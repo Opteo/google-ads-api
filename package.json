@@ -1,0 +1,47 @@
+{
+  "name": "google-ads-javascript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./lib/index.js",
+  "typings": "./lib/index.d.ts",
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "tsc",
+    "test": "jest"
+  },
+  "files": [
+    "lib"
+  ],
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "\\.ts$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "/src/.*\\.test\\.ts$"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Opteo/google-ads-javascript.git"
+  },
+  "keywords": [],
+  "author": "Opteo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Opteo/google-ads-javascript/issues"
+  },
+  "homepage": "https://github.com/Opteo/google-ads-javascript#readme",
+  "devDependencies": {
+    "@types/jest": "^23.1.6",
+    "jest": "^23.4.1",
+    "ts-jest": "^23.0.0",
+    "tslint": "^5.11.0",
+    "typescript": "^2.9.2"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.112",
+    "@types/request": "^2.47.1"
+  }
+}

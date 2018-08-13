@@ -1,0 +1,79 @@
+import GoogleAdsJs from '..'
+import config from '../config'
+
+describe('Campaign Budgets', async () => {
+    const lib_instance = new GoogleAdsJs({
+		client_id: config.client_id, 
+		client_secret: config.client_secret, 
+		developer_token: config.developer_token
+	})
+    const customer = lib_instance.Customer({
+		customer_account_id: config.cid, 
+		refresh_token: config.refresh_token
+	})
+
+    let budget_id = ''
+    
+    it('Lists All Campaign Budgets', async () => {
+        expect.assertions(1)
+        const budgets = await customer.campaignBudgets.list({
+            fields: ['id']
+        })
+        expect(budgets).toEqual({
+            results: expect.any(Object),
+            total_results_count: expect.any(String),
+            field_mask: 'campaignBudget.id'
+        })
+    })
+
+    it('Creates New Campaign Budget', async (done) => {
+	    expect.assertions(1)
+        const budget = await customer.campaignBudgets.create({
+            amount_micros: 12000000,
+            explicitly_shared: false
+        })
+        expect(budget).toEqual({
+            id: expect.any(String),
+            resource_name: expect.any(String),
+        })
+        budget_id = budget.id
+        done()
+    })
+
+    it('Retrieves Campaign Budget', async (done) => {
+	    expect.assertions(1)
+        const budget = await customer.campaignBudgets.retrieve(budget_id)
+        expect(budget).toEqual({
+            id: expect.any(String),
+            resource_name: expect.any(String),
+            name: expect.any(String),
+            amount_micros: expect.any(String),
+            status: expect.any(String),
+            delivery_method: expect.any(String),
+            explicitly_shared: expect.any(Boolean),
+            reference_count: expect.any(String),
+        })
+        done()
+    })
+
+    it('Updates Campaign Budget', async (done) => {
+	    expect.assertions(1)
+        await customer.campaignBudgets.update({
+            id: budget_id,
+            update: {
+                amount_micros: 15000000,
+            }
+        })
+        const campaign_budget = await customer.campaignBudgets.retrieve(budget_id)	
+		expect(campaign_budget.amount_micros).toBe('15000000')
+        done()
+    })
+
+    it('Deletes Campaign Budget', async () => {
+		expect.assertions(1)
+		await customer.campaignBudgets.delete(budget_id)
+        const campaign_budget = await customer.campaignBudgets.retrieve(budget_id)	
+		expect(campaign_budget.status).toBe('REMOVED')
+	})
+
+})
