@@ -24,15 +24,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Opteo/google-ads-javascript.git"
+    "url": "https://github.com/Opteo/google-ads-api.git"
   },
   "keywords": [],
   "author": "Opteo",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Opteo/google-ads-javascript/issues"
+    "url": "https://github.com/Opteo/google-ads-api/issues"
   },
-  "homepage": "https://github.com/Opteo/google-ads-javascript#readme",
+  "homepage": "https://github.com/Opteo/google-ads-api#readme",
   "devDependencies": {
     "@types/jest": "^23.1.6",
     "jest": "^23.4.1",
