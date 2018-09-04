@@ -100,19 +100,17 @@ export default class Http implements HttpController {
         const _this = this
         return new Promise((resolve, reject) => {
             request(options, (error, response, body) => {
-                if (error) {
-                    reject(error)
-                } else if (body.includes('Error 404')){
-                    reject(body)
-                } else {
+                console.log(response.statusCode);
+                if (response.statusCode === 200) {
                     const entity_body = JSON.parse(body)
                     const final_object = _this.transformObjectKeys(entity_body)
-
-                    if(final_object.error){
-                        reject(final_object.error)
-                    } else {
-                        resolve(final_object)
-                    }
+                    resolve(final_object)
+                } else if (response.statusCode === 404) {
+                    console.log("ERROR 404");
+                    reject(body)
+                } else {
+                    console.log("ERROR ", response.statusCode);
+                    reject(error)
                 }   
             })
         })
