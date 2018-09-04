@@ -9,46 +9,33 @@ import token_cache from './token_cache'
 
 export const getAccessToken = async (client: Client) => {
     const hash = getTokenHash(client)
-    const cached_token = getCachedToken(hash)
+    const now = new Date().getTime()
 
-    if(!cached_token) { 
-        // console.log("getting new token")
-        return new Promise((resolve, reject) => {
-            return refreshToken(client.client_id, client.client_secret, client.refresh_token).then(token => {
-                cacheNewToken(hash, token)
-                resolve(token.access_token)
-            }).catch(error => {
-                reject(error)
-            })
+    if (token_cache[hash] && token_cache[hash].expires > now) { 
+        console.log("returning cached token")
+        return token_cache[hash].access_token 
+    }
+
+    console.log("getting new token")
+    const token_promise = await refreshToken(client.client_id, client.client_secret, client.refresh_token).then(token => {
+        delete token_cache[hash]
+        return Promise.resolve({
+            access_token: token.access_token,
+            expires: now + token.expires_in * 1000
         })
-    } 
-    // console.log("found cached token")
-    return cached_token.access_token 
+    }).catch(error => {
+        return Promise.reject(error)
+    })
+
+    token_cache[hash] = token_promise
+
+    return token_promise.access_token 
 }
 
 
 
 const getTokenHash = (client: Client) => {
     return `${client.developer_token}_${client.cid}`
-}
-
-const getCachedToken = (hash: string) => {
-    const cached_token = token_cache[hash]
-    const now = new Date().getTime()
-
-    if(cached_token && cached_token.expires > now) { 
-        return cached_token
-    }
-    return null
-}
-
-const cacheNewToken = (hash: string, token: AccessToken) => {
-    const now = new Date().getTime()
-
-    token_cache[hash] = {
-        access_token: token.access_token,
-        expires: now + token.expires_in * 1000
-    }
 }
  
 const refreshToken = (client_id: string|number, client_secret: string, refresh_token: string) : Promise<AccessToken> => {
