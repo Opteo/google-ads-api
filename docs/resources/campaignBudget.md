@@ -49,7 +49,7 @@ await customer.campaignBudgets.create({
 
 #### Example Response
 ```json
-]{
+{
     id: "123123123",
     resource_name: "customers/987987987/campaignBudgets/123123123"
 }

@@ -223,4 +223,27 @@ Returns the resource name if the update succeeded.
 
 <br/><br/><br/>
 # Delete Ad Group Ad
-Operation not available for this entity.
+Deletes Ad Group Ad. You need to supply the unique id of the ad to be removed. **Note:** You need to pass the unique ID composed of both the ad group ID and the ad ID.
+
+### Arguments
+ Argument       | Type    | Required
+ :------------- | :------ | :-------- |
+ `id`  | String / Number  | True
+
+
+#### Example Request
+```javascript
+await customer.ads.delete('456456456_123123123')
+```
+
+### Returns
+Returns a resource name if a valid identifier was provided. **Note:**
+deleted ads can still be retrieved, however, their status is set to 'REMOVED'.
+
+#### Example Response
+```json
+{
+    id: 123123123,
+    resource_name: "customers/123123123/adGroupAds/456456456_123123123"
+}
+```

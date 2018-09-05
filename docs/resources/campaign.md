@@ -45,13 +45,15 @@ When you create a new campaign, you need to pass an identifier of a shared campa
 ### Arguments
  Argument       | Type    | Required
  :------------- | :------ | :-------- |
- `budget_id`  | String / Number  | True
  `name`  | String  | True
+ `budget_id`  | String / Number  | True
+ `advertising_channel_type`  | String  | True
 
 #### Example Request
 ```javascript  
 await customer.campaigns.create({
     name: 'my new campaign name',
+    advertising_channel_type: 'SEARCH'
     budget_id: '678678678',
 })
 ```
