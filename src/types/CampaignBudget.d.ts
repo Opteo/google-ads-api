@@ -1,6 +1,6 @@
 import { Entity } from './Entity'
 
-import { NewEntityConfig } from './Entity';
+import { NewEntityConfig } from './Entity'
 
 declare namespace CampaignBudget {
     /**

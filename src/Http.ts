@@ -142,7 +142,7 @@ export default class Http implements HttpController {
 
     private formatRequestConfig(config: any, entity: string) {
         let final_config = <any>{}
-
+        
         if (entity.includes('campaigns')){
             final_config = {
                 campaign_budget: `customers/${this.client.cid}/campaignBudgets/${config.budget_id}`,
@@ -169,7 +169,13 @@ export default class Http implements HttpController {
             if(config.keyword){
                 final_config.keyword = config.keyword
             }
+        } else if (entity.includes('sharedSets')) {
+            final_config = {
+                name: config.name,
+                type: config.type
+            }
         }
+        
         return final_config
     }
 
