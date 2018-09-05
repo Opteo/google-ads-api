@@ -54,7 +54,7 @@ const refreshToken = (client_id: string|number, client_secret: string, refresh_t
     }
     
     return new Promise((resolve, reject) => {
-        request(options, function (error, response, body) {
+        request(options, (error, response, body) => {
             if (error) {
                 reject(error)
             } else {

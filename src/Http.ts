@@ -8,6 +8,9 @@ import { Client } from './types/Global'
 import { RequestOptions, HttpController } from './types/Http'
 import { ListConfig, EntityUpdateConfig, NewEntityConfig } from './types/Entity'
 
+function log(obj){
+    console.log(require('util').inspect(obj, false, null));
+}
 
 export default class Http implements HttpController {
     private client : Client
@@ -100,16 +103,23 @@ export default class Http implements HttpController {
         const _this = this
         return new Promise((resolve, reject) => {
             request(options, (error, response, body) => {
-                console.log(response.statusCode);
                 if (response.statusCode === 200) {
                     const entity_body = JSON.parse(body)
                     const final_object = _this.transformObjectKeys(entity_body)
                     resolve(final_object)
                 } else if (response.statusCode === 404) {
-                    console.log("ERROR 404");
-                    reject(body)
+                    const { url } = options
+                    reject({
+                        code: response.statusCode,
+                        status: response.statusMessage,
+                        message: `The requested URL ${url} was not found.`
+                    })
                 } else {
-                    console.log("ERROR ", response.statusCode);
+                    if (!error) {
+                        body = JSON.parse(body)
+                        error = body.error || `Something bad happened in HTTP request, but we don't know what.`
+                    }
+                    log(body.error.details[0].errors);
                     reject(error)
                 }   
             })
@@ -134,19 +144,28 @@ export default class Http implements HttpController {
         let final_config = <any>{}
 
         if (entity.includes('campaigns')){
-            final_config.campaign_budget = `customers/${this.client.cid}/campaignBudgets/${config.budget_id}`
-            final_config.name = config.name
-            final_config.target_spend = config.target_spend
+            final_config = {
+                campaign_budget: `customers/${this.client.cid}/campaignBudgets/${config.budget_id}`,
+                name: config.name,
+                target_spend: config.target_spend,
+                advertising_channel_type: config.advertising_channel_type
+            }
         } else if (entity.includes('campaignBudgets')){
             final_config = config
         } else if (entity.includes('adGroups')){
-            final_config.name = config.name
-            final_config.campaign = `customers/${this.client.cid}/campaigns/${config.campaign_id}`
+            final_config = {
+                name: config.name,
+                campaign: `customers/${this.client.cid}/campaigns/${config.campaign_id}`
+            }
         } else if (entity.includes('adGroupAds')){
-            final_config.ad_group = `customers/${this.client.cid}/adGroups/${config.ad_group_id}`
-            final_config.ad = config.ad
-        } else if (entity.includes('adGroupCriteria')){
-            final_config.ad_group = `customers/${this.client.cid}/adGroups/${config.ad_group_id}`
+            final_config = {
+                ad_group: `customers/${this.client.cid}/adGroups/${config.ad_group_id}`,
+                ad: config.ad
+            }
+        } else if (entity.includes('adGroupCriteria')) {
+            final_config = {
+                ad_group: `customers/${this.client.cid}/adGroups/${config.ad_group_id}`
+            }
             if(config.keyword){
                 final_config.keyword = config.keyword
             }
@@ -225,7 +244,7 @@ export default class Http implements HttpController {
         if(config.limit && config.limit > 0){
             query += ` LIMIT ${config.limit}`
         }
-        // console.log(query)
+
         return query
     }
 
@@ -253,5 +272,4 @@ export default class Http implements HttpController {
 
         return final
     }
-
 }

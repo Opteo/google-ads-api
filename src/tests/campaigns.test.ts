@@ -50,6 +50,7 @@ describe('Campaigns', async () => {
 		const new_campaign = await customer.campaigns.create({
 				name: getRandomCampaignName(),
 				budget_id: response.id,
+				advertising_channel_type: 'DISPLAY',
 				target_spend: {
 					cpc_bid_ceiling_micros: 1000000
 				}

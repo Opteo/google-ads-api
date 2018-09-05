@@ -29,9 +29,6 @@ export default class Entity {
     }
     
     public delete(entity_id: string) : Promise<any> {
-        if(this.endpoint.includes('adGroupAds')){
-            throw new Error('The operation DELETE is not available for this entity.')
-        }
         return this.http_controller.delete(this.endpoint, entity_id)
     }
     

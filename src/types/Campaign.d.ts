@@ -47,11 +47,11 @@ declare namespace Campaign {
      * @enum {string}
      */
     enum CampaignStatus {
-        UNSPECIFIED = 'Unspecified',
-        UNKNOWN = 'Unknown',
-        ENABLED = 'Enabled',
-        PAUSED = 'Paused',
-        REMOVED = 'Removed',
+        UNSPECIFIED = 'UNSPECIFIED',
+        UNKNOWN = 'UNKNOWN',
+        ENABLED = 'ENABLED',
+        PAUSED = 'PAUSED',
+        REMOVED = 'REMOVED',
     }
 
     /**
@@ -60,9 +60,9 @@ declare namespace Campaign {
      * @enum {string}
      */
     enum ServingStatus {
-        ENABLED = 'Enabled',
-        REMOVED = 'Removed',
-        PAUSED = 'Paused',
+        ENABLED = 'ENABLED',
+        REMOVED = 'REMOVED',
+        PAUSED = 'PAUSED',
     }
 
     /**
@@ -71,13 +71,13 @@ declare namespace Campaign {
      * @enum {string}
      */
     enum AdServingOptimizationStatus {
-        UNSPECIFIED = 'Unspecified',
-        UNKNOWN = 'Unknown',
-        OPTIMIZE = 'Optimize',
-        CONVERSION_OPTIMIZE = 'Conversion Optimize',
-        ROTATE = 'Rotate',
-        ROTATE_INDEFINITELY = 'Rotate Indefinitely',
-        UNAVAILABLE = 'Unavailable',
+        UNSPECIFIED = 'UNSPECIFIED',
+        UNKNOWN = 'UNKNOWN',
+        OPTIMIZE = 'OPTIMIZE',
+        CONVERSION_OPTIMIZE = 'CONVERSION OPTIMIZE',
+        ROTATE = 'ROTATE',
+        ROTATE_INDEFINITELY = 'ROTATE INDEFINITELY',
+        UNAVAILABLE = 'UNAVAILABLE',
     }
 
     /**
@@ -86,10 +86,12 @@ declare namespace Campaign {
      * @enum {string}
      */
     enum AdvertisingChannelType {
-        UNSPECIFIED = 'Unspecified',
-        UNKNOWN = 'Unknown',
-        SEARCH = 'Search',
-        HOTEL = 'Hotel',
+        DISPLAY = 'DISPLAY',
+        HOTEL = 'HOTEL',
+        SEARCH = 'SEARCH',
+        SHOPPING = 'SHOPPING',
+        UNKNOWN = 'UNKNOWN',
+        UNSPECIFIED = 'UNSPECIFIED'
     }
 
     /**
@@ -117,6 +119,7 @@ declare namespace Campaign {
      */
     export interface NewCampaignConfig extends NewEntityConfig {
         budget_id: string,
+        advertising_channel_type: AdvertisingChannelType | keyof typeof AdvertisingChannelType,
         target_spend: TargetSpend
     }
 }

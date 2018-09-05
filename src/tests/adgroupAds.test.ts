@@ -89,10 +89,11 @@ describe('AdGroup Ads', async () => {
         done()
     })
 
-    it('Throws error when trying to delete Ad', async (done) => {
+    it('Removes Ad', async (done) => {
         expect.assertions(1)
-        const foo = () => customer.ads.delete(ad_id)
-		expect(foo).toThrowError('The operation DELETE is not available for this entity.')
+        await customer.ads.delete(ad_id)
+        const ad = await customer.ads.retrieve(ad_id)    
+        expect(ad.status).toBe('REMOVED')
         done()
     })
     
