@@ -6,4 +6,5 @@
 * [Campaign Budget](resources/campaignBudget.md)
 * [Customer](resources/customer.md)
 * [Keyword](resources/keyword.md)
+* [Shared Set](resources/sharedSet.md)
 * [Search Query](resources/search.md)
