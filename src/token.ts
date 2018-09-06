@@ -4,35 +4,43 @@ import { ADWORDS_AUTH_URL } from "./constants"
 import { AccessToken } from './types/Http'
 import { Client } from './types/Global'
 
-import token_cache from './token_cache'
+import { cached_tokens, unresolved_token_promises } from './token_cache'
 
 
 export const getAccessToken = async (client: Client) => {
     const hash = getTokenHash(client)
-    const now = new Date().getTime()
+    const now = Date.now()
 
-    if (token_cache[hash] && token_cache[hash].expires > now) { 
-        console.log("returning cached token")
-        return token_cache[hash].access_token 
+    if (cached_tokens[hash] && cached_tokens[hash].expires > now) { 
+        return cached_tokens[hash].access_token 
     }
 
-    console.log("getting new token")
-    const token_promise = await refreshToken(client.client_id, client.client_secret, client.refresh_token).then(token => {
-        delete token_cache[hash]
-        return Promise.resolve({
+    if(unresolved_token_promises[hash]){
+        return (await unresolved_token_promises[hash]).access_token
+    }
+
+    const token_promise = refreshToken(client.client_id, client.client_secret, client.refresh_token).then(token => {
+
+        cached_tokens[hash] = token
+        delete unresolved_token_promises[hash]
+        console.log(token.expires_in)
+        return {
             access_token: token.access_token,
-            expires: now + token.expires_in * 1000
-        })
-    }).catch(error => {
-        return Promise.reject(error)
+            expires: now + (token.expires_in * 1000) - (1000 * 60 * 3) // refresh 3 minutes before expiry just to make sure
+        }
+    }).catch(e => {
+        delete unresolved_token_promises[hash]
+        return Promise.reject(e)
     })
 
-    token_cache[hash] = token_promise
+    unresolved_token_promises[hash] = token_promise
+    
+    const token_object = await token_promise
 
-    return token_promise.access_token 
+    cached_tokens[hash] = token_object
+
+    return token_object.access_token 
 }
-
-
 
 const getTokenHash = (client: Client) => {
     return `${client.developer_token}_${client.cid}`
