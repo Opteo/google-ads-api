@@ -8,7 +8,7 @@ export enum ENDPOINTS {
     customers = 'customers',
     adgroups = 'adGroups',
     ads = 'adGroupAds',
-    keywords = 'adGroupCriteria',
+    adgroup_critera = 'adGroupCriteria',
     shared_sets = 'sharedSets',
 }
 
@@ -17,6 +17,6 @@ export enum RESOURCE_NAMES {
     campaign_budget = 'campaign_budget',
     adgroup = 'ad_group',
     ad = 'ad_group_ad',
-    keyword = 'ad_group_criterion',
+    adgroup_critera = 'ad_group_criterion',
     shared_set = 'shared_set',
 }

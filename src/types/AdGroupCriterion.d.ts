@@ -1,3 +1,5 @@
+import { NewEntityConfig } from './Entity'
+
 declare namespace AdGroupCriterion {
     /**
      * AdGroupCriterion Interface
@@ -91,5 +93,13 @@ declare namespace AdGroupCriterion {
         UNSPECIFIED = 'UNSPECIFIED'
     }
 
+    /**
+     * Interface for New Criterion Config
+     * @interface  
+     * @param ad_group_id
+     */
+    export interface NewCriterionConfig extends NewEntityConfig {
+        ad_group_id: string|number
+    }
 }
 export = AdGroupCriterion

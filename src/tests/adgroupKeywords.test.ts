@@ -3,7 +3,7 @@ import config from '../config'
 
 const getRandomKeywordText = () => `test-keyword-${((Math.random() * 10) + 1).toFixed(0)}`
 
-describe('Keywords', async () => {
+describe('AdGroup Keywords', async () => {
     const lib_instance = new GoogleAdsJs({
 		client_id: config.client_id, 
 		client_secret: config.client_secret, 
@@ -20,12 +20,13 @@ describe('Keywords', async () => {
     
     it('Lists All Keywords', async () => {
         expect.assertions(1)
-        const keywords = await customer.keywords.list({
-            ad_group_id,
-            fields: ['keyword.text', 'keyword.match_type']
+        const keywords = await customer.adgroupCriterions.list({
+            fields: ['keyword.text', 'keyword.match_type'],
+            constraints: {
+                ad_group_id
+            }
         })
 
-        // console.log(keywords)
         expect(keywords).toEqual({
             results: expect.any(Object),
             total_results_count: expect.any(String),
@@ -37,7 +38,7 @@ describe('Keywords', async () => {
         expect.assertions(1)
         const keyword_text = getRandomKeywordText()
 
-        const new_keyword = await customer.keywords.create({
+        const new_keyword = await customer.adgroupCriterions.create({
             ad_group_id,
             keyword: {
                 text: keyword_text,
@@ -46,7 +47,7 @@ describe('Keywords', async () => {
         })
 
         keyword_id = new_keyword.id
-        const keyword_data = await customer.keywords.retrieve(keyword_id)
+        const keyword_data = await customer.adgroupCriterions.retrieve(keyword_id)
 
         expect(keyword_data.keyword).toEqual({
             text: keyword_text,
@@ -57,7 +58,7 @@ describe('Keywords', async () => {
     
     it('Retrieves Keyword Data', async (done) => {
         expect.assertions(1)
-        const keyword = await customer.keywords.retrieve(keyword_id)
+        const keyword = await customer.adgroupCriterions.retrieve(keyword_id)
         // console.log(keyword)
         expect(keyword).toEqual({
             ad_group: expect.any(String),
@@ -87,14 +88,14 @@ describe('Keywords', async () => {
 
     it('Updates Keyword', async () => {
         expect.assertions(1)
-        await customer.keywords.update({
+        await customer.adgroupCriterions.update({
             id: keyword_id,
             update: {
                 status: 'PAUSED',
             }
         })
 
-        const updated_keyword = await customer.keywords.retrieve(keyword_id)
+        const updated_keyword = await customer.adgroupCriterions.retrieve(keyword_id)
         expect(updated_keyword.status).toEqual('PAUSED')
     }) 
 

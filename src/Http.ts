@@ -189,15 +189,19 @@ export default class Http implements HttpController {
         const selected_fields = config.fields.map((field: string) => `${resource}.${field}`)
         let query = `SELECT ${selected_fields.join(', ')} FROM ${resource}`
 
-        if(config.ad_group_id){
-            query += ` WHERE ad_group.id = ${config.ad_group_id}`
+        if (config.constraints && config.constraints.ad_group_id) {
+            query += ` WHERE ad_group.id = ${config.constraints.ad_group_id}`
+            delete config.constraints.ad_group_id
         }
 
-        if(config.constraints){
-            query += config.ad_group_id ? ' AND ' : ' WHERE '
+        if (config.constraints) {
             
             let index = 0
             for (const key in config.constraints) {
+                if (index < 1) {
+                    query += config.constraints.ad_group_id ? ' AND ' : ' WHERE '    
+                }
+
                 index += 1
                 if (index > 1) {
                     query += ' AND '
