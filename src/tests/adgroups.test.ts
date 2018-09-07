@@ -27,9 +27,7 @@ describe('AdGroups', async () => {
                 'status'
             ],
             constraints: {
-                campaign: {
-                    id: campaign_id,
-                },
+                campaign_id,
                 status: 'ENABLED'
             }
         })

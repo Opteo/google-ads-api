@@ -189,38 +189,45 @@ export default class Http implements HttpController {
         const selected_fields = config.fields.map((field: string) => `${resource}.${field}`)
         let query = `SELECT ${selected_fields.join(', ')} FROM ${resource}`
 
-        if (config.constraints && config.constraints.ad_group_id) {
-            query += ` WHERE ad_group.id = ${config.constraints.ad_group_id}`
-            delete config.constraints.ad_group_id
-        }
-
         if (config.constraints) {
-            
             let index = 0
-            for (const key in config.constraints) {
-                if (index < 1) {
-                    query += config.constraints.ad_group_id ? ' AND ' : ' WHERE '    
-                }
 
+            if (config.constraints.ad_group_id) {
+                query += ` WHERE ad_group.id = ${config.constraints.ad_group_id}`
                 index += 1
-                if (index > 1) {
-                    query += ' AND '
-                }
+                delete config.constraints.ad_group_id
+            } else if (config.constraints.campaign_id) {
+                query += index > 0 ? 
+                    ` AND campaign.id = ${config.constraints.campaign_id}` 
+                    : ` WHERE campaign.id = ${config.constraints.campaign_id}`
+                index += 1
+                delete config.constraints.campaign_id
+            } else {
+                query += ' WHERE ' 
+            }
+
+            for (const key in config.constraints) {
 
                 if (typeof config.constraints[key] === 'object') {
                     const resource_constraints = config.constraints[key]
 
                     for (const resource_key in resource_constraints) {
+                        index += 1
+
                         if (index > 1) {
                             query += ' AND '
                         }
-                        query += `${key}.${resource_key} = ${resource_constraints[resource_key]}`
-                        index += 1
+                        query += `${resource}.${key}.${resource_key} = ${resource_constraints[resource_key]}`
                     }
                     continue
-                }
+                } 
+                index += 1
 
+                if (index > 1) {
+                    query += ' AND '
+                }
                 query += `${resource}.${key} = ${config.constraints[key]}`
+
             }
         }
         

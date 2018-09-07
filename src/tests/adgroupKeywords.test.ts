@@ -23,7 +23,7 @@ describe('AdGroup Keywords', async () => {
         const keywords = await customer.adgroupCriterions.list({
             fields: ['keyword.text', 'keyword.match_type'],
             constraints: {
-                ad_group_id
+                ad_group_id,
             }
         })
 
