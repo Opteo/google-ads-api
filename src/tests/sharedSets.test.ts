@@ -18,7 +18,8 @@ describe('Shared Sets', async () => {
 	let new_shared_set_id = ''
 
 	it('Lists All Shared Sets', async () => {
-		const config = {
+		expect.assertions(1)
+		const shared_sets = await customer.sharedSets.list({
 			limit: 2,
 			fields: [
 				'id',
@@ -28,9 +29,7 @@ describe('Shared Sets', async () => {
 			constraints: {
 				status: 'ENABLED',
 			}
-		}
-		expect.assertions(1)
-		const shared_sets = await customer.sharedSets.list(config)
+		})
 
 		expect(shared_sets).toEqual({
             results: expect.any(Object),
@@ -71,15 +70,14 @@ describe('Shared Sets', async () => {
 	})
 
 	it('Updates Shared Set', async () => {
+		expect.assertions(1)
 		const new_shared_set_name = getRandomSharedSetName()
-		const config = {
+		await customer.sharedSets.update({
 			id: new_shared_set_id,
 			update: {
 				name: new_shared_set_name
 			}
-		}
-		expect.assertions(1)
-		await customer.sharedSets.update(config)
+		})
 		const shared_set = await customer.sharedSets.retrieve(new_shared_set_id)
 		expect(shared_set.name).toBe(new_shared_set_name)
 	})

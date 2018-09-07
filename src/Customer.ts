@@ -1,4 +1,3 @@
-// import Campaigns from './entities/Campaigns'
 import Campaigns from './entities/Campaigns'
 import CampaignBudgets from './entities/CampaignBudgets'
 import AdGroups from './entities/AdGroups'

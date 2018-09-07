@@ -1,4 +1,3 @@
-
 declare namespace AdGroupCriterion {
     /**
      * AdGroupCriterion Interface

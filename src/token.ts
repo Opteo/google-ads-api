@@ -15,15 +15,14 @@ export const getAccessToken = async (client: Client) => {
         return cached_tokens[hash].access_token 
     }
 
-    if(unresolved_token_promises[hash]){
+    if (unresolved_token_promises[hash]) {
         return (await unresolved_token_promises[hash]).access_token
     }
 
-    const token_promise = refreshToken(client.client_id, client.client_secret, client.refresh_token).then(token => {
-
+    const token_promise = refreshAccessToken(client.client_id, client.client_secret, client.refresh_token).then(token => {
         cached_tokens[hash] = token
         delete unresolved_token_promises[hash]
-        console.log(token.expires_in)
+
         return {
             access_token: token.access_token,
             expires: now + (token.expires_in * 1000) - (1000 * 60 * 3) // refresh 3 minutes before expiry just to make sure
@@ -42,11 +41,9 @@ export const getAccessToken = async (client: Client) => {
     return token_object.access_token 
 }
 
-const getTokenHash = (client: Client) => {
-    return `${client.developer_token}_${client.cid}`
-}
+const getTokenHash = (client: Client) => `${client.developer_token}_${client.cid}`
  
-const refreshToken = (client_id: string|number, client_secret: string, refresh_token: string) : Promise<AccessToken> => {
+const refreshAccessToken = (client_id: string|number, client_secret: string, refresh_token: string) : Promise<AccessToken> => {
     const options = {
         url: ADWORDS_AUTH_URL,
         method: 'POST',

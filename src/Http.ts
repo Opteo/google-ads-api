@@ -8,8 +8,8 @@ import { Client } from './types/Global'
 import { RequestOptions, HttpController } from './types/Http'
 import { ListConfig, EntityUpdateConfig, NewEntityConfig } from './types/Entity'
 
-function log(obj){
-    console.log(require('util').inspect(obj, false, null));
+const log = (obj: object) => {
+    console.log(require('util').inspect(obj, false, null))
 }
 
 export default class Http implements HttpController {
@@ -26,7 +26,7 @@ export default class Http implements HttpController {
     }
 
     /* 
-    *   PUBLIC 
+    *   PUBLIC METHODS
     */
     public async create(config: NewEntityConfig, entity: string) {
         const url = this.getRequestUrl('mutate', entity)
@@ -97,7 +97,7 @@ export default class Http implements HttpController {
 
 
     /* 
-    *   PRIVATE
+    *   PRIVATE METHODS
     */
     private queryApi(options: (request.UriOptions & request.CoreOptions) | (request.UrlOptions & request.CoreOptions)) {
         const _this = this
@@ -141,69 +141,41 @@ export default class Http implements HttpController {
     }
 
     private formatRequestConfig(config: any, entity: string) {
-        let final_config = <any>{}
-        
         if (entity.includes('campaigns')){
-            final_config = {
-                campaign_budget: `customers/${this.client.cid}/campaignBudgets/${config.budget_id}`,
-                name: config.name,
-                target_spend: config.target_spend,
-                advertising_channel_type: config.advertising_channel_type
-            }
-        } else if (entity.includes('campaignBudgets')){
-            final_config = config
+            config.campaign_budget = `customers/${this.client.cid}/campaignBudgets/${config.budget_id}`
+            delete config.budget_id
         } else if (entity.includes('adGroups')){
-            final_config = {
-                name: config.name,
-                campaign: `customers/${this.client.cid}/campaigns/${config.campaign_id}`
-            }
-        } else if (entity.includes('adGroupAds')){
-            final_config = {
-                ad_group: `customers/${this.client.cid}/adGroups/${config.ad_group_id}`,
-                ad: config.ad
-            }
-        } else if (entity.includes('adGroupCriteria')) {
-            final_config = {
-                ad_group: `customers/${this.client.cid}/adGroups/${config.ad_group_id}`
-            }
-            if(config.keyword){
-                final_config.keyword = config.keyword
-            }
-        } else if (entity.includes('sharedSets')) {
-            final_config = {
-                name: config.name,
-                type: config.type
-            }
-        }
+            config.campaign = `customers/${this.client.cid}/campaigns/${config.campaign_id}`
+            delete config.campaign_id
+        } else if (entity.includes('adGroupAds') || entity.includes('adGroupCriteria')){
+            config.ad_group = `customers/${this.client.cid}/adGroups/${config.ad_group_id}`
+            delete config.ad_group_id
+        } 
         
-        return final_config
+        return config
     }
 
     private getRequestUrl(operation_type?: string, endpoint?: string, entity_id?: string) : string {
-        if(endpoint && endpoint.includes('customers')) {
+        if (endpoint && endpoint.includes('customers')) {
             return `${ADWORDS_API_BASE_URL}${this.client.cid}`
         } 
-        if(operation_type && operation_type.includes('get')) {
+        if (operation_type && operation_type.includes('get')) {
             return `${ADWORDS_API_BASE_URL}${this.client.cid}/${endpoint}/${entity_id}`
         }
-        if(operation_type && operation_type.includes('mutate')) {
+        if (operation_type && operation_type.includes('mutate')) {
             return `${ADWORDS_API_BASE_URL}${this.client.cid}/${endpoint}:mutate`
         }
         return `${ADWORDS_API_BASE_URL}${this.client.cid}/googleAds:search`
     }
 
     private buildResourceName(endpoint?: string, entity_id?: string|number) : string {
-        if(entity_id){
-            return `customers/${this.client.cid}/${endpoint}/${entity_id}`
-        } else {
-            return `customers/${this.client.cid}`
-        }
+        return entity_id ? `customers/${this.client.cid}/${endpoint}/${entity_id}` : `customers/${this.client.cid}`
     }
 
     private getUpdateMask(update_object: any) : string {
         let mask = ''
-        for(const key in update_object){
-            if(isObject(update_object[key])){
+        for (const key in update_object) {
+            if (isObject(update_object[key])){
                 mask += Object.keys(update_object[key]).map(child_key => `${key}.${child_key}`).join(',') 
             } else {
                 mask += `${key},`
@@ -214,7 +186,6 @@ export default class Http implements HttpController {
 
     private buildQuery(config: any, resource: string) : string {
         const selected_fields = config.fields.map((field: string) => `${resource}.${field}`)
-
         let query = `SELECT ${selected_fields.join(', ')} FROM ${resource}`
 
         if(config.ad_group_id){
@@ -223,18 +194,19 @@ export default class Http implements HttpController {
 
         if(config.constraints){
             query += config.ad_group_id ? ' AND ' : ' WHERE '
+            
             let index = 0
-            for(const key in config.constraints){
+            for (const key in config.constraints) {
                 index += 1
-                if(index > 1){
+                if (index > 1) {
                     query += ' AND '
                 }
 
-                if(typeof config.constraints[key] === 'object'){
+                if (typeof config.constraints[key] === 'object') {
                     const resource_constraints = config.constraints[key]
 
-                    for(const resource_key in resource_constraints){
-                        if(index > 1){
+                    for (const resource_key in resource_constraints) {
+                        if (index > 1) {
                             query += ' AND '
                         }
                         query += `${key}.${resource_key} = ${resource_constraints[resource_key]}`
@@ -247,7 +219,7 @@ export default class Http implements HttpController {
             }
         }
         
-        if(config.limit && config.limit > 0){
+        if (config.limit && config.limit > 0) {
             query += ` LIMIT ${config.limit}`
         }
 
@@ -268,8 +240,8 @@ export default class Http implements HttpController {
     private transformObjectKeys(entity_object: any) : any {
         const final: { [key: string]: string|object } = {}
 
-        for(const key in entity_object){
-            if(isObject(entity_object[key])){
+        for (const key in entity_object) {
+            if (isObject(entity_object[key])) {
                 final[snakeCase(key)] = this.transformObjectKeys(entity_object[key])
             } else {
                 final[snakeCase(key)] = entity_object[key]   

@@ -1,5 +1,4 @@
 declare namespace Global {
-    
     /**
      *  Library Instance Interface
      * @interface

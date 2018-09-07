@@ -1,5 +1,6 @@
 import { NewEntityConfig, ListConfig } from './Entity'
 import { UpdateConfig } from './Global'
+
 declare namespace Http {
     /**
      *  Http Controller Interface

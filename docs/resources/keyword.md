@@ -129,8 +129,8 @@ Retrieves a list of all ad group's keywords. You need to provide a list of field
 ### Arguments
  Argument       | Type    | Required
  :------------- | :------ | :-------- |
- `ad_group_id`  | String / Number  | True
  `fields`  | Array of strings  | True
+ `ad_group_id`  | String / Number  | False
  `limit`  | Number  | False
  `constraints`  | Object  | False
 

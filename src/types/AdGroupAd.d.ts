@@ -1,6 +1,5 @@
 import { Entity, ListConfig, NewEntityConfig } from './Entity'
 
-// import { NewEntityConfig } from './Entity'
 declare namespace AdGroupAd {
 
     /**

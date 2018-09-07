@@ -1,8 +1,9 @@
-
 import Entity from './Entity'
 import { ENDPOINTS, RESOURCE_NAMES } from '../constants'
+
 import { HttpController } from '../types/Http'
 import { NewCampaignConfig } from '../types/Campaign'
+
 export default class Campaigns extends Entity {
 
     constructor(http_controller: HttpController) {

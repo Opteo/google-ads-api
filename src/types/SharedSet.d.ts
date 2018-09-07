@@ -1,7 +1,6 @@
 import { Entity, NewEntityConfig } from './Entity'
 import { UpdateConfig } from './Global'
 
-
 declare namespace SharedSet {
     /**
      *  Shared Set Instance Interface

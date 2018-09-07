@@ -1,6 +1,4 @@
-import { Entity } from './Entity'
-
-import { NewEntityConfig } from './Entity'
+import { Entity, NewEntityConfig } from './Entity'
 
 declare namespace AdGroup {
     /**

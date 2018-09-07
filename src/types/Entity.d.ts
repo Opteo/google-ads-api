@@ -1,4 +1,5 @@
 import { UpdateConfig } from './Global'
+
 declare namespace Entity {
     /**
      * Main Entity Interface

@@ -1,7 +1,6 @@
 import GoogleAdsJs from '..'
 import config from '../config'
 
-
 const getRandomKeywordText = () => `test-keyword-${((Math.random() * 10) + 1).toFixed(0)}`
 
 describe('Keywords', async () => {

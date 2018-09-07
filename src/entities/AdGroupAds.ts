@@ -1,6 +1,6 @@
-
 import Entity from './Entity'
 import { ENDPOINTS, RESOURCE_NAMES } from '../constants'
+
 import { HttpController } from '../types/Http'
 import { ListAdsConfig, NewAdConfig } from '../types/AdGroupAd';
 

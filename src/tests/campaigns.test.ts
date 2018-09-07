@@ -1,7 +1,7 @@
 import GoogleAdsJs from '..'
 import config from '../config'
 
-const getRandomCampaignName = () => `test-campaign-${((Math.random() * 10) + 1).toFixed(0)} (created during library test)`
+const getRandomCampaignName = () => `test-campaign-${((Math.random() * 100) + 1).toFixed(0)} (created during library test)`
 
 describe('Campaigns', async () => {
 	const lib_instance = new GoogleAdsJs({
