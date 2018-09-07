@@ -99,7 +99,7 @@ export default class Http implements HttpController {
     /* 
     *   PRIVATE METHODS
     */
-    private queryApi(options: (request.UriOptions & request.CoreOptions) | (request.UrlOptions & request.CoreOptions)) {
+    private queryApi(options: RequestOptions) {
         const _this = this
         return new Promise((resolve, reject) => {
             request(options, (error, response, body) => {
@@ -108,6 +108,7 @@ export default class Http implements HttpController {
                     const final_object = _this.transformObjectKeys(entity_body)
                     resolve(final_object)
                 } else if (response.statusCode === 404) {
+                    options
                     const { url } = options
                     reject({
                         code: response.statusCode,
