@@ -30,6 +30,12 @@ export default class GoogleAdsJs {
 	 * 
 	*/
 	public Customer({customer_account_id, refresh_token}: Account) : ICustomer {
+
+		/* 
+			Need to accept a fn in there instead...
+			Perhaps make the fn mode default, and create it if it doesn't exist?
+			gotta change all the TYPES though
+		 */
 		const cid = customer_account_id.toString().split('-').join('')
 		const http_controller = new Http({
 			cid,

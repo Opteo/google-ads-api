@@ -10,7 +10,7 @@ export default class AdgroupCriterions extends Entity {
         super(http_controller, ENDPOINTS.adgroup_critera, RESOURCE_NAMES.adgroup_critera)
     }
 
-    create(config: NewKeywordConfig) : Promise<any> {
+    create(config: NewCriterionConfig) : Promise<any> {
         return super.create(config)
     }
 
