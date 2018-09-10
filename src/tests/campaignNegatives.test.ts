@@ -30,11 +30,7 @@ describe('Campaign Negatives', async () => {
                 type: 'KEYWORD'
             }
         })
-        expect(criterions).toEqual({
-            results: expect.any(Object),
-            total_results_count: expect.any(String),
-            field_mask: 'campaignCriterion.criterionId,campaignCriterion.type' 
-        })
+        expect(criterions).toBeInstanceOf(Array)
     }) 
 
     it('Creates New Campaign Negative', async (done) => {

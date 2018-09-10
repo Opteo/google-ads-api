@@ -30,12 +30,7 @@ describe('Campaigns', async () => {
 				status: 'ENABLED',
 			}
 		})
-		expect(campaigns).toEqual({
-            results: expect.any(Object),
-            total_results_count: expect.any(String),
-            field_mask: 'campaign.id,campaign.name,campaign.status'
-        })
-		// console.log(campaigns)
+		expect(campaigns).toBeInstanceOf(Array)
 	})
 
 	it('Creates New Campaign', async (done) => {

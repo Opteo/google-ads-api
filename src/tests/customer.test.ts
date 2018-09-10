@@ -16,7 +16,7 @@ describe('Customer', async () => {
     it('Retrieves Customer Data', async () => {
         expect.assertions(1)
         const customer_data = await customer.retrieve()
-        // console.log(customer_data)
+
         expect(customer_data).toEqual({
             resource_name: expect.any(String),
             id: expect.any(String),
@@ -39,10 +39,6 @@ describe('Customer', async () => {
             FROM ad_group
         `)
         // console.log(data)
-        expect(data).toEqual({
-            results: expect.any(Object),
-            total_results_count: expect.any(String),
-            field_mask: 'campaign.id,campaign.name,adGroup.id,adGroup.name'
-        })
+        expect(data).toBeInstanceOf(Array)
     })   
 })

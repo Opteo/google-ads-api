@@ -19,11 +19,7 @@ describe('Campaign Budgets', async () => {
         const budgets = await customer.campaignBudgets.list({
             fields: ['id']
         })
-        expect(budgets).toEqual({
-            results: expect.any(Object),
-            total_results_count: expect.any(String),
-            field_mask: 'campaignBudget.id'
-        })
+        expect(budgets).toBeInstanceOf(Array)
     })
 
     it('Creates New Campaign Budget', async (done) => {

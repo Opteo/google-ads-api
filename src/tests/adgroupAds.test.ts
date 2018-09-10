@@ -22,11 +22,7 @@ describe('AdGroup Ads', async () => {
             fields: ['ad.id', 'status']
         })
 
-        expect(ads).toEqual({
-            results: expect.any(Object),
-            total_results_count: expect.any(String),
-            field_mask: 'adGroupAd.ad.id,adGroupAd.status'
-        })
+        expect(ads).toBeInstanceOf(Array)
     })
 
     it('Creates New Ad', async (done) => {
