@@ -1,5 +1,5 @@
 import { AdGroupCriterion } from './AdGroupCriterion'
-// import { ListConfig, NewEntityConfig } from './Entity';
+import { NewEntityConfig } from './Entity'
 
 declare namespace Keyword {
     /**
@@ -46,16 +46,13 @@ declare namespace Keyword {
     /**
      * Interface for NewKeywordConfig
      * @interface  
-     * @param keyword - text of the keyword (at most 80 characters and 10 words)
-     * @param match_type - match type of the keyword
+     * @param ad_group_id
+     * @param keyword
      */
-    // export interface NewKeywordConfig extends NewEntityConfig {
-    //     ad_group_id: string|number
-    //     keyword: {
-    //         text: string,
-    //         match_type: string
-    //     }
-    // }
+    export interface NewKeywordConfig extends NewEntityConfig {
+        ad_group_id: string|number
+        keyword: KeywordObject
+    }
 
 }
 export = Keyword

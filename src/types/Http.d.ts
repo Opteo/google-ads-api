@@ -6,7 +6,6 @@ declare namespace Http {
      *  Http Controller Interface
      * @interface
      */
-    
     export interface HttpController {
         retrieve(entity: string, entity_id?: string|number): Promise<object>, 
         create(config: NewEntityConfig, entity: string): Promise<object>, 

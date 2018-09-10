@@ -2,7 +2,8 @@ import Campaigns from '../entities/Campaigns'
 import CampaignBudgets from '../entities/CampaignBudgets'
 import AdGroups from '../entities/AdGroups'
 import AdGroupAds from '../entities/AdGroupAds'
-import AdgroupCriterions from '../entities/AdgroupCriterions'
+import AdGroupCriterions from '../entities/AdgroupCriterions'
+import Keywords from '../entities/Keywords'
 import SharedSets from '../entities/SharedSets'
 
 import { UpdateConfig } from './Global'
@@ -17,11 +18,11 @@ declare namespace Customer {
         campaignBudgets: CampaignBudgets,
         adgroups: AdGroups,
         ads: AdGroupAds,
-        adgroupCriterions: AdgroupCriterions,
+        adgroupCriterions: AdGroupCriterions,
+        keywords: Keywords,
         sharedSets: SharedSets,
         retrieve: () => Promise<any>,
-        search: (query: string) => Promise<any>,
-        // update: (config: UpdateConfig) => Promise<any>
+        search: (query: string) => Promise<any>
     }
 
 }
