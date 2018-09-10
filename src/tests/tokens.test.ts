@@ -2,7 +2,7 @@
 import GoogleAdsJs from '..'
 import config from '../config'
 
-function delay(ms){
+function delay(ms : number){
     return new Promise((resolve) => {
         setTimeout(()=>{
             resolve()
@@ -22,11 +22,13 @@ describe('Tokens', async () => {
     it('Waits for tokens to be available before querying', async () => {
 
 
-        const customer = lib_instance.Customer(async () => {
-            await delay(1000)
-            return {
-                customer_account_id: config.cid, 
-                refresh_token: config.refresh_token
+        const customer = lib_instance.Customer({
+            async_account_getter : async () => {
+                await delay(1000)
+                return {
+                    customer_account_id: config.cid, 
+                    refresh_token: config.refresh_token
+                }
             }
         })
 

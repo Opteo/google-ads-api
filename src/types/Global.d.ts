@@ -16,8 +16,9 @@ declare namespace Global {
      */
 
     export interface Account {
-        customer_account_id: string|number,
-        refresh_token: string,
+        customer_account_id?: string|number,
+        refresh_token?: string,
+        async_account_getter? : Function
     } 
 
     /**
@@ -26,8 +27,21 @@ declare namespace Global {
      */
 
     export interface Client {
-        cid: string|number,
-        refresh_token: string,
+        account_promise: Promise<object>,
+        cid : string,
+        refresh_token : string,
+        client_id: string|number,
+        developer_token: string,
+        client_secret: string,
+    }   
+
+    /**
+     *  Client Constructor Interface
+     * @interface
+     */
+
+    export interface ClientConstructor {
+        async_account_getter: Function,
         client_id: string|number,
         developer_token: string,
         client_secret: string,
