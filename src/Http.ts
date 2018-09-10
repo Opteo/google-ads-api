@@ -4,9 +4,13 @@ import { snakeCase, isObject } from 'lodash'
 import { getAccessToken } from './token'
 import { ADWORDS_API_BASE_URL } from "./constants"
 
+import GoogleAdsError from './Error'
 import { Client, ClientConstructor } from './types/Global'
 import { RequestOptions, HttpController } from './types/Http'
 import { ListConfig, EntityUpdateConfig, NewEntityConfig } from './types/Entity'
+
+import parser from './parser'
+
 
 const log = (obj: object) => {
     console.log(require('util').inspect(obj, false, null))
@@ -58,13 +62,8 @@ export default class Http implements HttpController {
     }
 
     public async list(config: ListConfig, resource: string) {
-        await this.client.account_promise
-        const url = this.getRequestUrl('search')
         const query = this.buildQuery(config, resource)
-        const options = await this.getRequestOptions('POST', url)
-        options.qs = { query }
-
-        return this.queryApi(options)
+        return this.search(query)
     }
 
     public async update(config: EntityUpdateConfig, entity: string) {
@@ -105,7 +104,9 @@ export default class Http implements HttpController {
         query = query.replace(/\s/g,' ')
         options.qs = { query }
 
-        return this.queryApi(options)
+        const raw_result = await this.queryApi(options)
+
+        return parser.parseSearch(raw_result)
     }
 
 
@@ -121,20 +122,22 @@ export default class Http implements HttpController {
                     const final_object = _this.transformObjectKeys(entity_body)
                     resolve(final_object)
                 } else if (response.statusCode === 404) {
-                    options
                     const { url } = options
-                    reject({
-                        code: response.statusCode,
-                        status: response.statusMessage,
-                        message: `The requested URL ${url} was not found.`
-                    })
+                    reject(new Error(`The requested URL ${url} was not found (404).`))
                 } else {
                     if (!error) {
                         body = JSON.parse(body)
-                        error = body.error || `Something bad happened in HTTP request, but we don't know what.`
+                        error = body.error || { message : `Something bad happened in HTTP request, but we don't know what.` }
                     }
+                    console.log(error)
+                    reject(new GoogleAdsError(
+                        error.message,
+                        error.status, 
+                        error.details, 
+                        error.code
+                    ))
                     log(body.error.details[0].errors);
-                    reject(error)
+                    // reject(error)
                 }   
             })
         })
