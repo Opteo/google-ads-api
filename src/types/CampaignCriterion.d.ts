@@ -24,11 +24,11 @@ declare namespace CampaignCriterion {
      * @interface
      */
     interface AdSchedule {
-        day_of_week: DayOfWeek,
+        day_of_week: DayOfWeek | keyof typeof DayOfWeek,
         end_hour: number,
-        end_minute: number,
+        end_minute: Minutes | keyof typeof Minutes,
         start_hour: number,
-        start_minute: number,
+        start_minute: Minutes | keyof typeof Minutes,
     }
 
     /**
@@ -65,6 +65,20 @@ declare namespace CampaignCriterion {
     }
 
      /**
+     * Enum for Minutes
+     * @readonly
+     * @enum {string}
+     */
+    enum Minutes {
+        FIFTEEN = 'FIFTEEN',
+        FORTY_FIVE = 'FORTY_FIVE',
+        THIRTY = 'THIRTY',
+        UNKNOWN = 'UNKNOWN',
+        UNSPECIFIED = 'UNSPECIFIED',
+        ZERO = 'ZERO'
+    }
+
+     /**
      * Enum for Device Type
      * @readonly
      * @enum {string}
@@ -85,6 +99,7 @@ declare namespace CampaignCriterion {
      */
     enum Type {
         DEVICE = 'DEVICE',
+        AD_SCHEDULE = 'AD_SCHEDULE',
         KEYWORD = 'KEYWORD',
         LISTING_GROUP = 'LISTING_GROUP',
         LOCATION = 'LOCATION',
@@ -100,7 +115,7 @@ declare namespace CampaignCriterion {
      */
     interface NewCriterion extends NewEntityConfig {
         campaign_id: string|number,
-        type?: DeviceType | keyof typeof DeviceType,
+        type?: Type | keyof typeof Type,
         negative?: boolean,
         bid_modifier?: number
     }
