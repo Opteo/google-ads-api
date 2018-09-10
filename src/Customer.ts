@@ -1,5 +1,7 @@
 import Campaigns from './entities/Campaigns'
 import CampaignBudgets from './entities/CampaignBudgets'
+import CampaignCriterions from './entities/CampaignCriterions'
+import CampaignNegatives from './entities/CampaignNegatives'
 import AdGroups from './entities/AdGroups'
 import AdGroupAds from './entities/AdGroupAds'
 import AdGroupCriterions from './entities/AdGroupCriterions'
@@ -14,6 +16,8 @@ export default function Customer(http_controller: HttpController) : Customer  {
 	return {
 		campaigns: new Campaigns(http_controller),
 		campaignBudgets: new CampaignBudgets(http_controller),
+		campaignCriterions: new CampaignCriterions(http_controller),
+		campaignNegatives: new CampaignNegatives(http_controller),
 		adgroups: new AdGroups(http_controller),
 		ads: new AdGroupAds(http_controller),         
 		adgroupCriterions: new AdGroupCriterions(http_controller),

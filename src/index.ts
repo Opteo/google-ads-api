@@ -16,7 +16,7 @@ export default class GoogleAdsJs {
 	* @param developer_token - Developer token
 	*
 	*/
-	constructor({client_id, client_secret, developer_token}: Library) {
+	constructor({client_id, client_secret, developer_token} : Library) {
 		this.client_id = client_id
 		this.client_secret = client_secret
 		this.developer_token = developer_token
@@ -29,7 +29,7 @@ export default class GoogleAdsJs {
 	 * @param refresh_token - OAuth2 refresh token
 	 * 
 	*/
-	public Customer({customer_account_id, refresh_token, async_account_getter}: Account) : ICustomer {
+	public Customer({customer_account_id, refresh_token, async_account_getter} : Account) : ICustomer {
 
 		/* 
 			Need to accept a fn in there instead...

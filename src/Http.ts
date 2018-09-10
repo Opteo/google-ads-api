@@ -4,7 +4,7 @@ import { snakeCase, isObject } from 'lodash'
 import { getAccessToken } from './token'
 import { ADWORDS_API_BASE_URL } from "./constants"
 
-import { Client, ClientConstructor } from './types/Global'
+import { Client, ClientConstructor, AccountInfo } from './types/Global'
 import { RequestOptions, HttpController } from './types/Http'
 import { ListConfig, EntityUpdateConfig, NewEntityConfig } from './types/Entity'
 
@@ -17,7 +17,7 @@ export default class Http implements HttpController {
 
     constructor({ async_account_getter, client_id, developer_token, client_secret } : ClientConstructor) {
 
-        const account_promise = async_account_getter().then((account_info : { cid: string, refresh_token: string }) => {
+        const account_promise = async_account_getter().then((account_info : AccountInfo) => {
             this.client.cid = account_info.cid.toString().split('-').join('')
             this.client.refresh_token = account_info.refresh_token
         })
@@ -133,7 +133,7 @@ export default class Http implements HttpController {
                         body = JSON.parse(body)
                         error = body.error || `Something bad happened in HTTP request, but we don't know what.`
                     }
-                    log(body.error.details[0].errors);
+                    log(body.error.details);
                     reject(error)
                 }   
             })
@@ -158,14 +158,14 @@ export default class Http implements HttpController {
         if (entity.includes('campaigns')){
             config.campaign_budget = `customers/${this.client.cid}/campaignBudgets/${config.budget_id}`
             delete config.budget_id
-        } else if (entity.includes('adGroups')){
+        } else if (entity.includes('adGroups') || entity.includes('campaignCriteria')){
             config.campaign = `customers/${this.client.cid}/campaigns/${config.campaign_id}`
             delete config.campaign_id
         } else if (entity.includes('adGroupAds') || entity.includes('adGroupCriteria')){
             config.ad_group = `customers/${this.client.cid}/adGroups/${config.ad_group_id}`
             delete config.ad_group_id
-        } 
-        
+        }
+
         return config
     }
 

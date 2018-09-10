@@ -5,6 +5,7 @@ export enum ENDPOINTS {
     search = 'googleAds:search',
     campaigns = 'campaigns',
     campaign_budgets = 'campaignBudgets',
+    campaign_criteria = 'campaignCriteria',
     customers = 'customers',
     adgroups = 'adGroups',
     ads = 'adGroupAds',
@@ -15,6 +16,7 @@ export enum ENDPOINTS {
 export enum RESOURCE_NAMES {
     campaign = 'campaign',
     campaign_budget = 'campaign_budget',
+    campaign_criteria = 'campaign_criterion',
     adgroup = 'ad_group',
     ad = 'ad_group_ad',
     adgroup_critera = 'ad_group_criterion',

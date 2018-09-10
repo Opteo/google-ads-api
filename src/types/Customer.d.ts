@@ -1,5 +1,7 @@
 import Campaigns from '../entities/Campaigns'
 import CampaignBudgets from '../entities/CampaignBudgets'
+import CampaignCriterions from '../entities/CampaignCriterions'
+import CampaignNegatives from '../entities/CampaignNegatives'
 import AdGroups from '../entities/AdGroups'
 import AdGroupAds from '../entities/AdGroupAds'
 import AdGroupCriterions from '../entities/AdGroupCriterions'
@@ -16,6 +18,8 @@ declare namespace Customer {
     export interface Customer {
         campaigns: Campaigns,
         campaignBudgets: CampaignBudgets,
+        campaignCriterions: CampaignCriterions,
+        campaignNegatives: CampaignNegatives,
         adgroups: AdGroups,
         ads: AdGroupAds,
         adgroupCriterions: AdGroupCriterions,

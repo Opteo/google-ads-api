@@ -18,7 +18,8 @@ describe('Campaigns', async () => {
 	let new_campaign_id = ''
 
 	it('Lists All Campaigns', async () => {
-		const config = {
+		expect.assertions(1)
+		const campaigns = await customer.campaigns.list({
 			limit: 2,
 			fields: [
 				'id',
@@ -28,9 +29,7 @@ describe('Campaigns', async () => {
 			constraints: {
 				status: 'ENABLED',
 			}
-		}
-		expect.assertions(1)
-		const campaigns = await customer.campaigns.list(config)
+		})
 		expect(campaigns).toEqual({
             results: expect.any(Object),
             total_results_count: expect.any(String),

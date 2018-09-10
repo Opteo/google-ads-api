@@ -1,4 +1,5 @@
 import { KeywordObject } from './Keyword'
+import { NewEntityConfig } from './Entity'
 
 declare namespace CampaignCriterion {
     /**
@@ -35,7 +36,15 @@ declare namespace CampaignCriterion {
      * @interface
      */
     interface Device {
-        type: DeviceType
+        type: DeviceType | keyof typeof DeviceType
+    }
+
+    /**
+     * Location Interface
+     * @interface
+     */
+    interface Location {
+        geo_target_constant: string
     }
 
      /**
@@ -83,5 +92,36 @@ declare namespace CampaignCriterion {
         UNSPECIFIED = 'UNSPECIFIED'
     }
 
+
+    /**
+     * Interface for New Criterion Config
+     * @interface  
+     * @param campaign_id
+     */
+    interface NewCriterion extends NewEntityConfig {
+        campaign_id: string|number,
+        type?: DeviceType | keyof typeof DeviceType,
+        negative?: boolean,
+        bid_modifier?: number
+    }
+
+    interface NewDevice extends NewCriterion {
+        device: Device
+    }  
+
+    interface NewKeyword extends NewCriterion {
+        negative: boolean,
+        keyword: KeywordObject
+    } 
+
+    interface NewLocation extends NewCriterion {
+        location: Location
+    }
+
+    interface newAdSchedule extends NewCriterion {
+        ad_schedule: AdSchedule 
+    }
+
+    export type NewCriterionConfig = NewDevice | NewLocation | newAdSchedule | NewKeyword
 }
 export = CampaignCriterion
