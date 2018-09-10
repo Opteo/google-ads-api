@@ -27,11 +27,7 @@ describe('AdGroup Keywords', async () => {
             }
         })
 
-        expect(keywords).toEqual({
-            results: expect.any(Object),
-            total_results_count: expect.any(String),
-            field_mask: 'adGroupCriterion.keyword.text,adGroupCriterion.keyword.matchType' 
-        })
+        expect(keywords).toBeInstanceOf(Array)
     }) 
 
     it('Creates New Keyword', async (done) => {

@@ -39,10 +39,6 @@ describe('Customer', async () => {
             FROM ad_group
         `)
         // console.log(data)
-        expect(data).toEqual({
-            results: expect.any(Object),
-            total_results_count: expect.any(String),
-            field_mask: 'campaign.id,campaign.name,adGroup.id,adGroup.name'
-        })
+        expect(data).toBeInstanceOf(Array)
     })   
 })

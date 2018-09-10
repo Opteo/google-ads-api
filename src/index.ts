@@ -42,7 +42,6 @@ export default class GoogleAdsJs {
 		}
 
 		if(!async_account_getter){
-			console.log('no getter, making one....')
 			const cid = (customer_account_id || '').toString().split('-').join('')
 			async_account_getter = async () => {
 				return { cid, refresh_token }

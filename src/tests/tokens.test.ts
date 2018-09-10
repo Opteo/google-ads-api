@@ -26,7 +26,7 @@ describe('Tokens', async () => {
             async_account_getter : async () => {
                 await delay(1000)
                 return {
-                    customer_account_id: config.cid, 
+                    cid: config.cid, 
                     refresh_token: config.refresh_token
                 }
             }

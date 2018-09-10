@@ -31,11 +31,7 @@ describe('Campaigns', async () => {
 		}
 		expect.assertions(1)
 		const campaigns = await customer.campaigns.list(config)
-		expect(campaigns).toEqual({
-            results: expect.any(Object),
-            total_results_count: expect.any(String),
-            field_mask: 'campaign.id,campaign.name,campaign.status'
-        })
+		expect(campaigns).toBeInstanceOf(Array)
 		// console.log(campaigns)
 	})
 

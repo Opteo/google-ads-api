@@ -31,11 +31,7 @@ describe('Shared Sets', async () => {
 			}
 		})
 
-		expect(shared_sets).toEqual({
-            results: expect.any(Object),
-            total_results_count: expect.any(String),
-            field_mask: 'sharedSet.id,sharedSet.name,sharedSet.status'
-        })
+		expect(shared_sets).toBeInstanceOf(Array)
 	})
 
 	it('Creates New Shared Set', async (done) => {
