@@ -99,7 +99,9 @@ declare namespace AdGroupCriterion {
      * @param ad_group_id
      */
     export interface NewCriterionConfig extends NewEntityConfig {
-        ad_group_id: string|number
+        ad_group_id: string|number,
+        keyword?: object,
+        listing_group?: object
     }
 }
 export = AdGroupCriterion
