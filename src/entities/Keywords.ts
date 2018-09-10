@@ -1,4 +1,4 @@
-import AdGroupCriterions from './AdgroupCriterions'
+import AdGroupCriterions from './AdGroupCriterions'
 
 import { HttpController } from '../types/Http'
 import { NewKeywordConfig } from '../types/Keyword'

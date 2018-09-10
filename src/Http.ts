@@ -4,7 +4,7 @@ import { snakeCase, isObject } from 'lodash'
 import { getAccessToken } from './token'
 import { ADWORDS_API_BASE_URL } from "./constants"
 
-import { Client } from './types/Global'
+import { Client, ClientConstructor } from './types/Global'
 import { RequestOptions, HttpController } from './types/Http'
 import { ListConfig, EntityUpdateConfig, NewEntityConfig } from './types/Entity'
 
@@ -15,10 +15,17 @@ const log = (obj: object) => {
 export default class Http implements HttpController {
     private client : Client
 
-    constructor({cid, refresh_token, client_id, developer_token, client_secret} : Client) {
+    constructor({ async_account_getter, client_id, developer_token, client_secret } : ClientConstructor) {
+
+        const account_promise = async_account_getter().then((account_info : { cid: string, refresh_token: string }) => {
+            this.client.cid = account_info.cid.toString().split('-').join('')
+            this.client.refresh_token = account_info.refresh_token
+        })
+
         this.client = {
-            cid,
-            refresh_token,
+            account_promise,
+            cid : '',
+            refresh_token : '',
             client_id,
             developer_token,
             client_secret
@@ -29,6 +36,7 @@ export default class Http implements HttpController {
     *   PUBLIC METHODS
     */
     public async create(config: NewEntityConfig, entity: string) {
+        await this.client.account_promise
         const url = this.getRequestUrl('mutate', entity)
         const options = await this.getRequestOptions('POST', url)
 
@@ -42,6 +50,7 @@ export default class Http implements HttpController {
     }
 
     public async retrieve(entity: string, entity_id?: string) {
+        await this.client.account_promise
         const url = this.getRequestUrl('get', entity, entity_id)
         const options = await this.getRequestOptions('GET', url)
 
@@ -49,6 +58,7 @@ export default class Http implements HttpController {
     }
 
     public async list(config: ListConfig, resource: string) {
+        await this.client.account_promise
         const url = this.getRequestUrl('search')
         const query = this.buildQuery(config, resource)
         const options = await this.getRequestOptions('POST', url)
@@ -58,6 +68,7 @@ export default class Http implements HttpController {
     }
 
     public async update(config: EntityUpdateConfig, entity: string) {
+        await this.client.account_promise
         const url = this.getRequestUrl('mutate', entity)
         const options = await this.getRequestOptions('POST', url)
         
@@ -74,6 +85,7 @@ export default class Http implements HttpController {
     }
 
     public async delete(entity: string, entity_id: string) {
+        await this.client.account_promise
         const url = this.getRequestUrl('mutate', entity)
         const options = await this.getRequestOptions('POST', url)
 
@@ -86,6 +98,7 @@ export default class Http implements HttpController {
     }
 
     public async search(query: string) {
+        await this.client.account_promise
         const url = this.getRequestUrl()
         const options = await this.getRequestOptions('POST', url)
 

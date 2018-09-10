@@ -18,7 +18,7 @@ declare namespace Keyword {
      */
     interface KeywordObject {
         text: string,
-        match_type: MatchType
+        match_type: MatchType | keyof typeof MatchType
     }
 
      /**
@@ -50,8 +50,8 @@ declare namespace Keyword {
      * @param keyword
      */
     export interface NewKeywordConfig extends NewEntityConfig {
-        ad_group_id: string|number
-        keyword: KeywordObject
+        ad_group_id: string|number,
+        keyword: KeywordObject,
     }
 
 }

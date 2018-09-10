@@ -2,7 +2,7 @@ import Campaigns from '../entities/Campaigns'
 import CampaignBudgets from '../entities/CampaignBudgets'
 import AdGroups from '../entities/AdGroups'
 import AdGroupAds from '../entities/AdGroupAds'
-import AdGroupCriterions from '../entities/AdgroupCriterions'
+import AdGroupCriterions from '../entities/AdGroupCriterions'
 import Keywords from '../entities/Keywords'
 import SharedSets from '../entities/SharedSets'
 

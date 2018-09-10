@@ -2,7 +2,7 @@ import Campaigns from './entities/Campaigns'
 import CampaignBudgets from './entities/CampaignBudgets'
 import AdGroups from './entities/AdGroups'
 import AdGroupAds from './entities/AdGroupAds'
-import AdgroupCriterions from './entities/AdGroupCriterions'
+import AdGroupCriterions from './entities/AdGroupCriterions'
 import Keywords from './entities/Keywords'
 import SharedSets from './entities/SharedSets'
 
@@ -16,7 +16,7 @@ export default function Customer(http_controller: HttpController) : Customer  {
 		campaignBudgets: new CampaignBudgets(http_controller),
 		adgroups: new AdGroups(http_controller),
 		ads: new AdGroupAds(http_controller),         
-		adgroupCriterions: new AdgroupCriterions(http_controller),
+		adgroupCriterions: new AdGroupCriterions(http_controller),
 		keywords: new Keywords(http_controller),
 		sharedSets: new SharedSets(http_controller),
 		retrieve: () => http_controller.retrieve(ENDPOINTS.customers),

@@ -29,11 +29,28 @@ export default class GoogleAdsJs {
 	 * @param refresh_token - OAuth2 refresh token
 	 * 
 	*/
-	public Customer({customer_account_id, refresh_token}: Account) : ICustomer {
-		const cid = customer_account_id.toString().split('-').join('')
+	public Customer({customer_account_id, refresh_token, async_account_getter}: Account) : ICustomer {
+
+		/* 
+			Need to accept a fn in there instead...
+			Perhaps make the fn mode default, and create it if it doesn't exist?
+			gotta change all the TYPES though
+		 */
+
+		if(!async_account_getter && (!customer_account_id || !refresh_token)){
+			throw new Error('must specify either {customer_account_id, refresh_token} or an async_account_getter')
+		}
+
+		if(!async_account_getter){
+			console.log('no getter, making one....')
+			const cid = (customer_account_id || '').toString().split('-').join('')
+			async_account_getter = async () => {
+				return { cid, refresh_token }
+			}
+		}
+
 		const http_controller = new Http({
-			cid,
-			refresh_token,
+			async_account_getter,
 			client_id: this.client_id,
 			developer_token: this.developer_token,
 			client_secret: this.client_secret
