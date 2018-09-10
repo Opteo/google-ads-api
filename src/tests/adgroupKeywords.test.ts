@@ -1,7 +1,7 @@
 import GoogleAdsJs from '..'
 import config from '../config'
 
-const getRandomKeywordText = () => `test-keyword-${((Math.random() * 10) + 1).toFixed(0)}`
+const getRandomKeywordText = () => `test-keyword-${((Math.random() * 100) + 1).toFixed(0)}`
 
 describe('AdGroup Keywords', async () => {
     const lib_instance = new GoogleAdsJs({
@@ -38,7 +38,7 @@ describe('AdGroup Keywords', async () => {
         expect.assertions(1)
         const keyword_text = getRandomKeywordText()
 
-        const new_keyword = await customer.adgroupCriterions.create({
+        const new_keyword = await customer.keywords.create({
             ad_group_id,
             keyword: {
                 text: keyword_text,
@@ -58,7 +58,7 @@ describe('AdGroup Keywords', async () => {
     
     it('Retrieves Keyword Data', async (done) => {
         expect.assertions(1)
-        const keyword = await customer.adgroupCriterions.retrieve(keyword_id)
+        const keyword = await customer.keywords.retrieve(keyword_id)
         // console.log(keyword)
         expect(keyword).toEqual({
             ad_group: expect.any(String),
@@ -95,7 +95,7 @@ describe('AdGroup Keywords', async () => {
             }
         })
 
-        const updated_keyword = await customer.adgroupCriterions.retrieve(keyword_id)
+        const updated_keyword = await customer.keywords.retrieve(keyword_id)
         expect(updated_keyword.status).toEqual('PAUSED')
     }) 
 
