@@ -3,7 +3,7 @@ import CampaignCriterions from './CampaignCriterions'
 import { HttpController } from '../types/Http'
 
 /* 
-* 	Campaign Ad Schedule Alias for Campaign Criterion 
+* 	Campaign Criterion Alias for Campaign Ad Schedule 
 */
 export default class CampaignAdSchedules extends CampaignCriterions {
 

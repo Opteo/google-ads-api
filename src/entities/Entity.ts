@@ -28,7 +28,7 @@ export default class Entity {
         return this.http_controller.update(config, this.endpoint)
     }
     
-    public delete(entity_id: string) : Promise<any> {
+    public delete(entity_id: string|number) : Promise<any> {
         return this.http_controller.delete(this.endpoint, entity_id)
     }
     

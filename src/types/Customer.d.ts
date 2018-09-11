@@ -3,6 +3,7 @@ import CampaignAdSchedules from '../entities/CampaignAdSchedules'
 import CampaignBudgets from '../entities/CampaignBudgets'
 import CampaignCriterions from '../entities/CampaignCriterions'
 import CampaignNegatives from '../entities/CampaignNegatives'
+import CampaignSharedSets from '../entities/CampaignSharedSets'
 import AdGroups from '../entities/AdGroups'
 import AdGroupAds from '../entities/AdGroupAds'
 import AdGroupCriterions from '../entities/AdGroupCriterions'
@@ -22,6 +23,7 @@ declare namespace Customer {
         campaignBudgets: CampaignBudgets,
         campaignCriterions: CampaignCriterions,
         campaignNegatives: CampaignNegatives,
+        campaignSharedSets: CampaignSharedSets,
         adgroups: AdGroups,
         ads: AdGroupAds,
         adgroupCriterions: AdGroupCriterions,

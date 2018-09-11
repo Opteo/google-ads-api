@@ -3,13 +3,14 @@ import CampaignBudgets from './entities/CampaignBudgets'
 import CampaignCriterions from './entities/CampaignCriterions'
 import CampaignNegatives from './entities/CampaignNegatives'
 import CampaignAdSchedules from './entities/CampaignAdSchedules'
+import CampaignSharedSets from './entities/CampaignSharedSets'
 import AdGroups from './entities/AdGroups'
 import AdGroupAds from './entities/AdGroupAds'
 import AdGroupCriterions from './entities/AdGroupCriterions'
 import Keywords from './entities/Keywords'
 import SharedSets from './entities/SharedSets'
 
-import { ENDPOINTS } from './constants'
+import { ENDPOINTS, RESOURCE_NAMES} from './constants'
 import { Customer } from './types/Customer'
 import { HttpController } from './types/Http'
 
@@ -20,6 +21,7 @@ export default function Customer(http_controller: HttpController) : Customer  {
 		campaignBudgets: new CampaignBudgets(http_controller),
 		campaignCriterions: new CampaignCriterions(http_controller),
 		campaignNegatives: new CampaignNegatives(http_controller),
+		campaignSharedSets: new CampaignSharedSets(http_controller, ENDPOINTS.campaign_shared_sets, RESOURCE_NAMES.campaign_shared_set),
 		adgroups: new AdGroups(http_controller),
 		ads: new AdGroupAds(http_controller),         
 		adgroupCriterions: new AdGroupCriterions(http_controller),

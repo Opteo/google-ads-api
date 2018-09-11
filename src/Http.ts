@@ -52,7 +52,6 @@ export default class Http implements HttpController {
         await this.client.account_promise
         const url = this.getRequestUrl('get', entity, entity_id)
         const options = await this.getRequestOptions('GET', url)
-
         return this.queryApi(options)
     }
 
@@ -124,7 +123,7 @@ export default class Http implements HttpController {
                         body = JSON.parse(body)
                         error = body.error || { message : `Something bad happened in HTTP request, but we don't know what.` }
                     }
-                    console.log(error)
+                    console.log(new GoogleAdsError(error))
                     reject(new GoogleAdsError(error))
                 }   
             })
@@ -155,6 +154,11 @@ export default class Http implements HttpController {
         } else if (entity.includes('adGroupAds') || entity.includes('adGroupCriteria')){
             config.ad_group = `customers/${this.client.cid}/adGroups/${config.ad_group_id}`
             delete config.ad_group_id
+        } else if (entity.includes('campaignSharedSets')){
+            config.campaign = `customers/${this.client.cid}/campaigns/${config.campaign_id}`
+            config.shared_set = `customers/${this.client.cid}/sharedSets/${config.shared_set_id}`
+            delete config.campaign_id
+            delete config.shared_set_id
         }
 
         return config

@@ -30,7 +30,6 @@ describe('Shared Sets', async () => {
 				status: 'ENABLED',
 			}
 		})
-
 		expect(shared_sets).toBeInstanceOf(Array)
 	})
 

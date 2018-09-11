@@ -3,7 +3,7 @@ import CampaignCriterions from './CampaignCriterions'
 import { HttpController } from '../types/Http'
 
 /* 
-* 	CampaignNegatives Alias for Campaign Criterion 
+* 	Campaign Criterion Alias for Campaign Negatives 
 */
 export default class CampaignNegatives extends CampaignCriterions {
 

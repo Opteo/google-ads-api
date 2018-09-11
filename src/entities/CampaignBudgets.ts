@@ -17,6 +17,5 @@ export default class CampaignBudgets extends Entity {
     retrieve<CampaignBudget>(campaign_budget_id: string) : Promise<any> {
         return super.retrieve(campaign_budget_id)
     }
-
     
 }

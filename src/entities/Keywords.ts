@@ -4,7 +4,7 @@ import { HttpController } from '../types/Http'
 import { NewKeywordConfig } from '../types/Keyword'
 
 /* 
-* 	Keywords Alias for AdGroup Criterion 
+* 	AdGroup Criterion Alias for AdGroup Keywords 
 */
 export default class Keywords extends AdGroupCriterions {
 
