@@ -1,10 +1,10 @@
-import GoogleAdsJs from '..'
+import GoogleAdsApi from '..'
 import config from '../config'
 
 const getRandomKeywordText = () => `test-keyword-${((Math.random() * 100) + 1).toFixed(0)}`
 
 describe('AdGroup Keywords', async () => {
-    const lib_instance = new GoogleAdsJs({
+    const lib_instance = new GoogleAdsApi({
 		client_id: config.client_id, 
 		client_secret: config.client_secret, 
 		developer_token: config.developer_token

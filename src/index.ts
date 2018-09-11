@@ -4,13 +4,13 @@ import CustomerInstance from './Customer'
 import { Library, Account } from './types/Global'
 import { Customer as ICustomer } from './types/Customer'
 
-export default class GoogleAdsJs {
+class GoogleAdsApi {
 	private client_id: string|number
 	private client_secret: string
 	private developer_token: string
 
 	/**
-	 * Creates GoogleAdsJs Instance
+	 * Creates GoogleAdsApi Instance
 	* @param client_id  - OAuth2 client ID 
 	* @param client_secret - OAuth2 client secret
 	* @param developer_token - Developer token
@@ -59,3 +59,5 @@ export default class GoogleAdsJs {
 	}
 
 }
+
+export = GoogleAdsApi
