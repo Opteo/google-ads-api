@@ -3,9 +3,9 @@ import config from '../config'
 
 const getRandomKeywordText = () => `test-negative-${((Math.random() * 100) + 1).toFixed(0)}`
 
-const log = (obj: object) => {
-    console.log(require('util').inspect(obj, false, null))
-}
+// const log = (obj: object) => {
+//     console.log(require('util').inspect(obj, false, null))
+// }
 describe('Campaign Negatives', async () => {
     const lib_instance = new GoogleAdsJs({
 		client_id: config.client_id, 

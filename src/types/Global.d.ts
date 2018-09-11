@@ -62,5 +62,17 @@ declare namespace Global {
     export interface UpdateConfig {
         update: { [key: string]: string|number|object },
     }
+
+    /**
+     *  Native Google Ads Error Interface
+     * @interface
+     */
+    export interface Error {
+        message: string,
+        status: string, 
+        details: any, 
+        code: number
+    }
+
 }
 export = Global

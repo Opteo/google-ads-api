@@ -1,17 +1,22 @@
+import { Error as IError } from './types/Global'
+
 export default class GoogleAdsError extends Error {
-    constructor(message:string, status:string, details:any, http_code:number) {
-        super(message);
-        Object.setPrototypeOf(this, GoogleAdsError.prototype);
-        // Ensure the name of this error is the same as the class name
-        if(details){
-            this.mistake = details[0].errors[0].message
-        }  
-        this.name = this.constructor.name;
+    public error_name: string
+    public details: Array<object>
+    public status: string
+    public mistake: string
+    public http_code: number
+
+    constructor({message, status, details, code} : IError) {
+        super(message)
+       
+        this.error_name = message
         this.details = details
         this.status = status
-        this.http_code = http_code
+        this.http_code = code
+        this.mistake = details ? details[0].errors[0].message : 'unknown'
 
-        Error.captureStackTrace(this, this.constructor);
+        Error.captureStackTrace(this, this.constructor)
     }
 }
  
