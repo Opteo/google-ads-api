@@ -1,5 +1,8 @@
 import { snakeCase, isObject } from 'lodash'
 
+import { ReportConfig } from './types/Global'
+import { ListConfig } from './types/Entity'
+
 export const getUpdateMask = (update_object: any) : string => {
     let mask = ''
     for (const key in update_object) {
@@ -12,7 +15,66 @@ export const getUpdateMask = (update_object: any) : string => {
     return mask
 }
 
-export const buildQuery = (config: any, resource: string) : string => {
+/**
+* Builds a custom Google Ads Query
+* @param {object} config
+* @returns {string} query 
+*/
+export const buildReportQuery = (config: ReportConfig) : string => {
+    let query = ''
+    let where_clause_exists = false
+    let start_date_exists = false
+
+    /* SELECT Clause */
+    const selected_fields = config.fields || []
+    const selected_metrics = config.metrics ? config.metrics.map((metric: string) => `metrics.${metric}`) : []
+    const all_selected_attributes = selected_fields.concat(selected_metrics).join(', ')
+
+    if (!all_selected_attributes.length) {
+        throw new Error('Missing resource fields or metric fields to be selected')
+    }
+
+    query = `SELECT ${all_selected_attributes} FROM ${config.resource}`
+
+    /* WHERE Clause */
+    if (config.date_constant && (config.from_date || config.to_date)) {
+        throw new Error('Use only one, Custom date range or Predefined date range') // TODO: add better error message
+    }
+
+    /* Custom Date Range */
+    if (config.from_date) {
+        query += `WHERE date >= ${config.from_date}`
+        start_date_exists = true
+        where_clause_exists = true
+    }
+    if (config.to_date) {
+        query += start_date_exists ? `AND date <= ${config.to_date}` : `WHERE date <= ${config.to_date}`
+        where_clause_exists = true
+    }
+
+    /* Predefined Date Constant */
+    if (config.date_constant) {
+        query += ` WHERE date DURING ${config.date_constant}` 
+        where_clause_exists = true
+    }
+
+
+    /* Order By */
+    if (config.order_by) {
+        const formatted_order_by = formatOrderBy(config.order_by) // TODO: allow to specify DESC or ASC
+        query += ` ORDER BY ${formatted_order_by}` 
+    } 
+
+    /* Limit To */
+    if (config.limit && config.limit > 0) {
+        query += ` LIMIT ${config.limit}`
+    }
+
+    console.log(query)
+    return query
+}
+
+export const buildQuery = (config: ListConfig, resource: string) : string => {
     const selected_fields = config.fields.map((field: string) => `${resource}.${field}`)
     let query = `SELECT ${selected_fields.join(', ')} FROM ${resource}`
 
@@ -59,7 +121,7 @@ export const buildQuery = (config: any, resource: string) : string => {
     }
     
     if (config.order_by) {
-        const formatted_order_by = formatOrderBy(config.order_by, resource)
+        const formatted_order_by = formatOrderBy(config.order_by)
         query += ` ORDER BY ${formatted_order_by}` 
     } 
 
@@ -70,11 +132,11 @@ export const buildQuery = (config: any, resource: string) : string => {
     return query
 }
 
-const formatOrderBy = (order_by: string|Array<string>, resource: string) : string => {
+const formatOrderBy = (order_by: string|Array<string>, resource?: string) : string => {
         if (order_by instanceof Array) {
-            return `${order_by.map((key: string) => `${resource}.${key}`).join(', ')}` 
+            return `${order_by.map((key: string) => resource ? `${resource}.${key}` : key).join(', ')}` 
         } 
-        return `${resource}.${order_by}`
+        return resource ? `${resource}.${order_by}` : order_by
 }
 
 export const mapResultsWithIds = (response: any) : object => {

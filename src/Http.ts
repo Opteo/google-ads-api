@@ -4,7 +4,7 @@ import retry from 'bluebird-retry'
 
 import { getAccessToken } from './token'
 import { ADWORDS_API_BASE_URL } from "./constants"
-import { getUpdateMask, buildQuery, mapResultsWithIds, transformObjectKeys } from './utils'
+import { getUpdateMask, buildQuery, buildReportQuery, mapResultsWithIds, transformObjectKeys } from './utils'
 
 import GoogleAdsError from './Error'
 import { Client, ClientConstructor, AccountInfo, ReportConfig } from './types/Global'
@@ -106,8 +106,10 @@ export default class Http implements HttpController {
     }
 
     public async report(config: ReportConfig) {
-        // const query = buildReportQuery(config)
-        // return this.query(query)
+        const query = buildReportQuery(config)
+        console.log(query)
+
+        return this.query(query)
     }
 
     /* 
