@@ -1,5 +1,6 @@
 import request from 'request'
-import { snakeCase, isObject } from 'lodash'
+import { snakeCase, isObject, random } from 'lodash'
+import retry from 'bluebird-retry'
 
 import { getAccessToken } from './token'
 import { ADWORDS_API_BASE_URL } from "./constants"
@@ -107,28 +108,59 @@ export default class Http implements HttpController {
     /* 
     *   PRIVATE METHODS
     */
-    private queryApi(options: RequestOptions) {
-        const _this = this
+    private async queryApi(options: RequestOptions) {
+        const work = async () => {
+            const { response, body } = await this.doHttpRequest(options)
+
+            if (response.statusCode === 404) {
+                const { url } = options
+                throw new retry.StopError(new Error(`The requested URL ${url} was not found (404).`))
+            } 
+
+            let decoded_body
+
+            try{
+                decoded_body = JSON.parse(body)
+            }
+            catch {
+                throw new retry.StopError(new Error(`Could not decode JSON body: ${body}`))
+            }
+            
+
+            if (response.statusCode === 200) {  
+                return decoded_body
+            }
+
+            // if the error is in the 400 range, it's our fault, so no need to retry.
+            if(response.statusCode.toString()[0] === '4'){
+                throw new retry.StopError(new GoogleAdsError(decoded_body.error))
+            }
+
+            // Errors that make it here will be retried.
+            throw new GoogleAdsError(decoded_body.error)
+        }
+
+        const data = await retry(work, { 
+            max_tries: 3, 
+            interval: 1000 + random(1000),
+            throw_original : true,
+            backoff : 2
+        })
+
+        const final_object = this.transformObjectKeys(data)
+        return final_object
+
+    }
+
+    private doHttpRequest(options : RequestOptions) : Promise<any>{
         return new Promise((resolve, reject) => {
             request(options, (error, response, body) => {
                 if(error){
                     reject(error)
                 }
-                else if (response.statusCode === 200) {  
-
-                    const entity_body = JSON.parse(body)
-                    const final_object = _this.transformObjectKeys(entity_body)
-                    resolve(final_object)
-                } else if (response.statusCode === 404) {
-                    const { url } = options
-                    reject(new Error(`The requested URL ${url} was not found (404).`))
-                } else {
-                    if (!error) {
-                        body = JSON.parse(body)
-                        error = body.error || { message : `Something bad happened in HTTP request, but we don't know what.` }
-                    }
-                    reject(new GoogleAdsError(error))
-                }   
+                else {
+                    resolve({ response, body })
+                }
             })
         })
     }
