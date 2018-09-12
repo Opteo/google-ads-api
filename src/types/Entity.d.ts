@@ -17,6 +17,7 @@ declare namespace Entity {
      */
     export interface ListConfig {
         limit?: number,
+        order_by?: string|Array<string>,
         fields: string[],
         constraints?: { [key: string]: string|any },
     }

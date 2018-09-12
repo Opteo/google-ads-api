@@ -24,14 +24,15 @@ describe('AdGroups', async () => {
             fields: [
                 'id',
                 'name',
-                'status'
+                'status',
+                'cpa_bid_micros'
             ],
+            order_by: ['id', 'cpa_bid_micros'],
             constraints: {
                 campaign_id,
                 status: 'ENABLED'
             }
         })
-
         expect(adgroups).toBeInstanceOf(Array)
     })
     

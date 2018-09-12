@@ -20,7 +20,7 @@ describe('Campaigns', async () => {
 	it('Lists All Campaigns', async () => {
 		expect.assertions(1)
 		const campaigns = await customer.campaigns.list({
-			limit: 2,
+			limit: 3,
 			fields: [
 				'id',
 				'name',
@@ -28,9 +28,10 @@ describe('Campaigns', async () => {
 			],
 			constraints: {
 				status: 'ENABLED',
-			}
+			},
+			order_by: 'id'
 		})
-		expect(campaigns).toBeInstanceOf(Array)
+		expect(campaigns).toHaveLength(3)
 	})
 
 	it('Creates New Campaign', async (done) => {

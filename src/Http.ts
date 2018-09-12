@@ -119,7 +119,7 @@ export default class Http implements HttpController {
 
             let decoded_body
 
-            try{
+            try {
                 decoded_body = JSON.parse(body)
             }
             catch {
@@ -132,7 +132,7 @@ export default class Http implements HttpController {
             }
 
             // if the error is in the 400 range, it's our fault, so no need to retry.
-            if(response.statusCode.toString()[0] === '4'){
+            if (response.statusCode.toString()[0] === '4') {
                 throw new retry.StopError(new GoogleAdsError(decoded_body.error))
             }
 
@@ -155,7 +155,7 @@ export default class Http implements HttpController {
     private doHttpRequest(options : RequestOptions) : Promise<any>{
         return new Promise((resolve, reject) => {
             request(options, (error, response, body) => {
-                if(error){
+                if (error) {
                     reject(error)
                 }
                 else {
@@ -274,6 +274,14 @@ export default class Http implements HttpController {
             }
         }
         
+        if (config.order_by) {
+            const order_by = config.order_by instanceof Array ? 
+                `${config.order_by.map((key: string) => `${resource}.${key}`).join(', ')}` 
+                : `${resource}.${config.order_by}`
+
+            query += ` ORDER BY ${order_by}` 
+        } 
+
         if (config.limit && config.limit > 0) {
             query += ` LIMIT ${config.limit}`
         }
