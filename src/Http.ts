@@ -58,7 +58,7 @@ export default class Http implements HttpController {
 
     public async list(config: ListConfig, resource: string) {
         const query = this.buildQuery(config, resource)
-        return this.search(query)
+        return this.query(query)
     }
 
     public async update(config: EntityUpdateConfig, entity: string) {
@@ -91,7 +91,7 @@ export default class Http implements HttpController {
         return this.queryApi(options)
     }
 
-    public async search(query: string) {
+    public async query(query: string) {
         await this.client.account_promise
         const url = this.getRequestUrl()
         const options = await this.getRequestOptions('POST', url)

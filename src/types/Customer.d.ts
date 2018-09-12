@@ -30,7 +30,7 @@ declare namespace Customer {
         keywords: Keywords,
         sharedSets: SharedSets,
         retrieve: () => Promise<any>,
-        search: (query: string) => Promise<any>
+        query: (query: string) => Promise<any>
     }
 
 }

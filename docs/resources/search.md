@@ -12,7 +12,7 @@ For more information on the Google Ads Query Language, visit [Google Ads Api Doc
 
 #### Example Request
 ```javascript
-const data = await customer.search(`
+const data = await customer.query(`
     SELECT 
         campaign.id, 
         campaign.name, 

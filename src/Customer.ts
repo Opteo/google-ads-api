@@ -28,7 +28,7 @@ export default function Customer(http_controller: HttpController) : Customer  {
 		keywords: new Keywords(http_controller),
 		sharedSets: new SharedSets(http_controller),
 		retrieve: () => http_controller.retrieve(ENDPOINTS.customers),
-		search: (query: string) => http_controller.search(query), 
+		query: (query: string) => http_controller.query(query), 
 	}
 }
 
