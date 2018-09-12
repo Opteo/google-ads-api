@@ -1,4 +1,4 @@
-import GoogleAdsJs from '..'
+import GoogleAdsApi from '..'
 import config from '../config'
 
 const getRandomKeywordText = () => `test-negative-${((Math.random() * 100) + 1).toFixed(0)}`
@@ -7,7 +7,7 @@ const getRandomKeywordText = () => `test-negative-${((Math.random() * 100) + 1).
 //     console.log(require('util').inspect(obj, false, null))
 // }
 describe('Campaign Negatives', async () => {
-    const lib_instance = new GoogleAdsJs({
+    const lib_instance = new GoogleAdsApi({
 		client_id: config.client_id, 
 		client_secret: config.client_secret, 
 		developer_token: config.developer_token

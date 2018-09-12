@@ -1,8 +1,8 @@
-import GoogleAdsJs from '..'
+import GoogleAdsApi from '..'
 import config from '../config'
 
 describe('Campaign Budgets', async () => {
-    const lib_instance = new GoogleAdsJs({
+    const lib_instance = new GoogleAdsApi({
 		client_id: config.client_id, 
 		client_secret: config.client_secret, 
 		developer_token: config.developer_token

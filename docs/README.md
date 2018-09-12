@@ -7,9 +7,9 @@
 
 #### Authentication
 ```javascript
-import GoogleAdsJs from 'google-ads-javascript'
+import GoogleAdsApi from 'google-ads-javascript'
 
-const google_ads_js = new GoogleAdsJs({
+const google_ads_js = new GoogleAdsApi({
     client_id: '2345234523-0r123fwfanq6umje125rewc2134n.apps.googleusercontent.com', 
     client_secret: '8TLfdsSAJ3rhEK8LbUvSAO', 
     developer_token: 'EBI_T2FAGKE3ABCEF'
