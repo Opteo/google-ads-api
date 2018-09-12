@@ -111,7 +111,11 @@ export default class Http implements HttpController {
         const _this = this
         return new Promise((resolve, reject) => {
             request(options, (error, response, body) => {
-                if (response.statusCode === 200) {
+                if(error){
+                    reject(error)
+                }
+                else if (response.statusCode === 200) {  
+
                     const entity_body = JSON.parse(body)
                     const final_object = _this.transformObjectKeys(entity_body)
                     resolve(final_object)
