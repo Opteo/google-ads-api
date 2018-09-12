@@ -12,7 +12,7 @@ declare namespace Http {
         list(config: ListConfig, resource: string): Promise<object>, 
         update(config: UpdateConfig, entity: string): Promise<object>, 
         delete(entity: string, entity_id: string|number): Promise<object>, 
-        search(entity: string): Promise<object>, 
+        query(entity: string): Promise<object>, 
     }
 
     /**
