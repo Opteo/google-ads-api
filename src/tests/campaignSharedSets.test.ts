@@ -33,7 +33,6 @@ describe('Campaign Shared Sets', async () => {
         const shared_sets = await customer.campaignSharedSets.list({
             fields: ['campaign', 'shared_set'],
         })
-        console.log(shared_sets)
         expect(shared_sets).toBeInstanceOf(Array)
     }) 
 

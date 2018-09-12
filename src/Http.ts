@@ -127,7 +127,6 @@ export default class Http implements HttpController {
                         body = JSON.parse(body)
                         error = body.error || { message : `Something bad happened in HTTP request, but we don't know what.` }
                     }
-                    console.log(new GoogleAdsError(error))
                     reject(new GoogleAdsError(error))
                 }   
             })
