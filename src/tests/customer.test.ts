@@ -30,7 +30,7 @@ describe('Customer', async () => {
 
     it('Queries data using search method', async () => {
         expect.assertions(1)
-        const data = await customer.search(`
+        const data = await customer.query(`
             SELECT 
                 campaign.id, 
                 campaign.name, 
