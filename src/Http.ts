@@ -7,7 +7,7 @@ import { ADWORDS_API_BASE_URL } from "./constants"
 import { getUpdateMask, buildQuery, mapResultsWithIds, transformObjectKeys } from './utils'
 
 import GoogleAdsError from './Error'
-import { Client, ClientConstructor, AccountInfo } from './types/Global'
+import { Client, ClientConstructor, AccountInfo, ReportConfig } from './types/Global'
 import { RequestOptions, HttpController } from './types/Http'
 import { ListConfig, EntityUpdateConfig, NewEntityConfig } from './types/Entity'
 
@@ -105,6 +105,10 @@ export default class Http implements HttpController {
         return parser.parseSearch(raw_result)
     }
 
+    public async report(config: ReportConfig) {
+        // const query = buildReportQuery(config)
+        // return this.query(query)
+    }
 
     /* 
     *   PRIVATE METHODS

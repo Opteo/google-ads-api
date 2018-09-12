@@ -1,5 +1,5 @@
 import { NewEntityConfig, ListConfig } from './Entity'
-import { UpdateConfig } from './Global'
+import { UpdateConfig, ReportConfig } from './Global'
 
 declare namespace Http {
     /**
@@ -13,6 +13,7 @@ declare namespace Http {
         update(config: UpdateConfig, entity: string): Promise<object>, 
         delete(entity: string, entity_id: string|number): Promise<object>, 
         query(entity: string): Promise<object>, 
+        report(config: ReportConfig): Promise<object>, 
     }
 
     /**

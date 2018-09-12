@@ -59,11 +59,8 @@ export const buildQuery = (config: any, resource: string) : string => {
     }
     
     if (config.order_by) {
-        const order_by = config.order_by instanceof Array ? 
-            `${config.order_by.map((key: string) => `${resource}.${key}`).join(', ')}` 
-            : `${resource}.${config.order_by}`
-
-        query += ` ORDER BY ${order_by}` 
+        const formatted_order_by = formatOrderBy(config.order_by, resource)
+        query += ` ORDER BY ${formatted_order_by}` 
     } 
 
     if (config.limit && config.limit > 0) {
@@ -71,6 +68,13 @@ export const buildQuery = (config: any, resource: string) : string => {
     }
 
     return query
+}
+
+const formatOrderBy = (order_by: string|Array<string>, resource: string) : string => {
+        if (order_by instanceof Array) {
+            return `${order_by.map((key: string) => `${resource}.${key}`).join(', ')}` 
+        } 
+        return `${resource}.${order_by}`
 }
 
 export const mapResultsWithIds = (response: any) : object => {

@@ -10,7 +10,7 @@ import AdGroupCriterions from '../entities/AdGroupCriterions'
 import Keywords from '../entities/Keywords'
 import SharedSets from '../entities/SharedSets'
 
-import { UpdateConfig } from './Global'
+import { UpdateConfig, ReportConfig } from './Global'
 
 declare namespace Customer {
     /**
@@ -30,8 +30,8 @@ declare namespace Customer {
         keywords: Keywords,
         sharedSets: SharedSets,
         retrieve: () => Promise<any>,
-        query: (query: string) => Promise<any>
+        query: (query: string) => Promise<any>,
+        report: (config: ReportConfig) => Promise<any>
     }
-
 }
 export = Customer

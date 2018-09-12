@@ -13,6 +13,7 @@ import SharedSets from './entities/SharedSets'
 import { ENDPOINTS, RESOURCE_NAMES} from './constants'
 import { Customer } from './types/Customer'
 import { HttpController } from './types/Http'
+import { ReportConfig } from './types/Global'
 
 export default function Customer(http_controller: HttpController) : Customer  {
 	return {
@@ -29,6 +30,7 @@ export default function Customer(http_controller: HttpController) : Customer  {
 		sharedSets: new SharedSets(http_controller),
 		retrieve: () => http_controller.retrieve(ENDPOINTS.customers),
 		query: (query: string) => http_controller.query(query), 
+		report: (config: ReportConfig) => http_controller.report(config), 
 	}
 }
 

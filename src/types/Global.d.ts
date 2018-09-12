@@ -64,7 +64,7 @@ declare namespace Global {
     }
 
     /**
-     *  Native Google Ads Error Interface
+     *  Google Ads Error Interface
      * @interface
      */
     export interface Error {
@@ -72,6 +72,23 @@ declare namespace Global {
         status: string, 
         details: any, 
         code: number
+    }
+
+
+    /**
+     *  Report Method Config Interface
+     * @interface
+     */
+    export interface ReportConfig {
+        resource: string,
+        fields?: Array<string>
+        metrics?: Array<string>
+        constraints?: Array<string>|string,
+        date_constant?: string,
+        from_date?: string,
+        to_date?: string,
+        limit?: number,
+        order_by?: string|Array<string>
     }
 
 }
