@@ -61,8 +61,9 @@ export const buildReportQuery = (config: ReportConfig) : string => {
 
     /* Order By */
     if (config.order_by) {
-        const formatted_order_by = formatOrderBy(config.order_by) // TODO: allow to specify DESC or ASC
-        query += ` ORDER BY ${formatted_order_by}` 
+        const formatted_order_by = formatOrderBy(config.order_by)
+        const sort_order = config.sort_order ? config.sort_order : 'ASC'
+        query += ` ORDER BY ${formatted_order_by} ${sort_order}` 
     } 
 
     /* Limit To */

@@ -88,7 +88,8 @@ declare namespace Global {
         from_date?: string, // ISO 8601(YYYY-MM-DD) format
         to_date?: string, // ISO 8601(YYYY-MM-DD) format
         limit?: number,
-        order_by?: string|Array<string>
+        order_by?: string|Array<string>,
+        sort_order: string
     }
 
      /**
