@@ -1,3 +1,5 @@
+import Bottleneck from "bottleneck";
+
 declare namespace Global {
     /**
      *  Library Instance Interface
@@ -8,6 +10,7 @@ declare namespace Global {
         client_id: string|number,
         developer_token: string,
         client_secret: string,
+        redis_options?: any
     } 
 
     /**
@@ -53,6 +56,7 @@ declare namespace Global {
         client_id: string|number,
         developer_token: string,
         client_secret: string,
+        throttler : Bottleneck
     }     
 
     /**
