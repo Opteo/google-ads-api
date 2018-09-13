@@ -34,7 +34,7 @@ export const buildReportQuery = (config: ReportConfig) : string => {
         throw new Error('Missing resource fields or metric fields to be selected.')
     }
 
-    query = `SELECT ${all_selected_attributes} FROM ${config.resource}`
+    query = `SELECT ${all_selected_attributes} FROM ${config.entity}`
 
     /* WHERE Clause */
 
@@ -90,6 +90,27 @@ export const buildReportQuery = (config: ReportConfig) : string => {
 
     console.log(query)
     return query
+}
+
+const formatConstraints = (constraints: string|Array<string>) : string => {
+    if (constraints instanceof Array) {
+        return constraints.join(' AND ')
+    } 
+    return constraints
+}
+
+const formatOrderBy = (order_by: string|Array<string>, entity?: string) : string => {
+    if (order_by instanceof Array) {
+        return `${order_by.map((key: string) => entity ? `${entity}.${key}` : key).join(', ')}` 
+    } 
+    return entity ? `${entity}.${order_by}` : order_by
+}
+
+const formatResults = (order_by: string|Array<string>, resource?: string) : string => {
+    if (order_by instanceof Array) {
+        return `${order_by.map((key: string) => resource ? `${resource}.${key}` : key).join(', ')}` 
+    } 
+    return resource ? `${resource}.${order_by}` : order_by
 }
 
 export const buildQuery = (config: ListConfig, resource: string) : string => {
@@ -148,20 +169,6 @@ export const buildQuery = (config: ListConfig, resource: string) : string => {
     }
 
     return query
-}
-
-const formatConstraints = (constraints: string|Array<string>) : string => {
-    if (constraints instanceof Array) {
-        return constraints.join(' AND ')
-    } 
-    return constraints
-}
-
-const formatOrderBy = (order_by: string|Array<string>, resource?: string) : string => {
-    if (order_by instanceof Array) {
-        return `${order_by.map((key: string) => resource ? `${resource}.${key}` : key).join(', ')}` 
-    } 
-    return resource ? `${resource}.${order_by}` : order_by
 }
 
 export const mapResultsWithIds = (response: any) : object => {

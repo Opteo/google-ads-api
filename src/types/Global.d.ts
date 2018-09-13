@@ -80,7 +80,7 @@ declare namespace Global {
      * @interface
      */
     export interface ReportConfig {
-        resource: string,
+        entity: string,
         fields?: Array<string>
         metrics?: Array<string>
         // segments?: Array<string>  //to do when it's available

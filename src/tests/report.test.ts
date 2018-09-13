@@ -16,7 +16,7 @@ describe('Reporting', async () => {
     it('Retrieves API fields', async () => {
         expect.assertions(2)
         const data = await customer.report({
-            resource: 'ad_group',
+            entity: 'ad_group',
             fields: ['ad_group.id', 'ad_group.name', 'campaign.id'],
             order_by: 'ad_group.id',
             sort_order: 'DESC'
@@ -39,7 +39,7 @@ describe('Reporting', async () => {
     it('Retrieves Metrics', async () => {
         expect.assertions(1)
         const data = await customer.report({
-            resource: 'ad_group',
+            entity: 'ad_group',
             fields: ['ad_group.id', 'campaign.id'],
             metrics: ['clicks', 'conversions']
         })
@@ -49,7 +49,7 @@ describe('Reporting', async () => {
     it('Date Constants', async () => {
         expect.assertions(1)
         const data = await customer.report({
-            resource: 'ad_group',
+            entity: 'ad_group',
             fields: ['ad_group.id'],
             metrics: ['clicks', 'conversions'],
             date_constant: 'TODAY'
@@ -61,7 +61,7 @@ describe('Reporting', async () => {
     it('Custom Date Ranges', async () => {
         expect.assertions(1)
         const data = await customer.report({
-            resource: 'ad_group',
+            entity: 'ad_group',
             fields: ['ad_group.id'],
             metrics: ['clicks', 'conversions'],
             from_date: '2018-09-01',
@@ -74,7 +74,7 @@ describe('Reporting', async () => {
     it('Array of Constraints', async () => {
         expect.assertions(2)
         const data = await customer.report({
-            resource: 'ad_group',
+            entity: 'ad_group',
             fields: ['ad_group.id', 'campaign.id'],
             metrics: ['clicks', 'conversions'],
             constraints: ['ad_group.status = ENABLED', 'campaign.id = 1485014801'],
@@ -88,7 +88,7 @@ describe('Reporting', async () => {
     it('Single String Constraints', async () => {
         expect.assertions(1)
         const data = await customer.report({
-            resource: 'ad_group',
+            entity: 'ad_group',
             fields: ['ad_group.id', 'campaign.id'],
             metrics: ['clicks', 'conversions'],
             constraints: 'ad_group.status = ENABLED AND campaign.id IN (1485014801, 1483704368)',
