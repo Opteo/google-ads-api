@@ -56,5 +56,44 @@ describe('Reporting', async () => {
         })
         // console.log(data);
         expect(data).toBeInstanceOf(Array)
+    })    
+
+    it('Custom Date Ranges', async () => {
+        expect.assertions(1)
+        const data = await customer.report({
+            resource: 'ad_group',
+            fields: ['ad_group.id'],
+            metrics: ['clicks', 'conversions'],
+            from_date: '2018-09-01',
+            to_date: '2018-09-10',
+        })
+        // console.log(data);
+        expect(data).toBeInstanceOf(Array)
+    })    
+
+    it('Array of Constraints', async () => {
+        expect.assertions(2)
+        const data = await customer.report({
+            resource: 'ad_group',
+            fields: ['ad_group.id', 'campaign.id'],
+            metrics: ['clicks', 'conversions'],
+            constraints: ['ad_group.status = ENABLED', 'campaign.id = 1485014801'],
+            from_date: '2018-09-01',
+            to_date: '2018-09-10',
+        })
+        expect(data).toBeInstanceOf(Array)
+        expect(data[0].campaign.id).toEqual('1485014801')
+    }) 
+
+    it('Single String Constraints', async () => {
+        expect.assertions(1)
+        const data = await customer.report({
+            resource: 'ad_group',
+            fields: ['ad_group.id', 'campaign.id'],
+            metrics: ['clicks', 'conversions'],
+            constraints: 'ad_group.status = ENABLED AND campaign.id IN (1485014801, 1483704368)',
+            date_constant: 'TODAY'
+        })
+        expect(data).toBeInstanceOf(Array)
     })   
 })

@@ -31,39 +31,56 @@ export const buildReportQuery = (config: ReportConfig) : string => {
     const all_selected_attributes = selected_fields.concat(selected_metrics).join(', ')
 
     if (!all_selected_attributes.length) {
-        throw new Error('Missing resource fields or metric fields to be selected')
+        throw new Error('Missing resource fields or metric fields to be selected.')
     }
 
     query = `SELECT ${all_selected_attributes} FROM ${config.resource}`
 
     /* WHERE Clause */
+
+    /* Constraints */
+    if (config.constraints) {
+        const constraints = formatConstraints(config.constraints)
+        query += ` WHERE ${constraints}`
+        where_clause_exists = true
+    }
+
+    // TODO: add better error message
     if (config.date_constant && (config.from_date || config.to_date)) {
-        throw new Error('Use only one, Custom date range or Predefined date range') // TODO: add better error message
+        throw new Error('Use only one, Custom date range or Predefined date range.') 
+    }
+    if (config.from_date && !config.to_date) {
+        throw new Error('Expected a finite date range is missing. (to_date)')
+    } 
+    else if (config.to_date && !config.from_date) {
+        throw new Error('Expected a start date range is missing. (from_date)')
     }
 
     /* Custom Date Range */
     if (config.from_date) {
-        query += `WHERE date >= ${config.from_date}`
+        query += where_clause_exists ? ' AND ' : ' WHERE '
+        query += `date >= '${config.from_date}'`
         start_date_exists = true
         where_clause_exists = true
     }
     if (config.to_date) {
-        query += start_date_exists ? `AND date <= ${config.to_date}` : `WHERE date <= ${config.to_date}`
+        query += where_clause_exists ? ' AND ' : ' WHERE '
+        query += `date <= '${config.to_date}'`
         where_clause_exists = true
     }
 
     /* Predefined Date Constant */
     if (config.date_constant) {
-        query += ` WHERE date DURING ${config.date_constant}` 
-        where_clause_exists = true
+        query += where_clause_exists ? ' AND ' : ' WHERE '
+        query += `date DURING ${config.date_constant}`
     }
 
 
     /* Order By */
     if (config.order_by) {
-        const formatted_order_by = formatOrderBy(config.order_by)
-        const sort_order = config.sort_order ? config.sort_order : 'ASC'
-        query += ` ORDER BY ${formatted_order_by} ${sort_order}` 
+        const order_by = formatOrderBy(config.order_by)
+        const sort_order = config.sort_order ? config.sort_order : 'DESC' // If sort order is unspecified, all values are sorted in descending order.
+        query += ` ORDER BY ${order_by} ${sort_order}` 
     } 
 
     /* Limit To */
@@ -133,11 +150,18 @@ export const buildQuery = (config: ListConfig, resource: string) : string => {
     return query
 }
 
+const formatConstraints = (constraints: string|Array<string>) : string => {
+    if (constraints instanceof Array) {
+        return constraints.join(' AND ')
+    } 
+    return constraints
+}
+
 const formatOrderBy = (order_by: string|Array<string>, resource?: string) : string => {
-        if (order_by instanceof Array) {
-            return `${order_by.map((key: string) => resource ? `${resource}.${key}` : key).join(', ')}` 
-        } 
-        return resource ? `${resource}.${order_by}` : order_by
+    if (order_by instanceof Array) {
+        return `${order_by.map((key: string) => resource ? `${resource}.${key}` : key).join(', ')}` 
+    } 
+    return resource ? `${resource}.${order_by}` : order_by
 }
 
 export const mapResultsWithIds = (response: any) : object => {

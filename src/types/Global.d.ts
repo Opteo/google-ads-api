@@ -83,6 +83,7 @@ declare namespace Global {
         resource: string,
         fields?: Array<string>
         metrics?: Array<string>
+        // segments?: Array<string>  //to do when it's available
         constraints?: Array<string>|string,
         date_constant?: DateConstant,
         from_date?: string, // ISO 8601(YYYY-MM-DD) format
