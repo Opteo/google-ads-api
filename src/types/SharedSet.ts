@@ -1,5 +1,5 @@
 import { Entity, NewEntityConfig } from './Entity'
-import { UpdateConfig } from './Global'
+// import { UpdateConfig } from './Global'
 
 declare namespace SharedSet {
     /**

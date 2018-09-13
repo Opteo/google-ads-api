@@ -10,7 +10,7 @@ import AdGroupCriterions from '../entities/AdGroupCriterions'
 import Keywords from '../entities/Keywords'
 import SharedSets from '../entities/SharedSets'
 
-import { UpdateConfig, ReportConfig } from './Global'
+import { ReportConfig } from './Global'
 
 declare namespace Customer {
     /**

@@ -23,7 +23,7 @@ export const getUpdateMask = (update_object: any) : string => {
 export const buildReportQuery = (config: ReportConfig) : string => {
     let query = ''
     let where_clause_exists = false
-    let start_date_exists = false
+    // let start_date_exists = false
 
     /* SELECT Clause */
     const selected_fields = config.fields || []
@@ -60,7 +60,7 @@ export const buildReportQuery = (config: ReportConfig) : string => {
     if (config.from_date) {
         query += where_clause_exists ? ' AND ' : ' WHERE '
         query += `date >= '${config.from_date}'`
-        start_date_exists = true
+        // start_date_exists = true
         where_clause_exists = true
     }
     if (config.to_date) {
@@ -106,12 +106,12 @@ const formatOrderBy = (order_by: string|Array<string>, entity?: string) : string
     return entity ? `${entity}.${order_by}` : order_by
 }
 
-const formatResults = (order_by: string|Array<string>, resource?: string) : string => {
-    if (order_by instanceof Array) {
-        return `${order_by.map((key: string) => resource ? `${resource}.${key}` : key).join(', ')}` 
-    } 
-    return resource ? `${resource}.${order_by}` : order_by
-}
+// const formatResults = (order_by: string|Array<string>, resource?: string) : string => {
+//     if (order_by instanceof Array) {
+//         return `${order_by.map((key: string) => resource ? `${resource}.${key}` : key).join(', ')}` 
+//     } 
+//     return resource ? `${resource}.${order_by}` : order_by
+// }
 
 export const buildQuery = (config: ListConfig, resource: string) : string => {
     const selected_fields = config.fields.map((field: string) => `${resource}.${field}`)
