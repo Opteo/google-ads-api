@@ -85,7 +85,7 @@ declare namespace Global {
      */
     export interface ReportConfig {
         entity: string,
-        fields?: Array<string>
+        attributes?: Array<string>
         metrics?: Array<string>
         // segments?: Array<string>  //to do when it's available
         constraints?: Array<string>|string,
