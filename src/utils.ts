@@ -1,4 +1,4 @@
-import { snakeCase, isObject } from 'lodash'
+import { snakeCase, isObject, merge } from 'lodash'
 
 import { ReportConfig } from './types/Global'
 import { ListConfig } from './types/Entity'
@@ -26,12 +26,12 @@ export const buildReportQuery = (config: ReportConfig) : string => {
     // let start_date_exists = false
 
     /* SELECT Clause */
-    const selected_fields = config.fields || []
+    const selected_attributes = config.attributes || []
     const selected_metrics = config.metrics ? config.metrics.map((metric: string) => `metrics.${metric}`) : []
-    const all_selected_attributes = selected_fields.concat(selected_metrics).join(', ')
+    const all_selected_attributes = selected_attributes.concat(selected_metrics).join(', ')
 
     if (!all_selected_attributes.length) {
-        throw new Error('Missing resource fields or metric fields to be selected.')
+        throw new Error('Missing attributes or metric fields to be selected.')
     }
 
     query = `SELECT ${all_selected_attributes} FROM ${config.entity}`
@@ -106,12 +106,15 @@ const formatOrderBy = (order_by: string|Array<string>, entity?: string) : string
     return entity ? `${entity}.${order_by}` : order_by
 }
 
-// const formatResults = (order_by: string|Array<string>, resource?: string) : string => {
-//     if (order_by instanceof Array) {
-//         return `${order_by.map((key: string) => resource ? `${resource}.${key}` : key).join(', ')}` 
-//     } 
-//     return resource ? `${resource}.${order_by}` : order_by
-// }
+export const formatReportResult = (result: Array<object>, entity: string) : Array<object> => {
+    return result.map((row: { [key: string]: any }) => {
+        if (row[entity]) {
+            merge(row, row[entity])
+            delete row[entity]
+        }
+        return row
+    })
+}
 
 export const buildQuery = (config: ListConfig, resource: string) : string => {
     const selected_fields = config.fields.map((field: string) => `${resource}.${field}`)
