@@ -23,12 +23,12 @@ export const getUpdateMask = (update_object: any) : string => {
 export const buildReportQuery = (config: ReportConfig) : string => {
     let query = ''
     let where_clause_exists = false
-    // let start_date_exists = false
 
     /* SELECT Clause */
-    const selected_attributes = config.attributes || []
+    const selected_attributes = config.attributes && config.attributes.length ? formatAttributes(config.attributes, config.entity) : []
+    const selected_segments = config.segments || []
     const selected_metrics = config.metrics ? config.metrics.map((metric: string) => `metrics.${metric}`) : []
-    const all_selected_attributes = selected_attributes.concat(selected_metrics).join(', ')
+    const all_selected_attributes = selected_attributes.concat(selected_metrics, selected_segments).join(', ')
 
     if (!all_selected_attributes.length) {
         throw new Error('Missing attributes or metric fields to be selected.')
@@ -60,7 +60,6 @@ export const buildReportQuery = (config: ReportConfig) : string => {
     if (config.from_date) {
         query += where_clause_exists ? ' AND ' : ' WHERE '
         query += `date >= '${config.from_date}'`
-        // start_date_exists = true
         where_clause_exists = true
     }
     if (config.to_date) {
@@ -78,9 +77,17 @@ export const buildReportQuery = (config: ReportConfig) : string => {
 
     /* Order By */
     if (config.order_by) {
-        const order_by = formatOrderBy(config.order_by)
-        const sort_order = config.sort_order ? config.sort_order : 'DESC' // If sort order is unspecified, all values are sorted in descending order.
-        query += ` ORDER BY ${order_by} ${sort_order}` 
+        // If sort order is unspecified, all values are sorted in DESCending order.
+        const sort_order = config.sort_order ? config.sort_order : 'DESC' 
+        let order_by = ''
+
+        if (config.order_by instanceof Array) {
+            order_by = config.order_by.map((key: string) => !key.includes('.') ? `${config.entity}.${key}` : key).join(', ')
+        } else {
+            order_by = !config.order_by.includes('.') ? `${config.entity}.${config.order_by}` : config.order_by
+        }
+
+        query += ` ORDER BY ${order_by} ${sort_order}`
     } 
 
     /* Limit To */
@@ -88,8 +95,17 @@ export const buildReportQuery = (config: ReportConfig) : string => {
         query += ` LIMIT ${config.limit}`
     }
 
-    console.log(query)
+    // console.log(query)
     return query
+}
+
+const formatAttributes = (attributes: Array<string>, entity: string) : Array<string> => {
+    return attributes.map((attribute: string) => {
+        if (!attribute.includes('.')) {
+            return `${entity}.${attribute}`
+        }
+        return attribute
+    })
 }
 
 const formatConstraints = (constraints: string|Array<string>) : string => {
@@ -163,7 +179,7 @@ export const buildQuery = (config: ListConfig, resource: string) : string => {
     }
     
     if (config.order_by) {
-        const formatted_order_by = formatOrderBy(config.order_by)
+        const formatted_order_by = formatOrderBy(config.order_by, resource)
         query += ` ORDER BY ${formatted_order_by}` 
     } 
 

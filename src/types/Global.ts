@@ -83,7 +83,7 @@ declare namespace Global {
         entity: string,
         attributes?: Array<string>
         metrics?: Array<string>
-        // segments?: Array<string>  //to do when it's available
+        segments?: Array<string> 
         constraints?: Array<string>|string,
         date_constant?: DateConstant | keyof typeof DateConstant,
         from_date?: string, // ISO 8601(YYYY-MM-DD) format

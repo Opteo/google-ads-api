@@ -17,7 +17,7 @@ describe('Reporting', async () => {
         // expect.assertions(2)
         const data = await customer.report({
             entity: 'ad_group',
-            attributes: ['ad_group.id', 'ad_group.name', 'campaign.id'],
+            attributes: ['id', 'name', 'campaign.id'],
             order_by: 'ad_group.id',
             sort_order: 'DESC'
         })
@@ -39,7 +39,27 @@ describe('Reporting', async () => {
         const data = await customer.report({
             entity: 'ad_group',
             attributes: ['ad_group.id', 'campaign.id'],
-            metrics: ['clicks', 'conversions']
+            metrics: ['clicks', 'conversions'],
+            order_by: 'id',
+        })
+        expect(data).toBeInstanceOf(Array)
+    })   
+
+    it('Retrieves Segments', async () => {
+        expect.assertions(2)
+        const data = await customer.report({
+            entity: 'ad_group',
+            attributes: ['ad_group.id', 'campaign.id'],
+            segments: ['device']
+        })
+        expect(data[0]).toEqual({
+            campaign: {
+                resource_name: expect.any(String),
+                id: expect.any(String)
+            },
+            device: expect.any(String),
+            resource_name: expect.any(String),
+            id: expect.any(String)
         })
         expect(data).toBeInstanceOf(Array)
     })   
