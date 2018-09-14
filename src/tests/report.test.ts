@@ -39,7 +39,7 @@ describe('Reporting', async () => {
         const data = await customer.report({
             entity: 'ad_group',
             attributes: ['ad_group.id', 'campaign.id'],
-            metrics: ['clicks', 'conversions'],
+            metrics: ['metrics.clicks', 'conversions'],
             order_by: 'id',
         })
         expect(data).toBeInstanceOf(Array)

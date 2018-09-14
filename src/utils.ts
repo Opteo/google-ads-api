@@ -27,11 +27,11 @@ export const buildReportQuery = (config: ReportConfig) : string => {
     /* SELECT Clause */
     const selected_attributes = config.attributes && config.attributes.length ? formatAttributes(config.attributes, config.entity) : []
     const selected_segments = config.segments || []
-    const selected_metrics = config.metrics ? config.metrics.map((metric: string) => `metrics.${metric}`) : []
+    const selected_metrics = config.metrics ? config.metrics.map((metric: string) => metric.includes('metrics.') ? metric : `metrics.${metric}`) : []
     const all_selected_attributes = selected_attributes.concat(selected_metrics, selected_segments).join(', ')
 
     if (!all_selected_attributes.length) {
-        throw new Error('Missing attributes or metric fields to be selected.')
+        throw new Error('Missing attributes, metric fields or segmens to be selected.')
     }
 
     query = `SELECT ${all_selected_attributes} FROM ${config.entity}`
@@ -50,6 +50,7 @@ export const buildReportQuery = (config: ReportConfig) : string => {
         throw new Error('Use only one, Custom date range or Predefined date range.') 
     }
     if (config.from_date && !config.to_date) {
+        // TODO: set today date as default?*
         throw new Error('Expected a finite date range is missing. (to_date)')
     } 
     else if (config.to_date && !config.from_date) {
@@ -124,9 +125,16 @@ const formatOrderBy = (order_by: string|Array<string>, entity?: string) : string
 
 export const formatReportResult = (result: Array<object>, entity: string) : Array<object> => {
     return result.map((row: { [key: string]: any }) => {
+        // removing main entity key from final object
         if (row[entity]) {
             merge(row, row[entity])
             delete row[entity]
+        }
+        // converting strings to numbers in metrics
+        if (row.metrics) {
+            for (const key in row.metrics) {
+                row.metrics[key] = +row.metrics[key]
+            }
         }
         return row
     })
