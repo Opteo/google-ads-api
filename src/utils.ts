@@ -51,21 +51,16 @@ export const buildReportQuery = (config: ReportConfig) : string => {
     }
     if (config.from_date && !config.to_date) {
         // TODO: set today date as default?*
-        throw new Error('Expected a finite date range is missing. (to_date)')
+        throw new Error('Expected finite date range is missing. (to_date)')
     } 
     else if (config.to_date && !config.from_date) {
-        throw new Error('Expected a start date range is missing. (from_date)')
+        throw new Error('Expected start date range is missing. (from_date)')
     }
 
     /* Custom Date Range */
-    if (config.from_date) {
+    if (config.from_date && config.to_date) {
         query += where_clause_exists ? ' AND ' : ' WHERE '
-        query += `date >= '${config.from_date}'`
-        where_clause_exists = true
-    }
-    if (config.to_date) {
-        query += where_clause_exists ? ' AND ' : ' WHERE '
-        query += `date <= '${config.to_date}'`
+        query += `date >= '${config.from_date}' AND date <= '${config.to_date}'`
         where_clause_exists = true
     }
 
