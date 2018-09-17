@@ -119,7 +119,11 @@ const formatOrderBy = (order_by: string|Array<string>, entity?: string) : string
 }
 
 export const formatReportResult = (result: Array<object>, entity: string, convert_micros: boolean) : Array<object> => {
+    
     return result.map((row: { [key: string]: any }) => {
+        if (convert_micros) {
+            row = convertMicros(row)
+        }
         // removing main entity key from final object
         if (row[entity]) {
             merge(row, row[entity])
@@ -129,15 +133,23 @@ export const formatReportResult = (result: Array<object>, entity: string, conver
         if (row.metrics) {
             for (const key in row.metrics) {
                 row.metrics[key] = +row.metrics[key]
-                if (convert_micros && key.includes('_micros')) {
-                    const new_key = key.replace('_micros', '')
-                    row.metrics[new_key] = row.metrics[key] > 0 ? row.metrics[key] / 1000000 : 0
-                }
             }
         }
 
         return row
     })
+}
+
+export const convertMicros = (result_object: { [key: string]: any }) : object => {
+    for (const key in result_object) {
+        if (isObject(result_object[key])) {
+            result_object[key] = convertMicros(result_object[key])
+        } else if (key.includes('_micros')) {
+            const new_key = key.replace('_micros', '')
+            result_object[new_key] = result_object[key] > 0 ? result_object[key] / 1000000 : 0
+        }
+    }
+    return result_object
 }
 
 export const buildQuery = (config: ListConfig, resource: string) : string => {
@@ -222,3 +234,4 @@ export const transformObjectKeys = (entity_object: any) : any  => {
 
     return final
 }
+

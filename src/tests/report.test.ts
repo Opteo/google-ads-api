@@ -9,8 +9,8 @@ describe('Reporting', async () => {
     })
 
     const customer = lib_instance.Customer({
-		customer_account_id: config.cid, 
-		refresh_token: config.refresh_token
+		customer_account_id: config.opteo_cid, 
+		refresh_token: config.opteo_refresh_token
 	})
     
     it('Retrieves API Attributes', async () => {
@@ -46,11 +46,17 @@ describe('Reporting', async () => {
     })    
 
     it('Converts Micros', async () => {
-        expect.assertions(2)
+        expect.assertions(3)
         const data = await customer.report({
             entity: 'ad_group',
-            attributes: ['ad_group.id', 'campaign.id'],
+            attributes: [
+                'ad_group.id', 
+                'campaign.id', 
+                'campaign.target_cpa.target_cpa_micros',
+                'campaign.target_spend.target_spend_micros',
+            ],
             metrics: ['metrics.clicks', 'conversions', 'metrics.cost_micros'],
+            constraints: ['ad_group.status = ENABLED', 'campaign.target_cpa.target_cpa_micros > 0'],
             order_by: 'id',
             convert_micros: true
         })
@@ -60,6 +66,10 @@ describe('Reporting', async () => {
             conversions: expect.any(Number),
             cost_micros: expect.any(Number),
             cost: expect.any(Number)
+        })
+        expect(data[0].campaign.target_cpa).toEqual({
+            target_cpa_micros: expect.any(Number),  
+            target_cpa: expect.any(Number),  
         })
     })   
 
