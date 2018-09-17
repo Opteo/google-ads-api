@@ -121,34 +121,31 @@ const formatOrderBy = (order_by: string|Array<string>, entity?: string) : string
 export const formatReportResult = (result: Array<object>, entity: string, convert_micros: boolean) : Array<object> => {
     
     return result.map((row: { [key: string]: any }) => {
-        if (convert_micros) {
-            row = convertMicros(row)
-        }
         // removing main entity key from final object
         if (row[entity]) {
             merge(row, row[entity])
             delete row[entity]
         }
-        // converting strings to numbers in metrics
-        if (row.metrics) {
-            for (const key in row.metrics) {
-                row.metrics[key] = +row.metrics[key]
-            }
-        }
 
-        return row
+        return formatSingleResult(row)
     })
 }
 
-export const convertMicros = (result_object: { [key: string]: any }) : object => {
+const formatSingleResult = (result_object: { [key: string]: any }) : object => {
     for (const key in result_object) {
         if (isObject(result_object[key])) {
-            result_object[key] = convertMicros(result_object[key])
-        } else if (key.includes('_micros')) {
+            result_object[key] = formatSingleResult(result_object[key])
+            continue
+        } 
+        if (key.includes('_micros')) {
             const new_key = key.replace('_micros', '')
             result_object[new_key] = result_object[key] > 0 ? result_object[key] / 1000000 : 0
         }
+        if (isNumeric(result_object[key])) {
+            result_object[key] = +result_object[key]
+        }
     }
+    
     return result_object
 }
 
@@ -235,3 +232,4 @@ export const transformObjectKeys = (entity_object: any) : any  => {
     return final
 }
 
+const isNumeric = (num: any): boolean => !isNaN(num)

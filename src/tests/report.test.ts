@@ -26,10 +26,10 @@ describe('Reporting', async () => {
         expect(data[0]).toEqual({
             campaign: {
                 resource_name: expect.any(String),
-                id: expect.any(String)
+                id: expect.any(Number)
             },
             resource_name: expect.any(String),
-            id: expect.any(String),
+            id: expect.any(Number),
             name: expect.any(String),
         })
     })   
@@ -78,16 +78,17 @@ describe('Reporting', async () => {
         const data = await customer.report({
             entity: 'ad_group',
             attributes: ['ad_group.id', 'campaign.id'],
-            segments: ['device']
+            segments: ['device'],
+            limit: 10
         })
         expect(data[0]).toEqual({
             campaign: {
                 resource_name: expect.any(String),
-                id: expect.any(String)
+                id: expect.any(Number)
             },
             device: expect.any(String),
             resource_name: expect.any(String),
-            id: expect.any(String)
+            id: expect.any(Number)
         })
         expect(data).toBeInstanceOf(Array)
     })   
@@ -118,17 +119,16 @@ describe('Reporting', async () => {
     })    
 
     it('Array of Constraints', async () => {
-        expect.assertions(2)
+        expect.assertions(1)
         const data = await customer.report({
             entity: 'ad_group',
             attributes: ['ad_group.id', 'campaign.id'],
             metrics: ['clicks', 'conversions'],
-            constraints: ['ad_group.status = ENABLED', 'campaign.id = 1485014801'],
+            constraints: ['ad_group.status = ENABLED'],
             from_date: '2018-09-01',
             to_date: '2018-09-10',
         })
         expect(data).toBeInstanceOf(Array)
-        expect(data[0].campaign.id).toEqual('1485014801')
     }) 
 
     it('Single String Constraints', async () => {
