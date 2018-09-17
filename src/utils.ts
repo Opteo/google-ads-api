@@ -118,7 +118,7 @@ const formatOrderBy = (order_by: string|Array<string>, entity?: string) : string
     return entity ? `${entity}.${order_by}` : order_by
 }
 
-export const formatReportResult = (result: Array<object>, entity: string) : Array<object> => {
+export const formatReportResult = (result: Array<object>, entity: string, convert_micros: boolean) : Array<object> => {
     return result.map((row: { [key: string]: any }) => {
         // removing main entity key from final object
         if (row[entity]) {
@@ -129,8 +129,13 @@ export const formatReportResult = (result: Array<object>, entity: string) : Arra
         if (row.metrics) {
             for (const key in row.metrics) {
                 row.metrics[key] = +row.metrics[key]
+                if (convert_micros && key.includes('_micros')) {
+                    const new_key = key.replace('_micros', '')
+                    row.metrics[new_key] = row.metrics[key] > 0 ? row.metrics[key] / 1000000 : 0
+                }
             }
         }
+
         return row
     })
 }

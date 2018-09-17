@@ -43,6 +43,24 @@ describe('Reporting', async () => {
             order_by: 'id',
         })
         expect(data).toBeInstanceOf(Array)
+    })    
+
+    it('Converts Micros', async () => {
+        expect.assertions(2)
+        const data = await customer.report({
+            entity: 'ad_group',
+            attributes: ['ad_group.id', 'campaign.id'],
+            metrics: ['metrics.clicks', 'conversions', 'metrics.cost_micros'],
+            order_by: 'id',
+            convert_micros: true
+        })
+        expect(data).toBeInstanceOf(Array)
+        expect(data[0].metrics).toEqual({
+            clicks: expect.any(Number), 
+            conversions: expect.any(Number),
+            cost_micros: expect.any(Number),
+            cost: expect.any(Number)
+        })
     })   
 
     it('Retrieves Segments', async () => {

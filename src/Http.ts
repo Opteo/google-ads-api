@@ -117,7 +117,7 @@ export default class Http implements HttpController {
         // console.log(query)
 
         return this.query(query).then(result => {
-            return formatReportResult(result, config.entity)
+            return formatReportResult(result, config.entity, config.convert_micros || false)
         })
     }
 
