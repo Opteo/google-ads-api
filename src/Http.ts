@@ -1,9 +1,11 @@
 import request from 'request'
 import { random } from 'lodash'
 import retry from 'bluebird-retry'
+import Bottleneck from 'bottleneck';
 
 import { getAccessToken } from './token'
 import { ADWORDS_API_BASE_URL } from "./constants"
+
 import { 
     getUpdateMask, 
     buildQuery, 
@@ -13,22 +15,26 @@ import {
     formatReportResult 
 } from './utils'
 
+import  parser  from './parser'
+
 import GoogleAdsError from './Error'
 import { Client, ClientConstructor, AccountInfo, ReportConfig } from './types/Global'
 import { RequestOptions, HttpController } from './types/Http'
 import { ListConfig, EntityUpdateConfig, NewEntityConfig } from './types/Entity'
 
-import parser from './parser'
 
 export default class Http implements HttpController {
     private client : Client
+    private throttler : Bottleneck
 
-    constructor({ async_account_getter, client_id, developer_token, client_secret } : ClientConstructor) {
+    constructor({ async_account_getter, client_id, developer_token, client_secret, throttler } : ClientConstructor) {
 
         const account_promise = async_account_getter().then((account_info : AccountInfo) => {
             this.client.cid = account_info.cid.toString().split('-').join('')
             this.client.refresh_token = account_info.refresh_token
         })
+
+        this.throttler = throttler
 
         this.client = {
             account_promise,
@@ -126,7 +132,8 @@ export default class Http implements HttpController {
     */
     private async queryApi(options: RequestOptions) {
         const work = async () => {
-            const { response, body } = await this.doHttpRequest(options)
+
+            const { response, body } = await this.throttler.wrap(this.doHttpRequest)(options)
 
             if (response.statusCode === 404) {
                 const { url } = options
