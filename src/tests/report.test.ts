@@ -9,8 +9,8 @@ describe('Reporting', async () => {
     })
 
     const customer = lib_instance.Customer({
-		customer_account_id: config.opteo_cid, 
-		refresh_token: config.opteo_refresh_token
+		customer_account_id: config.cid, 
+		refresh_token: config.refresh_token
 	})
     
     it('Retrieves API Attributes', async () => {
