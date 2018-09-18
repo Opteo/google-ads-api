@@ -1,4 +1,4 @@
-import { snakeCase, isObject, merge } from 'lodash'
+import { snakeCase, isObject, isString, isArray, isUndefined, merge } from 'lodash'
 
 import attributes from "./attributes"
 
@@ -96,9 +96,40 @@ const formatAttributes = (attributes: Array<string>, entity: string) : Array<str
     })
 }
 
-const formatConstraints = (constraints: string|Array<string>) : string => {
+const formatConstraints = (constraints: any) : string => {
+
+    const formatConstraint = (constraint: any) : string => {
+        if(isString(constraint)){
+            return constraint
+        }
+
+        let key 
+        let val
+        let op
+
+        if(constraint.key){
+            if(isUndefined(constraint.op) || isUndefined(constraint.val)){
+                throw new Error('must specify { key, op, val } when using object-style constraints')
+            }
+            key = constraint.key
+            op = constraint.op
+            val = constraint.val
+            if(isArray(constraint.val)){
+                val = `("${ constraint.val.join(`","`) }")`
+            }
+        }
+        else {
+            key = Object.keys(constraint)[0]
+            op = '='
+            val = constraint[key]
+        }
+
+        return `${key} ${op} ${val}`
+    }
+
     if (constraints instanceof Array) {
-        return constraints.join(' AND ')
+        // constraints = constraints.map(formatConstraint)
+        return constraints.map(formatConstraint).join(' AND ')
     } 
     return constraints
 }
