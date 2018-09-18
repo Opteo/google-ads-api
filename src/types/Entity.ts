@@ -18,8 +18,10 @@ declare namespace Entity {
     export interface ListConfig {
         limit?: number,
         order_by?: string|Array<string>,
-        fields: string[],
+        sort_order?: string,
+        // fields: string[],
         constraints?: { [key: string]: string|any },
+        convert_micros?: boolean
     }
 
     /**
