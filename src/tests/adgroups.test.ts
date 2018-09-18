@@ -27,7 +27,6 @@ describe('AdGroups', async () => {
                 status: 'ENABLED'
             }
         })
-        console.log(adgroups);
         expect(adgroups).toBeInstanceOf(Array)
     })
     

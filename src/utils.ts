@@ -167,7 +167,6 @@ const formatConstraints = (constraints: any) : string => {
     }
 
     if (constraints instanceof Array) {
-        // constraints = constraints.map(formatConstraint)
         return constraints.map(formatConstraint).join(' AND ')
     } 
     return constraints
