@@ -9,7 +9,7 @@ declare namespace Http {
     export interface HttpController {
         retrieve(entity: string, entity_id?: string|number): Promise<object>, 
         create(config: NewEntityConfig, entity: string): Promise<object>, 
-        list(config: ListConfig, resource: string): Promise<object>, 
+        list(config: ListConfig | undefined, resource: string): Promise<object>, 
         update(config: UpdateConfig, entity: string): Promise<object>, 
         delete(entity: string, entity_id: string|number): Promise<object>, 
         query(entity: string): Promise<object>, 
