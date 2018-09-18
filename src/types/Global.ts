@@ -98,6 +98,18 @@ declare namespace Global {
         convert_micros?: boolean
     }
 
+    /**
+     *  Metric object used for custom metrics
+     * @interface
+     */
+    export interface Metric {
+        name: string,
+        is_micros?: boolean
+        is_custom?: boolean
+        pre_query_hook? : Function
+        post_query_hook? : Function
+    }
+
      /**
      * Enum for Date Constant
      * @readonly

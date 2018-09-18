@@ -1,36 +1,10 @@
-import { snakeCase, isObject, isString, isArray, isNumber, isUndefined, merge, uniq, cloneDeep, compact, find, reject } from 'lodash'
+import { snakeCase, isObject, isString, isArray, isNumber, isUndefined, merge, includes, compact, find } from 'lodash'
 
 import entity_attributes from "./attributes"
-
-import { ReportConfig } from './types/Global'
+import entity_metrics from "./metrics"
+import { ReportConfig, Metric } from './types/Global'
 import { ListConfig } from './types/Entity'
 
-const all_metrics = [
-    { name : 'all_conversions' },
-    { name : 'cost_micros'},
-    { 
-        name : 'cost',
-        is_custom : true,
-        is_micros : true,
-        pre_query_hook : (report: ReportConfig): ReportConfig => {
-            
-            report.metrics = uniq(merge([
-                report.metrics,
-                ['metrics.cost_micros']
-            ]))
-
-            report.metrics = reject(report.metrics, i => i === 'metrics.cost')
-
-            return report
-        },
-        post_query_hook : (result_object: { [key: string]: any }) => {
-            result_object = cloneDeep(result_object)
-            result_object.metrics.cost = +result_object.metrics.cost_micros
-            return result_object
-        } 
-    },
-    { name : 'average_cpc', is_micros : true}
-]
 
 export const getUpdateMask = (update_object: any) : string => {
     let mask = ''
@@ -49,33 +23,36 @@ export const getUpdateMask = (update_object: any) : string => {
 * @param {object} config
 * @returns {string} query 
 */
-export const buildReportQuery = (config: ReportConfig) : { query: string, custom_metrics: Array<object> } => {
+export const buildReportQuery = (config: ReportConfig) : { query: string, custom_metrics: Array<Metric> } => {
     let query = ''
     let where_clause_exists = false
-    const custom_metrics : Array<object> = []
+    const custom_metrics : Array<Metric> = []
 
     /* SELECT Clause */
     config.attributes = config.attributes && config.attributes.length ? formatAttributes(config.attributes, config.entity) : []
     config.segments = config.segments || []
     config.metrics = config.metrics ? config.metrics.map((metric: string) => metric.includes('metrics.') ? metric : `metrics.${metric}`) : []
 
+    const getConstraintKeys = (constraint: {key? : string}): string|boolean => {
+        if(isString(constraint)){
+            return false
+        }
+        if(constraint.key){
+            return constraint.key
+        }
+
+        return Object.keys(constraint)[0]
+    }
 
     const all_config_metrics : Array<string> = compact(merge(
         config.metrics,
-        isArray(config.constraints) ? config.constraints.map(constraint => {
-            if(isString(constraint)){
-                return false
-            }
-            if(constraint.key){
-                return constraint.key
-            }
-
-            return Object.keys(constraint)[0]
-        }).filter(constraint_key => all_metrics.map(m => `metrics.${m.name}`).includes(constraint_key)) : []
+        isArray(config.constraints) 
+            ? config.constraints.map(getConstraintKeys).filter((constraint_key: string) => includes(entity_metrics.map(m => `metrics.${m.name}`), constraint_key))
+            : []
     ))
 
-    all_config_metrics.forEach(config_metric => {
-        const matching_metric = find(all_metrics, { name : config_metric.replace('metrics.', '')})
+    all_config_metrics.forEach((config_metric: string) => {
+        const matching_metric = find(entity_metrics, { name : config_metric.replace('metrics.', '')})
 
         if(matching_metric && matching_metric.pre_query_hook){
             config = matching_metric.pre_query_hook(config)
@@ -207,7 +184,7 @@ const formatOrderBy = (entity: string, order_by: string|Array<string>, sort_orde
 }
 
 
-export const formatQueryResults = (result: Array<object>, entity: string, convert_micros: boolean, custom_metrics:  Array<object>) : Array<object> => {    
+export const formatQueryResults = (result: Array<object>, entity: string, convert_micros: boolean, custom_metrics:  Array<Metric>) : Array<object> => {    
     return result.map((row: { [key: string]: any }) => {
         // removing main entity key from final object
         if (row[entity]) {
@@ -233,7 +210,7 @@ const formatSingleResult = (result_object: { [key: string]: any }, convert_micro
             continue
         } 
 
-        const matching_metric = find(all_metrics, { name : key })
+        const matching_metric = find(entity_metrics, { name : key })
 
         if(convert_micros && matching_metric && matching_metric.is_micros){
             result_object[key] = +result_object[key] / 1000000
