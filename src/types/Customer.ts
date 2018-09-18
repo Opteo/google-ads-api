@@ -9,6 +9,7 @@ import AdGroupAds from '../entities/AdGroupAds'
 import AdGroupCriterions from '../entities/AdGroupCriterions'
 import Keywords from '../entities/Keywords'
 import SharedSets from '../entities/SharedSets'
+import SharedSetCriterions from '../entities/SharedSetCriterions'
 
 import { ReportConfig } from './Global'
 
@@ -29,6 +30,7 @@ declare namespace Customer {
         adgroupCriterions: AdGroupCriterions,
         keywords: Keywords,
         sharedSets: SharedSets,
+        sharedSetCriterions: SharedSetCriterions,
         retrieve: () => Promise<any>,
         query: (query: string) => Promise<any>,
         report: (config: ReportConfig) => Promise<any>

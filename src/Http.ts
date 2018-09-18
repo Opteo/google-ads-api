@@ -217,6 +217,9 @@ export default class Http implements HttpController {
             config.shared_set = `customers/${this.client.cid}/sharedSets/${config.shared_set_id}`
             delete config.campaign_id
             delete config.shared_set_id
+        } else if (entity.includes('sharedCriteria')) {
+            config.shared_set = `customers/${this.client.cid}/sharedSets/${config.shared_set_id}`
+            delete config.shared_set_id
         }
 
         return config
