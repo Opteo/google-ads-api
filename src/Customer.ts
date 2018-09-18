@@ -9,6 +9,7 @@ import AdGroupAds from './entities/AdGroupAds'
 import AdGroupCriterions from './entities/AdGroupCriterions'
 import Keywords from './entities/Keywords'
 import SharedSets from './entities/SharedSets'
+import SharedSetCriterions from './entities/SharedSetCriterions'
 
 import { ENDPOINTS, RESOURCE_NAMES} from './constants'
 import { Customer } from './types/Customer'
@@ -28,6 +29,7 @@ export default function Customer(http_controller: HttpController) : Customer  {
 		adgroupCriterions: new AdGroupCriterions(http_controller),
 		keywords: new Keywords(http_controller),
 		sharedSets: new SharedSets(http_controller),
+		sharedSetCriterions: new SharedSetCriterions(http_controller),
 		retrieve: () => http_controller.retrieve(ENDPOINTS.customers),
 		query: (query: string) => http_controller.query(query), 
 		report: (config: ReportConfig) => http_controller.report(config), 

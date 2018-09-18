@@ -12,6 +12,7 @@ export enum ENDPOINTS {
     ads = 'adGroupAds',
     adgroup_critera = 'adGroupCriteria',
     shared_sets = 'sharedSets',
+    shared_set_criteria = 'sharedCriteria',
 }
 
 export enum RESOURCE_NAMES {
@@ -23,4 +24,5 @@ export enum RESOURCE_NAMES {
     ad = 'ad_group_ad',
     adgroup_critera = 'ad_group_criterion',
     shared_set = 'shared_set',
+    shared_set_criterion = 'shared_criterion',
 }

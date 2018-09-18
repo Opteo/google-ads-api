@@ -8,7 +8,7 @@ export default class CampaignSharedSets {
     private resource: string
 
     /**
-	 * CampaignSharedSets.
+	 * CampaignSharedSets
 	 * @constructor
 	 */
     constructor(http_controller: HttpController, endpoint: string, resource: string) {
