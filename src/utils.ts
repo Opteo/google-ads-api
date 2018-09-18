@@ -1,9 +1,38 @@
-import { snakeCase, isObject, isString, isArray, isNumber, isUndefined, merge } from 'lodash'
+import { snakeCase, isObject, isString, isArray, isNumber, isUndefined, merge, uniq, cloneDeep, compact, find, reject } from 'lodash'
 
 import attributes from "./attributes"
 
 import { ReportConfig } from './types/Global'
 import { ListConfig } from './types/Entity'
+
+const all_metrics = [
+    { name : 'all_conversions' },
+    { name : 'cost_micros'},
+    { 
+        name : 'cost',
+        is_custom : true,
+        is_micros : true,
+        pre_query_hook : (report: ReportConfig): ReportConfig => {
+            
+            report = cloneDeep(report)
+
+            report.metrics = uniq([
+                ...report.metrics,
+                'metrics.cost_micros'
+            ])
+
+            report.metrics = reject(report.metrics, i => i === 'metrics.cost')
+
+            return report
+        },
+        post_query_hook : (result_object: { [key: string]: any }) => {
+            result_object = cloneDeep(result_object)
+            result_object.metrics.cost = +result_object.metrics.cost_micros
+            return result_object
+        } 
+    },
+    { name : 'average_cpc', is_micros : true}
+]
 
 export const getUpdateMask = (update_object: any) : string => {
     let mask = ''
@@ -22,15 +51,45 @@ export const getUpdateMask = (update_object: any) : string => {
 * @param {object} config
 * @returns {string} query 
 */
-export const buildReportQuery = (config: ReportConfig) : string => {
+export const buildReportQuery = (config: ReportConfig) : object => {
     let query = ''
     let where_clause_exists = false
+    const custom_metrics = []
 
     /* SELECT Clause */
-    const selected_attributes = config.attributes && config.attributes.length ? formatAttributes(config.attributes, config.entity) : []
-    const selected_segments = config.segments || []
-    const selected_metrics = config.metrics ? config.metrics.map((metric: string) => metric.includes('metrics.') ? metric : `metrics.${metric}`) : []
-    const all_selected_attributes = selected_attributes.concat(selected_metrics, selected_segments).join(', ')
+    config.attributes = config.attributes && config.attributes.length ? formatAttributes(config.attributes, config.entity) : []
+    config.segments = config.segments || []
+    config.metrics = config.metrics ? config.metrics.map((metric: string) => metric.includes('metrics.') ? metric : `metrics.${metric}`) : []
+
+
+    const all_config_metrics = compact([
+        ...config.metrics,
+        ...isArray(config.constraints) ? config.constraints.map(constraint => {
+            if(isString(constraint)){
+                return false
+            }
+            if(constraint.key){
+                return constraint.key
+            }
+
+            return Object.keys(constraint)[0]
+        }).filter(constraint_key => all_metrics.map(m => `metrics.${m.name}`).includes(constraint_key)) : []
+    ])
+
+    all_config_metrics.forEach(config_metric => {
+        const matching_metric = find(all_metrics, { name : config_metric.replace('metrics.', '')})
+
+        if(matching_metric && matching_metric.pre_query_hook){
+            config = matching_metric.pre_query_hook(config)
+        }
+
+        if(matching_metric && matching_metric.is_custom){
+            custom_metrics.push(matching_metric)
+        }
+    })
+
+    const all_selected_attributes = config.attributes.concat(config.metrics, config.segments).join(', ')
+
 
     if (!all_selected_attributes.length) {
         throw new Error('Missing attributes, metric fields or segmens to be selected.')
@@ -84,7 +143,7 @@ export const buildReportQuery = (config: ReportConfig) : string => {
     }
 
     // console.log(query)
-    return query
+    return { query, custom_metrics }
 }
 
 const formatAttributes = (attributes: Array<string>, entity: string) : Array<string> => {
@@ -149,8 +208,8 @@ const formatOrderBy = (entity: string, order_by: string|Array<string>, sort_orde
     return` ORDER BY ${order_by} ${sort_order}`
 }
 
-export const formatQueryResults = (result: Array<object>, entity: string, convert_micros: boolean) : Array<object> => {
-    
+
+export const formatQueryResults = (result: Array<object>, entity: string, convert_micros: boolean, custom_metrics:  Array<object>) : Array<object> => {    
     return result.map((row: { [key: string]: any }) => {
         // removing main entity key from final object
         if (row[entity]) {
@@ -158,9 +217,16 @@ export const formatQueryResults = (result: Array<object>, entity: string, conver
             delete row[entity]
         }
 
+        custom_metrics.forEach(custom_metric => {
+            if(custom_metric.post_query_hook){
+                row = custom_metric.post_query_hook(row)
+            }
+        })
+
         return formatSingleResult(row, convert_micros)
     })
 }
+
 
 const formatSingleResult = (result_object: { [key: string]: any }, convert_micros: boolean) : object => {
     for (const key in result_object) {
@@ -168,10 +234,13 @@ const formatSingleResult = (result_object: { [key: string]: any }, convert_micro
             result_object[key] = formatSingleResult(result_object[key], convert_micros)
             continue
         } 
-        if (convert_micros && key.includes('_micros')) {
-            const new_key = key.replace('_micros', '')
-            result_object[new_key] = result_object[key] > 0 ? result_object[key] / 1000000 : 0
+
+        const matching_metric = find(all_metrics, { name : key })
+
+        if(convert_micros && matching_metric && matching_metric.is_micros){
+            result_object[key] = +result_object[key] / 1000000
         }
+
         if (isNumber(result_object[key])) {
             result_object[key] = +result_object[key]
         }

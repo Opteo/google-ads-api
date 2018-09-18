@@ -1,5 +1,5 @@
 import request from 'request'
-import { random } from 'lodash'
+import { random, isUndefined } from 'lodash'
 import retry from 'bluebird-retry'
 import Bottleneck from 'bottleneck';
 
@@ -121,11 +121,11 @@ export default class Http implements HttpController {
     }
 
     public async report(config: ReportConfig) {
-        const query = buildReportQuery(config)
+        const { query, custom_metrics} = buildReportQuery(config)
         // console.log(query)
 
         return this.query(query).then(result => {
-            return formatQueryResults(result, config.entity, config.convert_micros || false)
+            return formatQueryResults(result, config.entity, isUndefined(config.convert_micros) ? true : config.convert_micros, custom_metrics)
         })
     }
 
