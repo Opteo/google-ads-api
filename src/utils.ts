@@ -1,4 +1,4 @@
-import { snakeCase, isObject, isString, isArray, isNumber, isUndefined, merge, includes, compact, find, map } from 'lodash'
+import { snakeCase, isObject, isString, isArray, isNumber, isUndefined, merge, includes, compact, find, map, uniq } from 'lodash'
 
 import entity_attributes from "./attributes"
 import entity_metrics from "./metrics"
@@ -51,10 +51,10 @@ export const buildReportQuery = (config: ReportConfig) : { query: string, custom
             )
         : []
 
-    const all_config_metrics : Array<string> = compact(merge(
-        config.metrics,
-        metrics_referenced_in_constraints
-    ))
+    const all_config_metrics : Array<any> = compact(uniq([
+        ...config.metrics,
+        ...metrics_referenced_in_constraints
+    ]))
 
     all_config_metrics.forEach((config_metric: string) => {
         const matching_metric = find(entity_metrics, { name : config_metric.replace('metrics.', '')})

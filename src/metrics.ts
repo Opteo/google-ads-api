@@ -1,4 +1,4 @@
-import { merge, uniq, cloneDeep, reject } from 'lodash'
+import { cloneDeep, reject } from 'lodash'
 import { Metric, ReportConfig } from './types/Global'
 
 const all_metrics : Array<Metric> = [
@@ -9,14 +9,11 @@ const all_metrics : Array<Metric> = [
         is_custom : true,
         is_micros : true,
         pre_query_hook : (report: ReportConfig): ReportConfig => {
-            
-            report.metrics = uniq(merge([
-                report.metrics,
-                ['metrics.cost_micros']
-            ]))
+            if(report.metrics){
+                report.metrics.push('metrics.cost_micros')
+            }
 
             report.metrics = reject(report.metrics, i => i === 'metrics.cost')
-
             return report
         },
         post_query_hook : (result_object: { [key: string]: any }) => {
