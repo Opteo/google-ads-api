@@ -1,3 +1,40 @@
+
+
+const text_ad = {
+    headline: '',
+    description1: '',
+    description2: ''
+}
+const expanded_text_ad = {
+    headline_part1: '',
+    headline_part2: '',
+    description: '',
+    path1: '',
+    path2: ''
+}
+const dynamic_search_ad = {
+    description1: '',
+    description2: ''
+}
+const responsive_display_ad = {
+    short_headline: '',
+    long_headline: '',
+    description: '',
+    business_name: ''
+}
+const call_only_ad = {
+    country_code: '',
+    phone_number: '',
+    business_name: '',
+    description1: '',
+    description2: '',
+    call_tracked: '',
+    disable_call_conversion: '',
+    phone_number_verification_url: ''
+}
+const expanded_dynamic_search_ad = {
+    description: '',
+}
 const ad =  {
     id: '',
     final_urls: '',
@@ -6,9 +43,22 @@ const ad =  {
     url_custom_parameters: '',
     display_url: '',
     type: '',
+    text_ad,
+    expanded_text_ad,
+    dynamic_search_ad,
+    responsive_display_ad,
+    call_only_ad,
+    expanded_dynamic_search_ad,
+    hotel_ad: '',
+    shopping_smart_ad: ''
 }
 
 const entities : { [key: string]: object } = {
+    ad_group_ad: {
+        status: '',
+        ad_group: '',
+        ad
+    },
     // 'ad_group': [
     //     'id',
     //     'name',
@@ -24,18 +74,6 @@ const entities : { [key: string]: object } = {
     //     'target_roas_override',
     //     'percent_cpc_bid_micros',
     // ],
-    ad_group_ad: {
-        status: '',
-        ad_group: '',
-        ad
-
-        // 'status',
-        // 'ad_group',
-        // 'ad.id',
-        // 'ad.final_urls',
-        // 'ad.text_ad.headline',
-        // 'ad.expanded_text_ad.headline_part1'
-    },
     // 'ad_group_criterion': [
     //     'criterion_id',
     //     'status',

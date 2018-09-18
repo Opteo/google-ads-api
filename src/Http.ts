@@ -73,7 +73,7 @@ export default class Http implements HttpController {
     public async list(config: ListConfig, resource: string) {
         const query = buildQuery(config, resource)
         return this.query(query).then(results => {
-            return formatQueryResults(results, resource, isUndefined(config.convert_micros) ? true : config.convert_micros, [])
+            return formatQueryResults(results, resource, isUndefined(config.convert_micros) ? true : config.convert_micros, []) //TODO: fix this (this throws error if config is undefined)
         })
     }
 
