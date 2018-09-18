@@ -88,7 +88,7 @@ declare namespace Global {
         attributes?: Array<string>
         metrics?: Array<string>
         segments?: Array<string> 
-        constraints?: Array<string>|Array<object>|string,
+        constraints?: Array<string>|Array<object>|Array<Constraint>,
         date_constant?: DateConstant | keyof typeof DateConstant,
         from_date?: string, // ISO 8601(YYYY-MM-DD) format
         to_date?: string, // ISO 8601(YYYY-MM-DD) format
@@ -106,8 +106,19 @@ declare namespace Global {
         name: string,
         is_micros?: boolean
         is_custom?: boolean
+        is_number?: boolean
         pre_query_hook? : Function
         post_query_hook? : Function
+    }
+
+    /**
+     *  Constraint object with full parameters
+     * @interface
+     */
+    export interface Constraint {
+        key: string
+        op: string
+        val: string|Array<string>
     }
 
      /**

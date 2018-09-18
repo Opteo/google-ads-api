@@ -2,7 +2,7 @@ import { snakeCase, isObject, isString, isArray, isNumber, isUndefined, merge, i
 
 import entity_attributes from "./attributes"
 import entity_metrics from "./metrics"
-import { ReportConfig, Metric } from './types/Global'
+import { ReportConfig, Metric, Constraint } from './types/Global'
 import { ListConfig } from './types/Entity'
 
 
@@ -32,8 +32,40 @@ export const buildReportQuery = (config: ReportConfig) : { query: string, custom
     config.attributes = config.attributes && config.attributes.length ? formatAttributes(config.attributes, config.entity) : []
     config.segments = config.segments || []
     config.metrics = config.metrics ? config.metrics.map((metric: string) => metric.includes('metrics.') ? metric : `metrics.${metric}`) : []
+    config.constraints = config.constraints || []
 
-    const getConstraintKeys = (constraint: {key? : string} | string): string|boolean => {
+    const unrollConstraintShorthand = (constraint: any | string): Constraint => {
+
+
+        if(!constraint.key){
+            const key = Object.keys(constraint)[0]
+            const val = constraint[key]
+            if(isArray(val)){
+                return { key, op : 'IN', val }
+            }
+            return { key, op : '=', val }
+        }
+
+        return constraint
+    }
+
+    const addConstraintPrefixe = (constraint: Constraint): Constraint => {
+
+        if(constraint.key.includes('.')){
+            return constraint
+        }
+        
+        if(includes(map(entity_metrics,'name'), constraint.key)){
+            constraint.key = `metrics.${constraint.key}`
+        }
+        else {
+            constraint.key = `${config.entity}.${constraint.key}`
+        }
+
+        return constraint
+    }
+
+    const getConstraintKeys = (constraint: Constraint | string): string|boolean => {
         if(isString(constraint)){
             return false
         }
@@ -43,6 +75,17 @@ export const buildReportQuery = (config: ReportConfig) : { query: string, custom
 
         return Object.keys(constraint)[0]
     }
+
+
+    config.constraints = config.constraints.map((constraint: Constraint|string): Constraint|string => {
+        if(isString(constraint)){
+            return constraint
+        }
+        constraint = unrollConstraintShorthand(constraint)
+        constraint = addConstraintPrefixe(constraint)
+
+        return constraint
+    })
 
     const metrics_referenced_in_constraints = isArray(config.constraints) 
         ? map(config.constraints, getConstraintKeys)
@@ -146,21 +189,15 @@ const formatConstraints = (constraints: any) : string => {
         let val
         let op
 
-        if(constraint.key){
-            if(isUndefined(constraint.op) || isUndefined(constraint.val)){
-                throw new Error('must specify { key, op, val } when using object-style constraints')
-            }
-            key = constraint.key
-            op = constraint.op
-            val = constraint.val
-            if(isArray(constraint.val)){
-                val = `("${ constraint.val.join(`","`) }")`
-            }
+        if(isUndefined(constraint.key) || isUndefined(constraint.op) || isUndefined(constraint.val)){
+            throw new Error('must specify { key, op, val } when using object-style constraints')
         }
-        else {
-            key = Object.keys(constraint)[0]
-            op = '='
-            val = constraint[key]
+        key = constraint.key
+        op = constraint.op
+        val = constraint.val
+
+        if(isArray(constraint.val)){
+            val = `("${ constraint.val.join(`","`) }")`
         }
 
         return `${key} ${op} ${val}`
@@ -218,6 +255,10 @@ const formatSingleResult = (result_object: { [key: string]: any }, convert_micro
 
         if(convert_micros && matching_metric && matching_metric.is_micros){
             result_object[key] = +result_object[key] / 1000000
+        }
+
+        if(matching_metric && matching_metric.is_number){
+            result_object[key] = +result_object[key]
         }
 
         if (isNumber(result_object[key])) {
