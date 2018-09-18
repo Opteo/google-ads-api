@@ -1,4 +1,4 @@
-import { snakeCase, isObject, isString, isArray, isNumber, isUndefined, merge, includes, compact, find } from 'lodash'
+import { snakeCase, isObject, isString, isArray, isNumber, isUndefined, merge, includes, compact, find, map } from 'lodash'
 
 import entity_attributes from "./attributes"
 import entity_metrics from "./metrics"
@@ -33,7 +33,7 @@ export const buildReportQuery = (config: ReportConfig) : { query: string, custom
     config.segments = config.segments || []
     config.metrics = config.metrics ? config.metrics.map((metric: string) => metric.includes('metrics.') ? metric : `metrics.${metric}`) : []
 
-    const getConstraintKeys = (constraint: {key? : string}): string|boolean => {
+    const getConstraintKeys = (constraint: {key? : string} | string): string|boolean => {
         if(isString(constraint)){
             return false
         }
@@ -44,11 +44,16 @@ export const buildReportQuery = (config: ReportConfig) : { query: string, custom
         return Object.keys(constraint)[0]
     }
 
+    const metrics_referenced_in_constraints = isArray(config.constraints) 
+        ? map(config.constraints, getConstraintKeys)
+            .filter((constraint_key: string|boolean) => 
+                includes(entity_metrics.map(m => `metrics.${m.name}`), constraint_key)
+            )
+        : []
+
     const all_config_metrics : Array<string> = compact(merge(
         config.metrics,
-        isArray(config.constraints) 
-            ? config.constraints.map(getConstraintKeys).filter((constraint_key: string) => includes(entity_metrics.map(m => `metrics.${m.name}`), constraint_key))
-            : []
+        metrics_referenced_in_constraints
     ))
 
     all_config_metrics.forEach((config_metric: string) => {
