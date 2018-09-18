@@ -1,6 +1,6 @@
 import { snakeCase, isObject, isString, isArray, isNumber, isUndefined, merge, uniq, cloneDeep, compact, find, reject } from 'lodash'
 
-import attributes from "./attributes"
+import entity_attributes from "./attributes"
 
 import { ReportConfig } from './types/Global'
 import { ListConfig } from './types/Entity'
@@ -249,13 +249,24 @@ const formatSingleResult = (result_object: { [key: string]: any }, convert_micro
     return result_object
 }
 
+const getAttributesList = (resource: string) => {
+    const entity = entity_attributes[resource]
+    return mapAttributeObject(entity, resource)
+}
+
+const mapAttributeObject = (entity: any, prefix: string) : any => {
+    return Object.keys(entity).map(key => {
+        if (isObject(entity[key])) {
+            return mapAttributeObject(entity[key], `${prefix}.${key}`)
+        } 
+        return `${prefix}.${key}`
+    })
+}
+
 export const buildQuery = (config: ListConfig, resource: string) : string => {
-    console.log(resource);
-    const fields = attributes[resource]
-    const select_attributes = fields.map((field: string) => `${resource}.${field}`)
-    
-    let query = `SELECT ${select_attributes.join(', ')} FROM ${resource}`
-    
+    const attributes_list = getAttributesList(resource)
+    let query = `SELECT ${attributes_list.join(', ')} FROM ${resource}`
+
     if (!config) {
         return query
     }

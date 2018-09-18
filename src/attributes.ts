@@ -1,4 +1,14 @@
-const attributes : { [key: string]: object } = {
+const ad =  {
+    id: '',
+    final_urls: '',
+    final_mobile_urls: '',
+    tracking_url_template: '',
+    url_custom_parameters: '',
+    display_url: '',
+    type: '',
+}
+
+const entities : { [key: string]: object } = {
     // 'ad_group': [
     //     'id',
     //     'name',
@@ -14,13 +24,10 @@ const attributes : { [key: string]: object } = {
     //     'target_roas_override',
     //     'percent_cpc_bid_micros',
     // ],
-    ad: {
-        
-    },
     ad_group_ad: {
         status: '',
         ad_group: '',
-        ad: ,
+        ad
 
         // 'status',
         // 'ad_group',
@@ -96,4 +103,4 @@ const attributes : { [key: string]: object } = {
     // ]
 } 
 
-export default attributes
+export default entities

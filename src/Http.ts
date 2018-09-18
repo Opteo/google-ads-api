@@ -121,7 +121,7 @@ export default class Http implements HttpController {
     }
 
     public async report(config: ReportConfig) {
-        const { query, custom_metrics} = buildReportQuery(config)
+        const { query, custom_metrics } = buildReportQuery(config)
         // console.log(query)
 
         return this.query(query).then(result => {
