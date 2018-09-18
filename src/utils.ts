@@ -1,5 +1,7 @@
 import { snakeCase, isObject, isString, isArray, isUndefined, merge, uniq, cloneDeep, compact, find, reject } from 'lodash'
 
+import attributes from "./attributes"
+
 import { ReportConfig } from './types/Global'
 import { ListConfig } from './types/Entity'
 
@@ -132,17 +134,7 @@ export const buildReportQuery = (config: ReportConfig) : object => {
 
     /* Order By */
     if (config.order_by) {
-        // If sort order is unspecified, all values are sorted in DESCending order.
-        const sort_order = config.sort_order ? config.sort_order : 'DESC' 
-        let order_by = ''
-
-        if (config.order_by instanceof Array) {
-            order_by = config.order_by.map((key: string) => !key.includes('.') ? `${config.entity}.${key}` : key).join(', ')
-        } else {
-            order_by = !config.order_by.includes('.') ? `${config.entity}.${config.order_by}` : config.order_by
-        }
-
-        query += ` ORDER BY ${order_by} ${sort_order}`
+        query += formatOrderBy(config.entity, config.order_by, config.sort_order)
     } 
 
     /* Limit To */
@@ -201,22 +193,29 @@ const formatConstraints = (constraints: any) : string => {
     return constraints
 }
 
-const formatOrderBy = (order_by: string|Array<string>, entity?: string) : string => {
+const formatOrderBy = (entity: string, order_by: string|Array<string>, sort_order?: string,) : string => {
+    if (!sort_order) {
+        // If sort order is unspecified, all values are sorted in DESCending order.
+        sort_order = 'DESC' 
+    }
+
     if (order_by instanceof Array) {
-        return `${order_by.map((key: string) => entity ? `${entity}.${key}` : key).join(', ')}` 
-    } 
-    return entity ? `${entity}.${order_by}` : order_by
+        order_by = order_by.map((key: string) => !key.includes('.') ? `${entity}.${key}` : key).join(', ')
+    } else {
+        order_by = !order_by.includes('.') ? `${entity}.${order_by}` : order_by
+    }
+
+    return` ORDER BY ${order_by} ${sort_order}`
 }
 
-export const formatReportResult = (result: Array<object>, entity: string, convert_micros: boolean, custom_metrics) : Array<object> => {
-    
+
+export const formatQueryResults = (result: Array<object>, entity: string, convert_micros: boolean, custom_metrics:  Array<object>) : Array<object> => {    
     return result.map((row: { [key: string]: any }) => {
         // removing main entity key from final object
         if (row[entity]) {
             merge(row, row[entity])
             delete row[entity]
         }
-
 
         custom_metrics.forEach(custom_metric => {
             if(custom_metric.post_query_hook){
@@ -228,12 +227,13 @@ export const formatReportResult = (result: Array<object>, entity: string, conver
     })
 }
 
-const formatSingleResult = (result_object: { [key: string]: any }, convert_micros : boolean) : object => {
+
+const formatSingleResult = (result_object: { [key: string]: any }, convert_micros: boolean) : object => {
     for (const key in result_object) {
         if (isObject(result_object[key])) {
             result_object[key] = formatSingleResult(result_object[key], convert_micros)
             continue
-        }
+        } 
 
         const matching_metric = find(all_metrics, { name : key })
 
@@ -250,12 +250,14 @@ const formatSingleResult = (result_object: { [key: string]: any }, convert_micro
 }
 
 export const buildQuery = (config: ListConfig, resource: string) : string => {
-    const selected_fields = config.fields.map((field: string) => `${resource}.${field}`)
-    let query = `SELECT ${selected_fields.join(', ')} FROM ${resource}`
+    const fields = attributes[resource]
+    const select_attributes = fields.map((field: string) => `${resource}.${field}`)
+    let query = `SELECT ${select_attributes.join(', ')} FROM ${resource}`
 
     if (config.constraints) {
         let index = 0
 
+        //TODO: use formatConstaints method from Report
         if (config.constraints.ad_group_id) {
             query += ` WHERE ad_group.id = ${config.constraints.ad_group_id}`
             index += 1
@@ -294,10 +296,9 @@ export const buildQuery = (config: ListConfig, resource: string) : string => {
 
         }
     }
-    
+        
     if (config.order_by) {
-        const formatted_order_by = formatOrderBy(config.order_by, resource)
-        query += ` ORDER BY ${formatted_order_by}` 
+        query += formatOrderBy(resource, config.order_by, config.sort_order)
     } 
 
     if (config.limit && config.limit > 0) {

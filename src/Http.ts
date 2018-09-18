@@ -12,7 +12,7 @@ import {
     buildReportQuery, 
     mapResultsWithIds, 
     transformObjectKeys, 
-    formatReportResult 
+    formatQueryResults
 } from './utils'
 
 import  parser  from './parser'
@@ -72,7 +72,9 @@ export default class Http implements HttpController {
 
     public async list(config: ListConfig, resource: string) {
         const query = buildQuery(config, resource)
-        return this.query(query)
+        return this.query(query).then(results => {
+            return formatQueryResults(results, resource, config.convert_micros || false)
+        })
     }
 
     public async update(config: EntityUpdateConfig, entity: string) {
@@ -123,7 +125,7 @@ export default class Http implements HttpController {
         // console.log(query)
 
         return this.query(query).then(result => {
-            return formatReportResult(result, config.entity, isUndefined(config.convert_micros) ? true : config.convert_micros, custom_metrics)
+            return formatQueryResults(result, config.entity, isUndefined(config.convert_micros) ? true : config.convert_micros, custom_metrics)
         })
     }
 
