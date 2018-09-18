@@ -1,3 +1,6 @@
+import Bottleneck from "bottleneck"
+import crypto from 'crypto'
+
 import Http from './Http'
 import CustomerInstance from './Customer'
 
@@ -8,6 +11,7 @@ class GoogleAdsApi {
 	private client_id: string|number
 	private client_secret: string
 	private developer_token: string
+	private throttler : Bottleneck
 
 	/**
 	 * Creates GoogleAdsApi Instance
@@ -16,10 +20,25 @@ class GoogleAdsApi {
 	* @param developer_token - Developer token
 	*
 	*/
-	constructor({client_id, client_secret, developer_token} : Library) {
+	constructor({client_id, client_secret, developer_token, redis_options} : Library) {
 		this.client_id = client_id
 		this.client_secret = client_secret
 		this.developer_token = developer_token
+		const options = {
+			minTime: 10, // roughly 100 requests per second
+			id: 'id' + crypto.createHash('md5').update(developer_token).digest('hex'), // don't want to leak dev token to redis		   
+			/* Clustering options */
+			datastore: redis_options ? "redis" : "local",
+			clearDatastore: false,
+			clientOptions: redis_options
+		}
+		
+		this.throttler = new Bottleneck(options)
+
+		this.throttler.on("error", (err) => {
+			console.error('Could not connect to redis: ')
+			console.error(err)
+		})
 	}
 
 	/**
@@ -52,7 +71,8 @@ class GoogleAdsApi {
 			async_account_getter,
 			client_id: this.client_id,
 			developer_token: this.developer_token,
-			client_secret: this.client_secret
+			client_secret: this.client_secret,
+			throttler : this.throttler
 		})
 
 		return CustomerInstance(http_controller)
