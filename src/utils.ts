@@ -14,12 +14,10 @@ const all_metrics = [
         is_micros : true,
         pre_query_hook : (report: ReportConfig): ReportConfig => {
             
-            report = cloneDeep(report)
-
-            report.metrics = uniq([
-                ...report.metrics,
-                'metrics.cost_micros'
-            ])
+            report.metrics = uniq(merge([
+                report.metrics,
+                ['metrics.cost_micros']
+            ]))
 
             report.metrics = reject(report.metrics, i => i === 'metrics.cost')
 
@@ -51,10 +49,10 @@ export const getUpdateMask = (update_object: any) : string => {
 * @param {object} config
 * @returns {string} query 
 */
-export const buildReportQuery = (config: ReportConfig) : object => {
+export const buildReportQuery = (config: ReportConfig) : { query: string, custom_metrics: Array<object> } => {
     let query = ''
     let where_clause_exists = false
-    const custom_metrics = []
+    const custom_metrics : Array<object> = []
 
     /* SELECT Clause */
     config.attributes = config.attributes && config.attributes.length ? formatAttributes(config.attributes, config.entity) : []
@@ -62,9 +60,9 @@ export const buildReportQuery = (config: ReportConfig) : object => {
     config.metrics = config.metrics ? config.metrics.map((metric: string) => metric.includes('metrics.') ? metric : `metrics.${metric}`) : []
 
 
-    const all_config_metrics = compact([
-        ...config.metrics,
-        ...isArray(config.constraints) ? config.constraints.map(constraint => {
+    const all_config_metrics : Array<string> = compact(merge(
+        config.metrics,
+        isArray(config.constraints) ? config.constraints.map(constraint => {
             if(isString(constraint)){
                 return false
             }
@@ -74,7 +72,7 @@ export const buildReportQuery = (config: ReportConfig) : object => {
 
             return Object.keys(constraint)[0]
         }).filter(constraint_key => all_metrics.map(m => `metrics.${m.name}`).includes(constraint_key)) : []
-    ])
+    ))
 
     all_config_metrics.forEach(config_metric => {
         const matching_metric = find(all_metrics, { name : config_metric.replace('metrics.', '')})

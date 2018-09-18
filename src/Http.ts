@@ -73,7 +73,7 @@ export default class Http implements HttpController {
     public async list(config: ListConfig, resource: string) {
         const query = buildQuery(config, resource)
         return this.query(query).then(results => {
-            return formatQueryResults(results, resource, config.convert_micros || false)
+            return formatQueryResults(results, resource, isUndefined(config.convert_micros) ? true : config.convert_micros, [])
         })
     }
 
@@ -121,7 +121,7 @@ export default class Http implements HttpController {
     }
 
     public async report(config: ReportConfig) {
-        const { query, custom_metrics} = buildReportQuery(config)
+        const { query, custom_metrics } = buildReportQuery(config)
         // console.log(query)
 
         return this.query(query).then(result => {
