@@ -16,9 +16,7 @@ describe('Campaign Budgets', async () => {
     
     it('Lists All Campaign Budgets', async () => {
         expect.assertions(1)
-        const budgets = await customer.campaignBudgets.list({
-            fields: ['id']
-        })
+        const budgets = await customer.campaignBudgets.list()
         expect(budgets).toBeInstanceOf(Array)
     })
 

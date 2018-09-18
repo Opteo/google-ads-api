@@ -1,4 +1,4 @@
-import { snakeCase, isObject, isString, isArray, isUndefined, merge } from 'lodash'
+import { snakeCase, isObject, isString, isArray, isNumber, isUndefined, merge } from 'lodash'
 
 import attributes from "./attributes"
 
@@ -172,7 +172,7 @@ const formatSingleResult = (result_object: { [key: string]: any }, convert_micro
             const new_key = key.replace('_micros', '')
             result_object[new_key] = result_object[key] > 0 ? result_object[key] / 1000000 : 0
         }
-        if (isNumeric(result_object[key])) {
+        if (isNumber(result_object[key])) {
             result_object[key] = +result_object[key]
         }
     }
@@ -181,9 +181,15 @@ const formatSingleResult = (result_object: { [key: string]: any }, convert_micro
 }
 
 export const buildQuery = (config: ListConfig, resource: string) : string => {
+    console.log(resource);
     const fields = attributes[resource]
     const select_attributes = fields.map((field: string) => `${resource}.${field}`)
+    
     let query = `SELECT ${select_attributes.join(', ')} FROM ${resource}`
+    
+    if (!config) {
+        return query
+    }
 
     if (config.constraints) {
         let index = 0
@@ -263,5 +269,3 @@ export const transformObjectKeys = (entity_object: any) : any  => {
 
     return final
 }
-
-const isNumeric = (num: any): boolean => !isNaN(num)

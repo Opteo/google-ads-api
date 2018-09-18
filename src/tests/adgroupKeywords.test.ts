@@ -21,12 +21,10 @@ describe('AdGroup Keywords', async () => {
     it('Lists All Keywords', async () => {
         expect.assertions(1)
         const keywords = await customer.adgroupCriterions.list({
-            fields: ['keyword.text', 'keyword.match_type'],
             constraints: {
                 ad_group_id,
             }
         })
-
         expect(keywords).toBeInstanceOf(Array)
     }) 
 

@@ -24,12 +24,12 @@ describe('Campaign Negatives', async () => {
     it('Lists Campaign Negatives', async () => {
         expect.assertions(1)
         const criterions = await customer.campaignNegatives.list({
-            fields: ['criterion_id', 'type'],
             constraints: {
                 campaign_id,
                 type: 'KEYWORD'
             }
         })
+        console.log(criterions);
         expect(criterions).toBeInstanceOf(Array)
     }) 
 

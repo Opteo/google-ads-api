@@ -21,11 +21,6 @@ describe('Campaigns', async () => {
 		expect.assertions(1)
 		const campaigns = await customer.campaigns.list({
 			limit: 3,
-			fields: [
-				'id',
-				'name',
-				'status'
-			],
 			constraints: {
 				status: 'ENABLED',
 			},

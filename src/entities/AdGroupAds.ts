@@ -10,7 +10,7 @@ export default class AdGroupAds extends Entity {
         super(http_controller, ENDPOINTS.ads, RESOURCE_NAMES.ad)
     }
 
-    list(config: ListAdsConfig) : Promise<any> {
+    list(config?: ListAdsConfig) : Promise<any> {
         return super.list(config)
     }
 

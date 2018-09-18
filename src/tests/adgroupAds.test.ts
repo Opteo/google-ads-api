@@ -17,11 +17,8 @@ describe('AdGroup Ads', async () => {
 
     it('Lists All AdGroup Ads', async () => {
         expect.assertions(1)
-        const ads = await customer.ads.list({
-            ad_group_id,
-            fields: ['ad.id', 'status']
-        })
-
+        const ads = await customer.ads.list()
+        console.log(ads);
         expect(ads).toBeInstanceOf(Array)
     })
 

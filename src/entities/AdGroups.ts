@@ -14,5 +14,4 @@ export default class AdGroups extends Entity {
         return super.create(config)
     }
 
-
 }

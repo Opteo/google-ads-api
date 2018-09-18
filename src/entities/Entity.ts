@@ -20,7 +20,7 @@ export default class Entity {
         return this.http_controller.create(config, this.endpoint)
     }
     
-    public list(config: ListConfig) : Promise<any> {
+    public list(config?: ListConfig) : Promise<any> {
         return this.http_controller.list(config, this.resource)
     }
 
