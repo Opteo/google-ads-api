@@ -49,7 +49,7 @@ export const buildReportQuery = (config: ReportConfig) : { query: string, custom
         return constraint
     }
 
-    const addConstraintPrefixe = (constraint: Constraint): Constraint => {
+    const addConstraintPrefix = (constraint: Constraint): Constraint => {
 
         if(constraint.key.includes('.')){
             return constraint
@@ -82,7 +82,7 @@ export const buildReportQuery = (config: ReportConfig) : { query: string, custom
             return constraint
         }
         constraint = unrollConstraintShorthand(constraint)
-        constraint = addConstraintPrefixe(constraint)
+        constraint = addConstraintPrefix(constraint)
 
         return constraint
     })
