@@ -19,7 +19,6 @@ describe('Campaign Ad Schedules', async () => {
     it('Lists Campaign Ad Schedules', async () => {
         expect.assertions(1)
         const criterions = await customer.campaignAdSchedules.list({
-            fields: ['criterion_id', 'type'],
             constraints: {
                 campaign_id,
                 type: 'AD_SCHEDULE'

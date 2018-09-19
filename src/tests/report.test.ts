@@ -137,7 +137,7 @@ describe('Reporting', async () => {
             entity: 'ad_group',
             attributes: ['ad_group.id', 'campaign.id'],
             metrics: ['clicks', 'conversions'],
-            constraints: 'ad_group.status = ENABLED AND campaign.id IN (1485014801, 1483704368)',
+            constraints: ['ad_group.status = ENABLED', 'campaign.id IN (1485014801, 1483704368)'],
             date_constant: 'TODAY'
         })
         expect(data).toBeInstanceOf(Array)

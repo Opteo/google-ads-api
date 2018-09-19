@@ -118,7 +118,7 @@ declare namespace Global {
     export interface Constraint {
         key: string
         op: string
-        val: string|Array<string>
+        val: string|number|Array<string>
     }
 
      /**

@@ -290,6 +290,7 @@ export const buildQuery = (config: ListConfig, resource: string) : string => {
     if (!config) {
         return query
     }
+    // buildreportquery 
 
     if (config.constraints) {
         let index = 0

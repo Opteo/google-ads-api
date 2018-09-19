@@ -30,9 +30,7 @@ describe('Campaign Shared Sets', async () => {
 
     it('Lists Campaign Shared Sets', async () => {
         expect.assertions(1)
-        const shared_sets = await customer.campaignSharedSets.list({
-            fields: ['campaign', 'shared_set'],
-        })
+        const shared_sets = await customer.campaignSharedSets.list()
         expect(shared_sets).toBeInstanceOf(Array)
     }) 
 

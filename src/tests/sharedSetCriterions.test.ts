@@ -21,12 +21,7 @@ describe('Shared Set Criterions (Keyword)', async () => {
 
 	it('Lists Shared Set Criterions', async () => {
 		expect.assertions(1)
-		const criterions = await customer.sharedSetCriterions.list({
-			fields: [
-				'shared_set',
-				'type'
-			]
-		})
+		const criterions = await customer.sharedSetCriterions.list()
 		expect(criterions).toBeInstanceOf(Array)
 	})
 

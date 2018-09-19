@@ -21,11 +21,11 @@ describe('Shared Sets', async () => {
 		expect.assertions(1)
 		const shared_sets = await customer.sharedSets.list({
 			limit: 2,
-			fields: [
-				'id',
-				'name',
-				'status'
-			],
+			// fields: [
+			// 	'id',
+			// 	'name',
+			// 	'status'
+			// ],
 			constraints: {
 				status: 'ENABLED',
 			}
