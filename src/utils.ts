@@ -34,8 +34,7 @@ export const buildReportQuery = (config: ReportConfig) : { query: string, custom
     config.metrics = config.metrics ? config.metrics.map((metric: string) => metric.includes('metrics.') ? metric : `metrics.${metric}`) : []
     config.constraints = config.constraints || []
 
-    const unrollConstraintShorthand = (constraint: any | string): Constraint => {
-
+    const unrollConstraintShorthand = (constraint: any): Constraint => {
 
         if(!constraint.key){
             const key = Object.keys(constraint)[0]
@@ -94,7 +93,7 @@ export const buildReportQuery = (config: ReportConfig) : { query: string, custom
             )
         : []
 
-    const all_config_metrics : Array<any> = compact(uniq([
+    const all_config_metrics : Array<string> = compact(uniq([
         ...config.metrics,
         ...metrics_referenced_in_constraints
     ]))
