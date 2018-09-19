@@ -93,7 +93,7 @@ export const buildReportQuery = (config: ReportConfig) : { query: string, custom
             )
         : []
 
-    const all_config_metrics : Array<string> = compact(uniq([
+    const all_config_metrics : Array<any> = compact(uniq([
         ...config.metrics,
         ...metrics_referenced_in_constraints
     ]))
