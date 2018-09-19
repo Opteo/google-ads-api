@@ -1,17 +1,4 @@
-import {
-    snakeCase,
-    isObject,
-    isString,
-    isArray,
-    isNumber,
-    isUndefined,
-    merge,
-    includes,
-    compact,
-    find,
-    map,
-    uniq,
-} from 'lodash'
+import { snakeCase, isObject, isString, isArray, isUndefined, merge, includes, compact, find, map, uniq } from 'lodash'
 
 import entity_attributes from './attributes'
 import entity_metrics from './metrics'
@@ -126,7 +113,7 @@ export const buildReportQuery = (config: ReportConfig): { query: string; custom_
     const all_selected_attributes = config.attributes.concat(config.metrics, config.segments).join(', ')
 
     if (!all_selected_attributes.length) {
-        throw new Error('Missing attributes, metric fields or segmens to be selected.')
+        throw new Error('Missing attributes, metric fields or segments to be selected.')
     }
 
     query = `SELECT ${all_selected_attributes} FROM ${config.entity}`
@@ -134,7 +121,7 @@ export const buildReportQuery = (config: ReportConfig): { query: string; custom_
     /* WHERE Clause */
 
     /* Constraints */
-    if (config.constraints) {
+    if (config.constraints && config.constraints.length) {
         const constraints = formatConstraints(config.constraints)
         query += ` WHERE ${constraints}`
         where_clause_exists = true
@@ -174,7 +161,6 @@ export const buildReportQuery = (config: ReportConfig): { query: string; custom_
         query += ` LIMIT ${config.limit}`
     }
 
-    // console.log(query)
     return { query, custom_metrics }
 }
 
@@ -272,7 +258,7 @@ const formatSingleResult = (result_object: { [key: string]: any }, convert_micro
             result_object[key] = +result_object[key]
         }
 
-        if (isNumber(result_object[key])) {
+        if (isNumeric(result_object[key]) && !(key === 'id' || key.includes('.id'))) {
             result_object[key] = +result_object[key]
         }
     }
@@ -288,72 +274,27 @@ const getAttributesList = (resource: string) => {
 const mapAttributeObject = (entity: any, prefix: string): any => {
     return Object.keys(entity).map(key => {
         if (isObject(entity[key])) {
-            return mapAttributeObject(entity[key], `${prefix}.${key}`)
+            return mapAttributeObject(entity[key], `${prefix}.${key}`).join(', ')
         }
         return `${prefix}.${key}`
     })
 }
 
-export const buildQuery = (config: ListConfig, resource: string): string => {
+export const buildListQuery = (
+    config: ListConfig,
+    resource: string
+): { query: string; custom_metrics?: Array<Metric> } => {
     const attributes_list = getAttributesList(resource)
-    let query = `SELECT ${attributes_list.join(', ')} FROM ${resource}`
 
     if (!config) {
-        return query
-    }
-    // buildreportquery
-
-    if (config.constraints) {
-        let index = 0
-
-        //TODO: use formatConstaints method from Report
-        if (config.constraints.ad_group_id) {
-            query += ` WHERE ad_group.id = ${config.constraints.ad_group_id}`
-            index += 1
-            delete config.constraints.ad_group_id
-        } else if (config.constraints.campaign_id) {
-            query +=
-                index > 0
-                    ? ` AND campaign.id = ${config.constraints.campaign_id}`
-                    : ` WHERE campaign.id = ${config.constraints.campaign_id}`
-            index += 1
-            delete config.constraints.campaign_id
-        } else {
-            query += ' WHERE '
-        }
-
-        for (const key in config.constraints) {
-            if (typeof config.constraints[key] === 'object') {
-                const resource_constraints = config.constraints[key]
-
-                for (const resource_key in resource_constraints) {
-                    index += 1
-
-                    if (index > 1) {
-                        query += ' AND '
-                    }
-                    query += `${resource}.${key}.${resource_key} = ${resource_constraints[resource_key]}`
-                }
-                continue
-            }
-            index += 1
-
-            if (index > 1) {
-                query += ' AND '
-            }
-            query += `${resource}.${key} = ${config.constraints[key]}`
-        }
+        return { query: `SELECT ${attributes_list.join(', ')} FROM ${resource}` }
     }
 
-    if (config.order_by) {
-        query += formatOrderBy(resource, config.order_by, config.sort_order)
-    }
+    const report_config = config as ReportConfig
+    report_config.entity = resource
+    report_config.attributes = attributes_list
 
-    if (config.limit && config.limit > 0) {
-        query += ` LIMIT ${config.limit}`
-    }
-
-    return query
+    return buildReportQuery(report_config)
 }
 
 export const mapResultsWithIds = (response: any): object => {
@@ -379,4 +320,11 @@ export const transformObjectKeys = (entity_object: any): any => {
     }
 
     return final
+}
+
+const isNumeric = (value: any) => {
+    if (typeof value === 'boolean') {
+        return false
+    }
+    return !isNaN(value)
 }

@@ -2,6 +2,7 @@ import { cloneDeep, reject, isString, find } from 'lodash'
 import { Metric, ReportConfig, Constraint } from './types/Global'
 
 const all_metrics: Array<Metric> = [
+    { name: 'clicks', is_number: true },
     { name: 'all_conversions', is_number: true },
     { name: 'cost_micros', is_number: true },
     {
@@ -19,8 +20,6 @@ const all_metrics: Array<Metric> = [
             if (!report.constraints || isString(report.constraints)) {
                 return report
             }
-
-            // const _constraints = []
 
             const cost_constraint = find(report.constraints as Array<Constraint>, {
                 key: 'metrics.cost',

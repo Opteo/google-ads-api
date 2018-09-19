@@ -150,27 +150,35 @@ const entities: { [key: string]: object } = {
         campaign_group: '',
         end_date: '',
     },
-    // 'campaign_budget': [
-    //     'id',
-    //     'name',
-    //     'amount_micros',
-    //     'status',
-    //     'delivery_method',
-    //     'explicitly_shared',
-    //     'reference_count',
-    // ],
-    // 'campaign_criterion': [
-    //     'campaign',
-    //     'criterion_id',
-    //     'bid_modifier',
-    //     'negative',
-    //     'type',
-    // ],
-    // 'campaign_shared_set': [
-    //     'campaign',
-    //     'shared_set',
-    //     'status'
-    // ]
+
+    //TODO: add all missing entities
+    campaign_budget: {
+        id: '',
+        // 'name',
+        // 'amount_micros',
+        // 'status',
+        // 'delivery_method',
+        // 'explicitly_shared',
+        // 'reference_count',
+    },
+    campaign_criterion: {
+        campaign: '',
+        // 'criterion_id',
+        // 'bid_modifier',
+        // 'negative',
+        // 'type',
+    },
+    campaign_shared_set: {
+        campaign: '',
+        shared_set: '',
+        status: '',
+    },
+    shared_set: {
+        id: '',
+    },
+    shared_criterion: {
+        type: '',
+    },
 }
 
 export default entities

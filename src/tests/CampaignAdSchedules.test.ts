@@ -19,10 +19,7 @@ describe('Campaign Ad Schedules', async () => {
     it('Lists Campaign Ad Schedules', async () => {
         expect.assertions(1)
         const criterions = await customer.campaignAdSchedules.list({
-            constraints: {
-                campaign_id,
-                type: 'AD_SCHEDULE',
-            },
+            constraints: [{ 'campaign.id': campaign_id }, { type: 'AD_SCHEDULE' }],
         })
         expect(criterions).toBeInstanceOf(Array)
     })

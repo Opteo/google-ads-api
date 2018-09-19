@@ -9,27 +9,26 @@ describe('Reporting', async () => {
     })
 
     const customer = lib_instance.Customer({
-        customer_account_id: config.cid,
-        refresh_token: config.refresh_token,
+        customer_account_id: config.opteo_cid,
+        refresh_token: config.opteo_refresh_token,
     })
 
     it('Retrieves API Attributes', async () => {
-        // expect.assertions(2)
+        expect.assertions(2)
         const data = await customer.report({
             entity: 'ad_group',
             attributes: ['id', 'name', 'campaign.id'],
             order_by: 'ad_group.id',
             sort_order: 'DESC',
         })
-        // console.log(data)
         expect(data).toBeInstanceOf(Array)
         expect(data[0]).toEqual({
             campaign: {
                 resource_name: expect.any(String),
-                id: expect.any(Number),
+                id: expect.any(String),
             },
             resource_name: expect.any(String),
-            id: expect.any(Number),
+            id: expect.any(String),
             name: expect.any(String),
         })
     })
@@ -39,24 +38,25 @@ describe('Reporting', async () => {
         const data = await customer.report({
             entity: 'ad_group',
             attributes: ['ad_group.id', 'campaign.id'],
-            metrics: ['metrics.clicks', 'conversions'],
+            metrics: ['metrics.clicks', 'conversions', 'cost'],
             order_by: 'id',
         })
+
         expect(data).toBeInstanceOf(Array)
     })
 
     it('Converts Micros', async () => {
-        expect.assertions(3)
+        expect.assertions(2)
         const data = await customer.report({
             entity: 'ad_group',
             attributes: [
-                'ad_group.id',
+                'id',
                 'campaign.id',
                 'campaign.target_cpa.target_cpa_micros',
                 'campaign.target_spend.target_spend_micros',
             ],
             metrics: ['metrics.clicks', 'conversions', 'metrics.cost_micros'],
-            constraints: ['ad_group.status = ENABLED', 'campaign.target_cpa.target_cpa_micros > 0'],
+            constraints: ['ad_group.status = ENABLED', { key: 'cost', op: '>', val: 1 }],
             order_by: 'id',
             convert_micros: true,
         })
@@ -66,10 +66,6 @@ describe('Reporting', async () => {
             conversions: expect.any(Number),
             cost_micros: expect.any(Number),
             cost: expect.any(Number),
-        })
-        expect(data[0].campaign.target_cpa).toEqual({
-            target_cpa_micros: expect.any(Number),
-            target_cpa: expect.any(Number),
         })
     })
 
@@ -84,13 +80,13 @@ describe('Reporting', async () => {
         expect(data[0]).toEqual({
             campaign: {
                 resource_name: expect.any(String),
-                id: expect.any(Number),
+                id: expect.any(String),
             },
             device: expect.any(String),
             resource_name: expect.any(String),
-            id: expect.any(Number),
+            id: expect.any(String),
         })
-        expect(data).toBeInstanceOf(Array)
+        expect(data).toHaveLength(10)
     })
 
     it('Date Constants', async () => {
@@ -101,7 +97,6 @@ describe('Reporting', async () => {
             metrics: ['clicks', 'conversions'],
             date_constant: 'TODAY',
         })
-        // console.log(data);
         expect(data).toBeInstanceOf(Array)
     })
 
@@ -114,11 +109,10 @@ describe('Reporting', async () => {
             from_date: '2018-09-01',
             to_date: '2018-09-10',
         })
-        // console.log(data);
         expect(data).toBeInstanceOf(Array)
     })
 
-    it('Array of Constraints', async () => {
+    it('Constraints as Array of Strings', async () => {
         expect.assertions(1)
         const data = await customer.report({
             entity: 'ad_group',
@@ -131,14 +125,38 @@ describe('Reporting', async () => {
         expect(data).toBeInstanceOf(Array)
     })
 
-    it('Single String Constraints', async () => {
+    it('Constraints as Array of Shorthands', async () => {
         expect.assertions(1)
         const data = await customer.report({
             entity: 'ad_group',
             attributes: ['ad_group.id', 'campaign.id'],
             metrics: ['clicks', 'conversions'],
-            constraints: ['ad_group.status = ENABLED', 'campaign.id IN (1485014801, 1483704368)'],
+            constraints: [{ 'ad_group.status': 'ENABLED' }, { 'campaign.id': [1485014801, 1483704368] }],
             date_constant: 'TODAY',
+        })
+        expect(data).toBeInstanceOf(Array)
+    })
+
+    it('Constraints as Array of Objects', async () => {
+        expect.assertions(1)
+        const data = await customer.report({
+            entity: 'ad_group',
+            attributes: ['ad_group.id', 'campaign.id'],
+            metrics: ['clicks', 'conversions'],
+            constraints: [
+                {
+                    key: 'ad_group.status',
+                    op: '=',
+                    val: 'ENABLED',
+                },
+                {
+                    key: 'clicks',
+                    op: '>',
+                    val: '1',
+                },
+            ],
+            date_constant: 'TODAY',
+            limit: 5,
         })
         expect(data).toBeInstanceOf(Array)
     })

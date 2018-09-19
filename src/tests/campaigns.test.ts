@@ -2,7 +2,7 @@ import GoogleAdsApi from '..'
 import config from '../config'
 
 const getRandomCampaignName = () =>
-    `test-campaign-${(Math.random() * 100 + 1).toFixed(0)} (created during library test)`
+    `test-campaign-${(Math.random() * 1000000 + 1).toFixed(0)} (created during library test)`
 
 describe('Campaigns', async () => {
     const lib_instance = new GoogleAdsApi({
@@ -22,9 +22,7 @@ describe('Campaigns', async () => {
         expect.assertions(1)
         const campaigns = await customer.campaigns.list({
             limit: 3,
-            constraints: {
-                status: 'ENABLED',
-            },
+            constraints: [{ status: 'ENABLED' }],
             order_by: 'id',
         })
         expect(campaigns).toHaveLength(3)

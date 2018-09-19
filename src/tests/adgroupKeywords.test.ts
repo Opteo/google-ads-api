@@ -1,7 +1,7 @@
 import GoogleAdsApi from '..'
 import config from '../config'
 
-const getRandomKeywordText = () => `test-keyword-${(Math.random() * 100 + 1).toFixed(0)}`
+const getRandomKeywordText = () => `test-keyword-${(Math.random() * 1000000 + 1).toFixed(0)}`
 
 describe('AdGroup Keywords', async () => {
     const lib_instance = new GoogleAdsApi({
@@ -21,9 +21,7 @@ describe('AdGroup Keywords', async () => {
     it('Lists All Keywords', async () => {
         expect.assertions(1)
         const keywords = await customer.adgroupCriterions.list({
-            constraints: {
-                ad_group_id,
-            },
+            constraints: ['ad_group.id =' + ad_group_id],
         })
         expect(keywords).toBeInstanceOf(Array)
     })

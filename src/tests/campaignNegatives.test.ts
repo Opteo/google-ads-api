@@ -1,7 +1,7 @@
 import GoogleAdsApi from '..'
 import config from '../config'
 
-const getRandomKeywordText = () => `test-negative-${(Math.random() * 100 + 1).toFixed(0)}`
+const getRandomKeywordText = () => `test-negative-${(Math.random() * 1000000 + 1).toFixed(0)}`
 
 // const log = (obj: object) => {
 //     console.log(require('util').inspect(obj, false, null))
@@ -24,12 +24,8 @@ describe('Campaign Negatives', async () => {
     it('Lists Campaign Negatives', async () => {
         expect.assertions(1)
         const criterions = await customer.campaignNegatives.list({
-            constraints: {
-                campaign_id,
-                type: 'KEYWORD',
-            },
+            constraints: ['campaign.id =' + campaign_id, { type: 'KEYWORD' }],
         })
-        console.log(criterions)
         expect(criterions).toBeInstanceOf(Array)
     })
 

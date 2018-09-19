@@ -1,7 +1,7 @@
 import GoogleAdsApi from '..'
 import config from '../config'
 
-const getRandomCriterionText = () => `test-keyword-${(Math.random() * 100 + 1).toFixed(0)}`
+const getRandomCriterionText = () => `test-keyword-${(Math.random() * 1000000 + 1).toFixed(0)}`
 
 describe('Shared Set Criterions (Keyword)', async () => {
     const lib_instance = new GoogleAdsApi({

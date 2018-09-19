@@ -22,10 +22,7 @@ describe('AdGroups', async () => {
         expect.assertions(1)
         const adgroups = await customer.adgroups.list({
             order_by: ['id', 'cpa_bid_micros'],
-            constraints: {
-                campaign_id,
-                status: 'ENABLED',
-            },
+            constraints: [{ 'campaign.id': campaign_id }, { status: 'ENABLED' }],
         })
         expect(adgroups).toBeInstanceOf(Array)
     })

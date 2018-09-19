@@ -1,7 +1,8 @@
 import GoogleAdsApi from '..'
 import config from '../config'
 
-const getRandomSharedSetName = () => `test-list-${(Math.random() * 100 + 1).toFixed(0)} (created during library test)`
+const getRandomSharedSetName = () =>
+    `test-list-${(Math.random() * 1000000 + 1).toFixed(0)} (created during library test)`
 
 describe('Shared Sets', async () => {
     const lib_instance = new GoogleAdsApi({
@@ -21,14 +22,7 @@ describe('Shared Sets', async () => {
         expect.assertions(1)
         const shared_sets = await customer.sharedSets.list({
             limit: 2,
-            // fields: [
-            // 	'id',
-            // 	'name',
-            // 	'status'
-            // ],
-            constraints: {
-                status: 'ENABLED',
-            },
+            constraints: ['shared_set.status = ENABLED'],
         })
         expect(shared_sets).toBeInstanceOf(Array)
     })

@@ -31,10 +31,9 @@ export default class CampaignSharedSets {
      * Lists all Campaign Shared Sets
      * @param {object} config
      * @param {integer} config.limit
-     * @param {array} config.fields
      * @param {object} config.constraints
      */
-    public list(config: ListConfig): Promise<any> {
+    public list(config?: ListConfig): Promise<any> {
         return this.http_controller.list(config, this.resource)
     }
 

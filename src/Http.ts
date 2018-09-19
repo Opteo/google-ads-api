@@ -1,5 +1,5 @@
 import request from 'request'
-import { random, isUndefined } from 'lodash'
+import { random, isUndefined, get } from 'lodash'
 import retry from 'bluebird-retry'
 import Bottleneck from 'bottleneck'
 
@@ -8,7 +8,7 @@ import { ADWORDS_API_BASE_URL } from './constants'
 
 import {
     getUpdateMask,
-    buildQuery,
+    buildListQuery,
     buildReportQuery,
     mapResultsWithIds,
     transformObjectKeys,
@@ -72,14 +72,18 @@ export default class Http implements HttpController {
     }
 
     public async list(config: ListConfig, resource: string) {
-        const query = buildQuery(config, resource)
-        return this.query(query).then(results => {
+        const query = buildListQuery(config, resource)
+
+        return this.query(query.query).then(results => {
+            if (!config) {
+                config = {}
+            }
             return formatQueryResults(
                 results,
                 resource,
                 isUndefined(config.convert_micros) ? true : config.convert_micros,
                 []
-            ) //TODO: fix this (this throws error if config is undefined)
+            )
         })
     }
 
@@ -166,6 +170,12 @@ export default class Http implements HttpController {
 
             // if the error is in the 400 range, it's our fault, so no need to retry.
             if (response.statusCode.toString()[0] === '4') {
+                if (
+                    get(decoded_body, 'error.details[0].errors[0].errorCode.databaseError') ===
+                    'CONCURRENT_MODIFICATION'
+                ) {
+                    throw new GoogleAdsError(decoded_body.error)
+                }
                 throw new retry.StopError(new GoogleAdsError(decoded_body.error))
             }
 
