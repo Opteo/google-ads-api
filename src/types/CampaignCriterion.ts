@@ -7,15 +7,15 @@ declare namespace CampaignCriterion {
      * @interface
      */
     export interface CampaignCriterion {
-        resource_name: string,
-        ad_schedule: AdSchedule,
-        bid_modifier: number,
-        campaign: string,
-        criterion_id: number|string,
-        device: Device,
-        keyword: KeywordObject,
-        location: string,
-        negative: boolean,
+        resource_name: string
+        ad_schedule: AdSchedule
+        bid_modifier: number
+        campaign: string
+        criterion_id: number | string
+        device: Device
+        keyword: KeywordObject
+        location: string
+        negative: boolean
         type: Type
     }
 
@@ -24,11 +24,11 @@ declare namespace CampaignCriterion {
      * @interface
      */
     interface AdSchedule {
-        day_of_week: DayOfWeek | keyof typeof DayOfWeek,
-        end_hour: number,
-        end_minute: Minutes | keyof typeof Minutes,
-        start_hour: number,
-        start_minute: Minutes | keyof typeof Minutes,
+        day_of_week: DayOfWeek | keyof typeof DayOfWeek
+        end_hour: number
+        end_minute: Minutes | keyof typeof Minutes
+        start_hour: number
+        start_minute: Minutes | keyof typeof Minutes
     }
 
     /**
@@ -47,7 +47,7 @@ declare namespace CampaignCriterion {
         geo_target_constant: string
     }
 
-     /**
+    /**
      * Enum for Day Of Week
      * @readonly
      * @enum {string}
@@ -61,10 +61,10 @@ declare namespace CampaignCriterion {
         TUESDAY = 'TUESDAY',
         UNKNOWN = 'UNKNOWN',
         UNSPECIFIED = 'UNSPECIFIED',
-        WEDNESDAY = 'WEDNESDAY'
+        WEDNESDAY = 'WEDNESDAY',
     }
 
-     /**
+    /**
      * Enum for Minutes
      * @readonly
      * @enum {string}
@@ -75,10 +75,10 @@ declare namespace CampaignCriterion {
         THIRTY = 'THIRTY',
         UNKNOWN = 'UNKNOWN',
         UNSPECIFIED = 'UNSPECIFIED',
-        ZERO = 'ZERO'
+        ZERO = 'ZERO',
     }
 
-     /**
+    /**
      * Enum for Device Type
      * @readonly
      * @enum {string}
@@ -89,10 +89,10 @@ declare namespace CampaignCriterion {
         MOBILE = 'MOBILE',
         TABLET = 'TABLET',
         UNKNOWN = 'UNKNOWN',
-        UNSPECIFIED = 'UNSPECIFIED'
-    } 
+        UNSPECIFIED = 'UNSPECIFIED',
+    }
 
-     /**
+    /**
      * Enum for Criterion Type
      * @readonly
      * @enum {string}
@@ -104,37 +104,36 @@ declare namespace CampaignCriterion {
         LISTING_GROUP = 'LISTING_GROUP',
         LOCATION = 'LOCATION',
         UNKNOWN = 'UNKNOWN',
-        UNSPECIFIED = 'UNSPECIFIED'
+        UNSPECIFIED = 'UNSPECIFIED',
     }
-
 
     /**
      * Interface for New Criterion Config
-     * @interface  
+     * @interface
      * @param campaign_id
      */
     interface NewCriterion extends NewEntityConfig {
-        campaign_id: string|number,
-        type?: Type | keyof typeof Type,
-        negative?: boolean,
+        campaign_id: string | number
+        type?: Type | keyof typeof Type
+        negative?: boolean
         bid_modifier?: number
     }
 
     interface NewDevice extends NewCriterion {
         device: Device
-    }  
+    }
 
     interface NewKeyword extends NewCriterion {
-        negative: boolean,
+        negative: boolean
         keyword: KeywordObject
-    } 
+    }
 
     interface NewLocation extends NewCriterion {
         location: Location
     }
 
     interface newAdSchedule extends NewCriterion {
-        ad_schedule: AdSchedule 
+        ad_schedule: AdSchedule
     }
 
     export type NewCriterionConfig = NewDevice | NewLocation | newAdSchedule | NewKeyword

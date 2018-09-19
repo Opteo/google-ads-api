@@ -19,20 +19,20 @@ declare namespace Customer {
      * @interface
      */
     export interface Customer {
-        campaigns: Campaigns,
-        campaignAdSchedules: CampaignAdSchedules,
-        campaignBudgets: CampaignBudgets,
-        campaignCriterions: CampaignCriterions,
-        campaignNegatives: CampaignNegatives,
-        campaignSharedSets: CampaignSharedSets,
-        adgroups: AdGroups,
-        ads: AdGroupAds,
-        adgroupCriterions: AdGroupCriterions,
-        keywords: Keywords,
-        sharedSets: SharedSets,
-        sharedSetCriterions: SharedSetCriterions,
-        retrieve: () => Promise<any>,
-        query: (query: string) => Promise<any>,
+        campaigns: Campaigns
+        campaignAdSchedules: CampaignAdSchedules
+        campaignBudgets: CampaignBudgets
+        campaignCriterions: CampaignCriterions
+        campaignNegatives: CampaignNegatives
+        campaignSharedSets: CampaignSharedSets
+        adgroups: AdGroups
+        ads: AdGroupAds
+        adgroupCriterions: AdGroupCriterions
+        keywords: Keywords
+        sharedSets: SharedSets
+        sharedSetCriterions: SharedSetCriterions
+        retrieve: () => Promise<any>
+        query: (query: string) => Promise<any>
         report: (config: ReportConfig) => Promise<any>
     }
 }

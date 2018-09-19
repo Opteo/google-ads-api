@@ -6,18 +6,18 @@ declare namespace AdGroupCriterion {
      * @interface
      */
     export interface AdGroupCriterion {
-        resource_name: string,
-        status: CriterionStatus,
-        quality_info: QualityInfo,
-        ad_group: string,
-        position_estimates: PositionEstimates,
-        effective_cpc_bid_micros: string|number,
-        effective_cpm_bid_micros: string|number,
-        effective_cpc_bid_source: BidSource,
-        effective_cpm_bid_source: BidSource,
-        type: CriterionType,
-        criterion_id: string|number,
-        negative: boolean,
+        resource_name: string
+        status: CriterionStatus
+        quality_info: QualityInfo
+        ad_group: string
+        position_estimates: PositionEstimates
+        effective_cpc_bid_micros: string | number
+        effective_cpm_bid_micros: string | number
+        effective_cpc_bid_source: BidSource
+        effective_cpm_bid_source: BidSource
+        type: CriterionType
+        criterion_id: string | number
+        negative: boolean
         final_urls: string
     }
 
@@ -26,13 +26,13 @@ declare namespace AdGroupCriterion {
      * @interface
      */
     interface QualityInfo {
-        quality_score: number|string,
-        creative_quality_score: QualityScore,
-        post_click_quality_score: QualityScore,
+        quality_score: number | string
+        creative_quality_score: QualityScore
+        post_click_quality_score: QualityScore
         search_predicted_ctr: QualityScore
     }
 
-     /**
+    /**
      * Enum for QualityScore
      * @readonly
      * @enum {string}
@@ -42,7 +42,7 @@ declare namespace AdGroupCriterion {
         AVERAGE = 'AVERAGE',
         BELOW_AVERAGE = 'BELOW_AVERAGE',
         UNKNOWN = 'UNKNOWN',
-        UNSPECIFIED = 'UNSPECIFIED'
+        UNSPECIFIED = 'UNSPECIFIED',
     }
 
     /**
@@ -50,9 +50,9 @@ declare namespace AdGroupCriterion {
      * @interface
      */
     interface PositionEstimates {
-        first_page_cpc_micros?: string|number,
-        first_position_cpc_micros: string|number,
-        top_of_page_cpc_micros: string|number,
+        first_page_cpc_micros?: string | number
+        first_position_cpc_micros: string | number
+        top_of_page_cpc_micros: string | number
     }
 
     /**
@@ -65,7 +65,7 @@ declare namespace AdGroupCriterion {
         PAUSED = 'PAUSED',
         REMOVED = 'REMOVED',
         UNKNOWN = 'UNKNOWN',
-        UNSPECIFIED = 'UNSPECIFIED'
+        UNSPECIFIED = 'UNSPECIFIED',
     }
     /**
      * Enum for BidSource
@@ -77,7 +77,7 @@ declare namespace AdGroupCriterion {
         CAMPAIGN_BIDDING_STRATEGY = 'CAMPAIGN_BIDDING_STRATEGY',
         CRITERION = 'CRITERION',
         UNKNOWN = 'UNKNOWN',
-        UNSPECIFIED = 'UNSPECIFIED'
+        UNSPECIFIED = 'UNSPECIFIED',
     }
     /**
      * Enum for CriterionType
@@ -90,17 +90,17 @@ declare namespace AdGroupCriterion {
         LOCATION = 'LOCATION',
         PLATFORM = 'PLATFORM',
         UNKNOWN = 'UNKNOWN',
-        UNSPECIFIED = 'UNSPECIFIED'
+        UNSPECIFIED = 'UNSPECIFIED',
     }
 
     /**
      * Interface for New Criterion Config
-     * @interface  
+     * @interface
      * @param ad_group_id
      */
     export interface NewCriterionConfig extends NewEntityConfig {
-        ad_group_id: string|number,
-        keyword?: object,
+        ad_group_id: string | number
+        keyword?: object
         listing_group?: object
     }
 }

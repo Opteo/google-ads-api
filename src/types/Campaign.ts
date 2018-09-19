@@ -89,7 +89,7 @@ declare namespace Campaign {
         SEARCH = 'SEARCH',
         SHOPPING = 'SHOPPING',
         UNKNOWN = 'UNKNOWN',
-        UNSPECIFIED = 'UNSPECIFIED'
+        UNSPECIFIED = 'UNSPECIFIED',
     }
 
     /**
@@ -108,7 +108,7 @@ declare namespace Campaign {
      * @interface
      */
     export interface TargetSpend {
-        cpc_bid_ceiling_micros: string|number
+        cpc_bid_ceiling_micros: string | number
     }
 
     /**
@@ -116,8 +116,8 @@ declare namespace Campaign {
      * @interface
      */
     export interface NewCampaignConfig extends NewEntityConfig {
-        budget_id: string,
-        advertising_channel_type: AdvertisingChannelType | keyof typeof AdvertisingChannelType,
+        budget_id: string
+        advertising_channel_type: AdvertisingChannelType | keyof typeof AdvertisingChannelType
         target_spend: TargetSpend
     }
 }

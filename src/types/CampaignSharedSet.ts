@@ -11,17 +11,17 @@ declare namespace CampaignSharedSet {
         shared_set: string
         status: CampaignSharedSetStatus
     }
-   
+
     /**
      * Enum for CampaignSharedSetStatus
      * @readonly
      * @enum {string}
      */
     enum CampaignSharedSetStatus {
-        ENABLED = 'ENABLED',  
+        ENABLED = 'ENABLED',
         REMOVED = 'REMOVED',
         UNKNOWN = 'UNKNOWN',
-        UNSPECIFIED = 'UNSPECIFIED'
+        UNSPECIFIED = 'UNSPECIFIED',
     }
 
     /**
@@ -29,8 +29,8 @@ declare namespace CampaignSharedSet {
      * @interface
      */
     export interface CreateConfig extends NewEntityConfig {
-        campaign_id: string|number,
-        shared_set_id: string|number
+        campaign_id: string | number
+        shared_set_id: string | number
     }
 }
 export = CampaignSharedSet

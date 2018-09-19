@@ -7,13 +7,13 @@ declare namespace SharedSet {
      * @interface
      */
     export interface SharedSet extends Entity {
-        member_count: string|number,
-        reference_count: string|number,
-        status: SharedSetStatus,
-        type: SharedSetType,
+        member_count: string | number
+        reference_count: string | number
+        status: SharedSetStatus
+        type: SharedSetType
     }
 
-     /**
+    /**
      * Enum for Shared Set Status
      * @readonly
      * @enum {string}
@@ -42,8 +42,7 @@ declare namespace SharedSet {
      * @interface
      */
     export interface NewSharedSetConfig extends NewEntityConfig {
-        type: SharedSetType | keyof typeof SharedSetType,
+        type: SharedSetType | keyof typeof SharedSetType
     }
-    
 }
 export = SharedSet

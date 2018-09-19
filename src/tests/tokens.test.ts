@@ -1,10 +1,9 @@
-
 import GoogleAdsApi from '..'
 import config from '../config'
 
-function delay(ms : number){
-    return new Promise((resolve) => {
-        setTimeout(()=>{
+function delay(ms: number) {
+    return new Promise(resolve => {
+        setTimeout(() => {
             resolve()
         }, ms)
     })
@@ -12,29 +11,23 @@ function delay(ms : number){
 
 describe('Tokens', async () => {
     const lib_instance = new GoogleAdsApi({
-		client_id: config.client_id, 
-		client_secret: config.client_secret, 
-		developer_token: config.developer_token
+        client_id: config.client_id,
+        client_secret: config.client_secret,
+        developer_token: config.developer_token,
     })
 
-    
     // TODO: finish this
     it('Waits for tokens to be available before querying', async () => {
-
-
         const customer = lib_instance.Customer({
-            async_account_getter : async () => {
+            async_account_getter: async () => {
                 await delay(1000)
                 return {
-                    cid: config.cid, 
-                    refresh_token: config.refresh_token
+                    cid: config.cid,
+                    refresh_token: config.refresh_token,
                 }
-            }
+            },
         })
 
         await customer.retrieve()
-
-        
-    }) 
-
+    })
 })

@@ -1,51 +1,51 @@
 import GoogleAdsApi from '..'
 import config from '../config'
 
-const getRandomAdgroupName = () => `test-adgroup-${((Math.random() * 100) + 1).toFixed(0)} (created during library test)`
+const getRandomAdgroupName = () => `test-adgroup-${(Math.random() * 100 + 1).toFixed(0)} (created during library test)`
 
 describe('AdGroups', async () => {
     const lib_instance = new GoogleAdsApi({
-		client_id: config.client_id, 
-		client_secret: config.client_secret, 
-		developer_token: config.developer_token
+        client_id: config.client_id,
+        client_secret: config.client_secret,
+        developer_token: config.developer_token,
     })
 
     const customer = lib_instance.Customer({
-		customer_account_id: config.cid, 
-		refresh_token: config.refresh_token
-	})
+        customer_account_id: config.cid,
+        refresh_token: config.refresh_token,
+    })
 
     const campaign_id = 1485014801
     let new_adgroup_id = ''
-    
+
     it('Lists All AdGroups', async () => {
         expect.assertions(1)
         const adgroups = await customer.adgroups.list({
             order_by: ['id', 'cpa_bid_micros'],
             constraints: {
                 campaign_id,
-                status: 'ENABLED'
-            }
+                status: 'ENABLED',
+            },
         })
         expect(adgroups).toBeInstanceOf(Array)
     })
-    
-    it('Creates New AdGroup', async (done) => {
-		expect.assertions(1)
-		
-		const new_adgroup = await customer.adgroups.create({
-                name: getRandomAdgroupName(),
-                campaign_id
-        })
-        
-		expect(new_adgroup).toEqual({
-			id: expect.any(String),
-			resource_name: expect.any(String)
-		})
 
-		new_adgroup_id = new_adgroup.id
-		done()
-	})
+    it('Creates New AdGroup', async done => {
+        expect.assertions(1)
+
+        const new_adgroup = await customer.adgroups.create({
+            name: getRandomAdgroupName(),
+            campaign_id,
+        })
+
+        expect(new_adgroup).toEqual({
+            id: expect.any(String),
+            resource_name: expect.any(String),
+        })
+
+        new_adgroup_id = new_adgroup.id
+        done()
+    })
 
     it('Retrieves Single AdGroup', async () => {
         expect.assertions(1)
@@ -71,8 +71,8 @@ describe('AdGroups', async () => {
         await customer.adgroups.update({
             id: new_adgroup_id,
             update: {
-                name: new_adgroup_name
-            }
+                name: new_adgroup_name,
+            },
         })
         const updated_adgroup = await customer.adgroups.retrieve(new_adgroup_id)
         expect(updated_adgroup.name).toEqual(new_adgroup_name)
@@ -82,7 +82,6 @@ describe('AdGroups', async () => {
         expect.assertions(1)
         await customer.adgroups.delete(new_adgroup_id)
         const adgroup = await customer.adgroups.retrieve(new_adgroup_id)
-		expect(adgroup.status).toBe('REMOVED')
+        expect(adgroup.status).toBe('REMOVED')
     })
-
 })

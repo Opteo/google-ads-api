@@ -16,11 +16,11 @@ declare namespace Entity {
      * @interface
      */
     export interface ListConfig {
-        limit?: number,
-        order_by?: string|Array<string>,
-        sort_order?: string,
+        limit?: number
+        order_by?: string | Array<string>
+        sort_order?: string
         // fields: string[],
-        constraints?: { [key: string]: string|any },
+        constraints?: { [key: string]: string | any }
         convert_micros?: boolean
     }
 
@@ -29,7 +29,7 @@ declare namespace Entity {
      * @interface
      */
     export interface EntityUpdateConfig extends UpdateConfig {
-        id: string|number
+        id: string | number
     }
 
     /**
@@ -37,7 +37,7 @@ declare namespace Entity {
      * @interface
      */
     export interface NewEntityConfig {
-        name?: string,
+        name?: string
     }
 }
 export = Entity

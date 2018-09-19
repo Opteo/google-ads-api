@@ -1,36 +1,37 @@
 import request from 'request'
 import { random, isUndefined } from 'lodash'
 import retry from 'bluebird-retry'
-import Bottleneck from 'bottleneck';
+import Bottleneck from 'bottleneck'
 
 import { getAccessToken } from './token'
-import { ADWORDS_API_BASE_URL } from "./constants"
+import { ADWORDS_API_BASE_URL } from './constants'
 
-import { 
-    getUpdateMask, 
-    buildQuery, 
-    buildReportQuery, 
-    mapResultsWithIds, 
-    transformObjectKeys, 
-    formatQueryResults
+import {
+    getUpdateMask,
+    buildQuery,
+    buildReportQuery,
+    mapResultsWithIds,
+    transformObjectKeys,
+    formatQueryResults,
 } from './utils'
 
-import  parser  from './parser'
+import parser from './parser'
 
 import GoogleAdsError from './Error'
 import { Client, ClientConstructor, AccountInfo, ReportConfig } from './types/Global'
 import { RequestOptions, HttpController } from './types/Http'
 import { ListConfig, EntityUpdateConfig, NewEntityConfig } from './types/Entity'
 
-
 export default class Http implements HttpController {
-    private client : Client
-    private throttler : Bottleneck
+    private client: Client
+    private throttler: Bottleneck
 
-    constructor({ async_account_getter, client_id, developer_token, client_secret, throttler } : ClientConstructor) {
-
-        const account_promise = async_account_getter().then((account_info : AccountInfo) => {
-            this.client.cid = account_info.cid.toString().split('-').join('')
+    constructor({ async_account_getter, client_id, developer_token, client_secret, throttler }: ClientConstructor) {
+        const account_promise = async_account_getter().then((account_info: AccountInfo) => {
+            this.client.cid = account_info.cid
+                .toString()
+                .split('-')
+                .join('')
             this.client.refresh_token = account_info.refresh_token
         })
 
@@ -38,11 +39,11 @@ export default class Http implements HttpController {
 
         this.client = {
             account_promise,
-            cid : '',
-            refresh_token : '',
+            cid: '',
+            refresh_token: '',
             client_id,
             developer_token,
-            client_secret
+            client_secret,
         }
     }
 
@@ -56,7 +57,7 @@ export default class Http implements HttpController {
 
         config = this.formatRequestConfig(config, entity)
         const create_operation = { create: config }
-        options.body = JSON.stringify({ operations: [ create_operation ] }) 
+        options.body = JSON.stringify({ operations: [create_operation] })
 
         return this.queryApi(options).then(response => {
             return mapResultsWithIds(response)
@@ -73,7 +74,12 @@ export default class Http implements HttpController {
     public async list(config: ListConfig, resource: string) {
         const query = buildQuery(config, resource)
         return this.query(query).then(results => {
-            return formatQueryResults(results, resource, isUndefined(config.convert_micros) ? true : config.convert_micros, []) //TODO: fix this (this throws error if config is undefined)
+            return formatQueryResults(
+                results,
+                resource,
+                isUndefined(config.convert_micros) ? true : config.convert_micros,
+                []
+            ) //TODO: fix this (this throws error if config is undefined)
         })
     }
 
@@ -81,14 +87,14 @@ export default class Http implements HttpController {
         await this.client.account_promise
         const url = this.getRequestUrl('mutate', entity)
         const options = await this.getRequestOptions('POST', url)
-        
+
         const update_operation = {
             update: config.update,
-            update_mask: getUpdateMask(config.update)
+            update_mask: getUpdateMask(config.update),
         }
         update_operation.update.resource_name = this.buildResourceName(entity, config.id)
-        options.body = JSON.stringify({ operations: [ update_operation ] }) 
-        
+        options.body = JSON.stringify({ operations: [update_operation] })
+
         return this.queryApi(options).then(response => {
             return mapResultsWithIds(response)
         })
@@ -100,9 +106,9 @@ export default class Http implements HttpController {
         const options = await this.getRequestOptions('POST', url)
 
         const update_operation = {
-            remove: this.buildResourceName(entity, entity_id)
+            remove: this.buildResourceName(entity, entity_id),
         }
-        options.body = JSON.stringify({ operations: [ update_operation ] }) 
+        options.body = JSON.stringify({ operations: [update_operation] })
 
         return this.queryApi(options)
     }
@@ -112,7 +118,7 @@ export default class Http implements HttpController {
         const url = this.getRequestUrl()
         const options = await this.getRequestOptions('POST', url)
 
-        query = query.replace(/\s/g,' ')
+        query = query.replace(/\s/g, ' ')
         options.qs = { query }
 
         const raw_result = await this.queryApi(options)
@@ -125,7 +131,12 @@ export default class Http implements HttpController {
         // console.log(query)
 
         return this.query(query).then(result => {
-            return formatQueryResults(result, config.entity, isUndefined(config.convert_micros) ? true : config.convert_micros, custom_metrics)
+            return formatQueryResults(
+                result,
+                config.entity,
+                isUndefined(config.convert_micros) ? true : config.convert_micros,
+                custom_metrics
+            )
         })
     }
 
@@ -134,25 +145,22 @@ export default class Http implements HttpController {
     */
     private async queryApi(options: RequestOptions) {
         const work = async () => {
-
             const { response, body } = await this.throttler.wrap(this.doHttpRequest)(options)
 
             if (response.statusCode === 404) {
                 const { url } = options
                 throw new retry.StopError(new Error(`The requested URL ${url} was not found (404).`))
-            } 
+            }
 
             let decoded_body
 
             try {
                 decoded_body = JSON.parse(body)
-            }
-            catch {
+            } catch {
                 throw new retry.StopError(new Error(`Could not decode JSON body: ${body}`))
             }
-            
 
-            if (response.statusCode === 200) {  
+            if (response.statusCode === 200) {
                 return decoded_body
             }
 
@@ -165,32 +173,30 @@ export default class Http implements HttpController {
             throw new GoogleAdsError(decoded_body.error)
         }
 
-        const data = await retry(work, { 
-            max_tries: 3, 
+        const data = await retry(work, {
+            max_tries: 3,
             interval: 1000 + random(1000),
-            throw_original : true,
-            backoff : 2
+            throw_original: true,
+            backoff: 2,
         })
 
         const final_object = transformObjectKeys(data)
         return final_object
-
     }
 
-    private doHttpRequest(options : RequestOptions) : Promise<any>{
+    private doHttpRequest(options: RequestOptions): Promise<any> {
         return new Promise((resolve, reject) => {
             request(options, (error, response, body) => {
                 if (error) {
                     reject(error)
-                }
-                else {
+                } else {
                     resolve({ response, body })
                 }
             })
         })
     }
 
-    private async getRequestOptions(method: string, url: string) : Promise<RequestOptions> {
+    private async getRequestOptions(method: string, url: string): Promise<RequestOptions> {
         const access_token = await getAccessToken(this.client)
 
         const options = <RequestOptions>{
@@ -198,23 +204,23 @@ export default class Http implements HttpController {
             url,
             headers: {
                 authorization: `Bearer ${access_token}`,
-                'developer-token': this.client.developer_token
-            }
+                'developer-token': this.client.developer_token,
+            },
         }
         return options
     }
 
     private formatRequestConfig(config: any, entity: string) {
-        if (entity.includes('campaigns')){
+        if (entity.includes('campaigns')) {
             config.campaign_budget = `customers/${this.client.cid}/campaignBudgets/${config.budget_id}`
             delete config.budget_id
-        } else if (entity.includes('adGroups') || entity.includes('campaignCriteria')){
+        } else if (entity.includes('adGroups') || entity.includes('campaignCriteria')) {
             config.campaign = `customers/${this.client.cid}/campaigns/${config.campaign_id}`
             delete config.campaign_id
-        } else if (entity.includes('adGroupAds') || entity.includes('adGroupCriteria')){
+        } else if (entity.includes('adGroupAds') || entity.includes('adGroupCriteria')) {
             config.ad_group = `customers/${this.client.cid}/adGroups/${config.ad_group_id}`
             delete config.ad_group_id
-        } else if (entity.includes('campaignSharedSets')){
+        } else if (entity.includes('campaignSharedSets')) {
             config.campaign = `customers/${this.client.cid}/campaigns/${config.campaign_id}`
             config.shared_set = `customers/${this.client.cid}/sharedSets/${config.shared_set_id}`
             delete config.campaign_id
@@ -227,10 +233,10 @@ export default class Http implements HttpController {
         return config
     }
 
-    private getRequestUrl(operation_type?: string, endpoint?: string, entity_id?: string) : string {
+    private getRequestUrl(operation_type?: string, endpoint?: string, entity_id?: string): string {
         if (endpoint && endpoint.includes('customers')) {
             return `${ADWORDS_API_BASE_URL}${this.client.cid}`
-        } 
+        }
         if (operation_type && operation_type.includes('get')) {
             return `${ADWORDS_API_BASE_URL}${this.client.cid}/${endpoint}/${entity_id}`
         }
@@ -240,7 +246,7 @@ export default class Http implements HttpController {
         return `${ADWORDS_API_BASE_URL}${this.client.cid}/googleAds:search`
     }
 
-    private buildResourceName(endpoint?: string, entity_id?: string|number) : string {
+    private buildResourceName(endpoint?: string, entity_id?: string | number): string {
         return entity_id ? `customers/${this.client.cid}/${endpoint}/${entity_id}` : `customers/${this.client.cid}`
     }
 }

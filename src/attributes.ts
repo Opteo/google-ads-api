@@ -1,25 +1,24 @@
-
 const text_ad = {
     headline: '',
     description1: '',
-    description2: ''
+    description2: '',
 }
 const expanded_text_ad = {
     headline_part1: '',
     headline_part2: '',
     description: '',
     path1: '',
-    path2: ''
+    path2: '',
 }
 const dynamic_search_ad = {
     description1: '',
-    description2: ''
+    description2: '',
 }
 const responsive_display_ad = {
     short_headline: '',
     long_headline: '',
     description: '',
-    business_name: ''
+    business_name: '',
 }
 const call_only_ad = {
     country_code: '',
@@ -29,12 +28,12 @@ const call_only_ad = {
     description2: '',
     call_tracked: '',
     disable_call_conversion: '',
-    phone_number_verification_url: ''
+    phone_number_verification_url: '',
 }
 const expanded_dynamic_search_ad = {
     description: '',
 }
-const ad =  {
+const ad = {
     id: '',
     final_urls: '',
     final_mobile_urls: '',
@@ -49,9 +48,8 @@ const ad =  {
     call_only_ad,
     expanded_dynamic_search_ad,
     hotel_ad: '',
-    shopping_smart_ad: ''
+    shopping_smart_ad: '',
 }
-
 
 const quality_info = {
     quality_score: '',
@@ -65,7 +63,6 @@ const position_estimates = {
     top_of_page_cpc_micros: '',
 }
 
-
 const network_settings = {
     target_google_search: '',
     target_search_network: '',
@@ -73,27 +70,26 @@ const network_settings = {
     target_partner_search_network: '',
 }
 const hotel_setting = {
-    hotel_center_id: ''
+    hotel_center_id: '',
 }
 const dynamic_search_ads_setting = {
     domain_name: '',
     language_code: '',
     use_supplied_urls_only: '',
-    feed_ids: ''
+    feed_ids: '',
 }
 const shopping_setting = {
     merchant_id: '',
     sales_country: '',
     campaign_priority: '',
-    enable_local: ''
+    enable_local: '',
 }
 
-
-const entities : { [key: string]: object } = {
+const entities: { [key: string]: object } = {
     ad_group_ad: {
         status: '',
         ad_group: '',
-        ad
+        ad,
     },
     ad_group: {
         id: '',
@@ -175,6 +171,6 @@ const entities : { [key: string]: object } = {
     //     'shared_set',
     //     'status'
     // ]
-} 
+}
 
 export default entities

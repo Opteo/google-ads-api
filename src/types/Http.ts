@@ -7,13 +7,13 @@ declare namespace Http {
      * @interface
      */
     export interface HttpController {
-        retrieve(entity: string, entity_id?: string|number): Promise<object>, 
-        create(config: NewEntityConfig, entity: string): Promise<object>, 
-        list(config: ListConfig | undefined, resource: string): Promise<object>, 
-        update(config: UpdateConfig, entity: string): Promise<object>, 
-        delete(entity: string, entity_id: string|number): Promise<object>, 
-        query(entity: string): Promise<object>, 
-        report(config: ReportConfig): Promise<object>, 
+        retrieve(entity: string, entity_id?: string | number): Promise<object>
+        create(config: NewEntityConfig, entity: string): Promise<object>
+        list(config: ListConfig | undefined, resource: string): Promise<object>
+        update(config: UpdateConfig, entity: string): Promise<object>
+        delete(entity: string, entity_id: string | number): Promise<object>
+        query(entity: string): Promise<object>
+        report(config: ReportConfig): Promise<object>
     }
 
     /**
@@ -21,9 +21,9 @@ declare namespace Http {
      * @interface
      */
     export interface AccessToken {
-        access_token: string,
-        expires_in: number,
-        id_token: string|number,
+        access_token: string
+        expires_in: number
+        id_token: string | number
         token_type: string
     }
 
@@ -32,24 +32,24 @@ declare namespace Http {
      * @interface
      */
     export interface Error {
-        code: string|number, // create new enum?
-        details: object,
-        message: string,
-        status: string, // create new enum?
-      }
+        code: string | number // create new enum?
+        details: object
+        message: string
+        status: string // create new enum?
+    }
 
     /**
      * Request Options Interface
      * @interface
      */
     export interface RequestOptions {
-        method: string,
-        url: string,
+        method: string
+        url: string
         headers: {
-            authorization: string,
+            authorization: string
             'developer-token': string
-        },
-        qs?: object,
+        }
+        qs?: object
         body?: string
     }
 
@@ -58,8 +58,8 @@ declare namespace Http {
      * @interface
      */
     export interface Result {
-        results: object,
-        total_results_count: string|number,
+        results: object
+        total_results_count: string | number
         field_mask: string
     }
 }

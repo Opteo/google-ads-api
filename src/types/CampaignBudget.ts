@@ -21,10 +21,10 @@ declare namespace CampaignBudget {
      * @enum {string}
      */
     enum DeliveryMethod {
-        STANDARD = 'STANDARD',  
+        STANDARD = 'STANDARD',
         ACCELERATED = 'ACCELERATED',
         UNKNOWN = 'UNKNOWN',
-        UNSPECIFIED = 'UNSPECIFIED'
+        UNSPECIFIED = 'UNSPECIFIED',
     }
 
     /**
@@ -44,9 +44,8 @@ declare namespace CampaignBudget {
      * @interface
      */
     export interface NewCampaignBudgetConfig extends NewEntityConfig {
-        amount_micros: string|number,
+        amount_micros: string | number
         explicitly_shared: boolean
     }
-
 }
 export = CampaignBudget

@@ -1,4 +1,4 @@
-import Bottleneck from "bottleneck";
+import Bottleneck from 'bottleneck'
 
 declare namespace Global {
     /**
@@ -7,29 +7,29 @@ declare namespace Global {
      */
 
     export interface Library {
-        client_id: string|number,
-        developer_token: string,
-        client_secret: string,
+        client_id: string | number
+        developer_token: string
+        client_secret: string
         redis_options?: any
-    } 
+    }
 
     /**
      *  Account Instance Interface
      * @interface
      */
     export interface Account {
-        customer_account_id?: string|number,
-        refresh_token?: string,
+        customer_account_id?: string | number
+        refresh_token?: string
         async_account_getter?: Function
-    }  
+    }
 
     /**
      *  Account Info Interface
      * @interface
      */
-    export interface AccountInfo { 
-        cid: string, 
-        refresh_token: string 
+    export interface AccountInfo {
+        cid: string
+        refresh_token: string
     }
 
     /**
@@ -38,13 +38,13 @@ declare namespace Global {
      */
 
     export interface Client {
-        account_promise: Promise<object>,
-        cid: string,
-        refresh_token: string,
-        client_id: string|number,
-        developer_token: string,
-        client_secret: string,
-    }   
+        account_promise: Promise<object>
+        cid: string
+        refresh_token: string
+        client_id: string | number
+        developer_token: string
+        client_secret: string
+    }
 
     /**
      *  Client Constructor Interface
@@ -52,19 +52,19 @@ declare namespace Global {
      */
 
     export interface ClientConstructor {
-        async_account_getter: Function,
-        client_id: string|number,
-        developer_token: string,
-        client_secret: string,
-        throttler : Bottleneck
-    }     
+        async_account_getter: Function
+        client_id: string | number
+        developer_token: string
+        client_secret: string
+        throttler: Bottleneck
+    }
 
     /**
      *  Update Config Interface
      * @interface
      */
     export interface UpdateConfig {
-        update: { [key: string]: string|number|object },
+        update: { [key: string]: string | number | object }
     }
 
     /**
@@ -72,29 +72,28 @@ declare namespace Global {
      * @interface
      */
     export interface Error {
-        message: string,
-        status: string, 
-        details: any, 
+        message: string
+        status: string
+        details: any
         code: number
     }
-
 
     /**
      *  Report Method Config Interface
      * @interface
      */
     export interface ReportConfig {
-        entity: string,
+        entity: string
         attributes?: Array<string>
         metrics?: Array<string>
-        segments?: Array<string> 
-        constraints?: Array<string|object|Constraint>,
-        date_constant?: DateConstant | keyof typeof DateConstant,
-        from_date?: string, // ISO 8601(YYYY-MM-DD) format
-        to_date?: string, // ISO 8601(YYYY-MM-DD) format
-        limit?: number,
-        order_by?: string|Array<string>,
-        sort_order?: string,
+        segments?: Array<string>
+        constraints?: Array<string | object | Constraint>
+        date_constant?: DateConstant | keyof typeof DateConstant
+        from_date?: string // ISO 8601(YYYY-MM-DD) format
+        to_date?: string // ISO 8601(YYYY-MM-DD) format
+        limit?: number
+        order_by?: string | Array<string>
+        sort_order?: string
         convert_micros?: boolean
     }
 
@@ -103,12 +102,12 @@ declare namespace Global {
      * @interface
      */
     export interface Metric {
-        name: string,
+        name: string
         is_micros?: boolean
         is_custom?: boolean
         is_number?: boolean
-        pre_query_hook? : Function
-        post_query_hook? : Function
+        pre_query_hook?: Function
+        post_query_hook?: Function
     }
 
     /**
@@ -118,17 +117,17 @@ declare namespace Global {
     export interface Constraint {
         key: string
         op: string
-        val: string|number|Array<string>
+        val: string | number | Array<string>
     }
 
-     /**
+    /**
      * Enum for Date Constant
      * @readonly
      * @enum {string}
      */
     enum DateConstant {
         LAST_7_DAYS = 'LAST_7_DAYS',
-        LAST_14_DAYS = 'LAST_14_DAYS',  
+        LAST_14_DAYS = 'LAST_14_DAYS',
         LAST_30_DAYS = 'LAST_30_DAYS',
         LAST_BUSINESS_WEEK = 'LAST_BUSINESS_WEEK',
         LAST_MONTH = 'LAST_MONTH',

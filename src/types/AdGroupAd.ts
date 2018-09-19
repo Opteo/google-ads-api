@@ -1,15 +1,14 @@
 import { Entity, ListConfig, NewEntityConfig } from './Entity'
 
 declare namespace AdGroupAd {
-
     /**
      * Main AdGroupAd Interface
      * @interface
      */
     export interface AdGroupAd extends Entity {
         // resource_name: string,
-        status: AdStatus,
-        ad_group: string,
+        status: AdStatus
+        ad_group: string
         ad: Ad
     }
 
@@ -18,14 +17,14 @@ declare namespace AdGroupAd {
      * @interface
      */
     export interface Ad {
-        id: string|number,
-        final_urls: { [key: string]: string },
-        final_mobile_urls?: { [key: string]: string },
-        display_url: string,
-        type: AdType,
+        id: string | number
+        final_urls: { [key: string]: string }
+        final_mobile_urls?: { [key: string]: string }
+        display_url: string
+        type: AdType
         // [key: string]: TextAd | ExpandedTextAd | DynamicSearchAd | ExpandedDynamicSearchAd | ResponsiveDisplayAd | CallOnlyAd,
-        tracking_url_template?: string,
-        url_custom_parameters?: { [key: string]: string },
+        tracking_url_template?: string
+        url_custom_parameters?: { [key: string]: string }
     }
 
     /**
@@ -33,9 +32,9 @@ declare namespace AdGroupAd {
      * @interface
      */
     export interface TextAd {
-        description1: string,
-        description2: string,
-        headline: string,
+        description1: string
+        description2: string
+        headline: string
     }
 
     /**
@@ -43,11 +42,11 @@ declare namespace AdGroupAd {
      * @interface
      */
     export interface ExpandedTextAd {
-        description: string,
-        headline_part1: string,
-        headline_part2: string,
-        path1: string,
-        path2: string,
+        description: string
+        headline_part1: string
+        headline_part2: string
+        path1: string
+        path2: string
     }
 
     /**
@@ -55,8 +54,8 @@ declare namespace AdGroupAd {
      * @interface
      */
     export interface DynamicSearchAd {
-        description1: string,
-        description2: string,
+        description1: string
+        description2: string
     }
 
     /**
@@ -64,7 +63,7 @@ declare namespace AdGroupAd {
      * @interface
      */
     export interface ExpandedDynamicSearchAd {
-        description: string,
+        description: string
     }
 
     /**
@@ -72,10 +71,10 @@ declare namespace AdGroupAd {
      * @interface
      */
     export interface ResponsiveDisplayAd {
-        business_name: string,
-        description: string,
-        long_headline: string,
-        short_headline: string,
+        business_name: string
+        description: string
+        long_headline: string
+        short_headline: string
     }
 
     /**
@@ -83,14 +82,14 @@ declare namespace AdGroupAd {
      * @interface
      */
     export interface CallOnlyAd {
-        business_name: string,
-        call_tracked: string,
-        country_code: string,
-        description1: string,
-        description2: string,
-        disable_call_conversion: boolean,
-        phone_number: string,
-        phone_number_verification_url: string,
+        business_name: string
+        call_tracked: string
+        country_code: string
+        description1: string
+        description2: string
+        disable_call_conversion: boolean
+        phone_number: string
+        phone_number_verification_url: string
     }
 
     /**
@@ -103,7 +102,7 @@ declare namespace AdGroupAd {
         PAUSED = 'PAUSED',
         REMOVED = 'REMOVED',
         UNKNOWN = 'UNKNOWN',
-        UNSPECIFIED = 'UNSPECIFIED'
+        UNSPECIFIED = 'UNSPECIFIED',
     }
 
     /**
@@ -120,23 +119,23 @@ declare namespace AdGroupAd {
         RESPONSIVE_DISPLAY_AD = 'RESPONSIVE_DISPLAY_AD',
         TEXT_AD = 'TEXT_AD',
         UNKNOWN = 'UNKNOWN',
-        UNSPECIFIED = 'UNSPECIFIED'
+        UNSPECIFIED = 'UNSPECIFIED',
     }
 
     /**
      * Interface for ListAdsConfig
-     * @interface ListAdsConfig 
+     * @interface ListAdsConfig
      */
     export interface ListAdsConfig extends ListConfig {
-        ad_group_id: string|number
+        ad_group_id: string | number
     }
 
     /**
      * Interface for NewAdConfig
-     * @interface NewAdConfig 
+     * @interface NewAdConfig
      */
     export interface NewAdConfig extends NewEntityConfig {
-        ad_group_id: string|number
+        ad_group_id: string | number
         ad: object
     }
 }

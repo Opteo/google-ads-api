@@ -9,13 +9,13 @@ declare namespace AdGroup {
         // resource_name: string
         // id: string
         // name: string
-        status: AdGroupStatus,
-        campaign: string,
-        type: AdGroupType,
-        cpc_bid_micros: string|number,
-        cpm_bid_micros: string|number,
-        cpa_bid_micros: string|number,
-        cpv_bid_micros: string|number,
+        status: AdGroupStatus
+        campaign: string
+        type: AdGroupType
+        cpc_bid_micros: string | number
+        cpm_bid_micros: string | number
+        cpa_bid_micros: string | number
+        cpv_bid_micros: string | number
     }
 
     /**
@@ -40,7 +40,7 @@ declare namespace AdGroup {
         HOTEL_ADS = 'HOTEL_ADS',
         SEARCH_STANDARD = 'SEARCH_STANDARD',
         UNKNOWN = 'UNKNOWN',
-        UNSPECIFIED = 'UNSPECIFIED'
+        UNSPECIFIED = 'UNSPECIFIED',
     }
 
     /**
@@ -48,11 +48,9 @@ declare namespace AdGroup {
      * @interface
      */
     export interface NewAdGroupConfig extends NewEntityConfig {
-        campaign_id: string|number,
+        campaign_id: string | number
         name: string
     }
-
-
 }
 
 export = AdGroup

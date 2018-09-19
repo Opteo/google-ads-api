@@ -11,28 +11,31 @@ import Keywords from './entities/Keywords'
 import SharedSets from './entities/SharedSets'
 import SharedSetCriterions from './entities/SharedSetCriterions'
 
-import { ENDPOINTS, RESOURCE_NAMES} from './constants'
+import { ENDPOINTS, RESOURCE_NAMES } from './constants'
 import { Customer } from './types/Customer'
 import { HttpController } from './types/Http'
 import { ReportConfig } from './types/Global'
 
-export default function Customer(http_controller: HttpController) : Customer  {
-	return {
-		campaigns: new Campaigns(http_controller),
-		campaignAdSchedules: new CampaignAdSchedules(http_controller),
-		campaignBudgets: new CampaignBudgets(http_controller),
-		campaignCriterions: new CampaignCriterions(http_controller),
-		campaignNegatives: new CampaignNegatives(http_controller),
-		campaignSharedSets: new CampaignSharedSets(http_controller, ENDPOINTS.campaign_shared_sets, RESOURCE_NAMES.campaign_shared_set),
-		adgroups: new AdGroups(http_controller),
-		ads: new AdGroupAds(http_controller),         
-		adgroupCriterions: new AdGroupCriterions(http_controller),
-		keywords: new Keywords(http_controller),
-		sharedSets: new SharedSets(http_controller),
-		sharedSetCriterions: new SharedSetCriterions(http_controller),
-		retrieve: () => http_controller.retrieve(ENDPOINTS.customers),
-		query: (query: string) => http_controller.query(query), 
-		report: (config: ReportConfig) => http_controller.report(config), 
-	}
+export default function Customer(http_controller: HttpController): Customer {
+    return {
+        campaigns: new Campaigns(http_controller),
+        campaignAdSchedules: new CampaignAdSchedules(http_controller),
+        campaignBudgets: new CampaignBudgets(http_controller),
+        campaignCriterions: new CampaignCriterions(http_controller),
+        campaignNegatives: new CampaignNegatives(http_controller),
+        campaignSharedSets: new CampaignSharedSets(
+            http_controller,
+            ENDPOINTS.campaign_shared_sets,
+            RESOURCE_NAMES.campaign_shared_set
+        ),
+        adgroups: new AdGroups(http_controller),
+        ads: new AdGroupAds(http_controller),
+        adgroupCriterions: new AdGroupCriterions(http_controller),
+        keywords: new Keywords(http_controller),
+        sharedSets: new SharedSets(http_controller),
+        sharedSetCriterions: new SharedSetCriterions(http_controller),
+        retrieve: () => http_controller.retrieve(ENDPOINTS.customers),
+        query: (query: string) => http_controller.query(query),
+        report: (config: ReportConfig) => http_controller.report(config),
+    }
 }
-

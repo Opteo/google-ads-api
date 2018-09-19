@@ -7,7 +7,7 @@ declare namespace Keyword {
      * @interface
      */
     export interface Keyword extends AdGroupCriterion {
-        keyword: KeywordObject,
+        keyword: KeywordObject
     }
 
     /**
@@ -17,11 +17,11 @@ declare namespace Keyword {
      * @param match_type - match type of the keyword
      */
     interface KeywordObject {
-        text: string,
+        text: string
         match_type: MatchType | keyof typeof MatchType
     }
 
-     /**
+    /**
      * Enum for MatchType
      * @readonly
      * @enum {string}
@@ -31,28 +31,26 @@ declare namespace Keyword {
         EXACT = 'EXACT',
         PHRASE = 'PHRASE',
         UNKNOWN = 'UNKNOWN',
-        UNSPECIFIED = 'UNSPECIFIED'
+        UNSPECIFIED = 'UNSPECIFIED',
     }
 
     // /**
     //  * Interface for ListKeywordsConfig
-    //  * @interface  
+    //  * @interface
     //  */
     // export interface ListKeywordsConfig extends ListConfig {
     //     ad_group_id: string|number
     // }
 
-
     /**
      * Interface for NewKeywordConfig
-     * @interface  
+     * @interface
      * @param ad_group_id
      * @param keyword
      */
     export interface NewKeywordConfig extends NewEntityConfig {
-        ad_group_id: string|number,
-        keyword: KeywordObject,
+        ad_group_id: string | number
+        keyword: KeywordObject
     }
-
 }
 export = Keyword

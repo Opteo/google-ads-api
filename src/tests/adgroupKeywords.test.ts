@@ -1,34 +1,34 @@
 import GoogleAdsApi from '..'
 import config from '../config'
 
-const getRandomKeywordText = () => `test-keyword-${((Math.random() * 100) + 1).toFixed(0)}`
+const getRandomKeywordText = () => `test-keyword-${(Math.random() * 100 + 1).toFixed(0)}`
 
 describe('AdGroup Keywords', async () => {
     const lib_instance = new GoogleAdsApi({
-		client_id: config.client_id, 
-		client_secret: config.client_secret, 
-		developer_token: config.developer_token
+        client_id: config.client_id,
+        client_secret: config.client_secret,
+        developer_token: config.developer_token,
     })
 
     const customer = lib_instance.Customer({
-		customer_account_id: config.cid, 
-		refresh_token: config.refresh_token
+        customer_account_id: config.cid,
+        refresh_token: config.refresh_token,
     })
-    
-    const ad_group_id = 60170225920            
+
+    const ad_group_id = 60170225920
     let keyword_id = ''
-    
+
     it('Lists All Keywords', async () => {
         expect.assertions(1)
         const keywords = await customer.adgroupCriterions.list({
             constraints: {
                 ad_group_id,
-            }
+            },
         })
         expect(keywords).toBeInstanceOf(Array)
-    }) 
+    })
 
-    it('Creates New Keyword', async (done) => {
+    it('Creates New Keyword', async done => {
         expect.assertions(1)
         const keyword_text = getRandomKeywordText()
 
@@ -36,8 +36,8 @@ describe('AdGroup Keywords', async () => {
             ad_group_id,
             keyword: {
                 text: keyword_text,
-                match_type: 'BROAD'
-            }
+                match_type: 'BROAD',
+            },
         })
 
         keyword_id = new_keyword.id
@@ -45,12 +45,12 @@ describe('AdGroup Keywords', async () => {
 
         expect(keyword_data.keyword).toEqual({
             text: keyword_text,
-            match_type: 'BROAD'
+            match_type: 'BROAD',
         })
         done()
-    }) 
-    
-    it('Retrieves Keyword Data', async (done) => {
+    })
+
+    it('Retrieves Keyword Data', async done => {
         expect.assertions(1)
         const keyword = await customer.keywords.retrieve(keyword_id)
         // console.log(keyword)
@@ -78,7 +78,7 @@ describe('AdGroup Keywords', async () => {
             // position_estimates: expect.any(Object),
         })
         done()
-    }) 
+    })
 
     it('Updates Keyword', async () => {
         expect.assertions(1)
@@ -86,12 +86,12 @@ describe('AdGroup Keywords', async () => {
             id: keyword_id,
             update: {
                 status: 'PAUSED',
-            }
+            },
         })
 
         const updated_keyword = await customer.keywords.retrieve(keyword_id)
         expect(updated_keyword.status).toEqual('PAUSED')
-    }) 
+    })
 
     // it('Deletes Keyword', async () => {
     //     expect.assertions(1)
@@ -99,6 +99,5 @@ describe('AdGroup Keywords', async () => {
     //     await customer.keywords.delete(keyword_id)
     //     const updated_keyword = await customer.keywords.retrieve(keyword_id)
     //     expect(updated_keyword.status).toEqual('REMOVED')
-    // }) 
-
+    // })
 })
