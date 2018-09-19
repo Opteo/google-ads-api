@@ -76,14 +76,14 @@ export const buildReportQuery = (config: ReportConfig) : { query: string, custom
     }
 
 
-    config.constraints = config.constraints.map((constraint: Constraint|string): Constraint|string => {
+    config.constraints = config.constraints.map((constraint: Constraint|string|object): Constraint|string => {
         if(isString(constraint)){
             return constraint
         }
-        constraint = unrollConstraintShorthand(constraint)
-        constraint = addConstraintPrefix(constraint)
+        const unrolled_constraint = unrollConstraintShorthand(constraint)
+        const prefixed_constraint = addConstraintPrefix(unrolled_constraint)
 
-        return constraint
+        return prefixed_constraint
     })
 
     const metrics_referenced_in_constraints = isArray(config.constraints) 
