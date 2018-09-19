@@ -22,7 +22,7 @@ const all_metrics : Array<Metric> = [
 
             // const _constraints = []
 
-            const cost_constraint: Constraint|undefined = find(report.constraints as Array<Constraint>, { key: 'metrics.cost'})
+            const cost_constraint = find(report.constraints as Array<Constraint>, { key: 'metrics.cost'}) 
 
             if(!cost_constraint){
                 return report
@@ -31,10 +31,10 @@ const all_metrics : Array<Metric> = [
             report.constraints.push({
                 key : 'metrics.cost_micros',
                 op : cost_constraint.op,
-                val : cost_constraint.val * 1000000
-            }) 
+                val : +cost_constraint.val * 1000000 
+            } ) 
 
-            report.constraints = reject(report.constraints as Array<Constraint>, { key : 'metrics.cost'})
+            report.constraints = reject(report.constraints, { key : 'metrics.cost'})
 
             return report
         },
