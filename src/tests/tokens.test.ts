@@ -1,5 +1,6 @@
 import GoogleAdsApi from '..'
 import config from '../config'
+jest.setTimeout(30000)
 
 function delay(ms: number) {
     return new Promise(resolve => {

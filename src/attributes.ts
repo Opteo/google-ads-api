@@ -69,20 +69,45 @@ const network_settings = {
     target_content_network: '',
     target_partner_search_network: '',
 }
+
 const hotel_setting = {
     hotel_center_id: '',
 }
+
+const target_spend = {
+    cpc_bid_ceiling_micros : '',
+    target_spend_micros : ''
+}
+
+const target_cpa = {
+    cpc_bid_ceiling_micros : '',
+    cpc_bid_floor_micros : '',
+    target_cpa_micros : ''
+}
+
+const target_roas = {
+    cpc_bid_ceiling_micros : '',
+    cpc_bid_floor_micros : '',
+    target_roas : ''
+}
+
 const dynamic_search_ads_setting = {
     domain_name: '',
     language_code: '',
     use_supplied_urls_only: '',
     feed_ids: '',
 }
+
 const shopping_setting = {
     merchant_id: '',
     sales_country: '',
     campaign_priority: '',
     enable_local: '',
+}
+
+const keyword = {
+    text : '',
+    match_type : ''
 }
 
 const entities: { [key: string]: object } = {
@@ -125,10 +150,11 @@ const entities: { [key: string]: object } = {
         effective_cpm_bid_source: '',
         effective_cpv_bid_source: '',
         effective_percent_cpc_bid_source: '',
-        position_estimates,
         final_urls: '',
         tracking_url_template: '',
         url_custom_parameters: '',
+        position_estimates,
+        keyword
     },
     campaign: {
         id: '',
@@ -140,15 +166,18 @@ const entities: { [key: string]: object } = {
         advertising_channel_sub_type: '',
         tracking_url_template: '',
         url_custom_parameters: '',
-        network_settings,
-        hotel_setting,
-        dynamic_search_ads_setting,
         shopping_setting,
         campaign_budget: '',
         bidding_strategy_type: '',
         start_date: '',
         campaign_group: '',
         end_date: '',
+        network_settings,
+        hotel_setting,
+        dynamic_search_ads_setting,
+        target_spend,
+        target_cpa,
+        target_roas
     },
 
     //TODO: add all missing entities

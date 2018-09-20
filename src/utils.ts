@@ -1,4 +1,4 @@
-import { snakeCase, isObject, isString, isArray, isUndefined, merge, includes, compact, find, map, uniq } from 'lodash'
+import { flatten, snakeCase, isObject, isString, isArray, isUndefined, merge, includes, compact, find, map, uniq, get } from 'lodash'
 
 import entity_attributes from './attributes'
 import entity_metrics from './metrics'
@@ -57,13 +57,10 @@ export const buildReportQuery = (config: ReportConfig): { query: string; custom_
     }
 
     const addConstraintPrefix = (constraint: Constraint): Constraint => {
-        if (constraint.key.includes('.')) {
-            return constraint
-        }
 
         if (includes(map(entity_metrics, 'name'), constraint.key)) {
             constraint.key = `metrics.${constraint.key}`
-        } else {
+        } else if(isUndefined(get(entity_attributes, constraint.key))){
             constraint.key = `${config.entity}.${constraint.key}`
         }
 
@@ -169,7 +166,7 @@ export const buildReportQuery = (config: ReportConfig): { query: string; custom_
 
 const formatAttributes = (attributes: Array<string>, entity: string): Array<string> => {
     return attributes.map((attribute: string) => {
-        if (!attribute.includes('.')) {
+        if(isUndefined(get(entity_attributes, attribute))){
             return `${entity}.${attribute}`
         }
         return attribute
@@ -282,12 +279,12 @@ const getAttributesList = (resource: string) => {
 }
 
 const mapAttributeObject = (entity: any, prefix: string): any => {
-    return Object.keys(entity).map(key => {
+    return flatten(Object.keys(entity).map(key => {
         if (isObject(entity[key])) {
-            return mapAttributeObject(entity[key], `${prefix}.${key}`).join(', ')
+            return mapAttributeObject(entity[key], `${prefix}.${key}`)
         }
         return `${prefix}.${key}`
-    })
+    }), true)
 }
 
 export const buildListReportConfig = (

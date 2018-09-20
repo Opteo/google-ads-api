@@ -1,5 +1,6 @@
 import GoogleAdsApi from '..'
 import config from '../config'
+jest.setTimeout(30000)
 
 describe('Customer', async () => {
     const lib_instance = new GoogleAdsApi({

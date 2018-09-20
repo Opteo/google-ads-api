@@ -1,5 +1,6 @@
 import GoogleAdsApi from '..'
 import config from '../config'
+jest.setTimeout(30000)
 
 const getRandomCampaignName = () =>
     `test-campaign-${(Math.random() * 1000000 + 1).toFixed(0)} (created during library test)`

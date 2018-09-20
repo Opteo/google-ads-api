@@ -1,5 +1,6 @@
 import GoogleAdsApi from '..'
 import config from '../config'
+jest.setTimeout(30000)
 
 describe('Reporting', async () => {
     const lib_instance = new GoogleAdsApi({
@@ -55,11 +56,12 @@ describe('Reporting', async () => {
                 'campaign.target_cpa.target_cpa_micros',
                 'campaign.target_spend.target_spend_micros',
             ],
-            metrics: ['metrics.clicks', 'conversions', 'metrics.cost_micros'],
+            metrics: ['metrics.clicks', 'conversions', 'metrics.cost_micros', 'cost'],
             constraints: ['ad_group.status = ENABLED', { key: 'cost', op: '>', val: 1 }],
             order_by: 'id',
             convert_micros: true,
         })
+
         expect(data).toBeInstanceOf(Array)
         expect(data[0].metrics).toEqual({
             clicks: expect.any(Number),
