@@ -1,4 +1,4 @@
-import { flatten, snakeCase, isObject, isString, isArray, isUndefined, merge, includes, compact, find, map, uniq, get } from 'lodash'
+import { flattenDeep, snakeCase, isObject, isString, isArray, isUndefined, merge, includes, compact, find, map, uniq, get } from 'lodash'
 
 import entity_attributes from './attributes'
 import entity_metrics from './metrics'
@@ -279,12 +279,12 @@ const getAttributesList = (resource: string) => {
 }
 
 const mapAttributeObject = (entity: any, prefix: string): any => {
-    return flatten(Object.keys(entity).map(key => {
+    return flattenDeep(Object.keys(entity).map(key => {
         if (isObject(entity[key])) {
             return mapAttributeObject(entity[key], `${prefix}.${key}`)
         }
         return `${prefix}.${key}`
-    }), true)
+    }))
 }
 
 export const buildListReportConfig = (
