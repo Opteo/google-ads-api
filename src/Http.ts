@@ -84,7 +84,9 @@ export default class Http implements HttpController {
     public async report(config: ReportConfig) {
         const { query, custom_metrics } = buildReportQuery(config)
 
-         const pre_query_hook_result = await this.pre_query_hook({
+        await this.client.account_promise // need  this to ensure that client.cid is set
+
+        const pre_query_hook_result = await this.pre_query_hook({
             cid : this.client.cid,
             query,
             report_config : config
