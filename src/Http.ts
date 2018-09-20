@@ -8,7 +8,7 @@ import { ADWORDS_API_BASE_URL } from './constants'
 
 import {
     getUpdateMask,
-    buildListQuery,
+    buildListReportConfig,
     buildReportQuery,
     mapResultsWithIds,
     transformObjectKeys,
@@ -25,8 +25,10 @@ import { ListConfig, EntityUpdateConfig, NewEntityConfig } from './types/Entity'
 export default class Http implements HttpController {
     private client: Client
     private throttler: Bottleneck
-
-    constructor({ async_account_getter, client_id, developer_token, client_secret, throttler }: ClientConstructor) {
+    private pre_query_hook: Function
+    private post_query_hook: Function
+    
+    constructor({ async_account_getter, client_id, developer_token, client_secret, throttler, pre_query_hook, post_query_hook }: ClientConstructor) {
         const account_promise = async_account_getter().then((account_info: AccountInfo) => {
             this.client.cid = account_info.cid
                 .toString()
@@ -36,6 +38,8 @@ export default class Http implements HttpController {
         })
 
         this.throttler = throttler
+        this.pre_query_hook = pre_query_hook
+        this.post_query_hook = post_query_hook
 
         this.client = {
             account_promise,
@@ -72,19 +76,41 @@ export default class Http implements HttpController {
     }
 
     public async list(config: ListConfig, resource: string) {
-        const query = buildListQuery(config, resource)
+        const report_config = buildListReportConfig(config, resource)
 
-        return this.query(query.query).then(results => {
-            if (!config) {
-                config = {}
-            }
-            return formatQueryResults(
-                results,
-                resource,
-                isUndefined(config.convert_micros) ? true : config.convert_micros,
-                []
-            )
+        return this.report(report_config)
+    }
+
+    public async report(config: ReportConfig) {
+        const { query, custom_metrics } = buildReportQuery(config)
+
+         const pre_query_hook_result = await this.pre_query_hook({
+            cid : this.client.cid,
+            query,
+            report_config : config
         })
+
+        if(pre_query_hook_result){
+            return pre_query_hook_result
+        }
+
+        const raw_result = await this.query(query)
+
+        const result = await formatQueryResults(
+            raw_result,
+            config.entity,
+            isUndefined(config.convert_micros) ? true : config.convert_micros,
+            custom_metrics
+        )
+
+        const modified_result = await this.post_query_hook({
+            cid : this.client.cid,
+            query,
+            report_config : config,
+            result,
+        })
+        
+        return modified_result || result
     }
 
     public async update(config: EntityUpdateConfig, entity: string) {
@@ -118,6 +144,8 @@ export default class Http implements HttpController {
     }
 
     public async query(query: string) {
+        
+       
         await this.client.account_promise
         const url = this.getRequestUrl()
         const options = await this.getRequestOptions('POST', url)
@@ -128,20 +156,6 @@ export default class Http implements HttpController {
         const raw_result = await this.queryApi(options)
 
         return parser.parseSearch(raw_result)
-    }
-
-    public async report(config: ReportConfig) {
-        const { query, custom_metrics } = buildReportQuery(config)
-        // console.log(query)
-
-        return this.query(query).then(result => {
-            return formatQueryResults(
-                result,
-                config.entity,
-                isUndefined(config.convert_micros) ? true : config.convert_micros,
-                custom_metrics
-            )
-        })
     }
 
     /* 

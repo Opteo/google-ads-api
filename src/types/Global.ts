@@ -21,6 +21,8 @@ declare namespace Global {
         customer_account_id?: string | number
         refresh_token?: string
         async_account_getter?: Function
+        pre_query_hook?: Function
+        post_query_hook?: Function
     }
 
     /**
@@ -57,6 +59,8 @@ declare namespace Global {
         developer_token: string
         client_secret: string
         throttler: Bottleneck
+        pre_query_hook : Function
+        post_query_hook : Function
     }
 
     /**

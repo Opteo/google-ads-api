@@ -38,6 +38,11 @@ export const buildReportQuery = (config: ReportConfig): { query: string; custom_
         : []
     config.constraints = config.constraints || []
 
+    // sort parts of query to encourage better caching
+    config.attributes.sort()
+    config.segments.sort()
+    config.metrics.sort()
+
     const unrollConstraintShorthand = (constraint: any): Constraint => {
         if (!constraint.key) {
             const key = Object.keys(constraint)[0]
@@ -76,17 +81,15 @@ export const buildReportQuery = (config: ReportConfig): { query: string; custom_
         return Object.keys(constraint)[0]
     }
 
-    config.constraints = config.constraints.map(
-        (constraint: Constraint | string | object): Constraint | string => {
-            if (isString(constraint)) {
-                return constraint
-            }
-            const unrolled_constraint = unrollConstraintShorthand(constraint)
-            const prefixed_constraint = addConstraintPrefix(unrolled_constraint)
-
-            return prefixed_constraint
+    config.constraints = config.constraints.map((constraint: Constraint | string | object): Constraint | string => {
+        if (isString(constraint)) {
+            return constraint
         }
-    )
+        const unrolled_constraint = unrollConstraintShorthand(constraint)
+        const prefixed_constraint = addConstraintPrefix(unrolled_constraint)
+
+        return prefixed_constraint
+    })
 
     const metrics_referenced_in_constraints = isArray(config.constraints)
         ? map(config.constraints, getConstraintKeys).filter((constraint_key: string | boolean) =>
@@ -191,14 +194,17 @@ const formatConstraints = (constraints: any): string => {
         val = constraint.val
 
         if (isArray(constraint.val)) {
-            val = `("${constraint.val.join(`","`)}")`
+            val = `("${constraint.val.sort().join(`","`)}")`
         }
 
         return `${key} ${op} ${val}`
     }
 
     if (constraints instanceof Array) {
-        return constraints.map(formatConstraint).join(' AND ')
+        return constraints
+            .map(formatConstraint)
+            .sort()
+            .join(' AND ')
     }
     return constraints
 }
@@ -280,21 +286,24 @@ const mapAttributeObject = (entity: any, prefix: string): any => {
     })
 }
 
-export const buildListQuery = (
+export const buildListReportConfig = (
     config: ListConfig,
     resource: string
-): { query: string; custom_metrics?: Array<Metric> } => {
+): ReportConfig => {
     const attributes_list = getAttributesList(resource)
 
     if (!config) {
-        return { query: `SELECT ${attributes_list.join(', ')} FROM ${resource}` }
+        return {
+            entity : resource,
+            attributes : attributes_list
+        }
     }
 
     const report_config = config as ReportConfig
     report_config.entity = resource
-    report_config.attributes = attributes_list
+    report_config.attributes = report_config.attributes || attributes_list
 
-    return buildReportQuery(report_config)
+    return report_config
 }
 
 export const mapResultsWithIds = (response: any): object => {

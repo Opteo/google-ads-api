@@ -1,5 +1,6 @@
 import Bottleneck from 'bottleneck'
 import crypto from 'crypto'
+import { noop } from 'lodash'
 
 import Http from './Http'
 import CustomerInstance from './Customer'
@@ -53,12 +54,7 @@ class GoogleAdsApi {
      * @param refresh_token - OAuth2 refresh token
      *
      */
-    public Customer({ customer_account_id, refresh_token, async_account_getter }: Account): ICustomer {
-        /* 
-			Need to accept a fn in there instead...
-			Perhaps make the fn mode default, and create it if it doesn't exist?
-			gotta change all the TYPES though
-		 */
+    public Customer({ customer_account_id, refresh_token, async_account_getter, pre_query_hook, post_query_hook }: Account): ICustomer {
 
         if (!async_account_getter && (!customer_account_id || !refresh_token)) {
             throw new Error('must specify either {customer_account_id, refresh_token} or an async_account_getter')
@@ -73,6 +69,9 @@ class GoogleAdsApi {
                 return { cid, refresh_token }
             }
         }
+        
+        pre_query_hook = pre_query_hook || noop
+        post_query_hook = post_query_hook || noop
 
         const http_controller = new Http({
             async_account_getter,
@@ -80,6 +79,8 @@ class GoogleAdsApi {
             developer_token: this.developer_token,
             client_secret: this.client_secret,
             throttler: this.throttler,
+            pre_query_hook, 
+            post_query_hook
         })
 
         return CustomerInstance(http_controller)
