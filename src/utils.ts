@@ -132,8 +132,9 @@ export const buildReportQuery = (config: ReportConfig): { query: string; custom_
         throw new Error('Use only one, Custom date range or Predefined date range.')
     }
     if (config.from_date && !config.to_date) {
-        // TODO: set today date as default?*
-        throw new Error('Expected finite date range is missing. (to_date)')
+        const d = new Date()
+        const today_string = `${d.getFullYear()}-${('0'+(d.getMonth()+1)).slice(-2)}-${('0'+d.getDate()).slice(-2)}`
+        config.to_date = today_string
     } else if (config.to_date && !config.from_date) {
         throw new Error('Expected start date range is missing. (from_date)')
     }
