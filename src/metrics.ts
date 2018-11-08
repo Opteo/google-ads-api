@@ -3,6 +3,7 @@ import { Metric, ReportConfig, Constraint } from './types/Global'
 
 const all_metrics: Array<Metric> = [
     { name: 'clicks', is_number: true },
+    { name: 'conversions', is_number: true },
     { name: 'all_conversions', is_number: true },
     { name: 'cost_micros', is_number: true },
     { name: 'impressions', is_number: true },
