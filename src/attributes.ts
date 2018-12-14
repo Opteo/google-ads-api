@@ -75,20 +75,20 @@ const hotel_setting = {
 }
 
 const target_spend = {
-    cpc_bid_ceiling_micros : '',
-    target_spend_micros : ''
+    cpc_bid_ceiling_micros: '',
+    target_spend_micros: '',
 }
 
 const target_cpa = {
-    cpc_bid_ceiling_micros : '',
-    cpc_bid_floor_micros : '',
-    target_cpa_micros : ''
+    cpc_bid_ceiling_micros: '',
+    cpc_bid_floor_micros: '',
+    target_cpa_micros: '',
 }
 
 const target_roas = {
-    cpc_bid_ceiling_micros : '',
-    cpc_bid_floor_micros : '',
-    target_roas : ''
+    cpc_bid_ceiling_micros: '',
+    cpc_bid_floor_micros: '',
+    target_roas: '',
 }
 
 const dynamic_search_ads_setting = {
@@ -106,8 +106,8 @@ const shopping_setting = {
 }
 
 const keyword = {
-    text : '',
-    match_type : ''
+    text: '',
+    match_type: '',
 }
 
 const entities: { [key: string]: object } = {
@@ -154,7 +154,7 @@ const entities: { [key: string]: object } = {
         tracking_url_template: '',
         url_custom_parameters: '',
         position_estimates,
-        keyword
+        keyword,
     },
     campaign: {
         id: '',
@@ -177,18 +177,19 @@ const entities: { [key: string]: object } = {
         dynamic_search_ads_setting,
         target_spend,
         target_cpa,
-        target_roas
+        target_roas,
     },
 
     //TODO: add all missing entities
     campaign_budget: {
         id: '',
-        // 'name',
-        // 'amount_micros',
-        // 'status',
-        // 'delivery_method',
-        // 'explicitly_shared',
-        // 'reference_count',
+        name: '',
+        amount_micros: '',
+        total_amount_micros: '',
+        status: '',
+        delivery_method: '',
+        explicitly_shared: '',
+        reference_count: '',
     },
     campaign_criterion: {
         campaign: '',
