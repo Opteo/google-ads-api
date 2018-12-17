@@ -1,4 +1,18 @@
-import { flattenDeep, snakeCase, isObject, isString, isArray, isUndefined, merge, includes, compact, find, map, uniq, get } from 'lodash'
+import {
+    flattenDeep,
+    snakeCase,
+    isObject,
+    isString,
+    isArray,
+    isUndefined,
+    merge,
+    includes,
+    compact,
+    find,
+    map,
+    uniq,
+    get,
+} from 'lodash'
 
 import entity_attributes from './attributes'
 import entity_metrics from './metrics'
@@ -57,10 +71,9 @@ export const buildReportQuery = (config: ReportConfig): { query: string; custom_
     }
 
     const addConstraintPrefix = (constraint: Constraint): Constraint => {
-
         if (includes(map(entity_metrics, 'name'), constraint.key)) {
             constraint.key = `metrics.${constraint.key}`
-        } else if(isUndefined(get(entity_attributes, constraint.key))){
+        } else if (isUndefined(get(entity_attributes, constraint.key))) {
             constraint.key = `${config.entity}.${constraint.key}`
         }
 
@@ -78,15 +91,17 @@ export const buildReportQuery = (config: ReportConfig): { query: string; custom_
         return Object.keys(constraint)[0]
     }
 
-    config.constraints = config.constraints.map((constraint: Constraint | string | object): Constraint | string => {
-        if (isString(constraint)) {
-            return constraint
-        }
-        const unrolled_constraint = unrollConstraintShorthand(constraint)
-        const prefixed_constraint = addConstraintPrefix(unrolled_constraint)
+    config.constraints = config.constraints.map(
+        (constraint: Constraint | string | object): Constraint | string => {
+            if (isString(constraint)) {
+                return constraint
+            }
+            const unrolled_constraint = unrollConstraintShorthand(constraint)
+            const prefixed_constraint = addConstraintPrefix(unrolled_constraint)
 
-        return prefixed_constraint
-    })
+            return prefixed_constraint
+        }
+    )
 
     const metrics_referenced_in_constraints = isArray(config.constraints)
         ? map(config.constraints, getConstraintKeys).filter((constraint_key: string | boolean) =>
@@ -133,7 +148,9 @@ export const buildReportQuery = (config: ReportConfig): { query: string; custom_
     }
     if (config.from_date && !config.to_date) {
         const d = new Date()
-        const today_string = `${d.getFullYear()}-${('0'+(d.getMonth()+1)).slice(-2)}-${('0'+d.getDate()).slice(-2)}`
+        const today_string = `${d.getFullYear()}-${('0' + (d.getMonth() + 1)).slice(-2)}-${('0' + d.getDate()).slice(
+            -2
+        )}`
         config.to_date = today_string
     } else if (config.to_date && !config.from_date) {
         throw new Error('Expected start date range is missing. (from_date)')
@@ -167,7 +184,7 @@ export const buildReportQuery = (config: ReportConfig): { query: string; custom_
 
 const formatAttributes = (attributes: Array<string>, entity: string): Array<string> => {
     return attributes.map((attribute: string) => {
-        if(isUndefined(get(entity_attributes, attribute))){
+        if (isUndefined(get(entity_attributes, attribute))) {
             return `${entity}.${attribute}`
         }
         return attribute
@@ -192,7 +209,11 @@ const formatConstraints = (constraints: any): string => {
         val = constraint.val
 
         if (isArray(constraint.val)) {
-            val = `("${constraint.val.sort().join(`","`)}")`
+            if (constraint.val.length === 0) {
+                val = `()`
+            } else {
+                val = `("${constraint.val.sort().join(`","`)}")`
+            }
         }
 
         return `${key} ${op} ${val}`
@@ -258,7 +279,7 @@ const formatSingleResult = (result_object: { [key: string]: any }, convert_micro
             result_object[key] = +result_object[key] / 1000000
         }
 
-        if(convert_micros && key.includes('_micros')){
+        if (convert_micros && key.includes('_micros')) {
             result_object[key] = +result_object[key] / 1000000
         }
 
@@ -280,24 +301,23 @@ const getAttributesList = (resource: string) => {
 }
 
 const mapAttributeObject = (entity: any, prefix: string): any => {
-    return flattenDeep(Object.keys(entity).map(key => {
-        if (isObject(entity[key])) {
-            return mapAttributeObject(entity[key], `${prefix}.${key}`)
-        }
-        return `${prefix}.${key}`
-    }))
+    return flattenDeep(
+        Object.keys(entity).map(key => {
+            if (isObject(entity[key])) {
+                return mapAttributeObject(entity[key], `${prefix}.${key}`)
+            }
+            return `${prefix}.${key}`
+        })
+    )
 }
 
-export const buildListReportConfig = (
-    config: ListConfig,
-    resource: string
-): ReportConfig => {
+export const buildListReportConfig = (config: ListConfig, resource: string): ReportConfig => {
     const attributes_list = getAttributesList(resource)
 
     if (!config) {
         return {
-            entity : resource,
-            attributes : attributes_list
+            entity: resource,
+            attributes: attributes_list,
         }
     }
 
