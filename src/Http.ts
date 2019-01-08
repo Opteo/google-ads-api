@@ -27,8 +27,16 @@ export default class Http implements HttpController {
     private throttler: Bottleneck
     private pre_query_hook: Function
     private post_query_hook: Function
-    
-    constructor({ async_account_getter, client_id, developer_token, client_secret, throttler, pre_query_hook, post_query_hook }: ClientConstructor) {
+
+    constructor({
+        async_account_getter,
+        client_id,
+        developer_token,
+        client_secret,
+        throttler,
+        pre_query_hook,
+        post_query_hook,
+    }: ClientConstructor) {
         const account_promise = async_account_getter().then((account_info: AccountInfo) => {
             this.client.cid = account_info.cid
                 .toString()
@@ -51,9 +59,9 @@ export default class Http implements HttpController {
         }
     }
 
-    /* 
-    *   PUBLIC METHODS
-    */
+    /*
+     *   PUBLIC METHODS
+     */
     public async create(config: NewEntityConfig, entity: string) {
         await this.client.account_promise
         const url = this.getRequestUrl('mutate', entity)
@@ -87,12 +95,12 @@ export default class Http implements HttpController {
         await this.client.account_promise // need  this to ensure that client.cid is set
 
         const pre_query_hook_result = await this.pre_query_hook({
-            cid : this.client.cid,
+            cid: this.client.cid,
             query,
-            report_config : config
+            report_config: config,
         })
 
-        if(pre_query_hook_result){
+        if (pre_query_hook_result) {
             return pre_query_hook_result
         }
 
@@ -106,12 +114,12 @@ export default class Http implements HttpController {
         )
 
         const modified_result = await this.post_query_hook({
-            cid : this.client.cid,
+            cid: this.client.cid,
             query,
-            report_config : config,
+            report_config: config,
             result,
         })
-        
+
         return modified_result || result
     }
 
@@ -146,8 +154,6 @@ export default class Http implements HttpController {
     }
 
     public async query(query: string) {
-        
-       
         await this.client.account_promise
         const url = this.getRequestUrl()
         const options = await this.getRequestOptions('POST', url)
@@ -155,14 +161,16 @@ export default class Http implements HttpController {
         query = query.replace(/\s/g, ' ')
         options.qs = { query }
 
+        console.log(options)
+
         const raw_result = await this.queryApi(options)
 
         return parser.parseSearch(raw_result)
     }
 
-    /* 
-    *   PRIVATE METHODS
-    */
+    /*
+     *   PRIVATE METHODS
+     */
     private async queryApi(options: RequestOptions) {
         const work = async () => {
             const { response, body } = await this.throttler.wrap(this.doHttpRequest)(options)
