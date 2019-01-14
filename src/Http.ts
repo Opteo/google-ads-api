@@ -161,8 +161,6 @@ export default class Http implements HttpController {
         query = query.replace(/\s/g, ' ')
         options.qs = { query }
 
-        console.log(options)
-
         const raw_result = await this.queryApi(options)
 
         return parser.parseSearch(raw_result)
