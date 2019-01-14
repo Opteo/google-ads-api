@@ -173,7 +173,12 @@ export default class Http implements HttpController {
      */
     private async queryApi(options: RequestOptions) {
         const work = async () => {
-            const { response, body } = await this.throttler.wrap(this.doHttpRequest)(options)
+            const { response, body } = await this.throttler.wrap(this.doHttpRequest).withOptions(
+                {
+                    expiration: 1000 * 60, // 1 minute until we give up.
+                },
+                options
+            )
 
             if (response.statusCode === 404) {
                 const { url } = options
