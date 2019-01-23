@@ -26,6 +26,10 @@ describe('Customer', async () => {
             time_zone: expect.any(String),
             auto_tagging_enabled: expect.any(Boolean),
             has_partners_badge: expect.any(Boolean),
+            call_reporting_setting: {
+                call_conversion_action: expect.any(String),
+                call_conversion_reporting_enabled: expect.any(Boolean),
+            },
         })
     })
 
