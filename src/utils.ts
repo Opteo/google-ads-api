@@ -276,11 +276,9 @@ const formatSingleResult = (result_object: { [key: string]: any }, convert_micro
         const matching_metric = find(entity_metrics, { name: key })
 
         if (convert_micros && matching_metric && matching_metric.is_micros) {
-            result_object[key] = +result_object[key] / 1000000
-        }
-
-        if (convert_micros && key.includes('_micros')) {
-            result_object[key] = +result_object[key] / 1000000
+            result_object[key.split('_micros')[0]] = +result_object[key] / 1000000
+        } else if (convert_micros && key.includes('_micros')) {
+            result_object[key.split('_micros')[0]] = +result_object[key] / 1000000
         }
 
         if (matching_metric && matching_metric.is_number) {

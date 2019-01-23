@@ -41,11 +41,11 @@ const all_metrics: Array<Metric> = [
 
             return report
         },
-        post_query_hook: (result_object: { [key: string]: any }) => {
-            result_object = cloneDeep(result_object)
-            result_object.metrics.cost = +result_object.metrics.cost_micros
-            return result_object
-        },
+        // post_query_hook: (result_object: { [key: string]: any }) => {
+        //     result_object = cloneDeep(result_object)
+        //     result_object.metrics.cost = +result_object.metrics.cost_micros
+        //     return result_object
+        // },
     },
     { name: 'average_cpc', is_micros: true, is_number: true },
 ]
