@@ -170,7 +170,6 @@ const entities: { [key: string]: object } = {
         campaign_budget: '',
         bidding_strategy_type: '',
         start_date: '',
-        campaign_group: '',
         end_date: '',
         network_settings,
         hotel_setting,
