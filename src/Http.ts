@@ -160,13 +160,13 @@ export default class Http implements HttpController {
         return this.queryApi(options)
     }
 
-    public async query(query: string) {
+    public async query(query: string, page_size = 1000) {
         await this.client.account_promise
         const url = this.getRequestUrl()
         const options = await this.getRequestOptions('POST', url)
 
         query = query.replace(/\s/g, ' ')
-        options.qs = { query }
+        options.qs = { query, page_size }
 
         const raw_result = await this.queryApi(options)
 
@@ -177,6 +177,57 @@ export default class Http implements HttpController {
      *   PRIVATE METHODS
      */
     private async queryApi(options: RequestOptions) {
+        let results = []
+        let page = 0
+        let num_results = 0
+        let max_results = 0
+        let next_page_token = null
+
+        const hasNextPage = () => {
+            if (page === 0) {
+                return true
+            }
+            if (num_results >= max_results) {
+                return false
+            }
+
+            return true
+        }
+
+        const getNextPage = async () => {
+            if (next_page_token) {
+                options.qs.page_token = next_page_token
+            }
+
+            const data = await this.queryRetry(options)
+
+            if (!max_results && data.totalResultsCount) {
+                max_results = data.totalResultsCount
+            }
+
+            if (data.nextPageToken) {
+                options.qs.page_token = data.nextPageToken
+                page += 1
+            }
+
+            if (data.results && data.results.length > 0) {
+                num_results += data.results.length
+                return transformObjectKeys(data.results)
+            }
+        }
+
+        while (hasNextPage()) {
+            console.log('page', page)
+            console.log('num_results', num_results)
+            console.log('max_results', max_results)
+            const page_data = await getNextPage()
+            results.push(page_data)
+        }
+
+        return results
+    }
+
+    private async queryRetry(options: RequestOptions) {
         const work = async () => {
             const { response, body } = await this.throttler.wrap(this.doHttpRequest).withOptions(
                 {
@@ -217,15 +268,12 @@ export default class Http implements HttpController {
             throw new GoogleAdsError(decoded_body.error)
         }
 
-        const data = await retry(work, {
+        return retry(work, {
             max_tries: 3,
             interval: 1000 + random(1000),
             throw_original: true,
             backoff: 2,
         })
-
-        const final_object = transformObjectKeys(data)
-        return final_object
     }
 
     private doHttpRequest(options: RequestOptions): Promise<any> {
