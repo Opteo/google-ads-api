@@ -42,6 +42,12 @@ export default class Http implements HttpController {
                 .toString()
                 .split('-')
                 .join('')
+
+            this.client.manager_cid = account_info.manager_cid
+                .toString()
+                .split('-')
+                .join('')
+
             this.client.refresh_token = account_info.refresh_token
         })
 
@@ -52,6 +58,7 @@ export default class Http implements HttpController {
         this.client = {
             account_promise,
             cid: '',
+            manager_cid: '',
             refresh_token: '',
             client_id,
             developer_token,
@@ -240,10 +247,13 @@ export default class Http implements HttpController {
             method,
             url,
             headers: {
+                'login-customer-id': this.client.manager_cid,
+                'Content-Type': 'application/json',
                 authorization: `Bearer ${access_token}`,
                 'developer-token': this.client.developer_token,
             },
         }
+
         return options
     }
 
