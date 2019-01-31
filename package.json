@@ -1,6 +1,6 @@
 {
   "name": "google-ads-api",
-  "version": "0.2.9",
+  "version": "0.3.0",
   "description": "Google Ads API Client Library for JavaScript",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",

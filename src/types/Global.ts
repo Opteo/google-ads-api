@@ -20,6 +20,7 @@ declare namespace Global {
     export interface Account {
         customer_account_id?: string | number
         refresh_token?: string
+        manager_cid?: string
         async_account_getter?: Function
         pre_query_hook?: Function
         post_query_hook?: Function
@@ -31,6 +32,7 @@ declare namespace Global {
      */
     export interface AccountInfo {
         cid: string
+        manager_cid: string
         refresh_token: string
     }
 
@@ -42,6 +44,7 @@ declare namespace Global {
     export interface Client {
         account_promise: Promise<object>
         cid: string
+        manager_cid: string
         refresh_token: string
         client_id: string | number
         developer_token: string
@@ -59,8 +62,8 @@ declare namespace Global {
         developer_token: string
         client_secret: string
         throttler: Bottleneck
-        pre_query_hook : Function
-        post_query_hook : Function
+        pre_query_hook: Function
+        post_query_hook: Function
     }
 
     /**

@@ -48,6 +48,7 @@ declare namespace Http {
         headers: {
             authorization: string
             'developer-token': string
+            'login-customer-id': string
         }
         qs?: object
         body?: string

@@ -54,10 +54,18 @@ class GoogleAdsApi {
      * @param refresh_token - OAuth2 refresh token
      *
      */
-    public Customer({ customer_account_id, refresh_token, async_account_getter, pre_query_hook, post_query_hook }: Account): ICustomer {
-
+    public Customer({
+        customer_account_id,
+        refresh_token,
+        manager_cid,
+        async_account_getter,
+        pre_query_hook,
+        post_query_hook,
+    }: Account): ICustomer {
         if (!async_account_getter && (!customer_account_id || !refresh_token)) {
-            throw new Error('must specify either {customer_account_id, refresh_token} or an async_account_getter')
+            throw new Error(
+                'must specify either {customer_account_id, refresh_token, manager_cid} or an async_account_getter'
+            )
         }
 
         if (!async_account_getter) {
@@ -65,11 +73,17 @@ class GoogleAdsApi {
                 .toString()
                 .split('-')
                 .join('')
+
+            const _manager_cid = (manager_cid || '')
+                .toString()
+                .split('-')
+                .join('')
+
             async_account_getter = async () => {
-                return { cid, refresh_token }
+                return { cid, refresh_token, manager_cid: _manager_cid }
             }
         }
-        
+
         pre_query_hook = pre_query_hook || noop
         post_query_hook = post_query_hook || noop
 
@@ -79,8 +93,8 @@ class GoogleAdsApi {
             developer_token: this.developer_token,
             client_secret: this.client_secret,
             throttler: this.throttler,
-            pre_query_hook, 
-            post_query_hook
+            pre_query_hook,
+            post_query_hook,
         })
 
         return CustomerInstance(http_controller)
