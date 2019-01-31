@@ -16,6 +16,7 @@ import {
 
 import entity_attributes from './attributes'
 import entity_metrics from './metrics'
+import entity_segments from './segments'
 import { ReportConfig, Metric, Constraint } from './types/Global'
 import { ListConfig } from './types/Entity'
 
@@ -125,7 +126,9 @@ export const buildReportQuery = (config: ReportConfig): { query: string; custom_
         }
     })
 
-    const all_selected_attributes = config.attributes.concat(config.metrics, config.segments).join(', ')
+    const all_selected_attributes = config.attributes
+        .concat(config.metrics, config.segments.map(s => `segments.${s}`))
+        .join(', ')
 
     if (!all_selected_attributes.length) {
         throw new Error('Missing attributes, metric fields or segments to be selected.')
@@ -166,7 +169,7 @@ export const buildReportQuery = (config: ReportConfig): { query: string; custom_
     /* Predefined Date Constant */
     if (config.date_constant) {
         query += where_clause_exists ? ' AND ' : ' WHERE '
-        query += `date DURING ${config.date_constant}`
+        query += `segments.date DURING ${config.date_constant}`
     }
 
     /* Order By */
@@ -214,6 +217,10 @@ const formatConstraints = (constraints: any): string => {
             } else {
                 val = `("${constraint.val.sort().join(`","`)}")`
             }
+        }
+
+        if (entity_segments.map(s => s.name).includes(key)) {
+            key = `segments.${key}`
         }
 
         return `${key} ${op} ${val}`

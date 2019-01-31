@@ -118,6 +118,14 @@ declare namespace Global {
     }
 
     /**
+     *  Metric object used for custom metrics
+     * @interface
+     */
+    export interface Segment {
+        name: string
+    }
+
+    /**
      *  Constraint object with full parameters
      * @interface
      */
