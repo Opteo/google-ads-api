@@ -24,6 +24,7 @@ describe('Tokens', async () => {
                 await delay(1000)
                 return {
                     cid: config.cid,
+                    manager_cid: config.manager_cid,
                     refresh_token: config.refresh_token,
                 }
             },

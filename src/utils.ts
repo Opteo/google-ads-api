@@ -333,8 +333,8 @@ export const buildListReportConfig = (config: ListConfig, resource: string): Rep
     return report_config
 }
 
-export const mapResultsWithIds = (response: any): object => {
-    const resource_name = response.results[0].resource_name
+export const mapResultsWithIds = (results: any): object => {
+    const resource_name = results[0].resource_name
     const resource_name_split = resource_name.split('/')
     const id = resource_name_split[resource_name_split.length - 1]
 

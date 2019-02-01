@@ -50,7 +50,11 @@ declare namespace Http {
             'developer-token': string
             'login-customer-id': string
         }
-        qs?: object
+        qs?: {
+            query?: string
+            page_size?: string | number
+            page_token?: string
+        }
         body?: string
     }
 

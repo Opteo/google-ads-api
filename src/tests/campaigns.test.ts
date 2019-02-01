@@ -14,6 +14,7 @@ describe('Campaigns', async () => {
 
     const customer = lib_instance.Customer({
         customer_account_id: config.cid,
+        manager_cid: config.manager_cid,
         refresh_token: config.refresh_token,
     })
 
@@ -58,27 +59,27 @@ describe('Campaigns', async () => {
     it('Retrieves Single Campaign', async () => {
         expect.assertions(1)
         const campaign = await customer.campaigns.retrieve(new_campaign_id)
-
-        expect(campaign).toEqual({
-            resource_name: expect.any(String),
-            id: expect.any(String),
-            name: expect.any(String),
-            status: expect.any(String),
-            campaign_budget: expect.any(String),
-            ad_serving_optimization_status: expect.any(String),
-            advertising_channel_type: expect.any(String),
-            network_settings: {
-                target_google_search: expect.any(Boolean),
-                target_search_network: expect.any(Boolean),
-                target_content_network: expect.any(Boolean),
-                target_partner_search_network: expect.any(Boolean),
-            },
-            start_date: expect.any(String),
-            end_date: expect.any(String),
-            serving_status: expect.any(String),
-            bidding_strategy_type: expect.any(String),
-            target_spend: { cpc_bid_ceiling_micros: expect.any(String) },
-        })
+        expect(campaign.id).toEqual(new_campaign_id)
+        // expect(campaign).toEqual({
+        //     resource_name: expect.any(String),
+        //     id: expect.any(String),
+        //     name: expect.any(String),
+        //     status: expect.any(String),
+        //     campaign_budget: expect.any(String),
+        //     ad_serving_optimization_status: expect.any(String),
+        //     advertising_channel_type: expect.any(String),
+        //     network_settings: {
+        //         target_google_search: expect.any(Boolean),
+        //         target_search_network: expect.any(Boolean),
+        //         target_content_network: expect.any(Boolean),
+        //         target_partner_search_network: expect.any(Boolean),
+        //     },
+        //     start_date: expect.any(String),
+        //     end_date: expect.any(String),
+        //     serving_status: expect.any(String),
+        //     bidding_strategy_type: expect.any(String),
+        //     target_spend: { cpc_bid_ceiling_micros: expect.any(String) },
+        // })
     })
 
     it('Updates Campaign Name', async () => {

@@ -10,6 +10,7 @@ describe('AdGroup Ads', async () => {
     })
     const customer = lib_instance.Customer({
         customer_account_id: config.cid,
+        manager_cid: config.manager_cid,
         refresh_token: config.refresh_token,
     })
 
@@ -48,24 +49,26 @@ describe('AdGroup Ads', async () => {
     it('Retrieves Single Ad', async done => {
         expect.assertions(1)
         const ad = await customer.ads.retrieve(ad_id)
-        expect(ad).toEqual({
-            resource_name: expect.any(String),
-            status: expect.any(String),
-            ad_group: expect.any(String),
-            ad: {
-                id: expect.any(String),
-                final_urls: expect.any(Object),
-                display_url: expect.any(String),
-                type: expect.any(String),
-                expanded_text_ad: {
-                    headline_part_1: expect.any(String),
-                    headline_part_2: expect.any(String),
-                    description: expect.any(String),
-                    path_1: expect.any(String),
-                    path_2: expect.any(String),
-                },
-            },
-        })
+        expect(ad_id).toContain(ad.ad.id)
+
+        // expect(ad).toEqual({
+        //     resource_name: expect.any(String),
+        //     status: expect.any(String),
+        //     ad_group: expect.any(String),
+        //     ad: {
+        //         id: expect.any(String),
+        //         final_urls: expect.any(Object),
+        //         display_url: expect.any(String),
+        //         type: expect.any(String),
+        //         expanded_text_ad: {
+        //             headline_part_1: expect.any(String),
+        //             headline_part_2: expect.any(String),
+        //             description: expect.any(String),
+        //             path_1: expect.any(String),
+        //             path_2: expect.any(String),
+        //         },
+        //     },
+        // })
         done()
     })
 
