@@ -1,5 +1,6 @@
 /lib*
 src/config.ts
+src/tests/debug.test.ts
 
 # Logs
 logs
@@ -75,4 +76,4 @@ typings/
 # Serverless directories
 .serverless
 .DS_Store
-src/tests/debug.test.ts
+
