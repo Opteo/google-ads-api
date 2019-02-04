@@ -162,7 +162,7 @@ export const buildReportQuery = (config: ReportConfig): { query: string; custom_
     /* Custom Date Range */
     if (config.from_date && config.to_date) {
         query += where_clause_exists ? ' AND ' : ' WHERE '
-        query += `date >= '${config.from_date}' AND date <= '${config.to_date}'`
+        query += `segments.date >= '${config.from_date}' AND segments.date <= '${config.to_date}'`
         where_clause_exists = true
     }
 
