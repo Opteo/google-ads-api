@@ -50,25 +50,6 @@ describe('AdGroup Ads', async () => {
         expect.assertions(1)
         const ad = await customer.ads.retrieve(ad_id)
         expect(ad_id).toContain(ad.ad.id)
-
-        // expect(ad).toEqual({
-        //     resource_name: expect.any(String),
-        //     status: expect.any(String),
-        //     ad_group: expect.any(String),
-        //     ad: {
-        //         id: expect.any(String),
-        //         final_urls: expect.any(Object),
-        //         display_url: expect.any(String),
-        //         type: expect.any(String),
-        //         expanded_text_ad: {
-        //             headline_part_1: expect.any(String),
-        //             headline_part_2: expect.any(String),
-        //             description: expect.any(String),
-        //             path_1: expect.any(String),
-        //             path_2: expect.any(String),
-        //         },
-        //     },
-        // })
         done()
     })
 

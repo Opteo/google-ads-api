@@ -49,16 +49,6 @@ describe('Shared Sets', async () => {
         expect.assertions(1)
         const shared_set = await customer.sharedSets.retrieve(new_shared_set_id)
         expect(shared_set.id).toEqual(new_shared_set_id)
-
-        // expect(shared_set).toEqual({
-        //     resource_name: expect.any(String),
-        //     id: expect.any(String),
-        //     type: expect.any(String),
-        //     name: expect.any(String),
-        //     status: expect.any(String),
-        //     member_count: expect.any(String),
-        //     reference_count: expect.any(String),
-        // })
     })
 
     it('Updates Shared Set', async () => {

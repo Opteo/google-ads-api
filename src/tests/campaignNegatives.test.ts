@@ -53,18 +53,6 @@ describe('Campaign Negatives', async () => {
         expect.assertions(1)
         const negative_keyword = await customer.campaignNegatives.retrieve(criterion_id)
         expect(criterion_id).toContain(negative_keyword.criterion_id)
-
-        // expect(negative_keyword).toEqual({
-        //     resource_name: expect.any(String),
-        //     campaign: expect.any(String),
-        //     criterion_id: expect.any(String),
-        //     type: expect.any(String),
-        //     negative: expect.any(Boolean),
-        //     keyword: {
-        //         text: expect.any(String),
-        //         match_type: expect.any(String),
-        //     },
-        // })
         done()
     })
 

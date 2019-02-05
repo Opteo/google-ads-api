@@ -182,10 +182,8 @@ export default class Http implements HttpController {
             url.includes('mutate') ||
             (qs && qs.query && qs.query.toLowerCase().includes('limit'))
         ) {
-            const mutate_response = await this.queryRetry(options)
-            return mutate_response.results
-                ? values(transformObjectKeys(mutate_response.results))
-                : transformObjectKeys(mutate_response)
+            const response = await this.queryWithRetry(options)
+            return response.results ? values(transformObjectKeys(response.results)) : transformObjectKeys(response)
         }
 
         return this.queryIterator(options)
@@ -214,7 +212,7 @@ export default class Http implements HttpController {
                 options.qs.page_token = next_page_token
             }
 
-            const data = await this.queryRetry(options)
+            const data = await this.queryWithRetry(options)
             const { totalResultsCount, nextPageToken, results } = data
             page += 1
             if (max_results === 0 && totalResultsCount) {
@@ -243,7 +241,7 @@ export default class Http implements HttpController {
         return parser.parseSearch(query_results)
     }
 
-    private async queryRetry(options: RequestOptions) {
+    private async queryWithRetry(options: RequestOptions) {
         const work = async () => {
             const { response, body } = await this.throttler.wrap(this.doHttpRequest).withOptions(
                 {

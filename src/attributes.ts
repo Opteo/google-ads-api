@@ -126,9 +126,9 @@ const entities: { [key: string]: object } = {
         campaign: '',
         cpc_bid_micros: '',
         cpm_bid_micros: '',
-        cpa_bid_micros: '',
         cpv_bid_micros: '',
-        target_roas_override: '',
+        target_cpa_micros: '',
+        target_roas: '',
         percent_cpc_bid_micros: '',
     },
     ad_group_criterion: {

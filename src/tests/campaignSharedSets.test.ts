@@ -40,13 +40,6 @@ describe('Campaign Shared Sets', async () => {
         expect.assertions(1)
         const shared_set = await customer.campaignSharedSets.retrieve(campaign_shared_set)
         expect(shared_set.shared_set).toContain(shared_set_id)
-
-        // expect(shared_set).toEqual({
-        //     resource_name: expect.any(String),
-        //     status: expect.any(String),
-        //     campaign: expect.any(String),
-        //     shared_set: expect.any(String),
-        // })
     })
 
     it('Unlinks Campaign Shared Set', async () => {

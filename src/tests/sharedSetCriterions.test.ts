@@ -48,17 +48,6 @@ describe('Shared Set Criterions (Keyword)', async () => {
         expect.assertions(1)
         const criterion = await customer.sharedSetCriterions.retrieve(criterion_id)
         expect(criterion_id).toContain(criterion.criterion_id)
-
-        // expect(criterion).toEqual({
-        //     resource_name: expect.any(String),
-        //     shared_set: expect.any(String),
-        //     keyword: {
-        //         text: keyword_text,
-        //         match_type: 'EXACT',
-        //     },
-        //     type: 'KEYWORD',
-        //     criterion_id: expect.any(String),
-        // })
     })
 
     it('Deletes Shared Set Criterion', async () => {

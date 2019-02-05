@@ -19,19 +19,6 @@ describe('Customer', async () => {
         expect.assertions(1)
         const customer_data = await customer.retrieve()
         expect(customer_data).toBeInstanceOf(Object)
-        // expect(customer_data).toEqual({
-        //     resource_name: expect.any(String),
-        //     id: expect.any(String),
-        //     descriptive_name: expect.any(String),
-        //     currency_code: expect.any(String),
-        //     time_zone: expect.any(String),
-        //     auto_tagging_enabled: expect.any(Boolean),
-        //     has_partners_badge: expect.any(Boolean),
-        //     call_reporting_setting: {
-        //         call_conversion_action: expect.any(String),
-        //         call_conversion_reporting_enabled: expect.any(Boolean),
-        //     },
-        // })
     })
 
     it('Queries data using search method', async () => {

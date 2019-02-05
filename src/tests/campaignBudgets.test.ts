@@ -40,17 +40,6 @@ describe('Campaign Budgets', async () => {
         expect.assertions(1)
         const budget = await customer.campaignBudgets.retrieve(budget_id)
         expect(budget.id).toEqual(budget_id)
-
-        // expect(budget).toEqual({
-        //     id: expect.any(String),
-        //     resource_name: expect.any(String),
-        //     name: expect.any(String),
-        //     amount_micros: expect.any(String),
-        //     status: expect.any(String),
-        //     delivery_method: expect.any(String),
-        //     explicitly_shared: expect.any(Boolean),
-        //     reference_count: expect.any(String),
-        // })
         done()
     })
 
