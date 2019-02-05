@@ -37,6 +37,7 @@ class GoogleAdsApi {
             datastore: redis_options ? 'redis' : 'local',
             clearDatastore: false,
             clientOptions: redis_options,
+            timeout: 1000 * 60,
         }
 
         this.throttler = new Bottleneck(options)
