@@ -2,17 +2,16 @@ import { values } from 'lodash'
 
 const parser = {
     parseSearch(rows: any) {
-        return values(rows.results).map(convertFakeArrays)
+        return values(rows).map(convertFakeArrays)
     },
 }
 
-const convertFakeArrays = (o:any):any => {
-    for(const key in o){
+const convertFakeArrays = (o: any): any => {
+    for (const key in o) {
         if (o[key] && typeof o[key] === 'object') {
-            if(o[key]['0']){
+            if (o[key]['0']) {
                 o[key] = values(o[key])
-            }
-            else {
+            } else {
                 o[key] = convertFakeArrays(o[key])
             }
         }

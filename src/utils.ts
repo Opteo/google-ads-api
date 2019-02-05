@@ -283,11 +283,9 @@ const formatSingleResult = (result_object: { [key: string]: any }, convert_micro
         const matching_metric = find(entity_metrics, { name: key })
 
         if (convert_micros && matching_metric && matching_metric.is_micros) {
-            result_object[key] = +result_object[key] / 1000000
-        }
-
-        if (convert_micros && key.includes('_micros')) {
-            result_object[key] = +result_object[key] / 1000000
+            result_object[key.split('_micros')[0]] = +result_object[key] / 1000000
+        } else if (convert_micros && key.includes('_micros')) {
+            result_object[key.split('_micros')[0]] = +result_object[key] / 1000000
         }
 
         if (matching_metric && matching_metric.is_number) {
@@ -335,8 +333,8 @@ export const buildListReportConfig = (config: ListConfig, resource: string): Rep
     return report_config
 }
 
-export const mapResultsWithIds = (response: any): object => {
-    const resource_name = response.results[0].resource_name
+export const mapResultsWithIds = (data: any): object => {
+    const resource_name = data.results ? data.results[0].resource_name : data[0].resource_name
     const resource_name_split = resource_name.split('/')
     const id = resource_name_split[resource_name_split.length - 1]
 

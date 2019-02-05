@@ -1,5 +1,5 @@
 import request from 'request'
-import { random, isUndefined, get } from 'lodash'
+import { random, isUndefined, get, values } from 'lodash'
 import retry from 'bluebird-retry'
 import Bottleneck from 'bottleneck'
 
@@ -160,23 +160,86 @@ export default class Http implements HttpController {
         return this.queryApi(options)
     }
 
-    public async query(query: string) {
+    public async query(query: string, page_size = 10000) {
         await this.client.account_promise
         const url = this.getRequestUrl()
         const options = await this.getRequestOptions('POST', url)
 
         query = query.replace(/\s/g, ' ')
-        options.qs = { query }
+        options.qs = { query, page_size }
 
         const raw_result = await this.queryApi(options)
-
-        return parser.parseSearch(raw_result)
+        return raw_result
     }
 
     /*
      *   PRIVATE METHODS
      */
     private async queryApi(options: RequestOptions) {
+        const { method, url, qs } = options
+        if (
+            method === 'GET' ||
+            url.includes('mutate') ||
+            (qs && qs.query && qs.query.toLowerCase().includes('limit'))
+        ) {
+            const response = await this.queryWithRetry(options)
+            return response.results ? values(transformObjectKeys(response.results)) : transformObjectKeys(response)
+        }
+
+        return this.queryIterator(options)
+    }
+
+    private async queryIterator(options: RequestOptions) {
+        let query_results: object[] = []
+        let page = 0
+        let num_results = 0
+        let max_results = 0
+        let next_page_token: string = ''
+
+        const hasNextPage = () => {
+            if (page === 0) {
+                return true
+            }
+            if (num_results >= max_results) {
+                return false
+            }
+
+            return true
+        }
+
+        const getNextPage = async () => {
+            if (options.qs && next_page_token && next_page_token.length > 0) {
+                options.qs.page_token = next_page_token
+            }
+
+            const data = await this.queryWithRetry(options)
+            const { totalResultsCount, nextPageToken, results } = data
+            page += 1
+            if (max_results === 0 && totalResultsCount) {
+                max_results = totalResultsCount
+            }
+
+            if (nextPageToken) {
+                next_page_token = nextPageToken
+            }
+
+            if (results && results.length > 0) {
+                num_results += results.length
+                return values(transformObjectKeys(results))
+            }
+
+            return []
+        }
+
+        while (hasNextPage()) {
+            const page_data = await getNextPage()
+            query_results = query_results.concat(page_data)
+        }
+
+        return parser.parseSearch(query_results)
+    }
+
+    private async queryWithRetry(options: RequestOptions) {
         const work = async () => {
             const { response, body } = await this.throttler.wrap(this.doHttpRequest).withOptions(
                 {
@@ -217,15 +280,12 @@ export default class Http implements HttpController {
             throw new GoogleAdsError(decoded_body.error)
         }
 
-        const data = await retry(work, {
+        return retry(work, {
             max_tries: 3,
             interval: 1000 + random(1000),
             throw_original: true,
             backoff: 2,
         })
-
-        const final_object = transformObjectKeys(data)
-        return final_object
     }
 
     private doHttpRequest(options: RequestOptions): Promise<any> {

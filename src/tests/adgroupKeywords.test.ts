@@ -13,6 +13,7 @@ describe('AdGroup Keywords', async () => {
 
     const customer = lib_instance.Customer({
         customer_account_id: config.cid,
+        manager_cid: config.manager_cid,
         refresh_token: config.refresh_token,
     })
 
@@ -52,30 +53,7 @@ describe('AdGroup Keywords', async () => {
     it('Retrieves Keyword Data', async done => {
         expect.assertions(1)
         const keyword = await customer.keywords.retrieve(keyword_id)
-        // console.log(keyword)
-        expect(keyword).toEqual({
-            ad_group: expect.any(String),
-            criterion_id: expect.any(String),
-            effective_cpc_bid_micros: expect.any(String),
-            effective_cpc_bid_source: expect.any(String),
-            effective_cpm_bid_micros: expect.any(String),
-            effective_cpm_bid_source: expect.any(String),
-            keyword: {
-                text: expect.any(String),
-                match_type: expect.any(String),
-            },
-            negative: expect.any(Boolean),
-            quality_info: {
-                creative_quality_score: expect.any(String),
-                post_click_quality_score: expect.any(String),
-                quality_score: expect.any(Number),
-                search_predicted_ctr: expect.any(String),
-            },
-            resource_name: expect.any(String),
-            status: expect.any(String),
-            type: expect.any(String),
-            // position_estimates: expect.any(Object),
-        })
+        expect(keyword_id).toContain(keyword.criterion_id)
         done()
     })
 

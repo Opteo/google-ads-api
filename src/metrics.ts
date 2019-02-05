@@ -1,4 +1,4 @@
-import { cloneDeep, reject, isString, find } from 'lodash'
+import { reject, isString, find } from 'lodash'
 import { Metric, ReportConfig, Constraint } from './types/Global'
 
 const all_metrics: Array<Metric> = [
@@ -40,11 +40,6 @@ const all_metrics: Array<Metric> = [
             report.constraints = reject(report.constraints, { key: 'metrics.cost' })
 
             return report
-        },
-        post_query_hook: (result_object: { [key: string]: any }) => {
-            result_object = cloneDeep(result_object)
-            result_object.metrics.cost = +result_object.metrics.cost_micros
-            return result_object
         },
     },
     { name: 'average_cpc', is_micros: true, is_number: true },

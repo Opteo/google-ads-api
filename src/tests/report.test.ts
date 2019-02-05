@@ -11,6 +11,7 @@ describe('Reporting', async () => {
 
     const customer = lib_instance.Customer({
         customer_account_id: config.opteo_cid,
+        manager_cid: config.opteo_manager_cid,
         refresh_token: config.opteo_refresh_token,
     })
 
@@ -84,7 +85,9 @@ describe('Reporting', async () => {
                 resource_name: expect.any(String),
                 id: expect.any(String),
             },
-            device: expect.any(String),
+            segments: {
+                device: expect.any(String),
+            },
             resource_name: expect.any(String),
             id: expect.any(String),
         })

@@ -11,6 +11,7 @@ describe('Campaign Shared Sets', async () => {
 
     const customer = lib_instance.Customer({
         customer_account_id: config.cid,
+        manager_cid: config.manager_cid,
         refresh_token: config.refresh_token,
     })
 
@@ -38,13 +39,7 @@ describe('Campaign Shared Sets', async () => {
     it('Retrieves Single Campaign Shared Set', async () => {
         expect.assertions(1)
         const shared_set = await customer.campaignSharedSets.retrieve(campaign_shared_set)
-
-        expect(shared_set).toEqual({
-            resource_name: expect.any(String),
-            status: expect.any(String),
-            campaign: expect.any(String),
-            shared_set: expect.any(String),
-        })
+        expect(shared_set.shared_set).toContain(shared_set_id)
     })
 
     it('Unlinks Campaign Shared Set', async () => {

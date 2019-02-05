@@ -16,6 +16,7 @@ describe('Campaign Negatives', async () => {
 
     const customer = lib_instance.Customer({
         customer_account_id: config.cid,
+        manager_cid: config.manager_cid,
         refresh_token: config.refresh_token,
     })
 
@@ -51,18 +52,7 @@ describe('Campaign Negatives', async () => {
     it('Retrieves Single Campaign Negative', async done => {
         expect.assertions(1)
         const negative_keyword = await customer.campaignNegatives.retrieve(criterion_id)
-
-        expect(negative_keyword).toEqual({
-            resource_name: expect.any(String),
-            campaign: expect.any(String),
-            criterion_id: expect.any(String),
-            type: expect.any(String),
-            negative: expect.any(Boolean),
-            keyword: {
-                text: expect.any(String),
-                match_type: expect.any(String),
-            },
-        })
+        expect(criterion_id).toContain(negative_keyword.criterion_id)
         done()
     })
 
