@@ -1,4 +1,4 @@
-Caution: This project is still under heavy development.
+⚠️ **Caution: This project is still under heavy development.**
 
 ## Google Ads API Client Library for JavaScript
 
