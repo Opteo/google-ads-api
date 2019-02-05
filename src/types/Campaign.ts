@@ -191,7 +191,6 @@ declare namespace Campaign {
      */
     export interface NewCampaignConfig extends NewEntityConfig {
         budget_id: string
-        name: string
         advertising_channel_type: AdvertisingChannelType | keyof typeof AdvertisingChannelType
         target_spend?: TargetSpend
         status?: CampaignStatus
