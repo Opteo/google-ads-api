@@ -232,9 +232,7 @@ export default class Http implements HttpController {
         }
 
         while (hasNextPage()) {
-            // console.log('page', page, 'num_results', num_results, 'max_results', max_results)
             const page_data = await getNextPage()
-            // console.log('received', page_data.length)
             query_results = query_results.concat(page_data)
         }
 
