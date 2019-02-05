@@ -111,15 +111,6 @@ declare namespace Campaign {
         VIDEO_ACTION = 'VIDEO_ACTION',
         VIDEO_OUTSTREAM = 'VIDEO_OUTSTREAM'
     }
-    
-    /**
-     * Enum for PageOnePromotedStrategyGoal
-     * @readonly
-     * @enum {string}
-     */
-    enum PageOnePromotedStrategyGoal {
-        UNSPEC 
-    }
 
     /**
      * Interface for NetworkSettings
@@ -138,68 +129,60 @@ declare namespace Campaign {
      */
     export interface TargetSpend {
         cpc_bid_ceiling_micros: string | number
+        target_spend_micros?: string | number
     }
     
     /**
-     * Interface for ManualCpcBiddingStrategy
+     * Interface for ManualCpc
      * @interface
      */
-    export interface ManualCpcBiddingStrategy {
+    export interface ManualCpcy {
         enhanced_cpc_enabled: boolean
     }
     
     /**
-     * Interface for ManualCpcBiddingStrategy
+     * Interface for ManualCpc
      * @interface
      */
-    export interface ManualCpcBiddingStrategy {
+    export interface ManualCpc {
         enhanced_cpc_enabled: boolean
     }
     
     /**
-     * Interface for MaximizeConversionValueBiddingStrategy
+     * Interface for MaximizeConversionValue
      * @interface
      */
-    export interface MaximizeConversionValueBiddingStrategy {
+    export interface MaximizeConversionValue {
         target_roas: string | number
     }
     
     /**
-     * Interface for PercentCpcBiddingStrategy
+     * Interface for PercentCpc
      * @interface
      */
-    export interface PercentCpcBiddingStrategy {
+    export interface PercentCpc {
         cpc_bid_ceiling_micros?: string | number
         enhanced_cpc_enabled?: boolean
     }
     
     /**
-     * Interface for TargetCpaBiddingStrategy
+     * Interface for TargetCpa
      * @interface
      */
-    export interface TargetCpaBiddingStrategy {
+    export interface TargetCpa {
         target_cpa_micros?: string | number
         cpc_bid_ceiling_micros?: string | number
         cpc_bid_floor_micros?: string | number
     }
     
     /**
-     * Interface for TargetRoasBiddingStrategy
+     * Interface for TargetRoas
      * @interface
      */
-    export interface TargetRoasBiddingStrategy {
+    export interface TargetRoas {
         target_cpa_micros?: string | number
         cpc_bid_ceiling_micros?: string | number
         cpc_bid_floor_micros?: string | number
-    }
-    
-    /**
-     * Interface for TargetSpendBiddingStrategy
-     * @interface
-     */
-    export interface TargetSpendBiddingStrategy {
-        target_spend_micros?: string | number
-        cpc_bid_ceiling_micros?: string | number
     }
 
     /**
@@ -214,16 +197,16 @@ declare namespace Campaign {
         status?: CampaignStatus
         network_setting?: NetworkSettings
         advertising_channel_sub_type?: AdvertisingChannelSubType | keyof typeof AdvertisingChannelSubType
-        manual_cpc?: ManualCpcBiddingStrategy
+        manual_cpc?: ManualCpc
         // manual_cpm?: any
         // manual_cpv?: any
-        maximize_conversion_value?: MaximizeConversionValueBiddingStrategy
+        maximize_conversion_value?: MaximizeConversionValue
         // maximize_conversions?: any
-        percent_cpc?: PercentCpcBiddingStrategy
-        target_cpa?: TargetCpaBiddingStrategy
+        percent_cpc?: PercentCpc
+        target_cpa?: TargetCpa
         // target_cpm?: any
-        target_roas?: TargetRoasBiddingStrategy
-        target_spend?: TargetSpendBiddingStrategy
+        target_roas?: TargetRoas
+        target_spend?: TargetSpend
     }
 }
 export = Campaign
