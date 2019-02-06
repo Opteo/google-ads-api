@@ -69,14 +69,19 @@ export default class Http implements HttpController {
     /*
      *   PUBLIC METHODS
      */
-    public async create(config: NewEntityConfig, entity: string) {
+    public async create(config: NewEntityConfig | NewEntityConfig[], entity: string) {
         await this.client.account_promise
         const url = this.getRequestUrl('mutate', entity)
         const options = await this.getRequestOptions('POST', url)
 
-        config = this.formatRequestConfig(config, entity)
-        const create_operation = { create: config }
-        options.body = JSON.stringify({ operations: [create_operation] })
+        if (Array.isArray(config)) {
+            const operations = config.map(operation => ({ create: this.formatRequestConfig(operation, entity) }))
+            options.body = JSON.stringify({ operations })
+        } else {
+            config = this.formatRequestConfig(config, entity)
+            const create_operation = { create: config }
+            options.body = JSON.stringify({ operations: [create_operation] })
+        }
 
         return this.queryApi(options).then(response => {
             return mapResultsWithIds(response)
