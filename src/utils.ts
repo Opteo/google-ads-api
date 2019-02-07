@@ -333,22 +333,28 @@ export const buildListReportConfig = (config: ListConfig, resource: string): Rep
     return report_config
 }
 
-const mapRowsWithId = (rows: object[]): object[] => {
-    return rows.map((row: any) => {
-        const resource_name_split = row.resource_name.split('/')
+const mapSingleRowWithId = (row: any): object => {
+    const resource_name_split = row.resource_name ? row.resource_name.split('/') : null
+    if (resource_name_split) {
         return {
             id: resource_name_split[resource_name_split.length - 1],
             ...row,
         }
-    })
+    }
+    return row
+}
+const mapRowsWithId = (rows: object[]): object[] => {
+    return rows.map((row: any) => mapSingleRowWithId(row))
 }
 
 export const mapResultsWithIds = (data: any): object => {
     let result_rows: object[]
     if (data.results && Array.isArray(data.results)) {
         result_rows = mapRowsWithId(data.results)
-    } else {
+    } else if (Array.isArray(data)) {
         result_rows = mapRowsWithId(data)
+    } else {
+        return mapSingleRowWithId(data)
     }
 
     if (result_rows.length === 1) {
