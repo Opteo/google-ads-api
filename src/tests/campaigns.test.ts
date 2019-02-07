@@ -55,6 +55,44 @@ describe('Campaigns', async () => {
         new_campaign_id = new_campaign.id
         done()
     })
+    
+    it('Creates 2 New Campaigns', async done => {
+        expect.assertions(1)
+
+        const response = await customer.campaignBudgets.create({
+            amount_micros: 12000000,
+            explicitly_shared: true,
+        })
+
+        const new_campaigns_config = [
+            {
+                name: getRandomCampaignName(),
+                budget_id: response.id,
+                advertising_channel_type: 'DISPLAY',
+                target_spend: {
+                    cpc_bid_ceiling_micros: 1000000,
+                },
+            }, {
+                name: getRandomCampaignName(),
+                budget_id: response.id,
+                advertising_channel_type: 'SEARCH',
+                target_spend: {
+                    cpc_bid_ceiling_micros: 1000000,
+                },
+            }
+        ]
+
+        const new_campaigns = await customer.campaigns.create(new_campaigns_config)
+
+        expect(new_campaigns).toEqual({
+            id: expect.any(String),
+            resource_name: expect.any(String),
+        })
+
+        expect(new_campaigns.id.split('_').length).toEqual(2)
+
+        done()
+    })
 
     it('Retrieves Single Campaign', async () => {
         expect.assertions(1)
