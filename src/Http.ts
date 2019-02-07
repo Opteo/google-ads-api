@@ -102,7 +102,6 @@ export default class Http implements HttpController {
 
         return this.report(report_config)
     }
-
     public async report(config: ReportConfig) {
         const { query, custom_metrics } = buildReportQuery(config)
 
@@ -126,14 +125,21 @@ export default class Http implements HttpController {
             custom_metrics
         )
 
+        const parsed_result = parser.parseResult(result)
+
         const modified_result = await this.post_query_hook({
             cid: this.client.cid,
             query,
             report_config: config,
-            result,
+            result: parsed_result,
         })
 
-        return modified_result ? parser.parseResult(modified_result) : parser.parseResult(result)
+        /* 
+            The user may or may not actually return a modified result. 
+            If they don't, just return the original result.
+        */
+
+        return modified_result || parsed_result
     }
 
     public async update(config: EntityUpdateConfig, entity: string) {
