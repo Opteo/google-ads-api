@@ -1,4 +1,4 @@
-⚠️ **Caution: This project is still under heavy development.**
+> ⚠️ **Caution: This project is still under heavy development.**
 
 ## Google Ads API Client Library for JavaScript
 
@@ -30,14 +30,14 @@ const customer = google_ads_js.Customer({
 // Get single campaign
 const camapign = await customer.campaigns.get('123123123')
 
-// List ad groups
+// List multiple ad groups
 const adgroups = await customer.adgroups.list({
     campaign_id: '123123123',
     limit: 15,
 })
 
 // Query using report method
-const campaigns = await customer.adgroups.report({
+const campaigns = await customer.report({
     entity: 'campaign',
     attributes: ['id'],
     metrics: ['cost', 'clicks'],
@@ -55,10 +55,12 @@ const campaigns = await customer.search(`
     ORDER BY campaign.id
 `)
 
-const campaigns_with_stats = await customer.search(`
-    SELECT campaign.id, campaign.name, campaign.status, metrics.impressions
+const campaigns = await customer.search(`
+    SELECT 
+        campaign.id, campaign.name, campaign.status, 
+        metrics.impressions, metrics.cost
     FROM campaign
-    WHERE campaign.status = 'PAUSED' AND metrics.impressions > 1000
+    WHERE campaign.status = 'PAUSED' AND metrics.impressions > 5
     ORDER BY campaign.id
 `)
 ```
@@ -68,7 +70,7 @@ const campaigns_with_stats = await customer.search(`
 
 ## Google Ads Query Language
 
-### Query Language Grammar
+#### Query Language Grammar
 
 ```
 Query            -> SelectClause FromClause? WhereClause? OrderByClause? LimitClause?

@@ -1,6 +1,6 @@
 {
   "name": "google-ads-api",
-  "version": "0.4.0",
+  "version": "0.4.2",
   "description": "Google Ads API Client Library for JavaScript",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
@@ -50,7 +50,7 @@
     "@types/request": "^2.47.1",
     "bluebird": "^3.5.2",
     "bluebird-retry": "^0.11.0",
-    "bottleneck": "^2.9.0",
+    "bottleneck": "^2.16.1",
     "redis": "^2.8.0"
   }
 }

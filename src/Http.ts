@@ -22,6 +22,9 @@ import { Client, ClientConstructor, AccountInfo, ReportConfig } from './types/Gl
 import { RequestOptions, HttpController } from './types/Http'
 import { ListConfig, EntityUpdateConfig, NewEntityConfig } from './types/Entity'
 
+// const log = (obj: any) => {
+//     console.log(require('util').inspect(obj, false, null))
+// }
 export default class Http implements HttpController {
     private client: Client
     private throttler: Bottleneck
@@ -38,17 +41,21 @@ export default class Http implements HttpController {
         post_query_hook,
     }: ClientConstructor) {
         const account_promise = async_account_getter().then((account_info: AccountInfo) => {
-            this.client.cid = account_info.cid
+            const { cid, manager_cid, refresh_token } = account_info
+
+            if (isUndefined(cid) || isUndefined(refresh_token)) {
+                throw new Error('Missing required customer ID or refresh token')
+            }
+
+            this.client.refresh_token = refresh_token
+            this.client.cid = cid
                 .toString()
                 .split('-')
                 .join('')
-
-            this.client.manager_cid = account_info.manager_cid
+            this.client.manager_cid = (manager_cid || '')
                 .toString()
                 .split('-')
                 .join('')
-
-            this.client.refresh_token = account_info.refresh_token
         })
 
         this.throttler = throttler
@@ -104,7 +111,7 @@ export default class Http implements HttpController {
     public async report(config: ReportConfig) {
         const { query, custom_metrics } = buildReportQuery(config)
 
-        await this.client.account_promise // need  this to ensure that client.cid is set
+        await this.client.account_promise // need this to ensure that client.cid is set
 
         const pre_query_hook_result = await this.pre_query_hook({
             cid: this.client.cid,
@@ -117,7 +124,6 @@ export default class Http implements HttpController {
         }
 
         const raw_result = await this.query(query)
-
         const result = await formatQueryResults(
             raw_result,
             config.entity,
@@ -132,7 +138,7 @@ export default class Http implements HttpController {
             result,
         })
 
-        return modified_result || result
+        return modified_result ? parser.parseResult(modified_result) : parser.parseResult(result)
     }
 
     public async update(config: EntityUpdateConfig | EntityUpdateConfig[], entity: string) {
@@ -252,7 +258,7 @@ export default class Http implements HttpController {
             query_results = query_results.concat(page_data)
         }
 
-        return parser.parseSearch(query_results)
+        return parser.parseResult(query_results)
     }
 
     private async queryWithRetry(options: RequestOptions) {
@@ -318,16 +324,20 @@ export default class Http implements HttpController {
 
     private async getRequestOptions(method: string, url: string): Promise<RequestOptions> {
         const access_token = await getAccessToken(this.client)
+        const headers: any = {
+            'Content-Type': 'application/json',
+            authorization: `Bearer ${access_token}`,
+            'developer-token': this.client.developer_token,
+        }
+
+        if (this.client.manager_cid && this.client.manager_cid.length > 0) {
+            headers['login-customer-id'] = this.client.manager_cid
+        }
 
         const options = <RequestOptions>{
             method,
             url,
-            headers: {
-                'login-customer-id': this.client.manager_cid,
-                'Content-Type': 'application/json',
-                authorization: `Bearer ${access_token}`,
-                'developer-token': this.client.developer_token,
-            },
+            headers,
         }
 
         return options

@@ -38,6 +38,19 @@ declare namespace CampaignBudget {
         PAUSED = 'PAUSED',
         UNSPECIFIED = 'UNSPECIFIED',
     }
+    
+    /**
+     * Enum for BudgetPeriod
+     * @readonly
+     * @enum {string}
+     */
+    enum BudgetPeriod {
+        CUSTOM = 'CUSTOM',
+        DAILY = 'DAILY',
+        FIXED_DAILY = 'FIXED_DAILY',
+        UNKNOWN = 'UNKNOWN',
+        UNSPECIFIED = 'UNSPECIFIED',
+    }
 
     /**
      * Interface for NewCampaignBudgetConfig
@@ -46,6 +59,8 @@ declare namespace CampaignBudget {
     export interface NewCampaignBudgetConfig extends NewEntityConfig {
         amount_micros: string | number
         explicitly_shared: boolean
+        delivery_method?: DeliveryMethod
+        period?: BudgetPeriod
     }
 }
 export = CampaignBudget

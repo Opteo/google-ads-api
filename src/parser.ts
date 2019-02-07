@@ -1,7 +1,7 @@
 import { values } from 'lodash'
 
 const parser = {
-    parseSearch(rows: any) {
+    parseResult(rows: any) {
         return values(rows).map(convertFakeArrays)
     },
 }
