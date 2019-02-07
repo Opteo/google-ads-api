@@ -17,6 +17,8 @@ describe('Campaign Ad Schedules', async () => {
 
     const campaign_id = 1485014801
     let criterion_id = ''
+    let criterion_id_1 = ''
+    let criterion_id_2 = ''
 
     it('Lists Campaign Ad Schedules', async () => {
         expect.assertions(1)
@@ -46,6 +48,48 @@ describe('Campaign Ad Schedules', async () => {
         criterion_id = new_criterion.id
         done()
     })
+    
+    it('Creates 2 New Campaign Ad Schedules', async done => {
+        expect.assertions(1)
+        
+        const new_criteria_config = [
+            {
+                campaign_id,
+                ad_schedule: {
+                    day_of_week: 'WEDNESDAY',
+                    start_hour: 10,
+                    end_hour: 18,
+                    start_minute: 'ZERO',
+                    end_minute: 'ZERO',
+                },
+            }, {
+                campaign_id,
+                ad_schedule: {
+                    day_of_week: 'THURSDAY',
+                    start_hour: 10,
+                    end_hour: 18,
+                    start_minute: 'ZERO',
+                    end_minute: 'ZERO',
+                },
+            }
+        ]
+        
+        const new_criteria = await customer.campaignAdSchedules.create(new_criteria_config)
+
+        expect(new_criteria).toEqual({
+            id: expect.any(String),
+            resource_name: expect.any(String),
+        })
+        
+        const criteria_ids = new_criteria.id.split('_')
+        
+        expect(criteria_ids.length).toEqual(2)
+        
+        criterion_id_1 = criteria_ids[0]
+        criterion_id_2 = criteria_ids[1]
+        
+        done()
+    })
 
     it('Retrieves Single Campaign Ad Schedule', async done => {
         expect.assertions(1)
@@ -66,10 +110,41 @@ describe('Campaign Ad Schedules', async () => {
         const updated_ad_schedule = await customer.campaignAdSchedules.retrieve(criterion_id)
         expect(updated_ad_schedule.bid_modifier).toEqual(0.3)
     })
+    
+    it('Updates Multiple Campaign Ad Schedules', async () => {
+        expect.assertions(1)
+        const update_config = [
+            {
+                id: criterion_id_1,
+                update: {
+                    bid_modifier: 0.3,
+                },
+            }, {
+                id: criterion_id_2,
+                update: {
+                    bid_modifier: 0.2,
+                },
+            }
+        ]
+        
+        await customer.campaignAdSchedules.update(update_config)
+
+        const updated_ad_schedule_1 = await customer.campaignAdSchedules.retrieve(criterion_id_1)
+        expect(updated_ad_schedule_1.bid_modifier).toEqual(0.3)
+        
+        const updated_ad_schedule_2 = await customer.campaignAdSchedules.retrieve(criterion_id_2)
+        expect(updated_ad_schedule_2.bid_modifier).toEqual(0.2)
+    })
 
     it('Deletes Campaign Ad Schedule', async () => {
         expect.assertions(1)
         const res = await customer.campaignAdSchedules.delete(criterion_id)
+        expect(res).toBeInstanceOf(Object)
+        
+        const res = await customer.campaignAdSchedules.delete(criterion_id_1)
+        expect(res).toBeInstanceOf(Object)
+        
+        const res = await customer.campaignAdSchedules.delete(criterion_id_2)
         expect(res).toBeInstanceOf(Object)
     })
 })
