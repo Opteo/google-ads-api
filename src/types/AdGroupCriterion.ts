@@ -19,6 +19,7 @@ declare namespace AdGroupCriterion {
         criterion_id: string | number
         negative: boolean
         final_urls: string
+        listing_group: ListingGroup
     }
 
     /**
@@ -101,7 +102,168 @@ declare namespace AdGroupCriterion {
     export interface NewCriterionConfig extends NewEntityConfig {
         ad_group_id: string | number
         keyword?: object
-        listing_group?: object
+        listing_group?: ListingGroup
+    }
+
+    /**
+     * Listing Group Interface
+     * @interface
+     */
+    interface ListingGroup {
+        type: ListingGroupType
+        parent_ad_group_criterion: number | string
+        case_value: CaseValue
+    }
+
+    /**
+     * Enum for ListingGroupType
+     * @readonly
+     * @enum {string}
+     */
+    enum ListingGroupType {
+        SUBDIVISION = 'SUBDIVISION',
+        UNIT = 'UNIT',
+        UNKNOWN = 'UNKNOWN',
+        UNSPECIFIED = 'UNSPECIFIED',
+    }
+
+    /**
+     * Case Value Interface
+     * @interface
+     */
+    interface CaseValue {
+        product_type: ProductType
+        product_offer_id: ProductOfferId
+        listing_brand: ListingBrand
+        listing_custom_attribute: ListingCustomAttribute
+        product_channel: ProductChannel
+        product_channel_exclusivity: ProductChannelExclusivity
+        product_condition: ProductCondition
+    }
+
+    /**
+     * Product Type Interface
+     * @interface
+     */
+    interface ProductType {
+        value: string | number
+        level: ProductTypeLevel
+    }
+
+    /**
+     * Product Offer Id Interface
+     * @interface
+     */
+    interface ProductOfferId {
+        value: string | number
+    }
+
+    /**
+     * Listing Brand Interface
+     * @interface
+     */
+    interface ListingBrand {
+        value: string | number
+    }
+
+    /**
+     * Listing Custom Attribute Interface
+     * @interface
+     */
+    interface ListingCustomAttribute {
+        index: ListingCustomAttributeIndex
+        value: string | number
+    }
+
+    /**
+     * Product Channel Interface
+     * @interface
+     */
+    interface ProductChannel {
+        channel: ProductChannelChannel
+    }
+
+    /**
+     * Product Channel Exclusivity Interface
+     * @interface
+     */
+    interface ProductChannelExclusivity {
+        channel_exclusivity: ChannelExclusivity
+    }
+
+    /**
+     * Product Condition Interface
+     * @interface
+     */
+    interface ProductCondition {
+        condition: ProductConditionCondition
+    }
+
+    /**
+     * Enum for ProductTypeLevel
+     * @readonly
+     * @enum {string}
+     */
+    enum ProductTypeLevel {
+        PRODUCT_TYPE_L1 = 'PRODUCT_TYPE_L1',
+        PRODUCT_TYPE_L2 = 'PRODUCT_TYPE_L2',
+        PRODUCT_TYPE_L3 = 'PRODUCT_TYPE_L3',
+        PRODUCT_TYPE_L4 = 'PRODUCT_TYPE_L4',
+        PRODUCT_TYPE_L5 = 'PRODUCT_TYPE_L5',
+        UNKNOWN = 'UNKNOWN',
+        UNSPECIFIED = 'UNSPECIFIED',
+    }
+
+    /**
+     * Enum for ListingCustomAttributeIndex
+     * @readonly
+     * @enum {string}
+     */
+    enum ListingCustomAttributeIndex {
+        CUSTOM_ATTRIBUTE_0 = 'CUSTOM_ATTRIBUTE_0',
+        CUSTOM_ATTRIBUTE_1 = 'CUSTOM_ATTRIBUTE_1',
+        CUSTOM_ATTRIBUTE_2 = 'CUSTOM_ATTRIBUTE_2',
+        CUSTOM_ATTRIBUTE_3 = 'CUSTOM_ATTRIBUTE_3',
+        CUSTOM_ATTRIBUTE_4 = 'CUSTOM_ATTRIBUTE_4',
+        UNKNOWN = 'UNKNOWN',
+        UNSPECIFIED = 'UNSPECIFIED',
+    }
+
+    /**
+     * Enum for ProductChannelChannel
+     * @readonly
+     * @enum {string}
+     */
+    enum ProductChannelChannel {
+        LOCAL = 'LOCAL',
+        ONLINE = 'ONLINE',
+        UNKNOWN = 'UNKNOWN',
+        UNSPECIFIED = 'UNSPECIFIED',
+    }
+
+    /**
+     * Enum for ChannelExclusivity
+     * @readonly
+     * @enum {string}
+     */
+    enum ChannelExclusivity {
+        LOCAL = 'MULTI_CHANNEL',
+        ONLINE = 'SINGLE_CHANNEL',
+        UNKNOWN = 'UNKNOWN',
+        UNSPECIFIED = 'UNSPECIFIED',
+    }
+
+    /**
+     * Enum for ProductConditionCondition
+     * @readonly
+     * @enum {string}
+     */
+    enum ProductConditionCondition {
+        NEW = 'NEW',
+        REFURBISHED = 'REFURBISHED',
+        UNKNOWN = 'UNKNOWN',
+        UNSPECIFIED = 'UNSPECIFIED',
+        USED = 'USED',
     }
 }
 export = AdGroupCriterion
