@@ -1,6 +1,7 @@
 /lib*
 src/config.ts
 src/tests/debug.test.ts
+package-lock.json
 
 # Logs
 logs
