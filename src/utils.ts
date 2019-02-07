@@ -333,15 +333,29 @@ export const buildListReportConfig = (config: ListConfig, resource: string): Rep
     return report_config
 }
 
-export const mapResultsWithIds = (data: any): object => {
-    const resource_name = data.results ? data.results[0].resource_name : data[0].resource_name
-    const resource_name_split = resource_name.split('/')
-    const id = resource_name_split[resource_name_split.length - 1]
+const mapResultRowsWithId = (rows: object[]): object[] => {
+    return rows.map((row: any) => {
+        const resource_name_split = row.resource_name.split('/')
 
-    return {
-        id,
-        resource_name,
+        return {
+            id: resource_name_split[resource_name_split.length - 1],
+            ...row,
+        }
+    })
+}
+
+export const mapResultsWithIds = (data: any): object => {
+    let result_rows: object[]
+    if (data.results && Array.isArray(data.results)) {
+        result_rows = mapResultRowsWithId(data.results)
+    } else {
+        result_rows = mapResultRowsWithId(data)
     }
+
+    if (result_rows.length === 1) {
+        return result_rows[0]
+    }
+    return result_rows
 }
 
 export const transformObjectKeys = (entity_object: any): any => {
