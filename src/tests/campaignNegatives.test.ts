@@ -22,6 +22,8 @@ describe('Campaign Negatives', async () => {
 
     const campaign_id = 1485014801
     let criterion_id = ''
+    let criterion_id_1 = ''
+    let criterion_id_2 = ''
 
     it('Lists Campaign Negatives', async () => {
         expect.assertions(1)
@@ -46,6 +48,38 @@ describe('Campaign Negatives', async () => {
             resource_name: expect.any(String),
         })
         criterion_id = new_criterion.id
+        done()
+    })
+    
+    it('Creates Multiple New Campaign Negatives', async done => {
+        expect.assertions(1)
+        
+        const new_negative_config = [
+            {
+                campaign_id,
+                negative: true,
+                keyword: {
+                    text: getRandomKeywordText(),
+                    match_type: 'EXACT',
+                },
+            }, {
+                campaign_id,
+                negative: true,
+                keyword: {
+                    text: getRandomKeywordText(),
+                    match_type: 'EXACT',
+                },
+            }
+        ]
+        
+        const new_criteria = await customer.campaignNegatives.create(new_negative_config)
+        expect(new_criteria).toEqual({
+            id: expect.any(String),
+            resource_name: expect.any(String),
+        })
+        const criteria_ids = new_criteria.id.split('_')
+        criterion_id_1 = criteria_ids[0]
+        criterion_id_2 = criteria_ids[1]
         done()
     })
 
