@@ -9,7 +9,7 @@ export default class AdGroups extends Entity {
         super(http_controller, ENDPOINTS.adgroups, RESOURCE_NAMES.adgroup)
     }
 
-    create(config: NewAdGroupConfig): Promise<any> {
+    create(config: NewAdGroupConfig | NewAdGroupConfig[]): Promise<any> {
         return super.create(config)
     }
 }

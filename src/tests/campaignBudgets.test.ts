@@ -37,25 +37,29 @@ describe('Campaign Budgets', async () => {
         budget_id = budget.id
         done()
     })
-    
+
     it('Creates 2 New Campaign Budgets', async done => {
         expect.assertions(1)
-        
+
         const new_budgets_config = [
             {
                 amount_micros: 13000000,
                 explicitly_shared: false,
-            }, {
+            },
+            {
                 amount_micros: 14000000,
                 explicitly_shared: false,
-            }
+            },
         ]
         const budgets = await customer.campaignBudgets.create(new_budgets_config)
-        expect(budget).toEqual({
-            id: expect.any(String),
-            resource_name: expect.any(String),
-        })
-        const budget_ids = budgets.id.split('_')
+
+        expect(budgets).toContainEqual(
+            expect.objectContaining({
+                id: expect.any(String),
+                resource_name: expect.any(String),
+            })
+        )
+        const budget_ids = budgets.map((x: any, i: number) => x.id)
         budget_id_1 = budget_ids[0]
         budget_id_2 = budget_ids[1]
         done()
@@ -69,19 +73,20 @@ describe('Campaign Budgets', async () => {
     })
 
     it('Updates Multiple Campaign Budgets', async done => {
-        expect.assertions(1)
+        expect.assertions(2)
         const update_config = [
             {
                 id: budget_id_1,
                 update: {
                     amount_micros: 16000000,
                 },
-            }, {
+            },
+            {
                 id: budget_id_2,
                 update: {
                     amount_micros: 17000000,
                 },
-            }
+            },
         ]
         await customer.campaignBudgets.update(update_config)
         const campaign_budget_1 = await customer.campaignBudgets.retrieve(budget_id_1)
@@ -92,15 +97,15 @@ describe('Campaign Budgets', async () => {
     })
 
     it('Deletes Campaign Budget', async () => {
-        expect.assertions(1)
+        expect.assertions(3)
         await customer.campaignBudgets.delete(budget_id)
         const campaign_budget = await customer.campaignBudgets.retrieve(budget_id)
         expect(campaign_budget.status).toBe('REMOVED')
-        
+
         await customer.campaignBudgets.delete(budget_id_1)
         const campaign_budget_1 = await customer.campaignBudgets.retrieve(budget_id_1)
         expect(campaign_budget_1.status).toBe('REMOVED')
-        
+
         await customer.campaignBudgets.delete(budget_id_2)
         const campaign_budget_2 = await customer.campaignBudgets.retrieve(budget_id_2)
         expect(campaign_budget_2.status).toBe('REMOVED')

@@ -47,34 +47,37 @@ describe('AdGroups', async () => {
         new_adgroup_id = new_adgroup.id
         done()
     })
-    
+
     it('Creates 2 New AdGroups', async done => {
-        expect.assertions(1)
-        
+        expect.assertions(2)
+
         const new_ad_groups_config = [
             {
                 name: getRandomAdgroupName(),
                 campaign_id,
-            }, {
+            },
+            {
                 name: getRandomAdgroupName(),
                 campaign_id,
-            }
+            },
         ]
 
         const new_adgroups = await customer.adgroups.create(new_ad_groups_config)
 
-        expect(new_adgroups).toEqual({
-            id: expect.any(String),
-            resource_name: expect.any(String),
-        })
-        
-        const adgroup_ids = new_adgroups.id.split('_')
-        
+        expect(new_adgroups).toContainEqual(
+            expect.objectContaining({
+                id: expect.any(String),
+                resource_name: expect.any(String),
+            })
+        )
+
+        const adgroup_ids = new_adgroups.map((x: any, i: number) => x.id)
+
         expect(adgroup_ids.length).toEqual(2)
 
         new_adgroup_id_1 = adgroup_ids[0]
         new_adgroup_id_2 = adgroup_ids[1]
-        
+
         done()
     })
 
@@ -96,28 +99,29 @@ describe('AdGroups', async () => {
         const updated_adgroup = await customer.adgroups.retrieve(new_adgroup_id)
         expect(updated_adgroup.name).toEqual(new_adgroup_name)
     })
-    
+
     it('Updates Multiple AdGroups', async () => {
-        expect.assertions(1)
+        expect.assertions(2)
         const new_adgroup_name_1 = getRandomAdgroupName()
         const new_adgroup_name_2 = getRandomAdgroupName()
-        
+
         const update_config = [
             {
                 id: new_adgroup_id_1,
                 update: {
                     name: new_adgroup_name_1,
                 },
-            }, {
+            },
+            {
                 id: new_adgroup_id_2,
                 update: {
                     name: new_adgroup_name_2,
                 },
-            }
+            },
         ]
-        
+
         await customer.adgroups.update(update_config)
-        
+
         const updated_adgroup_1 = await customer.adgroups.retrieve(new_adgroup_id_1)
         expect(updated_adgroup_1.name).toEqual(new_adgroup_name_1)
         const updated_adgroup_2 = await customer.adgroups.retrieve(new_adgroup_id_2)
@@ -125,15 +129,15 @@ describe('AdGroups', async () => {
     })
 
     it('Deletes AdGroups', async () => {
-        expect.assertions(1)
+        expect.assertions(3)
         await customer.adgroups.delete(new_adgroup_id)
         const adgroup = await customer.adgroups.retrieve(new_adgroup_id)
         expect(adgroup.status).toBe('REMOVED')
-        
+
         await customer.adgroups.delete(new_adgroup_id_1)
         const adgroup1 = await customer.adgroups.retrieve(new_adgroup_id_1)
         expect(adgroup1.status).toBe('REMOVED')
-        
+
         await customer.adgroups.delete(new_adgroup_id_2)
         const adgroup2 = await customer.adgroups.retrieve(new_adgroup_id_2)
         expect(adgroup2.status).toBe('REMOVED')

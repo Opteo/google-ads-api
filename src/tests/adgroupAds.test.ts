@@ -47,10 +47,10 @@ describe('AdGroup Ads', async () => {
         })
         done()
     })
-    
+
     it('Creates 2 New Ads', async done => {
-        expect.assertions(1)
-        
+        expect.assertions(2)
+
         const new_ads_config = [
             {
                 ad_group_id,
@@ -64,7 +64,8 @@ describe('AdGroup Ads', async () => {
                         path2: 'path two here1',
                     },
                 },
-            }, {
+            },
+            {
                 ad_group_id,
                 ad: {
                     final_urls: 'http://hello.com',
@@ -76,22 +77,24 @@ describe('AdGroup Ads', async () => {
                         path2: 'path two here2',
                     },
                 },
-            }
+            },
         ]
         const new_ads = await customer.ads.create(new_ads_config)
-        
-        expect(new_ads).toEqual({
-            id: expect.any(String),
-            resource_name: expect.any(String),
-        })
-        
-        const ad_ids = new_ads.id.split('_')
-        
+
+        expect(new_ads).toContainEqual(
+            expect.objectContaining({
+                id: expect.any(String),
+                resource_name: expect.any(String),
+            })
+        )
+
+        const ad_ids = new_ads.map((x: any, i: number) => x.id)
+
         expect(ad_ids.length).toEqual(2)
-        
+
         ad_id_1 = ad_ids[0]
         ad_id_2 = ad_ids[1]
-        
+
         done()
     })
 
@@ -114,44 +117,45 @@ describe('AdGroup Ads', async () => {
         expect(ad.status).toBe('PAUSED')
         done()
     })
-    
+
     it('Updates Multiple Ads', async done => {
-        expect.assertions(1)
+        expect.assertions(2)
         const update_config = [
             {
                 id: ad_id_1,
                 update: {
                     status: 'PAUSED',
                 },
-            }, {
+            },
+            {
                 id: ad_id_2,
                 update: {
                     status: 'PAUSED',
                 },
-            }
+            },
         ]
-        
+
         await customer.ads.update(update_config)
-        
+
         const ad1 = await customer.ads.retrieve(ad_id_1)
         expect(ad1.status).toBe('PAUSED')
-        
+
         const ad2 = await customer.ads.retrieve(ad_id_2)
         expect(ad2.status).toBe('PAUSED')
-        
+
         done()
     })
 
     it('Removes Ads', async done => {
-        expect.assertions(1)
+        expect.assertions(3)
         await customer.ads.delete(ad_id)
         const ad = await customer.ads.retrieve(ad_id)
         expect(ad.status).toBe('REMOVED')
-        
+
         await customer.ads.delete(ad_id_1)
         const ad1 = await customer.ads.retrieve(ad_id_1)
         expect(ad1.status).toBe('REMOVED')
-        
+
         await customer.ads.delete(ad_id_2)
         const ad2 = await customer.ads.retrieve(ad_id_2)
         expect(ad2.status).toBe('REMOVED')

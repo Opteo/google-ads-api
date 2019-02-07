@@ -51,13 +51,13 @@ describe('AdGroup Keywords', async () => {
         })
         done()
     })
-    
+
     it('Creates 2 New Keywords', async done => {
-        expect.assertions(1)
-        
+        expect.assertions(3)
+
         const keyword_text_1 = getRandomKeywordText()
         const keyword_text_2 = getRandomKeywordText()
-        
+
         const new_keywords_config = [
             {
                 ad_group_id,
@@ -65,28 +65,37 @@ describe('AdGroup Keywords', async () => {
                     text: keyword_text_1,
                     match_type: 'BROAD',
                 },
-            }, {
+            },
+            {
                 ad_group_id,
                 keyword: {
                     text: keyword_text_2,
                     match_type: 'BROAD',
                 },
-            }
+            },
         ]
 
         const new_keywords = await customer.keywords.create(new_keywords_config)
 
-        const keyword_ids = new_keywords.id.split('_')
+        expect(new_keywords).toContainEqual(
+            expect.objectContaining({
+                id: expect.any(String),
+                resource_name: expect.any(String),
+            })
+        )
+
+        const keyword_ids = new_keywords.map((x: any, i: number) => x.id)
+
         keyword_id_1 = keyword_ids[0]
         keyword_id_2 = keyword_ids[1]
-        
+
         const keyword_data_1 = await customer.adgroupCriterions.retrieve(keyword_id_1)
 
         expect(keyword_data_1.keyword).toEqual({
             text: keyword_text_1,
             match_type: 'BROAD',
         })
-        
+
         const keyword_data_2 = await customer.adgroupCriterions.retrieve(keyword_id_2)
 
         expect(keyword_data_2.keyword).toEqual({
@@ -115,29 +124,30 @@ describe('AdGroup Keywords', async () => {
         const updated_keyword = await customer.keywords.retrieve(keyword_id)
         expect(updated_keyword.status).toEqual('PAUSED')
     })
-    
+
     it('Updates Multiple Keywords', async () => {
-        expect.assertions(1)
-        
+        expect.assertions(2)
+
         const update_config = [
             {
                 id: keyword_id_1,
                 update: {
                     status: 'PAUSED',
                 },
-            }, {
+            },
+            {
                 id: keyword_id_2,
                 update: {
                     status: 'PAUSED',
                 },
-            }
+            },
         ]
-        
+
         await customer.adgroupCriterions.update(update_config)
 
         const updated_keyword_1 = await customer.keywords.retrieve(keyword_id_1)
         expect(updated_keyword_1.status).toEqual('PAUSED')
-        
+
         const updated_keyword_2 = await customer.keywords.retrieve(keyword_id_2)
         expect(updated_keyword_2.status).toEqual('PAUSED')
     })

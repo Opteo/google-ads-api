@@ -9,7 +9,7 @@ export default class SharedSets extends Entity {
         super(http_controller, ENDPOINTS.shared_sets, RESOURCE_NAMES.shared_set)
     }
 
-    create(config: NewSharedSetConfig): Promise<any> {
+    create(config: NewSharedSetConfig | NewSharedSetConfig[]): Promise<any> {
         return super.create(config)
     }
 

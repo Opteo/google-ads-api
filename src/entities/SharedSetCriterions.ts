@@ -9,7 +9,7 @@ export default class SharedSetCriterions extends Entity {
         super(http_controller, ENDPOINTS.shared_set_criteria, RESOURCE_NAMES.shared_set_criterion)
     }
 
-    create(config: NewSharedSetCriterion): Promise<any> {
+    create(config: NewSharedSetCriterion | NewSharedSetCriterion[]): Promise<any> {
         return super.create(config)
     }
 }

@@ -59,7 +59,7 @@ describe('Campaigns', async () => {
     })
 
     it('Creates 2 New Campaigns', async done => {
-        expect.assertions(1)
+        expect.assertions(2)
 
         const response = await customer.campaignBudgets.create({
             amount_micros: 12000000,
@@ -88,12 +88,14 @@ describe('Campaigns', async () => {
 
         const new_campaigns = await customer.campaigns.create(new_campaigns_config)
 
-        expect(new_campaigns).toEqual({
-            id: expect.any(String),
-            resource_name: expect.any(String),
-        })
+        expect(new_campaigns).toContainEqual(
+            expect.objectContaining({
+                id: expect.any(String),
+                resource_name: expect.any(String),
+            })
+        )
 
-        const campaign_ids = new_campaigns.id.split('_')
+        const campaign_ids = new_campaigns.map((x: any) => x.id)
 
         expect(campaign_ids.length).toEqual(2)
 
@@ -140,7 +142,7 @@ describe('Campaigns', async () => {
             },
         }
 
-        expect.assertions(1)
+        expect.assertions(2)
         await customer.campaigns.update([config_1, config_2])
 
         const campaign_1 = await customer.campaigns.retrieve(new_campaign_id_1)
@@ -151,7 +153,7 @@ describe('Campaigns', async () => {
     })
 
     it('Deletes Campaign', async () => {
-        expect.assertions(1)
+        expect.assertions(3)
 
         await customer.campaigns.delete(new_campaign_id)
         const campaign = await customer.campaigns.retrieve(new_campaign_id)
