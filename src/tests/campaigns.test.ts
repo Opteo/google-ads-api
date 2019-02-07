@@ -19,6 +19,7 @@ describe('Campaigns', async () => {
     })
 
     let new_campaign_id = ''
+    let new_campaign_id_2 = ''
 
     it('Lists All Campaigns', async () => {
         expect.assertions(1)
@@ -88,8 +89,12 @@ describe('Campaigns', async () => {
             id: expect.any(String),
             resource_name: expect.any(String),
         })
+        
+        const campaign_ids = new_campaigns.id.split('_')
 
-        expect(new_campaigns.id.split('_').length).toEqual(2)
+        expect(campaign_ids.length).toEqual(2)
+        
+        new_campaign_id_2 = campaign_ids[1]
 
         done()
     })
@@ -112,6 +117,33 @@ describe('Campaigns', async () => {
         await customer.campaigns.update(config)
         const campaign = await customer.campaigns.retrieve(new_campaign_id)
         expect(campaign.name).toBe(new_campaign_name)
+    })
+    
+    it('Updates Multiple Campaign Names', async () => {
+        const new_campaign_name_1 = getRandomCampaignName()
+        const config_1 = {
+            id: new_campaign_id,
+            update: {
+                name: new_campaign_name_1,
+            },
+        }
+        
+        const new_campaign_name_2 = getRandomCampaignName()
+        const config_2 = {
+            id: new_campaign_id_2,
+            update: {
+                name: new_campaign_name_2,
+            },
+        }
+        
+        expect.assertions(1)
+        await customer.campaigns.update([config_1, config_2])
+        
+        const campaign_1 = await customer.campaigns.retrieve(new_campaign_id)
+        expect(campaign_1.name).toBe(new_campaign_name_1)
+        
+        const campaign_2 = await customer.campaigns.retrieve(new_campaign_id_2)
+        expect(campaign_2.name).toBe(new_campaign_name_2)
     })
 
     it('Deletes Campaign', async () => {
