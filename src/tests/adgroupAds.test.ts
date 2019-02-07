@@ -15,6 +15,7 @@ describe('AdGroup Ads', async () => {
     })
 
     let ad_id = ''
+    let ad_id_1 = ''
     let ad_id_2 = ''
     const ad_group_id = 56328868446
 
@@ -88,6 +89,7 @@ describe('AdGroup Ads', async () => {
         
         expect(ad_ids.length).toEqual(2)
         
+        ad_id_1 = ad_ids[0]
         ad_id_2 = ad_ids[1]
         
         done()
@@ -117,7 +119,7 @@ describe('AdGroup Ads', async () => {
         expect.assertions(1)
         const update_config = [
             {
-                id: ad_id,
+                id: ad_id_1,
                 update: {
                     status: 'PAUSED',
                 },
@@ -131,8 +133,8 @@ describe('AdGroup Ads', async () => {
         
         await customer.ads.update(update_config)
         
-        const ad = await customer.ads.retrieve(ad_id)
-        expect(ad.status).toBe('PAUSED')
+        const ad1 = await customer.ads.retrieve(ad_id_1)
+        expect(ad1.status).toBe('PAUSED')
         
         const ad2 = await customer.ads.retrieve(ad_id_2)
         expect(ad2.status).toBe('PAUSED')
@@ -143,7 +145,11 @@ describe('AdGroup Ads', async () => {
     it('Removes Ads', async done => {
         expect.assertions(1)
         await customer.ads.delete(ad_id)
-        const ad1 = await customer.ads.retrieve(ad_id)
+        const ad = await customer.ads.retrieve(ad_id)
+        expect(ad.status).toBe('REMOVED')
+        
+        await customer.ads.delete(ad_id_1)
+        const ad1 = await customer.ads.retrieve(ad_id_1)
         expect(ad1.status).toBe('REMOVED')
         
         await customer.ads.delete(ad_id_2)
