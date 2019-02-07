@@ -496,10 +496,10 @@ bluebird@^3.5.2:
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.2.tgz#1be0908e054a751754549c270489c1505d4ab15a"
   integrity sha512-dhHTWMI7kMx5whMQntl7Vr9C6BvV10lFXDAasnqnrMYhXVCzzk6IO9Fo2L75jXHT07WrOngL1WDXOp+yYS91Yg==
 
-bottleneck@^2.9.0:
-  version "2.9.0"
-  resolved "https://registry.yarnpkg.com/bottleneck/-/bottleneck-2.9.0.tgz#1cf11c3c9db1b65075fae03967418ea03ba66814"
-  integrity sha512-XXCbAhE5KtVBJD5KW1tqgaA+dopWWwSir+2168fjfmhCPlRKfGuh+yQnNpps1LVr1ow7K1gD2qOeOjHfTNsTQw==
+bottleneck@^2.16.1:
+  version "2.16.1"
+  resolved "https://registry.yarnpkg.com/bottleneck/-/bottleneck-2.16.1.tgz#6c7b3aeb7ac989b16569597cdf6d0c3da9dd56b4"
+  integrity sha512-OOHt4HXiMoXKUcQR/LBzwMYWCQxOU74c8zs6/VPCe6xO3kOAZBZqYKmrgsamVXa1wm9iztD1DAoV46KmGKLl5g==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
