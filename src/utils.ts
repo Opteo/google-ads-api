@@ -333,10 +333,9 @@ export const buildListReportConfig = (config: ListConfig, resource: string): Rep
     return report_config
 }
 
-const mapResultRowsWithId = (rows: object[]): object[] => {
+const mapRowsWithId = (rows: object[]): object[] => {
     return rows.map((row: any) => {
         const resource_name_split = row.resource_name.split('/')
-
         return {
             id: resource_name_split[resource_name_split.length - 1],
             ...row,
@@ -347,9 +346,9 @@ const mapResultRowsWithId = (rows: object[]): object[] => {
 export const mapResultsWithIds = (data: any): object => {
     let result_rows: object[]
     if (data.results && Array.isArray(data.results)) {
-        result_rows = mapResultRowsWithId(data.results)
+        result_rows = mapRowsWithId(data.results)
     } else {
-        result_rows = mapResultRowsWithId(data)
+        result_rows = mapRowsWithId(data)
     }
 
     if (result_rows.length === 1) {
