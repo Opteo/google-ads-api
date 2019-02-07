@@ -102,7 +102,7 @@ declare namespace AdGroupCriterion {
     export interface NewCriterionConfig extends NewEntityConfig {
         ad_group_id: string | number
         keyword?: object
-        listing_group?: object
+        listing_group?: ListingGroup
     }
 
     /**
