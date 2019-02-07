@@ -2,7 +2,7 @@ import { Entity, NewEntityConfig } from './Entity'
 
 declare namespace CampaignBudget {
     /**
-     * Main Campaign Interface
+     * Main CampaignBudget Interface
      * @interface
      */
     export interface CampaignBudget extends Entity {
@@ -15,6 +15,7 @@ declare namespace CampaignBudget {
         explicitly_shared: boolean
         reference_count: string
     }
+
     /**
      * Enum for DeliveryMethod
      * @readonly
@@ -38,7 +39,7 @@ declare namespace CampaignBudget {
         PAUSED = 'PAUSED',
         UNSPECIFIED = 'UNSPECIFIED',
     }
-    
+
     /**
      * Enum for BudgetPeriod
      * @readonly

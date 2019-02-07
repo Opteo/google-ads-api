@@ -10,6 +10,9 @@ export default class CampaignBudgets extends Entity {
     }
 
     create(config: NewCampaignBudgetConfig): Promise<any> {
+        if (config.explicitly_shared && !config.name) {
+            throw new Error('Field { name } is required for explicitly shared campaign budgets')
+        }
         return super.create(config)
     }
 
