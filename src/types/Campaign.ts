@@ -92,7 +92,7 @@ declare namespace Campaign {
         UNSPECIFIED = 'UNSPECIFIED',
         VIDEO = 'VIDEO',
     }
-    
+
     /**
      * Enum for AdvertisingChannelSubType
      * @readonly
@@ -109,7 +109,7 @@ declare namespace Campaign {
         UNKNOWN = 'UNKNOWN',
         UNSPECIFIED = 'UNSPECIFIED',
         VIDEO_ACTION = 'VIDEO_ACTION',
-        VIDEO_OUTSTREAM = 'VIDEO_OUTSTREAM'
+        VIDEO_OUTSTREAM = 'VIDEO_OUTSTREAM',
     }
 
     /**
@@ -131,7 +131,7 @@ declare namespace Campaign {
         cpc_bid_ceiling_micros: string | number
         target_spend_micros?: string | number
     }
-    
+
     /**
      * Interface for ManualCpc
      * @interface
@@ -139,7 +139,7 @@ declare namespace Campaign {
     export interface ManualCpcy {
         enhanced_cpc_enabled: boolean
     }
-    
+
     /**
      * Interface for ManualCpc
      * @interface
@@ -147,7 +147,7 @@ declare namespace Campaign {
     export interface ManualCpc {
         enhanced_cpc_enabled: boolean
     }
-    
+
     /**
      * Interface for MaximizeConversionValue
      * @interface
@@ -155,7 +155,7 @@ declare namespace Campaign {
     export interface MaximizeConversionValue {
         target_roas: string | number
     }
-    
+
     /**
      * Interface for PercentCpc
      * @interface
@@ -164,7 +164,7 @@ declare namespace Campaign {
         cpc_bid_ceiling_micros?: string | number
         enhanced_cpc_enabled?: boolean
     }
-    
+
     /**
      * Interface for TargetCpa
      * @interface
@@ -174,7 +174,7 @@ declare namespace Campaign {
         cpc_bid_ceiling_micros?: string | number
         cpc_bid_floor_micros?: string | number
     }
-    
+
     /**
      * Interface for TargetRoas
      * @interface
@@ -192,7 +192,6 @@ declare namespace Campaign {
     export interface NewCampaignConfig extends NewEntityConfig {
         budget_id: string
         advertising_channel_type: AdvertisingChannelType | keyof typeof AdvertisingChannelType
-        target_spend?: TargetSpend
         status?: CampaignStatus
         network_setting?: NetworkSettings
         advertising_channel_sub_type?: AdvertisingChannelSubType | keyof typeof AdvertisingChannelSubType
