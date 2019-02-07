@@ -17,6 +17,7 @@ describe('Campaign Ad Schedules', async () => {
 
     const campaign_id = 1485014801
     let criterion_id = ''
+    let criterion_id_1 = ''
     let criterion_id_2 = ''
 
     it('Lists Campaign Ad Schedules', async () => {
@@ -55,7 +56,7 @@ describe('Campaign Ad Schedules', async () => {
             {
                 campaign_id,
                 ad_schedule: {
-                    day_of_week: 'FRIDAY',
+                    day_of_week: 'WEDNESDAY',
                     start_hour: 10,
                     end_hour: 18,
                     start_minute: 'ZERO',
@@ -84,6 +85,7 @@ describe('Campaign Ad Schedules', async () => {
         
         expect(criteria_ids.length).toEqual(2)
         
+        criterion_id_1 = criteria_ids[0]
         criterion_id_2 = criteria_ids[1]
         
         done()
@@ -113,7 +115,7 @@ describe('Campaign Ad Schedules', async () => {
         expect.assertions(1)
         const update_config = [
             {
-                id: criterion_id,
+                id: criterion_id_1,
                 update: {
                     bid_modifier: 0.3,
                 },
@@ -127,7 +129,7 @@ describe('Campaign Ad Schedules', async () => {
         
         await customer.campaignAdSchedules.update(update_config)
 
-        const updated_ad_schedule_1 = await customer.campaignAdSchedules.retrieve(criterion_id)
+        const updated_ad_schedule_1 = await customer.campaignAdSchedules.retrieve(criterion_id_1)
         expect(updated_ad_schedule_1.bid_modifier).toEqual(0.3)
         
         const updated_ad_schedule_2 = await customer.campaignAdSchedules.retrieve(criterion_id_2)
@@ -137,6 +139,12 @@ describe('Campaign Ad Schedules', async () => {
     it('Deletes Campaign Ad Schedule', async () => {
         expect.assertions(1)
         const res = await customer.campaignAdSchedules.delete(criterion_id)
+        expect(res).toBeInstanceOf(Object)
+        
+        const res = await customer.campaignAdSchedules.delete(criterion_id_1)
+        expect(res).toBeInstanceOf(Object)
+        
+        const res = await customer.campaignAdSchedules.delete(criterion_id_2)
         expect(res).toBeInstanceOf(Object)
     })
 })
