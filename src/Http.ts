@@ -1,5 +1,5 @@
 import request from 'request'
-import { random, isUndefined, get, values } from 'lodash'
+import { random, isUndefined, get, values, keys } from 'lodash'
 import retry from 'bluebird-retry'
 import Bottleneck from 'bottleneck'
 
@@ -195,6 +195,15 @@ export default class Http implements HttpController {
             (qs && qs.query && qs.query.toLowerCase().includes('limit'))
         ) {
             const response = await this.queryWithRetry(options)
+
+            /*
+                Sometimes the API returns no `results` field in the response when
+                there are no results. In that case, all it returns is the `fieldMask`.
+            */
+            if (keys(response).length === 1 && keys(response)[0] === 'fieldMask') {
+                return []
+            }
+
             return response.results ? values(transformObjectKeys(response.results)) : transformObjectKeys(response)
         }
 

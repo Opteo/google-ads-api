@@ -1,6 +1,6 @@
 {
   "name": "google-ads-api",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Google Ads API Client Library for JavaScript",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
@@ -42,8 +42,8 @@
     "jest": "^23.4.1",
     "prettier": "^1.14.3",
     "ts-jest": "^23.0.0",
-    "tslint": "^5.11.0",
-    "typescript": "^2.9.2"
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.1"
   },
   "dependencies": {
     "@types/lodash": "^4.14.112",
