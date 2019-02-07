@@ -153,6 +153,7 @@ export default class Http implements HttpController {
                     update_mask: getUpdateMask(operation.update),
                 }
                 update_operation.update.resource_name = this.buildResourceName(entity, operation.id)
+                return update_operation
             })
             options.body = JSON.stringify({ operations })
         } else {
