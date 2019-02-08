@@ -16,7 +16,7 @@ export default class Entity {
         return this.http_controller.retrieve(this.endpoint, entity_id)
     }
 
-    public create(config: NewEntityConfig): Promise<any> {
+    public create(config: NewEntityConfig | NewEntityConfig[]): Promise<any> {
         return this.http_controller.create(config, this.endpoint)
     }
 
@@ -24,7 +24,7 @@ export default class Entity {
         return this.http_controller.list(config, this.resource)
     }
 
-    public update(config: EntityUpdateConfig): Promise<any> {
+    public update(config: EntityUpdateConfig | EntityUpdateConfig[]): Promise<any> {
         return this.http_controller.update(config, this.endpoint)
     }
 

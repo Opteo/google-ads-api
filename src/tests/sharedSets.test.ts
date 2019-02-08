@@ -19,6 +19,8 @@ describe('Shared Sets', async () => {
     })
 
     let new_shared_set_id = ''
+    // let new_shared_set_id_1 = ''
+    // let new_shared_set_id_2 = ''
 
     it('Lists All Shared Sets', async () => {
         expect.assertions(1)
@@ -45,13 +47,46 @@ describe('Shared Sets', async () => {
         done()
     })
 
-    it('Retrieves Single Shared Set', async () => {
+    /*  Internal error encountered. The appropriate error code isn't part of
+ the API yet. We may not be able to bulk create or edit shared sets
+    
+    it('Creates 2 New Shared Sets', async done => {
+        expect.assertions(1)
+
+        const new_shared_sets_config = [
+            {
+                name: getRandomSharedSetName(),
+                type: 'NEGATIVE_KEYWORDS',
+            },
+            {
+                name: getRandomSharedSetName(),
+                type: 'NEGATIVE_KEYWORDS',
+            },
+        ]
+        const new_shared_sets = await customer.sharedSets.create(new_shared_sets_config)
+
+        expect(new_shared_sets).toContainEqual(
+            expect.objectContaining({
+                id: expect.any(String),
+                resource_name: expect.any(String),
+            })
+        )
+
+        const shared_set_ids = new_shared_sets.map((x: any, i: number) => x.id)
+
+        new_shared_set_id_1 = shared_set_ids[0]
+        new_shared_set_id_2 = shared_set_ids[1]
+        done()
+    }) */
+
+    it('Retrieves Single Shared Set', async done => {
         expect.assertions(1)
         const shared_set = await customer.sharedSets.retrieve(new_shared_set_id)
         expect(shared_set.id).toEqual(new_shared_set_id)
+        done()
     })
 
-    it('Updates Shared Set', async () => {
+    it('Updates Shared Set', async done => {
         expect.assertions(1)
         const new_shared_set_name = getRandomSharedSetName()
         await customer.sharedSets.update({
@@ -62,11 +97,45 @@ describe('Shared Sets', async () => {
         })
         const shared_set = await customer.sharedSets.retrieve(new_shared_set_id)
         expect(shared_set.name).toBe(new_shared_set_name)
+        done()
     })
 
-    it('Deletes Shared Set', async () => {
+    /* it('Updates Multiple Shared Sets', async () => {
+        expect.assertions(1)
+        const new_shared_set_name_1 = getRandomSharedSetName()
+        const new_shared_set_name_2 = getRandomSharedSetName()
+
+        const update_config = [
+            {
+                id: new_shared_set_id_1,
+                update: {
+                    name: new_shared_set_name_1,
+                },
+            },
+            {
+                id: new_shared_set_id_2,
+                update: {
+                    name: new_shared_set_name_2,
+                },
+            },
+        ]
+        await customer.sharedSets.update(update_config)
+        const shared_set_1 = await customer.sharedSets.retrieve(new_shared_set_id_1)
+        expect(shared_set_1.name).toBe(new_shared_set_name_1)
+        const shared_set_2 = await customer.sharedSets.retrieve(new_shared_set_id_2)
+        expect(shared_set_2.name).toBe(new_shared_set_name_2)
+    }) */
+
+    it('Deletes Shared Set', async done => {
         await customer.sharedSets.delete(new_shared_set_id)
         const shared_set = await customer.sharedSets.retrieve(new_shared_set_id)
         expect(shared_set.status).toBe('REMOVED')
+        /* await customer.sharedSets.delete(new_shared_set_id_1)
+        const shared_set_1 = await customer.sharedSets.retrieve(new_shared_set_id_1)
+        expect(shared_set_1.status).toBe('REMOVED')
+        await customer.sharedSets.delete(new_shared_set_id_2)
+        const shared_set_2 = await customer.sharedSets.retrieve(new_shared_set_id_2)
+        expect(shared_set_2.status).toBe('REMOVED') */
+        done()
     })
 })

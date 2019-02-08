@@ -9,7 +9,7 @@ export default class Campaigns extends Entity {
         super(http_controller, ENDPOINTS.campaigns, RESOURCE_NAMES.campaign)
     }
 
-    create(config: NewCampaignConfig): Promise<any> {
+    create(config: NewCampaignConfig | NewCampaignConfig[]): Promise<any> {
         return super.create(config)
     }
 
