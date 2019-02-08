@@ -13,7 +13,7 @@ export default class Campaigns extends Entity {
         return super.create(config)
     }
 
-    retrieve<Campaign>(campaign_id: string): Promise<any> {
+    retrieve(campaign_id: string): Promise<any> {
         return super.retrieve(campaign_id)
     }
 }

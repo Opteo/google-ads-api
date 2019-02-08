@@ -120,7 +120,8 @@ describe('AdGroup Ads', async () => {
 
     it('Updates Multiple Ads', async done => {
         expect.assertions(2)
-        const update_config = [
+
+        await customer.ads.update([
             {
                 id: ad_id_1,
                 update: {
@@ -133,9 +134,7 @@ describe('AdGroup Ads', async () => {
                     status: 'PAUSED',
                 },
             },
-        ]
-
-        await customer.ads.update(update_config)
+        ])
 
         const ad1 = await customer.ads.retrieve(ad_id_1)
         expect(ad1.status).toBe('PAUSED')

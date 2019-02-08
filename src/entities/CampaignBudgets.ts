@@ -22,7 +22,7 @@ export default class CampaignBudgets extends Entity {
         return super.create(config)
     }
 
-    retrieve<CampaignBudget>(campaign_budget_id: string): Promise<any> {
+    retrieve(campaign_budget_id: string): Promise<any> {
         return super.retrieve(campaign_budget_id)
     }
 }

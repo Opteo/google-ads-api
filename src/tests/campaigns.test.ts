@@ -67,10 +67,12 @@ describe('Campaigns', async () => {
             name: `test-budget-${(Math.random() * 1000000 + 1).toFixed(0)}`,
         })
 
-        const new_campaigns_config = [
+        const { id } = response
+
+        const new_campaigns = await customer.campaigns.create([
             {
                 name: getRandomCampaignName(),
-                budget_id: response.id,
+                budget_id: id,
                 advertising_channel_type: 'DISPLAY',
                 target_spend: {
                     cpc_bid_ceiling_micros: 1000000,
@@ -78,15 +80,13 @@ describe('Campaigns', async () => {
             },
             {
                 name: getRandomCampaignName(),
-                budget_id: response.id,
+                budget_id: id,
                 advertising_channel_type: 'SEARCH',
                 target_spend: {
                     cpc_bid_ceiling_micros: 1000000,
                 },
             },
-        ]
-
-        const new_campaigns = await customer.campaigns.create(new_campaigns_config)
+        ])
 
         expect(new_campaigns).toContainEqual(
             expect.objectContaining({

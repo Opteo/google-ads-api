@@ -51,7 +51,7 @@ describe('AdGroups', async () => {
     it('Creates 2 New AdGroups', async done => {
         expect.assertions(2)
 
-        const new_ad_groups_config = [
+        const new_adgroups = await customer.adgroups.create([
             {
                 name: getRandomAdgroupName(),
                 campaign_id,
@@ -60,9 +60,7 @@ describe('AdGroups', async () => {
                 name: getRandomAdgroupName(),
                 campaign_id,
             },
-        ]
-
-        const new_adgroups = await customer.adgroups.create(new_ad_groups_config)
+        ])
 
         expect(new_adgroups).toContainEqual(
             expect.objectContaining({

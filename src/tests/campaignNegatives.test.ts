@@ -22,8 +22,6 @@ describe('Campaign Negatives', async () => {
 
     const campaign_id = 1485014801
     let criterion_id = ''
-    let criterion_id_1 = ''
-    let criterion_id_2 = ''
 
     it('Lists Campaign Negatives', async () => {
         expect.assertions(1)
@@ -54,7 +52,7 @@ describe('Campaign Negatives', async () => {
     it('Creates Multiple New Campaign Negatives', async done => {
         expect.assertions(1)
 
-        const new_negative_config = [
+        const new_criteria = await customer.campaignNegatives.create([
             {
                 campaign_id,
                 negative: true,
@@ -71,18 +69,14 @@ describe('Campaign Negatives', async () => {
                     match_type: 'EXACT',
                 },
             },
-        ]
+        ])
 
-        const new_criteria = await customer.campaignNegatives.create(new_negative_config)
         expect(new_criteria).toContainEqual(
             expect.objectContaining({
                 id: expect.any(String),
                 resource_name: expect.any(String),
             })
         )
-        const criteria_ids = new_criteria.map((x: any, i: number) => x.id)
-        criterion_id_1 = criteria_ids[0]
-        criterion_id_2 = criteria_ids[1]
         done()
     })
 

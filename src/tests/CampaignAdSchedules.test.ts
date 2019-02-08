@@ -52,7 +52,7 @@ describe('Campaign Ad Schedules', async () => {
     it('Creates 2 New Campaign Ad Schedules', async done => {
         expect.assertions(2)
 
-        const new_criteria_config = [
+        const new_criteria = await customer.campaignAdSchedules.create([
             {
                 campaign_id,
                 ad_schedule: {
@@ -73,9 +73,7 @@ describe('Campaign Ad Schedules', async () => {
                     end_minute: 'ZERO',
                 },
             },
-        ]
-
-        const new_criteria = await customer.campaignAdSchedules.create(new_criteria_config)
+        ])
 
         expect(new_criteria).toContainEqual(
             expect.objectContaining({
@@ -116,7 +114,8 @@ describe('Campaign Ad Schedules', async () => {
 
     it('Updates Multiple Campaign Ad Schedules', async () => {
         expect.assertions(2)
-        const update_config = [
+
+        await customer.campaignAdSchedules.update([
             {
                 id: criterion_id_1,
                 update: {
@@ -129,9 +128,7 @@ describe('Campaign Ad Schedules', async () => {
                     bid_modifier: 0.2,
                 },
             },
-        ]
-
-        await customer.campaignAdSchedules.update(update_config)
+        ])
 
         const updated_ad_schedule_1 = await customer.campaignAdSchedules.retrieve(criterion_id_1)
         expect(updated_ad_schedule_1.bid_modifier).toEqual(0.3)

@@ -20,9 +20,9 @@ describe('Shared Set Criterions (Keyword)', async () => {
     let criterion_id = ''
     let criterion_id_1 = ''
     let criterion_id_2 = ''
-    const keyword_text = getRandomCriterionText()
-    const keyword_text_1 = getRandomCriterionText()
-    const keyword_text_2 = getRandomCriterionText()
+    const keyword_text: string = getRandomCriterionText()
+    const keyword_text_1: string = getRandomCriterionText()
+    const keyword_text_2: string = getRandomCriterionText()
 
     it('Lists Shared Set Criterions', async () => {
         expect.assertions(1)
@@ -51,7 +51,7 @@ describe('Shared Set Criterions (Keyword)', async () => {
     it('Creates Multiple New Shared Set Criteria', async done => {
         expect.assertions(1)
 
-        const new_criteria_config = [
+        const new_criteria = await customer.sharedSetCriterions.create([
             {
                 shared_set_id: 1788591305,
                 keyword: {
@@ -66,8 +66,7 @@ describe('Shared Set Criterions (Keyword)', async () => {
                     match_type: 'EXACT',
                 },
             },
-        ]
-        const new_criteria = await customer.sharedSetCriterions.create(new_criteria_config)
+        ])
 
         expect(new_criteria).toContainEqual(
             expect.objectContaining({

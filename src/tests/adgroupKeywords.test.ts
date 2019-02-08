@@ -2,7 +2,7 @@ import GoogleAdsApi from '..'
 import config from '../config'
 jest.setTimeout(30000)
 
-const getRandomKeywordText = () => `test-keyword-${(Math.random() * 1000000 + 1).toFixed(0)}`
+const getRandomKeywordText = (): string => `test-keyword-${(Math.random() * 1000000 + 1).toFixed(0)}`
 
 describe('AdGroup Keywords', async () => {
     const lib_instance = new GoogleAdsApi({
@@ -59,7 +59,7 @@ describe('AdGroup Keywords', async () => {
         const keyword_text_1 = getRandomKeywordText()
         const keyword_text_2 = getRandomKeywordText()
 
-        const new_keywords_config = [
+        const new_keywords = await customer.keywords.create([
             {
                 ad_group_id,
                 keyword: {
@@ -74,9 +74,7 @@ describe('AdGroup Keywords', async () => {
                     match_type: 'BROAD',
                 },
             },
-        ]
-
-        const new_keywords = await customer.keywords.create(new_keywords_config)
+        ])
 
         expect(new_keywords).toContainEqual(
             expect.objectContaining({

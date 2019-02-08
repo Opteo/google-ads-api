@@ -13,7 +13,7 @@ export default class SharedSets extends Entity {
         return super.create(config)
     }
 
-    retrieve<SharedSet>(shared_set_id: string | number): Promise<any> {
+    retrieve(shared_set_id: string | number): Promise<any> {
         return super.retrieve(shared_set_id)
     }
 }

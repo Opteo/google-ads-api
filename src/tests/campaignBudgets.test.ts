@@ -41,7 +41,7 @@ describe('Campaign Budgets', async () => {
     it('Creates 2 New Campaign Budgets', async done => {
         expect.assertions(1)
 
-        const new_budgets_config = [
+        const budgets = await customer.campaignBudgets.create([
             {
                 amount_micros: 13000000,
                 explicitly_shared: false,
@@ -50,8 +50,7 @@ describe('Campaign Budgets', async () => {
                 amount_micros: 14000000,
                 explicitly_shared: false,
             },
-        ]
-        const budgets = await customer.campaignBudgets.create(new_budgets_config)
+        ])
 
         expect(budgets).toContainEqual(
             expect.objectContaining({
