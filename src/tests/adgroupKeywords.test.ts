@@ -22,12 +22,13 @@ describe('AdGroup Keywords', async () => {
     let keyword_id_1 = ''
     let keyword_id_2 = ''
 
-    it('Lists All Keywords', async () => {
+    it('Lists All Keywords', async done => {
         expect.assertions(1)
         const keywords = await customer.adgroupCriterions.list({
             constraints: ['ad_group.id =' + ad_group_id],
         })
         expect(keywords).toBeInstanceOf(Array)
+        done()
     })
 
     it('Creates New Keyword', async done => {
@@ -112,7 +113,7 @@ describe('AdGroup Keywords', async () => {
         done()
     })
 
-    it('Updates Keyword', async () => {
+    it('Updates Keyword', async done => {
         expect.assertions(1)
         await customer.adgroupCriterions.update({
             id: keyword_id,
@@ -123,6 +124,7 @@ describe('AdGroup Keywords', async () => {
 
         const updated_keyword = await customer.keywords.retrieve(keyword_id)
         expect(updated_keyword.status).toEqual('PAUSED')
+        done()
     })
 
     it('Updates Multiple Keywords', async () => {

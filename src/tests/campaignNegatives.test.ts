@@ -92,29 +92,4 @@ describe('Campaign Negatives', async () => {
         expect(criterion_id).toContain(negative_keyword.criterion_id)
         done()
     })
-
-    // it('Updates Campaign Negative', async () => {
-    //     expect.assertions(1)
-    //     const new_text = getRandomKeywordText()
-    //     await customer.campaignNegatives.update({
-    //         id: criterion_id,
-    //         update: {
-    //             keyword: {
-    //                 text: new_text
-    //             }
-    //         }
-    //     })
-
-    //     const updated_keyword = await customer.campaignNegatives.retrieve(criterion_id)
-    //     console.log(updated_keyword);
-    //     expect(updated_keyword.keyword.text).toEqual(new_text)
-    // })
-
-    // it('Deletes Campaign Negative', async () => {
-    //     expect.assertions(1)
-    //     await customer.campaignNegatives.delete(criterion_id)
-    //     const updated_keyword = await customer.campaignNegatives.retrieve(criterion_id)
-    //     // console.log(updated_keyword);
-    //     // expect(updated_keyword.status).toEqual('REMOVED')
-    // })
 })

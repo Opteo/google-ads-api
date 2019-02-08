@@ -79,13 +79,14 @@ describe('Shared Sets', async () => {
         done()
     }) */
 
-    it('Retrieves Single Shared Set', async () => {
+    it('Retrieves Single Shared Set', async done => {
         expect.assertions(1)
         const shared_set = await customer.sharedSets.retrieve(new_shared_set_id)
         expect(shared_set.id).toEqual(new_shared_set_id)
+        done()
     })
 
-    it('Updates Shared Set', async () => {
+    it('Updates Shared Set', async done => {
         expect.assertions(1)
         const new_shared_set_name = getRandomSharedSetName()
         await customer.sharedSets.update({
@@ -96,6 +97,7 @@ describe('Shared Sets', async () => {
         })
         const shared_set = await customer.sharedSets.retrieve(new_shared_set_id)
         expect(shared_set.name).toBe(new_shared_set_name)
+        done()
     })
 
     /* it('Updates Multiple Shared Sets', async () => {
@@ -124,7 +126,7 @@ describe('Shared Sets', async () => {
         expect(shared_set_2.name).toBe(new_shared_set_name_2)
     }) */
 
-    it('Deletes Shared Set', async () => {
+    it('Deletes Shared Set', async done => {
         await customer.sharedSets.delete(new_shared_set_id)
         const shared_set = await customer.sharedSets.retrieve(new_shared_set_id)
         expect(shared_set.status).toBe('REMOVED')
@@ -134,5 +136,6 @@ describe('Shared Sets', async () => {
         await customer.sharedSets.delete(new_shared_set_id_2)
         const shared_set_2 = await customer.sharedSets.retrieve(new_shared_set_id_2)
         expect(shared_set_2.status).toBe('REMOVED') */
+        done()
     })
 })
