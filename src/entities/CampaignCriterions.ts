@@ -9,7 +9,7 @@ export default class CampaignCriterions extends Entity {
         super(http_controller, ENDPOINTS.campaign_criteria, RESOURCE_NAMES.campaign_criteria)
     }
 
-    create(config: NewCriterionConfig): Promise<any> {
+    create(config: NewCriterionConfig | NewCriterionConfig[]): Promise<any> {
         return super.create(config)
     }
 }

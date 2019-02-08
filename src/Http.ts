@@ -76,14 +76,19 @@ export default class Http implements HttpController {
     /*
      *   PUBLIC METHODS
      */
-    public async create(config: NewEntityConfig, entity: string) {
+    public async create(config: NewEntityConfig | NewEntityConfig[], entity: string) {
         await this.client.account_promise
         const url = this.getRequestUrl('mutate', entity)
         const options = await this.getRequestOptions('POST', url)
 
-        config = this.formatRequestConfig(config, entity)
-        const create_operation = { create: config }
-        options.body = JSON.stringify({ operations: [create_operation] })
+        if (Array.isArray(config)) {
+            const operations = config.map(operation => ({ create: this.formatRequestConfig(operation, entity) }))
+            options.body = JSON.stringify({ operations })
+        } else {
+            config = this.formatRequestConfig(config, entity)
+            const create_operation = { create: config }
+            options.body = JSON.stringify({ operations: [create_operation] })
+        }
 
         return this.queryApi(options).then(response => {
             return mapResultsWithIds(response)
@@ -142,17 +147,29 @@ export default class Http implements HttpController {
         return modified_result || parsed_result
     }
 
-    public async update(config: EntityUpdateConfig, entity: string) {
+    public async update(config: EntityUpdateConfig | EntityUpdateConfig[], entity: string) {
         await this.client.account_promise
         const url = this.getRequestUrl('mutate', entity)
         const options = await this.getRequestOptions('POST', url)
 
-        const update_operation = {
-            update: config.update,
-            update_mask: getUpdateMask(config.update),
+        if (Array.isArray(config)) {
+            const operations = config.map(operation => {
+                const update_operation = {
+                    update: operation.update,
+                    update_mask: getUpdateMask(operation.update),
+                }
+                update_operation.update.resource_name = this.buildResourceName(entity, operation.id)
+                return update_operation
+            })
+            options.body = JSON.stringify({ operations })
+        } else {
+            const update_operation = {
+                update: config.update,
+                update_mask: getUpdateMask(config.update),
+            }
+            update_operation.update.resource_name = this.buildResourceName(entity, config.id)
+            options.body = JSON.stringify({ operations: [update_operation] })
         }
-        update_operation.update.resource_name = this.buildResourceName(entity, config.id)
-        options.body = JSON.stringify({ operations: [update_operation] })
 
         return this.queryApi(options).then(response => {
             return mapResultsWithIds(response)

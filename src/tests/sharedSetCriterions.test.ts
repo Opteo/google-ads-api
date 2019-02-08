@@ -18,7 +18,11 @@ describe('Shared Set Criterions (Keyword)', async () => {
     })
 
     let criterion_id = ''
+    let criterion_id_1 = ''
+    let criterion_id_2 = ''
     const keyword_text = getRandomCriterionText()
+    const keyword_text_1 = getRandomCriterionText()
+    const keyword_text_2 = getRandomCriterionText()
 
     it('Lists Shared Set Criterions', async () => {
         expect.assertions(1)
@@ -44,6 +48,40 @@ describe('Shared Set Criterions (Keyword)', async () => {
         done()
     })
 
+    it('Creates Multiple New Shared Set Criteria', async done => {
+        expect.assertions(1)
+
+        const new_criteria_config = [
+            {
+                shared_set_id: 1788591305,
+                keyword: {
+                    text: keyword_text_1,
+                    match_type: 'EXACT',
+                },
+            },
+            {
+                shared_set_id: 1788591305,
+                keyword: {
+                    text: keyword_text_2,
+                    match_type: 'EXACT',
+                },
+            },
+        ]
+        const new_criteria = await customer.sharedSetCriterions.create(new_criteria_config)
+
+        expect(new_criteria).toContainEqual(
+            expect.objectContaining({
+                id: expect.any(String),
+                resource_name: expect.any(String),
+            })
+        )
+
+        const criteria_ids = new_criteria.map((x: any, i: number) => x.id)
+        criterion_id_1 = criteria_ids[0]
+        criterion_id_2 = criteria_ids[1]
+        done()
+    })
+
     it('Retrieves Single Shared Set', async () => {
         expect.assertions(1)
         const criterion = await customer.sharedSetCriterions.retrieve(criterion_id)
@@ -52,5 +90,7 @@ describe('Shared Set Criterions (Keyword)', async () => {
 
     it('Deletes Shared Set Criterion', async () => {
         await customer.sharedSetCriterions.delete(criterion_id)
+        await customer.sharedSetCriterions.delete(criterion_id_1)
+        await customer.sharedSetCriterions.delete(criterion_id_2)
     })
 })

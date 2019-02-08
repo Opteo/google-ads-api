@@ -11,7 +11,7 @@ export default class Keywords extends AdGroupCriterions {
         super(http_controller)
     }
 
-    create(config: NewKeywordConfig): Promise<any> {
+    create(config: NewKeywordConfig | NewKeywordConfig[]): Promise<any> {
         return super.create(config)
     }
 }

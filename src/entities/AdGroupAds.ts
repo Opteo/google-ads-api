@@ -13,7 +13,7 @@ export default class AdGroupAds extends Entity {
         return super.list(config)
     }
 
-    create(config: NewAdConfig): Promise<any> {
+    create(config: NewAdConfig | NewAdConfig[]): Promise<any> {
         return super.create(config)
     }
 }
