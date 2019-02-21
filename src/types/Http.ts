@@ -1,5 +1,6 @@
 import { NewEntityConfig, ListConfig } from './Entity'
 import { UpdateConfig, ReportConfig } from './Global'
+import { SuggestGeoTargetConstantConfig } from './GeoTargetConstant'
 
 declare namespace Http {
     /**
@@ -14,6 +15,7 @@ declare namespace Http {
         delete(entity: string, entity_id: string | number): Promise<object>
         query(entity: string): Promise<object>
         report(config: ReportConfig): Promise<object>
+        suggest(config: SuggestGeoTargetConstantConfig, entity: string): Promise<any>
     }
 
     /**

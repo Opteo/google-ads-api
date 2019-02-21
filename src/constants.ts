@@ -1,4 +1,4 @@
-export const ADWORDS_API_BASE_URL = 'https://googleads.googleapis.com/v0/customers/'
+export const ADWORDS_API_BASE_URL = 'https://googleads.googleapis.com/v0/'
 export const ADWORDS_AUTH_URL = 'https://accounts.google.com/o/oauth2/token'
 
 export enum ENDPOINTS {
@@ -14,6 +14,7 @@ export enum ENDPOINTS {
     shared_sets = 'sharedSets',
     shared_set_criteria = 'sharedCriteria',
     conversion_actions = 'conversionActions',
+    geo_target_constants = 'geoTargetConstants',
 }
 
 export enum RESOURCE_NAMES {
@@ -27,4 +28,5 @@ export enum RESOURCE_NAMES {
     shared_set = 'shared_set',
     shared_set_criterion = 'shared_criterion',
     conversion_action = 'conversion_action',
+    geo_target_constant = 'geo_target_constant',
 }

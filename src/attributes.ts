@@ -224,6 +224,15 @@ const entities: { [key: string]: object } = {
         type: '',
         view_through_lookback_window_days: '',
     },
+    geo_target_constant: {
+        canonical_name: '',
+        country_code: '',
+        id: '',
+        name: '',
+        resource_name: '',
+        status: '',
+        target_type: '',
+    },
 }
 
 export default entities

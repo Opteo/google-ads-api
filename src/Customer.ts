@@ -11,6 +11,7 @@ import Keywords from './entities/Keywords'
 import SharedSets from './entities/SharedSets'
 import SharedSetCriterions from './entities/SharedSetCriterions'
 import ConversionActions from './entities/ConversionActions'
+import GeoTargetConstants from './entities/GeoTargetConstants'
 
 import { ENDPOINTS, RESOURCE_NAMES } from './constants'
 import { Customer } from './types/Customer'
@@ -36,6 +37,11 @@ export default function Customer(http_controller: HttpController): Customer {
         sharedSets: new SharedSets(http_controller),
         sharedSetCriterions: new SharedSetCriterions(http_controller),
         conversionActions: new ConversionActions(http_controller),
+        geoTargetConstants: new GeoTargetConstants(
+            http_controller,
+            ENDPOINTS.geo_target_constants,
+            RESOURCE_NAMES.geo_target_constant
+        ),
         update: (config: UpdateConfig) => http_controller.update(config, 'mutateCustomer'),
         retrieve: () => http_controller.retrieve(ENDPOINTS.customers),
         query: (query: string) => http_controller.query(query),
