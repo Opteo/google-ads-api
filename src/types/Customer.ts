@@ -11,7 +11,7 @@ import Keywords from '../entities/Keywords'
 import SharedSets from '../entities/SharedSets'
 import SharedSetCriterions from '../entities/SharedSetCriterions'
 
-import { ReportConfig } from './Global'
+import { ReportConfig, UpdateConfig } from './Global'
 
 declare namespace Customer {
     /**
@@ -31,6 +31,7 @@ declare namespace Customer {
         keywords: Keywords
         sharedSets: SharedSets
         sharedSetCriterions: SharedSetCriterions
+        update: (config: UpdateConfig) => Promise<any>
         retrieve: () => Promise<any>
         query: (query: string) => Promise<any>
         report: (config: ReportConfig) => Promise<any>

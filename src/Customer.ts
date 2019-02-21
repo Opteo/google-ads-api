@@ -14,7 +14,7 @@ import SharedSetCriterions from './entities/SharedSetCriterions'
 import { ENDPOINTS, RESOURCE_NAMES } from './constants'
 import { Customer } from './types/Customer'
 import { HttpController } from './types/Http'
-import { ReportConfig } from './types/Global'
+import { ReportConfig, UpdateConfig } from './types/Global'
 
 export default function Customer(http_controller: HttpController): Customer {
     return {
@@ -34,6 +34,7 @@ export default function Customer(http_controller: HttpController): Customer {
         keywords: new Keywords(http_controller),
         sharedSets: new SharedSets(http_controller),
         sharedSetCriterions: new SharedSetCriterions(http_controller),
+        update: (config: UpdateConfig) => http_controller.update(config, 'mutateCustomer'),
         retrieve: () => http_controller.retrieve(ENDPOINTS.customers),
         query: (query: string) => http_controller.query(query),
         report: (config: ReportConfig) => http_controller.report(config),

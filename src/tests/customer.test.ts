@@ -15,9 +15,12 @@ describe('Customer', async () => {
         refresh_token: config.refresh_token,
     })
 
+    let customer_name: string
+
     it('Retrieves Customer Data', async () => {
         expect.assertions(1)
         const customer_data = await customer.retrieve()
+        customer_name = customer_data.descriptive_name
         expect(customer_data).toBeInstanceOf(Object)
     })
 
@@ -33,5 +36,18 @@ describe('Customer', async () => {
         `)
         // console.log(data)
         expect(data).toBeInstanceOf(Array)
+    })
+
+    it('Updates a customer', async () => {
+        expect.assertions(2)
+        const customer_data = await customer.update({
+            update: { descriptive_name: 'Testing' },
+        })
+        expect(customer_data).toBeInstanceOf(Object)
+        const customer_updated_data = await customer.retrieve()
+        expect(customer_updated_data.descriptive_name).toEqual('Testing')
+        await customer.update({
+            update: { descriptive_name: customer_name },
+        })
     })
 })
