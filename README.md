@@ -7,8 +7,6 @@
 <p align="center">
   Unofficial Google Ads API client library for Node
 </p>
-<!-- &circle-token=ab3cda2c83e0a13712c96c088871e16ead2b78c7 -->
-
 <p align="center">
   <a href="https://www.npmjs.com/package/google-ads-api">
     <img src="https://img.shields.io/npm/v/google-ads-api.svg?style=flat-square">
