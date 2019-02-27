@@ -1,12 +1,43 @@
+<p align="center">
+  <a href="https://github.com/opteo/google-ads-api">
+    Google Ads Api
+  </a>
+</p>
+
+<p align="center">
+  Unofficial Google Ads API client library for Node
+</p>
+<p align="center">
+  <a href="https://www.npmjs.com/package/google-ads-api">
+    <img src="https://img.shields.io/npm/v/google-ads-api.svg?style=flat-square">
+  </a>
+  <a>
+    <img src="https://img.shields.io/npm/dm/google-ads-api.svg?style=flat-square">
+    </a>
+  <a>
+    <img src="https://img.shields.io/david/opteo/google-ads-api.svg?style=flat-square">
+  </a>
+</p>
+
+<p align="center">Built by <a href="https://opteo.com">Opteo</a></p>
+
+<p align="center">
+  <a href="https://opteo.com">
+    <img src="https://app.opteo.com/icons/logo.svg">
+  </a>
+</p>
+
 > ⚠️ **Caution: This project is still under heavy development.**
 
-## Google Ads API Client Library for JavaScript
+## Installation
 
-<!-- [Documentation](https://google-ads-javascript.netlify.com) -->
+```bash
+$ yarn add google-ads-api
+```
 
-### Usage
+## Usage
 
-#### Authentication
+### Authentication
 
 ```javascript
 import GoogleAdsApi from 'google-ads-api'
@@ -24,7 +55,7 @@ const customer = google_ads_js.Customer({
 })
 ```
 
-#### Basic Usage
+### Basic Usage
 
 ```javascript
 // Get single campaign
@@ -46,7 +77,7 @@ const campaigns = await customer.report({
 })
 ```
 
-#### Using Google Ads Query Language
+### Using Google Ads Query Language
 
 ```javascript
 const campaigns = await customer.search(`
