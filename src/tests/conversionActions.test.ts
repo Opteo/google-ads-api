@@ -3,7 +3,7 @@ import config from '../config'
 jest.setTimeout(30000)
 
 const getRandomConversionActionName = () =>
-    `test-conversion-action-${(Math.random() * 100 + 1).toFixed(0)} (created during library test)`
+    `test-conversion-action-${(Math.random() * 10000000 + 1).toFixed(0)} (created during library test)`
 
 describe('ConversionActions', async () => {
     const lib_instance = new GoogleAdsApi({
@@ -25,7 +25,7 @@ describe('ConversionActions', async () => {
     it('Lists All ConversionActions', async () => {
         expect.assertions(1)
         const conversion_actions = await customer.conversionActions.list({
-            order_by: ['id'],
+            order_by: 'id',
         })
         expect(conversion_actions).toBeInstanceOf(Array)
     })
@@ -34,7 +34,7 @@ describe('ConversionActions', async () => {
         expect.assertions(1)
 
         const new_conversion_action = await customer.conversionActions.create({
-            name: getRandomConversionActionName(),
+            name: getRandomConversionActionName() + '1',
             type: 'AD_CALL',
             category: 'LEAD',
             include_in_conversions_metric: true,
@@ -64,7 +64,7 @@ describe('ConversionActions', async () => {
 
         const new_conversion_actions = await customer.conversionActions.create([
             {
-                name: getRandomConversionActionName(),
+                name: getRandomConversionActionName() + '2',
                 type: 'AD_CALL',
                 category: 'LEAD',
                 include_in_conversions_metric: true,
@@ -80,7 +80,7 @@ describe('ConversionActions', async () => {
                 phone_call_duration_seconds: 45,
             },
             {
-                name: getRandomConversionActionName(),
+                name: getRandomConversionActionName() + '3',
                 type: 'WEBPAGE',
                 category: 'SIGNUP',
                 include_in_conversions_metric: true,
@@ -113,65 +113,77 @@ describe('ConversionActions', async () => {
         done()
     })
 
-    it('Retrieves Single ConversionAction', async () => {
-        expect.assertions(1)
-        const conversion_action = await customer.conversionActions.retrieve(new_conversion_action_id)
-        expect(new_conversion_action_id).toContain(conversion_action.id)
+    it('Retrieves Single ConversionAction', async done => {
+        setTimeout(async () => {
+            expect.assertions(1)
+            const conversion_action = await customer.conversionActions.retrieve(new_conversion_action_id)
+            expect(new_conversion_action_id).toContain(conversion_action.id)
+        }, 1000)
+
+        done()
     })
 
-    it('Updates ConversionAction', async () => {
-        expect.assertions(1)
-        const new_conversion_action_name = getRandomConversionActionName()
-        await customer.conversionActions.update({
-            id: new_conversion_action_id,
-            update: {
-                name: new_conversion_action_name,
-            },
-        })
-        const updated_conversion_action = await customer.conversionActions.retrieve(new_conversion_action_id)
-        expect(updated_conversion_action.name).toEqual(new_conversion_action_name)
+    it('Updates ConversionAction', async done => {
+        setTimeout(async () => {
+            expect.assertions(1)
+            const new_conversion_action_name = getRandomConversionActionName()
+            await customer.conversionActions.update({
+                id: new_conversion_action_id,
+                update: {
+                    name: new_conversion_action_name,
+                },
+            })
+            const updated_conversion_action = await customer.conversionActions.retrieve(new_conversion_action_id)
+            expect(updated_conversion_action.name).toEqual(new_conversion_action_name)
+        }, 1000)
+        done()
     })
 
-    it('Updates Multiple ConversionActions', async () => {
-        expect.assertions(2)
-        const new_conversion_action_name_1 = getRandomConversionActionName()
-        const new_conversion_action_name_2 = getRandomConversionActionName()
+    it('Updates Multiple ConversionActions', async done => {
+        setTimeout(async () => {
+            expect.assertions(1)
+            const new_conversion_action_name_1 = getRandomConversionActionName()
+            const new_conversion_action_name_2 = getRandomConversionActionName()
 
-        const update_config = [
-            {
-                id: new_conversion_action_id_1,
-                update: {
-                    name: new_conversion_action_name_1,
+            const update_config = [
+                {
+                    id: new_conversion_action_id_1,
+                    update: {
+                        name: new_conversion_action_name_1,
+                    },
                 },
-            },
-            {
-                id: new_conversion_action_id_2,
-                update: {
-                    name: new_conversion_action_name_2,
+                {
+                    id: new_conversion_action_id_2,
+                    update: {
+                        name: new_conversion_action_name_2,
+                    },
                 },
-            },
-        ]
+            ]
 
-        await customer.conversionActions.update(update_config)
+            await customer.conversionActions.update(update_config)
 
-        const updated_conversion_action_1 = await customer.conversionActions.retrieve(new_conversion_action_id_1)
-        expect(updated_conversion_action_1.name).toEqual(new_conversion_action_name_1)
-        const updated_conversion_action_2 = await customer.conversionActions.retrieve(new_conversion_action_id_2)
-        expect(updated_conversion_action_2.name).toEqual(new_conversion_action_name_2)
+            const updated_conversion_action_1 = await customer.conversionActions.retrieve(new_conversion_action_id_1)
+            expect(updated_conversion_action_1.name).toEqual(new_conversion_action_name_1)
+            const updated_conversion_action_2 = await customer.conversionActions.retrieve(new_conversion_action_id_2)
+            expect(updated_conversion_action_2.name).toEqual(new_conversion_action_name_2)
+        }, 1000)
+        done()
     })
 
     it('Deletes ConversionActions', async () => {
-        expect.assertions(3)
-        await customer.conversionActions.delete(new_conversion_action_id)
-        const conversion_action = await customer.conversionActions.retrieve(new_conversion_action_id)
-        expect(conversion_action.status).toBe('REMOVED')
+        setTimeout(async () => {
+            expect.assertions(3)
+            await customer.conversionActions.delete(new_conversion_action_id)
+            const conversion_action = await customer.conversionActions.retrieve(new_conversion_action_id)
+            expect(conversion_action.status).toBe('REMOVED')
 
-        await customer.conversionActions.delete(new_conversion_action_id_1)
-        const conversion_action1 = await customer.conversionActions.retrieve(new_conversion_action_id_1)
-        expect(conversion_action1.status).toBe('REMOVED')
+            await customer.conversionActions.delete(new_conversion_action_id_1)
+            const conversion_action1 = await customer.conversionActions.retrieve(new_conversion_action_id_1)
+            expect(conversion_action1.status).toBe('REMOVED')
 
-        await customer.conversionActions.delete(new_conversion_action_id_2)
-        const conversion_action2 = await customer.conversionActions.retrieve(new_conversion_action_id_2)
-        expect(conversion_action2.status).toBe('REMOVED')
+            await customer.conversionActions.delete(new_conversion_action_id_2)
+            const conversion_action2 = await customer.conversionActions.retrieve(new_conversion_action_id_2)
+            expect(conversion_action2.status).toBe('REMOVED')
+        }, 1000)
     })
 })
