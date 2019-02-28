@@ -25,7 +25,7 @@ describe('ConversionActions', async () => {
     it('Lists All ConversionActions', async () => {
         expect.assertions(1)
         const conversion_actions = await customer.conversionActions.list({
-            order_by: 'id',
+            order_by: ['id'],
         })
         expect(conversion_actions).toBeInstanceOf(Array)
     })
@@ -34,7 +34,7 @@ describe('ConversionActions', async () => {
         expect.assertions(1)
 
         const new_conversion_action = await customer.conversionActions.create({
-            name: getRandomConversionActionName() + '1',
+            name: getRandomConversionActionName(),
             type: 'AD_CALL',
             category: 'LEAD',
             include_in_conversions_metric: true,
@@ -64,7 +64,7 @@ describe('ConversionActions', async () => {
 
         const new_conversion_actions = await customer.conversionActions.create([
             {
-                name: getRandomConversionActionName() + '2',
+                name: getRandomConversionActionName(),
                 type: 'AD_CALL',
                 category: 'LEAD',
                 include_in_conversions_metric: true,
@@ -80,7 +80,7 @@ describe('ConversionActions', async () => {
                 phone_call_duration_seconds: 45,
             },
             {
-                name: getRandomConversionActionName() + '3',
+                name: getRandomConversionActionName(),
                 type: 'WEBPAGE',
                 category: 'SIGNUP',
                 include_in_conversions_metric: true,
