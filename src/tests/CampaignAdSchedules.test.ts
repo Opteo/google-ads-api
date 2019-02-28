@@ -15,7 +15,7 @@ describe('Campaign Ad Schedules', async () => {
         refresh_token: config.refresh_token,
     })
 
-    const campaign_id = 1485014801
+    const campaign_id = config.testing.campaign_id
     let criterion_id = ''
     let criterion_id_1 = ''
     let criterion_id_2 = ''

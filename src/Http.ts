@@ -162,6 +162,13 @@ export default class Http implements HttpController {
                 return update_operation
             })
             options.body = JSON.stringify({ operations })
+        } else if (entity && entity === 'mutateCustomer') {
+            const update_operation = {
+                update: config.update,
+                update_mask: getUpdateMask(config.update),
+            }
+            update_operation.update.resource_name = this.buildResourceName(entity, config.id)
+            options.body = JSON.stringify({ operation: update_operation })
         } else {
             const update_operation = {
                 update: config.update,
@@ -199,6 +206,14 @@ export default class Http implements HttpController {
 
         const raw_result = await this.queryApi(options)
         return raw_result
+    }
+
+    public async suggest(config: any, entity: string) {
+        await this.client.account_promise
+        const url = this.getRequestUrl('suggest', entity)
+        const options = await this.getRequestOptions('POST', url)
+        options.body = JSON.stringify(config)
+        return this.queryWithRetry(options)
     }
 
     /*
@@ -384,15 +399,23 @@ export default class Http implements HttpController {
 
     private getRequestUrl(operation_type?: string, endpoint?: string, entity_id?: string): string {
         if (endpoint && endpoint.includes('customers')) {
-            return `${ADWORDS_API_BASE_URL}${this.client.cid}`
+            return `${ADWORDS_API_BASE_URL}customers/${this.client.cid}`
+        }
+        if (endpoint && endpoint === 'mutateCustomer') {
+            return `${ADWORDS_API_BASE_URL}customers/${this.client.cid}:mutate`
+        }
+        if (endpoint && endpoint === 'geoTargetConstants') {
+            return entity_id
+                ? `${ADWORDS_API_BASE_URL}${endpoint}/${entity_id}`
+                : `${ADWORDS_API_BASE_URL}${endpoint}:suggest`
         }
         if (operation_type && operation_type.includes('get')) {
-            return `${ADWORDS_API_BASE_URL}${this.client.cid}/${endpoint}/${entity_id}`
+            return `${ADWORDS_API_BASE_URL}customers/${this.client.cid}/${endpoint}/${entity_id}`
         }
         if (operation_type && operation_type.includes('mutate')) {
-            return `${ADWORDS_API_BASE_URL}${this.client.cid}/${endpoint}:mutate`
+            return `${ADWORDS_API_BASE_URL}customers/${this.client.cid}/${endpoint}:mutate`
         }
-        return `${ADWORDS_API_BASE_URL}${this.client.cid}/googleAds:search`
+        return `${ADWORDS_API_BASE_URL}customers/${this.client.cid}/googleAds:search`
     }
 
     private buildResourceName(endpoint?: string, entity_id?: string | number): string {

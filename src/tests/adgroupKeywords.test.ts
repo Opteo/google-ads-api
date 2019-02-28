@@ -17,7 +17,7 @@ describe('AdGroup Keywords', async () => {
         refresh_token: config.refresh_token,
     })
 
-    const ad_group_id = 60170225920
+    const ad_group_id = config.testing.ad_group_id
     let keyword_id = ''
     let keyword_id_1 = ''
     let keyword_id_2 = ''

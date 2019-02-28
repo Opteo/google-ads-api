@@ -208,6 +208,31 @@ const entities: { [key: string]: object } = {
     shared_criterion: {
         type: '',
     },
+    conversion_action: {
+        app_id: '',
+        category: '',
+        click_through_lookback_window_days: '',
+        counting_type: '',
+        id: '',
+        include_in_conversions_metric: '',
+        name: '',
+        owner_customer: '',
+        phone_call_duration_seconds: '',
+        resource_name: '',
+        status: '',
+        tag_snippets: '',
+        type: '',
+        view_through_lookback_window_days: '',
+    },
+    geo_target_constant: {
+        canonical_name: '',
+        country_code: '',
+        id: '',
+        name: '',
+        resource_name: '',
+        status: '',
+        target_type: '',
+    },
 }
 
 export default entities

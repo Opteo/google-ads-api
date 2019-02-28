@@ -15,8 +15,8 @@ describe('Campaign Shared Sets', async () => {
         refresh_token: config.refresh_token,
     })
 
-    const campaign_id = 1485014801
-    const shared_set_id = 1788591305
+    const campaign_id = config.testing.campaign_id
+    const shared_set_id = config.testing.shared_set_id
     const campaign_shared_set = `${campaign_id}_${shared_set_id}`
 
     it('Creates New Campaign Shared Set', async done => {
