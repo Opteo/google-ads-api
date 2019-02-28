@@ -25,7 +25,7 @@ export default class GeoTargetConstants {
     }
 
     /**
-     * Retrieves Single Campaign Shared Set
+     * Retrieves Single Geo Target Constant
      * @param {string} geo_target_constant_id
      */
     public retrieve(geo_target_constant_id: string | number): Promise<any> {
