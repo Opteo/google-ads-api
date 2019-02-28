@@ -17,7 +17,7 @@ describe('AdGroup Ads', async () => {
     let ad_id = ''
     let ad_id_1 = ''
     let ad_id_2 = ''
-    const ad_group_id = 56328868446
+    const ad_group_id = config.testing.ad_group_id
 
     it('Lists All AdGroup Ads', async () => {
         expect.assertions(1)
