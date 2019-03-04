@@ -189,7 +189,7 @@ export default class Http implements HttpController {
         return this.queryApi(options)
     }
 
-    public async query(query: string, page_size = 50) {
+    public async query(query: string, page_size = 10000) {
         await this.client.account_promise
         const url = this.getRequestUrl()
         const options = await this.getRequestOptions('POST', url)
