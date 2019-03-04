@@ -122,7 +122,7 @@ export default class Http implements HttpController {
             return pre_query_hook_result
         }
 
-        const raw_result = await this.query(query)
+        const raw_result = await this.query(query, config.page_size)
         const result = await formatQueryResults(
             raw_result,
             config.entity,
@@ -202,6 +202,34 @@ export default class Http implements HttpController {
         const options = await this.getRequestOptions('POST', url)
 
         query = query.replace(/\s/g, ' ')
+
+        /*
+            This next section serves to remedy the current odd 
+            behavior around limit/page_size of the API. 
+
+            At the moment, this is what happens:
+
+            - If the page_size is higher than the limit:
+                - the limit is ignored
+                - the page_size is set to the limit
+                - SOLUTION: don't paginate
+            - If the page_size is lower than the limit:
+                - the limit is ignored
+                - SOLUTION: stop paginating when limit is hit
+
+            We're going to get in touch with Google about this.
+        */
+
+        const has_limit = query.toLowerCase().includes(' limit ')
+        if (has_limit) {
+            const limit = +query
+                .toLowerCase()
+                .split(' limit ')[1]
+                .trim()
+
+            options.limit = limit
+        }
+
         options.qs = { query, page_size }
 
         const raw_result = await this.queryApi(options)
@@ -220,12 +248,9 @@ export default class Http implements HttpController {
      *   PRIVATE METHODS
      */
     private async queryApi(options: RequestOptions) {
-        const { method, url, qs } = options
-        if (
-            method === 'GET' ||
-            url.includes('mutate') ||
-            (qs && qs.query && qs.query.toLowerCase().includes('limit'))
-        ) {
+        const { method, url, qs, limit } = options
+
+        if (method === 'GET' || url.includes('mutate') || (limit && qs && qs.page_size && qs.page_size >= limit)) {
             const response = await this.queryWithRetry(options)
 
             /*
@@ -287,6 +312,11 @@ export default class Http implements HttpController {
         while (hasNextPage()) {
             const page_data = await getNextPage()
             query_results = query_results.concat(page_data)
+
+            if (options.limit && query_results.length >= options.limit) {
+                query_results = query_results.slice(0, options.limit)
+                break
+            }
         }
 
         return parser.parseResult(query_results)
@@ -296,7 +326,7 @@ export default class Http implements HttpController {
         const work = async () => {
             const { response, body } = await this.throttler.wrap(this.doHttpRequest).withOptions(
                 {
-                    expiration: 1000 * 60, // 1 minute until we give up.
+                    expiration: 1000 * 60 * 5, // 5 minutes until we give up.
                 },
                 options
             )

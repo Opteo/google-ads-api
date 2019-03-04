@@ -102,6 +102,7 @@ declare namespace Global {
         order_by?: string | Array<string>
         sort_order?: string
         convert_micros?: boolean
+        page_size?: number
     }
 
     /**

@@ -58,6 +58,7 @@ declare namespace Http {
             page_token?: string
         }
         body?: string
+        limit?: number
     }
 
     /**
