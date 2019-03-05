@@ -25,7 +25,7 @@ export const getUpdateMask = (update_object: any): string => {
     for (const key in update_object) {
         if (isObject(update_object[key])) {
             mask +=
-                Object.keys(update_object).length === 0
+                Object.keys(update_object[key]).length === 0
                     ? key
                     : Object.keys(update_object[key])
                           .map(child_key => `${key}.${child_key}`)
