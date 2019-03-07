@@ -95,7 +95,7 @@ declare namespace Global {
         metrics?: Array<string>
         segments?: Array<string>
         constraints?: Array<string | object | Constraint>
-        date_constant?: DateConstant | keyof typeof DateConstant
+        date_constant?: DateConstant
         from_date?: string // ISO 8601(YYYY-MM-DD) format
         to_date?: string // ISO 8601(YYYY-MM-DD) format
         limit?: number
@@ -141,19 +141,33 @@ declare namespace Global {
      * @readonly
      * @enum {string}
      */
-    enum DateConstant {
-        LAST_7_DAYS = 'LAST_7_DAYS',
-        LAST_14_DAYS = 'LAST_14_DAYS',
-        LAST_30_DAYS = 'LAST_30_DAYS',
-        LAST_BUSINESS_WEEK = 'LAST_BUSINESS_WEEK',
-        LAST_MONTH = 'LAST_MONTH',
-        THIS_MONTH = 'THIS_MONTH',
-        LAST_WEEK_MON_SUN = 'LAST_WEEK_MON_SUN',
-        LAST_WEEK_SUN_SAT = 'LAST_WEEK_SUN_SAT',
-        THIS_WEEK_MON_TODAY = 'THIS_WEEK_MON_TODAY',
-        THIS_WEEK_SUN_TODAY = 'THIS_WEEK_SUN_TODAY',
-        YESTERDAY = 'YESTERDAY',
-        TODAY = 'TODAY',
-    }
+    // enum DateConstant {
+    //     LAST_7_DAYS = 'LAST_7_DAYS',
+    //     LAST_14_DAYS = 'LAST_14_DAYS',
+    //     LAST_30_DAYS = 'LAST_30_DAYS',
+    //     LAST_BUSINESS_WEEK = 'LAST_BUSINESS_WEEK',
+    //     LAST_MONTH = 'LAST_MONTH',
+    //     THIS_MONTH = 'THIS_MONTH',
+    //     LAST_WEEK_MON_SUN = 'LAST_WEEK_MON_SUN',
+    //     LAST_WEEK_SUN_SAT = 'LAST_WEEK_SUN_SAT',
+    //     THIS_WEEK_MON_TODAY = 'THIS_WEEK_MON_TODAY',
+    //     THIS_WEEK_SUN_TODAY = 'THIS_WEEK_SUN_TODAY',
+    //     YESTERDAY = 'YESTERDAY',
+    //     TODAY = 'TODAY',
+    // }
+
+    type DateConstant =
+        | 'LAST_7_DAYS'
+        | 'LAST_14_DAYS'
+        | 'LAST_30_DAYS'
+        | 'LAST_BUSINESS_WEEK'
+        | 'LAST_MONTH'
+        | 'THIS_MONTH'
+        | 'LAST_WEEK_MON_SUN'
+        | 'LAST_WEEK_SUN_SAT'
+        | 'THIS_WEEK_MON_TODAY'
+        | 'THIS_WEEK_SUN_TODAY'
+        | 'YESTERDAY'
+        | 'TODAY'
 }
 export = Global
