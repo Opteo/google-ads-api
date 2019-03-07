@@ -2,45 +2,48 @@ import { orderBy } from 'lodash'
 
 import GoogleAdsApi from '..'
 import config from '../config'
+import { AdGroupStatus } from 'google-ads-node/build/lib/enums'
 
 jest.setTimeout(30000)
 
-describe('Reporting', async () => {
-    const lib_instance = new GoogleAdsApi({
+function newCustomer(customer_account_id: string, manager_cid: string, refresh_token: string) {
+    const client = new GoogleAdsApi({
         client_id: config.client_id,
         client_secret: config.client_secret,
         developer_token: config.developer_token,
     })
-
-    const customer = lib_instance.Customer({
-        customer_account_id: config.cid,
-        manager_cid: config.manager_cid,
-        refresh_token: config.refresh_token,
+    return client.Customer({
+        customer_account_id,
+        manager_cid,
+        refresh_token,
     })
+}
 
-    it('Retrieves API Attributes', async () => {
-        expect.assertions(2)
+describe('Reporting', async () => {
+    const customer = newCustomer(config.opteo_cid, config.opteo_manager_cid, config.opteo_refresh_token)
+
+    it('retrieves API attributes', async () => {
         const data = await customer.report({
             entity: 'ad_group',
             attributes: ['id', 'name', 'campaign.id'],
             order_by: 'ad_group.id',
             sort_order: 'DESC',
         })
-
         expect(data).toBeInstanceOf(Array)
         expect(data[0]).toEqual({
             campaign: {
                 resource_name: expect.any(String),
-                id: expect.any(String),
+                id: expect.any(Number),
             },
-            resource_name: expect.any(String),
-            id: expect.any(String),
-            name: expect.any(String),
+            ad_group: {
+                resource_name: expect.any(String),
+                id: expect.any(Number),
+                name: expect.any(String),
+            },
         })
     })
 
-    it('Retrieves Metrics', async () => {
-        expect.assertions(2)
+    it('retrieves metrics', async () => {
         const data = await customer.report({
             entity: 'ad_group',
             attributes: ['ad_group.id', 'campaign.id'],
@@ -52,10 +55,12 @@ describe('Reporting', async () => {
         expect(data[0]).toEqual({
             campaign: {
                 resource_name: expect.any(String),
-                id: expect.any(String),
+                id: expect.any(Number),
             },
-            resource_name: expect.any(String),
-            id: expect.any(String),
+            ad_group: {
+                resource_name: expect.any(String),
+                id: expect.any(Number),
+            },
             metrics: {
                 clicks: expect.any(Number),
                 conversions: expect.any(Number),
@@ -65,8 +70,7 @@ describe('Reporting', async () => {
         })
     })
 
-    it('Converts Micros', async () => {
-        expect.assertions(2)
+    it('converts micros', async () => {
         const data = await customer.report({
             entity: 'ad_group',
             attributes: ['id', 'campaign.id'],
@@ -79,10 +83,12 @@ describe('Reporting', async () => {
         expect(data[0]).toEqual({
             campaign: {
                 resource_name: expect.any(String),
-                id: expect.any(String),
+                id: expect.any(Number),
             },
-            resource_name: expect.any(String),
-            id: expect.any(String),
+            ad_group: {
+                resource_name: expect.any(String),
+                id: expect.any(Number),
+            },
             metrics: {
                 clicks: expect.any(Number),
                 conversions: expect.any(Number),
@@ -92,51 +98,59 @@ describe('Reporting', async () => {
         })
     })
 
-    it('Retrieves Segments', async () => {
-        expect.assertions(2)
+    it('retrieves segments', async () => {
         const data = await customer.report({
             entity: 'ad_group',
             attributes: ['ad_group.id', 'campaign.id'],
             segments: ['device'],
             limit: 10,
         })
+
         expect(data[0]).toEqual({
             campaign: {
                 resource_name: expect.any(String),
-                id: expect.any(String),
+                id: expect.any(Number),
+            },
+            ad_group: {
+                resource_name: expect.any(String),
+                id: expect.any(Number),
             },
             segments: {
-                device: expect.any(String),
+                device: expect.any(Number),
             },
-            resource_name: expect.any(String),
-            id: expect.any(String),
         })
         expect(data.length).toBeLessThanOrEqual(10)
     })
 
-    it('Date Constants', async () => {
-        expect.assertions(2)
+    it('supports date constants', async () => {
+        expect.assertions(12)
+
         const data = await customer.report({
             entity: 'ad_group',
             attributes: ['ad_group.id'],
             segments: ['date'],
             date_constant: 'TODAY',
+            limit: 10,
         })
-
         const expected_date = new Date().toJSON().slice(0, 10)
 
         expect(data).toBeInstanceOf(Array)
         expect(data[0]).toEqual({
-            segments: {
-                date: expect.stringContaining(expected_date),
+            ad_group: {
+                resource_name: expect.any(String),
+                id: expect.any(Number),
             },
-            resource_name: expect.any(String),
-            id: expect.any(String),
+            segments: {
+                date: expect.any(String),
+            },
         })
+
+        for (const row of data) {
+            expect(row.segments.date).toEqual(expected_date)
+        }
     })
 
-    it('Custom Date Ranges', async () => {
-        expect.assertions(3)
+    it('supports custom date ranges', async () => {
         const data = await customer.report({
             entity: 'ad_group',
             attributes: ['ad_group.id'],
@@ -151,8 +165,7 @@ describe('Reporting', async () => {
         expect(ordered_dates[ordered_dates.length - 1].segments.date).toEqual('2019-01-10')
     })
 
-    it('Constraints as Array of Strings', async () => {
-        expect.assertions(3)
+    it('supports constraints as an array of strings', async () => {
         const data = await customer.report({
             entity: 'ad_group',
             attributes: ['ad_group.id', 'ad_group.status'],
@@ -162,19 +175,16 @@ describe('Reporting', async () => {
 
         expect(data).toBeInstanceOf(Array)
         expect(data[0]).toEqual({
-            resource_name: expect.any(String),
-            id: expect.any(String),
-            status: expect.stringContaining('ENABLED'),
+            ad_group: {
+                resource_name: expect.any(String),
+                id: expect.any(Number),
+                status: 2,
+            },
         })
-        expect(data[1]).toEqual({
-            resource_name: expect.any(String),
-            id: expect.any(String),
-            status: expect.stringContaining('ENABLED'),
-        })
+        expect(data[1].ad_group.status).toEqual(AdGroupStatus.ENABLED)
     })
 
-    it('Constraints as Array of Shorthands', async () => {
-        expect.assertions(3)
+    it('supports constraints as an array of shorthands', async () => {
         const data = await customer.report({
             entity: 'ad_group',
             attributes: ['ad_group.id', 'ad_group.status'],
@@ -183,19 +193,22 @@ describe('Reporting', async () => {
         })
         expect(data).toBeInstanceOf(Array)
         expect(data[0]).toEqual({
-            resource_name: expect.any(String),
-            id: expect.any(String),
-            status: expect.stringContaining('ENABLED'),
+            ad_group: {
+                resource_name: expect.any(String),
+                id: expect.any(Number),
+                status: AdGroupStatus.ENABLED,
+            },
         })
         expect(data[1]).toEqual({
-            resource_name: expect.any(String),
-            id: expect.any(String),
-            status: expect.stringContaining('ENABLED'),
+            ad_group: {
+                resource_name: expect.any(String),
+                id: expect.any(Number),
+                status: AdGroupStatus.ENABLED,
+            },
         })
     })
 
-    it('Constraints as Array of Objects', async () => {
-        expect.assertions(3)
+    it('supports constraints as an array of objects', async () => {
         const data = await customer.report({
             entity: 'ad_group',
             attributes: ['ad_group.id', 'status'],
@@ -210,14 +223,53 @@ describe('Reporting', async () => {
         })
         expect(data).toBeInstanceOf(Array)
         expect(data[0]).toEqual({
-            resource_name: expect.any(String),
-            id: expect.any(String),
-            status: expect.stringContaining('ENABLED'),
+            ad_group: {
+                resource_name: expect.any(String),
+                id: expect.any(Number),
+                status: AdGroupStatus.ENABLED,
+            },
         })
         expect(data[1]).toEqual({
-            resource_name: expect.any(String),
-            id: expect.any(String),
-            status: expect.stringContaining('ENABLED'),
+            ad_group: {
+                resource_name: expect.any(String),
+                id: expect.any(Number),
+                status: AdGroupStatus.ENABLED,
+            },
         })
+    })
+
+    // TODO: Make this work
+    // it('supports using enums as constraints', async () => {
+    //     const row = await customer.report({
+    //         entity: 'ad_group',
+    //         attributes: ['ad_group.id', 'status'],
+    //         constraints: [{ 'ad_group.status': AdGroupStatus.ENABLED }],
+    //         limit: 1,
+    //     })
+    //     expect(row.ad_group.status).toEqual(AdGroupStatus.ENABLED)
+    // })
+
+    it("retrieves no rows for entities that don't exist", async () => {
+        const row = await customer.report({
+            entity: 'campaign',
+            attributes: ['id'],
+            constraints: [{ 'campaign.id': '0123456789' }],
+        })
+        expect(row.length).toEqual(0)
+    })
+})
+
+describe('Reporting (zero metric rows)', async () => {
+    const customer = newCustomer(config.cid, config.manager_cid, config.refresh_token)
+
+    it('retrieves no rows because all metrics are zero', async () => {
+        const data = await customer.report({
+            entity: 'ad_group',
+            attributes: ['ad_group.id', 'campaign.id'],
+            segments: ['device'],
+            limit: 10,
+        })
+        expect(data).toEqual([])
+        expect(data.length).toEqual(0)
     })
 })
