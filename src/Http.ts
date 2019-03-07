@@ -18,7 +18,7 @@ import {
 import parser from './parser'
 
 import GrpcClient from './grpc'
-import GoogleAdsError from './Error'
+import { GoogleAdsError, SearchGrpcError } from './Error'
 import { Client, ClientConstructor, AccountInfo, ReportConfig } from './types/Global'
 import { RequestOptions, HttpController } from './types/Http'
 import { ListConfig, EntityUpdateConfig, NewEntityConfig } from './types/Entity'
@@ -207,30 +207,36 @@ export default class Http implements HttpController {
     public async query(query: string, page_size = 10000) {
         await this.client.account_promise
 
-        const access_token = await getAccessToken(this.client)
-        const client = new GrpcClient(this.client.developer_token, access_token, this.client.manager_cid)
+        // const access_token = await getAccessToken(this.client)
+        const client = new GrpcClient(
+            this.client.developer_token,
+            this.client.client_id as string,
+            this.client.client_secret,
+            this.client.refresh_token,
+            this.client.manager_cid
+        )
 
         query = query.replace(/\s/g, ' ')
 
         const { request, limit } = client.buildSearchRequest(this.client.cid, query, page_size)
 
-        let response = null
+        try {
+            let response = []
 
-        // TODO: Add error handling here
-        if (limit && page_size && page_size >= limit) {
-            response = await client.searchWithRetry(this.throttler, request)
-        } else {
-            // TODO: Make sure both responses return same format
-            response = await client.searchIterator(this.throttler, request, limit)
+            if (limit && page_size && page_size >= limit) {
+                response = await client.searchWithRetry(this.throttler, request)
+            } else {
+                // TODO: Make sure both responses return same format
+                response = await client.searchIterator(this.throttler, request, limit)
+                return response
+            }
+            if (response && response.hasOwnProperty('resultsList')) {
+                return response.resultsList
+            }
             return response
+        } catch (err) {
+            throw new SearchGrpcError(err, request)
         }
-
-        if (response && response.hasOwnProperty('resultsList')) {
-            const { resultsList } = response
-
-            return resultsList
-        }
-        return []
     }
 
     public async suggest(config: any, entity: string) {

@@ -10,10 +10,24 @@ export default class GrpcClient {
     // @ts-ignore
     private client: GoogleAdsClient
 
-    constructor(developer_token: string, access_token: string, login_customer_id?: string) {
+    // this.client.developer_token,
+    // this.client.client_id,
+    // this.client.client_secret,
+    // this.client.refresh_token,
+    // this.client.manager_cid
+
+    constructor(
+        developer_token: string,
+        client_id: string,
+        client_secret: string,
+        refresh_token: string,
+        login_customer_id?: string
+    ) {
         this.client = new GoogleAdsClient({
             developer_token,
-            access_token,
+            client_id,
+            client_secret,
+            refresh_token,
             login_customer_id,
             parseResults: true,
         })
