@@ -17,10 +17,12 @@ import {
 
 import parser from './parser'
 
+import GrpcClient from './grpc'
 import GoogleAdsError from './Error'
 import { Client, ClientConstructor, AccountInfo, ReportConfig } from './types/Global'
 import { RequestOptions, HttpController } from './types/Http'
 import { ListConfig, EntityUpdateConfig, NewEntityConfig } from './types/Entity'
+import { SearchGoogleAdsRequest } from 'google-ads-node'
 
 // const log = (obj: any) => {
 //     console.log(require('util').inspect(obj, false, null))
@@ -104,10 +106,15 @@ export default class Http implements HttpController {
 
     public async list(config: ListConfig, resource: string) {
         const report_config = buildListReportConfig(config, resource)
-
         return this.report(report_config)
     }
-    public async report(config: ReportConfig) {
+
+    /**
+     * @name report
+     * @param config Options for retrieving reporting data
+     * @returns Array of Google Ads data objects
+     */
+    public async report(config: ReportConfig): Promise<Array<object>> {
         const { query, custom_metrics } = buildReportQuery(config)
 
         await this.client.account_promise // need this to ensure that client.cid is set
@@ -132,12 +139,14 @@ export default class Http implements HttpController {
 
         const parsed_result = parser.parseResult(result)
 
-        const modified_result = await this.post_query_hook({
-            cid: this.client.cid,
-            query,
-            report_config: config,
-            result: parsed_result,
-        })
+        const modified_result = this.post_query_hook
+            ? await this.post_query_hook({
+                  cid: this.client.cid,
+                  query,
+                  report_config: config,
+                  result: parsed_result,
+              })
+            : undefined
 
         /* 
             The user may or may not actually return a modified result. 
@@ -198,11 +207,22 @@ export default class Http implements HttpController {
 
     public async query(query: string, page_size = 10000) {
         await this.client.account_promise
-        const url = this.getRequestUrl()
-        const options = await this.getRequestOptions('POST', url)
+
+        const access_token = await getAccessToken(this.client)
+        const client = new GrpcClient(this.client.developer_token, access_token, this.client.manager_cid)
 
         query = query.replace(/\s/g, ' ')
 
+        const request: SearchGoogleAdsRequest = client.buildSearchRequest(this.client.cid, query, page_size)
+        const response = await client.searchWithRetry(this.throttler, request)
+
+        if (response && response.hasOwnProperty('resultsList')) {
+            const { resultsList } = response
+
+            return resultsList
+        }
+
+        // TODO: Add support for pagination
         /*
             This next section serves to remedy the current odd 
             behavior around limit/page_size of the API. 
@@ -220,20 +240,21 @@ export default class Http implements HttpController {
             We're going to get in touch with Google about this.
         */
 
-        const has_limit = query.toLowerCase().includes(' limit ')
-        if (has_limit) {
-            const limit = +query
-                .toLowerCase()
-                .split(' limit ')[1]
-                .trim()
+        // const has_limit = query.toLowerCase().includes(' limit ')
+        // if (has_limit) {
+        //     const limit = +query
+        //         .toLowerCase()
+        //         .split(' limit ')[1]
+        //         .trim()
 
-            options.limit = limit
-        }
+        //     options.limit = limit
+        // }
 
-        options.qs = { query, page_size }
+        // options.qs = { query, page_size }
 
-        const raw_result = await this.queryApi(options)
-        return raw_result
+        // const raw_result = await this.queryApi(options)
+        // return raw_result
+        return []
     }
 
     public async suggest(config: any, entity: string) {
