@@ -10,11 +10,7 @@ const expanded_text_ad = {
     path1: '',
     path2: '',
 }
-const dynamic_search_ad = {
-    description1: '',
-    description2: '',
-}
-const responsive_display_ad = {
+const legacy_responsive_display_ad = {
     short_headline: '',
     long_headline: '',
     description: '',
@@ -43,8 +39,7 @@ const ad = {
     type: '',
     text_ad,
     expanded_text_ad,
-    dynamic_search_ad,
-    responsive_display_ad,
+    legacy_responsive_display_ad,
     call_only_ad,
     expanded_dynamic_search_ad,
     hotel_ad: '',
@@ -95,7 +90,7 @@ const dynamic_search_ads_setting = {
     domain_name: '',
     language_code: '',
     use_supplied_urls_only: '',
-    feed_ids: '',
+    feeds: '',
 }
 
 const shopping_setting = {

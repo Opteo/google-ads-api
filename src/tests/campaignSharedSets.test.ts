@@ -17,7 +17,7 @@ describe('Campaign Shared Sets', async () => {
 
     const campaign_id = config.testing.campaign_id
     const shared_set_id = config.testing.shared_set_id
-    const campaign_shared_set = `${campaign_id}_${shared_set_id}`
+    const campaign_shared_set = `${campaign_id}~${shared_set_id}`
 
     it('Creates New Campaign Shared Set', async done => {
         expect.assertions(1)
