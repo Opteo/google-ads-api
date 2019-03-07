@@ -5,7 +5,6 @@ import {
     isString,
     isArray,
     isUndefined,
-    merge,
     includes,
     compact,
     find,
@@ -259,21 +258,40 @@ export const formatQueryResults = (
     convert_micros: boolean,
     custom_metrics: Array<Metric>
 ): Array<object> => {
-    return result.map((row: { [key: string]: any }) => {
-        // removing main entity key from final object
-        if (row[entity]) {
-            merge(row, row[entity])
-            delete row[entity]
-        }
+    const parsed_results: Array<object> = []
+    //     custom_metrics.forEach(custom_metric => {
+    //         if (custom_metric.post_query_hook) {
+    //             row = custom_metric.post_query_hook(row)
+    //         }
+    //     })
+    // TODO: Add custom metric post query hook bits
+    for (const row of result) {
+        const parsed_row = formatEntity(row, convert_micros)
+        parsed_results.push(parsed_row)
+    }
+    return parsed_results
+}
 
-        custom_metrics.forEach(custom_metric => {
-            if (custom_metric.post_query_hook) {
-                row = custom_metric.post_query_hook(row)
+const formatEntity = (entity: any, convert_micros: boolean, final: any = {}): object => {
+    for (const key in entity) {
+        const underscore_key = snakeCase(key)
+        const value = entity[key]
+
+        if (isObject(value)) {
+            final[underscore_key] = formatEntity(value, convert_micros, final[underscore_key])
+        } else {
+            // TODO: Check if we still need matching_metric here
+            if (convert_micros && underscore_key.includes('_micros')) {
+                final[underscore_key.split('_micros')[0]] = convertMicroValue(value)
             }
-        })
+            final[underscore_key] = value
+        }
+    }
+    return final
+}
 
-        return formatSingleResult(row, convert_micros)
-    })
+const convertMicroValue = (money_value: number): number => {
+    return money_value / 1000000
 }
 
 const formatSingleResult = (result_object: { [key: string]: any }, convert_micros: boolean): object => {
@@ -289,14 +307,6 @@ const formatSingleResult = (result_object: { [key: string]: any }, convert_micro
             result_object[key.split('_micros')[0]] = +result_object[key] / 1000000
         } else if (convert_micros && key.includes('_micros')) {
             result_object[key.split('_micros')[0]] = +result_object[key] / 1000000
-        }
-
-        if (matching_metric && matching_metric.is_number) {
-            result_object[key] = +result_object[key]
-        }
-
-        if (isNumeric(result_object[key]) && !(key === 'id' || key.includes('.id'))) {
-            result_object[key] = +result_object[key]
         }
     }
 
@@ -378,11 +388,4 @@ export const transformObjectKeys = (entity_object: any): any => {
     }
 
     return final
-}
-
-const isNumeric = (value: any) => {
-    if (typeof value === 'boolean') {
-        return false
-    }
-    return !isNaN(value)
 }
