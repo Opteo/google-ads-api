@@ -8,7 +8,7 @@
     "prepare": "rm -rf lib/ && npm run build",
     "build": "tsc",
     "watch": "tsc -w",
-    "test": "jest",
+    "test": "jest --coverage",
     "prettier:base": "prettier --parser typescript --single-quote",
     "prettier:check": "npm run prettier:base -- --list-different \"src/**/*.{ts,tsx}\"",
     "prettier:write": "npm run prettier:base -- --write \"src/**/*.{ts,tsx}\""
@@ -25,7 +25,9 @@
     "transform": {
       "\\.ts$": "ts-jest"
     },
-    "testRegex": "/src/.*\\.test\\.ts$"
+    "testRegex": "/src/.*\\.test\\.ts$",
+    "verbose": true,
+    "testEnvironment": "node"
   },
   "repository": {
     "type": "git",
