@@ -2,19 +2,22 @@
   "name": "google-ads-api",
   "version": "0.6.2",
   "description": "Google Ads API Client Library for JavaScript",
-  "main": "./lib/index.js",
-  "typings": "./lib/index.d.ts",
+  "main": "./build/index.js",
+  "typings": "./build/index.d.ts",
   "scripts": {
-    "prepare": "rm -rf lib/ && npm run build",
+    "prepare": "run-s clean build",
+    "clean": "rm -rf build/",
     "build": "tsc",
     "watch": "tsc -w",
-    "test": "jest --coverage",
+    "test": "run-s clean build test:*",
+    "test:lint": "prettier --list-different \"src/**/*.{ts,tsx}\"",
+    "test:unit": "jest --coverage",
     "prettier:base": "prettier --parser typescript --single-quote",
     "prettier:check": "npm run prettier:base -- --list-different \"src/**/*.{ts,tsx}\"",
     "prettier:write": "npm run prettier:base -- --write \"src/**/*.{ts,tsx}\""
   },
   "files": [
-    "lib"
+    "build"
   ],
   "jest": {
     "moduleFileExtensions": [
@@ -33,9 +36,14 @@
     "type": "git",
     "url": "https://github.com/Opteo/google-ads-api.git"
   },
-  "keywords": [],
+  "keywords": [
+    "google ads",
+    "google ads api",
+    "google ads nodejs",
+    "google ads javascript"
+  ],
   "author": "Opteo",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Opteo/google-ads-api/issues"
   },
@@ -43,6 +51,7 @@
   "devDependencies": {
     "@types/jest": "^24.0.9",
     "jest": "^24.1.0",
+    "npm-run-all": "^4.1.5",
     "prettier": "^1.14.3",
     "ts-jest": "^24.0.0",
     "tslint": "^5.12.1",
