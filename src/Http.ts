@@ -13,6 +13,7 @@ import {
     mapResultsWithIds,
     transformObjectKeys,
     formatQueryResults,
+    formatQueryResultsHttp,
 } from './utils'
 
 import parser from './parser'
@@ -105,7 +106,7 @@ export default class Http implements HttpController {
 
     public async list(config: ListConfig, resource: string) {
         const report_config = buildListReportConfig(config, resource)
-        return this.report(report_config)
+        return this.reportHttp(report_config)
     }
 
     /**
@@ -221,18 +222,14 @@ export default class Http implements HttpController {
         const { request, limit } = client.buildSearchRequest(this.client.cid, query, page_size)
 
         try {
-            let response = []
-
             if (limit && page_size && page_size >= limit) {
-                response = await client.searchWithRetry(this.throttler, request)
-            } else {
-                // TODO: Make sure both responses return same format
-                response = await client.searchIterator(this.throttler, request, limit)
-                return response
+                const response = await client.searchWithRetry(this.throttler, request)
+                if (response && response.hasOwnProperty('resultsList')) {
+                    return response.resultsList
+                }
+                return []
             }
-            if (response && response.hasOwnProperty('resultsList')) {
-                return response.resultsList
-            }
+            const response = await client.searchIterator(this.throttler, request, limit)
             return response
         } catch (err) {
             throw new SearchGrpcError(err, request)
@@ -453,5 +450,90 @@ export default class Http implements HttpController {
 
     private buildResourceName(endpoint?: string, entity_id?: string | number): string {
         return entity_id ? `customers/${this.client.cid}/${endpoint}/${entity_id}` : `customers/${this.client.cid}`
+    }
+
+    /* 
+        This is the pre-gRPC report method (renamed to "reportHttp"). 
+        This can be removed once all support for http is dropped. 
+    */
+    private async reportHttp(config: ReportConfig) {
+        const { query, custom_metrics } = buildReportQuery(config)
+
+        await this.client.account_promise // need this to ensure that client.cid is set
+
+        const pre_query_hook_result = await this.pre_query_hook({
+            cid: this.client.cid,
+            query,
+            report_config: config,
+        })
+
+        if (pre_query_hook_result) {
+            return pre_query_hook_result
+        }
+
+        const raw_result = await this.queryHttp(query, config.page_size)
+        const result = await formatQueryResultsHttp(
+            raw_result,
+            config.entity,
+            isUndefined(config.convert_micros) ? true : config.convert_micros,
+            custom_metrics
+        )
+
+        const parsed_result = parser.parseResult(result)
+
+        const modified_result = await this.post_query_hook({
+            cid: this.client.cid,
+            query,
+            report_config: config,
+            result: parsed_result,
+        })
+
+        /* 
+            The user may or may not actually return a modified result. 
+            If they don't, just return the original result.
+        */
+
+        return modified_result || parsed_result
+    }
+
+    /* 
+        This is the pre-gRPC report method (renamed to "queryHttp"). 
+        This can be removed once all support for http is dropped. 
+    */
+    private async queryHttp(query: string, page_size = 10000) {
+        await this.client.account_promise
+        const url = this.getRequestUrl()
+        const options = await this.getRequestOptions('POST', url)
+
+        query = query.replace(/\s/g, ' ')
+
+        /*
+            This next section serves to remedy the current odd 
+            behavior around limit/page_size of the API. 
+            At the moment, this is what happens:
+            - If the page_size is higher than the limit:
+                - the limit is ignored
+                - the page_size is set to the limit
+                - SOLUTION: don't paginate
+            - If the page_size is lower than the limit:
+                - the limit is ignored
+                - SOLUTION: stop paginating when limit is hit
+            We're going to get in touch with Google about this.
+        */
+
+        const has_limit = query.toLowerCase().includes(' limit ')
+        if (has_limit) {
+            const limit = +query
+                .toLowerCase()
+                .split(' limit ')[1]
+                .trim()
+
+            options.limit = limit
+        }
+
+        options.qs = { query, page_size }
+
+        const raw_result = await this.queryApi(options)
+        return raw_result
     }
 }

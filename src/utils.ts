@@ -11,6 +11,7 @@ import {
     map,
     uniq,
     get,
+    merge,
 } from 'lodash'
 
 import entity_attributes from './attributes'
@@ -292,6 +293,29 @@ const formatEntity = (entity: any, convert_micros: boolean, final: any = {}): ob
 
 const convertMicroValue = (money_value: number): number => {
     return money_value / 1000000
+}
+
+export const formatQueryResultsHttp = (
+    result: Array<object>,
+    entity: string,
+    convert_micros: boolean,
+    custom_metrics: Array<Metric>
+): Array<object> => {
+    return result.map((row: { [key: string]: any }) => {
+        // removing main entity key from final object
+        if (row[entity]) {
+            merge(row, row[entity])
+            delete row[entity]
+        }
+
+        custom_metrics.forEach(custom_metric => {
+            if (custom_metric.post_query_hook) {
+                row = custom_metric.post_query_hook(row)
+            }
+        })
+
+        return formatSingleResult(row, convert_micros)
+    })
 }
 
 const formatSingleResult = (result_object: { [key: string]: any }, convert_micros: boolean): object => {
