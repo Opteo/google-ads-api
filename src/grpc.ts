@@ -76,18 +76,16 @@ export default class GrpcClient {
         const hasNextPage = (res: any) => res && res.nextPageToken
 
         while (hasNextPage(response)) {
-            const { nextPageToken, resultsList } = response
-            results = results.concat(resultsList)
+            const next_page_request = request.clone() as SearchGoogleAdsRequest
+            next_page_request.setPageToken(response.nextPageToken)
+
+            response = await this.searchWithRetry(throttler, next_page_request)
+            results = results.concat(response.resultsList)
 
             if (results.length >= limit) {
                 results = results.slice(0, limit)
                 break
             }
-
-            const next_page_request = request.clone() as SearchGoogleAdsRequest
-            next_page_request.setPageToken(nextPageToken)
-
-            response = await this.searchWithRetry(throttler, next_page_request)
         }
 
         return results
