@@ -119,4 +119,8 @@ export default class GrpcClient {
 
         return { request, limit }
     }
+
+    public getService(name: string): any {
+        return this.client.getService(name)
+    }
 }

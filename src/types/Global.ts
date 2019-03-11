@@ -141,20 +141,6 @@ declare namespace Global {
      * @readonly
      * @enum {string}
      */
-    // enum DateConstant {
-    //     LAST_7_DAYS = 'LAST_7_DAYS',
-    //     LAST_14_DAYS = 'LAST_14_DAYS',
-    //     LAST_30_DAYS = 'LAST_30_DAYS',
-    //     LAST_BUSINESS_WEEK = 'LAST_BUSINESS_WEEK',
-    //     LAST_MONTH = 'LAST_MONTH',
-    //     THIS_MONTH = 'THIS_MONTH',
-    //     LAST_WEEK_MON_SUN = 'LAST_WEEK_MON_SUN',
-    //     LAST_WEEK_SUN_SAT = 'LAST_WEEK_SUN_SAT',
-    //     THIS_WEEK_MON_TODAY = 'THIS_WEEK_MON_TODAY',
-    //     THIS_WEEK_SUN_TODAY = 'THIS_WEEK_SUN_TODAY',
-    //     YESTERDAY = 'YESTERDAY',
-    //     TODAY = 'TODAY',
-    // }
 
     type DateConstant =
         | 'LAST_7_DAYS'

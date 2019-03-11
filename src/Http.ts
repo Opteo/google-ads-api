@@ -132,7 +132,6 @@ export default class Http implements HttpController {
         const raw_result = await this.query(query, config.page_size)
         const result = await formatQueryResults(
             raw_result,
-            config.entity,
             isUndefined(config.convert_micros) ? true : config.convert_micros,
             custom_metrics
         )

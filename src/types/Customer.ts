@@ -13,6 +13,8 @@ import SharedSetCriterions from '../entities/SharedSetCriterions'
 import ConversionActions from '../entities/ConversionActions'
 import GeoTargetConstants from '../entities/GeoTargetConstants'
 
+import CampaignService from '../services/campaigns'
+
 import { ReportConfig, UpdateConfig } from './Global'
 
 declare namespace Customer {
@@ -39,6 +41,7 @@ declare namespace Customer {
         retrieve: () => Promise<any>
         query: (query: string) => Promise<any>
         report: (config: ReportConfig) => Promise<any>
+        _campaigns: CampaignService
     }
 }
 export = Customer

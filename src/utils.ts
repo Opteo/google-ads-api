@@ -255,9 +255,8 @@ const formatOrderBy = (entity: string, order_by: string | Array<string>, sort_or
 
 export const formatQueryResults = (
     result: Array<object>,
-    entity: string,
     convert_micros: boolean,
-    custom_metrics: Array<Metric>
+    custom_metrics?: Array<Metric>
 ): Array<object> => {
     const parsed_results: Array<object> = []
     //     custom_metrics.forEach(custom_metric => {

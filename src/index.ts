@@ -2,11 +2,12 @@ import Bottleneck from 'bottleneck'
 import crypto from 'crypto'
 import { noop } from 'lodash'
 
-import Http from './Http'
+// import Http from './Http'
 import CustomerInstance from './Customer'
+import GrpcClient from './grpc'
 
 import { Library, Account } from './types/Global'
-import { Customer as ICustomer } from './types/Customer'
+// import { Customer as ICustomer } from './types/Customer'
 
 class GoogleAdsApi {
     private client_id: string | number
@@ -62,43 +63,51 @@ class GoogleAdsApi {
         async_account_getter,
         pre_query_hook,
         post_query_hook,
-    }: Account): ICustomer {
+    }: Account) {
         if (!async_account_getter && (!customer_account_id || !refresh_token)) {
             throw new Error(
                 'must specify either {customer_account_id, refresh_token, manager_cid} or an async_account_getter'
             )
         }
 
-        if (!async_account_getter) {
-            const cid = (customer_account_id || '')
-                .toString()
-                .split('-')
-                .join('')
+        // if (!async_account_getter) {
+        //     const cid = (customer_account_id || '')
+        //         .toString()
+        //         .split('-')
+        //         .join('')
 
-            const _manager_cid = (manager_cid || '')
-                .toString()
-                .split('-')
-                .join('')
+        //     const _manager_cid = (manager_cid || '')
+        //         .toString()
+        //         .split('-')
+        //         .join('')
 
-            async_account_getter = async () => {
-                return { cid, refresh_token, manager_cid: _manager_cid }
-            }
-        }
+        //     async_account_getter = async () => {
+        //         return { cid, refresh_token, manager_cid: _manager_cid }
+        //     }
+        // }
 
         pre_query_hook = pre_query_hook || noop
         post_query_hook = post_query_hook || noop
 
-        const http_controller = new Http({
-            async_account_getter,
-            client_id: this.client_id,
-            developer_token: this.developer_token,
-            client_secret: this.client_secret,
-            throttler: this.throttler,
-            pre_query_hook,
-            post_query_hook,
-        })
+        customer_account_id = (customer_account_id || '')
+            .toString()
+            .split('-')
+            .join('')
 
-        return CustomerInstance(http_controller)
+        manager_cid = (manager_cid || '')
+            .toString()
+            .split('-')
+            .join('')
+
+        const client = new GrpcClient(
+            this.developer_token,
+            this.client_id as string,
+            this.client_secret,
+            refresh_token as string,
+            manager_cid
+        )
+
+        return CustomerInstance(customer_account_id, client, this.throttler)
     }
 }
 
