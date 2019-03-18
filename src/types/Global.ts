@@ -1,31 +1,7 @@
 import Bottleneck from 'bottleneck'
+// import { ResourceName, Metrics, Segments } from 'google-ads-node/build/lib/fields'
 
 declare namespace Global {
-    /**
-     *  Library Instance Interface
-     * @interface
-     */
-
-    export interface Library {
-        client_id: string | number
-        developer_token: string
-        client_secret: string
-        redis_options?: any
-    }
-
-    /**
-     *  Account Instance Interface
-     * @interface
-     */
-    export interface Account {
-        customer_account_id?: string | number
-        refresh_token?: string
-        manager_cid?: string
-        async_account_getter?: Function
-        pre_query_hook?: Function
-        post_query_hook?: Function
-    }
-
     /**
      *  Account Info Interface
      * @interface
@@ -92,6 +68,10 @@ declare namespace Global {
     export interface ReportConfig {
         entity: string
         attributes?: Array<string>
+        // TODO: Change to use gads-node types (require fixes elsewhere)
+        // entity: ResourceName
+        // metrics?: Metrics
+        // segments?: Segments
         metrics?: Array<string>
         segments?: Array<string>
         constraints?: Array<string | object | Constraint>
@@ -103,6 +83,33 @@ declare namespace Global {
         sort_order?: string
         convert_micros?: boolean
         page_size?: number
+    }
+
+    /**
+     * Constraint Types
+     * @type
+     */
+    type ConstraintOptions = Array<string | object | Constraint>
+
+    /**
+     * Service List Method Options
+     * @interface
+     * @description Options available when listing entities via a service
+     */
+    export interface ServiceListOptions {
+        limit?: number
+        order_by?: string
+        constraints?: ConstraintOptions
+    }
+
+    /**
+     * Service Create Method Options
+     * @interface
+     * @description Options available when creating resources via a service
+     */
+    export interface ServiceCreateOptions {
+        validate_only?: boolean
+        partial_failure?: boolean
     }
 
     /**
