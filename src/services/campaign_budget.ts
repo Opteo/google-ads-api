@@ -1,55 +1,61 @@
-import * as grpc from 'google-ads-node'
 import { CampaignBudget } from 'google-ads-node/build/lib/resources'
 
-import Service from './service'
+import Service, { Mutation } from './service'
 import { ServiceListOptions, ServiceCreateOptions } from '../types/Global'
 
 /**
- * @constant
+ * @constants
  */
-const RESOURCE_NAME = 'campaign_budget'
 const RESOURCE_URL_NAME = 'campaignBudgets'
-const SERVICE_GET_METHOD = 'getCampaignBudget'
+const MUTATE_METHOD = 'mutateCampaignBudgets'
+const MUTATE_REQUEST = 'MutateCampaignBudgetsRequest'
+const OPERATION_REQUEST = 'CampaignBudgetOperation'
+const GET_METHOD = 'getCampaignBudget'
+const GET_REQUEST = 'GetCampaignBudgetRequest'
+const RESOURCE = 'CampaignBudget'
 
 export default class CampaignBudgetService extends Service {
     public async get(id: number | string): Promise<CampaignBudget> {
-        const request = new grpc.GetCampaignBudgetRequest()
-        request.setResourceName(this.buildResourceName(`${RESOURCE_URL_NAME}/${id}`))
-        const budget = await this.serviceCall(SERVICE_GET_METHOD, request)
-        return budget as CampaignBudget
+        return this.serviceGet({
+            request: GET_REQUEST,
+            resource: `${RESOURCE_URL_NAME}/${id}`,
+            method: GET_METHOD,
+            entity_id: id,
+        }) as CampaignBudget
     }
 
     public async list(options?: ServiceListOptions): Promise<Array<{ campaign_budget: CampaignBudget }>> {
-        const budgets = await this.getListResults(RESOURCE_NAME, options)
-        return budgets
+        return this.getListResults('campaign_budget', options)
     }
 
-    public async create(budget: CampaignBudget, options?: ServiceCreateOptions): Promise<void> {
-        const request = new grpc.MutateCampaignBudgetsRequest()
-        const operation = new grpc.CampaignBudgetOperation()
+    public async create(budget: CampaignBudget, options?: ServiceCreateOptions): Promise<Mutation> {
+        return this.serviceCreate({
+            request: MUTATE_REQUEST,
+            operation: OPERATION_REQUEST,
+            mutate: MUTATE_METHOD,
+            entity: [RESOURCE, budget],
+            ...options,
+        })
+    }
 
-        const pb = this.buildResource('CampaignBudget', budget) as grpc.CampaignBudget
-        operation.setCreate(pb)
+    public async update(budget: CampaignBudget, options?: ServiceCreateOptions): Promise<Mutation> {
+        return this.serviceUpdate({
+            request: MUTATE_REQUEST,
+            operation: OPERATION_REQUEST,
+            mutate: MUTATE_METHOD,
+            entity: [RESOURCE, budget],
+            ...options,
+        })
+    }
 
-        request.setCustomerId(this.cid)
-        request.setOperationsList([operation])
-
-        if (options) {
-            if (options.hasOwnProperty('validate_only')) {
-                request.setValidateOnly(options.validate_only as boolean)
-            }
-            if (options.hasOwnProperty('partial_failure')) {
-                request.setPartialFailure(options.partial_failure as boolean)
-            }
-        }
-
-        console.log(request.toObject())
-
-        try {
-            const response = await this.serviceCall(SERVICE_MUTATE_METHOD, request)
-            console.log(response)
-        } catch (err) {
-            console.log(err)
-        }
+    public async delete(id: number | string, options?: ServiceCreateOptions) {
+        return this.serviceDelete({
+            request: MUTATE_REQUEST,
+            operation: OPERATION_REQUEST,
+            mutate: MUTATE_METHOD,
+            resource: `${RESOURCE_URL_NAME}/${id}`,
+            entity_id: id,
+            ...options,
+        })
     }
 }
