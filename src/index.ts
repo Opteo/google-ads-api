@@ -5,43 +5,50 @@ import { noop } from 'lodash'
 // import Http from './Http'
 import CustomerInstance from './Customer'
 import GrpcClient from './grpc'
+import { normaliseCustomerId } from './utils'
 
-import { Library, Account } from './types/Global'
-// import { Customer as ICustomer } from './types/Customer'
+interface ClientOptions {
+    readonly client_id: string
+    readonly client_secret: string
+    readonly developer_token: string
+    readonly redis_options?: any
+}
+
+interface CustomerAuth {
+    customer_account_id: string
+    refresh_token: string
+    login_customer_id?: string
+}
+
+interface CustomerOptions extends CustomerAuth {
+    async_account_getter?: () => Promise<CustomerAuth>
+    pre_query_hook?: () => void
+    post_query_hook?: () => void
+}
 
 class GoogleAdsApi {
-    private client_id: string | number
-    private client_secret: string
-    private developer_token: string
+    private readonly options: ClientOptions
     private throttler: Bottleneck
 
-    /**
-     * Creates GoogleAdsApi Instance
-     * @param client_id  - OAuth2 client ID
-     * @param client_secret - OAuth2 client secret
-     * @param developer_token - Developer token
-     *
-     */
-    constructor({ client_id, client_secret, developer_token, redis_options }: Library) {
-        this.client_id = client_id
-        this.client_secret = client_secret
-        this.developer_token = developer_token
-        const options = {
+    constructor(options: ClientOptions) {
+        this.options = options
+
+        const throttler_options = {
             minTime: 10, // roughly 100 requests per second
             id:
                 'id' +
                 crypto
                     .createHash('md5')
-                    .update(developer_token)
+                    .update(this.options.developer_token)
                     .digest('hex'), // don't want to leak dev token to redis
             /* Clustering options */
-            datastore: redis_options ? 'redis' : 'local',
+            datastore: this.options.redis_options ? 'redis' : 'local',
             clearDatastore: false,
-            clientOptions: redis_options,
+            clientOptions: this.options.redis_options,
             timeout: 1000 * 60 * 10,
         }
 
-        this.throttler = new Bottleneck(options)
+        this.throttler = new Bottleneck(throttler_options)
 
         this.throttler.on('error', err => {
             console.error('Could not connect to redis: ')
@@ -49,62 +56,40 @@ class GoogleAdsApi {
         })
     }
 
-    /**
-     * Creates new Customer instance
-     *
-     * @param customer_account_id - Client customer (account) ID
-     * @param refresh_token - OAuth2 refresh token
-     *
-     */
     public Customer({
         customer_account_id,
         refresh_token,
-        manager_cid,
+        login_customer_id,
         async_account_getter,
         pre_query_hook,
         post_query_hook,
-    }: Account) {
+    }: CustomerOptions) {
         if (!async_account_getter && (!customer_account_id || !refresh_token)) {
             throw new Error(
                 'must specify either {customer_account_id, refresh_token, manager_cid} or an async_account_getter'
             )
         }
 
-        // if (!async_account_getter) {
-        //     const cid = (customer_account_id || '')
-        //         .toString()
-        //         .split('-')
-        //         .join('')
+        // @ts-ignore TODO: Add these back
+        const pre_query_hook = pre_query_hook || noop
+        // @ts-ignore TODO: Add these back
+        const post_query_hook = post_query_hook || noop
 
-        //     const _manager_cid = (manager_cid || '')
-        //         .toString()
-        //         .split('-')
-        //         .join('')
+        customer_account_id = normaliseCustomerId(customer_account_id)
+        login_customer_id = normaliseCustomerId(login_customer_id)
 
-        //     async_account_getter = async () => {
-        //         return { cid, refresh_token, manager_cid: _manager_cid }
-        //     }
-        // }
-
-        pre_query_hook = pre_query_hook || noop
-        post_query_hook = post_query_hook || noop
-
-        customer_account_id = (customer_account_id || '')
-            .toString()
-            .split('-')
-            .join('')
-
-        manager_cid = (manager_cid || '')
-            .toString()
-            .split('-')
-            .join('')
+        if (!async_account_getter) {
+            async_account_getter = async () => {
+                return { customer_account_id, login_customer_id, refresh_token }
+            }
+        }
 
         const client = new GrpcClient(
-            this.developer_token,
-            this.client_id as string,
-            this.client_secret,
-            refresh_token as string,
-            manager_cid
+            this.options.developer_token,
+            this.options.client_id,
+            this.options.client_secret,
+            refresh_token,
+            login_customer_id
         )
 
         return CustomerInstance(customer_account_id, client, this.throttler)

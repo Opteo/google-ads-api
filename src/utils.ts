@@ -48,8 +48,7 @@ export const buildReportQuery = (config: ReportConfig): { query: string; custom_
     const custom_metrics: Array<Metric> = []
 
     /* SELECT Clause */
-    config.attributes =
-        config.attributes && config.attributes.length ? formatAttributes(config.attributes, config.entity) : []
+    config.attributes = config.attributes && config.attributes.length ? config.attributes : []
     config.segments = config.segments || []
     config.metrics = config.metrics
         ? config.metrics.map((metric: string) => (metric.includes('metrics.') ? metric : `metrics.${metric}`))
@@ -188,14 +187,14 @@ export const buildReportQuery = (config: ReportConfig): { query: string; custom_
     return { query, custom_metrics }
 }
 
-const formatAttributes = (attributes: Array<string>, entity: string): Array<string> => {
-    return attributes.map((attribute: string) => {
-        if (isUndefined(get(entity_attributes, attribute))) {
-            return `${entity}.${attribute}`
-        }
-        return attribute
-    })
-}
+// const formatAttributes = (attributes: Array<string>, entity: string): Array<string> => {
+//     return attributes.map((attribute: string) => {
+//         if (isUndefined(get(entity_attributes, attribute))) {
+//             return `${entity}.${attribute}`
+//         }
+//         return attribute
+//     })
+// }
 
 const formatConstraints = (constraints: any): string => {
     const formatConstraint = (constraint: any): string => {
@@ -277,7 +276,7 @@ const formatEntity = (entity: any, convert_micros: boolean, final: any = {}): ob
         const underscore_key = snakeCase(key)
         const value = entity[key]
 
-        if (isObject(value)) {
+        if (isObject(value) && !Array.isArray(value)) {
             final[underscore_key] = formatEntity(value, convert_micros, final[underscore_key])
         } else {
             // TODO: Check if we still need matching_metric here
@@ -411,4 +410,11 @@ export const transformObjectKeys = (entity_object: any): any => {
     }
 
     return final
+}
+
+export const normaliseCustomerId = (id: string | undefined): string => {
+    if (id) {
+        return id.split('-').join('')
+    }
+    return ''
 }
