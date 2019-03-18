@@ -63,7 +63,7 @@
     "bluebird": "^3.5.2",
     "bluebird-retry": "^0.11.0",
     "bottleneck": "^2.16.1",
-    "google-ads-node": "^1.1.2",
+    "google-ads-node": "^1.3.3",
     "redis": "^2.8.0"
   }
 }
