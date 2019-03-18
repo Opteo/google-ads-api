@@ -13,7 +13,8 @@
 // import ConversionActions from './entities/ConversionActions'
 // import GeoTargetConstants from './entities/GeoTargetConstants'
 
-import CampaignService from './services/campaigns'
+import CampaignService from './services/campaign'
+import CampaignBudgetService from './services/campaign_budget'
 
 // import { ENDPOINTS, RESOURCE_NAMES } from './constants'
 import { Customer } from './types/Customer'
@@ -24,7 +25,8 @@ import Bottleneck from 'bottleneck'
 
 export default function Customer(cid: string, client: GrpcClient, throttler: Bottleneck) {
     return {
-        campaigns: new CampaignService(cid, client, throttler),
+        campaigns: new CampaignService(cid, client, throttler, 'CampaignService'),
+        campaignBudgets: new CampaignBudgetService(cid, client, throttler, 'CampaignBudgetService'),
     }
 }
 

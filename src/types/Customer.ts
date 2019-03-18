@@ -13,7 +13,7 @@ import SharedSetCriterions from '../entities/SharedSetCriterions'
 import ConversionActions from '../entities/ConversionActions'
 import GeoTargetConstants from '../entities/GeoTargetConstants'
 
-import CampaignService from '../services/campaigns'
+import CampaignService from '../services/campaign'
 
 import { ReportConfig, UpdateConfig } from './Global'
 
