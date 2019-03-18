@@ -1,19 +1,47 @@
 import Bottleneck from 'bottleneck'
+import * as grpc from 'google-ads-node'
+import * as fields from 'google-ads-node/build/lib/fields'
+import { getFieldMask } from 'google-ads-node/build/lib/utils'
 
 import GrpcClient from '../grpc'
 import { formatQueryResults, buildReportQuery } from '../utils'
 import parser from '../parser'
-import { ReportConfig, ServiceListOptions } from '../types/Global'
+import { ReportConfig, ServiceListOptions, ServiceCreateOptions } from '../types/Global'
 import { SearchGrpcError } from '../Error'
 
-import * as fields from 'google-ads-node/build/lib/fields'
+interface GetOptions {
+    request: string
+    resource: string
+    method: string
+    entity_id: string | number
+}
+
+interface MutateOptions extends ServiceCreateOptions {
+    request: string
+    operation: string
+    mutate: string
+    entity: [string, object]
+}
+
+interface DelMutateOptions extends ServiceCreateOptions {
+    request: string
+    operation: string
+    mutate: string
+    resource: string
+    entity_id: string | number
+}
+
+export interface Mutation {
+    request: object
+    partial_failure_error: any
+    results: string[]
+}
 
 export default class Service {
     protected cid: string
     protected client: GrpcClient
     protected service: any
 
-    // @ts-ignore
     private throttler: Bottleneck
 
     constructor(cid: string, client: GrpcClient, throttler: Bottleneck, name: string) {
@@ -23,6 +51,76 @@ export default class Service {
 
         // This is the child specific service, e.g. "CampaignService"
         this.service = client.getService(name)
+    }
+
+    protected async serviceGet(options: GetOptions): Promise<unknown> {
+        const request = new (grpc as any)[options.request]()
+        if (typeof options.entity_id === 'string' && options.entity_id.startsWith('customers/')) {
+            request.setResourceName(options.entity_id)
+        } else {
+            request.setResourceName(this.buildResourceName(options.resource))
+        }
+        return this.serviceCall(options.method, request)
+    }
+
+    protected async serviceUpdate(options: MutateOptions): Promise<Mutation> {
+        const request = new (grpc as any)[options.request]()
+        const operation = new (grpc as any)[options.operation]()
+
+        const pb = this.buildResource(...options.entity)
+        operation.setUpdate(pb)
+
+        const mask = getFieldMask(options.entity[1])
+        operation.setUpdateMask(mask)
+
+        return this.mutate(request, [operation], options)
+    }
+
+    protected async serviceDelete(options: DelMutateOptions): Promise<any> {
+        const request = new (grpc as any)[options.request]()
+        const operation = new (grpc as any)[options.operation]()
+
+        if (typeof options.entity_id === 'string' && options.entity_id.startsWith('customers/')) {
+            operation.setRemove(options.entity_id)
+        } else {
+            operation.setRemove(this.buildResourceName(options.resource))
+        }
+
+        return this.mutate(request, [operation], options)
+    }
+
+    protected async serviceCreate(options: MutateOptions): Promise<Mutation> {
+        const request = new (grpc as any)[options.request]()
+        const operation = new (grpc as any)[options.operation]()
+
+        const pb = this.buildResource(...options.entity)
+        operation.setCreate(pb)
+
+        return this.mutate(request, [operation], options)
+    }
+
+    private async mutate(
+        request: any,
+        operations: any[],
+        options: MutateOptions | DelMutateOptions
+    ): Promise<Mutation> {
+        request.setCustomerId(this.cid)
+        request.setOperationsList(operations)
+
+        if (options.hasOwnProperty('validate_only')) {
+            request.setValidateOnly(options.validate_only)
+        }
+        if (options.hasOwnProperty('partial_failure')) {
+            request.setValidateOnly(options.partial_failure)
+        }
+
+        const response = await this.serviceCall(options.mutate, request)
+
+        return {
+            request: request.toObject(),
+            partial_failure_error: response.partial_failure_error,
+            results: response.results_list.map((r: any) => r.resourceName),
+        }
     }
 
     protected buildResourceName(resource: string): string {
