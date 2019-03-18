@@ -7,14 +7,7 @@ interface BuildSearchRequestResponse {
 }
 
 export default class GrpcClient {
-    // @ts-ignore
     private client: GoogleAdsClient
-
-    // this.client.developer_token,
-    // this.client.client_id,
-    // this.client.client_secret,
-    // this.client.refresh_token,
-    // this.client.manager_cid
 
     constructor(
         developer_token: string,
@@ -122,5 +115,9 @@ export default class GrpcClient {
 
     public getService(name: string): any {
         return this.client.getService(name)
+    }
+
+    public buildResource(resource: string, data: any): unknown {
+        return this.client.buildResource(resource, data)
     }
 }
