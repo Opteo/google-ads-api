@@ -16,7 +16,6 @@ import {
 
 import entity_attributes from './attributes'
 import entity_metrics from './metrics'
-import entity_segments from './segments'
 import { ReportConfig, Metric, Constraint } from './types/Global'
 import { ListConfig } from './types/Entity'
 
@@ -221,9 +220,9 @@ const formatConstraints = (constraints: any): string => {
             }
         }
 
-        if (entity_segments.map(s => s.name).includes(key)) {
-            key = `segments.${key}`
-        }
+        // if (entity_segments.map(s => s.name).includes(key)) {
+        //     key = `segments.${key}`
+        // }
 
         return `${key} ${op} ${val}`
     }

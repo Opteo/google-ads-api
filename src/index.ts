@@ -71,9 +71,9 @@ class GoogleAdsApi {
         }
 
         // @ts-ignore TODO: Add these back
-        const pre_query_hook = pre_query_hook || noop
+        pre_query_hook = pre_query_hook || noop
         // @ts-ignore TODO: Add these back
-        const post_query_hook = post_query_hook || noop
+        post_query_hook = post_query_hook || noop
 
         customer_account_id = normaliseCustomerId(customer_account_id)
         login_customer_id = normaliseCustomerId(login_customer_id)
