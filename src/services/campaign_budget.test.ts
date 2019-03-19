@@ -1,12 +1,7 @@
-// @ts-ignore
-import { newCustomer, BUDGET_ID, CID, getRandomName, delay } from '../test_utils'
-
-// @ts-ignore
 import { CampaignBudget } from 'google-ads-node/build/lib/resources'
-// @ts-ignore
 import { BudgetStatus } from 'google-ads-node/build/lib/enums'
 
-jest.setTimeout(30000)
+import { newCustomer, BUDGET_ID, CID, getRandomName } from '../test_utils'
 const customer = newCustomer()
 
 describe('campaign budgets', async () => {

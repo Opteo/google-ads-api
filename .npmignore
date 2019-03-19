@@ -1,0 +1,7 @@
+.env
+src
+coverage
+docs
+.prettierignore
+tsconfig.json
+**/*.test.*

@@ -1,20 +1,19 @@
 import GoogleAdsApi from './index'
-import config from './config'
 
-export const CID = config.cid
-export const CAMPAIGN_ID = config.testing.campaign_id
-export const BUDGET_ID = 1797929505
+export const CID = process.env.GADS_CID as string
+export const CAMPAIGN_ID = +(process.env.GADS_CAMPAIGN_ID as string)
+export const BUDGET_ID = +(process.env.GADS_BUDGET_ID as string)
 
 export function newCustomer() {
     const client = new GoogleAdsApi({
-        client_id: config.client_id,
-        client_secret: config.client_secret,
-        developer_token: config.developer_token,
+        client_id: process.env.GADS_CLIENT_ID as string,
+        client_secret: process.env.GADS_CLIENT_SECRET as string,
+        developer_token: process.env.GADS_DEVELOPER_TOKEN as string,
     })
     return client.Customer({
-        customer_account_id: config.cid,
-        login_customer_id: config.login_customer_id,
-        refresh_token: config.refresh_token,
+        customer_account_id: process.env.GADS_CID as string,
+        login_customer_id: process.env.GADS_LOGIN_CUSTOMER_ID as string,
+        refresh_token: process.env.GADS_REFRESH_TOKEN as string,
     })
 }
 

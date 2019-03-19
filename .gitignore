@@ -79,3 +79,4 @@ typings/
 .DS_Store
 
 build/
+.env
