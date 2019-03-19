@@ -111,7 +111,7 @@ export default class Service {
             request.setValidateOnly(options.validate_only)
         }
         if (options.hasOwnProperty('partial_failure')) {
-            request.setValidateOnly(options.partial_failure)
+            request.setPartialFailure(options.partial_failure)
         }
 
         const response = await this.serviceCall(options.mutate, request)
