@@ -15,6 +15,7 @@
 
 import CampaignService from './services/campaign'
 import CampaignBudgetService from './services/campaign_budget'
+import AdGroupService from './services/ad_group'
 
 // import { ENDPOINTS, RESOURCE_NAMES } from './constants'
 import { Customer } from './types/Customer'
@@ -24,10 +25,11 @@ import Bottleneck from 'bottleneck'
 // import { ReportConfig, UpdateConfig } from './types/Global'
 
 export default function Customer(cid: string, client: GrpcClient, throttler: Bottleneck) {
-    return {
-        campaigns: new CampaignService(cid, client, throttler, 'CampaignService'),
-        campaignBudgets: new CampaignBudgetService(cid, client, throttler, 'CampaignBudgetService'),
-    }
+	return {
+		campaigns: new CampaignService(cid, client, throttler, 'CampaignService'),
+		campaignBudgets: new CampaignBudgetService(cid, client, throttler, 'CampaignBudgetService'),
+		adGroups: new AdGroupService(cid, client, throttler, 'AdGroupService'),
+	}
 }
 
 // export default function Customer(http_controller: HttpController): Customer {
