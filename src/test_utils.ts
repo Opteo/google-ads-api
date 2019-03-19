@@ -3,7 +3,7 @@ import config from './config'
 
 export const CID = config.cid
 export const CAMPAIGN_ID = config.testing.campaign_id
-export const BUDGET_ID = 1536143460
+export const BUDGET_ID = 1797929505
 
 export function newCustomer() {
     const client = new GoogleAdsApi({

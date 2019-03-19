@@ -28,7 +28,10 @@ export default class CampaignBudgetService extends Service {
         return this.getListResults('campaign_budget', options)
     }
 
-    public async create(budget: CampaignBudget, options?: ServiceCreateOptions): Promise<Mutation> {
+    public async create(
+        budget: CampaignBudget | Array<CampaignBudget>,
+        options?: ServiceCreateOptions
+    ): Promise<Mutation> {
         return this.serviceCreate({
             request: MUTATE_REQUEST,
             operation: OPERATION_REQUEST,
@@ -38,7 +41,10 @@ export default class CampaignBudgetService extends Service {
         })
     }
 
-    public async update(budget: CampaignBudget, options?: ServiceCreateOptions): Promise<Mutation> {
+    public async update(
+        budget: CampaignBudget | Array<CampaignBudget>,
+        options?: ServiceCreateOptions
+    ): Promise<Mutation> {
         return this.serviceUpdate({
             request: MUTATE_REQUEST,
             operation: OPERATION_REQUEST,

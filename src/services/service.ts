@@ -17,10 +17,27 @@ interface GetOptions {
 }
 
 interface MutateOptions extends ServiceCreateOptions {
+    /**
+     * The request name (type) e.g. "MutateCampaignsRequest"
+     * This can be found in the Google Ads RPC documentation
+     */
     request: string
+    /**
+     * The operation name (type) e.g. "MutateCampaignsOperation"
+     * This can be found in the Google Ads RPC documentation
+     */
     operation: string
+    /**
+     * The method name for the mutate operation
+     * This can be found in the Google Ads RPC documentation
+     */
     mutate: string
-    entity: [string, object]
+    /**
+     * This is a tuple
+     * The string corresponds to the entity name e.g. "Campaign"
+     * The rest is a single or array of objects that will be converted
+     */
+    entity: [string, object | Array<object>]
 }
 
 interface DelMutateOptions extends ServiceCreateOptions {
@@ -65,15 +82,34 @@ export default class Service {
 
     protected async serviceUpdate(options: MutateOptions): Promise<Mutation> {
         const request = new (grpc as any)[options.request]()
-        const operation = new (grpc as any)[options.operation]()
+        const operationType = (grpc as any)[options.operation]
 
-        const pb = this.buildResource(...options.entity)
-        operation.setUpdate(pb)
+        const operations = []
 
-        const mask = getFieldMask(options.entity[1])
-        operation.setUpdateMask(mask)
+        if (Array.isArray(options.entity[1])) {
+            for (const entity of options.entity[1]) {
+                const operation = new operationType()
 
-        return this.mutate(request, [operation], options)
+                const pb = this.buildResource(options.entity[0], entity)
+                operation.setUpdate(pb)
+
+                const mask = getFieldMask(entity)
+                operation.setUpdateMask(mask)
+
+                operations.push(operation)
+            }
+        } else {
+            const operation = new operationType()
+            const pb = this.buildResource(...options.entity)
+            operation.setUpdate(pb)
+
+            const mask = getFieldMask(options.entity[1])
+            operation.setUpdateMask(mask)
+
+            operations.push(operation)
+        }
+
+        return this.mutate(request, operations, options)
     }
 
     protected async serviceDelete(options: DelMutateOptions): Promise<any> {
@@ -91,12 +127,25 @@ export default class Service {
 
     protected async serviceCreate(options: MutateOptions): Promise<Mutation> {
         const request = new (grpc as any)[options.request]()
-        const operation = new (grpc as any)[options.operation]()
+        const operationType = (grpc as any)[options.operation]
 
-        const pb = this.buildResource(...options.entity)
-        operation.setCreate(pb)
+        const operations = []
 
-        return this.mutate(request, [operation], options)
+        if (Array.isArray(options.entity[1])) {
+            for (const entity of options.entity[1]) {
+                const operation = new operationType()
+                const pb = this.buildResource(options.entity[0], entity)
+                operation.setCreate(pb)
+                operations.push(operation)
+            }
+        } else {
+            const operation = new operationType()
+            const pb = this.buildResource(...options.entity)
+            operation.setCreate(pb)
+            operations.push(operation)
+        }
+
+        return this.mutate(request, operations, options)
     }
 
     private async mutate(
@@ -127,6 +176,7 @@ export default class Service {
         return `customers/${this.cid}/${resource}`
     }
 
+    // TODO: Clean this up and rename since it's only used for get methods
     protected async serviceCall(call: string, request: any): Promise<any> {
         try {
             const response = await this.service[call](request)
