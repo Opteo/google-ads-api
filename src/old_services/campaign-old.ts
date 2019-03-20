@@ -2,7 +2,7 @@ import * as grpc from 'google-ads-node'
 import { Campaign } from 'google-ads-node/build/lib/resources'
 
 import Service from '../services/service'
-import { ServiceListOptions, ServiceCreateOptions } from '../types/Global'
+import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
 /**
  * @constant
