@@ -104,6 +104,12 @@ export default function Customer(cid: string, client: GrpcClient, throttler: Bot
     const cusService = new CustomerService(cid, client, throttler, 'CustomerService')
 
     return {
+        /* Top level customer methods */
+        report: (options: ReportOptions) => cusService.report(options),
+        query: (qry: string) => cusService.query(qry),
+        list: () => cusService.list(),
+
+        /* Services */
         campaigns: new CampaignService(cid, client, throttler, 'CampaignService'),
         campaignBudgets: new CampaignBudgetService(cid, client, throttler, 'CampaignBudgetService'),
         adGroups: new AdGroupService(cid, client, throttler, 'AdGroupService'),
@@ -248,40 +254,5 @@ export default function Customer(cid: string, client: GrpcClient, throttler: Bot
         userInterests: new UserInterestService(cid, client, throttler, 'UserInterestService'),
         userLists: new UserListService(cid, client, throttler, 'UserListService'),
         videos: new VideoService(cid, client, throttler, 'VideoService'),
-
-        /* Top level customer methods */
-        report: (options: ReportOptions) => cusService.report(options),
-        query: (qry: string) => cusService.query(qry),
     }
 }
-
-// export default function Customer(http_controller: HttpController): Customer {
-//     return {
-//         campaigns: new Campaigns(http_controller),
-//         campaignAdSchedules: new CampaignAdSchedules(http_controller),
-//         campaignBudgets: new CampaignBudgets(http_controller),
-//         campaignCriterions: new CampaignCriterions(http_controller),
-//         campaignNegatives: new CampaignNegatives(http_controller),
-//         campaignSharedSets: new CampaignSharedSets(
-//             http_controller,
-//             ENDPOINTS.campaign_shared_sets,
-//             RESOURCE_NAMES.campaign_shared_set
-//         ),
-//         adgroups: new AdGroups(http_controller),
-//         ads: new AdGroupAds(http_controller),
-//         adgroupCriterions: new AdGroupCriterions(http_controller),
-//         keywords: new Keywords(http_controller),
-//         sharedSets: new SharedSets(http_controller),
-//         sharedSetCriterions: new SharedSetCriterions(http_controller),
-//         conversionActions: new ConversionActions(http_controller),
-//         geoTargetConstants: new GeoTargetConstants(
-//             http_controller,
-//             ENDPOINTS.geo_target_constants,
-//             RESOURCE_NAMES.geo_target_constant
-//         ),
-//         update: (config: UpdateConfig) => http_controller.update(config, 'mutateCustomer'),
-//         retrieve: () => http_controller.retrieve(ENDPOINTS.customers),
-//         query: (query: string) => http_controller.query(query),
-//         report: (config: ReportConfig) => http_controller.report(config),
-//     }
-// }

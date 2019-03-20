@@ -154,4 +154,17 @@ describe('customer', () => {
             })
         })
     })
+
+    describe('list', () => {
+        it('retrieves customers directly accessible by the user authenticating the call', async () => {
+            const customers = await customer.list()
+            expect(customers[0]).toEqual({
+                customer: expect.objectContaining({
+                    resource_name: expect.stringContaining(`customers/${CID_WITH_METRICS}`),
+                    currency_code: expect.any(String),
+                    time_zone: expect.any(String),
+                }),
+            })
+        })
+    })
 })
