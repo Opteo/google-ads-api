@@ -193,7 +193,7 @@ export default class Service {
 
     protected async getListResults(resource: string, options?: ServiceListOptions): Promise<any> {
         const query = this.buildListQuery(resource, options)
-        const results = await this.report(query)
+        const results = await this.getSearchData(query)
         return this.parseServiceResults(results)
     }
 
@@ -209,7 +209,7 @@ export default class Service {
         return parser.parseResult(formatted)
     }
 
-    private async report(query: string, page_size: number = 10000): Promise<any> {
+    private async getSearchData(query: string, page_size: number = 10000): Promise<any> {
         const { request, limit } = this.client.buildSearchRequest(this.cid, query, page_size)
         try {
             if (limit && page_size && page_size >= limit) {

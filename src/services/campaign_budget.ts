@@ -1,3 +1,4 @@
+// @ts-ignore
 import { CampaignBudget } from 'google-ads-node/build/lib/resources'
 
 import Service, { Mutation } from './service'
@@ -29,27 +30,27 @@ export default class CampaignBudgetService extends Service {
     }
 
     public async create(
-        budget: CampaignBudget | Array<CampaignBudget>,
+        campaign_budget: CampaignBudget | Array<CampaignBudget>,
         options?: ServiceCreateOptions
     ): Promise<Mutation> {
         return this.serviceCreate({
             request: MUTATE_REQUEST,
             operation: OPERATION_REQUEST,
             mutate: MUTATE_METHOD,
-            entity: [RESOURCE, budget],
+            entity: [RESOURCE, campaign_budget],
             ...options,
         })
     }
 
     public async update(
-        budget: CampaignBudget | Array<CampaignBudget>,
+        campaign_budget: CampaignBudget | Array<CampaignBudget>,
         options?: ServiceCreateOptions
     ): Promise<Mutation> {
         return this.serviceUpdate({
             request: MUTATE_REQUEST,
             operation: OPERATION_REQUEST,
             mutate: MUTATE_METHOD,
-            entity: [RESOURCE, budget],
+            entity: [RESOURCE, campaign_budget],
             ...options,
         })
     }

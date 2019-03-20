@@ -1,3 +1,4 @@
+// @ts-ignore
 import { AdGroup } from 'google-ads-node/build/lib/resources'
 
 import Service, { Mutation } from './service'
@@ -28,7 +29,10 @@ export default class AdGroupService extends Service {
         return this.getListResults('ad_group', options)
     }
 
-    public async create(ad_group: AdGroup | Array<AdGroup>, options?: ServiceCreateOptions): Promise<Mutation> {
+    public async create(
+        ad_group: AdGroup | Array<AdGroup>,
+        options?: ServiceCreateOptions
+    ): Promise<Mutation> {
         return this.serviceCreate({
             request: MUTATE_REQUEST,
             operation: OPERATION_REQUEST,
@@ -38,7 +42,10 @@ export default class AdGroupService extends Service {
         })
     }
 
-    public async update(ad_group: AdGroup | Array<AdGroup>, options?: ServiceCreateOptions): Promise<Mutation> {
+    public async update(
+        ad_group: AdGroup | Array<AdGroup>,
+        options?: ServiceCreateOptions
+    ): Promise<Mutation> {
         return this.serviceUpdate({
             request: MUTATE_REQUEST,
             operation: OPERATION_REQUEST,
