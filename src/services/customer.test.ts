@@ -168,7 +168,7 @@ describe('customer', () => {
         })
     })
 
-    describe.only('get', () => {
+    describe('get', () => {
         it('should retrieve a single customer via an id or resource name', async () => {
             const c = await customer.get(CID_WITH_METRICS)
             expect(c).toEqual(

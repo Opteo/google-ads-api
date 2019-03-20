@@ -2,7 +2,7 @@
 import { ManagedPlacementView } from 'google-ads-node/build/lib/resources'
 
 import Service, { Mutation } from './service'
-import { ServiceListOptions, ServiceCreateOptions } from '../types/Global'
+import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
 /**
  * @constants
