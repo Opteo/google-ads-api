@@ -1,18 +1,4 @@
-// import Campaigns from './entities/Campaigns'
-// import CampaignBudgets from './entities/CampaignBudgets'
-// import CampaignCriterions from './entities/CampaignCriterions'
-// import CampaignNegatives from './entities/CampaignNegatives'
-// import CampaignAdSchedules from './entities/CampaignAdSchedules'
-// import CampaignSharedSets from './entities/CampaignSharedSets'
-// import AdGroups from './entities/AdGroups'
-// import AdGroupAds from './entities/AdGroupAds'
-// import AdGroupCriterions from './entities/AdGroupCriterions'
-// import Keywords from './entities/Keywords'
-// import SharedSets from './entities/SharedSets'
-// import SharedSetCriterions from './entities/SharedSetCriterions'
-// import ConversionActions from './entities/ConversionActions'
-// import GeoTargetConstants from './entities/GeoTargetConstants'
-
+/* Services */
 import CampaignService from './services/campaign'
 import CampaignBudgetService from './services/campaign_budget'
 import AdGroupService from './services/ad_group'
@@ -27,6 +13,7 @@ import AdGroupCriterionService from './services/ad_group_criterion'
 import AdGroupExtensionSettingService from './services/ad_group_extension_setting'
 import AdGroupFeedService from './services/ad_group_feed'
 import AdGroupLabelService from './services/ad_group_label'
+// TODO: Missing protos
 // import AdParameterService from './services/ad_parameter'
 import AdScheduleViewService from './services/ad_schedule_view'
 import AgeRangeViewService from './services/age_range_view'
@@ -43,6 +30,7 @@ import CarrierConstantService from './services/carrier_constant'
 import ChangeStatusService from './services/change_status'
 import ClickViewService from './services/click_view'
 import ConversionActionService from './services/conversion_action'
+// TODO: Missing protos
 // import ConversionUploadService from './services/conversion_upload'
 import CustomInterestService from './services/custom_interest'
 import CustomerClientLinkService from './services/customer_client_link'
@@ -69,6 +57,7 @@ import HotelGroupViewService from './services/hotel_group_view'
 import HotelPerformanceViewService from './services/hotel_performance_view'
 import KeywordPlanAdGroupService from './services/keyword_plan_ad_group'
 import KeywordPlanCampaignService from './services/keyword_plan_campaign'
+// TODO: Missing protos
 // import KeywordPlanIdeaService from './services/keyword_plan_idea'
 import KeywordPlanKeywordService from './services/keyword_plan_keyword'
 import KeywordPlanNegativeKeywordService from './services/keyword_plan_negative_keyword'
@@ -79,11 +68,13 @@ import LanguageConstantService from './services/language_constant'
 import LocationViewService from './services/location_view'
 import ManagedPlacementViewService from './services/managed_placement_view'
 import MediaFileService from './services/media_file'
+// TODO: Missing protos
 // import MerchantCenterLinkService from './services/merchant_center_link'
 import MobileAppCategoryConstantService from './services/mobile_app_category_constant'
 import MobileDeviceConstantService from './services/mobile_device_constant'
 import OperatingSystemVersionConstantService from './services/operating_system_version_constant'
 import ParentalStatusViewService from './services/parental_status_view'
+// TODO: Missing protos
 // import PaymentsAccountService from './services/payments_account'
 import ProductBiddingCategoryConstantService from './services/product_bidding_category_constant'
 import ProductGroupViewService from './services/product_group_view'
@@ -99,18 +90,23 @@ import UserInterestService from './services/user_interest'
 import UserListService from './services/user_list'
 import VideoService from './services/video'
 
-// import { ENDPOINTS, RESOURCE_NAMES } from './constants'
+/* Customer */
+import CustomerService from './services/customer'
+
+/* gRPC Client */
 import GrpcClient from './grpc'
+
+/* Utils */
 import Bottleneck from 'bottleneck'
-// import { HttpController } from './types/Http'
-// import { ReportConfig, UpdateConfig } from './types/Global'
+import { ReportOptions } from './types'
 
 export default function Customer(cid: string, client: GrpcClient, throttler: Bottleneck) {
+    const cusService = new CustomerService(cid, client, throttler, 'CustomerService')
+
     return {
         campaigns: new CampaignService(cid, client, throttler, 'CampaignService'),
         campaignBudgets: new CampaignBudgetService(cid, client, throttler, 'CampaignBudgetService'),
         adGroups: new AdGroupService(cid, client, throttler, 'AdGroupService'),
-
         accountBudgetProposals: new AccountBudgetProposalService(
             cid,
             client,
@@ -252,6 +248,9 @@ export default function Customer(cid: string, client: GrpcClient, throttler: Bot
         userInterests: new UserInterestService(cid, client, throttler, 'UserInterestService'),
         userLists: new UserListService(cid, client, throttler, 'UserListService'),
         videos: new VideoService(cid, client, throttler, 'VideoService'),
+
+        /* Top level customer methods */
+        report: (options: ReportOptions) => cusService.report(options),
     }
 }
 

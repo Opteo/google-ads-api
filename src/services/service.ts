@@ -6,8 +6,9 @@ import { getFieldMask } from 'google-ads-node/build/lib/utils'
 import GrpcClient from '../grpc'
 import { formatQueryResults, buildReportQuery } from '../utils'
 import parser from '../parser'
-import { ReportConfig, ServiceListOptions, ServiceCreateOptions } from '../types/Global'
+import { ServiceListOptions, ServiceCreateOptions } from '../types/Global'
 import { SearchGrpcError } from '../Error'
+import { ReportOptions } from '../types'
 
 interface GetOptions {
     request: string
@@ -202,6 +203,12 @@ export default class Service {
         return pb
     }
 
+    protected async serviceReport(options: ReportOptions): Promise<any> {
+        const query = this.buildCustomerReportQuery(options)
+        const results = await this.getSearchData(query, options.page_size)
+        return this.parseServiceResults(results)
+    }
+
     // TODO: Add support for custom metrics?
     // TODO: Decide about converting micros by default in "get" methods?
     private parseServiceResults(results: Array<any>, convert_micros?: boolean): any[] {
@@ -232,13 +239,18 @@ export default class Service {
         }
         const resource_fields = (fields as any)[resource]
 
-        const config: ReportConfig = {
+        const config: ReportOptions = {
             attributes: resource_fields,
             constraints: options && options.constraints ? options.constraints : [],
             limit: options && options.limit ? options.limit : undefined,
-            entity: resource,
+            entity: resource as fields.ResourceName,
         }
-        const { query } = buildReportQuery(config)
+        const query = buildReportQuery(config)
+        return query
+    }
+
+    private buildCustomerReportQuery(options: ReportOptions): string {
+        const query = buildReportQuery(options)
         return query
     }
 }

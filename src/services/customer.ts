@@ -1,8 +1,10 @@
 import Service from './service'
+import { ReportOptions } from '../types'
 
 export default class GoogleAdsService extends Service {
-    public async report(): Promise<string> {
-        return Promise.resolve('wasd')
+    public async report(options: ReportOptions): Promise<Array<any>> {
+        const results = await this.serviceReport(options)
+        return results
     }
 }
 
