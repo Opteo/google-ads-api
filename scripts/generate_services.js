@@ -44,7 +44,7 @@ const entities = [
     'ChangeStatus',
     'ClickView',
     'ConversionAction',
-    'ConversionUpload',
+    // 'ConversionUpload', // Missing protos
     'CustomInterest',
     'CustomerClientLink',
     'CustomerClient',
@@ -134,16 +134,37 @@ function getCustomerMethodName(entity, resource_url) {
     return resource_url
 }
 
+function getMutateRequest(entity) {
+    if (entity === 'ChangeStatus') {
+        return 'MutateChangeStatusRequest'
+    }
+    return `Mutate${entity}sRequest`
+}
+
+function getMutateMethod(entity) {
+    if (entity === 'ChangeStatus') {
+        return 'mutateChangeStatus'
+    }
+    return `mutate${entity}s`
+}
+
+function getParam(entity) {
+    if (entity === 'ChangeStatus') {
+        return `change_status`
+    }
+    return `${snakeCase(entity)}s`
+}
+
 function compileService(entity) {
-    if (entity !== 'CampaignCriterion') return
+    if (entity === 'ClickView') return
     const resource_url_name = getResourceUrl(entity)
 
     const get_request = `Get${entity}Request`
     const get_method = `get${entity}`
 
     const operation_request = `${entity}Operation`
-    const mutate_request = `Mutate${entity}sRequest`
-    const mutate_method = `mutate${entity}s`
+    const mutate_request = getMutateRequest(entity)
+    const mutate_method = getMutateMethod(entity)
 
     const resource = entity
     const type = entity
@@ -176,7 +197,8 @@ function compileService(entity) {
             GET_REQUEST: get_request,
             RESOURCE: entity,
             TYPE: type,
-            PARAM: param,
+            PARAM: getParam(entity),
+            PARAM_S: snakeCase(entity), // Singular version of parameter name
             ENTITY: entity,
             CUSTOMER_METHOD: getCustomerMethodName(entity, resource_url_name),
         })
