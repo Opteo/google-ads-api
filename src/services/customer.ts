@@ -1,7 +1,9 @@
+import * as grpc from 'google-ads-node'
 import { Customer } from 'google-ads-node/build/lib/resources'
+import { getFieldMask } from 'google-ads-node/build/lib/utils'
 
 import Service from './service'
-import { ReportOptions } from '../types'
+import { ReportOptions, ServiceCreateOptions } from '../types'
 
 export default class GoogleAdsService extends Service {
     public async report(options: ReportOptions): Promise<Array<any>> {
@@ -32,5 +34,25 @@ export default class GoogleAdsService extends Service {
             method: 'getCustomer',
             entity_id: id,
         }) as Customer
+    }
+
+    public async update(customer: Customer, options?: ServiceCreateOptions): Promise<void> {
+        const request = new grpc.MutateCustomerRequest()
+        const operation = new grpc.CustomerOperation()
+
+        const pb = this.buildResource('Customer', customer) as grpc.Customer
+        operation.setUpdate(pb)
+
+        const mask = getFieldMask(customer)
+        operation.setUpdateMask(mask)
+
+        request.setCustomerId(this.cid)
+        request.setOperation(operation)
+
+        if (options && options.hasOwnProperty('validate_only')) {
+            request.setValidateOnly(options.validate_only as boolean)
+        }
+
+        await this.service.mutateCustomer(request)
     }
 }

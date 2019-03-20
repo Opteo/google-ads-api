@@ -98,7 +98,8 @@ import GrpcClient from './grpc'
 
 /* Utils */
 import Bottleneck from 'bottleneck'
-import { ReportOptions } from './types'
+import { Customer } from 'google-ads-node/build/lib/resources'
+import { ReportOptions, ServiceCreateOptions } from './types'
 
 export default function Customer(cid: string, client: GrpcClient, throttler: Bottleneck) {
     const cusService = new CustomerService(cid, client, throttler, 'CustomerService')
@@ -109,6 +110,7 @@ export default function Customer(cid: string, client: GrpcClient, throttler: Bot
         query: (qry: string) => cusService.query(qry),
         list: () => cusService.list(),
         get: (id: number | string) => cusService.get(id),
+        update: (customer: Customer, options?: ServiceCreateOptions) => cusService.update(customer, options),
 
         /* Services */
         campaigns: new CampaignService(cid, client, throttler, 'CampaignService'),

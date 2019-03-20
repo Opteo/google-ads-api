@@ -1,7 +1,7 @@
-import { AdGroup } from 'google-ads-node/build/lib/resources'
+import { AdGroup, Customer } from 'google-ads-node/build/lib/resources'
 import { AdGroupStatus, CampaignStatus } from 'google-ads-node/build/lib/enums'
 
-import { newCustomerWithMetrics, newCustomer, CID_WITH_METRICS } from '../test_utils'
+import { newCustomerWithMetrics, newCustomer, CID, CID_WITH_METRICS } from '../test_utils'
 const customer = newCustomerWithMetrics()
 const customer_no_metrics = newCustomer()
 
@@ -179,6 +179,19 @@ describe('customer', () => {
                     currency_code: expect.any(String),
                 })
             )
+        })
+    })
+
+    describe('update', () => {
+        it('should update specified fields of a customer', async done => {
+            const c: Customer = {
+                resource_name: `customers/${CID}`,
+                descriptive_name: 'A new descriptive name',
+            }
+            await customer_no_metrics.update(c, {
+                validate_only: true,
+            })
+            done()
         })
     })
 })
