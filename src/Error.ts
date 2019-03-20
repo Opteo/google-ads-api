@@ -1,6 +1,12 @@
-import { Error as IError } from './types/Global'
 import { get } from 'lodash'
 import { SearchGoogleAdsRequest } from 'google-ads-node'
+
+interface IError {
+    message: string
+    status: string
+    details: any
+    code: number
+}
 
 export class GoogleAdsError extends Error {
     public error_name: string

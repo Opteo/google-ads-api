@@ -2,8 +2,7 @@ import Bottleneck from 'bottleneck'
 import crypto from 'crypto'
 import { noop } from 'lodash'
 
-// import Http from './Http'
-import CustomerInstance from './Customer'
+import CustomerInstance from './customer'
 import GrpcClient from './grpc'
 import { normaliseCustomerId } from './utils'
 
