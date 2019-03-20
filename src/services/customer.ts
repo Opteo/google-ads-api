@@ -55,4 +55,7 @@ export default class GoogleAdsService extends Service {
 
         await this.service.mutateCustomer(request)
     }
+
+    // TODO: Add support for this service method
+    // public async create(customer: Customer)
 }
