@@ -79,6 +79,10 @@ export const buildReportQuery = (config: ReportConfig): { query: string; custom_
             constraint.key = `${config.entity}.${constraint.key}`
         }
 
+        // Stripe entity name from segment constraint e.g. "click_view.segments.date" -> "segments.date"
+        if (constraint.key.startsWith(config.entity) && constraint.key.includes('.segments.')) {
+            constraint.key = constraint.key.replace(`${config.entity}.`, '')
+        }
         return constraint
     }
 
