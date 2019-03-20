@@ -1,5 +1,5 @@
 import { reject, isString, find } from 'lodash'
-import { Metric, ReportConfig, Constraint } from './types/Global'
+import { Metric, ReportOptions, Constraint } from './types'
 
 const all_metrics: Array<Metric> = [
     { name: 'clicks', is_number: true },
@@ -12,11 +12,12 @@ const all_metrics: Array<Metric> = [
         is_custom: true,
         is_micros: true,
         is_number: true,
-        pre_query_hook: (report: ReportConfig): ReportConfig => {
+        pre_query_hook: (report: ReportOptions): ReportOptions => {
             if (report.metrics) {
                 report.metrics.push('metrics.cost_micros')
             }
 
+            // @ts-ignore Ignore until custom metrics are added back
             report.metrics = reject(report.metrics, i => i === 'metrics.cost')
 
             if (!report.constraints || isString(report.constraints)) {

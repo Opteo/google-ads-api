@@ -163,12 +163,11 @@ export interface ReportOptions {
     page_size?: number
 }
 
-interface Constraint {
-    key: string
-    op: string
-    val: string | number | Array<string>
-}
-
+/**
+ * String union for Date Constant
+ * @readonly
+ * @union {string}
+ */
 type DateConstant =
     | 'LAST_7_DAYS'
     | 'LAST_14_DAYS'
@@ -182,3 +181,47 @@ type DateConstant =
     | 'THIS_WEEK_SUN_TODAY'
     | 'YESTERDAY'
     | 'TODAY'
+
+/**
+ *  Metric object used for custom metrics
+ * @interface
+ */
+export interface Metric {
+    name: string
+    is_micros?: boolean
+    is_custom?: boolean
+    is_number?: boolean
+    pre_query_hook?: Function
+    post_query_hook?: Function
+}
+
+/**
+ *  Constraint object with full parameters
+ * @interface
+ */
+export interface Constraint {
+    key: string
+    op: string
+    val: string | number | Array<string>
+}
+
+/**
+ * Service List Method Options
+ * @interface
+ * @description Options available when listing entities via a service
+ */
+export interface ServiceListOptions {
+    limit?: number
+    order_by?: string
+    constraints?: Array<string | object | Constraint>
+}
+
+/**
+ * Service Create Method Options
+ * @interface
+ * @description Options available when creating resources via a service
+ */
+export interface ServiceCreateOptions {
+    validate_only?: boolean
+    partial_failure?: boolean
+}
