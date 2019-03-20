@@ -14,6 +14,7 @@ const all_metrics: Array<Metric> = [
         is_number: true,
         pre_query_hook: (report: ReportOptions): ReportOptions => {
             if (report.metrics) {
+                // @ts-ignore
                 report.metrics.push('metrics.cost_micros')
             }
 

@@ -85,73 +85,71 @@ export interface ReportOptions {
         | fields.UserInterestFields
         | fields.UserListFields
         | fields.VideoFields
-    metrics?: fields.Metrics
-    // TODO: Use specific entity metrics when selectable with is supported (gads-node)
-    // | fields.AdGroupMetrics
-    // | fields.AdGroupAdMetrics
-    // | fields.AdGroupAudienceViewMetrics
-    // | fields.AdScheduleViewMetrics
-    // | fields.AgeRangeViewMetrics
-    // | fields.BiddingStrategyMetrics
-    // | fields.CampaignMetrics
-    // | fields.CampaignAudienceViewMetrics
-    // | fields.CampaignBidModifierMetrics
-    // | fields.CampaignBudgetMetrics
-    // | fields.ClickViewMetrics
-    // | fields.CustomerMetrics
-    // | fields.DetailPlacementViewMetrics
-    // | fields.DisplayKeywordViewMetrics
-    // | fields.DynamicSearchAdsSearchTermViewMetrics
-    // | fields.ExtensionFeedItemMetrics
-    // | fields.FeedItemMetrics
-    // | fields.FeedPlaceholderViewMetrics
-    // | fields.GenderViewMetrics
-    // | fields.GeographicViewMetrics
-    // | fields.GroupPlacementViewMetrics
-    // | fields.HotelGroupViewMetrics
-    // | fields.HotelPerformanceViewMetrics
-    // | fields.KeywordViewMetrics
-    // | fields.LocationViewMetrics
-    // | fields.ManagedPlacementViewMetrics
-    // | fields.ParentalStatusViewMetrics
-    // | fields.ProductGroupViewMetrics
-    // | fields.SearchTermViewMetrics
-    // | fields.ShoppingPerformanceViewMetrics
-    // | fields.TopicViewMetrics
-    // | fields.VideoMetrics
-    segments?: fields.Segments
-    // TODO: Use specific entity segments when selectable with is supported (gads-node)
-    // | fields.AdGroupSegments
-    // | fields.AdGroupAdSegments
-    // | fields.AdGroupAudienceViewSegments
-    // | fields.AdScheduleViewSegments
-    // | fields.AgeRangeViewSegments
-    // | fields.BiddingStrategySegments
-    // | fields.CampaignSegments
-    // | fields.CampaignAudienceViewSegments
-    // | fields.CampaignBudgetSegments
-    // | fields.ClickViewSegments
-    // | fields.CustomerSegments
-    // | fields.DetailPlacementViewSegments
-    // | fields.DisplayKeywordViewSegments
-    // | fields.DynamicSearchAdsSearchTermViewSegments
-    // | fields.ExtensionFeedItemSegments
-    // | fields.FeedItemSegments
-    // | fields.FeedPlaceholderViewSegments
-    // | fields.GenderViewSegments
-    // | fields.GeographicViewSegments
-    // | fields.GroupPlacementViewSegments
-    // | fields.HotelGroupViewSegments
-    // | fields.HotelPerformanceViewSegments
-    // | fields.KeywordViewSegments
-    // | fields.LocationViewSegments
-    // | fields.ManagedPlacementViewSegments
-    // | fields.ParentalStatusViewSegments
-    // | fields.ProductGroupViewSegments
-    // | fields.SearchTermViewSegments
-    // | fields.ShoppingPerformanceViewSegments
-    // | fields.TopicViewSegments
-    // | fields.VideoSegments
+    metrics?:
+        | fields.AdGroupMetrics
+        | fields.AdGroupAdMetrics
+        | fields.AdGroupAudienceViewMetrics
+        | fields.AdScheduleViewMetrics
+        | fields.AgeRangeViewMetrics
+        | fields.BiddingStrategyMetrics
+        | fields.CampaignMetrics
+        | fields.CampaignAudienceViewMetrics
+        | fields.CampaignBidModifierMetrics
+        | fields.CampaignBudgetMetrics
+        | fields.ClickViewMetrics
+        | fields.CustomerMetrics
+        | fields.DetailPlacementViewMetrics
+        | fields.DisplayKeywordViewMetrics
+        | fields.DynamicSearchAdsSearchTermViewMetrics
+        | fields.ExtensionFeedItemMetrics
+        | fields.FeedItemMetrics
+        | fields.FeedPlaceholderViewMetrics
+        | fields.GenderViewMetrics
+        | fields.GeographicViewMetrics
+        | fields.GroupPlacementViewMetrics
+        | fields.HotelGroupViewMetrics
+        | fields.HotelPerformanceViewMetrics
+        | fields.KeywordViewMetrics
+        | fields.LocationViewMetrics
+        | fields.ManagedPlacementViewMetrics
+        | fields.ParentalStatusViewMetrics
+        | fields.ProductGroupViewMetrics
+        | fields.SearchTermViewMetrics
+        | fields.ShoppingPerformanceViewMetrics
+        | fields.TopicViewMetrics
+        | fields.VideoMetrics
+    segments?:
+        | fields.AdGroupSegments
+        | fields.AdGroupAdSegments
+        | fields.AdGroupAudienceViewSegments
+        | fields.AdScheduleViewSegments
+        | fields.AgeRangeViewSegments
+        | fields.BiddingStrategySegments
+        | fields.CampaignSegments
+        | fields.CampaignAudienceViewSegments
+        | fields.CampaignBudgetSegments
+        | fields.ClickViewSegments
+        | fields.CustomerSegments
+        | fields.DetailPlacementViewSegments
+        | fields.DisplayKeywordViewSegments
+        | fields.DynamicSearchAdsSearchTermViewSegments
+        | fields.ExtensionFeedItemSegments
+        | fields.FeedItemSegments
+        | fields.FeedPlaceholderViewSegments
+        | fields.GenderViewSegments
+        | fields.GeographicViewSegments
+        | fields.GroupPlacementViewSegments
+        | fields.HotelGroupViewSegments
+        | fields.HotelPerformanceViewSegments
+        | fields.KeywordViewSegments
+        | fields.LocationViewSegments
+        | fields.ManagedPlacementViewSegments
+        | fields.ParentalStatusViewSegments
+        | fields.ProductGroupViewSegments
+        | fields.SearchTermViewSegments
+        | fields.ShoppingPerformanceViewSegments
+        | fields.TopicViewSegments
+        | fields.VideoSegments
     constraints?: Array<string | object | Constraint>
     date_constant?: DateConstant
     from_date?: string // ISO 8601(YYYY-MM-DD) format
@@ -201,7 +199,24 @@ export interface Metric {
  */
 export interface Constraint {
     key: string
-    op: string
+    op:
+        | '='
+        | '!='
+        | '>'
+        | '>='
+        | '<'
+        | '<='
+        | 'IN'
+        | 'NOT IN'
+        | 'LIKE'
+        | 'NOT LIKE'
+        | 'CONTAINS ANY'
+        | 'CONTAINS ALL'
+        | 'CONTAINS NONE'
+        | 'IS NULL'
+        | 'IS NOT NULL'
+        | 'DURING'
+        | 'BETWEEN'
     val: string | number | Array<string>
 }
 
