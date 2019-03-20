@@ -18,6 +18,7 @@ import entity_attributes from './attributes'
 import entity_metrics from './metrics'
 import { ReportConfig, Metric, Constraint } from './types/Global'
 import { ListConfig } from './types/Entity'
+import { ReportOptions } from './types'
 
 export const getUpdateMask = (update_object: any): string => {
     let mask = ''
@@ -36,12 +37,97 @@ export const getUpdateMask = (update_object: any): string => {
     return mask
 }
 
+function unrollConstraintShorthand(constraint: any): Constraint {
+    if (!constraint.key) {
+        const key = Object.keys(constraint)[0]
+        const val = constraint[key]
+        if (isArray(val)) {
+            return { key, op: 'IN', val }
+        }
+        return { key, op: '=', val }
+    }
+    return constraint
+}
+
+export function buildReportQuery(config: ReportOptions) {
+    let query = ``
+    let where_clause_exists = false
+
+    const attributes = config.attributes ? config.attributes.sort() : []
+    const metrics = config.metrics ? config.metrics.sort() : []
+    const segments = config.segments ? config.segments.sort() : []
+    const constraints = config.constraints || []
+
+    const normalised_constraints = constraints.map(
+        (constraint: Constraint | string | object): Constraint | string => {
+            if (isString(constraint)) {
+                return constraint
+            }
+            return unrollConstraintShorthand(constraint)
+        }
+    )
+
+    /* ATTRIBUTES */
+    const all_selected_attributes = (attributes as any).concat(metrics, segments).join(', ')
+    if (!all_selected_attributes) {
+        throw new Error(`Must specify at least one field in "attributes", "metrics" or "segments"`)
+    }
+
+    query = `SELECT ${all_selected_attributes} FROM ${config.entity}`
+
+    /* Constraints */
+    if (normalised_constraints && normalised_constraints.length > 0) {
+        const constraints = formatConstraints(normalised_constraints)
+        query += ` WHERE ${constraints}`
+        where_clause_exists = true
+    }
+
+    /* Date Ranges */
+    if (config.date_constant && (config.from_date || config.to_date)) {
+        throw new Error('Use only one of "date_constant" OR ("from_date","to_date")')
+    }
+    if (config.from_date && !config.to_date) {
+        const d = new Date()
+        const today_string = `${d.getFullYear()}-${('0' + (d.getMonth() + 1)).slice(-2)}-${('0' + d.getDate()).slice(
+            -2
+        )}`
+        config.to_date = today_string
+    } else if (config.to_date && !config.from_date) {
+        throw new Error('Expected start date range is missing - "from_date"')
+    }
+
+    /* Custom Date Range */
+    if (config.from_date && config.to_date) {
+        query += where_clause_exists ? ' AND ' : ' WHERE '
+        query += `segments.date >= '${config.from_date}' AND segments.date <= '${config.to_date}'`
+        where_clause_exists = true
+    }
+
+    /* Predefined Date Constant */
+    if (config.date_constant) {
+        query += where_clause_exists ? ' AND ' : ' WHERE '
+        query += `segments.date DURING ${config.date_constant}`
+    }
+
+    /* Order By */
+    if (config.order_by) {
+        query += formatOrderBy(config.entity, config.order_by, config.sort_order)
+    }
+
+    /* Limit To */
+    if (config.limit && config.limit > 0) {
+        query += ` LIMIT ${config.limit}`
+    }
+
+    return query
+}
+
 /**
  * Builds a custom Google Ads Query
  * @param {object} config
  * @returns {string} query
  */
-export const buildReportQuery = (config: ReportConfig): { query: string; custom_metrics: Array<Metric> } => {
+export const buildReportQueryOld = (config: ReportConfig): { query: string; custom_metrics: Array<Metric> } => {
     let query = ''
     let where_clause_exists = false
     const custom_metrics: Array<Metric> = []
@@ -58,19 +144,6 @@ export const buildReportQuery = (config: ReportConfig): { query: string; custom_
     config.attributes.sort()
     config.segments.sort()
     config.metrics.sort()
-
-    const unrollConstraintShorthand = (constraint: any): Constraint => {
-        if (!constraint.key) {
-            const key = Object.keys(constraint)[0]
-            const val = constraint[key]
-            if (isArray(val)) {
-                return { key, op: 'IN', val }
-            }
-            return { key, op: '=', val }
-        }
-
-        return constraint
-    }
 
     const addConstraintPrefix = (constraint: Constraint): Constraint => {
         if (includes(map(entity_metrics, 'name'), constraint.key)) {
