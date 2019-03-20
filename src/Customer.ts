@@ -251,6 +251,7 @@ export default function Customer(cid: string, client: GrpcClient, throttler: Bot
 
         /* Top level customer methods */
         report: (options: ReportOptions) => cusService.report(options),
+        query: (qry: string) => cusService.query(qry),
     }
 }
 

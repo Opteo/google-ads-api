@@ -1,5 +1,5 @@
 import { AdGroup } from 'google-ads-node/build/lib/resources'
-import { AdGroupStatus } from 'google-ads-node/build/lib/enums'
+import { AdGroupStatus, CampaignStatus } from 'google-ads-node/build/lib/enums'
 
 import { newCustomerWithMetrics, newCustomer, CID_WITH_METRICS } from '../test_utils'
 const customer = newCustomerWithMetrics()
@@ -123,6 +123,35 @@ describe('customer', () => {
             })
             expect(data).toEqual([])
             expect(data.length).toEqual(0)
+        })
+    })
+
+    describe('query', () => {
+        it('can retrieve data via an awql string', async () => {
+            const campaigns = await customer.query(`
+                SELECT 
+                    ad_group.id, 
+                    ad_group.name,
+                    campaign.id,
+                    campaign.status
+                FROM ad_group
+                WHERE campaign.status = ENABLED
+                LIMIT 5
+            `)
+
+            expect(campaigns.length).toEqual(5)
+            expect(campaigns[0]).toEqual({
+                ad_group: expect.objectContaining({
+                    resource_name: expect.any(String),
+                    id: expect.any(Number),
+                    name: expect.any(String),
+                }),
+                campaign: expect.objectContaining({
+                    resource_name: expect.any(String),
+                    id: expect.any(Number),
+                    status: CampaignStatus.ENABLED,
+                }),
+            })
         })
     })
 })

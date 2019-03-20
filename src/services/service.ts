@@ -203,9 +203,16 @@ export default class Service {
         return pb
     }
 
+    /* Base report method used in global customer instance */
     protected async serviceReport(options: ReportOptions): Promise<any> {
         const query = this.buildCustomerReportQuery(options)
         const results = await this.getSearchData(query, options.page_size)
+        return this.parseServiceResults(results)
+    }
+
+    /* Base query method used in global customer instance */
+    protected async serviceQuery(qry: string): Promise<any> {
+        const results = await this.getSearchData(qry)
         return this.parseServiceResults(results)
     }
 

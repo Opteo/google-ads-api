@@ -6,6 +6,11 @@ export default class GoogleAdsService extends Service {
         const results = await this.serviceReport(options)
         return results
     }
+
+    public async query(qry: string): Promise<Array<any>> {
+        const results = await this.serviceQuery(qry)
+        return results
+    }
 }
 
 // // import { CampaignBudget } from 'google-ads-node/build/lib/resources'
