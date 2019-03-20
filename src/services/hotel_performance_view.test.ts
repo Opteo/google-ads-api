@@ -9,17 +9,31 @@ const customer = newCustomer()
 
 describe('HotelPerformanceView', async () => {
 
-    describe('list', async () => {
+    describe('reporting', async () => {
         it('can retrieve a list of HotelPerformanceViews with all fields (if valid)', async () => {
             const hotel_performance_views = await customer.hotelPerformanceViews.list()
             expect(hotel_performance_views).toBeInstanceOf(Array)
 
-            if(hotel_performance_views.length > 0) {
+            // @ts-ignore Ignore missing proto definitions for now
+            if(hotel_performance_views.length > 0 && hotel_performance_views[0].hotel_performance_view.resource_name) {
                 expect(hotel_performance_views[0].hotel_performance_view).toEqual(
                     expect.objectContaining({
                         resource_name: expect.stringContaining(`customers/${CID}/hotelPerformanceViews`) || '',
                     })
                 )
+
+                // @ts-ignore Ignore missing proto definitions for now
+                const resource = hotel_performance_views[0].hotel_performance_view.resource_name
+
+                if(resource) {
+                    const singleton = await customer.hotelPerformanceViews.get(resource)
+                    expect(singleton).toBeInstanceOf(Object)
+                    expect(singleton).toEqual(
+                        expect.objectContaining({
+                            resource_name: expect.stringContaining(`customers/${CID}/hotelPerformanceViews`) || '',
+                        })
+                    )
+                }
             }
         })
 

@@ -9,17 +9,31 @@ const customer = newCustomer()
 
 describe('CampaignBidModifier', async () => {
 
-    describe('list', async () => {
+    describe('reporting', async () => {
         it('can retrieve a list of CampaignBidModifiers with all fields (if valid)', async () => {
             const campaign_bid_modifiers = await customer.campaignBidModifiers.list()
             expect(campaign_bid_modifiers).toBeInstanceOf(Array)
 
-            if(campaign_bid_modifiers.length > 0) {
+            // @ts-ignore Ignore missing proto definitions for now
+            if(campaign_bid_modifiers.length > 0 && campaign_bid_modifiers[0].campaign_bid_modifier.resource_name) {
                 expect(campaign_bid_modifiers[0].campaign_bid_modifier).toEqual(
                     expect.objectContaining({
                         resource_name: expect.stringContaining(`customers/${CID}/campaignBidModifiers`) || '',
                     })
                 )
+
+                // @ts-ignore Ignore missing proto definitions for now
+                const resource = campaign_bid_modifiers[0].campaign_bid_modifier.resource_name
+
+                if(resource) {
+                    const singleton = await customer.campaignBidModifiers.get(resource)
+                    expect(singleton).toBeInstanceOf(Object)
+                    expect(singleton).toEqual(
+                        expect.objectContaining({
+                            resource_name: expect.stringContaining(`customers/${CID}/campaignBidModifiers`) || '',
+                        })
+                    )
+                }
             }
         })
 

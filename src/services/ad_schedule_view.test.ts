@@ -9,17 +9,31 @@ const customer = newCustomer()
 
 describe('AdScheduleView', async () => {
 
-    describe('list', async () => {
+    describe('reporting', async () => {
         it('can retrieve a list of AdScheduleViews with all fields (if valid)', async () => {
             const ad_schedule_views = await customer.adScheduleViews.list()
             expect(ad_schedule_views).toBeInstanceOf(Array)
 
-            if(ad_schedule_views.length > 0) {
+            // @ts-ignore Ignore missing proto definitions for now
+            if(ad_schedule_views.length > 0 && ad_schedule_views[0].ad_schedule_view.resource_name) {
                 expect(ad_schedule_views[0].ad_schedule_view).toEqual(
                     expect.objectContaining({
                         resource_name: expect.stringContaining(`customers/${CID}/adScheduleViews`) || '',
                     })
                 )
+
+                // @ts-ignore Ignore missing proto definitions for now
+                const resource = ad_schedule_views[0].ad_schedule_view.resource_name
+
+                if(resource) {
+                    const singleton = await customer.adScheduleViews.get(resource)
+                    expect(singleton).toBeInstanceOf(Object)
+                    expect(singleton).toEqual(
+                        expect.objectContaining({
+                            resource_name: expect.stringContaining(`customers/${CID}/adScheduleViews`) || '',
+                        })
+                    )
+                }
             }
         })
 

@@ -9,17 +9,31 @@ const customer = newCustomer()
 
 describe('CustomerFeed', async () => {
 
-    describe('list', async () => {
+    describe('reporting', async () => {
         it('can retrieve a list of CustomerFeeds with all fields (if valid)', async () => {
             const customer_feeds = await customer.customerFeeds.list()
             expect(customer_feeds).toBeInstanceOf(Array)
 
-            if(customer_feeds.length > 0) {
+            // @ts-ignore Ignore missing proto definitions for now
+            if(customer_feeds.length > 0 && customer_feeds[0].customer_feed.resource_name) {
                 expect(customer_feeds[0].customer_feed).toEqual(
                     expect.objectContaining({
                         resource_name: expect.stringContaining(`customers/${CID}/customerFeeds`) || '',
                     })
                 )
+
+                // @ts-ignore Ignore missing proto definitions for now
+                const resource = customer_feeds[0].customer_feed.resource_name
+
+                if(resource) {
+                    const singleton = await customer.customerFeeds.get(resource)
+                    expect(singleton).toBeInstanceOf(Object)
+                    expect(singleton).toEqual(
+                        expect.objectContaining({
+                            resource_name: expect.stringContaining(`customers/${CID}/customerFeeds`) || '',
+                        })
+                    )
+                }
             }
         })
 

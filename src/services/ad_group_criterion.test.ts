@@ -9,17 +9,31 @@ const customer = newCustomer()
 
 describe('AdGroupCriterion', async () => {
 
-    describe('list', async () => {
+    describe('reporting', async () => {
         it('can retrieve a list of AdGroupCriterions with all fields (if valid)', async () => {
             const ad_group_criterions = await customer.adGroupCriterion.list()
             expect(ad_group_criterions).toBeInstanceOf(Array)
 
-            if(ad_group_criterions.length > 0) {
+            // @ts-ignore Ignore missing proto definitions for now
+            if(ad_group_criterions.length > 0 && ad_group_criterions[0].ad_group_criterion.resource_name) {
                 expect(ad_group_criterions[0].ad_group_criterion).toEqual(
                     expect.objectContaining({
                         resource_name: expect.stringContaining(`customers/${CID}/adGroupCriteria`) || '',
                     })
                 )
+
+                // @ts-ignore Ignore missing proto definitions for now
+                const resource = ad_group_criterions[0].ad_group_criterion.resource_name
+
+                if(resource) {
+                    const singleton = await customer.adGroupCriterion.get(resource)
+                    expect(singleton).toBeInstanceOf(Object)
+                    expect(singleton).toEqual(
+                        expect.objectContaining({
+                            resource_name: expect.stringContaining(`customers/${CID}/adGroupCriteria`) || '',
+                        })
+                    )
+                }
             }
         })
 

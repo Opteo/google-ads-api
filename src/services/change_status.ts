@@ -8,8 +8,8 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types/Global'
  * @constants
  */
 const RESOURCE_URL_NAME = 'changeStatus'
-const MUTATE_METHOD = 'mutateChangeStatuss'
-const MUTATE_REQUEST = 'MutateChangeStatussRequest'
+const MUTATE_METHOD = 'mutateChangeStatus'
+const MUTATE_REQUEST = 'MutateChangeStatusRequest'
 const OPERATION_REQUEST = 'ChangeStatusOperation'
 const GET_METHOD = 'getChangeStatus'
 const GET_REQUEST = 'GetChangeStatusRequest'

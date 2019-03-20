@@ -9,17 +9,31 @@ const customer = newCustomer()
 
 describe('FeedMapping', async () => {
 
-    describe('list', async () => {
+    describe('reporting', async () => {
         it('can retrieve a list of FeedMappings with all fields (if valid)', async () => {
             const feed_mappings = await customer.feedMappings.list()
             expect(feed_mappings).toBeInstanceOf(Array)
 
-            if(feed_mappings.length > 0) {
+            // @ts-ignore Ignore missing proto definitions for now
+            if(feed_mappings.length > 0 && feed_mappings[0].feed_mapping.resource_name) {
                 expect(feed_mappings[0].feed_mapping).toEqual(
                     expect.objectContaining({
                         resource_name: expect.stringContaining(`customers/${CID}/feedMappings`) || '',
                     })
                 )
+
+                // @ts-ignore Ignore missing proto definitions for now
+                const resource = feed_mappings[0].feed_mapping.resource_name
+
+                if(resource) {
+                    const singleton = await customer.feedMappings.get(resource)
+                    expect(singleton).toBeInstanceOf(Object)
+                    expect(singleton).toEqual(
+                        expect.objectContaining({
+                            resource_name: expect.stringContaining(`customers/${CID}/feedMappings`) || '',
+                        })
+                    )
+                }
             }
         })
 

@@ -9,17 +9,31 @@ const customer = newCustomer()
 
 describe('LocationView', async () => {
 
-    describe('list', async () => {
+    describe('reporting', async () => {
         it('can retrieve a list of LocationViews with all fields (if valid)', async () => {
             const location_views = await customer.locationViews.list()
             expect(location_views).toBeInstanceOf(Array)
 
-            if(location_views.length > 0) {
+            // @ts-ignore Ignore missing proto definitions for now
+            if(location_views.length > 0 && location_views[0].location_view.resource_name) {
                 expect(location_views[0].location_view).toEqual(
                     expect.objectContaining({
                         resource_name: expect.stringContaining(`customers/${CID}/locationViews`) || '',
                     })
                 )
+
+                // @ts-ignore Ignore missing proto definitions for now
+                const resource = location_views[0].location_view.resource_name
+
+                if(resource) {
+                    const singleton = await customer.locationViews.get(resource)
+                    expect(singleton).toBeInstanceOf(Object)
+                    expect(singleton).toEqual(
+                        expect.objectContaining({
+                            resource_name: expect.stringContaining(`customers/${CID}/locationViews`) || '',
+                        })
+                    )
+                }
             }
         })
 

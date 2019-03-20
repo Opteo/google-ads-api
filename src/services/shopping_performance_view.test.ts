@@ -9,17 +9,31 @@ const customer = newCustomer()
 
 describe('ShoppingPerformanceView', async () => {
 
-    describe('list', async () => {
+    describe('reporting', async () => {
         it('can retrieve a list of ShoppingPerformanceViews with all fields (if valid)', async () => {
             const shopping_performance_views = await customer.shoppingPerformanceViews.list()
             expect(shopping_performance_views).toBeInstanceOf(Array)
 
-            if(shopping_performance_views.length > 0) {
+            // @ts-ignore Ignore missing proto definitions for now
+            if(shopping_performance_views.length > 0 && shopping_performance_views[0].shopping_performance_view.resource_name) {
                 expect(shopping_performance_views[0].shopping_performance_view).toEqual(
                     expect.objectContaining({
                         resource_name: expect.stringContaining(`customers/${CID}/shoppingPerformanceViews`) || '',
                     })
                 )
+
+                // @ts-ignore Ignore missing proto definitions for now
+                const resource = shopping_performance_views[0].shopping_performance_view.resource_name
+
+                if(resource) {
+                    const singleton = await customer.shoppingPerformanceViews.get(resource)
+                    expect(singleton).toBeInstanceOf(Object)
+                    expect(singleton).toEqual(
+                        expect.objectContaining({
+                            resource_name: expect.stringContaining(`customers/${CID}/shoppingPerformanceViews`) || '',
+                        })
+                    )
+                }
             }
         })
 

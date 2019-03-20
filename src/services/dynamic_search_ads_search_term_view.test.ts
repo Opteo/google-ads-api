@@ -9,17 +9,31 @@ const customer = newCustomer()
 
 describe('DynamicSearchAdsSearchTermView', async () => {
 
-    describe('list', async () => {
+    describe('reporting', async () => {
         it('can retrieve a list of DynamicSearchAdsSearchTermViews with all fields (if valid)', async () => {
             const dynamic_search_ads_search_term_views = await customer.dynamicSearchAdsSearchTermViews.list()
             expect(dynamic_search_ads_search_term_views).toBeInstanceOf(Array)
 
-            if(dynamic_search_ads_search_term_views.length > 0) {
+            // @ts-ignore Ignore missing proto definitions for now
+            if(dynamic_search_ads_search_term_views.length > 0 && dynamic_search_ads_search_term_views[0].dynamic_search_ads_search_term_view.resource_name) {
                 expect(dynamic_search_ads_search_term_views[0].dynamic_search_ads_search_term_view).toEqual(
                     expect.objectContaining({
                         resource_name: expect.stringContaining(`customers/${CID}/dynamicSearchAdsSearchTermViews`) || '',
                     })
                 )
+
+                // @ts-ignore Ignore missing proto definitions for now
+                const resource = dynamic_search_ads_search_term_views[0].dynamic_search_ads_search_term_view.resource_name
+
+                if(resource) {
+                    const singleton = await customer.dynamicSearchAdsSearchTermViews.get(resource)
+                    expect(singleton).toBeInstanceOf(Object)
+                    expect(singleton).toEqual(
+                        expect.objectContaining({
+                            resource_name: expect.stringContaining(`customers/${CID}/dynamicSearchAdsSearchTermViews`) || '',
+                        })
+                    )
+                }
             }
         })
 

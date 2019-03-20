@@ -9,17 +9,31 @@ const customer = newCustomer()
 
 describe('CampaignSharedSet', async () => {
 
-    describe('list', async () => {
+    describe('reporting', async () => {
         it('can retrieve a list of CampaignSharedSets with all fields (if valid)', async () => {
             const campaign_shared_sets = await customer.campaignSharedSets.list()
             expect(campaign_shared_sets).toBeInstanceOf(Array)
 
-            if(campaign_shared_sets.length > 0) {
+            // @ts-ignore Ignore missing proto definitions for now
+            if(campaign_shared_sets.length > 0 && campaign_shared_sets[0].campaign_shared_set.resource_name) {
                 expect(campaign_shared_sets[0].campaign_shared_set).toEqual(
                     expect.objectContaining({
                         resource_name: expect.stringContaining(`customers/${CID}/campaignSharedSets`) || '',
                     })
                 )
+
+                // @ts-ignore Ignore missing proto definitions for now
+                const resource = campaign_shared_sets[0].campaign_shared_set.resource_name
+
+                if(resource) {
+                    const singleton = await customer.campaignSharedSets.get(resource)
+                    expect(singleton).toBeInstanceOf(Object)
+                    expect(singleton).toEqual(
+                        expect.objectContaining({
+                            resource_name: expect.stringContaining(`customers/${CID}/campaignSharedSets`) || '',
+                        })
+                    )
+                }
             }
         })
 

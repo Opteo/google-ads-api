@@ -9,17 +9,31 @@ const customer = newCustomer()
 
 describe('DomainCategory', async () => {
 
-    describe('list', async () => {
+    describe('reporting', async () => {
         it('can retrieve a list of DomainCategorys with all fields (if valid)', async () => {
             const domain_categorys = await customer.domainCategorys.list()
             expect(domain_categorys).toBeInstanceOf(Array)
 
-            if(domain_categorys.length > 0) {
+            // @ts-ignore Ignore missing proto definitions for now
+            if(domain_categorys.length > 0 && domain_categorys[0].domain_category.resource_name) {
                 expect(domain_categorys[0].domain_category).toEqual(
                     expect.objectContaining({
                         resource_name: expect.stringContaining(`customers/${CID}/domainCategorys`) || '',
                     })
                 )
+
+                // @ts-ignore Ignore missing proto definitions for now
+                const resource = domain_categorys[0].domain_category.resource_name
+
+                if(resource) {
+                    const singleton = await customer.domainCategorys.get(resource)
+                    expect(singleton).toBeInstanceOf(Object)
+                    expect(singleton).toEqual(
+                        expect.objectContaining({
+                            resource_name: expect.stringContaining(`customers/${CID}/domainCategorys`) || '',
+                        })
+                    )
+                }
             }
         })
 

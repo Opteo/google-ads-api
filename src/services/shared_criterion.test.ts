@@ -9,17 +9,31 @@ const customer = newCustomer()
 
 describe('SharedCriterion', async () => {
 
-    describe('list', async () => {
+    describe('reporting', async () => {
         it('can retrieve a list of SharedCriterions with all fields (if valid)', async () => {
             const shared_criterions = await customer.sharedCriterion.list()
             expect(shared_criterions).toBeInstanceOf(Array)
 
-            if(shared_criterions.length > 0) {
+            // @ts-ignore Ignore missing proto definitions for now
+            if(shared_criterions.length > 0 && shared_criterions[0].shared_criterion.resource_name) {
                 expect(shared_criterions[0].shared_criterion).toEqual(
                     expect.objectContaining({
                         resource_name: expect.stringContaining(`customers/${CID}/sharedCriteria`) || '',
                     })
                 )
+
+                // @ts-ignore Ignore missing proto definitions for now
+                const resource = shared_criterions[0].shared_criterion.resource_name
+
+                if(resource) {
+                    const singleton = await customer.sharedCriterion.get(resource)
+                    expect(singleton).toBeInstanceOf(Object)
+                    expect(singleton).toEqual(
+                        expect.objectContaining({
+                            resource_name: expect.stringContaining(`customers/${CID}/sharedCriteria`) || '',
+                        })
+                    )
+                }
             }
         })
 

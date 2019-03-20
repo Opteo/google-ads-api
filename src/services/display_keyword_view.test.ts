@@ -9,17 +9,31 @@ const customer = newCustomer()
 
 describe('DisplayKeywordView', async () => {
 
-    describe('list', async () => {
+    describe('reporting', async () => {
         it('can retrieve a list of DisplayKeywordViews with all fields (if valid)', async () => {
             const display_keyword_views = await customer.displayKeywordViews.list()
             expect(display_keyword_views).toBeInstanceOf(Array)
 
-            if(display_keyword_views.length > 0) {
+            // @ts-ignore Ignore missing proto definitions for now
+            if(display_keyword_views.length > 0 && display_keyword_views[0].display_keyword_view.resource_name) {
                 expect(display_keyword_views[0].display_keyword_view).toEqual(
                     expect.objectContaining({
                         resource_name: expect.stringContaining(`customers/${CID}/displayKeywordViews`) || '',
                     })
                 )
+
+                // @ts-ignore Ignore missing proto definitions for now
+                const resource = display_keyword_views[0].display_keyword_view.resource_name
+
+                if(resource) {
+                    const singleton = await customer.displayKeywordViews.get(resource)
+                    expect(singleton).toBeInstanceOf(Object)
+                    expect(singleton).toEqual(
+                        expect.objectContaining({
+                            resource_name: expect.stringContaining(`customers/${CID}/displayKeywordViews`) || '',
+                        })
+                    )
+                }
             }
         })
 

@@ -9,17 +9,31 @@ const customer = newCustomer()
 
 describe('CustomerNegativeCriterion', async () => {
 
-    describe('list', async () => {
+    describe('reporting', async () => {
         it('can retrieve a list of CustomerNegativeCriterions with all fields (if valid)', async () => {
             const customer_negative_criterions = await customer.customerNegativeCriterions.list()
             expect(customer_negative_criterions).toBeInstanceOf(Array)
 
-            if(customer_negative_criterions.length > 0) {
+            // @ts-ignore Ignore missing proto definitions for now
+            if(customer_negative_criterions.length > 0 && customer_negative_criterions[0].customer_negative_criterion.resource_name) {
                 expect(customer_negative_criterions[0].customer_negative_criterion).toEqual(
                     expect.objectContaining({
                         resource_name: expect.stringContaining(`customers/${CID}/customerNegativeCriterions`) || '',
                     })
                 )
+
+                // @ts-ignore Ignore missing proto definitions for now
+                const resource = customer_negative_criterions[0].customer_negative_criterion.resource_name
+
+                if(resource) {
+                    const singleton = await customer.customerNegativeCriterions.get(resource)
+                    expect(singleton).toBeInstanceOf(Object)
+                    expect(singleton).toEqual(
+                        expect.objectContaining({
+                            resource_name: expect.stringContaining(`customers/${CID}/customerNegativeCriterions`) || '',
+                        })
+                    )
+                }
             }
         })
 

@@ -9,17 +9,31 @@ const customer = newCustomer()
 
 describe('AgeRangeView', async () => {
 
-    describe('list', async () => {
+    describe('reporting', async () => {
         it('can retrieve a list of AgeRangeViews with all fields (if valid)', async () => {
             const age_range_views = await customer.ageRangeViews.list()
             expect(age_range_views).toBeInstanceOf(Array)
 
-            if(age_range_views.length > 0) {
+            // @ts-ignore Ignore missing proto definitions for now
+            if(age_range_views.length > 0 && age_range_views[0].age_range_view.resource_name) {
                 expect(age_range_views[0].age_range_view).toEqual(
                     expect.objectContaining({
                         resource_name: expect.stringContaining(`customers/${CID}/ageRangeViews`) || '',
                     })
                 )
+
+                // @ts-ignore Ignore missing proto definitions for now
+                const resource = age_range_views[0].age_range_view.resource_name
+
+                if(resource) {
+                    const singleton = await customer.ageRangeViews.get(resource)
+                    expect(singleton).toBeInstanceOf(Object)
+                    expect(singleton).toEqual(
+                        expect.objectContaining({
+                            resource_name: expect.stringContaining(`customers/${CID}/ageRangeViews`) || '',
+                        })
+                    )
+                }
             }
         })
 

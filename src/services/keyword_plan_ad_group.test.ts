@@ -9,17 +9,31 @@ const customer = newCustomer()
 
 describe('KeywordPlanAdGroup', async () => {
 
-    describe('list', async () => {
+    describe('reporting', async () => {
         it('can retrieve a list of KeywordPlanAdGroups with all fields (if valid)', async () => {
             const keyword_plan_ad_groups = await customer.keywordPlanAdGroups.list()
             expect(keyword_plan_ad_groups).toBeInstanceOf(Array)
 
-            if(keyword_plan_ad_groups.length > 0) {
+            // @ts-ignore Ignore missing proto definitions for now
+            if(keyword_plan_ad_groups.length > 0 && keyword_plan_ad_groups[0].keyword_plan_ad_group.resource_name) {
                 expect(keyword_plan_ad_groups[0].keyword_plan_ad_group).toEqual(
                     expect.objectContaining({
                         resource_name: expect.stringContaining(`customers/${CID}/keywordPlanAdGroups`) || '',
                     })
                 )
+
+                // @ts-ignore Ignore missing proto definitions for now
+                const resource = keyword_plan_ad_groups[0].keyword_plan_ad_group.resource_name
+
+                if(resource) {
+                    const singleton = await customer.keywordPlanAdGroups.get(resource)
+                    expect(singleton).toBeInstanceOf(Object)
+                    expect(singleton).toEqual(
+                        expect.objectContaining({
+                            resource_name: expect.stringContaining(`customers/${CID}/keywordPlanAdGroups`) || '',
+                        })
+                    )
+                }
             }
         })
 

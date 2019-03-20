@@ -9,17 +9,31 @@ const customer = newCustomer()
 
 describe('FeedPlaceholderView', async () => {
 
-    describe('list', async () => {
+    describe('reporting', async () => {
         it('can retrieve a list of FeedPlaceholderViews with all fields (if valid)', async () => {
             const feed_placeholder_views = await customer.feedPlaceholderViews.list()
             expect(feed_placeholder_views).toBeInstanceOf(Array)
 
-            if(feed_placeholder_views.length > 0) {
+            // @ts-ignore Ignore missing proto definitions for now
+            if(feed_placeholder_views.length > 0 && feed_placeholder_views[0].feed_placeholder_view.resource_name) {
                 expect(feed_placeholder_views[0].feed_placeholder_view).toEqual(
                     expect.objectContaining({
                         resource_name: expect.stringContaining(`customers/${CID}/feedPlaceholderViews`) || '',
                     })
                 )
+
+                // @ts-ignore Ignore missing proto definitions for now
+                const resource = feed_placeholder_views[0].feed_placeholder_view.resource_name
+
+                if(resource) {
+                    const singleton = await customer.feedPlaceholderViews.get(resource)
+                    expect(singleton).toBeInstanceOf(Object)
+                    expect(singleton).toEqual(
+                        expect.objectContaining({
+                            resource_name: expect.stringContaining(`customers/${CID}/feedPlaceholderViews`) || '',
+                        })
+                    )
+                }
             }
         })
 

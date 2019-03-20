@@ -9,17 +9,31 @@ const customer = newCustomer()
 
 describe('Recommendation', async () => {
 
-    describe('list', async () => {
+    describe('reporting', async () => {
         it('can retrieve a list of Recommendations with all fields (if valid)', async () => {
             const recommendations = await customer.recommendations.list()
             expect(recommendations).toBeInstanceOf(Array)
 
-            if(recommendations.length > 0) {
+            // @ts-ignore Ignore missing proto definitions for now
+            if(recommendations.length > 0 && recommendations[0].recommendation.resource_name) {
                 expect(recommendations[0].recommendation).toEqual(
                     expect.objectContaining({
                         resource_name: expect.stringContaining(`customers/${CID}/recommendations`) || '',
                     })
                 )
+
+                // @ts-ignore Ignore missing proto definitions for now
+                const resource = recommendations[0].recommendation.resource_name
+
+                if(resource) {
+                    const singleton = await customer.recommendations.get(resource)
+                    expect(singleton).toBeInstanceOf(Object)
+                    expect(singleton).toEqual(
+                        expect.objectContaining({
+                            resource_name: expect.stringContaining(`customers/${CID}/recommendations`) || '',
+                        })
+                    )
+                }
             }
         })
 

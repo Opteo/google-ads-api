@@ -9,17 +9,31 @@ const customer = newCustomer()
 
 describe('GenderView', async () => {
 
-    describe('list', async () => {
+    describe('reporting', async () => {
         it('can retrieve a list of GenderViews with all fields (if valid)', async () => {
             const gender_views = await customer.genderViews.list()
             expect(gender_views).toBeInstanceOf(Array)
 
-            if(gender_views.length > 0) {
+            // @ts-ignore Ignore missing proto definitions for now
+            if(gender_views.length > 0 && gender_views[0].gender_view.resource_name) {
                 expect(gender_views[0].gender_view).toEqual(
                     expect.objectContaining({
                         resource_name: expect.stringContaining(`customers/${CID}/genderViews`) || '',
                     })
                 )
+
+                // @ts-ignore Ignore missing proto definitions for now
+                const resource = gender_views[0].gender_view.resource_name
+
+                if(resource) {
+                    const singleton = await customer.genderViews.get(resource)
+                    expect(singleton).toBeInstanceOf(Object)
+                    expect(singleton).toEqual(
+                        expect.objectContaining({
+                            resource_name: expect.stringContaining(`customers/${CID}/genderViews`) || '',
+                        })
+                    )
+                }
             }
         })
 
