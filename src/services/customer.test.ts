@@ -167,4 +167,18 @@ describe('customer', () => {
             })
         })
     })
+
+    describe.only('get', () => {
+        it('should retrieve a single customer via an id or resource name', async () => {
+            const c = await customer.get(CID_WITH_METRICS)
+            expect(c).toEqual(
+                expect.objectContaining({
+                    resource_name: `customers/${CID_WITH_METRICS}`,
+                    id: expect.any(Number),
+                    descriptive_name: expect.any(String),
+                    currency_code: expect.any(String),
+                })
+            )
+        })
+    })
 })

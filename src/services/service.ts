@@ -174,6 +174,9 @@ export default class Service {
     }
 
     protected buildResourceName(resource: string): string {
+        if (resource.startsWith('customers/')) {
+            return resource
+        }
         return `customers/${this.cid}/${resource}`
     }
 

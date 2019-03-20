@@ -108,6 +108,7 @@ export default function Customer(cid: string, client: GrpcClient, throttler: Bot
         report: (options: ReportOptions) => cusService.report(options),
         query: (qry: string) => cusService.query(qry),
         list: () => cusService.list(),
+        get: (id: number | string) => cusService.get(id),
 
         /* Services */
         campaigns: new CampaignService(cid, client, throttler, 'CampaignService'),

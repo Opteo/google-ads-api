@@ -24,4 +24,13 @@ export default class GoogleAdsService extends Service {
     public async list(): Promise<Array<{ customer: Customer }>> {
         return this.getListResults('customer')
     }
+
+    public async get(id: number | string): Promise<Customer> {
+        return this.serviceGet({
+            request: 'GetCustomerRequest',
+            resource: `customers/${id}`,
+            method: 'getCustomer',
+            entity_id: id,
+        }) as Customer
+    }
 }
