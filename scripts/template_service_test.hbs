@@ -1,0 +1,36 @@
+// Auto Generated File! Do Not Edit.
+
+// @ts-ignore
+import { {{ ENTITY }} } from 'google-ads-node/build/lib/resources'
+
+// @ts-ignore
+import { newCustomer, BUDGET_ID, CID, getRandomName } from '../test_utils'
+const customer = newCustomer()
+
+describe('{{ ENTITY }}', async () => {
+
+    describe('list', async () => {
+        it('can retrieve a list of {{ ENTITY }}s with all fields (if valid)', async () => {
+            const {{ PARAM }}s = await customer.{{ CUSTOMER_METHOD }}.list()
+            expect({{ PARAM }}s).toBeInstanceOf(Array)
+
+            if({{ PARAM }}s.length > 0) {
+                expect({{ PARAM }}s[0].{{ PARAM }}).toEqual(
+                    expect.objectContaining({
+                        resource_name: expect.stringContaining(`customers/${CID}/{{ RESOURCE_URL_NAME }}`) || '',
+                    })
+                )
+            }
+        })
+
+        it('throws an error when the request is invalid', async () => {
+            await expect(
+                customer.{{ CUSTOMER_METHOD }}.list({
+                    limit: -10,
+                    constraints: ['FakeConstraint=INVALID'],
+                })
+            ).rejects.toThrow('Unrecognized field')
+        })
+    })
+
+})
