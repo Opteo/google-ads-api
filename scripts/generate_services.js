@@ -26,7 +26,7 @@ const entities = [
     'AdGroupFeed',
     'AdGroupLabel',
     'AdGroup',
-    // 'AdParameter', // Missing fields (gads-node fix)
+    // 'AdParameter', // Missing protos
     'AdScheduleView',
     'AgeRangeView',
     'BiddingStrategy',
@@ -34,7 +34,7 @@ const entities = [
     'CampaignAudienceView',
     'CampaignBidModifier',
     'CampaignBudget',
-    'CampaignCriterion', // Missing fields (gads-node fix)
+    'CampaignCriterion',
     'CampaignExtensionSetting',
     'CampaignFeed',
     'CampaignLabel',
@@ -89,7 +89,7 @@ const entities = [
     // 'MutateJob', // Missing protos
     'OperatingSystemVersionConstant',
     'ParentalStatusView',
-    // 'PaymentsAccount', (gads-node fix)
+    // 'PaymentsAccount', // Missing protos
     'ProductBiddingCategoryConstant',
     'ProductGroupView',
     'Recommendation',

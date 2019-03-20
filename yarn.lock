@@ -1439,10 +1439,10 @@ globals@^11.1.0:
   resolved "https://registry.yarnpkg.com/globals/-/globals-11.11.0.tgz#dcf93757fa2de5486fbeed7118538adf789e9c2e"
   integrity sha512-WHq43gS+6ufNOEqlrDBxVEbb8ntfXrfAUU2ZOpCxrBdGKW3gyv8mCxAfIBD0DroPKGrJ2eSsXsLtY9MPntsyTw==
 
-google-ads-node@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/google-ads-node/-/google-ads-node-1.4.0.tgz#7dcf5d34fe7a68d2e32eb50c2c5f4cc6389a940d"
-  integrity sha512-Am8OzPAO6euPaiWS0oI4I+Z+5gBA4m/VjFnEirozqcDBg2JcWQzyBARn6twNOV/azVLPi6xxkjj70GqIuKM8gw==
+google-ads-node@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/google-ads-node/-/google-ads-node-1.4.1.tgz#da308675d5fb6755698c29855c95626261b2eaea"
+  integrity sha512-hOJT0qZhk2oe8NRMHq2HFDZCR32ZwTGBXVkLuc50WPBhvwN9jR3vq5TMSHNUbULWwCRHwLRvx82Ecys39L4uhg==
   dependencies:
     "@types/google-protobuf" "^3.2.7"
     "@types/lodash.get" "^4.4.6"
@@ -2793,9 +2793,9 @@ node-fetch@^2.3.0:
   integrity sha512-MOd8pV3fxENbryESLgVIeaGKrdl+uaYhCSSVkjeOb/31/njTpcis5aWfdqgNlHIrKOLRbMnfPINPOML2CIFeXA==
 
 node-forge@^0.8.0:
-  version "0.8.1"
-  resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-0.8.1.tgz#67aeb9df7bb78d15444ec04a0162d2c565559c37"
-  integrity sha512-C/42HVb5eRtnDgRKOFx4bJH6LwbGQwbEHOC/trQwQSR6xWAUR/jlWoUJnxOmFTvdmDIZtjl2VH4dl3VpQuIz5g==
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-0.8.2.tgz#b4bcc59fb12ce77a8825fc6a783dfe3182499c5a"
+  integrity sha512-mXQ9GBq1N3uDCyV1pdSzgIguwgtVpM7f5/5J4ipz12PKWElmPpVWLDuWl8iXmhysr21+WmX/OJ5UKx82wjomgg==
 
 node-int64@^0.4.0:
   version "0.4.0"
