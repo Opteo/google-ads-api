@@ -1434,10 +1434,10 @@ globals@^11.1.0:
   resolved "https://registry.yarnpkg.com/globals/-/globals-11.11.0.tgz#dcf93757fa2de5486fbeed7118538adf789e9c2e"
   integrity sha512-WHq43gS+6ufNOEqlrDBxVEbb8ntfXrfAUU2ZOpCxrBdGKW3gyv8mCxAfIBD0DroPKGrJ2eSsXsLtY9MPntsyTw==
 
-google-ads-node@^1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/google-ads-node/-/google-ads-node-1.4.2.tgz#40efe1d84fa07fa65a2ef9f1c0197e968ec9c52b"
-  integrity sha512-88EY17C9B0njNzpLI/Xu0KDWdyiWNdDvFs3WwF3rfLwEXzbQR/ksbR4vMPrOfTqMN6wW3awocN402K+I/NdsLA==
+google-ads-node@^1.4.4:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/google-ads-node/-/google-ads-node-1.4.4.tgz#259f17a936b71420afdfdbe85794f5b6c463782f"
+  integrity sha512-P3J2n5SRPTQmL2urm9p31nK5UkgUZFUF0VF3tlHR8T/0TkBF/e2G8e6Rs3DO2Xt98njPP6bnm8cv/Zc9Ew3jfw==
   dependencies:
     "@types/google-protobuf" "^3.2.7"
     "@types/lodash.get" "^4.4.6"
