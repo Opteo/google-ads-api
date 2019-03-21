@@ -56,7 +56,6 @@ describe('customer', () => {
         it('retrieves data when using segments', async () => {
             const ad_group = await customer.report({
                 entity: 'ad_group',
-                // @ts-ignore
                 attributes: ['ad_group.id', 'campaign.id'],
                 segments: ['segments.device'],
                 limit: 3,
