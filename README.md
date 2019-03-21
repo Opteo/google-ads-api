@@ -40,18 +40,18 @@ $ yarn add google-ads-api
 ### Authentication
 
 ```javascript
-import GoogleAdsApi from 'google-ads-api'
+import { GoogleAdsApi } from 'google-ads-api'
 
-const google_ads_js = new GoogleAdsApi({
-    client_id: '2345234523-0r123fwfanq6umje125rewc2134n.apps.googleusercontent.com',
-    client_secret: '8TLfdsSAJ3rhEK8LbUvSAO',
-    developer_token: 'EBI_T2FAGKE3ABCEF',
+const client = new GoogleAdsApi({
+    client_id: '<YOUR_CLIENT_ID>',
+    client_secret: '<YOUR_CLIENT_SECRET>',
+    developer_token: '<YOUR_DEVELOPER_TOKEN>',
 })
 
-const customer = google_ads_js.Customer({
+const customer = client.Customer({
     customer_account_id: '123-123-123',
-    manager_cid: '456-456-456',
-    refresh_token: '1/fSBD8aGFjQkb0FlCYO5ASNDSJ27-crNoGFdhKQk',
+    login_customer_id: '456-456-456',
+    refresh_token: '<YOUR_REFRESH_TOKEN>',
 })
 ```
 
@@ -59,19 +59,20 @@ const customer = google_ads_js.Customer({
 
 ```javascript
 // Get single campaign
-const camapign = await customer.campaigns.get('123123123')
+const campaign = await customer.campaigns.get(123123123)
 
 // List multiple ad groups
-const adgroups = await customer.adgroups.list({
-    campaign_id: '123123123',
+const ad_groups = await customer.adGroups.list({
+    constraints: ["campaign.id = 123"]
     limit: 15,
 })
 
 // Query using report method
 const campaigns = await customer.report({
     entity: 'campaign',
-    attributes: ['id'],
-    metrics: ['cost', 'clicks'],
+    attributes: ['campaign.id', 'campaign.name'],
+    metrics: ['metrics.cost', 'metrics.clicks'],
+    segments: ['segments.date'],
     constraints: [{ status: 'ENABLED' }],
     from_date: '2019-01-01',
 })
