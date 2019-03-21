@@ -1,4 +1,4 @@
-import GoogleAdsApi from './index'
+import { GoogleAdsApi } from './index'
 
 export const CID = process.env.GADS_CID as string
 export const CID_WITH_METRICS = process.env.GADS_CID_WITH_METRICS as string
