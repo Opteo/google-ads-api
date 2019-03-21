@@ -247,7 +247,10 @@ export default class Service {
         if (!fields.hasOwnProperty(resource)) {
             throw new Error(`Resource "${resource}" not found in google-ads-node compiled resources (fields.ts).`)
         }
-        const resource_fields = (fields as any)[resource]
+        const resource_fields = (fields as any)[resource].slice(0, 89)
+        resource_fields.push('campaign_criterion.resource_name')
+
+        console.log(resource_fields, resource_fields.length)
 
         const config: ReportOptions = {
             attributes: resource_fields,

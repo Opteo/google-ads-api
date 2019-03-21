@@ -182,7 +182,7 @@ export default function Customer(cid: string, client: GrpcClient, throttler: Bot
             'CustomerNegativeCriterionService'
         ),
         displayKeywordViews: new DisplayKeywordViewService(cid, client, throttler, 'DisplayKeywordViewService'),
-        domainCategorys: new DomainCategoryService(cid, client, throttler, 'DomainCategoryService'),
+        domainCategories: new DomainCategoryService(cid, client, throttler, 'DomainCategoryService'),
         dynamicSearchAdsSearchTermViews: new DynamicSearchAdsSearchTermViewService(
             cid,
             client,
