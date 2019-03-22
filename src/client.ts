@@ -15,13 +15,12 @@ interface ClientOptions {
 }
 
 interface CustomerAuth {
-    customer_account_id: string
-    refresh_token: string
+    customer_account_id?: string
+    refresh_token?: string
     login_customer_id?: string
 }
 
 interface CustomerOptions extends CustomerAuth {
-    async_account_getter?: () => Promise<CustomerAuth>
     pre_report_hook?: PreReportHook
     post_report_hook?: PostReportHook
 }
@@ -60,14 +59,11 @@ export default class GoogleAdsApi {
         customer_account_id,
         refresh_token,
         login_customer_id,
-        async_account_getter,
         pre_report_hook,
         post_report_hook,
     }: CustomerOptions) {
-        if (!async_account_getter && (!customer_account_id || !refresh_token)) {
-            throw new Error(
-                'must specify either {customer_account_id, refresh_token, manager_cid} or an async_account_getter'
-            )
+        if (!customer_account_id || !refresh_token) {
+            throw new Error('Must specify {customer_account_id, refresh_token}')
         }
 
         pre_report_hook = pre_report_hook || noop
@@ -76,17 +72,11 @@ export default class GoogleAdsApi {
         customer_account_id = normaliseCustomerId(customer_account_id)
         login_customer_id = normaliseCustomerId(login_customer_id)
 
-        if (!async_account_getter) {
-            async_account_getter = async () => {
-                return { customer_account_id, login_customer_id, refresh_token }
-            }
-        }
-
         const client = new GrpcClient(
             this.options.developer_token,
             this.options.client_id,
             this.options.client_secret,
-            refresh_token,
+            refresh_token as string,
             login_customer_id
         )
 
