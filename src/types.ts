@@ -157,7 +157,6 @@ export interface ReportOptions {
     limit?: number
     order_by?: string | Array<string>
     sort_order?: string
-    convert_micros?: boolean
     page_size?: number
 }
 
@@ -179,19 +178,6 @@ type DateConstant =
     | 'THIS_WEEK_SUN_TODAY'
     | 'YESTERDAY'
     | 'TODAY'
-
-/**
- *  Metric object used for custom metrics
- * @interface
- */
-export interface Metric {
-    name: string
-    is_micros?: boolean
-    is_custom?: boolean
-    is_number?: boolean
-    pre_query_hook?: Function
-    post_query_hook?: Function
-}
 
 /**
  *  Constraint object with full parameters
@@ -240,3 +226,18 @@ export interface ServiceCreateOptions {
     validate_only?: boolean
     partial_failure?: boolean
 }
+
+interface PreQueryHookArgs {
+    query: string
+    cid: string
+}
+
+interface PostQueryHookArgs {
+    query: string
+    cid: string
+    result: any
+    report_config: any
+}
+
+export type PreReportHook = (options: PreQueryHookArgs) => void | Promise<any>
+export type PostReportHook = (options: PostQueryHookArgs) => void

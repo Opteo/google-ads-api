@@ -1,6 +1,6 @@
 import { snakeCase, isObject, isString, isArray, isUndefined, values } from 'lodash'
 
-import { ReportOptions, Metric, Constraint } from './types'
+import { ReportOptions, Constraint } from './types'
 
 function unrollConstraintShorthand(constraint: any): Constraint {
     if (!constraint.key) {
@@ -143,26 +143,22 @@ const formatOrderBy = (entity: string, order_by: string | Array<string>, sort_or
     return ` ORDER BY ${order_by} ${sort_order}`
 }
 
-export const formatQueryResults = (
-    result: Array<object>,
-    convert_micros: boolean,
-    custom_metrics?: Array<Metric>
-): Array<object> => {
+export const formatQueryResults = (result: Array<object>): Array<object> => {
     const parsed_results: Array<object> = []
     for (const row of result) {
-        const parsed_row = formatEntity(row, convert_micros)
+        const parsed_row = formatEntity(row)
         parsed_results.push(parsed_row)
     }
     return parsed_results
 }
 
-const formatEntity = (entity: any, convert_micros: boolean, final: any = {}): object => {
+const formatEntity = (entity: any, final: any = {}): object => {
     for (const key in entity) {
         const underscore_key = snakeCase(key)
         const value = entity[key]
 
         if (isObject(value) && !Array.isArray(value)) {
-            final[underscore_key] = formatEntity(value, convert_micros, final[underscore_key])
+            final[underscore_key] = formatEntity(value, final[underscore_key])
         } else {
             final[underscore_key] = value
         }

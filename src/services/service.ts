@@ -6,8 +6,8 @@ import { getFieldMask } from 'google-ads-node/build/lib/utils'
 import GrpcClient from '../grpc'
 import { formatQueryResults, buildReportQuery, parseResult } from '../utils'
 import { ServiceListOptions, ServiceCreateOptions } from '../types'
-import { SearchGrpcError } from '../error'
-import { ReportOptions } from '../types'
+import { SearchGrpcError } from '../Error'
+import { ReportOptions, PreReportHook, PostReportHook } from '../types'
 
 interface GetOptions {
     request: string
@@ -205,10 +205,33 @@ export default class Service {
     }
 
     /* Base report method used in global customer instance */
-    protected async serviceReport(options: ReportOptions): Promise<any> {
+    protected async serviceReport(
+        options: ReportOptions,
+        pre_report_hook: PreReportHook,
+        post_report_hook: PostReportHook
+    ): Promise<any> {
         const query = this.buildCustomerReportQuery(options)
+
+        const hook_result = await pre_report_hook({
+            cid: this.cid,
+            query,
+        })
+
+        if (hook_result) {
+            return hook_result
+        }
+
         const results = await this.getSearchData(query, options.page_size)
-        return this.parseServiceResults(results)
+        const parsed_results = this.parseServiceResults(results)
+
+        await post_report_hook({
+            cid: this.cid,
+            query,
+            result: parsed_results,
+            report_config: options,
+        })
+
+        return parsed_results
     }
 
     /* Base query method used in global customer instance */
@@ -217,8 +240,8 @@ export default class Service {
         return this.parseServiceResults(results)
     }
 
-    private parseServiceResults(results: Array<any>, convert_micros?: boolean): any[] {
-        const formatted = formatQueryResults(results, false)
+    private parseServiceResults(results: Array<any>): any[] {
+        const formatted = formatQueryResults(results)
         return parseResult(formatted)
     }
 

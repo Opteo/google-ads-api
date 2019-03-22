@@ -76,7 +76,6 @@ describe('Reporting', async () => {
             attributes: ['id', 'campaign.id'],
             metrics: ['metrics.clicks', 'conversions', 'metrics.cost_micros', 'cost'],
             order_by: 'id',
-            convert_micros: true,
         })
 
         expect(data).toBeInstanceOf(Array)

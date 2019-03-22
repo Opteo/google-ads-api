@@ -99,10 +99,16 @@ import GrpcClient from './grpc'
 /* Utils */
 import Bottleneck from 'bottleneck'
 import { Customer } from 'google-ads-node/build/lib/resources'
-import { ReportOptions, ServiceCreateOptions } from './types'
+import { ReportOptions, ServiceCreateOptions, PostReportHook, PreReportHook } from './types'
 
-export default function Customer(cid: string, client: GrpcClient, throttler: Bottleneck) {
-    const cusService = new CustomerService(cid, client, throttler, 'CustomerService')
+export default function Customer(
+    cid: string,
+    client: GrpcClient,
+    throttler: Bottleneck,
+    pre_report_hook: PreReportHook,
+    post_report_hook: PostReportHook
+) {
+    const cusService = new CustomerService(cid, client, throttler, 'CustomerService', pre_report_hook, post_report_hook)
 
     return {
         /* Top level customer methods */

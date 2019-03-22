@@ -70,6 +70,7 @@
     "bluebird": "^3.5.2",
     "bottleneck": "^2.16.1",
     "google-ads-node": "^1.4.4",
+    "lodash": "^4.17.11",
     "redis": "^2.8.0"
   }
 }

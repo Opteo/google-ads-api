@@ -5,6 +5,7 @@ import { noop } from 'lodash'
 import CustomerInstance from './customer'
 import GrpcClient from './grpc'
 import { normaliseCustomerId } from './utils'
+import { PreReportHook, PostReportHook } from './types'
 
 interface ClientOptions {
     readonly client_id: string
@@ -21,8 +22,8 @@ interface CustomerAuth {
 
 interface CustomerOptions extends CustomerAuth {
     async_account_getter?: () => Promise<CustomerAuth>
-    pre_query_hook?: () => void
-    post_query_hook?: () => void
+    pre_report_hook?: PreReportHook
+    post_report_hook?: PostReportHook
 }
 
 export default class GoogleAdsApi {
@@ -60,8 +61,8 @@ export default class GoogleAdsApi {
         refresh_token,
         login_customer_id,
         async_account_getter,
-        pre_query_hook,
-        post_query_hook,
+        pre_report_hook,
+        post_report_hook,
     }: CustomerOptions) {
         if (!async_account_getter && (!customer_account_id || !refresh_token)) {
             throw new Error(
@@ -69,10 +70,8 @@ export default class GoogleAdsApi {
             )
         }
 
-        // @ts-ignore TODO: Add these back
-        pre_query_hook = pre_query_hook || noop
-        // @ts-ignore TODO: Add these back
-        post_query_hook = post_query_hook || noop
+        pre_report_hook = pre_report_hook || noop
+        post_report_hook = post_report_hook || noop
 
         customer_account_id = normaliseCustomerId(customer_account_id)
         login_customer_id = normaliseCustomerId(login_customer_id)
@@ -91,6 +90,6 @@ export default class GoogleAdsApi {
             login_customer_id
         )
 
-        return CustomerInstance(customer_account_id, client, this.throttler)
+        return CustomerInstance(customer_account_id, client, this.throttler, pre_report_hook, post_report_hook)
     }
 }

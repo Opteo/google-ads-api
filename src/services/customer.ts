@@ -2,12 +2,32 @@ import * as grpc from 'google-ads-node'
 import { Customer } from 'google-ads-node/build/lib/resources'
 import { getFieldMask } from 'google-ads-node/build/lib/utils'
 
-import Service from './service'
-import { ReportOptions, ServiceCreateOptions } from '../types'
+import GrpcClient from '../grpc'
+import Bottleneck from 'bottleneck'
 
-export default class GoogleAdsService extends Service {
+import Service from './service'
+import { ReportOptions, ServiceCreateOptions, PreReportHook, PostReportHook } from '../types'
+
+export default class CustomerService extends Service {
+    private post_report_hook: PostReportHook
+    private pre_report_hook: PreReportHook
+
+    constructor(
+        cid: string,
+        client: GrpcClient,
+        throttler: Bottleneck,
+        name: string,
+        pre_report_hook: PreReportHook,
+        post_report_hook: PostReportHook
+    ) {
+        super(cid, client, throttler, name)
+
+        this.pre_report_hook = pre_report_hook
+        this.post_report_hook = post_report_hook
+    }
+
     public async report(options: ReportOptions): Promise<Array<any>> {
-        const results = await this.serviceReport(options)
+        const results = await this.serviceReport(options, this.pre_report_hook, this.post_report_hook)
         return results
     }
 
