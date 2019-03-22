@@ -72,7 +72,12 @@ export default class Service {
 
     protected async serviceGet(options: GetOptions): Promise<unknown> {
         const request = new (grpc as any)[options.request]()
-        if (typeof options.entity_id === 'string' && options.entity_id.startsWith('customers/')) {
+
+        const id_is_resource_name =
+            typeof options.entity_id === 'string' &&
+            (options.entity_id.startsWith('customers/') || options.entity_id.toLowerCase().includes('constant'))
+
+        if (id_is_resource_name) {
             request.setResourceName(options.entity_id)
         } else {
             request.setResourceName(this.buildResourceName(options.resource))

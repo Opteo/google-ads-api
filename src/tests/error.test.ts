@@ -1,37 +1,25 @@
-import GoogleAdsApi from '..'
-import config from '../config'
+// @ts-ignore
+import { newCustomer, BUDGET_ID, CID, getRandomName } from '../test_utils'
+const customer = newCustomer()
 
 jest.setTimeout(30000)
 
-function newCustomer(customer_account_id: string, manager_cid: string, refresh_token: string) {
-    const client = new GoogleAdsApi({
-        client_id: config.client_id,
-        client_secret: config.client_secret,
-        developer_token: config.developer_token,
-    })
-    return client.Customer({
-        customer_account_id,
-        manager_cid,
-        refresh_token,
-    })
-}
-
 describe('Error', async () => {
-    const customer = newCustomer(config.cid, config.manager_cid, config.refresh_token)
-
     it('throws an error when an entity is invalid', async () => {
         await expect(
             customer.report({
+                // @ts-ignore
                 entity: 'campayne',
-                attributes: ['id'],
+                attributes: ['campaign.id'],
             })
-        ).rejects.toThrow('Unrecognized field')
+        ).rejects.toThrow('is not a valid resource name')
     })
 
     it('throws an error when an attribute is invalid', async () => {
         await expect(
             customer.report({
                 entity: 'campaign',
+                // @ts-ignore
                 attributes: ['wasd'],
             })
         ).rejects.toThrow('Unrecognized field')
