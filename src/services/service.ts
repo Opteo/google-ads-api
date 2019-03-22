@@ -6,7 +6,7 @@ import { getFieldMask } from 'google-ads-node/build/lib/utils'
 import GrpcClient from '../grpc'
 import { formatQueryResults, buildReportQuery, parseResult } from '../utils'
 import { ServiceListOptions, ServiceCreateOptions } from '../types'
-import { SearchGrpcError } from '../Error'
+import { SearchGrpcError } from '../error'
 import { ReportOptions, PreReportHook, PostReportHook } from '../types'
 
 interface GetOptions {
