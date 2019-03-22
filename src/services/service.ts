@@ -4,8 +4,7 @@ import * as fields from 'google-ads-node/build/lib/fields'
 import { getFieldMask } from 'google-ads-node/build/lib/utils'
 
 import GrpcClient from '../grpc'
-import { formatQueryResults, buildReportQuery } from '../utils'
-import parser from '../parser'
+import { formatQueryResults, buildReportQuery, parseResult } from '../utils'
 import { ServiceListOptions, ServiceCreateOptions } from '../types'
 import { SearchGrpcError } from '../error'
 import { ReportOptions } from '../types'
@@ -180,7 +179,6 @@ export default class Service {
         return `customers/${this.cid}/${resource}`
     }
 
-    // TODO: Clean this up and rename since it's only used for get methods
     protected async serviceCall(call: string, request: any): Promise<any> {
         try {
             const response = await this.service[call](request)
@@ -219,11 +217,9 @@ export default class Service {
         return this.parseServiceResults(results)
     }
 
-    // TODO: Add support for custom metrics?
-    // TODO: Decide about converting micros by default in "get" methods?
     private parseServiceResults(results: Array<any>, convert_micros?: boolean): any[] {
         const formatted = formatQueryResults(results, false)
-        return parser.parseResult(formatted)
+        return parseResult(formatted)
     }
 
     private async getSearchData(query: string, page_size: number = 10000): Promise<any> {

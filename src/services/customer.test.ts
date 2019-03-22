@@ -43,16 +43,6 @@ describe('customer', () => {
             )
         })
 
-        // TODO: Make sure micro conversion works again
-        // it('converts micros when specified', async () => {
-        //     const campaigns = await customer.report({
-        //         entity: 'campaign',
-        //         metrics: ['metrics.cost_micros'],
-        //         convert_micros: true,
-        //         limit: 5,
-        //     })
-        // })
-
         it('retrieves data when using segments', async () => {
             const ad_group = await customer.report({
                 entity: 'ad_group',

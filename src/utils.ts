@@ -1,4 +1,4 @@
-import { snakeCase, isObject, isString, isArray, isUndefined } from 'lodash'
+import { snakeCase, isObject, isString, isArray, isUndefined, values } from 'lodash'
 
 import { ReportOptions, Metric, Constraint } from './types'
 
@@ -149,12 +149,6 @@ export const formatQueryResults = (
     custom_metrics?: Array<Metric>
 ): Array<object> => {
     const parsed_results: Array<object> = []
-    //     custom_metrics.forEach(custom_metric => {
-    //         if (custom_metric.post_query_hook) {
-    //             row = custom_metric.post_query_hook(row)
-    //         }
-    //     })
-    // TODO: Add custom metric post query hook bits
     for (const row of result) {
         const parsed_row = formatEntity(row, convert_micros)
         parsed_results.push(parsed_row)
@@ -170,23 +164,37 @@ const formatEntity = (entity: any, convert_micros: boolean, final: any = {}): ob
         if (isObject(value) && !Array.isArray(value)) {
             final[underscore_key] = formatEntity(value, convert_micros, final[underscore_key])
         } else {
-            // TODO: Check if we still need matching_metric here
-            if (convert_micros && underscore_key.includes('_micros')) {
-                final[underscore_key.split('_micros')[0]] = convertMicroValue(value)
-            }
             final[underscore_key] = value
         }
     }
     return final
 }
 
-const convertMicroValue = (money_value: number): number => {
-    return money_value / 1000000
-}
+export const fromMicros = (value: number): number => value / 1000000
+
+export const toMicros = (value: number): number => value * 1000000
 
 export const normaliseCustomerId = (id: string | undefined): string => {
     if (id) {
         return id.split('-').join('')
     }
     return ''
+}
+
+export function parseResult(rows: any) {
+    return values(rows).map(convertFakeArrays)
+}
+
+function convertFakeArrays(o: any): any {
+    for (const key in o) {
+        if (o[key] && typeof o[key] === 'object') {
+            if (o[key]['0']) {
+                o[key] = values(o[key])
+            } else {
+                o[key] = convertFakeArrays(o[key])
+            }
+        }
+    }
+
+    return o
 }
