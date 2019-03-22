@@ -241,9 +241,9 @@
   integrity sha512-m9zXmifkZsMHZBOyxZWilMwmTlpC8x5Ty360JKTiXvlXZfBWYpsg9ZZvP/Ye+iZUh+Q+MxDLjItVTWIsfwz+8Q==
 
 "@types/node@^10.1.0":
-  version "10.14.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.14.1.tgz#8701cd760acc20beba5ffe0b7a1b879f39cb8c41"
-  integrity sha512-Rymt08vh1GaW4vYB6QP61/5m/CFLGnFZP++bJpWbiNxceNa6RBipDmb413jvtSf/R1gg5a/jQVl2jY4XVRscEA==
+  version "10.14.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.14.2.tgz#0c4d73f10a8f7093cdb634ee79dd59a609114c7b"
+  integrity sha512-Y1kCfTShKcJH4CsG5+m5RMA+0tQKa8TrxyMczy0zE8QeDKbuOAJMF8JRM5ouCFyakaSoAhhgy2beCSKLVz+daw==
 
 "@types/protobufjs@^6.0.0":
   version "6.0.0"
@@ -1434,10 +1434,10 @@ globals@^11.1.0:
   resolved "https://registry.yarnpkg.com/globals/-/globals-11.11.0.tgz#dcf93757fa2de5486fbeed7118538adf789e9c2e"
   integrity sha512-WHq43gS+6ufNOEqlrDBxVEbb8ntfXrfAUU2ZOpCxrBdGKW3gyv8mCxAfIBD0DroPKGrJ2eSsXsLtY9MPntsyTw==
 
-google-ads-node@^1.4.4:
-  version "1.4.4"
-  resolved "https://registry.yarnpkg.com/google-ads-node/-/google-ads-node-1.4.4.tgz#259f17a936b71420afdfdbe85794f5b6c463782f"
-  integrity sha512-P3J2n5SRPTQmL2urm9p31nK5UkgUZFUF0VF3tlHR8T/0TkBF/e2G8e6Rs3DO2Xt98njPP6bnm8cv/Zc9Ew3jfw==
+google-ads-node@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/google-ads-node/-/google-ads-node-1.6.0.tgz#dfa665743d3918c68f692089ba3f0289467bdc8c"
+  integrity sha512-UL4dRNKUaYj3LqiF2eMKB2Bgi2rsbCaZ8Z1FKoEri6h87+suKp12UCOmg/1feBqPfgOrerJZIBTnOzm17xmswA==
   dependencies:
     "@types/google-protobuf" "^3.2.7"
     "@types/lodash.get" "^4.4.6"
@@ -1472,9 +1472,9 @@ google-p12-pem@^1.0.0:
     pify "^4.0.0"
 
 google-protobuf@^3.7.0-rc.2:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/google-protobuf/-/google-protobuf-3.7.0.tgz#5c7228b68d24a7c93706c1a44efdb8ee883cea43"
-  integrity sha512-QZwgOBPfvnAdnYA+tizEs9CbE42mMXFPGCmYAh0podfJbGPkBIEC6vR9gMSGxjaSB8t2GCGLhOHiX9OrseOWCA==
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/google-protobuf/-/google-protobuf-3.7.1.tgz#9ef0fa3bc9ee416ba3fbe32b21ec6b7626f898e2"
+  integrity sha512-6fvlUey6cNKtWSEn1bt4CT4wc2EID1fVluHS1dOnqIlxyIu3cBid2BvWE8Rwl6wN+hRTgiAKhfyydAGV/weZYQ==
 
 graceful-fs@^4.1.11, graceful-fs@^4.1.2:
   version "4.1.11"

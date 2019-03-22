@@ -1,6 +1,8 @@
 import { GoogleAdsClient, SearchGoogleAdsRequest } from 'google-ads-node'
 import Bottleneck from 'bottleneck'
 
+import { getAccessToken } from './token'
+
 interface BuildSearchRequestResponse {
     request: SearchGoogleAdsRequest
     limit: number
@@ -23,6 +25,13 @@ export default class GrpcClient {
             refresh_token,
             login_customer_id,
             parseResults: true,
+            async accessTokenGetter(clientId: string, clientSecret: string, refreshToken: string) {
+                return getAccessToken({
+                    client_id: clientId,
+                    client_secret: clientSecret,
+                    refresh_token: refreshToken,
+                })
+            },
         })
     }
 
