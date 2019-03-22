@@ -1,33 +1,14 @@
-/*
-
-    INCOMPLETE
-
-*/
-
-// @ts-ignore
-import { GeoTargetConstant } from 'google-ads-node/build/lib/resources'
-import * as grpc from 'google-ads-node'
+import { GeoTargetConstant, SuggestGeoTargetConstantsRequest } from 'google-ads-node/build/lib/resources'
 import Service from './service'
 import { ServiceListOptions } from '../types'
+import { values } from 'lodash'
 
-interface SuggestGeoTargetConstantsRequest {
-    locale: string
-    country_code: string
-    location_names?: {
-        names: Array<string>
-    }
-    geo_targets?: {
-        geo_target_constants: Array<string>
-    }
-}
 /**
  * @constants
  */
 const RESOURCE_URL_NAME = 'geoTargetConstants'
 const GET_METHOD = 'getGeoTargetConstant'
 const GET_REQUEST = 'GetGeoTargetConstantRequest'
-// const SUGGEST_REQUEST = 'SuggestGeoTargetConstantsRequest'
-// const SUGGEST_METHOD = 'suggestGeoTargetConstants'
 
 export default class GeoTargetConstantService extends Service {
     public async get(id: number | string): Promise<GeoTargetConstant> {
@@ -44,17 +25,12 @@ export default class GeoTargetConstantService extends Service {
     }
 
     public async suggest(options: SuggestGeoTargetConstantsRequest): Promise<any> {
-        const request = new grpc.SuggestGeoTargetConstantsRequest()
+        const pb = this.buildResource('SuggestGeoTargetConstantsRequest', options)
 
-        request.setLocale(options.locale)
+        const response = await this.service.suggestGeoTargetConstants(pb)
 
-        const pb = this.buildResource(
-            'SuggestGeoTargetConstantsRequest',
-            options
-        ) as grpc.SuggestGeoTargetConstantsRequest
+        const parsed = this.parseServiceResults(values(response.geoTargetConstantSuggestions))
 
-        console.log(pb)
-
-        // await this.service.mutateCustomer(request)
+        return parsed
     }
 }

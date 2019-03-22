@@ -245,7 +245,7 @@ export default class Service {
         return this.parseServiceResults(results)
     }
 
-    private parseServiceResults(results: Array<any>): any[] {
+    protected parseServiceResults(results: Array<any>): any[] {
         const formatted = formatQueryResults(results)
         return parseResult(formatted)
     }
