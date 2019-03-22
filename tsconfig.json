@@ -58,6 +58,6 @@
 
         "forceConsistentCasingInFileNames": true
     },
-    "include": ["src/**/*", "src/tests/service.test.ts"],
-    "exclude": ["src/tests/*"]
+    "include": ["src/**/*"],
+    "exclude": ["src/tests_old/*"]
 }
