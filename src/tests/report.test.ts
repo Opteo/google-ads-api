@@ -1,31 +1,15 @@
 import { orderBy } from 'lodash'
+import { newCustomerWithMetrics, newCustomer } from '../test_utils'
 
-import GoogleAdsApi from '..'
-import config from '../config'
 import { AdGroupStatus } from 'google-ads-node/build/lib/enums'
 
-jest.setTimeout(30000)
-
-function newCustomer(customer_account_id: string, manager_cid: string, refresh_token: string) {
-    const client = new GoogleAdsApi({
-        client_id: config.client_id,
-        client_secret: config.client_secret,
-        developer_token: config.developer_token,
-    })
-    return client.Customer({
-        customer_account_id,
-        manager_cid,
-        refresh_token,
-    })
-}
-
 describe('Reporting', async () => {
-    const customer = newCustomer(config.opteo_cid, config.opteo_manager_cid, config.opteo_refresh_token)
+    const customer = newCustomerWithMetrics()
 
     it('retrieves API attributes', async () => {
         const data = await customer.report({
             entity: 'ad_group',
-            attributes: ['id', 'name', 'campaign.id'],
+            attributes: ['ad_group.id', 'ad_group.name', 'campaign.id'],
             order_by: 'ad_group.id',
             sort_order: 'DESC',
         })
@@ -47,7 +31,7 @@ describe('Reporting', async () => {
         const data = await customer.report({
             entity: 'ad_group',
             attributes: ['ad_group.id', 'campaign.id'],
-            metrics: ['metrics.clicks', 'conversions', 'cost'],
+            metrics: ['metrics.clicks', 'metrics.conversions', 'metrics.cost_micros'],
             order_by: 'id',
         })
 
@@ -65,34 +49,6 @@ describe('Reporting', async () => {
                 clicks: expect.any(Number),
                 conversions: expect.any(Number),
                 cost_micros: expect.any(Number),
-                cost: expect.any(Number),
-            },
-        })
-    })
-
-    it('converts micros', async () => {
-        const data = await customer.report({
-            entity: 'ad_group',
-            attributes: ['id', 'campaign.id'],
-            metrics: ['metrics.clicks', 'conversions', 'metrics.cost_micros', 'cost'],
-            order_by: 'id',
-        })
-
-        expect(data).toBeInstanceOf(Array)
-        expect(data[0]).toEqual({
-            campaign: {
-                resource_name: expect.any(String),
-                id: expect.any(Number),
-            },
-            ad_group: {
-                resource_name: expect.any(String),
-                id: expect.any(Number),
-            },
-            metrics: {
-                clicks: expect.any(Number),
-                conversions: expect.any(Number),
-                cost_micros: expect.any(Number),
-                cost: expect.any(Number),
             },
         })
     })
@@ -101,7 +57,7 @@ describe('Reporting', async () => {
         const data = await customer.report({
             entity: 'ad_group',
             attributes: ['ad_group.id', 'campaign.id'],
-            segments: ['device'],
+            segments: ['segments.device'],
             limit: 10,
         })
 
@@ -127,7 +83,7 @@ describe('Reporting', async () => {
         const data = await customer.report({
             entity: 'ad_group',
             attributes: ['ad_group.id'],
-            segments: ['date'],
+            segments: ['segments.date'],
             date_constant: 'TODAY',
             limit: 10,
         })
@@ -153,7 +109,7 @@ describe('Reporting', async () => {
         const data = await customer.report({
             entity: 'ad_group',
             attributes: ['ad_group.id'],
-            segments: ['date'],
+            segments: ['segments.date'],
             from_date: '2019-01-01',
             to_date: '2019-01-10',
         })
@@ -210,7 +166,7 @@ describe('Reporting', async () => {
     it('supports constraints as an array of objects', async () => {
         const data = await customer.report({
             entity: 'ad_group',
-            attributes: ['ad_group.id', 'status'],
+            attributes: ['ad_group.id', 'ad_group.status'],
             constraints: [
                 {
                     key: 'ad_group.status',
@@ -251,7 +207,7 @@ describe('Reporting', async () => {
     it("retrieves no rows for entities that don't exist", async () => {
         const row = await customer.report({
             entity: 'campaign',
-            attributes: ['id'],
+            attributes: ['campaign.id'],
             constraints: [{ 'campaign.id': '0123456789' }],
         })
         expect(row.length).toEqual(0)
@@ -259,13 +215,13 @@ describe('Reporting', async () => {
 })
 
 describe('Reporting (zero metric rows)', async () => {
-    const customer = newCustomer(config.cid, config.manager_cid, config.refresh_token)
+    const customer = newCustomer()
 
     it('retrieves no rows because all metrics are zero', async () => {
         const data = await customer.report({
             entity: 'ad_group',
             attributes: ['ad_group.id', 'campaign.id'],
-            segments: ['device'],
+            segments: ['segments.device'],
             limit: 10,
         })
         expect(data).toEqual([])
