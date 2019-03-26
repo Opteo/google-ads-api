@@ -1,5 +1,5 @@
-// @ts-ignore
-import { newCustomer, BUDGET_ID, CID, getRandomName } from '../test_utils'
+import { enums } from '../index'
+import { newCustomer } from '../test_utils'
 const customer = newCustomer()
 
 jest.setTimeout(30000)
@@ -39,7 +39,7 @@ describe('Error', async () => {
                 WHERE segments.date DURING LAST_13_DAYS
             `)
         } catch (err) {
-            expect(err.code).toEqual(3) // INVALID_ARGUMENT
+            expect(err.code.queryError).toEqual(enums.QueryError.INVALID_VALUE_WITH_DURING_OPERATOR) // INVALID_ARGUMENT
             expect(err.request).toEqual({
                 customerId: expect.any(String),
                 query: expect.any(String),
