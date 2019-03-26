@@ -11,7 +11,11 @@ export class SearchGrpcError extends Error {
         const { code, details } = err
 
         super(details)
-        this.code = code
+        try {
+            this.code = JSON.parse(get(err, "metadata._internal_repr['error-code'][0]"))
+        } catch (err) {
+            this.code = code
+        }
         this.request = request.toObject()
         this.request_id = get(err, "metadata._internal_repr['request-id'][0]")
         this.failure = err
