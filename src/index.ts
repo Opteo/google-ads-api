@@ -8,6 +8,6 @@ import * as enums from 'google-ads-node/build/lib/enums'
 import * as types from 'google-ads-node/build/lib/resources'
 
 /* Helpers */
-import { fromMicros, toMicros } from './utils'
+import { fromMicros, toMicros, getEnumString } from './utils'
 
-export { GoogleAdsApi, enums, types, fromMicros, toMicros }
+export { GoogleAdsApi, enums, types, fromMicros, toMicros, getEnumString }

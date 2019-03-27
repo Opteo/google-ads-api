@@ -1,6 +1,7 @@
 import { snakeCase, isObject, isString, isArray, isUndefined, values } from 'lodash'
 
 import { ReportOptions, Constraint } from './types'
+import { enums } from './index'
 
 function unrollConstraintShorthand(constraint: any): Constraint {
     if (!constraint.key) {
@@ -193,4 +194,15 @@ function convertFakeArrays(o: any): any {
     }
 
     return o
+}
+
+export function getEnumString(type: string, value: number): string {
+    if (!enums.hasOwnProperty(type)) {
+        throw new Error(`Could not find enum "${type}"`)
+    }
+    const e = (enums as any)[type]
+    if (!e.hasOwnProperty(value)) {
+        throw new Error(`Could not find value "${value}" on enum "${type}"`)
+    }
+    return e[value]
 }
