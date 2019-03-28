@@ -152,10 +152,50 @@ const campaigns = await customer.search(`
 `)
 ```
 
+### Mutations
+Roughly half of the services in the Google Ads API can make use of mutate operations, for creating, updating and deleting entities.
+
+#### Create
+The `create` method can take a single entity or array of entities, of the specified type e.g. Campaign. You can use the Typescript definitions to see at compile time what properties are available when creating new entities. Optionally, you can supply a second argument with the following options: `validate_only` and `partial_failure`. For more details on these, refer to the [Google Ads API documentation](https://developers.google.com/google-ads/api/reference/rpc/google.ads.googleads.v1.services#google.ads.googleads.v1.services.MutateCampaignsRequest).
+
+The `results` property of the response object will contain the newly created entity resource names.
+
+```typescript
+const campaign: types.Campaign = {
+    name: 'new-campaign',
+    campaign_budget: 'customers/123/campaignBudgets/123',
+    advertising_channel_type: enums.AdvertisingChannelType.SEARCH,
+    status: enums.CampaignStatus.PAUSED
+}
+
+const { results } = await customer.campaigns.create(campaign)
+console.log(results) // ['customers/123/campaigns/123']
+```
+
+#### Update
+The `update` method works the same way as `create` and takes a single entity or array of entities to update. All properties passed (that can be updated) will be updated, so if you **don't want to update an attribute, don't include it**. This method also supports the additional `validate_only` and `partial_failure` options.
+
+The `results` property of the response object will contain the newly created entity resource names.
+
+```typescript
+const campaign: types.Campaign = {
+    resource_name: `customers/123/campaigns/123`,
+    name: 'updated-campaign-name',
+}
+const { results } = await gads.campaigns.update(campaign, { validate_only: true })
+```
+
+#### Delete
+The `delete` method should be provided with a valid resource name, being the entity to remove. Note: When deleting an entity in the Google Ads API, it won't be removed, but simply changed to removed.
+```typescript
+await gads.campaigns.delete('customers/123/campaigns/123')
+```
+
+
 ### Error Handling
 To handle errors from the Google Ads API, the best approach is to use the provided error enums, available with the `enums` import. A full list of error types can be found in the [Google Ads API references](https://developers.google.com/google-ads/api/reference/rpc/google.ads.googleads.v1.errors).
 ```typescript
-import { enums } from "google-ads-api"
+import { enums } from 'google-ads-api'
 
 try {
     const campaigns = await gads.report({
