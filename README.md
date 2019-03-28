@@ -41,7 +41,7 @@ $ yarn add google-ads-api
 ```
 
 ## Example
-```typescript
+```javascript
 import { GoogleAdsApi, types, enums } from "google-ads-api"
 
 // 1. Create a new client with your credentials
@@ -71,9 +71,7 @@ async function main() {
   
   // 4. Inspect the data and benefit from ts definitions!
   for(const row of response) {
-    const ad_group = row.ad_group as types.AdGroup
-    const metrics = row.metrics as types.Metrics
-    
+    const { ad_group, metrics } = row
     if(ad_group.status === enums.AdGroupStatus.ENABLED) {
       console.log(`Ad group "${ad_group.name}" had ${metrics.clicks} clicks.`)
     }
