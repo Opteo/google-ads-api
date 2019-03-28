@@ -132,8 +132,10 @@ const campaigns = await customer.report({
 The `customer.search` allows you to query customer data using GAQL ([Google Ads Query Language](https://developers.google.com/google-ads/api/docs/query/overview)) query strings.
 ```javascript
 const campaigns = await customer.search(`
-    SELECT campaign.id, campaign.name, campaign.status
-    FROM campaign
+    SELECT 
+      campaign.id, campaign.name, campaign.status
+    FROM 
+      campaign
     ORDER BY campaign.id
 `)
 
@@ -141,14 +143,38 @@ const campaigns = await customer.search(`
     SELECT 
         campaign.id, campaign.name, campaign.status, 
         metrics.impressions, metrics.cost
-    FROM campaign
-    WHERE campaign.status = 'PAUSED' AND metrics.impressions > 5
+    FROM 
+      campaign
+    WHERE 
+      campaign.status = 'PAUSED' 
+      AND metrics.impressions > 5
     ORDER BY campaign.id
 `)
 ```
 
-<br/>
-<br/>
+### Error Handling
+To handle errors from the Google Ads API, the best approach is to use the provided error enums, available with the `enums` import. A full list of error types can be found in the [Google Ads API references](https://developers.google.com/google-ads/api/reference/rpc/google.ads.googleads.v1.errors).
+```typescript
+import { enums } from "google-ads-api"
+
+try {
+    const campaigns = await gads.report({
+        entity: 'campaign',
+        attributes: ['ad_group_criterion.keyword.text'],
+    })
+} catch (err) {
+    if (err.code.queryError === enums.QueryError.PROHIBITED_RESOURCE_TYPE_IN_SELECT_CLAUSE) {
+        // Handle error case..
+    }
+}
+```
+As well as the error code, the `message`, `request_id`, `request` object and grpc `failure` object properties are accessible e.g. 
+```javascript
+console.log(err.message) // "Cannot select fields from the following resource.."
+console.log(err.request_id) // "5Tzsyp_M_9F7oHl_EZh8Ow"
+console.log(err.request) // Request protocol buffer body in readable format
+console.log(err.failure) // gRPC GoogleAdsFailure instance
+```
 
 ## Type Definitions
 All Typescript definition files for Google Ads resources can be found in our companion library, [google-ads-node](https://github.com/opteo/google-ads-node). Specifically, the files [`resources.ts`](https://github.com/Opteo/google-ads-node/blob/master/src/lib/resources.ts) and [`enums.ts`](https://github.com/Opteo/google-ads-node/blob/master/src/lib/enums.ts) will be useful for referencing if you're using this library in a Typescript environment.
@@ -179,7 +205,6 @@ if(channel === enums.AdvertisingChannelType.SEARCH) {
 Check out the official [Google Ads API release notes](https://developers.google.com/google-ads/api/docs/release-notes) for a detailed changelog.
 
 ## Google Ads Query Language
-
 #### Query Language Grammar
 
 ```
