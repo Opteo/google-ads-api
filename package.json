@@ -1,45 +1,61 @@
 {
   "name": "google-ads-api",
-  "version": "0.6.2",
+  "version": "1.0.0-beta.0.2",
   "description": "Google Ads API Client Library for JavaScript",
-  "main": "./lib/index.js",
-  "typings": "./lib/index.d.ts",
+  "main": "./build/index.js",
+  "typings": "./build/index.d.ts",
   "scripts": {
-    "prepare": "rm -rf lib/ && npm run build",
+    "prepare": "run-s clean build",
+    "clean": "rm -rf build/",
     "build": "tsc",
     "watch": "tsc -w",
-    "test": "jest",
+    "test": "run-s clean build test:unit",
+    "test:lint": "prettier --list-different \"src/**/*.{ts,tsx}\"",
+    "test:unit": "jest /tests/customer.test /tests/campaign_budget.test /tests/campaign.test /tests/geo_target_constant.test /tests/error /tests/query_limits.test",
     "prettier:base": "prettier --parser typescript --single-quote",
     "prettier:check": "npm run prettier:base -- --list-different \"src/**/*.{ts,tsx}\"",
     "prettier:write": "npm run prettier:base -- --write \"src/**/*.{ts,tsx}\""
   },
-  "files": [
-    "lib"
-  ],
   "jest": {
     "moduleFileExtensions": [
       "ts",
-      "js"
+      "js",
+      "json"
     ],
     "transform": {
       "\\.ts$": "ts-jest"
     },
-    "testRegex": "/src/.*\\.test\\.ts$"
+    "testRegex": "/src/.*\\.test\\.ts$",
+    "verbose": true,
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "./jest_setup.js"
+    ]
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/Opteo/google-ads-api.git"
   },
-  "keywords": [],
+  "keywords": [
+    "google ads",
+    "google ads api",
+    "google ads nodejs",
+    "google ads javascript"
+  ],
   "author": "Opteo",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Opteo/google-ads-api/issues"
   },
   "homepage": "https://github.com/Opteo/google-ads-api#readme",
   "devDependencies": {
     "@types/jest": "^24.0.9",
+    "dotenv": "^7.0.0",
     "jest": "^24.1.0",
+    "lodash.camelcase": "^4.3.0",
+    "lodash.snakecase": "^4.1.1",
+    "lodash.template": "^4.4.0",
+    "npm-run-all": "^4.1.5",
     "prettier": "^1.14.3",
     "ts-jest": "^24.0.0",
     "tslint": "^5.12.1",
@@ -49,8 +65,9 @@
     "@types/lodash": "^4.14.112",
     "@types/request": "^2.47.1",
     "bluebird": "^3.5.2",
-    "bluebird-retry": "^0.11.0",
     "bottleneck": "^2.16.1",
+    "google-ads-node": "^1.7.0",
+    "lodash": "^4.17.11",
     "redis": "^2.8.0"
   }
 }
