@@ -214,6 +214,26 @@ console.log(err.request) // Request protocol buffer body in readable format
 console.log(err.failure) // gRPC GoogleAdsFailure instance
 ```
 
+## Utilities
+In this library, we also provide a set of helper methods that can assist you during development.
+
+| Method 	| Description 	|
+|-----------------	|----------------------------------------------------------------------------	|
+| `fromMicros` 	| Converts micro value to a normal number 	|
+| `toMicros` 	| Converts a normal number to a micro value 	|
+| `getEnumString` 	| Get the value of an enum as a string (instead of the default number value) 	|
+
+```javascript
+import { fromMicros, toMicros, getEnumString } from 'google-ads-api'
+
+fromMicros(123300000) // 123.3
+toMicros(123.3) // 123300000
+
+// You must pass the enum name and the value
+getEnumString("AdvertisingChannelType", enums.AdvertisingChannelType.DISPLAY) // "DISPLAY"
+```
+
+
 ## Type Definitions
 All Typescript definition files for Google Ads resources can be found in our companion library, [google-ads-node](https://github.com/opteo/google-ads-node). Specifically, the files [`resources.ts`](https://github.com/Opteo/google-ads-node/blob/master/src/lib/resources.ts) and [`enums.ts`](https://github.com/Opteo/google-ads-node/blob/master/src/lib/enums.ts) will be useful for referencing if you're using this library in a Typescript environment.
 
