@@ -150,6 +150,34 @@ const campaigns = await customer.search(`
 <br/>
 <br/>
 
+## Type Definitions
+All Typescript definition files for Google Ads resources can be found in our companion library, [google-ads-node](https://github.com/opteo/google-ads-node). Specifically, the files [`resources.ts`](https://github.com/Opteo/google-ads-node/blob/master/src/lib/resources.ts) and [`enums.ts`](https://github.com/Opteo/google-ads-node/blob/master/src/lib/enums.ts) will be useful for referencing if you're using this library in a Typescript environment.
+
+```typescript
+// Example interface for the v1 common "TextAdInfo" entity in the Google Ads API
+
+/* .google.ads.googleads.v1.common.TextAdInfo */
+export interface TextAdInfo {
+  headline?: string;
+  description_1?: string;
+  description_2?: string;
+}
+```
+
+Both the interfaces and enums can be imported into your project from google-ads-api, as shown below:
+```typescript
+import { types, enums } from "google-ads-api"
+
+const campaign: types.Campaign = { ... }
+
+if(channel === enums.AdvertisingChannelType.SEARCH) {
+  // ...
+}
+```
+
+## Changelog
+Check out the official [Google Ads API release notes](https://developers.google.com/google-ads/api/docs/release-notes) for a detailed changelog.
+
 ## Google Ads Query Language
 
 #### Query Language Grammar
