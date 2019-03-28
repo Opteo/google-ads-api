@@ -8,6 +8,9 @@
   Unofficial Google Ads API client library for Node
 </p>
 <p align="center">
+  <a href="https://developers.google.com/google-ads/api/docs/release-notes">
+    <img src="https://img.shields.io/badge/google%20ads-v1.0.0-009688.svg?style=flat-square">
+  </a>
   <a href="https://www.npmjs.com/package/google-ads-api">
     <img src="https://img.shields.io/npm/v/google-ads-api.svg?style=flat-square">
   </a>
@@ -27,12 +30,57 @@
   </a>
 </p>
 
-> ⚠️ **Caution: This project is still under heavy development.**
+## Features
+- Simple and easy to use API
+- Uses [gRPC](https://grpc.io/) and [Protocol Buffers](https://developers.google.com/protocol-buffers/) internally (recommended by Google)
+- Typescript definitions for all [Google Ads API resources, enums and errors](https://developers.google.com/google-ads/api/reference/rpc/google.ads.googleads.v1.resources)
 
 ## Installation
-
 ```bash
 $ yarn add google-ads-api
+```
+
+## Example
+```typescript
+import { GoogleAdsApi, types, enums } from "google-ads-api"
+
+// 1. Create a new client with your credentials
+const client = new GoogleAdsApi({
+    client_id: "<CLIENT_ID>",
+    client_secret: "<CLIENT_SECRET>",
+    developer_token: "<DEVELOPER_TOKEN>"
+})
+
+async function main() {
+  // 2. Load a customer with a valid CID & authentication
+  const customer = client.Customer({
+      customer_account_id: "<CUSTOMER_ACCOUNT_ID>",
+      refresh_token: "<REFRESH_TOKEN>"
+  })
+  
+  // 3. Use the report method for querying customer data
+  const response = await customer.report({
+      entity: 'ad_group',
+      attributes: ['ad_group.id', 'ad_group.name', 'ad_group.status'],
+      metrics: ['metrics.clicks'],
+      segments: ['segments.device'],
+      constraints: ['metrics.impressions > 10'],
+      date_constant: 'LAST_30_DAYS',
+      limit: 5,
+  })
+  
+  // 4. Inspect the data and benefit from ts definitions!
+  for(const row of response) {
+    const ad_group = row.ad_group as types.AdGroup
+    const metrics = row.metrics as types.Metrics
+    
+    if(ad_group.status === enums.AdGroupStatus.ENABLED) {
+      console.log(`Ad group "${ad_group.name}" had ${metrics.clicks} clicks.`)
+    }
+  }
+}
+
+main()
 ```
 
 ## Usage
@@ -50,16 +98,18 @@ const client = new GoogleAdsApi({
 
 const customer = client.Customer({
     customer_account_id: '123-123-123',
-    login_customer_id: '456-456-456',
+    login_customer_id: '456-456-456', // Optionally provide a login-customer-id
     refresh_token: '<YOUR_REFRESH_TOKEN>',
 })
 ```
 
 ### Basic Usage
+Most Google Ads services, accessible via `customer.<serviceName>`, have a `get` and `list` method for retrieving entity data, **not including** metrics and segments. Other supported services also provide a series of mutate operations, namely `create`, `update` and `delete`. Mutate operation examples can be found in the next section.
 
 ```javascript
-// Get single campaign
+// Get single campaign with an id or resource name
 const campaign = await customer.campaigns.get(123123123)
+const campaign = await customer.campaigns.get('customers/123/campaigns/123')
 
 // List multiple ad groups
 const ad_groups = await customer.adGroups.list({
@@ -78,8 +128,8 @@ const campaigns = await customer.report({
 })
 ```
 
-### Using Google Ads Query Language
-
+### Using GAQL (Google Ads Query Language)
+The `customer.search` allows you to query customer data using GAQL ([Google Ads Query Language](https://developers.google.com/google-ads/api/docs/query/overview)) query strings.
 ```javascript
 const campaigns = await customer.search(`
     SELECT campaign.id, campaign.name, campaign.status
