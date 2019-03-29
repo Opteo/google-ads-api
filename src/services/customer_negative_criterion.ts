@@ -7,9 +7,9 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
 /**
  * @constants
  */
-const RESOURCE_URL_NAME = 'customerNegativeCriterions'
-const MUTATE_METHOD = 'mutateCustomerNegativeCriterions'
-const MUTATE_REQUEST = 'MutateCustomerNegativeCriterionsRequest'
+const RESOURCE_URL_NAME = 'customerNegativeCriteria'
+const MUTATE_METHOD = 'mutateCustomerNegativeCriteria'
+const MUTATE_REQUEST = 'MutateCustomerNegativeCriteriaRequest'
 const OPERATION_REQUEST = 'CustomerNegativeCriterionOperation'
 const GET_METHOD = 'getCustomerNegativeCriterion'
 const GET_REQUEST = 'GetCustomerNegativeCriterionRequest'
@@ -25,7 +25,9 @@ export default class CustomerNegativeCriterionService extends Service {
         }) as CustomerNegativeCriterion
     }
 
-    public async list(options?: ServiceListOptions): Promise<Array<{ customer_negative_criterion: CustomerNegativeCriterion }>> {
+    public async list(
+        options?: ServiceListOptions
+    ): Promise<Array<{ customer_negative_criterion: CustomerNegativeCriterion }>> {
         return this.getListResults('customer_negative_criterion', options)
     }
 

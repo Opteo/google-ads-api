@@ -8,8 +8,8 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
  * @constants
  */
 const RESOURCE_URL_NAME = 'adGroupCriteria'
-const MUTATE_METHOD = 'mutateAdGroupCriterions'
-const MUTATE_REQUEST = 'MutateAdGroupCriterionsRequest'
+const MUTATE_METHOD = 'mutateAdGroupCriteria'
+const MUTATE_REQUEST = 'MutateAdGroupCriteriaRequest'
 const OPERATION_REQUEST = 'AdGroupCriterionOperation'
 const GET_METHOD = 'getAdGroupCriterion'
 const GET_REQUEST = 'GetAdGroupCriterionRequest'
