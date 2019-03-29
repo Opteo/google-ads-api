@@ -1,156 +1,56 @@
-import {
-    flattenDeep,
-    snakeCase,
-    isObject,
-    isString,
-    isArray,
-    isUndefined,
-    merge,
-    includes,
-    compact,
-    find,
-    map,
-    uniq,
-    get,
-} from 'lodash'
+import { snakeCase, isObject, isString, isArray, isUndefined, values } from 'lodash'
 
-import entity_attributes from './attributes'
-import entity_metrics from './metrics'
-import entity_segments from './segments'
-import { ReportConfig, Metric, Constraint } from './types/Global'
-import { ListConfig } from './types/Entity'
+import { ReportOptions, Constraint } from './types'
+import { enums } from './index'
 
-export const getUpdateMask = (update_object: any): string => {
-    let mask = ''
-    for (const key in update_object) {
-        if (isObject(update_object[key])) {
-            mask +=
-                Object.keys(update_object[key]).length === 0
-                    ? key
-                    : Object.keys(update_object[key])
-                          .map(child_key => `${key}.${child_key}`)
-                          .join(',')
-        } else {
-            mask += `${key},`
+function unrollConstraintShorthand(constraint: any): Constraint {
+    if (!constraint.key) {
+        const key = Object.keys(constraint)[0]
+        const val = constraint[key]
+        if (isArray(val)) {
+            return { key, op: 'IN', val }
         }
+        return { key, op: '=', val }
     }
-    return mask
+    return constraint
 }
 
-/**
- * Builds a custom Google Ads Query
- * @param {object} config
- * @returns {string} query
- */
-export const buildReportQuery = (config: ReportConfig): { query: string; custom_metrics: Array<Metric> } => {
-    let query = ''
+export function buildReportQuery(config: ReportOptions) {
+    let query = ``
     let where_clause_exists = false
-    const custom_metrics: Array<Metric> = []
 
-    /* SELECT Clause */
-    config.attributes =
-        config.attributes && config.attributes.length ? formatAttributes(config.attributes, config.entity) : []
-    config.segments = config.segments || []
-    config.metrics = config.metrics
-        ? config.metrics.map((metric: string) => (metric.includes('metrics.') ? metric : `metrics.${metric}`))
-        : []
-    config.constraints = config.constraints || []
+    const attributes = config.attributes ? config.attributes.sort() : []
+    const metrics = config.metrics ? config.metrics.sort() : []
+    const segments = config.segments ? config.segments.sort() : []
+    const constraints = config.constraints || []
 
-    // sort parts of query to encourage better caching
-    config.attributes.sort()
-    config.segments.sort()
-    config.metrics.sort()
-
-    const unrollConstraintShorthand = (constraint: any): Constraint => {
-        if (!constraint.key) {
-            const key = Object.keys(constraint)[0]
-            const val = constraint[key]
-            if (isArray(val)) {
-                return { key, op: 'IN', val }
-            }
-            return { key, op: '=', val }
-        }
-
-        return constraint
-    }
-
-    const addConstraintPrefix = (constraint: Constraint): Constraint => {
-        if (includes(map(entity_metrics, 'name'), constraint.key)) {
-            constraint.key = `metrics.${constraint.key}`
-        } else if (isUndefined(get(entity_attributes, constraint.key))) {
-            constraint.key = `${config.entity}.${constraint.key}`
-        }
-
-        return constraint
-    }
-
-    const getConstraintKeys = (constraint: Constraint | string): string | boolean => {
-        if (isString(constraint)) {
-            return false
-        }
-        if (constraint.key) {
-            return constraint.key
-        }
-
-        return Object.keys(constraint)[0]
-    }
-
-    config.constraints = config.constraints.map(
+    const normalised_constraints = constraints.map(
         (constraint: Constraint | string | object): Constraint | string => {
             if (isString(constraint)) {
                 return constraint
             }
-            const unrolled_constraint = unrollConstraintShorthand(constraint)
-            const prefixed_constraint = addConstraintPrefix(unrolled_constraint)
-
-            return prefixed_constraint
+            return unrollConstraintShorthand(constraint)
         }
     )
 
-    const metrics_referenced_in_constraints = isArray(config.constraints)
-        ? map(config.constraints, getConstraintKeys).filter((constraint_key: string | boolean) =>
-              includes(entity_metrics.map(m => `metrics.${m.name}`), constraint_key)
-          )
-        : []
-
-    const all_config_metrics: Array<any> = compact(uniq([...config.metrics, ...metrics_referenced_in_constraints]))
-
-    all_config_metrics.forEach((config_metric: string) => {
-        const matching_metric = find(entity_metrics, {
-            name: config_metric.replace('metrics.', ''),
-        })
-
-        if (matching_metric && matching_metric.pre_query_hook) {
-            config = matching_metric.pre_query_hook(config)
-        }
-
-        if (matching_metric && matching_metric.is_custom) {
-            custom_metrics.push(matching_metric)
-        }
-    })
-
-    const all_selected_attributes = config.attributes
-        .concat(config.metrics, config.segments.map(s => `segments.${s}`))
-        .join(', ')
-
-    if (!all_selected_attributes.length) {
-        throw new Error('Missing attributes, metric fields or segments to be selected.')
+    /* ATTRIBUTES */
+    const all_selected_attributes = (attributes as any).concat(metrics, segments).join(', ')
+    if (!all_selected_attributes) {
+        throw new Error(`Must specify at least one field in "attributes", "metrics" or "segments"`)
     }
 
     query = `SELECT ${all_selected_attributes} FROM ${config.entity}`
 
-    /* WHERE Clause */
-
     /* Constraints */
-    if (config.constraints && config.constraints.length) {
-        const constraints = formatConstraints(config.constraints)
+    if (normalised_constraints && normalised_constraints.length > 0) {
+        const constraints = formatConstraints(normalised_constraints)
         query += ` WHERE ${constraints}`
         where_clause_exists = true
     }
 
-    // TODO: add better error message
+    /* Date Ranges */
     if (config.date_constant && (config.from_date || config.to_date)) {
-        throw new Error('Use only one, Custom date range or Predefined date range.')
+        throw new Error('Use only one of "date_constant" OR ("from_date","to_date")')
     }
     if (config.from_date && !config.to_date) {
         const d = new Date()
@@ -159,7 +59,7 @@ export const buildReportQuery = (config: ReportConfig): { query: string; custom_
         )}`
         config.to_date = today_string
     } else if (config.to_date && !config.from_date) {
-        throw new Error('Expected start date range is missing. (from_date)')
+        throw new Error('Expected start date range is missing - "from_date"')
     }
 
     /* Custom Date Range */
@@ -185,16 +85,7 @@ export const buildReportQuery = (config: ReportConfig): { query: string; custom_
         query += ` LIMIT ${config.limit}`
     }
 
-    return { query, custom_metrics }
-}
-
-const formatAttributes = (attributes: Array<string>, entity: string): Array<string> => {
-    return attributes.map((attribute: string) => {
-        if (isUndefined(get(entity_attributes, attribute))) {
-            return `${entity}.${attribute}`
-        }
-        return attribute
-    })
+    return query
 }
 
 const formatConstraints = (constraints: any): string => {
@@ -222,9 +113,9 @@ const formatConstraints = (constraints: any): string => {
             }
         }
 
-        if (entity_segments.map(s => s.name).includes(key)) {
-            key = `segments.${key}`
-        }
+        // if (entity_segments.map(s => s.name).includes(key)) {
+        //     key = `segments.${key}`
+        // }
 
         return `${key} ${op} ${val}`
     }
@@ -253,136 +144,65 @@ const formatOrderBy = (entity: string, order_by: string | Array<string>, sort_or
     return ` ORDER BY ${order_by} ${sort_order}`
 }
 
-export const formatQueryResults = (
-    result: Array<object>,
-    entity: string,
-    convert_micros: boolean,
-    custom_metrics: Array<Metric>
-): Array<object> => {
-    return result.map((row: { [key: string]: any }) => {
-        // removing main entity key from final object
-        if (row[entity]) {
-            merge(row, row[entity])
-            delete row[entity]
-        }
-
-        custom_metrics.forEach(custom_metric => {
-            if (custom_metric.post_query_hook) {
-                row = custom_metric.post_query_hook(row)
-            }
-        })
-
-        return formatSingleResult(row, convert_micros)
-    })
-}
-
-const formatSingleResult = (result_object: { [key: string]: any }, convert_micros: boolean): object => {
-    for (const key in result_object) {
-        if (isObject(result_object[key])) {
-            result_object[key] = formatSingleResult(result_object[key], convert_micros)
-            continue
-        }
-
-        const matching_metric = find(entity_metrics, { name: key })
-
-        if (convert_micros && matching_metric && matching_metric.is_micros) {
-            result_object[key.split('_micros')[0]] = +result_object[key] / 1000000
-        } else if (convert_micros && key.includes('_micros')) {
-            result_object[key.split('_micros')[0]] = +result_object[key] / 1000000
-        }
-
-        if (matching_metric && matching_metric.is_number) {
-            result_object[key] = +result_object[key]
-        }
-
-        if (isNumeric(result_object[key]) && !(key === 'id' || key.includes('.id'))) {
-            result_object[key] = +result_object[key]
-        }
+export const formatQueryResults = (result: Array<object>): Array<object> => {
+    const parsed_results: Array<object> = []
+    for (const row of result) {
+        const parsed_row = formatEntity(row)
+        parsed_results.push(parsed_row)
     }
-
-    return result_object
+    return parsed_results
 }
 
-const getAttributesList = (resource: string) => {
-    const entity = entity_attributes[resource]
-    return mapAttributeObject(entity, resource)
-}
+const formatEntity = (entity: any, final: any = {}): object => {
+    for (const key in entity) {
+        const underscore_key = snakeCase(key)
+        const value = entity[key]
 
-const mapAttributeObject = (entity: any, prefix: string): any => {
-    return flattenDeep(
-        Object.keys(entity).map(key => {
-            if (isObject(entity[key])) {
-                return mapAttributeObject(entity[key], `${prefix}.${key}`)
-            }
-            return `${prefix}.${key}`
-        })
-    )
-}
-
-export const buildListReportConfig = (config: ListConfig, resource: string): ReportConfig => {
-    const attributes_list = getAttributesList(resource)
-
-    if (!config) {
-        return {
-            entity: resource,
-            attributes: attributes_list,
-        }
-    }
-
-    const report_config = config as ReportConfig
-    report_config.entity = resource
-    report_config.attributes = report_config.attributes || attributes_list
-
-    return report_config
-}
-
-const mapSingleRowWithId = (row: any): object => {
-    const resource_name_split = row.resource_name ? row.resource_name.split('/') : null
-    if (resource_name_split) {
-        return {
-            id: resource_name_split[resource_name_split.length - 1],
-            ...row,
-        }
-    }
-    return row
-}
-const mapRowsWithId = (rows: object[]): object[] => {
-    return rows.map((row: any) => mapSingleRowWithId(row))
-}
-
-export const mapResultsWithIds = (data: any): object => {
-    let result_rows: object[]
-    if (data.results && Array.isArray(data.results)) {
-        result_rows = mapRowsWithId(data.results)
-    } else if (Array.isArray(data)) {
-        result_rows = mapRowsWithId(data)
-    } else {
-        return mapSingleRowWithId(data)
-    }
-
-    if (result_rows.length === 1) {
-        return result_rows[0]
-    }
-    return result_rows
-}
-
-export const transformObjectKeys = (entity_object: any): any => {
-    const final: { [key: string]: string | object } = {}
-
-    for (const key in entity_object) {
-        if (isObject(entity_object[key])) {
-            final[snakeCase(key)] = transformObjectKeys(entity_object[key])
+        if (isObject(value) && !Array.isArray(value)) {
+            final[underscore_key] = formatEntity(value, final[underscore_key])
         } else {
-            final[snakeCase(key)] = entity_object[key]
+            final[underscore_key] = value
         }
     }
-
     return final
 }
 
-const isNumeric = (value: any) => {
-    if (typeof value === 'boolean') {
-        return false
+export const fromMicros = (value: number): number => value / 1000000
+
+export const toMicros = (value: number): number => value * 1000000
+
+export const normaliseCustomerId = (id: string | undefined): string => {
+    if (id) {
+        return id.split('-').join('')
     }
-    return !isNaN(value)
+    return ''
+}
+
+export function parseResult(rows: any) {
+    return values(rows).map(convertFakeArrays)
+}
+
+function convertFakeArrays(o: any): any {
+    for (const key in o) {
+        if (o[key] && typeof o[key] === 'object') {
+            if (o[key]['0']) {
+                o[key] = values(o[key])
+            } else {
+                o[key] = convertFakeArrays(o[key])
+            }
+        }
+    }
+
+    return o
+}
+
+export function getEnumString(type: string, value: number): string {
+    if (!enums.hasOwnProperty(type)) {
+        throw new Error(`Could not find enum "${type}"`)
+    }
+    const e = (enums as any)[type]
+    if (!e.hasOwnProperty(value)) {
+        throw new Error(`Could not find value "${value}" on enum "${type}"`)
+    }
+    return e[value]
 }

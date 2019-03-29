@@ -78,4 +78,5 @@ typings/
 .serverless
 .DS_Store
 
-build
+build/
+.env

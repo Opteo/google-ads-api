@@ -1,13 +1,27 @@
+import crypto from 'crypto'
 import request from 'request'
 
-import { ADWORDS_AUTH_URL } from './constants'
-import { AccessToken } from './types/Http'
-import { Client } from './types/Global'
+const ADWORDS_AUTH_URL = 'https://accounts.google.com/o/oauth2/token'
 
 import { cached_tokens, unresolved_token_promises } from './token_cache'
 
-export const getAccessToken = async (client: Client) => {
-    const hash = getTokenHash(client)
+interface TokenAuth {
+    client_id: string
+    client_secret: string
+    refresh_token: string
+}
+
+interface TokenReturn {
+    access_token: string
+    expires_in: number
+}
+
+export const getAccessToken = async ({ client_id, client_secret, refresh_token }: TokenAuth) => {
+    const hash = getTokenHash({
+        client_id,
+        client_secret,
+        refresh_token,
+    })
     const now = Date.now()
 
     if (cached_tokens[hash] && cached_tokens[hash].expires > now) {
@@ -18,7 +32,7 @@ export const getAccessToken = async (client: Client) => {
         return (await unresolved_token_promises[hash]).access_token
     }
 
-    const token_promise = refreshAccessToken(client.client_id, client.client_secret, client.refresh_token)
+    const token_promise = refreshAccessToken(client_id, client_secret, refresh_token)
         .then(token => {
             cached_tokens[hash] = token
             delete unresolved_token_promises[hash]
@@ -42,13 +56,13 @@ export const getAccessToken = async (client: Client) => {
     return token_object.access_token
 }
 
-const getTokenHash = (client: Client) => `${client.developer_token}_${client.cid}`
+const getTokenHash = (auth: TokenAuth) =>
+    crypto
+        .createHash('sha256')
+        .update(`${auth.client_id}_${auth.refresh_token}`)
+        .digest('base64')
 
-const refreshAccessToken = (
-    client_id: string | number,
-    client_secret: string,
-    refresh_token: string
-): Promise<AccessToken> => {
+const refreshAccessToken = (client_id: string, client_secret: string, refresh_token: string): Promise<TokenReturn> => {
     const options = {
         url: ADWORDS_AUTH_URL,
         method: 'POST',
