@@ -1,6 +1,6 @@
-import { getEnumString, enums } from './index'
+import { getEnumString, enums } from '../index'
 
-test.only('getEnumString', () => {
+test('getEnumString', () => {
     const status = getEnumString('CampaignStatus', enums.CampaignStatus.ENABLED)
     expect(status).toEqual('ENABLED')
 

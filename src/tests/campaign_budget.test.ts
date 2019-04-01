@@ -1,10 +1,6 @@
-// Auto Generated File! Do Not Edit.
-
-// @ts-ignore
 import { CampaignBudget } from 'google-ads-node/build/lib/resources'
 
-// @ts-ignore
-import { newCustomer, BUDGET_ID, CID, getRandomName } from '../test_utils'
+import { newCustomer, CID, getRandomName } from '../test_utils'
 const customer = newCustomer()
 
 describe('CampaignBudget', async () => {
@@ -13,7 +9,6 @@ describe('CampaignBudget', async () => {
             const campaign_budgets = await customer.campaignBudgets.list()
             expect(campaign_budgets).toBeInstanceOf(Array)
 
-            // @ts-ignore Ignore missing proto definitions for now
             if (campaign_budgets.length > 0 && campaign_budgets[0].campaign_budget.resource_name) {
                 expect(campaign_budgets[0].campaign_budget).toEqual(
                     expect.objectContaining({
@@ -21,7 +16,6 @@ describe('CampaignBudget', async () => {
                     })
                 )
 
-                // @ts-ignore Ignore missing proto definitions for now
                 const resource = campaign_budgets[0].campaign_budget.resource_name
 
                 if (resource) {
