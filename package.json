@@ -11,7 +11,7 @@
     "watch": "tsc -w",
     "test": "run-s clean build test:unit",
     "test:lint": "prettier --list-different \"src/**/*.{ts,tsx}\"",
-    "test:unit": "jest /tests/customer.test /tests/campaign_budget.test /tests/campaign.test /tests/geo_target_constant.test /tests/error /tests/query_limits.test",
+    "test:unit": "jest /tests/customer.test /tests/campaign_budget.test /tests/campaign.test /tests/geo_target_constant.test /tests/error /tests/query_limits.test /tests/ad_group_criterion.test ",
     "prettier:base": "prettier --parser typescript --single-quote",
     "prettier:check": "npm run prettier:base -- --list-different \"src/**/*.{ts,tsx}\"",
     "prettier:write": "npm run prettier:base -- --write \"src/**/*.{ts,tsx}\""
@@ -66,7 +66,7 @@
     "@types/request": "^2.47.1",
     "bluebird": "^3.5.2",
     "bottleneck": "^2.16.1",
-    "google-ads-node": "^1.7.0",
+    "google-ads-node": "^1.7.1",
     "lodash": "^4.17.11",
     "redis": "^2.8.0"
   }
