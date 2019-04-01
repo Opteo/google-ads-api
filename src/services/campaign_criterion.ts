@@ -8,8 +8,8 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
  * @constants
  */
 const RESOURCE_URL_NAME = 'campaignCriteria'
-const MUTATE_METHOD = 'mutateCampaignCriterions'
-const MUTATE_REQUEST = 'MutateCampaignCriterionsRequest'
+const MUTATE_METHOD = 'mutateCampaignCriteria'
+const MUTATE_REQUEST = 'MutateCampaignCriteriaRequest'
 const OPERATION_REQUEST = 'CampaignCriterionOperation'
 const GET_METHOD = 'getCampaignCriterion'
 const GET_REQUEST = 'GetCampaignCriterionRequest'

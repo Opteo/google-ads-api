@@ -8,8 +8,8 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
  * @constants
  */
 const RESOURCE_URL_NAME = 'sharedCriteria'
-const MUTATE_METHOD = 'mutateSharedCriterions'
-const MUTATE_REQUEST = 'MutateSharedCriterionsRequest'
+const MUTATE_METHOD = 'mutateSharedCriteria'
+const MUTATE_REQUEST = 'MutateSharedCriteriaRequest'
 const OPERATION_REQUEST = 'SharedCriterionOperation'
 const GET_METHOD = 'getSharedCriterion'
 const GET_REQUEST = 'GetSharedCriterionRequest'

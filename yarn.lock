@@ -220,6 +220,13 @@
   dependencies:
     "@types/lodash" "*"
 
+"@types/lodash.set@^4.3.6":
+  version "4.3.6"
+  resolved "https://registry.yarnpkg.com/@types/lodash.set/-/lodash.set-4.3.6.tgz#33e635c2323f855359225df6a5c8c6f1f1908264"
+  integrity sha512-ZeGDDlnRYTvS31Laij0RsSaguIUSBTYIlJFKL3vm3T2OAZAQj2YpSvVWJc0WiG4jqg9fGX6PAPGvDqBcHfSgFg==
+  dependencies:
+    "@types/lodash" "*"
+
 "@types/lodash@*":
   version "4.14.123"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.123.tgz#39be5d211478c8dd3bdae98ee75bb7efe4abfe4d"
@@ -1434,18 +1441,20 @@ globals@^11.1.0:
   resolved "https://registry.yarnpkg.com/globals/-/globals-11.11.0.tgz#dcf93757fa2de5486fbeed7118538adf789e9c2e"
   integrity sha512-WHq43gS+6ufNOEqlrDBxVEbb8ntfXrfAUU2ZOpCxrBdGKW3gyv8mCxAfIBD0DroPKGrJ2eSsXsLtY9MPntsyTw==
 
-google-ads-node@^1.7.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/google-ads-node/-/google-ads-node-1.7.0.tgz#6ec3f241f4b57500bbc05094a7cae26ee51a7004"
-  integrity sha512-PZxaFaGC2Pvf8bouGCc1yPQaIKLouUvSqXW3fGMh6WoYK/UYCGc9PdBh2LfwP6SloKDFI6du+d3Rc9oqOc8JcA==
+google-ads-node@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/google-ads-node/-/google-ads-node-1.7.1.tgz#b9f007d1bb42afef8b3feb5e2ac054d0b55f24e6"
+  integrity sha512-aUNXqt4+/r/mXuKViSCCgPMtAoGbg+WlBiyDRSLaTt3sKB/UEQYQXGoQLn3lfQTOLvMi4E7oULbnWzpJ/O1u7A==
   dependencies:
     "@types/google-protobuf" "^3.2.7"
     "@types/lodash.get" "^4.4.6"
+    "@types/lodash.set" "^4.3.6"
     "@types/protobufjs" "^6.0.0"
     google-auth-library "^3.1.0"
     google-protobuf "^3.7.0-rc.2"
     grpc "^1.18.0"
     lodash.get "^4.4.2"
+    lodash.set "^4.3.2"
     protobufjs "^6.8.8"
 
 google-auth-library@^3.1.0:
@@ -2509,6 +2518,11 @@ lodash.get@^4.4.2:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
   integrity sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk=
+
+lodash.set@^4.3.2:
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/lodash.set/-/lodash.set-4.3.2.tgz#d8757b1da807dde24816b0d6a84bea1a76230b23"
+  integrity sha1-2HV7HagH3eJIFrDWqEvqGnYjCyM=
 
 lodash.snakecase@^4.1.1:
   version "4.1.1"
