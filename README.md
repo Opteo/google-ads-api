@@ -260,6 +260,8 @@ if(channel === enums.AdvertisingChannelType.SEARCH) {
 ```
 
 ## Changelog
+View the changelog for this library here: https://github.com/Opteo/google-ads-api/blob/master/CHANGELOG.md (only starts from v1.0.1).
+
 Check out the official [Google Ads API release notes](https://developers.google.com/google-ads/api/docs/release-notes) for a detailed changelog.
 
 ## Google Ads Query Language
