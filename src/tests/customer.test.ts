@@ -14,9 +14,7 @@ describe('customer', () => {
                 metrics: ['metrics.cost_micros'],
                 constraints: [
                     {
-                        key: 'ad_group.status',
-                        op: '=',
-                        val: 'ENABLED',
+                        'ad_group.status': AdGroupStatus.ENABLED,
                     },
                 ],
                 limit: 5,
