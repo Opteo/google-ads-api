@@ -17,6 +17,7 @@ export interface ReportOptions {
         | fields.AdGroupLabelFields
         | fields.AdScheduleViewFields
         | fields.AgeRangeViewFields
+        | fields.AssetFields
         | fields.BiddingStrategyFields
         | fields.BillingSetupFields
         | fields.CampaignFields
@@ -91,6 +92,7 @@ export interface ReportOptions {
         | fields.AdGroupAudienceViewMetrics
         | fields.AdScheduleViewMetrics
         | fields.AgeRangeViewMetrics
+        | fields.AssetMetrics
         | fields.BiddingStrategyMetrics
         | fields.CampaignMetrics
         | fields.CampaignAudienceViewMetrics
@@ -124,6 +126,7 @@ export interface ReportOptions {
         | fields.AdGroupAudienceViewSegments
         | fields.AdScheduleViewSegments
         | fields.AgeRangeViewSegments
+        | fields.AssetSegments
         | fields.BiddingStrategySegments
         | fields.CampaignSegments
         | fields.CampaignAudienceViewSegments

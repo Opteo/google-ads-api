@@ -68,7 +68,7 @@
     "@types/request": "^2.47.1",
     "bluebird": "^3.5.2",
     "bottleneck": "^2.16.1",
-    "google-ads-node": "^1.7.2",
+    "google-ads-node": "^1.8.0",
     "lodash": "^4.17.11",
     "redis": "^2.8.0",
     "request": "^2.88.0"
