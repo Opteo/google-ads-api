@@ -25,22 +25,14 @@ export function buildReportQuery(config: ReportOptions) {
     const segments = config.segments ? config.segments.sort() : []
     const constraints = config.constraints || []
 
-    const normalised_constraints = Array.isArray(constraints)
-        ? constraints.map(
-              (constraint: Constraint | string | object): Constraint | string => {
-                  if (isString(constraint)) {
-                      return constraint
-                  }
-                  return unrollConstraintShorthand(constraint)
-              }
-          )
-        : Object.keys(constraints).map(key => {
-              return {
-                  key,
-                  op: '=',
-                  val: (constraints as any)[key],
-              }
-          })
+    const normalised_constraints = constraints.map(
+        (constraint: Constraint | string | object): Constraint | string => {
+            if (isString(constraint)) {
+                return constraint
+            }
+            return unrollConstraintShorthand(constraint)
+        }
+    )
 
     /* ATTRIBUTES */
     const all_selected_attributes = (attributes as any).concat(metrics, segments).join(', ')
