@@ -218,7 +218,6 @@ export interface ServiceListOptions {
     limit?: number
     order_by?: string
     constraints?: Array<string | object | Constraint> | object
-    translate_enums?: boolean
 }
 
 /**
