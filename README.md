@@ -218,7 +218,7 @@ Most entities will have these five methods, but they may also have others depend
 These operations will get you all fields, unsegmented, without metrics.
 
 -   If you're interested in metrics, please use `customer.report()` or `customer.search()`.
--   The `get()` method is rate limited heavily by google. Use it only for debugging.
+-   The `get()` method is rate limited heavily by Google. Use it only for debugging.
 -   The `list()` method is designed to get you every single field for an entity. Some entities can be quite large, so consider using `customer.report()` or `customer.search()` to get only the fields you actually need for performance reasons.
 
 ```javascript
@@ -417,5 +417,5 @@ When we first started using AdWords, we found the API difficult to use. SOAP, in
 
 The Google Ads API is a massive step in the right direction, but we still don't feel that it still isn't quite as developer friendly as it could be. We have written two libraries to fill that gap:
 
--   [`google-ads-node`](https://github.com/Opteo/google-ads-node) Is a low-level Node implementation of the API which imitates the stucture of the other client libraries.
+-   [`google-ads-node`](https://github.com/Opteo/google-ads-node) is a low-level Node implementation of the API which imitates the stucture of the other client libraries.
 -   `google-ads-api` (this library) is a wrapper around `google-ads-node` to provide a better developer experience.
