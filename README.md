@@ -34,7 +34,7 @@
 
 -   Simple and easy to use API
 -   Uses [gRPC](https://grpc.io/) and [Protocol Buffers](https://developers.google.com/protocol-buffers/) internally (recommended by Google)
--   Typescript definitions for all [Google Ads API resources, enums and errors](https://developers.google.com/google-ads/api/reference/rpc/google.ads.googleads.v1.resources)
+-   Typescript definitions for all [Google Ads API resources, enums and errors](https://developers.google.com/google-ads/api/reference/rpc/google.ads.googleads.v1.resources)`
 
 # Installation
 
@@ -235,11 +235,11 @@ const ad_groups = await customer.adGroups.list({
 
 ### Mutations
 
-Most entities in the Google Ads API can have mutate methods for creating, updating, and deleting.
+Most entities in the Google Ads API will have mutation methods for creating, updating, and deleting.
 
 #### Create
 
-The `create` method can take a single entity or array of entities, of the specified type e.g. Campaign. You can use the Typescript definitions to see at compile time what properties are available when creating new entities. Optionally, you can supply a second argument with the following options: `validate_only` and `partial_failure`. For more details on these, refer to the [Google Ads API documentation](https://developers.google.com/google-ads/api/reference/rpc/google.ads.googleads.v1.services#google.ads.googleads.v1.services.MutateCampaignsRequest).
+The `create` method can take a single entity or array of entities. Optionally, you can supply a second argument with the following options: `validate_only` and `partial_failure`. For more details on these, refer to the [Google Ads API documentation](https://developers.google.com/google-ads/api/reference/rpc/google.ads.googleads.v1.services#google.ads.googleads.v1.services.MutateCampaignsRequest).
 
 The `results` property of the response object will contain the newly created entity resource names.
 
@@ -252,14 +252,14 @@ const campaign = {
 }
 
 const { results } = await customer.campaigns.create(campaign)
-console.log(results) // ['customers/123/campaigns/123']
+console.log(results) // ['customers/123/campaigns/456']
 ```
 
 #### Update
 
 The `update` method works the same way as `create` and takes a single entity or array of entities to update. All properties passed (that can be updated) will be updated, so if you **don't want to update an attribute, don't include it**. This method also supports the additional `validate_only` and `partial_failure` options.
 
-The `results` property of the response object will contain the newly created entity resource names.
+The `results` property of the response object will contain the updated entity resource names.
 
 ```javascript
 const campaign = {
@@ -271,7 +271,7 @@ const { results } = await customer.campaigns.update(campaign, { validate_only: t
 
 #### Delete
 
-The `delete` method should be provided with a valid resource name, being the entity to remove. Note: When deleting an entity in the Google Ads API, it won't be removed, but simply changed to removed.
+The `delete` method should be provided with the resource name of the entity to remove. Note: When deleting an entity in the Google Ads API, it will continue to exist, but it will be immutable and its status will be changed to `REMOVED`.
 
 ```javascript
 await customer.campaigns.delete('customers/123/campaigns/123')
@@ -415,7 +415,7 @@ Check out the official [Google Ads API release notes](https://developers.google.
 
 When we first started using AdWords, we found the API difficult to use. SOAP, in particular, was a huge pain to use with Node.
 
-The Google Ads API is a massive step in the right direction, but we still don't feel that it's quite as developer friendly as it could be. We have written two libraries to fill that gap:
+The Google Ads API is a massive step in the right direction, but we still don't feel that it still isn't quite as developer friendly as it could be. We have written two libraries to fill that gap:
 
 -   [`google-ads-node`](https://github.com/Opteo/google-ads-node) Is a low-level Node implementation of the API which imitates the stucture of the other client libraries.
 -   `google-ads-api` (this library) is a wrapper around `google-ads-node` to provide a better developer experience.
