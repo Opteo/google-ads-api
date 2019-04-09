@@ -1,4 +1,4 @@
-const { GoogleAdsApi, enums, types } = require('google-ads-api')
+const { GoogleAdsApi, types } = require('google-ads-api')
 
 // Make sure you pass in valid authentication details!
 const client = new GoogleAdsApi({
@@ -16,7 +16,7 @@ async function main() {
     // Bonus: If you're using Typescript, set the type here to "types.AdGroup" for autocomplete
     const adgroup = {
         name: 'new ad group',
-        campaign: `customers/{customer_id}campaigns/{campaign_id}`,
+        campaign: `customers/{customer_id}/campaigns/{campaign_id}`,
     }
 
     try {
