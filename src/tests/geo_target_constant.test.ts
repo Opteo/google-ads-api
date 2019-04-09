@@ -1,5 +1,4 @@
-// @ts-ignore
-import { newCustomer, BUDGET_ID, CID, getRandomName } from '../test_utils'
+import { newCustomer } from '../test_utils'
 const customer = newCustomer()
 
 describe('Geo Target Constants', async () => {

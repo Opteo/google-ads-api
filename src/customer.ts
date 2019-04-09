@@ -17,6 +17,7 @@ import AdGroupLabelService from './services/ad_group_label'
 // import AdParameterService from './services/ad_parameter'
 import AdScheduleViewService from './services/ad_schedule_view'
 import AgeRangeViewService from './services/age_range_view'
+import AssetService from './services/asset'
 import BiddingStrategyService from './services/bidding_strategy'
 import BillingSetupService from './services/billing_setup'
 import CampaignAudienceViewService from './services/campaign_audience_view'
@@ -30,8 +31,8 @@ import CarrierConstantService from './services/carrier_constant'
 import ChangeStatusService from './services/change_status'
 import ClickViewService from './services/click_view'
 import ConversionActionService from './services/conversion_action'
-// TODO: Missing protos
-// import ConversionUploadService from './services/conversion_upload'
+import ConversionUploadService from './services/conversion_upload'
+import ConversionAdjustmentUploadService from './services/conversion_adjustment_upload'
 import CustomInterestService from './services/custom_interest'
 import CustomerClientLinkService from './services/customer_client_link'
 import CustomerClientService from './services/customer_client'
@@ -150,6 +151,7 @@ export default function Customer(
         adGroupLabels: new AdGroupLabelService(cid, client, throttler, 'AdGroupLabelService'),
         adScheduleViews: new AdScheduleViewService(cid, client, throttler, 'AdScheduleViewService'),
         ageRangeViews: new AgeRangeViewService(cid, client, throttler, 'AgeRangeViewService'),
+        assets: new AssetService(cid, client, throttler, 'AssetService'),
         biddingStrategys: new BiddingStrategyService(cid, client, throttler, 'BiddingStrategyService'),
         billingSetups: new BillingSetupService(cid, client, throttler, 'BillingSetupService'),
         campaignAudienceViews: new CampaignAudienceViewService(cid, client, throttler, 'CampaignAudienceViewService'),
@@ -168,7 +170,13 @@ export default function Customer(
         changeStatus: new ChangeStatusService(cid, client, throttler, 'ChangeStatusService'),
         clickViews: new ClickViewService(cid, client, throttler, 'ClickViewService'),
         conversionActions: new ConversionActionService(cid, client, throttler, 'ConversionActionService'),
-        // conversionUploads: new ConversionUploadService(cid, client, throttler, 'ConversionUploadService'),
+        conversionUploads: new ConversionUploadService(cid, client, throttler, 'ConversionUploadService'),
+        conversionAdjustmentUploads: new ConversionAdjustmentUploadService(
+            cid,
+            client,
+            throttler,
+            'ConversionAdjustmentUploadService'
+        ),
         customInterests: new CustomInterestService(cid, client, throttler, 'CustomInterestService'),
         customerClientLinks: new CustomerClientLinkService(cid, client, throttler, 'CustomerClientLinkService'),
         customerClients: new CustomerClientService(cid, client, throttler, 'CustomerClientService'),

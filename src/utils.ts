@@ -1,4 +1,5 @@
-import { snakeCase, isObject, isString, isArray, isUndefined, values } from 'lodash'
+import { snakeCase, isObject, isString, isArray, isUndefined, values, get } from 'lodash'
+import * as maps from 'google-ads-node/build/lib/mapping'
 
 import { ReportOptions, Constraint } from './types'
 import { enums } from './index'
@@ -113,9 +114,7 @@ const formatConstraints = (constraints: any): string => {
             }
         }
 
-        // if (entity_segments.map(s => s.name).includes(key)) {
-        //     key = `segments.${key}`
-        // }
+        val = translateEnumValue(key, val)
 
         return `${key} ${op} ${val}`
     }
@@ -127,6 +126,14 @@ const formatConstraints = (constraints: any): string => {
             .join(' AND ')
     }
     return constraints
+}
+
+export function translateEnumValue(key: string, value: string | number): string | number {
+    const enum_name = get(maps, key)
+    if (enum_name && typeof value === 'number') {
+        return getEnumString(enum_name, value as number)
+    }
+    return value
 }
 
 const formatOrderBy = (entity: string, order_by: string | Array<string>, sort_order?: string): string => {
