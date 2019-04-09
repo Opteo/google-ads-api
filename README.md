@@ -84,6 +84,17 @@ for (const row of response) {
 
 ## Authentication
 
+Before you can use the google ads API, you'll need to gather some authentication. You'll need:
+
+-   **Client id** and **client secret**: These are your OAuth credentials. You'll find them in your [google cloud console](https://console.cloud.google.com/apis/api/googleads.googleapis.com/). If you don't already have these tokens, see [google's instructions](https://developers.google.com/google-ads/api/docs/oauth/cloud-project).
+-   **Developer token**: You'll find this in your google ads account, in the API Center.
+
+Then, for every google ads account that you want to access, you'll need:
+
+-   **Customer account ID**: This is the CID of the account you want to access, which will look like `xxx-xxx-xxxx`.
+-   **Login customer ID**: _(only required if accessing the account via an MCC)_ This is usually the CID of the highest-level account in your MCC structure, also in the format `xxx-xxx-xxxx`.
+-   **Refresh token**: You'll get this token when somebody authorises you to query their adwords account via OAuth.
+
 ```javascript
 import { GoogleAdsApi } from 'google-ads-api'
 
@@ -106,7 +117,7 @@ const customer = client.Customer({
 
 To get reports with metrics, you'll use `customer.search()` or `customer.query()`.
 
-### Using GAQL (Google Ads Query Language)
+### Using `customer.search()`
 
 The `customer.search()` method allows you to query customer data using GAQL ([Google Ads Query Language](https://developers.google.com/google-ads/api/docs/query/overview)) query strings. This is great for prototyping and getting results out quickly.
 
@@ -134,16 +145,18 @@ const campaigns = await customer.search(`
 
 ### Using `customer.report()`
 
-The `customer.search()` method is a safer and more structured way to use GAQL. It is also more practical to use when your queries need to be built dynamically. If you are using typescript, it will give you handy autocomplete, too!
+The `customer.report()` method is a safer and more structured way to use GAQL. It is also more practical to use when your queries need to be built dynamically. If you are using typescript, it will give you handy autocomplete, too!
 
 ```javascript
 const response = await customer.report({
     entity: 'ad_group', // The SELECT clause of your query
     attributes: ['ad_group.id', 'ad_group.name', 'ad_group.status'], // The attribute fields of your query
     metrics: ['metrics.clicks'], // The metric fields of your query
-    segments: ['segments.device'], // The segment fields of your query
+    segments: ['segments.date'], // The segment fields of your query
     constraints: ['metrics.impressions > 10'], // The WHERE clause of your query
     date_constant: 'LAST_30_DAYS', // The DURING clause of your query if using a date constant.
+    order_by: 'metrics.clicks', // the ORDER BY clause of your query
+    sort_order: 'desc',
     limit: 5, // The LIMIT clause of your query.
 })
 
@@ -167,7 +180,7 @@ const response = await customer.report({
         },
     ],
 
-    // A full { key, op (operation), val (value)} object, is the most verbose option
+    // a full { key, op, val } object (most verbose option)
     constraints: [
         {
             key: 'campaign.status',
@@ -175,6 +188,12 @@ const response = await customer.report({
             val: enums.CampaignStatus.REMOVED,
         },
     ],
+})
+
+const response = await customer.report({
+    // If you need to select a specific date range, use from_date and to_date
+    from_date: '2019-01-01',
+    to_date: '2019-02-15',
 })
 ```
 
@@ -197,9 +216,10 @@ Most entities will have these five methods, but they may also have others depend
 ### Getting and listing
 
 These operations will get you all fields, unsegmented, without metrics.
-- If you're interested in metrics, please use `customer.report()` or `customer.search()`.
-- The `get()` method is rate limited heavily by google. Use it only for debugging.
-- The `list()` method is designed to get you every single field for an entity. Some entities can be quite large, so consider using `customer.report()` or `customer.search()` to get only the fields you actually need for performance reasons.
+
+-   If you're interested in metrics, please use `customer.report()` or `customer.search()`.
+-   The `get()` method is rate limited heavily by google. Use it only for debugging.
+-   The `list()` method is designed to get you every single field for an entity. Some entities can be quite large, so consider using `customer.report()` or `customer.search()` to get only the fields you actually need for performance reasons.
 
 ```javascript
 // Get single campaign with an id or resource name
@@ -211,7 +231,6 @@ const ad_groups = await customer.adGroups.list({
     constraints: ["campaign.id = 123"]
     limit: 15,
 })
-
 ```
 
 ### Mutations
@@ -247,7 +266,7 @@ const campaign = {
     resource_name: `customers/123/campaigns/123`,
     name: 'updated-campaign-name',
 }
-const { results } = await gads.campaigns.update(campaign, { validate_only: true })
+const { results } = await customer.campaigns.update(campaign, { validate_only: true })
 ```
 
 #### Delete
@@ -255,7 +274,60 @@ const { results } = await gads.campaigns.update(campaign, { validate_only: true 
 The `delete` method should be provided with a valid resource name, being the entity to remove. Note: When deleting an entity in the Google Ads API, it won't be removed, but simply changed to removed.
 
 ```javascript
-await gads.campaigns.delete('customers/123/campaigns/123')
+await customer.campaigns.delete('customers/123/campaigns/123')
+```
+
+### Enums
+
+All enums are represented as integers in the google ads API.
+
+For example:
+
+```typescript
+const campaigns = await customer.search(`SELECT campaign.status FROM campaign`)
+
+if (campaigns[0].campaign.status === 2) {
+    // the campaign is enabled
+}
+
+const campaign_to_update = {
+    resource_name: `customers/123/campaigns/123`,
+    status: 3,
+}
+
+await customer.campaigns.update(campaign) // This will set the status to "PAUSED"
+```
+
+Of course, using numbers directly isn't convenient. Instead, use the `enums` import:
+
+```typescript
+import { enums } from 'google-ads-api'
+
+const campaigns = await customer.search(`SELECT campaign.status FROM campaign`)
+
+if (campaigns[0].campaign.status === enums.CampaignStatus.ENABLED) {
+    // the campaign is enabled
+}
+
+const campaign_to_update = {
+    resource_name: `customers/123/campaigns/123`,
+    status: enums.CampaignStatus.PAUSED,
+}
+
+await customer.campaigns.update(campaign) // This will set the status to "PAUSED"
+```
+
+The [`enums.ts`](https://github.com/Opteo/google-ads-node/blob/master/src/lib/enums.ts) file (found in our companion library) lists out all enums available in the google ads API. For example:
+
+```typescript
+// Note that this will be compiled to an object by typescript.
+export enum CampaignStatus {
+    'UNSPECIFIED' = 0,
+    'UNKNOWN' = 1,
+    'ENABLED' = 2,
+    'PAUSED' = 3,
+    'REMOVED' = 4,
+}
 ```
 
 ### Error Handling
@@ -266,7 +338,7 @@ To handle errors from the Google Ads API, the best approach is to use the provid
 import { enums } from 'google-ads-api'
 
 try {
-    const campaigns = await gads.report({
+    const campaigns = await customer.report({
         entity: 'campaign',
         attributes: ['ad_group_criterion.keyword.text'],
     })
@@ -306,9 +378,21 @@ toMicros(123.3) // 123300000
 getEnumString('AdvertisingChannelType', enums.AdvertisingChannelType.DISPLAY) // "DISPLAY"
 ```
 
-## Type Definitions
+# Typescript
 
-All Typescript definition files for Google Ads resources can be found in our companion library, [google-ads-node](https://github.com/opteo/google-ads-node). Specifically, the files [`resources.ts`](https://github.com/Opteo/google-ads-node/blob/master/src/lib/resources.ts) and [`enums.ts`](https://github.com/Opteo/google-ads-node/blob/master/src/lib/enums.ts) will be useful for referencing if you're using this library in a Typescript environment.
+All arguments and return types in this library have been carefully set up with typescript. We also expose every single type in the google ads api via the `types` export, should you choose to use them in your own code:
+
+```typescript
+import { types } from 'google-ads-api'
+
+const campaign: types.Campaign = {
+    id: 123123,
+    some_wrong_field: false, // The type checker won't allow this.
+    name: [1, 2, 3], // `name` should be a string, so this will also throw an error.
+}
+```
+
+The [`resources.ts`](https://github.com/Opteo/google-ads-node/blob/master/src/lib/resources.ts) file (found in our companion library) is a good reference for all exported types. For example, you'll find:
 
 ```typescript
 // Example interface for the v1 common "TextAdInfo" entity in the Google Ads API
@@ -321,67 +405,8 @@ export interface TextAdInfo {
 }
 ```
 
-Both the interfaces and enums can be imported into your project from google-ads-api, as shown below:
+# Changelog
 
-```typescript
-import { types, enums } from "google-ads-api"
-
-const campaign: types.Campaign = { ... }
-
-if(channel === enums.AdvertisingChannelType.SEARCH) {
-  // ...
-}
-```
-
-## Changelog
-
-View the changelog for this library here: https://github.com/Opteo/google-ads-api/blob/master/CHANGELOG.md (only starts from v1.0.1).
+View the changelog for this library here: https://github.com/Opteo/google-ads-api/blob/master/CHANGELOG.md
 
 Check out the official [Google Ads API release notes](https://developers.google.com/google-ads/api/docs/release-notes) for a detailed changelog.
-
-## Google Ads Query Language
-
-#### Query Language Grammar
-
-```
-Query            -> SelectClause FromClause? WhereClause? OrderByClause? LimitClause?
-SelectClause     -> SELECT FieldName (, FieldName)*
-FromClause       -> FROM ResourceName
-WhereClause      -> WHERE Condition (AND Condition)*
-OrderByClause    -> ORDER BY Ordering (, Ordering)*
-LimitClause      -> LIMIT PositiveInteger
-
-Condition        -> FieldName Operator Value
-Operator         -> = | != | > | >= | < | <= | IN | NOT IN |
-                    LIKE | NOT LIKE | CONTAINS ANY | CONTAINS ALL |
-                    CONTAINS NONE | IS NULL | IS NOT NULL | DURING |
-                    BETWEEN
-Value            -> Literal | LiteralList | Number | NumberList | String |
-                    StringList | Function
-Ordering         -> FieldName (ASC | DESC)?
-
-FieldName        -> [a-z] ([a-zA-Z0-9._])*
-ResourceName     -> [a-z] ([a-zA-Z_])*
-
-StringList       -> ( String (, String)* )
-LiteralList      -> ( Literal (, Literal)* )
-NumberList       -> ( Number (, Number)* )
-
-PositiveInteger  -> [1-9] ([0-9])*
-Number           -> -? [0-9]+ (. [0-9] [0-9]*)?
-String           -> (' Char* ') | (" Char* ")
-Literal          -> [a-zA-Z0-9_]*
-
-Function         -> LAST_14_DAYS | LAST_30_DAYS | LAST_7_DAYS |
-                    LAST_BUSINESS_WEEK | LAST_MONTH | LAST_WEEK_MON_SUN |
-                    LAST_WEEK_SUN_SAT | THIS_MONTH | THIS_WEEK_MON_TODAY |
-                    THIS_WEEK_SUN_TODAY | TODAY | YESTERDAY
-```
-
--   `?` indicates an optional element.
--   `*` means zero or more; `+` means one or more.
--   `(xxxxxx)` indicates a grouping.
--   `[a-z0-9]` signifies character ranges.
--   `|` stand for "or".
-
-For more information on the Google Ads Query Language, visit [Google Ads Api Docs](https://developers.google.com/google-ads/api/docs/query/overview).
