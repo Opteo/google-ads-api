@@ -115,14 +115,14 @@ const customer = client.Customer({
 
 ### Reporting & metrics
 
-To get reports with metrics, you'll use `customer.search()` or `customer.query()`.
+To get reports with metrics, you'll use `customer.query()`.
 
-### Using `customer.search()`
+### Using `customer.query()`
 
-The `customer.search()` method allows you to query customer data using GAQL ([Google Ads Query Language](https://developers.google.com/google-ads/api/docs/query/overview)) query strings. This is great for prototyping and getting results out quickly.
+The `customer.query()` method allows you to query customer data using GAQL ([Google Ads Query Language](https://developers.google.com/google-ads/api/docs/query/overview)) query strings. This is great for prototyping and getting results out quickly.
 
 ```javascript
-const campaigns = await customer.search(`
+const campaigns = await customer.query(`
     SELECT 
       campaign.id, campaign.name, campaign.status
     FROM 
@@ -130,7 +130,7 @@ const campaigns = await customer.search(`
     ORDER BY campaign.id
 `)
 
-const campaigns = await customer.search(`
+const campaigns = await customer.query(`
     SELECT 
         campaign.id, campaign.name, campaign.status, 
         metrics.impressions, metrics.cost
@@ -217,9 +217,9 @@ Most entities will have these five methods, but they may also have others depend
 
 These operations will get you all fields, unsegmented, without metrics.
 
--   If you're interested in metrics, please use `customer.report()` or `customer.search()`.
+-   If you're interested in metrics, please use `customer.report()` or `customer.query()`.
 -   The `get()` method is rate limited heavily by Google. Use it only for debugging.
--   The `list()` method is designed to get you every single field for an entity. Some entities can be quite large, so consider using `customer.report()` or `customer.search()` to get only the fields you actually need for performance reasons.
+-   The `list()` method is designed to get you every single field for an entity. Some entities can be quite large, so consider using `customer.report()` or `customer.query()` to get only the fields you actually need for performance reasons.
 
 ```javascript
 // Get single campaign with an id or resource name
@@ -284,7 +284,7 @@ All enums are represented as integers in the google ads API.
 For example:
 
 ```typescript
-const campaigns = await customer.search(`SELECT campaign.status FROM campaign`)
+const campaigns = await customer.query(`SELECT campaign.status FROM campaign`)
 
 if (campaigns[0].campaign.status === 2) {
     // the campaign is enabled
@@ -303,7 +303,7 @@ Of course, using numbers directly isn't convenient. Instead, use the `enums` imp
 ```typescript
 import { enums } from 'google-ads-api'
 
-const campaigns = await customer.search(`SELECT campaign.status FROM campaign`)
+const campaigns = await customer.query(`SELECT campaign.status FROM campaign`)
 
 if (campaigns[0].campaign.status === enums.CampaignStatus.ENABLED) {
     // the campaign is enabled
