@@ -4,6 +4,12 @@ import { LocationView } from 'google-ads-node/build/lib/resources'
 import Service from './service'
 import { ServiceListOptions } from '../types'
 
+// The location_view entity:
+
+const location_view = {
+    resource_name: 'string', // The resource name of the location view. Location view resource names have the form:  `customers/{customer_id}/locationViews/{campaign_id}~{criterion_id}`
+}
+
 /**
  * @constants
  */

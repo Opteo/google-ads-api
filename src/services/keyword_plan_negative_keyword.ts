@@ -4,6 +4,16 @@ import { KeywordPlanNegativeKeyword } from 'google-ads-node/build/lib/resources'
 import Service, { Mutation } from './service'
 import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
+// The keyword_plan_negative_keyword entity:
+
+const keyword_plan_negative_keyword = {
+    id: 'string', // The ID of the Keyword Plan negative keyword.
+    match_type: 'UNSPECIFIED | UNKNOWN | EXACT | PHRASE | BROAD', // The keyword match type.
+    resource_name: 'string', // The resource name of the Keyword Plan negative keyword. KeywordPlanNegativeKeyword resource names have the form:   `customers/{customer_id}/keywordPlanNegativeKeywords/{kp_negative_keyword_id}`
+    keyword_plan_campaign: 'string', // The Keyword Plan campaign to which this negative keyword belongs.
+    text: 'string', // The keyword text.
+}
+
 /**
  * @constants
  */
@@ -25,7 +35,9 @@ export default class KeywordPlanNegativeKeywordService extends Service {
         }) as KeywordPlanNegativeKeyword
     }
 
-    public async list(options?: ServiceListOptions): Promise<Array<{ keyword_plan_negative_keyword: KeywordPlanNegativeKeyword }>> {
+    public async list(
+        options?: ServiceListOptions
+    ): Promise<Array<{ keyword_plan_negative_keyword: KeywordPlanNegativeKeyword }>> {
         return this.getListResults('keyword_plan_negative_keyword', options)
     }
 

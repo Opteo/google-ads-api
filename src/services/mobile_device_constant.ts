@@ -4,6 +4,17 @@ import { MobileDeviceConstant } from 'google-ads-node/build/lib/resources'
 import Service from './service'
 import { ServiceListOptions } from '../types'
 
+// The mobile_device_constant entity:
+
+const mobile_device_constant = {
+    operating_system_name: 'string', // The operating system of the mobile device.
+    name: 'string', // The name of the mobile device.
+    type: 'UNSPECIFIED | UNKNOWN | MOBILE | TABLET', // The type of mobile device.
+    id: 'string', // The ID of the mobile device constant.
+    manufacturer_name: 'string', // The manufacturer of the mobile device.
+    resource_name: 'string', // The resource name of the mobile device constant. Mobile device constant resource names have the form:  `mobileDeviceConstants/{criterion_id}`
+}
+
 /**
  * @constants
  */

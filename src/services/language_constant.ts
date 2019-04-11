@@ -4,6 +4,16 @@ import { LanguageConstant } from 'google-ads-node/build/lib/resources'
 import Service from './service'
 import { ServiceListOptions } from '../types'
 
+// The language_constant entity:
+
+const language_constant = {
+    targetable: 'boolean', // Whether the language is targetable.
+    id: 'string', // The ID of the language constant.
+    resource_name: 'string', // The resource name of the language constant. Language constant resource names have the form:  `languageConstants/{criterion_id}`
+    name: 'string', // The full name of the language in English, e.g., "English (US)", "Spanish", etc.
+    code: 'string', // The language code, e.g. "en_US", "en_AU", "es", "fr", etc.
+}
+
 /**
  * @constants
  */

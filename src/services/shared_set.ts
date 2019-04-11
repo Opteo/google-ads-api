@@ -4,6 +4,18 @@ import { SharedSet } from 'google-ads-node/build/lib/resources'
 import Service, { Mutation } from './service'
 import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
+// The shared_set entity:
+
+const shared_set = {
+    resource_name: 'string', // The resource name of the shared set. Shared set resource names have the form:  `customers/{customer_id}/sharedSets/{shared_set_id}`
+    reference_count: 'string', // The number of campaigns associated with this shared set. Read only.
+    status: 'UNSPECIFIED | UNKNOWN | ENABLED | REMOVED', // The status of this shared set. Read only.
+    name: 'string', // The name of this shared set. Required. Shared Sets must have names that are unique among active shared sets of the same type. The length of this string should be between 1 and 255 UTF-8 bytes, inclusive.
+    type: 'UNSPECIFIED | UNKNOWN | NEGATIVE_KEYWORDS | NEGATIVE_PLACEMENTS', // The type of this shared set: each shared set holds only a single kind of resource. Required. Immutable.
+    member_count: 'string', // The number of shared criteria within this shared set. Read only.
+    id: 'string', // The ID of this shared set. Read only.
+}
+
 /**
  * @constants
  */
@@ -29,10 +41,7 @@ export default class SharedSetService extends Service {
         return this.getListResults('shared_set', options)
     }
 
-    public async create(
-        shared_set: SharedSet | Array<SharedSet>,
-        options?: ServiceCreateOptions
-    ): Promise<Mutation> {
+    public async create(shared_set: SharedSet | Array<SharedSet>, options?: ServiceCreateOptions): Promise<Mutation> {
         return this.serviceCreate({
             request: MUTATE_REQUEST,
             operation: OPERATION_REQUEST,
@@ -42,10 +51,7 @@ export default class SharedSetService extends Service {
         })
     }
 
-    public async update(
-        shared_set: SharedSet | Array<SharedSet>,
-        options?: ServiceCreateOptions
-    ): Promise<Mutation> {
+    public async update(shared_set: SharedSet | Array<SharedSet>, options?: ServiceCreateOptions): Promise<Mutation> {
         return this.serviceUpdate({
             request: MUTATE_REQUEST,
             operation: OPERATION_REQUEST,

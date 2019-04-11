@@ -4,6 +4,12 @@ import { ManagedPlacementView } from 'google-ads-node/build/lib/resources'
 import Service from './service'
 import { ServiceListOptions } from '../types'
 
+// The managed_placement_view entity:
+
+const managed_placement_view = {
+    resource_name: 'string', // The resource name of the Managed Placement view. Managed placement view resource names have the form:   `customers/{customer_id}/managedPlacementViews/{ad_group_id}~{criterion_id}`
+}
+
 /**
  * @constants
  */

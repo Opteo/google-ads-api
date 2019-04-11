@@ -2,16 +2,50 @@ const fs = require('fs')
 const template = require('lodash.template')
 const camelCase = require('lodash.camelcase')
 const snakeCase = require('lodash.snakecase')
+const endsWith = require('lodash.endswith')
+
+var Promise = require('bluebird')
+var execP = Promise.promisify(require('child_process').exec)
 
 const service_template_file = fs.readFileSync(__dirname + '/template_service.hbs', 'utf-8')
 const service_compiler = template(service_template_file, {
     interpolate: /{{([\s\S]+?)}}/g,
 })
 
-const service_test_template_file = fs.readFileSync(__dirname + '/template_service_test.hbs', 'utf-8')
+const service_immutable_template_file = fs.readFileSync(
+    __dirname + '/template_service_immutable.hbs',
+    'utf-8'
+)
+const service_immutable_compiler = template(service_immutable_template_file, {
+    interpolate: /{{([\s\S]+?)}}/g,
+})
+
+const service_test_template_file = fs.readFileSync(
+    __dirname + '/template_service_test.hbs',
+    'utf-8'
+)
 const service_test_compiler = template(service_test_template_file, {
     interpolate: /{{([\s\S]+?)}}/g,
 })
+
+const $RefParser = require('json-schema-ref-parser')
+
+const raw_schema = require('./schema.json')
+
+const references = raw_schema.schemas
+
+var myResolver = {
+    order: 1,
+
+    canRead: /Google/,
+
+    read: function(file) {
+        const resource = file.url.split('/')[file.url.split('/').length - 1]
+        return JSON.stringify(references[resource])
+    },
+}
+
+let schema
 
 const entities = [
     'AccountBudgetProposal',
@@ -105,25 +139,35 @@ const entities = [
     'Video',
 ]
 
-for (const entity of entities) {
-    console.log(`Compiling ${entity} service template`)
-    compileService(entity)
-}
-console.log('Finished compiling all services')
-
 function getResourceUrl(entity) {
     if (entity === 'ChangeStatus') {
         return camelCase(entity)
     }
-    if (entity === 'AdGroupCriterion') {
-        return `adGroupCriteria`
+
+    if (entity === 'BillingSetup') {
+        return camelCase(entity)
     }
-    if (entity === 'SharedCriterion') {
-        return `sharedCriteria`
+
+    if (entity === 'CustomerClientLink') {
+        return camelCase(entity)
     }
-    if (entity === 'CampaignCriterion') {
-        return `campaignCriteria`
+
+    if (entity === 'customerManagerLink') {
+        return camelCase(entity)
     }
+
+    if (endsWith(entity, 'Criterion')) {
+        return `${camelCase(entity.replace('Criterion', 'Criteria'))}`
+    }
+
+    if (endsWith(entity, 'Strategy')) {
+        return `${camelCase(entity.replace('Strategy', 'Strategies'))}`
+    }
+
+    if (endsWith(entity, 'Category')) {
+        return `${camelCase(entity.replace('Category', 'Categories'))}`
+    }
+
     return `${camelCase(entity)}s`
 }
 
@@ -138,6 +182,35 @@ function getMutateRequest(entity) {
     if (entity === 'ChangeStatus') {
         return 'MutateChangeStatusRequest'
     }
+
+    if (entity === 'BillingSetup') {
+        return 'MutateBillingSetupRequest'
+    }
+
+    if (entity === 'CustomerClientLink') {
+        return 'MutateCustomerClientLinkRequest'
+    }
+
+    if (entity === 'CustomerManagerLink') {
+        return 'MutateCustomerManagerLinkRequest'
+    }
+
+    if (entity.includes('AccountBudgetProposal')) {
+        return `MutateAccountBudgetProposalRequest`
+    }
+
+    if (endsWith(entity, 'Criterion')) {
+        return `Mutate${entity.replace('Criterion', 'Criteria')}Request`
+    }
+
+    if (endsWith(entity, 'Strategy')) {
+        return `Mutate${entity.replace('Strategy', 'Strategies')}Request`
+    }
+
+    if (endsWith(entity, 'Category')) {
+        return `Mutate${entity.replace('Category', 'Categories')}Request`
+    }
+
     return `Mutate${entity}sRequest`
 }
 
@@ -145,6 +218,35 @@ function getMutateMethod(entity) {
     if (entity === 'ChangeStatus') {
         return 'mutateChangeStatus'
     }
+
+    if (entity === 'BillingSetup') {
+        return 'mutateBillingSetup'
+    }
+
+    if (entity === 'CustomerClientLink') {
+        return 'mutateCustomerClientLink'
+    }
+
+    if (entity === 'CustomerManagerLink') {
+        return 'mutateCustomerManagerLink'
+    }
+
+    if (entity.includes('AccountBudgetProposal')) {
+        return `mutateAccountBudgetProposal`
+    }
+
+    if (endsWith(entity, 'Criterion')) {
+        return `mutate${entity.replace('Criterion', 'Criteria')}`
+    }
+
+    if (endsWith(entity, 'Strategy')) {
+        return `mutate${camelCase(entity.replace('Strategy', 'Strategies'))}`
+    }
+
+    if (endsWith(entity, 'Category')) {
+        return `utate${camelCase(entity.replace('Category', 'Categories'))}`
+    }
+
     return `mutate${entity}s`
 }
 
@@ -155,7 +257,7 @@ function getParam(entity) {
     return `${snakeCase(entity)}s`
 }
 
-function compileService(entity) {
+async function compileService(entity, schema) {
     if (entity === 'ClickView') return
     const resource_url_name = getResourceUrl(entity)
 
@@ -172,23 +274,52 @@ function compileService(entity) {
     const param = snakeCase(entity)
     const ent = snakeCase(entity)
 
-    const compiled_service = service_compiler({
-        RESOURCE_URL_NAME: resource_url_name,
-        MUTATE_METHOD: mutate_method,
-        MUTATE_REQUEST: mutate_request,
-        OPERATION_REQUEST: operation_request,
-        GET_METHOD: get_method,
-        GET_REQUEST: get_request,
-        RESOURCE: entity,
-        TYPE: type,
-        PARAM: param,
-        ENTITY: ent,
-    })
+    let compiled_service
 
-    fs.writeFileSync(`${__dirname}/../src/services/${ent}.ts`, compiled_service)
+    function unroll(obj) {
+        const new_obj = {}
 
-    if (!entity.toLowerCase().includes('constant')) {
-        const compiled_service_test = service_test_compiler({
+        Object.keys(obj).forEach(key => {
+            // console.log(key)
+            const type = obj[key].type
+            if (type === 'object') {
+                new_obj[snakeCase(key)] = unroll(obj[key].properties)
+            } else {
+                new_obj[snakeCase(key)] = { type, descr: obj[key].description }
+            }
+        })
+
+        return new_obj
+    }
+
+    function pretty(obj, level = 1) {
+        let new_obj = `{`
+
+        const tab = '    '
+
+        Object.keys(obj).forEach(key => {
+            const type = obj[key].enum ? obj[key].enum.join(' | ') : obj[key].type
+            if (type === 'object') {
+                new_obj += `\n${tab.repeat(level)}${snakeCase(key)}: ${pretty(
+                    obj[key].properties,
+                    level + 1
+                )}`
+            } else {
+                new_obj += `\n${tab.repeat(level)}${snakeCase(key)}: '${type}', // ${obj[
+                    key
+                ].description
+                    .split('\n')
+                    .join(' ')}`
+            }
+        })
+
+        return `${new_obj}\n${tab.repeat(level - 1)}}${level === 1 ? '' : ','}`
+    }
+
+    console.log(pretty(schema.schemas[`GoogleAdsGoogleadsV1Resources__${entity}`].properties))
+
+    if (schema.schemas[`GoogleAdsGoogleadsV1Services__${mutate_request}`]) {
+        compiled_service = service_compiler({
             RESOURCE_URL_NAME: resource_url_name,
             MUTATE_METHOD: mutate_method,
             MUTATE_REQUEST: mutate_request,
@@ -197,11 +328,67 @@ function compileService(entity) {
             GET_REQUEST: get_request,
             RESOURCE: entity,
             TYPE: type,
-            PARAM: getParam(entity),
-            PARAM_S: snakeCase(entity), // Singular version of parameter name
-            ENTITY: entity,
-            CUSTOMER_METHOD: getCustomerMethodName(entity, resource_url_name),
+            PARAM: param,
+            ENTITY: ent,
+            ENTITY_DOC: pretty(
+                schema.schemas[`GoogleAdsGoogleadsV1Resources__${entity}`].properties
+            ),
         })
-        fs.writeFileSync(`${__dirname}/../src/services/${ent}.test.ts`, compiled_service_test)
+    } else {
+        compiled_service = service_immutable_compiler({
+            RESOURCE_URL_NAME: resource_url_name,
+            MUTATE_METHOD: mutate_method,
+            MUTATE_REQUEST: mutate_request,
+            OPERATION_REQUEST: operation_request,
+            GET_METHOD: get_method,
+            GET_REQUEST: get_request,
+            RESOURCE: entity,
+            TYPE: type,
+            PARAM: param,
+            ENTITY: ent,
+            ENTITY_DOC: pretty(
+                schema.schemas[`GoogleAdsGoogleadsV1Resources__${entity}`].properties
+            ),
+        })
     }
+
+    const file_path = `${__dirname}/../src/services/${ent}.ts`
+    fs.writeFileSync(file_path, compiled_service)
+
+    if (!entity.toLowerCase().includes('constant')) {
+        // const compiled_service_test = service_test_compiler({
+        //     RESOURCE_URL_NAME: resource_url_name,
+        //     MUTATE_METHOD: mutate_method,
+        //     MUTATE_REQUEST: mutate_request,
+        //     OPERATION_REQUEST: operation_request,
+        //     GET_METHOD: get_method,
+        //     GET_REQUEST: get_request,
+        //     RESOURCE: entity,
+        //     TYPE: type,
+        //     PARAM: getParam(entity),
+        //     PARAM_S: snakeCase(entity), // Singular version of parameter name
+        //     ENTITY: entity,
+        //     CUSTOMER_METHOD: getCustomerMethodName(entity, resource_url_name),
+        // })
+        // fs.writeFileSync(`${__dirname}/../src/services/${ent}.test.ts`, compiled_service_test)
+    }
+
+    // const result = await execP(`prettier --write ${file_path}`)
+
+    // console.log({ file_path })
 }
+
+;(async () => {
+    schema = await $RefParser.dereference(__dirname + '/schema.json', {
+        resolve: { gads: myResolver },
+    })
+
+    for (const entity of entities) {
+        console.log(`Compiling ${entity} service template`)
+        await compileService(entity, schema)
+    }
+
+    const result = await execP(`prettier --write ${__dirname}/../src/services/*.ts`)
+
+    console.log('Finished compiling all services')
+})()

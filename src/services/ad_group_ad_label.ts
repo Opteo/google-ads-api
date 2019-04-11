@@ -4,6 +4,14 @@ import { AdGroupAdLabel } from 'google-ads-node/build/lib/resources'
 import Service, { Mutation } from './service'
 import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
+// The ad_group_ad_label entity:
+
+const ad_group_ad_label = {
+    label: 'string', // The label assigned to the ad group ad.
+    ad_group_ad: 'string', // The ad group ad to which the label is attached.
+    resource_name: 'string', // The resource name of the ad group ad label. Ad group ad label resource names have the form: `customers/{customer_id}/adGroupAdLabels/{ad_group_id}~{ad_id}~{label_id}`
+}
+
 /**
  * @constants
  */

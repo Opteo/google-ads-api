@@ -4,6 +4,14 @@ import { CampaignLabel } from 'google-ads-node/build/lib/resources'
 import Service, { Mutation } from './service'
 import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
+// The campaign_label entity:
+
+const campaign_label = {
+    campaign: 'string', // The campaign to which the label is attached.
+    resource_name: 'string', // Name of the resource. Campaign label resource names have the form: `customers/{customer_id}/campaignLabels/{campaign_id}~{label_id}`
+    label: 'string', // The label assigned to the campaign.
+}
+
 /**
  * @constants
  */

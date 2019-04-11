@@ -4,6 +4,21 @@ import { KeywordPlan } from 'google-ads-node/build/lib/resources'
 import Service, { Mutation } from './service'
 import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
+// The keyword_plan entity:
+
+const keyword_plan = {
+    resource_name: 'string', // The resource name of the Keyword Planner plan. KeywordPlan resource names have the form:  `customers/{customer_id}/keywordPlans/{kp_plan_id}`
+    name: 'string', // The name of the keyword plan.  This field is required and should not be empty when creating new keyword plans.
+    forecast_period: {
+        date_interval: 'UNSPECIFIED | UNKNOWN | NEXT_WEEK | NEXT_MONTH | NEXT_QUARTER', // A future date range relative to the current date used for forecasting.
+        date_range: {
+            start_date: 'string', // The start date, in yyyy-mm-dd format.
+            end_date: 'string', // The end date, in yyyy-mm-dd format.
+        },
+    },
+    id: 'string', // The ID of the keyword plan.
+}
+
 /**
  * @constants
  */

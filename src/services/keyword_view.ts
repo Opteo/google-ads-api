@@ -4,6 +4,12 @@ import { KeywordView } from 'google-ads-node/build/lib/resources'
 import Service from './service'
 import { ServiceListOptions } from '../types'
 
+// The keyword_view entity:
+
+const keyword_view = {
+    resource_name: 'string', // The resource name of the keyword view. Keyword view resource names have the form:  `customers/{customer_id}/keywordViews/{ad_group_id}~{criterion_id}`
+}
+
 /**
  * @constants
  */

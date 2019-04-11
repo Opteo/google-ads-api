@@ -4,6 +4,14 @@ import { AdGroupCriterionLabel } from 'google-ads-node/build/lib/resources'
 import Service, { Mutation } from './service'
 import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
+// The ad_group_criterion_label entity:
+
+const ad_group_criterion_label = {
+    ad_group_criterion: 'string', // The ad group criterion to which the label is attached.
+    resource_name: 'string', // The resource name of the ad group criterion label. Ad group criterion label resource names have the form:  `customers/{customer_id}/adGroupCriterionLabels/{ad_group_id}~{criterion_id}~{label_id}`
+    label: 'string', // The label assigned to the ad group criterion.
+}
+
 /**
  * @constants
  */
@@ -25,7 +33,9 @@ export default class AdGroupCriterionLabelService extends Service {
         }) as AdGroupCriterionLabel
     }
 
-    public async list(options?: ServiceListOptions): Promise<Array<{ ad_group_criterion_label: AdGroupCriterionLabel }>> {
+    public async list(
+        options?: ServiceListOptions
+    ): Promise<Array<{ ad_group_criterion_label: AdGroupCriterionLabel }>> {
         return this.getListResults('ad_group_criterion_label', options)
     }
 

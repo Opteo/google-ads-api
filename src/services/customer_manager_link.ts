@@ -4,12 +4,21 @@ import { CustomerManagerLink } from 'google-ads-node/build/lib/resources'
 import Service, { Mutation } from './service'
 import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
+// The customer_manager_link entity:
+
+const customer_manager_link = {
+    manager_customer: 'string', // The manager customer linked to the customer.
+    manager_link_id: 'string', // ID of the customer-manager link. This field is read only.
+    status: 'UNSPECIFIED | UNKNOWN | ACTIVE | INACTIVE | PENDING | REFUSED | CANCELED', // Status of the link between the customer and the manager.
+    resource_name: 'string', // Name of the resource. CustomerManagerLink resource names have the form:  `customers/{customer_id}/customerManagerLinks/{manager_customer_id}~{manager_link_id}`
+}
+
 /**
  * @constants
  */
 const RESOURCE_URL_NAME = 'customerManagerLinks'
-const MUTATE_METHOD = 'mutateCustomerManagerLinks'
-const MUTATE_REQUEST = 'MutateCustomerManagerLinksRequest'
+const MUTATE_METHOD = 'mutateCustomerManagerLink'
+const MUTATE_REQUEST = 'MutateCustomerManagerLinkRequest'
 const OPERATION_REQUEST = 'CustomerManagerLinkOperation'
 const GET_METHOD = 'getCustomerManagerLink'
 const GET_REQUEST = 'GetCustomerManagerLinkRequest'

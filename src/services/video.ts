@@ -4,6 +4,16 @@ import { Video } from 'google-ads-node/build/lib/resources'
 import Service from './service'
 import { ServiceListOptions } from '../types'
 
+// The video entity:
+
+const video = {
+    id: 'string', // The ID of the video.
+    channel_id: 'string', // The owner channel id of the video.
+    duration_millis: 'string', // The duration of the video in milliseconds.
+    title: 'string', // The title of the video.
+    resource_name: 'string', // The resource name of the video. Video resource names have the form:  `customers/{customer_id}/videos/{video_id}`
+}
+
 /**
  * @constants
  */

@@ -4,6 +4,12 @@ import { HotelGroupView } from 'google-ads-node/build/lib/resources'
 import Service from './service'
 import { ServiceListOptions } from '../types'
 
+// The hotel_group_view entity:
+
+const hotel_group_view = {
+    resource_name: 'string', // The resource name of the hotel group view. Hotel Group view resource names have the form:  `customers/{customer_id}/hotelGroupViews/{ad_group_id}~{criterion_id}`
+}
+
 /**
  * @constants
  */

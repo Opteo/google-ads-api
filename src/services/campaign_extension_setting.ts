@@ -4,6 +4,17 @@ import { CampaignExtensionSetting } from 'google-ads-node/build/lib/resources'
 import Service, { Mutation } from './service'
 import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
+// The campaign_extension_setting entity:
+
+const campaign_extension_setting = {
+    extension_feed_items: 'array', // The resource names of the extension feed items to serve under the campaign. ExtensionFeedItem resource names have the form:  `customers/{customer_id}/extensionFeedItems/{feed_item_id}`
+    campaign: 'string', // The resource name of the campaign. The linked extension feed items will serve under this campaign. Campaign resource names have the form:  `customers/{customer_id}/campaigns/{campaign_id}`
+    resource_name: 'string', // The resource name of the campaign extension setting. CampaignExtensionSetting resource names have the form:   `customers/{customer_id}/campaignExtensionSettings/{campaign_id}~{extension_type}`
+    extension_type:
+        'UNSPECIFIED | UNKNOWN | NONE | APP | CALL | CALLOUT | MESSAGE | PRICE | PROMOTION | REVIEW | SITELINK | STRUCTURED_SNIPPET', // The extension type of the customer extension setting.
+    device: 'UNSPECIFIED | UNKNOWN | MOBILE | DESKTOP', // The device for which the extensions will serve. Optional.
+}
+
 /**
  * @constants
  */
@@ -25,7 +36,9 @@ export default class CampaignExtensionSettingService extends Service {
         }) as CampaignExtensionSetting
     }
 
-    public async list(options?: ServiceListOptions): Promise<Array<{ campaign_extension_setting: CampaignExtensionSetting }>> {
+    public async list(
+        options?: ServiceListOptions
+    ): Promise<Array<{ campaign_extension_setting: CampaignExtensionSetting }>> {
         return this.getListResults('campaign_extension_setting', options)
     }
 

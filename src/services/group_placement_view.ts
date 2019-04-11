@@ -4,6 +4,17 @@ import { GroupPlacementView } from 'google-ads-node/build/lib/resources'
 import Service from './service'
 import { ServiceListOptions } from '../types'
 
+// The group_placement_view entity:
+
+const group_placement_view = {
+    placement: 'string', // The automatic placement string at group level, e. g. web domain, mobile app ID, or a YouTube channel ID.
+    target_url: 'string', // URL of the group placement, e.g. domain, link to the mobile application in app store, or a YouTube channel URL.
+    resource_name: 'string', // The resource name of the group placement view. Group placement view resource names have the form:   `customers/{customer_id}/groupPlacementViews/{ad_group_id}~{base64_placement}`
+    placement_type:
+        'UNSPECIFIED | UNKNOWN | WEBSITE | MOBILE_APP_CATEGORY | MOBILE_APPLICATION | YOUTUBE_VIDEO | YOUTUBE_CHANNEL', // Type of the placement, e.g. Website, YouTube Channel, Mobile Application.
+    display_name: 'string', // Domain name for websites and YouTube channel name for YouTube channels.
+}
+
 /**
  * @constants
  */

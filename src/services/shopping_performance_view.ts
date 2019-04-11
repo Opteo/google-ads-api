@@ -4,6 +4,12 @@ import { ShoppingPerformanceView } from 'google-ads-node/build/lib/resources'
 import Service from './service'
 import { ServiceListOptions } from '../types'
 
+// The shopping_performance_view entity:
+
+const shopping_performance_view = {
+    resource_name: 'string', // The resource name of the Shopping performance view. Shopping performance view resource names have the form: `customers/{customer_id}/shoppingPerformanceView`
+}
+
 /**
  * @constants
  */

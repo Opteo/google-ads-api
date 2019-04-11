@@ -4,6 +4,18 @@ import { CampaignBidModifier } from 'google-ads-node/build/lib/resources'
 import Service, { Mutation } from './service'
 import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
+// The campaign_bid_modifier entity:
+
+const campaign_bid_modifier = {
+    criterion_id: 'string', // The ID of the criterion to bid modify.  This field is ignored for mutates.
+    campaign: 'string', // The campaign to which this criterion belongs.
+    resource_name: 'string', // The resource name of the campaign bid modifier. Campaign bid modifier resource names have the form:  `customers/{customer_id}/campaignBidModifiers/{campaign_id}~{criterion_id}`
+    bid_modifier: 'number', // The modifier for the bid when the criterion matches.
+    interaction_type: {
+        type: 'UNSPECIFIED | UNKNOWN | CALLS', // The interaction type.
+    },
+}
+
 /**
  * @constants
  */

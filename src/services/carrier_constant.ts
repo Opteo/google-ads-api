@@ -4,6 +4,15 @@ import { CarrierConstant } from 'google-ads-node/build/lib/resources'
 import Service from './service'
 import { ServiceListOptions } from '../types'
 
+// The carrier_constant entity:
+
+const carrier_constant = {
+    resource_name: 'string', // The resource name of the carrier criterion. Carrier criterion resource names have the form:  `carrierConstants/{criterion_id}`
+    name: 'string', // The full name of the carrier in English.
+    id: 'string', // The ID of the carrier criterion.
+    country_code: 'string', // The country code of the country where the carrier is located, e.g., "AR", "FR", etc.
+}
+
 /**
  * @constants
  */
