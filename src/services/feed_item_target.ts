@@ -7,7 +7,7 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
 // The feed_item_target entity:
 
 const feed_item_target = {
-    feed_item_target_id: 'string', // The ID of the targeted resource. This field is read-only.
+    feed_item_target_id: 'int64', // The ID of the targeted resource. This field is read-only.
     feed_item_target_type: 'UNSPECIFIED | UNKNOWN | CAMPAIGN | AD_GROUP | CRITERION', // The target type of this feed item target. This field is read-only.
     feed_item: 'string', // The feed item to which this feed item target belongs.
     ad_group: 'string', // The targeted ad group.
@@ -21,9 +21,9 @@ const feed_item_target = {
     ad_schedule: {
         day_of_week: 'UNSPECIFIED | UNKNOWN | MONDAY | TUESDAY | WEDNESDAY | THURSDAY | FRIDAY | SATURDAY | SUNDAY', // Day of the week the schedule applies to.  This field is required for CREATE operations and is prohibited on UPDATE operations.
         end_minute: 'UNSPECIFIED | UNKNOWN | ZERO | FIFTEEN | THIRTY | FORTY_FIVE', // Minutes after the end hour at which this schedule ends. The schedule is exclusive of the end minute.  This field is required for CREATE operations and is prohibited on UPDATE operations.
-        start_hour: 'integer', // Starting hour in 24 hour time. This field must be between 0 and 23, inclusive.  This field is required for CREATE operations and is prohibited on UPDATE operations.
+        start_hour: 'int32', // Starting hour in 24 hour time. This field must be between 0 and 23, inclusive.  This field is required for CREATE operations and is prohibited on UPDATE operations.
         start_minute: 'UNSPECIFIED | UNKNOWN | ZERO | FIFTEEN | THIRTY | FORTY_FIVE', // Minutes after the start hour at which this schedule starts.  This field is required for CREATE operations and is prohibited on UPDATE operations.
-        end_hour: 'integer', // Ending hour in 24 hour time; 24 signifies end of the day. This field must be between 0 and 24, inclusive.  This field is required for CREATE operations and is prohibited on UPDATE operations.
+        end_hour: 'int32', // Ending hour in 24 hour time; 24 signifies end of the day. This field must be between 0 and 24, inclusive.  This field is required for CREATE operations and is prohibited on UPDATE operations.
     },
     device: 'UNSPECIFIED | UNKNOWN | MOBILE', // The targeted device.
 }

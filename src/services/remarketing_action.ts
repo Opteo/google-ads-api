@@ -7,7 +7,7 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
 // The remarketing_action entity:
 
 const remarketing_action = {
-    id: 'string', // Id of the remarketing action.
+    id: 'int64', // Id of the remarketing action.
     tag_snippets: 'array', // The snippets used for tracking remarketing actions.
     resource_name: 'string', // The resource name of the remarketing action. Remarketing action resource names have the form:  `customers/{customer_id}/remarketingActions/{remarketing_action_id}`
     name: 'string', // The name of the remarketing action.  This field is required and should not be empty when creating new remarketing actions.

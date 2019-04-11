@@ -14,7 +14,7 @@ const user_interest = {
     name: 'string', // The name of the user interest.
     taxonomy_type:
         'UNSPECIFIED | UNKNOWN | AFFINITY | IN_MARKET | MOBILE_APP_INSTALL_USER | VERTICAL_GEO | NEW_SMART_PHONE_USER', // Taxonomy type of the user interest.
-    user_interest_id: 'string', // The ID of the user interest.
+    user_interest_id: 'int64', // The ID of the user interest.
 }
 
 /**

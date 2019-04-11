@@ -61,7 +61,7 @@ const extension_feed_item = {
     promotion_feed_item: {
         language_code: 'string', // The language of the promotion. Represented as BCP 47 language tag.
         discount_modifier: 'UNSPECIFIED | UNKNOWN | UP_TO', // Enum that modifies the qualification of the discount.
-        percent_off: 'string', // Percentage off discount in the promotion in micros. One million is equivalent to one percent. Either this or money_off_amount is required.
+        percent_off: 'int64', // Percentage off discount in the promotion in micros. One million is equivalent to one percent. Either this or money_off_amount is required.
         final_urls: 'array', // A list of possible final URLs after all cross domain redirects. This field is required.
         url_custom_parameters: 'array', // A list of mappings to be used for substituting URL custom parameter tags in the tracking_url_template, final_urls, and/or final_mobile_urls.
         promotion_end_date: 'string', // End date of when the promotion is eligible to be redeemed. This field is currently mutate only.
@@ -71,14 +71,14 @@ const extension_feed_item = {
         tracking_url_template: 'string', // URL template for constructing a tracking URL.
         money_amount_off: {
             currency_code: 'string', // Three-character ISO 4217 currency code.
-            amount_micros: 'string', // Amount in micros. One million is equivalent to one unit.
+            amount_micros: 'int64', // Amount in micros. One million is equivalent to one unit.
         },
         promotion_code: 'string', // A code the user should use in order to be eligible for the promotion.
         promotion_target: 'string', // A freeform description of what the promotion is targeting. This field is required.
         promotion_start_date: 'string', // Start date of when the promotion is eligible to be redeemed. This field is currently mutate only.
         orders_over_amount: {
             currency_code: 'string', // Three-character ISO 4217 currency code.
-            amount_micros: 'string', // Amount in micros. One million is equivalent to one unit.
+            amount_micros: 'int64', // Amount in micros. One million is equivalent to one unit.
         },
         final_mobile_urls: 'array', // A list of possible final mobile URLs after all cross domain redirects.
     },

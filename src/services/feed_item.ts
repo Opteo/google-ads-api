@@ -11,7 +11,7 @@ const feed_item = {
     status: 'UNSPECIFIED | UNKNOWN | ENABLED | REMOVED', // Status of the feed item. This field is read-only.
     attribute_values: 'array', // The feed item's attribute values.
     url_custom_parameters: 'array', // The list of mappings used to substitute custom parameter tags in a `tracking_url_template`, `final_urls`, or `mobile_final_urls`.
-    id: 'string', // The ID of this feed item.
+    id: 'int64', // The ID of this feed item.
     start_date_time: 'string', // Start time in which this feed item is effective and can begin serving. The format is "YYYY-MM-DD HH:MM:SS". Examples: "2018-03-05 09:15:00" or "2018-02-01 14:34:30"
     end_date_time: 'string', // End time in which this feed item is no longer effective and will stop serving. The format is "YYYY-MM-DD HH:MM:SS". Examples: "2018-03-05 09:15:00" or "2018-02-01 14:34:30"
     resource_name: 'string', // The resource name of the feed item. Feed item resource names have the form:  `customers/{customer_id}/feedItems/{feed_id}~{feed_item_id}`

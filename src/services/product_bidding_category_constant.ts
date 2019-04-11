@@ -14,7 +14,7 @@ const product_bidding_category_constant = {
     status: 'UNSPECIFIED | UNKNOWN | ACTIVE | OBSOLETE', // Status of the product bidding category.
     product_bidding_category_constant_parent: 'string', // Resource name of the parent product bidding category.
     level: 'UNSPECIFIED | UNKNOWN | LEVEL1 | LEVEL2 | LEVEL3 | LEVEL4 | LEVEL5', // Level of the product bidding category.
-    id: 'string', // ID of the product bidding category.  This ID is equivalent to the google_product_category ID as described in this article: https://support.google.com/merchants/answer/6324436.
+    id: 'int64', // ID of the product bidding category.  This ID is equivalent to the google_product_category ID as described in this article: https://support.google.com/merchants/answer/6324436.
 }
 
 /**

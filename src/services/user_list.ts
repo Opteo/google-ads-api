@@ -8,12 +8,12 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
 const user_list = {
     name: 'string', // Name of this user list. Depending on its access_reason, the user list name may not be unique (e.g. if access_reason=SHARED)
-    membership_life_span: 'string', // Number of days a user's cookie stays on your list since its most recent addition to the list. This field must be between 0 and 540 inclusive. However, for CRM based userlists, this field can be set to 10000 which means no expiration.  It'll be ignored for logical_user_list.
+    membership_life_span: 'int64', // Number of days a user's cookie stays on your list since its most recent addition to the list. This field must be between 0 and 540 inclusive. However, for CRM based userlists, this field can be set to 10000 which means no expiration.  It'll be ignored for logical_user_list.
     membership_status: 'UNSPECIFIED | UNKNOWN | OPEN | CLOSED', // Membership status of this user list. Indicates whether a user list is open or active. Only open user lists can accumulate more users and can be targeted to.
     closing_reason: 'UNSPECIFIED | UNKNOWN | UNUSED', // Indicating the reason why this user list membership status is closed. It is only populated on lists that were automatically closed due to inactivity, and will be cleared once the list membership status becomes open.
-    id: 'string', // Id of the user list.
+    id: 'int64', // Id of the user list.
     access_reason: 'UNSPECIFIED | UNKNOWN | OWNED | SHARED | LICENSED | SUBSCRIBED | AFFILIATED', // Indicates the reason this account has been granted access to the list. The reason can be SHARED, OWNED, LICENSED or SUBSCRIBED.  This field is read-only.
-    size_for_search: 'string', // Estimated number of users in this user list in the google.com domain. These are the users available for targeting in Search campaigns. This value is null if the number of users has not yet been determined.  This field is read-only.
+    size_for_search: 'int64', // Estimated number of users in this user list in the google.com domain. These are the users available for targeting in Search campaigns. This value is null if the number of users has not yet been determined.  This field is read-only.
     resource_name: 'string', // The resource name of the user list. User list resource names have the form:  `customers/{customer_id}/userLists/{user_list_id}`
     eligible_for_display: 'boolean', // Indicates this user list is eligible for Google Display Network.  This field is read-only.
     read_only: 'boolean', // A flag that indicates if a user may edit a list. Depends on the list ownership and list type. For example, external remarketing user lists are not editable.  This field is read-only.
@@ -24,7 +24,7 @@ const user_list = {
         'UNSPECIFIED | UNKNOWN | LESS_THAN_FIVE_HUNDRED | LESS_THAN_ONE_THOUSAND | ONE_THOUSAND_TO_TEN_THOUSAND | TEN_THOUSAND_TO_FIFTY_THOUSAND | FIFTY_THOUSAND_TO_ONE_HUNDRED_THOUSAND | ONE_HUNDRED_THOUSAND_TO_THREE_HUNDRED_THOUSAND | THREE_HUNDRED_THOUSAND_TO_FIVE_HUNDRED_THOUSAND | FIVE_HUNDRED_THOUSAND_TO_ONE_MILLION | ONE_MILLION_TO_TWO_MILLION | TWO_MILLION_TO_THREE_MILLION | THREE_MILLION_TO_FIVE_MILLION | FIVE_MILLION_TO_TEN_MILLION | TEN_MILLION_TO_TWENTY_MILLION | TWENTY_MILLION_TO_THIRTY_MILLION | THIRTY_MILLION_TO_FIFTY_MILLION | OVER_FIFTY_MILLION', // Size range in terms of number of users of the UserList, on the Google Display Network.  This field is read-only.
     integration_code: 'string', // An ID from external system. It is used by user list sellers to correlate IDs on their systems.
     type: 'UNSPECIFIED | UNKNOWN | REMARKETING | LOGICAL | EXTERNAL_REMARKETING | RULE_BASED | SIMILAR | CRM_BASED', // Type of this list.  This field is read-only.
-    size_for_display: 'string', // Estimated number of users in this user list, on the Google Display Network. This value is null if the number of users has not yet been determined.  This field is read-only.
+    size_for_display: 'int64', // Estimated number of users in this user list, on the Google Display Network. This value is null if the number of users has not yet been determined.  This field is read-only.
     eligible_for_search: 'boolean', // Indicates if this user list is eligible for Google Search Network.
     rule_based_user_list: {
         date_specific_rule_user_list: {

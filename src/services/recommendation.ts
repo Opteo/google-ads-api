@@ -18,7 +18,7 @@ const recommendation = {
         recommended_match_type: 'UNSPECIFIED | UNKNOWN | EXACT | PHRASE | BROAD', // The recommended new match type.
     },
     keyword_recommendation: {
-        recommended_cpc_bid_micros: 'string', // The recommended CPC (cost-per-click) bid.
+        recommended_cpc_bid_micros: 'int64', // The recommended CPC (cost-per-click) bid.
         keyword: {
             match_type: 'UNSPECIFIED | UNKNOWN | EXACT | PHRASE | BROAD', // The match type of the keyword.
             text: 'string', // The text of the keyword (at most 80 characters and 10 words).
@@ -26,24 +26,24 @@ const recommendation = {
     },
     campaign_budget: 'string', // The budget targeted by this recommendation. This will be set only when the recommendation affects a single campaign budget.  This field will be set for the following recommendation types: CAMPAIGN_BUDGET
     maximize_conversions_opt_in_recommendation: {
-        recommended_budget_amount_micros: 'string', // The recommended new budget amount.
+        recommended_budget_amount_micros: 'int64', // The recommended new budget amount.
     },
     type:
         'UNSPECIFIED | UNKNOWN | CAMPAIGN_BUDGET | KEYWORD | TEXT_AD | TARGET_CPA_OPT_IN | MAXIMIZE_CONVERSIONS_OPT_IN | ENHANCED_CPC_OPT_IN | SEARCH_PARTNERS_OPT_IN | MAXIMIZE_CLICKS_OPT_IN | OPTIMIZE_AD_ROTATION | KEYWORD_MATCH_TYPE | MOVE_UNUSED_BUDGET', // The type of recommendation.
     impact: {
         base_metrics: {
-            cost_micros: 'string', // Cost (in micros) for advertising, in the local currency for the account.
-            video_views: 'number', // Number of video views for a video ad campaign.
-            impressions: 'number', // Number of ad impressions.
-            clicks: 'number', // Number of ad clicks.
-            conversions: 'number', // Number of conversions.
+            cost_micros: 'int64', // Cost (in micros) for advertising, in the local currency for the account.
+            video_views: 'double', // Number of video views for a video ad campaign.
+            impressions: 'double', // Number of ad impressions.
+            clicks: 'double', // Number of ad clicks.
+            conversions: 'double', // Number of conversions.
         },
         potential_metrics: {
-            cost_micros: 'string', // Cost (in micros) for advertising, in the local currency for the account.
-            video_views: 'number', // Number of video views for a video ad campaign.
-            impressions: 'number', // Number of ad impressions.
-            clicks: 'number', // Number of ad clicks.
-            conversions: 'number', // Number of conversions.
+            cost_micros: 'int64', // Cost (in micros) for advertising, in the local currency for the account.
+            video_views: 'double', // Number of video views for a video ad campaign.
+            impressions: 'double', // Number of ad impressions.
+            clicks: 'double', // Number of ad clicks.
+            conversions: 'double', // Number of conversions.
         },
     },
     ad_group: 'string', // The ad group targeted by this recommendation. This will be set only when the recommendation affects a single ad group.  This field will be set for the following recommendation types: KEYWORD, OPTIMIZE_AD_ROTATION, TEXT_AD
@@ -82,7 +82,7 @@ const recommendation = {
                 headline_part_2: 'string', // The second part of the ad's headline.
             },
             final_urls: 'array', // The list of possible final URLs after all cross-domain redirects for the ad.
-            id: 'string', // The ID of the ad.
+            id: 'int64', // The ID of the ad.
             responsive_search_ad: {
                 headlines: 'array', // List of text assets for headlines. When the ad serves the headlines will be selected from this list.
                 path_2: 'string', // Second part of text that may appear appended to the url displayed in the ad. This field can only be set when path1 is also set.
@@ -156,17 +156,17 @@ const recommendation = {
             },
             image_ad: {
                 image_url: 'string', // URL of the full size image.
-                preview_pixel_height: 'string', // Height in pixels of the preview size image.
+                preview_pixel_height: 'int64', // Height in pixels of the preview size image.
                 preview_image_url: 'string', // URL of the preview size image.
-                ad_id_to_copy_image_from: 'string', // An ad ID to copy the image from.
+                ad_id_to_copy_image_from: 'int64', // An ad ID to copy the image from.
                 mime_type:
                     'UNSPECIFIED | UNKNOWN | IMAGE_JPEG | IMAGE_GIF | IMAGE_PNG | FLASH | TEXT_HTML | PDF | MSWORD | MSEXCEL | RTF | AUDIO_WAV | AUDIO_MP3 | HTML5_AD_ZIP', // The mime type of the image.
-                data: 'string', // Raw image data as bytes.
-                pixel_width: 'string', // Width in pixels of the full size image.
-                preview_pixel_width: 'string', // Width in pixels of the preview size image.
+                data: 'byte', // Raw image data as bytes.
+                pixel_width: 'int64', // Width in pixels of the full size image.
+                preview_pixel_width: 'int64', // Width in pixels of the preview size image.
                 media_file: 'string', // The MediaFile resource to use for the image.
                 name: 'string', // The name of the image. If the image was created from a MediaFile, this is the MediaFile's name. If the image was created from bytes, this is empty.
-                pixel_height: 'string', // Height in pixels of the full size image.
+                pixel_height: 'int64', // Height in pixels of the full size image.
             },
             tracking_url_template: 'string', // The URL template for constructing a tracking URL.
             shopping_smart_ad: {},
@@ -214,26 +214,26 @@ const recommendation = {
         },
     },
     maximize_clicks_opt_in_recommendation: {
-        recommended_budget_amount_micros: 'string', // The recommended new budget amount. Only set if the current budget is too high.
+        recommended_budget_amount_micros: 'int64', // The recommended new budget amount. Only set if the current budget is too high.
     },
     move_unused_budget_recommendation: {
         excess_campaign_budget: 'string', // The excess budget's resource_name.
         budget_recommendation: {
-            current_budget_amount_micros: 'string', // The current budget amount in micros.
+            current_budget_amount_micros: 'int64', // The current budget amount in micros.
             budget_options: 'array', // The budget amounts and associated impact estimates for some values of possible budget amounts.
-            recommended_budget_amount_micros: 'string', // The recommended budget amount in micros.
+            recommended_budget_amount_micros: 'int64', // The recommended budget amount in micros.
         },
     },
     enhanced_cpc_opt_in_recommendation: {},
     dismissed: 'boolean', // Whether the recommendation is dismissed or not.
     target_cpa_opt_in_recommendation: {
         options: 'array', // The available goals and corresponding options for Target CPA strategy.
-        recommended_target_cpa_micros: 'string', // The recommended average CPA target. See required budget amount and impact of using this recommendation in options list.
+        recommended_target_cpa_micros: 'int64', // The recommended average CPA target. See required budget amount and impact of using this recommendation in options list.
     },
     campaign_budget_recommendation: {
-        current_budget_amount_micros: 'string', // The current budget amount in micros.
+        current_budget_amount_micros: 'int64', // The current budget amount in micros.
         budget_options: 'array', // The budget amounts and associated impact estimates for some values of possible budget amounts.
-        recommended_budget_amount_micros: 'string', // The recommended budget amount in micros.
+        recommended_budget_amount_micros: 'int64', // The recommended budget amount in micros.
     },
 }
 

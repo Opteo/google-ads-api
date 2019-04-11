@@ -25,7 +25,7 @@ const customer_negative_criterion = {
     },
     type:
         'UNSPECIFIED | UNKNOWN | KEYWORD | PLACEMENT | MOBILE_APP_CATEGORY | MOBILE_APPLICATION | DEVICE | LOCATION | LISTING_GROUP | AD_SCHEDULE | AGE_RANGE | GENDER | INCOME_RANGE | PARENTAL_STATUS | YOUTUBE_VIDEO | YOUTUBE_CHANNEL | USER_LIST | PROXIMITY | TOPIC | LISTING_SCOPE | LANGUAGE | IP_BLOCK | CONTENT_LABEL | CARRIER | USER_INTEREST | WEBPAGE | OPERATING_SYSTEM_VERSION | APP_PAYMENT_MODEL | MOBILE_DEVICE | CUSTOM_AFFINITY | CUSTOM_INTENT', // The type of the criterion.
-    id: 'string', // The ID of the criterion.
+    id: 'int64', // The ID of the criterion.
     mobile_app_category: {
         mobile_app_category_constant: 'string', // The mobile app category constant resource name.
     },

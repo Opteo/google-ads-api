@@ -8,10 +8,10 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
 const keyword_plan_campaign = {
     keyword_plan_network: 'UNSPECIFIED | UNKNOWN | GOOGLE_SEARCH | GOOGLE_SEARCH_AND_PARTNERS', // Targeting network.  This field is required and should not be empty when creating Keyword Plan campaigns.
-    cpc_bid_micros: 'string', // A default max cpc bid in micros, and in the account currency, for all ad groups under the campaign.  This field is required and should not be empty when creating Keyword Plan campaigns.
+    cpc_bid_micros: 'int64', // A default max cpc bid in micros, and in the account currency, for all ad groups under the campaign.  This field is required and should not be empty when creating Keyword Plan campaigns.
     name: 'string', // The name of the Keyword Plan campaign.  This field is required and should not be empty when creating Keyword Plan campaigns.
     language_constants: 'array', // The languages targeted for the Keyword Plan campaign. Max allowed: 1.
-    id: 'string', // The ID of the Keyword Plan campaign.
+    id: 'int64', // The ID of the Keyword Plan campaign.
     geo_targets: 'array', // The geo targets. Max number allowed: 20.
     resource_name: 'string', // The resource name of the Keyword Plan campaign. KeywordPlanCampaign resource names have the form:  `customers/{customer_id}/keywordPlanCampaigns/{kp_campaign_id}`
     keyword_plan: 'string', // The keyword plan this campaign belongs to.

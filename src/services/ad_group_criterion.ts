@@ -7,9 +7,9 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
 // The ad_group_criterion entity:
 
 const ad_group_criterion = {
-    cpv_bid_micros: 'string', // The CPV (cost-per-view) bid.
-    effective_cpv_bid_micros: 'string', // The effective CPV (cost-per-view) bid.
-    bid_modifier: 'number', // The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers.
+    cpv_bid_micros: 'int64', // The CPV (cost-per-view) bid.
+    effective_cpv_bid_micros: 'int64', // The effective CPV (cost-per-view) bid.
+    bid_modifier: 'double', // The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers.
     type:
         'UNSPECIFIED | UNKNOWN | KEYWORD | PLACEMENT | MOBILE_APP_CATEGORY | MOBILE_APPLICATION | DEVICE | LOCATION | LISTING_GROUP | AD_SCHEDULE | AGE_RANGE | GENDER | INCOME_RANGE | PARENTAL_STATUS | YOUTUBE_VIDEO | YOUTUBE_CHANNEL | USER_LIST | PROXIMITY | TOPIC | LISTING_SCOPE | LANGUAGE | IP_BLOCK | CONTENT_LABEL | CARRIER | USER_INTEREST | WEBPAGE | OPERATING_SYSTEM_VERSION | APP_PAYMENT_MODEL | MOBILE_DEVICE | CUSTOM_AFFINITY | CUSTOM_INTENT', // The type of the criterion.
     effective_percent_cpc_bid_source:
@@ -20,13 +20,13 @@ const ad_group_criterion = {
     user_interest: {
         user_interest_category: 'string', // The UserInterest resource name.
     },
-    percent_cpc_bid_micros: 'string', // The CPC bid amount, expressed as a fraction of the advertised price for some good or service. The valid range for the fraction is [0,1) and the value stored here is 1,000,000 * [fraction].
+    percent_cpc_bid_micros: 'int64', // The CPC bid amount, expressed as a fraction of the advertised price for some good or service. The valid range for the fraction is [0,1) and the value stored here is 1,000,000 * [fraction].
     listing_group: {
         parent_ad_group_criterion: 'string', // Resource name of ad group criterion which is the parent listing group subdivision. Null for the root group.
         type: 'UNSPECIFIED | UNKNOWN | SUBDIVISION | UNIT', // Type of the listing group.
         case_value: {
             product_bidding_category: {
-                id: 'string', // ID of the product bidding category.  This ID is equivalent to the google_product_category ID as described in this article: https://support.google.com/merchants/answer/6324436.
+                id: 'int64', // ID of the product bidding category.  This ID is equivalent to the google_product_category ID as described in this article: https://support.google.com/merchants/answer/6324436.
                 country_code: 'string', // Two-letter upper-case country code of the product bidding category. It must match the campaign.shopping_setting.sales_country field.
                 level: 'UNSPECIFIED | UNKNOWN | LEVEL1 | LEVEL2 | LEVEL3 | LEVEL4 | LEVEL5', // Level of the product bidding category.
             },
@@ -37,7 +37,7 @@ const ad_group_criterion = {
                 condition: 'UNSPECIFIED | UNKNOWN | NEW | REFURBISHED | USED', // Value of the condition.
             },
             hotel_class: {
-                value: 'string', // Long value of the hotel class.
+                value: 'int64', // Long value of the hotel class.
             },
             hotel_id: {
                 value: 'string', // String value of the hotel ID.
@@ -76,12 +76,12 @@ const ad_group_criterion = {
         criterion_name: 'string', // The name of the criterion that is defined by this parameter. The name value will be used for identifying, sorting and filtering criteria with this type of parameters.  This field is required for CREATE operations and is prohibited on UPDATE operations.
         conditions: 'array', // Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting.  This field is required for CREATE operations and is prohibited on UPDATE operations.
     },
-    cpc_bid_micros: 'string', // The CPC (cost-per-click) bid.
+    cpc_bid_micros: 'int64', // The CPC (cost-per-click) bid.
     placement: {
         url: 'string', // URL of the placement.  For example, "http://www.domain.com".
     },
     status: 'UNSPECIFIED | UNKNOWN | ENABLED | PAUSED | REMOVED', // The status of the criterion.
-    effective_percent_cpc_bid_micros: 'string', // The effective Percent CPC bid amount.
+    effective_percent_cpc_bid_micros: 'int64', // The effective Percent CPC bid amount.
     url_custom_parameters: 'array', // The list of mappings used to substitute custom parameter tags in a `tracking_url_template`, `final_urls`, or `mobile_final_urls`.
     final_url_suffix: 'string', // URL template for appending params to final URL.
     resource_name: 'string', // The resource name of the ad group criterion. Ad group criterion resource names have the form:  `customers/{customer_id}/adGroupCriteria/{ad_group_id}~{criterion_id}`
@@ -93,11 +93,11 @@ const ad_group_criterion = {
     quality_info: {
         post_click_quality_score: 'UNSPECIFIED | UNKNOWN | BELOW_AVERAGE | AVERAGE | ABOVE_AVERAGE', // The quality score of the landing page.
         creative_quality_score: 'UNSPECIFIED | UNKNOWN | BELOW_AVERAGE | AVERAGE | ABOVE_AVERAGE', // The performance of the ad compared to other advertisers.
-        quality_score: 'integer', // The quality score.  This field may not be populated if Google does not have enough information to determine a value.
+        quality_score: 'int32', // The quality score.  This field may not be populated if Google does not have enough information to determine a value.
         search_predicted_ctr: 'UNSPECIFIED | UNKNOWN | BELOW_AVERAGE | AVERAGE | ABOVE_AVERAGE', // The click-through rate compared to that of other advertisers.
     },
     tracking_url_template: 'string', // The URL template for constructing a tracking URL.
-    criterion_id: 'string', // The ID of the criterion.  This field is ignored for mutates.
+    criterion_id: 'int64', // The ID of the criterion.  This field is ignored for mutates.
     age_range: {
         type:
             'UNSPECIFIED | UNKNOWN | AGE_RANGE_18_24 | AGE_RANGE_25_34 | AGE_RANGE_35_44 | AGE_RANGE_45_54 | AGE_RANGE_55_64 | AGE_RANGE_65_UP | AGE_RANGE_UNDETERMINED', // Type of the age range.
@@ -140,19 +140,19 @@ const ad_group_criterion = {
         custom_intent: 'string', // The CustomInterest resource name.
     },
     final_urls: 'array', // The list of possible final URLs after all cross-domain redirects for the ad.
-    effective_cpc_bid_micros: 'string', // The effective CPC (cost-per-click) bid.
-    effective_cpm_bid_micros: 'string', // The effective CPM (cost-per-thousand viewable impressions) bid.
-    cpm_bid_micros: 'string', // The CPM (cost-per-thousand viewable impressions) bid.
+    effective_cpc_bid_micros: 'int64', // The effective CPC (cost-per-click) bid.
+    effective_cpm_bid_micros: 'int64', // The effective CPM (cost-per-thousand viewable impressions) bid.
+    cpm_bid_micros: 'int64', // The CPM (cost-per-thousand viewable impressions) bid.
     income_range: {
         type:
             'UNSPECIFIED | UNKNOWN | INCOME_RANGE_0_50 | INCOME_RANGE_50_60 | INCOME_RANGE_60_70 | INCOME_RANGE_70_80 | INCOME_RANGE_80_90 | INCOME_RANGE_90_UP | INCOME_RANGE_UNDETERMINED', // Type of the income range.
     },
     position_estimates: {
-        first_page_cpc_micros: 'string', // The estimate of the CPC bid required for ad to be shown on first page of search results.
-        first_position_cpc_micros: 'string', // The estimate of the CPC bid required for ad to be displayed in first position, at the top of the first page of search results.
-        estimated_add_clicks_at_first_position_cpc: 'string', // Estimate of how many clicks per week you might get by changing your keyword bid to the value in first_position_cpc_micros.
-        estimated_add_cost_at_first_position_cpc: 'string', // Estimate of how your cost per week might change when changing your keyword bid to the value in first_position_cpc_micros.
-        top_of_page_cpc_micros: 'string', // The estimate of the CPC bid required for ad to be displayed at the top of the first page of search results.
+        first_page_cpc_micros: 'int64', // The estimate of the CPC bid required for ad to be shown on first page of search results.
+        first_position_cpc_micros: 'int64', // The estimate of the CPC bid required for ad to be displayed in first position, at the top of the first page of search results.
+        estimated_add_clicks_at_first_position_cpc: 'int64', // Estimate of how many clicks per week you might get by changing your keyword bid to the value in first_position_cpc_micros.
+        estimated_add_cost_at_first_position_cpc: 'int64', // Estimate of how your cost per week might change when changing your keyword bid to the value in first_position_cpc_micros.
+        top_of_page_cpc_micros: 'int64', // The estimate of the CPC bid required for ad to be displayed at the top of the first page of search results.
     },
 }
 

@@ -8,8 +8,8 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
 const keyword_plan_ad_group = {
     keyword_plan_campaign: 'string', // The keyword plan campaign to which this ad group belongs.
-    id: 'string', // The ID of the keyword plan ad group.
-    cpc_bid_micros: 'string', // A default ad group max cpc bid in micros in account currency for all biddable keywords under the keyword plan ad group. If not set, will inherit from parent campaign.
+    id: 'int64', // The ID of the keyword plan ad group.
+    cpc_bid_micros: 'int64', // A default ad group max cpc bid in micros in account currency for all biddable keywords under the keyword plan ad group. If not set, will inherit from parent campaign.
     resource_name: 'string', // The resource name of the Keyword Planner ad group. KeywordPlanAdGroup resource names have the form:  `customers/{customer_id}/keywordPlanAdGroups/{kp_ad_group_id}`
     name: 'string', // The name of the keyword plan ad group.  This field is required and should not be empty when creating keyword plan ad group.
 }

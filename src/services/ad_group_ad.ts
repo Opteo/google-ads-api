@@ -41,7 +41,7 @@ const ad_group_ad = {
             headline_part_2: 'string', // The second part of the ad's headline.
         },
         final_urls: 'array', // The list of possible final URLs after all cross-domain redirects for the ad.
-        id: 'string', // The ID of the ad.
+        id: 'int64', // The ID of the ad.
         responsive_search_ad: {
             headlines: 'array', // List of text assets for headlines. When the ad serves the headlines will be selected from this list.
             path_2: 'string', // Second part of text that may appear appended to the url displayed in the ad. This field can only be set when path1 is also set.
@@ -115,17 +115,17 @@ const ad_group_ad = {
         },
         image_ad: {
             image_url: 'string', // URL of the full size image.
-            preview_pixel_height: 'string', // Height in pixels of the preview size image.
+            preview_pixel_height: 'int64', // Height in pixels of the preview size image.
             preview_image_url: 'string', // URL of the preview size image.
-            ad_id_to_copy_image_from: 'string', // An ad ID to copy the image from.
+            ad_id_to_copy_image_from: 'int64', // An ad ID to copy the image from.
             mime_type:
                 'UNSPECIFIED | UNKNOWN | IMAGE_JPEG | IMAGE_GIF | IMAGE_PNG | FLASH | TEXT_HTML | PDF | MSWORD | MSEXCEL | RTF | AUDIO_WAV | AUDIO_MP3 | HTML5_AD_ZIP', // The mime type of the image.
-            data: 'string', // Raw image data as bytes.
-            pixel_width: 'string', // Width in pixels of the full size image.
-            preview_pixel_width: 'string', // Width in pixels of the preview size image.
+            data: 'byte', // Raw image data as bytes.
+            pixel_width: 'int64', // Width in pixels of the full size image.
+            preview_pixel_width: 'int64', // Width in pixels of the preview size image.
             media_file: 'string', // The MediaFile resource to use for the image.
             name: 'string', // The name of the image. If the image was created from a MediaFile, this is the MediaFile's name. If the image was created from bytes, this is empty.
-            pixel_height: 'string', // Height in pixels of the full size image.
+            pixel_height: 'int64', // Height in pixels of the full size image.
         },
         tracking_url_template: 'string', // The URL template for constructing a tracking URL.
         shopping_smart_ad: {},

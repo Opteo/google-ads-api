@@ -18,7 +18,7 @@ const campaign_criterion = {
         type:
             'UNSPECIFIED | UNKNOWN | SEXUALLY_SUGGESTIVE | BELOW_THE_FOLD | PARKED_DOMAIN | GAME | JUVENILE | PROFANITY | TRAGEDY | VIDEO | VIDEO_RATING_DV_G | VIDEO_RATING_DV_PG | VIDEO_RATING_DV_T | VIDEO_RATING_DV_MA | VIDEO_NOT_YET_RATED | EMBEDDED_VIDEO | LIVE_STREAMING_VIDEO', // Content label type, required for CREATE operations.
     },
-    criterion_id: 'string', // The ID of the criterion.  This field is ignored during mutate.
+    criterion_id: 'int64', // The ID of the criterion.  This field is ignored during mutate.
     age_range: {
         type:
             'UNSPECIFIED | UNKNOWN | AGE_RANGE_18_24 | AGE_RANGE_25_34 | AGE_RANGE_35_44 | AGE_RANGE_45_54 | AGE_RANGE_55_64 | AGE_RANGE_65_UP | AGE_RANGE_UNDETERMINED', // Type of the age range.
@@ -54,10 +54,10 @@ const campaign_criterion = {
             street_address: 'string', // Street address line 1.
         },
         geo_point: {
-            latitude_in_micro_degrees: 'integer', // Micro degrees for the latitude.
-            longitude_in_micro_degrees: 'integer', // Micro degrees for the longitude.
+            latitude_in_micro_degrees: 'int32', // Micro degrees for the latitude.
+            longitude_in_micro_degrees: 'int32', // Micro degrees for the longitude.
         },
-        radius: 'number', // The radius of the proximity.
+        radius: 'double', // The radius of the proximity.
     },
     language: {
         language_constant: 'string', // The language constant resource name.
@@ -90,11 +90,11 @@ const campaign_criterion = {
     ad_schedule: {
         day_of_week: 'UNSPECIFIED | UNKNOWN | MONDAY | TUESDAY | WEDNESDAY | THURSDAY | FRIDAY | SATURDAY | SUNDAY', // Day of the week the schedule applies to.  This field is required for CREATE operations and is prohibited on UPDATE operations.
         end_minute: 'UNSPECIFIED | UNKNOWN | ZERO | FIFTEEN | THIRTY | FORTY_FIVE', // Minutes after the end hour at which this schedule ends. The schedule is exclusive of the end minute.  This field is required for CREATE operations and is prohibited on UPDATE operations.
-        start_hour: 'integer', // Starting hour in 24 hour time. This field must be between 0 and 23, inclusive.  This field is required for CREATE operations and is prohibited on UPDATE operations.
+        start_hour: 'int32', // Starting hour in 24 hour time. This field must be between 0 and 23, inclusive.  This field is required for CREATE operations and is prohibited on UPDATE operations.
         start_minute: 'UNSPECIFIED | UNKNOWN | ZERO | FIFTEEN | THIRTY | FORTY_FIVE', // Minutes after the start hour at which this schedule starts.  This field is required for CREATE operations and is prohibited on UPDATE operations.
-        end_hour: 'integer', // Ending hour in 24 hour time; 24 signifies end of the day. This field must be between 0 and 24, inclusive.  This field is required for CREATE operations and is prohibited on UPDATE operations.
+        end_hour: 'int32', // Ending hour in 24 hour time; 24 signifies end of the day. This field must be between 0 and 24, inclusive.  This field is required for CREATE operations and is prohibited on UPDATE operations.
     },
-    bid_modifier: 'number', // The modifier for the bids when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers. Use 0 to opt out of a Device type.
+    bid_modifier: 'float', // The modifier for the bids when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers. Use 0 to opt out of a Device type.
     type:
         'UNSPECIFIED | UNKNOWN | KEYWORD | PLACEMENT | MOBILE_APP_CATEGORY | MOBILE_APPLICATION | DEVICE | LOCATION | LISTING_GROUP | AD_SCHEDULE | AGE_RANGE | GENDER | INCOME_RANGE | PARENTAL_STATUS | YOUTUBE_VIDEO | YOUTUBE_CHANNEL | USER_LIST | PROXIMITY | TOPIC | LISTING_SCOPE | LANGUAGE | IP_BLOCK | CONTENT_LABEL | CARRIER | USER_INTEREST | WEBPAGE | OPERATING_SYSTEM_VERSION | APP_PAYMENT_MODEL | MOBILE_DEVICE | CUSTOM_AFFINITY | CUSTOM_INTENT', // The type of the criterion.
     user_list: {

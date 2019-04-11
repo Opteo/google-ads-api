@@ -16,7 +16,7 @@ const keyword_plan = {
             end_date: 'string', // The end date, in yyyy-mm-dd format.
         },
     },
-    id: 'string', // The ID of the keyword plan.
+    id: 'int64', // The ID of the keyword plan.
 }
 
 /**

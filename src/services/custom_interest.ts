@@ -11,7 +11,7 @@ const custom_interest = {
     status: 'UNSPECIFIED | UNKNOWN | ENABLED | REMOVED', // Status of this custom interest. Indicates whether the custom interest is enabled or removed.
     name: 'string', // Name of the custom interest. It should be unique across the same custom affinity audience. This field is required for create operations.
     type: 'UNSPECIFIED | UNKNOWN | CUSTOM_AFFINITY | CUSTOM_INTENT', // Type of the custom interest, CUSTOM_AFFINITY or CUSTOM_INTENT. By default the type is set to CUSTOM_AFFINITY.
-    id: 'string', // Id of the custom interest.
+    id: 'int64', // Id of the custom interest.
     resource_name: 'string', // The resource name of the custom interest. Custom interest resource names have the form:  `customers/{customer_id}/customInterests/{custom_interest_id}`
     description: 'string', // Description of this custom interest audience.
 }

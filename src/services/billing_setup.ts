@@ -21,7 +21,7 @@ const billing_setup = {
     status: 'UNSPECIFIED | UNKNOWN | PENDING | APPROVED_HELD | APPROVED | CANCELLED', // The status of the billing setup.
     start_time_type: 'UNSPECIFIED | UNKNOWN | NOW | FOREVER', // The start time as a type. Only NOW is allowed.
     end_time_type: 'UNSPECIFIED | UNKNOWN | NOW | FOREVER', // The end time as a type.  The only possible value is FOREVER.
-    id: 'string', // The ID of the billing setup.
+    id: 'int64', // The ID of the billing setup.
 }
 
 /**

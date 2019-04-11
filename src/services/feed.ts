@@ -29,7 +29,7 @@ const feed = {
     name: 'string', // Name of the feed. Required.
     origin: 'UNSPECIFIED | UNKNOWN | USER | GOOGLE', // Specifies who manages the FeedAttributes for the Feed.
     attributes: 'array', // The Feed's attributes. Required on CREATE. Disallowed on UPDATE. Use attribute_operations to add new attributes.
-    id: 'string', // The ID of the feed. This field is read-only.
+    id: 'int64', // The ID of the feed. This field is read-only.
 }
 
 /**

@@ -9,7 +9,7 @@ import { ServiceListOptions } from '../types'
 const mobile_app_category_constant = {
     resource_name: 'string', // The resource name of the mobile app category constant. Mobile app category constant resource names have the form:  `mobileAppCategoryConstants/{mobile_app_category_id}`
     name: 'string', // Mobile app category name.
-    id: 'integer', // The ID of the mobile app category constant.
+    id: 'int32', // The ID of the mobile app category constant.
 }
 
 /**

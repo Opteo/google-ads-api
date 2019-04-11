@@ -9,8 +9,8 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
 const ad_group_bid_modifier = {
     ad_group: 'string', // The ad group to which this criterion belongs.
     hotel_length_of_stay: {
-        max_nights: 'string', // High end of the number of nights in the stay.
-        min_nights: 'string', // Low end of the number of nights in the stay.
+        max_nights: 'int64', // High end of the number of nights in the stay.
+        min_nights: 'int64', // Low end of the number of nights in the stay.
     },
     base_ad_group: 'string', // The base ad group from which this draft/trial adgroup bid modifier was created. If ad_group is a base ad group then this field will be equal to ad_group. If the ad group was created in the draft or trial and has no corresponding base ad group, then this field will be null. This field is readonly.
     preferred_content: {
@@ -23,16 +23,16 @@ const ad_group_bid_modifier = {
         type: 'UNSPECIFIED | UNKNOWN | DEFAULT_SELECTION | USER_SELECTED', // Type of the hotel date selection
     },
     hotel_advance_booking_window: {
-        max_days: 'string', // High end of the number of days prior to the stay.
-        min_days: 'string', // Low end of the number of days prior to the stay.
+        max_days: 'int64', // High end of the number of days prior to the stay.
+        min_days: 'int64', // Low end of the number of days prior to the stay.
     },
     resource_name: 'string', // The resource name of the ad group bid modifier. Ad group bid modifier resource names have the form:  `customers/{customer_id}/adGroupBidModifiers/{ad_group_id}~{criterion_id}`
     bid_modifier_source: 'UNSPECIFIED | UNKNOWN | CAMPAIGN | AD_GROUP', // Bid modifier source.
     device: {
         type: 'UNSPECIFIED | UNKNOWN | MOBILE | TABLET | DESKTOP | OTHER', // Type of the device.
     },
-    criterion_id: 'string', // The ID of the criterion to bid modify.  This field is ignored for mutates.
-    bid_modifier: 'number', // The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. The range is 1.0 - 6.0 for PreferredContent. Use 0 to opt out of a Device type.
+    criterion_id: 'int64', // The ID of the criterion to bid modify.  This field is ignored for mutates.
+    bid_modifier: 'double', // The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. The range is 1.0 - 6.0 for PreferredContent. Use 0 to opt out of a Device type.
 }
 
 /**

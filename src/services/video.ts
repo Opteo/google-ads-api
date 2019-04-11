@@ -9,7 +9,7 @@ import { ServiceListOptions } from '../types'
 const video = {
     id: 'string', // The ID of the video.
     channel_id: 'string', // The owner channel id of the video.
-    duration_millis: 'string', // The duration of the video in milliseconds.
+    duration_millis: 'int64', // The duration of the video in milliseconds.
     title: 'string', // The title of the video.
     resource_name: 'string', // The resource name of the video. Video resource names have the form:  `customers/{customer_id}/videos/{video_id}`
 }

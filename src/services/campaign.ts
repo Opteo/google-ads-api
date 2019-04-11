@@ -12,15 +12,15 @@ const campaign = {
         vanity_pharma_text:
             'UNSPECIFIED | UNKNOWN | PRESCRIPTION_TREATMENT_WEBSITE_EN | PRESCRIPTION_TREATMENT_WEBSITE_ES | PRESCRIPTION_DEVICE_WEBSITE_EN | PRESCRIPTION_DEVICE_WEBSITE_ES | MEDICAL_DEVICE_WEBSITE_EN | MEDICAL_DEVICE_WEBSITE_ES | PREVENTATIVE_TREATMENT_WEBSITE_EN | PREVENTATIVE_TREATMENT_WEBSITE_ES | PRESCRIPTION_CONTRACEPTION_WEBSITE_EN | PRESCRIPTION_CONTRACEPTION_WEBSITE_ES | PRESCRIPTION_VACCINE_WEBSITE_EN | PRESCRIPTION_VACCINE_WEBSITE_ES', // The text that will be displayed in display URL of the text ad when website description is the selected display mode for vanity pharma URLs.
     },
-    id: 'string', // The ID of the campaign.
+    id: 'int64', // The ID of the campaign.
     target_cpa: {
-        cpc_bid_ceiling_micros: 'string', // Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.
-        cpc_bid_floor_micros: 'string', // Minimum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.
-        target_cpa_micros: 'string', // Average CPA target. This target should be greater than or equal to minimum billable unit based on the currency for the account.
+        cpc_bid_ceiling_micros: 'int64', // Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.
+        cpc_bid_floor_micros: 'int64', // Minimum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.
+        target_cpa_micros: 'int64', // Average CPA target. This target should be greater than or equal to minimum billable unit based on the currency for the account.
     },
     bidding_strategy: 'string', // Portfolio bidding strategy used by campaign.
     commission: {
-        commission_rate_micros: 'string', // Commission rate defines the portion of the conversion value that the advertiser will be billed. A commission rate of x should be passed into this field as (x * 1,000,000). For example, 106,000 represents a commission rate of 0.106 (10.6%).
+        commission_rate_micros: 'int64', // Commission rate defines the portion of the conversion value that the advertiser will be billed. A commission rate of x should be passed into this field as (x * 1,000,000). For example, 106,000 represents a commission rate of 0.106 (10.6%).
     },
     campaign_budget: 'string', // The budget of the campaign.
     real_time_bidding_setting: {
@@ -28,14 +28,14 @@ const campaign = {
     },
     maximize_conversions: {},
     target_roas: {
-        cpc_bid_ceiling_micros: 'string', // Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.
-        target_roas: 'number', // Required. The desired revenue (based on conversion data) per unit of spend. Value must be between 0.01 and 1000.0, inclusive.
-        cpc_bid_floor_micros: 'string', // Minimum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.
+        cpc_bid_ceiling_micros: 'int64', // Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.
+        target_roas: 'double', // Required. The desired revenue (based on conversion data) per unit of spend. Value must be between 0.01 and 1000.0, inclusive.
+        cpc_bid_floor_micros: 'int64', // Minimum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.
     },
     target_impression_share: {
-        cpc_bid_ceiling_micros: 'string', // The highest CPC bid the automated bidding system is permitted to specify. This is a required field entered by the advertiser that sets the ceiling and specified in local micros.
+        cpc_bid_ceiling_micros: 'int64', // The highest CPC bid the automated bidding system is permitted to specify. This is a required field entered by the advertiser that sets the ceiling and specified in local micros.
         location: 'UNSPECIFIED | UNKNOWN | ANYWHERE_ON_PAGE | TOP_OF_PAGE | ABSOLUTE_TOP_OF_PAGE', // The targeted location on the search results page.
-        location_fraction_micros: 'string', // The desired fraction of ads to be shown in the targeted location in micros. E.g. 1% equals 10,000.
+        location_fraction_micros: 'int64', // The desired fraction of ads to be shown in the targeted location in micros. E.g. 1% equals 10,000.
     },
     tracking_setting: {
         tracking_url: 'string', // The url used for dynamic tracking.
@@ -51,10 +51,10 @@ const campaign = {
     video_brand_safety_suitability:
         'UNSPECIFIED | UNKNOWN | EXPANDED_INVENTORY | STANDARD_INVENTORY | LIMITED_INVENTORY', // 3-Tier Brand Safety setting for the campaign.
     shopping_setting: {
-        campaign_priority: 'integer', // Priority of the campaign. Campaigns with numerically higher priorities take precedence over those with lower priorities. This field is required for Shopping campaigns, with values between 0 and 2, inclusive. This field is optional for Smart Shopping campaigns, but must be equal to 3 if set.
+        campaign_priority: 'int32', // Priority of the campaign. Campaigns with numerically higher priorities take precedence over those with lower priorities. This field is required for Shopping campaigns, with values between 0 and 2, inclusive. This field is optional for Smart Shopping campaigns, but must be equal to 3 if set.
         sales_country: 'string', // Sales country of products to include in the campaign. This field is required for Shopping campaigns. This field is immutable. This field is optional for non-Shopping campaigns, but it must be equal to 'ZZ' if set.
         enable_local: 'boolean', // Whether to include local products.
-        merchant_id: 'string', // ID of the Merchant Center account. This field is required for create operations. This field is immutable for Shopping campaigns.
+        merchant_id: 'int64', // ID of the Merchant Center account. This field is required for create operations. This field is immutable for Shopping campaigns.
     },
     app_campaign_setting: {
         app_store: 'UNSPECIFIED | UNKNOWN | APPLE_APP_STORE | GOOGLE_APP_STORE', // The application store that distributes this specific app.
@@ -63,7 +63,7 @@ const campaign = {
         app_id: 'string', // A string that uniquely identifies a mobile application.
     },
     percent_cpc: {
-        cpc_bid_ceiling_micros: 'string', // Maximum bid limit that can be set by the bid strategy. This is an optional field entered by the advertiser and specified in local micros. Note: A zero value is interpreted in the same way as having bid_ceiling undefined.
+        cpc_bid_ceiling_micros: 'int64', // Maximum bid limit that can be set by the bid strategy. This is an optional field entered by the advertiser and specified in local micros. Note: A zero value is interpreted in the same way as having bid_ceiling undefined.
         enhanced_cpc_enabled: 'boolean', // Adjusts the bid for each auction upward or downward, depending on the likelihood of a conversion. Individual bids may exceed cpc_bid_ceiling_micros, but the average bid amount for a campaign should not.
     },
     targeting_setting: {
@@ -74,8 +74,8 @@ const campaign = {
     },
     end_date: 'string', // The date when campaign ended.  This field must not be used in WHERE clauses.
     target_spend: {
-        cpc_bid_ceiling_micros: 'string', // Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.
-        target_spend_micros: 'string', // The spend target under which to maximize clicks. A TargetSpend bidder will attempt to spend the smaller of this value or the natural throttling spend amount. If not specified, the budget is used as the spend target.
+        cpc_bid_ceiling_micros: 'int64', // Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.
+        target_spend_micros: 'int64', // The spend target under which to maximize clicks. A TargetSpend bidder will attempt to spend the smaller of this value or the natural throttling spend amount. If not specified, the budget is used as the spend target.
     },
     status: 'UNSPECIFIED | UNKNOWN | ENABLED | PAUSED | REMOVED', // The status of the campaign.  When a new campaign is added, the status defaults to ENABLED.
     manual_cpv: {},
@@ -96,7 +96,7 @@ const campaign = {
     },
     url_custom_parameters: 'array', // The list of mappings used to substitute custom parameter tags in a `tracking_url_template`, `final_urls`, or `mobile_final_urls`.
     maximize_conversion_value: {
-        target_roas: 'number', // The target return on ad spend (ROAS) option. If set, the bid strategy will maximize revenue while averaging the target return on ad spend. If the target ROAS is high, the bid strategy may not be able to spend the full budget. If the target ROAS is not set, the bid strategy will aim to achieve the highest possible ROAS for the budget.
+        target_roas: 'double', // The target return on ad spend (ROAS) option. If set, the bid strategy will maximize revenue while averaging the target return on ad spend. If the target ROAS is high, the bid strategy may not be able to spend the full budget. If the target ROAS is not set, the bid strategy will aim to achieve the highest possible ROAS for the budget.
     },
     final_url_suffix: 'string', // Suffix used to append query parameters to landing pages that are served with parallel tracking.
     geo_target_type_setting: {
@@ -112,7 +112,7 @@ const campaign = {
     target_cpm: {},
     advertising_channel_type: 'UNSPECIFIED | UNKNOWN | SEARCH | DISPLAY | SHOPPING | HOTEL | VIDEO | MULTI_CHANNEL', // The primary serving target for ads within the campaign. The targeting options can be refined in `network_settings`.  This field is required and should not be empty when creating new campaigns.  Can be set only when creating campaigns. After the campaign is created, the field can not be changed.
     hotel_setting: {
-        hotel_center_id: 'string', // The linked Hotel Center account.
+        hotel_center_id: 'int64', // The linked Hotel Center account.
     },
 }
 

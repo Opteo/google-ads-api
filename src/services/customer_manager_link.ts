@@ -8,7 +8,7 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
 const customer_manager_link = {
     manager_customer: 'string', // The manager customer linked to the customer.
-    manager_link_id: 'string', // ID of the customer-manager link. This field is read only.
+    manager_link_id: 'int64', // ID of the customer-manager link. This field is read only.
     status: 'UNSPECIFIED | UNKNOWN | ACTIVE | INACTIVE | PENDING | REFUSED | CANCELED', // Status of the link between the customer and the manager.
     resource_name: 'string', // Name of the resource. CustomerManagerLink resource names have the form:  `customers/{customer_id}/customerManagerLinks/{manager_customer_id}~{manager_link_id}`
 }

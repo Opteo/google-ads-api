@@ -298,7 +298,9 @@ async function compileService(entity, schema) {
         const tab = '    '
 
         Object.keys(obj).forEach(key => {
-            const type = obj[key].enum ? obj[key].enum.join(' | ') : obj[key].type
+            const type = obj[key].enum
+                ? obj[key].enum.join(' | ')
+                : obj[key].format || obj[key].type
             if (type === 'object') {
                 new_obj += `\n${tab.repeat(level)}${snakeCase(key)}: ${pretty(
                     obj[key].properties,
