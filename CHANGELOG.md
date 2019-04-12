@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.2](https://github.com/Opteo/google-ads-api/compare/v1.2.1...v1.2.2) (2019-04-12)
+
+
+### Bug Fixes
+
+* **services:** Correctly parse enums to avoid "resource field missing" errors ([82e4ecc](https://github.com/Opteo/google-ads-api/commit/82e4ecc))
+
+
+
 ## [1.2.1](https://github.com/Opteo/google-ads-api/compare/v1.2.0...v1.2.1) (2019-04-08)
 
 
