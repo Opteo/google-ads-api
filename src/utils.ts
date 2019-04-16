@@ -100,12 +100,13 @@ const formatConstraints = (constraints: any): string => {
         let op
 
         if (!isUndefined(constraint.key) && !isUndefined(constraint.op) && isUndefined(constraint.val)) {
-            throw new Error(`"val" cannot be undefined`)
+            throw new Error(`"val" cannot be undefined for the key "${constraint.key}" in constraints`)
         }
 
         if (isUndefined(constraint.key) || isUndefined(constraint.op) || isUndefined(constraint.val)) {
             throw new Error('must specify { key, op, val } when using object-style constraints')
         }
+
         key = constraint.key
         op = constraint.op
         val = constraint.val
