@@ -63,4 +63,34 @@ describe('buildReportQuery', () => {
             `SELECT ad_group.name, campaign.name FROM ad_group WHERE ad_group.status = PAUSED AND campaign.advertising_channel_type = SEARCH AND campaign_budget.status = ENABLED AND metrics.clicks > 10`
         )
     })
+
+    it(`should throw an error if "val" is undefined`, () => {
+        const id = undefined
+
+        const options: ReportOptions = {
+            entity: 'campaign',
+            attributes: ['campaign.id'],
+            constraints: [{ key: 'campaign.id', op: '=', val: id }],
+        }
+
+        try {
+            buildReportQuery(options)
+        } catch (err) {
+            expect(err.message).toContain('cannot be undefined')
+        }
+    })
+
+    it('should throw an error when incorrectly using key, op, val constraint fields', () => {
+        const options: ReportOptions = {
+            entity: 'campaign',
+            attributes: ['campaign.id'],
+            constraints: [{ key: 'campaign.id', val: 2 }],
+        }
+
+        try {
+            buildReportQuery(options)
+        } catch (err) {
+            expect(err.message).toContain('must specify { key, op, val }')
+        }
+    })
 })
