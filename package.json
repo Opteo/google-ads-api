@@ -1,6 +1,6 @@
 {
   "name": "google-ads-api",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "Google Ads API Client Library for JavaScript",
   "main": "./build/index.js",
   "typings": "./build/index.d.ts",
@@ -72,7 +72,7 @@
     "@types/request": "^2.47.1",
     "bluebird": "^3.5.2",
     "bottleneck": "^2.16.1",
-    "google-ads-node": "^1.8.1",
+    "google-ads-node": "^1.8.3",
     "lodash": "^4.17.11",
     "redis": "^2.8.0",
     "request": "^2.88.0"
