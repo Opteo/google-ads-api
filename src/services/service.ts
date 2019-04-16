@@ -209,6 +209,10 @@ export default class Service {
         return pb
     }
 
+    protected buildResources(resource: string, data: any): unknown {
+        return data.map((d: any) => this.client.buildResource(resource, d))
+    }
+
     /* Base report method used in global customer instance */
     protected async serviceReport(
         options: ReportOptions,
