@@ -184,7 +184,7 @@ export default class Service {
         return `customers/${this.cid}/${resource}`
     }
 
-    protected async serviceCall(call: string, request: any): Promise<any> {
+    protected async serviceCall(call: string, request: any, all_results: boolean = false): Promise<any> {
         try {
             const response = await this.service[call](request)
             const parsed_results = this.parseServiceResults([response])
@@ -192,7 +192,7 @@ export default class Service {
                 Since get returns an object, we always return the first item.
                 This should only ever be one item here, and it should exist.
             */
-            return parsed_results[0]
+            return all_results ? parsed_results : parsed_results[0]
         } catch (err) {
             throw new SearchGrpcError(err, request)
         }
