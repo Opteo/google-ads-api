@@ -12,7 +12,13 @@ export class SearchGrpcError extends Error {
 
         super(details)
         try {
+            // Error.code is usually a number, so typescript really needs massaging here to accept an object.
             this.code = JSON.parse(get(err, "metadata._internal_repr['error-code'][0]"))
+            for (const key in this.code as any) {
+                if ((this.code as any)[key] === 0) {
+                    delete (this.code as any)[key]
+                }
+            }
         } catch (err) {
             this.code = code
         }
