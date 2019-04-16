@@ -15,15 +15,14 @@ async function main() {
 
     try {
         const results = await customer.report({
-            entity: 'ad_group',
-            attributes: ['campaign.id', 'ad_group.id', 'ad_group.name'],
-            constraints: [{ 'ad_group.status': enums.AdGroupStatus.ENABLED }],
+            entity: 'campaign',
+            attributes: ['campaign.id', 'campaign.name'],
+            constraints: [{ 'campaign.status': enums.CampaignStatus.ENABLED }],
         })
 
-        for (const { campaign, ad_group } of results) {
+        for (const { campaign } of results) {
             console.log(`
-                Ad group with ID ${ad_group.id} and name "${ad_group.name}" 
-                was found in campaign with ID ${campaign.id}
+                Campaign with ID ${campaign.id} and name "${campaign.name}" was found.
             `)
         }
     } catch (err) {
