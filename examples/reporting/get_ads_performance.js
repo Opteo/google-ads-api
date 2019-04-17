@@ -28,10 +28,11 @@ async function main() {
         })
 
         for (const { ad_group, ad_group_ad, metrics, segments } of results) {
+            const { ad } = ad_group_ad
             console.log(
-                `Ad ID ${ad_group_ad.ad.id} in ad group ID ${ad_group.id} with ${
-                    metrics.impressions
-                } impressions on day ${segments.date} had ${metrics.clicks} clicks during the last 7 days.`
+                `Ad ID ${ad.id} in ad group ID ${ad_group.id} with ${metrics.impressions} impressions on day ${
+                    segments.date
+                } had ${metrics.clicks} clicks during the last 7 days.`
             )
         }
     } catch (err) {
