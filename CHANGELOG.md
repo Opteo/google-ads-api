@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.4.0](https://github.com/Opteo/google-ads-api/compare/v1.3.0...v1.4.0) (2019-04-17)
+
+
+### Features
+
+* **errors:** added support for error field location ([8c77ac5](https://github.com/Opteo/google-ads-api/commit/8c77ac5))
+
+
+
 # [1.3.0](https://github.com/Opteo/google-ads-api/compare/v1.2.2...v1.3.0) (2019-04-16)
 
 
