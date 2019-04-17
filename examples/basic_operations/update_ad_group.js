@@ -1,4 +1,4 @@
-const { GoogleAdsApi } = require('google-ads-api')
+const { GoogleAdsApi, enums } = require('google-ads-api')
 
 // Make sure you pass in valid authentication details!
 const client = new GoogleAdsApi({
@@ -14,17 +14,15 @@ async function main() {
     })
 
     // Bonus: If you're using Typescript, set the type here to "types.AdGroup" for autocomplete
-    const adgroup = {
-        name: 'new ad group',
-        campaign: `customers/{customer_id}/campaigns/{campaign_id}`,
+    const ad_group = {
+        resource_name: 'customers/{customer_id}/adGroups/{ad_group_id}',
+        cpc_bid_micros: 1000000,
+        status: enums.AdGroupStatus.PAUSED,
     }
 
     try {
-        const { results } = await customer.adGroups.create(adgroup)
-        /*
-            The newly created ad group will have a resource name in the following format:
-            "customers/{customer_id}/adGroups/{ad_group_id}"
-        */
+        const { results } = await customer.adGroups.update(ad_group)
+        console.log(`Updated CPC bid and status of the ad group ${results[0].resource_name}`)
     } catch (err) {
         console.log(err)
     }

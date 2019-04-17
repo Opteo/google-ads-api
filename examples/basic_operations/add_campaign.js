@@ -1,4 +1,4 @@
-const { GoogleAdsApi, enums, types } = require('google-ads-api')
+const { GoogleAdsApi, enums } = require('google-ads-api')
 
 // Make sure you pass in valid authentication details!
 const client = new GoogleAdsApi({
