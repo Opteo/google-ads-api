@@ -6,14 +6,6 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
 // The customer_client_link entity:
 
-const customer_client_link = {
-    manager_link_id: 'int64', // This is uniquely identifies a customer client link. Read only.
-    status: 'UNSPECIFIED | UNKNOWN | ACTIVE | INACTIVE | PENDING | REFUSED | CANCELED', // This is the status of the link between client and manager.
-    resource_name: 'string', // Name of the resource. CustomerClientLink resource names have the form:  `customers/{customer_id}/customerClientLinks/{client_customer_id}~{manager_link_id}`
-    client_customer: 'string', // The client customer linked to this customer.
-    hidden: 'boolean', // The visibility of the link. Users can choose whether or not to see hidden links in the AdWords UI. Default value is false
-}
-
 /**
  * @constants
  */

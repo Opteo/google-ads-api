@@ -6,10 +6,6 @@ import { ServiceListOptions } from '../types'
 
 // The product_group_view entity:
 
-const product_group_view = {
-    resource_name: 'string', // The resource name of the product group view. Product group view resource names have the form:  `customers/{customer_id}/productGroupViews/{ad_group_id}~{criterion_id}`
-}
-
 /**
  * @constants
  */

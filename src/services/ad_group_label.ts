@@ -6,12 +6,6 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
 // The ad_group_label entity:
 
-const ad_group_label = {
-    label: 'string', // The label assigned to the ad group.
-    ad_group: 'string', // The ad group to which the label is attached.
-    resource_name: 'string', // The resource name of the ad group label. Ad group label resource names have the form: `customers/{customer_id}/adGroupLabels/{ad_group_id}~{label_id}`
-}
-
 /**
  * @constants
  */

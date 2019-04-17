@@ -6,10 +6,6 @@ import { ServiceListOptions } from '../types'
 
 // The parental_status_view entity:
 
-const parental_status_view = {
-    resource_name: 'string', // The resource name of the parental status view. Parental Status view resource names have the form:  `customers/{customer_id}/parentalStatusViews/{ad_group_id}~{criterion_id}`
-}
-
 /**
  * @constants
  */

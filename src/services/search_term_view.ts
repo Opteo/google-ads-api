@@ -6,13 +6,6 @@ import { ServiceListOptions } from '../types'
 
 // The search_term_view entity:
 
-const search_term_view = {
-    ad_group: 'string', // The ad group the search term served in.
-    status: 'UNSPECIFIED | UNKNOWN | ADDED | EXCLUDED | ADDED_EXCLUDED | NONE', // Indicates whether the search term is currently one of your targeted or excluded keywords.
-    search_term: 'string', // The search term.
-    resource_name: 'string', // The resource name of the search term view. Search term view resource names have the form:  `customers/{customer_id}/searchTermViews/{campaign_id}~{ad_group_id}~ {URL-base64 search term}`
-}
-
 /**
  * @constants
  */

@@ -6,20 +6,6 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
 // The campaign_feed entity:
 
-const campaign_feed = {
-    matching_function: {
-        function_string: 'string', // String representation of the Function.  Examples: 1) IDENTITY(true) or IDENTITY(false). All or none feed items serve. 2) EQUALS(CONTEXT.DEVICE,"Mobile") 3) IN(FEED_ITEM_ID,{1000001,1000002,1000003}) 4) CONTAINS_ANY(FeedAttribute[12345678,0],{"Mars cruise","Venus cruise"}) 5) AND(IN(FEED_ITEM_ID,{10001,10002}),EQUALS(CONTEXT.DEVICE,"Mobile")) See  https: //developers.google.com/adwords/api/docs/guides/feed-matching-functions  Note that because multiple strings may represent the same underlying function (whitespace and single versus double quotation marks, for example), the value returned may not be identical to the string sent in a mutate request.
-        left_operands: 'array', // The operands on the left hand side of the equation. This is also the operand to be used for single operand expressions such as NOT.
-        operator: 'UNSPECIFIED | UNKNOWN | IN | IDENTITY | EQUALS | AND | CONTAINS_ANY', // Operator for a function.
-        right_operands: 'array', // The operands on the right hand side of the equation.
-    },
-    campaign: 'string', // The campaign to which the CampaignFeed belongs.
-    resource_name: 'string', // The resource name of the campaign feed. Campaign feed resource names have the form:  `customers/{customer_id}/campaignFeeds/{campaign_id}~{feed_id}
-    placeholder_types: 'array', // Indicates which placeholder types the feed may populate under the connected campaign. Required.
-    feed: 'string', // The feed to which the CampaignFeed belongs.
-    status: 'UNSPECIFIED | UNKNOWN | ENABLED | REMOVED', // Status of the campaign feed. This field is read-only.
-}
-
 /**
  * @constants
  */

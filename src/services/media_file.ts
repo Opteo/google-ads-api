@@ -6,32 +6,6 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
 // The media_file entity:
 
-const media_file = {
-    file_size: 'int64', // The size of the media file in bytes.
-    id: 'int64', // The ID of the media file.
-    mime_type:
-        'UNSPECIFIED | UNKNOWN | IMAGE_JPEG | IMAGE_GIF | IMAGE_PNG | FLASH | TEXT_HTML | PDF | MSWORD | MSEXCEL | RTF | AUDIO_WAV | AUDIO_MP3 | HTML5_AD_ZIP', // The mime type of the media file.
-    media_bundle: {
-        data: 'byte', // Raw zipped data.
-    },
-    source_url: 'string', // The URL of where the original media file was downloaded from (or a file name).
-    resource_name: 'string', // The resource name of the media file. Media file resource names have the form:  `customers/{customer_id}/mediaFiles/{media_file_id}`
-    video: {
-        youtube_video_id: 'string', // The YouTube video ID (as seen in YouTube URLs).
-        ad_duration_millis: 'int64', // The duration of the Video in milliseconds.
-        advertising_id_code: 'string', // The Advertising Digital Identification code for this video, as defined by the American Association of Advertising Agencies, used mainly for television commercials.
-        isci_code: 'string', // The Industry Standard Commercial Identifier code for this video, used mainly for television commercials.
-    },
-    image: {
-        data: 'byte', // Raw image data.
-    },
-    audio: {
-        ad_duration_millis: 'int64', // The duration of the Audio in milliseconds.
-    },
-    name: 'string', // The name of the media file. The name can be used by clients to help identify previously uploaded media.
-    type: 'UNSPECIFIED | UNKNOWN | IMAGE | ICON | MEDIA_BUNDLE | AUDIO | VIDEO | DYNAMIC_IMAGE', // Type of the media file.
-}
-
 /**
  * @constants
  */

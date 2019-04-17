@@ -6,10 +6,6 @@ import { ServiceListOptions } from '../types'
 
 // The hotel_performance_view entity:
 
-const hotel_performance_view = {
-    resource_name: 'string', // The resource name of the hotel performance view. Hotel performance view resource names have the form:  `customers/{customer_id}/hotelPerformanceView`
-}
-
 /**
  * @constants
  */

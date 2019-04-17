@@ -15,7 +15,9 @@
     "test:unit": "jest /tests/",
     "prettier:base": "prettier --parser typescript --single-quote",
     "prettier:check": "npm run prettier:base -- --list-different \"src/**/*.{ts,tsx}\"",
-    "prettier:write": "npm run prettier:base -- --write \"src/**/*.{ts,tsx}\""
+    "prettier:write": "npm run prettier:base -- --write \"src/**/*.{ts,tsx}\"",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -56,6 +58,7 @@
   "devDependencies": {
     "@types/jest": "^24.0.9",
     "dotenv": "^7.0.0",
+    "fs-extra": "^7.0.1",
     "jest": "^24.1.0",
     "json-schema-ref-parser": "^6.1.0",
     "lodash.camelcase": "^4.3.0",

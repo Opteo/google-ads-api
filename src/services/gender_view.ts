@@ -6,10 +6,6 @@ import { ServiceListOptions } from '../types'
 
 // The gender_view entity:
 
-const gender_view = {
-    resource_name: 'string', // The resource name of the gender view. Gender view resource names have the form:  `customers/{customer_id}/genderViews/{ad_group_id}~{criterion_id}`
-}
-
 /**
  * @constants
  */

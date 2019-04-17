@@ -1,8 +1,19 @@
-const fs = require('fs')
+const fs = require('fs-extra')
 const template = require('lodash.template')
 const camelCase = require('lodash.camelcase')
 const snakeCase = require('lodash.snakecase')
 const endsWith = require('lodash.endswith')
+const  ts = require("typescript")
+
+
+const log = obj => {
+    console.log(require('util').inspect(obj, false, null))
+}
+
+const capitalise = s => {
+    if (typeof s !== 'string') return ''
+    return s.charAt(0).toUpperCase() + s.slice(1)
+}
 
 var Promise = require('bluebird')
 var execP = Promise.promisify(require('child_process').exec)
@@ -12,18 +23,12 @@ const service_compiler = template(service_template_file, {
     interpolate: /{{([\s\S]+?)}}/g,
 })
 
-const service_immutable_template_file = fs.readFileSync(
-    __dirname + '/template_service_immutable.hbs',
-    'utf-8'
-)
+const service_immutable_template_file = fs.readFileSync(__dirname + '/template_service_immutable.hbs', 'utf-8')
 const service_immutable_compiler = template(service_immutable_template_file, {
     interpolate: /{{([\s\S]+?)}}/g,
 })
 
-const service_test_template_file = fs.readFileSync(
-    __dirname + '/template_service_test.hbs',
-    'utf-8'
-)
+const service_test_template_file = fs.readFileSync(__dirname + '/template_service_test.hbs', 'utf-8')
 const service_test_compiler = template(service_test_template_file, {
     interpolate: /{{([\s\S]+?)}}/g,
 })
@@ -31,7 +36,20 @@ const service_test_compiler = template(service_test_template_file, {
 const $RefParser = require('json-schema-ref-parser')
 
 const raw_schema = require('./schema.json')
+// TODO: get this from google-ads-node
+const raw_compiled_services = require('./compiled_resources.json')
 
+// console.log(raw_compiled_services)
+// console.log(raw_compiled_services.nested.google.nested)
+// console.log(
+//     raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v1.nested.resources.nested.Ad.oneofs.adData
+// )
+
+const compiled_resources =
+    raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v1.nested.resources.nested
+// raw_compiled_services.nested.
+
+// console.log(compiled_resources)
 const references = raw_schema.schemas
 
 var myResolver = {
@@ -276,16 +294,40 @@ async function compileService(entity, schema) {
 
     let compiled_service
 
-    function unroll(obj) {
+    function unroll(obj, parent_field_name) {
         const new_obj = {}
 
         Object.keys(obj).forEach(key => {
-            // console.log(key)
-            const type = obj[key].type
-            if (type === 'object') {
-                new_obj[snakeCase(key)] = unroll(obj[key].properties)
+
+            const _new_object = {}            
+
+            if (obj[key].enum) {
+                _new_object._type = 'enum'
+                _new_object._enums = obj[key].enum.map((_enum, index) => {
+                    return {
+                        s: _enum,
+                        description: obj[key].enumDescriptions[index],
+                    }
+                })
             } else {
-                new_obj[snakeCase(key)] = { type, descr: obj[key].description }
+                _new_object._type = obj[key].format || obj[key].type
+            }
+
+            if (_new_object._type === 'object') {
+                new_obj[snakeCase(key)] = unroll(obj[key].properties, key)
+            } else {
+                new_obj[snakeCase(key)] = { ..._new_object, _description: obj[key].description }
+            }
+
+            const matching_resource = compiled_resources[capitalise(parent_field_name)]
+            if(matching_resource && matching_resource.oneofs){
+                Object.keys(matching_resource.oneofs).forEach(oneof_key => {
+                    matching_resource.oneofs[oneof_key].oneof.forEach(el =>{
+                        if(el === key){
+                            new_obj[snakeCase(key)]._oneof = oneof_key
+                        }
+                    })
+                })
             }
         })
 
@@ -298,18 +340,12 @@ async function compileService(entity, schema) {
         const tab = '    '
 
         Object.keys(obj).forEach(key => {
-            const type = obj[key].enum
-                ? obj[key].enum.join(' | ')
-                : obj[key].format || obj[key].type
+            const type = obj[key].enum ? obj[key].enum.join(' | ') : obj[key].format || obj[key].type
+
             if (type === 'object') {
-                new_obj += `\n${tab.repeat(level)}${snakeCase(key)}: ${pretty(
-                    obj[key].properties,
-                    level + 1
-                )}`
+                new_obj += `\n${tab.repeat(level)}${snakeCase(key)}: ${pretty(obj[key].properties, level + 1)}`
             } else {
-                new_obj += `\n${tab.repeat(level)}${snakeCase(key)}: '${type}', // ${obj[
-                    key
-                ].description
+                new_obj += `\n${tab.repeat(level)}${snakeCase(key)}: '${type}', // ${obj[key].description
                     .split('\n')
                     .join(' ')}`
             }
@@ -318,7 +354,11 @@ async function compileService(entity, schema) {
         return `${new_obj}\n${tab.repeat(level - 1)}}${level === 1 ? '' : ','}`
     }
 
-    console.log(pretty(schema.schemas[`GoogleAdsGoogleadsV1Resources__${entity}`].properties))
+    const meta = {
+        name: entity,
+        object: unroll(schema.schemas[`GoogleAdsGoogleadsV1Resources__${entity}`].properties, entity),
+    }
+
 
     if (schema.schemas[`GoogleAdsGoogleadsV1Services__${mutate_request}`]) {
         compiled_service = service_compiler({
@@ -332,10 +372,10 @@ async function compileService(entity, schema) {
             TYPE: type,
             PARAM: param,
             ENTITY: ent,
-            ENTITY_DOC: pretty(
-                schema.schemas[`GoogleAdsGoogleadsV1Resources__${entity}`].properties
-            ),
+            // ENTITY_DOC: pretty(schema.schemas[`GoogleAdsGoogleadsV1Resources__${entity}`].properties),
         })
+
+        meta.methods = ['get', 'list', 'create', 'update', 'delete']
     } else {
         compiled_service = service_immutable_compiler({
             RESOURCE_URL_NAME: resource_url_name,
@@ -348,14 +388,24 @@ async function compileService(entity, schema) {
             TYPE: type,
             PARAM: param,
             ENTITY: ent,
-            ENTITY_DOC: pretty(
-                schema.schemas[`GoogleAdsGoogleadsV1Resources__${entity}`].properties
-            ),
+            // ENTITY_DOC: pretty(schema.schemas[`GoogleAdsGoogleadsV1Resources__${entity}`].properties),
         })
+
+        meta.methods = ['get', 'list']
     }
 
+    // let js_class = ts.transpileModule(compiled_service, {
+    //   compilerOptions: { module: ts.ModuleKind.CommonJS }
+    // });
+
+    // console.log(JSON.stringify(js_class));
+
     const file_path = `${__dirname}/../src/services/${ent}.ts`
+    const docs_file_path = `${__dirname}/../docs/entities/${ent}/`
     fs.writeFileSync(file_path, compiled_service)
+
+    await fs.ensureDir(docs_file_path)
+    await fs.writeJson(docs_file_path + 'meta.json', meta)
 
     if (!entity.toLowerCase().includes('constant')) {
         // const compiled_service_test = service_test_compiler({
@@ -391,6 +441,7 @@ async function compileService(entity, schema) {
     }
 
     const result = await execP(`prettier --write ${__dirname}/../src/services/*.ts`)
+    await execP(`prettier --write ${__dirname}/../docs/**/*.json`)
 
     console.log('Finished compiling all services')
 })()

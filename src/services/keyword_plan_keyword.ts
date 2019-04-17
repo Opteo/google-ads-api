@@ -6,15 +6,6 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
 // The keyword_plan_keyword entity:
 
-const keyword_plan_keyword = {
-    match_type: 'UNSPECIFIED | UNKNOWN | EXACT | PHRASE | BROAD', // The keyword match type.
-    resource_name: 'string', // The resource name of the Keyword Plan ad group keyword. KeywordPlanKeyword resource names have the form:  `customers/{customer_id}/keywordPlanKeywords/{kp_ad_group_keyword_id}`
-    cpc_bid_micros: 'int64', // A keyword level max cpc bid in micros, in the account currency, that overrides the keyword plan ad group cpc bid.
-    keyword_plan_ad_group: 'string', // The Keyword Plan ad group to which this keyword belongs.
-    text: 'string', // The keyword text.
-    id: 'int64', // The ID of the Keyword Plan keyword.
-}
-
 /**
  * @constants
  */

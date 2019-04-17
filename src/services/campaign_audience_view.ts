@@ -6,10 +6,6 @@ import { ServiceListOptions } from '../types'
 
 // The campaign_audience_view entity:
 
-const campaign_audience_view = {
-    resource_name: 'string', // The resource name of the campaign audience view. Campaign audience view resource names have the form:   `customers/{customer_id}/campaignAudienceViews/{campaign_id}~{criterion_id}`
-}
-
 /**
  * @constants
  */

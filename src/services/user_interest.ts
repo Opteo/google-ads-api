@@ -6,17 +6,6 @@ import { ServiceListOptions } from '../types'
 
 // The user_interest entity:
 
-const user_interest = {
-    launched_to_all: 'boolean', // True if the user interest is launched to all channels and locales.
-    resource_name: 'string', // The resource name of the user interest. User interest resource names have the form:  `customers/{customer_id}/userInterests/{user_interest_id}`
-    availabilities: 'array', // Availability information of the user interest.
-    user_interest_parent: 'string', // The parent of the user interest.
-    name: 'string', // The name of the user interest.
-    taxonomy_type:
-        'UNSPECIFIED | UNKNOWN | AFFINITY | IN_MARKET | MOBILE_APP_INSTALL_USER | VERTICAL_GEO | NEW_SMART_PHONE_USER', // Taxonomy type of the user interest.
-    user_interest_id: 'int64', // The ID of the user interest.
-}
-
 /**
  * @constants
  */

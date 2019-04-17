@@ -6,12 +6,6 @@ import { ServiceListOptions } from '../types'
 
 // The feed_placeholder_view entity:
 
-const feed_placeholder_view = {
-    resource_name: 'string', // The resource name of the feed placeholder view. Feed placeholder view resource names have the form:  `customers/{customer_id}/feedPlaceholderViews/{placeholder_type}`
-    placeholder_type:
-        'UNSPECIFIED | UNKNOWN | SITELINK | CALL | APP | LOCATION | AFFILIATE_LOCATION | CALLOUT | STRUCTURED_SNIPPET | MESSAGE | PRICE | PROMOTION | AD_CUSTOMIZER | DYNAMIC_EDUCATION | DYNAMIC_FLIGHT | DYNAMIC_CUSTOM | DYNAMIC_HOTEL | DYNAMIC_REAL_ESTATE | DYNAMIC_TRAVEL | DYNAMIC_LOCAL | DYNAMIC_JOB', // The placeholder type of the feed placeholder view.
-}
-
 /**
  * @constants
  */

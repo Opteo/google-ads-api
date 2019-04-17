@@ -6,10 +6,6 @@ import { ServiceListOptions } from '../types'
 
 // The topic_view entity:
 
-const topic_view = {
-    resource_name: 'string', // The resource name of the topic view. Topic view resource names have the form:  `customers/{customer_id}/topicViews/{ad_group_id}~{criterion_id}`
-}
-
 /**
  * @constants
  */

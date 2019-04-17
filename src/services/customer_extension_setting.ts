@@ -6,14 +6,6 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
 // The customer_extension_setting entity:
 
-const customer_extension_setting = {
-    extension_feed_items: 'array', // The resource names of the extension feed items to serve under the customer. ExtensionFeedItem resource names have the form:  `customers/{customer_id}/extensionFeedItems/{feed_item_id}`
-    resource_name: 'string', // The resource name of the customer extension setting. CustomerExtensionSetting resource names have the form:  `customers/{customer_id}/customerExtensionSettings/{extension_type}`
-    extension_type:
-        'UNSPECIFIED | UNKNOWN | NONE | APP | CALL | CALLOUT | MESSAGE | PRICE | PROMOTION | REVIEW | SITELINK | STRUCTURED_SNIPPET', // The extension type of the customer extension setting.
-    device: 'UNSPECIFIED | UNKNOWN | MOBILE | DESKTOP', // The device for which the extensions will serve. Optional.
-}
-
 /**
  * @constants
  */

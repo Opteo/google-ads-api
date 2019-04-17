@@ -6,14 +6,6 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
 // The keyword_plan_negative_keyword entity:
 
-const keyword_plan_negative_keyword = {
-    id: 'int64', // The ID of the Keyword Plan negative keyword.
-    match_type: 'UNSPECIFIED | UNKNOWN | EXACT | PHRASE | BROAD', // The keyword match type.
-    resource_name: 'string', // The resource name of the Keyword Plan negative keyword. KeywordPlanNegativeKeyword resource names have the form:   `customers/{customer_id}/keywordPlanNegativeKeywords/{kp_negative_keyword_id}`
-    keyword_plan_campaign: 'string', // The Keyword Plan campaign to which this negative keyword belongs.
-    text: 'string', // The keyword text.
-}
-
 /**
  * @constants
  */

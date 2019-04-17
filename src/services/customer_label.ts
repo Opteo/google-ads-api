@@ -6,12 +6,6 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
 // The customer_label entity:
 
-const customer_label = {
-    label: 'string', // The resource name of the label assigned to the customer.  Note: the Customer ID portion of the label resource name is not validated when creating a new CustomerLabel.
-    customer: 'string', // The resource name of the customer to which the label is attached. Read only.
-    resource_name: 'string', // Name of the resource. Customer label resource names have the form: `customers/{customer_id}/customerLabels/{label_id}`
-}
-
 /**
  * @constants
  */

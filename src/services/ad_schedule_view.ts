@@ -6,10 +6,6 @@ import { ServiceListOptions } from '../types'
 
 // The ad_schedule_view entity:
 
-const ad_schedule_view = {
-    resource_name: 'string', // The resource name of the ad schedule view. AdSchedule view resource names have the form:  `customers/{customer_id}/adScheduleViews/{campaign_id}~{criterion_id}`
-}
-
 /**
  * @constants
  */

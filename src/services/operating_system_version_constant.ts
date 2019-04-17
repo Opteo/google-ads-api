@@ -6,15 +6,6 @@ import { ServiceListOptions } from '../types'
 
 // The operating_system_version_constant entity:
 
-const operating_system_version_constant = {
-    operator_type: 'UNSPECIFIED | UNKNOWN | EQUALS_TO | GREATER_THAN_EQUALS_TO', // Determines whether this constant represents a single version or a range of versions.
-    os_major_version: 'int32', // The OS Major Version number.
-    os_minor_version: 'int32', // The OS Minor Version number.
-    name: 'string', // Name of the operating system.
-    id: 'int64', // The ID of the operating system version.
-    resource_name: 'string', // The resource name of the operating system version constant. Operating system version constant resource names have the form:  `operatingSystemVersionConstants/{criterion_id}`
-}
-
 /**
  * @constants
  */
