@@ -1,0 +1,23 @@
+{
+  "name": "google-ads-api-docs",
+  "private": true,
+  "description": "",
+  "version": "0.1.0",
+  "author": "Mateusz Janusz <mateusz@opteo.com>",
+  "dependencies": {
+    "gatsby": "^2.3.24",
+    "gatsby-source-filesystem": "^2.0.29",
+    "gatsby-transformer-remark": "^2.3.8",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write src/**/*.{js,jsx}",
+    "dev": "npm run develop",
+    "serve": "gatsby serve",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
+  }
+}
