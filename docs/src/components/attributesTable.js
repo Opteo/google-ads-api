@@ -4,7 +4,7 @@ import React from 'react'
 const AttributesTable = ({ meta }) => {
     const Rows = Object.keys(meta.object).map(key => {
         const details = meta.object[key]
-        console.log(key, details)
+        // console.log(key, details)
         return (
             <tr key={`key-${key}`}>
                 <td>

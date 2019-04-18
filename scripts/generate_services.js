@@ -412,6 +412,12 @@ async function compileService(entity, schema) {
 
     fs.writeFileSync(docs_file_path + 'meta.js', compiled_meta)
 
+    // temporary sample markdown file
+    fs.writeFileSync(
+        docs_file_path + 'index.md',
+        '---\ntitle: ' + entity + '\n---\n' + '``` \n// sample code\nawait customer.campaigns.list()\n```'
+    )
+
     // await fs.writeJson(docs_file_path + 'meta.json', meta)
 
     if (!entity.toLowerCase().includes('constant')) {
