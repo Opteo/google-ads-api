@@ -3,16 +3,11 @@ import React from 'react'
 
 import AttributesTable from './attributesTable'
 
-const Section = ({ node, meta }) => {
-    // console.log({ node, meta })
+const Section = ({ id, key, node, meta }) => {
     return (
-        <div>
-            <h2>{node.frontmatter.title}</h2>
-            <div
-                style={{
-                    width: '100%',
-                }}
-            >
+        <div id={id} key={key}>
+            <h3>{node.frontmatter.title}</h3>
+            <div>
                 <div
                     style={{
                         width: '50%',
@@ -40,6 +35,8 @@ const Section = ({ node, meta }) => {
 }
 
 Section.propTypes = {
+    id: PropTypes.string.isRequired,
+    key: PropTypes.string.isRequired,
     node: PropTypes.object.isRequired,
     meta: PropTypes.object.isRequired,
 }
