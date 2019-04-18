@@ -33,6 +33,11 @@ const service_test_compiler = template(service_test_template_file, {
     interpolate: /{{([\s\S]+?)}}/g,
 })
 
+const meta_template_file = fs.readFileSync(__dirname + '/template_meta.hbs', 'utf-8')
+const meta_compiler = template(meta_template_file, {
+    interpolate: /{{([\s\S]+?)}}/g,
+})
+
 const $RefParser = require('json-schema-ref-parser')
 
 const raw_schema = require('./schema.json')
@@ -394,6 +399,8 @@ async function compileService(entity, schema) {
         meta.methods = ['get', 'list']
     }
 
+    const compiled_meta = meta_compiler({JSON_META : JSON.stringify(meta)})
+
     // let js_class = ts.transpileModule(compiled_service, {
     //   compilerOptions: { module: ts.ModuleKind.CommonJS }
     // });
@@ -405,7 +412,11 @@ async function compileService(entity, schema) {
     fs.writeFileSync(file_path, compiled_service)
 
     await fs.ensureDir(docs_file_path)
-    await fs.writeJson(docs_file_path + 'meta.json', meta)
+
+    fs.writeFileSync(docs_file_path + 'meta.js', compiled_meta)
+
+
+    // await fs.writeJson(docs_file_path + 'meta.json', meta)
 
     if (!entity.toLowerCase().includes('constant')) {
         // const compiled_service_test = service_test_compiler({
@@ -441,7 +452,7 @@ async function compileService(entity, schema) {
     }
 
     const result = await execP(`prettier --write ${__dirname}/../src/services/*.ts`)
-    await execP(`prettier --write ${__dirname}/../docs/**/*.json`)
+    await execP(`prettier --write ${__dirname}/../docs/**/*.js`)
 
     console.log('Finished compiling all services')
 })()
