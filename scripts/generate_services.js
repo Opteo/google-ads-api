@@ -3,8 +3,7 @@ const template = require('lodash.template')
 const camelCase = require('lodash.camelcase')
 const snakeCase = require('lodash.snakecase')
 const endsWith = require('lodash.endswith')
-const  ts = require("typescript")
-
+const ts = require('typescript')
 
 const log = obj => {
     console.log(require('util').inspect(obj, false, null))
@@ -303,8 +302,7 @@ async function compileService(entity, schema) {
         const new_obj = {}
 
         Object.keys(obj).forEach(key => {
-
-            const _new_object = {}            
+            const _new_object = {}
 
             if (obj[key].enum) {
                 _new_object._type = 'enum'
@@ -325,10 +323,10 @@ async function compileService(entity, schema) {
             }
 
             const matching_resource = compiled_resources[capitalise(parent_field_name)]
-            if(matching_resource && matching_resource.oneofs){
+            if (matching_resource && matching_resource.oneofs) {
                 Object.keys(matching_resource.oneofs).forEach(oneof_key => {
-                    matching_resource.oneofs[oneof_key].oneof.forEach(el =>{
-                        if(el === key){
+                    matching_resource.oneofs[oneof_key].oneof.forEach(el => {
+                        if (el === key) {
                             new_obj[snakeCase(key)]._oneof = oneof_key
                         }
                     })
@@ -364,7 +362,6 @@ async function compileService(entity, schema) {
         object: unroll(schema.schemas[`GoogleAdsGoogleadsV1Resources__${entity}`].properties, entity),
     }
 
-
     if (schema.schemas[`GoogleAdsGoogleadsV1Services__${mutate_request}`]) {
         compiled_service = service_compiler({
             RESOURCE_URL_NAME: resource_url_name,
@@ -399,7 +396,7 @@ async function compileService(entity, schema) {
         meta.methods = ['get', 'list']
     }
 
-    const compiled_meta = meta_compiler({JSON_META : JSON.stringify(meta)})
+    const compiled_meta = meta_compiler({ JSON_META: JSON.stringify(meta) })
 
     // let js_class = ts.transpileModule(compiled_service, {
     //   compilerOptions: { module: ts.ModuleKind.CommonJS }
@@ -408,13 +405,12 @@ async function compileService(entity, schema) {
     // console.log(JSON.stringify(js_class));
 
     const file_path = `${__dirname}/../src/services/${ent}.ts`
-    const docs_file_path = `${__dirname}/../docs/entities/${ent}/`
+    const docs_file_path = `${__dirname}/../docs/content/entities/${ent}/`
     fs.writeFileSync(file_path, compiled_service)
 
     await fs.ensureDir(docs_file_path)
 
     fs.writeFileSync(docs_file_path + 'meta.js', compiled_meta)
-
 
     // await fs.writeJson(docs_file_path + 'meta.json', meta)
 
