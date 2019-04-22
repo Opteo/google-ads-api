@@ -40,7 +40,8 @@ Campaign {
 
 <br/><br/><br/>
 # Create Campaign
-When you create a new campaign, you need to pass an identifier of a shared campaign budget to assign it to the new campaign. If you don't have shared campaign budget, you can create a new campaign budget using [Campaign Budget service](/resources/campaignBudget?id=create-campaign-budget).
+When you create a new campaign, you need to pass an identifier of a shared campaign budget to assign it to the new campaign. If you don't have shared campaign budget, you can create a new campaign budget using [Campaign Budget service](/resources/campaignBudget.md#create-campaign-budget).
+
 
 ### Arguments
  Argument       | Type    | Required
