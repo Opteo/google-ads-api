@@ -1,9 +1,6 @@
 // @ts-ignore
 import { values } from 'lodash'
-import {
-    GeoTargetConstant,
-    SuggestGeoTargetConstantsRequest,
-} from 'google-ads-node/build/lib/resources'
+import { GeoTargetConstant, SuggestGeoTargetConstantsRequest } from 'google-ads-node/build/lib/resources'
 
 import Service from './service'
 import { ServiceListOptions } from '../types'
@@ -37,9 +34,7 @@ export default class GeoTargetConstantService extends Service {
         }) as GeoTargetConstant
     }
 
-    public async list(
-        options?: ServiceListOptions
-    ): Promise<Array<{ geo_target_constant: GeoTargetConstant }>> {
+    public async list(options?: ServiceListOptions): Promise<Array<{ geo_target_constant: GeoTargetConstant }>> {
         return this.getListResults('geo_target_constant', options)
     }
 
