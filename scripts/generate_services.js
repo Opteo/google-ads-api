@@ -525,7 +525,13 @@ async function compileService(entity, schema) {
     })
     
 
-    fs.writeFileSync(file_path, compiled_service)
+
+    const existing_service = fs.readFileSync(file_path)
+
+    if(!existing_service.toString().slice(0, 20).includes('manual_mode')){
+        fs.writeFileSync(file_path, compiled_service)
+    }
+    
 
     
     if (!entity.toLowerCase().includes('constant')) {
