@@ -16,7 +16,7 @@ const IndexPage = ({
     const sections_data = getSections(edges)
 
     const Sections = sections_data.map(section => {
-        return <Section id={section.id} key={section.key} node={section.node} meta={section.meta} />
+        return <Section id={section.id} name={section.key} node={section.node} meta={section.meta} />
     })
 
     return (
@@ -54,7 +54,7 @@ export default IndexPage
 
 export const pageQuery = graphql`
     query {
-        allMarkdownRemark(sort: { order: ASC, fields: [frontmatter___title] }) {
+        allMarkdownRemark {
             edges {
                 node {
                     id
@@ -64,6 +64,7 @@ export const pageQuery = graphql`
                     }
                     fields {
                         directory
+                        is_index
                     }
                 }
             }
