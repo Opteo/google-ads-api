@@ -5,6 +5,22 @@ const snakeCase = require('lodash.snakecase')
 const endsWith = require('lodash.endswith')
 const  ts = require("typescript")
 
+require('dotenv').config()
+const { GoogleAdsApi } = require("../build")
+
+const client = new GoogleAdsApi({
+    client_id: process.env.GADS_CLIENT_ID,
+    client_secret: process.env.GADS_CLIENT_SECRET ,
+    developer_token: process.env.GADS_DEVELOPER_TOKEN ,
+})
+
+
+const customer =  client.Customer({
+    customer_account_id: process.env.GADS_CID ,
+    login_customer_id: process.env.GADS_LOGIN_CUSTOMER_ID,
+    refresh_token: process.env.GADS_REFRESH_TOKEN ,
+})
+
 
 const log = obj => {
     console.log(require('util').inspect(obj, false, null))
@@ -35,6 +51,10 @@ const service_test_compiler = template(service_test_template_file, {
 
 const meta_template_file = fs.readFileSync(__dirname + '/template_meta.hbs', 'utf-8')
 const meta_compiler = template(meta_template_file, {
+    interpolate: /{{([\s\S]+?)}}/g,
+})
+
+const readme_create_compiler = template(fs.readFileSync(__dirname + '/template_readme_object.hbs', 'utf-8'), {
     interpolate: /{{([\s\S]+?)}}/g,
 })
 
@@ -398,8 +418,16 @@ async function compileService(entity, schema) {
 
         meta.methods = ['get', 'list']
     }
-
+    // console.log(customer)
+    // console.log(entity)
+    const listed = await customer[camelCase(entity+'s')].list()
+    console.log(listed.length)
     const compiled_meta = meta_compiler({JSON_META : JSON.stringify(meta)})
+
+    // const compiled_readme_object = readme_object_compiler({
+    //     ENTITY: ent,
+    //     ENTITY_DOC: pretty(schema.schemas[`GoogleAdsGoogleadsV1Resources__${entity}`].properties),
+    // })
 
     // let js_class = ts.transpileModule(compiled_service, {
     //   compilerOptions: { module: ts.ModuleKind.CommonJS }
@@ -409,11 +437,12 @@ async function compileService(entity, schema) {
 
     const file_path = `${__dirname}/../src/services/${ent}.ts`
     const docs_file_path = `${__dirname}/../docs/entities/${ent}/`
-    fs.writeFileSync(file_path, compiled_service)
+    // fs.writeFileSync(file_path, compiled_service)
 
     await fs.ensureDir(docs_file_path)
 
     fs.writeFileSync(docs_file_path + 'meta.js', compiled_meta)
+    // fs.writeFileSync(docs_file_path + 'readme_object.md', compiled_readme_object)
 
 
     // await fs.writeJson(docs_file_path + 'meta.json', meta)
@@ -438,7 +467,8 @@ async function compileService(entity, schema) {
 
     // const result = await execP(`prettier --write ${file_path}`)
 
-    // console.log({ file_path })
+    // console.log({ file_path }) g
+
 }
 
 ;(async () => {
