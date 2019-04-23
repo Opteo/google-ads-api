@@ -1,10 +1,21 @@
 // @ts-ignore
-import { GeoTargetConstant } from 'google-ads-node/build/lib/resources'
+import { values } from 'lodash'
+import { GeoTargetConstant, SuggestGeoTargetConstantsRequest } from 'google-ads-node/build/lib/resources'
 
 import Service from './service'
 import { ServiceListOptions } from '../types'
 
 // The geo_target_constant entity:
+
+const geo_target_constant = {
+    canonical_name: 'string', // The fully qualified English name, consisting of the target's name and that of its parent and country.
+    resource_name: 'string', // The resource name of the geo target constant. Geo target constant resource names have the form:  `geoTargetConstants/{geo_target_constant_id}`
+    country_code: 'string', // The ISO-3166-1 alpha-2 country code that is associated with the target.
+    target_type: 'string', // Geo target constant target type.
+    status: 'UNSPECIFIED | UNKNOWN | ENABLED | REMOVAL_PLANNED', // Geo target constant status.
+    name: 'string', // Geo target constant English name.
+    id: 'int64', // The ID of the geo target constant.
+}
 
 /**
  * @constants
@@ -25,5 +36,15 @@ export default class GeoTargetConstantService extends Service {
 
     public async list(options?: ServiceListOptions): Promise<Array<{ geo_target_constant: GeoTargetConstant }>> {
         return this.getListResults('geo_target_constant', options)
+    }
+
+    public async suggest(options: SuggestGeoTargetConstantsRequest): Promise<any> {
+        const pb = this.buildResource('SuggestGeoTargetConstantsRequest', options)
+
+        const response = await this.service.suggestGeoTargetConstants(pb)
+
+        const parsed = this.parseServiceResults(values(response.geoTargetConstantSuggestions))
+
+        return parsed
     }
 }
