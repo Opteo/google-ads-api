@@ -431,8 +431,24 @@ async function compileService(entity, schema) {
     // console.log(customer)
     // console.log(entity)
 
-    const listed = [] // await customer[camelCase(entity+'s')].list()
+    const cache_path = `${__dirname}/../.cache/${ent}.json`
+    let listed
+    try {
+        listed = fs.readJsonSync(cache_path)
+
+    }
+    catch {
+        listed = await customer[camelCase(entity+'s')].list()
+        fs.writeJsonSync(cache_path, listed)
+
+    }
+
+
+
     console.log(listed.length)
+
+
+
 
     let example_object = '// Todo: add example object here'
 
