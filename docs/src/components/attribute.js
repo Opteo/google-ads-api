@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import AttributesTable from './AttributesTable'
+import AttributesTable from './attributesTable'
 import Enums from './enums'
 
 const Attribute = ({ data, name }) => {

@@ -12,7 +12,7 @@ export const getIds = edges => {
     return ids
 }
 
-export const getSections = edges => {
+export const getSectionsData = edges => {
     return edges.map(edge => {
         const { node } = edge
         const meta = require(`../content/${node.fields.directory}/meta.js`)

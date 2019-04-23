@@ -1,11 +1,12 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import styled from 'styled-components'
 
 import Layout from '../components/layout'
 import Section from '../components/section'
 import Sidebar from '../components/sidebar'
 // import SEO from '../components/seo'
-import { getIds, getSections } from '../utils'
+import { getIds, getSectionsData } from '../utils'
 
 const IndexPage = ({
     data: {
@@ -13,39 +14,34 @@ const IndexPage = ({
     },
 }) => {
     const ids = getIds(edges)
-    const sections_data = getSections(edges)
-
+    const sections_data = getSectionsData(edges)
     const Sections = sections_data.map(section => {
         return <Section id={section.id} name={section.key} node={section.node} meta={section.meta} />
     })
 
+    const Container = styled.div`
+        width: 100%;
+    `
+    const ColumnOne = styled.div`
+        width: 20%;
+        display: inline-block;
+        vertical-align: top;
+    `
+    const ColumnTwo = styled.div`
+        width: 80%;
+        display: inline-block;
+        vertical-align: top;
+    `
+
     return (
         <Layout>
             {/* <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} /> */}
-            <div
-                style={{
-                    width: `100%`,
-                }}
-            >
-                <div
-                    style={{
-                        width: `20%`,
-                        display: `inline-block`,
-                        verticalAlign: `top`,
-                    }}
-                >
+            <Container>
+                <ColumnOne>
                     <Sidebar ids={ids} />
-                </div>
-                <div
-                    style={{
-                        width: `80%`,
-                        display: `inline-block`,
-                        paddingTop: `48px`,
-                    }}
-                >
-                    {Sections}
-                </div>
-            </div>
+                </ColumnOne>
+                <ColumnTwo>{Sections}</ColumnTwo>
+            </Container>
         </Layout>
     )
 }

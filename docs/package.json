@@ -11,7 +11,8 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "scroll-to-element": "^2.0.3"
+    "scroll-to-element": "^2.0.3",
+    "styled-components": "^4.2.0"
   },
   "scripts": {
     "build": "gatsby build",
