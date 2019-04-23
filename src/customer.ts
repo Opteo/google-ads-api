@@ -152,7 +152,7 @@ export default function Customer(
         adScheduleViews: new AdScheduleViewService(cid, client, throttler, 'AdScheduleViewService'),
         ageRangeViews: new AgeRangeViewService(cid, client, throttler, 'AgeRangeViewService'),
         assets: new AssetService(cid, client, throttler, 'AssetService'),
-        biddingStrategys: new BiddingStrategyService(cid, client, throttler, 'BiddingStrategyService'),
+        biddingStrategies: new BiddingStrategyService(cid, client, throttler, 'BiddingStrategyService'),
         billingSetups: new BillingSetupService(cid, client, throttler, 'BillingSetupService'),
         campaignAudienceViews: new CampaignAudienceViewService(cid, client, throttler, 'CampaignAudienceViewService'),
         campaignBidModifiers: new CampaignBidModifierService(cid, client, throttler, 'CampaignBidModifierService'),

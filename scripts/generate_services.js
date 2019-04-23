@@ -438,9 +438,8 @@ async function compileService(entity, schema) {
 
     }
     catch {
-        listed = await customer[camelCase(entity+'s')].list()
+        listed = await customer[camelCase(resource_url_name)].list()
         fs.writeJsonSync(cache_path, listed)
-
     }
 
 
