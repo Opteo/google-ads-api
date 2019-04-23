@@ -10,8 +10,8 @@ This section describes how to delete a CustomerClientLink.
 
 // Deleting the entity
 
-const results = customer.customerClientLink.delete('customers/1234567890/customerClientLink')
+const results = customer.customerClientLinks.delete('customers/1234567890/customerClientLinks')
 
-console.log(results) // ['customers/1234567890/customerClientLink/9765432177']
+console.log(results) // ['customers/1234567890/customerClientLinks/9765432177']
 
 ```

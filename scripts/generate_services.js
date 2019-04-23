@@ -198,18 +198,6 @@ function getResourceUrl(entity) {
         return camelCase(entity)
     }
 
-    if (entity === 'BillingSetup') {
-        return camelCase(entity)
-    }
-
-    if (entity === 'CustomerClientLink') {
-        return camelCase(entity)
-    }
-
-    if (entity === 'customerManagerLink') {
-        return camelCase(entity)
-    }
-
     if (endsWith(entity, 'Criterion')) {
         return `${camelCase(entity.replace('Criterion', 'Criteria'))}`
     }
@@ -443,7 +431,7 @@ async function compileService(entity, schema) {
     // console.log(customer)
     // console.log(entity)
 
-    const listed = [] //await customer[camelCase(entity+'s')].list()
+    const listed = [] // await customer[camelCase(entity+'s')].list()
     console.log(listed.length)
 
     let example_object = '// Todo: add example object here'
@@ -473,7 +461,7 @@ async function compileService(entity, schema) {
     })
     
 
-    //fs.writeFileSync(file_path, compiled_service)
+    fs.writeFileSync(file_path, compiled_service)
 
     
     if (!entity.toLowerCase().includes('constant')) {

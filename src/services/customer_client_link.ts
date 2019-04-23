@@ -9,7 +9,7 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
 /**
  * @constants
  */
-const RESOURCE_URL_NAME = 'customerClientLink'
+const RESOURCE_URL_NAME = 'customerClientLinks'
 const MUTATE_METHOD = 'mutateCustomerClientLink'
 const MUTATE_REQUEST = 'MutateCustomerClientLinkRequest'
 const OPERATION_REQUEST = 'CustomerClientLinkOperation'

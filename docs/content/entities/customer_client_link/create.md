@@ -14,8 +14,8 @@ const customer_client_link = {
     // Your CustomerClientLink here 
 }
 
-const results = await customer.customerClientLink.create(customer_client_link)
+const results = await customer.customerClientLinks.create(customer_client_link)
 
-console.log(results) // ['customers/1234567890/customerClientLink/9765432177']
+console.log(results) // ['customers/1234567890/customerClientLinks/9765432177']
 
 ```

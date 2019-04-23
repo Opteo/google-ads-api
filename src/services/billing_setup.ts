@@ -9,7 +9,7 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
 /**
  * @constants
  */
-const RESOURCE_URL_NAME = 'billingSetup'
+const RESOURCE_URL_NAME = 'billingSetups'
 const MUTATE_METHOD = 'mutateBillingSetup'
 const MUTATE_REQUEST = 'MutateBillingSetupRequest'
 const OPERATION_REQUEST = 'BillingSetupOperation'

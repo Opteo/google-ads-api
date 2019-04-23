@@ -156,7 +156,7 @@ export default function Customer(
         billingSetups: new BillingSetupService(cid, client, throttler, 'BillingSetupService'),
         campaignAudienceViews: new CampaignAudienceViewService(cid, client, throttler, 'CampaignAudienceViewService'),
         campaignBidModifiers: new CampaignBidModifierService(cid, client, throttler, 'CampaignBidModifierService'),
-        campaignCriterion: new CampaignCriterionService(cid, client, throttler, 'CampaignCriterionService'),
+        campaignCriteria: new CampaignCriterionService(cid, client, throttler, 'CampaignCriterionService'),
         campaignExtensionSettings: new CampaignExtensionSettingService(
             cid,
             client,
@@ -189,7 +189,7 @@ export default function Customer(
         customerFeeds: new CustomerFeedService(cid, client, throttler, 'CustomerFeedService'),
         customerLabels: new CustomerLabelService(cid, client, throttler, 'CustomerLabelService'),
         customerManagerLinks: new CustomerManagerLinkService(cid, client, throttler, 'CustomerManagerLinkService'),
-        customerNegativeCriterions: new CustomerNegativeCriterionService(
+        customerNegativeCriteria: new CustomerNegativeCriterionService(
             cid,
             client,
             throttler,
@@ -258,7 +258,7 @@ export default function Customer(
         recommendations: new RecommendationService(cid, client, throttler, 'RecommendationService'),
         remarketingActions: new RemarketingActionService(cid, client, throttler, 'RemarketingActionService'),
         searchTermViews: new SearchTermViewService(cid, client, throttler, 'SearchTermViewService'),
-        sharedCriterion: new SharedCriterionService(cid, client, throttler, 'SharedCriterionService'),
+        sharedCriteria: new SharedCriterionService(cid, client, throttler, 'SharedCriterionService'),
         shoppingPerformanceViews: new ShoppingPerformanceViewService(
             cid,
             client,

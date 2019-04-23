@@ -14,8 +14,8 @@ const billing_setup = {
     // Your BillingSetup here 
 }
 
-const results = await customer.billingSetup.create(billing_setup)
+const results = await customer.billingSetups.create(billing_setup)
 
-console.log(results) // ['customers/1234567890/billingSetup/9765432177']
+console.log(results) // ['customers/1234567890/billingSetups/9765432177']
 
 ```
