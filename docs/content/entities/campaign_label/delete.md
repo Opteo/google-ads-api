@@ -1,17 +1,14 @@
 ---
-title: Delete CampaignLabel 
+title: Delete CampaignLabel
+order: 6
+type: delete
+entity: CampaignLabel
 ---
 
 This section describes how to delete a CampaignLabel.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.campaignLabels.delete('customers/1234567890/campaignLabels')
-
-console.log(results) // ['customers/1234567890/campaignLabels/9765432177']
-
+await customer.campaignLabels.delete('customers/3827277046/campaignLabels/729914321~898377018')
 ```

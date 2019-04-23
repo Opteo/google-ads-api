@@ -1,17 +1,14 @@
 ---
-title: Delete AdGroupCriterion 
+title: Delete AdGroupCriterion
+order: 6
+type: delete
+entity: AdGroupCriterion
 ---
 
 This section describes how to delete a AdGroupCriterion.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.adGroupCriteria.delete('customers/1234567890/adGroupCriteria')
-
-console.log(results) // ['customers/1234567890/adGroupCriteria/9765432177']
-
+await customer.adGroupCriteria.delete('customers/9262111890/adGroupCriteria/56328868446~1165620981')
 ```

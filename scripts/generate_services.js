@@ -3,6 +3,7 @@ const template = require('lodash.template')
 const camelCase = require('lodash.camelcase')
 const snakeCase = require('lodash.snakecase')
 const endsWith = require('lodash.endswith')
+const get = require('lodash.get')
 
 require('dotenv').config()
 const { GoogleAdsApi } = require("../build")
@@ -18,6 +19,13 @@ const customer =  client.Customer({
     customer_account_id: process.env.GADS_CID ,
     login_customer_id: process.env.GADS_LOGIN_CUSTOMER_ID,
     refresh_token: process.env.GADS_REFRESH_TOKEN ,
+})
+
+
+const customer_scary =  client.Customer({
+    customer_account_id: process.env.GADS_CID_WITH_METRICS ,
+    login_customer_id: process.env.GADS_LOGIN_CUSTOMER_ID_WITH_METRICS,
+    refresh_token: process.env.GADS_REFRESH_TOKEN_WITH_METRICS ,
 })
 
 const log = obj => {
@@ -106,7 +114,7 @@ const entities = [
     'AccountBudget',
     'AdGroupAdLabel',
     'AdGroupAd',
-    'AdGroupAudienceView',
+    // 'AdGroupAudienceView',
     'AdGroupBidModifier',
     'AdGroupCriterionLabel',
     'AdGroupCriterion',
@@ -115,11 +123,11 @@ const entities = [
     'AdGroupLabel',
     'AdGroup',
     // 'AdParameter', // Missing protos
-    'AdScheduleView',
-    'AgeRangeView',
+    // 'AdScheduleView',
+    // 'AgeRangeView',
     'BiddingStrategy',
     'BillingSetup',
-    'CampaignAudienceView',
+    // 'CampaignAudienceView',
     'CampaignBidModifier',
     'CampaignBudget',
     'CampaignCriterion',
@@ -130,7 +138,7 @@ const entities = [
     'CampaignSharedSet',
     'CarrierConstant',
     'ChangeStatus',
-    'ClickView',
+    // 'ClickView',
     'ConversionAction',
     // 'ConversionUpload', // Missing protos
     'CustomInterest',
@@ -142,52 +150,52 @@ const entities = [
     'CustomerManagerLink',
     'CustomerNegativeCriterion',
     //   'Customer', // Not required
-    'DisplayKeywordView',
+    // 'DisplayKeywordView',
     'DomainCategory',
-    'DynamicSearchAdsSearchTermView',
+    // 'DynamicSearchAdsSearchTermView',
     'ExtensionFeedItem',
     'FeedItem',
     'FeedItemTarget',
     'FeedMapping',
-    'FeedPlaceholderView',
+    // 'FeedPlaceholderView',
     'Feed',
-    'GenderView',
+    // 'GenderView',
     'GeoTargetConstant',
-    'GeographicView',
+    // 'GeographicView',
     // 'GoogleAdsField', // Not required
     // 'GoogleAds', // Not required
-    'GroupPlacementView',
-    'HotelGroupView',
-    'HotelPerformanceView',
+    // 'GroupPlacementView',
+    // 'HotelGroupView',
+    // 'HotelPerformanceView',
     'KeywordPlanAdGroup',
     'KeywordPlanCampaign',
     // 'KeywordPlanIdea', // Missing protos
     'KeywordPlanKeyword',
     'KeywordPlanNegativeKeyword',
     'KeywordPlan',
-    'KeywordView',
+    // 'KeywordView',
     'Label',
     'LanguageConstant',
-    'LocationView',
-    'ManagedPlacementView',
+    // 'LocationView',
+    // 'ManagedPlacementView',
     'MediaFile',
     // 'MerchantCenterLink', // Missing protos
     'MobileAppCategoryConstant',
     'MobileDeviceConstant',
     // 'MutateJob', // Missing protos
     'OperatingSystemVersionConstant',
-    'ParentalStatusView',
+    // 'ParentalStatusView',
     // 'PaymentsAccount', // Missing protos
     'ProductBiddingCategoryConstant',
-    'ProductGroupView',
+    // 'ProductGroupView',
     'Recommendation',
     'RemarketingAction',
-    'SearchTermView',
+    // 'SearchTermView',
     'SharedCriterion',
-    'ShoppingPerformanceView',
+    // 'ShoppingPerformanceView',
     'SharedSet',
     'TopicConstant',
-    'TopicView',
+    // 'TopicView',
     'UserInterest',
     'UserList',
     'Video',
@@ -387,10 +395,7 @@ async function compileService(entity, schema) {
 
     const docs_file_path = `${__dirname}/../docs/content/entities/${ent}/`
 
-
     await fs.ensureDir(docs_file_path)
-
-    
 
     if (schema.schemas[`GoogleAdsGoogleadsV1Services__${mutate_request}`]) {
         compiled_service = service_compiler({
@@ -432,28 +437,70 @@ async function compileService(entity, schema) {
     // console.log(entity)
 
     const cache_path = `${__dirname}/../.cache/${ent}.json`
-    let listed
+
+    let listed = []
     try {
         listed = fs.readJsonSync(cache_path)
 
     }
     catch {
-        listed = await customer[camelCase(resource_url_name)].list()
-        fs.writeJsonSync(cache_path, listed)
+
+        try {
+            listed = await customer[camelCase(resource_url_name)].list({
+                limit : 1
+            })
+            fs.writeJsonSync(cache_path, listed)
+        }
+        catch(e) {
+            console.error(e)
+        }
+        
+    }
+    let scary = false
+
+    if(listed.length === 0){
+        try {
+            listed = await customer_scary[camelCase(resource_url_name)].list({
+                limit : 1
+            })
+            scary = listed.length > 0 
+            console.log(listed.length)
+            fs.writeJsonSync(cache_path, listed)
+        }
+        catch(e) {
+            console.error(e)
+        }
     }
 
 
-
-    console.log(listed.length)
-
-
-
-
-    let example_object = '// Todo: add example object here'
+    let example_object_list = '// Todo: add example list() return here'
+    let example_object_get = '// Todo: add example get() return here'
+    let example_resource_name = `customers/1234567890/${ resource_url_name }/123123123`
 
     if(listed.length > 0){
-        example_object = JSON.stringify(listed[0])
+        // just a tiny bit of sanitization
+        Object.keys(listed[0]).forEach(key => {
+            if(listed[0][key].name && !entity.toLowerCase().includes('constant')){
+                listed[0][key].name = `My ${key.split('_').join(' ')}`
+            }
+            if(listed[0][key].descriptive_name && !entity.toLowerCase().includes('constant')){
+                listed[0][key].descriptive_name = `My ${key.split('_').join(' ')}`
+            }
+        })
+        example_object_list = JSON.stringify(listed[0])
+        if(get(listed[0], `${ent}.resource_name`)){
+            example_resource_name = listed[0][ent].resource_name
+        }
+        if(get(listed[0], `${ent}`)){
+            example_object_get = JSON.stringify(listed[0][ent])
+        }
     }
+
+    if(!scary){
+        // return
+    }
+
+
 
 
     fs.writeFileSync(docs_file_path + 'meta.js', meta_compiler({ JSON_META: JSON.stringify(meta) }))
@@ -469,7 +516,9 @@ async function compileService(entity, schema) {
             ENTITY: entity,
             ENTITY_SNAKECASE: ent,
             RESOURCE_URL_NAME : resource_url_name,
-            EXAMPLE_OBJECT: example_object
+            EXAMPLE_OBJECT_LIST: example_object_list,
+            EXAMPLE_OBJECT_GET: example_object_get,
+            EXAMPLE_RESOURCE_NAME: example_resource_name
         })
 
         fs.writeFileSync(docs_file_path + `${method}.md`, compiled_md)
@@ -514,7 +563,11 @@ async function compileService(entity, schema) {
     }
 
     const result = await execP(`prettier --write ${__dirname}/../src/services/*.ts`)
+    console.log('prettifying js...')
     await execP(`prettier --write ${__dirname}/../docs/content/**/*.js`)
+    console.log('prettifying md...')
+
+    await execP(`prettier --write ${__dirname}/../docs/content/**/*.md`)
 
     console.log('Finished compiling all services')
 })()

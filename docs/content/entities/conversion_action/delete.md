@@ -1,17 +1,14 @@
 ---
-title: Delete ConversionAction 
+title: Delete ConversionAction
+order: 6
+type: delete
+entity: ConversionAction
 ---
 
 This section describes how to delete a ConversionAction.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.conversionActions.delete('customers/1234567890/conversionActions')
-
-console.log(results) // ['customers/1234567890/conversionActions/9765432177']
-
+await customer.conversionActions.delete('customers/1234567890/conversionActions/123123123')
 ```

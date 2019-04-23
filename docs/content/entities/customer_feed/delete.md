@@ -1,17 +1,14 @@
 ---
-title: Delete CustomerFeed 
+title: Delete CustomerFeed
+order: 6
+type: delete
+entity: CustomerFeed
 ---
 
 This section describes how to delete a CustomerFeed.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.customerFeeds.delete('customers/1234567890/customerFeeds')
-
-console.log(results) // ['customers/1234567890/customerFeeds/9765432177']
-
+await customer.customerFeeds.delete('customers/9262111890/customerFeeds/77425432')
 ```

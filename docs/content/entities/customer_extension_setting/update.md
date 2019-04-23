@@ -1,1 +1,21 @@
-UDPATE CustomerExtensionSetting
+---
+title: Update CustomerExtensionSetting
+order: 5
+type: update
+entity: CustomerExtensionSetting
+---
+
+This section describes how to update a CustomerExtensionSetting.
+
+```javascript
+// Updating the entity
+
+const customer_extension_setting = {
+    resource_name: 'customers/9262111890/customerExtensionSettings/SITELINK', // The resource_name is required
+    // ...any other fields that you would like to update
+}
+
+const results = await customer.customerExtensionSettings.update(customer_extension_setting)
+
+console.log(results) // ['customers/9262111890/customerExtensionSettings/SITELINK']
+```

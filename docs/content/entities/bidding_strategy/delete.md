@@ -1,17 +1,14 @@
 ---
-title: Delete BiddingStrategy 
+title: Delete BiddingStrategy
+order: 6
+type: delete
+entity: BiddingStrategy
 ---
 
 This section describes how to delete a BiddingStrategy.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.biddingStrategies.delete('customers/1234567890/biddingStrategies')
-
-console.log(results) // ['customers/1234567890/biddingStrategies/9765432177']
-
+await customer.biddingStrategies.delete('customers/3827277046/biddingStrategies/1534381593')
 ```

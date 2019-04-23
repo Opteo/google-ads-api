@@ -1,17 +1,14 @@
 ---
-title: Delete UserList 
+title: Delete UserList
+order: 6
+type: delete
+entity: UserList
 ---
 
 This section describes how to delete a UserList.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.userLists.delete('customers/1234567890/userLists')
-
-console.log(results) // ['customers/1234567890/userLists/9765432177']
-
+await customer.userLists.delete('customers/3827277046/userLists/508846109')
 ```

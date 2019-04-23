@@ -1,17 +1,14 @@
 ---
-title: Delete CustomerNegativeCriterion 
+title: Delete CustomerNegativeCriterion
+order: 6
+type: delete
+entity: CustomerNegativeCriterion
 ---
 
 This section describes how to delete a CustomerNegativeCriterion.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.customerNegativeCriteria.delete('customers/1234567890/customerNegativeCriteria')
-
-console.log(results) // ['customers/1234567890/customerNegativeCriteria/9765432177']
-
+await customer.customerNegativeCriteria.delete('customers/3827277046/customerNegativeCriteria/1163177997')
 ```

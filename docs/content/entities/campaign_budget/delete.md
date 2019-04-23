@@ -1,17 +1,14 @@
 ---
-title: Delete CampaignBudget 
+title: Delete CampaignBudget
+order: 6
+type: delete
+entity: CampaignBudget
 ---
 
 This section describes how to delete a CampaignBudget.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.campaignBudgets.delete('customers/1234567890/campaignBudgets')
-
-console.log(results) // ['customers/1234567890/campaignBudgets/9765432177']
-
+await customer.campaignBudgets.delete('customers/9262111890/campaignBudgets/1536143460')
 ```

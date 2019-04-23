@@ -1,17 +1,14 @@
 ---
-title: Delete FeedItem 
+title: Delete FeedItem
+order: 6
+type: delete
+entity: FeedItem
 ---
 
 This section describes how to delete a FeedItem.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.feedItems.delete('customers/1234567890/feedItems')
-
-console.log(results) // ['customers/1234567890/feedItems/9765432177']
-
+await customer.feedItems.delete('customers/3827277046/feedItems/43009393~9779152283')
 ```

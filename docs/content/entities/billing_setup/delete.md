@@ -1,17 +1,14 @@
 ---
-title: Delete BillingSetup 
+title: Delete BillingSetup
+order: 6
+type: delete
+entity: BillingSetup
 ---
 
 This section describes how to delete a BillingSetup.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.billingSetups.delete('customers/1234567890/billingSetups')
-
-console.log(results) // ['customers/1234567890/billingSetups/9765432177']
-
+await customer.billingSetups.delete('customers/9262111890/billingSetups/465508048')
 ```

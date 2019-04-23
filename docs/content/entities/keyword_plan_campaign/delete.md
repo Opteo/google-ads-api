@@ -1,17 +1,14 @@
 ---
-title: Delete KeywordPlanCampaign 
+title: Delete KeywordPlanCampaign
+order: 6
+type: delete
+entity: KeywordPlanCampaign
 ---
 
 This section describes how to delete a KeywordPlanCampaign.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.keywordPlanCampaigns.delete('customers/1234567890/keywordPlanCampaigns')
-
-console.log(results) // ['customers/1234567890/keywordPlanCampaigns/9765432177']
-
+await customer.keywordPlanCampaigns.delete('customers/3827277046/keywordPlanCampaigns/4773388')
 ```

@@ -1,17 +1,14 @@
 ---
-title: Delete AdGroupBidModifier 
+title: Delete AdGroupBidModifier
+order: 6
+type: delete
+entity: AdGroupBidModifier
 ---
 
 This section describes how to delete a AdGroupBidModifier.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.adGroupBidModifiers.delete('customers/1234567890/adGroupBidModifiers')
-
-console.log(results) // ['customers/1234567890/adGroupBidModifiers/9765432177']
-
+await customer.adGroupBidModifiers.delete('customers/9262111890/adGroupBidModifiers/54493284610~30000')
 ```

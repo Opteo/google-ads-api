@@ -1,17 +1,14 @@
 ---
-title: Delete RemarketingAction 
+title: Delete RemarketingAction
+order: 6
+type: delete
+entity: RemarketingAction
 ---
 
 This section describes how to delete a RemarketingAction.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.remarketingActions.delete('customers/1234567890/remarketingActions')
-
-console.log(results) // ['customers/1234567890/remarketingActions/9765432177']
-
+await customer.remarketingActions.delete('customers/1234567890/remarketingActions/123123123')
 ```

@@ -1,17 +1,14 @@
 ---
-title: Delete AdGroupAd 
+title: Delete AdGroupAd
+order: 6
+type: delete
+entity: AdGroupAd
 ---
 
 This section describes how to delete a AdGroupAd.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.adGroupAds.delete('customers/1234567890/adGroupAds')
-
-console.log(results) // ['customers/1234567890/adGroupAds/9765432177']
-
+await customer.adGroupAds.delete('customers/9262111890/adGroupAds/56328868446~284706472002')
 ```

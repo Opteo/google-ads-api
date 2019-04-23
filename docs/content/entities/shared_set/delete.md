@@ -1,17 +1,14 @@
 ---
-title: Delete SharedSet 
+title: Delete SharedSet
+order: 6
+type: delete
+entity: SharedSet
 ---
 
 This section describes how to delete a SharedSet.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.sharedSets.delete('customers/1234567890/sharedSets')
-
-console.log(results) // ['customers/1234567890/sharedSets/9765432177']
-
+await customer.sharedSets.delete('customers/9262111890/sharedSets/1788591305')
 ```

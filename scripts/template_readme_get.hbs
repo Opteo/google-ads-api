@@ -1,6 +1,20 @@
+---
+title: Get {{ ENTITY }} 
+order: 2
+type: get
+entity: {{ ENTITY }} 
+---
+
+The `customer.{{ RESOURCE_URL_NAME }}.get()` method returns all fields for one {{ ENTITY }}, as well as all other entities related to it. Note that this function is heavily rate-limited by Google, so avoid using it in production.
 
 ``` javascript
 
-{{EXAMPLE_OBJECT}}
+
+// Getting the entity
+let result = await customer.{{ RESOURCE_URL_NAME }}.get('{{EXAMPLE_RESOURCE_NAME}}')
+
+
+// Here's what the result might look like
+result === {{ EXAMPLE_OBJECT_GET }}
 
 ```

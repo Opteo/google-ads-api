@@ -1,17 +1,14 @@
 ---
-title: Delete CampaignCriterion 
+title: Delete CampaignCriterion
+order: 6
+type: delete
+entity: CampaignCriterion
 ---
 
 This section describes how to delete a CampaignCriterion.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.campaignCriteria.delete('customers/1234567890/campaignCriteria')
-
-console.log(results) // ['customers/1234567890/campaignCriteria/9765432177']
-
+await customer.campaignCriteria.delete('customers/9262111890/campaignCriteria/1473765780~1000')
 ```

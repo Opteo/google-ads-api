@@ -1,17 +1,14 @@
 ---
-title: Delete AccountBudgetProposal 
+title: Delete AccountBudgetProposal
+order: 6
+type: delete
+entity: AccountBudgetProposal
 ---
 
 This section describes how to delete a AccountBudgetProposal.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.accountBudgetProposals.delete('customers/1234567890/accountBudgetProposals')
-
-console.log(results) // ['customers/1234567890/accountBudgetProposals/9765432177']
-
+await customer.accountBudgetProposals.delete('customers/3827277046/accountBudgetProposals/265265547')
 ```

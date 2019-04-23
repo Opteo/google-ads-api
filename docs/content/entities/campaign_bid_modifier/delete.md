@@ -1,17 +1,14 @@
 ---
-title: Delete CampaignBidModifier 
+title: Delete CampaignBidModifier
+order: 6
+type: delete
+entity: CampaignBidModifier
 ---
 
 This section describes how to delete a CampaignBidModifier.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.campaignBidModifiers.delete('customers/1234567890/campaignBidModifiers')
-
-console.log(results) // ['customers/1234567890/campaignBidModifiers/9765432177']
-
+await customer.campaignBidModifiers.delete('customers/3827277046/campaignBidModifiers/729684361~8000')
 ```
