@@ -1,7 +1,5 @@
 ---
-title: TopicConstant
+title: TopicConstant 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the TopicConstant entity.

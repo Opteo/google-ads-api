@@ -1,7 +1,5 @@
 ---
-title: DynamicSearchAdsSearchTermView
+title: DynamicSearchAdsSearchTermView 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the DynamicSearchAdsSearchTermView entity.

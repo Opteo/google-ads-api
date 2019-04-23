@@ -1,7 +1,5 @@
 ---
-title: AdGroupExtensionSetting
+title: AdGroupExtensionSetting 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the AdGroupExtensionSetting entity.

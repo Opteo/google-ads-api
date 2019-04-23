@@ -1,7 +1,5 @@
 ---
-title: CampaignFeed
+title: CampaignFeed 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the CampaignFeed entity.

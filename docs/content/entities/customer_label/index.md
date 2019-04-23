@@ -1,7 +1,5 @@
 ---
-title: CustomerLabel
+title: CustomerLabel 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the CustomerLabel entity.

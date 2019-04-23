@@ -1,7 +1,5 @@
 ---
-title: BiddingStrategy
+title: BiddingStrategy 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the BiddingStrategy entity.

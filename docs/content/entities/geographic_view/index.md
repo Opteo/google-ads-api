@@ -1,7 +1,5 @@
 ---
-title: GeographicView
+title: GeographicView 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the GeographicView entity.

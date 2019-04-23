@@ -1,7 +1,5 @@
 ---
-title: CampaignLabel
+title: CampaignLabel 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the CampaignLabel entity.

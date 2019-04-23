@@ -1,7 +1,5 @@
 ---
-title: CustomInterest
+title: CustomInterest 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the CustomInterest entity.

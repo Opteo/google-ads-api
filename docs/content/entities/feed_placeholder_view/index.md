@@ -1,7 +1,5 @@
 ---
-title: FeedPlaceholderView
+title: FeedPlaceholderView 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the FeedPlaceholderView entity.

@@ -1,7 +1,5 @@
 ---
-title: TopicView
+title: TopicView 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the TopicView entity.

@@ -52,8 +52,21 @@ const meta_compiler = template(meta_template_file, {
     interpolate: /{{([\s\S]+?)}}/g,
 })
 
-const readme_create_compiler = template(fs.readFileSync(__dirname + '/template_readme_object.hbs', 'utf-8'), {
+const readme_object_compiler = template(fs.readFileSync(__dirname + '/template_readme_object.hbs', 'utf-8'), {
     interpolate: /{{([\s\S]+?)}}/g,
+})
+
+// const readme_create_compiler = template(fs.readFileSync(__dirname + '/template_readme_create.hbs', 'utf-8'), {
+//     interpolate: /{{([\s\S]+?)}}/g,
+// })
+
+
+const method_compilers = {}
+
+;(['get', 'list', 'create', 'update', 'delete']).forEach(method => {
+    method_compilers[method] = template(fs.readFileSync(__dirname + `/template_readme_${method}.hbs`, 'utf-8'), {
+        interpolate: /{{([\s\S]+?)}}/g,
+    })
 })
 
 const $RefParser = require('json-schema-ref-parser')
@@ -381,6 +394,16 @@ async function compileService(entity, schema) {
         object: unroll(schema.schemas[`GoogleAdsGoogleadsV1Resources__${entity}`].properties, entity),
     }
 
+
+    const file_path = `${__dirname}/../src/services/${ent}.ts`
+
+    const docs_file_path = `${__dirname}/../docs/content/entities/${ent}/`
+
+
+    await fs.ensureDir(docs_file_path)
+
+    
+
     if (schema.schemas[`GoogleAdsGoogleadsV1Services__${mutate_request}`]) {
         compiled_service = service_compiler({
             RESOURCE_URL_NAME: resource_url_name,
@@ -397,6 +420,9 @@ async function compileService(entity, schema) {
         })
 
         meta.methods = ['get', 'list', 'create', 'update', 'delete']
+
+
+        
     } else {
         compiled_service = service_immutable_compiler({
             RESOURCE_URL_NAME: resource_url_name,
@@ -416,41 +442,40 @@ async function compileService(entity, schema) {
     }
     // console.log(customer)
     // console.log(entity)
-    const listed = await customer[camelCase(entity+'s')].list()
+
+    const listed = [] //await customer[camelCase(entity+'s')].list()
     console.log(listed.length)
 
+    let example_object = '// Todo: add example object here'
 
-    const compiled_meta = meta_compiler({ JSON_META: JSON.stringify(meta) })
+    if(listed.length > 0){
+        example_object = JSON.stringify(listed[0])
+    }
 
-    // const compiled_readme_object = readme_object_compiler({
-    //     ENTITY: ent,
-    //     ENTITY_DOC: pretty(schema.schemas[`GoogleAdsGoogleadsV1Resources__${entity}`].properties),
-    // })
 
-    // let js_class = ts.transpileModule(compiled_service, {
-    //   compilerOptions: { module: ts.ModuleKind.CommonJS }
-    // });
+    fs.writeFileSync(docs_file_path + 'meta.js', meta_compiler({ JSON_META: JSON.stringify(meta) }))
 
-    // console.log(JSON.stringify(js_class));
+    fs.writeFileSync(docs_file_path + 'index.md', readme_object_compiler({
+        ENTITY: entity,
+    }))
 
-    const file_path = `${__dirname}/../src/services/${ent}.ts`
 
-    const docs_file_path = `${__dirname}/../docs/content/entities/${ent}/`
+    meta.methods.forEach(method => {
+
+        const compiled_md = method_compilers[method]({
+            ENTITY: entity,
+            ENTITY_SNAKECASE: ent,
+            RESOURCE_URL_NAME : resource_url_name,
+            EXAMPLE_OBJECT: example_object
+        })
+
+        fs.writeFileSync(docs_file_path + `${method}.md`, compiled_md)
+    })
+    
+
     //fs.writeFileSync(file_path, compiled_service)
 
-    await fs.ensureDir(docs_file_path)
-
-    fs.writeFileSync(docs_file_path + 'meta.js', compiled_meta)
-    // fs.writeFileSync(docs_file_path + 'readme_object.md', compiled_readme_object)
-
-    // temporary sample markdown file
-    fs.writeFileSync(
-        docs_file_path + 'index.md',
-        '---\ntitle: ' + entity + '\n---\n' + '``` \n// sample code\nawait customer.campaigns.list()\n```'
-    )
-
-    // await fs.writeJson(docs_file_path + 'meta.json', meta)
-
+    
     if (!entity.toLowerCase().includes('constant')) {
         // const compiled_service_test = service_test_compiler({
         //     RESOURCE_URL_NAME: resource_url_name,
@@ -486,7 +511,7 @@ async function compileService(entity, schema) {
     }
 
     const result = await execP(`prettier --write ${__dirname}/../src/services/*.ts`)
-    await execP(`prettier --write ${__dirname}/../docs/**/*.js`)
+    await execP(`prettier --write ${__dirname}/../docs/content/**/*.js`)
 
     console.log('Finished compiling all services')
 })()

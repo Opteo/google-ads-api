@@ -1,7 +1,5 @@
 ---
-title: HotelGroupView
+title: HotelGroupView 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the HotelGroupView entity.

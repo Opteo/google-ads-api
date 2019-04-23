@@ -1,7 +1,5 @@
 ---
-title: GroupPlacementView
+title: GroupPlacementView 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the GroupPlacementView entity.

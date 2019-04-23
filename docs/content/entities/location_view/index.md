@@ -1,7 +1,5 @@
 ---
-title: LocationView
+title: LocationView 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the LocationView entity.

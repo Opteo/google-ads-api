@@ -1,7 +1,5 @@
 ---
-title: ProductBiddingCategoryConstant
+title: ProductBiddingCategoryConstant 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the ProductBiddingCategoryConstant entity.

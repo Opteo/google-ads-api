@@ -1,7 +1,5 @@
 ---
-title: KeywordView
+title: KeywordView 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the KeywordView entity.

@@ -1,7 +1,5 @@
 ---
-title: DisplayKeywordView
+title: DisplayKeywordView 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the DisplayKeywordView entity.

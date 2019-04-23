@@ -1,7 +1,5 @@
 ---
-title: AgeRangeView
+title: AgeRangeView 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the AgeRangeView entity.

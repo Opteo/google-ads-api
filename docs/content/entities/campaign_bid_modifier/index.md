@@ -1,7 +1,5 @@
 ---
-title: CampaignBidModifier
+title: CampaignBidModifier 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the CampaignBidModifier entity.

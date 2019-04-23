@@ -1,7 +1,5 @@
 ---
-title: ManagedPlacementView
+title: ManagedPlacementView 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the ManagedPlacementView entity.

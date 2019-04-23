@@ -1,7 +1,5 @@
 ---
-title: MobileAppCategoryConstant
+title: MobileAppCategoryConstant 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the MobileAppCategoryConstant entity.

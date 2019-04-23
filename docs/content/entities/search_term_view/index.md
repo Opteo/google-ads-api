@@ -1,7 +1,5 @@
 ---
-title: SearchTermView
+title: SearchTermView 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the SearchTermView entity.

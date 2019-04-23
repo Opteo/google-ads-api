@@ -1,7 +1,5 @@
 ---
-title: FeedItem
+title: FeedItem 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the FeedItem entity.

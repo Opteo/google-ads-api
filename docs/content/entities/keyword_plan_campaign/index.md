@@ -1,7 +1,5 @@
 ---
-title: KeywordPlanCampaign
+title: KeywordPlanCampaign 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the KeywordPlanCampaign entity.

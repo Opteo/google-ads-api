@@ -1,7 +1,5 @@
 ---
-title: MediaFile
+title: MediaFile 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the MediaFile entity.

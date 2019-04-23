@@ -1,7 +1,5 @@
 ---
-title: UserList
+title: UserList 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the UserList entity.

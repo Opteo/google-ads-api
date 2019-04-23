@@ -140,7 +140,7 @@ export default function Customer(
             throttler,
             'AdGroupCriterionLabelService'
         ),
-        adGroupCriterion: new AdGroupCriterionService(cid, client, throttler, 'AdGroupCriterionService'),
+        adGroupCriteria: new AdGroupCriterionService(cid, client, throttler, 'AdGroupCriterionService'),
         adGroupExtensionSettings: new AdGroupExtensionSettingService(
             cid,
             client,

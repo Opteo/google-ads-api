@@ -1,7 +1,5 @@
 ---
-title: FeedMapping
+title: FeedMapping 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the FeedMapping entity.

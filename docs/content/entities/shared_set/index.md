@@ -1,7 +1,5 @@
 ---
-title: SharedSet
+title: SharedSet 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the SharedSet entity.

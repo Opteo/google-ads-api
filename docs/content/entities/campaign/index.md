@@ -1,7 +1,5 @@
 ---
-title: Campaign
+title: Campaign 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the Campaign entity.

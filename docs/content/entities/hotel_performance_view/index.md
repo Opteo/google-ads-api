@@ -1,7 +1,5 @@
 ---
-title: HotelPerformanceView
+title: HotelPerformanceView 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the HotelPerformanceView entity.

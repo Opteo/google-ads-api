@@ -1,7 +1,5 @@
 ---
-title: GenderView
+title: GenderView 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the GenderView entity.

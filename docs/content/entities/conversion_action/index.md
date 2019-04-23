@@ -1,7 +1,5 @@
 ---
-title: ConversionAction
+title: ConversionAction 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the ConversionAction entity.

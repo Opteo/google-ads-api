@@ -1,7 +1,5 @@
 ---
-title: CustomerExtensionSetting
+title: CustomerExtensionSetting 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the CustomerExtensionSetting entity.

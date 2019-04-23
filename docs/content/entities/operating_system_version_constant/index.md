@@ -1,7 +1,5 @@
 ---
-title: OperatingSystemVersionConstant
+title: OperatingSystemVersionConstant 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the OperatingSystemVersionConstant entity.

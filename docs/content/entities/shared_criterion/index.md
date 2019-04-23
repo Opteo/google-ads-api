@@ -1,7 +1,5 @@
 ---
-title: SharedCriterion
+title: SharedCriterion 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the SharedCriterion entity.

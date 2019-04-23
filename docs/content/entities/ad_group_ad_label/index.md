@@ -1,7 +1,5 @@
 ---
-title: AdGroupAdLabel
+title: AdGroupAdLabel 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the AdGroupAdLabel entity.

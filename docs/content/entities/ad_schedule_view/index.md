@@ -1,7 +1,5 @@
 ---
-title: AdScheduleView
+title: AdScheduleView 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the AdScheduleView entity.

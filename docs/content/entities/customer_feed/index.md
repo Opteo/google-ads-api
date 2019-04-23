@@ -1,7 +1,5 @@
 ---
-title: CustomerFeed
+title: CustomerFeed 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the CustomerFeed entity.

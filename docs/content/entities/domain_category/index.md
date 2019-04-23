@@ -1,7 +1,5 @@
 ---
-title: DomainCategory
+title: DomainCategory 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the DomainCategory entity.

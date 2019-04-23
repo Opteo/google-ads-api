@@ -1,7 +1,5 @@
 ---
-title: UserInterest
+title: UserInterest 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the UserInterest entity.

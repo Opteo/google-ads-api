@@ -1,7 +1,5 @@
 ---
-title: AdGroupFeed
+title: AdGroupFeed 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the AdGroupFeed entity.

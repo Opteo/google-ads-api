@@ -1,7 +1,5 @@
 ---
-title: AccountBudgetProposal
+title: AccountBudgetProposal 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the AccountBudgetProposal entity.

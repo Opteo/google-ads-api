@@ -1,7 +1,5 @@
 ---
-title: CampaignCriterion
+title: CampaignCriterion 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the CampaignCriterion entity.

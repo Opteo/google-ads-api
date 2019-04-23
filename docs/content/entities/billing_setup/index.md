@@ -1,7 +1,5 @@
 ---
-title: BillingSetup
+title: BillingSetup 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the BillingSetup entity.

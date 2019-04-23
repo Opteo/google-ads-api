@@ -1,7 +1,5 @@
 ---
-title: CustomerClientLink
+title: CustomerClientLink 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the CustomerClientLink entity.

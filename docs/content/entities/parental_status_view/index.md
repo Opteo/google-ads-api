@@ -1,7 +1,5 @@
 ---
-title: ParentalStatusView
+title: ParentalStatusView 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the ParentalStatusView entity.

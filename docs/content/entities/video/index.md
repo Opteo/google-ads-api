@@ -1,7 +1,5 @@
 ---
-title: Video
+title: Video 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the Video entity.

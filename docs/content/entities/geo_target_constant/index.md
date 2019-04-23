@@ -1,7 +1,5 @@
 ---
-title: GeoTargetConstant
+title: GeoTargetConstant 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the GeoTargetConstant entity.

@@ -1,7 +1,5 @@
 ---
-title: AdGroupBidModifier
+title: AdGroupBidModifier 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the AdGroupBidModifier entity.

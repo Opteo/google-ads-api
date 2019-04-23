@@ -1,7 +1,5 @@
 ---
-title: RemarketingAction
+title: RemarketingAction 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the RemarketingAction entity.

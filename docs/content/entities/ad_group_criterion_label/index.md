@@ -1,7 +1,5 @@
 ---
-title: AdGroupCriterionLabel
+title: AdGroupCriterionLabel 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the AdGroupCriterionLabel entity.

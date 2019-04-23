@@ -1,0 +1,17 @@
+---
+title: Delete {{ ENTITY }} 
+---
+
+This section describes how to delete a {{ ENTITY }}.
+
+
+
+```javascript
+
+// Deleting the entity
+
+const results = customer.{{ RESOURCE_URL_NAME }}.delete('customers/1234567890/{{ RESOURCE_URL_NAME }}')
+
+console.log(results) // ['customers/1234567890/{{ RESOURCE_URL_NAME }}/9765432177']
+
+```

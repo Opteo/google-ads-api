@@ -1,7 +1,5 @@
 ---
-title: AdGroup
+title: AdGroup 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the AdGroup entity.

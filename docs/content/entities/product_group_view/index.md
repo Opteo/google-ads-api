@@ -1,7 +1,5 @@
 ---
-title: ProductGroupView
+title: ProductGroupView 
 ---
-``` 
-// sample code
-await customer.campaigns.list()
-```
+
+This section describes the ProductGroupView entity.
