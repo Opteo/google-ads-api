@@ -3,7 +3,6 @@ const template = require('lodash.template')
 const camelCase = require('lodash.camelcase')
 const snakeCase = require('lodash.snakecase')
 const endsWith = require('lodash.endswith')
-const  ts = require("typescript")
 
 require('dotenv').config()
 const { GoogleAdsApi } = require("../build")
@@ -20,7 +19,6 @@ const customer =  client.Customer({
     login_customer_id: process.env.GADS_LOGIN_CUSTOMER_ID,
     refresh_token: process.env.GADS_REFRESH_TOKEN ,
 })
-
 
 const log = obj => {
     console.log(require('util').inspect(obj, false, null))
@@ -323,8 +321,7 @@ async function compileService(entity, schema) {
         const new_obj = {}
 
         Object.keys(obj).forEach(key => {
-
-            const _new_object = {}            
+            const _new_object = {}
 
             if (obj[key].enum) {
                 _new_object._type = 'enum'
@@ -345,10 +342,10 @@ async function compileService(entity, schema) {
             }
 
             const matching_resource = compiled_resources[capitalise(parent_field_name)]
-            if(matching_resource && matching_resource.oneofs){
+            if (matching_resource && matching_resource.oneofs) {
                 Object.keys(matching_resource.oneofs).forEach(oneof_key => {
-                    matching_resource.oneofs[oneof_key].oneof.forEach(el =>{
-                        if(el === key){
+                    matching_resource.oneofs[oneof_key].oneof.forEach(el => {
+                        if (el === key) {
                             new_obj[snakeCase(key)]._oneof = oneof_key
                         }
                     })
@@ -383,7 +380,6 @@ async function compileService(entity, schema) {
         name: entity,
         object: unroll(schema.schemas[`GoogleAdsGoogleadsV1Resources__${entity}`].properties, entity),
     }
-
 
     if (schema.schemas[`GoogleAdsGoogleadsV1Services__${mutate_request}`]) {
         compiled_service = service_compiler({
@@ -422,7 +418,9 @@ async function compileService(entity, schema) {
     // console.log(entity)
     const listed = await customer[camelCase(entity+'s')].list()
     console.log(listed.length)
-    const compiled_meta = meta_compiler({JSON_META : JSON.stringify(meta)})
+
+
+    const compiled_meta = meta_compiler({ JSON_META: JSON.stringify(meta) })
 
     // const compiled_readme_object = readme_object_compiler({
     //     ENTITY: ent,
@@ -436,14 +434,20 @@ async function compileService(entity, schema) {
     // console.log(JSON.stringify(js_class));
 
     const file_path = `${__dirname}/../src/services/${ent}.ts`
-    const docs_file_path = `${__dirname}/../docs/entities/${ent}/`
-    // fs.writeFileSync(file_path, compiled_service)
+
+    const docs_file_path = `${__dirname}/../docs/content/entities/${ent}/`
+    //fs.writeFileSync(file_path, compiled_service)
 
     await fs.ensureDir(docs_file_path)
 
     fs.writeFileSync(docs_file_path + 'meta.js', compiled_meta)
     // fs.writeFileSync(docs_file_path + 'readme_object.md', compiled_readme_object)
 
+    // temporary sample markdown file
+    fs.writeFileSync(
+        docs_file_path + 'index.md',
+        '---\ntitle: ' + entity + '\n---\n' + '``` \n// sample code\nawait customer.campaigns.list()\n```'
+    )
 
     // await fs.writeJson(docs_file_path + 'meta.json', meta)
 

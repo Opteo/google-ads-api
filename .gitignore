@@ -1,3 +1,5 @@
+.DS_Store
+
 /lib*
 src/config.ts
 src/tests/debug.test.ts
