@@ -3,23 +3,25 @@ import React from 'react'
 
 import AttributesTable from './attributesTable'
 
-const Section = ({ id, key, node, meta }) => {
+const Section = ({ id, name, node, meta }) => {
+    const { fields } = node
     return (
-        <div id={id} key={key}>
+        <div id={id} key={name}>
             <h3>{node.frontmatter.title}</h3>
             <div>
                 <div
                     style={{
-                        width: '50%',
+                        width: '60%',
                         display: `inline-block`,
                         padding: `10px`,
+                        maxWidth: '400px',
                     }}
                 >
-                    <AttributesTable meta={meta} />
+                    {fields.is_index ? <AttributesTable data={meta.object} /> : ''}
                 </div>
                 <div
                     style={{
-                        width: '50%',
+                        width: '40%',
                         display: `inline-block`,
                         padding: `10px`,
                         verticalAlign: `top`,
@@ -36,7 +38,7 @@ const Section = ({ id, key, node, meta }) => {
 
 Section.propTypes = {
     id: PropTypes.string.isRequired,
-    key: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     node: PropTypes.object.isRequired,
     meta: PropTypes.object.isRequired,
 }

@@ -7,7 +7,7 @@ const Sidebar = ({ ids }) => {
     return (
         <div>
             <h2>google-ads-api</h2>
-            <ul>
+            <ul style={{ fontSize: '15px' }}>
                 {Object.keys(ids).map(id => {
                     const title = ids[id]
                     const element_id = `div#${id}`
