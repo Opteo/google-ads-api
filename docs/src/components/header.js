@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 const Header = ({ siteTitle }) => (
-    <header className="bg-white ph4 pv3 tc bb b--opteo-light-gray" style={{ marginLeft: '280px' }}>
-        <div className="">
+    <header id="header" className="bg-white ph4 pv2 tc bb b--opteo-light-gray" style={{ marginLeft: '280px' }}>
+        <div>
             <Link className="" to="/">
                 {/* {siteTitle} */}
-                <div className="w-100 flex items-center justify-center mobile-show">
+                <div className="w-100 flex items-center justify-center mobile-show pb1">
                     <svg className="logo" width="40" height="40" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                         <g fill="none" fill-rule="evenodd">
                             <path

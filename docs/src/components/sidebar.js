@@ -14,23 +14,22 @@ const jumpToSection = id => {
 
 const Sidebar = ({ ids }) => {
     return (
-        <div
-            className="absolute top-0 h-100 bg-white fixed br b--opteo-light-gray overflow-y-scroll"
-            style={{ maxWidth: '280px' }}
-        >
-            <h3 class="tc pv3">google-ads-api</h3>
-            <ul className="list f6 ph0">
+        <div className="absolute top-0 h-100 bg-white fixed br b--opteo-light-gray" style={{ maxWidth: '280px' }}>
+            <h3 class="tc pv3 bb b--opteo-light-gray" onClick={() => jumpToSection('#header')}>
+                google-ads-api
+            </h3>
+            <ul className="h-100 list f6 ph0 overflow-y-scroll">
                 {Object.keys(ids).map(entity => {
                     const subsections = ids[entity]
                     const key = `sidebar-${entity}`
                     const section_id = `#${subsections[1].id}`
 
                     return (
-                        <li key={key} className="mt1 mb0">
+                        <li key={key} className="mv0">
                             <Collapsible
                                 trigger={entity}
-                                triggerClassName="pointer fw6"
-                                triggerOpenedClassName="pointer fw6"
+                                triggerClassName="pointer fw6 f7"
+                                triggerOpenedClassName="pointer fw6 f7"
                                 onOpening={() => jumpToSection(section_id)}
                             >
                                 <ul className="list">

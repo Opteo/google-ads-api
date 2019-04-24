@@ -25,7 +25,7 @@ const IndexPage = ({
                 <div className="" style={{ width: '280px' }}>
                     <Sidebar ids={ids} />
                 </div>
-                <div className="pa3 mt4" style={{ marginLeft: '280px' }}>
+                <div className="pa3 mt4" style={{ marginLeft: '280px', width: 'calc(100% - 280px)' }}>
                     {Sections}
                 </div>
             </div>

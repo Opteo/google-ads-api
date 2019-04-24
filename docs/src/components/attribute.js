@@ -18,7 +18,8 @@ const Attribute = ({ data, name, enums }) => {
             <Collapsible
                 trigger="show child attributes"
                 triggerWhenOpen="hide child attributes"
-                className="pointer pl2 opteo-link-blue"
+                triggerClassName="pointer pl2 opteo-link-blue tc"
+                triggerOpenedClassName="pointer pl2 opteo-link-blue tc"
             >
                 <AttributesTable data={data} isChild={true} />
             </Collapsible>
@@ -35,7 +36,8 @@ const Attribute = ({ data, name, enums }) => {
                     <Collapsible
                         trigger="show enums"
                         triggerWhenOpen="hide enums"
-                        className="pointer pl2 opteo-link-blue"
+                        triggerClassName="pointer pl2 opteo-link-blue tc"
+                        triggerOpenedClassName="pointer pl2 opteo-link-blue tc"
                     >
                         <Enums enums={enums} />
                     </Collapsible>
