@@ -1,17 +1,14 @@
 ---
-title: Delete KeywordPlanAdGroup 
+title: Delete KeywordPlanAdGroup
+order: 6
+type: delete
+entity: KeywordPlanAdGroup
 ---
 
 This section describes how to delete a KeywordPlanAdGroup.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.keywordPlanAdGroups.delete('customers/1234567890/keywordPlanAdGroups')
-
-console.log(results) // ['customers/1234567890/keywordPlanAdGroups/9765432177']
-
+await customer.keywordPlanAdGroups.delete('customers/1234567890/keywordPlanAdGroups/123123123')
 ```

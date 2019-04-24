@@ -10,7 +10,7 @@ const customer = newCustomer()
 describe('CampaignCriterion', async () => {
     describe('reporting', async () => {
         it.only('can retrieve a list of CampaignCriterions with all fields (if valid)', async () => {
-            const campaign_criterions = await customer.campaignCriterion.list()
+            const campaign_criterions = await customer.campaignCriteria.list()
             expect(campaign_criterions).toBeInstanceOf(Array)
 
             // @ts-ignore Ignore missing proto definitions for now
@@ -25,7 +25,7 @@ describe('CampaignCriterion', async () => {
                 const resource = campaign_criterions[0].campaign_criterion.resource_name
 
                 if (resource) {
-                    const singleton = await customer.campaignCriterion.get(resource)
+                    const singleton = await customer.campaignCriteria.get(resource)
                     expect(singleton).toBeInstanceOf(Object)
                     expect(singleton).toEqual(
                         expect.objectContaining({
@@ -38,7 +38,7 @@ describe('CampaignCriterion', async () => {
 
         it('throws an error when the request is invalid', async () => {
             await expect(
-                customer.campaignCriterion.list({
+                customer.campaignCriteria.list({
                     limit: -10,
                     constraints: ['FakeConstraint=INVALID'],
                 })

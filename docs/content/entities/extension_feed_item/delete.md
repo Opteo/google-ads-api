@@ -1,17 +1,14 @@
 ---
-title: Delete ExtensionFeedItem 
+title: Delete ExtensionFeedItem
+order: 6
+type: delete
+entity: ExtensionFeedItem
 ---
 
 This section describes how to delete a ExtensionFeedItem.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.extensionFeedItems.delete('customers/1234567890/extensionFeedItems')
-
-console.log(results) // ['customers/1234567890/extensionFeedItems/9765432177']
-
+await customer.extensionFeedItems.delete('customers/3827277046/extensionFeedItems/9779152283')
 ```

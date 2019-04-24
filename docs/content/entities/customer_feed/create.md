@@ -1,21 +1,20 @@
 ---
-title: Create CustomerFeed 
+title: Create CustomerFeed
+order: 4
+type: create
+entity: CustomerFeed
 ---
 
 This section describes how to create a CustomerFeed.
 
-
-
 ```javascript
-
 // Creating the entity
 
 const customer_feed = {
-    // Your CustomerFeed here 
+    // Your CustomerFeed here, without immutable fields such as resource_name
 }
 
 const results = await customer.customerFeeds.create(customer_feed)
 
-console.log(results) // ['customers/1234567890/customerFeeds/9765432177']
-
+console.log(results) // ['customers/9262111890/customerFeeds/77425432']
 ```

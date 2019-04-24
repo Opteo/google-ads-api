@@ -1,17 +1,14 @@
 ---
-title: Delete KeywordPlanNegativeKeyword 
+title: Delete KeywordPlanNegativeKeyword
+order: 6
+type: delete
+entity: KeywordPlanNegativeKeyword
 ---
 
 This section describes how to delete a KeywordPlanNegativeKeyword.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.keywordPlanNegativeKeywords.delete('customers/1234567890/keywordPlanNegativeKeywords')
-
-console.log(results) // ['customers/1234567890/keywordPlanNegativeKeywords/9765432177']
-
+await customer.keywordPlanNegativeKeywords.delete('customers/1234567890/keywordPlanNegativeKeywords/123123123')
 ```

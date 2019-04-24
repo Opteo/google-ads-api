@@ -1,17 +1,14 @@
 ---
-title: Delete AdGroupCriterionLabel 
+title: Delete AdGroupCriterionLabel
+order: 6
+type: delete
+entity: AdGroupCriterionLabel
 ---
 
 This section describes how to delete a AdGroupCriterionLabel.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.adGroupCriterionLabels.delete('customers/1234567890/adGroupCriterionLabels')
-
-console.log(results) // ['customers/1234567890/adGroupCriterionLabels/9765432177']
-
+await customer.adGroupCriterionLabels.delete('customers/1234567890/adGroupCriterionLabels/123123123')
 ```

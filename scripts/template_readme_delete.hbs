@@ -1,5 +1,8 @@
 ---
 title: Delete {{ ENTITY }} 
+order: 6
+type: delete
+entity: {{ ENTITY }} 
 ---
 
 This section describes how to delete a {{ ENTITY }}.
@@ -10,8 +13,6 @@ This section describes how to delete a {{ ENTITY }}.
 
 // Deleting the entity
 
-const results = customer.{{ RESOURCE_URL_NAME }}.delete('customers/1234567890/{{ RESOURCE_URL_NAME }}')
-
-console.log(results) // ['customers/1234567890/{{ RESOURCE_URL_NAME }}/9765432177']
+await customer.{{ RESOURCE_URL_NAME }}.delete('{{EXAMPLE_RESOURCE_NAME}}')
 
 ```

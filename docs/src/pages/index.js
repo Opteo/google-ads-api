@@ -1,6 +1,5 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import styled from 'styled-components'
 
 import Layout from '../components/layout'
 import Section from '../components/section'
@@ -19,28 +18,14 @@ const IndexPage = ({
         return <Section id={section.id} name={section.key} node={section.node} meta={section.meta} />
     })
 
-    const Container = styled.div`
-        width: 100%;
-    `
-    const ColumnOne = styled.div`
-        width: 20%;
-        display: inline-block;
-        vertical-align: top;
-    `
-    const ColumnTwo = styled.div`
-        width: 80%;
-        display: inline-block;
-        vertical-align: top;
-    `
-
     return (
         <Layout>
             {/* <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} /> */}
-            <Container>
-                <ColumnOne>
+            <Container className="w-100 flex items-start">
+                <div className="w-20 justify-start pa3">
                     <Sidebar ids={ids} />
-                </ColumnOne>
-                <ColumnTwo>{Sections}</ColumnTwo>
+                </div>
+                <div className="w-80 pa3">{Sections}</div>
             </Container>
         </Layout>
     )

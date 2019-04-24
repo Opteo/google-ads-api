@@ -1,17 +1,14 @@
 ---
-title: Delete CustomerManagerLink 
+title: Delete CustomerManagerLink
+order: 6
+type: delete
+entity: CustomerManagerLink
 ---
 
 This section describes how to delete a CustomerManagerLink.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.customerManagerLinks.delete('customers/1234567890/customerManagerLinks')
-
-console.log(results) // ['customers/1234567890/customerManagerLinks/9765432177']
-
+await customer.customerManagerLinks.delete('customers/9262111890/customerManagerLinks/6141549892~121665495')
 ```

@@ -1,5 +1,8 @@
 ---
 title: Create {{ ENTITY }} 
+order: 4
+type: create
+entity: {{ ENTITY }} 
 ---
 
 This section describes how to create a {{ ENTITY }}.
@@ -11,11 +14,11 @@ This section describes how to create a {{ ENTITY }}.
 // Creating the entity
 
 const {{ ENTITY_SNAKECASE }} = {
-    // Your {{ ENTITY }} here 
+    // Your {{ ENTITY }} here, without immutable fields such as resource_name
 }
 
 const results = await customer.{{ RESOURCE_URL_NAME }}.create({{ ENTITY_SNAKECASE }})
 
-console.log(results) // ['customers/1234567890/{{ RESOURCE_URL_NAME }}/9765432177']
+console.log(results) // ['{{EXAMPLE_RESOURCE_NAME}}']
 
 ```

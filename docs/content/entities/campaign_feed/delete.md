@@ -1,17 +1,14 @@
 ---
-title: Delete CampaignFeed 
+title: Delete CampaignFeed
+order: 6
+type: delete
+entity: CampaignFeed
 ---
 
 This section describes how to delete a CampaignFeed.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.campaignFeeds.delete('customers/1234567890/campaignFeeds')
-
-console.log(results) // ['customers/1234567890/campaignFeeds/9765432177']
-
+await customer.campaignFeeds.delete('customers/9262111890/campaignFeeds/1483704368~77425432')
 ```

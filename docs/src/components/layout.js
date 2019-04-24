@@ -10,6 +10,7 @@ import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 
 import Header from './header'
+import './tachyons.min.css'
 import './layout.css'
 
 const Layout = ({ children }) => (

@@ -1,17 +1,14 @@
 ---
-title: Delete CustomerExtensionSetting 
+title: Delete CustomerExtensionSetting
+order: 6
+type: delete
+entity: CustomerExtensionSetting
 ---
 
 This section describes how to delete a CustomerExtensionSetting.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.customerExtensionSettings.delete('customers/1234567890/customerExtensionSettings')
-
-console.log(results) // ['customers/1234567890/customerExtensionSettings/9765432177']
-
+await customer.customerExtensionSettings.delete('customers/9262111890/customerExtensionSettings/SITELINK')
 ```

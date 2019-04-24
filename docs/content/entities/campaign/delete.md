@@ -1,17 +1,14 @@
 ---
-title: Delete Campaign 
+title: Delete Campaign
+order: 6
+type: delete
+entity: Campaign
 ---
 
 This section describes how to delete a Campaign.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.campaigns.delete('customers/1234567890/campaigns')
-
-console.log(results) // ['customers/1234567890/campaigns/9765432177']
-
+await customer.campaigns.delete('customers/9262111890/campaigns/1473765780')
 ```

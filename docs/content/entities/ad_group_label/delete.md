@@ -1,17 +1,14 @@
 ---
-title: Delete AdGroupLabel 
+title: Delete AdGroupLabel
+order: 6
+type: delete
+entity: AdGroupLabel
 ---
 
 This section describes how to delete a AdGroupLabel.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.adGroupLabels.delete('customers/1234567890/adGroupLabels')
-
-console.log(results) // ['customers/1234567890/adGroupLabels/9765432177']
-
+await customer.adGroupLabels.delete('customers/3827277046/adGroupLabels/42877626370~3345231412')
 ```

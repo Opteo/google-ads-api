@@ -1,17 +1,14 @@
 ---
-title: Delete SharedCriterion 
+title: Delete SharedCriterion
+order: 6
+type: delete
+entity: SharedCriterion
 ---
 
 This section describes how to delete a SharedCriterion.
 
-
-
 ```javascript
-
 // Deleting the entity
 
-const results = customer.sharedCriteria.delete('customers/1234567890/sharedCriteria')
-
-console.log(results) // ['customers/1234567890/sharedCriteria/9765432177']
-
+await customer.sharedCriteria.delete('customers/9262111890/sharedCriteria/1788591305~13223616')
 ```
