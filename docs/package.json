@@ -10,6 +10,7 @@
     "gatsby-transformer-remark": "^2.3.8",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
+    "react-collapsible": "^2.6.0",
     "react-dom": "^16.8.6",
     "scroll-to-element": "^2.0.3"
   },
