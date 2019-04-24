@@ -9,7 +9,7 @@ const Enums = ({ enums }) => {
             </div>
         )
     })
-    return <div>{rows}</div>
+    return <div className="pl2">{rows}</div>
 }
 
 Enums.propTypes = {

@@ -9,7 +9,7 @@ const AttributesTable = ({ data, isChild }) => {
         return Object.keys(rows).map(key => {
             const details = rows[key]
             return (
-                <tr key={`key-${key}`}>
+                <tr key={`key-${key}`} className="tl pa3 mw5">
                     <Attribute data={details} name={key} />
                     {details._enums ? <Enums enums={details._enums} /> : null}
                 </tr>
@@ -18,9 +18,9 @@ const AttributesTable = ({ data, isChild }) => {
     }
 
     return (
-        <table>
+        <table className="f7 w-100 center ba b--opteo-light-gray">
             <thead>
-                <tr>
+                <tr className="fw6 tl pa3">
                     <th>
                         {isChild ? 'Child ' : ''}
                         Attributes

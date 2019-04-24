@@ -17,17 +17,13 @@ const Attribute = ({ data, name }) => {
     }
 
     return (
-        <tr
-            style={{
-                verticalAlign: `top`,
-            }}
-        >
-            <td>
-                <h5>{name}</h5>
-                {data._type ? <p>{data._type}</p> : ''}
+        <tr className="tl w-100">
+            <td className="tl w-40">
+                <p className="pl2 f7 fw6 mv0">{name}</p>
+                {data._type ? <p className="pl2 f7 fw5 mv0 black-70">{data._type}</p> : ''}
                 {details._enums ? <Enums enums={details._enums} /> : null}
             </td>
-            <td>{details}</td>
+            <td className="tl w-60">{details}</td>
         </tr>
     )
 }

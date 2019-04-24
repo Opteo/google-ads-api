@@ -25,7 +25,7 @@ const IndexPage = ({
                 <div className="w-20">
                     <Sidebar ids={ids} />
                 </div>
-                <div className="w-80 pa3">{Sections}</div>
+                <div className="w-80 pa3 mt4">{Sections}</div>
             </div>
         </Layout>
     )

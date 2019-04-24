@@ -2,11 +2,17 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 const scrollToElement = require('scroll-to-element')
+const jumpToSection = id =>
+    scrollToElement(id, {
+        offset: -10,
+        ease: '',
+        duration: 700,
+    })
 
 const Sidebar = ({ ids }) => {
     return (
-        <div className="br ph1">
-            <h2 class="tc">google-ads-api</h2>
+        <div className="ph1 br b--opteo-light-gray">
+            <h2 class="tc pv3">google-ads-api</h2>
             <ul className="list f6">
                 {Object.keys(ids).map(entity => {
                     const subsections = ids[entity]
@@ -15,7 +21,9 @@ const Sidebar = ({ ids }) => {
 
                     return (
                         <li key={key}>
-                            <strong onClick={() => scrollToElement(section_id)}>{entity}</strong>
+                            <strong className="pointer f6" onClick={() => jumpToSection(section_id)}>
+                                {entity}
+                            </strong>
                             <ul className="list">
                                 {Object.keys(subsections).map(index => {
                                     const sub_key = `${key}-${index}`
@@ -23,7 +31,11 @@ const Sidebar = ({ ids }) => {
                                     const subsection_id = `#${subpage.id}`
 
                                     return (
-                                        <li key={sub_key} onClick={() => scrollToElement(subsection_id)}>
+                                        <li
+                                            className="pointer f7 fw5"
+                                            key={sub_key}
+                                            onClick={() => jumpToSection(subsection_id)}
+                                        >
                                             {subpage.title}
                                         </li>
                                     )
