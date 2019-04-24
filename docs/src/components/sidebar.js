@@ -2,18 +2,22 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 const scrollToElement = require('scroll-to-element')
-const jumpToSection = id =>
-    scrollToElement(id, {
-        offset: -10,
-        ease: '',
-        duration: 700,
+const jumpToSection = id => {
+    console.log(id)
+    return scrollToElement(id, {
+        offset: 0,
+        duration: 600,
     })
+}
 
 const Sidebar = ({ ids }) => {
     return (
-        <div className="ph1 br b--opteo-light-gray">
-            <h2 class="tc pv3">google-ads-api</h2>
-            <ul className="list f6">
+        <div
+            className="absolute top-0 h-100 bg-white fixed br b--opteo-light-gray overflow-y-scroll"
+            style={{ maxWidth: '280px' }}
+        >
+            <h3 class="tc pv3">google-ads-api</h3>
+            <ul className="list f6 ph0">
                 {Object.keys(ids).map(entity => {
                     const subsections = ids[entity]
                     const key = `sidebar-${entity}`

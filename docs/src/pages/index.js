@@ -22,10 +22,12 @@ const IndexPage = ({
         <Layout>
             {/* <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} /> */}
             <div className="w-100 flex items-start">
-                <div className="w-20">
+                <div className="" style={{ width: '280px' }}>
                     <Sidebar ids={ids} />
                 </div>
-                <div className="w-80 pa3 mt4">{Sections}</div>
+                <div className="pa3 mt4" style={{ marginLeft: '280px' }}>
+                    {Sections}
+                </div>
             </div>
         </Layout>
     )

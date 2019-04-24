@@ -18,7 +18,7 @@ const AttributesTable = ({ data, isChild }) => {
     }
 
     return (
-        <table className="f7 w-100 center ba b--opteo-light-gray">
+        <table className="f7 w-100 ba b--opteo-light-gray mw6">
             <thead>
                 <tr className="fw6 tl pa3">
                     <th>
