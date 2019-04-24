@@ -21,12 +21,12 @@ const IndexPage = ({
     return (
         <Layout>
             {/* <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} /> */}
-            <Container className="w-100 flex items-start">
-                <div className="w-20 justify-start pa3">
+            <div className="w-100 flex items-start">
+                <div className="w-20">
                     <Sidebar ids={ids} />
                 </div>
                 <div className="w-80 pa3">{Sections}</div>
-            </Container>
+            </div>
         </Layout>
     )
 }
@@ -35,13 +35,16 @@ export default IndexPage
 
 export const pageQuery = graphql`
     query {
-        allMarkdownRemark {
+        allMarkdownRemark(sort: { order: ASC, fields: [frontmatter___entity, frontmatter___order] }) {
             edges {
                 node {
                     id
                     html
                     frontmatter {
                         title
+                        order
+                        type
+                        entity
                     }
                     fields {
                         directory

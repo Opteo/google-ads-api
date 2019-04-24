@@ -5,16 +5,30 @@ const scrollToElement = require('scroll-to-element')
 
 const Sidebar = ({ ids }) => {
     return (
-        <div>
-            <h2>google-ads-api</h2>
-            <ul style={{ fontSize: '15px' }}>
-                {Object.keys(ids).map(id => {
-                    const title = ids[id]
-                    const element_id = `div#${id}`
-                    const key = `sidebar-${id}`
+        <div className="br ph1">
+            <h2 class="tc">google-ads-api</h2>
+            <ul className="list f6">
+                {Object.keys(ids).map(entity => {
+                    const subsections = ids[entity]
+                    const key = `sidebar-${entity}`
+                    const section_id = `#${subsections[1].id}`
+
                     return (
-                        <li key={key} onClick={() => scrollToElement(element_id)}>
-                            {title}
+                        <li key={key}>
+                            <strong onClick={() => scrollToElement(section_id)}>{entity}</strong>
+                            <ul className="list">
+                                {Object.keys(subsections).map(index => {
+                                    const sub_key = `${key}-${index}`
+                                    const subpage = subsections[index]
+                                    const subsection_id = `#${subpage.id}`
+
+                                    return (
+                                        <li key={sub_key} onClick={() => scrollToElement(subsection_id)}>
+                                            {subpage.title}
+                                        </li>
+                                    )
+                                })}
+                            </ul>
                         </li>
                     )
                 })}

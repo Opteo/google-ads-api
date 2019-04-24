@@ -1,13 +1,24 @@
 export const getSectionId = node => {
     const { title } = node.frontmatter
-    return `${node.fields.directory.split('/').join('-')}-${title.split(' ').join('-')}`
+    return title
+        .split(' ')
+        .join('-')
+        .toLowerCase()
 }
 
 export const getIds = edges => {
     const ids = {}
     edges.forEach(edge => {
         const { node } = edge
-        ids[getSectionId(node)] = node.frontmatter.title
+        const { entity, order, title } = node.frontmatter
+
+        if (!ids[entity]) {
+            ids[entity] = {}
+        }
+        ids[entity][order] = {
+            title,
+            id: getSectionId(node),
+        }
     })
     return ids
 }

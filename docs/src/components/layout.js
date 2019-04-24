@@ -27,13 +27,7 @@ const Layout = ({ children }) => (
         render={data => (
             <>
                 <Header siteTitle={data.site.siteMetadata.title} />
-                <div
-                    style={{
-                        margin: `0 auto`,
-                        padding: `0px 1.0875rem 1.45rem`,
-                        paddingTop: 0,
-                    }}
-                >
+                <div className="">
                     <main>{children}</main>
                     <footer>© Opteo {new Date().getFullYear()}</footer>
                 </div>
