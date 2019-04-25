@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import sortBy from 'lodash.sortby'
 
 import Attribute from './attribute'
 
 const AttributesTable = ({ data, title, section }) => {
     const getRows = rows => {
-        return Object.keys(rows).map(key => {
+        return sortBy(Object.keys(rows), key => {
+            return key + rows[key]._oneof
+        }).map(key => {
             const details = rows[key]
             if (typeof details !== 'object') {
                 return null

@@ -27,7 +27,15 @@ const Attribute = ({ data, name, enums, section }) => {
     return (
         <tr key={`${section}-${name}`} className="tl w-100 v-top">
             <td className="tl mw5">
-                {_oneof ? <span className="pl2 fw6 black-30">ONE OF</span> : null}
+                {_oneof ? (
+                    <span className="pl2 fw6 black-30">
+                        ONE OF{' '}
+                        {_oneof
+                            .split(/(?=[A-Z])/)
+                            .join('_')
+                            .toLowerCase()}
+                    </span>
+                ) : null}
 
                 <p className="pl2 f7 fw6 mv0">{name}</p>
 
