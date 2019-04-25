@@ -9,7 +9,7 @@ const Header = ({ siteTitle }) => (
                 {/* {siteTitle} */}
                 <div className="w-100 flex items-center justify-center mobile-show pb1">
                     <svg className="logo" width="40" height="40" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                        <g fill="none" fill-rule="evenodd">
+                        <g fill="none" fillRule="evenodd">
                             <path
                                 d="M0 15.875c0-.8741794.74845047-1.625 1.625-1.625.97212314 0 1.71963805.7508206 1.75 1.625C3.34463805 22.9384695 9.0216349 28.6405712 16 28.625c6.9783651.0155712 12.6553619-5.6865305 12.625-12.75.0303619-.8741794.7778769-1.625 1.75-1.625.8765495 0 1.625.7508206 1.625 1.625C32 24.7906189 24.82236 32 16 32 7.17764004 32 0 24.7906189 0 15.875z"
                                 fill="#1056EA"

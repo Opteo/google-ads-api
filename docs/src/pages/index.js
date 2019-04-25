@@ -14,10 +14,9 @@ const IndexPage = ({
 }) => {
     const ids = getIds(edges)
     const sections_data = getSectionsData(edges)
-    const Sections = sections_data.map(section => {
-        return <Section id={section.id} name={section.key} node={section.node} meta={section.meta} />
+    const Sections = sections_data.slice(0, 4).map(section => {
+        return <Section data={section}/>
     })
-
     return (
         <Layout>
             {/* <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} /> */}

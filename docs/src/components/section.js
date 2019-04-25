@@ -9,10 +9,12 @@ const copyToClipboard = section_id => {
     window.prompt('Copy to clipboard: Ctrl+C, Enter', `${base}/${id}`)
 }
 
-const Section = ({ id, name, node, meta }) => {
+const Section = ({ data }) => {
+    const { id, node, meta } = data
     const { fields, html } = node
+
     return (
-        <div key={name} className="mv3 bb b--opteo-light-gray">
+        <div key={id} className="mv3 bb b--opteo-light-gray">
             <div className="mb3">
                 <span id={id} className="fw6 f4">
                     {node.frontmatter.title}
@@ -23,17 +25,14 @@ const Section = ({ id, name, node, meta }) => {
             </div>
             <div className="w-100 fl">
                 <div className="f6" dangerouslySetInnerHTML={{ __html: html }} />
-                {fields.is_index ? <AttributesTable data={meta.object} /> : ''}
+                {fields.is_index ? <AttributesTable section={id} data={meta.object} /> : ''}
             </div>
         </div>
     )
 }
 
 Section.propTypes = {
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    node: PropTypes.object.isRequired,
-    meta: PropTypes.object.isRequired,
+    data: PropTypes.object.isRequired,
 }
 
 export default Section

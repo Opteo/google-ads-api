@@ -15,7 +15,7 @@ const jumpToSection = id => {
 const Sidebar = ({ ids }) => {
     return (
         <div className="absolute top-0 h-100 bg-white fixed br b--opteo-light-gray" style={{ maxWidth: '280px' }}>
-            <h3 class="tc pv3 bb b--opteo-light-gray" onClick={() => jumpToSection('#header')}>
+            <h3 className="tc pv3 bb b--opteo-light-gray" onClick={() => jumpToSection('#header')}>
                 google-ads-api
             </h3>
             <ul className="h-100 list f6 ph0 overflow-y-scroll">
