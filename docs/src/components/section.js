@@ -23,7 +23,7 @@ const Section = ({ data }) => {
                 </span>
             </div>
             <div className="w-100 fl">
-                <div className="f6" dangerouslySetInnerHTML={{ __html: html }} />
+                <div className="f6 content" dangerouslySetInnerHTML={{ __html: html }} />
                 {meta ? <AttributesTable section={id} data={meta} /> : null}
             </div>
         </div>

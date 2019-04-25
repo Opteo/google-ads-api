@@ -13,6 +13,8 @@ import Header from './header'
 import '../css/tachyons.min.css'
 import '../css/main.css'
 import '../css/colors.css'
+import '../css/two-column.css'
+import '../css/prism-theme-dark.css'
 
 const Layout = ({ children }) => (
     <StaticQuery

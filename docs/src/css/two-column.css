@@ -1,0 +1,40 @@
+.content {
+	position: relative;
+}
+
+.content > h1,
+.content > h2,
+.content > h3,
+.content > h4,
+.content > h5,
+.content > h6,
+.content > p,
+.content > table,
+.content > ul,
+.content > ol,
+.content > aside,
+.content > dl {
+	width: 50%;
+	padding: 0 28px;
+	box-sizing: border-box;
+	display: inline-block;
+}
+
+.content div.gatsby-highlight,
+.content blockquote {
+	/*background-color: #1e2224;*/
+	color: #fff;
+	margin: 0;
+	width: 50%;
+	float: right;
+	clear: right;
+	box-sizing: border-box;
+}
+
+.content code,
+.content pre {
+	font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono',
+		'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;
+	font-size: 1em;
+	/*line-height: 1.5;*/
+}

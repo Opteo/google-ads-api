@@ -8,7 +8,7 @@ import scrollToElement from 'scroll-to-element'
 const jumpToSection = id => {
     return scrollToElement(id, {
         offset: 0,
-        duration: 600,
+        duration: 100,
     })
 }
 
@@ -18,18 +18,18 @@ const Sidebar = ({ ids }) => {
             <h3 className="tc pv3 bb b--opteo-light-gray" onClick={() => jumpToSection('#header')}>
                 google-ads-api
             </h3>
-            <ul className="h-100 list f6 ph0 overflow-y-scroll">
+            <ul className="h-100 list f5 ph0 overflow-y-scroll">
                 {Object.keys(ids).map(entity => {
                     const subsections = ids[entity]
                     const key = `sidebar-${entity}`
                     const section_id = `#${subsections[1].id}`
 
                     return (
-                        <li key={key} className="mv0">
+                        <li key={key} className="mv0 pb2">
                             <Collapsible
                                 trigger={entity}
-                                triggerClassName="pointer fw6 f7"
-                                triggerOpenedClassName="pointer fw6 f7"
+                                triggerClassName="pointer fw6 f5"
+                                triggerOpenedClassName="pointer fw6 f5"
                                 onOpening={() => jumpToSection(section_id)}
                             >
                                 <ul className="list">
@@ -40,7 +40,7 @@ const Sidebar = ({ ids }) => {
 
                                         return (
                                             <li
-                                                className="pointer f7 fw5 mt1 mb0"
+                                                className="pointer f6 fw5 mt1 mb0"
                                                 key={sub_key}
                                                 onClick={() => jumpToSection(subsection_id)}
                                             >

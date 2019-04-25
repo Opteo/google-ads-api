@@ -25,24 +25,29 @@ const Attribute = ({ data, name, enums, section }) => {
     }
 
     return (
-        <tr key={`${section}-${name}`} className="tl w-100 v-top">
-            <td className="tl mw5">
-                {_oneof ? (
-                    <span className="pl2 fw6 black-30">
-                        ONE OF{' '}
-                        {_oneof
-                            .split(/(?=[A-Z])/)
-                            .join('_')
-                            .toLowerCase()}
-                    </span>
-                ) : null}
+        <tr key={`${section}-${name}`} className=" w-100 v-top">
+            <td className="">
+                
 
-                <p className="pl2 f7 fw6 mv0">{name}</p>
+                <div className="pl3 mb2">
+                    <span className=" f5 fw6 mv0 ">{name} </span>
+                    {data._type ? <span className=" f6 fw5 mv0 black-70">{data._type}</span> : null}
+                    {_oneof ? (
+                        <span className="f5 fw6 black-30">
+                            ONE OF{' '}
+                            {_oneof
+                                .split(/(?=[A-Z])/)
+                                .join('_')
+                                .toLowerCase()}
+                        </span>
+                    ) : null}
+                </div>
 
-                {data._type ? <p className="pl2 f7 fw5 mv0 black-70">{data._type}</p> : null}
+                
 
                 {enums ? (
                     <Collapsible
+                        className="pl1"
                         trigger="show enums"
                         triggerWhenOpen="hide enums"
                         triggerClassName="pointer pl2 opteo-link-blue tc"
@@ -51,8 +56,12 @@ const Attribute = ({ data, name, enums, section }) => {
                         <Enums enums={enums} />
                     </Collapsible>
                 ) : null}
+
+                <div className="pl3">
+                    {details}
+                </div>
             </td>
-            <td className="tl">{details}</td>
+            <td className="tl"></td>
         </tr>
     )
 }

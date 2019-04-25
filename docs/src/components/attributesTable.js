@@ -19,7 +19,7 @@ const AttributesTable = ({ data, title, section }) => {
     }
 
     return (
-        <table className="f7 w-100 ba b--opteo-light-gray mw6" style={{ width: '70%' }}>
+        <table className="f5 w-100 ba b--white mw6" style={{ width: '70%' }}>
             <thead>
                 <tr className="fw6 tl pa3">
                     <th>{title || 'Attributes'}</th>

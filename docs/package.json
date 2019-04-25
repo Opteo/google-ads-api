@@ -6,9 +6,11 @@
   "author": "Mateusz Janusz <mateusz@opteo.com>",
   "dependencies": {
     "gatsby": "^2.3.24",
+    "gatsby-remark-prismjs": "^3.2.8",
     "gatsby-source-filesystem": "^2.0.29",
-    "gatsby-transformer-remark": "^2.3.8",
+    "gatsby-transformer-remark": "^2.3.12",
     "lodash.sortby": "^4.7.0",
+    "prismjs": "^1.16.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-collapsible": "^2.6.0",
