@@ -11,8 +11,7 @@ const copyToClipboard = section_id => {
 
 const Section = ({ data }) => {
     const { id, node, meta } = data
-    const { fields, html } = node
-
+    const { html } = node
     return (
         <div key={id} className="mv3 bb b--opteo-light-gray">
             <div className="mb3">
@@ -25,7 +24,7 @@ const Section = ({ data }) => {
             </div>
             <div className="w-100 fl">
                 <div className="f6" dangerouslySetInnerHTML={{ __html: html }} />
-                {fields.is_index ? <AttributesTable section={id} data={meta.object} /> : ''}
+                {meta ? <AttributesTable section={id} data={meta} /> : null}
             </div>
         </div>
     )

@@ -3,27 +3,23 @@ import React from 'react'
 
 import Attribute from './attribute'
 
-const AttributesTable = ({ data, isChild }) => {
+const AttributesTable = ({ data, title, section }) => {
     const getRows = rows => {
         return Object.keys(rows).map(key => {
             const details = rows[key]
+            if (typeof details !== 'object') {
+                return null
+            }
 
-            return (
-                <tr key={`key-${key}`} className="tl pa3 mw5">
-                    <Attribute data={details} name={key} enums={details._enums} />
-                </tr>
-            )
+            return <Attribute data={details} section={section} name={key} enums={details._enums} />
         })
     }
 
     return (
-        <table className="f7 w-100 ba b--opteo-light-gray mw6">
+        <table className="f7 w-100 ba b--opteo-light-gray mw6" style={{ width: '70%' }}>
             <thead>
                 <tr className="fw6 tl pa3">
-                    <th>
-                        {isChild ? 'Child ' : ''}
-                        Attributes
-                    </th>
+                    <th>{title || 'Attributes'}</th>
                 </tr>
             </thead>
             <tbody>{getRows(data)}</tbody>
@@ -33,7 +29,8 @@ const AttributesTable = ({ data, isChild }) => {
 
 AttributesTable.propTypes = {
     data: PropTypes.object.isRequired,
-    isChild: PropTypes.bool,
+    section: PropTypes.string,
+    title: PropTypes.string,
 }
 
 export default AttributesTable

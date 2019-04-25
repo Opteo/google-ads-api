@@ -11,8 +11,6 @@ const Attribute = ({ data, name, enums, section }) => {
 
     if (_description) {
         details = <p>{_description}</p>
-    } else if (_oneof) {
-        details = <p>it is one of {_oneof}</p>
     } else {
         details = (
             <Collapsible
@@ -21,7 +19,7 @@ const Attribute = ({ data, name, enums, section }) => {
                 triggerClassName="pointer pl2 opteo-link-blue tc"
                 triggerOpenedClassName="pointer pl2 opteo-link-blue tc"
             >
-                <AttributesTable data={data} section={section} isChild={true} />
+                <AttributesTable data={data} section={section} title="Child Attributes" />
             </Collapsible>
         )
     }
@@ -29,8 +27,11 @@ const Attribute = ({ data, name, enums, section }) => {
     return (
         <tr key={`${section}-${name}`} className="tl w-100 v-top">
             <td className="tl mw5">
+                {_oneof ? <span className="pl2 fw6 black-30">ONE OF</span> : null}
+
                 <p className="pl2 f7 fw6 mv0">{name}</p>
-                {data._type ? <p className="pl2 f7 fw5 mv0 black-70">{data._type}</p> : ''}
+
+                {data._type ? <p className="pl2 f7 fw5 mv0 black-70">{data._type}</p> : null}
 
                 {enums ? (
                     <Collapsible

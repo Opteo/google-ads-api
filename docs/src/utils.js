@@ -26,13 +26,19 @@ export const getIds = edges => {
 export const getSectionsData = edges => {
     return edges.map(edge => {
         const { node } = edge
-        const meta = require(`../content/${node.fields.directory}/meta.js`)
-        const id = getSectionId(node)
-        return {
-            id,
+        const { is_index } = node.fields
+
+        const section_data = {
+            id: getSectionId(node),
             key: edge.node.id,
             node,
-            meta,
         }
+
+        if (is_index) {
+            const meta_file = require(`../content/${node.fields.directory}/meta.js`)
+            section_data.meta = meta_file.object
+        }
+
+        return section_data
     })
 }
