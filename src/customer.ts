@@ -118,6 +118,8 @@ export default function Customer(
         list: () => cusService.list(),
         get: (id: number | string) => cusService.get(id),
         update: (customer: Customer, options?: ServiceCreateOptions) => cusService.update(customer, options),
+        globalCreate: (operations: Array<any>, options?: ServiceCreateOptions) =>
+            cusService.globalCreate(operations, options),
 
         /* Services */
         campaigns: new CampaignService(cid, client, throttler, 'CampaignService'),

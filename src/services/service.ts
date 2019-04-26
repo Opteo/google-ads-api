@@ -177,6 +177,25 @@ export default class Service {
         }
     }
 
+    protected async globalMutate(request: grpc.MutateGoogleAdsRequest): Promise<Mutation> {
+        const service = this.client.getService('GoogleAdsService')
+        try {
+            const response = await service.mutate(request)
+            const parsed_results = this.parseServiceResults([response])[0] as any
+            return {
+                request: request.toObject(),
+                partial_failure_error: parsed_results.partial_failure_error,
+                results: parsed_results.mutate_operation_responses.map((r: any) => {
+                    // @ts-ignore Object.values not recognised
+                    const { resource_name } = Object.values(r)[0]
+                    return resource_name
+                }),
+            }
+        } catch (err) {
+            throw new GrpcError(err, request)
+        }
+    }
+
     protected buildResourceName(resource: string): string {
         if (resource.startsWith('customers/')) {
             return resource
