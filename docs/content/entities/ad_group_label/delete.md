@@ -5,6 +5,8 @@ type: delete
 entity: AdGroupLabel
 ---
 
+### Delete AdGroupLabel
+
 This section describes how to delete a AdGroupLabel.
 
 ```javascript

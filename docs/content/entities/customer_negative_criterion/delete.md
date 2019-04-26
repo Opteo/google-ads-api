@@ -5,6 +5,8 @@ type: delete
 entity: CustomerNegativeCriterion
 ---
 
+### Delete CustomerNegativeCriterion
+
 This section describes how to delete a CustomerNegativeCriterion.
 
 ```javascript

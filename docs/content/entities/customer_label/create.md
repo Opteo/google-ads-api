@@ -5,16 +5,21 @@ type: create
 entity: CustomerLabel
 ---
 
+### Create CustomerLabel
+
 This section describes how to create a CustomerLabel.
 
 ```javascript
 // Creating the entity
 
 const customer_label = {
-    // Your CustomerLabel here, without immutable fields such as resource_name
+  // Your CustomerLabel here, without immutable fields such as resource_name
 }
 
-const results = await customer.customerLabels.create(customer_label)
+const result = await customer.customerLabels.create(customer_label)
+```
 
-console.log(results) // ['customers/1234567890/customerLabels/123123123']
+```javascript
+// Example result
+;['customers/1234567890/customerLabels/123123123']
 ```

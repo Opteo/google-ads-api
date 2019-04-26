@@ -5,6 +5,8 @@ type: delete
 entity: BiddingStrategy
 ---
 
+### Delete BiddingStrategy
+
 This section describes how to delete a BiddingStrategy.
 
 ```javascript

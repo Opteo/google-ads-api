@@ -5,6 +5,8 @@ type: delete
 entity: CustomInterest
 ---
 
+### Delete CustomInterest
+
 This section describes how to delete a CustomInterest.
 
 ```javascript

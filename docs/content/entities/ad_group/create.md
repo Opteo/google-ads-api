@@ -5,16 +5,21 @@ type: create
 entity: AdGroup
 ---
 
+### Create AdGroup
+
 This section describes how to create a AdGroup.
 
 ```javascript
 // Creating the entity
 
 const ad_group = {
-    // Your AdGroup here, without immutable fields such as resource_name
+  // Your AdGroup here, without immutable fields such as resource_name
 }
 
-const results = await customer.adGroups.create(ad_group)
+const result = await customer.adGroups.create(ad_group)
+```
 
-console.log(results) // ['customers/9262111890/adGroups/54493284610']
+```javascript
+// Example result
+;['customers/9262111890/adGroups/54493284610']
 ```

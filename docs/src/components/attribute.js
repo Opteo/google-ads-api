@@ -10,7 +10,7 @@ const Attribute = ({ data, name, enums, section }) => {
     let details = null
 
     if (_description) {
-        details = <p>{_description}</p>
+        details = <div>{_description}</div>
     } else {
         details = (
             <Collapsible
@@ -18,51 +18,50 @@ const Attribute = ({ data, name, enums, section }) => {
                 triggerWhenOpen="hide child attributes"
                 triggerClassName="pointer pl2 opteo-link-blue tc"
                 triggerOpenedClassName="pointer pl2 opteo-link-blue tc"
-            >
-                <AttributesTable data={data} section={section} title="Child Attributes" />
+            >   
+                <div className="ml3 mt3 pa3 ba b--opteo-light-gray br3">
+                    <AttributesTable data={data} section={section} title="Child Attributes" />
+                </div>
             </Collapsible>
         )
     }
 
     return (
-        <tr key={`${section}-${name}`} className=" w-100 v-top">
-            <td className="">
+        <div key={`${section}-${name}`} className=" w-100 v-top pv3 bt b--opteo-light-gray">
                 
 
-                <div className="pl3 mb2">
-                    <span className=" f5 fw6 mv0 ">{name} </span>
-                    {data._type ? <span className=" f6 fw5 mv0 black-70">{data._type}</span> : null}
-                    {_oneof ? (
-                        <span className="f5 fw6 black-30">
-                            ONE OF{' '}
-                            {_oneof
-                                .split(/(?=[A-Z])/)
-                                .join('_')
-                                .toLowerCase()}
-                        </span>
-                    ) : null}
-                </div>
-
-                
-
-                {enums ? (
-                    <Collapsible
-                        className="pl1"
-                        trigger="show enums"
-                        triggerWhenOpen="hide enums"
-                        triggerClassName="pointer pl2 opteo-link-blue tc"
-                        triggerOpenedClassName="pointer pl2 opteo-link-blue tc"
-                    >
-                        <Enums enums={enums} />
-                    </Collapsible>
+            <div className=" mb2">
+                <span className=" f5 fw6 mv0 ">{name} </span>
+                {data._type ? <span className=" f6 fw5 mv0 black-70">{data._type}</span> : null}
+                {_oneof ? (
+                    <span className="f5 fw6 black-30">
+                        ONE OF{' '}
+                        {_oneof
+                            .split(/(?=[A-Z])/)
+                            .join('_')
+                            .toLowerCase()}
+                    </span>
                 ) : null}
+            </div>
 
-                <div className="pl3">
-                    {details}
-                </div>
-            </td>
-            <td className="tl"></td>
-        </tr>
+            
+
+            {enums ? (
+                <Collapsible
+                    className="pl1"
+                    trigger="show enums"
+                    triggerWhenOpen="hide enums"
+                    triggerClassName="pointer pl2 opteo-link-blue tc"
+                    triggerOpenedClassName="pointer pl2 opteo-link-blue tc"
+                >
+                    <Enums enums={enums} />
+                </Collapsible>
+            ) : null}
+
+            <div className="">
+                {details}
+            </div>
+        </div>
     )
 }
 

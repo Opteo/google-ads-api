@@ -5,6 +5,8 @@ type: delete
 entity: CampaignBudget
 ---
 
+### Delete CampaignBudget
+
 This section describes how to delete a CampaignBudget.
 
 ```javascript

@@ -5,6 +5,8 @@ type: delete
 entity: FeedItemTarget
 ---
 
+### Delete FeedItemTarget
+
 This section describes how to delete a FeedItemTarget.
 
 ```javascript

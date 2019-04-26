@@ -5,16 +5,21 @@ type: create
 entity: AdGroupAdLabel
 ---
 
+### Create AdGroupAdLabel
+
 This section describes how to create a AdGroupAdLabel.
 
 ```javascript
 // Creating the entity
 
 const ad_group_ad_label = {
-    // Your AdGroupAdLabel here, without immutable fields such as resource_name
+  // Your AdGroupAdLabel here, without immutable fields such as resource_name
 }
 
-const results = await customer.adGroupAdLabels.create(ad_group_ad_label)
+const result = await customer.adGroupAdLabels.create(ad_group_ad_label)
+```
 
-console.log(results) // ['customers/3827277046/adGroupAdLabels/37706041185~191743801329~1091971976']
+```javascript
+// Example result
+;['customers/3827277046/adGroupAdLabels/37706041185~191743801329~1091971976']
 ```

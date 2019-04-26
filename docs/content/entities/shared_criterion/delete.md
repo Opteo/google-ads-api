@@ -5,6 +5,8 @@ type: delete
 entity: SharedCriterion
 ---
 
+### Delete SharedCriterion
+
 This section describes how to delete a SharedCriterion.
 
 ```javascript

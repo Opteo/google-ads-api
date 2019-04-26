@@ -5,6 +5,8 @@ type: delete
 entity: CustomerManagerLink
 ---
 
+### Delete CustomerManagerLink
+
 This section describes how to delete a CustomerManagerLink.
 
 ```javascript

@@ -5,6 +5,8 @@ type: delete
 entity: CampaignFeed
 ---
 
+### Delete CampaignFeed
+
 This section describes how to delete a CampaignFeed.
 
 ```javascript

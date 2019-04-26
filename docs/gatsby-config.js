@@ -18,9 +18,10 @@ module.exports = {
         {
             resolve: `gatsby-transformer-remark`,
             options: {
-              plugins: [
-                {
-                  resolve: `gatsby-remark-prismjs`,
+                plugins: [
+                    // `gatsby-remark-autolink-headers`,
+                    {
+                      resolve: `gatsby-remark-prismjs`,
                   options: {
                     // Class prefix for <pre> tags containing syntax highlighting;
                     // defaults to 'language-' (eg <pre class="language-js">).

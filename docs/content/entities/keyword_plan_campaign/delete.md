@@ -5,6 +5,8 @@ type: delete
 entity: KeywordPlanCampaign
 ---
 
+### Delete KeywordPlanCampaign
+
 This section describes how to delete a KeywordPlanCampaign.
 
 ```javascript

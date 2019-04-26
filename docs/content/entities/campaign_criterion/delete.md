@@ -5,6 +5,8 @@ type: delete
 entity: CampaignCriterion
 ---
 
+### Delete CampaignCriterion
+
 This section describes how to delete a CampaignCriterion.
 
 ```javascript

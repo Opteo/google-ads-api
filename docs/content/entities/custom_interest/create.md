@@ -5,16 +5,21 @@ type: create
 entity: CustomInterest
 ---
 
+### Create CustomInterest
+
 This section describes how to create a CustomInterest.
 
 ```javascript
 // Creating the entity
 
 const custom_interest = {
-    // Your CustomInterest here, without immutable fields such as resource_name
+  // Your CustomInterest here, without immutable fields such as resource_name
 }
 
-const results = await customer.customInterests.create(custom_interest)
+const result = await customer.customInterests.create(custom_interest)
+```
 
-console.log(results) // ['customers/1234567890/customInterests/123123123']
+```javascript
+// Example result
+;['customers/1234567890/customInterests/123123123']
 ```

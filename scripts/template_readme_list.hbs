@@ -5,6 +5,9 @@ title: List {{ ENTITY }}
 order: 3
 ---
 
+### List all {{ ENTITY }} 
+
+
 This `customer.{{ RESOURCE_URL_NAME }}.list()` method works just like `get`, except that it returns all of the entities in the account. It isn't rate limited, but it can be very slow, so use it sparingly.
 
 ``` javascript
@@ -22,8 +25,11 @@ let result = await customer.{{ RESOURCE_URL_NAME }}.list({
     limit: 15,
 })
 
+```
 
-// Here's what the result might look like
-result === [{{ EXAMPLE_OBJECT_LIST }}]
+``` javascript
+
+// Example result
+[{{ EXAMPLE_OBJECT_LIST }}]
 
 ```

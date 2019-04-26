@@ -5,16 +5,21 @@ type: create
 entity: UserList
 ---
 
+### Create UserList
+
 This section describes how to create a UserList.
 
 ```javascript
 // Creating the entity
 
 const user_list = {
-    // Your UserList here, without immutable fields such as resource_name
+  // Your UserList here, without immutable fields such as resource_name
 }
 
-const results = await customer.userLists.create(user_list)
+const result = await customer.userLists.create(user_list)
+```
 
-console.log(results) // ['customers/3827277046/userLists/508846109']
+```javascript
+// Example result
+;['customers/3827277046/userLists/508846109']
 ```

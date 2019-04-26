@@ -5,6 +5,8 @@ type: delete
 entity: CustomerLabel
 ---
 
+### Delete CustomerLabel
+
 This section describes how to delete a CustomerLabel.
 
 ```javascript

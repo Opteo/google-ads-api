@@ -5,6 +5,8 @@ type: delete
 entity: FeedMapping
 ---
 
+### Delete FeedMapping
+
 This section describes how to delete a FeedMapping.
 
 ```javascript

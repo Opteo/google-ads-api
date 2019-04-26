@@ -5,6 +5,8 @@ type: delete
 entity: KeywordPlanNegativeKeyword
 ---
 
+### Delete KeywordPlanNegativeKeyword
+
 This section describes how to delete a KeywordPlanNegativeKeyword.
 
 ```javascript

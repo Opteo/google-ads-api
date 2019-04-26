@@ -5,17 +5,22 @@ type: update
 entity: CustomInterest
 ---
 
+### Update CustomInterest
+
 This section describes how to update a CustomInterest.
 
 ```javascript
 // Updating the entity
 
 const custom_interest = {
-    resource_name: 'customers/1234567890/customInterests/123123123', // The resource_name is required
-    // ...any other fields that you would like to update
+  resource_name: 'customers/1234567890/customInterests/123123123', // The resource_name is required
+  // ...any other fields that you would like to update
 }
 
-const results = await customer.customInterests.update(custom_interest)
+const result = await customer.customInterests.update(custom_interest)
+```
 
-console.log(results) // ['customers/1234567890/customInterests/123123123']
+```javascript
+// Example result
+;['customers/1234567890/customInterests/123123123']
 ```

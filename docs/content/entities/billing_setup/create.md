@@ -5,16 +5,21 @@ type: create
 entity: BillingSetup
 ---
 
+### Create BillingSetup
+
 This section describes how to create a BillingSetup.
 
 ```javascript
 // Creating the entity
 
 const billing_setup = {
-    // Your BillingSetup here, without immutable fields such as resource_name
+  // Your BillingSetup here, without immutable fields such as resource_name
 }
 
-const results = await customer.billingSetups.create(billing_setup)
+const result = await customer.billingSetups.create(billing_setup)
+```
 
-console.log(results) // ['customers/9262111890/billingSetups/465508048']
+```javascript
+// Example result
+;['customers/9262111890/billingSetups/465508048']
 ```

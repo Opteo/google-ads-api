@@ -5,6 +5,8 @@ type: delete
 entity: AdGroupCriterion
 ---
 
+### Delete AdGroupCriterion
+
 This section describes how to delete a AdGroupCriterion.
 
 ```javascript

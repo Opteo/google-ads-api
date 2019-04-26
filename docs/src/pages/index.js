@@ -14,17 +14,17 @@ const IndexPage = ({
 }) => {
     const ids = getIds(edges)
     const sections_data = getSectionsData(edges)
-    const Sections = sections_data.map(section => {
-        return <Section data={section} />
+    const Sections = sections_data.map((section, index) => {
+        return <Section key={'section'+index} data={section} />
     })
     return (
         <Layout>
             {/* <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} /> */}
-            <div className="w-100 flex items-start">
+            <div className="w-100 items-start">
                 <div className="" style={{ width: '280px' }}>
                     <Sidebar ids={ids} />
                 </div>
-                <div className="pa3 mt3" style={{ marginLeft: '280px', width: 'calc(100% - 280px)' }}>
+                <div className="pa4 mt3" style={{ marginLeft: '280px', width: 'calc(100% - 280px)' }}>
                     {Sections}
                 </div>
             </div>

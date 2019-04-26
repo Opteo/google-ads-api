@@ -5,6 +5,8 @@ type: create
 entity: {{ ENTITY }} 
 ---
 
+### Create {{ ENTITY }} 
+
 This section describes how to create a {{ ENTITY }}.
 
 
@@ -17,8 +19,13 @@ const {{ ENTITY_SNAKECASE }} = {
     // Your {{ ENTITY }} here, without immutable fields such as resource_name
 }
 
-const results = await customer.{{ RESOURCE_URL_NAME }}.create({{ ENTITY_SNAKECASE }})
+const result = await customer.{{ RESOURCE_URL_NAME }}.create({{ ENTITY_SNAKECASE }})
 
-console.log(results) // ['{{EXAMPLE_RESOURCE_NAME}}']
+```
+
+```javascript
+
+// Example result
+['{{EXAMPLE_RESOURCE_NAME}}']
 
 ```

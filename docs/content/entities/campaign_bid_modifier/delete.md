@@ -5,6 +5,8 @@ type: delete
 entity: CampaignBidModifier
 ---
 
+### Delete CampaignBidModifier
+
 This section describes how to delete a CampaignBidModifier.
 
 ```javascript

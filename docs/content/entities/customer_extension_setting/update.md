@@ -5,17 +5,22 @@ type: update
 entity: CustomerExtensionSetting
 ---
 
+### Update CustomerExtensionSetting
+
 This section describes how to update a CustomerExtensionSetting.
 
 ```javascript
 // Updating the entity
 
 const customer_extension_setting = {
-    resource_name: 'customers/9262111890/customerExtensionSettings/SITELINK', // The resource_name is required
-    // ...any other fields that you would like to update
+  resource_name: 'customers/9262111890/customerExtensionSettings/SITELINK', // The resource_name is required
+  // ...any other fields that you would like to update
 }
 
-const results = await customer.customerExtensionSettings.update(customer_extension_setting)
+const result = await customer.customerExtensionSettings.update(customer_extension_setting)
+```
 
-console.log(results) // ['customers/9262111890/customerExtensionSettings/SITELINK']
+```javascript
+// Example result
+;['customers/9262111890/customerExtensionSettings/SITELINK']
 ```

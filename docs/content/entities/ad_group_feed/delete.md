@@ -5,6 +5,8 @@ type: delete
 entity: AdGroupFeed
 ---
 
+### Delete AdGroupFeed
+
 This section describes how to delete a AdGroupFeed.
 
 ```javascript

@@ -507,6 +507,8 @@ async function compileService(entity, schema) {
 
     fs.writeFileSync(docs_file_path + 'index.md', readme_object_compiler({
         ENTITY: entity,
+        ENTITY_SNAKECASE: ent,
+        EXAMPLE_OBJECT_GET: example_object_get
     }))
 
 
@@ -573,7 +575,7 @@ async function compileService(entity, schema) {
     await execP(`prettier --write ${__dirname}/../docs/content/**/*.js`)
     console.log('prettifying md...')
 
-    await execP(`prettier --write ${__dirname}/../docs/content/**/*.md`)
+    await execP(`prettier --tab-width 2 --write ${__dirname}/../docs/content/**/*.md`)
 
     console.log('Finished compiling all services')
 })()

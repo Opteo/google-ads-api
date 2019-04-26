@@ -15,9 +15,9 @@
 .content > aside,
 .content > dl {
 	width: 50%;
-	padding: 0 28px;
 	box-sizing: border-box;
 	display: inline-block;
+	padding-right: 32px;
 }
 
 .content div.gatsby-highlight,
@@ -35,6 +35,11 @@
 .content pre {
 	font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono',
 		'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;
-	font-size: 1em;
+	font-size: 0.9em;
 	/*line-height: 1.5;*/
+}
+
+.content pre {
+	max-height: 50vh;
+	overflow: scroll;
 }

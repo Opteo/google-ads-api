@@ -5,6 +5,8 @@ type: delete
 entity: AdGroupBidModifier
 ---
 
+### Delete AdGroupBidModifier
+
 This section describes how to delete a AdGroupBidModifier.
 
 ```javascript

@@ -5,6 +5,8 @@ type: delete
 entity: Campaign
 ---
 
+### Delete Campaign
+
 This section describes how to delete a Campaign.
 
 ```javascript

@@ -5,6 +5,8 @@ type: delete
 entity: CustomerExtensionSetting
 ---
 
+### Delete CustomerExtensionSetting
+
 This section describes how to delete a CustomerExtensionSetting.
 
 ```javascript

@@ -5,6 +5,8 @@ type: delete
 entity: MediaFile
 ---
 
+### Delete MediaFile
+
 This section describes how to delete a MediaFile.
 
 ```javascript

@@ -5,6 +5,8 @@ type: delete
 entity: CampaignSharedSet
 ---
 
+### Delete CampaignSharedSet
+
 This section describes how to delete a CampaignSharedSet.
 
 ```javascript

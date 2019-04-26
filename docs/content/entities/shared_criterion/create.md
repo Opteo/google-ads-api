@@ -5,16 +5,21 @@ type: create
 entity: SharedCriterion
 ---
 
+### Create SharedCriterion
+
 This section describes how to create a SharedCriterion.
 
 ```javascript
 // Creating the entity
 
 const shared_criterion = {
-    // Your SharedCriterion here, without immutable fields such as resource_name
+  // Your SharedCriterion here, without immutable fields such as resource_name
 }
 
-const results = await customer.sharedCriteria.create(shared_criterion)
+const result = await customer.sharedCriteria.create(shared_criterion)
+```
 
-console.log(results) // ['customers/9262111890/sharedCriteria/1788591305~13223616']
+```javascript
+// Example result
+;['customers/9262111890/sharedCriteria/1788591305~13223616']
 ```

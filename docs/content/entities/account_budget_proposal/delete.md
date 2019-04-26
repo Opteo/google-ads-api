@@ -5,6 +5,8 @@ type: delete
 entity: AccountBudgetProposal
 ---
 
+### Delete AccountBudgetProposal
+
 This section describes how to delete a AccountBudgetProposal.
 
 ```javascript

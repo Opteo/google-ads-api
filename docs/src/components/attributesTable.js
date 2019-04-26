@@ -14,19 +14,17 @@ const AttributesTable = ({ data, title, section }) => {
                 return null
             }
 
-            return <Attribute data={details} section={section} name={key} enums={details._enums} />
+            return <Attribute data={details} section={section} name={key} key={key} enums={details._enums} />
         })
     }
 
     return (
-        <table className="f5 w-100 ba b--white mw6" style={{ width: '70%' }}>
-            <thead>
-                <tr className="fw6 tl pa3">
-                    <th>{title || 'Attributes'}</th>
-                </tr>
-            </thead>
-            <tbody>{getRows(data)}</tbody>
-        </table>
+        <div className="f5 ba b--white  pr3" >
+            
+            <h4>{title || 'Fields'}</h4>
+                
+            <div>{getRows(data)}</div>
+        </div>
     )
 }
 

@@ -2,10 +2,10 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 const Enums = ({ enums }) => {
-    const rows = enums.map(el => {
+    const rows = enums.map((el, index) => {
         return (
             <div key={el.s}>
-                <span>{el.s}</span>: <span>{el.description}</span>
+                <span>{el.s} ({index})</span>: <span>{el.description}</span>
             </div>
         )
     })

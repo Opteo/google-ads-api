@@ -5,6 +5,8 @@ type: delete
 entity: RemarketingAction
 ---
 
+### Delete RemarketingAction
+
 This section describes how to delete a RemarketingAction.
 
 ```javascript

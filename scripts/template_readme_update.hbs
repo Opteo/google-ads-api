@@ -5,6 +5,9 @@ type: update
 entity: {{ ENTITY }} 
 ---
 
+### Update {{ ENTITY }} 
+
+
 This section describes how to update a {{ ENTITY }}.
 
 
@@ -17,8 +20,13 @@ const {{ ENTITY_SNAKECASE }} = {
     // ...any other fields that you would like to update
 }
 
-const results = await customer.{{ RESOURCE_URL_NAME }}.update({{ ENTITY_SNAKECASE }})
+const result = await customer.{{ RESOURCE_URL_NAME }}.update({{ ENTITY_SNAKECASE }})
 
-console.log(results) // ['{{EXAMPLE_RESOURCE_NAME}}']
+```
+
+```javascript
+
+// Example result
+['{{EXAMPLE_RESOURCE_NAME}}']
 
 ```

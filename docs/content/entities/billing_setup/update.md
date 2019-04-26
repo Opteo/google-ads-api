@@ -5,17 +5,22 @@ type: update
 entity: BillingSetup
 ---
 
+### Update BillingSetup
+
 This section describes how to update a BillingSetup.
 
 ```javascript
 // Updating the entity
 
 const billing_setup = {
-    resource_name: 'customers/9262111890/billingSetups/465508048', // The resource_name is required
-    // ...any other fields that you would like to update
+  resource_name: 'customers/9262111890/billingSetups/465508048', // The resource_name is required
+  // ...any other fields that you would like to update
 }
 
-const results = await customer.billingSetups.update(billing_setup)
+const result = await customer.billingSetups.update(billing_setup)
+```
 
-console.log(results) // ['customers/9262111890/billingSetups/465508048']
+```javascript
+// Example result
+;['customers/9262111890/billingSetups/465508048']
 ```

@@ -5,16 +5,21 @@ type: create
 entity: CampaignLabel
 ---
 
+### Create CampaignLabel
+
 This section describes how to create a CampaignLabel.
 
 ```javascript
 // Creating the entity
 
 const campaign_label = {
-    // Your CampaignLabel here, without immutable fields such as resource_name
+  // Your CampaignLabel here, without immutable fields such as resource_name
 }
 
-const results = await customer.campaignLabels.create(campaign_label)
+const result = await customer.campaignLabels.create(campaign_label)
+```
 
-console.log(results) // ['customers/3827277046/campaignLabels/729914321~898377018']
+```javascript
+// Example result
+;['customers/3827277046/campaignLabels/729914321~898377018']
 ```

@@ -5,16 +5,21 @@ type: create
 entity: FeedItem
 ---
 
+### Create FeedItem
+
 This section describes how to create a FeedItem.
 
 ```javascript
 // Creating the entity
 
 const feed_item = {
-    // Your FeedItem here, without immutable fields such as resource_name
+  // Your FeedItem here, without immutable fields such as resource_name
 }
 
-const results = await customer.feedItems.create(feed_item)
+const result = await customer.feedItems.create(feed_item)
+```
 
-console.log(results) // ['customers/3827277046/feedItems/43009393~9779152283']
+```javascript
+// Example result
+;['customers/3827277046/feedItems/43009393~9779152283']
 ```

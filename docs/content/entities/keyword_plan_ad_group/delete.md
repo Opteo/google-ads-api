@@ -5,6 +5,8 @@ type: delete
 entity: KeywordPlanAdGroup
 ---
 
+### Delete KeywordPlanAdGroup
+
 This section describes how to delete a KeywordPlanAdGroup.
 
 ```javascript

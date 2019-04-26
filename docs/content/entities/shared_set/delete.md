@@ -5,6 +5,8 @@ type: delete
 entity: SharedSet
 ---
 
+### Delete SharedSet
+
 This section describes how to delete a SharedSet.
 
 ```javascript

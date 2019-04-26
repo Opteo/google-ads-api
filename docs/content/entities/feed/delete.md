@@ -5,6 +5,8 @@ type: delete
 entity: Feed
 ---
 
+### Delete Feed
+
 This section describes how to delete a Feed.
 
 ```javascript

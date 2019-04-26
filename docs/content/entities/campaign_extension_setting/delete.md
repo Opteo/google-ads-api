@@ -5,6 +5,8 @@ type: delete
 entity: CampaignExtensionSetting
 ---
 
+### Delete CampaignExtensionSetting
+
 This section describes how to delete a CampaignExtensionSetting.
 
 ```javascript

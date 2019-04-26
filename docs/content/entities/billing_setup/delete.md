@@ -5,6 +5,8 @@ type: delete
 entity: BillingSetup
 ---
 
+### Delete BillingSetup
+
 This section describes how to delete a BillingSetup.
 
 ```javascript

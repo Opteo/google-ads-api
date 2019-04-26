@@ -5,16 +5,21 @@ type: create
 entity: KeywordPlanKeyword
 ---
 
+### Create KeywordPlanKeyword
+
 This section describes how to create a KeywordPlanKeyword.
 
 ```javascript
 // Creating the entity
 
 const keyword_plan_keyword = {
-    // Your KeywordPlanKeyword here, without immutable fields such as resource_name
+  // Your KeywordPlanKeyword here, without immutable fields such as resource_name
 }
 
-const results = await customer.keywordPlanKeywords.create(keyword_plan_keyword)
+const result = await customer.keywordPlanKeywords.create(keyword_plan_keyword)
+```
 
-console.log(results) // ['customers/1234567890/keywordPlanKeywords/123123123']
+```javascript
+// Example result
+;['customers/1234567890/keywordPlanKeywords/123123123']
 ```

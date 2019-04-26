@@ -5,6 +5,8 @@ type: delete
 entity: AdGroupExtensionSetting
 ---
 
+### Delete AdGroupExtensionSetting
+
 This section describes how to delete a AdGroupExtensionSetting.
 
 ```javascript

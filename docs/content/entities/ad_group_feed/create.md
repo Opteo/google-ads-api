@@ -5,16 +5,21 @@ type: create
 entity: AdGroupFeed
 ---
 
+### Create AdGroupFeed
+
 This section describes how to create a AdGroupFeed.
 
 ```javascript
 // Creating the entity
 
 const ad_group_feed = {
-    // Your AdGroupFeed here, without immutable fields such as resource_name
+  // Your AdGroupFeed here, without immutable fields such as resource_name
 }
 
-const results = await customer.adGroupFeeds.create(ad_group_feed)
+const result = await customer.adGroupFeeds.create(ad_group_feed)
+```
 
-console.log(results) // ['customers/3827277046/adGroupFeeds/36337683057~43009393']
+```javascript
+// Example result
+;['customers/3827277046/adGroupFeeds/36337683057~43009393']
 ```

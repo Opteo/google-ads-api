@@ -5,6 +5,8 @@ type: delete
 entity: CustomerFeed
 ---
 
+### Delete CustomerFeed
+
 This section describes how to delete a CustomerFeed.
 
 ```javascript

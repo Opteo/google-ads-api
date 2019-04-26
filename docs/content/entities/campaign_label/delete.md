@@ -5,6 +5,8 @@ type: delete
 entity: CampaignLabel
 ---
 
+### Delete CampaignLabel
+
 This section describes how to delete a CampaignLabel.
 
 ```javascript

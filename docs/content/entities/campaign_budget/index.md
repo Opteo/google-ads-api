@@ -5,4 +5,25 @@ entity: CampaignBudget
 title: CampaignBudget
 ---
 
+## CampaignBudget
+
+### The CampaignBudget object
+
 This section describes the CampaignBudget entity.
+
+```javascript
+// Example CampaignBudget
+const campaign_budget = {
+  resource_name: 'customers/9262111890/campaignBudgets/1536143460',
+  amount_micros: 10000000,
+  delivery_method: 2,
+  explicitly_shared: false,
+  has_recommended_budget: false,
+  id: 1536143460,
+  name: 'My campaign budget',
+  period: 2,
+  reference_count: 0,
+  status: 3,
+  type: 2,
+}
+```

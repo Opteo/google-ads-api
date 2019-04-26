@@ -5,6 +5,8 @@ type: delete
 entity: UserList
 ---
 
+### Delete UserList
+
 This section describes how to delete a UserList.
 
 ```javascript

@@ -5,6 +5,8 @@ type: delete
 entity: KeywordPlan
 ---
 
+### Delete KeywordPlan
+
 This section describes how to delete a KeywordPlan.
 
 ```javascript

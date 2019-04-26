@@ -5,6 +5,8 @@ type: delete
 entity: Label
 ---
 
+### Delete Label
+
 This section describes how to delete a Label.
 
 ```javascript

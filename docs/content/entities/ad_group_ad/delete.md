@@ -5,6 +5,8 @@ type: delete
 entity: AdGroupAd
 ---
 
+### Delete AdGroupAd
+
 This section describes how to delete a AdGroupAd.
 
 ```javascript

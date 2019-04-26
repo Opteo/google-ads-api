@@ -5,6 +5,8 @@ type: delete
 entity: AdGroupCriterionLabel
 ---
 
+### Delete AdGroupCriterionLabel
+
 This section describes how to delete a AdGroupCriterionLabel.
 
 ```javascript

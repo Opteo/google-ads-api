@@ -5,6 +5,8 @@ type: delete
 entity: ExtensionFeedItem
 ---
 
+### Delete ExtensionFeedItem
+
 This section describes how to delete a ExtensionFeedItem.
 
 ```javascript
