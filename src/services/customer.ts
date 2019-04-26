@@ -98,17 +98,38 @@ export default class CustomerService extends Service {
                 throw new Error(`Missing "_resource" key on entity`)
             }
 
-            /* Create the resource e.g. "CampaignBudget" */
-            const pb = this.buildResource(operation._resource, operation)
+            const operation_resource_name = operation._resource
+            const operation_mode = operation._operation
 
-            /* Create create operation of resource type e.g. "CampaignBudgetOperation" */
+            delete operation._resource
+            delete operation._operation
+
+            /* Create the resource e.g. "CampaignBudget" */
+            const pb = this.buildResource(operation_resource_name, operation)
+
+            /* Create create|update operation of resource type e.g. "CampaignBudgetOperation" */
             // @ts-ignore Types are no use here
-            const resource_operation = new grpc[`${operation._resource}Operation`]()
-            resource_operation.setCreate(pb)
+            const resource_operation = new grpc[`${operation_resource_name}Operation`]()
+
+            if (operation_mode) {
+                if (operation_mode !== 'create' && operation_mode !== 'update') {
+                    throw new Error(`"_operation" field must be one of "create"|"update`)
+                }
+                if (operation_mode === 'create') {
+                    resource_operation.setCreate(pb)
+                }
+                if (operation_mode === 'update') {
+                    resource_operation.setUpdate(pb)
+                    const update_mask = getFieldMask(operation)
+                    resource_operation.setUpdateMask(update_mask)
+                }
+            } else {
+                resource_operation.setCreate(pb)
+            }
 
             /* Add operation of resource type to global mutate operation e.g. "MutateOperation.setCampaignBudgetOperation" */
             const op = new grpc.MutateOperation()
-            const operation_set_method = `set${operation._resource}Operation`
+            const operation_set_method = `set${operation_resource_name}Operation`
             // @ts-ignore Types are no use here
             op[operation_set_method](resource_operation)
 

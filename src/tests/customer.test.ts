@@ -2,7 +2,7 @@ import { AdGroup, Customer } from 'google-ads-node/build/lib/resources'
 import { AdGroupStatus, CampaignStatus } from 'google-ads-node/build/lib/enums'
 import { enums } from '..'
 
-import { newCustomerWithMetrics, newCustomer, CID, CID_WITH_METRICS, getRandomName } from '../test_utils'
+import { newCustomerWithMetrics, newCustomer, CID, CID_WITH_METRICS, getRandomName, CAMPAIGN_ID } from '../test_utils'
 const customer = newCustomerWithMetrics()
 const customer_no_metrics = newCustomer()
 
@@ -290,6 +290,37 @@ describe('customer', () => {
             expect(response.results).toEqual([expect.any(String), '', ''])
             expect(response.partial_failure_error).toBeDefined()
             expect(response.partial_failure_error.message).toContain('Multiple errors')
+        })
+
+        it('should support specifying the _operation type', async () => {
+            const response = await customer_no_metrics.globalCreate(
+                [
+                    {
+                        _resource: 'CampaignBudget',
+                        _operation: 'create',
+                        resource_name: `customers/${CID}/campaignBudgets/-1`,
+                        name: getRandomName('budget'),
+                        amount_micros: 3000000,
+                        explicitly_shared: true,
+                    },
+                    {
+                        _resource: 'Campaign',
+                        _operation: 'update',
+                        resource_name: `customers/${CID}/campaigns/${CAMPAIGN_ID}`,
+                        campaign_budget: `customers/${CID}/campaignBudgets/${-1}`,
+                    },
+                ],
+                { validate_only: true }
+            )
+            expect(response.results).toEqual([])
+        })
+
+        it('should throw an error if the _operation type is invalid', async () => {
+            try {
+                await customer.globalCreate([{ _resource: 'Campaign', _operation: 'slice' }])
+            } catch (err) {
+                expect(err.message).toContain('must be one of')
+            }
         })
 
         it('should throw an error when the _resource key is missing', async () => {
