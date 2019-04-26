@@ -6,7 +6,7 @@ import { getFieldMask } from 'google-ads-node/build/lib/utils'
 import GrpcClient from '../grpc'
 import { formatQueryResults, buildReportQuery, parseResult } from '../utils'
 import { ServiceListOptions, ServiceCreateOptions } from '../types'
-import { SearchGrpcError } from '../error'
+import { GrpcError } from '../error'
 import { ReportOptions, PreReportHook, PostReportHook } from '../types'
 
 interface GetOptions {
@@ -194,7 +194,7 @@ export default class Service {
             */
             return parsed_results[0]
         } catch (err) {
-            throw new SearchGrpcError(err, request)
+            throw new GrpcError(err, request)
         }
     }
 
@@ -263,7 +263,7 @@ export default class Service {
             const response = await this.client.searchIterator(this.throttler, request, limit)
             return response
         } catch (err) {
-            throw new SearchGrpcError(err, request)
+            throw new GrpcError(err, request)
         }
     }
 
