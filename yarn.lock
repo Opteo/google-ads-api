@@ -213,6 +213,13 @@
   dependencies:
     "@types/jest-diff" "*"
 
+"@types/lodash.camelcase@^4.3.6":
+  version "4.3.6"
+  resolved "https://registry.yarnpkg.com/@types/lodash.camelcase/-/lodash.camelcase-4.3.6.tgz#393c748b70cd926fc629e6502a9d0929f217d5fd"
+  integrity sha512-hd/TEuPd76Jtf1xEq85CHbCqR+iqvs5IOKyrYbiaOg69BRQgPN9XkvLj8Jl8rBp/dfJ2wQ1AVcP8mZmybq7kIg==
+  dependencies:
+    "@types/lodash" "*"
+
 "@types/lodash.get@^4.4.6":
   version "4.4.6"
   resolved "https://registry.yarnpkg.com/@types/lodash.get/-/lodash.get-4.4.6.tgz#0c7ac56243dae0f9f09ab6f75b29471e2e777240"
@@ -1824,18 +1831,20 @@ globals@^11.1.0:
   resolved "https://registry.yarnpkg.com/globals/-/globals-11.11.0.tgz#dcf93757fa2de5486fbeed7118538adf789e9c2e"
   integrity sha512-WHq43gS+6ufNOEqlrDBxVEbb8ntfXrfAUU2ZOpCxrBdGKW3gyv8mCxAfIBD0DroPKGrJ2eSsXsLtY9MPntsyTw==
 
-google-ads-node@^1.8.2:
-  version "1.8.2"
-  resolved "https://registry.yarnpkg.com/google-ads-node/-/google-ads-node-1.8.2.tgz#6ee0916cc9d3bdc5b40d8fcb04e679fbdb1531a7"
-  integrity sha512-esMT5UDxrY1sVfSkPXEQoUQEh2fPlLmwQYeS3QNQCiBYjqi2T1XJ/GfEP/momoT1rhJbAtSOZxmt/gbB1Ww3sg==
+google-ads-node@^1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/google-ads-node/-/google-ads-node-1.9.0.tgz#ae9fed1ce997952a7a662d208266692f7515378f"
+  integrity sha512-uevi/00GMw9xKt11fcFo9xf1hMM6vThbQ5QU1Flddpj/saIYJ4EjiiBK2exvHFBNHF63HSidCrU+kcKuT/VtgA==
   dependencies:
     "@types/google-protobuf" "^3.2.7"
+    "@types/lodash.camelcase" "^4.3.6"
     "@types/lodash.get" "^4.4.6"
     "@types/lodash.set" "^4.3.6"
     "@types/protobufjs" "^6.0.0"
     google-auth-library "^3.1.0"
     google-protobuf "^3.7.0-rc.2"
     grpc "^1.18.0"
+    lodash.camelcase "^4.3.0"
     lodash.get "^4.4.2"
     lodash.set "^4.3.2"
     protobufjs "^6.8.8"

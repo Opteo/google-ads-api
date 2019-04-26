@@ -93,7 +93,7 @@ Then, for every google ads account that you want to access, you'll need:
 
 -   **Customer account ID**: This is the CID of the account you want to access, which will look like `xxx-xxx-xxxx`.
 -   **Login customer ID**: _(only required if accessing the account via an MCC)_ This is usually the CID of the highest-level account in your MCC structure, also in the format `xxx-xxx-xxxx`.
--   **Refresh token**: You'll get this token when somebody authorises you to query their adwords account via OAuth.
+-   **Refresh token**: You'll get this token when somebody authorises you to query their adwords account via OAuth. To get started, you can use https://refresh-token-helper.opteo.com/ to generate a single refresh token.
 
 ```javascript
 import { GoogleAdsApi } from 'google-ads-api'
