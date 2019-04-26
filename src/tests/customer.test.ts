@@ -1,7 +1,8 @@
 import { AdGroup, Customer } from 'google-ads-node/build/lib/resources'
 import { AdGroupStatus, CampaignStatus } from 'google-ads-node/build/lib/enums'
+import { enums } from '..'
 
-import { newCustomerWithMetrics, newCustomer, CID, CID_WITH_METRICS } from '../test_utils'
+import { newCustomerWithMetrics, newCustomer, CID, CID_WITH_METRICS, getRandomName } from '../test_utils'
 const customer = newCustomerWithMetrics()
 const customer_no_metrics = newCustomer()
 
@@ -179,6 +180,140 @@ describe('customer', () => {
                 validate_only: true,
             })
             done()
+        })
+    })
+
+    describe('mutate', () => {
+        it('should be able to perform mutations with temporary resource ids', async () => {
+            const response = await customer.globalCreate(
+                [
+                    {
+                        _resource: 'CampaignBudget',
+                        resource_name: `customers/${CID_WITH_METRICS}/campaignBudgets/-1`,
+                        name: getRandomName('budget'),
+                        amount_micros: 3000000,
+                        explicitly_shared: true,
+                    },
+                    {
+                        _resource: 'Campaign',
+                        resource_name: `customers/${CID_WITH_METRICS}/campaigns/-2`,
+                        campaign_budget: `customers/${CID_WITH_METRICS}/campaignBudgets/-1`,
+                        name: getRandomName('campaign'),
+                        advertising_channel_type: enums.AdvertisingChannelType.SEARCH,
+                        status: enums.CampaignStatus.PAUSED,
+                        manual_cpc: {
+                            enhanced_cpc_enabled: true,
+                        },
+                    },
+                    {
+                        _resource: 'AdGroup',
+                        resource_name: `customers/${CID_WITH_METRICS}/adGroups/-3`,
+                        campaign: `customers/${CID_WITH_METRICS}/campaigns/-2`,
+                        name: getRandomName('adgroup'),
+                        status: enums.AdGroupStatus.PAUSED,
+                    },
+                    {
+                        _resource: 'AdGroup',
+                        resource_name: `customers/${CID_WITH_METRICS}/adGroups/-4`,
+                        campaign: `customers/${CID_WITH_METRICS}/campaigns/-2`,
+                        name: getRandomName('adgroup'),
+                        status: enums.AdGroupStatus.PAUSED,
+                    },
+                ],
+                {
+                    validate_only: true,
+                }
+            )
+            expect(response.results).toEqual([])
+        })
+
+        it('should be atomic by default', async () => {
+            await expect(
+                customer.globalCreate(
+                    [
+                        {
+                            _resource: 'CampaignBudget',
+                            resource_name: `customers/${CID_WITH_METRICS}/campaignBudgets/-1`,
+                            name: getRandomName('budget'),
+                            amount_micros: 3000000,
+                            explicitly_shared: true,
+                        },
+                        {
+                            _resource: 'Campaign',
+                            resource_name: `customers/${CID_WITH_METRICS}/campaigns/-2`,
+                            campaign_budget: `customers/${CID_WITH_METRICS}/campaignBudgets/123`,
+                            name: getRandomName('campaign'),
+                            advertising_channel_type: enums.AdvertisingChannelType.SEARCH,
+                            status: enums.CampaignStatus.PAUSED,
+                            manual_cpc: {
+                                enhanced_cpc_enabled: true,
+                            },
+                        },
+                    ],
+                    { validate_only: true }
+                )
+            ).rejects.toThrow()
+        })
+
+        it('should support partial failures', async () => {
+            const response = await customer_no_metrics.globalCreate(
+                [
+                    {
+                        _resource: 'CampaignBudget',
+                        resource_name: `customers/${CID}/campaignBudgets/-1`,
+                        name: getRandomName('budget'),
+                        amount_micros: 3000000,
+                        explicitly_shared: true,
+                    },
+                    {
+                        _resource: 'Campaign',
+                        resource_name: `customers/${CID}/campaigns/-2`,
+                        campaign_budget: `customers/${CID}/campaignBudgets/123`,
+                        name: getRandomName('campaign'),
+                        advertising_channel_type: enums.AdvertisingChannelType.SEARCH,
+                        status: enums.CampaignStatus.PAUSED,
+                        manual_cpc: {
+                            enhanced_cpc_enabled: true,
+                        },
+                    },
+                    {
+                        _resource: 'AdGroup',
+                        resource_name: `customers/${CID_WITH_METRICS}/adGroups/-3`,
+                        campaign: `customers/${CID_WITH_METRICS}/campaigns/-2`,
+                        name: getRandomName('adgroup'),
+                        status: enums.AdGroupStatus.PAUSED,
+                    },
+                ],
+                { partial_failure: true }
+            )
+            /* The first resource should exist, and the other two should fail to be created */
+            expect(response.results).toEqual([expect.any(String), '', ''])
+            expect(response.partial_failure_error).toBeDefined()
+            expect(response.partial_failure_error.message).toContain('Multiple errors')
+        })
+
+        it('should throw an error when the _resource key is missing', async () => {
+            try {
+                await customer.globalCreate([{ name: 'wasd' }])
+            } catch (err) {
+                expect(err.message).toContain('Missing "_resource"')
+            }
+        })
+
+        it('should throw an error if the resource type is invalid', async () => {
+            try {
+                await customer.globalCreate([
+                    {
+                        _resource: 'CampaignFakeResource',
+                        resource_name: `customers/${CID_WITH_METRICS}/campaignBudgets/-1`,
+                        name: getRandomName('budget'),
+                        amount_micros: 3000000,
+                        explicitly_shared: true,
+                    },
+                ])
+            } catch (err) {
+                expect(err.message).toContain('does not exist')
+            }
         })
     })
 })
