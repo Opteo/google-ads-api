@@ -186,7 +186,7 @@ describe('customer', () => {
 
     describe('mutate', () => {
         it('should be able to perform mutations with temporary resource ids', async () => {
-            const response = await customer.globalCreate(
+            const response = await customer.mutateResources(
                 [
                     {
                         _resource: 'CampaignBudget',
@@ -230,7 +230,7 @@ describe('customer', () => {
 
         it('should be atomic by default', async () => {
             await expect(
-                customer.globalCreate(
+                customer.mutateResources(
                     [
                         {
                             _resource: 'CampaignBudget',
@@ -257,7 +257,7 @@ describe('customer', () => {
         })
 
         it('should support partial failures', async () => {
-            const response = await customer_no_metrics.globalCreate(
+            const response = await customer_no_metrics.mutateResources(
                 [
                     {
                         _resource: 'CampaignBudget',
@@ -294,7 +294,7 @@ describe('customer', () => {
         })
 
         it('should support specifying the _operation type', async () => {
-            const response = await customer_no_metrics.globalCreate(
+            const response = await customer_no_metrics.mutateResources(
                 [
                     {
                         _resource: 'CampaignBudget',
@@ -326,7 +326,8 @@ describe('customer', () => {
 
         it('should throw an error when the _resource key is missing', async () => {
             try {
-                await customer.globalCreate([{ name: 'wasd' }])
+                // @ts-ignore
+                await customer.mutateResources([{ name: 'wasd' }])
             } catch (err) {
                 expect(err.message).toContain('Missing "_resource"')
             }
@@ -334,7 +335,7 @@ describe('customer', () => {
 
         it('should throw an error if the resource type is invalid', async () => {
             try {
-                await customer.globalCreate([
+                await customer.mutateResources([
                     {
                         _resource: 'CampaignFakeResource',
                         resource_name: `customers/${CID_WITH_METRICS}/campaignBudgets/-1`,
