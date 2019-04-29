@@ -115,8 +115,8 @@ export default class CustomerService extends Service {
             const resource_operation = new grpc[`${operation_resource_name}Operation`]()
 
             if (operation_mode) {
-                if (operation_mode !== 'create' && operation_mode !== 'update') {
-                    throw new Error(`"_operation" field must be one of "create"|"update`)
+                if (operation_mode !== 'create' && operation_mode !== 'update' && operation_mode !== 'delete') {
+                    throw new Error(`"_operation" field must be one of "create"|"update"|"delete"`)
                 }
                 if (operation_mode === 'create') {
                     resource_operation.setCreate(pb)
@@ -125,6 +125,14 @@ export default class CustomerService extends Service {
                     resource_operation.setUpdate(pb)
                     const update_mask = getFieldMask(operation)
                     resource_operation.setUpdateMask(update_mask)
+                }
+                if (operation_mode === 'delete') {
+                    // @ts-ignore Types are no use here
+                    if (!pb.toObject().hasOwnProperty('resourceName') || !pb.toObject().resourceName) {
+                        throw new Error(`Must specify "resource_name" to remove when using "delete"`)
+                    }
+                    // @ts-ignore Types are no use here
+                    resource_operation.setRemove(pb.toObject().resourceName)
                 }
             } else {
                 resource_operation.setCreate(pb)

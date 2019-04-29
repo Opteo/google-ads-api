@@ -316,9 +316,44 @@ describe('customer', () => {
             expect(response.results).toEqual([])
         })
 
+        it('should support deleting resources', async () => {
+            const campaigns = await customer_no_metrics.campaigns.list({
+                limit: 3,
+                constraints: [
+                    {
+                        'campaign.status': enums.CampaignStatus.ENABLED,
+                    },
+                ],
+            })
+            const campaign_resource_names = campaigns.map(({ campaign }) => campaign.resource_name)
+
+            const operations = campaign_resource_names.map(resource_name => {
+                return {
+                    _resource: 'Campaign',
+                    _operation: 'delete',
+                    resource_name,
+                }
+            }) as Array<MutateResourceOperation>
+
+            const response = await customer_no_metrics.mutateResources(operations, {
+                validate_only: true,
+            })
+            expect(response.results).toEqual([])
+        })
+
+        it('should throw an error when missing a resource_name in delete mode', async () => {
+            try {
+                // @ts-ignore
+                await customer.mutateResources([{ _resource: 'Campaign', _operation: 'delete', id: 123 }])
+            } catch (err) {
+                expect(err.message).toContain('Must specify "resource_name"')
+            }
+        })
+
         it('should throw an error if the _operation type is invalid', async () => {
             try {
-                await customer.globalCreate([{ _resource: 'Campaign', _operation: 'slice' }])
+                // @ts-ignore
+                await customer.mutateResources([{ _resource: 'Campaign', _operation: 'slice' }])
             } catch (err) {
                 expect(err.message).toContain('must be one of')
             }
