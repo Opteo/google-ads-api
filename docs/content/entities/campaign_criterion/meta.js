@@ -8,7 +8,7 @@ module.exports = {
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the campaign criterion.\nCampaign criterion resource names have the form:\n\n`customers/{customer_id}/campaignCriteria/{campaign_id}~{criterion_id}`',
+                'The resource name of the campaign criterion. Campaign criterion resource names have the form: <code>customers/{customer_id}/campaignCriteria/{campaign_id}~{criterion_id}</code>',
         },
         parental_status: {
             type: {
@@ -56,10 +56,7 @@ module.exports = {
             },
             _oneof: 'criterion',
         },
-        criterion_id: {
-            _type: 'int64',
-            _description: 'The ID of the criterion.\n\nThis field is ignored during mutate.',
-        },
+        criterion_id: { _type: 'int64', _description: 'The ID of the criterion. This field is ignored during mutate.' },
         age_range: {
             type: {
                 _type: 'enum',
@@ -97,11 +94,14 @@ module.exports = {
             path: {
                 _type: 'array',
                 _description:
-                    'The category to target or exclude. Each subsequent element in the array\ndescribes a more specific sub-category. For example,\n"Pets & Animals", "Pets", "Dogs" represents the "Pets & Animals/Pets/Dogs"\ncategory.',
+                    'The category to target or exclude. Each subsequent element in the array describes a more specific sub-category. For example, "Pets &amp; Animals", "Pets", "Dogs" represents the "Pets &amp; Animals/Pets/Dogs" category.',
             },
             _oneof: 'criterion',
         },
-        negative: { _type: 'boolean', _description: 'Whether to target (`false`) or exclude (`true`) the criterion.' },
+        negative: {
+            _type: 'boolean',
+            _description: 'Whether to target (<code>false</code>) or exclude (<code>true</code>) the criterion.',
+        },
         mobile_app_category: {
             mobile_app_category_constant: {
                 _type: 'string',
@@ -149,7 +149,7 @@ module.exports = {
                 street_address_2: {
                     _type: 'string',
                     _description:
-                        'Street address line 2. This field is write-only. It is only used for\ncalculating the longitude and latitude of an address when geo_point is\nempty.',
+                        'Street address line 2. This field is write-only. It is only used for calculating the longitude and latitude of an address when geo_point is empty.',
                 },
                 province_code: { _type: 'string', _description: 'Province or state code.' },
                 province_name: { _type: 'string', _description: 'Province or state name.' },
@@ -187,7 +187,7 @@ module.exports = {
             app_id: {
                 _type: 'string',
                 _description:
-                    'A string that uniquely identifies a mobile application to Google Ads API.\nThe format of this string is "{platform}-{platform_native_id}", where\nplatform is "1" for iOS apps and "2" for Android apps, and where\nplatform_native_id is the mobile application identifier native to the\ncorresponding platform.\nFor iOS, this native identifier is the 9 digit string that appears at the\nend of an App Store URL (e.g., "476943146" for "Flood-It! 2" whose App\nStore link is http://itunes.apple.com/us/app/flood-it!-2/id476943146).\nFor Android, this native identifier is the application\'s package name\n(e.g., "com.labpixies.colordrips" for "Color Drips" given Google Play link\nhttps://play.google.com/store/apps/details?id=com.labpixies.colordrips).\nA well formed app id for Google Ads API would thus be "1-476943146" for iOS\nand "2-com.labpixies.colordrips" for Android.\nThis field is required and must be set in CREATE operations.',
+                    'A string that uniquely identifies a mobile application to Google Ads API. The format of this string is "{platform}-{platform_native_id}", where platform is "1" for iOS apps and "2" for Android apps, and where platform_native_id is the mobile application identifier native to the corresponding platform. For iOS, this native identifier is the 9 digit string that appears at the end of an App Store URL (e.g., "476943146" for "Flood-It! 2" whose App Store link is http://itunes.apple.com/us/app/flood-it!-2/id476943146). For Android, this native identifier is the application\'s package name (e.g., "com.labpixies.colordrips" for "Color Drips" given Google Play link https://play.google.com/store/apps/details?id=com.labpixies.colordrips). A well formed app id for Google Ads API would thus be "1-476943146" for iOS and "2-com.labpixies.colordrips" for Android. This field is required and must be set in CREATE operations.',
             },
             _oneof: 'criterion',
         },
@@ -261,7 +261,7 @@ module.exports = {
                     { s: 'SUNDAY', description: 'Sunday.' },
                 ],
                 _description:
-                    'Day of the week the schedule applies to.\n\nThis field is required for CREATE operations and is prohibited on UPDATE\noperations.',
+                    'Day of the week the schedule applies to. This field is required for CREATE operations and is prohibited on UPDATE operations.',
             },
             end_minute: {
                 _type: 'enum',
@@ -274,12 +274,12 @@ module.exports = {
                     { s: 'FORTY_FIVE', description: 'Forty-five minutes past the hour.' },
                 ],
                 _description:
-                    'Minutes after the end hour at which this schedule ends. The schedule is\nexclusive of the end minute.\n\nThis field is required for CREATE operations and is prohibited on UPDATE\noperations.',
+                    'Minutes after the end hour at which this schedule ends. The schedule is exclusive of the end minute. This field is required for CREATE operations and is prohibited on UPDATE operations.',
             },
             start_hour: {
                 _type: 'int32',
                 _description:
-                    'Starting hour in 24 hour time.\nThis field must be between 0 and 23, inclusive.\n\nThis field is required for CREATE operations and is prohibited on UPDATE\noperations.',
+                    'Starting hour in 24 hour time. This field must be between 0 and 23, inclusive. This field is required for CREATE operations and is prohibited on UPDATE operations.',
             },
             start_minute: {
                 _type: 'enum',
@@ -292,19 +292,19 @@ module.exports = {
                     { s: 'FORTY_FIVE', description: 'Forty-five minutes past the hour.' },
                 ],
                 _description:
-                    'Minutes after the start hour at which this schedule starts.\n\nThis field is required for CREATE operations and is prohibited on UPDATE\noperations.',
+                    'Minutes after the start hour at which this schedule starts. This field is required for CREATE operations and is prohibited on UPDATE operations.',
             },
             end_hour: {
                 _type: 'int32',
                 _description:
-                    'Ending hour in 24 hour time; 24 signifies end of the day.\nThis field must be between 0 and 24, inclusive.\n\nThis field is required for CREATE operations and is prohibited on UPDATE\noperations.',
+                    'Ending hour in 24 hour time; 24 signifies end of the day. This field must be between 0 and 24, inclusive. This field is required for CREATE operations and is prohibited on UPDATE operations.',
             },
             _oneof: 'criterion',
         },
         bid_modifier: {
             _type: 'float',
             _description:
-                'The modifier for the bids when the criterion matches. The modifier must be\nin the range: 0.1 - 10.0. Most targetable criteria types support modifiers.\nUse 0 to opt out of a Device type.',
+                'The modifier for the bids when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers. Use 0 to opt out of a Device type.',
         },
         type: {
             _type: 'enum',
@@ -359,17 +359,17 @@ module.exports = {
             criterion_name: {
                 _type: 'string',
                 _description:
-                    'The name of the criterion that is defined by this parameter. The name value\nwill be used for identifying, sorting and filtering criteria with this type\nof parameters.\n\nThis field is required for CREATE operations and is prohibited on UPDATE\noperations.',
+                    'The name of the criterion that is defined by this parameter. The name value will be used for identifying, sorting and filtering criteria with this type of parameters. This field is required for CREATE operations and is prohibited on UPDATE operations.',
             },
             conditions: {
                 _type: 'array',
                 _description:
-                    'Conditions, or logical expressions, for webpage targeting. The list of\nwebpage targeting conditions are and-ed together when evaluated\nfor targeting.\n\nThis field is required for CREATE operations and is prohibited on UPDATE\noperations.',
+                    'Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting. This field is required for CREATE operations and is prohibited on UPDATE operations.',
             },
             _oneof: 'criterion',
         },
         placement: {
-            url: { _type: 'string', _description: 'URL of the placement.\n\nFor example, "http://www.domain.com".' },
+            url: { _type: 'string', _description: 'URL of the placement. For example, "http://www.domain.com".' },
             _oneof: 'criterion',
         },
     },

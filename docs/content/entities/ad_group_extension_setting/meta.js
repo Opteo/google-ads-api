@@ -4,17 +4,17 @@ module.exports = {
         ad_group: {
             _type: 'string',
             _description:
-                'The resource name of the ad group. The linked extension feed items will\nserve under this ad group.\nAdGroup resource names have the form:\n\n`customers/{customer_id}/adGroups/{ad_group_id}`',
+                'The resource name of the ad group. The linked extension feed items will serve under this ad group. AdGroup resource names have the form: <code>customers/{customer_id}/adGroups/{ad_group_id}</code>',
         },
         extension_feed_items: {
             _type: 'array',
             _description:
-                'The resource names of the extension feed items to serve under the ad group.\nExtensionFeedItem resource names have the form:\n\n`customers/{customer_id}/extensionFeedItems/{feed_item_id}`',
+                'The resource names of the extension feed items to serve under the ad group. ExtensionFeedItem resource names have the form: <code>customers/{customer_id}/extensionFeedItems/{feed_item_id}</code>',
         },
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the ad group extension setting.\nAdGroupExtensionSetting resource names have the form:\n\n\n`customers/{customer_id}/adGroupExtensionSettings/{ad_group_id}~{extension_type}`',
+                'The resource name of the ad group extension setting. AdGroupExtensionSetting resource names have the form: <code>customers/{customer_id}/adGroupExtensionSettings/{ad_group_id}~{extension_type}</code>',
         },
         extension_type: {
             _type: 'enum',

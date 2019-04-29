@@ -45,7 +45,7 @@ module.exports = {
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the feed item target.\nFeed item target resource names have the form:\n\n`customers/{customer_id}/feedItemTargets/{feed_id}~{feed_item_id}~{feed_item_target_type}~{feed_item_target_id}`',
+                'The resource name of the feed item target. Feed item target resource names have the form: <code>customers/{customer_id}/feedItemTargets/{feed_id}~{feed_item_id}~{feed_item_target_type}~{feed_item_target_id}</code>',
         },
         ad_schedule: {
             day_of_week: {
@@ -62,7 +62,7 @@ module.exports = {
                     { s: 'SUNDAY', description: 'Sunday.' },
                 ],
                 _description:
-                    'Day of the week the schedule applies to.\n\nThis field is required for CREATE operations and is prohibited on UPDATE\noperations.',
+                    'Day of the week the schedule applies to. This field is required for CREATE operations and is prohibited on UPDATE operations.',
             },
             end_minute: {
                 _type: 'enum',
@@ -75,12 +75,12 @@ module.exports = {
                     { s: 'FORTY_FIVE', description: 'Forty-five minutes past the hour.' },
                 ],
                 _description:
-                    'Minutes after the end hour at which this schedule ends. The schedule is\nexclusive of the end minute.\n\nThis field is required for CREATE operations and is prohibited on UPDATE\noperations.',
+                    'Minutes after the end hour at which this schedule ends. The schedule is exclusive of the end minute. This field is required for CREATE operations and is prohibited on UPDATE operations.',
             },
             start_hour: {
                 _type: 'int32',
                 _description:
-                    'Starting hour in 24 hour time.\nThis field must be between 0 and 23, inclusive.\n\nThis field is required for CREATE operations and is prohibited on UPDATE\noperations.',
+                    'Starting hour in 24 hour time. This field must be between 0 and 23, inclusive. This field is required for CREATE operations and is prohibited on UPDATE operations.',
             },
             start_minute: {
                 _type: 'enum',
@@ -93,12 +93,12 @@ module.exports = {
                     { s: 'FORTY_FIVE', description: 'Forty-five minutes past the hour.' },
                 ],
                 _description:
-                    'Minutes after the start hour at which this schedule starts.\n\nThis field is required for CREATE operations and is prohibited on UPDATE\noperations.',
+                    'Minutes after the start hour at which this schedule starts. This field is required for CREATE operations and is prohibited on UPDATE operations.',
             },
             end_hour: {
                 _type: 'int32',
                 _description:
-                    'Ending hour in 24 hour time; 24 signifies end of the day.\nThis field must be between 0 and 24, inclusive.\n\nThis field is required for CREATE operations and is prohibited on UPDATE\noperations.',
+                    'Ending hour in 24 hour time; 24 signifies end of the day. This field must be between 0 and 24, inclusive. This field is required for CREATE operations and is prohibited on UPDATE operations.',
             },
             _oneof: 'target',
         },

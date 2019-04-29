@@ -32,7 +32,7 @@ module.exports = {
                 { s: 'AD_GROUP_BID_MODIFIER', description: 'An AdGroupBidModifier resource change.' },
             ],
             _description:
-                'Represents the type of the changed resource. This dictates what fields\nwill be set. For example, for AD_GROUP, campaign and ad_group fields will\nbe set.',
+                'Represents the type of the changed resource. This dictates what fields will be set. For example, for AD_GROUP, campaign and ad_group fields will be set.',
         },
         resource_status: {
             _type: 'enum',
@@ -54,7 +54,7 @@ module.exports = {
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the change status.\nChange status resource names have the form:\n\n`customers/{customer_id}/changeStatus/{change_status_id}`',
+                'The resource name of the change status. Change status resource names have the form: <code>customers/{customer_id}/changeStatus/{change_status_id}</code>',
         },
         feed: { _type: 'string', _description: 'The Feed affected by this change.' },
         ad_group_bid_modifier: { _type: 'string', _description: 'The AdGroupBidModifier affected by this change.' },

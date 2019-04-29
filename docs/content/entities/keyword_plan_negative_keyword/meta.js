@@ -16,7 +16,7 @@ module.exports = {
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the Keyword Plan negative keyword.\nKeywordPlanNegativeKeyword resource names have the form:\n\n\n`customers/{customer_id}/keywordPlanNegativeKeywords/{kp_negative_keyword_id}`',
+                'The resource name of the Keyword Plan negative keyword. KeywordPlanNegativeKeyword resource names have the form: <code>customers/{customer_id}/keywordPlanNegativeKeywords/{kp_negative_keyword_id}</code>',
         },
         keyword_plan_campaign: {
             _type: 'string',

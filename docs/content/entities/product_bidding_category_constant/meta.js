@@ -3,12 +3,12 @@ module.exports = {
     object: {
         localized_name: {
             _type: 'string',
-            _description: 'Display value of the product bidding category localized according to\nlanguage_code.',
+            _description: 'Display value of the product bidding category localized according to language_code.',
         },
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the product bidding category.\nProduct bidding category resource names have the form:\n\n`productBiddingCategoryConstants/{country_code}~{level}~{id}`',
+                'The resource name of the product bidding category. Product bidding category resource names have the form: <code>productBiddingCategoryConstants/{country_code}~{level}~{id}</code>',
         },
         country_code: {
             _type: 'string',
@@ -45,7 +45,7 @@ module.exports = {
         id: {
             _type: 'int64',
             _description:
-                'ID of the product bidding category.\n\nThis ID is equivalent to the google_product_category ID as described in\nthis article: https://support.google.com/merchants/answer/6324436.',
+                'ID of the product bidding category. This ID is equivalent to the google_product_category ID as described in this article: https://support.google.com/merchants/answer/6324436.',
         },
     },
     methods: ['get', 'list'],

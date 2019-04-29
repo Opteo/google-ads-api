@@ -9,7 +9,7 @@ module.exports = {
                 { s: 'ENABLED', description: 'Feed mapping is enabled.' },
                 { s: 'REMOVED', description: 'Feed mapping has been removed.' },
             ],
-            _description: 'Status of the feed mapping.\nThis field is read-only.',
+            _description: 'Status of the feed mapping. This field is read-only.',
         },
         placeholder_type: {
             _type: 'enum',
@@ -93,13 +93,13 @@ module.exports = {
                 { s: 'DYNAMIC_JOB', description: 'Indicates that this feed is for job dynamic remarketing.' },
             ],
             _description:
-                'The placeholder type of this mapping (i.e., if the mapping maps feed\nattributes to placeholder fields).',
+                'The placeholder type of this mapping (i.e., if the mapping maps feed attributes to placeholder fields).',
             _oneof: 'target',
         },
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the feed mapping.\nFeed mapping resource names have the form:\n\n`customers/{customer_id}/feedMappings/{feed_id}~{feed_mapping_id}`',
+                'The resource name of the feed mapping. Feed mapping resource names have the form: <code>customers/{customer_id}/feedMappings/{feed_id}~{feed_mapping_id}</code>',
         },
         criterion_type: {
             _type: 'enum',
@@ -116,14 +116,14 @@ module.exports = {
                 },
             ],
             _description:
-                'The criterion type of this mapping (i.e., if the mapping maps feed\nattributes to criterion fields).',
+                'The criterion type of this mapping (i.e., if the mapping maps feed attributes to criterion fields).',
             _oneof: 'target',
         },
         feed: { _type: 'string', _description: 'The feed of this feed mapping.' },
         attribute_field_mappings: {
             _type: 'array',
             _description:
-                'Feed attributes to field mappings. These mappings are a one-to-many\nrelationship meaning that 1 feed attribute can be used to populate\nmultiple placeholder fields, but 1 placeholder field can only draw\ndata from 1 feed attribute. Ad Customizer is an exception, 1 placeholder\nfield can be mapped to multiple feed attributes. Required.',
+                'Feed attributes to field mappings. These mappings are a one-to-many relationship meaning that 1 feed attribute can be used to populate multiple placeholder fields, but 1 placeholder field can only draw data from 1 feed attribute. Ad Customizer is an exception, 1 placeholder field can be mapped to multiple feed attributes. Required.',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

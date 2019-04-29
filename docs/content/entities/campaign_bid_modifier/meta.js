@@ -3,13 +3,13 @@ module.exports = {
     object: {
         criterion_id: {
             _type: 'int64',
-            _description: 'The ID of the criterion to bid modify.\n\nThis field is ignored for mutates.',
+            _description: 'The ID of the criterion to bid modify. This field is ignored for mutates.',
         },
         campaign: { _type: 'string', _description: 'The campaign to which this criterion belongs.' },
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the campaign bid modifier.\nCampaign bid modifier resource names have the form:\n\n`customers/{customer_id}/campaignBidModifiers/{campaign_id}~{criterion_id}`',
+                'The resource name of the campaign bid modifier. Campaign bid modifier resource names have the form: <code>customers/{customer_id}/campaignBidModifiers/{campaign_id}~{criterion_id}</code>',
         },
         bid_modifier: { _type: 'double', _description: 'The modifier for the bid when the criterion matches.' },
         interaction_type: {

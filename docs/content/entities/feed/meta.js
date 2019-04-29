@@ -4,12 +4,12 @@ module.exports = {
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the feed.\nFeed resource names have the form:\n\n`customers/{customer_id}/feeds/{feed_id}`',
+                'The resource name of the feed. Feed resource names have the form: <code>customers/{customer_id}/feeds/{feed_id}</code>',
         },
         attribute_operations: {
             _type: 'array',
             _description:
-                'The list of operations changing the feed attributes. Attributes can only\nbe added, not removed.',
+                'The list of operations changing the feed attributes. Attributes can only be added, not removed.',
         },
         affiliate_location_feed_data: {
             relationship_type: {
@@ -26,7 +26,7 @@ module.exports = {
             },
             chain_ids: {
                 _type: 'array',
-                _description: 'The list of chains that the affiliate location feed will sync the\nlocations from.',
+                _description: 'The list of chains that the affiliate location feed will sync the locations from.',
             },
             _oneof: 'systemFeedGenerationData',
         },
@@ -38,18 +38,18 @@ module.exports = {
                 { s: 'ENABLED', description: 'Feed is enabled.' },
                 { s: 'REMOVED', description: 'Feed has been removed.' },
             ],
-            _description: 'Status of the feed.\nThis field is read-only.',
+            _description: 'Status of the feed. This field is read-only.',
         },
         places_location_feed_data: {
             label_filters: {
                 _type: 'array',
                 _description:
-                    'Used to filter Google My Business listings by labels. If entries exist in\nlabel_filters, only listings that has any of the labels set are\ncandidates to be synchronized into FeedItems. If no entries exist in\nlabel_filters, then all listings are candidates for syncing.',
+                    'Used to filter Google My Business listings by labels. If entries exist in label_filters, only listings that has any of the labels set are candidates to be synchronized into FeedItems. If no entries exist in label_filters, then all listings are candidates for syncing.',
             },
             business_account_id: {
                 _type: 'string',
                 _description:
-                    'Plus page ID of the managed business whose locations should be used. If\nthis field is not set, then all businesses accessible by the user\n(specified by email_address) are used.\nThis field is mutate-only and is not selectable.',
+                    'Plus page ID of the managed business whose locations should be used. If this field is not set, then all businesses accessible by the user (specified by email_address) are used. This field is mutate-only and is not selectable.',
             },
             oauth_info: {
                 http_method: { _type: 'string', _description: 'The HTTP method used to obtain authorization.' },
@@ -65,17 +65,17 @@ module.exports = {
             category_filters: {
                 _type: 'array',
                 _description:
-                    "Used to filter Google My Business listings by categories. If entries\nexist in category_filters, only listings that belong to any of the\ncategories are candidates to be sync'd into FeedItems. If no entries\nexist in category_filters, then all listings are candidates for syncing.",
+                    "Used to filter Google My Business listings by categories. If entries exist in category_filters, only listings that belong to any of the categories are candidates to be sync'd into FeedItems. If no entries exist in category_filters, then all listings are candidates for syncing.",
             },
             email_address: {
                 _type: 'string',
                 _description:
-                    'Email address of a Google My Business account or email address of a\nmanager of the Google My Business account. Required.',
+                    'Email address of a Google My Business account or email address of a manager of the Google My Business account. Required.',
             },
             business_name_filter: {
                 _type: 'string',
                 _description:
-                    "Used to filter Google My Business listings by business name. If\nbusiness_name_filter is set, only listings with a matching business name\nare candidates to be sync'd into FeedItems.",
+                    "Used to filter Google My Business listings by business name. If business_name_filter is set, only listings with a matching business name are candidates to be sync'd into FeedItems.",
             },
             _oneof: 'systemFeedGenerationData',
         },
@@ -101,9 +101,9 @@ module.exports = {
         attributes: {
             _type: 'array',
             _description:
-                "The Feed's attributes. Required on CREATE.\nDisallowed on UPDATE. Use attribute_operations to add new attributes.",
+                "The Feed's attributes. Required on CREATE. Disallowed on UPDATE. Use attribute_operations to add new attributes.",
         },
-        id: { _type: 'int64', _description: 'The ID of the feed.\nThis field is read-only.' },
+        id: { _type: 'int64', _description: 'The ID of the feed. This field is read-only.' },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],
 }

@@ -4,7 +4,7 @@ module.exports = {
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the shared set.\nShared set resource names have the form:\n\n`customers/{customer_id}/sharedSets/{shared_set_id}`',
+                'The resource name of the shared set. Shared set resource names have the form: <code>customers/{customer_id}/sharedSets/{shared_set_id}</code>',
         },
         reference_count: {
             _type: 'int64',
@@ -23,7 +23,7 @@ module.exports = {
         name: {
             _type: 'string',
             _description:
-                'The name of this shared set. Required.\nShared Sets must have names that are unique among active shared sets of\nthe same type.\nThe length of this string should be between 1 and 255 UTF-8 bytes,\ninclusive.',
+                'The name of this shared set. Required. Shared Sets must have names that are unique among active shared sets of the same type. The length of this string should be between 1 and 255 UTF-8 bytes, inclusive.',
         },
         type: {
             _type: 'enum',
@@ -34,7 +34,7 @@ module.exports = {
                 { s: 'NEGATIVE_PLACEMENTS', description: 'A set of placements that can be excluded from targeting.' },
             ],
             _description:
-                'The type of this shared set: each shared set holds only a single kind\nof resource. Required. Immutable.',
+                'The type of this shared set: each shared set holds only a single kind of resource. Required. Immutable.',
         },
         member_count: {
             _type: 'int64',

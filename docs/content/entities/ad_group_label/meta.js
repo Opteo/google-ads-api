@@ -6,7 +6,7 @@ module.exports = {
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the ad group label.\nAd group label resource names have the form:\n`customers/{customer_id}/adGroupLabels/{ad_group_id}~{label_id}`',
+                'The resource name of the ad group label. Ad group label resource names have the form: <code>customers/{customer_id}/adGroupLabels/{ad_group_id}~{label_id}</code>',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

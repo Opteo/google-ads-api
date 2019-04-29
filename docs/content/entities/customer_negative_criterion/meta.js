@@ -31,14 +31,14 @@ module.exports = {
             _oneof: 'criterion',
         },
         placement: {
-            url: { _type: 'string', _description: 'URL of the placement.\n\nFor example, "http://www.domain.com".' },
+            url: { _type: 'string', _description: 'URL of the placement. For example, "http://www.domain.com".' },
             _oneof: 'criterion',
         },
         mobile_application: {
             app_id: {
                 _type: 'string',
                 _description:
-                    'A string that uniquely identifies a mobile application to Google Ads API.\nThe format of this string is "{platform}-{platform_native_id}", where\nplatform is "1" for iOS apps and "2" for Android apps, and where\nplatform_native_id is the mobile application identifier native to the\ncorresponding platform.\nFor iOS, this native identifier is the 9 digit string that appears at the\nend of an App Store URL (e.g., "476943146" for "Flood-It! 2" whose App\nStore link is http://itunes.apple.com/us/app/flood-it!-2/id476943146).\nFor Android, this native identifier is the application\'s package name\n(e.g., "com.labpixies.colordrips" for "Color Drips" given Google Play link\nhttps://play.google.com/store/apps/details?id=com.labpixies.colordrips).\nA well formed app id for Google Ads API would thus be "1-476943146" for iOS\nand "2-com.labpixies.colordrips" for Android.\nThis field is required and must be set in CREATE operations.',
+                    'A string that uniquely identifies a mobile application to Google Ads API. The format of this string is "{platform}-{platform_native_id}", where platform is "1" for iOS apps and "2" for Android apps, and where platform_native_id is the mobile application identifier native to the corresponding platform. For iOS, this native identifier is the 9 digit string that appears at the end of an App Store URL (e.g., "476943146" for "Flood-It! 2" whose App Store link is http://itunes.apple.com/us/app/flood-it!-2/id476943146). For Android, this native identifier is the application\'s package name (e.g., "com.labpixies.colordrips" for "Color Drips" given Google Play link https://play.google.com/store/apps/details?id=com.labpixies.colordrips). A well formed app id for Google Ads API would thus be "1-476943146" for iOS and "2-com.labpixies.colordrips" for Android. This field is required and must be set in CREATE operations.',
             },
             _oneof: 'criterion',
         },
@@ -101,7 +101,7 @@ module.exports = {
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the customer negative criterion.\nCustomer negative criterion resource names have the form:\n\n`customers/{customer_id}/customerNegativeCriteria/{criterion_id}`',
+                'The resource name of the customer negative criterion. Customer negative criterion resource names have the form: <code>customers/{customer_id}/customerNegativeCriteria/{criterion_id}</code>',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

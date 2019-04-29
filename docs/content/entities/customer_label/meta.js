@@ -4,16 +4,16 @@ module.exports = {
         label: {
             _type: 'string',
             _description:
-                'The resource name of the label assigned to the customer.\n\nNote: the Customer ID portion of the label resource name is not\nvalidated when creating a new CustomerLabel.',
+                'The resource name of the label assigned to the customer. Note: the Customer ID portion of the label resource name is not validated when creating a new CustomerLabel.',
         },
         customer: {
             _type: 'string',
-            _description: 'The resource name of the customer to which the label is attached.\nRead only.',
+            _description: 'The resource name of the customer to which the label is attached. Read only.',
         },
         resource_name: {
             _type: 'string',
             _description:
-                'Name of the resource.\nCustomer label resource names have the form:\n`customers/{customer_id}/customerLabels/{label_id}`',
+                'Name of the resource. Customer label resource names have the form: <code>customers/{customer_id}/customerLabels/{label_id}</code>',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

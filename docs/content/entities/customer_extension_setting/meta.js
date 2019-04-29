@@ -4,12 +4,12 @@ module.exports = {
         extension_feed_items: {
             _type: 'array',
             _description:
-                'The resource names of the extension feed items to serve under the customer.\nExtensionFeedItem resource names have the form:\n\n`customers/{customer_id}/extensionFeedItems/{feed_item_id}`',
+                'The resource names of the extension feed items to serve under the customer. ExtensionFeedItem resource names have the form: <code>customers/{customer_id}/extensionFeedItems/{feed_item_id}</code>',
         },
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the customer extension setting.\nCustomerExtensionSetting resource names have the form:\n\n`customers/{customer_id}/customerExtensionSettings/{extension_type}`',
+                'The resource name of the customer extension setting. CustomerExtensionSetting resource names have the form: <code>customers/{customer_id}/customerExtensionSettings/{extension_type}</code>',
         },
         extension_type: {
             _type: 'enum',

@@ -4,12 +4,12 @@ module.exports = {
         canonical_name: {
             _type: 'string',
             _description:
-                "The fully qualified English name, consisting of the target's name and that\nof its parent and country.",
+                "The fully qualified English name, consisting of the target's name and that of its parent and country.",
         },
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the geo target constant.\nGeo target constant resource names have the form:\n\n`geoTargetConstants/{geo_target_constant_id}`',
+                'The resource name of the geo target constant. Geo target constant resource names have the form: <code>geoTargetConstants/{geo_target_constant_id}</code>',
         },
         country_code: {
             _type: 'string',

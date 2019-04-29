@@ -26,7 +26,7 @@ module.exports = {
         resource_name: {
             _type: 'string',
             _description:
-                'Name of the resource.\nCustomerManagerLink resource names have the form:\n\n`customers/{customer_id}/customerManagerLinks/{manager_customer_id}~{manager_link_id}`',
+                'Name of the resource. CustomerManagerLink resource names have the form: <code>customers/{customer_id}/customerManagerLinks/{manager_customer_id}~{manager_link_id}</code>',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

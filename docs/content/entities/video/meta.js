@@ -8,7 +8,7 @@ module.exports = {
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the video.\nVideo resource names have the form:\n\n`customers/{customer_id}/videos/{video_id}`',
+                'The resource name of the video. Video resource names have the form: <code>customers/{customer_id}/videos/{video_id}</code>',
         },
     },
     methods: ['get', 'list'],

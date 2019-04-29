@@ -9,7 +9,7 @@ module.exports = {
                 { s: 'EQUALS_TO', description: 'Equals to the specified version.' },
                 { s: 'GREATER_THAN_EQUALS_TO', description: 'Greater than or equals to the specified version.' },
             ],
-            _description: 'Determines whether this constant represents a single version or a range of\nversions.',
+            _description: 'Determines whether this constant represents a single version or a range of versions.',
         },
         os_major_version: { _type: 'int32', _description: 'The OS Major Version number.' },
         os_minor_version: { _type: 'int32', _description: 'The OS Minor Version number.' },
@@ -18,7 +18,7 @@ module.exports = {
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the operating system version constant.\nOperating system version constant resource names have the form:\n\n`operatingSystemVersionConstants/{criterion_id}`',
+                'The resource name of the operating system version constant. Operating system version constant resource names have the form: <code>operatingSystemVersionConstants/{criterion_id}</code>',
         },
     },
     methods: ['get', 'list'],

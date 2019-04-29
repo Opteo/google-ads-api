@@ -4,11 +4,11 @@ module.exports = {
         proposed_purchase_order_number: {
             _type: 'string',
             _description:
-                'A purchase order number is a value that enables the user to help them\nreference this budget in their monthly invoices.',
+                'A purchase order number is a value that enables the user to help them reference this budget in their monthly invoices.',
         },
         proposed_spending_limit_micros: {
             _type: 'int64',
-            _description: 'The proposed spending limit in micros.  One million is equivalent to\none unit.',
+            _description: 'The proposed spending limit in micros. One million is equivalent to one unit.',
             _oneof: 'proposedSpendingLimit',
         },
         proposed_notes: { _type: 'string', _description: 'Notes associated with this budget.' },
@@ -22,7 +22,7 @@ module.exports = {
                 { s: 'END', description: 'Identifies a request to end a budget that has already started.' },
                 { s: 'REMOVE', description: "Identifies a request to remove a budget that hasn't started yet." },
             ],
-            _description: 'The type of this proposal, e.g. END to end the budget associated with this\nproposal.',
+            _description: 'The type of this proposal, e.g. END to end the budget associated with this proposal.',
         },
         proposed_start_date_time: {
             _type: 'string',
@@ -53,7 +53,7 @@ module.exports = {
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the proposal.\nAccountBudgetProposal resource names have the form:\n\n\n`customers/{customer_id}/accountBudgetProposals/{account_budget_proposal_id}`',
+                'The resource name of the proposal. AccountBudgetProposal resource names have the form: <code>customers/{customer_id}/accountBudgetProposals/{account_budget_proposal_id}</code>',
         },
         approved_spending_limit_type: {
             _type: 'enum',
@@ -96,7 +96,7 @@ module.exports = {
         },
         account_budget: {
             _type: 'string',
-            _description: 'The resource name of the account-level budget associated with this\nproposal.',
+            _description: 'The resource name of the account-level budget associated with this proposal.',
         },
         proposed_start_time_type: {
             _type: 'enum',
@@ -112,11 +112,11 @@ module.exports = {
         creation_date_time: {
             _type: 'string',
             _description:
-                'The date time when this account-level budget proposal was created, which is\nnot the same as its approval date time, if applicable.',
+                'The date time when this account-level budget proposal was created, which is not the same as its approval date time, if applicable.',
         },
         approved_spending_limit_micros: {
             _type: 'int64',
-            _description: 'The approved spending limit in micros.  One million is equivalent to\none unit.',
+            _description: 'The approved spending limit in micros. One million is equivalent to one unit.',
             _oneof: 'approvedSpendingLimit',
         },
         proposed_name: { _type: 'string', _description: 'The name to assign to the account-level budget.' },
@@ -144,7 +144,7 @@ module.exports = {
                 },
             ],
             _description:
-                'The status of this proposal.\nWhen a new proposal is created, the status defaults to PENDING.',
+                'The status of this proposal. When a new proposal is created, the status defaults to PENDING.',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

@@ -10,7 +10,7 @@ module.exports = {
         base_ad_group: {
             _type: 'string',
             _description:
-                'The base ad group from which this draft/trial adgroup bid modifier was\ncreated. If ad_group is a base ad group then this field will be equal to\nad_group. If the ad group was created in the draft or trial and has no\ncorresponding base ad group, then this field will be null.\nThis field is readonly.',
+                'The base ad group from which this draft/trial adgroup bid modifier was created. If ad_group is a base ad group then this field will be equal to ad_group. If the ad group was created in the draft or trial and has no corresponding base ad group, then this field will be null. This field is readonly.',
         },
         preferred_content: {
             type: {
@@ -66,7 +66,7 @@ module.exports = {
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the ad group bid modifier.\nAd group bid modifier resource names have the form:\n\n`customers/{customer_id}/adGroupBidModifiers/{ad_group_id}~{criterion_id}`',
+                'The resource name of the ad group bid modifier. Ad group bid modifier resource names have the form: <code>customers/{customer_id}/adGroupBidModifiers/{ad_group_id}~{criterion_id}</code>',
         },
         bid_modifier_source: {
             _type: 'enum',
@@ -99,12 +99,12 @@ module.exports = {
         },
         criterion_id: {
             _type: 'int64',
-            _description: 'The ID of the criterion to bid modify.\n\nThis field is ignored for mutates.',
+            _description: 'The ID of the criterion to bid modify. This field is ignored for mutates.',
         },
         bid_modifier: {
             _type: 'double',
             _description:
-                'The modifier for the bid when the criterion matches. The modifier must be\nin the range: 0.1 - 10.0. The range is 1.0 - 6.0 for PreferredContent.\nUse 0 to opt out of a Device type.',
+                'The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. The range is 1.0 - 6.0 for PreferredContent. Use 0 to opt out of a Device type.',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

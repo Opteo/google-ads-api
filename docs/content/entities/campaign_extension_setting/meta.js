@@ -4,17 +4,17 @@ module.exports = {
         extension_feed_items: {
             _type: 'array',
             _description:
-                'The resource names of the extension feed items to serve under the campaign.\nExtensionFeedItem resource names have the form:\n\n`customers/{customer_id}/extensionFeedItems/{feed_item_id}`',
+                'The resource names of the extension feed items to serve under the campaign. ExtensionFeedItem resource names have the form: <code>customers/{customer_id}/extensionFeedItems/{feed_item_id}</code>',
         },
         campaign: {
             _type: 'string',
             _description:
-                'The resource name of the campaign. The linked extension feed items will\nserve under this campaign.\nCampaign resource names have the form:\n\n`customers/{customer_id}/campaigns/{campaign_id}`',
+                'The resource name of the campaign. The linked extension feed items will serve under this campaign. Campaign resource names have the form: <code>customers/{customer_id}/campaigns/{campaign_id}</code>',
         },
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the campaign extension setting.\nCampaignExtensionSetting resource names have the form:\n\n\n`customers/{customer_id}/campaignExtensionSettings/{campaign_id}~{extension_type}`',
+                'The resource name of the campaign extension setting. CampaignExtensionSetting resource names have the form: <code>customers/{customer_id}/campaignExtensionSettings/{campaign_id}~{extension_type}</code>',
         },
         extension_type: {
             _type: 'enum',

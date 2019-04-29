@@ -6,11 +6,11 @@ module.exports = {
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the language constant.\nLanguage constant resource names have the form:\n\n`languageConstants/{criterion_id}`',
+                'The resource name of the language constant. Language constant resource names have the form: <code>languageConstants/{criterion_id}</code>',
         },
         name: {
             _type: 'string',
-            _description: 'The full name of the language in English, e.g., "English (US)", "Spanish",\netc.',
+            _description: 'The full name of the language in English, e.g., "English (US)", "Spanish", etc.',
         },
         code: { _type: 'string', _description: 'The language code, e.g. "en_US", "en_AU", "es", "fr", etc.' },
     },

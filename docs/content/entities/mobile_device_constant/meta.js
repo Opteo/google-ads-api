@@ -18,7 +18,7 @@ module.exports = {
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the mobile device constant.\nMobile device constant resource names have the form:\n\n`mobileDeviceConstants/{criterion_id}`',
+                'The resource name of the mobile device constant. Mobile device constant resource names have the form: <code>mobileDeviceConstants/{criterion_id}</code>',
         },
     },
     methods: ['get', 'list'],

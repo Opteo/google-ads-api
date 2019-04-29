@@ -25,7 +25,7 @@ module.exports = {
         billing_setup: {
             _type: 'string',
             _description:
-                'The resource name of the billing setup associated with this account-level\nbudget.  BillingSetup resource names have the form:\n\n`customers/{customer_id}/billingSetups/{billing_setup_id}`',
+                'The resource name of the billing setup associated with this account-level budget. BillingSetup resource names have the form: <code>customers/{customer_id}/billingSetups/{billing_setup_id}</code>',
         },
         adjusted_spending_limit_type: {
             _type: 'enum',
@@ -35,12 +35,12 @@ module.exports = {
                 { s: 'INFINITE', description: 'Infinite, indicates unlimited spending power.' },
             ],
             _description:
-                'The adjusted spending limit as a well-defined type, e.g. INFINITE.\nThis will only be populated if the adjusted spending limit is INFINITE,\nwhich is guaranteed to be true if the approved spending limit is\nINFINITE.',
+                'The adjusted spending limit as a well-defined type, e.g. INFINITE. This will only be populated if the adjusted spending limit is INFINITE, which is guaranteed to be true if the approved spending limit is INFINITE.',
             _oneof: 'adjustedSpendingLimit',
         },
         total_adjustments_micros: {
             _type: 'int64',
-            _description: 'The total adjustments amount.\n\nAn example of an adjustment is courtesy credits.',
+            _description: 'The total adjustments amount. An example of an adjustment is courtesy credits.',
         },
         pending_proposal: {
             end_time_type: {
@@ -69,7 +69,7 @@ module.exports = {
                     { s: 'END', description: 'Identifies a request to end a budget that has already started.' },
                     { s: 'REMOVE', description: "Identifies a request to remove a budget that hasn't started yet." },
                 ],
-                _description: 'The type of this proposal, e.g. END to end the budget associated\nwith this proposal.',
+                _description: 'The type of this proposal, e.g. END to end the budget associated with this proposal.',
             },
             spending_limit_type: {
                 _type: 'enum',
@@ -86,23 +86,23 @@ module.exports = {
             account_budget_proposal: {
                 _type: 'string',
                 _description:
-                    'The resource name of the proposal.\nAccountBudgetProposal resource names have the form:\n\n\n`customers/{customer_id}/accountBudgetProposals/{account_budget_proposal_id}`',
+                    'The resource name of the proposal. AccountBudgetProposal resource names have the form: <code>customers/{customer_id}/accountBudgetProposals/{account_budget_proposal_id}</code>',
             },
             start_date_time: { _type: 'string', _description: 'The start time in yyyy-MM-dd HH:mm:ss format.' },
             purchase_order_number: {
                 _type: 'string',
                 _description:
-                    'A purchase order number is a value that helps users reference this budget\nin their monthly invoices.',
+                    'A purchase order number is a value that helps users reference this budget in their monthly invoices.',
             },
             creation_date_time: {
                 _type: 'string',
                 _description:
-                    'The time when this account-level budget proposal was created.\nFormatted as yyyy-MM-dd HH:mm:ss.',
+                    'The time when this account-level budget proposal was created. Formatted as yyyy-MM-dd HH:mm:ss.',
             },
             end_date_time: { _type: 'string', _description: 'The end time in yyyy-MM-dd HH:mm:ss format.' },
             spending_limit_micros: {
                 _type: 'int64',
-                _description: 'The spending limit in micros.  One million is equivalent to\none unit.',
+                _description: 'The spending limit in micros. One million is equivalent to one unit.',
             },
             notes: { _type: 'string', _description: 'Notes associated with this budget.' },
             name: { _type: 'string', _description: 'The name to assign to the account-level budget.' },
@@ -110,7 +110,7 @@ module.exports = {
         approved_spending_limit_micros: {
             _type: 'int64',
             _description:
-                'The approved spending limit in micros.  One million is equivalent to\none unit.  This will only be populated if the proposed spending limit\nis finite, and will always be greater than or equal to the\nproposed spending limit.',
+                'The approved spending limit in micros. One million is equivalent to one unit. This will only be populated if the proposed spending limit is finite, and will always be greater than or equal to the proposed spending limit.',
             _oneof: 'approvedSpendingLimit',
         },
         proposed_end_date_time: {
@@ -132,14 +132,14 @@ module.exports = {
         },
         proposed_spending_limit_micros: {
             _type: 'int64',
-            _description: 'The proposed spending limit in micros.  One million is equivalent to\none unit.',
+            _description: 'The proposed spending limit in micros. One million is equivalent to one unit.',
             _oneof: 'proposedSpendingLimit',
         },
         name: { _type: 'string', _description: 'The name of the account-level budget.' },
         proposed_start_date_time: {
             _type: 'string',
             _description:
-                'The proposed start time of the account-level budget in\nyyyy-MM-dd HH:mm:ss format.  If a start time type of NOW was proposed,\nthis is the time of request.',
+                'The proposed start time of the account-level budget in yyyy-MM-dd HH:mm:ss format. If a start time type of NOW was proposed, this is the time of request.',
         },
         id: { _type: 'int64', _description: 'The ID of the account-level budget.' },
         approved_end_date_time: {
@@ -161,22 +161,22 @@ module.exports = {
         approved_start_date_time: {
             _type: 'string',
             _description:
-                'The approved start time of the account-level budget in yyyy-MM-dd HH:mm:ss\nformat.\n\nFor example, if a new budget is approved after the proposed start time,\nthe approved start time is the time of approval.',
+                'The approved start time of the account-level budget in yyyy-MM-dd HH:mm:ss format. For example, if a new budget is approved after the proposed start time, the approved start time is the time of approval.',
         },
         amount_served_micros: {
             _type: 'int64',
             _description:
-                'The value of Ads that have been served, in micros.\n\nThis includes overdelivery costs, in which case a credit might be\nautomatically applied to the budget (see total_adjustments_micros).',
+                'The value of Ads that have been served, in micros. This includes overdelivery costs, in which case a credit might be automatically applied to the budget (see total_adjustments_micros).',
         },
         purchase_order_number: {
             _type: 'string',
             _description:
-                'A purchase order number is a value that helps users reference this budget\nin their monthly invoices.',
+                'A purchase order number is a value that helps users reference this budget in their monthly invoices.',
         },
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the account-level budget.\nAccountBudget resource names have the form:\n\n`customers/{customer_id}/accountBudgets/{account_budget_id}`',
+                'The resource name of the account-level budget. AccountBudget resource names have the form: <code>customers/{customer_id}/accountBudgets/{account_budget_id}</code>',
         },
         approved_spending_limit_type: {
             _type: 'enum',
@@ -186,13 +186,13 @@ module.exports = {
                 { s: 'INFINITE', description: 'Infinite, indicates unlimited spending power.' },
             ],
             _description:
-                'The approved spending limit as a well-defined type, e.g. INFINITE.  This\nwill only be populated if the approved spending limit is INFINITE.',
+                'The approved spending limit as a well-defined type, e.g. INFINITE. This will only be populated if the approved spending limit is INFINITE.',
             _oneof: 'approvedSpendingLimit',
         },
         adjusted_spending_limit_micros: {
             _type: 'int64',
             _description:
-                'The adjusted spending limit in micros.  One million is equivalent to\none unit.\n\nIf the approved spending limit is finite, the adjusted\nspending limit may vary depending on the types of adjustments applied\nto this budget, if applicable.\n\nThe different kinds of adjustments are described here:\nhttps://support.google.com/google-ads/answer/1704323\n\nFor example, a debit adjustment reduces how much the account is\nallowed to spend.',
+                'The adjusted spending limit in micros. One million is equivalent to one unit. If the approved spending limit is finite, the adjusted spending limit may vary depending on the types of adjustments applied to this budget, if applicable. The different kinds of adjustments are described here: https://support.google.com/google-ads/answer/1704323 For example, a debit adjustment reduces how much the account is allowed to spend.',
             _oneof: 'adjustedSpendingLimit',
         },
     },

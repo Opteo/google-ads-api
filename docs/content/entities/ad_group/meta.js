@@ -3,7 +3,7 @@ module.exports = {
     object: {
         effective_target_roas: {
             _type: 'double',
-            _description: 'The effective target ROAS (return-on-ad-spend).\nThis field is read-only.',
+            _description: 'The effective target ROAS (return-on-ad-spend). This field is read-only.',
         },
         type: {
             _type: 'enum',
@@ -33,13 +33,12 @@ module.exports = {
         percent_cpc_bid_micros: {
             _type: 'int64',
             _description:
-                'The percent cpc bid amount, expressed as a fraction of the advertised price\nfor some good or service. The valid range for the fraction is [0,1) and the\nvalue stored here is 1,000,000 * [fraction].',
+                'The percent cpc bid amount, expressed as a fraction of the advertised price for some good or service. The valid range for the fraction is [0,1) and the value stored here is 1,000,000 * [fraction].',
         },
         targeting_setting: {
             target_restrictions: {
                 _type: 'array',
-                _description:
-                    'The per-targeting-dimension setting to restrict the reach of your campaign\nor ad group.',
+                _description: 'The per-targeting-dimension setting to restrict the reach of your campaign or ad group.',
             },
         },
         cpc_bid_micros: { _type: 'int64', _description: 'The maximum CPC (cost-per-click) bid.' },
@@ -60,18 +59,18 @@ module.exports = {
         name: {
             _type: 'string',
             _description:
-                'The name of the ad group.\n\nThis field is required and should not be empty when creating new ad\ngroups.\n\nIt must contain fewer than 255 UTF-8 full-width characters.\n\nIt must not contain any null (code point 0x0), NL line feed\n(code point 0xA) or carriage return (code point 0xD) characters.',
+                'The name of the ad group. This field is required and should not be empty when creating new ad groups. It must contain fewer than 255 UTF-8 full-width characters. It must not contain any null (code point 0x0), NL line feed (code point 0xA) or carriage return (code point 0xD) characters.',
         },
         url_custom_parameters: {
             _type: 'array',
             _description:
-                'The list of mappings used to substitute custom parameter tags in a\n`tracking_url_template`, `final_urls`, or `mobile_final_urls`.',
+                'The list of mappings used to substitute custom parameter tags in a <code>tracking_url_template</code>, <code>final_urls</code>, or <code>mobile_final_urls</code>.',
         },
         final_url_suffix: { _type: 'string', _description: 'URL template for appending params to Final URL.' },
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the ad group.\nAd group resource names have the form:\n\n`customers/{customer_id}/adGroups/{ad_group_id}`',
+                'The resource name of the ad group. Ad group resource names have the form: <code>customers/{customer_id}/adGroups/{ad_group_id}</code>',
         },
         tracking_url_template: { _type: 'string', _description: 'The URL template for constructing a tracking URL.' },
         target_cpa_micros: { _type: 'int64', _description: 'The target CPA (cost-per-acquisition).' },
@@ -80,7 +79,7 @@ module.exports = {
         },
         effective_target_cpa_micros: {
             _type: 'int64',
-            _description: 'The effective target CPA (cost-per-acquisition).\nThis field is read-only.',
+            _description: 'The effective target CPA (cost-per-acquisition). This field is read-only.',
         },
         campaign: { _type: 'string', _description: 'The campaign to which the ad group belongs.' },
         ad_rotation_mode: {
@@ -108,7 +107,7 @@ module.exports = {
                 { s: 'AD_GROUP', description: 'The bid or target is defined on the ad group.' },
                 { s: 'AD_GROUP_CRITERION', description: 'The bid or target is defined on the ad group criterion.' },
             ],
-            _description: 'Source of the effective target ROAS.\nThis field is read-only.',
+            _description: 'Source of the effective target ROAS. This field is read-only.',
         },
         cpm_bid_micros: {
             _type: 'int64',
@@ -146,7 +145,7 @@ module.exports = {
                 { s: 'INCOME_RANGE', description: 'Criteria for income range targeting.' },
             ],
             _description:
-                'Allows advertisers to specify a targeting dimension on which to place\nabsolute bids. This is only applicable for campaigns that target only the\ndisplay network and not search.',
+                'Allows advertisers to specify a targeting dimension on which to place absolute bids. This is only applicable for campaigns that target only the display network and not search.',
         },
         effective_target_cpa_source: {
             _type: 'enum',
@@ -160,18 +159,18 @@ module.exports = {
                 { s: 'AD_GROUP', description: 'The bid or target is defined on the ad group.' },
                 { s: 'AD_GROUP_CRITERION', description: 'The bid or target is defined on the ad group criterion.' },
             ],
-            _description: 'Source of the effective target CPA.\nThis field is read-only.',
+            _description: 'Source of the effective target CPA. This field is read-only.',
         },
         cpv_bid_micros: { _type: 'int64', _description: 'The CPV (cost-per-view) bid.' },
         target_roas: {
             _type: 'double',
             _description:
-                "The target ROAS (return-on-ad-spend) override. If the ad group's campaign\nbidding strategy is a standard Target ROAS strategy, then this field\noverrides the target ROAS specified in the campaign's bidding strategy.\nOtherwise, this value is ignored.",
+                "The target ROAS (return-on-ad-spend) override. If the ad group's campaign bidding strategy is a standard Target ROAS strategy, then this field overrides the target ROAS specified in the campaign's bidding strategy. Otherwise, this value is ignored.",
         },
         target_cpm_micros: {
             _type: 'int64',
             _description:
-                'Average amount in micros that the advertiser is willing to pay for every\nthousand times the ad is shown.',
+                'Average amount in micros that the advertiser is willing to pay for every thousand times the ad is shown.',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

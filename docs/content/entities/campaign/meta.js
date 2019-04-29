@@ -85,7 +85,7 @@ module.exports = {
                     },
                 ],
                 _description:
-                    'The text that will be displayed in display URL of the text ad when\nwebsite description is the selected display mode for vanity pharma URLs.',
+                    'The text that will be displayed in display URL of the text ad when website description is the selected display mode for vanity pharma URLs.',
             },
         },
         id: { _type: 'int64', _description: 'The ID of the campaign.' },
@@ -93,17 +93,17 @@ module.exports = {
             cpc_bid_ceiling_micros: {
                 _type: 'int64',
                 _description:
-                    'Maximum bid limit that can be set by the bid strategy.\nThe limit applies to all keywords managed by the strategy.',
+                    'Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
             },
             cpc_bid_floor_micros: {
                 _type: 'int64',
                 _description:
-                    'Minimum bid limit that can be set by the bid strategy.\nThe limit applies to all keywords managed by the strategy.',
+                    'Minimum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
             },
             target_cpa_micros: {
                 _type: 'int64',
                 _description:
-                    'Average CPA target.\nThis target should be greater than or equal to minimum billable unit based\non the currency for the account.',
+                    'Average CPA target. This target should be greater than or equal to minimum billable unit based on the currency for the account.',
             },
             _oneof: 'campaignBiddingStrategy',
         },
@@ -116,7 +116,7 @@ module.exports = {
             commission_rate_micros: {
                 _type: 'int64',
                 _description:
-                    'Commission rate defines the portion of the conversion value that the\nadvertiser will be billed. A commission rate of x should be passed into\nthis field as (x * 1,000,000). For example, 106,000 represents a commission\nrate of 0.106 (10.6%).',
+                    'Commission rate defines the portion of the conversion value that the advertiser will be billed. A commission rate of x should be passed into this field as (x * 1,000,000). For example, 106,000 represents a commission rate of 0.106 (10.6%).',
             },
             _oneof: 'campaignBiddingStrategy',
         },
@@ -129,17 +129,17 @@ module.exports = {
             cpc_bid_ceiling_micros: {
                 _type: 'int64',
                 _description:
-                    'Maximum bid limit that can be set by the bid strategy.\nThe limit applies to all keywords managed by the strategy.',
+                    'Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
             },
             target_roas: {
                 _type: 'double',
                 _description:
-                    'Required. The desired revenue (based on conversion data) per unit of spend.\nValue must be between 0.01 and 1000.0, inclusive.',
+                    'Required. The desired revenue (based on conversion data) per unit of spend. Value must be between 0.01 and 1000.0, inclusive.',
             },
             cpc_bid_floor_micros: {
                 _type: 'int64',
                 _description:
-                    'Minimum bid limit that can be set by the bid strategy.\nThe limit applies to all keywords managed by the strategy.',
+                    'Minimum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
             },
             _oneof: 'campaignBiddingStrategy',
         },
@@ -147,7 +147,7 @@ module.exports = {
             cpc_bid_ceiling_micros: {
                 _type: 'int64',
                 _description:
-                    'The highest CPC bid the automated bidding system is permitted to specify.\nThis is a required field entered by the advertiser that sets the ceiling\nand specified in local micros.',
+                    'The highest CPC bid the automated bidding system is permitted to specify. This is a required field entered by the advertiser that sets the ceiling and specified in local micros.',
             },
             location: {
                 _type: 'enum',
@@ -166,7 +166,7 @@ module.exports = {
             location_fraction_micros: {
                 _type: 'int64',
                 _description:
-                    'The desired fraction of ads to be shown in the targeted location in micros.\nE.g. 1% equals 10,000.',
+                    'The desired fraction of ads to be shown in the targeted location in micros. E.g. 1% equals 10,000.',
             },
             _oneof: 'campaignBiddingStrategy',
         },
@@ -189,18 +189,18 @@ module.exports = {
                 { s: 'APP_CAMPAIGN', description: 'Universal App Campaign.' },
             ],
             _description:
-                'Optional refinement to `advertising_channel_type`.\nMust be a valid sub-type of the parent channel type.\n\nCan be set only when creating campaigns.\nAfter campaign is created, the field can not be changed.',
+                'Optional refinement to <code>advertising_channel_type</code>. Must be a valid sub-type of the parent channel type. Can be set only when creating campaigns. After campaign is created, the field can not be changed.',
         },
         network_settings: {
             target_search_network: {
                 _type: 'boolean',
                 _description:
-                    'Whether ads will be served on partner sites in the Google Search Network\n(requires `target_google_search` to also be `true`).',
+                    'Whether ads will be served on partner sites in the Google Search Network (requires <code>target_google_search</code> to also be <code>true</code>).',
             },
             target_content_network: {
                 _type: 'boolean',
                 _description:
-                    'Whether ads will be served on specified placements in the Google Display\nNetwork. Placements are specified using the Placement criterion.',
+                    'Whether ads will be served on specified placements in the Google Display Network. Placements are specified using the Placement criterion.',
             },
             target_google_search: {
                 _type: 'boolean',
@@ -209,7 +209,7 @@ module.exports = {
             target_partner_search_network: {
                 _type: 'boolean',
                 _description:
-                    'Whether ads will be served on the Google Partner Network.\nThis is available only to some select Google partner accounts.',
+                    'Whether ads will be served on the Google Partner Network. This is available only to some select Google partner accounts.',
             },
         },
         video_brand_safety_suitability: {
@@ -239,18 +239,18 @@ module.exports = {
             campaign_priority: {
                 _type: 'int32',
                 _description:
-                    'Priority of the campaign. Campaigns with numerically higher priorities\ntake precedence over those with lower priorities.\nThis field is required for Shopping campaigns, with values between 0 and\n2, inclusive.\nThis field is optional for Smart Shopping campaigns, but must be equal to\n3 if set.',
+                    'Priority of the campaign. Campaigns with numerically higher priorities take precedence over those with lower priorities. This field is required for Shopping campaigns, with values between 0 and 2, inclusive. This field is optional for Smart Shopping campaigns, but must be equal to 3 if set.',
             },
             sales_country: {
                 _type: 'string',
                 _description:
-                    "Sales country of products to include in the campaign.\nThis field is required for Shopping campaigns. This field is immutable.\nThis field is optional for non-Shopping campaigns, but it must be equal\nto 'ZZ' if set.",
+                    "Sales country of products to include in the campaign. This field is required for Shopping campaigns. This field is immutable. This field is optional for non-Shopping campaigns, but it must be equal to 'ZZ' if set.",
             },
             enable_local: { _type: 'boolean', _description: 'Whether to include local products.' },
             merchant_id: {
                 _type: 'int64',
                 _description:
-                    'ID of the Merchant Center account.\nThis field is required for create operations. This field is immutable for\nShopping campaigns.',
+                    'ID of the Merchant Center account. This field is required for create operations. This field is immutable for Shopping campaigns.',
             },
         },
         app_campaign_setting: {
@@ -297,7 +297,7 @@ module.exports = {
                     },
                 ],
                 _description:
-                    'Represents the goal which the bidding strategy of this app campaign\nshould optimize towards.',
+                    'Represents the goal which the bidding strategy of this app campaign should optimize towards.',
             },
             app_id: { _type: 'string', _description: 'A string that uniquely identifies a mobile application.' },
         },
@@ -305,20 +305,19 @@ module.exports = {
             cpc_bid_ceiling_micros: {
                 _type: 'int64',
                 _description:
-                    'Maximum bid limit that can be set by the bid strategy. This is\nan optional field entered by the advertiser and specified in local micros.\nNote: A zero value is interpreted in the same way as having bid_ceiling\nundefined.',
+                    'Maximum bid limit that can be set by the bid strategy. This is an optional field entered by the advertiser and specified in local micros. Note: A zero value is interpreted in the same way as having bid_ceiling undefined.',
             },
             enhanced_cpc_enabled: {
                 _type: 'boolean',
                 _description:
-                    'Adjusts the bid for each auction upward or downward, depending on the\nlikelihood of a conversion. Individual bids may exceed\ncpc_bid_ceiling_micros, but the average bid amount for a campaign should\nnot.',
+                    'Adjusts the bid for each auction upward or downward, depending on the likelihood of a conversion. Individual bids may exceed cpc_bid_ceiling_micros, but the average bid amount for a campaign should not.',
             },
             _oneof: 'campaignBiddingStrategy',
         },
         targeting_setting: {
             target_restrictions: {
                 _type: 'array',
-                _description:
-                    'The per-targeting-dimension setting to restrict the reach of your campaign\nor ad group.',
+                _description: 'The per-targeting-dimension setting to restrict the reach of your campaign or ad group.',
             },
         },
         selective_optimization: {
@@ -329,18 +328,18 @@ module.exports = {
         },
         end_date: {
             _type: 'string',
-            _description: 'The date when campaign ended.\n\nThis field must not be used in WHERE clauses.',
+            _description: 'The date when campaign ended. This field must not be used in WHERE clauses.',
         },
         target_spend: {
             cpc_bid_ceiling_micros: {
                 _type: 'int64',
                 _description:
-                    'Maximum bid limit that can be set by the bid strategy.\nThe limit applies to all keywords managed by the strategy.',
+                    'Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
             },
             target_spend_micros: {
                 _type: 'int64',
                 _description:
-                    'The spend target under which to maximize clicks.\nA TargetSpend bidder will attempt to spend the smaller of this value\nor the natural throttling spend amount.\nIf not specified, the budget is used as the spend target.',
+                    'The spend target under which to maximize clicks. A TargetSpend bidder will attempt to spend the smaller of this value or the natural throttling spend amount. If not specified, the budget is used as the spend target.',
             },
             _oneof: 'campaignBiddingStrategy',
         },
@@ -353,8 +352,7 @@ module.exports = {
                 { s: 'PAUSED', description: 'Campaign has been paused by the user.' },
                 { s: 'REMOVED', description: 'Campaign has been removed.' },
             ],
-            _description:
-                'The status of the campaign.\n\nWhen a new campaign is added, the status defaults to ENABLED.',
+            _description: 'The status of the campaign. When a new campaign is added, the status defaults to ENABLED.',
         },
         manual_cpv: { _oneof: 'campaignBiddingStrategy' },
         bidding_strategy_type: {
@@ -425,7 +423,7 @@ module.exports = {
                 },
             ],
             _description:
-                'The type of bidding strategy.\n\nA bidding strategy can be created by setting either the bidding scheme to\ncreate a standard bidding strategy or the `bidding_strategy` field to\ncreate a portfolio bidding strategy.\n\nThis field is read-only.',
+                'The type of bidding strategy. A bidding strategy can be created by setting either the bidding scheme to create a standard bidding strategy or the <code>bidding_strategy</code> field to create a portfolio bidding strategy. This field is read-only.',
         },
         dynamic_search_ads_setting: {
             language_code: {
@@ -435,7 +433,7 @@ module.exports = {
             domain_name: {
                 _type: 'string',
                 _description:
-                    'The Internet domain name that this setting represents, e.g., "google.com"\nor "www.google.com".',
+                    'The Internet domain name that this setting represents, e.g., "google.com" or "www.google.com".',
             },
             use_supplied_urls_only: {
                 _type: 'boolean',
@@ -446,7 +444,7 @@ module.exports = {
         name: {
             _type: 'string',
             _description:
-                'The name of the campaign.\n\nThis field is required and should not be empty when creating new\ncampaigns.\n\nIt must not contain any null (code point 0x0), NL line feed\n(code point 0xA) or carriage return (code point 0xD) characters.',
+                'The name of the campaign. This field is required and should not be empty when creating new campaigns. It must not contain any null (code point 0x0), NL line feed (code point 0xA) or carriage return (code point 0xD) characters.',
         },
         ad_serving_optimization_status: {
             _type: 'enum',
@@ -492,20 +490,20 @@ module.exports = {
         url_custom_parameters: {
             _type: 'array',
             _description:
-                'The list of mappings used to substitute custom parameter tags in a\n`tracking_url_template`, `final_urls`, or `mobile_final_urls`.',
+                'The list of mappings used to substitute custom parameter tags in a <code>tracking_url_template</code>, <code>final_urls</code>, or <code>mobile_final_urls</code>.',
         },
         maximize_conversion_value: {
             target_roas: {
                 _type: 'double',
                 _description:
-                    'The target return on ad spend (ROAS) option. If set, the bid strategy will\nmaximize revenue while averaging the target return on ad spend. If the\ntarget ROAS is high, the bid strategy may not be able to spend the full\nbudget. If the target ROAS is not set, the bid strategy will aim to\nachieve the highest possible ROAS for the budget.',
+                    'The target return on ad spend (ROAS) option. If set, the bid strategy will maximize revenue while averaging the target return on ad spend. If the target ROAS is high, the bid strategy may not be able to spend the full budget. If the target ROAS is not set, the bid strategy will aim to achieve the highest possible ROAS for the budget.',
             },
             _oneof: 'campaignBiddingStrategy',
         },
         final_url_suffix: {
             _type: 'string',
             _description:
-                'Suffix used to append query parameters to landing pages that are served\nwith parallel tracking.',
+                'Suffix used to append query parameters to landing pages that are served with parallel tracking.',
         },
         geo_target_type_setting: {
             negative_geo_target_type: {
@@ -553,7 +551,7 @@ module.exports = {
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the campaign.\nCampaign resource names have the form:\n\n`customers/{customer_id}/campaigns/{campaign_id}`',
+                'The resource name of the campaign. Campaign resource names have the form: <code>customers/{customer_id}/campaigns/{campaign_id}</code>',
         },
         frequency_caps: {
             _type: 'array',
@@ -578,7 +576,7 @@ module.exports = {
         tracking_url_template: { _type: 'string', _description: 'The URL template for constructing a tracking URL.' },
         start_date: {
             _type: 'string',
-            _description: 'The date when campaign started.\n\nThis field must not be used in WHERE clauses.',
+            _description: 'The date when campaign started. This field must not be used in WHERE clauses.',
         },
         manual_cpm: { _oneof: 'campaignBiddingStrategy' },
         target_cpm: { _oneof: 'campaignBiddingStrategy' },
@@ -602,7 +600,7 @@ module.exports = {
                 },
             ],
             _description:
-                'The primary serving target for ads within the campaign.\nThe targeting options can be refined in `network_settings`.\n\nThis field is required and should not be empty when creating new\ncampaigns.\n\nCan be set only when creating campaigns.\nAfter the campaign is created, the field can not be changed.',
+                'The primary serving target for ads within the campaign. The targeting options can be refined in <code>network_settings</code>. This field is required and should not be empty when creating new campaigns. Can be set only when creating campaigns. After the campaign is created, the field can not be changed.',
         },
         hotel_setting: { hotel_center_id: { _type: 'int64', _description: 'The linked Hotel Center account.' } },
     },

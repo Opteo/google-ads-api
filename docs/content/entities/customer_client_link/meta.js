@@ -28,13 +28,13 @@ module.exports = {
         resource_name: {
             _type: 'string',
             _description:
-                'Name of the resource.\nCustomerClientLink resource names have the form:\n\n`customers/{customer_id}/customerClientLinks/{client_customer_id}~{manager_link_id}`',
+                'Name of the resource. CustomerClientLink resource names have the form: <code>customers/{customer_id}/customerClientLinks/{client_customer_id}~{manager_link_id}</code>',
         },
         client_customer: { _type: 'string', _description: 'The client customer linked to this customer.' },
         hidden: {
             _type: 'boolean',
             _description:
-                'The visibility of the link. Users can choose whether or not to see hidden\nlinks in the AdWords UI.\nDefault value is false',
+                'The visibility of the link. Users can choose whether or not to see hidden links in the AdWords UI. Default value is false',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

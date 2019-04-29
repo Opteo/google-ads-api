@@ -15,12 +15,12 @@ module.exports = {
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the Keyword Plan ad group keyword.\nKeywordPlanKeyword resource names have the form:\n\n`customers/{customer_id}/keywordPlanKeywords/{kp_ad_group_keyword_id}`',
+                'The resource name of the Keyword Plan ad group keyword. KeywordPlanKeyword resource names have the form: <code>customers/{customer_id}/keywordPlanKeywords/{kp_ad_group_keyword_id}</code>',
         },
         cpc_bid_micros: {
             _type: 'int64',
             _description:
-                'A keyword level max cpc bid in micros, in the account currency, that\noverrides the keyword plan ad group cpc bid.',
+                'A keyword level max cpc bid in micros, in the account currency, that overrides the keyword plan ad group cpc bid.',
         },
         keyword_plan_ad_group: {
             _type: 'string',

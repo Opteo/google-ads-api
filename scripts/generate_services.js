@@ -5,27 +5,47 @@ const snakeCase = require('lodash.snakecase')
 const endsWith = require('lodash.endswith')
 const get = require('lodash.get')
 
+const Promise = require('bluebird')
+
+var TurndownService = require('turndown')
+TurndownService.prototype.escape = t => t
+var turndownService = new TurndownService()
+
+
+const showdown = require('showdown')
+showdown.setOption('literalMidWordUnderscores', true)
+const converter = new showdown.Converter()
+
+
+const sanitiseHtml = (gg) => {
+    gg = turndownService.turndown(gg)
+    const result = converter.makeHtml(gg);
+
+    // remove <p> tags
+    return result.substring(3, result.length - 4)
+}
+
 require('dotenv').config()
 const { GoogleAdsApi } = require("../build")
 
 const client = new GoogleAdsApi({
     client_id: process.env.GADS_CLIENT_ID,
-    client_secret: process.env.GADS_CLIENT_SECRET ,
-    developer_token: process.env.GADS_DEVELOPER_TOKEN ,
+    client_secret: process.env.GADS_CLIENT_SECRET,
+    developer_token: process.env.GADS_DEVELOPER_TOKEN,
 })
 
 
-const customer =  client.Customer({
-    customer_account_id: process.env.GADS_CID ,
+const customer = client.Customer({
+    customer_account_id: process.env.GADS_CID,
     login_customer_id: process.env.GADS_LOGIN_CUSTOMER_ID,
-    refresh_token: process.env.GADS_REFRESH_TOKEN ,
+    refresh_token: process.env.GADS_REFRESH_TOKEN,
 })
 
 
-const customer_scary =  client.Customer({
-    customer_account_id: process.env.GADS_CID_WITH_METRICS ,
+const customer_scary = client.Customer({
+    customer_account_id: process.env.GADS_CID_WITH_METRICS,
     login_customer_id: process.env.GADS_LOGIN_CUSTOMER_ID_WITH_METRICS,
-    refresh_token: process.env.GADS_REFRESH_TOKEN_WITH_METRICS ,
+    refresh_token: process.env.GADS_REFRESH_TOKEN_WITH_METRICS,
 })
 
 const log = obj => {
@@ -37,7 +57,6 @@ const capitalise = s => {
     return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
-var Promise = require('bluebird')
 var execP = Promise.promisify(require('child_process').exec)
 
 const service_template_file = fs.readFileSync(__dirname + '/template_service.hbs', 'utf-8')
@@ -71,7 +90,8 @@ const readme_object_compiler = template(fs.readFileSync(__dirname + '/template_r
 
 const method_compilers = {}
 
-;(['get', 'list', 'create', 'update', 'delete']).forEach(method => {
+;
+(['get', 'list', 'create', 'update', 'delete']).forEach(method => {
     method_compilers[method] = template(fs.readFileSync(__dirname + `/template_readme_${method}.hbs`, 'utf-8'), {
         interpolate: /{{([\s\S]+?)}}/g,
     })
@@ -80,7 +100,7 @@ const method_compilers = {}
 const $RefParser = require('json-schema-ref-parser')
 
 const raw_schema = require('./schema.json')
-// TODO: get this from google-ads-node
+    // TODO: get this from google-ads-node
 const raw_compiled_services = require('./compiled_resources.json')
 
 // console.log(raw_compiled_services)
@@ -91,7 +111,7 @@ const raw_compiled_services = require('./compiled_resources.json')
 
 const compiled_resources =
     raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v1.nested.resources.nested
-// raw_compiled_services.nested.
+    // raw_compiled_services.nested.
 
 // console.log(compiled_resources)
 const references = raw_schema.schemas
@@ -347,7 +367,9 @@ async function compileService(entity, schema) {
             if (_new_object._type === 'object') {
                 new_obj[snakeCase(key)] = unroll(obj[key].properties, key)
             } else {
-                new_obj[snakeCase(key)] = { ..._new_object, _description: obj[key].description }
+                const markdown_description = sanitiseHtml(obj[key].description)
+
+                new_obj[snakeCase(key)] = {..._new_object, _description: markdown_description }
             }
 
 
@@ -368,8 +390,8 @@ async function compileService(entity, schema) {
         const oneof_counts = {}
         Object.keys(new_obj).forEach(just_created_child_key => {
             const just_created_child = new_obj[just_created_child_key]
-            if(just_created_child._oneof){
-                if(!oneof_counts[just_created_child._oneof]){
+            if (just_created_child._oneof) {
+                if (!oneof_counts[just_created_child._oneof]) {
                     oneof_counts[just_created_child._oneof] = 0
                 }
                 oneof_counts[just_created_child._oneof]++
@@ -378,16 +400,16 @@ async function compileService(entity, schema) {
         })
 
         Object.keys(oneof_counts).forEach(oneof_type => {
-            if(oneof_counts[oneof_type] > 1){
+            if (oneof_counts[oneof_type] > 1) {
                 return
             }
 
             // remove any _oneof keys from this child since they are useless
             Object.keys(new_obj).forEach(just_created_child_key => {
-                if(oneof_type === new_obj[just_created_child_key]._oneof){
+                if (oneof_type === new_obj[just_created_child_key]._oneof) {
                     delete new_obj[just_created_child_key]._oneof
                 }
-                
+
             })
         })
 
@@ -444,7 +466,7 @@ async function compileService(entity, schema) {
         meta.methods = ['get', 'list', 'create', 'update', 'delete']
 
 
-        
+
     } else {
         compiled_service = service_immutable_compiler({
             RESOURCE_URL_NAME: resource_url_name,
@@ -471,32 +493,29 @@ async function compileService(entity, schema) {
     try {
         listed = fs.readJsonSync(cache_path)
 
-    }
-    catch {
+    } catch {
 
         try {
             listed = await customer[camelCase(resource_url_name)].list({
-                limit : 1
+                limit: 1
             })
             fs.writeJsonSync(cache_path, listed)
-        }
-        catch(e) {
+        } catch (e) {
             console.error(e)
         }
-        
+
     }
     let scary = false
 
-    if(listed.length === 0){
+    if (listed.length === 0) {
         try {
             listed = await customer_scary[camelCase(resource_url_name)].list({
-                limit : 1
+                limit: 1
             })
-            scary = listed.length > 0 
+            scary = listed.length > 0
             console.log(listed.length)
             fs.writeJsonSync(cache_path, listed)
-        }
-        catch(e) {
+        } catch (e) {
             console.error(e)
         }
     }
@@ -506,26 +525,26 @@ async function compileService(entity, schema) {
     let example_object_get = '// Todo: add example get() return here'
     let example_resource_name = `customers/1234567890/${ resource_url_name }/123123123`
 
-    if(listed.length > 0){
+    if (listed.length > 0) {
         // just a tiny bit of sanitization
         Object.keys(listed[0]).forEach(key => {
-            if(listed[0][key].name && !entity.toLowerCase().includes('constant')){
+            if (listed[0][key].name && !entity.toLowerCase().includes('constant')) {
                 listed[0][key].name = `My ${key.split('_').join(' ')}`
             }
-            if(listed[0][key].descriptive_name && !entity.toLowerCase().includes('constant')){
+            if (listed[0][key].descriptive_name && !entity.toLowerCase().includes('constant')) {
                 listed[0][key].descriptive_name = `My ${key.split('_').join(' ')}`
             }
         })
         example_object_list = JSON.stringify(listed[0])
-        if(get(listed[0], `${ent}.resource_name`)){
+        if (get(listed[0], `${ent}.resource_name`)) {
             example_resource_name = listed[0][ent].resource_name
         }
-        if(get(listed[0], `${ent}`)){
+        if (get(listed[0], `${ent}`)) {
             example_object_get = JSON.stringify(listed[0][ent])
         }
     }
 
-    if(!scary){
+    if (!scary) {
         // return
     }
 
@@ -546,7 +565,7 @@ async function compileService(entity, schema) {
         const compiled_md = method_compilers[method]({
             ENTITY: entity,
             ENTITY_SNAKECASE: ent,
-            RESOURCE_URL_NAME : resource_url_name,
+            RESOURCE_URL_NAME: resource_url_name,
             EXAMPLE_OBJECT_LIST: example_object_list,
             EXAMPLE_OBJECT_GET: example_object_get,
             EXAMPLE_RESOURCE_NAME: example_resource_name
@@ -554,17 +573,17 @@ async function compileService(entity, schema) {
 
         fs.writeFileSync(docs_file_path + `${method}.md`, compiled_md)
     })
-    
+
 
 
     const existing_service = fs.readFileSync(file_path)
 
-    if(!existing_service.toString().slice(0, 20).includes('manual_mode')){
+    if (!existing_service.toString().slice(0, 20).includes('manual_mode')) {
         fs.writeFileSync(file_path, compiled_service)
     }
-    
 
-    
+
+
     if (!entity.toLowerCase().includes('constant')) {
         // const compiled_service_test = service_test_compiler({
         //     RESOURCE_URL_NAME: resource_url_name,
@@ -589,7 +608,8 @@ async function compileService(entity, schema) {
 
 }
 
-;(async () => {
+;
+(async() => {
     schema = await $RefParser.dereference(__dirname + '/schema.json', {
         resolve: { gads: myResolver },
     })

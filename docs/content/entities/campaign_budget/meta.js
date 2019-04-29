@@ -4,21 +4,21 @@ module.exports = {
         amount_micros: {
             _type: 'int64',
             _description:
-                'The amount of the budget, in the local currency for the account.\nAmount is specified in micros, where one million is equivalent to one\ncurrency unit.',
+                'The amount of the budget, in the local currency for the account. Amount is specified in micros, where one million is equivalent to one currency unit.',
         },
         explicitly_shared: {
             _type: 'boolean',
             _description:
-                "Specifies whether the budget is explicitly shared. Defaults to true if\nunspecified in a create operation.\n\nIf true, the budget was created with the purpose of sharing\nacross one or more campaigns.\n\nIf false, the budget was created with the intention of only being used\nwith a single campaign. The budget's name and status will stay in sync\nwith the campaign's name and status. Attempting to share the budget with a\nsecond campaign will result in an error.\n\nA non-shared budget can become an explicitly shared. The same operation\nmust also assign the budget a name.\n\nA shared campaign budget can never become non-shared.",
+                "Specifies whether the budget is explicitly shared. Defaults to true if unspecified in a create operation. If true, the budget was created with the purpose of sharing across one or more campaigns. If false, the budget was created with the intention of only being used with a single campaign. The budget's name and status will stay in sync with the campaign's name and status. Attempting to share the budget with a second campaign will result in an error. A non-shared budget can become an explicitly shared. The same operation must also assign the budget a name. A shared campaign budget can never become non-shared.",
         },
         reference_count: {
             _type: 'int64',
-            _description: 'The number of campaigns actively using the budget.\n\nThis field is read-only.',
+            _description: 'The number of campaigns actively using the budget. This field is read-only.',
         },
         recommended_budget_amount_micros: {
             _type: 'int64',
             _description:
-                'The recommended budget amount. If no recommendation is available, this will\nbe set to the budget amount.\nAmount is specified in micros, where one million is equivalent to one\ncurrency unit.\n\nThis field is read-only.',
+                'The recommended budget amount. If no recommendation is available, this will be set to the budget amount. Amount is specified in micros, where one million is equivalent to one currency unit. This field is read-only.',
         },
         status: {
             _type: 'enum',
@@ -33,7 +33,7 @@ module.exports = {
         has_recommended_budget: {
             _type: 'boolean',
             _description:
-                'Indicates whether there is a recommended budget for this campaign budget.\n\nThis field is read-only.',
+                'Indicates whether there is a recommended budget for this campaign budget. This field is read-only.',
         },
         period: {
             _type: 'enum',
@@ -49,27 +49,27 @@ module.exports = {
         name: {
             _type: 'string',
             _description:
-                "The name of the campaign budget.\n\nWhen creating a campaign budget through CampaignBudgetService, every\nexplicitly shared campaign budget must have a non-null, non-empty name.\nCampaign budgets that are not explicitly shared derive their name from the\nattached campaign's name.\n\nThe length of this string must be between 1 and 255, inclusive,\nin UTF-8 bytes, (trimmed).",
+                "The name of the campaign budget. When creating a campaign budget through CampaignBudgetService, every explicitly shared campaign budget must have a non-null, non-empty name. Campaign budgets that are not explicitly shared derive their name from the attached campaign's name. The length of this string must be between 1 and 255, inclusive, in UTF-8 bytes, (trimmed).",
         },
         id: {
             _type: 'int64',
             _description:
-                'The ID of the campaign budget.\n\nA campaign budget is created using the CampaignBudgetService create\noperation and is assigned a budget ID. A budget ID can be shared across\ndifferent campaigns; the system will then allocate the campaign budget\namong different campaigns to get optimum results.',
+                'The ID of the campaign budget. A campaign budget is created using the CampaignBudgetService create operation and is assigned a budget ID. A budget ID can be shared across different campaigns; the system will then allocate the campaign budget among different campaigns to get optimum results.',
         },
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the campaign budget.\nCampaign budget resource names have the form:\n\n`customers/{customer_id}/campaignBudgets/{budget_id}`',
+                'The resource name of the campaign budget. Campaign budget resource names have the form: <code>customers/{customer_id}/campaignBudgets/{budget_id}</code>',
         },
         recommended_budget_estimated_change_weekly_views: {
             _type: 'int64',
             _description:
-                'The estimated change in weekly views if the recommended budget is applied.\n\nThis field is read-only.',
+                'The estimated change in weekly views if the recommended budget is applied. This field is read-only.',
         },
         recommended_budget_estimated_change_weekly_interactions: {
             _type: 'int64',
             _description:
-                'The estimated change in weekly interactions if the recommended budget is\napplied.\n\nThis field is read-only.',
+                'The estimated change in weekly interactions if the recommended budget is applied. This field is read-only.',
         },
         delivery_method: {
             _type: 'enum',
@@ -87,17 +87,17 @@ module.exports = {
                 },
             ],
             _description:
-                'The delivery method that determines the rate at which the campaign budget\nis spent.\n\nDefaults to STANDARD if unspecified in a create operation.',
+                'The delivery method that determines the rate at which the campaign budget is spent. Defaults to STANDARD if unspecified in a create operation.',
         },
         total_amount_micros: {
             _type: 'int64',
             _description:
-                'The lifetime amount of the budget, in the local currency for the account.\nAmount is specified in micros, where one million is equivalent to one\ncurrency unit.',
+                'The lifetime amount of the budget, in the local currency for the account. Amount is specified in micros, where one million is equivalent to one currency unit.',
         },
         recommended_budget_estimated_change_weekly_clicks: {
             _type: 'int64',
             _description:
-                'The estimated change in weekly clicks if the recommended budget is applied.\n\nThis field is read-only.',
+                'The estimated change in weekly clicks if the recommended budget is applied. This field is read-only.',
         },
         type: {
             _type: 'enum',
@@ -112,7 +112,7 @@ module.exports = {
         recommended_budget_estimated_change_weekly_cost_micros: {
             _type: 'int64',
             _description:
-                'The estimated change in weekly cost in micros if the recommended budget is\napplied. One million is equivalent to one currency unit.\n\nThis field is read-only.',
+                'The estimated change in weekly cost in micros if the recommended budget is applied. One million is equivalent to one currency unit. This field is read-only.',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

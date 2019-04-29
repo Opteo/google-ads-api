@@ -6,7 +6,7 @@ module.exports = {
         bid_modifier: {
             _type: 'double',
             _description:
-                'The modifier for the bid when the criterion matches. The modifier must be\nin the range: 0.1 - 10.0. Most targetable criteria types support modifiers.',
+                'The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers.',
         },
         type: {
             _type: 'enum',
@@ -70,13 +70,13 @@ module.exports = {
         percent_cpc_bid_micros: {
             _type: 'int64',
             _description:
-                'The CPC bid amount, expressed as a fraction of the advertised price\nfor some good or service. The valid range for the fraction is [0,1) and the\nvalue stored here is 1,000,000 * [fraction].',
+                'The CPC bid amount, expressed as a fraction of the advertised price for some good or service. The valid range for the fraction is [0,1) and the value stored here is 1,000,000 * [fraction].',
         },
         listing_group: {
             parent_ad_group_criterion: {
                 _type: 'string',
                 _description:
-                    'Resource name of ad group criterion which is the parent listing group\nsubdivision. Null for the root group.',
+                    'Resource name of ad group criterion which is the parent listing group subdivision. Null for the root group.',
             },
             type: {
                 _type: 'enum',
@@ -100,12 +100,12 @@ module.exports = {
                     id: {
                         _type: 'int64',
                         _description:
-                            'ID of the product bidding category.\n\nThis ID is equivalent to the google_product_category ID as described in\nthis article: https://support.google.com/merchants/answer/6324436.',
+                            'ID of the product bidding category. This ID is equivalent to the google_product_category ID as described in this article: https://support.google.com/merchants/answer/6324436.',
                     },
                     country_code: {
                         _type: 'string',
                         _description:
-                            'Two-letter upper-case country code of the product bidding category. It must\nmatch the campaign.shopping_setting.sales_country field.',
+                            'Two-letter upper-case country code of the product bidding category. It must match the campaign.shopping_setting.sales_country field.',
                     },
                     level: {
                         _type: 'enum',
@@ -254,18 +254,18 @@ module.exports = {
             criterion_name: {
                 _type: 'string',
                 _description:
-                    'The name of the criterion that is defined by this parameter. The name value\nwill be used for identifying, sorting and filtering criteria with this type\nof parameters.\n\nThis field is required for CREATE operations and is prohibited on UPDATE\noperations.',
+                    'The name of the criterion that is defined by this parameter. The name value will be used for identifying, sorting and filtering criteria with this type of parameters. This field is required for CREATE operations and is prohibited on UPDATE operations.',
             },
             conditions: {
                 _type: 'array',
                 _description:
-                    'Conditions, or logical expressions, for webpage targeting. The list of\nwebpage targeting conditions are and-ed together when evaluated\nfor targeting.\n\nThis field is required for CREATE operations and is prohibited on UPDATE\noperations.',
+                    'Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting. This field is required for CREATE operations and is prohibited on UPDATE operations.',
             },
             _oneof: 'criterion',
         },
         cpc_bid_micros: { _type: 'int64', _description: 'The CPC (cost-per-click) bid.' },
         placement: {
-            url: { _type: 'string', _description: 'URL of the placement.\n\nFor example, "http://www.domain.com".' },
+            url: { _type: 'string', _description: 'URL of the placement. For example, "http://www.domain.com".' },
             _oneof: 'criterion',
         },
         status: {
@@ -286,13 +286,13 @@ module.exports = {
         url_custom_parameters: {
             _type: 'array',
             _description:
-                'The list of mappings used to substitute custom parameter tags in a\n`tracking_url_template`, `final_urls`, or `mobile_final_urls`.',
+                'The list of mappings used to substitute custom parameter tags in a <code>tracking_url_template</code>, <code>final_urls</code>, or <code>mobile_final_urls</code>.',
         },
         final_url_suffix: { _type: 'string', _description: 'URL template for appending params to final URL.' },
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the ad group criterion.\nAd group criterion resource names have the form:\n\n`customers/{customer_id}/adGroupCriteria/{ad_group_id}~{criterion_id}`',
+                'The resource name of the ad group criterion. Ad group criterion resource names have the form: <code>customers/{customer_id}/adGroupCriteria/{ad_group_id}~{criterion_id}</code>',
         },
         approval_status: {
             _type: 'enum',
@@ -369,7 +369,7 @@ module.exports = {
             quality_score: {
                 _type: 'int32',
                 _description:
-                    'The quality score.\n\nThis field may not be populated if Google does not have enough\ninformation to determine a value.',
+                    'The quality score. This field may not be populated if Google does not have enough information to determine a value.',
             },
             search_predicted_ctr: {
                 _type: 'enum',
@@ -387,10 +387,7 @@ module.exports = {
             },
         },
         tracking_url_template: { _type: 'string', _description: 'The URL template for constructing a tracking URL.' },
-        criterion_id: {
-            _type: 'int64',
-            _description: 'The ID of the criterion.\n\nThis field is ignored for mutates.',
-        },
+        criterion_id: { _type: 'int64', _description: 'The ID of the criterion. This field is ignored for mutates.' },
         age_range: {
             type: {
                 _type: 'enum',
@@ -442,7 +439,7 @@ module.exports = {
             path: {
                 _type: 'array',
                 _description:
-                    'The category to target or exclude. Each subsequent element in the array\ndescribes a more specific sub-category. For example,\n"Pets & Animals", "Pets", "Dogs" represents the "Pets & Animals/Pets/Dogs"\ncategory.',
+                    'The category to target or exclude. Each subsequent element in the array describes a more specific sub-category. For example, "Pets &amp; Animals", "Pets", "Dogs" represents the "Pets &amp; Animals/Pets/Dogs" category.',
             },
             _oneof: 'criterion',
         },
@@ -463,7 +460,7 @@ module.exports = {
         negative: {
             _type: 'boolean',
             _description:
-                'Whether to target (`false`) or exclude (`true`) the criterion.\n\nThis field is immutable. To switch a criterion from positive to negative,\nremove then re-add it.',
+                'Whether to target (<code>false</code>) or exclude (<code>true</code>) the criterion. This field is immutable. To switch a criterion from positive to negative, remove then re-add it.',
         },
         app_payment_model: {
             type: {
@@ -531,7 +528,7 @@ module.exports = {
             app_id: {
                 _type: 'string',
                 _description:
-                    'A string that uniquely identifies a mobile application to Google Ads API.\nThe format of this string is "{platform}-{platform_native_id}", where\nplatform is "1" for iOS apps and "2" for Android apps, and where\nplatform_native_id is the mobile application identifier native to the\ncorresponding platform.\nFor iOS, this native identifier is the 9 digit string that appears at the\nend of an App Store URL (e.g., "476943146" for "Flood-It! 2" whose App\nStore link is http://itunes.apple.com/us/app/flood-it!-2/id476943146).\nFor Android, this native identifier is the application\'s package name\n(e.g., "com.labpixies.colordrips" for "Color Drips" given Google Play link\nhttps://play.google.com/store/apps/details?id=com.labpixies.colordrips).\nA well formed app id for Google Ads API would thus be "1-476943146" for iOS\nand "2-com.labpixies.colordrips" for Android.\nThis field is required and must be set in CREATE operations.',
+                    'A string that uniquely identifies a mobile application to Google Ads API. The format of this string is "{platform}-{platform_native_id}", where platform is "1" for iOS apps and "2" for Android apps, and where platform_native_id is the mobile application identifier native to the corresponding platform. For iOS, this native identifier is the 9 digit string that appears at the end of an App Store URL (e.g., "476943146" for "Flood-It! 2" whose App Store link is http://itunes.apple.com/us/app/flood-it!-2/id476943146). For Android, this native identifier is the application\'s package name (e.g., "com.labpixies.colordrips" for "Color Drips" given Google Play link https://play.google.com/store/apps/details?id=com.labpixies.colordrips). A well formed app id for Google Ads API would thus be "1-476943146" for iOS and "2-com.labpixies.colordrips" for Android. This field is required and must be set in CREATE operations.',
             },
             _oneof: 'criterion',
         },
@@ -541,7 +538,7 @@ module.exports = {
         },
         final_urls: {
             _type: 'array',
-            _description: 'The list of possible final URLs after all cross-domain redirects for the\nad.',
+            _description: 'The list of possible final URLs after all cross-domain redirects for the ad.',
         },
         effective_cpc_bid_micros: { _type: 'int64', _description: 'The effective CPC (cost-per-click) bid.' },
         effective_cpm_bid_micros: {
@@ -574,27 +571,27 @@ module.exports = {
             first_page_cpc_micros: {
                 _type: 'int64',
                 _description:
-                    'The estimate of the CPC bid required for ad to be shown on first\npage of search results.',
+                    'The estimate of the CPC bid required for ad to be shown on first page of search results.',
             },
             first_position_cpc_micros: {
                 _type: 'int64',
                 _description:
-                    'The estimate of the CPC bid required for ad to be displayed in first\nposition, at the top of the first page of search results.',
+                    'The estimate of the CPC bid required for ad to be displayed in first position, at the top of the first page of search results.',
             },
             estimated_add_clicks_at_first_position_cpc: {
                 _type: 'int64',
                 _description:
-                    'Estimate of how many clicks per week you might get by changing your\nkeyword bid to the value in first_position_cpc_micros.',
+                    'Estimate of how many clicks per week you might get by changing your keyword bid to the value in first_position_cpc_micros.',
             },
             estimated_add_cost_at_first_position_cpc: {
                 _type: 'int64',
                 _description:
-                    'Estimate of how your cost per week might change when changing your\nkeyword bid to the value in first_position_cpc_micros.',
+                    'Estimate of how your cost per week might change when changing your keyword bid to the value in first_position_cpc_micros.',
             },
             top_of_page_cpc_micros: {
                 _type: 'int64',
                 _description:
-                    'The estimate of the CPC bid required for ad to be displayed at the top\nof the first page of search results.',
+                    'The estimate of the CPC bid required for ad to be displayed at the top of the first page of search results.',
             },
         },
     },

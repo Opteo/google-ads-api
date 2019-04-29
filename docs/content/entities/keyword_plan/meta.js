@@ -4,12 +4,12 @@ module.exports = {
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the Keyword Planner plan.\nKeywordPlan resource names have the form:\n\n`customers/{customer_id}/keywordPlans/{kp_plan_id}`',
+                'The resource name of the Keyword Planner plan. KeywordPlan resource names have the form: <code>customers/{customer_id}/keywordPlans/{kp_plan_id}</code>',
         },
         name: {
             _type: 'string',
             _description:
-                'The name of the keyword plan.\n\nThis field is required and should not be empty when creating new keyword\nplans.',
+                'The name of the keyword plan. This field is required and should not be empty when creating new keyword plans.',
         },
         forecast_period: {
             date_interval: {

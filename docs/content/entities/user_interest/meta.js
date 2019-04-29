@@ -8,7 +8,7 @@ module.exports = {
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the user interest.\nUser interest resource names have the form:\n\n`customers/{customer_id}/userInterests/{user_interest_id}`',
+                'The resource name of the user interest. User interest resource names have the form: <code>customers/{customer_id}/userInterests/{user_interest_id}</code>',
         },
         availabilities: { _type: 'array', _description: 'Availability information of the user interest.' },
         user_interest_parent: { _type: 'string', _description: 'The parent of the user interest.' },

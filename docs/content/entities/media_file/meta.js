@@ -29,12 +29,12 @@ module.exports = {
         media_bundle: { data: { _type: 'byte', _description: 'Raw zipped data.' }, _oneof: 'mediatype' },
         source_url: {
             _type: 'string',
-            _description: 'The URL of where the original media file was downloaded from (or a file\nname).',
+            _description: 'The URL of where the original media file was downloaded from (or a file name).',
         },
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the media file.\nMedia file resource names have the form:\n\n`customers/{customer_id}/mediaFiles/{media_file_id}`',
+                'The resource name of the media file. Media file resource names have the form: <code>customers/{customer_id}/mediaFiles/{media_file_id}</code>',
         },
         video: {
             youtube_video_id: { _type: 'string', _description: 'The YouTube video ID (as seen in YouTube URLs).' },
@@ -42,12 +42,12 @@ module.exports = {
             advertising_id_code: {
                 _type: 'string',
                 _description:
-                    'The Advertising Digital Identification code for this video, as defined by\nthe American Association of Advertising Agencies, used mainly for\ntelevision commercials.',
+                    'The Advertising Digital Identification code for this video, as defined by the American Association of Advertising Agencies, used mainly for television commercials.',
             },
             isci_code: {
                 _type: 'string',
                 _description:
-                    'The Industry Standard Commercial Identifier code for this video, used\nmainly for television commercials.',
+                    'The Industry Standard Commercial Identifier code for this video, used mainly for television commercials.',
             },
             _oneof: 'mediatype',
         },
@@ -59,7 +59,7 @@ module.exports = {
         name: {
             _type: 'string',
             _description:
-                'The name of the media file. The name can be used by clients to help\nidentify previously uploaded media.',
+                'The name of the media file. The name can be used by clients to help identify previously uploaded media.',
         },
         type: {
             _type: 'enum',

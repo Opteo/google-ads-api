@@ -4,7 +4,7 @@ module.exports = {
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the ad.\nAd group ad resource names have the form:\n\n`customers/{customer_id}/adGroupAds/{ad_group_id}~{ad_id}`',
+                'The resource name of the ad. Ad group ad resource names have the form: <code>customers/{customer_id}/adGroupAds/{ad_group_id}~{ad_id}</code>',
         },
         ad_strength: {
             _type: 'enum',
@@ -42,32 +42,32 @@ module.exports = {
                     url_collection_id: {
                         _type: 'string',
                         _description:
-                            'Identifies the url collection in the ad.url_collections field. If not set\nthe url defaults to final_url.',
+                            'Identifies the url collection in the ad.url_collections field. If not set the url defaults to final_url.',
                     },
                     text_color: {
                         _type: 'string',
                         _description:
-                            'Text color for the display-call-to-action in hexadecimal, e.g. #ffffff for\nwhite.',
+                            'Text color for the display-call-to-action in hexadecimal, e.g. #ffffff for white.',
                     },
                 },
                 product_videos: {
                     _type: 'array',
                     _description:
-                        'Product videos. Up to 7 videos are supported. At least one product video\nor a marketing image must be specified.',
+                        'Product videos. Up to 7 videos are supported. At least one product video or a marketing image must be specified.',
                 },
                 product_images: { _type: 'array', _description: 'Product images. Up to 15 images are supported.' },
                 marketing_image_headline: { _type: 'string', _description: 'Headline of the marketing image.' },
                 marketing_image: {
                     _type: 'string',
                     _description:
-                        'The MediaFile resource name of the marketing image. Valid image types are\nGIF, JPEG and PNG. The image must either be landscape with a minimum size\nof 600x314 pixels and aspect ratio of 600:314 (+-1%) or square with a\nminimum size of 300x300 pixels and aspect ratio of 1:1 (+-1%)',
+                        'The MediaFile resource name of the marketing image. Valid image types are GIF, JPEG and PNG. The image must either be landscape with a minimum size of 600x314 pixels and aspect ratio of 600:314 (+-1%) or square with a minimum size of 300x300 pixels and aspect ratio of 1:1 (+-1%)',
                 },
                 teaser: {
                     description: { _type: 'string', _description: 'Description of the teaser.' },
                     logo_image: {
                         _type: 'string',
                         _description:
-                            'The MediaFile resource name of the logo image. Valid image types are GIF,\nJPEG and PNG. The minimum size is 144x144 pixels and the aspect ratio must\nbe 1:1 (+-1%).',
+                            'The MediaFile resource name of the logo image. Valid image types are GIF, JPEG and PNG. The minimum size is 144x144 pixels and the aspect ratio must be 1:1 (+-1%).',
                     },
                     business_name: { _type: 'string', _description: 'Business name of the advertiser.' },
                     headline: { _type: 'string', _description: 'Headline of the teaser.' },
@@ -75,13 +75,13 @@ module.exports = {
                 header_image: {
                     _type: 'string',
                     _description:
-                        'The MediaFile resource name of the header image. Valid image types are GIF,\nJPEG and PNG. The minimum size is 300x100 pixels and the aspect ratio must\nbe between 3:1 and 5:1 (+-1%).',
+                        'The MediaFile resource name of the header image. Valid image types are GIF, JPEG and PNG. The minimum size is 300x100 pixels and the aspect ratio must be between 3:1 and 5:1 (+-1%).',
                 },
                 _oneof: 'adData',
             },
             final_mobile_urls: {
                 _type: 'array',
-                _description: 'The list of possible final mobile URLs after all cross-domain redirects\nfor the ad.',
+                _description: 'The list of possible final mobile URLs after all cross-domain redirects for the ad.',
             },
             expanded_text_ad: {
                 path_1: { _type: 'string', _description: "The text that can appear alongside the ad's displayed URL." },
@@ -98,24 +98,24 @@ module.exports = {
             },
             final_urls: {
                 _type: 'array',
-                _description: 'The list of possible final URLs after all cross-domain redirects for the\nad.',
+                _description: 'The list of possible final URLs after all cross-domain redirects for the ad.',
             },
             id: { _type: 'int64', _description: 'The ID of the ad.' },
             responsive_search_ad: {
                 headlines: {
                     _type: 'array',
                     _description:
-                        'List of text assets for headlines. When the ad serves the headlines will\nbe selected from this list.',
+                        'List of text assets for headlines. When the ad serves the headlines will be selected from this list.',
                 },
                 path_2: {
                     _type: 'string',
                     _description:
-                        'Second part of text that may appear appended to the url displayed in the\nad. This field can only be set when path1 is also set.',
+                        'Second part of text that may appear appended to the url displayed in the ad. This field can only be set when path1 is also set.',
                 },
                 descriptions: {
                     _type: 'array',
                     _description:
-                        'List of text assets for descriptions. When the ad serves the descriptions\nwill be selected from this list.',
+                        'List of text assets for descriptions. When the ad serves the descriptions will be selected from this list.',
                 },
                 path_1: {
                     _type: 'string',
@@ -149,7 +149,7 @@ module.exports = {
             added_by_google_ads: {
                 _type: 'boolean',
                 _description:
-                    'Indicates if this ad was automatically added by Google Ads and not by a\nuser. For example, this could happen when ads are automatically created as\nsuggestions for new ads based on knowledge of how existing ads are\nperforming.',
+                    'Indicates if this ad was automatically added by Google Ads and not by a user. For example, this could happen when ads are automatically created as suggestions for new ads based on knowledge of how existing ads are performing.',
             },
             app_ad: {
                 mandatory_ad_text: {
@@ -169,7 +169,7 @@ module.exports = {
                             { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.' },
                         ],
                         _description:
-                            'The pinned field of the asset. This restricts the asset to only serve\nwithin this field. Multiple assets can be pinned to the same field. An\nasset that is unpinned or pinned to a different field will not serve in a\nfield where some other asset has been pinned.',
+                            'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
                     },
                     text: { _type: 'string', _description: 'Asset text.' },
                 },
@@ -181,7 +181,7 @@ module.exports = {
                 headlines: {
                     _type: 'array',
                     _description:
-                        'List of text assets for headlines. When the ad serves the headlines will\nbe selected from this list.',
+                        'List of text assets for headlines. When the ad serves the headlines will be selected from this list.',
                 },
                 youtube_videos: {
                     _type: 'array',
@@ -190,7 +190,7 @@ module.exports = {
                 descriptions: {
                     _type: 'array',
                     _description:
-                        'List of text assets for descriptions. When the ad serves the descriptions\nwill be selected from this list.',
+                        'List of text assets for descriptions. When the ad serves the descriptions will be selected from this list.',
                 },
                 _oneof: 'adData',
             },
@@ -239,7 +239,7 @@ module.exports = {
                     { s: 'AD_VARIATIONS', description: 'Generated ad variations experiment ad.' },
                 ],
                 _description:
-                    'If this ad is system managed, then this field will indicate the source.\nThis field is read-only.',
+                    'If this ad is system managed, then this field will indicate the source. This field is read-only.',
             },
             shopping_product_ad: { _oneof: 'adData' },
             device_preference: {
@@ -253,18 +253,18 @@ module.exports = {
                     { s: 'OTHER', description: 'Other device types.' },
                 ],
                 _description:
-                    'The device preference for the ad. You can only specify a preference for\nmobile devices. When this preference is set the ad will be preferred over\nother ads when being displayed on a mobile device. The ad can still be\ndisplayed on other device types, e.g. if no other ads are available.\nIf unspecified (no device preference), all devices are targeted.\nThis is only supported by some ad types.',
+                    'The device preference for the ad. You can only specify a preference for mobile devices. When this preference is set the ad will be preferred over other ads when being displayed on a mobile device. The ad can still be displayed on other device types, e.g. if no other ads are available. If unspecified (no device preference), all devices are targeted. This is only supported by some ad types.',
             },
             name: {
                 _type: 'string',
                 _description:
-                    'The name of the ad. This is only used to be able to identify the ad. It\ndoes not need to be unique and does not affect the served ad.',
+                    'The name of the ad. This is only used to be able to identify the ad. It does not need to be unique and does not affect the served ad.',
             },
             legacy_responsive_display_ad: {
                 allow_flexible_color: {
                     _type: 'boolean',
                     _description:
-                        "Advertiser's consent to allow flexible color. When true, the ad may be\nserved with different color if necessary. When false, the ad will be served\nwith the specified colors or a neutral color.\nThe default value is true.\nMust be true if main_color and accent_color are not set.",
+                        "Advertiser's consent to allow flexible color. When true, the ad may be served with different color if necessary. When false, the ad will be served with the specified colors or a neutral color. The default value is true. Must be true if main_color and accent_color are not set.",
                 },
                 marketing_image: {
                     _type: 'string',
@@ -273,12 +273,12 @@ module.exports = {
                 promo_text: {
                     _type: 'string',
                     _description:
-                        "Promotion text used for dyanmic formats of responsive ads. For example\n'Free two-day shipping'.",
+                        "Promotion text used for dyanmic formats of responsive ads. For example 'Free two-day shipping'.",
                 },
                 accent_color: {
                     _type: 'string',
                     _description:
-                        'The accent color of the ad in hexadecimal, e.g. #ffffff for white.\nIf one of main_color and accent_color is set, the other is required as\nwell.',
+                        'The accent color of the ad in hexadecimal, e.g. #ffffff for white. If one of main_color and accent_color is set, the other is required as well.',
                 },
                 logo_image: {
                     _type: 'string',
@@ -287,7 +287,7 @@ module.exports = {
                 main_color: {
                     _type: 'string',
                     _description:
-                        'The main color of the ad in hexadecimal, e.g. #ffffff for white.\nIf one of main_color and accent_color is set, the other is required as\nwell.',
+                        'The main color of the ad in hexadecimal, e.g. #ffffff for white. If one of main_color and accent_color is set, the other is required as well.',
                 },
                 short_headline: { _type: 'string', _description: "The short version of the ad's headline." },
                 description: { _type: 'string', _description: 'The description of the ad.' },
@@ -323,12 +323,12 @@ module.exports = {
             url_collections: {
                 _type: 'array',
                 _description:
-                    'Additional URLs for the ad that are tagged with a unique identifier that\ncan be referenced from other fields in the ad.',
+                    'Additional URLs for the ad that are tagged with a unique identifier that can be referenced from other fields in the ad.',
             },
             url_custom_parameters: {
                 _type: 'array',
                 _description:
-                    'The list of mappings that can be used to substitute custom parameter tags\nin a `tracking_url_template`, `final_urls`, or `mobile_final_urls`.',
+                    'The list of mappings that can be used to substitute custom parameter tags in a <code>tracking_url_template</code>, <code>final_urls</code>, or <code>mobile_final_urls</code>.',
             },
             video_ad: {
                 media_file: { _type: 'string', _description: 'The MediaFile resource to use for the video.' },
@@ -342,12 +342,12 @@ module.exports = {
                     action_headline: {
                         _type: 'string',
                         _description:
-                            'Additional text displayed with the CTA (call-to-action) button to give\ncontext and encourage clicking on the button.',
+                            'Additional text displayed with the CTA (call-to-action) button to give context and encourage clicking on the button.',
                     },
                     action_button_label: {
                         _type: 'string',
                         _description:
-                            "Label on the CTA (call-to-action) button taking the user to the video ad's\nfinal URL.\nRequired for TrueView for action campaigns, optional otherwise.",
+                            "Label on the CTA (call-to-action) button taking the user to the video ad's final URL. Required for TrueView for action campaigns, optional otherwise.",
                     },
                 },
                 _oneof: 'adData',
@@ -388,7 +388,7 @@ module.exports = {
                 name: {
                     _type: 'string',
                     _description:
-                        "The name of the image. If the image was created from a MediaFile, this is\nthe MediaFile's name. If the image was created from bytes, this is empty.",
+                        "The name of the image. If the image was created from a MediaFile, this is the MediaFile's name. If the image was created from bytes, this is empty.",
                 },
                 pixel_height: { _type: 'int64', _description: 'Height in pixels of the full size image.' },
                 _oneof: 'adData',
@@ -424,20 +424,20 @@ module.exports = {
                         },
                     ],
                     _description:
-                        'The call conversion behavior of this call only ad. It can use its own call\nconversion setting, inherit the account level setting, or be disabled.',
+                        'The call conversion behavior of this call only ad. It can use its own call conversion setting, inherit the account level setting, or be disabled.',
                 },
                 description_2: { _type: 'string', _description: "The second line of the ad's description." },
                 disable_call_conversion: {
                     _type: 'boolean',
                     _description:
-                        'Whether to disable call conversion for the creative.\nIf set to `true`, disables call conversions even when `call_tracked` is\n`true`.\nIf `call_tracked` is `false`, this field is ignored.',
+                        'Whether to disable call conversion for the creative. If set to <code>true</code>, disables call conversions even when <code>call_tracked</code> is <code>true</code>. If <code>call_tracked</code> is <code>false</code>, this field is ignored.',
                 },
                 headline_2: { _type: 'string', _description: 'Second headline in the ad.' },
                 business_name: { _type: 'string', _description: 'The business name in the ad.' },
                 call_tracked: {
                     _type: 'boolean',
                     _description:
-                        'Whether to enable call tracking for the creative. Enabling call\ntracking also enables call conversions.',
+                        'Whether to enable call tracking for the creative. Enabling call tracking also enables call conversions.',
                 },
                 phone_number: { _type: 'string', _description: 'The phone number in the ad.' },
                 country_code: { _type: 'string', _description: 'The country code in the ad.' },
@@ -450,7 +450,7 @@ module.exports = {
                 conversion_action: {
                     _type: 'string',
                     _description:
-                        'The conversion action to attribute a call conversion to. If not set a\ndefault conversion action is used. This field only has effect if\ncall_tracked is set to true. Otherwise this field is ignored.',
+                        'The conversion action to attribute a call conversion to. If not set a default conversion action is used. This field only has effect if call_tracked is set to true. Otherwise this field is ignored.',
                 },
                 _oneof: 'adData',
             },
@@ -485,47 +485,47 @@ module.exports = {
                 headlines: {
                     _type: 'array',
                     _description:
-                        'Short format headlines for the ad. The maximum length is 30 characters.\nAt least 1 and max 5 headlines can be specified.',
+                        'Short format headlines for the ad. The maximum length is 30 characters. At least 1 and max 5 headlines can be specified.',
                 },
                 descriptions: {
                     _type: 'array',
                     _description:
-                        'Descriptive texts for the ad. The maximum length is 90 characters. At\nleast 1 and max 5 headlines can be specified.',
+                        'Descriptive texts for the ad. The maximum length is 90 characters. At least 1 and max 5 headlines can be specified.',
                 },
                 marketing_images: {
                     _type: 'array',
                     _description:
-                        'Marketing images to be used in the ad. Valid image types are GIF,\nJPEG, and PNG. The minimum size is 600x314 and the aspect ratio must\nbe 1.91:1 (+-1%). At least one marketing_image is required. Combined with\nsquare_marketing_images the maximum is 15.',
+                        'Marketing images to be used in the ad. Valid image types are GIF, JPEG, and PNG. The minimum size is 600x314 and the aspect ratio must be 1.91:1 (+-1%). At least one marketing_image is required. Combined with square_marketing_images the maximum is 15.',
                 },
                 allow_flexible_color: {
                     _type: 'boolean',
                     _description:
-                        "Advertiser's consent to allow flexible color. When true, the ad may be\nserved with different color if necessary. When false, the ad will be served\nwith the specified colors or a neutral color.\nThe default value is true.\nMust be true if main_color and accent_color are not set.",
+                        "Advertiser's consent to allow flexible color. When true, the ad may be served with different color if necessary. When false, the ad will be served with the specified colors or a neutral color. The default value is true. Must be true if main_color and accent_color are not set.",
                 },
                 promo_text: {
                     _type: 'string',
                     _description:
-                        "Promotion text used for dyanmic formats of responsive ads. For example\n'Free two-day shipping'.",
+                        "Promotion text used for dyanmic formats of responsive ads. For example 'Free two-day shipping'.",
                 },
                 accent_color: {
                     _type: 'string',
                     _description:
-                        'The accent color of the ad in hexadecimal, e.g. #ffffff for white.\nIf one of main_color and accent_color is set, the other is required as\nwell.',
+                        'The accent color of the ad in hexadecimal, e.g. #ffffff for white. If one of main_color and accent_color is set, the other is required as well.',
                 },
                 main_color: {
                     _type: 'string',
                     _description:
-                        'The main color of the ad in hexadecimal, e.g. #ffffff for white.\nIf one of main_color and accent_color is set, the other is required as\nwell.',
+                        'The main color of the ad in hexadecimal, e.g. #ffffff for white. If one of main_color and accent_color is set, the other is required as well.',
                 },
                 square_marketing_images: {
                     _type: 'array',
                     _description:
-                        'Square marketing images to be used in the ad. Valid image types are GIF,\nJPEG, and PNG. The minimum size is 300x300 and the aspect ratio must\nbe 1:1 (+-1%). At least one square marketing_image is required. Combined\nwith marketing_images the maximum is 15.',
+                        'Square marketing images to be used in the ad. Valid image types are GIF, JPEG, and PNG. The minimum size is 300x300 and the aspect ratio must be 1:1 (+-1%). At least one square marketing_image is required. Combined with marketing_images the maximum is 15.',
                 },
                 square_logo_images: {
                     _type: 'array',
                     _description:
-                        'Square logo images to be used in the ad. Valid image types are GIF,\nJPEG, and PNG. The minimum size is 128x128 and the aspect ratio must\nbe 1:1 (+-1%). Combined with square_logo_images the maximum is 5.',
+                        'Square logo images to be used in the ad. Valid image types are GIF, JPEG, and PNG. The minimum size is 128x128 and the aspect ratio must be 1:1 (+-1%). Combined with square_logo_images the maximum is 5.',
                 },
                 youtube_videos: {
                     _type: 'array',
@@ -534,7 +534,7 @@ module.exports = {
                 logo_images: {
                     _type: 'array',
                     _description:
-                        'Logo images to be used in the ad. Valid image types are GIF,\nJPEG, and PNG. The minimum size is 512x128 and the aspect ratio must\nbe 4:1 (+-1%). Combined with square_logo_images the maximum is 5.',
+                        'Logo images to be used in the ad. Valid image types are GIF, JPEG, and PNG. The minimum size is 512x128 and the aspect ratio must be 4:1 (+-1%). Combined with square_logo_images the maximum is 5.',
                 },
                 price_prefix: { _type: 'string', _description: "Prefix before price. E.g. 'as low as'." },
                 long_headline: {
@@ -554,7 +554,7 @@ module.exports = {
                             { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.' },
                         ],
                         _description:
-                            'The pinned field of the asset. This restricts the asset to only serve\nwithin this field. Multiple assets can be pinned to the same field. An\nasset that is unpinned or pinned to a different field will not serve in a\nfield where some other asset has been pinned.',
+                            'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
                     },
                     text: { _type: 'string', _description: 'Asset text.' },
                 },
@@ -581,7 +581,7 @@ module.exports = {
                     },
                 ],
                 _description:
-                    'The overall approval status of this ad, calculated based on the status of\nits individual policy topic entries.',
+                    'The overall approval status of this ad, calculated based on the status of its individual policy topic entries.',
             },
             policy_topic_entries: { _type: 'array', _description: 'The list of policy findings for this ad.' },
             review_status: {

@@ -4,7 +4,7 @@ module.exports = {
         shared_set: {
             _type: 'string',
             _description:
-                'The shared set associated with the campaign. This may be a negative keyword\nshared set of another customer. This customer should be a manager of the\nother customer, otherwise the campaign shared set will exist but have no\nserving effect. Only negative keyword shared sets can be associated with\nShopping campaigns. Only negative placement shared sets can be associated\nwith Display mobile app campaigns.',
+                'The shared set associated with the campaign. This may be a negative keyword shared set of another customer. This customer should be a manager of the other customer, otherwise the campaign shared set will exist but have no serving effect. Only negative keyword shared sets can be associated with Shopping campaigns. Only negative placement shared sets can be associated with Display mobile app campaigns.',
         },
         status: {
             _type: 'enum',
@@ -20,7 +20,7 @@ module.exports = {
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the campaign shared set.\nCampaign shared set resource names have the form:\n\n`customers/{customer_id}/campaignSharedSets/{campaign_id}~{shared_set_id}`',
+                'The resource name of the campaign shared set. Campaign shared set resource names have the form: <code>customers/{customer_id}/campaignSharedSets/{campaign_id}~{shared_set_id}</code>',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

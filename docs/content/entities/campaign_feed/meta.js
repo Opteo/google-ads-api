@@ -5,12 +5,12 @@ module.exports = {
             function_string: {
                 _type: 'string',
                 _description:
-                    'String representation of the Function.\n\nExamples:\n1) IDENTITY(true) or IDENTITY(false). All or none feed items serve.\n2) EQUALS(CONTEXT.DEVICE,"Mobile")\n3) IN(FEED_ITEM_ID,{1000001,1000002,1000003})\n4) CONTAINS_ANY(FeedAttribute[12345678,0],{"Mars cruise","Venus cruise"})\n5) AND(IN(FEED_ITEM_ID,{10001,10002}),EQUALS(CONTEXT.DEVICE,"Mobile"))\nSee\n\nhttps:\n//developers.google.com/adwords/api/docs/guides/feed-matching-functions\n\nNote that because multiple strings may represent the same underlying\nfunction (whitespace and single versus double quotation marks, for\nexample), the value returned may not be identical to the string sent in a\nmutate request.',
+                    'String representation of the Function. Examples: 1) IDENTITY(true) or IDENTITY(false). All or none feed items serve. 2) EQUALS(CONTEXT.DEVICE,"Mobile") 3) IN(FEED_ITEM_ID,{1000001,1000002,1000003}) 4) CONTAINS_ANY(FeedAttribute[12345678,0],{"Mars cruise","Venus cruise"}) 5) AND(IN(FEED_ITEM_ID,{10001,10002}),EQUALS(CONTEXT.DEVICE,"Mobile")) See https: //developers.google.com/adwords/api/docs/guides/feed-matching-functions Note that because multiple strings may represent the same underlying function (whitespace and single versus double quotation marks, for example), the value returned may not be identical to the string sent in a mutate request.',
             },
             left_operands: {
                 _type: 'array',
                 _description:
-                    'The operands on the left hand side of the equation. This is also the\noperand to be used for single operand expressions such as NOT.',
+                    'The operands on the left hand side of the equation. This is also the operand to be used for single operand expressions such as NOT.',
             },
             operator: {
                 _type: 'enum',
@@ -42,12 +42,12 @@ module.exports = {
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the campaign feed.\nCampaign feed resource names have the form:\n\n`customers/{customer_id}/campaignFeeds/{campaign_id}~{feed_id}',
+                'The resource name of the campaign feed. Campaign feed resource names have the form: `customers/{customer_id}/campaignFeeds/{campaign_id}~{feed_id}',
         },
         placeholder_types: {
             _type: 'array',
             _description:
-                'Indicates which placeholder types the feed may populate under the connected\ncampaign. Required.',
+                'Indicates which placeholder types the feed may populate under the connected campaign. Required.',
         },
         feed: { _type: 'string', _description: 'The feed to which the CampaignFeed belongs.' },
         status: {
@@ -58,7 +58,7 @@ module.exports = {
                 { s: 'ENABLED', description: 'Feed link is enabled.' },
                 { s: 'REMOVED', description: 'Feed link has been removed.' },
             ],
-            _description: 'Status of the campaign feed.\nThis field is read-only.',
+            _description: 'Status of the campaign feed. This field is read-only.',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

@@ -3,12 +3,12 @@ module.exports = {
     object: {
         include_in_conversions_metric: {
             _type: 'boolean',
-            _description: 'Whether this conversion action should be included in the "conversions"\nmetric.',
+            _description: 'Whether this conversion action should be included in the "conversions" metric.',
         },
         click_through_lookback_window_days: {
             _type: 'int64',
             _description:
-                'The maximum number of days that may elapse between an interaction\n(e.g., a click) and a conversion event.',
+                'The maximum number of days that may elapse between an interaction (e.g., a click) and a conversion event.',
         },
         app_id: { _type: 'string', _description: 'App ID for an app conversion action.' },
         type: {
@@ -48,12 +48,12 @@ module.exports = {
         view_through_lookback_window_days: {
             _type: 'int64',
             _description:
-                'The maximum number of days which may elapse between an impression and a\nconversion without an interaction.',
+                'The maximum number of days which may elapse between an impression and a conversion without an interaction.',
         },
         owner_customer: {
             _type: 'string',
             _description:
-                'The resource name of the conversion action owner customer, or null if this\nis a system-defined conversion action.',
+                'The resource name of the conversion action owner customer, or null if this is a system-defined conversion action.',
         },
         tag_snippets: { _type: 'array', _description: 'The snippets used for tracking conversions.' },
         attribution_model_settings: {
@@ -123,13 +123,13 @@ module.exports = {
                             'The data driven model has never been generated. Most commonly this is\nbecause there has never been the required number of events in any 30-day\nperiod.',
                     },
                 ],
-                _description: 'The status of the data-driven attribution model for the conversion\naction.',
+                _description: 'The status of the data-driven attribution model for the conversion action.',
             },
         },
         phone_call_duration_seconds: {
             _type: 'int64',
             _description:
-                'The phone call duration in seconds after which a conversion should be\nreported for this conversion action.\n\nThe value must be between 0 and 10000, inclusive.',
+                'The phone call duration in seconds after which a conversion should be reported for this conversion action. The value must be between 0 and 10000, inclusive.',
         },
         counting_type: {
             _type: 'enum',
@@ -159,7 +159,7 @@ module.exports = {
         name: {
             _type: 'string',
             _description:
-                'The name of the conversion action.\n\nThis field is required and should not be empty when creating new\nconversion actions.',
+                'The name of the conversion action. This field is required and should not be empty when creating new conversion actions.',
         },
         category: {
             _type: 'enum',
@@ -180,23 +180,23 @@ module.exports = {
             default_value: {
                 _type: 'double',
                 _description:
-                    'The value to use when conversion events for this conversion action are\nsent with an invalid, disallowed or missing value, or when\nthis conversion action is configured to always use the default value.',
+                    'The value to use when conversion events for this conversion action are sent with an invalid, disallowed or missing value, or when this conversion action is configured to always use the default value.',
             },
             default_currency_code: {
                 _type: 'string',
                 _description:
-                    'The currency code to use when conversion events for this conversion\naction are sent with an invalid or missing currency code, or when this\nconversion action is configured to always use the default value.',
+                    'The currency code to use when conversion events for this conversion action are sent with an invalid or missing currency code, or when this conversion action is configured to always use the default value.',
             },
             always_use_default_value: {
                 _type: 'boolean',
                 _description:
-                    'Controls whether the default value and default currency code are used in\nplace of the value and currency code specified in conversion events for\nthis conversion action.',
+                    'Controls whether the default value and default currency code are used in place of the value and currency code specified in conversion events for this conversion action.',
             },
         },
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the conversion action.\nConversion action resource names have the form:\n\n`customers/{customer_id}/conversionActions/{conversion_action_id}`',
+                'The resource name of the conversion action. Conversion action resource names have the form: <code>customers/{customer_id}/conversionActions/{conversion_action_id}</code>',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

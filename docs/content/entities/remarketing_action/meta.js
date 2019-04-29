@@ -6,12 +6,12 @@ module.exports = {
         resource_name: {
             _type: 'string',
             _description:
-                'The resource name of the remarketing action.\nRemarketing action resource names have the form:\n\n`customers/{customer_id}/remarketingActions/{remarketing_action_id}`',
+                'The resource name of the remarketing action. Remarketing action resource names have the form: <code>customers/{customer_id}/remarketingActions/{remarketing_action_id}</code>',
         },
         name: {
             _type: 'string',
             _description:
-                'The name of the remarketing action.\n\nThis field is required and should not be empty when creating new\nremarketing actions.',
+                'The name of the remarketing action. This field is required and should not be empty when creating new remarketing actions.',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],
