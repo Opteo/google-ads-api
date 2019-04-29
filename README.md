@@ -235,7 +235,74 @@ const ad_groups = await customer.adGroups.list({
 
 ### Mutations
 
-Most entities in the Google Ads API will have mutation methods for creating, updating, and deleting.
+Most entities in the Google Ads API will have mutation methods for creating, updating, and deleting. We also support a top-level customer `mutateResources` method, that allows for performing mutations with different types atomically, as well as supporting the new concept of temporary resource ids.
+
+#### Using `customer.mutateResources()`
+
+Sometimes you may want to create multiple resources of different types at once, for example, creating a new campaign and it's required campaign budget. The `customer.mutateResources` method is designed for this use case, and supports temporary resource ids. A basic example of creating a campaign budget and a campaign (which uses this budget) is shown below:
+
+```javascript
+const { results } = await customer.mutateResources([
+    {
+        // For each resource, you must specify it's type with the "_resource" key
+        _resource: 'CampaignBudget',
+        resource_name: `customers/123/campaignBudgets/-1`,
+        name: 'My new campaign budget',
+        amount_micros: 3000000,
+        explicitly_shared: true,
+    },
+    {
+        _resource: 'Campaign',
+        // This resource name corresponds to the campaign budget above
+        campaign_budget: `customers/123/campaignBudgets/-1`,
+        name: 'My new campaign',
+        advertising_channel_type: enums.AdvertisingChannelType.SEARCH,
+        status: enums.CampaignStatus.PAUSED,
+        manual_cpc: {
+            enhanced_cpc_enabled: true,
+        },
+    },
+])
+
+// The resource ids will now be defined after performing the operation
+console.log(results) // ['customers/123/campaignBudgets/123123', 'customers/123/campaigns/321321']
+```
+
+By default, `mutateResources` is atomic and will halt if one operation fails. This means, no new resources will be added to the client account if one operation fails. This mode can be disabled by setting the `partial_failure` option to `true`. The `validate_only` option is also supported in this method. See the [Google Ads API documentation](https://developers.google.com/google-ads/api/reference/rpc/google.ads.googleads.v1.services#google.ads.googleads.v1.services.MutateGoogleAdsRequest) for more details on these settings.
+
+```javascript
+await customer.mutateResources(operations, { partial_failure: true })
+```
+
+As well as creating resources, `mutateResources` also supports updating and deleting multiple resources (which also work with temporary resource ids). Use the `_operation` field in an operation to specify the mode, being either `create`, `update` or `delete`. This field isn't required, and by default is set to `create`. In the example below, the following is done:
+
+1. A new campaign budget with the temporary resource id `-1` is created.
+2. An existing campaign (id of `456`) is updated to use the new campaign budget (`-1`)
+3. The original campaign budget that was being used by the campaign is deleted
+
+```javascript
+const response = await customer_no_metrics.mutateResources([
+    {
+        _resource: 'CampaignBudget',
+        _operation: 'create',
+        resource_name: 'customers/123/campaignBudgets/-1',
+        name: 'My new campaign budget',
+        amount_micros: 3000000,
+        explicitly_shared: true,
+    },
+    {
+        _resource: 'Campaign',
+        _operation: 'update',
+        resource_name: 'customers/123/campaigns/456',
+        campaign_budget: 'customers/123/campaignBudgets/-1',
+    },
+    {
+        _resource: 'CampaignBudget',
+        _operation: 'delete',
+        resource_name: 'customers/123/campaignBudgets/123123',
+    },
+])
+```
 
 #### Create
 
