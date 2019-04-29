@@ -15,7 +15,7 @@ const IndexPage = ({
     const ids = getIds(edges)
     const sections_data = getSectionsData(edges)
     const Sections = sections_data.map((section, index) => {
-        return <Section key={'section'+index} data={section} />
+        return <Section key={'section' + index} data={section} />
     })
     return (
         <Layout>

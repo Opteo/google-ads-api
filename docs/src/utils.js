@@ -28,7 +28,7 @@ export const getIds = edges => {
 export const getSectionsData = edges => {
     return edges.map(edge => {
         const { node } = edge
-        
+
         const section_data = {
             id: getSectionId(node),
             key: edge.node.id,
@@ -49,13 +49,12 @@ export const getSectionsData = edges => {
 
 export const toggleVisible = (id) => {
     const element = document.getElementById(id)
-    if(element){
-        if(element.style.display === 'none'){
+    if (element) {
+        if (element.style.display === 'none') {
             element.style.display = "block"
-        }
-        else {
+        } else {
             element.style.display = "none"
         }
     }
-   
+
 }

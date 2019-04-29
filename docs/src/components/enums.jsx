@@ -7,7 +7,6 @@ class Enums extends React.Component {
     constructor(props) {
         super(props)
         this.state = { shown: false }
-        
     }
 
     toggleMenu() {

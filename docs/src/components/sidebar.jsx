@@ -1,17 +1,16 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { Link } from "gatsby"
+import { Link } from 'gatsby'
 
 import { toggleVisible } from '../utils'
 import _ from 'lodash'
 
 class Sidebar extends React.Component {
-
     shouldComponentUpdate(nextProps, nextState) {
         return false
     }
 
-    render(){
+    render() {
         const { ids } = this.props
         return (
             <div className="absolute top-0 h-100 bg-white fixed br b--opteo-light-gray" style={{ maxWidth: '280px' }}>
@@ -36,7 +35,7 @@ class Sidebar extends React.Component {
 
                                         return (
                                             <li className="pointer f6 fw5 mt1 mb0" key={sub_key}>
-                                                <Link to={'/'+subsection_id}>
+                                                <Link to={'/' + subsection_id}>
                                                     {subpage.type === 'object'
                                                         ? `The ${subpage.entity} object`
                                                         : `${_.startCase(subpage.type)}`}
