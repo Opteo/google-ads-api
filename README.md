@@ -274,14 +274,14 @@ By default, `mutateResources` is atomic and will halt if one operation fails. Th
 await customer.mutateResources(operations, { partial_failure: true })
 ```
 
-As well as creating resources, `mutateResources` also supports updating and deleting multiple resources (which also work with temporary resource ids). Use the `_operation` field in an operation to specify the mode, being either `create`, `update` or `delete`. This field isn't required, and by default is set to `create`. In the example below, the following is done:
+As well as creating resources, `mutateResources` also supports updating and deleting multiple resources (which also works with temporary resource ids). Use the `_operation` field in an operation to specify the mode, being either `create`, `update` or `delete`. This field isn't required, and by default is set to `create`. In the example below, the following is done:
 
 1. A new campaign budget with the temporary resource id `-1` is created.
 2. An existing campaign (id of `456`) is updated to use the new campaign budget (`-1`)
 3. The original campaign budget that was being used by the campaign is deleted
 
 ```javascript
-const response = await customer_no_metrics.mutateResources([
+const response = await customer.mutateResources([
     {
         _resource: 'CampaignBudget',
         _operation: 'create',
