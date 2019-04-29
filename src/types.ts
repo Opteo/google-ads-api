@@ -230,6 +230,13 @@ export interface ServiceCreateOptions {
     partial_failure?: boolean
 }
 
+export interface MutateResourceOperation {
+    _resource: string
+    _operation?: 'create' | 'update' | 'delete'
+    // Allow any resource field
+    [key: string]: any
+}
+
 interface PreQueryHookArgs {
     query: string
     cid: string

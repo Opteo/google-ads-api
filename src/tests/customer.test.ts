@@ -3,6 +3,7 @@ import { AdGroupStatus, CampaignStatus } from 'google-ads-node/build/lib/enums'
 import { enums } from '..'
 
 import { newCustomerWithMetrics, newCustomer, CID, CID_WITH_METRICS, getRandomName, CAMPAIGN_ID } from '../test_utils'
+import { MutateResourceOperation } from '../types'
 const customer = newCustomerWithMetrics()
 const customer_no_metrics = newCustomer()
 

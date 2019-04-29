@@ -6,7 +6,7 @@ import GrpcClient from '../grpc'
 import Bottleneck from 'bottleneck'
 
 import Service, { Mutation } from './service'
-import { ReportOptions, ServiceCreateOptions, PreReportHook, PostReportHook } from '../types'
+import { ReportOptions, ServiceCreateOptions, PreReportHook, PostReportHook, MutateResourceOperation } from '../types'
 
 export default class CustomerService extends Service {
     private post_report_hook: PostReportHook
@@ -79,7 +79,10 @@ export default class CustomerService extends Service {
     // TODO: Add support for this service method
     // public async create(customer: Customer)
 
-    public async globalCreate(operations: Array<any>, options?: ServiceCreateOptions): Promise<Mutation> {
+    public async mutateResources(
+        operations: Array<MutateResourceOperation>,
+        options?: ServiceCreateOptions
+    ): Promise<Mutation> {
         const request = new grpc.MutateGoogleAdsRequest()
 
         request.setCustomerId(this.cid)

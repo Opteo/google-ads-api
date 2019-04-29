@@ -100,7 +100,7 @@ import GrpcClient from './grpc'
 /* Utils */
 import Bottleneck from 'bottleneck'
 import { Customer } from 'google-ads-node/build/lib/resources'
-import { ReportOptions, ServiceCreateOptions, PostReportHook, PreReportHook } from './types'
+import { ReportOptions, ServiceCreateOptions, PostReportHook, PreReportHook, MutateResourceOperation } from './types'
 
 export default function Customer(
     cid: string,
@@ -118,8 +118,8 @@ export default function Customer(
         list: () => cusService.list(),
         get: (id: number | string) => cusService.get(id),
         update: (customer: Customer, options?: ServiceCreateOptions) => cusService.update(customer, options),
-        globalCreate: (operations: Array<any>, options?: ServiceCreateOptions) =>
-            cusService.globalCreate(operations, options),
+        mutateResources: (operations: Array<MutateResourceOperation>, options?: ServiceCreateOptions) =>
+            cusService.mutateResources(operations, options),
 
         /* Services */
         campaigns: new CampaignService(cid, client, throttler, 'CampaignService'),
