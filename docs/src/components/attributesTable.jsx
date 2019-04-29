@@ -28,7 +28,7 @@ const AttributesTable = ({ data, title, section }) => {
         return (
             Object.keys(one_ofs).map(oneof_type_key => {
                 return (
-                    <div>
+                    <div key={'oneofcontainer' + section + oneof_type_key}>
                         {
                             Object.keys(one_ofs[oneof_type_key]).map((oneof_key, index) => {
                                 const details = one_ofs[oneof_type_key][oneof_key]
@@ -36,9 +36,12 @@ const AttributesTable = ({ data, title, section }) => {
                                     return null
                                 }
 
+                                const unique_oneof_key = 'oneof' + section + oneof_type_key
+                                const unique_attribute_key = 'oneof' + section + oneof_type_key + oneof_key 
+
                                 return (
-                                    <div style={ {display : index === 0 ? 'block' : 'none'} } className={['oneof' + section + oneof_type_key]} id={'oneof' + section + oneof_type_key + oneof_key }>
-                                        <Attribute data={details} section={section} name={oneof_key} key={oneof_key} enums={details._enums} />
+                                    <div style={ {display : index === 0 ? 'block' : 'none'} } className={[unique_oneof_key]} id={unique_attribute_key} key={unique_attribute_key}>
+                                        <Attribute data={details} section={section} name={oneof_key}  enums={details._enums} />
                                     </div>  
                                 )
                             })
@@ -47,8 +50,10 @@ const AttributesTable = ({ data, title, section }) => {
                         This field can also be replaced by: 
                         {
                             Object.keys(one_ofs[oneof_type_key]).map(oneof_key => {
+                                const unique_attribute_key = 'oneof' + section + oneof_type_key + oneof_key 
+
                                 return (
-                                    <div className="opteo-blue" onClick={() => toggleOneOf('oneof' + section + oneof_type_key, 'oneof' + section + oneof_type_key + oneof_key)}> • {oneof_key.split('_').join(' ')}  </div>  
+                                    <div key={unique_attribute_key + 'selector'} className="opteo-blue pointer" onClick={() => toggleOneOf('oneof' + section + oneof_type_key, 'oneof' + section + oneof_type_key + oneof_key)}> • {oneof_key.split('_').join(' ')}  </div>  
                                 )
                             })
                         }
