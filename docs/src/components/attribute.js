@@ -6,7 +6,7 @@ import AttributesTable from './attributesTable'
 import Enums from './enums'
 
 const Attribute = ({ data, name, enums, section }) => {
-    const { _description, _oneof } = data
+    const { _description } = data
     let details = null
 
     if (_description) {
@@ -32,19 +32,9 @@ const Attribute = ({ data, name, enums, section }) => {
 
             <div className=" mb2">
                 <span className=" f5 fw6 mv0 ">{name} </span>
-                {data._type ? <span className=" f6 fw5 mv0 black-70">{data._type}</span> : null}
-                {_oneof ? (
-                    <span className="f5 fw6 black-30">
-                        ONE OF{' '}
-                        {_oneof
-                            .split(/(?=[A-Z])/)
-                            .join('_')
-                            .toLowerCase()}
-                    </span>
-                ) : null}
+                {data._type ? <span className=" f6 fw5 mv0 black-70">{data._type}</span> : 'object'}
+                
             </div>
-
-            
 
             {enums ? (
                 <Collapsible

@@ -46,3 +46,16 @@ export const getSectionsData = edges => {
         return section_data
     })
 }
+
+export const toggleVisible = (id) => {
+    const element = document.getElementById(id)
+    if(element){
+        if(element.style.display === 'none'){
+            element.style.display = "block"
+        }
+        else {
+            element.style.display = "none"
+        }
+    }
+   
+}

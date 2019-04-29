@@ -25,7 +25,6 @@ module.exports = {
                 ],
                 _description: 'The interaction type.',
             },
-            _oneof: 'criterion',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

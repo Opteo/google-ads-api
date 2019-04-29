@@ -350,6 +350,7 @@ async function compileService(entity, schema) {
                 new_obj[snakeCase(key)] = { ..._new_object, _description: obj[key].description }
             }
 
+
             const matching_resource = compiled_resources[capitalise(parent_field_name)]
             if (matching_resource && matching_resource.oneofs) {
                 Object.keys(matching_resource.oneofs).forEach(oneof_key => {
@@ -360,6 +361,34 @@ async function compileService(entity, schema) {
                     })
                 })
             }
+
+        })
+
+        // remove incorrect oneofs (only one instance in object)
+        const oneof_counts = {}
+        Object.keys(new_obj).forEach(just_created_child_key => {
+            const just_created_child = new_obj[just_created_child_key]
+            if(just_created_child._oneof){
+                if(!oneof_counts[just_created_child._oneof]){
+                    oneof_counts[just_created_child._oneof] = 0
+                }
+                oneof_counts[just_created_child._oneof]++
+            }
+
+        })
+
+        Object.keys(oneof_counts).forEach(oneof_type => {
+            if(oneof_counts[oneof_type] > 1){
+                return
+            }
+
+            // remove any _oneof keys from this child since they are useless
+            Object.keys(new_obj).forEach(just_created_child_key => {
+                if(oneof_type === new_obj[just_created_child_key]._oneof){
+                    delete new_obj[just_created_child_key]._oneof
+                }
+                
+            })
         })
 
         return new_obj

@@ -1,11 +1,12 @@
 // import { anchorate } from 'anchorate'
 
-exports.onRouteUpdate = (args) => {
-	console.log(args)
-  	// anchorate()
-}
+// exports.onRouteUpdate = (args) => {
+// 	console.log('updating route!', args)
+// }
 
-exports.shouldUpdateScroll = (args) => {
-	console.log('checking if should update scroll...', args)
-	return false
-}
+exports.disableCorePrefetching = () => true
+
+
+exports.shouldUpdateScroll = () =>  false
+
+
