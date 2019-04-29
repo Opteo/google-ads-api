@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { Link } from "gatsby"
 
 import { toggleVisible } from '../utils'
 import _ from 'lodash'
@@ -28,11 +29,11 @@ const Sidebar = ({ ids }) => {
 
                                     return (
                                         <li className="pointer f6 fw5 mt1 mb0" key={sub_key}>
-                                            <a href={subsection_id}>
+                                            <Link to={'/'+subsection_id}>
                                                 {subpage.type === 'object'
                                                     ? `The ${subpage.entity} object`
                                                     : `${_.startCase(subpage.type)}`}
-                                            </a>
+                                            </Link>
                                         </li>
                                     )
                                 })}
