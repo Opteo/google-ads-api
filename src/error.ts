@@ -1,14 +1,14 @@
 import { get } from 'lodash'
-import { SearchGoogleAdsRequest } from 'google-ads-node'
+import { SearchGoogleAdsRequest, MutateGoogleAdsRequest } from 'google-ads-node'
 
-export class SearchGrpcError extends Error {
+export class GrpcError extends Error {
     public readonly code: number
     public readonly request: object
     public readonly request_id: string
     public readonly location: string
     public readonly failure: any
 
-    constructor(err: any, request: SearchGoogleAdsRequest) {
+    constructor(err: any, request: SearchGoogleAdsRequest | MutateGoogleAdsRequest) {
         const { code, details } = err
 
         super(details)
