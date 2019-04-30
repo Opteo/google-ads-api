@@ -17,8 +17,10 @@ async function main() {
     const keyword = {
         ad_group: 'customers/123/adGroups/321',
         status: enums.AdGroupCriterionStatus.ENABLED,
-        text: 'hotels london',
-        match_type: enums.KeywordMatchType.EXACT,
+        keyword: {
+            text: 'hotels london',
+            match_type: enums.KeywordMatchType.EXACT,
+        },
     }
 
     try {

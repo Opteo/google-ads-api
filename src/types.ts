@@ -153,7 +153,7 @@ export interface ReportOptions {
         | fields.ShoppingPerformanceViewSegments
         | fields.TopicViewSegments
         | fields.VideoSegments
-    constraints?: Array<string | object | Constraint> | object
+    constraints?: Array<string | object | Constraint>
     date_constant?: DateConstant
     from_date?: string // ISO 8601(YYYY-MM-DD) format
     to_date?: string // ISO 8601(YYYY-MM-DD) format
