@@ -91,24 +91,18 @@ export default class Service {
 
         const operations = []
 
-        if (Array.isArray(options.entity[1])) {
-            for (const entity of options.entity[1]) {
-                const operation = new operationType()
+        // If the user passed in only one entity, convert it to an array of length 1
+        if (!Array.isArray(options.entity[1])) {
+            options.entity[1] = [options.entity[1]]
+        }
 
-                const pb = this.buildResource(options.entity[0], entity)
-                operation.setUpdate(pb)
-
-                const mask = getFieldMask(entity)
-                operation.setUpdateMask(mask)
-
-                operations.push(operation)
-            }
-        } else {
+        for (const entity of options.entity[1] as Array<object>) {
             const operation = new operationType()
-            const pb = this.buildResource(...options.entity)
+
+            const pb = this.buildResource(options.entity[0], entity)
             operation.setUpdate(pb)
 
-            const mask = getFieldMask(options.entity[1])
+            const mask = getFieldMask(entity)
             operation.setUpdateMask(mask)
 
             operations.push(operation)
@@ -136,16 +130,14 @@ export default class Service {
 
         const operations = []
 
-        if (Array.isArray(options.entity[1])) {
-            for (const entity of options.entity[1]) {
-                const operation = new operationType()
-                const pb = this.buildResource(options.entity[0], entity)
-                operation.setCreate(pb)
-                operations.push(operation)
-            }
-        } else {
+        // If the user passed in only one entity, convert it to an array of length 1
+        if (!Array.isArray(options.entity[1])) {
+            options.entity[1] = [options.entity[1]]
+        }
+
+        for (const entity of options.entity[1] as Array<object>) {
             const operation = new operationType()
-            const pb = this.buildResource(...options.entity)
+            const pb = this.buildResource(options.entity[0], entity)
             operation.setCreate(pb)
             operations.push(operation)
         }

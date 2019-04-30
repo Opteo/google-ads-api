@@ -102,7 +102,7 @@ export default class CustomerService extends Service {
             }
 
             const operation_resource_name = operation._resource
-            const operation_mode = operation._operation
+            let operation_mode = operation._operation
 
             delete operation._resource
             delete operation._operation
@@ -114,28 +114,31 @@ export default class CustomerService extends Service {
             // @ts-ignore Types are no use here
             const resource_operation = new grpc[`${operation_resource_name}Operation`]()
 
-            if (operation_mode) {
-                if (operation_mode !== 'create' && operation_mode !== 'update' && operation_mode !== 'delete') {
-                    throw new Error(`"_operation" field must be one of "create"|"update"|"delete"`)
-                }
-                if (operation_mode === 'create') {
-                    resource_operation.setCreate(pb)
-                }
-                if (operation_mode === 'update') {
-                    resource_operation.setUpdate(pb)
-                    const update_mask = getFieldMask(operation)
-                    resource_operation.setUpdateMask(update_mask)
-                }
-                if (operation_mode === 'delete') {
-                    // @ts-ignore Types are no use here
-                    if (!pb.toObject().hasOwnProperty('resourceName') || !pb.toObject().resourceName) {
-                        throw new Error(`Must specify "resource_name" to remove when using "delete"`)
-                    }
-                    // @ts-ignore Types are no use here
-                    resource_operation.setRemove(pb.toObject().resourceName)
-                }
-            } else {
+            if (!operation_mode) {
+                operation_mode = 'create'
+            }
+
+            if (operation_mode !== 'create' && operation_mode !== 'update' && operation_mode !== 'delete') {
+                throw new Error(`"_operation" field must be one of "create"|"update"|"delete"`)
+            }
+
+            if (operation_mode === 'create') {
                 resource_operation.setCreate(pb)
+            }
+
+            if (operation_mode === 'update') {
+                resource_operation.setUpdate(pb)
+                const update_mask = getFieldMask(operation)
+                resource_operation.setUpdateMask(update_mask)
+            }
+
+            if (operation_mode === 'delete') {
+                // @ts-ignore Types are no use here
+                if (!pb.toObject().hasOwnProperty('resourceName') || !pb.toObject().resourceName) {
+                    throw new Error(`Must specify "resource_name" to remove when using "delete"`)
+                }
+                // @ts-ignore Types are no use here
+                resource_operation.setRemove(pb.toObject().resourceName)
             }
 
             /* Add operation of resource type to global mutate operation e.g. "MutateOperation.setCampaignBudgetOperation" */
