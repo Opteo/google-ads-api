@@ -217,7 +217,7 @@ export interface Constraint {
 export interface ServiceListOptions {
     limit?: number
     order_by?: string
-    constraints?: Array<string | object | Constraint>
+    constraints?: Array<string | object | Constraint> | object
 }
 
 /**
