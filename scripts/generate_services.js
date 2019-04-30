@@ -130,12 +130,13 @@ var myResolver = {
 
 let schema
 
+
+
 const entities = [
     'AccountBudgetProposal',
     'AccountBudget',
     'AdGroupAdLabel',
     'AdGroupAd',
-    // 'AdGroupAudienceView',
     'AdGroupBidModifier',
     'AdGroupCriterionLabel',
     'AdGroupCriterion',
@@ -143,12 +144,10 @@ const entities = [
     'AdGroupFeed',
     'AdGroupLabel',
     'AdGroup',
-    // 'AdParameter', // Missing protos
-    // 'AdScheduleView',
-    // 'AgeRangeView',
+    // 'AdParameter', // Missing protos?
+    //'Asset', // Needs custom implementation (only create exists)
     'BiddingStrategy',
     'BillingSetup',
-    // 'CampaignAudienceView',
     'CampaignBidModifier',
     'CampaignBudget',
     'CampaignCriterion',
@@ -159,9 +158,8 @@ const entities = [
     'CampaignSharedSet',
     'CarrierConstant',
     'ChangeStatus',
-    // 'ClickView',
     'ConversionAction',
-    // 'ConversionUpload', // Missing protos
+    // 'ConversionUpload', // Probably needs custom implementation
     'CustomInterest',
     'CustomerClientLink',
     'CustomerClient',
@@ -171,56 +169,60 @@ const entities = [
     'CustomerManagerLink',
     'CustomerNegativeCriterion',
     //   'Customer', // Not required
-    // 'DisplayKeywordView',
     'DomainCategory',
-    // 'DynamicSearchAdsSearchTermView',
     'ExtensionFeedItem',
     'FeedItem',
     'FeedItemTarget',
     'FeedMapping',
-    // 'FeedPlaceholderView',
     'Feed',
-    // 'GenderView',
     'GeoTargetConstant',
-    // 'GeographicView',
     // 'GoogleAdsField', // Not required
     // 'GoogleAds', // Not required
-    // 'GroupPlacementView',
-    // 'HotelGroupView',
-    // 'HotelPerformanceView',
     'KeywordPlanAdGroup',
     'KeywordPlanCampaign',
-    // 'KeywordPlanIdea', // Missing protos
+    //'KeywordPlanIdea', // Not really a resource -- just a random function in a service
     'KeywordPlanKeyword',
     'KeywordPlanNegativeKeyword',
     'KeywordPlan',
-    // 'KeywordView',
     'Label',
     'LanguageConstant',
-    // 'LocationView',
-    // 'ManagedPlacementView',
     'MediaFile',
-    // 'MerchantCenterLink', // Missing protos
+    // 'MerchantCenterLink', // Missing protos?
     'MobileAppCategoryConstant',
     'MobileDeviceConstant',
-    // 'MutateJob', // Missing protos
+    // 'MutateJob', // Not to implement yet
     'OperatingSystemVersionConstant',
-    // 'ParentalStatusView',
-    // 'PaymentsAccount', // Missing protos
+    // 'PaymentsAccount', // Missing protos?
     'ProductBiddingCategoryConstant',
-    // 'ProductGroupView',
     'Recommendation',
     'RemarketingAction',
-    // 'SearchTermView',
     'SharedCriterion',
-    // 'ShoppingPerformanceView',
     'SharedSet',
     'TopicConstant',
-    // 'TopicView',
     'UserInterest',
     'UserList',
     'Video',
 ]
+
+
+const compiled_services =
+    raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v1.nested.services.nested
+
+
+const _entities = Object.keys(compiled_services).forEach(entity => {
+    if (!entity.includes('Service')) {
+        return
+    }
+
+    if (entity.includes('View')) {
+        return
+    }
+
+    if (!entities.includes(entity.replace('Service', ''))) {
+        console.log(entity)
+    }
+})
+
 
 function getResourceUrl(entity) {
     if (entity === 'ChangeStatus') {
@@ -488,126 +490,135 @@ async function compileService(entity, schema) {
     // console.log(customer)
     // console.log(entity)
 
-    const cache_path = `${__dirname}/../.cache/${ent}.json`
+    if(customer[camelCase(resource_url_name)]){
+        const cache_path = `${__dirname}/../.cache/${ent}.json`
 
-    let listed = []
-    try {
-        listed = fs.readJsonSync(cache_path)
-
-    } catch {
-
+        let listed = []
         try {
-            listed = await customer[camelCase(resource_url_name)].list({
-                limit: 1
-            })
-            fs.writeJsonSync(cache_path, listed)
-        } catch (e) {
-            console.error(e)
+            listed = fs.readJsonSync(cache_path)
+
+        } catch {
+
+            try {
+                listed = await customer[camelCase(resource_url_name)].list({
+                    limit: 1
+                })
+                fs.writeJsonSync(cache_path, listed)
+            } catch (e) {
+                console.error(e)
+            }
+
+        }
+        let scary = false
+
+        if (listed.length === 0) {
+            try {
+                listed = await customer_scary[camelCase(resource_url_name)].list({
+                    limit: 1
+                })
+                scary = listed.length > 0
+                console.log(listed.length)
+                fs.writeJsonSync(cache_path, listed)
+            } catch (e) {
+                console.error(e)
+            }
         }
 
-    }
-    let scary = false
 
-    if (listed.length === 0) {
-        try {
-            listed = await customer_scary[camelCase(resource_url_name)].list({
-                limit: 1
+        let example_object_list = '// Todo: add example list() return here'
+        let example_object_get = '// Todo: add example get() return here'
+        let example_resource_name = `customers/1234567890/${ resource_url_name }/123123123`
+
+        if (listed.length > 0) {
+
+            // Get the "biggest" example in an attempt to get the most fields
+            let chosen_example = maxBy(listed, block => {
+                return JSON.stringify(block).length
             })
-            scary = listed.length > 0
-            console.log(listed.length)
-            fs.writeJsonSync(cache_path, listed)
-        } catch (e) {
-            console.error(e)
-        }
-    }
 
-
-    let example_object_list = '// Todo: add example list() return here'
-    let example_object_get = '// Todo: add example get() return here'
-    let example_resource_name = `customers/1234567890/${ resource_url_name }/123123123`
-
-    if (listed.length > 0) {
-
-        // Get the "biggest" example in an attempt to get the most fields
-        let chosen_example = maxBy(listed, block => {
-            return JSON.stringify(block).length
-        })
-
-        // Reorder the object to put the least interesting things at the bottom
-        ;
-        (['ad_group', 'campaign', 'customer']).forEach(key => {
-            if (chosen_example[key]) {
-                const customer_temp_object = chosen_example[key]
-                delete chosen_example[key]
-                chosen_example = {
-                    ...chosen_example,
-                    [key]: customer_temp_object,
+            // Reorder the object to put the least interesting things at the bottom
+            ;
+            (['ad_group', 'campaign', 'customer']).forEach(key => {
+                if (chosen_example[key]) {
+                    const customer_temp_object = chosen_example[key]
+                    delete chosen_example[key]
+                    chosen_example = {
+                        ...chosen_example,
+                        [key]: customer_temp_object,
+                    }
                 }
-            }
-        })
+            })
 
-        // ... And get the important bit at the top
-        const ent_temp_object = chosen_example[ent]
-        delete chosen_example[ent]
-        chosen_example = {
-            [ent]: ent_temp_object,
-            ...chosen_example
+            // ... And get the important bit at the top
+            const ent_temp_object = chosen_example[ent]
+            delete chosen_example[ent]
+            chosen_example = {
+                [ent]: ent_temp_object,
+                ...chosen_example
+            }
+
+            // just a tiny bit of sanitization
+            Object.keys(chosen_example).forEach(key => {
+                if (chosen_example[key].name && !entity.toLowerCase().includes('constant')) {
+                    chosen_example[key].name = `My ${key.split('_').join(' ')}`
+                }
+                if (chosen_example[key].descriptive_name && !entity.toLowerCase().includes('constant')) {
+                    chosen_example[key].descriptive_name = `My ${key.split('_').join(' ')}`
+                }
+            })
+
+            example_object_list = JSON.stringify(chosen_example)
+            if (get(chosen_example, `${ent}.resource_name`)) {
+                example_resource_name = chosen_example[ent].resource_name
+            }
+            if (get(chosen_example, `${ent}`)) {
+                example_object_get = JSON.stringify(chosen_example[ent])
+            }
         }
 
-        // just a tiny bit of sanitization
-        Object.keys(chosen_example).forEach(key => {
-            if (chosen_example[key].name && !entity.toLowerCase().includes('constant')) {
-                chosen_example[key].name = `My ${key.split('_').join(' ')}`
-            }
-            if (chosen_example[key].descriptive_name && !entity.toLowerCase().includes('constant')) {
-                chosen_example[key].descriptive_name = `My ${key.split('_').join(' ')}`
-            }
-        })
-
-        example_object_list = JSON.stringify(chosen_example)
-        if (get(chosen_example, `${ent}.resource_name`)) {
-            example_resource_name = chosen_example[ent].resource_name
+        if (!scary) {
+            // return
         }
-        if (get(chosen_example, `${ent}`)) {
-            example_object_get = JSON.stringify(chosen_example[ent])
-        }
-    }
-
-    if (!scary) {
-        // return
-    }
 
 
 
 
-    fs.writeFileSync(docs_file_path + 'meta.js', meta_compiler({ JSON_META: JSON.stringify(meta) }))
+        fs.writeFileSync(docs_file_path + 'meta.js', meta_compiler({ JSON_META: JSON.stringify(meta) }))
 
-    fs.writeFileSync(docs_file_path + 'index.md', readme_object_compiler({
-        ENTITY: entity,
-        ENTITY_SNAKECASE: ent,
-        EXAMPLE_OBJECT_GET: example_object_get
-    }))
-
-
-    meta.methods.forEach(method => {
-
-        const compiled_md = method_compilers[method]({
+        fs.writeFileSync(docs_file_path + 'index.md', readme_object_compiler({
             ENTITY: entity,
             ENTITY_SNAKECASE: ent,
-            RESOURCE_URL_NAME: resource_url_name,
-            EXAMPLE_OBJECT_LIST: example_object_list,
-            EXAMPLE_OBJECT_GET: example_object_get,
-            EXAMPLE_RESOURCE_NAME: example_resource_name
+            EXAMPLE_OBJECT_GET: example_object_get
+        }))
+
+
+        meta.methods.forEach(method => {
+
+            const compiled_md = method_compilers[method]({
+                ENTITY: entity,
+                ENTITY_SNAKECASE: ent,
+                RESOURCE_URL_NAME: resource_url_name,
+                EXAMPLE_OBJECT_LIST: example_object_list,
+                EXAMPLE_OBJECT_GET: example_object_get,
+                EXAMPLE_RESOURCE_NAME: example_resource_name
+            })
+
+            fs.writeFileSync(docs_file_path + `${method}.md`, compiled_md)
         })
 
-        fs.writeFileSync(docs_file_path + `${method}.md`, compiled_md)
-    })
+    }
 
-
-
-    const existing_service = fs.readFileSync(file_path)
+    let existing_service = ''
+   
+    try {
+        existing_service = fs.readFileSync(file_path)
+    }
+    catch(err){
+        console.log(err)
+    }    
 
     if (!existing_service.toString().slice(0, 20).includes('manual_mode')) {
+        fs.ensureFileSync(file_path)
         fs.writeFileSync(file_path, compiled_service)
     }
 
