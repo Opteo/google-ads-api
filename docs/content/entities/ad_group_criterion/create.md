@@ -21,5 +21,5 @@ const result = await customer.adGroupCriteria.create(ad_group_criterion)
 
 ```javascript
 // Example result
-;['customers/9262111890/adGroupCriteria/56328868446~1165620981']
+;['customers/9262111890/adGroupCriteria/60170225920~521456008776']
 ```

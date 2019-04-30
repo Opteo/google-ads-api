@@ -12,5 +12,5 @@ This section describes how to delete a CampaignCriterion.
 ```javascript
 // Deleting the entity
 
-await customer.campaignCriteria.delete('customers/9262111890/campaignCriteria/1473765780~1000')
+await customer.campaignCriteria.delete('customers/9262111890/campaignCriteria/1599497210~1000')
 ```

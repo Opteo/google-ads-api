@@ -11,18 +11,18 @@ The `customer.sharedSets.get()` method returns all fields for one SharedSet, as 
 
 ```javascript
 // Getting the entity
-let result = await customer.sharedSets.get('customers/9262111890/sharedSets/1788591305')
+let result = await customer.sharedSets.get('customers/9262111890/sharedSets/1802068178')
 ```
 
 ```javascript
 // Example result
 ;({
-  resource_name: 'customers/9262111890/sharedSets/1788591305',
-  id: 1788591305,
-  member_count: 6,
+  resource_name: 'customers/9262111890/sharedSets/1802068178',
+  id: 1802068178,
+  member_count: 0,
   name: 'My shared set',
   reference_count: 0,
-  status: 2,
+  status: 3,
   type: 2,
 })
 ```

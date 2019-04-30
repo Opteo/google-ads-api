@@ -12,5 +12,5 @@ This section describes how to delete a AdGroupCriterion.
 ```javascript
 // Deleting the entity
 
-await customer.adGroupCriteria.delete('customers/9262111890/adGroupCriteria/56328868446~1165620981')
+await customer.adGroupCriteria.delete('customers/9262111890/adGroupCriteria/60170225920~521456008776')
 ```

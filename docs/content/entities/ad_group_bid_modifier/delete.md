@@ -12,5 +12,5 @@ This section describes how to delete a AdGroupBidModifier.
 ```javascript
 // Deleting the entity
 
-await customer.adGroupBidModifiers.delete('customers/9262111890/adGroupBidModifiers/54493284610~30000')
+await customer.adGroupBidModifiers.delete('customers/9262111890/adGroupBidModifiers/66537099246~30000')
 ```

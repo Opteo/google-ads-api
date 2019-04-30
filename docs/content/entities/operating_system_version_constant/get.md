@@ -11,15 +11,15 @@ The `customer.operatingSystemVersionConstants.get()` method returns all fields f
 
 ```javascript
 // Getting the entity
-let result = await customer.operatingSystemVersionConstants.get('operatingSystemVersionConstants/630153')
+let result = await customer.operatingSystemVersionConstants.get('operatingSystemVersionConstants/630266')
 ```
 
 ```javascript
 // Example result
 ;({
-  resource_name: 'operatingSystemVersionConstants/630153',
-  id: 630153,
-  name: 'Apple iOS',
+  resource_name: 'operatingSystemVersionConstants/630266',
+  id: 630266,
+  name: 'WindowsPhone',
   operator_type: 2,
   os_major_version: -1,
   os_minor_version: -1,

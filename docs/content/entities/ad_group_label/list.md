@@ -30,6 +30,21 @@ let result = await customer.adGroupLabels.list({
 // Example result
 ;[
   {
+    ad_group_label: {
+      resource_name: 'customers/3827277046/adGroupLabels/42877626370~3345231412',
+      ad_group: 'customers/3827277046/adGroups/42877626370',
+      label: 'customers/3827277046/labels/3345231412',
+    },
+    label: {
+      resource_name: 'customers/3827277046/labels/3345231412',
+      id: 3345231412,
+      name: 'My label',
+      status: 2,
+      text_label: {
+        background_color: '#E993EB',
+        description: 'Adgroups where Chloe will write new ads that kick butt.',
+      },
+    },
     ad_group: {
       resource_name: 'customers/3827277046/adGroups/42877626370',
       campaign: 'customers/3827277046/campaigns/954453048',
@@ -55,11 +70,6 @@ let result = await customer.adGroupLabels.list({
       },
       type: 2,
       url_custom_parameters: [],
-    },
-    ad_group_label: {
-      resource_name: 'customers/3827277046/adGroupLabels/42877626370~3345231412',
-      ad_group: 'customers/3827277046/adGroups/42877626370',
-      label: 'customers/3827277046/labels/3345231412',
     },
     campaign: {
       resource_name: 'customers/3827277046/campaigns/954453048',
@@ -108,16 +118,6 @@ let result = await customer.adGroupLabels.list({
       time_zone: 'Europe/London',
       tracking_url_template:
         '{lpurl}?utm_source=adwords&utm_medium=PPC&utm_campaign={campaignid}&utm_term={ifsearch:{keyword}}{ifcontent:{placement}}&utm_content={creative}&network={network}&adgroupid={adgroupid}&matchtype={matchtype}&adposition={adposition}&targetid={targetid}&target={target}&device={device}&devicemodel={devicemodel}',
-    },
-    label: {
-      resource_name: 'customers/3827277046/labels/3345231412',
-      id: 3345231412,
-      name: 'My label',
-      status: 2,
-      text_label: {
-        background_color: '#E993EB',
-        description: 'Adgroups where Chloe will write new ads that kick butt.',
-      },
     },
   },
 ]

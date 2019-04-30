@@ -21,5 +21,5 @@ const result = await customer.campaigns.create(campaign)
 
 ```javascript
 // Example result
-;['customers/9262111890/campaigns/1473765780']
+;['customers/9262111890/campaigns/1568629385']
 ```

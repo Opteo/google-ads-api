@@ -30,6 +30,12 @@ let result = await customer.customerClients.list({
 // Example result
 ;[
   {
+    customer_client: {
+      resource_name: 'customers/9262111890/customerClients/9262111890',
+      client_customer: 'customers/9262111890',
+      hidden: false,
+      level: 0,
+    },
     customer: {
       resource_name: 'customers/9262111890',
       auto_tagging_enabled: false,
@@ -49,12 +55,6 @@ let result = await customer.customerClients.list({
       },
       test_account: true,
       time_zone: 'Europe/London',
-    },
-    customer_client: {
-      resource_name: 'customers/9262111890/customerClients/9262111890',
-      client_customer: 'customers/9262111890',
-      hidden: false,
-      level: 0,
     },
   },
 ]

@@ -30,6 +30,21 @@ let result = await customer.campaignSharedSets.list({
 // Example result
 ;[
   {
+    campaign_shared_set: {
+      resource_name: 'customers/9262111890/campaignSharedSets/1485014801~1788591305',
+      campaign: 'customers/9262111890/campaigns/1485014801',
+      shared_set: 'customers/9262111890/sharedSets/1788591305',
+      status: 3,
+    },
+    shared_set: {
+      resource_name: 'customers/9262111890/sharedSets/1788591305',
+      id: 1788591305,
+      member_count: 6,
+      name: 'My shared set',
+      reference_count: 0,
+      status: 2,
+      type: 2,
+    },
     campaign: {
       resource_name: 'customers/9262111890/campaigns/1485014801',
       ad_serving_optimization_status: 2,
@@ -55,12 +70,6 @@ let result = await customer.campaignSharedSets.list({
       target_spend: { cpc_bid_ceiling_micros: 1000000 },
       url_custom_parameters: [],
     },
-    campaign_shared_set: {
-      resource_name: 'customers/9262111890/campaignSharedSets/1485014801~1788591305',
-      campaign: 'customers/9262111890/campaigns/1485014801',
-      shared_set: 'customers/9262111890/sharedSets/1788591305',
-      status: 3,
-    },
     customer: {
       resource_name: 'customers/9262111890',
       auto_tagging_enabled: false,
@@ -80,15 +89,6 @@ let result = await customer.campaignSharedSets.list({
       },
       test_account: true,
       time_zone: 'Europe/London',
-    },
-    shared_set: {
-      resource_name: 'customers/9262111890/sharedSets/1788591305',
-      id: 1788591305,
-      member_count: 6,
-      name: 'My shared set',
-      reference_count: 0,
-      status: 2,
-      type: 2,
     },
   },
 ]

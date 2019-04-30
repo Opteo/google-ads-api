@@ -28,5 +28,14 @@ let result = await customer.carrierConstants.list({
 
 ```javascript
 // Example result
-;[{ carrier_constant: { resource_name: 'carrierConstants/70000', country_code: 'JP', id: 70000, name: 'NTT DoCoMo' } }]
+;[
+  {
+    carrier_constant: {
+      resource_name: 'carrierConstants/70720',
+      country_code: 'TW',
+      id: 70720,
+      name: 'Long Distance & Mobile Business Group',
+    },
+  },
+]
 ```

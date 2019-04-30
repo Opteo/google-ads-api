@@ -30,6 +30,35 @@ let result = await customer.customerFeeds.list({
 // Example result
 ;[
   {
+    customer_feed: {
+      resource_name: 'customers/9262111890/customerFeeds/82896692',
+      feed: 'customers/9262111890/feeds/82896692',
+      matching_function: {
+        function_string: 'EQUALS(FEED_ITEM_ID,51840594005)',
+        left_operands: [{ requestContextOperand: { contextType: 2 } }],
+        operator: 4,
+        right_operands: [{ constantOperand: { longValue: { value: 51840594005 } } }],
+      },
+      placeholder_types: [2],
+      status: 2,
+    },
+    feed: {
+      resource_name: 'customers/9262111890/feeds/82896692',
+      attributes: [
+        { id: { value: 1 }, name: { value: 'SitelinkName' }, type: 4, isPartOfKey: { value: false } },
+        { id: { value: 2 }, name: { value: 'SitelinkUrl' }, type: 6, isPartOfKey: { value: false } },
+        { id: { value: 3 }, name: { value: 'SitelinkDescription1' }, type: 4, isPartOfKey: { value: false } },
+        { id: { value: 4 }, name: { value: 'SitelinkDescription2' }, type: 4, isPartOfKey: { value: false } },
+        { id: { value: 5 }, name: { value: 'SitelinkFinalUrls' }, type: 12, isPartOfKey: { value: false } },
+        { id: { value: 6 }, name: { value: 'SitelinkFinalMobileUrls' }, type: 12, isPartOfKey: { value: false } },
+        { id: { value: 7 }, name: { value: 'SitelinkTrackingUrl' }, type: 6, isPartOfKey: { value: false } },
+        { id: { value: 8 }, name: { value: 'SitelinkFinalUrlSuffix' }, type: 4, isPartOfKey: { value: false } },
+      ],
+      id: 82896692,
+      name: 'My feed',
+      origin: 3,
+      status: 2,
+    },
     customer: {
       resource_name: 'customers/9262111890',
       auto_tagging_enabled: false,
@@ -49,26 +78,6 @@ let result = await customer.customerFeeds.list({
       },
       test_account: true,
       time_zone: 'Europe/London',
-    },
-    customer_feed: {
-      resource_name: 'customers/9262111890/customerFeeds/77425432',
-      feed: 'customers/9262111890/feeds/77425432',
-      matching_function: {
-        function_string: 'EQUALS(FEED_ITEM_ID,51842329086)',
-        left_operands: [{ requestContextOperand: { contextType: 2 } }],
-        operator: 4,
-        right_operands: [{ constantOperand: { longValue: { value: 51842329086 } } }],
-      },
-      placeholder_types: [7],
-      status: 2,
-    },
-    feed: {
-      resource_name: 'customers/9262111890/feeds/77425432',
-      attributes: [{ id: { value: 1 }, name: { value: 'Callout Text' }, type: 4, isPartOfKey: { value: false } }],
-      id: 77425432,
-      name: 'My feed',
-      origin: 3,
-      status: 2,
     },
   },
 ]

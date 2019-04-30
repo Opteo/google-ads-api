@@ -21,5 +21,5 @@ const result = await customer.adGroupBidModifiers.create(ad_group_bid_modifier)
 
 ```javascript
 // Example result
-;['customers/9262111890/adGroupBidModifiers/54493284610~30000']
+;['customers/9262111890/adGroupBidModifiers/66537099246~30000']
 ```

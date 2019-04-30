@@ -21,5 +21,5 @@ const result = await customer.customerExtensionSettings.create(customer_extensio
 
 ```javascript
 // Example result
-;['customers/9262111890/customerExtensionSettings/SITELINK']
+;['customers/9262111890/customerExtensionSettings/STRUCTURED_SNIPPET']
 ```

@@ -30,6 +30,41 @@ let result = await customer.campaignFeeds.list({
 // Example result
 ;[
   {
+    campaign_feed: {
+      resource_name: 'customers/9262111890/campaignFeeds/1483704368~82896692',
+      campaign: 'customers/9262111890/campaigns/1483704368',
+      feed: 'customers/9262111890/feeds/82896692',
+      matching_function: {
+        function_string: 'IN(FEED_ITEM_ID,{51842193961,51842200495,51844020102,51844028388})',
+        left_operands: [{ requestContextOperand: { contextType: 2 } }],
+        operator: 2,
+        right_operands: [
+          { constantOperand: { longValue: { value: 51842193961 } } },
+          { constantOperand: { longValue: { value: 51842200495 } } },
+          { constantOperand: { longValue: { value: 51844020102 } } },
+          { constantOperand: { longValue: { value: 51844028388 } } },
+        ],
+      },
+      placeholder_types: [2],
+      status: 2,
+    },
+    feed: {
+      resource_name: 'customers/9262111890/feeds/82896692',
+      attributes: [
+        { id: { value: 1 }, name: { value: 'SitelinkName' }, type: 4, isPartOfKey: { value: false } },
+        { id: { value: 2 }, name: { value: 'SitelinkUrl' }, type: 6, isPartOfKey: { value: false } },
+        { id: { value: 3 }, name: { value: 'SitelinkDescription1' }, type: 4, isPartOfKey: { value: false } },
+        { id: { value: 4 }, name: { value: 'SitelinkDescription2' }, type: 4, isPartOfKey: { value: false } },
+        { id: { value: 5 }, name: { value: 'SitelinkFinalUrls' }, type: 12, isPartOfKey: { value: false } },
+        { id: { value: 6 }, name: { value: 'SitelinkFinalMobileUrls' }, type: 12, isPartOfKey: { value: false } },
+        { id: { value: 7 }, name: { value: 'SitelinkTrackingUrl' }, type: 6, isPartOfKey: { value: false } },
+        { id: { value: 8 }, name: { value: 'SitelinkFinalUrlSuffix' }, type: 4, isPartOfKey: { value: false } },
+      ],
+      id: 82896692,
+      name: 'My feed',
+      origin: 3,
+      status: 2,
+    },
     campaign: {
       resource_name: 'customers/9262111890/campaigns/1483704368',
       ad_serving_optimization_status: 2,
@@ -55,24 +90,6 @@ let result = await customer.campaignFeeds.list({
       target_spend: { cpc_bid_ceiling_micros: 12000000 },
       url_custom_parameters: [],
     },
-    campaign_feed: {
-      resource_name: 'customers/9262111890/campaignFeeds/1483704368~77425432',
-      campaign: 'customers/9262111890/campaigns/1483704368',
-      feed: 'customers/9262111890/feeds/77425432',
-      matching_function: {
-        function_string: 'IN(FEED_ITEM_ID,{51842673272,51842611747,51842613103,51844472313})',
-        left_operands: [{ requestContextOperand: { contextType: 2 } }],
-        operator: 2,
-        right_operands: [
-          { constantOperand: { longValue: { value: 51842673272 } } },
-          { constantOperand: { longValue: { value: 51842611747 } } },
-          { constantOperand: { longValue: { value: 51842613103 } } },
-          { constantOperand: { longValue: { value: 51844472313 } } },
-        ],
-      },
-      placeholder_types: [7],
-      status: 2,
-    },
     customer: {
       resource_name: 'customers/9262111890',
       auto_tagging_enabled: false,
@@ -92,14 +109,6 @@ let result = await customer.campaignFeeds.list({
       },
       test_account: true,
       time_zone: 'Europe/London',
-    },
-    feed: {
-      resource_name: 'customers/9262111890/feeds/77425432',
-      attributes: [{ id: { value: 1 }, name: { value: 'Callout Text' }, type: 4, isPartOfKey: { value: false } }],
-      id: 77425432,
-      name: 'My feed',
-      origin: 3,
-      status: 2,
     },
   },
 ]

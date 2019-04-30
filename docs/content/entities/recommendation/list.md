@@ -30,6 +30,26 @@ let result = await customer.recommendations.list({
 // Example result
 ;[
   {
+    recommendation: {
+      resource_name: 'customers/3827277046/recommendations/MTk5MDY3NzIzLTEzNi0xNTU1OTYzMjEyNTk5LSs5NTMzNjEwMzc',
+      campaign: 'customers/3827277046/campaigns/953361037',
+      campaign_budget: 'customers/3827277046/campaignBudgets/1234768991',
+      dismissed: false,
+      type: 5,
+    },
+    campaign_budget: {
+      resource_name: 'customers/3827277046/campaignBudgets/1234768991',
+      amount_micros: 100000000,
+      delivery_method: 3,
+      explicitly_shared: false,
+      has_recommended_budget: false,
+      id: 1234768991,
+      name: 'My campaign budget',
+      period: 2,
+      reference_count: 1,
+      status: 2,
+      type: 2,
+    },
     ad_group: {
       resource_name: '',
       campaign: 'customers/3827277046/campaigns/953361037',
@@ -62,19 +82,6 @@ let result = await customer.recommendations.list({
       targeting_setting: { target_restrictions: [{ targetingDimension: 3, bidOnly: { value: false } }] },
       url_custom_parameters: [],
     },
-    campaign_budget: {
-      resource_name: 'customers/3827277046/campaignBudgets/1234768991',
-      amount_micros: 100000000,
-      delivery_method: 3,
-      explicitly_shared: false,
-      has_recommended_budget: false,
-      id: 1234768991,
-      name: 'My campaign budget',
-      period: 2,
-      reference_count: 1,
-      status: 2,
-      type: 2,
-    },
     customer: {
       resource_name: 'customers/3827277046',
       auto_tagging_enabled: true,
@@ -96,13 +103,6 @@ let result = await customer.recommendations.list({
       time_zone: 'Europe/London',
       tracking_url_template:
         '{lpurl}?utm_source=adwords&utm_medium=PPC&utm_campaign={campaignid}&utm_term={ifsearch:{keyword}}{ifcontent:{placement}}&utm_content={creative}&network={network}&adgroupid={adgroupid}&matchtype={matchtype}&adposition={adposition}&targetid={targetid}&target={target}&device={device}&devicemodel={devicemodel}',
-    },
-    recommendation: {
-      resource_name: 'customers/3827277046/recommendations/MTk5MDY3NzIzLTEzNi0xNTU1OTYzMjEyNTk5LSs5NTMzNjEwMzc',
-      campaign: 'customers/3827277046/campaigns/953361037',
-      campaign_budget: 'customers/3827277046/campaignBudgets/1234768991',
-      dismissed: false,
-      type: 5,
     },
   },
 ]

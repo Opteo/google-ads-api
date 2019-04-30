@@ -30,6 +30,12 @@ let result = await customer.customerNegativeCriteria.list({
 // Example result
 ;[
   {
+    customer_negative_criterion: {
+      resource_name: 'customers/3827277046/customerNegativeCriteria/1163177997',
+      content_label: { type: 2 },
+      id: 1163177997,
+      type: 22,
+    },
     customer: {
       resource_name: 'customers/3827277046',
       auto_tagging_enabled: true,
@@ -51,12 +57,6 @@ let result = await customer.customerNegativeCriteria.list({
       time_zone: 'Europe/London',
       tracking_url_template:
         '{lpurl}?utm_source=adwords&utm_medium=PPC&utm_campaign={campaignid}&utm_term={ifsearch:{keyword}}{ifcontent:{placement}}&utm_content={creative}&network={network}&adgroupid={adgroupid}&matchtype={matchtype}&adposition={adposition}&targetid={targetid}&target={target}&device={device}&devicemodel={devicemodel}',
-    },
-    customer_negative_criterion: {
-      resource_name: 'customers/3827277046/customerNegativeCriteria/1163177997',
-      content_label: { type: 2 },
-      id: 1163177997,
-      type: 22,
     },
   },
 ]

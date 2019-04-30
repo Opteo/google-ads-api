@@ -11,14 +11,14 @@ The `customer.campaignCriteria.get()` method returns all fields for one Campaign
 
 ```javascript
 // Getting the entity
-let result = await customer.campaignCriteria.get('customers/9262111890/campaignCriteria/1473765780~1000')
+let result = await customer.campaignCriteria.get('customers/9262111890/campaignCriteria/1599497210~1000')
 ```
 
 ```javascript
 // Example result
 ;({
-  resource_name: 'customers/9262111890/campaignCriteria/1473765780~1000',
-  campaign: 'customers/9262111890/campaigns/1473765780',
+  resource_name: 'customers/9262111890/campaignCriteria/1599497210~1000',
+  campaign: 'customers/9262111890/campaigns/1599497210',
   criterion_id: 1000,
   language: { language_constant: 'languageConstants/1000' },
   negative: false,

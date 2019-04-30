@@ -13,7 +13,7 @@ This section describes how to update a CustomerFeed.
 // Updating the entity
 
 const customer_feed = {
-  resource_name: 'customers/9262111890/customerFeeds/77425432', // The resource_name is required
+  resource_name: 'customers/9262111890/customerFeeds/82896692', // The resource_name is required
   // ...any other fields that you would like to update
 }
 
@@ -22,5 +22,5 @@ const result = await customer.customerFeeds.update(customer_feed)
 
 ```javascript
 // Example result
-;['customers/9262111890/customerFeeds/77425432']
+;['customers/9262111890/customerFeeds/82896692']
 ```

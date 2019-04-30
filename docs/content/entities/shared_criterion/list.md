@@ -30,6 +30,22 @@ let result = await customer.sharedCriteria.list({
 // Example result
 ;[
   {
+    shared_criterion: {
+      resource_name: 'customers/9262111890/sharedCriteria/1788591305~627191652608',
+      criterion_id: 627191652608,
+      keyword: { match_type: 2, text: 'test-keyword-399026' },
+      shared_set: 'customers/9262111890/sharedSets/1788591305',
+      type: 2,
+    },
+    shared_set: {
+      resource_name: 'customers/9262111890/sharedSets/1788591305',
+      id: 1788591305,
+      member_count: 6,
+      name: 'My shared set',
+      reference_count: 0,
+      status: 2,
+      type: 2,
+    },
     customer: {
       resource_name: 'customers/9262111890',
       auto_tagging_enabled: false,
@@ -49,22 +65,6 @@ let result = await customer.sharedCriteria.list({
       },
       test_account: true,
       time_zone: 'Europe/London',
-    },
-    shared_criterion: {
-      resource_name: 'customers/9262111890/sharedCriteria/1788591305~13223616',
-      criterion_id: 13223616,
-      keyword: { match_type: 2, text: 'abc' },
-      shared_set: 'customers/9262111890/sharedSets/1788591305',
-      type: 2,
-    },
-    shared_set: {
-      resource_name: 'customers/9262111890/sharedSets/1788591305',
-      id: 1788591305,
-      member_count: 6,
-      name: 'My shared set',
-      reference_count: 0,
-      status: 2,
-      type: 2,
     },
   },
 ]

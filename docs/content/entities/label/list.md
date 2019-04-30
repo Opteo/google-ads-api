@@ -30,6 +30,13 @@ let result = await customer.labels.list({
 // Example result
 ;[
   {
+    label: {
+      resource_name: 'customers/3827277046/labels/872103121',
+      id: 872103121,
+      name: 'My label',
+      status: 2,
+      text_label: { background_color: '#6633FF', description: 'Non brand, traditional cold traffic via search' },
+    },
     customer: {
       resource_name: 'customers/3827277046',
       auto_tagging_enabled: true,
@@ -51,13 +58,6 @@ let result = await customer.labels.list({
       time_zone: 'Europe/London',
       tracking_url_template:
         '{lpurl}?utm_source=adwords&utm_medium=PPC&utm_campaign={campaignid}&utm_term={ifsearch:{keyword}}{ifcontent:{placement}}&utm_content={creative}&network={network}&adgroupid={adgroupid}&matchtype={matchtype}&adposition={adposition}&targetid={targetid}&target={target}&device={device}&devicemodel={devicemodel}',
-    },
-    label: {
-      resource_name: 'customers/3827277046/labels/872103121',
-      id: 872103121,
-      name: 'My label',
-      status: 2,
-      text_label: { background_color: '#6633FF', description: 'Non brand, traditional cold traffic via search' },
     },
   },
 ]

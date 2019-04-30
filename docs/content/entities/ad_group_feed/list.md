@@ -30,6 +30,41 @@ let result = await customer.adGroupFeeds.list({
 // Example result
 ;[
   {
+    ad_group_feed: {
+      resource_name: 'customers/3827277046/adGroupFeeds/36337683057~43009393',
+      ad_group: 'customers/3827277046/adGroups/36337683057',
+      feed: 'customers/3827277046/feeds/43009393',
+      matching_function: {
+        function_string: 'IN(FEED_ITEM_ID,{9779152283,9780600045,9784362487,9784349521})',
+        left_operands: [{ requestContextOperand: { contextType: 2 } }],
+        operator: 2,
+        right_operands: [
+          { constantOperand: { longValue: { value: 9779152283 } } },
+          { constantOperand: { longValue: { value: 9780600045 } } },
+          { constantOperand: { longValue: { value: 9784362487 } } },
+          { constantOperand: { longValue: { value: 9784349521 } } },
+        ],
+      },
+      placeholder_types: [2],
+      status: 2,
+    },
+    feed: {
+      resource_name: 'customers/3827277046/feeds/43009393',
+      attributes: [
+        { id: { value: 1 }, name: { value: 'SitelinkName' }, type: 4, isPartOfKey: { value: false } },
+        { id: { value: 2 }, name: { value: 'SitelinkUrl' }, type: 6, isPartOfKey: { value: false } },
+        { id: { value: 3 }, name: { value: 'SitelinkDescription1' }, type: 4, isPartOfKey: { value: false } },
+        { id: { value: 4 }, name: { value: 'SitelinkDescription2' }, type: 4, isPartOfKey: { value: false } },
+        { id: { value: 5 }, name: { value: 'SitelinkFinalUrls' }, type: 12, isPartOfKey: { value: false } },
+        { id: { value: 6 }, name: { value: 'SitelinkFinalMobileUrls' }, type: 12, isPartOfKey: { value: false } },
+        { id: { value: 7 }, name: { value: 'SitelinkTrackingUrl' }, type: 6, isPartOfKey: { value: false } },
+        { id: { value: 8 }, name: { value: 'SitelinkFinalUrlSuffix' }, type: 4, isPartOfKey: { value: false } },
+      ],
+      id: 43009393,
+      name: 'My feed',
+      origin: 3,
+      status: 2,
+    },
     ad_group: {
       resource_name: 'customers/3827277046/adGroups/36337683057',
       campaign: 'customers/3827277046/campaigns/729468370',
@@ -54,24 +89,6 @@ let result = await customer.adGroupFeeds.list({
       },
       type: 2,
       url_custom_parameters: [],
-    },
-    ad_group_feed: {
-      resource_name: 'customers/3827277046/adGroupFeeds/36337683057~43009393',
-      ad_group: 'customers/3827277046/adGroups/36337683057',
-      feed: 'customers/3827277046/feeds/43009393',
-      matching_function: {
-        function_string: 'IN(FEED_ITEM_ID,{9779152283,9780600045,9784362487,9784349521})',
-        left_operands: [{ requestContextOperand: { contextType: 2 } }],
-        operator: 2,
-        right_operands: [
-          { constantOperand: { longValue: { value: 9779152283 } } },
-          { constantOperand: { longValue: { value: 9780600045 } } },
-          { constantOperand: { longValue: { value: 9784362487 } } },
-          { constantOperand: { longValue: { value: 9784349521 } } },
-        ],
-      },
-      placeholder_types: [2],
-      status: 2,
     },
     campaign: {
       resource_name: 'customers/3827277046/campaigns/729468370',
@@ -119,23 +136,6 @@ let result = await customer.adGroupFeeds.list({
       time_zone: 'Europe/London',
       tracking_url_template:
         '{lpurl}?utm_source=adwords&utm_medium=PPC&utm_campaign={campaignid}&utm_term={ifsearch:{keyword}}{ifcontent:{placement}}&utm_content={creative}&network={network}&adgroupid={adgroupid}&matchtype={matchtype}&adposition={adposition}&targetid={targetid}&target={target}&device={device}&devicemodel={devicemodel}',
-    },
-    feed: {
-      resource_name: 'customers/3827277046/feeds/43009393',
-      attributes: [
-        { id: { value: 1 }, name: { value: 'SitelinkName' }, type: 4, isPartOfKey: { value: false } },
-        { id: { value: 2 }, name: { value: 'SitelinkUrl' }, type: 6, isPartOfKey: { value: false } },
-        { id: { value: 3 }, name: { value: 'SitelinkDescription1' }, type: 4, isPartOfKey: { value: false } },
-        { id: { value: 4 }, name: { value: 'SitelinkDescription2' }, type: 4, isPartOfKey: { value: false } },
-        { id: { value: 5 }, name: { value: 'SitelinkFinalUrls' }, type: 12, isPartOfKey: { value: false } },
-        { id: { value: 6 }, name: { value: 'SitelinkFinalMobileUrls' }, type: 12, isPartOfKey: { value: false } },
-        { id: { value: 7 }, name: { value: 'SitelinkTrackingUrl' }, type: 6, isPartOfKey: { value: false } },
-        { id: { value: 8 }, name: { value: 'SitelinkFinalUrlSuffix' }, type: 4, isPartOfKey: { value: false } },
-      ],
-      id: 43009393,
-      name: 'My feed',
-      origin: 3,
-      status: 2,
     },
   },
 ]

@@ -13,7 +13,7 @@ This section describes how to update a CustomerExtensionSetting.
 // Updating the entity
 
 const customer_extension_setting = {
-  resource_name: 'customers/9262111890/customerExtensionSettings/SITELINK', // The resource_name is required
+  resource_name: 'customers/9262111890/customerExtensionSettings/STRUCTURED_SNIPPET', // The resource_name is required
   // ...any other fields that you would like to update
 }
 
@@ -22,5 +22,5 @@ const result = await customer.customerExtensionSettings.update(customer_extensio
 
 ```javascript
 // Example result
-;['customers/9262111890/customerExtensionSettings/SITELINK']
+;['customers/9262111890/customerExtensionSettings/STRUCTURED_SNIPPET']
 ```

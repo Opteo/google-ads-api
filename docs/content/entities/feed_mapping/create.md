@@ -21,5 +21,5 @@ const result = await customer.feedMappings.create(feed_mapping)
 
 ```javascript
 // Example result
-;['customers/9262111890/feedMappings/77425432~84739365']
+;['customers/9262111890/feedMappings/82896692~91300060']
 ```

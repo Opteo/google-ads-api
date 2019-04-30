@@ -14,12 +14,12 @@ This section describes the SharedSet entity.
 ```javascript
 // Example SharedSet
 const shared_set = {
-  resource_name: 'customers/9262111890/sharedSets/1788591305',
-  id: 1788591305,
-  member_count: 6,
+  resource_name: 'customers/9262111890/sharedSets/1802068178',
+  id: 1802068178,
+  member_count: 0,
   name: 'My shared set',
   reference_count: 0,
-  status: 2,
+  status: 3,
   type: 2,
 }
 ```

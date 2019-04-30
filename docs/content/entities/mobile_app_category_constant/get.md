@@ -11,10 +11,10 @@ The `customer.mobileAppCategoryConstants.get()` method returns all fields for on
 
 ```javascript
 // Getting the entity
-let result = await customer.mobileAppCategoryConstants.get('customers/1234567890/mobileAppCategoryConstants/123123123')
+let result = await customer.mobileAppCategoryConstants.get('mobileAppCategoryConstants/60559')
 ```
 
 ```javascript
 // Example result
-;({ resource_name: '', id: 0, name: '/' })
+;({ resource_name: 'mobileAppCategoryConstants/60559', id: 60559, name: 'Literary Magazines & Journals' })
 ```

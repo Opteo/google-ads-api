@@ -30,6 +30,15 @@ let result = await customer.mediaFiles.list({
 // Example result
 ;[
   {
+    media_file: {
+      resource_name: 'customers/3827277046/mediaFiles/2844631150',
+      file_size: 0,
+      id: 2844631150,
+      mime_type: 1,
+      name: 'My media file',
+      source_url: '',
+      type: 1,
+    },
     customer: {
       resource_name: 'customers/3827277046',
       auto_tagging_enabled: true,
@@ -51,15 +60,6 @@ let result = await customer.mediaFiles.list({
       time_zone: 'Europe/London',
       tracking_url_template:
         '{lpurl}?utm_source=adwords&utm_medium=PPC&utm_campaign={campaignid}&utm_term={ifsearch:{keyword}}{ifcontent:{placement}}&utm_content={creative}&network={network}&adgroupid={adgroupid}&matchtype={matchtype}&adposition={adposition}&targetid={targetid}&target={target}&device={device}&devicemodel={devicemodel}',
-    },
-    media_file: {
-      resource_name: 'customers/3827277046/mediaFiles/2844631150',
-      file_size: 0,
-      id: 2844631150,
-      mime_type: 1,
-      name: 'My media file',
-      source_url: '',
-      type: 1,
     },
   },
 ]

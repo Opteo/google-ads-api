@@ -30,6 +30,17 @@ let result = await customer.campaignExtensionSettings.list({
 // Example result
 ;[
   {
+    campaign_extension_setting: {
+      resource_name: 'customers/9262111890/campaignExtensionSettings/1483704368~SITELINK',
+      campaign: 'customers/9262111890/campaigns/1483704368',
+      extension_feed_items: [
+        { value: 'customers/9262111890/extensionFeedItems/51842193961' },
+        { value: 'customers/9262111890/extensionFeedItems/51842200495' },
+        { value: 'customers/9262111890/extensionFeedItems/51844020102' },
+        { value: 'customers/9262111890/extensionFeedItems/51844028388' },
+      ],
+      extension_type: 10,
+    },
     campaign: {
       resource_name: 'customers/9262111890/campaigns/1483704368',
       ad_serving_optimization_status: 2,
@@ -54,17 +65,6 @@ let result = await customer.campaignExtensionSettings.list({
       status: 2,
       target_spend: { cpc_bid_ceiling_micros: 12000000 },
       url_custom_parameters: [],
-    },
-    campaign_extension_setting: {
-      resource_name: 'customers/9262111890/campaignExtensionSettings/1483704368~SITELINK',
-      campaign: 'customers/9262111890/campaigns/1483704368',
-      extension_feed_items: [
-        { value: 'customers/9262111890/extensionFeedItems/51842193961' },
-        { value: 'customers/9262111890/extensionFeedItems/51842200495' },
-        { value: 'customers/9262111890/extensionFeedItems/51844020102' },
-        { value: 'customers/9262111890/extensionFeedItems/51844028388' },
-      ],
-      extension_type: 10,
     },
     customer: {
       resource_name: 'customers/9262111890',

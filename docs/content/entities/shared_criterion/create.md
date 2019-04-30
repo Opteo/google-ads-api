@@ -21,5 +21,5 @@ const result = await customer.sharedCriteria.create(shared_criterion)
 
 ```javascript
 // Example result
-;['customers/9262111890/sharedCriteria/1788591305~13223616']
+;['customers/9262111890/sharedCriteria/1788591305~627191652608']
 ```

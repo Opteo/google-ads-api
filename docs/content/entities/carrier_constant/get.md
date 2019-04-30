@@ -11,10 +11,15 @@ The `customer.carrierConstants.get()` method returns all fields for one CarrierC
 
 ```javascript
 // Getting the entity
-let result = await customer.carrierConstants.get('carrierConstants/70000')
+let result = await customer.carrierConstants.get('carrierConstants/70720')
 ```
 
 ```javascript
 // Example result
-;({ resource_name: 'carrierConstants/70000', country_code: 'JP', id: 70000, name: 'NTT DoCoMo' })
+;({
+  resource_name: 'carrierConstants/70720',
+  country_code: 'TW',
+  id: 70720,
+  name: 'Long Distance & Mobile Business Group',
+})
 ```

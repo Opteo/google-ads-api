@@ -13,7 +13,7 @@ This section describes how to update a AdGroup.
 // Updating the entity
 
 const ad_group = {
-  resource_name: 'customers/9262111890/adGroups/54493284610', // The resource_name is required
+  resource_name: 'customers/9262111890/adGroups/66537099246', // The resource_name is required
   // ...any other fields that you would like to update
 }
 
@@ -22,5 +22,5 @@ const result = await customer.adGroups.update(ad_group)
 
 ```javascript
 // Example result
-;['customers/9262111890/adGroups/54493284610']
+;['customers/9262111890/adGroups/66537099246']
 ```

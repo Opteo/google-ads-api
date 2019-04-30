@@ -30,6 +30,12 @@ let result = await customer.customerManagerLinks.list({
 // Example result
 ;[
   {
+    customer_manager_link: {
+      resource_name: 'customers/9262111890/customerManagerLinks/6141549892~121665495',
+      manager_customer: 'customers/6141549892',
+      manager_link_id: 121665495,
+      status: 2,
+    },
     customer: {
       resource_name: 'customers/9262111890',
       auto_tagging_enabled: false,
@@ -49,12 +55,6 @@ let result = await customer.customerManagerLinks.list({
       },
       test_account: true,
       time_zone: 'Europe/London',
-    },
-    customer_manager_link: {
-      resource_name: 'customers/9262111890/customerManagerLinks/6141549892~121665495',
-      manager_customer: 'customers/6141549892',
-      manager_link_id: 121665495,
-      status: 2,
     },
   },
 ]

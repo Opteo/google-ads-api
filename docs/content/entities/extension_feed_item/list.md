@@ -30,6 +30,18 @@ let result = await customer.extensionFeedItems.list({
 // Example result
 ;[
   {
+    extension_feed_item: {
+      resource_name: 'customers/3827277046/extensionFeedItems/9779152283',
+      extension_type: 10,
+      sitelink_feed_item: {
+        final_mobile_urls: [],
+        final_urls: [{ value: 'https://opteo.com/docs' }],
+        line_1: 'Adwords Guides, Case Studies',
+        line_2: 'Chrome Extensions and more!',
+        link_text: 'AdWords Knowledge Base',
+      },
+      status: 2,
+    },
     ad_group: {
       resource_name: 'customers/3827277046/adGroups/36337682537',
       campaign: 'customers/3827277046/campaigns/729468367',
@@ -101,18 +113,6 @@ let result = await customer.extensionFeedItems.list({
       time_zone: 'Europe/London',
       tracking_url_template:
         '{lpurl}?utm_source=adwords&utm_medium=PPC&utm_campaign={campaignid}&utm_term={ifsearch:{keyword}}{ifcontent:{placement}}&utm_content={creative}&network={network}&adgroupid={adgroupid}&matchtype={matchtype}&adposition={adposition}&targetid={targetid}&target={target}&device={device}&devicemodel={devicemodel}',
-    },
-    extension_feed_item: {
-      resource_name: 'customers/3827277046/extensionFeedItems/9779152283',
-      extension_type: 10,
-      sitelink_feed_item: {
-        final_mobile_urls: [],
-        final_urls: [{ value: 'https://opteo.com/docs' }],
-        line_1: 'Adwords Guides, Case Studies',
-        line_2: 'Chrome Extensions and more!',
-        link_text: 'AdWords Knowledge Base',
-      },
-      status: 2,
     },
   },
 ]

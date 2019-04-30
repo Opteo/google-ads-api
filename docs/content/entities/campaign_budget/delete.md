@@ -12,5 +12,5 @@ This section describes how to delete a CampaignBudget.
 ```javascript
 // Deleting the entity
 
-await customer.campaignBudgets.delete('customers/9262111890/campaignBudgets/1536143460')
+await customer.campaignBudgets.delete('customers/9262111890/campaignBudgets/1624493702')
 ```

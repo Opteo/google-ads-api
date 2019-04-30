@@ -31,12 +31,12 @@ let result = await customer.mobileDeviceConstants.list({
 ;[
   {
     mobile_device_constant: {
-      resource_name: 'mobileDeviceConstants/600329',
-      id: 600329,
-      manufacturer_name: 'HTC',
-      name: 'Hero',
-      operating_system_name: 'Android',
-      type: 2,
+      resource_name: 'mobileDeviceConstants/610508',
+      id: 610508,
+      manufacturer_name: 'Microsoft',
+      name: 'windows rt tablet',
+      operating_system_name: 'Other/Unknown',
+      type: 3,
     },
   },
 ]

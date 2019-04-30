@@ -30,6 +30,7 @@ let result = await customer.keywordPlans.list({
 // Example result
 ;[
   {
+    keyword_plan: { resource_name: 'customers/3827277046/keywordPlans/4739396', id: 4739396, name: 'My keyword plan' },
     customer: {
       resource_name: 'customers/3827277046',
       auto_tagging_enabled: true,
@@ -52,7 +53,6 @@ let result = await customer.keywordPlans.list({
       tracking_url_template:
         '{lpurl}?utm_source=adwords&utm_medium=PPC&utm_campaign={campaignid}&utm_term={ifsearch:{keyword}}{ifcontent:{placement}}&utm_content={creative}&network={network}&adgroupid={adgroupid}&matchtype={matchtype}&adposition={adposition}&targetid={targetid}&target={target}&device={device}&devicemodel={devicemodel}',
     },
-    keyword_plan: { resource_name: 'customers/3827277046/keywordPlans/4739396', id: 4739396, name: 'My keyword plan' },
   },
 ]
 ```

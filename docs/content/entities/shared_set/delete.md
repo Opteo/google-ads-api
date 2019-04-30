@@ -12,5 +12,5 @@ This section describes how to delete a SharedSet.
 ```javascript
 // Deleting the entity
 
-await customer.sharedSets.delete('customers/9262111890/sharedSets/1788591305')
+await customer.sharedSets.delete('customers/9262111890/sharedSets/1802068178')
 ```

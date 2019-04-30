@@ -12,5 +12,5 @@ This section describes how to delete a Feed.
 ```javascript
 // Deleting the entity
 
-await customer.feeds.delete('customers/9262111890/feeds/77425432')
+await customer.feeds.delete('customers/9262111890/feeds/82896692')
 ```

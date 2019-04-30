@@ -21,5 +21,5 @@ const result = await customer.campaignFeeds.create(campaign_feed)
 
 ```javascript
 // Example result
-;['customers/9262111890/campaignFeeds/1483704368~77425432']
+;['customers/9262111890/campaignFeeds/1483704368~82896692']
 ```

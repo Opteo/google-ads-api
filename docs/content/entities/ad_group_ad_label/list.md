@@ -30,6 +30,40 @@ let result = await customer.adGroupAdLabels.list({
 // Example result
 ;[
   {
+    ad_group_ad_label: {
+      resource_name: 'customers/3827277046/adGroupAdLabels/37706041185~191743801329~1091971976',
+      ad_group_ad: 'customers/3827277046/adGroupAds/37706041185~191743801329',
+      label: 'customers/3827277046/labels/1091971976',
+    },
+    ad_group_ad: {
+      resource_name: 'customers/3827277046/adGroupAds/37706041185~191743801329',
+      ad: {
+        added_by_google_ads: false,
+        display_url: '',
+        expanded_text_ad: {
+          description: 'State Of The Art AdWords PPC Tool. Designed For Agencies. Try It Free!',
+          headline_part_1: 'Top Ad Words Tool',
+          headline_part_2: 'Manage AdWords The Smart Way',
+          path_1: 'ppc',
+          path_2: 'tool',
+        },
+        final_mobile_urls: [],
+        final_urls: [{ value: 'http://opteo.co/lp/ad-words-software' }],
+        id: 191743801329,
+        type: 3,
+        url_collections: [],
+        url_custom_parameters: [],
+      },
+      ad_group: 'customers/3827277046/adGroups/37706041185',
+      status: 3,
+    },
+    label: {
+      resource_name: 'customers/3827277046/labels/1091971976',
+      id: 1091971976,
+      name: 'My label',
+      status: 2,
+      text_label: { background_color: '#FF9900', description: '' },
+    },
     ad_group: {
       resource_name: 'customers/3827277046/adGroups/37706041185',
       campaign: 'customers/3827277046/campaigns/729684361',
@@ -54,33 +88,6 @@ let result = await customer.adGroupAdLabels.list({
       },
       type: 2,
       url_custom_parameters: [],
-    },
-    ad_group_ad: {
-      resource_name: 'customers/3827277046/adGroupAds/37706041185~191743801329',
-      ad: {
-        added_by_google_ads: false,
-        display_url: '',
-        expanded_text_ad: {
-          description: 'State Of The Art AdWords PPC Tool. Designed For Agencies. Try It Free!',
-          headline_part_1: 'Top Ad Words Tool',
-          headline_part_2: 'Manage AdWords The Smart Way',
-          path_1: 'ppc',
-          path_2: 'tool',
-        },
-        final_mobile_urls: [],
-        final_urls: [{ value: 'http://opteo.co/lp/ad-words-software' }],
-        id: 191743801329,
-        type: 3,
-        url_collections: [],
-        url_custom_parameters: [],
-      },
-      ad_group: 'customers/3827277046/adGroups/37706041185',
-      status: 3,
-    },
-    ad_group_ad_label: {
-      resource_name: 'customers/3827277046/adGroupAdLabels/37706041185~191743801329~1091971976',
-      ad_group_ad: 'customers/3827277046/adGroupAds/37706041185~191743801329',
-      label: 'customers/3827277046/labels/1091971976',
     },
     campaign: {
       resource_name: 'customers/3827277046/campaigns/729684361',
@@ -129,13 +136,6 @@ let result = await customer.adGroupAdLabels.list({
       time_zone: 'Europe/London',
       tracking_url_template:
         '{lpurl}?utm_source=adwords&utm_medium=PPC&utm_campaign={campaignid}&utm_term={ifsearch:{keyword}}{ifcontent:{placement}}&utm_content={creative}&network={network}&adgroupid={adgroupid}&matchtype={matchtype}&adposition={adposition}&targetid={targetid}&target={target}&device={device}&devicemodel={devicemodel}',
-    },
-    label: {
-      resource_name: 'customers/3827277046/labels/1091971976',
-      id: 1091971976,
-      name: 'My label',
-      status: 2,
-      text_label: { background_color: '#FF9900', description: '' },
     },
   },
 ]

@@ -11,17 +11,17 @@ The `customer.mobileDeviceConstants.get()` method returns all fields for one Mob
 
 ```javascript
 // Getting the entity
-let result = await customer.mobileDeviceConstants.get('mobileDeviceConstants/600329')
+let result = await customer.mobileDeviceConstants.get('mobileDeviceConstants/610508')
 ```
 
 ```javascript
 // Example result
 ;({
-  resource_name: 'mobileDeviceConstants/600329',
-  id: 600329,
-  manufacturer_name: 'HTC',
-  name: 'Hero',
-  operating_system_name: 'Android',
-  type: 2,
+  resource_name: 'mobileDeviceConstants/610508',
+  id: 610508,
+  manufacturer_name: 'Microsoft',
+  name: 'windows rt tablet',
+  operating_system_name: 'Other/Unknown',
+  type: 3,
 })
 ```

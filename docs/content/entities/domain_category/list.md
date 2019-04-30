@@ -30,6 +30,16 @@ let result = await customer.domainCategories.list({
 // Example result
 ;[
   {
+    domain_category: {
+      resource_name: 'customers/3827277046/domainCategories/1398201241~YWRz~en',
+      campaign: 'customers/3827277046/campaigns/1398201241',
+      category: 'ads',
+      category_rank: 8,
+      coverage_fraction: 7.042253521126761,
+      domain: 'opteo.com',
+      has_children: false,
+      language_code: 'en',
+    },
     campaign: {
       resource_name: 'customers/3827277046/campaigns/1398201241',
       ad_serving_optimization_status: 5,
@@ -82,16 +92,6 @@ let result = await customer.domainCategories.list({
       time_zone: 'Europe/London',
       tracking_url_template:
         '{lpurl}?utm_source=adwords&utm_medium=PPC&utm_campaign={campaignid}&utm_term={ifsearch:{keyword}}{ifcontent:{placement}}&utm_content={creative}&network={network}&adgroupid={adgroupid}&matchtype={matchtype}&adposition={adposition}&targetid={targetid}&target={target}&device={device}&devicemodel={devicemodel}',
-    },
-    domain_category: {
-      resource_name: 'customers/3827277046/domainCategories/1398201241~YWRz~en',
-      campaign: 'customers/3827277046/campaigns/1398201241',
-      category: 'ads',
-      category_rank: 8,
-      coverage_fraction: 7.042253521126761,
-      domain: 'opteo.com',
-      has_children: false,
-      language_code: 'en',
     },
   },
 ]

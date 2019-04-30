@@ -21,5 +21,5 @@ const result = await customer.adGroups.create(ad_group)
 
 ```javascript
 // Example result
-;['customers/9262111890/adGroups/54493284610']
+;['customers/9262111890/adGroups/66537099246']
 ```

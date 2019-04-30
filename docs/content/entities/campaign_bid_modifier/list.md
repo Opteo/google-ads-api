@@ -30,6 +30,11 @@ let result = await customer.campaignBidModifiers.list({
 // Example result
 ;[
   {
+    campaign_bid_modifier: {
+      resource_name: 'customers/3827277046/campaignBidModifiers/729684361~8000',
+      campaign: 'customers/3827277046/campaigns/729684361',
+      criterion_id: 8000,
+    },
     campaign: {
       resource_name: 'customers/3827277046/campaigns/729684361',
       ad_serving_optimization_status: 4,
@@ -55,11 +60,6 @@ let result = await customer.campaignBidModifiers.list({
       status: 3,
       targeting_setting: { target_restrictions: [{ targetingDimension: 3, bidOnly: { value: false } }] },
       url_custom_parameters: [],
-    },
-    campaign_bid_modifier: {
-      resource_name: 'customers/3827277046/campaignBidModifiers/729684361~8000',
-      campaign: 'customers/3827277046/campaigns/729684361',
-      criterion_id: 8000,
     },
     customer: {
       resource_name: 'customers/3827277046',

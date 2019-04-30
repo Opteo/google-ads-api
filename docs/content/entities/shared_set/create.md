@@ -21,5 +21,5 @@ const result = await customer.sharedSets.create(shared_set)
 
 ```javascript
 // Example result
-;['customers/9262111890/sharedSets/1788591305']
+;['customers/9262111890/sharedSets/1802068178']
 ```

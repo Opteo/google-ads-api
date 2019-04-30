@@ -13,7 +13,7 @@ This section describes how to update a AdGroupBidModifier.
 // Updating the entity
 
 const ad_group_bid_modifier = {
-  resource_name: 'customers/9262111890/adGroupBidModifiers/54493284610~30000', // The resource_name is required
+  resource_name: 'customers/9262111890/adGroupBidModifiers/66537099246~30000', // The resource_name is required
   // ...any other fields that you would like to update
 }
 
@@ -22,5 +22,5 @@ const result = await customer.adGroupBidModifiers.update(ad_group_bid_modifier)
 
 ```javascript
 // Example result
-;['customers/9262111890/adGroupBidModifiers/54493284610~30000']
+;['customers/9262111890/adGroupBidModifiers/66537099246~30000']
 ```

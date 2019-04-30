@@ -30,20 +30,12 @@ let result = await customer.videos.list({
 // Example result
 ;[
   {
-    ad_group: {
-      resource_name: 'customers/3827277046/adGroups/54404228570',
-      campaign: 'customers/3827277046/campaigns/1546870006',
-      cpc_bid_micros: 0,
-      cpm_bid_micros: 10000,
-      cpv_bid_micros: 100000,
-      display_custom_bid_dimension: 2,
-      effective_target_cpa_micros: 0,
-      id: 54404228570,
-      name: 'My ad group',
-      status: 2,
-      target_cpa_micros: 0,
-      type: 9,
-      url_custom_parameters: [],
+    video: {
+      resource_name: 'customers/3827277046/videos/Vl9qUzhuTExwWkk',
+      channel_id: 'UCOSYb4yvogm0SAI8rX8kGWQ',
+      duration_millis: 40356,
+      id: 'V_jS8nLLpZI',
+      title: 'Opteo',
     },
     ad_group_ad: {
       resource_name: 'customers/3827277046/adGroupAds/54404228570~293693442153',
@@ -60,6 +52,21 @@ let result = await customer.videos.list({
       },
       ad_group: 'customers/3827277046/adGroups/54404228570',
       status: 2,
+    },
+    ad_group: {
+      resource_name: 'customers/3827277046/adGroups/54404228570',
+      campaign: 'customers/3827277046/campaigns/1546870006',
+      cpc_bid_micros: 0,
+      cpm_bid_micros: 10000,
+      cpv_bid_micros: 100000,
+      display_custom_bid_dimension: 2,
+      effective_target_cpa_micros: 0,
+      id: 54404228570,
+      name: 'My ad group',
+      status: 2,
+      target_cpa_micros: 0,
+      type: 9,
+      url_custom_parameters: [],
     },
     campaign: {
       resource_name: 'customers/3827277046/campaigns/1546870006',
@@ -107,13 +114,6 @@ let result = await customer.videos.list({
       time_zone: 'Europe/London',
       tracking_url_template:
         '{lpurl}?utm_source=adwords&utm_medium=PPC&utm_campaign={campaignid}&utm_term={ifsearch:{keyword}}{ifcontent:{placement}}&utm_content={creative}&network={network}&adgroupid={adgroupid}&matchtype={matchtype}&adposition={adposition}&targetid={targetid}&target={target}&device={device}&devicemodel={devicemodel}',
-    },
-    video: {
-      resource_name: 'customers/3827277046/videos/Vl9qUzhuTExwWkk',
-      channel_id: 'UCOSYb4yvogm0SAI8rX8kGWQ',
-      duration_millis: 40356,
-      id: 'V_jS8nLLpZI',
-      title: 'Opteo',
     },
   },
 ]

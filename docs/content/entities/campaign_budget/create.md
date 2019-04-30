@@ -21,5 +21,5 @@ const result = await customer.campaignBudgets.create(campaign_budget)
 
 ```javascript
 // Example result
-;['customers/9262111890/campaignBudgets/1536143460']
+;['customers/9262111890/campaignBudgets/1624493702']
 ```

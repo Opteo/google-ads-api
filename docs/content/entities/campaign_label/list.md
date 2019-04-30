@@ -30,6 +30,18 @@ let result = await customer.campaignLabels.list({
 // Example result
 ;[
   {
+    campaign_label: {
+      resource_name: 'customers/3827277046/campaignLabels/729914321~898377018',
+      campaign: 'customers/3827277046/campaigns/729914321',
+      label: 'customers/3827277046/labels/898377018',
+    },
+    label: {
+      resource_name: 'customers/3827277046/labels/898377018',
+      id: 898377018,
+      name: 'My label',
+      status: 2,
+      text_label: { background_color: '#CCCCFF', description: '' },
+    },
     campaign: {
       resource_name: 'customers/3827277046/campaigns/729914321',
       ad_serving_optimization_status: 5,
@@ -56,11 +68,6 @@ let result = await customer.campaignLabels.list({
       targeting_setting: { target_restrictions: [{ targetingDimension: 3, bidOnly: { value: false } }] },
       url_custom_parameters: [],
     },
-    campaign_label: {
-      resource_name: 'customers/3827277046/campaignLabels/729914321~898377018',
-      campaign: 'customers/3827277046/campaigns/729914321',
-      label: 'customers/3827277046/labels/898377018',
-    },
     customer: {
       resource_name: 'customers/3827277046',
       auto_tagging_enabled: true,
@@ -82,13 +89,6 @@ let result = await customer.campaignLabels.list({
       time_zone: 'Europe/London',
       tracking_url_template:
         '{lpurl}?utm_source=adwords&utm_medium=PPC&utm_campaign={campaignid}&utm_term={ifsearch:{keyword}}{ifcontent:{placement}}&utm_content={creative}&network={network}&adgroupid={adgroupid}&matchtype={matchtype}&adposition={adposition}&targetid={targetid}&target={target}&device={device}&devicemodel={devicemodel}',
-    },
-    label: {
-      resource_name: 'customers/3827277046/labels/898377018',
-      id: 898377018,
-      name: 'My label',
-      status: 2,
-      text_label: { background_color: '#CCCCFF', description: '' },
     },
   },
 ]

@@ -30,6 +30,15 @@ let result = await customer.sharedSets.list({
 // Example result
 ;[
   {
+    shared_set: {
+      resource_name: 'customers/9262111890/sharedSets/1802068178',
+      id: 1802068178,
+      member_count: 0,
+      name: 'My shared set',
+      reference_count: 0,
+      status: 3,
+      type: 2,
+    },
     customer: {
       resource_name: 'customers/9262111890',
       auto_tagging_enabled: false,
@@ -49,15 +58,6 @@ let result = await customer.sharedSets.list({
       },
       test_account: true,
       time_zone: 'Europe/London',
-    },
-    shared_set: {
-      resource_name: 'customers/9262111890/sharedSets/1788591305',
-      id: 1788591305,
-      member_count: 6,
-      name: 'My shared set',
-      reference_count: 0,
-      status: 2,
-      type: 2,
     },
   },
 ]

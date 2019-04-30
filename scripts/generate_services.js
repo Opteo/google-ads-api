@@ -4,6 +4,7 @@ const camelCase = require('lodash.camelcase')
 const snakeCase = require('lodash.snakecase')
 const endsWith = require('lodash.endswith')
 const get = require('lodash.get')
+const maxBy = require('lodash.maxby')
 
 const Promise = require('bluebird')
 
@@ -526,21 +527,49 @@ async function compileService(entity, schema) {
     let example_resource_name = `customers/1234567890/${ resource_url_name }/123123123`
 
     if (listed.length > 0) {
-        // just a tiny bit of sanitization
-        Object.keys(listed[0]).forEach(key => {
-            if (listed[0][key].name && !entity.toLowerCase().includes('constant')) {
-                listed[0][key].name = `My ${key.split('_').join(' ')}`
-            }
-            if (listed[0][key].descriptive_name && !entity.toLowerCase().includes('constant')) {
-                listed[0][key].descriptive_name = `My ${key.split('_').join(' ')}`
+
+        // Get the "biggest" example in an attempt to get the most fields
+        let chosen_example = maxBy(listed, block => {
+            return JSON.stringify(block).length
+        })
+
+        // Reorder the object to put the least interesting things at the bottom
+        ;
+        (['ad_group', 'campaign', 'customer']).forEach(key => {
+            if (chosen_example[key]) {
+                const customer_temp_object = chosen_example[key]
+                delete chosen_example[key]
+                chosen_example = {
+                    ...chosen_example,
+                    [key]: customer_temp_object,
+                }
             }
         })
-        example_object_list = JSON.stringify(listed[0])
-        if (get(listed[0], `${ent}.resource_name`)) {
-            example_resource_name = listed[0][ent].resource_name
+
+        // ... And get the important bit at the top
+        const ent_temp_object = chosen_example[ent]
+        delete chosen_example[ent]
+        chosen_example = {
+            [ent]: ent_temp_object,
+            ...chosen_example
         }
-        if (get(listed[0], `${ent}`)) {
-            example_object_get = JSON.stringify(listed[0][ent])
+
+        // just a tiny bit of sanitization
+        Object.keys(chosen_example).forEach(key => {
+            if (chosen_example[key].name && !entity.toLowerCase().includes('constant')) {
+                chosen_example[key].name = `My ${key.split('_').join(' ')}`
+            }
+            if (chosen_example[key].descriptive_name && !entity.toLowerCase().includes('constant')) {
+                chosen_example[key].descriptive_name = `My ${key.split('_').join(' ')}`
+            }
+        })
+
+        example_object_list = JSON.stringify(chosen_example)
+        if (get(chosen_example, `${ent}.resource_name`)) {
+            example_resource_name = chosen_example[ent].resource_name
+        }
+        if (get(chosen_example, `${ent}`)) {
+            example_object_get = JSON.stringify(chosen_example[ent])
         }
     }
 

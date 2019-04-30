@@ -12,5 +12,5 @@ This section describes how to delete a Campaign.
 ```javascript
 // Deleting the entity
 
-await customer.campaigns.delete('customers/9262111890/campaigns/1473765780')
+await customer.campaigns.delete('customers/9262111890/campaigns/1568629385')
 ```

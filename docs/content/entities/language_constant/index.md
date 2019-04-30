@@ -14,10 +14,10 @@ This section describes the LanguageConstant entity.
 ```javascript
 // Example LanguageConstant
 const language_constant = {
-  resource_name: 'languageConstants/1000',
-  code: 'en',
-  id: 1000,
-  name: 'English',
-  targetable: true,
+  resource_name: 'languageConstants/1150',
+  code: 'zh_HK',
+  id: 1150,
+  name: 'Chinese (Hong Kong SAR)',
+  targetable: false,
 }
 ```

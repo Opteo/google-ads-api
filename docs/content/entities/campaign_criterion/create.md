@@ -21,5 +21,5 @@ const result = await customer.campaignCriteria.create(campaign_criterion)
 
 ```javascript
 // Example result
-;['customers/9262111890/campaignCriteria/1473765780~1000']
+;['customers/9262111890/campaignCriteria/1599497210~1000']
 ```

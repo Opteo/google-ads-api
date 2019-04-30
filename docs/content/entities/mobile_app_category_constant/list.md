@@ -28,5 +28,13 @@ let result = await customer.mobileAppCategoryConstants.list({
 
 ```javascript
 // Example result
-;[{ mobile_app_category_constant: { resource_name: '', id: 0, name: '/' } }]
+;[
+  {
+    mobile_app_category_constant: {
+      resource_name: 'mobileAppCategoryConstants/60559',
+      id: 60559,
+      name: 'Literary Magazines & Journals',
+    },
+  },
+]
 ```

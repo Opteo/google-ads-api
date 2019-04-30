@@ -28,5 +28,22 @@ let result = await customer.topicConstants.list({
 
 ```javascript
 // Example result
-;[{ topic_constant: { resource_name: '', id: 0, path: [{ value: '' }], topic_constant_parent: 'topicConstants/-1' } }]
+;[
+  {
+    topic_constant: {
+      resource_name: 'topicConstants/1786',
+      id: 1786,
+      path: [
+        { value: '' },
+        { value: 'Computers & Electronics' },
+        { value: 'Consumer Electronics' },
+        { value: 'Camera & Photo Equipment' },
+        { value: 'Cameras & Camcorders' },
+        { value: 'Camcorders' },
+        { value: 'Body Mounted & Action Cameras' },
+      ],
+      topic_constant_parent: 'topicConstants/308',
+    },
+  },
+]
 ```

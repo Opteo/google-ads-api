@@ -81,6 +81,7 @@
     "bottleneck": "^2.16.1",
     "google-ads-node": "^1.9.0",
     "lodash": "^4.17.11",
+    "lodash.maxby": "^4.6.0",
     "redis": "^2.8.0",
     "request": "^2.88.0",
     "showdown": "^1.9.0",

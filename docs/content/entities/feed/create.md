@@ -21,5 +21,5 @@ const result = await customer.feeds.create(feed)
 
 ```javascript
 // Example result
-;['customers/9262111890/feeds/77425432']
+;['customers/9262111890/feeds/82896692']
 ```

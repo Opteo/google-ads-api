@@ -30,17 +30,25 @@ let result = await customer.adGroupBidModifiers.list({
 // Example result
 ;[
   {
+    ad_group_bid_modifier: {
+      resource_name: 'customers/9262111890/adGroupBidModifiers/66537099246~30000',
+      ad_group: 'customers/9262111890/adGroups/66537099246',
+      base_ad_group: 'customers/9262111890/adGroups/66537099246',
+      criterion_id: 30000,
+      device: { type: 4 },
+    },
     ad_group: {
-      resource_name: 'customers/9262111890/adGroups/54493284610',
+      resource_name: 'customers/9262111890/adGroups/66537099246',
       campaign: 'customers/9262111890/campaigns/1485014801',
-      cpc_bid_micros: 10000,
+      cpc_bid_micros: 1000000,
       cpm_bid_micros: 10000,
       cpv_bid_micros: 0,
       effective_target_cpa_micros: 0,
-      id: 54493284610,
+      id: 66537099246,
       name: 'My ad group',
-      status: 4,
+      status: 2,
       target_cpa_micros: 0,
+      target_cpm_micros: 10000,
       targeting_setting: {
         target_restrictions: [
           { targetingDimension: 5, bidOnly: { value: true } },
@@ -51,13 +59,6 @@ let result = await customer.adGroupBidModifiers.list({
       },
       type: 2,
       url_custom_parameters: [],
-    },
-    ad_group_bid_modifier: {
-      resource_name: 'customers/9262111890/adGroupBidModifiers/54493284610~30000',
-      ad_group: 'customers/9262111890/adGroups/54493284610',
-      base_ad_group: 'customers/9262111890/adGroups/54493284610',
-      criterion_id: 30000,
-      device: { type: 4 },
     },
     campaign: {
       resource_name: 'customers/9262111890/campaigns/1485014801',
