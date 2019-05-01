@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.5.0](https://github.com/Opteo/google-ads-api/compare/v1.4.0...v1.5.0) (2019-04-30)
+
+
+### Bug Fixes
+
+* **utils:** added missing single object constraint implementation ([adf3cd0](https://github.com/Opteo/google-ads-api/commit/adf3cd0))
+
+
+### Features
+
+* **customer:** added global, atomic mutate method `customer.mutateResources()` ([db6ef9a](https://github.com/Opteo/google-ads-api/commit/db6ef9a))
+* **reporting:** allow passing contraints as an object for report() function ([7513081](https://github.com/Opteo/google-ads-api/commit/7513081))
+
+
+
 # [1.4.0](https://github.com/Opteo/google-ads-api/compare/v1.3.0...v1.4.0) (2019-04-17)
 
 

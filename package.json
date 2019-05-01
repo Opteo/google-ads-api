@@ -1,6 +1,6 @@
 {
   "name": "google-ads-api",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Google Ads API Client Library for JavaScript",
   "main": "./build/index.js",
   "typings": "./build/index.d.ts",
@@ -13,6 +13,7 @@
     "test": "run-s clean build test:unit",
     "test:lint": "prettier --list-different \"src/**/*.{ts,tsx}\"",
     "test:unit": "jest /tests/",
+    "test:watch": "run-s clean build && run-p \"build -- -w\" \"test:unit -- --watch --runInBand\"",
     "prettier:base": "prettier --parser typescript --single-quote",
     "prettier:check": "npm run prettier:base -- --list-different \"src/**/*.{ts,tsx}\"",
     "prettier:write": "npm run prettier:base -- --write \"src/**/*.{ts,tsx}\"",

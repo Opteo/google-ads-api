@@ -153,7 +153,7 @@ export interface ReportOptions {
         | fields.ShoppingPerformanceViewSegments
         | fields.TopicViewSegments
         | fields.VideoSegments
-    constraints?: Array<string | object | Constraint>
+    constraints?: Array<string | object | Constraint> | object
     date_constant?: DateConstant
     from_date?: string // ISO 8601(YYYY-MM-DD) format
     to_date?: string // ISO 8601(YYYY-MM-DD) format
@@ -217,7 +217,7 @@ export interface Constraint {
 export interface ServiceListOptions {
     limit?: number
     order_by?: string
-    constraints?: Array<string | object | Constraint>
+    constraints?: Array<string | object | Constraint> | object
 }
 
 /**
@@ -228,6 +228,13 @@ export interface ServiceListOptions {
 export interface ServiceCreateOptions {
     validate_only?: boolean
     partial_failure?: boolean
+}
+
+export interface MutateResourceOperation {
+    _resource: string
+    _operation?: 'create' | 'update' | 'delete'
+    // Allow any resource field
+    [key: string]: any
 }
 
 interface PreQueryHookArgs {

@@ -6,7 +6,7 @@ import { getFieldMask } from 'google-ads-node/build/lib/utils'
 import GrpcClient from '../grpc'
 import { formatQueryResults, buildReportQuery, parseResult } from '../utils'
 import { ServiceListOptions, ServiceCreateOptions } from '../types'
-import { SearchGrpcError } from '../error'
+import { GrpcError } from '../error'
 import { ReportOptions, PreReportHook, PostReportHook } from '../types'
 
 interface GetOptions {
@@ -91,24 +91,18 @@ export default class Service {
 
         const operations = []
 
-        if (Array.isArray(options.entity[1])) {
-            for (const entity of options.entity[1]) {
-                const operation = new operationType()
+        // If the user passed in only one entity, convert it to an array of length 1
+        if (!Array.isArray(options.entity[1])) {
+            options.entity[1] = [options.entity[1]]
+        }
 
-                const pb = this.buildResource(options.entity[0], entity)
-                operation.setUpdate(pb)
-
-                const mask = getFieldMask(entity)
-                operation.setUpdateMask(mask)
-
-                operations.push(operation)
-            }
-        } else {
+        for (const entity of options.entity[1] as Array<object>) {
             const operation = new operationType()
-            const pb = this.buildResource(...options.entity)
+
+            const pb = this.buildResource(options.entity[0], entity)
             operation.setUpdate(pb)
 
-            const mask = getFieldMask(options.entity[1])
+            const mask = getFieldMask(entity)
             operation.setUpdateMask(mask)
 
             operations.push(operation)
@@ -136,16 +130,14 @@ export default class Service {
 
         const operations = []
 
-        if (Array.isArray(options.entity[1])) {
-            for (const entity of options.entity[1]) {
-                const operation = new operationType()
-                const pb = this.buildResource(options.entity[0], entity)
-                operation.setCreate(pb)
-                operations.push(operation)
-            }
-        } else {
+        // If the user passed in only one entity, convert it to an array of length 1
+        if (!Array.isArray(options.entity[1])) {
+            options.entity[1] = [options.entity[1]]
+        }
+
+        for (const entity of options.entity[1] as Array<object>) {
             const operation = new operationType()
-            const pb = this.buildResource(...options.entity)
+            const pb = this.buildResource(options.entity[0], entity)
             operation.setCreate(pb)
             operations.push(operation)
         }
@@ -177,6 +169,25 @@ export default class Service {
         }
     }
 
+    protected async globalMutate(request: grpc.MutateGoogleAdsRequest): Promise<Mutation> {
+        const service = this.client.getService('GoogleAdsService')
+        try {
+            const response = await service.mutate(request)
+            const parsed_results = this.parseServiceResults([response])[0] as any
+            return {
+                request: request.toObject(),
+                partial_failure_error: parsed_results.partial_failure_error,
+                results: parsed_results.mutate_operation_responses.map((r: any) => {
+                    // @ts-ignore Object.values not recognised
+                    const { resource_name } = Object.values(r)[0]
+                    return resource_name
+                }),
+            }
+        } catch (err) {
+            throw new GrpcError(err, request)
+        }
+    }
+
     protected buildResourceName(resource: string): string {
         if (resource.startsWith('customers/')) {
             return resource
@@ -194,7 +205,7 @@ export default class Service {
             */
             return parsed_results[0]
         } catch (err) {
-            throw new SearchGrpcError(err, request)
+            throw new GrpcError(err, request)
         }
     }
 
@@ -263,7 +274,7 @@ export default class Service {
             const response = await this.client.searchIterator(this.throttler, request, limit)
             return response
         } catch (err) {
-            throw new SearchGrpcError(err, request)
+            throw new GrpcError(err, request)
         }
     }
 

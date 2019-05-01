@@ -5,8 +5,8 @@ import { getFieldMask } from 'google-ads-node/build/lib/utils'
 import GrpcClient from '../grpc'
 import Bottleneck from 'bottleneck'
 
-import Service from './service'
-import { ReportOptions, ServiceCreateOptions, PreReportHook, PostReportHook } from '../types'
+import Service, { Mutation } from './service'
+import { ReportOptions, ServiceCreateOptions, PreReportHook, PostReportHook, MutateResourceOperation } from '../types'
 
 export default class CustomerService extends Service {
     private post_report_hook: PostReportHook
@@ -78,4 +78,82 @@ export default class CustomerService extends Service {
 
     // TODO: Add support for this service method
     // public async create(customer: Customer)
+
+    public async mutateResources(
+        operations: Array<MutateResourceOperation>,
+        options?: ServiceCreateOptions
+    ): Promise<Mutation> {
+        const request = new grpc.MutateGoogleAdsRequest()
+
+        request.setCustomerId(this.cid)
+
+        if (options && options.hasOwnProperty('validate_only')) {
+            request.setValidateOnly(options.validate_only as boolean)
+        }
+        if (options && options.hasOwnProperty('partial_failure')) {
+            request.setPartialFailure(options.partial_failure as boolean)
+        }
+
+        const ops: Array<grpc.MutateOperation> = []
+
+        for (const operation of operations) {
+            if (!operation.hasOwnProperty('_resource')) {
+                throw new Error(`Missing "_resource" key on entity`)
+            }
+
+            const operation_resource_name = operation._resource
+            let operation_mode = operation._operation
+
+            delete operation._resource
+            delete operation._operation
+
+            /* Create the resource e.g. "CampaignBudget" */
+            const pb = this.buildResource(operation_resource_name, operation)
+
+            /* Create create|update operation of resource type e.g. "CampaignBudgetOperation" */
+            // @ts-ignore Types are no use here
+            const resource_operation = new grpc[`${operation_resource_name}Operation`]()
+
+            if (!operation_mode) {
+                operation_mode = 'create'
+            }
+
+            if (operation_mode !== 'create' && operation_mode !== 'update' && operation_mode !== 'delete') {
+                throw new Error(`"_operation" field must be one of "create"|"update"|"delete"`)
+            }
+
+            if (operation_mode === 'create') {
+                resource_operation.setCreate(pb)
+            }
+
+            if (operation_mode === 'update') {
+                resource_operation.setUpdate(pb)
+                const update_mask = getFieldMask(operation)
+                resource_operation.setUpdateMask(update_mask)
+            }
+
+            if (operation_mode === 'delete') {
+                // @ts-ignore Types are no use here
+                if (!pb.toObject().hasOwnProperty('resourceName') || !pb.toObject().resourceName) {
+                    throw new Error(`Must specify "resource_name" to remove when using "delete"`)
+                }
+                // @ts-ignore Types are no use here
+                resource_operation.setRemove(pb.toObject().resourceName)
+            }
+
+            /* Add operation of resource type to global mutate operation e.g. "MutateOperation.setCampaignBudgetOperation" */
+            const op = new grpc.MutateOperation()
+            const operation_set_method = `set${operation_resource_name}Operation`
+            // @ts-ignore Types are no use here
+            op[operation_set_method](resource_operation)
+
+            /* Push operation to MutateOperationsList */
+            ops.push(op)
+        }
+
+        request.setMutateOperationsList(ops)
+        const response = await this.globalMutate(request)
+
+        return response
+    }
 }
