@@ -92,7 +92,14 @@ import UserListService from './services/user_list'
 import VideoService from './services/video'
 
 /* Customer */
-import CustomerService from './services/customer'
+import CustomerService, {
+    ReportResponse,
+    QueryResponse,
+    ListResponse,
+    GetResponse,
+    UpdateResponse,
+    MutateResourcesResponse,
+} from './services/customer'
 
 /* gRPC Client */
 import GrpcClient from './grpc'
@@ -102,24 +109,121 @@ import Bottleneck from 'bottleneck'
 import { Customer } from 'google-ads-node/build/lib/resources'
 import { ReportOptions, ServiceCreateOptions, PostReportHook, PreReportHook, MutateResourceOperation } from './types'
 
+export interface CustomerInstance {
+    /* Global customer methods */
+    report: (options: ReportOptions) => ReportResponse
+    query: (qry: string) => QueryResponse
+    list: () => ListResponse
+    get: (id: number | string) => GetResponse
+    update: (customer: Customer, options?: ServiceCreateOptions) => UpdateResponse
+    mutateResources: (
+        operations: Array<MutateResourceOperation>,
+        options?: ServiceCreateOptions
+    ) => MutateResourcesResponse
+
+    /* Services */
+    campaigns: CampaignService
+    campaignBudgets: CampaignBudgetService
+    adGroups: AdGroupService
+    accountBudgetProposals: AccountBudgetProposalService
+    accountBudgets: AccountBudgetService
+    adGroupAdLabels: AdGroupAdLabelService
+    adGroupAds: AdGroupAdService
+    adGroupAudienceViews: AdGroupAudienceViewService
+    adGroupBidModifiers: AdGroupBidModifierService
+    adGroupCriterionLabels: AdGroupCriterionLabelService
+    adGroupCriterion: AdGroupCriterionService
+    adGroupExtensionSettings: AdGroupExtensionSettingService
+    adGroupFeeds: AdGroupFeedService
+    adGroupLabels: AdGroupLabelService
+    adScheduleViews: AdScheduleViewService
+    ageRangeViews: AgeRangeViewService
+    assets: AssetService
+    biddingStrategys: BiddingStrategyService
+    billingSetups: BillingSetupService
+    campaignAudienceViews: CampaignAudienceViewService
+    campaignBidModifiers: CampaignBidModifierService
+    campaignCriterion: CampaignCriterionService
+    campaignExtensionSettings: CampaignExtensionSettingService
+    campaignFeeds: CampaignFeedService
+    campaignLabels: CampaignLabelService
+    campaignSharedSets: CampaignSharedSetService
+    carrierConstants: CarrierConstantService
+    changeStatus: ChangeStatusService
+    clickViews: ClickViewService
+    conversionActions: ConversionActionService
+    conversionUploads: ConversionUploadService
+    conversionAdjustmentUploads: ConversionAdjustmentUploadService
+    customInterests: CustomInterestService
+    customerClientLinks: CustomerClientLinkService
+    customerClients: CustomerClientService
+    customerExtensionSettings: CustomerExtensionSettingService
+    customerFeeds: CustomerFeedService
+    customerLabels: CustomerLabelService
+    customerManagerLinks: CustomerManagerLinkService
+    customerNegativeCriterions: CustomerNegativeCriterionService
+    displayKeywordViews: DisplayKeywordViewService
+    domainCategories: DomainCategoryService
+    dynamicSearchAdsSearchTermViews: DynamicSearchAdsSearchTermViewService
+    extensionFeedItems: ExtensionFeedItemService
+    feedItems: FeedItemService
+    feedItemTargets: FeedItemTargetService
+    feedMappings: FeedMappingService
+    feedPlaceholderViews: FeedPlaceholderViewService
+    feeds: FeedService
+    genderViews: GenderViewService
+    geoTargetConstants: GeoTargetConstantService
+    geographicViews: GeographicViewService
+    groupPlacementViews: GroupPlacementViewService
+    hotelGroupViews: HotelGroupViewService
+    hotelPerformanceViews: HotelPerformanceViewService
+    keywordPlanAdGroups: KeywordPlanAdGroupService
+    keywordPlanCampaigns: KeywordPlanCampaignService
+    keywordPlanKeywords: KeywordPlanKeywordService
+    keywordPlanNegativeKeywords: KeywordPlanNegativeKeywordService
+    keywordPlans: KeywordPlanService
+    keywordViews: KeywordViewService
+    labels: LabelService
+    languageConstants: LanguageConstantService
+    locationViews: LocationViewService
+    managedPlacementViews: ManagedPlacementViewService
+    mediaFiles: MediaFileService
+    mobileAppCategoryConstants: MobileAppCategoryConstantService
+    mobileDeviceConstants: MobileDeviceConstantService
+    operatingSystemVersionConstants: OperatingSystemVersionConstantService
+    parentalStatusViews: ParentalStatusViewService
+    productBiddingCategoryConstants: ProductBiddingCategoryConstantService
+    productGroupViews: ProductGroupViewService
+    recommendations: RecommendationService
+    remarketingActions: RemarketingActionService
+    searchTermViews: SearchTermViewService
+    sharedCriterion: SharedCriterionService
+    shoppingPerformanceViews: ShoppingPerformanceViewService
+    sharedSets: SharedSetService
+    topicConstants: TopicConstantService
+    topicViews: TopicViewService
+    userInterests: UserInterestService
+    userLists: UserListService
+    videos: VideoService
+}
+
 export default function Customer(
     cid: string,
     client: GrpcClient,
     throttler: Bottleneck,
     pre_report_hook: PreReportHook,
     post_report_hook: PostReportHook
-) {
+): CustomerInstance {
     const cusService = new CustomerService(cid, client, throttler, 'CustomerService', pre_report_hook, post_report_hook)
 
     return {
         /* Top level customer methods */
-        report: (options: ReportOptions) => cusService.report(options),
-        query: (qry: string) => cusService.query(qry),
+        report: options => cusService.report(options),
+        query: qry => cusService.query(qry),
         list: () => cusService.list(),
-        get: (id: number | string) => cusService.get(id),
-        update: (customer: Customer, options?: ServiceCreateOptions) => cusService.update(customer, options),
-        mutateResources: (operations: Array<MutateResourceOperation>, options?: ServiceCreateOptions) =>
-            cusService.mutateResources(operations, options),
+        get: id => cusService.get(id),
+        update: (customer, options) => cusService.update(customer, options),
+        mutateResources: (operations, options) => cusService.mutateResources(operations, options),
 
         /* Services */
         campaigns: new CampaignService(cid, client, throttler, 'CampaignService'),
