@@ -9,8 +9,6 @@ title: UserInterest
 
 ### The UserInterest object
 
-This section describes the UserInterest entity.
-
 ```javascript
 // Example UserInterest
 const user_interest = {

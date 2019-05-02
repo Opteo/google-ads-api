@@ -5,9 +5,19 @@ type: get
 entity: Recommendation
 ---
 
-### Get Recommendation
+### Get a Recommendation
 
-The `customer.recommendations.get()` method returns all fields for one Recommendation, as well as all other entities related to it. Note that this function is heavily rate-limited by Google, so avoid using it in production.
+The `customer.recommendations.get(resource_name)` method returns the Recommendation identified by a resource_name.
+
+_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
+
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that Recommendation
+
+#### Returns
+
+Returns that Recommendation as an object.
 
 ```javascript
 // Getting the entity

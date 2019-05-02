@@ -9,8 +9,6 @@ title: AdGroupCriterion
 
 ### The AdGroupCriterion object
 
-This section describes the AdGroupCriterion entity.
-
 ```javascript
 // Example AdGroupCriterion
 const ad_group_criterion = {

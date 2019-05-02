@@ -9,8 +9,6 @@ title: FeedItem
 
 ### The FeedItem object
 
-This section describes the FeedItem entity.
-
 ```javascript
 // Example FeedItem
 const feed_item = {

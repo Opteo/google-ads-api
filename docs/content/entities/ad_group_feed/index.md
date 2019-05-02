@@ -9,8 +9,6 @@ title: AdGroupFeed
 
 ### The AdGroupFeed object
 
-This section describes the AdGroupFeed entity.
-
 ```javascript
 // Example AdGroupFeed
 const ad_group_feed = {

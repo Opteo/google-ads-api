@@ -9,8 +9,6 @@ title: AdGroupAd
 
 ### The AdGroupAd object
 
-This section describes the AdGroupAd entity.
-
 ```javascript
 // Example AdGroupAd
 const ad_group_ad = {

@@ -9,8 +9,6 @@ title: CustomerLabel
 
 ### The CustomerLabel object
 
-This section describes the CustomerLabel entity.
-
 ```javascript
 
 // Example CustomerLabel

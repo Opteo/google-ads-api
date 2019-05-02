@@ -9,8 +9,6 @@ title: CustomerNegativeCriterion
 
 ### The CustomerNegativeCriterion object
 
-This section describes the CustomerNegativeCriterion entity.
-
 ```javascript
 // Example CustomerNegativeCriterion
 const customer_negative_criterion = {

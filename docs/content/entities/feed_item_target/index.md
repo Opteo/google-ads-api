@@ -9,8 +9,6 @@ title: FeedItemTarget
 
 ### The FeedItemTarget object
 
-This section describes the FeedItemTarget entity.
-
 ```javascript
 
 // Example FeedItemTarget

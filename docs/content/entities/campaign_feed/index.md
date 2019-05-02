@@ -9,8 +9,6 @@ title: CampaignFeed
 
 ### The CampaignFeed object
 
-This section describes the CampaignFeed entity.
-
 ```javascript
 // Example CampaignFeed
 const campaign_feed = {

@@ -9,8 +9,6 @@ title: ProductBiddingCategoryConstant
 
 ### The ProductBiddingCategoryConstant object
 
-This section describes the ProductBiddingCategoryConstant entity.
-
 ```javascript
 // Example ProductBiddingCategoryConstant
 const product_bidding_category_constant = {

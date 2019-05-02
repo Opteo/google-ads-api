@@ -9,8 +9,6 @@ title: AdGroupCriterionLabel
 
 ### The AdGroupCriterionLabel object
 
-This section describes the AdGroupCriterionLabel entity.
-
 ```javascript
 
 // Example AdGroupCriterionLabel

@@ -5,9 +5,19 @@ type: get
 entity: LanguageConstant
 ---
 
-### Get LanguageConstant
+### Get a LanguageConstant
 
-The `customer.languageConstants.get()` method returns all fields for one LanguageConstant, as well as all other entities related to it. Note that this function is heavily rate-limited by Google, so avoid using it in production.
+The `customer.languageConstants.get(resource_name)` method returns the LanguageConstant identified by a resource_name.
+
+_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
+
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that LanguageConstant
+
+#### Returns
+
+Returns that LanguageConstant as an object.
 
 ```javascript
 // Getting the entity

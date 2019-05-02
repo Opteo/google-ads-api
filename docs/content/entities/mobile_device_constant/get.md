@@ -5,9 +5,19 @@ type: get
 entity: MobileDeviceConstant
 ---
 
-### Get MobileDeviceConstant
+### Get a MobileDeviceConstant
 
-The `customer.mobileDeviceConstants.get()` method returns all fields for one MobileDeviceConstant, as well as all other entities related to it. Note that this function is heavily rate-limited by Google, so avoid using it in production.
+The `customer.mobileDeviceConstants.get(resource_name)` method returns the MobileDeviceConstant identified by a resource_name.
+
+_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
+
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that MobileDeviceConstant
+
+#### Returns
+
+Returns that MobileDeviceConstant as an object.
 
 ```javascript
 // Getting the entity

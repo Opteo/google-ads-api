@@ -9,8 +9,6 @@ title: KeywordPlanNegativeKeyword
 
 ### The KeywordPlanNegativeKeyword object
 
-This section describes the KeywordPlanNegativeKeyword entity.
-
 ```javascript
 
 // Example KeywordPlanNegativeKeyword

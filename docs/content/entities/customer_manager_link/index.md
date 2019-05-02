@@ -9,8 +9,6 @@ title: CustomerManagerLink
 
 ### The CustomerManagerLink object
 
-This section describes the CustomerManagerLink entity.
-
 ```javascript
 // Example CustomerManagerLink
 const customer_manager_link = {

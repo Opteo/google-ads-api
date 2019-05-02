@@ -5,9 +5,22 @@ type: create
 entity: KeywordPlanKeyword
 ---
 
-### Create KeywordPlanKeyword
+### Create a KeywordPlanKeyword
 
-This section describes how to create a KeywordPlanKeyword.
+The `customer.keywordPlanKeywords.create(keyword_plan_keyword)` method makes a new KeywordPlanKeyword in an account. It also supports an array as its first agument for batch operations.
+
+#### Arguments
+
+- **`entity`** (_required_): The KeywordPlanKeyword object or array of objects.
+- **`options`** (_optional_): Object of the form `{ validate_only, partial_failure }`:
+  - **`validate_only`** (_optional, boolean_): When `true`, only checks whether the operation is valid. Makes no changes to your google ads account. Defaults to `false`.
+  - **`partial_failure`** (_optional, boolean_): Only useful when passing in an array of entities. When `false`, a single failure in the array of entities to create will cause the whole operation to be rolled back. When `true`, the system will still create the non-failed entities. Defaults to `false`.
+
+#### Returns
+
+- **`results`**: An array of the `resource_names` created.
+- **`partial_failure_error`**: If `partial_failure` was set to `true`, an array of errors.
+- **`request`**: The request object that we sent to google's gRPC services. Useful for debugging.
 
 ```javascript
 // Creating the entity
@@ -16,10 +29,22 @@ const keyword_plan_keyword = {
   // Your KeywordPlanKeyword here, without immutable fields such as resource_name
 }
 
+// Passing in a single entity to create
 const result = await customer.keywordPlanKeywords.create(keyword_plan_keyword)
+
+// Passing in an array of entities to create, validating only
+const result = await customer.keywordPlanKeywords.create([keyword_plan_keyword, other_keyword_plan_keyword], {
+  validate_only: true,
+})
 ```
 
 ```javascript
+
 // Example result
-;['customers/1234567890/keywordPlanKeywords/123123123']
+{
+	results : ['customers/1234567890/keywordPlanKeywords/123123123'],
+	partial_failure_error : null,
+	request: { /* your request object */ }
+}
+
 ```

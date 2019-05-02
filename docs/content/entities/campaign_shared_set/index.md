@@ -9,8 +9,6 @@ title: CampaignSharedSet
 
 ### The CampaignSharedSet object
 
-This section describes the CampaignSharedSet entity.
-
 ```javascript
 // Example CampaignSharedSet
 const campaign_shared_set = {

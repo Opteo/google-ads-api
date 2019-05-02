@@ -9,8 +9,6 @@ title: AccountBudget
 
 ### The AccountBudget object
 
-This section describes the AccountBudget entity.
-
 ```javascript
 // Example AccountBudget
 const account_budget = {

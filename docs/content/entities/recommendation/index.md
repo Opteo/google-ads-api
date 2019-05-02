@@ -9,8 +9,6 @@ title: Recommendation
 
 ### The Recommendation object
 
-This section describes the Recommendation entity.
-
 ```javascript
 // Example Recommendation
 const recommendation = {

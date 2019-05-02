@@ -9,8 +9,6 @@ title: TopicConstant
 
 ### The TopicConstant object
 
-This section describes the TopicConstant entity.
-
 ```javascript
 // Example TopicConstant
 const topic_constant = {

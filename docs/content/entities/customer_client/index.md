@@ -9,8 +9,6 @@ title: CustomerClient
 
 ### The CustomerClient object
 
-This section describes the CustomerClient entity.
-
 ```javascript
 // Example CustomerClient
 const customer_client = {

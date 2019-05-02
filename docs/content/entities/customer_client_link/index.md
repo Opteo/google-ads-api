@@ -9,8 +9,6 @@ title: CustomerClientLink
 
 ### The CustomerClientLink object
 
-This section describes the CustomerClientLink entity.
-
 ```javascript
 
 // Example CustomerClientLink

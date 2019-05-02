@@ -9,8 +9,6 @@ title: AccountBudgetProposal
 
 ### The AccountBudgetProposal object
 
-This section describes the AccountBudgetProposal entity.
-
 ```javascript
 // Example AccountBudgetProposal
 const account_budget_proposal = {

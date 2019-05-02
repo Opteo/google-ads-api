@@ -5,9 +5,19 @@ type: get
 entity: CampaignFeed
 ---
 
-### Get CampaignFeed
+### Get a CampaignFeed
 
-The `customer.campaignFeeds.get()` method returns all fields for one CampaignFeed, as well as all other entities related to it. Note that this function is heavily rate-limited by Google, so avoid using it in production.
+The `customer.campaignFeeds.get(resource_name)` method returns the CampaignFeed identified by a resource_name.
+
+_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
+
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that CampaignFeed
+
+#### Returns
+
+Returns that CampaignFeed as an object.
 
 ```javascript
 // Getting the entity

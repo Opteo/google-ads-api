@@ -9,8 +9,6 @@ title: ExtensionFeedItem
 
 ### The ExtensionFeedItem object
 
-This section describes the ExtensionFeedItem entity.
-
 ```javascript
 // Example ExtensionFeedItem
 const extension_feed_item = {

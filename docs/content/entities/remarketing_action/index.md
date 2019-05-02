@@ -9,8 +9,6 @@ title: RemarketingAction
 
 ### The RemarketingAction object
 
-This section describes the RemarketingAction entity.
-
 ```javascript
 
 // Example RemarketingAction

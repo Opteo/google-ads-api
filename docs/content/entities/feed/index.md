@@ -9,8 +9,6 @@ title: Feed
 
 ### The Feed object
 
-This section describes the Feed entity.
-
 ```javascript
 // Example Feed
 const feed = {

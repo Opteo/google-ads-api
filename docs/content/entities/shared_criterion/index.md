@@ -9,8 +9,6 @@ title: SharedCriterion
 
 ### The SharedCriterion object
 
-This section describes the SharedCriterion entity.
-
 ```javascript
 // Example SharedCriterion
 const shared_criterion = {

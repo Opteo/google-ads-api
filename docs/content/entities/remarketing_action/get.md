@@ -5,9 +5,19 @@ type: get
 entity: RemarketingAction
 ---
 
-### Get RemarketingAction
+### Get a RemarketingAction
 
-The `customer.remarketingActions.get()` method returns all fields for one RemarketingAction, as well as all other entities related to it. Note that this function is heavily rate-limited by Google, so avoid using it in production.
+The `customer.remarketingActions.get(resource_name)` method returns the RemarketingAction identified by a resource_name.
+
+_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
+
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that RemarketingAction
+
+#### Returns
+
+Returns that RemarketingAction as an object.
 
 ```javascript
 // Getting the entity

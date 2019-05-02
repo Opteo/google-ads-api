@@ -9,8 +9,6 @@ title: SharedSet
 
 ### The SharedSet object
 
-This section describes the SharedSet entity.
-
 ```javascript
 // Example SharedSet
 const shared_set = {

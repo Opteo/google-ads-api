@@ -5,9 +5,19 @@ type: get
 entity: CustomInterest
 ---
 
-### Get CustomInterest
+### Get a CustomInterest
 
-The `customer.customInterests.get()` method returns all fields for one CustomInterest, as well as all other entities related to it. Note that this function is heavily rate-limited by Google, so avoid using it in production.
+The `customer.customInterests.get(resource_name)` method returns the CustomInterest identified by a resource_name.
+
+_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
+
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that CustomInterest
+
+#### Returns
+
+Returns that CustomInterest as an object.
 
 ```javascript
 // Getting the entity

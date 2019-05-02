@@ -9,8 +9,6 @@ title: KeywordPlanKeyword
 
 ### The KeywordPlanKeyword object
 
-This section describes the KeywordPlanKeyword entity.
-
 ```javascript
 
 // Example KeywordPlanKeyword

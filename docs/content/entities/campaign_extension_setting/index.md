@@ -9,8 +9,6 @@ title: CampaignExtensionSetting
 
 ### The CampaignExtensionSetting object
 
-This section describes the CampaignExtensionSetting entity.
-
 ```javascript
 // Example CampaignExtensionSetting
 const campaign_extension_setting = {

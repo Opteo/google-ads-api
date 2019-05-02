@@ -9,8 +9,6 @@ title: AdGroupExtensionSetting
 
 ### The AdGroupExtensionSetting object
 
-This section describes the AdGroupExtensionSetting entity.
-
 ```javascript
 // Example AdGroupExtensionSetting
 const ad_group_extension_setting = {

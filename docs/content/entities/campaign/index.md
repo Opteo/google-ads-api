@@ -9,8 +9,6 @@ title: Campaign
 
 ### The Campaign object
 
-This section describes the Campaign entity.
-
 ```javascript
 // Example Campaign
 const campaign = {

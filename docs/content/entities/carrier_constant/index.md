@@ -9,8 +9,6 @@ title: CarrierConstant
 
 ### The CarrierConstant object
 
-This section describes the CarrierConstant entity.
-
 ```javascript
 // Example CarrierConstant
 const carrier_constant = {

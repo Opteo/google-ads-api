@@ -9,8 +9,6 @@ title: AdGroup
 
 ### The AdGroup object
 
-This section describes the AdGroup entity.
-
 ```javascript
 // Example AdGroup
 const ad_group = {

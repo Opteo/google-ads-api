@@ -5,9 +5,17 @@ type: delete
 entity: CampaignBudget
 ---
 
-### Delete CampaignBudget
+### Delete a CampaignBudget
 
-This section describes how to delete a CampaignBudget.
+The `customer.campaignBudgets.delete(resource_name)` sets the `status` field of a CampaignBudget to `REMOVED`. Those entities and their metrics will continue to exist, but they will be read-only. Removed entities cannot be re-enabled.
+
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that CampaignBudget
+
+#### Returns
+
+_Nothing_
 
 ```javascript
 // Deleting the entity

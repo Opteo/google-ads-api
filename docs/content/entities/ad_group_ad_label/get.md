@@ -5,9 +5,19 @@ type: get
 entity: AdGroupAdLabel
 ---
 
-### Get AdGroupAdLabel
+### Get an AdGroupAdLabel
 
-The `customer.adGroupAdLabels.get()` method returns all fields for one AdGroupAdLabel, as well as all other entities related to it. Note that this function is heavily rate-limited by Google, so avoid using it in production.
+The `customer.adGroupAdLabels.get(resource_name)` method returns the AdGroupAdLabel identified by a resource_name.
+
+_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
+
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that AdGroupAdLabel
+
+#### Returns
+
+Returns that AdGroupAdLabel as an object.
 
 ```javascript
 // Getting the entity

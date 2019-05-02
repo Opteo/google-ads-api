@@ -9,8 +9,6 @@ title: CampaignCriterion
 
 ### The CampaignCriterion object
 
-This section describes the CampaignCriterion entity.
-
 ```javascript
 // Example CampaignCriterion
 const campaign_criterion = {

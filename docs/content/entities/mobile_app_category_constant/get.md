@@ -5,9 +5,19 @@ type: get
 entity: MobileAppCategoryConstant
 ---
 
-### Get MobileAppCategoryConstant
+### Get a MobileAppCategoryConstant
 
-The `customer.mobileAppCategoryConstants.get()` method returns all fields for one MobileAppCategoryConstant, as well as all other entities related to it. Note that this function is heavily rate-limited by Google, so avoid using it in production.
+The `customer.mobileAppCategoryConstants.get(resource_name)` method returns the MobileAppCategoryConstant identified by a resource_name.
+
+_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
+
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that MobileAppCategoryConstant
+
+#### Returns
+
+Returns that MobileAppCategoryConstant as an object.
 
 ```javascript
 // Getting the entity

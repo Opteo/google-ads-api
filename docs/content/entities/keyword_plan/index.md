@@ -9,8 +9,6 @@ title: KeywordPlan
 
 ### The KeywordPlan object
 
-This section describes the KeywordPlan entity.
-
 ```javascript
 // Example KeywordPlan
 const keyword_plan = {

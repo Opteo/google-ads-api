@@ -9,8 +9,6 @@ title: CustomerFeed
 
 ### The CustomerFeed object
 
-This section describes the CustomerFeed entity.
-
 ```javascript
 // Example CustomerFeed
 const customer_feed = {

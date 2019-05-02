@@ -9,8 +9,6 @@ title: AdGroupLabel
 
 ### The AdGroupLabel object
 
-This section describes the AdGroupLabel entity.
-
 ```javascript
 // Example AdGroupLabel
 const ad_group_label = {

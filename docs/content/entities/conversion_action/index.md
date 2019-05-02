@@ -9,8 +9,6 @@ title: ConversionAction
 
 ### The ConversionAction object
 
-This section describes the ConversionAction entity.
-
 ```javascript
 // Example ConversionAction
 const conversion_action = {

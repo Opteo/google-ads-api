@@ -9,8 +9,6 @@ title: AdGroupBidModifier
 
 ### The AdGroupBidModifier object
 
-This section describes the AdGroupBidModifier entity.
-
 ```javascript
 // Example AdGroupBidModifier
 const ad_group_bid_modifier = {

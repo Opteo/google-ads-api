@@ -5,9 +5,19 @@ type: get
 entity: BiddingStrategy
 ---
 
-### Get BiddingStrategy
+### Get a BiddingStrategy
 
-The `customer.biddingStrategies.get()` method returns all fields for one BiddingStrategy, as well as all other entities related to it. Note that this function is heavily rate-limited by Google, so avoid using it in production.
+The `customer.biddingStrategies.get(resource_name)` method returns the BiddingStrategy identified by a resource_name.
+
+_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
+
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that BiddingStrategy
+
+#### Returns
+
+Returns that BiddingStrategy as an object.
 
 ```javascript
 // Getting the entity

@@ -581,14 +581,15 @@ async function compileService(entity, schema) {
         }
 
 
-
+        const AN = (['O', 'A']).includes(entity.slice(0,1)) ? 'an' : 'a'
 
         fs.writeFileSync(docs_file_path + 'meta.js', meta_compiler({ JSON_META: JSON.stringify(meta) }))
 
         fs.writeFileSync(docs_file_path + 'index.md', readme_object_compiler({
             ENTITY: entity,
             ENTITY_SNAKECASE: ent,
-            EXAMPLE_OBJECT_GET: example_object_get
+            EXAMPLE_OBJECT_GET: example_object_get,
+            AN
         }))
 
 
@@ -600,7 +601,8 @@ async function compileService(entity, schema) {
                 RESOURCE_URL_NAME: resource_url_name,
                 EXAMPLE_OBJECT_LIST: example_object_list,
                 EXAMPLE_OBJECT_GET: example_object_get,
-                EXAMPLE_RESOURCE_NAME: example_resource_name
+                EXAMPLE_RESOURCE_NAME: example_resource_name,
+                AN
             })
 
             fs.writeFileSync(docs_file_path + `${method}.md`, compiled_md)

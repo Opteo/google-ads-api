@@ -9,8 +9,6 @@ title: LanguageConstant
 
 ### The LanguageConstant object
 
-This section describes the LanguageConstant entity.
-
 ```javascript
 // Example LanguageConstant
 const language_constant = {

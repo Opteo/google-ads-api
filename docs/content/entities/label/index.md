@@ -9,8 +9,6 @@ title: Label
 
 ### The Label object
 
-This section describes the Label entity.
-
 ```javascript
 // Example Label
 const label = {

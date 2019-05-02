@@ -9,8 +9,6 @@ title: CampaignBudget
 
 ### The CampaignBudget object
 
-This section describes the CampaignBudget entity.
-
 ```javascript
 // Example CampaignBudget
 const campaign_budget = {

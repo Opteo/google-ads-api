@@ -9,8 +9,6 @@ title: BiddingStrategy
 
 ### The BiddingStrategy object
 
-This section describes the BiddingStrategy entity.
-
 ```javascript
 // Example BiddingStrategy
 const bidding_strategy = {

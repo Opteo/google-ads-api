@@ -5,9 +5,17 @@ type: delete
 entity: CampaignBidModifier
 ---
 
-### Delete CampaignBidModifier
+### Delete a CampaignBidModifier
 
-This section describes how to delete a CampaignBidModifier.
+The `customer.campaignBidModifiers.delete(resource_name)` sets the `status` field of a CampaignBidModifier to `REMOVED`. Those entities and their metrics will continue to exist, but they will be read-only. Removed entities cannot be re-enabled.
+
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that CampaignBidModifier
+
+#### Returns
+
+_Nothing_
 
 ```javascript
 // Deleting the entity

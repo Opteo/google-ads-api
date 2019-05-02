@@ -9,8 +9,6 @@ title: CampaignBidModifier
 
 ### The CampaignBidModifier object
 
-This section describes the CampaignBidModifier entity.
-
 ```javascript
 // Example CampaignBidModifier
 const campaign_bid_modifier = {

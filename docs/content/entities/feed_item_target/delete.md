@@ -5,9 +5,17 @@ type: delete
 entity: FeedItemTarget
 ---
 
-### Delete FeedItemTarget
+### Delete a FeedItemTarget
 
-This section describes how to delete a FeedItemTarget.
+The `customer.feedItemTargets.delete(resource_name)` sets the `status` field of a FeedItemTarget to `REMOVED`. Those entities and their metrics will continue to exist, but they will be read-only. Removed entities cannot be re-enabled.
+
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that FeedItemTarget
+
+#### Returns
+
+_Nothing_
 
 ```javascript
 // Deleting the entity

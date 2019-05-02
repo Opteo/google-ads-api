@@ -5,9 +5,19 @@ type: get
 entity: CustomerExtensionSetting
 ---
 
-### Get CustomerExtensionSetting
+### Get a CustomerExtensionSetting
 
-The `customer.customerExtensionSettings.get()` method returns all fields for one CustomerExtensionSetting, as well as all other entities related to it. Note that this function is heavily rate-limited by Google, so avoid using it in production.
+The `customer.customerExtensionSettings.get(resource_name)` method returns the CustomerExtensionSetting identified by a resource_name.
+
+_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
+
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that CustomerExtensionSetting
+
+#### Returns
+
+Returns that CustomerExtensionSetting as an object.
 
 ```javascript
 // Getting the entity

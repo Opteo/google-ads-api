@@ -5,15 +5,29 @@ title: List AdGroupAd
 order: 3
 ---
 
-### List all AdGroupAd
+### List every instance of AdGroupAd
 
-This `customer.adGroupAds.list()` method works just like `get`, except that it returns all of the entities in the account. It isn't rate limited, but it can be very slow, so use it sparingly.
+The `customer.adGroupAds.list()` returns all of the entities in the account, including `REMOVED` entities. It also returns all other resources that can be selected with each instance of AdGroupAd.
+
+This method was designed for convenience and discovery. Internally, it uses the `customer.report()` method with all `attributes` fields included. For production code, we recommend using `customer.report()` with only the fields you need.
+
+#### Arguments
+
+- **`options`** (_optional_): Object of the form `{ limit, order_by, constraints }`:
+  - **`limit`** (_optional, number_): Number of rows to return. Equivalent to the limit in `customer.report()`. Defaults to no limit.
+  - **`order_by`** (_optional, string_): The field to sort the returned rows by. Equivalent to the order_by in `customer.report()`. By default, no sorting is applied.
+  - **`constraints`** (_optional, array/object_): A constraints array or object. See the `customer.report()` documentation for details. By default, all entities are returned.
+
+#### Returns
+
+Returns an array of objects.
+Each object has a `ad_group_ad` property. Any other resources that can be selected with `ad_group_ad` will also be added as properities.
 
 ```javascript
 // Listing all the adGroupAds in the account
 let result = await customer.adGroupAds.list()
 
-// Listing with constraints and a limited number of results
+// Listing with constraints, sorting, and a limited number of results
 let result = await customer.adGroupAds.list({
   constraints: [
     {
@@ -23,6 +37,7 @@ let result = await customer.adGroupAds.list({
     },
   ],
   limit: 15,
+  order_by: 'ad_group_ad.some_field.sub_field',
 })
 ```
 

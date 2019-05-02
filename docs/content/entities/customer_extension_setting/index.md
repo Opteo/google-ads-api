@@ -9,8 +9,6 @@ title: CustomerExtensionSetting
 
 ### The CustomerExtensionSetting object
 
-This section describes the CustomerExtensionSetting entity.
-
 ```javascript
 // Example CustomerExtensionSetting
 const customer_extension_setting = {

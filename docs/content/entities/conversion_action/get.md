@@ -5,9 +5,19 @@ type: get
 entity: ConversionAction
 ---
 
-### Get ConversionAction
+### Get a ConversionAction
 
-The `customer.conversionActions.get()` method returns all fields for one ConversionAction, as well as all other entities related to it. Note that this function is heavily rate-limited by Google, so avoid using it in production.
+The `customer.conversionActions.get(resource_name)` method returns the ConversionAction identified by a resource_name.
+
+_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
+
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that ConversionAction
+
+#### Returns
+
+Returns that ConversionAction as an object.
 
 ```javascript
 // Getting the entity

@@ -5,9 +5,19 @@ type: get
 entity: OperatingSystemVersionConstant
 ---
 
-### Get OperatingSystemVersionConstant
+### Get an OperatingSystemVersionConstant
 
-The `customer.operatingSystemVersionConstants.get()` method returns all fields for one OperatingSystemVersionConstant, as well as all other entities related to it. Note that this function is heavily rate-limited by Google, so avoid using it in production.
+The `customer.operatingSystemVersionConstants.get(resource_name)` method returns the OperatingSystemVersionConstant identified by a resource_name.
+
+_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
+
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that OperatingSystemVersionConstant
+
+#### Returns
+
+Returns that OperatingSystemVersionConstant as an object.
 
 ```javascript
 // Getting the entity

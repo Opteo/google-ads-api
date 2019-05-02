@@ -9,8 +9,6 @@ title: UserList
 
 ### The UserList object
 
-This section describes the UserList entity.
-
 ```javascript
 // Example UserList
 const user_list = {

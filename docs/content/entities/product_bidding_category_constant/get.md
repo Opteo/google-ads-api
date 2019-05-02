@@ -5,9 +5,19 @@ type: get
 entity: ProductBiddingCategoryConstant
 ---
 
-### Get ProductBiddingCategoryConstant
+### Get a ProductBiddingCategoryConstant
 
-The `customer.productBiddingCategoryConstants.get()` method returns all fields for one ProductBiddingCategoryConstant, as well as all other entities related to it. Note that this function is heavily rate-limited by Google, so avoid using it in production.
+The `customer.productBiddingCategoryConstants.get(resource_name)` method returns the ProductBiddingCategoryConstant identified by a resource_name.
+
+_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
+
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that ProductBiddingCategoryConstant
+
+#### Returns
+
+Returns that ProductBiddingCategoryConstant as an object.
 
 ```javascript
 // Getting the entity

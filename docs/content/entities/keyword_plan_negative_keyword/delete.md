@@ -5,9 +5,17 @@ type: delete
 entity: KeywordPlanNegativeKeyword
 ---
 
-### Delete KeywordPlanNegativeKeyword
+### Delete a KeywordPlanNegativeKeyword
 
-This section describes how to delete a KeywordPlanNegativeKeyword.
+The `customer.keywordPlanNegativeKeywords.delete(resource_name)` sets the `status` field of a KeywordPlanNegativeKeyword to `REMOVED`. Those entities and their metrics will continue to exist, but they will be read-only. Removed entities cannot be re-enabled.
+
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that KeywordPlanNegativeKeyword
+
+#### Returns
+
+_Nothing_
 
 ```javascript
 // Deleting the entity

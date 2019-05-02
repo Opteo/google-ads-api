@@ -9,8 +9,6 @@ title: Video
 
 ### The Video object
 
-This section describes the Video entity.
-
 ```javascript
 // Example Video
 const video = {

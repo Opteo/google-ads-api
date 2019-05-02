@@ -9,8 +9,6 @@ title: DomainCategory
 
 ### The DomainCategory object
 
-This section describes the DomainCategory entity.
-
 ```javascript
 // Example DomainCategory
 const domain_category = {

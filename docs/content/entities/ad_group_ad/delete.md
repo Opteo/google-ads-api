@@ -5,9 +5,17 @@ type: delete
 entity: AdGroupAd
 ---
 
-### Delete AdGroupAd
+### Delete an AdGroupAd
 
-This section describes how to delete a AdGroupAd.
+The `customer.adGroupAds.delete(resource_name)` sets the `status` field of an AdGroupAd to `REMOVED`. Those entities and their metrics will continue to exist, but they will be read-only. Removed entities cannot be re-enabled.
+
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that AdGroupAd
+
+#### Returns
+
+_Nothing_
 
 ```javascript
 // Deleting the entity

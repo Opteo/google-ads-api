@@ -9,8 +9,6 @@ title: OperatingSystemVersionConstant
 
 ### The OperatingSystemVersionConstant object
 
-This section describes the OperatingSystemVersionConstant entity.
-
 ```javascript
 // Example OperatingSystemVersionConstant
 const operating_system_version_constant = {

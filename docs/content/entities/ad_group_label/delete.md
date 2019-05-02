@@ -5,9 +5,17 @@ type: delete
 entity: AdGroupLabel
 ---
 
-### Delete AdGroupLabel
+### Delete an AdGroupLabel
 
-This section describes how to delete a AdGroupLabel.
+The `customer.adGroupLabels.delete(resource_name)` sets the `status` field of an AdGroupLabel to `REMOVED`. Those entities and their metrics will continue to exist, but they will be read-only. Removed entities cannot be re-enabled.
+
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that AdGroupLabel
+
+#### Returns
+
+_Nothing_
 
 ```javascript
 // Deleting the entity

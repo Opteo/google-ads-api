@@ -9,8 +9,6 @@ title: KeywordPlanCampaign
 
 ### The KeywordPlanCampaign object
 
-This section describes the KeywordPlanCampaign entity.
-
 ```javascript
 // Example KeywordPlanCampaign
 const keyword_plan_campaign = {

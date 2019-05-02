@@ -9,8 +9,6 @@ title: GeoTargetConstant
 
 ### The GeoTargetConstant object
 
-This section describes the GeoTargetConstant entity.
-
 ```javascript
 // Example GeoTargetConstant
 const geo_target_constant = {

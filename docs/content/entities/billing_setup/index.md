@@ -9,8 +9,6 @@ title: BillingSetup
 
 ### The BillingSetup object
 
-This section describes the BillingSetup entity.
-
 ```javascript
 // Example BillingSetup
 const billing_setup = {

@@ -9,8 +9,6 @@ title: CustomInterest
 
 ### The CustomInterest object
 
-This section describes the CustomInterest entity.
-
 ```javascript
 
 // Example CustomInterest

@@ -9,8 +9,6 @@ title: ChangeStatus
 
 ### The ChangeStatus object
 
-This section describes the ChangeStatus entity.
-
 ```javascript
 // Example ChangeStatus
 const change_status = {

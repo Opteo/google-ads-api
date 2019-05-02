@@ -9,8 +9,6 @@ title: KeywordPlanAdGroup
 
 ### The KeywordPlanAdGroup object
 
-This section describes the KeywordPlanAdGroup entity.
-
 ```javascript
 
 // Example KeywordPlanAdGroup

@@ -9,8 +9,6 @@ title: MediaFile
 
 ### The MediaFile object
 
-This section describes the MediaFile entity.
-
 ```javascript
 // Example MediaFile
 const media_file = {

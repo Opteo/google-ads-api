@@ -5,9 +5,19 @@ type: get
 entity: CustomerNegativeCriterion
 ---
 
-### Get CustomerNegativeCriterion
+### Get a CustomerNegativeCriterion
 
-The `customer.customerNegativeCriteria.get()` method returns all fields for one CustomerNegativeCriterion, as well as all other entities related to it. Note that this function is heavily rate-limited by Google, so avoid using it in production.
+The `customer.customerNegativeCriteria.get(resource_name)` method returns the CustomerNegativeCriterion identified by a resource_name.
+
+_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
+
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that CustomerNegativeCriterion
+
+#### Returns
+
+Returns that CustomerNegativeCriterion as an object.
 
 ```javascript
 // Getting the entity

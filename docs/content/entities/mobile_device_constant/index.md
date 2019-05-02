@@ -9,8 +9,6 @@ title: MobileDeviceConstant
 
 ### The MobileDeviceConstant object
 
-This section describes the MobileDeviceConstant entity.
-
 ```javascript
 // Example MobileDeviceConstant
 const mobile_device_constant = {

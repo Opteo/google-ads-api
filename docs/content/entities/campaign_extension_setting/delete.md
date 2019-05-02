@@ -5,9 +5,17 @@ type: delete
 entity: CampaignExtensionSetting
 ---
 
-### Delete CampaignExtensionSetting
+### Delete a CampaignExtensionSetting
 
-This section describes how to delete a CampaignExtensionSetting.
+The `customer.campaignExtensionSettings.delete(resource_name)` sets the `status` field of a CampaignExtensionSetting to `REMOVED`. Those entities and their metrics will continue to exist, but they will be read-only. Removed entities cannot be re-enabled.
+
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that CampaignExtensionSetting
+
+#### Returns
+
+_Nothing_
 
 ```javascript
 // Deleting the entity

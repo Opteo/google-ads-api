@@ -5,9 +5,19 @@ type: get
 entity: KeywordPlanKeyword
 ---
 
-### Get KeywordPlanKeyword
+### Get a KeywordPlanKeyword
 
-The `customer.keywordPlanKeywords.get()` method returns all fields for one KeywordPlanKeyword, as well as all other entities related to it. Note that this function is heavily rate-limited by Google, so avoid using it in production.
+The `customer.keywordPlanKeywords.get(resource_name)` method returns the KeywordPlanKeyword identified by a resource_name.
+
+_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
+
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that KeywordPlanKeyword
+
+#### Returns
+
+Returns that KeywordPlanKeyword as an object.
 
 ```javascript
 // Getting the entity

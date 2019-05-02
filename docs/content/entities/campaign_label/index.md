@@ -9,8 +9,6 @@ title: CampaignLabel
 
 ### The CampaignLabel object
 
-This section describes the CampaignLabel entity.
-
 ```javascript
 // Example CampaignLabel
 const campaign_label = {

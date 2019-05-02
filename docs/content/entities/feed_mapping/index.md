@@ -9,8 +9,6 @@ title: FeedMapping
 
 ### The FeedMapping object
 
-This section describes the FeedMapping entity.
-
 ```javascript
 // Example FeedMapping
 const feed_mapping = {
