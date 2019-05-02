@@ -16,9 +16,3 @@ The `customer.adGroupAds.delete(resource_name)` sets the `status` field of an Ad
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.adGroupAds.delete('customers/9262111890/adGroupAds/63236814369~303721890851')
-```

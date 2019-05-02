@@ -16,9 +16,3 @@ The `customer.keywordPlanCampaigns.delete(resource_name)` sets the `status` fiel
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.keywordPlanCampaigns.delete('customers/3827277046/keywordPlanCampaigns/4773388')
-```

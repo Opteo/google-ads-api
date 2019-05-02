@@ -16,9 +16,3 @@ The `customer.sharedSets.delete(resource_name)` sets the `status` field of a Sha
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.sharedSets.delete('customers/9262111890/sharedSets/1802068178')
-```

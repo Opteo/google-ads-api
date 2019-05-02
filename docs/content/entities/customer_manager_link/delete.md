@@ -16,9 +16,3 @@ The `customer.customerManagerLinks.delete(resource_name)` sets the `status` fiel
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.customerManagerLinks.delete('customers/9262111890/customerManagerLinks/6141549892~121665495')
-```

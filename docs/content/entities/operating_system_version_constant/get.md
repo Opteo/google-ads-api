@@ -18,20 +18,3 @@ _Note_: This function is heavily rate-limited by Google, so avoid using it in pr
 #### Returns
 
 Returns that OperatingSystemVersionConstant as an object.
-
-```javascript
-// Getting the entity
-let result = await customer.operatingSystemVersionConstants.get('operatingSystemVersionConstants/630266')
-```
-
-```javascript
-// Example result
-;({
-  resource_name: 'operatingSystemVersionConstants/630266',
-  id: 630266,
-  name: 'WindowsPhone',
-  operator_type: 2,
-  os_major_version: -1,
-  os_minor_version: -1,
-})
-```

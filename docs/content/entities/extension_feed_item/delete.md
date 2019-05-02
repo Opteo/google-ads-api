@@ -16,9 +16,3 @@ The `customer.extensionFeedItems.delete(resource_name)` sets the `status` field 
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.extensionFeedItems.delete('customers/3827277046/extensionFeedItems/9779152283')
-```

@@ -16,9 +16,3 @@ The `customer.customInterests.delete(resource_name)` sets the `status` field of 
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.customInterests.delete('customers/1234567890/customInterests/123123123')
-```

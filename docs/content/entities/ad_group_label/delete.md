@@ -16,9 +16,3 @@ The `customer.adGroupLabels.delete(resource_name)` sets the `status` field of an
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.adGroupLabels.delete('customers/3827277046/adGroupLabels/42877626370~3345231412')
-```

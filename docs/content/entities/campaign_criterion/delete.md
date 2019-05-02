@@ -16,9 +16,3 @@ The `customer.campaignCriteria.delete(resource_name)` sets the `status` field of
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.campaignCriteria.delete('customers/9262111890/campaignCriteria/1599497210~1000')
-```

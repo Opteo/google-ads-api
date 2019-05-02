@@ -18,17 +18,3 @@ _Note_: This function is heavily rate-limited by Google, so avoid using it in pr
 #### Returns
 
 Returns that KeywordPlanNegativeKeyword as an object.
-
-```javascript
-// Getting the entity
-let result = await customer.keywordPlanNegativeKeywords.get(
-  'customers/1234567890/keywordPlanNegativeKeywords/123123123'
-)
-```
-
-```javascript
-
-// Example result
-(// Todo: add example get() return here)
-
-```

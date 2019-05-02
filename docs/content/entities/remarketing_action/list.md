@@ -22,28 +22,3 @@ This method was designed for convenience and discovery. Internally, it uses the 
 
 Returns an array of objects.
 Each object has a `remarketing_action` property. Any other resources that can be selected with `remarketing_action` will also be added as properities.
-
-```javascript
-// Listing all the remarketingActions in the account
-let result = await customer.remarketingActions.list()
-
-// Listing with constraints, sorting, and a limited number of results
-let result = await customer.remarketingActions.list({
-  constraints: [
-    {
-      key: 'remarketing_action.some_field',
-      op: '=',
-      val: 'yellow submarine',
-    },
-  ],
-  limit: 15,
-  order_by: 'remarketing_action.some_field.sub_field',
-})
-```
-
-```javascript
-
-// Example result
-[// Todo: add example list() return here]
-
-```

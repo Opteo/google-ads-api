@@ -16,9 +16,3 @@ The `customer.sharedCriteria.delete(resource_name)` sets the `status` field of a
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.sharedCriteria.delete('customers/9262111890/sharedCriteria/1788591305~627191652608')
-```

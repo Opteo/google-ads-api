@@ -16,9 +16,3 @@ The `customer.campaignSharedSets.delete(resource_name)` sets the `status` field 
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.campaignSharedSets.delete('customers/9262111890/campaignSharedSets/1485014801~1788591305')
-```

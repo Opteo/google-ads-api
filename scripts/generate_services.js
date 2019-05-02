@@ -80,13 +80,17 @@ const readme_object_compiler = template(fs.readFileSync(__dirname + '/templates/
     interpolate: /{{([\s\S]+?)}}/g,
 })
 
+const readme_object_compiler_code = template(fs.readFileSync(__dirname + '/templates/template_readme_object_code.hbs', 'utf-8'), {
+    interpolate: /{{([\s\S]+?)}}/g,
+})
+
 // const readme_create_compiler = template(fs.readFileSync(__dirname + '/template_readme_create.hbs', 'utf-8'), {
 //     interpolate: /{{([\s\S]+?)}}/g,
 // })
 
 const method_compilers = {}
 
-;['get', 'list', 'create', 'update', 'delete'].forEach(method => {
+;['get', 'list', 'create', 'update', 'delete', 'get_code', 'list_code', 'create_code', 'update_code', 'delete_code'].forEach(method => {
     method_compilers[method] = template(
         fs.readFileSync(__dirname + `/templates/template_readme_${method}.hbs`, 'utf-8'),
         {
@@ -572,7 +576,27 @@ async function compileService(entity, schema) {
             })
         )
 
+        fs.writeFileSync(
+            docs_file_path + 'index_code.md',
+            readme_object_compiler_code({
+                ENTITY: entity,
+                ENTITY_SNAKECASE: ent,
+                EXAMPLE_OBJECT_GET: example_object_get,
+                AN,
+            })
+        )
+
         meta.methods.forEach(method => {
+            const compiled_md_code = method_compilers[method+ '_code']({
+                ENTITY: entity,
+                ENTITY_SNAKECASE: ent,
+                RESOURCE_URL_NAME: resource_url_name,
+                EXAMPLE_OBJECT_LIST: example_object_list,
+                EXAMPLE_OBJECT_GET: example_object_get,
+                EXAMPLE_RESOURCE_NAME: example_resource_name,
+                AN,
+            })
+            
             const compiled_md = method_compilers[method]({
                 ENTITY: entity,
                 ENTITY_SNAKECASE: ent,
@@ -584,6 +608,7 @@ async function compileService(entity, schema) {
             })
 
             fs.writeFileSync(docs_file_path + `${method}.md`, compiled_md)
+            fs.writeFileSync(docs_file_path + `${method}_code.md`, compiled_md_code)
         })
     }
 

@@ -18,18 +18,3 @@ _Note_: This function is heavily rate-limited by Google, so avoid using it in pr
 #### Returns
 
 Returns that CustomerClient as an object.
-
-```javascript
-// Getting the entity
-let result = await customer.customerClients.get('customers/9262111890/customerClients/9262111890')
-```
-
-```javascript
-// Example result
-;({
-  resource_name: 'customers/9262111890/customerClients/9262111890',
-  client_customer: 'customers/9262111890',
-  hidden: false,
-  level: 0,
-})
-```

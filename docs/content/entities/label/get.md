@@ -18,19 +18,3 @@ _Note_: This function is heavily rate-limited by Google, so avoid using it in pr
 #### Returns
 
 Returns that Label as an object.
-
-```javascript
-// Getting the entity
-let result = await customer.labels.get('customers/3827277046/labels/872103121')
-```
-
-```javascript
-// Example result
-;({
-  resource_name: 'customers/3827277046/labels/872103121',
-  id: 872103121,
-  name: 'My label',
-  status: 2,
-  text_label: { background_color: '#6633FF', description: 'Non brand, traditional cold traffic via search' },
-})
-```

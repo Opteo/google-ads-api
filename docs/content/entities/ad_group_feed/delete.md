@@ -16,9 +16,3 @@ The `customer.adGroupFeeds.delete(resource_name)` sets the `status` field of an 
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.adGroupFeeds.delete('customers/3827277046/adGroupFeeds/36337683057~43009393')
-```

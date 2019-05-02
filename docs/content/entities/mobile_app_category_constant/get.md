@@ -18,13 +18,3 @@ _Note_: This function is heavily rate-limited by Google, so avoid using it in pr
 #### Returns
 
 Returns that MobileAppCategoryConstant as an object.
-
-```javascript
-// Getting the entity
-let result = await customer.mobileAppCategoryConstants.get('mobileAppCategoryConstants/60559')
-```
-
-```javascript
-// Example result
-;({ resource_name: 'mobileAppCategoryConstants/60559', id: 60559, name: 'Literary Magazines & Journals' })
-```

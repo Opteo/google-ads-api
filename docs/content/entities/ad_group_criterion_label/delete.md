@@ -16,9 +16,3 @@ The `customer.adGroupCriterionLabels.delete(resource_name)` sets the `status` fi
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.adGroupCriterionLabels.delete('customers/1234567890/adGroupCriterionLabels/123123123')
-```

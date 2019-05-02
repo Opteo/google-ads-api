@@ -22,28 +22,3 @@ This method was designed for convenience and discovery. Internally, it uses the 
 
 Returns an array of objects.
 Each object has a `keyword_plan_ad_group` property. Any other resources that can be selected with `keyword_plan_ad_group` will also be added as properities.
-
-```javascript
-// Listing all the keywordPlanAdGroups in the account
-let result = await customer.keywordPlanAdGroups.list()
-
-// Listing with constraints, sorting, and a limited number of results
-let result = await customer.keywordPlanAdGroups.list({
-  constraints: [
-    {
-      key: 'keyword_plan_ad_group.some_field',
-      op: '=',
-      val: 'yellow submarine',
-    },
-  ],
-  limit: 15,
-  order_by: 'keyword_plan_ad_group.some_field.sub_field',
-})
-```
-
-```javascript
-
-// Example result
-[// Todo: add example list() return here]
-
-```

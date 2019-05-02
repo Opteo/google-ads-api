@@ -18,19 +18,3 @@ _Note_: This function is heavily rate-limited by Google, so avoid using it in pr
 #### Returns
 
 Returns that AdGroupAdLabel as an object.
-
-```javascript
-// Getting the entity
-let result = await customer.adGroupAdLabels.get(
-  'customers/3827277046/adGroupAdLabels/37706041185~191743801329~1091971976'
-)
-```
-
-```javascript
-// Example result
-;({
-  resource_name: 'customers/3827277046/adGroupAdLabels/37706041185~191743801329~1091971976',
-  ad_group_ad: 'customers/3827277046/adGroupAds/37706041185~191743801329',
-  label: 'customers/3827277046/labels/1091971976',
-})
-```

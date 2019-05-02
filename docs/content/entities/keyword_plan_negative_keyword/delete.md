@@ -16,9 +16,3 @@ The `customer.keywordPlanNegativeKeywords.delete(resource_name)` sets the `statu
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.keywordPlanNegativeKeywords.delete('customers/1234567890/keywordPlanNegativeKeywords/123123123')
-```

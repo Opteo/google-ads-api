@@ -16,9 +16,3 @@ The `customer.adGroupBidModifiers.delete(resource_name)` sets the `status` field
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.adGroupBidModifiers.delete('customers/9262111890/adGroupBidModifiers/66537099246~30000')
-```

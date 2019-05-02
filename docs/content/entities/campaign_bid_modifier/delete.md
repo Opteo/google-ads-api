@@ -16,9 +16,3 @@ The `customer.campaignBidModifiers.delete(resource_name)` sets the `status` fiel
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.campaignBidModifiers.delete('customers/3827277046/campaignBidModifiers/729684361~8000')
-```

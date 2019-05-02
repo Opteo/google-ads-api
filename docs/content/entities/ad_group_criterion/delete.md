@@ -16,9 +16,3 @@ The `customer.adGroupCriteria.delete(resource_name)` sets the `status` field of 
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.adGroupCriteria.delete('customers/9262111890/adGroupCriteria/60170225920~521456008776')
-```

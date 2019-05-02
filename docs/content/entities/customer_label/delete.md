@@ -16,9 +16,3 @@ The `customer.customerLabels.delete(resource_name)` sets the `status` field of a
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.customerLabels.delete('customers/1234567890/customerLabels/123123123')
-```

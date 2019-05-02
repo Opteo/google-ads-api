@@ -10,7 +10,6 @@ entity: {{ ENTITY }}
 The `customer.{{ RESOURCE_URL_NAME }}.delete(resource_name)` sets the `status` field of {{ AN }} {{ ENTITY }} to `REMOVED`. Those entities and their metrics will continue to exist, but they will be read-only. Removed entities cannot be re-enabled.
 
 
-
 #### Arguments
 
 - **`resource_name`** (_required_): The resource_name of that {{ ENTITY }}
@@ -19,13 +18,3 @@ The `customer.{{ RESOURCE_URL_NAME }}.delete(resource_name)` sets the `status` f
 #### Returns
 
 _Nothing_
-
-
-
-```javascript
-
-// Deleting the entity
-
-await customer.{{ RESOURCE_URL_NAME }}.delete('{{EXAMPLE_RESOURCE_NAME}}')
-
-```

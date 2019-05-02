@@ -16,9 +16,3 @@ The `customer.userLists.delete(resource_name)` sets the `status` field of a User
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.userLists.delete('customers/3827277046/userLists/508846109')
-```

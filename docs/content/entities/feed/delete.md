@@ -16,9 +16,3 @@ The `customer.feeds.delete(resource_name)` sets the `status` field of a Feed to 
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.feeds.delete('customers/9262111890/feeds/82896692')
-```

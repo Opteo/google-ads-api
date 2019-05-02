@@ -18,20 +18,3 @@ _Note_: This function is heavily rate-limited by Google, so avoid using it in pr
 #### Returns
 
 Returns that MobileDeviceConstant as an object.
-
-```javascript
-// Getting the entity
-let result = await customer.mobileDeviceConstants.get('mobileDeviceConstants/610508')
-```
-
-```javascript
-// Example result
-;({
-  resource_name: 'mobileDeviceConstants/610508',
-  id: 610508,
-  manufacturer_name: 'Microsoft',
-  name: 'windows rt tablet',
-  operating_system_name: 'Other/Unknown',
-  type: 3,
-})
-```

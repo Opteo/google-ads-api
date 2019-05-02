@@ -18,13 +18,3 @@ _Note_: This function is heavily rate-limited by Google, so avoid using it in pr
 #### Returns
 
 Returns that KeywordPlan as an object.
-
-```javascript
-// Getting the entity
-let result = await customer.keywordPlans.get('customers/3827277046/keywordPlans/4739396')
-```
-
-```javascript
-// Example result
-;({ resource_name: 'customers/3827277046/keywordPlans/4739396', id: 4739396, name: 'My keyword plan' })
-```

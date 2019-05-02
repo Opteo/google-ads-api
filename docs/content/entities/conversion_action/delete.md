@@ -16,9 +16,3 @@ The `customer.conversionActions.delete(resource_name)` sets the `status` field o
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.conversionActions.delete('customers/3827277046/conversionActions/238277646')
-```

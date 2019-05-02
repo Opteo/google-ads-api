@@ -16,9 +16,3 @@ The `customer.biddingStrategies.delete(resource_name)` sets the `status` field o
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.biddingStrategies.delete('customers/3827277046/biddingStrategies/1534381593')
-```

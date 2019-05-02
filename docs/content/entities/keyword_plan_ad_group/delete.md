@@ -16,9 +16,3 @@ The `customer.keywordPlanAdGroups.delete(resource_name)` sets the `status` field
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.keywordPlanAdGroups.delete('customers/1234567890/keywordPlanAdGroups/123123123')
-```

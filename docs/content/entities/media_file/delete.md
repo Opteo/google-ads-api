@@ -16,9 +16,3 @@ The `customer.mediaFiles.delete(resource_name)` sets the `status` field of a Med
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.mediaFiles.delete('customers/3827277046/mediaFiles/2844631150')
-```

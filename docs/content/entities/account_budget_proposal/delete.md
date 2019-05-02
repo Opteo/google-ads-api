@@ -16,9 +16,3 @@ The `customer.accountBudgetProposals.delete(resource_name)` sets the `status` fi
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.accountBudgetProposals.delete('customers/3827277046/accountBudgetProposals/265265547')
-```

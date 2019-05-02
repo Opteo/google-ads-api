@@ -22,38 +22,3 @@ This method was designed for convenience and discovery. Internally, it uses the 
 
 Returns an array of objects.
 Each object has a `product_bidding_category_constant` property. Any other resources that can be selected with `product_bidding_category_constant` will also be added as properities.
-
-```javascript
-// Listing all the productBiddingCategoryConstants in the account
-let result = await customer.productBiddingCategoryConstants.list()
-
-// Listing with constraints, sorting, and a limited number of results
-let result = await customer.productBiddingCategoryConstants.list({
-  constraints: [
-    {
-      key: 'product_bidding_category_constant.some_field',
-      op: '=',
-      val: 'yellow submarine',
-    },
-  ],
-  limit: 15,
-  order_by: 'product_bidding_category_constant.some_field.sub_field',
-})
-```
-
-```javascript
-// Example result
-;[
-  {
-    product_bidding_category_constant: {
-      resource_name: 'productBiddingCategoryConstants/AU~LEVEL1~1',
-      country_code: 'AU',
-      id: 1,
-      language_code: 'en',
-      level: 2,
-      localized_name: 'Animals & Pet Supplies',
-      status: 2,
-    },
-  },
-]
-```

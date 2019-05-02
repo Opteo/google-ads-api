@@ -16,9 +16,3 @@ The `customer.remarketingActions.delete(resource_name)` sets the `status` field 
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.remarketingActions.delete('customers/1234567890/remarketingActions/123123123')
-```

@@ -18,18 +18,3 @@ _Note_: This function is heavily rate-limited by Google, so avoid using it in pr
 #### Returns
 
 Returns that CarrierConstant as an object.
-
-```javascript
-// Getting the entity
-let result = await customer.carrierConstants.get('carrierConstants/70720')
-```
-
-```javascript
-// Example result
-;({
-  resource_name: 'carrierConstants/70720',
-  country_code: 'TW',
-  id: 70720,
-  name: 'Long Distance & Mobile Business Group',
-})
-```

@@ -18,17 +18,3 @@ _Note_: This function is heavily rate-limited by Google, so avoid using it in pr
 #### Returns
 
 Returns that CampaignBidModifier as an object.
-
-```javascript
-// Getting the entity
-let result = await customer.campaignBidModifiers.get('customers/3827277046/campaignBidModifiers/729684361~8000')
-```
-
-```javascript
-// Example result
-;({
-  resource_name: 'customers/3827277046/campaignBidModifiers/729684361~8000',
-  campaign: 'customers/3827277046/campaigns/729684361',
-  criterion_id: 8000,
-})
-```

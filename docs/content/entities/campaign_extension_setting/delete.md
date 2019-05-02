@@ -16,9 +16,3 @@ The `customer.campaignExtensionSettings.delete(resource_name)` sets the `status`
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.campaignExtensionSettings.delete('customers/9262111890/campaignExtensionSettings/1483704368~SITELINK')
-```

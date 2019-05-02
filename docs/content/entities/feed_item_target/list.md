@@ -22,28 +22,3 @@ This method was designed for convenience and discovery. Internally, it uses the 
 
 Returns an array of objects.
 Each object has a `feed_item_target` property. Any other resources that can be selected with `feed_item_target` will also be added as properities.
-
-```javascript
-// Listing all the feedItemTargets in the account
-let result = await customer.feedItemTargets.list()
-
-// Listing with constraints, sorting, and a limited number of results
-let result = await customer.feedItemTargets.list({
-  constraints: [
-    {
-      key: 'feed_item_target.some_field',
-      op: '=',
-      val: 'yellow submarine',
-    },
-  ],
-  limit: 15,
-  order_by: 'feed_item_target.some_field.sub_field',
-})
-```
-
-```javascript
-
-// Example result
-[// Todo: add example list() return here]
-
-```

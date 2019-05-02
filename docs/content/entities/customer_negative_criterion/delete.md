@@ -16,9 +16,3 @@ The `customer.customerNegativeCriteria.delete(resource_name)` sets the `status` 
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.customerNegativeCriteria.delete('customers/3827277046/customerNegativeCriteria/1163177997')
-```

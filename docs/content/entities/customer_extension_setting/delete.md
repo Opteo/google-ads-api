@@ -16,9 +16,3 @@ The `customer.customerExtensionSettings.delete(resource_name)` sets the `status`
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.customerExtensionSettings.delete('customers/9262111890/customerExtensionSettings/STRUCTURED_SNIPPET')
-```

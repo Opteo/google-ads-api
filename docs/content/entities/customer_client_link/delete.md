@@ -16,9 +16,3 @@ The `customer.customerClientLinks.delete(resource_name)` sets the `status` field
 #### Returns
 
 _Nothing_
-
-```javascript
-// Deleting the entity
-
-await customer.customerClientLinks.delete('customers/1234567890/customerClientLinks/123123123')
-```
