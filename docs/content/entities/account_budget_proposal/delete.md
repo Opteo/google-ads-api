@@ -5,12 +5,14 @@ type: delete
 entity: AccountBudgetProposal
 ---
 
-### Delete AccountBudgetProposal
+### Delete an AccountBudgetProposal
 
-This section describes how to delete a AccountBudgetProposal.
+The `customer.accountBudgetProposals.delete(resource_name)` sets the `status` field of an AccountBudgetProposal to `REMOVED`. Those entities and their metrics will continue to exist, but they will be read-only. Removed entities cannot be re-enabled.
 
-```javascript
-// Deleting the entity
+#### Arguments
 
-await customer.accountBudgetProposals.delete('customers/3827277046/accountBudgetProposals/265265547')
-```
+- **`resource_name`** (_required_): The resource_name of that AccountBudgetProposal
+
+#### Returns
+
+_Nothing_

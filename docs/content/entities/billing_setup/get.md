@@ -5,22 +5,16 @@ type: get
 entity: BillingSetup
 ---
 
-### Get BillingSetup
+### Get a BillingSetup
 
-The `customer.billingSetups.get()` method returns all fields for one BillingSetup, as well as all other entities related to it. Note that this function is heavily rate-limited by Google, so avoid using it in production.
+The `customer.billingSetups.get(resource_name)` method returns the BillingSetup identified by a resource_name.
 
-```javascript
-// Getting the entity
-let result = await customer.billingSetups.get('customers/9262111890/billingSetups/465508048')
-```
+_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
 
-```javascript
-// Example result
-;({
-  resource_name: 'customers/9262111890/billingSetups/465508048',
-  end_time_type: 3,
-  id: 465508048,
-  start_date_time: '2018-07-23 15:51:33',
-  status: 2,
-})
-```
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that BillingSetup
+
+#### Returns
+
+Returns that BillingSetup as an object.

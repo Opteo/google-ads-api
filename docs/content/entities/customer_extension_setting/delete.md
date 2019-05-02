@@ -5,12 +5,14 @@ type: delete
 entity: CustomerExtensionSetting
 ---
 
-### Delete CustomerExtensionSetting
+### Delete a CustomerExtensionSetting
 
-This section describes how to delete a CustomerExtensionSetting.
+The `customer.customerExtensionSettings.delete(resource_name)` sets the `status` field of a CustomerExtensionSetting to `REMOVED`. Those entities and their metrics will continue to exist, but they will be read-only. Removed entities cannot be re-enabled.
 
-```javascript
-// Deleting the entity
+#### Arguments
 
-await customer.customerExtensionSettings.delete('customers/9262111890/customerExtensionSettings/STRUCTURED_SNIPPET')
-```
+- **`resource_name`** (_required_): The resource_name of that CustomerExtensionSetting
+
+#### Returns
+
+_Nothing_

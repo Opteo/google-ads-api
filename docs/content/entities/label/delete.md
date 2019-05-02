@@ -5,12 +5,14 @@ type: delete
 entity: Label
 ---
 
-### Delete Label
+### Delete a Label
 
-This section describes how to delete a Label.
+The `customer.labels.delete(resource_name)` sets the `status` field of a Label to `REMOVED`. Those entities and their metrics will continue to exist, but they will be read-only. Removed entities cannot be re-enabled.
 
-```javascript
-// Deleting the entity
+#### Arguments
 
-await customer.labels.delete('customers/3827277046/labels/872103121')
-```
+- **`resource_name`** (_required_): The resource_name of that Label
+
+#### Returns
+
+_Nothing_

@@ -5,12 +5,14 @@ type: delete
 entity: KeywordPlanCampaign
 ---
 
-### Delete KeywordPlanCampaign
+### Delete a KeywordPlanCampaign
 
-This section describes how to delete a KeywordPlanCampaign.
+The `customer.keywordPlanCampaigns.delete(resource_name)` sets the `status` field of a KeywordPlanCampaign to `REMOVED`. Those entities and their metrics will continue to exist, but they will be read-only. Removed entities cannot be re-enabled.
 
-```javascript
-// Deleting the entity
+#### Arguments
 
-await customer.keywordPlanCampaigns.delete('customers/3827277046/keywordPlanCampaigns/4773388')
-```
+- **`resource_name`** (_required_): The resource_name of that KeywordPlanCampaign
+
+#### Returns
+
+_Nothing_

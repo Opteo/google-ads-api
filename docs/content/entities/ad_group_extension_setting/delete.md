@@ -5,12 +5,14 @@ type: delete
 entity: AdGroupExtensionSetting
 ---
 
-### Delete AdGroupExtensionSetting
+### Delete an AdGroupExtensionSetting
 
-This section describes how to delete a AdGroupExtensionSetting.
+The `customer.adGroupExtensionSettings.delete(resource_name)` sets the `status` field of an AdGroupExtensionSetting to `REMOVED`. Those entities and their metrics will continue to exist, but they will be read-only. Removed entities cannot be re-enabled.
 
-```javascript
-// Deleting the entity
+#### Arguments
 
-await customer.adGroupExtensionSettings.delete('customers/3827277046/adGroupExtensionSettings/36337683057~SITELINK')
-```
+- **`resource_name`** (_required_): The resource_name of that AdGroupExtensionSetting
+
+#### Returns
+
+_Nothing_

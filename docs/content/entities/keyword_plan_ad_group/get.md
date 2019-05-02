@@ -5,18 +5,16 @@ type: get
 entity: KeywordPlanAdGroup
 ---
 
-### Get KeywordPlanAdGroup
+### Get a KeywordPlanAdGroup
 
-The `customer.keywordPlanAdGroups.get()` method returns all fields for one KeywordPlanAdGroup, as well as all other entities related to it. Note that this function is heavily rate-limited by Google, so avoid using it in production.
+The `customer.keywordPlanAdGroups.get(resource_name)` method returns the KeywordPlanAdGroup identified by a resource_name.
 
-```javascript
-// Getting the entity
-let result = await customer.keywordPlanAdGroups.get('customers/1234567890/keywordPlanAdGroups/123123123')
-```
+_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
 
-```javascript
+#### Arguments
 
-// Example result
-(// Todo: add example get() return here)
+- **`resource_name`** (_required_): The resource_name of that KeywordPlanAdGroup
 
-```
+#### Returns
+
+Returns that KeywordPlanAdGroup as an object.

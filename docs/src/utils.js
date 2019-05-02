@@ -26,12 +26,13 @@ export const getIds = edges => {
 }
 
 export const getSectionsData = edges => {
-    return edges.map(edge => {
-        const { node } = edge
+    const sections = {}
 
+    edges.forEach(edge => {
+        const { node } = edge
         const section_data = {
             id: getSectionId(node),
-            key: edge.node.id,
+            key: node.id,
             node,
         }
 
@@ -40,21 +41,27 @@ export const getSectionsData = edges => {
         if (section_data.is_index) {
             const meta_file = require(`../content/${node.fields.directory}/meta.js`)
             section_data.meta = meta_file.object
-
         }
 
-        return section_data
+        const { type } = node.frontmatter
+        const section_type = type.includes('code') ? 'code' : 'description'
+
+        if (!sections[section_data.id]) {
+            sections[section_data.id] = {}
+        }
+        sections[section_data.id][section_type] = section_data
     })
+
+    return sections
 }
 
-export const toggleVisible = (id) => {
+export const toggleVisible = id => {
     const element = document.getElementById(id)
     if (element) {
         if (element.style.display === 'none') {
-            element.style.display = "block"
+            element.style.display = 'block'
         } else {
-            element.style.display = "none"
+            element.style.display = 'none'
         }
     }
-
 }

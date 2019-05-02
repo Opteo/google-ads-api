@@ -111,7 +111,7 @@ export default class Service {
         return this.mutate(request, operations, options)
     }
 
-    protected async serviceDelete(options: DelMutateOptions): Promise<any> {
+    protected async serviceDelete(options: DelMutateOptions): Promise<Mutation> {
         const request = new (grpc as any)[options.request]()
         const operation = new (grpc as any)[options.operation]()
 

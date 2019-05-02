@@ -5,12 +5,14 @@ type: delete
 entity: AdGroup
 ---
 
-### Delete AdGroup
+### Delete an AdGroup
 
-This section describes how to delete a AdGroup.
+The `customer.adGroups.delete(resource_name)` sets the `status` field of an AdGroup to `REMOVED`. Those entities and their metrics will continue to exist, but they will be read-only. Removed entities cannot be re-enabled.
 
-```javascript
-// Deleting the entity
+#### Arguments
 
-await customer.adGroups.delete('customers/9262111890/adGroups/66537099246')
-```
+- **`resource_name`** (_required_): The resource_name of that AdGroup
+
+#### Returns
+
+_Nothing_

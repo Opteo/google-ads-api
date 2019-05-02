@@ -5,21 +5,16 @@ type: get
 entity: CarrierConstant
 ---
 
-### Get CarrierConstant
+### Get a CarrierConstant
 
-The `customer.carrierConstants.get()` method returns all fields for one CarrierConstant, as well as all other entities related to it. Note that this function is heavily rate-limited by Google, so avoid using it in production.
+The `customer.carrierConstants.get(resource_name)` method returns the CarrierConstant identified by a resource_name.
 
-```javascript
-// Getting the entity
-let result = await customer.carrierConstants.get('carrierConstants/70720')
-```
+_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
 
-```javascript
-// Example result
-;({
-  resource_name: 'carrierConstants/70720',
-  country_code: 'TW',
-  id: 70720,
-  name: 'Long Distance & Mobile Business Group',
-})
-```
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that CarrierConstant
+
+#### Returns
+
+Returns that CarrierConstant as an object.

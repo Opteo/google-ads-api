@@ -5,12 +5,14 @@ type: delete
 entity: CustomerClientLink
 ---
 
-### Delete CustomerClientLink
+### Delete a CustomerClientLink
 
-This section describes how to delete a CustomerClientLink.
+The `customer.customerClientLinks.delete(resource_name)` sets the `status` field of a CustomerClientLink to `REMOVED`. Those entities and their metrics will continue to exist, but they will be read-only. Removed entities cannot be re-enabled.
 
-```javascript
-// Deleting the entity
+#### Arguments
 
-await customer.customerClientLinks.delete('customers/1234567890/customerClientLinks/123123123')
-```
+- **`resource_name`** (_required_): The resource_name of that CustomerClientLink
+
+#### Returns
+
+_Nothing_

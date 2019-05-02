@@ -1,0 +1,35 @@
+---
+title: Create {{ ENTITY }} 
+order: 4.1
+type: create_code
+entity: {{ ENTITY }} 
+---
+
+```javascript
+
+// Creating the entity
+
+const {{ ENTITY_SNAKECASE }} = {
+    // Your {{ ENTITY }} here, without immutable fields such as resource_name
+}
+
+// Passing in a single entity to create
+const result = await customer.{{ RESOURCE_URL_NAME }}.create({{ ENTITY_SNAKECASE }})
+
+// Passing in an array of entities to create, validating only
+const result = await customer.{{ RESOURCE_URL_NAME }}.create([{{ ENTITY_SNAKECASE }}, other_{{ ENTITY_SNAKECASE }}], {
+	validate_only : true
+})
+
+```
+
+```javascript
+
+// Example result
+{
+	results : ['{{EXAMPLE_RESOURCE_NAME}}'],
+	partial_failure_error : null,
+	request: { /* your request object */ }
+}
+
+```

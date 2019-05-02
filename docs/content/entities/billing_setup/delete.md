@@ -5,12 +5,14 @@ type: delete
 entity: BillingSetup
 ---
 
-### Delete BillingSetup
+### Delete a BillingSetup
 
-This section describes how to delete a BillingSetup.
+The `customer.billingSetups.delete(resource_name)` sets the `status` field of a BillingSetup to `REMOVED`. Those entities and their metrics will continue to exist, but they will be read-only. Removed entities cannot be re-enabled.
 
-```javascript
-// Deleting the entity
+#### Arguments
 
-await customer.billingSetups.delete('customers/9262111890/billingSetups/465508048')
-```
+- **`resource_name`** (_required_): The resource_name of that BillingSetup
+
+#### Returns
+
+_Nothing_

@@ -5,32 +5,16 @@ type: get
 entity: Feed
 ---
 
-### Get Feed
+### Get a Feed
 
-The `customer.feeds.get()` method returns all fields for one Feed, as well as all other entities related to it. Note that this function is heavily rate-limited by Google, so avoid using it in production.
+The `customer.feeds.get(resource_name)` method returns the Feed identified by a resource_name.
 
-```javascript
-// Getting the entity
-let result = await customer.feeds.get('customers/9262111890/feeds/82896692')
-```
+_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
 
-```javascript
-// Example result
-;({
-  resource_name: 'customers/9262111890/feeds/82896692',
-  attributes: [
-    { id: { value: 1 }, name: { value: 'SitelinkName' }, type: 4, isPartOfKey: { value: false } },
-    { id: { value: 2 }, name: { value: 'SitelinkUrl' }, type: 6, isPartOfKey: { value: false } },
-    { id: { value: 3 }, name: { value: 'SitelinkDescription1' }, type: 4, isPartOfKey: { value: false } },
-    { id: { value: 4 }, name: { value: 'SitelinkDescription2' }, type: 4, isPartOfKey: { value: false } },
-    { id: { value: 5 }, name: { value: 'SitelinkFinalUrls' }, type: 12, isPartOfKey: { value: false } },
-    { id: { value: 6 }, name: { value: 'SitelinkFinalMobileUrls' }, type: 12, isPartOfKey: { value: false } },
-    { id: { value: 7 }, name: { value: 'SitelinkTrackingUrl' }, type: 6, isPartOfKey: { value: false } },
-    { id: { value: 8 }, name: { value: 'SitelinkFinalUrlSuffix' }, type: 4, isPartOfKey: { value: false } },
-  ],
-  id: 82896692,
-  name: 'My feed',
-  origin: 3,
-  status: 2,
-})
-```
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that Feed
+
+#### Returns
+
+Returns that Feed as an object.

@@ -5,12 +5,14 @@ type: delete
 entity: UserList
 ---
 
-### Delete UserList
+### Delete a UserList
 
-This section describes how to delete a UserList.
+The `customer.userLists.delete(resource_name)` sets the `status` field of a UserList to `REMOVED`. Those entities and their metrics will continue to exist, but they will be read-only. Removed entities cannot be re-enabled.
 
-```javascript
-// Deleting the entity
+#### Arguments
 
-await customer.userLists.delete('customers/3827277046/userLists/508846109')
-```
+- **`resource_name`** (_required_): The resource_name of that UserList
+
+#### Returns
+
+_Nothing_

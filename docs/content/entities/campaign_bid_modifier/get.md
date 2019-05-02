@@ -5,20 +5,16 @@ type: get
 entity: CampaignBidModifier
 ---
 
-### Get CampaignBidModifier
+### Get a CampaignBidModifier
 
-The `customer.campaignBidModifiers.get()` method returns all fields for one CampaignBidModifier, as well as all other entities related to it. Note that this function is heavily rate-limited by Google, so avoid using it in production.
+The `customer.campaignBidModifiers.get(resource_name)` method returns the CampaignBidModifier identified by a resource_name.
 
-```javascript
-// Getting the entity
-let result = await customer.campaignBidModifiers.get('customers/3827277046/campaignBidModifiers/729684361~8000')
-```
+_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
 
-```javascript
-// Example result
-;({
-  resource_name: 'customers/3827277046/campaignBidModifiers/729684361~8000',
-  campaign: 'customers/3827277046/campaigns/729684361',
-  criterion_id: 8000,
-})
-```
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that CampaignBidModifier
+
+#### Returns
+
+Returns that CampaignBidModifier as an object.

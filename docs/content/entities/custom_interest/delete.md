@@ -5,12 +5,14 @@ type: delete
 entity: CustomInterest
 ---
 
-### Delete CustomInterest
+### Delete a CustomInterest
 
-This section describes how to delete a CustomInterest.
+The `customer.customInterests.delete(resource_name)` sets the `status` field of a CustomInterest to `REMOVED`. Those entities and their metrics will continue to exist, but they will be read-only. Removed entities cannot be re-enabled.
 
-```javascript
-// Deleting the entity
+#### Arguments
 
-await customer.customInterests.delete('customers/1234567890/customInterests/123123123')
-```
+- **`resource_name`** (_required_): The resource_name of that CustomInterest
+
+#### Returns
+
+_Nothing_

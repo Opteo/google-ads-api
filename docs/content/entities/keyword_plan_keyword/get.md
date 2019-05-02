@@ -5,18 +5,16 @@ type: get
 entity: KeywordPlanKeyword
 ---
 
-### Get KeywordPlanKeyword
+### Get a KeywordPlanKeyword
 
-The `customer.keywordPlanKeywords.get()` method returns all fields for one KeywordPlanKeyword, as well as all other entities related to it. Note that this function is heavily rate-limited by Google, so avoid using it in production.
+The `customer.keywordPlanKeywords.get(resource_name)` method returns the KeywordPlanKeyword identified by a resource_name.
 
-```javascript
-// Getting the entity
-let result = await customer.keywordPlanKeywords.get('customers/1234567890/keywordPlanKeywords/123123123')
-```
+_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
 
-```javascript
+#### Arguments
 
-// Example result
-(// Todo: add example get() return here)
+- **`resource_name`** (_required_): The resource_name of that KeywordPlanKeyword
 
-```
+#### Returns
+
+Returns that KeywordPlanKeyword as an object.

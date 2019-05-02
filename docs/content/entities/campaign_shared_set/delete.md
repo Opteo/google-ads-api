@@ -5,12 +5,14 @@ type: delete
 entity: CampaignSharedSet
 ---
 
-### Delete CampaignSharedSet
+### Delete a CampaignSharedSet
 
-This section describes how to delete a CampaignSharedSet.
+The `customer.campaignSharedSets.delete(resource_name)` sets the `status` field of a CampaignSharedSet to `REMOVED`. Those entities and their metrics will continue to exist, but they will be read-only. Removed entities cannot be re-enabled.
 
-```javascript
-// Deleting the entity
+#### Arguments
 
-await customer.campaignSharedSets.delete('customers/9262111890/campaignSharedSets/1485014801~1788591305')
-```
+- **`resource_name`** (_required_): The resource_name of that CampaignSharedSet
+
+#### Returns
+
+_Nothing_

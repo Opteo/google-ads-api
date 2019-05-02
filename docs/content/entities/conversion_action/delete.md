@@ -5,12 +5,14 @@ type: delete
 entity: ConversionAction
 ---
 
-### Delete ConversionAction
+### Delete a ConversionAction
 
-This section describes how to delete a ConversionAction.
+The `customer.conversionActions.delete(resource_name)` sets the `status` field of a ConversionAction to `REMOVED`. Those entities and their metrics will continue to exist, but they will be read-only. Removed entities cannot be re-enabled.
 
-```javascript
-// Deleting the entity
+#### Arguments
 
-await customer.conversionActions.delete('customers/3827277046/conversionActions/238277646')
-```
+- **`resource_name`** (_required_): The resource_name of that ConversionAction
+
+#### Returns
+
+_Nothing_

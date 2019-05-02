@@ -5,23 +5,16 @@ type: get
 entity: CampaignCriterion
 ---
 
-### Get CampaignCriterion
+### Get a CampaignCriterion
 
-The `customer.campaignCriteria.get()` method returns all fields for one CampaignCriterion, as well as all other entities related to it. Note that this function is heavily rate-limited by Google, so avoid using it in production.
+The `customer.campaignCriteria.get(resource_name)` method returns the CampaignCriterion identified by a resource_name.
 
-```javascript
-// Getting the entity
-let result = await customer.campaignCriteria.get('customers/9262111890/campaignCriteria/1599497210~1000')
-```
+_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
 
-```javascript
-// Example result
-;({
-  resource_name: 'customers/9262111890/campaignCriteria/1599497210~1000',
-  campaign: 'customers/9262111890/campaigns/1599497210',
-  criterion_id: 1000,
-  language: { language_constant: 'languageConstants/1000' },
-  negative: false,
-  type: 20,
-})
-```
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that CampaignCriterion
+
+#### Returns
+
+Returns that CampaignCriterion as an object.

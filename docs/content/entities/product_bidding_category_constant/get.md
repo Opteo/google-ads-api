@@ -5,24 +5,16 @@ type: get
 entity: ProductBiddingCategoryConstant
 ---
 
-### Get ProductBiddingCategoryConstant
+### Get a ProductBiddingCategoryConstant
 
-The `customer.productBiddingCategoryConstants.get()` method returns all fields for one ProductBiddingCategoryConstant, as well as all other entities related to it. Note that this function is heavily rate-limited by Google, so avoid using it in production.
+The `customer.productBiddingCategoryConstants.get(resource_name)` method returns the ProductBiddingCategoryConstant identified by a resource_name.
 
-```javascript
-// Getting the entity
-let result = await customer.productBiddingCategoryConstants.get('productBiddingCategoryConstants/AU~LEVEL1~1')
-```
+_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
 
-```javascript
-// Example result
-;({
-  resource_name: 'productBiddingCategoryConstants/AU~LEVEL1~1',
-  country_code: 'AU',
-  id: 1,
-  language_code: 'en',
-  level: 2,
-  localized_name: 'Animals & Pet Supplies',
-  status: 2,
-})
-```
+#### Arguments
+
+- **`resource_name`** (_required_): The resource_name of that ProductBiddingCategoryConstant
+
+#### Returns
+
+Returns that ProductBiddingCategoryConstant as an object.

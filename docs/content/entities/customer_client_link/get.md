@@ -5,18 +5,16 @@ type: get
 entity: CustomerClientLink
 ---
 
-### Get CustomerClientLink
+### Get a CustomerClientLink
 
-The `customer.customerClientLinks.get()` method returns all fields for one CustomerClientLink, as well as all other entities related to it. Note that this function is heavily rate-limited by Google, so avoid using it in production.
+The `customer.customerClientLinks.get(resource_name)` method returns the CustomerClientLink identified by a resource_name.
 
-```javascript
-// Getting the entity
-let result = await customer.customerClientLinks.get('customers/1234567890/customerClientLinks/123123123')
-```
+_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
 
-```javascript
+#### Arguments
 
-// Example result
-(// Todo: add example get() return here)
+- **`resource_name`** (_required_): The resource_name of that CustomerClientLink
 
-```
+#### Returns
+
+Returns that CustomerClientLink as an object.
