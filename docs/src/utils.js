@@ -15,11 +15,14 @@ export const getIds = edges => {
         if (!ids[entity]) {
             ids[entity] = {}
         }
-        ids[entity][order] = {
-            title,
-            type,
-            entity,
-            id: getSectionId(node),
+
+        if (!type.includes('code')) {
+            ids[entity][order] = {
+                title,
+                type,
+                entity,
+                id: getSectionId(node),
+            }
         }
     })
     return ids
