@@ -12,22 +12,20 @@ var TurndownService = require('turndown')
 TurndownService.prototype.escape = t => t
 var turndownService = new TurndownService()
 
-
 const showdown = require('showdown')
 showdown.setOption('literalMidWordUnderscores', true)
 const converter = new showdown.Converter()
 
-
-const sanitiseHtml = (gg) => {
+const sanitiseHtml = gg => {
     gg = turndownService.turndown(gg)
-    const result = converter.makeHtml(gg);
+    const result = converter.makeHtml(gg)
 
     // remove <p> tags
     return result.substring(3, result.length - 4)
 }
 
 require('dotenv').config()
-const { GoogleAdsApi } = require("../build")
+const { GoogleAdsApi } = require('../build')
 
 const client = new GoogleAdsApi({
     client_id: process.env.GADS_CLIENT_ID,
@@ -35,13 +33,11 @@ const client = new GoogleAdsApi({
     developer_token: process.env.GADS_DEVELOPER_TOKEN,
 })
 
-
 const customer = client.Customer({
     customer_account_id: process.env.GADS_CID,
     login_customer_id: process.env.GADS_LOGIN_CUSTOMER_ID,
     refresh_token: process.env.GADS_REFRESH_TOKEN,
 })
-
 
 const customer_scary = client.Customer({
     customer_account_id: process.env.GADS_CID_WITH_METRICS,
@@ -60,27 +56,27 @@ const capitalise = s => {
 
 var execP = Promise.promisify(require('child_process').exec)
 
-const service_template_file = fs.readFileSync(__dirname + '/template_service.hbs', 'utf-8')
+const service_template_file = fs.readFileSync(__dirname + '/templates/template_service.hbs', 'utf-8')
 const service_compiler = template(service_template_file, {
     interpolate: /{{([\s\S]+?)}}/g,
 })
 
-const service_immutable_template_file = fs.readFileSync(__dirname + '/template_service_immutable.hbs', 'utf-8')
+const service_immutable_template_file = fs.readFileSync(__dirname + '/templates/template_service_immutable.hbs', 'utf-8')
 const service_immutable_compiler = template(service_immutable_template_file, {
     interpolate: /{{([\s\S]+?)}}/g,
 })
 
-const service_test_template_file = fs.readFileSync(__dirname + '/template_service_test.hbs', 'utf-8')
+const service_test_template_file = fs.readFileSync(__dirname + '/templates/template_service_test.hbs', 'utf-8')
 const service_test_compiler = template(service_test_template_file, {
     interpolate: /{{([\s\S]+?)}}/g,
 })
 
-const meta_template_file = fs.readFileSync(__dirname + '/template_meta.hbs', 'utf-8')
+const meta_template_file = fs.readFileSync(__dirname + '/templates/template_meta.hbs', 'utf-8')
 const meta_compiler = template(meta_template_file, {
     interpolate: /{{([\s\S]+?)}}/g,
 })
 
-const readme_object_compiler = template(fs.readFileSync(__dirname + '/template_readme_object.hbs', 'utf-8'), {
+const readme_object_compiler = template(fs.readFileSync(__dirname + '/templates/template_readme_object.hbs', 'utf-8'), {
     interpolate: /{{([\s\S]+?)}}/g,
 })
 
@@ -88,20 +84,21 @@ const readme_object_compiler = template(fs.readFileSync(__dirname + '/template_r
 //     interpolate: /{{([\s\S]+?)}}/g,
 // })
 
-
 const method_compilers = {}
 
-;
-(['get', 'list', 'create', 'update', 'delete']).forEach(method => {
-    method_compilers[method] = template(fs.readFileSync(__dirname + `/template_readme_${method}.hbs`, 'utf-8'), {
-        interpolate: /{{([\s\S]+?)}}/g,
-    })
+;['get', 'list', 'create', 'update', 'delete'].forEach(method => {
+    method_compilers[method] = template(
+        fs.readFileSync(__dirname + `/templates/template_readme_${method}.hbs`, 'utf-8'),
+        {
+            interpolate: /{{([\s\S]+?)}}/g,
+        }
+    )
 })
 
 const $RefParser = require('json-schema-ref-parser')
 
 const raw_schema = require('./schema.json')
-    // TODO: get this from google-ads-node
+// TODO: get this from google-ads-node
 const raw_compiled_services = require('./compiled_resources.json')
 
 // console.log(raw_compiled_services)
@@ -112,7 +109,7 @@ const raw_compiled_services = require('./compiled_resources.json')
 
 const compiled_resources =
     raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v1.nested.resources.nested
-    // raw_compiled_services.nested.
+// raw_compiled_services.nested.
 
 // console.log(compiled_resources)
 const references = raw_schema.schemas
@@ -129,8 +126,6 @@ var myResolver = {
 }
 
 let schema
-
-
 
 const entities = [
     'AccountBudgetProposal',
@@ -204,10 +199,8 @@ const entities = [
     'Video',
 ]
 
-
 const compiled_services =
     raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v1.nested.services.nested
-
 
 const _entities = Object.keys(compiled_services).forEach(entity => {
     if (!entity.includes('Service')) {
@@ -222,7 +215,6 @@ const _entities = Object.keys(compiled_services).forEach(entity => {
         console.log(entity)
     }
 })
-
 
 function getResourceUrl(entity) {
     if (entity === 'ChangeStatus') {
@@ -372,9 +364,8 @@ async function compileService(entity, schema) {
             } else {
                 const markdown_description = sanitiseHtml(obj[key].description)
 
-                new_obj[snakeCase(key)] = {..._new_object, _description: markdown_description }
+                new_obj[snakeCase(key)] = { ..._new_object, _description: markdown_description }
             }
-
 
             const matching_resource = compiled_resources[capitalise(parent_field_name)]
             if (matching_resource && matching_resource.oneofs) {
@@ -386,7 +377,6 @@ async function compileService(entity, schema) {
                     })
                 })
             }
-
         })
 
         // remove incorrect oneofs (only one instance in object)
@@ -399,7 +389,6 @@ async function compileService(entity, schema) {
                 }
                 oneof_counts[just_created_child._oneof]++
             }
-
         })
 
         Object.keys(oneof_counts).forEach(oneof_type => {
@@ -412,7 +401,6 @@ async function compileService(entity, schema) {
                 if (oneof_type === new_obj[just_created_child_key]._oneof) {
                     delete new_obj[just_created_child_key]._oneof
                 }
-
             })
         })
 
@@ -444,7 +432,6 @@ async function compileService(entity, schema) {
         object: unroll(schema.schemas[`GoogleAdsGoogleadsV1Resources__${entity}`].properties, entity),
     }
 
-
     const file_path = `${__dirname}/../src/services/${ent}.ts`
 
     const docs_file_path = `${__dirname}/../docs/content/entities/${ent}/`
@@ -467,9 +454,6 @@ async function compileService(entity, schema) {
         })
 
         meta.methods = ['get', 'list', 'create', 'update', 'delete']
-
-
-
     } else {
         compiled_service = service_immutable_compiler({
             RESOURCE_URL_NAME: resource_url_name,
@@ -490,31 +474,28 @@ async function compileService(entity, schema) {
     // console.log(customer)
     // console.log(entity)
 
-    if(customer[camelCase(resource_url_name)]){
+    if (customer[camelCase(resource_url_name)]) {
         const cache_path = `${__dirname}/../.cache/${ent}.json`
 
         let listed = []
         try {
             listed = fs.readJsonSync(cache_path)
-
         } catch {
-
             try {
                 listed = await customer[camelCase(resource_url_name)].list({
-                    limit: 1
+                    limit: 1,
                 })
                 fs.writeJsonSync(cache_path, listed)
             } catch (e) {
                 console.error(e)
             }
-
         }
         let scary = false
 
         if (listed.length === 0) {
             try {
                 listed = await customer_scary[camelCase(resource_url_name)].list({
-                    limit: 1
+                    limit: 1,
                 })
                 scary = listed.length > 0
                 console.log(listed.length)
@@ -524,21 +505,18 @@ async function compileService(entity, schema) {
             }
         }
 
-
         let example_object_list = '// Todo: add example list() return here'
         let example_object_get = '// Todo: add example get() return here'
-        let example_resource_name = `customers/1234567890/${ resource_url_name }/123123123`
+        let example_resource_name = `customers/1234567890/${resource_url_name}/123123123`
 
         if (listed.length > 0) {
-
             // Get the "biggest" example in an attempt to get the most fields
             let chosen_example = maxBy(listed, block => {
                 return JSON.stringify(block).length
             })
 
             // Reorder the object to put the least interesting things at the bottom
-            ;
-            (['ad_group', 'campaign', 'customer']).forEach(key => {
+            ;['ad_group', 'campaign', 'customer'].forEach(key => {
                 if (chosen_example[key]) {
                     const customer_temp_object = chosen_example[key]
                     delete chosen_example[key]
@@ -554,7 +532,7 @@ async function compileService(entity, schema) {
             delete chosen_example[ent]
             chosen_example = {
                 [ent]: ent_temp_object,
-                ...chosen_example
+                ...chosen_example,
             }
 
             // just a tiny bit of sanitization
@@ -580,21 +558,21 @@ async function compileService(entity, schema) {
             // return
         }
 
-
-        const AN = (['O', 'A']).includes(entity.slice(0,1)) ? 'an' : 'a'
+        const AN = ['O', 'A'].includes(entity.slice(0, 1)) ? 'an' : 'a'
 
         fs.writeFileSync(docs_file_path + 'meta.js', meta_compiler({ JSON_META: JSON.stringify(meta) }))
 
-        fs.writeFileSync(docs_file_path + 'index.md', readme_object_compiler({
-            ENTITY: entity,
-            ENTITY_SNAKECASE: ent,
-            EXAMPLE_OBJECT_GET: example_object_get,
-            AN
-        }))
-
+        fs.writeFileSync(
+            docs_file_path + 'index.md',
+            readme_object_compiler({
+                ENTITY: entity,
+                ENTITY_SNAKECASE: ent,
+                EXAMPLE_OBJECT_GET: example_object_get,
+                AN,
+            })
+        )
 
         meta.methods.forEach(method => {
-
             const compiled_md = method_compilers[method]({
                 ENTITY: entity,
                 ENTITY_SNAKECASE: ent,
@@ -602,29 +580,30 @@ async function compileService(entity, schema) {
                 EXAMPLE_OBJECT_LIST: example_object_list,
                 EXAMPLE_OBJECT_GET: example_object_get,
                 EXAMPLE_RESOURCE_NAME: example_resource_name,
-                AN
+                AN,
             })
 
             fs.writeFileSync(docs_file_path + `${method}.md`, compiled_md)
         })
-
     }
 
     let existing_service = ''
-   
+
     try {
         existing_service = fs.readFileSync(file_path)
-    }
-    catch(err){
+    } catch (err) {
         console.log(err)
-    }    
+    }
 
-    if (!existing_service.toString().slice(0, 20).includes('manual_mode')) {
+    if (
+        !existing_service
+            .toString()
+            .slice(0, 20)
+            .includes('manual_mode')
+    ) {
         fs.ensureFileSync(file_path)
         fs.writeFileSync(file_path, compiled_service)
     }
-
-
 
     if (!entity.toLowerCase().includes('constant')) {
         // const compiled_service_test = service_test_compiler({
@@ -647,11 +626,9 @@ async function compileService(entity, schema) {
     // const result = await execP(`prettier --write ${file_path}`)
 
     // console.log({ file_path }) g
-
 }
 
-;
-(async() => {
+;(async () => {
     schema = await $RefParser.dereference(__dirname + '/schema.json', {
         resolve: { gads: myResolver },
     })
