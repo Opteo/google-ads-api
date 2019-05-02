@@ -9,6 +9,7 @@
     grid-column: 1;
 }
 .content p {
+    font-size: 1rem;
     grid-column: 1;
     margin-bottom: 2rem;
 }
@@ -16,4 +17,8 @@
 .gatsby-highlight {
     position: sticky;
     top: 0;
+}
+
+.enum-container {
+    background-color: #f0f1f5;
 }

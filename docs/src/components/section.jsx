@@ -12,8 +12,6 @@ class Section extends React.Component {
         const { id, node, meta, is_index } = data
         const { html } = node
 
-        console.log(meta)
-
         return (
             <div id={id} key={id} className={`  ` + (is_index ? 'bb b--opteo-light-gray pt6 pb4' : 'bb b--opteo-light-gray pv4')}>
                 <div className="w-100 fl v-top">

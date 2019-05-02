@@ -51,6 +51,10 @@
     border-color: #262629;
 }
 
+.opteo-middle-gray {
+    color: #c9cacf;
+}
+
 .hover-opteo-dark-gray:hover,
 .hover-opteo-dark-gray:focus {
     color: #262629;

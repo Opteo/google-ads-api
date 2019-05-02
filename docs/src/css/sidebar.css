@@ -1,9 +1,10 @@
 .entity {
+    font-size: 1rem;
     color: #747883;
     transition: color 0.3s ease;
 }
 .entity:hover {
-    color: #1056ea;
+    color: #008dff;
 }
 
 .entity-child a {
@@ -12,6 +13,6 @@
 }
 
 .entity-child a:hover {
-    color: #1056ea;
+    color: #008dff;
     display: block;
 }

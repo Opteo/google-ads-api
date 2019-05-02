@@ -51,14 +51,15 @@ const AttributesTable = ({ data, title, section }) => {
                             </div>
                         )
                     })}
-                    This field can also be replaced by:
+                    <div className="mb2">This field can also be replaced by:</div>
+                    <ul>
                     {Object.keys(one_ofs[oneof_type_key]).map(oneof_key => {
                         const unique_attribute_key = 'oneof' + section + oneof_type_key + oneof_key
 
                         return (
-                            <div
+                            <li
                                 key={unique_attribute_key + 'selector'}
-                                className="opteo-blue pointer"
+                                className="one-of-item mb2 pointer"
                                 onClick={() =>
                                     toggleOneOf(
                                         'oneof' + section + oneof_type_key,
@@ -66,11 +67,11 @@ const AttributesTable = ({ data, title, section }) => {
                                     )
                                 }
                             >
-                                {' '}
-                                • {oneof_key.split('_').join(' ')}{' '}
-                            </div>
+                                • <span className="bb b--opteo-link-blue">{oneof_key.split('_').join(' ')}{' '}</span>
+                            </li>
                         )
                     })}
+                    </ul>
                 </div>
             )
         })
