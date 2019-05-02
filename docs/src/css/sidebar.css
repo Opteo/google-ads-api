@@ -1,0 +1,17 @@
+.entity {
+    color: #747883;
+    transition: color 0.3s ease;
+}
+.entity:hover {
+    color: #1056ea;
+}
+
+.entity-child a {
+    color: #747883;
+    display: block;
+}
+
+.entity-child a:hover {
+    color: #1056ea;
+    display: block;
+}

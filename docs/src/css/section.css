@@ -1,0 +1,19 @@
+/* .content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+} */
+.content h2 {
+    grid-column: 1;
+}
+.content h3 {
+    grid-column: 1;
+}
+.content p {
+    grid-column: 1;
+    margin-bottom: 2rem;
+}
+
+.gatsby-highlight {
+    position: sticky;
+    top: 0;
+}

@@ -11,8 +11,11 @@ import { StaticQuery, graphql } from 'gatsby'
 
 import Header from './header'
 import '../css/tachyons.min.css'
-import '../css/main.css'
+import '../css/reset.css'
 import '../css/colors.css'
+import '../css/main.css'
+import '../css/sidebar.css'
+import '../css/section.css'
 import '../css/two-column.css'
 import '../css/prism-theme-dark.css'
 

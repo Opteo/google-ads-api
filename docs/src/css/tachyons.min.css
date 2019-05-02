@@ -2126,6 +2126,9 @@ code {
 .pb2 {
     padding-bottom: 0.5rem;
 }
+.pb2-5 {
+    padding-bottom: 0.75rem;
+}
 .pb3 {
     padding-bottom: 1rem;
 }
@@ -2596,6 +2599,9 @@ code {
 .f5 {
     font-size: 1rem;
 }
+.f5-5 {
+    font-size: 0.925rem
+} 
 .f6 {
     font-size: 0.875rem;
 }

@@ -27,7 +27,10 @@ const AttributesTable = ({ data, title, section }) => {
     const getOneOfRows = one_ofs => {
         return Object.keys(one_ofs).map(oneof_type_key => {
             return (
-                <div key={'oneofcontainer' + section + oneof_type_key}>
+                <div
+                    className="pb3"
+                    key={'oneofcontainer' + section + oneof_type_key}
+                >
                     {Object.keys(one_ofs[oneof_type_key]).map((oneof_key, index) => {
                         const details = one_ofs[oneof_type_key][oneof_key]
                         if (typeof details !== 'object') {

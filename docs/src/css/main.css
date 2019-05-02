@@ -1,4 +1,60 @@
-html {
+body {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    color: #2c3e50;
+}
+
+a { 
+    color: inherit;
+    text-decoration: none;
+    color: #2c3e50;
+    transition: color 0.3s ease;
+} 
+a:hover {
+    color: #1056ea;
+}
+
+/* h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+} */
+
+h2 {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+}
+
+h3 {
+    font-size: 1.35rem;
+    margin-bottom: 2rem;
+}
+
+h4 {
+    margin-bottom: 1rem;
+}
+
+code,
+kbd,
+pre,
+samp {
+    font-family: monospace, monospace;
+    font-size: 1em;
+}
+
+pre {
+    overflow: auto !important;
+}
+code {
+    background-color: #272822;
+    color: white;
+    border-radius: 3px;
+    font-family: 'SFMono-Regular', Consolas, 'Roboto Mono', 'Droid Sans Mono', 'Liberation Mono', Menlo, Courier,
+        monospace;
+    padding: 0.2em 0.2em;
+    font-size: 0.85rem;
+    line-height: 1.45rem;
+}
+
+/* html {
     font-family: sans-serif;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
@@ -618,4 +674,4 @@ pre tt:after {
     html {
         font-size: 100%;
     }
-}
+} */
