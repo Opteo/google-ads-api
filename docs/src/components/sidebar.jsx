@@ -1,8 +1,18 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { Link } from 'gatsby'
-import { getSubsectionTitle } from '../utils'
+
+import { getSubsectionTitle, stringMatch } from '../utils'
 class Sidebar extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = { search: '' }
+    }
+
+    handleSearch = event => {
+        this.setState({ search: event.target.value })
+    }
+
     render() {
         const { sections, currentSection } = this.props
 
@@ -36,6 +46,13 @@ class Sidebar extends React.Component {
 
             const subsection_ids = Object.keys(subsections).map(index => subsections[index].id)
 
+            const searched =
+                this.state.search && this.state.search.length > 0 ? stringMatch(section, this.state.search) : true
+
+            if (!searched) {
+                return null
+            }
+
             if (!subsection_ids.includes(currentSection)) {
                 return (
                     <li key={section_key} className="mv0 pb2-5">
@@ -66,6 +83,7 @@ class Sidebar extends React.Component {
                 <Link className="f3 tc pv3 bb b--opteo-light-gray opteo-gray hover-opteo-gray" to="/">
                     google-ads-api
                 </Link>
+                <input type="text" placeholder="search" value={this.state.search} onChange={this.handleSearch} />
                 <div className="f6 pa3 bb b--opteo-light-gray opteo-middle-gray">CORE RESOURCES</div>
                 <ul className="list f5 pv3 pl3 overflow-y-auto">{SectionRows}</ul>
             </div>

@@ -77,3 +77,13 @@ export const getSubsectionTitle = ({ entity, type }) => {
             return `${capitalizeFirstLetter(type)} ${AN} ${entity}`
     }
 }
+
+export const stringMatch = (a, b) => {
+    const a_low = a.toLowerCase()
+    const b_low = b.toLowerCase()
+
+    const a_split = a.replace(/([A-Z])/g, ' $1').toLowerCase()
+    const b_split = b.replace(/([A-Z])/g, ' $1').toLowerCase()
+
+    return a_low.includes(b_low) || a_split.includes(b_split)
+}
