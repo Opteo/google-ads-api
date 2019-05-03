@@ -108,28 +108,23 @@ export interface CustomerInstance {
     accountBudgets: AccountBudgetService
     adGroupAdLabels: AdGroupAdLabelService
     adGroupAds: AdGroupAdService
-    adGroupAudienceViews: AdGroupAudienceViewService
     adGroupBidModifiers: AdGroupBidModifierService
     adGroupCriterionLabels: AdGroupCriterionLabelService
-    adGroupCriterion: AdGroupCriterionService
+    adGroupCriteria: AdGroupCriterionService
     adGroupExtensionSettings: AdGroupExtensionSettingService
     adGroupFeeds: AdGroupFeedService
     adGroupLabels: AdGroupLabelService
-    adScheduleViews: AdScheduleViewService
-    ageRangeViews: AgeRangeViewService
     assets: AssetService
-    biddingStrategys: BiddingStrategyService
+    biddingStrategies: BiddingStrategyService
     billingSetups: BillingSetupService
-    campaignAudienceViews: CampaignAudienceViewService
     campaignBidModifiers: CampaignBidModifierService
-    campaignCriterion: CampaignCriterionService
+    campaignCriteria: CampaignCriterionService
     campaignExtensionSettings: CampaignExtensionSettingService
     campaignFeeds: CampaignFeedService
     campaignLabels: CampaignLabelService
     campaignSharedSets: CampaignSharedSetService
     carrierConstants: CarrierConstantService
     changeStatus: ChangeStatusService
-    clickViews: ClickViewService
     conversionActions: ConversionActionService
     conversionUploads: ConversionUploadService
     conversionAdjustmentUploads: ConversionAdjustmentUploadService
@@ -140,47 +135,31 @@ export interface CustomerInstance {
     customerFeeds: CustomerFeedService
     customerLabels: CustomerLabelService
     customerManagerLinks: CustomerManagerLinkService
-    customerNegativeCriterions: CustomerNegativeCriterionService
-    displayKeywordViews: DisplayKeywordViewService
+    customerNegativeCriteria: CustomerNegativeCriterionService
     domainCategories: DomainCategoryService
-    dynamicSearchAdsSearchTermViews: DynamicSearchAdsSearchTermViewService
     extensionFeedItems: ExtensionFeedItemService
     feedItems: FeedItemService
     feedItemTargets: FeedItemTargetService
     feedMappings: FeedMappingService
-    feedPlaceholderViews: FeedPlaceholderViewService
     feeds: FeedService
-    genderViews: GenderViewService
     geoTargetConstants: GeoTargetConstantService
-    geographicViews: GeographicViewService
-    groupPlacementViews: GroupPlacementViewService
-    hotelGroupViews: HotelGroupViewService
-    hotelPerformanceViews: HotelPerformanceViewService
     keywordPlanAdGroups: KeywordPlanAdGroupService
     keywordPlanCampaigns: KeywordPlanCampaignService
     keywordPlanKeywords: KeywordPlanKeywordService
     keywordPlanNegativeKeywords: KeywordPlanNegativeKeywordService
     keywordPlans: KeywordPlanService
-    keywordViews: KeywordViewService
     labels: LabelService
     languageConstants: LanguageConstantService
-    locationViews: LocationViewService
-    managedPlacementViews: ManagedPlacementViewService
     mediaFiles: MediaFileService
     mobileAppCategoryConstants: MobileAppCategoryConstantService
     mobileDeviceConstants: MobileDeviceConstantService
     operatingSystemVersionConstants: OperatingSystemVersionConstantService
-    parentalStatusViews: ParentalStatusViewService
     productBiddingCategoryConstants: ProductBiddingCategoryConstantService
-    productGroupViews: ProductGroupViewService
     recommendations: RecommendationService
     remarketingActions: RemarketingActionService
-    searchTermViews: SearchTermViewService
-    sharedCriterion: SharedCriterionService
-    shoppingPerformanceViews: ShoppingPerformanceViewService
+    sharedCriteria: SharedCriterionService
     sharedSets: SharedSetService
     topicConstants: TopicConstantService
-    topicViews: TopicViewService
     userInterests: UserInterestService
     userLists: UserListService
     videos: VideoService
