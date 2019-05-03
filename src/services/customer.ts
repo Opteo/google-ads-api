@@ -8,6 +8,13 @@ import Bottleneck from 'bottleneck'
 import Service, { Mutation } from './service'
 import { ReportOptions, ServiceCreateOptions, PreReportHook, PostReportHook, MutateResourceOperation } from '../types'
 
+export type ReportResponse = Promise<Array<any>>
+export type QueryResponse = Promise<Array<any>>
+export type ListResponse = Promise<Array<{ customer: Customer }>>
+export type GetResponse = Promise<Customer>
+export type UpdateResponse = Promise<void>
+export type MutateResourcesResponse = Promise<Mutation>
+
 export default class CustomerService extends Service {
     private post_report_hook: PostReportHook
     private pre_report_hook: PreReportHook
@@ -26,12 +33,12 @@ export default class CustomerService extends Service {
         this.post_report_hook = post_report_hook
     }
 
-    public async report(options: ReportOptions): Promise<Array<any>> {
+    public async report(options: ReportOptions): ReportResponse {
         const results = await this.serviceReport(options, this.pre_report_hook, this.post_report_hook)
         return results
     }
 
-    public async query(qry: string): Promise<Array<any>> {
+    public async query(qry: string): QueryResponse {
         const results = await this.serviceQuery(qry)
         return results
     }
@@ -43,11 +50,11 @@ export default class CustomerService extends Service {
     //     console.log(response)
     // }
 
-    public async list(): Promise<Array<{ customer: Customer }>> {
+    public async list(): ListResponse {
         return this.getListResults('customer')
     }
 
-    public async get(id: number | string): Promise<Customer> {
+    public async get(id: number | string): GetResponse {
         return this.serviceGet({
             request: 'GetCustomerRequest',
             resource: `customers/${id}`,
@@ -56,7 +63,7 @@ export default class CustomerService extends Service {
         }) as Customer
     }
 
-    public async update(customer: Customer, options?: ServiceCreateOptions): Promise<void> {
+    public async update(customer: Customer, options?: ServiceCreateOptions): UpdateResponse {
         const request = new grpc.MutateCustomerRequest()
         const operation = new grpc.CustomerOperation()
 
@@ -82,7 +89,7 @@ export default class CustomerService extends Service {
     public async mutateResources(
         operations: Array<MutateResourceOperation>,
         options?: ServiceCreateOptions
-    ): Promise<Mutation> {
+    ): MutateResourcesResponse {
         const request = new grpc.MutateGoogleAdsRequest()
 
         request.setCustomerId(this.cid)

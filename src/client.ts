@@ -2,7 +2,7 @@ import Bottleneck from 'bottleneck'
 import crypto from 'crypto'
 import { noop } from 'lodash'
 
-import CustomerInstance from './customer'
+import Customer, { CustomerInstance } from './customer'
 import GrpcClient from './grpc'
 import { normaliseCustomerId } from './utils'
 import { PreReportHook, PostReportHook } from './types'
@@ -61,7 +61,7 @@ export default class GoogleAdsApi {
         login_customer_id,
         pre_report_hook,
         post_report_hook,
-    }: CustomerOptions) {
+    }: CustomerOptions): CustomerInstance {
         if (!customer_account_id || !refresh_token) {
             throw new Error('Must specify {customer_account_id, refresh_token}')
         }
@@ -80,6 +80,6 @@ export default class GoogleAdsApi {
             login_customer_id
         )
 
-        return CustomerInstance(customer_account_id, client, this.throttler, pre_report_hook, post_report_hook)
+        return Customer(customer_account_id, client, this.throttler, pre_report_hook, post_report_hook)
     }
 }
