@@ -61,13 +61,6 @@ export const getSectionsData = edges => {
     return sections
 }
 
-export const toggleVisible = id => {
-    const element = document.getElementById(id)
-    if (element) {
-        if (element.style.display === 'none') {
-            element.style.display = 'block'
-        } else {
-            element.style.display = 'none'
-        }
-    }
+export const capitalizeFirstLetter = str => {
+    return `${str.charAt(0).toUpperCase()}${str.slice(1)}`
 }

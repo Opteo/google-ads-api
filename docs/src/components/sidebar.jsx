@@ -2,9 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { Link, navigate } from 'gatsby'
 
-import { toggleVisible } from '../utils'
-import _ from 'lodash'
-
+import { capitalizeFirstLetter } from '../utils'
 class Sidebar extends React.Component {
     getSubsectionTitle({ entity, type }) {
         const AN = ['O', 'A'].includes(entity.slice(0, 1)) ? 'an' : 'a'
@@ -17,7 +15,7 @@ class Sidebar extends React.Component {
                 return `List all ${entity}s`
             }
             default:
-                return `${_.startCase(type)} ${AN} ${entity}`
+                return `${capitalizeFirstLetter(type)} ${AN} ${entity}`
         }
     }
 
@@ -37,18 +35,22 @@ class Sidebar extends React.Component {
                     {Object.keys(ids).map(section => {
                         const subsections = ids[section]
                         const section_key = `sidebar-${section}`
-                        const is_current = section === currentSection
+                        const section_id = `/#${section.toLowerCase()}`
+
+                        if (section !== currentSection) {
+                            return (
+                                <li key={section_key} className="mv0 pb2-5">
+                                    <Link className="entity pointer" to={section_id}>
+                                        {section}
+                                    </Link>
+                                </li>
+                            )
+                        }
 
                         return (
                             <li key={section_key} className="mv0 pb2-5">
-                                <div
-                                    className={'entity pointer ' + (is_current ? 'bg-opteo-light-gray' : '')}
-                                    onClick={() => toggleVisible(section_key)}
-                                >
-                                    {section}
-                                </div>
-
-                                <ul style={{ display: 'none' }} className="list pt2 pl3" id={section_key}>
+                                <div className="entity pointer bg-opteo-light-gray">{section}</div>
+                                <ul className="list pt2 pl3" id={section_key}>
                                     {Object.keys(subsections).map(index => {
                                         const subsection = subsections[index]
 
@@ -57,7 +59,7 @@ class Sidebar extends React.Component {
 
                                         return (
                                             <li className="entity-child pointer f5-5 pt1 pb1" key={subsection_key}>
-                                                <Link to={'/' + subsection_id} replace>
+                                                <Link to={'/' + subsection_id}>
                                                     {this.getSubsectionTitle(subsection)}
                                                 </Link>
                                             </li>
