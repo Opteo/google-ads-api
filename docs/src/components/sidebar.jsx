@@ -13,7 +13,10 @@ class Sidebar extends React.Component {
     render() {
         const { ids } = this.props
         return (
-            <div className="absolute top-0 h-100 flex flex-column bg-white fixed br b--opteo-light-gray" style={{ maxWidth: '280px' }}>
+            <div
+                className="absolute top-0 h-100 flex flex-column bg-white fixed br b--opteo-light-gray"
+                style={{ maxWidth: '280px' }}
+            >
                 <div className="f3 tc pv3 bb b--opteo-light-gray opteo-gray">google-ads-api</div>
                 <div className="f6 pa3 bb b--opteo-light-gray opteo-middle-gray">CORE RESOURCES</div>
                 <ul className="list f5 pv3 pl3 overflow-y-auto">

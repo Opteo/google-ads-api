@@ -1,0 +1,5 @@
+{
+    "prettier.disableLanguages": [],
+    "prettier.eslintIntegration": true,
+    "eslint.autoFixOnSave": true
+}

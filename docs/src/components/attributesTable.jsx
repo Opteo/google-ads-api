@@ -27,10 +27,7 @@ const AttributesTable = ({ data, title, section }) => {
     const getOneOfRows = one_ofs => {
         return Object.keys(one_ofs).map(oneof_type_key => {
             return (
-                <div
-                    className="pb3"
-                    key={'oneofcontainer' + section + oneof_type_key}
-                >
+                <div className="pb3" key={'oneofcontainer' + section + oneof_type_key}>
                     {Object.keys(one_ofs[oneof_type_key]).map((oneof_key, index) => {
                         const details = one_ofs[oneof_type_key][oneof_key]
                         if (typeof details !== 'object') {
@@ -53,24 +50,24 @@ const AttributesTable = ({ data, title, section }) => {
                     })}
                     <div className="mb2">This field can also be replaced by:</div>
                     <ul>
-                    {Object.keys(one_ofs[oneof_type_key]).map(oneof_key => {
-                        const unique_attribute_key = 'oneof' + section + oneof_type_key + oneof_key
+                        {Object.keys(one_ofs[oneof_type_key]).map(oneof_key => {
+                            const unique_attribute_key = 'oneof' + section + oneof_type_key + oneof_key
 
-                        return (
-                            <li
-                                key={unique_attribute_key + 'selector'}
-                                className="one-of-item mb2 pointer"
-                                onClick={() =>
-                                    toggleOneOf(
-                                        'oneof' + section + oneof_type_key,
-                                        'oneof' + section + oneof_type_key + oneof_key
-                                    )
-                                }
-                            >
-                                • <span className="bb b--opteo-link-blue">{oneof_key.split('_').join(' ')}{' '}</span>
-                            </li>
-                        )
-                    })}
+                            return (
+                                <li
+                                    key={unique_attribute_key + 'selector'}
+                                    className="one-of-item mb2 pointer"
+                                    onClick={() =>
+                                        toggleOneOf(
+                                            'oneof' + section + oneof_type_key,
+                                            'oneof' + section + oneof_type_key + oneof_key
+                                        )
+                                    }
+                                >
+                                    • <span className="bb b--opteo-link-blue">{oneof_key.split('_').join(' ')} </span>
+                                </li>
+                            )
+                        })}
                     </ul>
                 </div>
             )

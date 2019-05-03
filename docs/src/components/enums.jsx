@@ -37,9 +37,7 @@ class Enums extends React.Component {
                         this.toggleMenu()
                     }}
                 >
-                <button className="pa2 ba br2 b--opteo-light-gray">
-                    Show Enums
-                </button>
+                    <button className="pa2 ba br2 b--opteo-light-gray">Show Enums</button>
                 </div>
                 <div style={{ display: this.state.shown ? 'block' : 'none' }} className="enum-container pa3 mb3 br2">
                     {rows}
