@@ -4,8 +4,6 @@ import { CampaignCriterion } from 'google-ads-node/build/lib/resources'
 import Service, { Mutation } from './service'
 import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
-// The campaign_criterion entity:
-
 /**
  * @constants
  */

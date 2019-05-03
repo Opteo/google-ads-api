@@ -4,8 +4,6 @@ import { CustomerLabel } from 'google-ads-node/build/lib/resources'
 import Service, { Mutation } from './service'
 import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
-// The customer_label entity:
-
 /**
  * @constants
  */

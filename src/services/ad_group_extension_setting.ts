@@ -4,8 +4,6 @@ import { AdGroupExtensionSetting } from 'google-ads-node/build/lib/resources'
 import Service, { Mutation } from './service'
 import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
-// The ad_group_extension_setting entity:
-
 /**
  * @constants
  */

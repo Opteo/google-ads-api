@@ -4,8 +4,6 @@ import { KeywordPlanKeyword } from 'google-ads-node/build/lib/resources'
 import Service, { Mutation } from './service'
 import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
-// The keyword_plan_keyword entity:
-
 /**
  * @constants
  */

@@ -4,8 +4,6 @@ import { CustomerExtensionSetting } from 'google-ads-node/build/lib/resources'
 import Service, { Mutation } from './service'
 import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
-// The customer_extension_setting entity:
-
 /**
  * @constants
  */
