@@ -151,12 +151,26 @@ export default class Service {
         options: MutateOptions | DelMutateOptions
     ): Promise<Mutation> {
         request.setCustomerId(this.cid)
-        request.setOperationsList(operations)
+
+        if (!request.setOperationsList) {
+            if (operations.length > 1) {
+                throw new Error(`This method only accepts one operation, but ${operations.length} were passed in.`)
+            }
+            request.setOperation(operations[0])
+        } else {
+            request.setOperationsList(operations)
+        }
 
         if (options.hasOwnProperty('validate_only')) {
+            if (!request.setValidateOnly) {
+                throw new Error(`This method does not support the validate_only option.`)
+            }
             request.setValidateOnly(options.validate_only)
         }
         if (options.hasOwnProperty('partial_failure')) {
+            if (!request.setPartialFailure) {
+                throw new Error(`This method does not support the partial_failure option.`)
+            }
             request.setPartialFailure(options.partial_failure)
         }
 
