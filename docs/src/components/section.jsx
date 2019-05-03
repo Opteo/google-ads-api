@@ -22,7 +22,7 @@ class Section extends React.Component {
                 id={id}
                 key={id}
                 className={`  ` + (is_index ? 'bb b--opteo-light-gray pt6 pb4' : 'bb b--opteo-light-gray pv4')}
-                onEnterViewport={() => this.props.onSectionChange(entity)}
+                onEnterViewport={() => this.props.onSectionChange(id)}
             >
                 <div className="w-100 fl v-top">
                     <div className="f6 content v-top" dangerouslySetInnerHTML={{ __html: html_description }} />

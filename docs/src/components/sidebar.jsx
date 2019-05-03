@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { Link, navigate } from 'gatsby'
+import { Link } from 'gatsby'
 
 import { capitalizeFirstLetter } from '../utils'
 class Sidebar extends React.Component {
@@ -27,9 +27,9 @@ class Sidebar extends React.Component {
                 className="absolute top-0 h-100 flex flex-column bg-white fixed br b--opteo-light-gray"
                 style={{ maxWidth: '280px' }}
             >
-                <div className="f3 tc pv3 bb b--opteo-light-gray opteo-gray" onClick={() => navigate('/')}>
+                <Link className="f3 tc pv3 bb b--opteo-light-gray opteo-gray hover-opteo-gray" to="/">
                     google-ads-api
-                </div>
+                </Link>
                 <div className="f6 pa3 bb b--opteo-light-gray opteo-middle-gray">CORE RESOURCES</div>
                 <ul className="list f5 pv3 pl3 overflow-y-auto">
                     {Object.keys(ids).map(section => {
@@ -37,7 +37,9 @@ class Sidebar extends React.Component {
                         const section_key = `sidebar-${section}`
                         const section_id = `/#${section.toLowerCase()}`
 
-                        if (section !== currentSection) {
+                        const subsection_ids = Object.keys(subsections).map(index => subsections[index].id)
+
+                        if (!subsection_ids.includes(currentSection)) {
                             return (
                                 <li key={section_key} className="mv0 pb2-5">
                                     <Link className="entity pointer" to={section_id}>
@@ -54,8 +56,19 @@ class Sidebar extends React.Component {
                                     {Object.keys(subsections).map(index => {
                                         const subsection = subsections[index]
 
-                                        const subsection_key = `${section_key}-${index}`
-                                        const subsection_id = `#${subsection.id}`
+                                        const subsection_key = subsection.id
+                                        const subsection_id = `#${subsection_key}`
+
+                                        if (subsection.id === currentSection) {
+                                            return (
+                                                <li
+                                                    className="entity-child pointer f5-5 pt1 pb1 bg-opteo-light-gray"
+                                                    key={subsection_key}
+                                                >
+                                                    {this.getSubsectionTitle(subsection)}
+                                                </li>
+                                            )
+                                        }
 
                                         return (
                                             <li className="entity-child pointer f5-5 pt1 pb1" key={subsection_key}>
