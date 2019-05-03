@@ -4,6 +4,8 @@ import React from 'react'
 import Section from '../components/section'
 import Sidebar from '../components/sidebar'
 
+import { getIds, getSectionsData } from '../utils'
+
 class Container extends React.Component {
     constructor(props) {
         super(props)
@@ -11,12 +13,15 @@ class Container extends React.Component {
     }
 
     render() {
-        const { ids, sectionsData } = this.props
+        const { edges } = this.props
 
-        const Sections = Object.keys(sectionsData).map((key, index) => (
+        const section_ids = getIds(edges)
+        const sections_data = getSectionsData(edges)
+
+        const Sections = Object.keys(sections_data).map((key, index) => (
             <Section
                 key={'section' + index}
-                data={sectionsData[key]}
+                data={sections_data[key]}
                 onSectionChange={section => this.setState({ current_section: section })}
             />
         ))
@@ -24,7 +29,7 @@ class Container extends React.Component {
         return (
             <div className="w-100 items-start">
                 <div className="" style={{ width: '280px' }}>
-                    <Sidebar ids={ids} currentSection={this.state.current_section} />
+                    <Sidebar sections={section_ids} currentSection={this.state.current_section} />
                 </div>
                 <div className="pa4 mt3" style={{ marginLeft: '280px', width: 'calc(100% - 280px)' }}>
                     {Sections}
@@ -35,8 +40,7 @@ class Container extends React.Component {
 }
 
 Container.propTypes = {
-    ids: PropTypes.object.isRequired,
-    sectionsData: PropTypes.object.isRequired,
+    edges: PropTypes.array.isRequired,
 }
 
 export default Container

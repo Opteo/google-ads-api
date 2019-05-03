@@ -12,7 +12,7 @@ class Section extends React.Component {
         const { data } = this.props
 
         const { code, description } = data
-        const { id, entity, meta, is_index } = description
+        const { id, meta, is_index } = description
 
         const html_description = description.node.html || ''
         const html_code = code.node.html || ''

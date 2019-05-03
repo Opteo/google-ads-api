@@ -33,13 +33,11 @@ export const getSectionsData = edges => {
 
     edges.forEach(edge => {
         const { node } = edge
-        const { entity } = node.frontmatter
 
         const section_data = {
             id: getSectionId(node),
             key: node.id,
             node,
-            entity,
         }
 
         section_data.is_index = node.fields.is_index
@@ -63,4 +61,19 @@ export const getSectionsData = edges => {
 
 export const capitalizeFirstLetter = str => {
     return `${str.charAt(0).toUpperCase()}${str.slice(1)}`
+}
+
+export const getSubsectionTitle = ({ entity, type }) => {
+    const AN = ['O', 'A'].includes(entity.slice(0, 1)) ? 'an' : 'a'
+
+    switch (type) {
+        case 'object': {
+            return `The ${entity} Object`
+        }
+        case 'list': {
+            return `List all ${entity}s`
+        }
+        default:
+            return `${capitalizeFirstLetter(type)} ${AN} ${entity}`
+    }
 }
