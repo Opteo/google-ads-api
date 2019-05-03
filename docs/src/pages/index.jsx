@@ -2,8 +2,8 @@ import React from 'react'
 import { graphql } from 'gatsby'
 
 import Layout from '../components/layout'
-import Section from '../components/section'
-import Sidebar from '../components/sidebar'
+import Container from '../components/container'
+
 // import SEO from '../components/seo'
 import { getIds, getSectionsData } from '../utils'
 
@@ -15,21 +15,10 @@ const IndexPage = ({
     const ids = getIds(edges)
     const sections_data = getSectionsData(edges)
 
-    const Sections = Object.keys(sections_data).map((key, index) => (
-        <Section key={'section' + index} data={sections_data[key]} />
-    ))
-
     return (
         <Layout>
             {/* <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} /> */}
-            <div className="w-100 items-start">
-                <div className="" style={{ width: '280px' }}>
-                    <Sidebar ids={ids} />
-                </div>
-                <div className="pa4 mt3" style={{ marginLeft: '280px', width: 'calc(100% - 280px)' }}>
-                    {Sections}
-                </div>
-            </div>
+            <Container ids={ids} sectionsData={sections_data} />
         </Layout>
     )
 }

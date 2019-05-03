@@ -33,10 +33,13 @@ export const getSectionsData = edges => {
 
     edges.forEach(edge => {
         const { node } = edge
+        const { entity } = node.frontmatter
+
         const section_data = {
             id: getSectionId(node),
             key: node.id,
             node,
+            entity,
         }
 
         section_data.is_index = node.fields.is_index
