@@ -4,8 +4,6 @@ import { LanguageConstant } from 'google-ads-node/build/lib/resources'
 import Service from './service'
 import { ServiceListOptions } from '../types'
 
-// The language_constant entity:
-
 /**
  * @constants
  */

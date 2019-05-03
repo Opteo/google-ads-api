@@ -4,8 +4,6 @@ import { MobileDeviceConstant } from 'google-ads-node/build/lib/resources'
 import Service from './service'
 import { ServiceListOptions } from '../types'
 
-// The mobile_device_constant entity:
-
 /**
  * @constants
  */

@@ -4,8 +4,6 @@ import { ProductBiddingCategoryConstant } from 'google-ads-node/build/lib/resour
 import Service from './service'
 import { ServiceListOptions } from '../types'
 
-// The product_bidding_category_constant entity:
-
 /**
  * @constants
  */

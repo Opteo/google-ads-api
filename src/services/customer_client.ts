@@ -4,8 +4,6 @@ import { CustomerClient } from 'google-ads-node/build/lib/resources'
 import Service from './service'
 import { ServiceListOptions } from '../types'
 
-// The customer_client entity:
-
 /**
  * @constants
  */

@@ -4,8 +4,6 @@ import { CarrierConstant } from 'google-ads-node/build/lib/resources'
 import Service from './service'
 import { ServiceListOptions } from '../types'
 
-// The carrier_constant entity:
-
 /**
  * @constants
  */

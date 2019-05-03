@@ -4,8 +4,6 @@ import { DomainCategory } from 'google-ads-node/build/lib/resources'
 import Service from './service'
 import { ServiceListOptions } from '../types'
 
-// The domain_category entity:
-
 /**
  * @constants
  */

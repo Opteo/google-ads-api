@@ -4,8 +4,6 @@ import { MobileAppCategoryConstant } from 'google-ads-node/build/lib/resources'
 import Service from './service'
 import { ServiceListOptions } from '../types'
 
-// The mobile_app_category_constant entity:
-
 /**
  * @constants
  */

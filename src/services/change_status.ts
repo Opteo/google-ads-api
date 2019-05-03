@@ -4,8 +4,6 @@ import { ChangeStatus } from 'google-ads-node/build/lib/resources'
 import Service from './service'
 import { ServiceListOptions } from '../types'
 
-// The change_status entity:
-
 /**
  * @constants
  */

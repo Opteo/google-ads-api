@@ -4,8 +4,6 @@ import { AccountBudget } from 'google-ads-node/build/lib/resources'
 import Service from './service'
 import { ServiceListOptions } from '../types'
 
-// The account_budget entity:
-
 /**
  * @constants
  */

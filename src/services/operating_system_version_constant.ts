@@ -4,8 +4,6 @@ import { OperatingSystemVersionConstant } from 'google-ads-node/build/lib/resour
 import Service from './service'
 import { ServiceListOptions } from '../types'
 
-// The operating_system_version_constant entity:
-
 /**
  * @constants
  */

@@ -4,8 +4,6 @@ import { Recommendation } from 'google-ads-node/build/lib/resources'
 import Service from './service'
 import { ServiceListOptions } from '../types'
 
-// The recommendation entity:
-
 /**
  * @constants
  */
