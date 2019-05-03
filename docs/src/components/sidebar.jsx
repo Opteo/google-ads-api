@@ -10,8 +10,24 @@ class Sidebar extends React.Component {
         return false
     }
 
+    getSubsectionTitle({ entity, type }) {
+        const AN = ['O', 'A'].includes(entity.slice(0, 1)) ? 'an' : 'a'
+
+        switch (type) {
+            case 'object': {
+                return `The ${entity} Object`
+            }
+            case 'list': {
+                return `List all ${entity}s`
+            }
+            default:
+                return `${_.startCase(type)} ${AN} ${entity}`
+        }
+    }
+
     render() {
         const { ids } = this.props
+
         return (
             <div
                 className="absolute top-0 h-100 flex flex-column bg-white fixed br b--opteo-light-gray"
@@ -33,7 +49,6 @@ class Sidebar extends React.Component {
                                 <ul style={{ display: 'none' }} className="list pt2 pl3" id={section_key}>
                                     {Object.keys(subsections).map(index => {
                                         const subsection = subsections[index]
-                                        const { type, entity } = subsection
 
                                         const subsection_key = `${section_key}-${index}`
                                         const subsection_id = `#${subsection.id}`
@@ -41,9 +56,7 @@ class Sidebar extends React.Component {
                                         return (
                                             <li className="entity-child pointer f5-5 pt1 pb1" key={subsection_key}>
                                                 <Link to={'/' + subsection_id}>
-                                                    {type === 'object'
-                                                        ? `The ${entity} object`
-                                                        : `${_.startCase(type)}`}
+                                                    {this.getSubsectionTitle(subsection)}
                                                 </Link>
                                             </li>
                                         )
