@@ -20,28 +20,30 @@ class Sidebar extends React.Component {
                 <div className="f3 tc pv3 bb b--opteo-light-gray opteo-gray">google-ads-api</div>
                 <div className="f6 pa3 bb b--opteo-light-gray opteo-middle-gray">CORE RESOURCES</div>
                 <ul className="list f5 pv3 pl3 overflow-y-auto">
-                    {Object.keys(ids).map(entity => {
-                        const subsections = ids[entity]
-                        const key = `sidebar-${entity}`
+                    {Object.keys(ids).map(section => {
+                        const subsections = ids[section]
+                        const section_key = `sidebar-${section}`
 
                         return (
-                            <li key={key} className="mv0 pb2-5">
-                                <div className="entity pointer" onClick={() => toggleVisible(key)}>
-                                    {entity}
+                            <li key={section_key} className="mv0 pb2-5">
+                                <div className="entity pointer" onClick={() => toggleVisible(section_key)}>
+                                    {section}
                                 </div>
 
-                                <ul style={{ display: 'none' }} className="list pt2 pl3" id={key}>
+                                <ul style={{ display: 'none' }} className="list pt2 pl3" id={section_key}>
                                     {Object.keys(subsections).map(index => {
-                                        const sub_key = `${key}-${index}`
-                                        const subpage = subsections[index]
-                                        const subsection_id = `#${subpage.id}`
+                                        const subsection = subsections[index]
+                                        const { type, entity } = subsection
+
+                                        const subsection_key = `${section_key}-${index}`
+                                        const subsection_id = `#${subsection.id}`
 
                                         return (
-                                            <li className="entity-child pointer f5-5 pt1 pb1" key={sub_key}>
+                                            <li className="entity-child pointer f5-5 pt1 pb1" key={subsection_key}>
                                                 <Link to={'/' + subsection_id}>
-                                                    {subpage.type === 'object'
-                                                        ? `The ${subpage.entity} object`
-                                                        : `${_.startCase(subpage.type)}`}
+                                                    {type === 'object'
+                                                        ? `The ${entity} object`
+                                                        : `${_.startCase(type)}`}
                                                 </Link>
                                             </li>
                                         )

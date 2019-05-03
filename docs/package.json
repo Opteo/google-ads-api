@@ -5,18 +5,16 @@
   "version": "0.1.0",
   "author": "Mateusz Janusz <mateusz@opteo.com>",
   "dependencies": {
-    "anchorate": "^1.2.3",
     "gatsby": "^2.3.24",
     "gatsby-remark-autolink-headers": "^2.0.16",
     "gatsby-remark-prismjs": "^3.2.8",
     "gatsby-source-filesystem": "^2.0.29",
     "gatsby-transformer-remark": "^2.3.12",
-    "lodash.sortby": "^4.7.0",
+    "lodash": "^4.17.11",
     "prismjs": "^1.16.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "scroll-to-element": "^2.0.3"
+    "react-dom": "^16.8.6"
   },
   "scripts": {
     "build": "gatsby build",
