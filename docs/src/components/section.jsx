@@ -1,7 +1,7 @@
 import React from 'react'
 
 import AttributesTable from './attributesTable'
-import SectionContainer from './SectionContainer'
+import SectionContainer from './sectionContainer'
 
 class Section extends React.Component {
     shouldComponentUpdate(nextProps, nextState) {
