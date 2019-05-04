@@ -23,5 +23,8 @@
     "dev": "npm run develop",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
+  },
+  "devDependencies": {
+    "gatsby-remark-custom-blocks": "^2.0.7"
   }
 }

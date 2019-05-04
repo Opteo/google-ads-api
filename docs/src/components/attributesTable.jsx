@@ -88,7 +88,7 @@ const AttributesTable = ({ data, title, section }) => {
 
     return (
         <div className="f5 ba b--white  pr3">
-            <h4>{title || 'Fields'}</h4>
+            <h4 class="bb-0">{title || 'Fields'}</h4>
             <div>{getOneOfRows(oneOfs)}</div>
             <div>{getBasicRows(data)}</div>
         </div>

@@ -77,7 +77,7 @@ class Sidebar extends React.Component {
 
         return (
             <div
-                className="absolute top-0 h-100 flex flex-column bg-white fixed br b--opteo-light-gray"
+                className="absolute top-0 h-100 flex flex-column fw4 bg-white fixed br b--opteo-light-gray"
                 style={{ maxWidth: '280px' }}
             >
                 <Link className="f3 tc pv3 bb b--opteo-light-gray opteo-gray hover-opteo-gray" to="/">

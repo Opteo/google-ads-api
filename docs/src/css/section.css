@@ -2,21 +2,24 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
 } */
-.content h2 {
-    grid-column: 1;
-}
-.content h3 {
-    grid-column: 1;
-}
-.content p {
-    font-size: 1rem;
-    grid-column: 1;
-    margin-bottom: 2rem;
+.w-48 {
+    width: 48%;
 }
 
-.gatsby-highlight {
+.text-container code {
+    color: #cd3d64;
+    background: #f0f1f5;
+    padding: 0 3px;
+    margin: 0 1px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.sticky-code-block {
     position: sticky;
-    top: 0;
+    top: 2rem;
 }
 
 .enum-container {

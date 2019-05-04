@@ -21,15 +21,19 @@ class Section extends React.Component {
             <SectionContainer
                 id={id}
                 key={id}
-                className={`  ` + (is_index ? 'bb b--opteo-light-gray pt6 pb4' : 'bb b--opteo-light-gray pv4')}
+                className={
+                    `  ` +
+                    (is_index
+                        ? 'flex justify-between bb b--opteo-light-gray pv5'
+                        : 'flex justify-between bb b--opteo-light-gray pv5')
+                }
                 onEnterViewport={() => this.props.onSectionChange(id)}
             >
-                <div className="w-100 fl v-top">
-                    <div className="f6 content v-top" dangerouslySetInnerHTML={{ __html: html_description }} />
-                    <div className="w-50">{meta ? <AttributesTable section={id} data={meta} /> : null}</div>
+                <div className="text-container w-48">
+                    <div className="content" dangerouslySetInnerHTML={{ __html: html_description }} />
+                    <div>{meta ? <AttributesTable section={id} data={meta} /> : null}</div>
                 </div>
-                <div className="f6 content v-top" dangerouslySetInnerHTML={{ __html: html_code }} />
-                <div className="cf" />
+                <div className="sticky-code-block self-start w-48 f6" dangerouslySetInnerHTML={{ __html: html_code }} />
             </SectionContainer>
         )
     }

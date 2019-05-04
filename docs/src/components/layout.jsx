@@ -16,7 +16,8 @@ import '../css/colors.css'
 import '../css/main.css'
 import '../css/sidebar.css'
 import '../css/section.css'
-import '../css/two-column.css'
+// import '../css/two-column.css'
+import '../css/content.css'
 import '../css/prism-theme-dark.css'
 
 const Layout = ({ children }) => (

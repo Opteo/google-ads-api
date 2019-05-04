@@ -1,0 +1,44 @@
+.content p {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.content em {
+    color: #b3b3b3;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.content ul li:first-child {
+    border-top: none;
+}
+
+.content ul ul li:first-child {
+    border-top: 1px solid;
+    border-color: #f2f2f6;
+}
+
+.content ul ul li {
+    padding-left: 2rem;
+}
+
+.content ul ul ul li {
+    padding-left: 2rem;
+}
+
+.content ul ul ul li:first-child {
+    border-top: 1px solid;
+    border-color: #f2f2f6;
+}
+
+.content li {
+    border-top: 1px solid;
+    border-color: #f2f2f6;
+    padding-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.content ul li p {
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+}

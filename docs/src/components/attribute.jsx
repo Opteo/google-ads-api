@@ -22,10 +22,14 @@ class Attribute extends React.Component {
         const { _description } = data
 
         return (
-            <div key={`${section}-${name}`} className=" w-100 v-top pb3 bt b--opteo-light-gray">
-                <div className="pt3 mb2">
-                    <span className="f5 fw6 mv0 opteo-gray"> {name} </span>{' '}
-                    {data._type ? <span className=" f6 fw5 mv0 black-70"> {data._type} </span> : 'object'}
+            <div key={`${section}-${name}`} className=" w-100 v-top pb3-5 bt b--opteo-light-gray">
+                <div className="pt3-5 mb2">
+                    <span className="fw6 mv0 opteo-gray"> {name} </span>{' '}
+                    {data._type ? (
+                        <span className="f6 fw5 mv0 opteo-middle-gray"> {data._type} </span>
+                    ) : (
+                        <span className="f6 fw5 mv0 opteo-middle-gray">object</span>
+                    )}
                 </div>
                 {enums ? <Enums enums={enums} /> : null}
 
@@ -33,14 +37,14 @@ class Attribute extends React.Component {
                     <div className="" dangerouslySetInnerHTML={{ __html: _description }} />
                 ) : (
                     <div className="ml3 mt3 pa3 ba b--opteo-light-gray br3">
-                        <div
-                            className="opteo-blue pointer"
+                        <button
+                            className="f6 pa2 ba br2 b--opteo-light-gray opteo-link-blue"
                             onClick={() => {
                                 this.toggleChild()
                             }}
                         >
-                            Show Child Fields
-                        </div>
+                            {this.state.child_shown ? 'Hide Child Fields' : 'Show Child Fields'}
+                        </button>
                         <div style={{ display: this.state.child_shown ? 'block' : 'none' }}>
                             <AttributesTable data={data} section={section} title="Child Attributes" />
                         </div>

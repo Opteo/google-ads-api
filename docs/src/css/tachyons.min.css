@@ -2132,6 +2132,9 @@ code {
 .pb3 {
     padding-bottom: 1rem;
 }
+.pb3-5 {
+    padding-bottom: 1.5rem;
+}
 .pb4 {
     padding-bottom: 2rem;
 }
@@ -2155,6 +2158,9 @@ code {
 }
 .pt3 {
     padding-top: 1rem;
+}
+.pt3-5 {
+    padding-top: 1.5rem;
 }
 .pt4 {
     padding-top: 2rem;
@@ -2312,6 +2318,9 @@ code {
 }
 .mb2 {
     margin-bottom: 0.5rem;
+}
+.mb2-5 {
+    margin-bottom: 0.75rem;
 }
 .mb3 {
     margin-bottom: 1rem;
@@ -2600,8 +2609,8 @@ code {
     font-size: 1rem;
 }
 .f5-5 {
-    font-size: 0.925rem
-} 
+    font-size: 0.925rem;
+}
 .f6 {
     font-size: 0.875rem;
 }
