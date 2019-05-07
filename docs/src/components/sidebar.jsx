@@ -3,10 +3,23 @@ import React from 'react'
 import { Link } from 'gatsby'
 
 import { getSubsectionTitle, stringMatch } from '../utils'
+
 class Sidebar extends React.Component {
     constructor(props) {
         super(props)
         this.state = { search: '' }
+    }
+
+    componentWillReceiveProps(nextProp, prevProp) {
+        if (nextProp.currentSection !== prevProp.currentSection) {
+            const current_el = document.getElementById(`sidebar-${nextProp.currentSection}`)
+            const sidebar_el = document.getElementById('section-list')
+
+            if (current_el) {
+                const margin = window.innerHeight / 3 + current_el.parentElement.offsetHeight
+                sidebar_el.scrollTop = current_el.offsetTop - margin
+            }
+        }
     }
 
     handleSearch = event => {
@@ -20,20 +33,24 @@ class Sidebar extends React.Component {
             return Object.keys(subsections).map(index => {
                 const subsection = subsections[index]
 
-                const subsection_key = subsection.id
-                const subsection_id = `#${subsection_key}`
+                const subsection_id = `sidebar-${subsection.id}`
+                const subsection_link_id = `#${subsection.id}`
 
                 if (subsection.id === currentSection) {
                     return (
-                        <li className="entity-child pointer f5-5 pt1 pb1 bg-opteo-light-gray" key={subsection_key}>
-                            <Link to={'/' + subsection_id}>{getSubsectionTitle(subsection)}</Link>
+                        <li
+                            id={subsection_id}
+                            key={subsection_id}
+                            className="entity-child pointer f5-5 pt1 pb1 bg-opteo-light-gray"
+                        >
+                            <Link to={'/' + subsection_link_id}>{getSubsectionTitle(subsection)}</Link>
                         </li>
                     )
                 }
 
                 return (
-                    <li className="entity-child pointer f5-5 pt1 pb1" key={subsection_key}>
-                        <Link to={'/' + subsection_id}>{getSubsectionTitle(subsection)}</Link>
+                    <li id={subsection_id} key={subsection_id} className="entity-child pointer f5-5 pt1 pb1">
+                        <Link to={'/' + subsection_link_id}>{getSubsectionTitle(subsection)}</Link>
                     </li>
                 )
             })
@@ -85,7 +102,9 @@ class Sidebar extends React.Component {
                 </Link>
                 <input type="text" placeholder="search" value={this.state.search} onChange={this.handleSearch} />
                 <div className="f6 pa3 bb b--opteo-light-gray opteo-middle-gray">CORE RESOURCES</div>
-                <ul className="list f5 pv3 pl3 overflow-y-auto">{SectionRows}</ul>
+                <ul id="section-list" className="list f5 pv3 pl3 overflow-y-auto">
+                    {SectionRows}
+                </ul>
             </div>
         )
     }
