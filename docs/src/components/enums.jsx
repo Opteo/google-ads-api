@@ -2,8 +2,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 class Enums extends React.Component {
-    // ... constructor and toggleMenu from above
-
     constructor(props) {
         super(props)
         this.state = { shown: false }
@@ -13,7 +11,6 @@ class Enums extends React.Component {
         this.setState(prevState => {
             return { shown: !prevState.shown }
         })
-        console.log('toggling')
     }
 
     render() {

@@ -1,22 +1,15 @@
-/**
- * Layout component that queries for data
- * with Gatsby's StaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/static-query/
- */
-
 import React from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 
 import Header from './header'
+
 import '../css/tachyons.min.css'
 import '../css/reset.css'
 import '../css/colors.css'
 import '../css/main.css'
 import '../css/sidebar.css'
 import '../css/section.css'
-// import '../css/two-column.css'
 import '../css/content.css'
 import '../css/prism-theme-dark.css'
 
