@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: CarrierConstant
-title: CarrierConstant
+entity: CarrierConstant 
+title: CarrierConstant 
 ---
 
-## CarrierConstant
-
+## CarrierConstant 
 ### The CarrierConstant object
+

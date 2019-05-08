@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: AdGroupLabel
-title: AdGroupLabel
+entity: AdGroupLabel 
+title: AdGroupLabel 
 ---
 
-## AdGroupLabel
-
+## AdGroupLabel 
 ### The AdGroupLabel object
+

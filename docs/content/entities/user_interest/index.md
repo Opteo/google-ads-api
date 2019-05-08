@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: UserInterest
-title: UserInterest
+entity: UserInterest 
+title: UserInterest 
 ---
 
-## UserInterest
-
+## UserInterest 
 ### The UserInterest object
+

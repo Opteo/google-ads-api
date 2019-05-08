@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: AdGroup
-title: AdGroup
+entity: AdGroup 
+title: AdGroup 
 ---
 
-## AdGroup
-
+## AdGroup 
 ### The AdGroup object
+

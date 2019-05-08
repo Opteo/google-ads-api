@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: KeywordPlanCampaign
-title: KeywordPlanCampaign
+entity: KeywordPlanCampaign 
+title: KeywordPlanCampaign 
 ---
 
-## KeywordPlanCampaign
-
+## KeywordPlanCampaign 
 ### The KeywordPlanCampaign object
+

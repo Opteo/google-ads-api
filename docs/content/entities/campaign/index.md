@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: Campaign
-title: Campaign
+entity: Campaign 
+title: Campaign 
 ---
 
-## Campaign
-
+## Campaign 
 ### The Campaign object
+

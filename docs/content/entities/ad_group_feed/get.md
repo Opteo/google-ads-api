@@ -1,19 +1,22 @@
 ---
-title: Get AdGroupFeed
+title: Get AdGroupFeed 
 order: 2
 type: get
-entity: AdGroupFeed
+entity: AdGroupFeed 
 ---
 
-### Get an AdGroupFeed
+### Get an AdGroupFeed 
 
-The `customer.adGroupFeeds.get(resource_name)` method returns the AdGroupFeed identified by a resource_name.
+The `customer.adGroupFeeds.get(resource_name)` method returns the AdGroupFeed identified by a resource_name. 
 
 _Note_: This function is heavily rate-limited by Google, so avoid using it in production.
 
+
 #### Arguments
 
-- **`resource_name`** (_required_): The resource_name of that AdGroupFeed
+- 	##### resource_name _required_
+	The resource_name of that AdGroupFeed
+
 
 #### Returns
 

@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: CampaignFeed
-title: CampaignFeed
+entity: CampaignFeed 
+title: CampaignFeed 
 ---
 
-## CampaignFeed
-
+## CampaignFeed 
 ### The CampaignFeed object
+

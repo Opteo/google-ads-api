@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: CampaignBudget
-title: CampaignBudget
+entity: CampaignBudget 
+title: CampaignBudget 
 ---
 
-## CampaignBudget
-
+## CampaignBudget 
 ### The CampaignBudget object
+

@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: Video
-title: Video
+entity: Video 
+title: Video 
 ---
 
-## Video
-
+## Video 
 ### The Video object
+

@@ -1,19 +1,22 @@
 ---
-title: Get CustomerClientLink
+title: Get CustomerClientLink 
 order: 2
 type: get
-entity: CustomerClientLink
+entity: CustomerClientLink 
 ---
 
-### Get a CustomerClientLink
+### Get a CustomerClientLink 
 
-The `customer.customerClientLinks.get(resource_name)` method returns the CustomerClientLink identified by a resource_name.
+The `customer.customerClientLinks.get(resource_name)` method returns the CustomerClientLink identified by a resource_name. 
 
 _Note_: This function is heavily rate-limited by Google, so avoid using it in production.
 
+
 #### Arguments
 
-- **`resource_name`** (_required_): The resource_name of that CustomerClientLink
+- 	##### resource_name _required_
+	The resource_name of that CustomerClientLink
+
 
 #### Returns
 

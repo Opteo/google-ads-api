@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: AccountBudget
-title: AccountBudget
+entity: AccountBudget 
+title: AccountBudget 
 ---
 
-## AccountBudget
-
+## AccountBudget 
 ### The AccountBudget object
+

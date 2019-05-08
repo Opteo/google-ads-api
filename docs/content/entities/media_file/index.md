@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: MediaFile
-title: MediaFile
+entity: MediaFile 
+title: MediaFile 
 ---
 
-## MediaFile
-
+## MediaFile 
 ### The MediaFile object
+

@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: AdGroupCriterion
-title: AdGroupCriterion
+entity: AdGroupCriterion 
+title: AdGroupCriterion 
 ---
 
-## AdGroupCriterion
-
+## AdGroupCriterion 
 ### The AdGroupCriterion object
+

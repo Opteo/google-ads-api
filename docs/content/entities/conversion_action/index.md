@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: ConversionAction
-title: ConversionAction
+entity: ConversionAction 
+title: ConversionAction 
 ---
 
-## ConversionAction
-
+## ConversionAction 
 ### The ConversionAction object
+

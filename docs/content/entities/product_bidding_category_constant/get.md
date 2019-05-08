@@ -1,19 +1,22 @@
 ---
-title: Get ProductBiddingCategoryConstant
+title: Get ProductBiddingCategoryConstant 
 order: 2
 type: get
-entity: ProductBiddingCategoryConstant
+entity: ProductBiddingCategoryConstant 
 ---
 
-### Get a ProductBiddingCategoryConstant
+### Get a ProductBiddingCategoryConstant 
 
-The `customer.productBiddingCategoryConstants.get(resource_name)` method returns the ProductBiddingCategoryConstant identified by a resource_name.
+The `customer.productBiddingCategoryConstants.get(resource_name)` method returns the ProductBiddingCategoryConstant identified by a resource_name. 
 
 _Note_: This function is heavily rate-limited by Google, so avoid using it in production.
 
+
 #### Arguments
 
-- **`resource_name`** (_required_): The resource_name of that ProductBiddingCategoryConstant
+- 	##### resource_name _required_
+	The resource_name of that ProductBiddingCategoryConstant
+
 
 #### Returns
 

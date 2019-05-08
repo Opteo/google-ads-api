@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: CampaignCriterion
-title: CampaignCriterion
+entity: CampaignCriterion 
+title: CampaignCriterion 
 ---
 
-## CampaignCriterion
-
+## CampaignCriterion 
 ### The CampaignCriterion object
+

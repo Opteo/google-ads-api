@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: OperatingSystemVersionConstant
-title: OperatingSystemVersionConstant
+entity: OperatingSystemVersionConstant 
+title: OperatingSystemVersionConstant 
 ---
 
-## OperatingSystemVersionConstant
-
+## OperatingSystemVersionConstant 
 ### The OperatingSystemVersionConstant object
+

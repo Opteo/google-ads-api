@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: Label
-title: Label
+entity: Label 
+title: Label 
 ---
 
-## Label
-
+## Label 
 ### The Label object
+

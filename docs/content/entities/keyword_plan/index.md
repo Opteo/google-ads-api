@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: KeywordPlan
-title: KeywordPlan
+entity: KeywordPlan 
+title: KeywordPlan 
 ---
 
-## KeywordPlan
-
+## KeywordPlan 
 ### The KeywordPlan object
+

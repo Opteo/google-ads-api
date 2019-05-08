@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: Feed
-title: Feed
+entity: Feed 
+title: Feed 
 ---
 
-## Feed
-
+## Feed 
 ### The Feed object
+

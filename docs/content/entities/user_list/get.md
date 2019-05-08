@@ -1,19 +1,22 @@
 ---
-title: Get UserList
+title: Get UserList 
 order: 2
 type: get
-entity: UserList
+entity: UserList 
 ---
 
-### Get a UserList
+### Get a UserList 
 
-The `customer.userLists.get(resource_name)` method returns the UserList identified by a resource_name.
+The `customer.userLists.get(resource_name)` method returns the UserList identified by a resource_name. 
 
 _Note_: This function is heavily rate-limited by Google, so avoid using it in production.
 
+
 #### Arguments
 
-- **`resource_name`** (_required_): The resource_name of that UserList
+- 	##### resource_name _required_
+	The resource_name of that UserList
+
 
 #### Returns
 

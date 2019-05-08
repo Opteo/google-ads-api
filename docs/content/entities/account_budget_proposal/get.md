@@ -1,19 +1,22 @@
 ---
-title: Get AccountBudgetProposal
+title: Get AccountBudgetProposal 
 order: 2
 type: get
-entity: AccountBudgetProposal
+entity: AccountBudgetProposal 
 ---
 
-### Get an AccountBudgetProposal
+### Get an AccountBudgetProposal 
 
-The `customer.accountBudgetProposals.get(resource_name)` method returns the AccountBudgetProposal identified by a resource_name.
+The `customer.accountBudgetProposals.get(resource_name)` method returns the AccountBudgetProposal identified by a resource_name. 
 
 _Note_: This function is heavily rate-limited by Google, so avoid using it in production.
 
+
 #### Arguments
 
-- **`resource_name`** (_required_): The resource_name of that AccountBudgetProposal
+- 	##### resource_name _required_
+	The resource_name of that AccountBudgetProposal
+
 
 #### Returns
 

@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: CustomInterest
-title: CustomInterest
+entity: CustomInterest 
+title: CustomInterest 
 ---
 
-## CustomInterest
-
+## CustomInterest 
 ### The CustomInterest object
+

@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: FeedMapping
-title: FeedMapping
+entity: FeedMapping 
+title: FeedMapping 
 ---
 
-## FeedMapping
-
+## FeedMapping 
 ### The FeedMapping object
+

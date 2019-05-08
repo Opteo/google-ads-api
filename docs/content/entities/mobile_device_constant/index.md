@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: MobileDeviceConstant
-title: MobileDeviceConstant
+entity: MobileDeviceConstant 
+title: MobileDeviceConstant 
 ---
 
-## MobileDeviceConstant
-
+## MobileDeviceConstant 
 ### The MobileDeviceConstant object
+

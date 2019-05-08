@@ -1,19 +1,22 @@
 ---
-title: Get CustomerClient
+title: Get CustomerClient 
 order: 2
 type: get
-entity: CustomerClient
+entity: CustomerClient 
 ---
 
-### Get a CustomerClient
+### Get a CustomerClient 
 
-The `customer.customerClients.get(resource_name)` method returns the CustomerClient identified by a resource_name.
+The `customer.customerClients.get(resource_name)` method returns the CustomerClient identified by a resource_name. 
 
 _Note_: This function is heavily rate-limited by Google, so avoid using it in production.
 
+
 #### Arguments
 
-- **`resource_name`** (_required_): The resource_name of that CustomerClient
+- 	##### resource_name _required_
+	The resource_name of that CustomerClient
+
 
 #### Returns
 

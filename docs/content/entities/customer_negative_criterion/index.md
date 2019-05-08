@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: CustomerNegativeCriterion
-title: CustomerNegativeCriterion
+entity: CustomerNegativeCriterion 
+title: CustomerNegativeCriterion 
 ---
 
-## CustomerNegativeCriterion
-
+## CustomerNegativeCriterion 
 ### The CustomerNegativeCriterion object
+

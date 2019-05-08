@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: AdGroupBidModifier
-title: AdGroupBidModifier
+entity: AdGroupBidModifier 
+title: AdGroupBidModifier 
 ---
 
-## AdGroupBidModifier
-
+## AdGroupBidModifier 
 ### The AdGroupBidModifier object
+
