@@ -23,9 +23,9 @@ const SidebarSectionRows = ({ groupSections, currentSection, search }) => {
         if (!subsection_ids.includes(currentSection)) {
             return (
                 <li key={section_key} className="mv0 pb2">
-                    <p className="entity pl3 pointer" onClick={() => jumpTo(section_id)}>
+                    <div className="entity pl3 pointer" onClick={() => jumpTo(section_id)}>
                         {section_name}
-                    </p>
+                    </div>
                 </li>
             )
         }
@@ -34,12 +34,12 @@ const SidebarSectionRows = ({ groupSections, currentSection, search }) => {
             <li key={section_key} className="mv0 pb2">
                 <div className="relative">
                     <div className="indicator absolute top-0 left-0 h-100 bg-opteo-link-blue" />
-                    <p
+                    <div
                         className="entity active pointer pt1 pl3 pb1 db bg-opteo-light-gray"
                         onClick={() => jumpTo(section_id)}
                     >
                         {section_name}
-                    </p>
+                    </div>
                 </div>
                 <SidebarSubsectionRows id={section_key} subsections={subsections} currentSection={currentSection} />
             </li>

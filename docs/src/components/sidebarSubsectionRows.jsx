@@ -11,14 +11,16 @@ const SidebarSubsectionRows = ({ subsections, currentSection }) => (
             const subsection_link_id = `#${subsection.id}`
 
             return (
-                <li
-                    id={subsection_id}
-                    key={subsection_id}
-                    className={
-                        'entity-child pointer f5-5 pt1 pl3 pb1 ' + (subsection.id === currentSection ? 'active' : '')
-                    }
-                >
-                    <p onClick={() => jumpTo('/' + subsection_link_id)}>{getSubsectionTitle(subsection)}</p>
+                <li id={subsection_id} key={subsection_id}>
+                    <div
+                        className={
+                            'entity-child pointer f5-5 pt1 pl3 pb1' +
+                            (subsection.id === currentSection ? ' active' : '')
+                        }
+                        onClick={() => jumpTo('/' + subsection_link_id)}
+                    >
+                        {getSubsectionTitle(subsection)}
+                    </div>
                 </li>
             )
         })}
