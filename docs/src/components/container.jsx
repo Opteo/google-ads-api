@@ -12,6 +12,33 @@ class Container extends React.Component {
         this.state = { current_section: '' }
     }
 
+    viewport_sections = {}
+
+    findCurrentSection(id, percent_visible){
+        this.viewport_sections[id] = percent_visible
+
+        if(id === this.state.current_section){
+            return
+        }
+
+        let is_biggest = true
+
+        const other_percentages = Object.values(this.viewport_sections)
+        
+        for(const other_percent of other_percentages){
+            if(other_percent > percent_visible){
+                is_biggest = false
+                break
+            }
+        }
+        
+        if(is_biggest){
+            this.setState({
+                current_section : id
+            })
+        }
+    }
+
     render() {
         const { edges } = this.props
 
@@ -22,7 +49,7 @@ class Container extends React.Component {
             <Section
                 key={'section' + index}
                 data={sections_data[key]}
-                onSectionChange={section => this.setState({ current_section: section })}
+                onSectionChange={(id, percent) => this.findCurrentSection(id, percent)}
             />
         ))
 

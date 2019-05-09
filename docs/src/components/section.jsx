@@ -18,7 +18,7 @@ class Section extends React.Component {
 
         if (!code) {
             return (
-                <SectionContainer id={id} key={id} onEnterViewport={() => this.props.onSectionChange(id)}>
+                <SectionContainer id={id} key={id} handler={this.props.onSectionChange}>
                     <div className="text-container w-48">
                         <div className="content" dangerouslySetInnerHTML={{ __html: html_description }} />
                         <div>{meta ? <AttributesTable section={id} data={meta} /> : null}</div>
@@ -30,7 +30,7 @@ class Section extends React.Component {
         const html_code = code.node.html || ''
 
         return (
-            <SectionContainer id={id} key={id} onEnterViewport={() => this.props.onSectionChange(id)}>
+            <SectionContainer id={id} key={id} handler={this.props.onSectionChange}>
                 <div
                     className={
                         ' ' +
