@@ -1,19 +1,22 @@
 ---
-title: Get CampaignCriterion
+title: Get CampaignCriterion 
 order: 2
 type: get
-entity: CampaignCriterion
+entity: CampaignCriterion 
 ---
 
-### Get a CampaignCriterion
+### Get a CampaignCriterion 
 
-The `customer.campaignCriteria.get(resource_name)` method returns the CampaignCriterion identified by a resource_name.
+The `customer.campaignCriteria.get(resource_name)` method returns the CampaignCriterion identified by a resource_name. 
 
 _Note_: This function is heavily rate-limited by Google, so avoid using it in production.
 
+
 #### Arguments
 
-- **`resource_name`** (_required_): The resource_name of that CampaignCriterion
+- 	##### resource_name _required_
+	The resource_name of that CampaignCriterion
+
 
 #### Returns
 

@@ -1,19 +1,22 @@
 ---
-title: Get AdGroupBidModifier
+title: Get AdGroupBidModifier 
 order: 2
 type: get
-entity: AdGroupBidModifier
+entity: AdGroupBidModifier 
 ---
 
-### Get an AdGroupBidModifier
+### Get an AdGroupBidModifier 
 
-The `customer.adGroupBidModifiers.get(resource_name)` method returns the AdGroupBidModifier identified by a resource_name.
+The `customer.adGroupBidModifiers.get(resource_name)` method returns the AdGroupBidModifier identified by a resource_name. 
 
 _Note_: This function is heavily rate-limited by Google, so avoid using it in production.
 
+
 #### Arguments
 
-- **`resource_name`** (_required_): The resource_name of that AdGroupBidModifier
+- 	##### resource_name _required_
+	The resource_name of that AdGroupBidModifier
+
 
 #### Returns
 

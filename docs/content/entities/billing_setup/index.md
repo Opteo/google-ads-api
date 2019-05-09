@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: BillingSetup
-title: BillingSetup
+entity: BillingSetup 
+title: BillingSetup 
 ---
 
-## BillingSetup
-
+## BillingSetup 
 ### The BillingSetup object
+

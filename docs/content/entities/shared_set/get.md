@@ -1,19 +1,22 @@
 ---
-title: Get SharedSet
+title: Get SharedSet 
 order: 2
 type: get
-entity: SharedSet
+entity: SharedSet 
 ---
 
-### Get a SharedSet
+### Get a SharedSet 
 
-The `customer.sharedSets.get(resource_name)` method returns the SharedSet identified by a resource_name.
+The `customer.sharedSets.get(resource_name)` method returns the SharedSet identified by a resource_name. 
 
 _Note_: This function is heavily rate-limited by Google, so avoid using it in production.
 
+
 #### Arguments
 
-- **`resource_name`** (_required_): The resource_name of that SharedSet
+- 	##### resource_name _required_
+	The resource_name of that SharedSet
+
 
 #### Returns
 

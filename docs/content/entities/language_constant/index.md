@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: LanguageConstant
-title: LanguageConstant
+entity: LanguageConstant 
+title: LanguageConstant 
 ---
 
-## LanguageConstant
-
+## LanguageConstant 
 ### The LanguageConstant object
+

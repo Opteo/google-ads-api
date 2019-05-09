@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: CustomerLabel
-title: CustomerLabel
+entity: CustomerLabel 
+title: CustomerLabel 
 ---
 
-## CustomerLabel
-
+## CustomerLabel 
 ### The CustomerLabel object
+

@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: CampaignSharedSet
-title: CampaignSharedSet
+entity: CampaignSharedSet 
+title: CampaignSharedSet 
 ---
 
-## CampaignSharedSet
-
+## CampaignSharedSet 
 ### The CampaignSharedSet object
+

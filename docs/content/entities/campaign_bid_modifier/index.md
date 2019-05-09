@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: CampaignBidModifier
-title: CampaignBidModifier
+entity: CampaignBidModifier 
+title: CampaignBidModifier 
 ---
 
-## CampaignBidModifier
-
+## CampaignBidModifier 
 ### The CampaignBidModifier object
+

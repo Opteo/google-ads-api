@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: CustomerFeed
-title: CustomerFeed
+entity: CustomerFeed 
+title: CustomerFeed 
 ---
 
-## CustomerFeed
-
+## CustomerFeed 
 ### The CustomerFeed object
+

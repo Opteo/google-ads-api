@@ -1,19 +1,22 @@
 ---
-title: Get BiddingStrategy
+title: Get BiddingStrategy 
 order: 2
 type: get
-entity: BiddingStrategy
+entity: BiddingStrategy 
 ---
 
-### Get a BiddingStrategy
+### Get a BiddingStrategy 
 
-The `customer.biddingStrategies.get(resource_name)` method returns the BiddingStrategy identified by a resource_name.
+The `customer.biddingStrategies.get(resource_name)` method returns the BiddingStrategy identified by a resource_name. 
 
 _Note_: This function is heavily rate-limited by Google, so avoid using it in production.
 
+
 #### Arguments
 
-- **`resource_name`** (_required_): The resource_name of that BiddingStrategy
+- 	##### resource_name _required_
+	The resource_name of that BiddingStrategy
+
 
 #### Returns
 

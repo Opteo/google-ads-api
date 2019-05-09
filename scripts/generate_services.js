@@ -668,7 +668,7 @@ async function compileService(entity, schema) {
     await execP(`prettier --write ${__dirname}/../docs/content/**/*.js`)
     console.log('prettifying md...')
 
-    await execP(`prettier --tab-width 2 --write ${__dirname}/../docs/content/**/*.md`)
+    await execP(`prettier --tab-width 2 --write ${__dirname}/../docs/content/**/*_code.md`)
 
     console.log('Finished compiling all services')
 })()

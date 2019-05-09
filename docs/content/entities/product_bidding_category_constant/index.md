@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: ProductBiddingCategoryConstant
-title: ProductBiddingCategoryConstant
+entity: ProductBiddingCategoryConstant 
+title: ProductBiddingCategoryConstant 
 ---
 
-## ProductBiddingCategoryConstant
-
+## ProductBiddingCategoryConstant 
 ### The ProductBiddingCategoryConstant object
+

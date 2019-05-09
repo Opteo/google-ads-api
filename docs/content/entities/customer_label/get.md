@@ -1,19 +1,22 @@
 ---
-title: Get CustomerLabel
+title: Get CustomerLabel 
 order: 2
 type: get
-entity: CustomerLabel
+entity: CustomerLabel 
 ---
 
-### Get a CustomerLabel
+### Get a CustomerLabel 
 
-The `customer.customerLabels.get(resource_name)` method returns the CustomerLabel identified by a resource_name.
+The `customer.customerLabels.get(resource_name)` method returns the CustomerLabel identified by a resource_name. 
 
 _Note_: This function is heavily rate-limited by Google, so avoid using it in production.
 
+
 #### Arguments
 
-- **`resource_name`** (_required_): The resource_name of that CustomerLabel
+- 	##### resource_name _required_
+	The resource_name of that CustomerLabel
+
 
 #### Returns
 

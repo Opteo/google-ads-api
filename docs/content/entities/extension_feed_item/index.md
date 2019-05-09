@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: ExtensionFeedItem
-title: ExtensionFeedItem
+entity: ExtensionFeedItem 
+title: ExtensionFeedItem 
 ---
 
-## ExtensionFeedItem
-
+## ExtensionFeedItem 
 ### The ExtensionFeedItem object
+

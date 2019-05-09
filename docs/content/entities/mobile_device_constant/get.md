@@ -1,19 +1,22 @@
 ---
-title: Get MobileDeviceConstant
+title: Get MobileDeviceConstant 
 order: 2
 type: get
-entity: MobileDeviceConstant
+entity: MobileDeviceConstant 
 ---
 
-### Get a MobileDeviceConstant
+### Get a MobileDeviceConstant 
 
-The `customer.mobileDeviceConstants.get(resource_name)` method returns the MobileDeviceConstant identified by a resource_name.
+The `customer.mobileDeviceConstants.get(resource_name)` method returns the MobileDeviceConstant identified by a resource_name. 
 
 _Note_: This function is heavily rate-limited by Google, so avoid using it in production.
 
+
 #### Arguments
 
-- **`resource_name`** (_required_): The resource_name of that MobileDeviceConstant
+- 	##### resource_name _required_
+	The resource_name of that MobileDeviceConstant
+
 
 #### Returns
 

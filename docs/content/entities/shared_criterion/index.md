@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: SharedCriterion
-title: SharedCriterion
+entity: SharedCriterion 
+title: SharedCriterion 
 ---
 
-## SharedCriterion
-
+## SharedCriterion 
 ### The SharedCriterion object
+

@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: FeedItemTarget
-title: FeedItemTarget
+entity: FeedItemTarget 
+title: FeedItemTarget 
 ---
 
-## FeedItemTarget
-
+## FeedItemTarget 
 ### The FeedItemTarget object
+

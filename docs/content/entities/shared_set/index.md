@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: SharedSet
-title: SharedSet
+entity: SharedSet 
+title: SharedSet 
 ---
 
-## SharedSet
-
+## SharedSet 
 ### The SharedSet object
+

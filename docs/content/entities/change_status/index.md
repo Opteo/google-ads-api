@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: ChangeStatus
-title: ChangeStatus
+entity: ChangeStatus 
+title: ChangeStatus 
 ---
 
-## ChangeStatus
-
+## ChangeStatus 
 ### The ChangeStatus object
+

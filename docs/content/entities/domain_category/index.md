@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: DomainCategory
-title: DomainCategory
+entity: DomainCategory 
+title: DomainCategory 
 ---
 
-## DomainCategory
-
+## DomainCategory 
 ### The DomainCategory object
+

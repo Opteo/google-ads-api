@@ -1,17 +1,20 @@
 ---
-title: Delete SharedSet
+title: Delete SharedSet 
 order: 6
 type: delete
-entity: SharedSet
+entity: SharedSet 
 ---
 
-### Delete a SharedSet
+### Delete a SharedSet 
 
 The `customer.sharedSets.delete(resource_name)` sets the `status` field of a SharedSet to `REMOVED`. Those entities and their metrics will continue to exist, but they will be read-only. Removed entities cannot be re-enabled.
 
+
 #### Arguments
 
-- **`resource_name`** (_required_): The resource_name of that SharedSet
+-   ##### resource_name _required_
+    The resource_name of that SharedSet
+
 
 #### Returns
 

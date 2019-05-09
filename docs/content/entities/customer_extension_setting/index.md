@@ -1,10 +1,10 @@
 ---
 order: 1
 type: object
-entity: CustomerExtensionSetting
-title: CustomerExtensionSetting
+entity: CustomerExtensionSetting 
+title: CustomerExtensionSetting 
 ---
 
-## CustomerExtensionSetting
-
+## CustomerExtensionSetting 
 ### The CustomerExtensionSetting object
+
