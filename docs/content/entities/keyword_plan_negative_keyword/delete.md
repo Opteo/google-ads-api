@@ -12,7 +12,7 @@ The `customer.keywordPlanNegativeKeywords.delete(resource_name)` sets the `statu
 
 #### Arguments
 
--   ##### resource_name _required_
+- ##### resource_name *required*
     The resource_name of that KeywordPlanNegativeKeyword
 
 

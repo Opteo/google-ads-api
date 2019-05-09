@@ -14,8 +14,8 @@ The `customer.conversionActions.get(resource_name)` method returns the Conversio
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that ConversionAction
+- ##### resource_name *required*
+    The resource_name of that ConversionAction
 
 
 #### Returns

@@ -12,7 +12,7 @@ The `customer.campaignExtensionSettings.delete(resource_name)` sets the `status`
 
 #### Arguments
 
--   ##### resource_name _required_
+- ##### resource_name *required*
     The resource_name of that CampaignExtensionSetting
 
 

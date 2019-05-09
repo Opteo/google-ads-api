@@ -14,8 +14,8 @@ The `customer.feedItems.get(resource_name)` method returns the FeedItem identifi
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that FeedItem
+- ##### resource_name *required*
+    The resource_name of that FeedItem
 
 
 #### Returns

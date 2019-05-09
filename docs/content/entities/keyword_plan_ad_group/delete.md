@@ -12,7 +12,7 @@ The `customer.keywordPlanAdGroups.delete(resource_name)` sets the `status` field
 
 #### Arguments
 
--   ##### resource_name _required_
+- ##### resource_name *required*
     The resource_name of that KeywordPlanAdGroup
 
 

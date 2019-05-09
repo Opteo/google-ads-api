@@ -14,8 +14,8 @@ The `customer.videos.get(resource_name)` method returns the Video identified by 
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that Video
+- ##### resource_name *required*
+    The resource_name of that Video
 
 
 #### Returns

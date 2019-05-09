@@ -14,8 +14,8 @@ The `customer.geoTargetConstants.get(resource_name)` method returns the GeoTarge
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that GeoTargetConstant
+- ##### resource_name *required*
+    The resource_name of that GeoTargetConstant
 
 
 #### Returns

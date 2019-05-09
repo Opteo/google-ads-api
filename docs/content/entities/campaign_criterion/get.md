@@ -14,8 +14,8 @@ The `customer.campaignCriteria.get(resource_name)` method returns the CampaignCr
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that CampaignCriterion
+- ##### resource_name *required*
+    The resource_name of that CampaignCriterion
 
 
 #### Returns

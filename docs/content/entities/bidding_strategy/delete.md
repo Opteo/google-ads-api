@@ -12,7 +12,7 @@ The `customer.biddingStrategies.delete(resource_name)` sets the `status` field o
 
 #### Arguments
 
--   ##### resource_name _required_
+- ##### resource_name *required*
     The resource_name of that BiddingStrategy
 
 

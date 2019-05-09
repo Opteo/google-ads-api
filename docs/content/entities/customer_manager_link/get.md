@@ -14,8 +14,8 @@ The `customer.customerManagerLinks.get(resource_name)` method returns the Custom
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that CustomerManagerLink
+- ##### resource_name *required*
+    The resource_name of that CustomerManagerLink
 
 
 #### Returns

@@ -14,8 +14,8 @@ The `customer.recommendations.get(resource_name)` method returns the Recommendat
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that Recommendation
+- ##### resource_name *required*
+    The resource_name of that Recommendation
 
 
 #### Returns

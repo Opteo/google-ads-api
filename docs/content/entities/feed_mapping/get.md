@@ -14,8 +14,8 @@ The `customer.feedMappings.get(resource_name)` method returns the FeedMapping id
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that FeedMapping
+- ##### resource_name *required*
+    The resource_name of that FeedMapping
 
 
 #### Returns

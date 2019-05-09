@@ -14,8 +14,8 @@ The `customer.userLists.get(resource_name)` method returns the UserList identifi
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that UserList
+- ##### resource_name *required*
+    The resource_name of that UserList
 
 
 #### Returns

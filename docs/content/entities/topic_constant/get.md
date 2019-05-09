@@ -14,8 +14,8 @@ The `customer.topicConstants.get(resource_name)` method returns the TopicConstan
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that TopicConstant
+- ##### resource_name *required*
+    The resource_name of that TopicConstant
 
 
 #### Returns

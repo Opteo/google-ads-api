@@ -14,8 +14,8 @@ The `customer.customerFeeds.get(resource_name)` method returns the CustomerFeed 
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that CustomerFeed
+- ##### resource_name *required*
+    The resource_name of that CustomerFeed
 
 
 #### Returns

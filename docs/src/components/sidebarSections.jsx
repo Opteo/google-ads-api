@@ -72,11 +72,11 @@ const SidebarSections = ({ sections, currentSection, search }) => {
         <ul id="section-list" className="list f5 pv3 overflow-y-auto">
             {Object.keys(sections).map(group_name => {
                 return (
-                    <li key={group_name} className="mv0 pb2">
-                        <div className="f6 pa3 bb b--opteo-light-gray opteo-middle-gray">
+                    <li key={group_name} className=" mv0 pb2">
+                        <div className="f6 ttu pa3 bb b--opteo-light-gray opteo-middle-gray">
                             {getGroupDisplayName(group_name)}
                         </div>
-                        <ul className="list pt2 pl3 pb2" id={group_name}>
+                        <ul className="list pt2 pb2" id={group_name}>
                             {getSectionRows(sections[group_name])}
                         </ul>
                     </li>

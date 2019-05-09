@@ -12,7 +12,7 @@ The `customer.accountBudgetProposals.delete(resource_name)` sets the `status` fi
 
 #### Arguments
 
--   ##### resource_name _required_
+- ##### resource_name *required*
     The resource_name of that AccountBudgetProposal
 
 

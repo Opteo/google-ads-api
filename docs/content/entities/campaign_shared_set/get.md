@@ -14,8 +14,8 @@ The `customer.campaignSharedSets.get(resource_name)` method returns the Campaign
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that CampaignSharedSet
+- ##### resource_name *required*
+    The resource_name of that CampaignSharedSet
 
 
 #### Returns

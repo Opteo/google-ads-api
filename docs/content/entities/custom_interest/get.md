@@ -14,8 +14,8 @@ The `customer.customInterests.get(resource_name)` method returns the CustomInter
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that CustomInterest
+- ##### resource_name *required*
+    The resource_name of that CustomInterest
 
 
 #### Returns

@@ -14,8 +14,8 @@ The `customer.productBiddingCategoryConstants.get(resource_name)` method returns
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that ProductBiddingCategoryConstant
+- ##### resource_name *required*
+    The resource_name of that ProductBiddingCategoryConstant
 
 
 #### Returns

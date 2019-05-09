@@ -14,8 +14,8 @@ The `customer.campaignLabels.get(resource_name)` method returns the CampaignLabe
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that CampaignLabel
+- ##### resource_name *required*
+    The resource_name of that CampaignLabel
 
 
 #### Returns
