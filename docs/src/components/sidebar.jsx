@@ -12,15 +12,16 @@ class Sidebar extends React.Component {
     }
 
     componentWillReceiveProps(nextProp, prevProp) {
-        if (nextProp.currentSection !== prevProp.currentSection) {
-            const current_el = document.getElementById(`sidebar-${nextProp.currentSection}`)
-            const sidebar_el = document.getElementById('section-list')
+        return false
+        // if (nextProp.currentSection !== prevProp.currentSection) {
+        //     const current_el = document.getElementById(`sidebar-${nextProp.currentSection}`)
+        //     const sidebar_el = document.getElementById('section-list')
 
-            if (current_el) {
-                const margin = window.innerHeight / 3 + current_el.parentElement.offsetHeight
-                sidebar_el.scrollTop = current_el.offsetTop - margin
-            }
-        }
+        //     if (current_el) {
+        //         const margin = window.innerHeight / 3 + current_el.parentElement.offsetHeight
+        //         sidebar_el.scrollTop = current_el.offsetTop - margin
+        //     }
+        // }
     }
 
     handleSearch = event => {

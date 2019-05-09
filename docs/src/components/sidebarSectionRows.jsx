@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { Link } from 'gatsby'
 
-import { capitalizeFirstLetter, stringMatch } from '../utils'
+import { capitalizeFirstLetter, stringMatch, jumpTo } from '../utils'
 
 import SidebarSubsectionRows from './sidebarSubsectionRows'
 
@@ -24,19 +23,23 @@ const SidebarSectionRows = ({ groupSections, currentSection, search }) => {
         if (!subsection_ids.includes(currentSection)) {
             return (
                 <li key={section_key} className="mv0 pb2">
-                    <Link className="entity pl3 pointer" to={section_id}>
+                    <p className="entity pl3 pointer" onClick={() => jumpTo(section_id)}>
                         {section_name}
-                    </Link>
+                    </p>
                 </li>
             )
         }
+
         return (
             <li key={section_key} className="mv0 pb2">
                 <div className="relative">
                     <div className="indicator absolute top-0 left-0 h-100 bg-opteo-link-blue" />
-                    <Link className="entity active pointer pt1 pl3 pb1 db bg-opteo-light-gray" to={section_id}>
+                    <p
+                        className="entity active pointer pt1 pl3 pb1 db bg-opteo-light-gray"
+                        onClick={() => jumpTo(section_id)}
+                    >
                         {section_name}
-                    </Link>
+                    </p>
                 </div>
                 <SidebarSubsectionRows id={section_key} subsections={subsections} currentSection={currentSection} />
             </li>

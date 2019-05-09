@@ -125,3 +125,5 @@ export const getGroupDisplayName = name => {
             return name
     }
 }
+
+export const jumpTo = section_id => (window.location.href = section_id)
