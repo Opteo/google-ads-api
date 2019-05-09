@@ -57,7 +57,7 @@ class Container extends React.Component {
 
         return (
             <div className="w-100 items-start">
-                <div className="" style={{ width: '280px' }}>
+                <div className="" >
                     <Sidebar sectionGroups={section_ids} currentSection={this.state.current_section} />
                 </div>
                 <div className="pa4 mt3" style={{ marginLeft: '280px', width: 'calc(100% - 280px)' }}>
