@@ -14,8 +14,8 @@ The `customer.customerExtensionSettings.get(resource_name)` method returns the C
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that CustomerExtensionSetting
+- ##### resource_name *required*
+    The resource_name of that CustomerExtensionSetting
 
 
 #### Returns

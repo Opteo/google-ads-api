@@ -12,7 +12,7 @@ The `customer.adGroups.delete(resource_name)` sets the `status` field of an AdGr
 
 #### Arguments
 
--   ##### resource_name _required_
+- ##### resource_name *required*
     The resource_name of that AdGroup
 
 

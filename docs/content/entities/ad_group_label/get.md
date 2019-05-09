@@ -14,8 +14,8 @@ The `customer.adGroupLabels.get(resource_name)` method returns the AdGroupLabel 
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that AdGroupLabel
+- ##### resource_name *required*
+    The resource_name of that AdGroupLabel
 
 
 #### Returns

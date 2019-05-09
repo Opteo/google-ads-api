@@ -14,8 +14,8 @@ The `customer.customerNegativeCriteria.get(resource_name)` method returns the Cu
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that CustomerNegativeCriterion
+- ##### resource_name *required*
+    The resource_name of that CustomerNegativeCriterion
 
 
 #### Returns

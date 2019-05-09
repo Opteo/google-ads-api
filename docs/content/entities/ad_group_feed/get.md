@@ -14,8 +14,8 @@ The `customer.adGroupFeeds.get(resource_name)` method returns the AdGroupFeed id
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that AdGroupFeed
+- ##### resource_name *required*
+    The resource_name of that AdGroupFeed
 
 
 #### Returns

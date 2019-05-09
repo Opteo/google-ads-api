@@ -18,6 +18,14 @@ module.exports = {
         {
             resolve: `gatsby-transformer-remark`,
             options: {
+                commonmark: true,
+                // Footnotes mode (default: true)
+                footnotes: false,
+                // Pedantic mode (default: true)
+                pedantic: false,
+                // GitHub Flavored Markdown mode (default: true)
+                gfm: true,
+                // Plugins configs
                 plugins: [
                     // `gatsby-remark-autolink-headers`,
                     {

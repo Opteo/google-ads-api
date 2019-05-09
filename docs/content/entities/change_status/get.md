@@ -14,8 +14,8 @@ The `customer.changeStatus.get(resource_name)` method returns the ChangeStatus i
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that ChangeStatus
+- ##### resource_name *required*
+    The resource_name of that ChangeStatus
 
 
 #### Returns

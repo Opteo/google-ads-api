@@ -14,8 +14,8 @@ The `customer.campaigns.get(resource_name)` method returns the Campaign identifi
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that Campaign
+- ##### resource_name *required*
+    The resource_name of that Campaign
 
 
 #### Returns

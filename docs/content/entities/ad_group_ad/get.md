@@ -14,8 +14,8 @@ The `customer.adGroupAds.get(resource_name)` method returns the AdGroupAd identi
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that AdGroupAd
+- ##### resource_name *required*
+    The resource_name of that AdGroupAd
 
 
 #### Returns

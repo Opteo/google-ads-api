@@ -14,8 +14,8 @@ The `customer.feeds.get(resource_name)` method returns the Feed identified by a 
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that Feed
+- ##### resource_name *required*
+    The resource_name of that Feed
 
 
 #### Returns

@@ -14,8 +14,8 @@ The `customer.mobileDeviceConstants.get(resource_name)` method returns the Mobil
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that MobileDeviceConstant
+- ##### resource_name *required*
+    The resource_name of that MobileDeviceConstant
 
 
 #### Returns

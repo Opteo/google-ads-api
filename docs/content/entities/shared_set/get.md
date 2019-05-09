@@ -14,8 +14,8 @@ The `customer.sharedSets.get(resource_name)` method returns the SharedSet identi
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that SharedSet
+- ##### resource_name *required*
+    The resource_name of that SharedSet
 
 
 #### Returns

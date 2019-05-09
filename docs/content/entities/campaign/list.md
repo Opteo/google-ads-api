@@ -15,13 +15,13 @@ This method was designed for convenience and discovery. Internally, it uses the 
 
 #### Arguments
 
--   ##### options _optional_
+- ##### options *optional*
     Object of the form `{ limit, order_by, constraints }`:
-    -   ##### limit _optional, number_
+    - ##### limit *optional, number*
         Number of rows to return. Equivalent to the limit in `customer.report()`. Defaults to no limit.
-    -   ##### order_by _optional, string_
+    - ##### order_by *optional, string*
         The field to sort the returned rows by. Equivalent to the order_by in `customer.report()`. By default, no sorting is applied.
-    -   ##### constraints _optional, array/object_
+    - ##### constraints *optional, array/object*
         A constraints array or object. See the `customer.report()` documentation for details. By default, all entities are returned.
 
 

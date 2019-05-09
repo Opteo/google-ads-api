@@ -14,8 +14,8 @@ The `customer.carrierConstants.get(resource_name)` method returns the CarrierCon
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that CarrierConstant
+- ##### resource_name *required*
+    The resource_name of that CarrierConstant
 
 
 #### Returns
