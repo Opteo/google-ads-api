@@ -56,7 +56,7 @@ const AttributesTable = ({ data, title, section }) => {
                             return (
                                 <li
                                     key={unique_attribute_key + 'selector'}
-                                    className="one-of-item mb2 pointer"
+                                    className="one-of-item mb1 pointer"
                                     onClick={() =>
                                         toggleOneOf(
                                             'oneof' + section + oneof_type_key,
@@ -64,7 +64,7 @@ const AttributesTable = ({ data, title, section }) => {
                                         )
                                     }
                                 >
-                                    • <span className="bb b--opteo-link-blue">{oneof_key.split('_').join(' ')} </span>
+                                    <span>• </span><span className="opteo-link-blue">{oneof_key.split('_').join(' ')} </span>
                                 </li>
                             )
                         })}
@@ -87,8 +87,8 @@ const AttributesTable = ({ data, title, section }) => {
     })
 
     return (
-        <div className="f5 ba b--white  pr3">
-            <h4 className="bb-0">{title || 'Fields'}</h4>
+        <div>
+            <h4 className="nested-title bb-0">{title || 'Fields'}</h4>
             <div>{getOneOfRows(oneOfs)}</div>
             <div>{getBasicRows(data)}</div>
         </div>

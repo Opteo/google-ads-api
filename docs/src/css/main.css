@@ -23,17 +23,19 @@ a:hover {
 } */
 
 h2 {
-    font-size: 1.6rem;
+    /* font-family: sans-serif; */
+    font-weight: 400;
+    font-size: 1.5rem;
     margin-bottom: 2rem;
     color: #313135;
-    font-weight: 600;
 }
 
 h3 {
-    font-size: 1.35rem;
+    /* font-family: sans-serif; */
+    font-weight: 400;
+    font-size: 1.2rem;
     margin-bottom: 2rem;
     color: #313135;
-    font-weight: 600;
 }
 
 h4 {
@@ -48,6 +50,10 @@ h4 {
     border-bottom: 1px solid #f2f2f6;
 }
 
+h4.nested-title {
+    margin-top: 1.5rem;
+}
+
 h5 {
     color: #313135;
     font-size: 1rem;
@@ -59,7 +65,7 @@ kbd,
 pre,
 samp {
     font-family: monospace, monospace;
-    font-size: 1em;
+    font-size: 1rem;
 }
 
 pre {
@@ -75,6 +81,16 @@ code {
     padding: 0.2em 0.2em;
     font-size: 0.8rem;
     line-height: 1.45rem;
+}
+
+button {
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    font-weight: 400;
+    padding: 0.3rem 0.8rem;
+    box-shadow: 0 0 0 1px rgba(2,2,12,.05), 0 2px 4px -2px rgba(2,2,12,.1);
+    border: none;
+    border-radius: 5rem;
 }
 
 /* html {

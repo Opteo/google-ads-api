@@ -25,14 +25,14 @@ class Sidebar extends React.Component {
 
                 if (subsection.id === currentSection) {
                     return (
-                        <li className="entity-child pointer f5-5 pt1 pb1 bg-opteo-light-gray" key={subsection_key}>
+                        <li className="entity-child active pointer f5-5 pt1 pl3 pb1" key={subsection_key}>
                             <Link to={'/' + subsection_id}>{getSubsectionTitle(subsection)}</Link>
                         </li>
                     )
                 }
 
                 return (
-                    <li className="entity-child pointer f5-5 pt1 pb1" key={subsection_key}>
+                    <li className="entity-child pointer pt1 pl3 pb1" key={subsection_key}>
                         <Link to={'/' + subsection_id}>{getSubsectionTitle(subsection)}</Link>
                     </li>
                 )
@@ -55,8 +55,8 @@ class Sidebar extends React.Component {
 
             if (!subsection_ids.includes(currentSection)) {
                 return (
-                    <li key={section_key} className="mv0 pb2-5">
-                        <Link className="entity pointer" to={section_id}>
+                    <li key={section_key} className="mv0 pb2">
+                        <Link className="entity pl3 pointer" to={section_id}>
                             {section}
                         </Link>
                     </li>
@@ -64,11 +64,14 @@ class Sidebar extends React.Component {
             }
 
             return (
-                <li key={section_key} className="mv0 pb2-5">
-                    <Link className="entity pointer bg-opteo-light-gray" to={section_id}>
-                        {section}
-                    </Link>
-                    <ul className="list pt2 pl3" id={section_key}>
+                <li key={section_key} className=" mv0 pb2">
+                    <div className="relative">
+                        <div className="indicator absolute top-0 left-0 h-100 bg-opteo-link-blue"></div>
+                        <Link className="entity active pointer pt1 pl3 pb1 db bg-opteo-light-gray" to={section_id}>
+                            {section}
+                        </Link>
+                    </div>
+                    <ul className="list pt2 pl3 pb2" id={section_key}>
                         {getSubsectionRows(subsections)}
                     </ul>
                 </li>
@@ -80,12 +83,14 @@ class Sidebar extends React.Component {
                 className="absolute top-0 h-100 flex flex-column fw4 bg-white fixed br b--opteo-light-gray"
                 style={{ maxWidth: '280px' }}
             >
-                <Link className="f3 tc pv3 bb b--opteo-light-gray opteo-gray hover-opteo-gray" to="/">
+                <Link className="f3 tc pv3 opteo-gray hover-opteo-gray" to="/">
                     google-ads-api
                 </Link>
-                <input type="text" placeholder="search" value={this.state.search} onChange={this.handleSearch} />
+                <div className="pl3 pr3">
+                    <input className="w-100 pa1 br2 ba b--opteo-light-gray" type="text" placeholder="search" value={this.state.search} onChange={this.handleSearch} />
+                </div>
                 <div className="f6 pa3 bb b--opteo-light-gray opteo-middle-gray">CORE RESOURCES</div>
-                <ul className="list f5 pv3 pl3 overflow-y-auto">{SectionRows}</ul>
+                <ul className="sidebar-list-container list f5 pv3 overflow-y-auto">{SectionRows}</ul>
             </div>
         )
     }

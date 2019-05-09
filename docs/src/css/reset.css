@@ -55,3 +55,6 @@ button {
 	cursor: pointer;
 	outline: none;
 }
+input {
+	-webkit-appearance: none;
+}

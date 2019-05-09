@@ -22,7 +22,7 @@ class Attribute extends React.Component {
         const { _description } = data
 
         return (
-            <div key={`${section}-${name}`} className=" w-100 v-top pb3-5 bt b--opteo-light-gray">
+            <div key={`${section}-${name}`} className=" w-100 pb3-5 bt b--opteo-light-gray">
                 <div className="pt3-5 mb2">
                     <span className="fw6 mv0 opteo-gray"> {name} </span>{' '}
                     {data._type ? (
@@ -36,14 +36,14 @@ class Attribute extends React.Component {
                 {_description ? (
                     <div className="" dangerouslySetInnerHTML={{ __html: _description }} />
                 ) : (
-                    <div className="ml3 mt3 pa3 ba b--opteo-light-gray br3">
+                    <div className="mt3 pa3 ba b--opteo-light-gray br3">
                         <button
-                            className="f6 pa2 ba br2 b--opteo-light-gray opteo-link-blue"
+                            className="opteo-link-blue"
                             onClick={() => {
                                 this.toggleChild()
                             }}
                         >
-                            {this.state.child_shown ? 'Hide Child Fields' : 'Show Child Fields'}
+                            {this.state.child_shown ? 'Hide Child Fields -' : 'Show Child Fields +'}
                         </button>
                         <div style={{ display: this.state.child_shown ? 'block' : 'none' }}>
                             <AttributesTable data={data} section={section} title="Child Attributes" />

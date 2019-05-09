@@ -1,18 +1,42 @@
+.sidebar-list-container a {
+    color: #50535a;
+}
 .entity {
-    font-size: 1rem;
-    color: #747883;
+    font-size: 0.9rem;
     transition: color 0.3s ease;
 }
 .entity:hover {
     color: #008dff;
 }
-
+.entity.active {
+    color: #008dff;
+}
 .entity-child a {
-    color: #747883;
+    font-size: 0.84rem;
+    color: #50535a;
     display: block;
 }
 
 .entity-child a:hover {
     color: #008dff;
     display: block;
+}
+
+.entity-child.active {
+    border-bottom-left-radius: 0.2rem;
+    border-top-left-radius: 0.2rem;
+}
+
+.entity-child.active a {
+    color: #008dff;
+}
+
+.active {
+    background-color: #f9fafc;
+}
+
+.indicator {
+    border-top-right-radius: 0.1rem;
+    border-bottom-right-radius: 0.1rem;
+    width: 3px;
 }

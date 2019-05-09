@@ -7,21 +7,47 @@
 }
 
 .text-container code {
-    color: #cd3d64;
-    background: #f0f1f5;
+    color: #c92c2c;
+    background: #f9fafc;
     padding: 0 3px;
     margin: 0 1px;
     border-radius: 4px;
     border: 1px solid rgba(0, 0, 0, 0.05);
     font-weight: 500;
-    font-size: 0.85rem;
+    /* font-size: 0.85rem; */
 }
 
 .sticky-code-block {
     position: sticky;
     top: 2rem;
+    padding-top: 3rem;
+}
+
+.plus-symbol {
+    display: inline-block;
+    transform: rotate(0deg);
+    transition: transfrom 0.5s ease
+}
+
+.plus-symbol.enum-open {
+    transform: rotate(45deg)
 }
 
 .enum-container {
-    background-color: #f0f1f5;
+    /* background-color: #f0f1f5; */
+    font-size: 0.85rem
+}
+
+.enum-table {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-column-gap: 10px;
+}
+
+.enum-table:last-child {
+    border-bottom: none;
+}
+
+.one-of-item {
+    background-color: one-of-item ;
 }

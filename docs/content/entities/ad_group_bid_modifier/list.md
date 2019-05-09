@@ -17,7 +17,7 @@ This method was designed for convenience and discovery. Internally, it uses the 
     Object of the form `{ limit, order_by, constraints }`:
     -   ##### limit _optional, number_
         Number of rows to return. Equivalent to the limit in `customer.report()`. Defaults to no limit.
-    -   ##### order*by \_optional, string*
+    -   ##### order by _optional, string_
         The field to sort the returned rows by. Equivalent to the order_by in `customer.report()`. By default, no sorting is applied.
     -   ##### constraints _optional, array/object_
         A constraints array or object. See the `customer.report()` documentation for details. By default, all entities are returned.
