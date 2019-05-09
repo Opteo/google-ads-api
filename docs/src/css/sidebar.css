@@ -36,7 +36,5 @@
 }
 
 .indicator {
-    border-top-right-radius: 0.1rem;
-    border-bottom-right-radius: 0.1rem;
     width: 3px;
 }

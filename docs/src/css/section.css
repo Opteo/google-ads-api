@@ -35,13 +35,14 @@
 
 .enum-container {
     /* background-color: #f0f1f5; */
-    font-size: 0.85rem
+    /* font-size: 0.85rem */
 }
 
 .enum-table {
     display: grid;
     grid-template-columns: 200px 1fr;
     grid-column-gap: 10px;
+    font-size: 0.75rem
 }
 
 .enum-table:last-child {

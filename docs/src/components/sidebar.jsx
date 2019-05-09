@@ -35,7 +35,7 @@ class Sidebar extends React.Component {
                 className="absolute top-0 h-100 flex flex-column fw4 bg-white fixed br b--opteo-light-gray"
                 style={{ maxWidth: '280px' }}
             >
-                <Link className="f3 tc pv3 opteo-gray hover-opteo-gray" to="/">
+                <Link className="f3 tc pt3-5 pb2  opteo-gray hover-opteo-gray" to="/">
                     google-ads-api
                 </Link>
                 <SidebarSearch value={this.state.search} changeHandler={this.handleSearch} />

@@ -19,11 +19,11 @@
 }
 
 .content ul ul li {
-    padding-left: 2rem;
+    padding-left: 1.5rem;
 }
 
 .content ul ul ul li {
-    padding-left: 2rem;
+    padding-left: 1.5rem;
 }
 
 .content ul ul ul li:first-child {

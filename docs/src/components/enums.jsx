@@ -18,7 +18,7 @@ class Enums extends React.Component {
 
         const rows = enums.map((el, index) => {
             return (
-                <li key={el.s} className="enum-table grid pa2 bb b--opteo-light-gray">
+                <li key={el.s} className="enum-table grid pa2 bt b--opteo-light-gray">
                     <div>
                         <span className="fw5 opteo-gray">{el.s}</span>
                         <span> ({index})</span>
@@ -30,21 +30,19 @@ class Enums extends React.Component {
         return (
             <div>
                 <div
-                    className="ba b--opteo-light-gray pa3 br3 mb3"
+                    className={this.state.shown ? 'ba b--opteo-light-gray br3 mt3 mb3': null}
                     onClick={() => {
                         this.toggleMenu()
                     }}
                 >
-                    <button className={this.state.shown ? 'opteo-link-blue': 'opteo-link-blue'}>
+                    <button className={this.state.shown ? 'opteo-link-blue': 'opteo-link-blue btn-box-shadow mt2 mb3'}>
                         {this.state.shown ? 'Hide Enums -' : 'Show Enums +'}
                     </button>
+
                     <div style={{ display: this.state.shown ? 'block' : 'none' }}>
-                        <h4 className="nested-title bb-0">Enum Values</h4>
-                        <div className="pt3-5 bt b--opteo-light-gray">
-                            <ul className="enum-container ba b--opteo-light-gray mb3 br2">
-                                {rows}
-                            </ul>
-                        </div>
+                        <ul className="enum-container br2">
+                            {rows}
+                        </ul>
                     </div>
                 </div>
             </div>

@@ -27,7 +27,7 @@ const AttributesTable = ({ data, title, section }) => {
     const getOneOfRows = one_ofs => {
         return Object.keys(one_ofs).map(oneof_type_key => {
             return (
-                <div className="pb3" key={'oneofcontainer' + section + oneof_type_key}>
+                <div key={'oneofcontainer' + section + oneof_type_key}>
                     {Object.keys(one_ofs[oneof_type_key]).map((oneof_key, index) => {
                         const details = one_ofs[oneof_type_key][oneof_key]
                         if (typeof details !== 'object') {
@@ -40,7 +40,7 @@ const AttributesTable = ({ data, title, section }) => {
                         return (
                             <div
                                 style={{ display: index === 0 ? 'block' : 'none' }}
-                                className={[unique_oneof_key]}
+                                className={`${unique_oneof_key}`}
                                 id={unique_attribute_key}
                                 key={unique_attribute_key}
                             >
@@ -48,8 +48,8 @@ const AttributesTable = ({ data, title, section }) => {
                             </div>
                         )
                     })}
-                    <div className="mb2">This field can also be replaced by:</div>
-                    <ul>
+                    <div className="pl3">This field can also be replaced by:</div>
+                    <ul className="pt2 pl3 pr3 pb3">
                         {Object.keys(one_ofs[oneof_type_key]).map(oneof_key => {
                             const unique_attribute_key = 'oneof' + section + oneof_type_key + oneof_key
 
@@ -88,7 +88,6 @@ const AttributesTable = ({ data, title, section }) => {
 
     return (
         <div>
-            <h4 className="nested-title bb-0">{title || 'Fields'}</h4>
             <div>{getOneOfRows(oneOfs)}</div>
             <div>{getBasicRows(data)}</div>
         </div>

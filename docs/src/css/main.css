@@ -80,7 +80,7 @@ code {
     background-color: #272822;
     color: white;
     border-radius: 3px;
-    font-family: Menlo, 'SFMono-Regular', Consolas, 'Roboto Mono', 'Droid Sans Mono', 'Liberation Mono', Menlo, Courier,
+    font-family: Menlo, 'SFMono-Regular', Consolas, 'Roboto Mono', 'Droid Sans Mono', 'Liberation Mono', Courier,
         monospace;
     padding: 0.2em 0.2em;
     font-size: 0.8rem;
@@ -92,9 +92,12 @@ button {
     font-size: 0.7rem;
     font-weight: 400;
     padding: 0.3rem 0.8rem;
-    box-shadow: 0 0 0 1px rgba(2,2,12,.05), 0 2px 4px -2px rgba(2,2,12,.1);
     border: none;
     border-radius: 5rem;
+}
+
+.btn-box-shadow {
+    box-shadow: 0 0 0 1px rgba(2,2,12,.05), 0 2px 4px -2px rgba(2,2,12,.1)
 }
 
 /* html {
