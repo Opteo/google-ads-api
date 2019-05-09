@@ -2,3 +2,5 @@
 package.json
 package-lock.json
 build/
+*.md
+!*_code.md

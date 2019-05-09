@@ -14,8 +14,8 @@ The `customer.feedItemTargets.get(resource_name)` method returns the FeedItemTar
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that FeedItemTarget
+- ##### resource_name *required*
+    The resource_name of that FeedItemTarget
 
 
 #### Returns

@@ -14,8 +14,8 @@ The `customer.remarketingActions.get(resource_name)` method returns the Remarket
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that RemarketingAction
+- ##### resource_name *required*
+    The resource_name of that RemarketingAction
 
 
 #### Returns

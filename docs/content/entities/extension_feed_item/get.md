@@ -14,8 +14,8 @@ The `customer.extensionFeedItems.get(resource_name)` method returns the Extensio
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that ExtensionFeedItem
+- ##### resource_name *required*
+    The resource_name of that ExtensionFeedItem
 
 
 #### Returns

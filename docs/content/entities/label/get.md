@@ -14,8 +14,8 @@ The `customer.labels.get(resource_name)` method returns the Label identified by 
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that Label
+- ##### resource_name *required*
+    The resource_name of that Label
 
 
 #### Returns

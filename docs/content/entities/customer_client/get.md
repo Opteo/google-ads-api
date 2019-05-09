@@ -14,8 +14,8 @@ The `customer.customerClients.get(resource_name)` method returns the CustomerCli
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that CustomerClient
+- ##### resource_name *required*
+    The resource_name of that CustomerClient
 
 
 #### Returns

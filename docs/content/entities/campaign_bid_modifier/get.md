@@ -14,8 +14,8 @@ The `customer.campaignBidModifiers.get(resource_name)` method returns the Campai
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that CampaignBidModifier
+- ##### resource_name *required*
+    The resource_name of that CampaignBidModifier
 
 
 #### Returns

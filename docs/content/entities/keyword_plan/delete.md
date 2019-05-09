@@ -12,7 +12,7 @@ The `customer.keywordPlans.delete(resource_name)` sets the `status` field of a K
 
 #### Arguments
 
--   ##### resource_name _required_
+- ##### resource_name *required*
     The resource_name of that KeywordPlan
 
 

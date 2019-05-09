@@ -14,8 +14,8 @@ The `customer.operatingSystemVersionConstants.get(resource_name)` method returns
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that OperatingSystemVersionConstant
+- ##### resource_name *required*
+    The resource_name of that OperatingSystemVersionConstant
 
 
 #### Returns

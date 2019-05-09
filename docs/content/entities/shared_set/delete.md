@@ -12,7 +12,7 @@ The `customer.sharedSets.delete(resource_name)` sets the `status` field of a Sha
 
 #### Arguments
 
--   ##### resource_name _required_
+- ##### resource_name *required*
     The resource_name of that SharedSet
 
 

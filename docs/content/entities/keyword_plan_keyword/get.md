@@ -14,8 +14,8 @@ The `customer.keywordPlanKeywords.get(resource_name)` method returns the Keyword
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that KeywordPlanKeyword
+- ##### resource_name *required*
+    The resource_name of that KeywordPlanKeyword
 
 
 #### Returns

@@ -12,7 +12,7 @@ The `customer.feedItems.delete(resource_name)` sets the `status` field of a Feed
 
 #### Arguments
 
--   ##### resource_name _required_
+- ##### resource_name *required*
     The resource_name of that FeedItem
 
 

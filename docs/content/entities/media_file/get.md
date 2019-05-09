@@ -14,8 +14,8 @@ The `customer.mediaFiles.get(resource_name)` method returns the MediaFile identi
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that MediaFile
+- ##### resource_name *required*
+    The resource_name of that MediaFile
 
 
 #### Returns

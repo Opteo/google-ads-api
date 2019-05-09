@@ -12,7 +12,7 @@ The `customer.adGroupAdLabels.delete(resource_name)` sets the `status` field of 
 
 #### Arguments
 
--   ##### resource_name _required_
+- ##### resource_name *required*
     The resource_name of that AdGroupAdLabel
 
 

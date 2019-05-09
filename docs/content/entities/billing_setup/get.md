@@ -14,8 +14,8 @@ The `customer.billingSetups.get(resource_name)` method returns the BillingSetup 
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that BillingSetup
+- ##### resource_name *required*
+    The resource_name of that BillingSetup
 
 
 #### Returns

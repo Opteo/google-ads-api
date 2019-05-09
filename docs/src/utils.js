@@ -1,3 +1,5 @@
+const endsWith = require('lodash.endswith')
+
 export const getSectionId = node => {
     const { title } = node.frontmatter
     return title
@@ -79,6 +81,17 @@ export const getSubsectionTitle = ({ entity, type }) => {
             return `The ${entity} Object`
         }
         case 'list': {
+            if (endsWith(entity, 'Criterion')) {
+                return `List all ${entity.replace('Criterion', 'Criteria')}`
+            }
+
+            if (endsWith(entity, 'Strategy')) {
+                return `List all  ${entity.replace('Strategy', 'Strategies')}`
+            }
+
+            if (endsWith(entity, 'Category')) {
+                return `List all  ${entity.replace('Category', 'Categories')}`
+            }
             return `List all ${entity}s`
         }
         default:

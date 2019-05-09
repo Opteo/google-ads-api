@@ -14,8 +14,8 @@ The `customer.campaignBudgets.get(resource_name)` method returns the CampaignBud
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that CampaignBudget
+- ##### resource_name *required*
+    The resource_name of that CampaignBudget
 
 
 #### Returns

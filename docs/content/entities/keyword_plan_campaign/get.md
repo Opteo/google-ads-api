@@ -14,8 +14,8 @@ The `customer.keywordPlanCampaigns.get(resource_name)` method returns the Keywor
 
 #### Arguments
 
-- 	##### resource_name _required_
-	The resource_name of that KeywordPlanCampaign
+- ##### resource_name *required*
+    The resource_name of that KeywordPlanCampaign
 
 
 #### Returns
