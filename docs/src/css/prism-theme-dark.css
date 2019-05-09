@@ -10,7 +10,7 @@ pre[class*='language-javascript'] {
     background: none;
     font-family: Menlo, 'SFMono-Regular', Consolas, 'Roboto Mono', 'Droid Sans Mono', 'Liberation Mono', Menlo, Courier,
         monospace;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     text-align: left;
     white-space: pre;
     word-spacing: normal;
@@ -39,7 +39,7 @@ pre[class*='language-javascript'] {
 pre[class*='language-javascript'] > code {
     border-radius: 0.5rem;
     border: 1px solid #f2f2f6;
-    padding: 0.5rem;
+    padding: 1rem;
     position: relative;
     /* border-left: 10px solid #358ccb; */
     /* box-shadow: -1px 0px 0px 0px #358ccb, 0px 0px 0px 1px #dfdfdf; */

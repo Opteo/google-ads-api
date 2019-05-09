@@ -13,7 +13,7 @@ const IndexPage = ({
 }) => {
     return (
         <Layout>
-            {/* <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} /> */}
+            {/* <SEO title="Opteo" keywords={[`gatsby`, `application`, `react`]} /> */}
             <Container edges={edges} />
         </Layout>
     )

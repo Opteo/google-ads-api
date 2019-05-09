@@ -60,6 +60,7 @@ export const getSectionsData = edges => {
         if (!sections[section_data.id]) {
             sections[section_data.id] = {}
         }
+        sections[section_data.id].group = node.fields.group
         sections[section_data.id][section_type] = section_data
     })
 
@@ -70,12 +71,12 @@ export const capitalizeFirstLetter = str => {
     return `${str.charAt(0).toUpperCase()}${str.slice(1)}`
 }
 
-export const getSubsectionTitle = ({ entity, type }) => {
+export const getSubsectionTitle = ({ entity, type, title }) => {
     const AN = ['O', 'A'].includes(entity.slice(0, 1)) ? 'an' : 'a'
 
     switch (type) {
         case 'manual': {
-            return capitalizeFirstLetter(entity)
+            return capitalizeFirstLetter(title)
         }
         case 'object': {
             return `The ${entity} Object`
@@ -124,3 +125,5 @@ export const getGroupDisplayName = name => {
             return name
     }
 }
+
+export const jumpTo = section_id => (window.location.href = section_id)
