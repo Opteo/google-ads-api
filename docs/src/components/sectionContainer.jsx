@@ -7,8 +7,8 @@ for (let i=0; i<=1.0; i+= 0.1) {
   thresholds.push(i);
 }
 
-const SectionContainer = ({ id, children, forwardedRef, handler }) => (
-    <InView threshold={thresholds} onChange={(inView, entry) => handler(id, entry.intersectionRatio)}>
+const SectionContainer = ({  children, handler, sectionId }) => (
+    <InView id={sectionId} threshold={thresholds} onChange={(inView, entry) => handler(sectionId, entry.intersectionRatio)}>
         {children}
     </InView>
 )
