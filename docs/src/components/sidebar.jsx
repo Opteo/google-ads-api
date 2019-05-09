@@ -11,15 +11,17 @@ class Sidebar extends React.Component {
         this.state = { search: '' }
     }
 
-    componentWillReceiveProps(nextProp, prevProp) {
-        return false
-        // if (nextProp.currentSection !== prevProp.currentSection) {
-        //     const current_el = document.getElementById(`sidebar-${nextProp.currentSection}`)
+    componentDidUpdate(prevProp) {
+        // return false
+        // if (this.props.currentSection !== prevProp.currentSection) {
+        //     const current_el = document.getElementById(`sidebar-${this.props.currentSection}`)
         //     const sidebar_el = document.getElementById('section-list')
 
         //     if (current_el) {
         //         const margin = window.innerHeight / 3 + current_el.parentElement.offsetHeight
         //         sidebar_el.scrollTop = current_el.offsetTop - margin
+        //     }
+        //     else {
         //     }
         // }
     }

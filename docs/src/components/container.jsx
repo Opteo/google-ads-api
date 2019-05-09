@@ -17,26 +17,28 @@ class Container extends React.Component {
     findCurrentSection(id, percent_visible){
         this.viewport_sections[id] = percent_visible
 
-        if(id === this.state.current_section){
-            return
-        }
-
-        let is_biggest = true
-
-        const other_percentages = Object.values(this.viewport_sections)
-        
-        for(const other_percent of other_percentages){
-            if(other_percent > percent_visible){
-                is_biggest = false
-                break
+        window.requestAnimationFrame(() => {
+            if(id === this.state.current_section){
+                return
             }
-        }
-        
-        if(is_biggest){
-            this.setState({
-                current_section : id
-            })
-        }
+
+            let is_biggest = true
+
+            const other_percentages = Object.values(this.viewport_sections)
+            
+            for(const other_percent of other_percentages){
+                if(other_percent > percent_visible){
+                    is_biggest = false
+                    break
+                }
+            }
+            
+            if(is_biggest){
+                this.setState({
+                    current_section : id
+                })
+            }
+        })
     }
 
     render() {
