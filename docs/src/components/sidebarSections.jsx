@@ -52,7 +52,6 @@ const SidebarSections = ({ sections, currentSection, search }) => {
                     </li>
                 )
             }
-
             return (
                 <li key={section_key} className=" mv0 pb2">
                     <div className="relative">
@@ -73,7 +72,7 @@ const SidebarSections = ({ sections, currentSection, search }) => {
         <ul id="section-list" className="list f5 pv3 overflow-y-auto">
             {Object.keys(sections).map(group_name => {
                 return (
-                    <li key={group_name} className=" mv0 pb2">
+                    <li key={group_name} className="mv0 pb2">
                         <div className="f6 pa3 bb b--opteo-light-gray opteo-middle-gray">
                             {getGroupDisplayName(group_name)}
                         </div>

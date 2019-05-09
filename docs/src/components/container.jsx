@@ -18,13 +18,33 @@ class Container extends React.Component {
         const section_ids = getIds(edges)
         const sections_data = getSectionsData(edges)
 
-        const Sections = Object.keys(sections_data).map((key, index) => (
-            <Section
-                key={'section' + index}
-                data={sections_data[key]}
-                onSectionChange={section => this.setState({ current_section: section })}
-            />
-        ))
+        let last_group = ''
+        const Sections = Object.keys(sections_data).map((key, index) => {
+            const data = sections_data[key]
+            const { group } = data
+
+            if (last_group !== group) {
+                console.log('new group', group, 'old group', last_group)
+                last_group = group
+                return (
+                    <div className="mb5">
+                        <Section
+                            key={'section' + index}
+                            data={data}
+                            onSectionChange={section => this.setState({ current_section: section })}
+                        />
+                    </div>
+                )
+            }
+
+            return (
+                <Section
+                    key={'section' + index}
+                    data={data}
+                    onSectionChange={section => this.setState({ current_section: section })}
+                />
+            )
+        })
 
         return (
             <div className="w-100 items-start">

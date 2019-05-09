@@ -13,7 +13,7 @@ const IndexPage = ({
 }) => {
     return (
         <Layout>
-            {/* <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} /> */}
+            {/* <SEO title="Opteo" keywords={[`gatsby`, `application`, `react`]} /> */}
             <Container edges={edges} />
         </Layout>
     )
@@ -23,7 +23,7 @@ export default IndexPage
 
 export const pageQuery = graphql`
     query {
-        allMarkdownRemark(sort: { order: ASC, fields: [fields___group, frontmatter___entity, frontmatter___order] }) {
+        allMarkdownRemark(sort: { order: ASC, fields: [fields___group, frontmatter___order, frontmatter___entity] }) {
             edges {
                 node {
                     id

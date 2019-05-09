@@ -1,13 +1,15 @@
 ---
-type: list
-entity: AdGroupAd
-title: List AdGroupAd
-order: 3
+order: 2.1
+type: manual
+entity: errors
+title: Handling Errors
 ---
 
-### List every instance of AdGroupAd
+## Handling Errors
 
-The `customer.adGroupAds.list()` returns all of the entities in the account, including `REMOVED` entities. It also returns all other resources that can be selected with each instance of AdGroupAd.
+Copy about errors here
+
+The `customer.accountBudgets.list()` returns all of the entities in the account, including `REMOVED` entities. It also returns all other resources that can be selected with each instance of AccountBudget.
 
 This method was designed for convenience and discovery. Internally, it uses the `customer.report()` method with all `attributes` fields included. For production code, we recommend using `customer.report()` with only the fields you need.
 
@@ -17,9 +19,7 @@ This method was designed for convenience and discovery. Internally, it uses the 
     Object of the form `{ limit, order_by, constraints }`:
     -   ##### limit _optional, number_
         Number of rows to return. Equivalent to the limit in `customer.report()`. Defaults to no limit.
-    -   #####
-            order_by
-        _optional, string_
+    -   ##### order*by \_optional, string*
         The field to sort the returned rows by. Equivalent to the order_by in `customer.report()`. By default, no sorting is applied.
     -   ##### constraints _optional, array/object_
         A constraints array or object. See the `customer.report()` documentation for details. By default, all entities are returned.
@@ -27,4 +27,4 @@ This method was designed for convenience and discovery. Internally, it uses the 
 #### Returns
 
 Returns an array of objects.
-Each object has a `ad_group_ad` property. Any other resources that can be selected with `ad_group_ad` will also be added as properities.
+Each object has a `account_budget` property. Any other resources that can be selected with `account_budget` will also be added as properities.
