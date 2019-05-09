@@ -12,9 +12,21 @@ class Section extends React.Component {
         const { data } = this.props
 
         const { code, description } = data
-        const { id, meta, is_index } = description
+        const { id, meta, is_entity_index } = description
 
         const html_description = description.node.html || ''
+
+        if (!code) {
+            return (
+                <SectionContainer id={id} key={id} onEnterViewport={() => this.props.onSectionChange(id)}>
+                    <div className="text-container w-48">
+                        <div className="content" dangerouslySetInnerHTML={{ __html: html_description }} />
+                        <div>{meta ? <AttributesTable section={id} data={meta} /> : null}</div>
+                    </div>
+                </SectionContainer>
+            )
+        }
+
         const html_code = code.node.html || ''
 
         return (
@@ -22,7 +34,7 @@ class Section extends React.Component {
                 <div
                     className={
                         ' ' +
-                        (is_index
+                        (is_entity_index
                             ? 'flex justify-between bb b--opteo-light-gray pv5'
                             : 'flex justify-between bb b--opteo-light-gray pv5')
                     }
