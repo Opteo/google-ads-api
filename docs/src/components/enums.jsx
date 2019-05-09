@@ -27,17 +27,22 @@ class Enums extends React.Component {
         return (
             <div>
                 <div
-                    className={this.state.shown ? 'ba b--opteo-light-gray pt3 pl3 pr3 br3 mb3': null}
+                    className="ba b--opteo-light-gray pa3 br3 mb3"
                     onClick={() => {
                         this.toggleMenu()
                     }}
                 >
-                    <button className={this.state.shown ? 'opteo-link-blue mb3': 'opteo-link-blue mt2 mb3'}>
+                    <button className={this.state.shown ? 'opteo-link-blue': 'opteo-link-blue'}>
                         {this.state.shown ? 'Hide Enums -' : 'Show Enums +'}
                     </button>
-                    <ul style={{ display: this.state.shown ? 'block' : 'none' }} className="enum-container ba b--opteo-light-gray mb3 br2">
-                        {rows}
-                    </ul>
+                    <div style={{ display: this.state.shown ? 'block' : 'none' }}>
+                        <h4 className="nested-title bb-0">Enum Values</h4>
+                        <div className="pt3-5 bt b--opteo-light-gray">
+                            <ul className="enum-container ba b--opteo-light-gray mb3 br2">
+                                {rows}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         )

@@ -42,3 +42,20 @@
     margin-top: 0.5rem;
     margin-bottom: 1.5rem;
 }
+
+blockquote {
+    background-color: #f9fafc;
+    padding: 1rem 1.25rem;
+    border-left: 1px solid #008080;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    font-size: 0.85rem;
+}
+
+blockquote p {
+    margin: 0rem !important;
+}
+
+blockquote em {
+    font-style: italic;
+}
