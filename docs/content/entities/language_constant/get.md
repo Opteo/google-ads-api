@@ -9,7 +9,7 @@ entity: LanguageConstant
 
 The `customer.languageConstants.get(resource_name)` method returns the LanguageConstant identified by a resource_name. 
 
-_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
+> Note: This function is heavily rate-limited by Google, so avoid using it in production.
 
 
 #### Arguments

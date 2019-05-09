@@ -9,7 +9,7 @@ entity: Label
 
 The `customer.labels.get(resource_name)` method returns the Label identified by a resource_name. 
 
-_Note_: This function is heavily rate-limited by Google, so avoid using it in production.
+> Note: This function is heavily rate-limited by Google, so avoid using it in production.
 
 
 #### Arguments

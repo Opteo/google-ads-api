@@ -19,7 +19,10 @@ class Enums extends React.Component {
         const rows = enums.map((el, index) => {
             return (
                 <li key={el.s} className="enum-table grid pa2 bb b--opteo-light-gray">
-                    <div><span class="fw5 opteo-gray">{el.s}</span><span> ({index})</span></div>
+                    <div>
+                        <span className="fw5 opteo-gray">{el.s}</span>
+                        <span> ({index})</span>
+                    </div>
                     <div>{el.description}</div>
                 </li>
             )
