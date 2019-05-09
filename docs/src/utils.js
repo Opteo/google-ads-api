@@ -10,14 +10,18 @@ export const getIds = edges => {
     const ids = {}
     edges.forEach(edge => {
         const { node } = edge
+        const { group } = node.fields
         const { entity, order, title, type } = node.frontmatter
 
-        if (!ids[entity]) {
-            ids[entity] = {}
+        if (!ids[group]) {
+            ids[group] = {}
+        }
+        if (!ids[group][entity]) {
+            ids[group][entity] = {}
         }
 
         if (!type.includes('code')) {
-            ids[entity][order] = {
+            ids[group][entity][order] = {
                 title,
                 type,
                 entity,
@@ -25,6 +29,7 @@ export const getIds = edges => {
             }
         }
     })
+
     return ids
 }
 
@@ -40,9 +45,9 @@ export const getSectionsData = edges => {
             node,
         }
 
-        section_data.is_index = node.fields.is_index
+        section_data.is_entity_index = node.fields.is_entity_index
 
-        if (section_data.is_index) {
+        if (section_data.is_entity_index) {
             const meta_file = require(`../content/${node.fields.directory}/meta.js`)
             section_data.meta = meta_file.object
         }
@@ -67,6 +72,9 @@ export const getSubsectionTitle = ({ entity, type }) => {
     const AN = ['O', 'A'].includes(entity.slice(0, 1)) ? 'an' : 'a'
 
     switch (type) {
+        case 'manual': {
+            return capitalizeFirstLetter(entity)
+        }
         case 'object': {
             return `The ${entity} Object`
         }
@@ -86,4 +94,20 @@ export const stringMatch = (a, b) => {
     const b_split = b.replace(/([A-Z])/g, ' $1').toLowerCase()
 
     return a_low.includes(b_low) || a_split.includes(b_split)
+}
+
+export const getGroupDisplayName = name => {
+    switch (name) {
+        case 'entities': {
+            return `Core Resources`
+        }
+        case 'concepts': {
+            return `Concepts`
+        }
+        case 'other': {
+            return `Other`
+        }
+        default:
+            return name
+    }
 }
