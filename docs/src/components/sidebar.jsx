@@ -2,8 +2,8 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { Link } from 'gatsby'
 
-import SidebarSections from './SidebarSections'
-import SidebarSearch from './SidebarSearch'
+import SidebarSections from './sidebarSections'
+import SidebarSearch from './sidebarSearch'
 
 class Sidebar extends React.Component {
     constructor(props) {
