@@ -19,7 +19,7 @@ class Section extends React.Component {
         if (!code) {
             return (
                 <SectionContainer id={id} key={id} onEnterViewport={() => this.props.onSectionChange(id)}>
-                    <div className="text-container w-48">
+                    <div className="text-container half-column">
                         <div className="content" dangerouslySetInnerHTML={{ __html: html_description }} />
                         <div>{meta ? <AttributesTable section={id} data={meta} /> : null}</div>
                     </div>
@@ -39,12 +39,12 @@ class Section extends React.Component {
                             : 'flex justify-between bb b--opteo-light-gray pv5')
                     }
                 >
-                    <div className="text-container w-48">
+                    <div className="text-container half-column">
                         <div className="content" dangerouslySetInnerHTML={{ __html: html_description }} />
-                        <div>{meta ? <AttributesTable section={id} data={meta} /> : null}</div>
+                        <div>{meta ? <AttributesTable section={id} data={meta}/> : null}</div>
                     </div>
                     <div
-                        className="sticky-code-block self-start w-48 f6"
+                        className="sticky-code-block self-start half-column f6"
                         dangerouslySetInnerHTML={{ __html: html_code }}
                     />
                 </div>

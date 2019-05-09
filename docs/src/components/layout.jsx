@@ -12,6 +12,7 @@ import '../css/sidebar.css'
 import '../css/section.css'
 import '../css/content.css'
 import '../css/prism-theme-dark.css'
+import '../css/media-queries.css'
 
 const Layout = ({ children }) => (
     <StaticQuery

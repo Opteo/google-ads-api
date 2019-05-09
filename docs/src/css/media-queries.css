@@ -1,3 +1,44 @@
-@media screen and (min-width: 1450px) {
-    
+@media screen and (min-width: 1500px) {
+    .section {
+        max-width: 90%;
+    }
+    .half-column {
+        width: 46%;
+    }
+}
+
+@media screen and (min-width: 1750px) {
+    .section {
+        max-width: 85%;
+    }
+}
+
+@media screen and (min-width: 1900px) {
+    .section {
+        max-width: 80%;
+    }
+}
+
+@media screen and (min-width: 2000px) {
+    .section {
+        max-width: 75%;
+    }
+}
+
+@media screen and (min-width: 2100px) {
+    .section {
+        max-width: 70%;
+    }
+}
+
+@media screen and (min-width: 2200px) {
+    .section {
+        max-width: 65%;
+    }
+}
+
+@media screen and (min-width: 2300px) {
+    .section {
+        max-width: 60%;
+    }
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import handleViewport from 'react-in-viewport'
 
 const SectionContainer = ({ id, children, forwardedRef }) => (
-    <div id={id} ref={forwardedRef}>
+    <div id={id} className="section w-100" ref={forwardedRef}>
         {children}
     </div>
 )

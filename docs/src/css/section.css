@@ -1,9 +1,13 @@
-/* .content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-} */
-.w-48 {
-    width: 48%;
+.sections-container {
+    padding: 3rem;
+}
+
+.section {
+    max-width: 100%;
+}
+
+.half-column {
+    width: 47%;
 }
 
 .text-container code {

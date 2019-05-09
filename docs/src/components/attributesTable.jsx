@@ -88,6 +88,9 @@ const AttributesTable = ({ data, title, section }) => {
 
     return (
         <div>
+            { !title &&
+            <h4 className="nested-title bb-0">Fields</h4>
+            }
             <div>{getOneOfRows(oneOfs)}</div>
             <div>{getBasicRows(data)}</div>
         </div>
