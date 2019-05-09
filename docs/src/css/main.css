@@ -1,7 +1,7 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, 'Apple Color Emoji', Arial, sans-serif,
         'Segoe UI Emoji', 'Segoe UI Symbol';
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     line-height: 1.2rem;
     font-weight: 200;
     color: #50535a;
@@ -40,7 +40,7 @@ h3 {
 
 h4 {
     font-weight: 400;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     margin-top: 3rem;
     margin-bottom: 0rem;
     padding-bottom: 1rem;
@@ -56,9 +56,13 @@ h4.nested-title {
 
 h5 {
     color: #313135;
-    font-size: 1rem;
     font-weight: 600;
 }
+
+/* .mono {
+    font-family: Menlo, 'SFMono-Regular', Consolas, 'Roboto Mono', 'Droid Sans Mono', 'Liberation Mono', Menlo, Courier,
+    monospace;
+} */
 
 code,
 kbd,

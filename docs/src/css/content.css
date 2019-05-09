@@ -47,9 +47,9 @@ blockquote {
     background-color: #f9fafc;
     padding: 1rem 1.25rem;
     border-left: 1px solid #008080;
-    border-top-right-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
-    font-size: 0.85rem;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    font-size: 0.8rem;
 }
 
 blockquote p {

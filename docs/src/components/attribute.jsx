@@ -23,7 +23,7 @@ class Attribute extends React.Component {
 
         return (
             <div key={`${section}-${name}`} className=" w-100 pb3-5 bt b--opteo-light-gray">
-                <div className="pt3-5 mb2">
+                <div className="mono pt3-5 mb2">
                     <span className="fw6 mv0 opteo-gray"> {name} </span>{' '}
                     {data._type ? (
                         <span className="f6 fw5 mv0 opteo-middle-gray"> {data._type} </span>
