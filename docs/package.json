@@ -14,7 +14,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-in-viewport": "^1.0.0-alpha.5"
+    "react-intersection-observer": "^8.23.0"
   },
   "scripts": {
     "build": "gatsby build",

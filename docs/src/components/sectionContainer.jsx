@@ -1,9 +1,16 @@
 import React from 'react'
-import handleViewport from 'react-in-viewport'
+import { InView } from 'react-intersection-observer'
 
-const SectionContainer = ({ id, children, forwardedRef }) => (
-    <div id={id} className="section w-100" ref={forwardedRef}>
+const thresholds = []
+
+for (let i=0; i<=1.0; i+= 0.1) {
+  thresholds.push(i);
+}
+
+const SectionContainer = ({  children, handler, sectionId }) => (
+    <InView id={sectionId} threshold={thresholds} onChange={(inView, entry) => handler(sectionId, entry.intersectionRatio)} className="section w-100">
         {children}
-    </div>
+    </InView>
 )
-export default handleViewport(SectionContainer, {}, { threshold: [0, 0.25, 0.5, 0.75, 1] })
+
+export default SectionContainer
