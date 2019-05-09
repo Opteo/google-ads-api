@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { Link } from 'gatsby'
 
-import SidebarSections from './sidebarSections'
+import SidebarSectionGroups from './sidebarSectionGroups'
 import SidebarSearch from './sidebarSearch'
 
 class Sidebar extends React.Component {
@@ -28,7 +28,7 @@ class Sidebar extends React.Component {
     }
 
     render() {
-        const { sections, currentSection } = this.props
+        const { currentSection, sectionGroups } = this.props
 
         return (
             <div
@@ -39,14 +39,18 @@ class Sidebar extends React.Component {
                     google-ads-api
                 </Link>
                 <SidebarSearch value={this.state.search} changeHandler={this.handleSearch} />
-                <SidebarSections sections={sections} currentSection={currentSection} search={this.state.search} />
+                <SidebarSectionGroups
+                    sectionGroups={sectionGroups}
+                    currentSection={currentSection}
+                    search={this.state.search}
+                />
             </div>
         )
     }
 }
 
 Sidebar.propTypes = {
-    sections: PropTypes.object.isRequired,
+    sectionGroups: PropTypes.object,
     currentSection: PropTypes.string,
 }
 

@@ -23,7 +23,7 @@ export default IndexPage
 
 export const pageQuery = graphql`
     query {
-        allMarkdownRemark(sort: { order: ASC, fields: [fields___group, frontmatter___order, frontmatter___entity] }) {
+        allMarkdownRemark(sort: { order: ASC, fields: [fields___group, frontmatter___entity, frontmatter___order] }) {
             edges {
                 node {
                     id
