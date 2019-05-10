@@ -42,7 +42,7 @@ h4 {
     margin-top: 3rem;
     margin-bottom: 0rem;
     padding-bottom: 1rem;
-    color: #b3b3b3;
+    color: #95a1ad;
     letter-spacing: 0.1px;
     text-transform: uppercase;
     border-bottom: 1px solid #f2f2f6;
@@ -59,7 +59,7 @@ h4.nested-title {
 }  */
 
 ::placeholder {
-    color: #f2f2f6;
+    color: #e1e1e6;
 }
 
 button {
