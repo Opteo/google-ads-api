@@ -19,9 +19,8 @@ const AttributesTable = ({ data, section, nestingDepth }) => {
 
     return (
         <div>
-            {nestingDepth === 0 && <h4 className="nested-title bb-0">Fields</h4>}
-            {console.log(nestingDepth)}
-            <AttributesTableOneOfs oneOfs={oneOfs} />
+            {nestingDepth === 0 && <h4 className="nested-title bb-0">Fields</h4>}}
+            <AttributesTableOneOfs oneOfs={oneOfs} nestingDepth={nestingDepth} />
             <AttributesTableRows rows={data} section={section} nestingDepth={nestingDepth} />
         </div>
     )
@@ -30,6 +29,7 @@ const AttributesTable = ({ data, section, nestingDepth }) => {
 AttributesTable.propTypes = {
     data: PropTypes.object.isRequired,
     section: PropTypes.string,
+    nestingDepth: PropTypes.number,
 }
 
 export default AttributesTable
