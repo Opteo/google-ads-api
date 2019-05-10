@@ -14,7 +14,7 @@ class Container extends React.Component {
 
     viewport_sections = {}
 
-    findCurrentSection(id, percent_visible) {
+    findCurrentSection = (id, percent_visible) => {
         this.viewport_sections[id] = percent_visible
 
         window.requestAnimationFrame(() => {
@@ -48,11 +48,7 @@ class Container extends React.Component {
         const sections_data = getSectionsData(edges)
 
         const Sections = Object.keys(sections_data).map((key, index) => (
-            <Section
-                key={'section' + index}
-                data={sections_data[key]}
-                onSectionChange={(id, percent) => this.findCurrentSection(id, percent)}
-            />
+            <Section key={'section' + index} data={sections_data[key]} onSectionChange={this.findCurrentSection} />
         ))
 
         return (
@@ -60,7 +56,10 @@ class Container extends React.Component {
                 <div className="">
                     <Sidebar sectionGroups={section_ids} currentSection={this.state.current_section} />
                 </div>
-                <div className="sections-container flex flex-column items-center mt3" style={{ marginLeft: '280px', width: 'calc(100% - 280px)' }}>
+                <div
+                    className="sections-container flex flex-column items-center mt3"
+                    style={{ marginLeft: '280px', width: 'calc(100% - 280px)' }}
+                >
                     {Sections}
                 </div>
             </div>
