@@ -51,11 +51,11 @@ h5 {
 
 blockquote {
     background-color: #f9fafc;
-    padding: 0.8rem;
-    border-left: 1px solid #008080;
+    padding: 0.8rem 1.2rem;
+    border-left: 2px solid #008080;
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
 }
 
 blockquote p {
