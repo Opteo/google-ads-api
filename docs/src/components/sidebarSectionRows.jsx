@@ -3,7 +3,7 @@ import React from 'react'
 
 import { capitalizeFirstLetter, stringMatch } from '../utils'
 
-import SidebarSectionRow from './SidebarSectionRow'
+import SidebarSectionRow from './sidebarSectionRow'
 
 const SidebarSectionRows = ({ groupSections, currentSection, search }) => {
     return Object.keys(groupSections).map(section => {
