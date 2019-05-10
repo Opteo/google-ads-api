@@ -45,6 +45,7 @@ SidebarSectionRows.propTypes = {
     groupSections: PropTypes.object,
     currentSection: PropTypes.string,
     search: PropTypes.string,
+    jumpTo: PropTypes.func,
 }
 
 export default SidebarSectionRows
