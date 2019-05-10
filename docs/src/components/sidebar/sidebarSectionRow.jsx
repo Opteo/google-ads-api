@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { jumpTo } from '../utils'
+import { jumpTo } from '../../utils'
 
 import SidebarSubsectionRows from './sidebarSubsectionRows'
 
