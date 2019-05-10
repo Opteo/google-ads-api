@@ -6,7 +6,7 @@ import SidebarSubsectionRows from './sidebarSubsectionRows'
 
 const SidebarSectionRow = ({ sectionKey, sectionId, sectionName, isActive, currentSection, subsections }) => {
     return (
-        <li key={sectionKey} className="mv0 pb2">
+        <li className="mv0 pb2">
             <div className="relative">
                 <div
                     className={
