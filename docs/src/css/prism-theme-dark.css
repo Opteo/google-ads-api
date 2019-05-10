@@ -80,36 +80,6 @@ pre[class*='language-javascript'] {
     white-space: normal;
 }
 
-pre[class*='language-javascript']:before,
-pre[class*='language-javascript']:after {
-    content: '';
-    z-index: -2;
-    display: block;
-    position: absolute;
-    bottom: 0.75em;
-    left: 0.18em;
-    width: 40%;
-    height: 20%;
-    max-height: 13em;
-    box-shadow: 0px 13px 8px #979797;
-    -webkit-transform: rotate(-2deg);
-    -moz-transform: rotate(-2deg);
-    -ms-transform: rotate(-2deg);
-    -o-transform: rotate(-2deg);
-    transform: rotate(-2deg);
-}
-
-:not(pre) > code[class*='language-javascript']:after,
-pre[class*='language-javascript']:after {
-    right: 0.75em;
-    left: auto;
-    -webkit-transform: rotate(2deg);
-    -moz-transform: rotate(2deg);
-    -ms-transform: rotate(2deg);
-    -o-transform: rotate(2deg);
-    transform: rotate(2deg);
-}
-
 .token.comment,
 .token.block-comment,
 .token.prolog,
