@@ -14,7 +14,7 @@ const SidebarSectionRow = ({ sectionKey, sectionId, sectionName, isActive, curre
                     }
                 />
                 <div
-                    className={'entity pl3 pointer ' + (isActive ? 'active pt1 pb1 db bg-opteo-light-gray' : '')}
+                    className={'entity pl3 pointer ' + (isActive ? 'active pt1 pb1 db' : '')}
                     onClick={() => jumpTo(sectionId)}
                 >
                     {sectionName}

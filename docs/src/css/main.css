@@ -87,6 +87,10 @@ code {
     line-height: 1.45rem;
 }
 
+::placeholder {
+    color: #f2f2f6;
+}
+
 button {
     text-transform: uppercase;
     font-size: 0.7rem;

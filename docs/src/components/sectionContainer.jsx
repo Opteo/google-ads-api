@@ -12,6 +12,7 @@ const SectionContainer = ({ children, handler, sectionId }) => (
         id={sectionId}
         threshold={thresholds}
         onChange={(inView, entry) => handler(sectionId, entry.intersectionRatio)}
+        className="section w-100"
     >
         {children}
     </InView>

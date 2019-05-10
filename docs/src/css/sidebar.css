@@ -11,7 +11,7 @@
 .entity.active {
     color: #008dff;
 }
-.entity-child a {
+.entity-child {
     font-size: 0.84rem;
     color: #50535a;
     display: block;
@@ -27,7 +27,7 @@
     border-top-left-radius: 0.2rem;
 }
 
-.entity-child.active a {
+.entity-child.active {
     color: #008dff;
 }
 
@@ -36,5 +36,5 @@
 }
 
 .indicator {
-    width: 3px;
+    width: 2px;
 }

@@ -1,5 +1,5 @@
 .content p {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     margin-bottom: 1rem;
 }
 
@@ -34,13 +34,13 @@
 .content li {
     border-top: 1px solid;
     border-color: #f2f2f6;
-    padding-top: 1.5rem;
+    padding-top: 1rem;
     margin-bottom: 1rem;
 }
 
 .content ul li p {
     margin-top: 0.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 blockquote {
@@ -49,7 +49,7 @@ blockquote {
     border-left: 1px solid #008080;
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
 }
 
 blockquote p {
