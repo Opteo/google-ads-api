@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans|Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, 'Apple Color Emoji', Arial, sans-serif,
         'Segoe UI Emoji', 'Segoe UI Symbol';
@@ -59,10 +62,9 @@ h5 {
     font-weight: 600;
 }
 
-/* .mono {
-    font-family: Menlo, 'SFMono-Regular', Consolas, 'Roboto Mono', 'Droid Sans Mono', 'Liberation Mono', Menlo, Courier,
-    monospace;
-} */
+.mono {
+    font-family: 'Roboto Mono', Menlo;
+} 
 
 code,
 kbd,
@@ -80,8 +82,7 @@ code {
     background-color: #272822;
     color: white;
     border-radius: 3px;
-    font-family: Menlo, 'SFMono-Regular', Consolas, 'Roboto Mono', 'Droid Sans Mono', 'Liberation Mono', Courier,
-        monospace;
+    font-family: 'Roboto Mono', Menlo;
     padding: 0.2em 0.2em;
     font-size: 0.8rem;
     line-height: 1.45rem;
@@ -98,6 +99,12 @@ button {
     padding: 0.3rem 0.8rem;
     border: none;
     border-radius: 5rem;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+button:hover {
+    color: #008dff;
 }
 
 .btn-box-shadow {
