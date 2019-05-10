@@ -12,7 +12,7 @@ const toggleOneOf = (others, id) => {
     document.getElementById(id).style.display = 'block'
 }
 
-const AttributesTable = ({ data, title, section }) => {
+const AttributesTable = ({ data, section, nestingDepth }) => {
     const getBasicRows = rows => {
         return Object.keys(rows).map(key => {
             const details = rows[key]
@@ -20,7 +20,16 @@ const AttributesTable = ({ data, title, section }) => {
                 return null
             }
 
-            return <Attribute data={details} section={section} name={key} key={key} enums={details._enums} />
+            return (
+                <Attribute
+                    data={details}
+                    section={section}
+                    name={key}
+                    key={key}
+                    enums={details._enums}
+                    nestingDepth={nestingDepth}
+                />
+            )
         })
     }
 
@@ -44,7 +53,13 @@ const AttributesTable = ({ data, title, section }) => {
                                 id={unique_attribute_key}
                                 key={unique_attribute_key}
                             >
-                                <Attribute data={details} section={section} name={oneof_key} enums={details._enums} />
+                                <Attribute
+                                    data={details}
+                                    section={section}
+                                    name={oneof_key}
+                                    enums={details._enums}
+                                    nestingDepth={nestingDepth}
+                                />
                             </div>
                         )
                     })}
@@ -98,7 +113,6 @@ const AttributesTable = ({ data, title, section }) => {
 AttributesTable.propTypes = {
     data: PropTypes.object.isRequired,
     section: PropTypes.string,
-    title: PropTypes.string,
 }
 
 export default AttributesTable
