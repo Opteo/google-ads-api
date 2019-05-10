@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { capitalizeFirstLetter, stringMatch, jumpTo } from '../utils'
+import { capitalizeFirstLetter, stringMatch } from '../utils'
 
-import SidebarSubsectionRows from './sidebarSubsectionRows'
+import SidebarSectionRow from './SidebarSectionRow'
 
 const SidebarSectionRows = ({ groupSections, currentSection, search }) => {
     return Object.keys(groupSections).map(section => {
@@ -20,29 +20,21 @@ const SidebarSectionRows = ({ groupSections, currentSection, search }) => {
             return null
         }
 
+        let is_active = true
+
         if (!subsection_ids.includes(currentSection)) {
-            return (
-                <li key={section_key} className="mv0 pb2">
-                    <div className="entity pl3 pointer" onClick={() => jumpTo(section_id)}>
-                        {section_name}
-                    </div>
-                </li>
-            )
+            is_active = false
         }
 
         return (
-            <li key={section_key} className="mv0 pb2">
-                <div className="relative">
-                    <div className="indicator absolute top-0 left-0 h-100 bg-opteo-link-blue" />
-                    <div
-                        className="entity active pointer pt1 pl3 pb1 db bg-opteo-light-gray"
-                        onClick={() => jumpTo(section_id)}
-                    >
-                        {section_name}
-                    </div>
-                </div>
-                <SidebarSubsectionRows id={section_key} subsections={subsections} currentSection={currentSection} />
-            </li>
+            <SidebarSectionRow 
+                sectionKey={section_key} 
+                sectionId={section_id} 
+                sectionName={section_name}
+                isActive={is_active}
+                subsections={subsections}
+                currentSection={is_active ? currentSection : '' }
+            />
         )
     })
 }
