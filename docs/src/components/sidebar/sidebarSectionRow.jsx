@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 
 import SidebarSubsectionRows from './sidebarSubsectionRows'
@@ -23,6 +24,16 @@ const SidebarSectionRow = ({ sectionKey, sectionId, sectionName, isActive, curre
             <SidebarSubsectionRows subsections={subsections} currentSection={currentSection} jumpTo={jumpTo} />
         </li>
     )
+}
+
+SidebarSectionRow.propTypes = {
+    sectionKey: PropTypes.string,
+    sectionId: PropTypes.string,
+    sectionName: PropTypes.string,
+    isActive: PropTypes.bool,
+    currentSection: PropTypes.string,
+    jumpTo: PropTypes.func,
+    subsections: PropTypes.object,
 }
 
 export default SidebarSectionRow

@@ -38,6 +38,7 @@ const SidebarSubsectionRows = ({ subsections, currentSection, jumpTo }) => {
 SidebarSubsectionRows.propTypes = {
     subsections: PropTypes.object,
     currentSection: PropTypes.string,
+    jumpTo: PropTypes.func,
 }
 
 export default SidebarSubsectionRows
