@@ -10,7 +10,7 @@ const SidebarSectionGroups = ({ sectionGroups, currentSection, search, jumpTo })
         {Object.keys(sectionGroups).map(group_name => {
             return (
                 <li key={group_name} className="mv0 pb2">
-                    <div className="f6 ttu pa3 bb b--opteo-light-gray opteo-middle-gray">
+                    <div className="section-group-header ttu pa3 bb b--opteo-light-gray opteo-middle-gray">
                         {getGroupDisplayName(group_name)}
                     </div>
                     <ul className="list pt2 pb2" id={group_name}>

@@ -19,7 +19,7 @@ const AttributesTable = ({ data, section, nestingDepth }) => {
 
     return (
         <div>
-            {nestingDepth === 0 && <h4 className="nested-title bb-0">Fields</h4>}}
+            {nestingDepth === 0 && <h4 className="nested-title opteo-middle-gray bb-0">Fields</h4>}}
             <AttributesTableOneOfs oneOfs={oneOfs} nestingDepth={nestingDepth} />
             <AttributesTableRows rows={data} section={section} nestingDepth={nestingDepth} />
         </div>
