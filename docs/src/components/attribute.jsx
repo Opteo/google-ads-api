@@ -17,7 +17,7 @@ class Attribute extends React.Component {
     }
 
     render() {
-        const { data, name, enums, section } = this.props
+        const { data, name, enums, section, nestingDepth } = this.props
 
         const { _description } = data
 
@@ -48,7 +48,7 @@ class Attribute extends React.Component {
                             {this.state.child_shown ? 'Hide Child Fields -' : 'Show Child Fields +'}
                         </button>
                         <div style={{ display: this.state.child_shown ? 'block' : 'none' }}>
-                            <AttributesTable data={data} section={section} title="Child Attributes" />
+                            <AttributesTable data={data} section={section} nestingDepth={nestingDepth + 1} />
                         </div>
                     </div>
                 )}
