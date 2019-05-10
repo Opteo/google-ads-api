@@ -23,7 +23,7 @@ const SidebarSubsectionRows = ({ subsections, currentSection }) => {
                         <div
                             className={
                                 'entity-child pointer f5-5 pt1 pl3 pb1' +
-                                (subsection.id === currentSection ? ' active' : '')
+                                (subsection.id === currentSection ? ' active opteo-link-blue' : '')
                             }
                             onClick={() => jumpTo('/' + subsection_link_id)}
                         >
