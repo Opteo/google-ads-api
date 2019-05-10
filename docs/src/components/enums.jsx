@@ -7,7 +7,7 @@ class Enums extends React.Component {
         this.state = { shown: false }
     }
 
-    toggleMenu() {
+    toggleMenu = () => {
         this.setState(prevState => {
             return { shown: !prevState.shown }
         })
@@ -31,9 +31,7 @@ class Enums extends React.Component {
             <div>
                 <div
                     className={this.state.shown ? 'ba b--opteo-light-gray br3 mt3 mb3' : null}
-                    onClick={() => {
-                        this.toggleMenu()
-                    }}
+                    onClick={this.toggleMenu}
                 >
                     <button className={this.state.shown ? 'opteo-link-blue' : 'opteo-link-blue btn-box-shadow mt2 mb3'}>
                         {this.state.shown ? 'Hide Enums -' : 'Show Enums +'}

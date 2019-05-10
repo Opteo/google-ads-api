@@ -10,7 +10,7 @@ class Attribute extends React.Component {
         this.state = { child_shown: false }
     }
 
-    toggleChild() {
+    toggleChild = () => {
         this.setState(prevState => {
             return { child_shown: !prevState.child_shown }
         })
@@ -44,9 +44,7 @@ class Attribute extends React.Component {
                             className={
                                 this.state.child_shown ? 'opteo-link-blue' : 'opteo-link-blue btn-box-shadow mt2'
                             }
-                            onClick={() => {
-                                this.toggleChild()
-                            }}
+                            onClick={this.toggleChild()}
                         >
                             {this.state.child_shown ? 'Hide Child Fields -' : 'Show Child Fields +'}
                         </button>
