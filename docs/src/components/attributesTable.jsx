@@ -64,7 +64,8 @@ const AttributesTable = ({ data, title, section }) => {
                                         )
                                     }
                                 >
-                                    <span>• </span><span className="opteo-link-blue">{oneof_key.split('_').join(' ')} </span>
+                                    <span>• </span>
+                                    <span className="opteo-link-blue">{oneof_key.split('_').join(' ')} </span>
                                 </li>
                             )
                         })}

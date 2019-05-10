@@ -14,28 +14,28 @@ class Container extends React.Component {
 
     viewport_sections = {}
 
-    findCurrentSection(id, percent_visible){
+    findCurrentSection(id, percent_visible) {
         this.viewport_sections[id] = percent_visible
 
         window.requestAnimationFrame(() => {
-            if(id === this.state.current_section){
+            if (id === this.state.current_section) {
                 return
             }
 
             let is_biggest = true
 
             const other_percentages = Object.values(this.viewport_sections)
-            
-            for(const other_percent of other_percentages){
-                if(other_percent > percent_visible){
+
+            for (const other_percent of other_percentages) {
+                if (other_percent > percent_visible) {
                     is_biggest = false
                     break
                 }
             }
-            
-            if(is_biggest){
+
+            if (is_biggest) {
                 this.setState({
-                    current_section : id
+                    current_section: id,
                 })
             }
         })
@@ -57,7 +57,7 @@ class Container extends React.Component {
 
         return (
             <div className="w-100 items-start">
-                <div className="" style={{ width: '280px' }}>
+                <div className="">
                     <Sidebar sectionGroups={section_ids} currentSection={this.state.current_section} />
                 </div>
                 <div className="sections-container flex flex-column items-center mt3" style={{ marginLeft: '280px', width: 'calc(100% - 280px)' }}>
