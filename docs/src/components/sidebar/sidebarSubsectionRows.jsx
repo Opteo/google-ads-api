@@ -16,7 +16,6 @@ const SidebarSubsectionRows = ({ subsections, currentSection, jumpTo }) => {
             {Object.keys(subsections).map(index => {
                 const subsection = subsections[index]
                 const subsection_id = `sidebar-${subsection.id}`
-                // const subsection_link_id = `#${subsection.id}`
 
                 return (
                     <li id={subsection_id} key={subsection_id}>
