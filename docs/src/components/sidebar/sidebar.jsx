@@ -11,6 +11,13 @@ class Sidebar extends React.Component {
         this.state = { search: '' }
     }
 
+    shouldComponentUpdate(nextProps) {
+        if (this.props.currentSection !== nextProps.currentSection) {
+            return true
+        }
+        return false
+    }
+
     componentDidUpdate(prevProp) {
         // return false
         // if (this.props.currentSection !== prevProp.currentSection) {
