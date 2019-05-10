@@ -63,8 +63,8 @@ const AttributesTable = ({ data, section, nestingDepth }) => {
                             </div>
                         )
                     })}
-                    <div className="pl3">This field can also be replaced by:</div>
-                    <ul className="pt2 pl3 pr3 pb3">
+                    <div className={nestingDepth === 0 ? null : 'pl3'}>This field can also be replaced by:</div>
+                    <ul className={nestingDepth === 0 ? 'pt2 pr3 pb3' : 'pt2 pl3 pr3 pb3'}>
                         {Object.keys(one_ofs[oneof_type_key]).map(oneof_key => {
                             const unique_attribute_key = 'oneof' + section + oneof_type_key + oneof_key
 
