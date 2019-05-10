@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { getGroupDisplayName } from '../utils'
+import { getGroupDisplayName } from '../../utils'
 
 import SidebarSectionRows from './sidebarSectionRows'
 

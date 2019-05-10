@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import Section from '../components/section'
-import Sidebar from '../components/sidebar'
+import Sidebar from '../components/sidebar/sidebar'
 
 import { getIds, getSectionsData } from '../utils'
 

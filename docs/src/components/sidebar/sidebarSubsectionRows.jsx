@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { getSubsectionTitle, jumpTo } from '../utils'
+import { getSubsectionTitle, jumpTo } from '../../utils'
 
 const SidebarSubsectionRows = ({ subsections, currentSection }) => {
     if (

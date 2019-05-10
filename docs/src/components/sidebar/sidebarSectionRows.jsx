@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { capitalizeFirstLetter, stringMatch } from '../utils'
+import { capitalizeFirstLetter, stringMatch } from '../../utils'
 
 import SidebarSectionRow from './sidebarSectionRow'
 
