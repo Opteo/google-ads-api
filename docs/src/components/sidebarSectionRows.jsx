@@ -27,13 +27,13 @@ const SidebarSectionRows = ({ groupSections, currentSection, search }) => {
         }
 
         return (
-            <SidebarSectionRow 
-                sectionKey={section_key} 
-                sectionId={section_id} 
+            <SidebarSectionRow
+                sectionKey={section_key}
+                sectionId={section_id}
                 sectionName={section_name}
                 isActive={is_active}
                 subsections={subsections}
-                currentSection={is_active ? currentSection : '' }
+                currentSection={is_active ? currentSection : ''}
             />
         )
     })

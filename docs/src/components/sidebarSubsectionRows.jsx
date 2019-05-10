@@ -4,8 +4,12 @@ import React from 'react'
 import { getSubsectionTitle, jumpTo } from '../utils'
 
 const SidebarSubsectionRows = ({ subsections, currentSection }) => {
-    if(!Object.keys(subsections).map(index => subsections[index].id).includes(currentSection)){
-        return (<div />)
+    if (
+        !Object.keys(subsections)
+            .map(index => subsections[index].id)
+            .includes(currentSection)
+    ) {
+        return <div />
     }
     return (
         <ul className="list pt2 pl3 pb2">
