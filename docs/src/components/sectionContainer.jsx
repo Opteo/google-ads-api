@@ -3,7 +3,7 @@ import { InView } from 'react-intersection-observer'
 
 const thresholds = []
 
-for (let i = 0; i <= 1.0; i += 0.1) {
+for (let i = 0; i <= 1.0; i += 0.2) {
     thresholds.push(i)
 }
 
