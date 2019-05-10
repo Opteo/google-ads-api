@@ -41,7 +41,7 @@ class Attribute extends React.Component {
                             className={
                                 this.state.child_shown ? 'opteo-link-blue' : 'opteo-link-blue btn-box-shadow mt2'
                             }
-                            onClick={this.toggleChild()}
+                            onClick={this.toggleChild}
                         >
                             {this.state.child_shown ? 'Hide Child Fields -' : 'Show Child Fields +'}
                         </button>
