@@ -104,7 +104,7 @@ const AttributesTable = ({ data, section, nestingDepth }) => {
 
     return (
         <div>
-            { !title &&
+            { nestingDepth === 0 &&
             <h4 className="nested-title bb-0">Fields</h4>
             }
             <div>{getOneOfRows(oneOfs)}</div>
