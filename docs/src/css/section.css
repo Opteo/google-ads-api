@@ -10,16 +10,6 @@
     width: 47%;
 }
 
-.text-container code {
-    color: #c92c2c;
-    background: #f9fafc;
-    padding: 0 3px;
-    margin: 0 1px;
-    border-radius: 4px;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    font-weight: 500;
-    /* font-size: 0.85rem; */
-}
 
 .sticky-code-block {
     position: sticky;

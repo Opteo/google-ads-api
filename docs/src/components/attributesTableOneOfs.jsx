@@ -58,7 +58,7 @@ const AttributesTableOneOfs = ({ oneOfs, nestingDepth, section }) => {
                         return (
                             <li
                                 key={unique_attribute_key + 'selector'}
-                                className="one-of-item mb1 pointer"
+                                className="one-of-item pointer"
                                 onClick={() => toggleOneOf(unique_oneof_key, unique_attribute_key)}
                             >
                                 <span>• </span>

@@ -26,13 +26,13 @@ class Attribute extends React.Component {
                 key={`${section}-${name}`}
                 className={nestingDepth === 0 ? 'w-100 pv3 bt b--opteo-light-gray' : 'w-100 pa3 bt b--opteo-light-gray'}
             >
-                <div className="mono mb2">
-                    <span className="fw6 mv0 opteo-gray"> {name} </span>{' '}
+                <div className="mb2">
+                    <span className="mono fw6 mv0 opteo-gray">{name}</span>
                     {(() => {
                         if (data._type) {
-                            return <span className="f6 fw5 mv0 opteo-middle-gray"> {data._type} </span>
+                            return <span className="f7 fw5 mv0 opteo-middle-gray"> {data._type}</span>
                         } else {
-                            return <span className="f6 fw5 mv0 opteo-middle-gray">object</span>
+                            return <span className="f7 fw5 mv0 opteo-middle-gray"> object</span>
                         }
                     })()}
                 </div>

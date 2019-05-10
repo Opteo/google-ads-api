@@ -1,5 +1,22 @@
+code {
+    font-family: 'Roboto Mono', Menlo;
+    font-size: 0.81rem;
+    font-weight: 400;
+}
+
+/* Inline Text */
+
+.text-container code {
+    color: #c92c2c;
+    background: #f9fafc;
+    padding: 0 4px;
+    margin: 0 1px;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
 /**
- * prism.js Coy theme for JavaScript, CoffeeScript, CSS and HTML
+ * prism.js — Coy Theme
  * Based on https://github.com/tshedor/workshop-wp-theme (Example: http://workshop.kansan.com/category/sessions/basics or http://workshop.timshedor.com/category/sessions/basics);
  * @author Tim  Shedor
  */
@@ -8,8 +25,6 @@ code[class*='language-javascript'],
 pre[class*='language-javascript'] {
     color: black;
     background: none;
-    font-family: 'Roboto Mono', Menlo;
-    font-size: 0.78rem;
     text-align: left;
     white-space: pre;
     word-spacing: normal;
@@ -40,11 +55,7 @@ pre[class*='language-javascript'] > code {
     border: 1px solid #f2f2f6;
     padding: 1rem;
     position: relative;
-    /* border-left: 10px solid #358ccb; */
-    /* box-shadow: -1px 0px 0px 0px #358ccb, 0px 0px 0px 1px #dfdfdf; */
-    background-color: #fdfdfd;
     background-color: #f9fafc;
-    /* background-image: linear-gradient(transparent 50%, #f6fafd 50%); */
     background-size: 3em 3em;
     background-origin: content-box;
     background-attachment: local;
@@ -109,8 +120,6 @@ pre[class*='language-javascript'] {
 .token.function,
 .token.builtin,
 .token.inserted {
-    color: #099;
-    color: #1f61a0;
     color: #008080;
 }
 
@@ -126,7 +135,6 @@ pre[class*='language-javascript'] {
 .token.attr-value,
 .token.keyword,
 .token.class-name {
-    color: #1990b8;
     color: #8b2bb9;
 }
 

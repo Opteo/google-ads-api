@@ -1,12 +1,18 @@
-.content p {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+h5 {
+    color: #313135;
+    font-weight: 600;
 }
 
 .content em {
     color: #b3b3b3;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     font-weight: 500;
+}
+
+
+.content p {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .content ul li:first-child {
