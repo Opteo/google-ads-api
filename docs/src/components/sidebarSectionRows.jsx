@@ -28,6 +28,7 @@ const SidebarSectionRows = ({ groupSections, currentSection, search }) => {
 
         return (
             <SidebarSectionRow
+                key={section_key}
                 sectionKey={section_key}
                 sectionId={section_id}
                 sectionName={section_name}
