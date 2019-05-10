@@ -21,7 +21,7 @@ class Section extends React.Component {
                 <SectionContainer sectionId={id} key={id} handler={this.props.onSectionChange}>
                     <div className="text-container half-column">
                         <div className="content" dangerouslySetInnerHTML={{ __html: html_description }} />
-                        <div>{meta ? <AttributesTable section={id} data={meta} nestedDepth={1} /> : null}</div>
+                        <div>{meta ? <AttributesTable section={id} data={meta} nestingDepth={0} /> : null}</div>
                     </div>
                 </SectionContainer>
             )
@@ -41,7 +41,7 @@ class Section extends React.Component {
                 >
                     <div className="text-container half-column">
                         <div className="content" dangerouslySetInnerHTML={{ __html: html_description }} />
-                        <div>{meta ? <AttributesTable section={id} data={meta} nestingDepth="0" /> : null}</div>
+                        <div>{meta ? <AttributesTable section={id} data={meta} nestingDepth={0} /> : null}</div>
                     </div>
                     <div
                         className="sticky-code-block self-start half-column f6"

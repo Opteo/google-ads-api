@@ -20,6 +20,7 @@ const AttributesTable = ({ data, section, nestingDepth }) => {
     return (
         <div>
             {nestingDepth === 0 && <h4 className="nested-title bb-0">Fields</h4>}
+            {console.log(nestingDepth)}
             <AttributesTableOneOfs oneOfs={oneOfs} />
             <AttributesTableRows rows={data} section={section} nestingDepth={nestingDepth} />
         </div>

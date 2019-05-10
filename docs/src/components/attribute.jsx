@@ -54,7 +54,7 @@ class Attribute extends React.Component {
                                     {this.state.child_shown ? 'Hide Child Fields -' : 'Show Child Fields +'}
                                 </button>
                                 <div style={{ display: this.state.child_shown ? 'block' : 'none' }}>
-                                    <AttributesTable data={data} section={section} nestingDepth={nestingDepth + 1} />
+                                    <AttributesTable data={data} section={section} nestingDepth={+nestingDepth + 1} />
                                 </div>
                             </div>
                         )
