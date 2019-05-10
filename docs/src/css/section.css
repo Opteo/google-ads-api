@@ -36,7 +36,7 @@
     display: grid;
     grid-template-columns: 200px 1fr;
     grid-column-gap: 10px;
-    font-size: 0.75rem
+    font-size: 0.76rem
 }
 
 .enum-table:last-child {

@@ -21,7 +21,7 @@ class Enums extends React.Component {
                 <li key={el.s} className="enum-table grid pa2 bt b--opteo-light-gray">
                     <div>
                         <span className="fw5 opteo-gray">{el.s}</span>
-                        <span> ({index})</span>
+                        <span className="fw4 opteo-middle-gray"> ({index})</span>
                     </div>
                     <div>{el.description}</div>
                 </li>
