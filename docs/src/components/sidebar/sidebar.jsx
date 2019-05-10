@@ -5,35 +5,38 @@ import { Link } from 'gatsby'
 import SidebarSectionGroups from './sidebarSectionGroups'
 import SidebarSearch from './sidebarSearch'
 
+import { jumpTo, centerSidebarToId } from '../../utils'
+
 class Sidebar extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { search: '' }
+        this.state = { search: '', jump_from_click: false }
     }
 
     shouldComponentUpdate(nextProps) {
         if (this.props.currentSection !== nextProps.currentSection) {
+            if (!this.state.jump_from_click) {
+                centerSidebarToId(nextProps.currentSection)
+            }
+            this.setState({ jump_from_click: false })
+
             return true
         }
         return false
     }
 
-    componentDidUpdate(prevProp) {
-        // return false
-        // if (this.props.currentSection !== prevProp.currentSection) {
-        //     const current_el = document.getElementById(`sidebar-${this.props.currentSection}`)
-        //     const sidebar_el = document.getElementById('section-list')
-        //     if (current_el) {
-        //         const margin = window.innerHeight / 3 + current_el.parentElement.offsetHeight
-        //         sidebar_el.scrollTop = current_el.offsetTop - margin
-        //     }
-        //     else {
-        //     }
-        // }
+    componentDidMount() {
+        const { href } = window.location
+        console.log('mounted', href)
     }
 
     handleSearch = event => {
         this.setState({ search: event.target.value })
+    }
+
+    handleJumpTo = id => {
+        this.setState({ jump_from_click: true })
+        jumpTo(`#${id}`)
     }
 
     render() {
@@ -52,6 +55,7 @@ class Sidebar extends React.Component {
                     sectionGroups={sectionGroups}
                     currentSection={currentSection}
                     search={this.state.search}
+                    jumpTo={this.handleJumpTo}
                 />
             </div>
         )

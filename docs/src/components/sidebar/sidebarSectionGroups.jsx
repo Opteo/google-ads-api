@@ -5,11 +5,11 @@ import { getGroupDisplayName } from '../../utils'
 
 import SidebarSectionRows from './sidebarSectionRows'
 
-const SidebarSectionGroups = ({ sectionGroups, currentSection, search }) => (
+const SidebarSectionGroups = ({ sectionGroups, currentSection, search, jumpTo }) => (
     <ul id="section-list" className="list f5 pv3 overflow-y-auto">
         {Object.keys(sectionGroups).map(group_name => {
             return (
-                <li key={group_name} className=" mv0 pb2">
+                <li key={group_name} className="mv0 pb2">
                     <div className="f6 ttu pa3 bb b--opteo-light-gray opteo-middle-gray">
                         {getGroupDisplayName(group_name)}
                     </div>
@@ -18,6 +18,7 @@ const SidebarSectionGroups = ({ sectionGroups, currentSection, search }) => (
                             groupSections={sectionGroups[group_name]}
                             currentSection={currentSection}
                             search={search}
+                            jumpTo={jumpTo}
                         />
                     </ul>
                 </li>

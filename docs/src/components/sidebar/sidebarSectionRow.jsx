@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { jumpTo } from '../../utils'
-
 import SidebarSubsectionRows from './sidebarSubsectionRows'
 
-const SidebarSectionRow = ({ sectionKey, sectionId, sectionName, isActive, currentSection, subsections }) => {
+const SidebarSectionRow = ({ sectionKey, sectionId, sectionName, isActive, currentSection, subsections, jumpTo }) => {
+    const subsection_id = sectionKey.toLowerCase()
+    const sidebar_subsection_id = `sidebar-` + subsection_id
     return (
         <li className="mv0 pb2">
             <div className="relative">
@@ -14,13 +14,19 @@ const SidebarSectionRow = ({ sectionKey, sectionId, sectionName, isActive, curre
                     }
                 />
                 <div
+                    id={sidebar_subsection_id}
                     className={'entity pl3 pointer ' + (isActive ? 'active pt1 pb1 db' : '')}
                     onClick={() => jumpTo(sectionId)}
                 >
                     {sectionName}
                 </div>
             </div>
-            <SidebarSubsectionRows id={sectionKey} subsections={subsections} currentSection={currentSection} />
+            <SidebarSubsectionRows
+                id={subsection_id}
+                subsections={subsections}
+                currentSection={currentSection}
+                jumpTo={jumpTo}
+            />
         </li>
     )
 }

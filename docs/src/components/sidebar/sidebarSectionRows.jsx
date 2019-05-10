@@ -5,12 +5,12 @@ import { capitalizeFirstLetter, stringMatch } from '../../utils'
 
 import SidebarSectionRow from './sidebarSectionRow'
 
-const SidebarSectionRows = ({ groupSections, currentSection, search }) => {
+const SidebarSectionRows = ({ groupSections, currentSection, search, jumpTo }) => {
     return Object.keys(groupSections).map(section => {
         const subsections = groupSections[section]
 
         const section_key = `sidebar-${section}`
-        const section_id = `/#${section.toLowerCase()}`
+        const section_id = section.toLowerCase()
         const section_name = capitalizeFirstLetter(section)
         const subsection_ids = Object.keys(subsections).map(index => subsections[index].id)
 
@@ -35,6 +35,7 @@ const SidebarSectionRows = ({ groupSections, currentSection, search }) => {
                 isActive={is_active}
                 subsections={subsections}
                 currentSection={is_active ? currentSection : ''}
+                jumpTo={jumpTo}
             />
         )
     })
