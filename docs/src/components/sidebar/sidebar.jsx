@@ -26,8 +26,10 @@ class Sidebar extends React.Component {
     }
 
     componentDidMount() {
-        const { href } = window.location
-        console.log('mounted', href)
+        const { hash } = window.location
+        if (hash && hash.length > 0) {
+            centerSidebarToId(hash.split('#')[1])
+        }
     }
 
     handleSearch = event => {
