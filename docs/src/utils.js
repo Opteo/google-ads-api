@@ -133,11 +133,13 @@ export const centerSidebarToId = id => {
     const sidebar_id = 'sidebar-' + parent[parent.length - 1]
 
     const el = document.getElementById(sidebar_id)
-
+    // console.log('center', sidebar_id)
     if (el) {
-        el.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center',
+        window.requestAnimationFrame(() => {
+            el.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center',
+            })
         })
     }
 }
