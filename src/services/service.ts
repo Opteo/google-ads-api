@@ -176,10 +176,15 @@ export default class Service {
 
         const response = await this.serviceCall(options.mutate, request)
 
+        const is_single_result = response.hasOwnProperty(`result`)
+
         return {
             request: request.toObject(),
             partial_failure_error: response.partial_failure_error,
-            results: response.results_list.map((r: any) => r.resourceName),
+            // Always return results as an array for consistency
+            results: is_single_result
+                ? [response.result.resource_name]
+                : response.results_list.map((r: any) => r.resourceName),
         }
     }
 

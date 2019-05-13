@@ -129,17 +129,22 @@ export const getGroupDisplayName = name => {
 export const jumpTo = section_id => (window.location.href = section_id)
 
 export const centerSidebarToId = id => {
-    const parent = id.split('-')
-    const sidebar_id = 'sidebar-' + parent[parent.length - 1]
+    const sidebar_id = 'sidebar-' + id
 
     const el = document.getElementById(sidebar_id)
 
     if (el) {
         window.requestAnimationFrame(() => {
-            el.scrollIntoView({
-                behavior: 'smooth',
-                block: 'center',
-            })
+            const distance_from_top = el.parentNode.offsetTop 
+
+            const scrollable = el.parentNode.parentNode.parentNode.parentNode.parentNode;
+
+            scrollable.scrollTop = distance_from_top - 200
+            
+            // el.scrollIntoView({
+            //     behavior: 'smooth',
+            //     block: 'center',
+            // })
         })
     }
 }
