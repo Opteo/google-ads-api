@@ -6,7 +6,7 @@ import { getGroupDisplayName } from '../../utils'
 import SidebarSectionRows from './sidebarSectionRows'
 
 const SidebarSectionGroups = ({ sectionGroups, currentSection, search, jumpTo }) => (
-    <ul id="section-list" className="list f5 pv3 overflow-y-auto">
+    <ul id="section-list" className="list f5 pb3 overflow-y-auto">
         {Object.keys(sectionGroups).map(group_name => {
             return (
                 <li key={group_name} className="mv0 pb2">
