@@ -1,4 +1,4 @@
-h5 {
+.content h5 {
     color: #313135;
     font-weight: 600;
 }
@@ -8,7 +8,6 @@ h5 {
     font-size: 0.8rem;
     font-weight: 500;
 }
-
 
 .content p {
     margin-top: 1rem;

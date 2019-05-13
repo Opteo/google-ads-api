@@ -63,6 +63,7 @@ class Container extends React.Component {
                     className="sections-container flex flex-column items-center mt3"
                     style={{ marginLeft: '280px', width: 'calc(100% - 280px)' }}
                 >
+                    <div className="f2"> Google Ads API</div>
                     {Sections}
                 </div>
             </div>

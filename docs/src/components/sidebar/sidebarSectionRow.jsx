@@ -5,6 +5,9 @@ import SidebarSubsectionRows from './sidebarSubsectionRows'
 
 const SidebarSectionRow = ({ sectionKey, sectionId, sectionName, isActive, currentSection, subsections, jumpTo }) => {
     const subsection_id = sectionKey.toLowerCase()
+    const smallest_subsction_key = Math.min.apply(null, Object.keys(subsections).map(k => +k))
+    const first_subsection_id = subsections[`${smallest_subsction_key}`].id
+
     return (
         <li className="mv0 pb2">
             <div className="relative">
@@ -16,7 +19,7 @@ const SidebarSectionRow = ({ sectionKey, sectionId, sectionName, isActive, curre
                 <div
                     id={subsection_id}
                     className={'entity pl3 pointer ' + (isActive ? 'active pt1 pb1 db' : '')}
-                    onClick={() => jumpTo(sectionId)}
+                    onClick={() => jumpTo(first_subsection_id)}
                 >
                     {sectionName}
                 </div>
