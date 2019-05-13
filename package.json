@@ -73,7 +73,9 @@
     "standard-version": "^5.0.2",
     "ts-jest": "^24.0.0",
     "tslint": "^5.12.1",
-    "typescript": "^3.3.1"
+    "typescript": "^3.3.1",
+    "showdown": "^1.9.0",
+    "turndown": "^5.0.3"
   },
   "dependencies": {
     "@types/lodash": "^4.14.112",
@@ -84,8 +86,6 @@
     "lodash": "^4.17.11",
     "lodash.maxby": "^4.6.0",
     "redis": "^2.8.0",
-    "request": "^2.88.0",
-    "showdown": "^1.9.0",
-    "turndown": "^5.0.3"
+    "request": "^2.88.0"
   }
 }
