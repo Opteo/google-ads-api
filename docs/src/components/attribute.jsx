@@ -17,16 +17,20 @@ class Attribute extends React.Component {
     }
 
     render() {
-        const { data, name, enums, section, nestingDepth } = this.props
+        const { data, name, enums, section, nestingDepth, ofManyChild } = this.props
 
         const { _description } = data
 
         return (
             <div
                 key={`${section}-${name}`}
-                className={nestingDepth === 0 ? 'w-100 pv3 bt b--opteo-light-gray' : 'w-100 pa3 bt b--opteo-light-gray'}
+                className={
+                    nestingDepth === 0 && ofManyChild ? 'w-100 pb3 pr3 pl3'
+                    : nestingDepth === 0 ? 'w-100 pv3 bt b--opteo-light-gray' 
+                    : 'w-100 pa3 bt b--opteo-light-gray'}
             >
-                <div className="mb2">
+                { !ofManyChild && (
+                <div className="mb3">
                     <span className="mono fw6 mv0 opteo-gray">{name}</span>
                     {(() => {
                         if (data._type) {
@@ -36,6 +40,7 @@ class Attribute extends React.Component {
                         }
                     })()}
                 </div>
+                )}
                 {enums && <Enums enums={enums} />}
                 {(() => {
                     if (_description) {
@@ -70,6 +75,7 @@ Attribute.propTypes = {
     name: PropTypes.string.isRequired,
     enums: PropTypes.array,
     section: PropTypes.string,
+    ofManyChild: PropTypes.bool,
 }
 
 export default Attribute
