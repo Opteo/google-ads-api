@@ -28,6 +28,14 @@
     margin-left: 24px;
 }
 
+.manual-content ol {
+    list-style-type: decimal;
+}
+
+.manual-content ol li {
+    margin-left: 24px;
+}
+
 .manual-content a {
     color: blue;
     text-decoration: underline;

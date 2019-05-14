@@ -9,7 +9,7 @@ title: Enums in reporting
 
 This library uses enums for all inputs and outputs of the Google Ads API. This reduces ambiguity when reading and writing code.
 
-## Enums in reporting
+### Enums in reporting
 
 All enums are represented as integers in the google ads API.
 

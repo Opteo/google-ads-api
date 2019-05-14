@@ -5,11 +5,12 @@ entity: overview
 title: Goals
 ---
 
-### Goals
+### Why does this library exist?
 
-When we first started using AdWords, we found the API difficult to use. SOAP, in particular, was a huge pain to use with Node.
+The official Google Ads client libraries are robust, but they don't always offer the most user-friendly developer interfaces, and their documentation can be confusing. 
 
-The Google Ads API is a massive step in the right direction, but we still don't feel that it still isn't quite as developer friendly as it could be. We have written two libraries to fill that gap:
+This library aims to offer a better way to use the Google Ads API. [Opteo](https://opteo.com) uses it internally.
 
 -   [`google-ads-node`](https://github.com/Opteo/google-ads-node) is a low-level Node implementation of the API which imitates the stucture of the other client libraries.
 -   `google-ads-api` (this library) is a wrapper around `google-ads-node` to provide a better developer experience.
+
