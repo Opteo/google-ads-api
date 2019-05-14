@@ -37,8 +37,8 @@ class Container extends React.Component {
                 this.setState({
                     current_section: id,
                 })
-                if(window.history.replaceState) {
-                    window.history.replaceState(null, null, '#' + id);
+                if (window.history.replaceState) {
+                    window.history.replaceState(null, null, '#' + id)
                 }
             }
         })

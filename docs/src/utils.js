@@ -135,12 +135,16 @@ export const centerSidebarToId = id => {
 
     if (el) {
         window.requestAnimationFrame(() => {
-            const distance_from_top = el.parentNode.offsetTop 
+            const distance_from_top = el.parentNode.offsetTop
 
-            const scrollable = el.parentNode.parentNode.parentNode.parentNode.parentNode;
+            try {
+                const scrollable = el.parentNode.parentNode.parentNode.parentNode.parentNode
 
-            scrollable.scrollTop = distance_from_top - 200
-            
+                scrollable.scrollTop = distance_from_top - 200
+            } catch (e) {
+                console.warn(e)
+            }
+
             // el.scrollIntoView({
             //     behavior: 'smooth',
             //     block: 'center',

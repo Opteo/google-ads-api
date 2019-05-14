@@ -1,13 +1,11 @@
 ---
-order: 6.1
+order: 5.3
 type: manual
 entity: enums
 title: Handling Errors
 ---
 
-## Enums
-
-### Handling Errors
+### Handling Errors with Enums
 
 
 To handle errors from the Google Ads API, the best approach is to use the provided error enums, available with the `enums` import. A full list of error types can be found in the [Google Ads API references](https://developers.google.com/google-ads/api/reference/rpc/google.ads.googleads.v1.errors).

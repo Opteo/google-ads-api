@@ -1,16 +1,13 @@
 ---
-order: 3.1
+order: 3.2
 type: manual
 entity: reporting
-title: Reporting Concepts
+title: Reporting using core resources
 ---
 
-## Reporting
+### Using core resources for reports directly
 
-In this context, reporting just means fetching data about an account. 
-
-### Reporting concepts
-
+asdfasdfasdf
 ut I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was
 
 born and I will give you a complete account of the system, and expound the actual teachings 

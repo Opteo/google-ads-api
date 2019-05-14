@@ -15,12 +15,11 @@ class Sidebar extends React.Component {
 
     shouldComponentUpdate(nextProps) {
         if (this.props.currentSection !== nextProps.currentSection) {
-
             const this_parent = this.props.currentSection.split('-')
-            const this_parent_id =  this_parent[this_parent.length - 1]
+            const this_parent_id = this_parent[this_parent.length - 1]
 
             const next_parent = nextProps.currentSection.split('-')
-            const next_parent_id =  next_parent[next_parent.length - 1]
+            const next_parent_id = next_parent[next_parent.length - 1]
 
             if (!this.state.jump_from_click && this_parent_id !== next_parent_id) {
                 centerSidebarToId(next_parent_id)

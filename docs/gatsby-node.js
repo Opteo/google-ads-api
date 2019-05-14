@@ -3,12 +3,16 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     switch (node.internal.type) {
         case 'MarkdownRemark': {
             const { relativePath, relativeDirectory } = getNode(node.parent)
-            
+
             const order_map = {
                 overview: 1,
                 authentication: 2,
                 reporting: 3,
-                enums: 6
+                mutations: 4,
+                enums: 5,
+                utilities: 6,
+                typescript: 7,
+                misc: 8,
             }
             createNodeField({
                 node,
