@@ -20,49 +20,43 @@ const AttributesTableOneOfs = ({ oneOfs, nestingDepth, section }) => {
         const key = 'oneofcontainer' + section_key
 
         return (
-            <div key={key}>
-                {Object.keys(one_of).map((oneof_key, index) => {
-                    const details = one_of[oneof_key]
-                    if (typeof details !== 'object') {
-                        return null
-                    }
-
-                    const unique_oneof_key = 'oneof' + section_key
-                    const unique_attribute_key = unique_oneof_key + oneof_key
-
-                    return (
-                        <div
-                            style={{ display: index === 0 ? 'block' : 'none' }}
-                            className={unique_oneof_key}
-                            id={unique_attribute_key}
-                            key={unique_attribute_key}
-                        >
-                            <Attribute
-                                data={details}
-                                section={section}
-                                name={oneof_key}
-                                enums={details._enums}
-                                nestingDepth={nestingDepth}
-                            />
-                        </div>
-                    )
-                })}
-
-                <div className={nestingDepth === 0 ? null : 'pl3'}>This field can also be replaced by:</div>
-
-                <ul className={nestingDepth === 0 ? 'pt2 pr3 pb3' : 'pt2 pl3 pr3 pb3'}>
-                    {Object.keys(one_of).map(oneof_key => {
+            <div key={key} className="mb3 br3 ba b--opteo-light-gray">
+                <div className="table-heading pa3 bb b--opteo-light-gray"><span class="fw6 bb">ONE</span> of the following:</div>
+                <ul className={nestingDepth === 0 ? '' : 'pb3'}>
+                    {Object.keys(one_of).map((oneof_key, index) => {
                         const unique_oneof_key = 'oneof' + section_key
                         const unique_attribute_key = unique_oneof_key + oneof_key
+                        const details = one_of[oneof_key]
 
                         return (
                             <li
                                 key={unique_attribute_key + 'selector'}
-                                className="one-of-item pointer"
+                                className="one-of-item pointer bb b--opteo-light-gray"
                                 onClick={() => toggleOneOf(unique_oneof_key, unique_attribute_key)}
                             >
-                                <span>• </span>
-                                <span className="opteo-link-blue">{oneof_key.split('_').join(' ')} </span>
+                                <div className="pa3">
+                                    <span>• </span>
+                                    <span className="mono fw6 mv0 opteo-gray">{oneof_key.split('_').join(' ')} </span>
+                                </div>
+                                {/* {console.log(one_of[oneof_key])} */}
+                                {
+                                    typeof details !== 'object' ? null : (
+                                    <div
+                                        style={{ display: index === 0 ? 'block' : 'none' }}
+                                        className={unique_oneof_key}
+                                        id={unique_attribute_key}
+                                        key={unique_attribute_key}
+                                    >
+                                        <Attribute
+                                            data={details}
+                                            section={section}
+                                            name={oneof_key}
+                                            enums={details._enums}
+                                            nestingDepth={nestingDepth}
+                                        />
+                                    </div>
+                                    ) 
+                                }
                             </li>
                         )
                     })}

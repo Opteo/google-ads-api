@@ -27,6 +27,17 @@
     transform: rotate(45deg)
 }
 
+.table-heading {
+    text-transform: uppercase;
+    font-size: .7rem;
+    font-weight: 400;
+    padding: 0.3rem 0.8rem;
+}
+
+.one-of-item:last-child {
+    border-bottom: none;
+}
+
 .enum-container {
     /* background-color: #f0f1f5; */
     /* font-size: 0.85rem */
