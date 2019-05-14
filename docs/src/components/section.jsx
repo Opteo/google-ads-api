@@ -12,9 +12,24 @@ class Section extends React.Component {
         const { data } = this.props
 
         const { code, description } = data
+
         const { id, meta, is_entity_index } = description
 
         const html_description = description.node.html || ''
+
+        const is_not_core_resource = description.node.frontmatter.type === 'manual'
+
+        if(is_not_core_resource){
+            return (
+                <SectionContainer sectionId={id} key={id} handler={this.props.onSectionChange}>
+                   <div
+                        className={'pv5'}
+                    >
+                        <div className="manual-content text-container" dangerouslySetInnerHTML={{ __html: html_description }} />
+                    </div>
+                </SectionContainer>
+            )
+        }
 
         if (!code) {
             return (
