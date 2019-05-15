@@ -8,6 +8,7 @@
     "gatsby": "^2.3.24",
     "gatsby-plugin-offline": "^2.1.0",
     "gatsby-remark-autolink-headers": "^2.0.16",
+    "gatsby-remark-external-links": "^0.0.4",
     "gatsby-remark-prismjs": "^3.2.8",
     "gatsby-source-filesystem": "^2.0.29",
     "gatsby-transformer-remark": "^2.3.12",
