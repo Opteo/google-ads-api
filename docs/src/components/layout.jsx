@@ -31,7 +31,16 @@ const Layout = ({ children }) => (
                 <Header siteTitle={data.site.siteMetadata.title} />
                 <div className="">
                     <main>{children}</main>
-                    <footer>© Opteo {new Date().getFullYear()}</footer>
+                    <footer
+                        className="tc opteo-middle-gray"
+                        style={{ 
+                            marginBottom: '3rem',
+                            marginLeft: '280px', 
+                            width: 'calc(100% - 280px)' 
+                        }}
+                    >
+                        © Opteo {new Date().getFullYear()}
+                    </footer>
                 </div>
             </>
         )}

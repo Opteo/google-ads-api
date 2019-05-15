@@ -14,6 +14,7 @@
 }
 .entity.active {
     color: #008dff;
+    background-color: #f9fafc;
 }
 .entity-child {
     font-size: 0.84rem;
@@ -33,9 +34,6 @@
 
 .entity-child.active {
     color: #008dff;
-}
-
-.active {
     background-color: #f9fafc;
 }
 

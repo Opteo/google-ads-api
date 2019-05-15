@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans|Open+Sans');
-@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:300,400,500');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400');
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, 'Apple Color Emoji', Arial, sans-serif,
@@ -20,10 +19,17 @@ a:hover {
     color: #1056ea;
 }
 
+h1 {
+    font-weight: 400;
+    font-size: 1.8rem;
+    margin-bottom: 4rem;
+    color: #313135;
+}
+
 h2 {
     /* font-family: sans-serif; */
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     margin-bottom: 2rem;
     color: #313135;
 }
@@ -66,7 +72,7 @@ button {
     text-transform: uppercase;
     font-size: 0.7rem;
     font-weight: 400;
-    padding: 0.3rem 0.8rem;
+    padding: 0.3rem 1rem;
     border: none;
     border-radius: 5rem;
     color: inherit;

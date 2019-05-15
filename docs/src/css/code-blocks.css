@@ -4,6 +4,10 @@ code {
     font-weight: 400;
 }
 
+a code::after {
+    content: ' 🔗';
+}
+
 /* Inline Text */
 
 .text-container code {

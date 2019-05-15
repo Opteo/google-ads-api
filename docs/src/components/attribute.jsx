@@ -25,12 +25,14 @@ class Attribute extends React.Component {
             <div
                 key={`${section}-${name}`}
                 className={
-                    nestingDepth === 0 && ofManyChild ? 'w-100 pb3 pr3 pl3'
-                    : nestingDepth === 0 ? 'w-100 pv3 bt b--opteo-light-gray' 
+                    ofManyChild && enums ? 'w-100 pl3 pr3 pb3'
+                    : ofManyChild && nestingDepth === 0 ? 'w-100 pb3 ph3'
+                    : nestingDepth === 0 ? 'w-100 pv3 bt b--opteo-light-gray'
+                    : ofManyChild ? 'w-100 pa3'
                     : 'w-100 pa3 bt b--opteo-light-gray'}
             >
                 { !ofManyChild && (
-                <div className="mb3">
+                <div>
                     <span className="mono fw6 mv0 opteo-gray">{name}</span>
                     {(() => {
                         if (data._type) {
@@ -44,25 +46,37 @@ class Attribute extends React.Component {
                 {enums && <Enums enums={enums} />}
                 {(() => {
                     if (_description) {
-                        return <div className="" dangerouslySetInnerHTML={{ __html: _description }} />
+                        return <div className="mt2" dangerouslySetInnerHTML={{ __html: _description }} />
                     } else {
-                        return (
-                            <div className={this.state.child_shown ? 'ba b--opteo-light-gray br3 mt3' : null}>
-                                <button
-                                    className={
-                                        this.state.child_shown
-                                            ? 'opteo-link-blue'
-                                            : 'opteo-link-blue btn-box-shadow mt2'
-                                    }
-                                    onClick={this.toggleChild}
+                        if (ofManyChild) {
+                            return (
+                                <div 
+                                    style={{ display: this.state.child_shown || ofManyChild ? 'block' : 'none' }}
+                                    className="br3 ba b--opteo-light-gray"
                                 >
-                                    {this.state.child_shown ? 'Hide Child Fields -' : 'Show Child Fields +'}
-                                </button>
-                                <div style={{ display: this.state.child_shown ? 'block' : 'none' }}>
+                                    <div className="table-heading opteo-middle-gray">Child Fields</div>
                                     <AttributesTable data={data} section={section} nestingDepth={nestingDepth + 1} />
                                 </div>
-                            </div>
-                        )
+                            )
+                        } else {
+                            return (
+                                <div className={this.state.child_shown ? 'ba b--opteo-light-gray br3 mt2' : null}>
+                                    <button
+                                        className={
+                                            this.state.child_shown
+                                                ? 'opteo-link-blue'
+                                                : 'opteo-link-blue btn-box-shadow mt2'
+                                        }
+                                        onClick={this.toggleChild}
+                                    >
+                                        {this.state.child_shown ? 'Hide Child Fields -' : 'Show Child Fields +'}
+                                    </button>
+                                    <div style={{ display: this.state.child_shown ? 'block' : 'none' }}>
+                                        <AttributesTable data={data} section={section} nestingDepth={nestingDepth + 1}/>
+                                    </div>
+                                </div>
+                            )
+                        }
                     }
                 })()}
             </div>

@@ -4,14 +4,8 @@
     line-height: 1.8em;
 }
 
-.manual-content h1 {
-    font-size: 2em;
-    margin-bottom: 2em;
-}
-
 .manual-content em {
-    color: #95a1ad;
-    font-size: 0.8rem;
+    color: #313135;
     font-weight: 500;
 }
 
@@ -29,10 +23,11 @@
 }
 
 .manual-content a {
-    color: blue;
-    text-decoration: underline;
+    color: #008dff;
+    /* text-decoration: underline; */
 }
 
 .manual-content strong {
-    font-weight: bold;
+    font-weight: 500;
+    color: #313135;
 }

@@ -23,7 +23,7 @@ class Section extends React.Component {
             return (
                 <SectionContainer sectionId={id} key={id} handler={this.props.onSectionChange}>
                     <div
-                        className={'pv5'}
+                        className={'pv4'}
                     >
                         <div className="manual-content text-container" dangerouslySetInnerHTML={{ __html: html_description }} />
                     </div>
