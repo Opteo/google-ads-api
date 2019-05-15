@@ -12,7 +12,6 @@ class Section extends React.Component {
         const { data } = this.props
 
         const { code, description } = data
-        console.log(data)
 
         const { id, meta, is_entity_index } = description
 
