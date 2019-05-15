@@ -13,7 +13,7 @@ class Section extends React.Component {
 
         const { code, description } = data
 
-        const { id, meta, is_entity_index } = description
+        const { id, meta, is_entity_index, is_first_core_resource } = description
 
         const html_description = description.node.html || ''
 
@@ -44,9 +44,10 @@ class Section extends React.Component {
         }
 
         const html_code = code.node.html || ''
-
+        const h1 = is_first_core_resource ? <h1 className="f2">Core resources</h1> : ''
         return (
             <SectionContainer sectionId={id} key={id} handler={this.props.onSectionChange}>
+                {h1}
                 <div
                     className={
                         ' ' +
