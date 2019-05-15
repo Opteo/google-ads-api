@@ -5,9 +5,6 @@ entity: AccountBudget
 title: AccountBudget 
 ---
 
-
-# Core entities
-
 ## AccountBudget 
 ### The AccountBudget object
 

@@ -20,6 +20,16 @@
 
 .manual-content ul li {
     margin-left: 24px;
+    margin-bottom: 12px;
+}
+
+.manual-content ol {
+    list-style-type: decimal;
+}
+
+.manual-content ol li {
+    margin-left: 24px;
+    margin-bottom: 12px;
 }
 
 .manual-content a {

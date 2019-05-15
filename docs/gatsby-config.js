@@ -38,6 +38,13 @@ module.exports = {
                             noInlineHighlight: false,
                         },
                     },
+                    {
+                        resolve: 'gatsby-remark-external-links',
+                        options: {
+                            target: '_blank',
+                            rel: null,
+                        },
+                    },
                 ],
             },
         },

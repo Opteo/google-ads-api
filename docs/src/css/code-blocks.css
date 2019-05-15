@@ -25,8 +25,10 @@ a code::after {
  * @author Tim  Shedor
  */
 
-code[class*='language-javascript'],
-pre[class*='language-javascript'] {
+code.language-javascript,
+code.language-typescript,
+pre.language-javascript,
+pre.language-typescript {
     color: black;
     background: none;
     text-align: left;
@@ -48,13 +50,15 @@ pre[class*='language-javascript'] {
 }
 
 /* Code blocks */
-pre[class*='language-javascript'] {
+pre[class='language-javascript'],
+pre[class='language-typescript'] {
     position: relative;
     margin: 0.5em 0;
     overflow: visible;
     padding: 0;
 }
-pre[class*='language-javascript'] > code {
+pre[class='language-javascript'] > code,
+pre[class='language-typescript'] > code {
     border-radius: 0.5rem;
     border: 1px solid #f2f2f6;
     padding: 1rem;
@@ -65,7 +69,8 @@ pre[class*='language-javascript'] > code {
     background-attachment: local;
 }
 
-code[class*='language-javascript'] {
+code[class='language-javascript'],
+code[class='language-typescript'] {
     max-height: inherit;
     height: inherit;
     padding: 0 1em;
@@ -74,8 +79,10 @@ code[class*='language-javascript'] {
 }
 
 /* Margin bottom to accommodate shadow */
-:not(pre) > code[class*='language-javascript'],
-pre[class*='language-javascript'] {
+:not(pre) > code[class='language-javascript'],
+:not(pre) > code[class='language-typescript'],
+pre[class='language-javascript'],
+pre[class='language-typescript'] {
     background-color: #fdfdfd;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -84,7 +91,7 @@ pre[class*='language-javascript'] {
 }
 
 /* Inline code */
-:not(pre) > code[class*='language-javascript'] {
+:not(pre) > code[class='language-javascript'] :not(pre) > code[class='language-typescript'] {
     position: relative;
     padding: 0.2em;
     border-radius: 0.3em;
@@ -173,8 +180,10 @@ pre[class*='language-javascript'] {
 }
 
 @media screen and (max-width: 767px) {
-    pre[class*='language-javascript']:before,
-    pre[class*='language-javascript']:after {
+    pre[class='language-javascript']:before,
+    pre[class='language-javascript']:after,
+    pre[class='language-typescript']:before,
+    pre[class='language-typescript']:after {
         bottom: 14px;
         box-shadow: none;
     }
@@ -188,20 +197,24 @@ pre[class*='language-javascript'] {
 }
 
 /* Plugin styles: Line Numbers */
-pre[class*='language-javascript'].line-numbers.line-numbers {
+pre[class='language-typescript'].line-numbers.line-numbers,
+pre[class='language-javascript'].line-numbers.line-numbers {
     padding-left: 0;
 }
 
-pre[class*='language-javascript'].line-numbers.line-numbers code {
+pre[class='language-javascript'].line-numbers.line-numbers code,
+pre[class='language-typescript'].line-numbers.line-numbers code {
     padding-left: 3.8em;
 }
 
-pre[class*='language-javascript'].line-numbers.line-numbers .line-numbers-rows {
+pre[class='language-javascript'].line-numbers.line-numbers .line-numbers-rows,
+pre[class='language-typescript'].line-numbers.line-numbers .line-numbers-rows {
     left: 0;
 }
 
 /* Plugin styles: Line Highlight */
-pre[class*='language-javascript'][data-line] {
+pre[class='language-javascript'][data-line],
+pre[class='language-typescript'][data-line] {
     padding-top: 0;
     padding-bottom: 0;
     padding-left: 0;

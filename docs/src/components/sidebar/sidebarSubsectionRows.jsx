@@ -4,11 +4,13 @@ import React from 'react'
 import { getSubsectionTitle } from '../../utils'
 
 const SidebarSubsectionRows = ({ subsections, currentSection, jumpTo }) => {
-    if (
-        !Object.keys(subsections)
-            .map(index => subsections[index].id)
-            .includes(currentSection)
-    ) {
+    const has_current_section = Object.keys(subsections)
+        .map(index => subsections[index].id)
+        .includes(currentSection)
+
+    const only_one_section = Object.keys(subsections).length === 1
+
+    if (!has_current_section || only_one_section) {
         return <div />
     }
     return (

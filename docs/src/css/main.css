@@ -84,5 +84,5 @@ button:hover {
 }
 
 .btn-box-shadow {
-    box-shadow: 0 0 0 1px rgba(2,2,12,.05), 0 2px 4px -2px rgba(2,2,12,.1)
+    box-shadow: 0 0 0 1px rgba(2, 2, 12, 0.05), 0 2px 4px -2px rgba(2, 2, 12, 0.1);
 }

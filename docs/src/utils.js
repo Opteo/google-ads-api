@@ -38,7 +38,8 @@ export const getIds = edges => {
 export const getSectionsData = edges => {
     const sections = {}
 
-    edges.forEach(edge => {
+    let is_first_core_resource = true
+    edges.forEach((edge, index) => {
         const { node } = edge
 
         const section_data = {
@@ -60,6 +61,14 @@ export const getSectionsData = edges => {
         if (!sections[section_data.id]) {
             sections[section_data.id] = {}
         }
+
+        const is_not_core_resource = type === 'manual'
+
+        if (!is_not_core_resource && is_first_core_resource) {
+            section_data.is_first_core_resource = true
+            is_first_core_resource = false
+        }
+
         sections[section_data.id].group = node.fields.group
         sections[section_data.id][section_type] = section_data
     })
@@ -95,6 +104,11 @@ export const getSubsectionTitle = ({ entity, type, title }) => {
             }
             return `List all ${entity}s`
         }
+
+        case 'mutateresources': {
+            return `Mutate several resources`
+        }
+
         default:
             return `${capitalizeFirstLetter(type)} ${AN} ${entity}`
     }
@@ -135,12 +149,16 @@ export const centerSidebarToId = id => {
 
     if (el) {
         window.requestAnimationFrame(() => {
-            const distance_from_top = el.parentNode.offsetTop 
+            const distance_from_top = el.parentNode.offsetTop
 
-            const scrollable = el.parentNode.parentNode.parentNode.parentNode.parentNode;
+            try {
+                const scrollable = el.parentNode.parentNode.parentNode.parentNode.parentNode
 
-            scrollable.scrollTop = distance_from_top - 200
-            
+                scrollable.scrollTop = distance_from_top - 200
+            } catch (e) {
+                console.warn(e)
+            }
+
             // el.scrollIntoView({
             //     behavior: 'smooth',
             //     block: 'center',
