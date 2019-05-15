@@ -1,3 +1,5 @@
+// manual_mode: This file has been manually modified and should not be touched by generate_services.js
+
 import * as grpc from 'google-ads-node'
 import { Customer } from 'google-ads-node/build/lib/resources'
 import { getFieldMask } from 'google-ads-node/build/lib/utils'

@@ -95,6 +95,11 @@ export const getSubsectionTitle = ({ entity, type, title }) => {
             }
             return `List all ${entity}s`
         }
+
+        case 'mutateresources': {
+            return `Mutate several resources`
+        }
+
         default:
             return `${capitalizeFirstLetter(type)} ${AN} ${entity}`
     }
