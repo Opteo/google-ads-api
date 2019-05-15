@@ -22,7 +22,7 @@ class Section extends React.Component {
         if (is_not_core_resource) {
             return (
                 <SectionContainer sectionId={id} key={id} handler={this.props.onSectionChange}>
-                    <div className={'pv5'}>
+                    <div className={''}>
                         <div
                             className="manual-content text-container"
                             dangerouslySetInnerHTML={{ __html: html_description }}

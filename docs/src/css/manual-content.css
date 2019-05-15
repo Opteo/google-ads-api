@@ -9,6 +9,16 @@
     margin-bottom: 2em;
 }
 
+.manual-content h2 {
+    margin-top: 2.5em;
+    margin-bottom: 1.5em;
+}
+
+.manual-content h3 {
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
 .manual-content em {
     color: #95a1ad;
     font-size: 0.8rem;
@@ -26,6 +36,7 @@
 
 .manual-content ul li {
     margin-left: 24px;
+    margin-bottom: 12px;
 }
 
 .manual-content ol {
@@ -34,6 +45,7 @@
 
 .manual-content ol li {
     margin-left: 24px;
+    margin-bottom: 12px;
 }
 
 .manual-content a {

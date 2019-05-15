@@ -9,7 +9,7 @@ const SidebarSectionRow = ({ sectionKey, sectionId, sectionName, isActive, curre
     const first_subsection_id = subsections[`${smallest_subsction_key}`].id
 
     return (
-        <li className="mv0 pb2">
+        <li className="mv0 ">
             <div className="relative">
                 <div
                     className={
@@ -18,7 +18,7 @@ const SidebarSectionRow = ({ sectionKey, sectionId, sectionName, isActive, curre
                 />
                 <div
                     id={subsection_id}
-                    className={'entity pl3 pointer ' + (isActive ? 'active pt1 pb1 db' : '')}
+                    className={'entity pointer pl3 pv1 db ' + (isActive ? 'active  ' : '')}
                     onClick={() => jumpTo(first_subsection_id)}
                 >
                     {sectionName}
