@@ -9,32 +9,29 @@ title: Reporting Concepts
 
 "Reporting" just means fetching data about an account.
 
-**All data Google Ads is queriable via SQL-like tables that we call "Resources"**.
-
-```javascript
-const campaigns = await customer.query(`
-    SELECT 
-      something
-    FROM 
-      <RESOURCE_HERE> 
-`)
-
-```
+All data Google Ads is queriable via SQL-like tables. There is one table per resource (such as `campaign` or `ad_group_ad`.) 
+These tables and their associated fields can be found in the [core resources](/#accountbudget) section of this page, or in the ["API Fields"](https://developers.google.com/google-ads/api/docs/fields/account_budget)
+ section of the official docs.
 
 ### Resources
 
-
-
 There are four types of resources available for querying.
 
-1. **Core resources**
+1. **Core resources** directly map to entities in your account. Example: `campaign`, `ad_group_criterion`.
+2. **Criteria View Resources** offer a more convenient way to query ad_group and campaign criteria (criteria are targeting options such as keywords or placements). They may also aggregate metrics differently. Example: `keyword_view` is a subset of ad_group_criterion, while `age_range_view` is a subset of campaign_criterion.
+3. **Click & Search Term Resources** are like core resources, except that they are by nature read-only. Example: `click_view`, `search_term_view`.
+4. **Constant Resources** are just a convenient way to query Google Ads constants (and their IDs). They aren't specific to your account. Example: `geo_target_constant`, `mobile_device_constant`.
 
-    These resources directly map to entities in your account. For example:
-    -   The `campaigns` resource will contain all fields about campaigns in one account, one campaign per row.
-    -   The `ad_group_ads` resource will contain all fields about ads in one account, across all campaigns and adgroups.
-    -   The `customer` resource will only ever have one row -- the customer you're authorised as.
 
-> Note: Most of these core resources can be mutated.
+### Fields
+
+Resources contain three types of fields:
+
+1. **Metrics** hold data about the performance of your account, and change through time. Example: `metrics.clicks` or `metrics.historical_quality_score`. 
+
+3. **Segments** allow you to segment your metrics by your chosen field, meaning that your result will have more rows. Example: `segments.device` or `segments.conversion_action`. 
+
+1. **Attributes** are static information about an resource. All fields described in the [core resources](/#accountbudget) section of this page are attributes. It is not possible to query the past value of an attribute. Example: `campaign.name` or `ad_group_criterion.keyword.text`.
 
 <!-- For reference, this is the complete list of core resources: 
 account_budget, 
@@ -96,11 +93,6 @@ user_interest
 user_list
 video -->
 
-2. **Criteria View Resources**
-
-    These resources offer a more convenient way to query adgroup and campaign criteria. They may also aggregate metrics differently. For example:
-    - The `keyword_view` resource will return the 'ad_group_criterion' resource fields pre-filtered by type=keyword.
-    - The `age_range_view` resource will return the 'campaign_criterion' resource fields pre-filtered by type=age_range. 
 
 
 <!-- ad_group_audience_view
@@ -126,22 +118,6 @@ topic_view -->
 
 
 
-3. **Click & Search Term Resources**
-
-    These resources are just like core resources, except that they are by nature read-only. For example:
-    - The `click_view` resource is a read-only table of the clicks your ads have received.
-    - The `search_term_view` resource includes metrics aggregated by search term at the ad group level.
-
-<!-- `click_view`, `search_term_view`, `paid_organic_search_term_view`, `dynamic_search_ads_search_term_view` -->
-
-4. **Constant Resources**
-
-    These resources are just a convenient way to query Google Ads constants (and their IDs). They aren't specific to your account. For example:
-    - The `geo_target_constant` resource includes every single geographic location that google considers for targeting and reporting
-    - The `mobile_device_constant` resource is a list of every single mobile device (phone, tablet, etc) that might exist if you segment by `segments.device` in another core resource query.
-
-
-
 <!-- 
 carrier_constant
 geo_target_constant
@@ -152,32 +128,5 @@ operating_system_version_constant
 product_bidding_category_constant
 topic_constant -->
 
-
-### Fields
-
-
-```javascript
-const campaigns = await customer.query(`
-    SELECT 
-      <FIELDS HERE>
-    FROM 
-      something 
-`)
-
-```
-
-Resources contain three types of fields:
-
-1. **Attributes**
-
-    Example: `campaign.name` (string) or `ad_group.bidding_strategy_type` (enum). It is not possible to query a past attribute -- querying `SELECT campaign.name FROM campaign WHERE segments.date = YESTERDAY` will give you today's campaign name.
-
-2. **Metrics**
-
-    Example: `metrics.clicks` (number) or `metrics.historical_quality_score` (enum). These can be segmented by date to query the past.
-
-3. **Segments**
-
-    Example: `segments.device` (enum) or `segments.conversion_action` (resource_name). These will segment the result rows by your chosen field, meaning that your result will have more rows.
 
 

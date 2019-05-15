@@ -7,10 +7,10 @@ title: Using core resources
 
 ## Mutations
 
-A "mutation" is a change to a google ads account, such as a new campaign or a adjusted bid.
+A "mutation" is a change to a google ads account, such as a new campaign or an adjusted bid.
+
 
 ### Making changes using core resources
-
 
 Most entities in the Google Ads API will have mutation methods for creating, updating, and deleting. We also support a top-level customer `mutateResources` method, that allows for performing mutations with different types atomically, as well as supporting the new concept of temporary resource ids.
 

@@ -2,34 +2,40 @@
 order: 3.3
 type: manual
 entity: reporting
-title: Reporting using query()
+title: Using GAQL
 ---
 
 
-### Using `customer.query()`
+### Using GAQL
 
 The `customer.query()` method allows you to query customer data using GAQL ([Google Ads Query Language](https://developers.google.com/google-ads/api/docs/query/overview)) query strings. This is great for prototyping and getting results out quickly.
 
+GAQL looks like SQL, but it is not SQL. Key differences include:
+- Very limited [grammar](https://developers.google.com/google-ads/api/docs/query/grammar) (for example, no `OR` in constraints)
+- Implicit joins when selecting `selectableWith` fields. These aren't always intuitive.
+
 ```javascript
+// Basic query
 const campaigns = await customer.query(`
     SELECT 
-      campaign.id, campaign.name, campaign.status
+      campaign.name, campaign.status
     FROM 
       campaign
-    ORDER BY campaign.id
 `)
 
-const campaigns = await customer.query(`
+// More complex query
+const keyword_texts = await customer.query(`
     SELECT 
-        campaign.id, campaign.name, campaign.status, 
-        metrics.impressions, metrics.cost
+        keyword_view.resource_name,
+        ad_group_criterion.keyword.text <-- This is an implicit join on ad_group_criterion
     FROM 
-      campaign
+      keyword_view                      <-- Main resource
     WHERE 
-      campaign.status = 'PAUSED' 
+      campaign.status = 'PAUSED'        <-- This is another implicit join on campaign
       AND metrics.impressions > 5
-    ORDER BY campaign.id
+    ORDER BY campaign.impressions
+    LIMIT 20
 `)
 ```
 
-Fore more infomation about `customer.query()`, see the [customer core resource](/#customer-query)
+For more infomation about `customer.query()`, see the [customer core resource](/#customer-query)
