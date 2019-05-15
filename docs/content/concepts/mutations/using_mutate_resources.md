@@ -5,7 +5,6 @@ entity: mutations
 title: Using global mutate
 ---
 
-
 ### Atomic mutations using `customer.mutateResources()`
 
 Sometimes you may want to create multiple resources of different types at once, such as creating a new campaign and its required budget. The `customer.mutateResources` method is designed for this use case, and supports:
@@ -85,3 +84,4 @@ const response = await customer.mutateResources([
 
 _Note_: Using `customer.mutateResources()` with a single operation is equivalent to using any of the standard `customer.someResource.create|update|delete()` methods, but your ts definitions won't be as good.
 
+For more information about this method, see the customer resource's [mutateResources section](/#mutateResources-customer)
