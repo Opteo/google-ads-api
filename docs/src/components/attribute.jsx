@@ -52,7 +52,10 @@ class Attribute extends React.Component {
                             return (
                                 <div 
                                     style={{ display: this.state.child_shown || ofManyChild ? 'block' : 'none' }}
-                                    className="br3 ba b--opteo-light-gray"
+                                    className={
+                                        nestingDepth === 0 ? 'mt3 br3 ba b--opteo-light-gray'
+                                        : 'br3 ba b--opteo-light-gray'
+                                    }
                                 >
                                     <div className="table-heading opteo-middle-gray">Child Fields</div>
                                     <AttributesTable data={data} section={section} nestingDepth={nestingDepth + 1} />
