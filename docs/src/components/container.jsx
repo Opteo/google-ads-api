@@ -63,21 +63,39 @@ class Container extends React.Component {
                     className="sections-container flex flex-column items-center mt3"
                     style={{ marginLeft: '280px', width: 'calc(100% - 280px)' }}
                 >
-                    <h1> Google Ads API</h1>
+                    <h1>Google Ads API</h1>
+                    <h3 class="mb0">Unofficial Google Ads API client library for Node</h3>
                     <div className="mt4">
                         <a className="ph1" href="https://developers.google.com/google-ads/api/docs/release-notes">
-                            <img className="br1" src="https://img.shields.io/badge/google%20ads-v1.1.0-009688.svg?style=flat-square" alt="Google Ads version number"/>
+                            <img
+                                className="br1"
+                                src="https://img.shields.io/badge/google%20ads-v1.1.0-009688.svg?style=flat-square"
+                                alt="Google Ads version number"
+                            />
                         </a>
                         <a className="ph1" href="https://www.npmjs.com/package/google-ads-api">
-                            <img className="br1" src="https://img.shields.io/npm/v/google-ads-api.svg?style=flat-square" alt="NPM version number"/>
+                            <img
+                                className="br1"
+                                src="https://img.shields.io/npm/v/google-ads-api.svg?style=flat-square"
+                                alt="NPM version number"
+                            />
                         </a>
                         <a className="ph1" href="https://www.npmjs.com/package/google-ads-api">
-                            <img className="br1" src="https://img.shields.io/npm/dm/google-ads-api.svg?style=flat-square" alt="Number of downloads from NPM"/>
+                            <img
+                                className="br1"
+                                src="https://img.shields.io/npm/dm/google-ads-api.svg?style=flat-square"
+                                alt="Number of downloads from NPM"
+                            />
                         </a>
                         <a className="ph1" href="https://www.npmjs.com/package/google-ads-api">
-                            <img className="br1" src="https://img.shields.io/david/opteo/google-ads-api.svg?style=flat-square" alt="Dependency status"/>
+                            <img
+                                className="br1"
+                                src="https://img.shields.io/david/opteo/google-ads-api.svg?style=flat-square"
+                                alt="Dependency status"
+                            />
                         </a>
                     </div>
+
                     {Sections}
                 </div>
             </div>

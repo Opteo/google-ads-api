@@ -50,3 +50,10 @@
     font-weight: 500;
     color: #313135;
 }
+
+.manual-content code.language-javascript,
+.manual-content code.language-typescript,
+.manual-content pre.language-javascript,
+.manual-content pre.language-typescript {
+    max-height: inherit;
+}

@@ -44,7 +44,7 @@ The `customer.report()` method is very similar to [customer.query](/#query), exc
     - ##### sort_order *string, optional*
         The order direction. Either `DESC` or `ASC`
     - ##### page_size *number, optional*
-        This library handles paging automatically. If the number of returned rows is larger than the page size, it will paginate through result sets and return all of the results when done. Defaults to `20,000`.
+        This library handles paging automatically. If the number of returned rows is larger than the page size, it will paginate through result sets and return all of the results when done. Defaults to `10,000`.
    
 #### Returns
 
