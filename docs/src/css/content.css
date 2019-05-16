@@ -3,6 +3,10 @@
     font-weight: 600;
 }
 
+.content a {
+    color: #008dff;
+}
+
 .content em {
     color: #95a1ad;
     font-size: 0.8rem;
