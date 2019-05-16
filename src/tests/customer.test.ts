@@ -116,7 +116,7 @@ describe('customer', () => {
     })
 
     describe('query', () => {
-        it('can retrieve data via an awql string', async () => {
+        it('can retrieve data via an gaql string', async () => {
             const campaigns = await customer.query(`
                 SELECT 
                     ad_group.id, 
