@@ -45,6 +45,17 @@ module.exports = {
                             rel: null,
                         },
                     },
+                    {
+                        resolve: `gatsby-plugin-prefetch-google-fonts`,
+                        options: {
+                            fonts: [
+                                {
+                                    family: `Roboto Mono`,
+                                    variants: [`400`]
+                                },
+                            ],
+                        },
+                    }
                 ],
             },
         },
