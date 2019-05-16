@@ -25,9 +25,8 @@ class AttributesTableOneOfs extends React.Component {
     
             return (
                 // <div className="table-heading pa3 opteo-middle-gray bb b--opteo-light-gray"><span className="fw7">ONE</span> of the following:</div>
-                <div className={nestingDepth === 0 ? 'one-of-container' : 'one-of-container pa3'}>
+                <div key={key} className={nestingDepth === 0 ? 'one-of-container' : 'one-of-container pa3'}>
                     <div 
-                        key={key} 
                         className={
                             nestingDepth === 0 ? 'mb3 br3 ba b--opteo-light-gray' 
                             : 'br3 ba b--opteo-light-gray'
@@ -38,6 +37,7 @@ class AttributesTableOneOfs extends React.Component {
                             {Object.keys(one_of).map((oneof_key, index) => {
                                 return (
                                     <AttributesTableOneOfItem
+                                        key={oneof_key}
                                         sectionKey={section_key}
                                         oneOfKey={oneof_key}
                                         details={one_of[oneof_key]}
