@@ -220,19 +220,19 @@ module.exports = {
                     _description: 'The list of possible final mobile URLs after all cross-domain redirects for the ad.',
                 },
                 expanded_text_ad: {
-                    path_1: {
+                    path1: {
                         _type: 'string',
                         _description: "The text that can appear alongside the ad's displayed URL.",
                     },
-                    headline_part_1: { _type: 'string', _description: "The first part of the ad's headline." },
+                    headline_part1: { _type: 'string', _description: "The first part of the ad's headline." },
                     description: { _type: 'string', _description: 'The description of the ad.' },
-                    description_2: { _type: 'string', _description: 'The second description of the ad.' },
-                    path_2: {
+                    description2: { _type: 'string', _description: 'The second description of the ad.' },
+                    path2: {
                         _type: 'string',
                         _description: "Additional text that can appear alongside the ad's displayed URL.",
                     },
-                    headline_part_3: { _type: 'string', _description: "The third part of the ad's headline." },
-                    headline_part_2: { _type: 'string', _description: "The second part of the ad's headline." },
+                    headline_part3: { _type: 'string', _description: "The third part of the ad's headline." },
+                    headline_part2: { _type: 'string', _description: "The second part of the ad's headline." },
                     _oneof: 'adData',
                 },
                 final_urls: {
@@ -246,7 +246,7 @@ module.exports = {
                         _description:
                             'List of text assets for headlines. When the ad serves the headlines will be selected from this list.',
                     },
-                    path_2: {
+                    path2: {
                         _type: 'string',
                         _description:
                             'Second part of text that may appear appended to the url displayed in the ad. This field can only be set when path1 is also set.',
@@ -256,7 +256,7 @@ module.exports = {
                         _description:
                             'List of text assets for descriptions. When the ad serves the descriptions will be selected from this list.',
                     },
-                    path_1: {
+                    path1: {
                         _type: 'string',
                         _description: 'First part of text that may appear appended to the url displayed in the ad.',
                     },
@@ -264,8 +264,8 @@ module.exports = {
                 },
                 legacy_app_install_ad: {
                     app_id: { _type: 'string', _description: 'The id of the mobile app.' },
-                    description_2: { _type: 'string', _description: 'The second description line of the ad.' },
-                    description_1: { _type: 'string', _description: 'The first description line of the ad.' },
+                    description2: { _type: 'string', _description: 'The second description line of the ad.' },
+                    description1: { _type: 'string', _description: 'The first description line of the ad.' },
                     headline: { _type: 'string', _description: 'The headline of the ad.' },
                     app_store: {
                         _type: 'enum',
@@ -362,9 +362,9 @@ module.exports = {
                 },
                 hotel_ad: { _oneof: 'adData' },
                 text_ad: {
-                    description_1: { _type: 'string', _description: "The first line of the ad's description." },
+                    description1: { _type: 'string', _description: "The first line of the ad's description." },
                     headline: { _type: 'string', _description: 'The headline of the ad.' },
-                    description_2: { _type: 'string', _description: "The second line of the ad's description." },
+                    description2: { _type: 'string', _description: "The second line of the ad's description." },
                     _oneof: 'adData',
                 },
                 system_managed_resource_source: {
@@ -568,13 +568,13 @@ module.exports = {
                         _description:
                             'The call conversion behavior of this call only ad. It can use its own call conversion setting, inherit the account level setting, or be disabled.',
                     },
-                    description_2: { _type: 'string', _description: "The second line of the ad's description." },
+                    description2: { _type: 'string', _description: "The second line of the ad's description." },
                     disable_call_conversion: {
                         _type: 'boolean',
                         _description:
                             'Whether to disable call conversion for the creative. If set to <code>true</code>, disables call conversions even when <code>call_tracked</code> is <code>true</code>. If <code>call_tracked</code> is <code>false</code>, this field is ignored.',
                     },
-                    headline_2: { _type: 'string', _description: 'Second headline in the ad.' },
+                    headline2: { _type: 'string', _description: 'Second headline in the ad.' },
                     business_name: { _type: 'string', _description: 'The business name in the ad.' },
                     call_tracked: {
                         _type: 'boolean',
@@ -583,12 +583,12 @@ module.exports = {
                     },
                     phone_number: { _type: 'string', _description: 'The phone number in the ad.' },
                     country_code: { _type: 'string', _description: 'The country code in the ad.' },
-                    headline_1: { _type: 'string', _description: 'First headline in the ad.' },
+                    headline1: { _type: 'string', _description: 'First headline in the ad.' },
                     phone_number_verification_url: {
                         _type: 'string',
                         _description: 'The URL to be used for phone number verification.',
                     },
-                    description_1: { _type: 'string', _description: "The first line of the ad's description." },
+                    description1: { _type: 'string', _description: "The first line of the ad's description." },
                     conversion_action: {
                         _type: 'string',
                         _description:

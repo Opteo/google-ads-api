@@ -3,6 +3,7 @@ const template = require('lodash.template')
 const camelCase = require('lodash.camelcase')
 const snakeCase = require('lodash.snakecase')
 const endsWith = require('lodash.endswith')
+const isnan = require('lodash.isnan')
 const get = require('lodash.get')
 const maxBy = require('lodash.maxby')
 
@@ -61,7 +62,10 @@ const service_compiler = template(service_template_file, {
     interpolate: /{{([\s\S]+?)}}/g,
 })
 
-const service_immutable_template_file = fs.readFileSync(__dirname + '/templates/template_service_immutable.hbs', 'utf-8')
+const service_immutable_template_file = fs.readFileSync(
+    __dirname + '/templates/template_service_immutable.hbs',
+    'utf-8'
+)
 const service_immutable_compiler = template(service_immutable_template_file, {
     interpolate: /{{([\s\S]+?)}}/g,
 })
@@ -80,9 +84,12 @@ const readme_object_compiler = template(fs.readFileSync(__dirname + '/templates/
     interpolate: /{{([\s\S]+?)}}/g,
 })
 
-const readme_object_compiler_code = template(fs.readFileSync(__dirname + '/templates/template_readme_object_code.hbs', 'utf-8'), {
-    interpolate: /{{([\s\S]+?)}}/g,
-})
+const readme_object_compiler_code = template(
+    fs.readFileSync(__dirname + '/templates/template_readme_object_code.hbs', 'utf-8'),
+    {
+        interpolate: /{{([\s\S]+?)}}/g,
+    }
+)
 
 // const readme_create_compiler = template(fs.readFileSync(__dirname + '/template_readme_create.hbs', 'utf-8'), {
 //     interpolate: /{{([\s\S]+?)}}/g,
@@ -90,7 +97,18 @@ const readme_object_compiler_code = template(fs.readFileSync(__dirname + '/templ
 
 const method_compilers = {}
 
-;['get', 'list', 'create', 'update', 'delete', 'get_code', 'list_code', 'create_code', 'update_code', 'delete_code'].forEach(method => {
+;[
+    'get',
+    'list',
+    'create',
+    'update',
+    'delete',
+    'get_code',
+    'list_code',
+    'create_code',
+    'update_code',
+    'delete_code',
+].forEach(method => {
     method_compilers[method] = template(
         fs.readFileSync(__dirname + `/templates/template_readme_${method}.hbs`, 'utf-8'),
         {
@@ -323,7 +341,17 @@ function getParam(entity) {
     if (entity === 'ChangeStatus') {
         return `change_status`
     }
-    return `${snakeCase(entity)}s`
+    return `${snakeCaseGads(entity)}s`
+}
+
+// Google does not consider numbers to be capitalised, but lodash does.
+function snakeCaseGads(str) {
+    const snaked = snakeCase(str)
+    const last_character = snaked[snaked.length - 1]
+    if (!isNaN(+last_character)) {
+        return snaked.slice(0, snaked.length - 2) + last_character
+    }
+    return snaked
 }
 
 async function compileService(entity, schema) {
@@ -340,8 +368,8 @@ async function compileService(entity, schema) {
     const resource = entity
     const type = entity
 
-    const param = snakeCase(entity)
-    const ent = snakeCase(entity)
+    const param = snakeCaseGads(entity)
+    const ent = snakeCaseGads(entity)
 
     let compiled_service
 
@@ -349,6 +377,7 @@ async function compileService(entity, schema) {
         const new_obj = {}
 
         Object.keys(obj).forEach(key => {
+            console.log(key)
             const _new_object = {}
 
             if (obj[key].enum) {
@@ -364,11 +393,11 @@ async function compileService(entity, schema) {
             }
 
             if (_new_object._type === 'object') {
-                new_obj[snakeCase(key)] = unroll(obj[key].properties, key)
+                new_obj[snakeCaseGads(key)] = unroll(obj[key].properties, key)
             } else {
                 const markdown_description = sanitiseHtml(obj[key].description)
 
-                new_obj[snakeCase(key)] = { ..._new_object, _description: markdown_description }
+                new_obj[snakeCaseGads(key)] = { ..._new_object, _description: markdown_description }
             }
 
             const matching_resource = compiled_resources[capitalise(parent_field_name)]
@@ -376,7 +405,7 @@ async function compileService(entity, schema) {
                 Object.keys(matching_resource.oneofs).forEach(oneof_key => {
                     matching_resource.oneofs[oneof_key].oneof.forEach(el => {
                         if (el === key) {
-                            new_obj[snakeCase(key)]._oneof = oneof_key
+                            new_obj[snakeCaseGads(key)]._oneof = oneof_key
                         }
                     })
                 })
@@ -420,9 +449,9 @@ async function compileService(entity, schema) {
             const type = obj[key].enum ? obj[key].enum.join(' | ') : obj[key].format || obj[key].type
 
             if (type === 'object') {
-                new_obj += `\n${tab.repeat(level)}${snakeCase(key)}: ${pretty(obj[key].properties, level + 1)}`
+                new_obj += `\n${tab.repeat(level)}${snakeCaseGads(key)}: ${pretty(obj[key].properties, level + 1)}`
             } else {
-                new_obj += `\n${tab.repeat(level)}${snakeCase(key)}: '${type}', // ${obj[key].description
+                new_obj += `\n${tab.repeat(level)}${snakeCaseGads(key)}: '${type}', // ${obj[key].description
                     .split('\n')
                     .join(' ')}`
             }
@@ -587,7 +616,7 @@ async function compileService(entity, schema) {
         )
 
         meta.methods.forEach(method => {
-            const compiled_md_code = method_compilers[method+ '_code']({
+            const compiled_md_code = method_compilers[method + '_code']({
                 ENTITY: entity,
                 ENTITY_SNAKECASE: ent,
                 RESOURCE_URL_NAME: resource_url_name,
@@ -596,7 +625,7 @@ async function compileService(entity, schema) {
                 EXAMPLE_RESOURCE_NAME: example_resource_name,
                 AN,
             })
-            
+
             const compiled_md = method_compilers[method]({
                 ENTITY: entity,
                 ENTITY_SNAKECASE: ent,

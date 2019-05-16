@@ -12,7 +12,7 @@ The `customer.query()` method allows you to query customer data using GAQL ([Goo
 
 GAQL looks like SQL, but it is not SQL. Key differences include:
 - Very limited [grammar](https://developers.google.com/google-ads/api/docs/query/grammar) (for example, no `OR` in constraints)
-- Implicit joins when selecting `selectableWith` fields. These aren't always intuitive.
+- Implicit joins when selecting `selectableWith` fields. These aren't always intuitive. [This file](https://github.com/Opteo/google-ads-node/blob/master/src/lib/fields.ts#L359) holds a complete list of which fields are usable for each resource.
 
 ```javascript
 // Basic query
@@ -38,4 +38,4 @@ const keyword_texts = await customer.query(`
 `)
 ```
 
-For more infomation about `customer.query()`, see the [customer core resource](/#customer-query)
+For a definition of the arguments and return types for `customer.query()`, see the [customer core resource](/#customer-query)

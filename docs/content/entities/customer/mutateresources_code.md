@@ -45,4 +45,3 @@ const response = await customer.mutateResources([
 	request: { /* your request object */ }
 }
 ```
-

@@ -146,7 +146,7 @@ module.exports = {
                 city_name: { _type: 'string', _description: 'Name of the city.' },
                 country_code: { _type: 'string', _description: 'Country code.' },
                 postal_code: { _type: 'string', _description: 'Postal code.' },
-                street_address_2: {
+                street_address2: {
                     _type: 'string',
                     _description:
                         'Street address line 2. This field is write-only. It is only used for calculating the longitude and latitude of an address when geo_point is empty.',

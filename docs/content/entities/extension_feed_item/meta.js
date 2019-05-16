@@ -10,7 +10,7 @@ module.exports = {
             _oneof: 'extension',
         },
         sitelink_feed_item: {
-            line_2: {
+            line2: {
                 _type: 'string',
                 _description:
                     'Second line of the description for the sitelink. If this value is set, line1 must also be set. The length of this string should be between 0 and 35, inclusive.',
@@ -25,7 +25,7 @@ module.exports = {
                 _description: 'A list of possible final mobile URLs after all cross domain redirects.',
             },
             tracking_url_template: { _type: 'string', _description: 'URL template for constructing a tracking URL.' },
-            line_1: {
+            line1: {
                 _type: 'string',
                 _description:
                     'First line of the description for the sitelink. If this value is set, line2 must also be set. The length of this string should be between 0 and 35, inclusive.',

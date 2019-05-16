@@ -7,7 +7,7 @@ entity: Customer
 
 ### Mutate several of different resource types in one call
 
-The `customer.mutateResources(resources_array)` takes an array of operations, where each operation is mutation to a resource, performs all of these mutations in sequence. By default, a call to `customer.mutateResources()` is atomic -- either all operations succeed or everything is rolled back.
+The `customer.mutateResources(resources_array)` method takes an array of operations, where each operation is mutation to a resource, performs all of these mutations in sequence. By default, a call to `customer.mutateResources()` is atomic -- either all operations succeed or everything is rolled back.
 
 #### Arguments
 

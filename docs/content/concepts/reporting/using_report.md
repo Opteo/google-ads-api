@@ -25,7 +25,7 @@ const response = await customer.report({
 
 ```
 
-For more infomation about `customer.report()`, see the [customer core resource](/#customer-report)
+For full infomation on the arguments of `customer.report()`, see the [customer core resource](/#customer-report)
 
 Every core resource also has `get()` and `list()` methods, which offer a convenient way to select every attribute of a resource. This can be quite valuable since GAQL does not support `SELECT *`. See the [campaign](/#get-campaign) core resource for an example.
 
