@@ -1,4 +1,5 @@
 module.exports = {
+    pathPrefix: `/dev/google-ads-api`,
     siteMetadata: {
         title: `Opteo docs`,
         description: `hello world`,
@@ -51,11 +52,11 @@ module.exports = {
                             fonts: [
                                 {
                                     family: `Roboto Mono`,
-                                    variants: [`400`]
+                                    variants: [`400`],
                                 },
                             ],
                         },
-                    }
+                    },
                 ],
             },
         },

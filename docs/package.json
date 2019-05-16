@@ -20,7 +20,7 @@
     "react-intersection-observer": "^8.23.0"
   },
   "scripts": {
-    "build": "gatsby build",
+    "build": "gatsby build --prefix-paths",
     "develop": "gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx}",
     "dev": "npm run develop",
