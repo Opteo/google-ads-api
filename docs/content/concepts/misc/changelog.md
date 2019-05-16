@@ -7,9 +7,9 @@ title: Changelog & future plans
 
 ## Changelog 
 
-View the changelog for this library here: https://github.com/Opteo/google-ads-api/blob/master/CHANGELOG.md
+This library's changelog: https://github.com/Opteo/google-ads-api/blob/master/CHANGELOG.md
 
-Check out the official [Google Ads API release notes](https://developers.google.com/google-ads/api/docs/release-notes) for a detailed changelog.
+Official API changelog: [Google Ads API release notes](https://developers.google.com/google-ads/api/docs/release-notes)
 
 We do not yet support every feature of the Google Ads API. Currently, these parts are still missing:
 - Uploading click and call conversions

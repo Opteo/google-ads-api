@@ -54,3 +54,10 @@
 .manual-content .gatsby-highlight{
     margin: 2rem 0rem;
 }
+
+.manual-content code.language-javascript,
+.manual-content code.language-typescript,
+.manual-content pre.language-javascript,
+.manual-content pre.language-typescript {
+    max-height: inherit;
+}

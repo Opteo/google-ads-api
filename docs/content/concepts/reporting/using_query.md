@@ -38,4 +38,4 @@ const keyword_texts = await customer.query(`
 `)
 ```
 
-For a definition of the arguments and return types for `customer.query()`, see the [customer core resource](/#customer-query)
+For a definition of the arguments and return types for `customer.query()`, see the [customer core resource](/#query)

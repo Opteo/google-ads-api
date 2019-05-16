@@ -108,6 +108,12 @@ export const getSubsectionTitle = ({ entity, type, title }) => {
         case 'mutateresources': {
             return `Mutate several resources`
         }
+        case 'query': {
+            return `Get data using query()`
+        }
+        case 'report': {
+            return `Get data using report()`
+        }
 
         default:
             return `${capitalizeFirstLetter(type)} ${AN} ${entity}`

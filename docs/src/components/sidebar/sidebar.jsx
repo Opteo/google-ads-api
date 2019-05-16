@@ -14,6 +14,8 @@ class Sidebar extends React.Component {
     }
 
     shouldComponentUpdate(nextProps) {
+        let should_update = false
+
         if (this.props.currentSection !== nextProps.currentSection) {
             const this_parent = this.props.currentSection.split('-')
             const this_parent_id = this_parent[this_parent.length - 1]
@@ -26,9 +28,14 @@ class Sidebar extends React.Component {
             }
             this.setState({ jump_from_click: false })
 
-            return true
+            should_update = true
         }
-        return false
+
+        if (this.state.search.length > 0) {
+            should_update = true
+        }
+
+        return should_update
     }
 
     componentDidMount() {
@@ -58,8 +65,8 @@ class Sidebar extends React.Component {
                 <Link className="f3 tc pt3-5 pb2  opteo-gray hover-opteo-gray" to="/">
                     google-ads-api
                 </Link>
-                <div className="mono f7 tc opteo-middle-gray">v1.5.0</div>
-                <SidebarSearch value={this.state.search} changeHandler={this.handleSearch} />
+                <div className="mono f7 tc opteo-middle-gray">v2.0.0</div>
+                <SidebarSearch changeHandler={this.handleSearch} />
                 <SidebarSectionGroups
                     sectionGroups={sectionGroups}
                     currentSection={currentSection}

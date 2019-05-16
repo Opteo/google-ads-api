@@ -8,7 +8,7 @@ title: Using Typescript
 
 ## Typescript
 
-All arguments and return types in this library have been carefully set up with typescript. We also expose every single type in the google ads api via the `types` export, should you choose to use them in your own code:
+This library has first-class support for Typescript. We also expose every single type in the Google Ads API via the `types` export, should you choose to use them in your own code:
 
 ```typescript
 import { types } from 'google-ads-api'

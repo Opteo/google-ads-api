@@ -59,3 +59,23 @@ let ads_with_urls = await customer.report({
     },
 ]
 ```
+
+```javascript
+// Constraint shorthands
+constraints = [
+    // clicks > 0, with no shorthand
+    { key: 'metrics.clicks', op: '>', val: 0 },
+    // campaign.name = "my campaign", with object shorthand for "="
+    { 'campaign.name': '"my campaign"' },
+    // campaign.status = "PAUSED", with object shorthand for "=" on enum
+    { 'campaign.status': enums.CampaignStatus.PAUSED },
+    // campaign.status IN ("PAUSED", "ENABLED"), with array shorthand for "IN"
+    { 'campaign.status': [enums.CampaignStatus.PAUSED, enums.CampaignStatus.ENABLED] },
+]
+
+// If all constraints are using "=" or "IN", the whole contraints key can be an object instead of an array.
+constraints = {
+    'campaign.name': '"my campaign"',
+    'campaign.status': [enums.CampaignStatus.PAUSED, enums.CampaignStatus.ENABLED],
+}
+```
