@@ -7,7 +7,7 @@ const Header = ({ siteTitle }) => (
         <div>
             <Link className="" to="/">
                 {/* {siteTitle} */}
-                <div className="w-100 flex items-center justify-center mobile-show pb1">
+                <div className="w-100 flex items-center justify-center mobile-show pt2 pb1">
                     <svg className="logo" width="40" height="40" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                         <g fill="none" fillRule="evenodd">
                             <path

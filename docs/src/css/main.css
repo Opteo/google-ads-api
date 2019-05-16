@@ -22,7 +22,7 @@ a:hover {
 h1 {
     font-weight: 400;
     font-size: 1.8rem;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
     color: #313135;
 }
 
@@ -57,11 +57,11 @@ h4 {
 h4.nested-title {
     margin-top: 1.5rem;
 }
-
-/* .mono {
+/* 
+.mono {
     font-family: 'Roboto Mono', Menlo;
-    font-weight: 600;
-    font-size: 0.85rem;
+    font-weight: 500;
+    font-size: 0.8rem;
 }  */
 
 ::placeholder {

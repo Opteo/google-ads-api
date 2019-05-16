@@ -64,6 +64,20 @@ class Container extends React.Component {
                     style={{ marginLeft: '280px', width: 'calc(100% - 280px)' }}
                 >
                     <h1 className="f2"> Google Ads API</h1>
+                    <div className="mt4">
+                        <a className="ph1" href="https://developers.google.com/google-ads/api/docs/release-notes">
+                            <img className="br1" src="https://img.shields.io/badge/google%20ads-v1.1.0-009688.svg?style=flat-square" />
+                        </a>
+                        <a className="ph1" href="https://www.npmjs.com/package/google-ads-api">
+                            <img className="br1" src="https://img.shields.io/npm/v/google-ads-api.svg?style=flat-square" />
+                        </a>
+                        <a className="ph1">
+                            <img className="br1" src="https://img.shields.io/npm/dm/google-ads-api.svg?style=flat-square" />
+                        </a>
+                        <a className="ph1">
+                            <img className="br1" src="https://img.shields.io/david/opteo/google-ads-api.svg?style=flat-square" />
+                        </a>
+                    </div>
                     {Sections}
                 </div>
             </div>

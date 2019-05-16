@@ -44,7 +44,7 @@ class Section extends React.Component {
         }
 
         const html_code = code.node.html || ''
-        const h1 = is_first_core_resource ? <h1 className="f2 mt4">Core resources</h1> : ''
+        const h1 = is_first_core_resource ? <h1 className="f2 mt6">Core resources</h1> : ''
         return (
             <SectionContainer sectionId={id} key={id} handler={this.props.onSectionChange}>
                 {h1}
