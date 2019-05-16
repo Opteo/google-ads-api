@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.6.0](https://github.com/Opteo/google-ads-api/compare/v1.5.0...v1.6.0) (2019-05-16)
+
+
+### Bug Fixes
+
+* **customer:** added customer interface type ([f275c53](https://github.com/Opteo/google-ads-api/commit/f275c53))
+* **docs:** add path prefix to Gatsby ([10b3e13](https://github.com/Opteo/google-ads-api/commit/10b3e13))
+
+
+### Features
+
+* **docs:** better types for entity fields ([9753350](https://github.com/Opteo/google-ads-api/commit/9753350))
+* **services:**  imporoved service generation. Still need to update test generation. Start of reference docs generation. ([4517ef6](https://github.com/Opteo/google-ads-api/commit/4517ef6))
+
+
+
 # [1.5.0](https://github.com/Opteo/google-ads-api/compare/v1.4.0...v1.5.0) (2019-04-30)
 
 
