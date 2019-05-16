@@ -1,7 +1,11 @@
+// manual_mode: This file has been manually modified and should not be touched by generate_services.js
+
+// @ts-ignore
+import { values } from 'lodash'
 import { GeoTargetConstant, SuggestGeoTargetConstantsRequest } from 'google-ads-node/build/lib/resources'
+
 import Service from './service'
 import { ServiceListOptions } from '../types'
-import { values } from 'lodash'
 
 /**
  * @constants

@@ -29,10 +29,7 @@ export default class FeedService extends Service {
         return this.getListResults('feed', options)
     }
 
-    public async create(
-        feed: Feed | Array<Feed>,
-        options?: ServiceCreateOptions
-    ): Promise<Mutation> {
+    public async create(feed: Feed | Array<Feed>, options?: ServiceCreateOptions): Promise<Mutation> {
         return this.serviceCreate({
             request: MUTATE_REQUEST,
             operation: OPERATION_REQUEST,
@@ -42,10 +39,7 @@ export default class FeedService extends Service {
         })
     }
 
-    public async update(
-        feed: Feed | Array<Feed>,
-        options?: ServiceCreateOptions
-    ): Promise<Mutation> {
+    public async update(feed: Feed | Array<Feed>, options?: ServiceCreateOptions): Promise<Mutation> {
         return this.serviceUpdate({
             request: MUTATE_REQUEST,
             operation: OPERATION_REQUEST,

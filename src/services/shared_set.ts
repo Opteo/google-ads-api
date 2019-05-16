@@ -29,10 +29,7 @@ export default class SharedSetService extends Service {
         return this.getListResults('shared_set', options)
     }
 
-    public async create(
-        shared_set: SharedSet | Array<SharedSet>,
-        options?: ServiceCreateOptions
-    ): Promise<Mutation> {
+    public async create(shared_set: SharedSet | Array<SharedSet>, options?: ServiceCreateOptions): Promise<Mutation> {
         return this.serviceCreate({
             request: MUTATE_REQUEST,
             operation: OPERATION_REQUEST,
@@ -42,10 +39,7 @@ export default class SharedSetService extends Service {
         })
     }
 
-    public async update(
-        shared_set: SharedSet | Array<SharedSet>,
-        options?: ServiceCreateOptions
-    ): Promise<Mutation> {
+    public async update(shared_set: SharedSet | Array<SharedSet>, options?: ServiceCreateOptions): Promise<Mutation> {
         return this.serviceUpdate({
             request: MUTATE_REQUEST,
             operation: OPERATION_REQUEST,

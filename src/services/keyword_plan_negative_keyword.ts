@@ -25,7 +25,9 @@ export default class KeywordPlanNegativeKeywordService extends Service {
         }) as KeywordPlanNegativeKeyword
     }
 
-    public async list(options?: ServiceListOptions): Promise<Array<{ keyword_plan_negative_keyword: KeywordPlanNegativeKeyword }>> {
+    public async list(
+        options?: ServiceListOptions
+    ): Promise<Array<{ keyword_plan_negative_keyword: KeywordPlanNegativeKeyword }>> {
         return this.getListResults('keyword_plan_negative_keyword', options)
     }
 

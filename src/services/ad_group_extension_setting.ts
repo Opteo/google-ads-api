@@ -25,7 +25,9 @@ export default class AdGroupExtensionSettingService extends Service {
         }) as AdGroupExtensionSetting
     }
 
-    public async list(options?: ServiceListOptions): Promise<Array<{ ad_group_extension_setting: AdGroupExtensionSetting }>> {
+    public async list(
+        options?: ServiceListOptions
+    ): Promise<Array<{ ad_group_extension_setting: AdGroupExtensionSetting }>> {
         return this.getListResults('ad_group_extension_setting', options)
     }
 

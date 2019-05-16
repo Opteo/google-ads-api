@@ -1,0 +1,73 @@
+import React from 'react'
+
+import AttributesTable from './attributesTable'
+import SectionContainer from './sectionContainer'
+
+class Section extends React.Component {
+    shouldComponentUpdate(nextProps, nextState) {
+        return false
+    }
+
+    render() {
+        const { data } = this.props
+
+        const { code, description } = data
+
+        const { id, meta, is_entity_index, is_first_core_resource } = description
+
+        const html_description = description.node.html || ''
+
+        const is_not_core_resource = description.node.frontmatter.type === 'manual'
+
+        if (is_not_core_resource) {
+            return (
+                <SectionContainer sectionId={id} key={id} handler={this.props.onSectionChange}>
+                    <div className={''}>
+                        <div
+                            className="manual-content text-container"
+                            dangerouslySetInnerHTML={{ __html: html_description }}
+                        />
+                    </div>
+                </SectionContainer>
+            )
+        }
+
+        if (!code) {
+            return (
+                <SectionContainer sectionId={id} key={id} handler={this.props.onSectionChange}>
+                    <div className="text-container half-column">
+                        <div className="content" dangerouslySetInnerHTML={{ __html: html_description }} />
+                        <div>{meta ? <AttributesTable section={id} data={meta} nestingDepth={0} /> : null}</div>
+                    </div>
+                </SectionContainer>
+            )
+        }
+
+        const html_code = code.node.html || ''
+        const h1 = is_first_core_resource ? <h1 className="mt6">Core resources</h1> : ''
+        return (
+            <SectionContainer sectionId={id} key={id} handler={this.props.onSectionChange}>
+                {h1}
+                <div
+                    className={
+                        ' ' +
+                        (is_entity_index
+                            ? 'flex justify-between bb b--opteo-light-gray pv5'
+                            : 'flex justify-between bb b--opteo-light-gray pv5')
+                    }
+                >
+                    <div className="text-container half-column">
+                        <div className="content" dangerouslySetInnerHTML={{ __html: html_description }} />
+                        <div>{meta ? <AttributesTable section={id} data={meta} nestingDepth={0} /> : null}</div>
+                    </div>
+                    <div
+                        className="sticky-code-block self-start half-column f6"
+                        dangerouslySetInnerHTML={{ __html: html_code }}
+                    />
+                </div>
+            </SectionContainer>
+        )
+    }
+}
+
+export default Section

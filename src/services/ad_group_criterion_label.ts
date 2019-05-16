@@ -25,7 +25,9 @@ export default class AdGroupCriterionLabelService extends Service {
         }) as AdGroupCriterionLabel
     }
 
-    public async list(options?: ServiceListOptions): Promise<Array<{ ad_group_criterion_label: AdGroupCriterionLabel }>> {
+    public async list(
+        options?: ServiceListOptions
+    ): Promise<Array<{ ad_group_criterion_label: AdGroupCriterionLabel }>> {
         return this.getListResults('ad_group_criterion_label', options)
     }
 

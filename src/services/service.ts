@@ -111,7 +111,7 @@ export default class Service {
         return this.mutate(request, operations, options)
     }
 
-    protected async serviceDelete(options: DelMutateOptions): Promise<any> {
+    protected async serviceDelete(options: DelMutateOptions): Promise<Mutation> {
         const request = new (grpc as any)[options.request]()
         const operation = new (grpc as any)[options.operation]()
 
@@ -151,21 +151,40 @@ export default class Service {
         options: MutateOptions | DelMutateOptions
     ): Promise<Mutation> {
         request.setCustomerId(this.cid)
-        request.setOperationsList(operations)
+
+        if (!request.setOperationsList) {
+            if (operations.length > 1) {
+                throw new Error(`This method only accepts one operation, but ${operations.length} were passed in.`)
+            }
+            request.setOperation(operations[0])
+        } else {
+            request.setOperationsList(operations)
+        }
 
         if (options.hasOwnProperty('validate_only')) {
+            if (!request.setValidateOnly) {
+                throw new Error(`This method does not support the validate_only option.`)
+            }
             request.setValidateOnly(options.validate_only)
         }
         if (options.hasOwnProperty('partial_failure')) {
+            if (!request.setPartialFailure) {
+                throw new Error(`This method does not support the partial_failure option.`)
+            }
             request.setPartialFailure(options.partial_failure)
         }
 
         const response = await this.serviceCall(options.mutate, request)
 
+        const is_single_result = response.hasOwnProperty(`result`)
+
         return {
             request: request.toObject(),
             partial_failure_error: response.partial_failure_error,
-            results: response.results_list.map((r: any) => r.resourceName),
+            // Always return results as an array for consistency
+            results: is_single_result
+                ? [response.result.resource_name]
+                : response.results_list.map((r: any) => r.resourceName),
         }
     }
 

@@ -1,0 +1,228 @@
+code {
+    font-family: 'Roboto Mono', Menlo;
+    font-size: 0.81rem;
+    font-weight: 400;
+}
+
+a code::after {
+    content: ' 🔗';
+}
+
+/* Inline Text */
+
+.text-container code {
+    color: #c92c2c;
+    background: #f9fafc;
+    padding: 0 4px;
+    margin: 0 1px;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/**
+ * prism.js — Coy Theme
+ * Based on https://github.com/tshedor/workshop-wp-theme (Example: http://workshop.kansan.com/category/sessions/basics or http://workshop.timshedor.com/category/sessions/basics);
+ * @author Tim  Shedor
+ */
+
+code.language-javascript,
+code.language-typescript,
+pre.language-javascript,
+pre.language-typescript {
+    color: black;
+    background: none;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+    max-height: 50vh;
+}
+
+/* Code blocks */
+pre[class='language-javascript'],
+pre[class='language-typescript'] {
+    position: relative;
+    margin: 0.5em 0;
+    overflow: visible;
+    padding: 0;
+}
+pre[class='language-javascript'] > code,
+pre[class='language-typescript'] > code {
+    border-radius: 0.5rem;
+    border: 1px solid #f2f2f6;
+    padding: 1rem;
+    position: relative;
+    background-color: #f9fafc;
+    background-size: 3em 3em;
+    background-origin: content-box;
+    background-attachment: local;
+}
+
+code[class='language-javascript'],
+code[class='language-typescript'] {
+    max-height: inherit;
+    height: inherit;
+    padding: 0 1em;
+    display: block;
+    overflow: auto;
+}
+
+/* Margin bottom to accommodate shadow */
+:not(pre) > code[class='language-javascript'],
+:not(pre) > code[class='language-typescript'],
+pre[class='language-javascript'],
+pre[class='language-typescript'] {
+    background-color: #fdfdfd;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-bottom: 1em;
+}
+
+/* Inline code */
+:not(pre) > code[class='language-javascript'] :not(pre) > code[class='language-typescript'] {
+    position: relative;
+    padding: 0.2em;
+    border-radius: 0.3em;
+    color: #c92c2c;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    display: inline;
+    white-space: normal;
+}
+
+.token.comment,
+.token.block-comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: #7d8b99;
+}
+
+.token.punctuation {
+    color: #5f6364;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.function-name,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #c92c2c;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.function,
+.token.builtin,
+.token.inserted {
+    color: #008080;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.token.variable {
+    color: #a67f59;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword,
+.token.class-name {
+    color: #8b2bb9;
+}
+
+.token.regex,
+.token.important {
+    color: #e90;
+}
+
+.language-javascriptcss .token.string,
+.style .token.string {
+    color: #a67f59;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.token.important {
+    font-weight: normal;
+}
+
+.token.bold {
+    font-weight: bold;
+}
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}
+
+.namespace {
+    opacity: 0.7;
+}
+
+@media screen and (max-width: 767px) {
+    pre[class='language-javascript']:before,
+    pre[class='language-javascript']:after,
+    pre[class='language-typescript']:before,
+    pre[class='language-typescript']:after {
+        bottom: 14px;
+        box-shadow: none;
+    }
+}
+
+/* Plugin styles */
+.token.tab:not(:empty):before,
+.token.cr:before,
+.token.lf:before {
+    color: #e0d7d1;
+}
+
+/* Plugin styles: Line Numbers */
+pre[class='language-typescript'].line-numbers.line-numbers,
+pre[class='language-javascript'].line-numbers.line-numbers {
+    padding-left: 0;
+}
+
+pre[class='language-javascript'].line-numbers.line-numbers code,
+pre[class='language-typescript'].line-numbers.line-numbers code {
+    padding-left: 3.8em;
+}
+
+pre[class='language-javascript'].line-numbers.line-numbers .line-numbers-rows,
+pre[class='language-typescript'].line-numbers.line-numbers .line-numbers-rows {
+    left: 0;
+}
+
+/* Plugin styles: Line Highlight */
+pre[class='language-javascript'][data-line],
+pre[class='language-typescript'][data-line] {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+}
+pre[data-line] code {
+    position: relative;
+    padding-left: 4em;
+}
+pre .line-highlight {
+    margin-top: 0;
+}

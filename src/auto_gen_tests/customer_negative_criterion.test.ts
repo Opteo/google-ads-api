@@ -8,14 +8,16 @@ import { newCustomer, BUDGET_ID, CID, getRandomName } from '../test_utils'
 const customer = newCustomer()
 
 describe('CustomerNegativeCriterion', async () => {
-
     describe('reporting', async () => {
         it('can retrieve a list of CustomerNegativeCriterions with all fields (if valid)', async () => {
-            const customer_negative_criterions = await customer.customerNegativeCriterions.list()
+            const customer_negative_criterions = await customer.customerNegativeCriteria.list()
             expect(customer_negative_criterions).toBeInstanceOf(Array)
 
             // @ts-ignore Ignore missing proto definitions for now
-            if(customer_negative_criterions.length > 0 && customer_negative_criterions[0].customer_negative_criterion.resource_name) {
+            if (
+                customer_negative_criterions.length > 0 &&
+                customer_negative_criterions[0].customer_negative_criterion.resource_name
+            ) {
                 expect(customer_negative_criterions[0].customer_negative_criterion).toEqual(
                     expect.objectContaining({
                         resource_name: expect.stringContaining(`customers/${CID}/customerNegativeCriterions`) || '',
@@ -25,8 +27,8 @@ describe('CustomerNegativeCriterion', async () => {
                 // @ts-ignore Ignore missing proto definitions for now
                 const resource = customer_negative_criterions[0].customer_negative_criterion.resource_name
 
-                if(resource) {
-                    const singleton = await customer.customerNegativeCriterions.get(resource)
+                if (resource) {
+                    const singleton = await customer.customerNegativeCriteria.get(resource)
                     expect(singleton).toBeInstanceOf(Object)
                     expect(singleton).toEqual(
                         expect.objectContaining({
@@ -39,12 +41,11 @@ describe('CustomerNegativeCriterion', async () => {
 
         it('throws an error when the request is invalid', async () => {
             await expect(
-                customer.customerNegativeCriterions.list({
+                customer.customerNegativeCriteria.list({
                     limit: -10,
                     constraints: ['FakeConstraint=INVALID'],
                 })
             ).rejects.toThrow('Unrecognized field')
         })
     })
-
 })

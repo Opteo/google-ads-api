@@ -1,0 +1,270 @@
+/* Opteo Colours
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.opteo-blue {
+    color: #1056ea;
+}
+.bg-opteo-blue {
+    background-color: #1056ea;
+}
+.b--opteo-blue {
+    border-color: #1056ea;
+}
+
+.hover-opteo-blue:hover,
+.hover-opteo-blue:focus {
+    color: #1056ea;
+}
+
+.hover-bg-opteo-blue:hover,
+.hover-bg-opteo-blue:focus {
+    background-color: #1056ea;
+}
+
+.opteo-gray {
+    color: #313135;
+}
+.bg-opteo-gray {
+    background-color: #313135;
+}
+.b--opteo-gray {
+    border-color: #313135;
+}
+
+.hover-opteo-gray:hover,
+.hover-opteo-gray:focus {
+    color: #313135;
+}
+
+.hover-bg-opteo-gray:hover,
+.hover-bg-opteo-gray:focus {
+    background-color: #313135;
+}
+
+.opteo-dark-gray {
+    color: #262629;
+}
+.bg-opteo-dark-gray {
+    background-color: #262629;
+}
+.b--opteo-dark-gray {
+    border-color: #262629;
+}
+
+.opteo-middle-gray {
+    color: #95a1ad;
+}
+
+.hover-opteo-dark-gray:hover,
+.hover-opteo-dark-gray:focus {
+    color: #262629;
+}
+
+.hover-bg-opteo-dark-gray:hover,
+.hover-bg-opteo-dark-gray:focus {
+    background-color: #262629;
+}
+
+.opteo-light-gray {
+    color: #f2f2f6;
+}
+.bg-opteo-light-gray {
+    background-color: #f2f2f6;
+}
+.b--opteo-light-gray {
+    border-color: #f2f2f6;
+}
+
+.hover-opteo-light-gray:hover,
+.hover-opteo-light-gray:focus {
+    color: #f2f2f6;
+}
+
+.hover-bg-opteo-light-gray:hover,
+.hover-bg-opteo-light-gray:focus {
+    background-color: #f2f2f6;
+}
+
+.opteo-near-white {
+    color: #f6f6f9;
+}
+.bg-opteo-near-white {
+    background-color: #fcfcfd;
+}
+.b--opteo-near-white {
+    border-color: rgba(2, 2, 12, 0.04);
+}
+
+.hover-opteo-near-white:hover,
+.hover-opteo-near-white:focus {
+    color: #f6f6f9;
+}
+
+.hover-bg-opteo-near-white:hover,
+.hover-bg-opteo-near-white:focus {
+    background-color: #fcfcfd;
+}
+
+.opteo-link-blue {
+    color: #008dff;
+}
+.opteo-link-blue-imp {
+    color: #008dff !important;
+    opacity: 1 !important;
+}
+.bg-opteo-link-blue {
+    background-color: #008dff;
+}
+.b--opteo-link-blue {
+    border-color: #008dff;
+}
+
+.hover-opteo-link-blue:hover,
+.hover-opteo-link-blue:focus {
+    color: #008dff;
+}
+
+.hover-bg-opteo-link-blue:hover,
+.hover-bg-opteo-link-blue:focus {
+    background-color: #008dff;
+}
+
+.opteo-purple {
+    color: #7d52ff;
+}
+.bg-opteo-purple {
+    background-color: #7d52ff;
+}
+.b--opteo-purple {
+    border-color: #7d52ff;
+}
+
+.hover-opteo-purple:hover,
+.hover-opteo-purple:focus {
+    color: #7d52ff;
+}
+
+.hover-bg-opteo-purple:hover,
+.hover-bg-opteo-purple:focus {
+    background-color: #7d52ff;
+}
+
+.opteo-green {
+    color: #00be72;
+}
+.bg-opteo-green {
+    background-color: #00be72;
+}
+.b--opteo-green {
+    border-color: #00be72;
+}
+
+.hover-opteo-green:hover,
+.hover-opteo-green:focus {
+    color: #00be72;
+}
+
+.hover-bg-opteo-green:hover,
+.hover-bg-opteo-green:focus {
+    background-color: #00be72;
+}
+
+.opteo-gold {
+    color: #ff9900;
+}
+.bg-opteo-gold {
+    background-color: #ff9900;
+}
+.b--opteo-gold {
+    border-color: #ff9900;
+}
+
+.hover-opteo-gold:hover,
+.hover-opteo-gold:focus {
+    color: #ff9900;
+}
+
+.hover-bg-opteo-gold:hover,
+.hover-bg-opteo-gold:focus {
+    background-color: #ff9900;
+}
+
+.opteo-red {
+    color: #ff4646;
+}
+.bg-opteo-red {
+    background-color: #ff4646;
+}
+.b--opteo-red {
+    border-color: #ff4646;
+}
+
+.hover-opteo-red:hover,
+.hover-opteo-red:focus {
+    color: #ff4646;
+}
+
+.hover-bg-opteo-red:hover,
+.hover-bg-opteo-red:focus {
+    background-color: #ff4646;
+}
+
+.opteo-steel {
+    color: #747883;
+}
+.bg-opteo-steel {
+    background-color: #747883;
+}
+.b--opteo-steel {
+    border-color: #747883;
+}
+
+.hover-opteo-steel:hover,
+.hover-opteo-steel:focus {
+    color: #747883;
+}
+
+.hover-bg-opteo-steel:hover,
+.hover-bg-opteo-steel:focus {
+    background-color: #747883;
+}
+
+.opteo-inactive {
+    color: #cecfd4;
+}
+.bg-opteo-inactive {
+    background-color: #dddfe4;
+}
+.b--opteo-inactive {
+    border-color: #dddfe4;
+}
+
+.hover-opteo-inactive:hover,
+.hover-opteo-inactive:focus {
+    color: #cecfd4;
+}
+
+.hover-bg-opteo-inactive:hover,
+.hover-bg-opteo-inactive:focus {
+    background-color: #dddfe4;
+}
+
+.opteo-pink {
+    color: #ff4f70;
+}
+.bg-opteo-pink {
+    background-color: #ff4f70;
+}
+.b--opteo-pink {
+    border-color: #ff4f70;
+}
+
+.hover-opteo-pink:hover,
+.hover-opteo-pink:focus {
+    color: #ff4f70;
+}
+
+.hover-bg-opteo-pink:hover,
+.hover-bg-opteo-pink:focus {
+    background-color: #ff4f70;
+}

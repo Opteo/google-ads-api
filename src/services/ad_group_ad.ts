@@ -29,10 +29,7 @@ export default class AdGroupAdService extends Service {
         return this.getListResults('ad_group_ad', options)
     }
 
-    public async create(
-        ad_group_ad: AdGroupAd | Array<AdGroupAd>,
-        options?: ServiceCreateOptions
-    ): Promise<Mutation> {
+    public async create(ad_group_ad: AdGroupAd | Array<AdGroupAd>, options?: ServiceCreateOptions): Promise<Mutation> {
         return this.serviceCreate({
             request: MUTATE_REQUEST,
             operation: OPERATION_REQUEST,
@@ -42,10 +39,7 @@ export default class AdGroupAdService extends Service {
         })
     }
 
-    public async update(
-        ad_group_ad: AdGroupAd | Array<AdGroupAd>,
-        options?: ServiceCreateOptions
-    ): Promise<Mutation> {
+    public async update(ad_group_ad: AdGroupAd | Array<AdGroupAd>, options?: ServiceCreateOptions): Promise<Mutation> {
         return this.serviceUpdate({
             request: MUTATE_REQUEST,
             operation: OPERATION_REQUEST,

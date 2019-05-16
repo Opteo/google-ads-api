@@ -25,7 +25,9 @@ export default class CampaignExtensionSettingService extends Service {
         }) as CampaignExtensionSetting
     }
 
-    public async list(options?: ServiceListOptions): Promise<Array<{ campaign_extension_setting: CampaignExtensionSetting }>> {
+    public async list(
+        options?: ServiceListOptions
+    ): Promise<Array<{ campaign_extension_setting: CampaignExtensionSetting }>> {
         return this.getListResults('campaign_extension_setting', options)
     }
 

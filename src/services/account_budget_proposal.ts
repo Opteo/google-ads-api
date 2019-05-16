@@ -8,8 +8,8 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
  * @constants
  */
 const RESOURCE_URL_NAME = 'accountBudgetProposals'
-const MUTATE_METHOD = 'mutateAccountBudgetProposals'
-const MUTATE_REQUEST = 'MutateAccountBudgetProposalsRequest'
+const MUTATE_METHOD = 'mutateAccountBudgetProposal'
+const MUTATE_REQUEST = 'MutateAccountBudgetProposalRequest'
 const OPERATION_REQUEST = 'AccountBudgetProposalOperation'
 const GET_METHOD = 'getAccountBudgetProposal'
 const GET_REQUEST = 'GetAccountBudgetProposalRequest'
@@ -25,7 +25,9 @@ export default class AccountBudgetProposalService extends Service {
         }) as AccountBudgetProposal
     }
 
-    public async list(options?: ServiceListOptions): Promise<Array<{ account_budget_proposal: AccountBudgetProposal }>> {
+    public async list(
+        options?: ServiceListOptions
+    ): Promise<Array<{ account_budget_proposal: AccountBudgetProposal }>> {
         return this.getListResults('account_budget_proposal', options)
     }
 

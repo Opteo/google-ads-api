@@ -16,7 +16,9 @@
     "test:watch": "run-s clean build && run-p \"build -- -w\" \"test:unit -- --watch --runInBand\"",
     "prettier:base": "prettier --parser typescript --single-quote",
     "prettier:check": "npm run prettier:base -- --list-different \"src/**/*.{ts,tsx}\"",
-    "prettier:write": "npm run prettier:base -- --write \"src/**/*.{ts,tsx}\""
+    "prettier:write": "npm run prettier:base -- --write \"src/**/*.{ts,tsx}\"",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -57,15 +59,23 @@
   "devDependencies": {
     "@types/jest": "^24.0.9",
     "dotenv": "^7.0.0",
+    "fs-extra": "^7.0.1",
     "jest": "^24.1.0",
+    "json-schema-ref-parser": "^6.1.0",
     "lodash.camelcase": "^4.3.0",
+    "lodash.endswith": "^4.2.1",
+    "lodash.get": "^4.4.2",
+    "lodash.isnan": "^3.0.2",
     "lodash.snakecase": "^4.1.1",
+    "lodash.startswith": "^4.2.1",
     "lodash.template": "^4.4.0",
     "npm-run-all": "^4.1.5",
-    "prettier": "^1.14.3",
+    "prettier": "^1.17.1",
+    "showdown": "^1.9.0",
     "standard-version": "^5.0.2",
     "ts-jest": "^24.0.0",
     "tslint": "^5.12.1",
+    "turndown": "^5.0.3",
     "typescript": "^3.3.1"
   },
   "dependencies": {
@@ -75,6 +85,7 @@
     "bottleneck": "^2.16.1",
     "google-ads-node": "^1.10.1",
     "lodash": "^4.17.11",
+    "lodash.maxby": "^4.6.0",
     "redis": "^2.8.0",
     "request": "^2.88.0"
   }

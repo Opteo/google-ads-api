@@ -29,10 +29,7 @@ export default class UserListService extends Service {
         return this.getListResults('user_list', options)
     }
 
-    public async create(
-        user_list: UserList | Array<UserList>,
-        options?: ServiceCreateOptions
-    ): Promise<Mutation> {
+    public async create(user_list: UserList | Array<UserList>, options?: ServiceCreateOptions): Promise<Mutation> {
         return this.serviceCreate({
             request: MUTATE_REQUEST,
             operation: OPERATION_REQUEST,
@@ -42,10 +39,7 @@ export default class UserListService extends Service {
         })
     }
 
-    public async update(
-        user_list: UserList | Array<UserList>,
-        options?: ServiceCreateOptions
-    ): Promise<Mutation> {
+    public async update(user_list: UserList | Array<UserList>, options?: ServiceCreateOptions): Promise<Mutation> {
         return this.serviceUpdate({
             request: MUTATE_REQUEST,
             operation: OPERATION_REQUEST,

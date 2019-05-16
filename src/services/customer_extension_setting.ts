@@ -25,7 +25,9 @@ export default class CustomerExtensionSettingService extends Service {
         }) as CustomerExtensionSetting
     }
 
-    public async list(options?: ServiceListOptions): Promise<Array<{ customer_extension_setting: CustomerExtensionSetting }>> {
+    public async list(
+        options?: ServiceListOptions
+    ): Promise<Array<{ customer_extension_setting: CustomerExtensionSetting }>> {
         return this.getListResults('customer_extension_setting', options)
     }
 
