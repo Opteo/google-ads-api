@@ -50,3 +50,7 @@
     font-weight: 500;
     color: #313135;
 }
+
+.manual-content .gatsby-highlight{
+    margin: 2rem 0rem;
+}
