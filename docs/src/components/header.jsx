@@ -5,9 +5,8 @@ import React from 'react'
 const Header = ({ siteTitle }) => (
     <header id="header" className="bg-white ph4 pv2 tc bb b--opteo-light-gray" style={{ marginLeft: '280px' }}>
         <div>
-            <Link className="" to="/">
-                {/* {siteTitle} */}
-                <div className="w-100 flex items-center justify-center mobile-show pt2 pb1">
+            <div className="w-100 flex items-center justify-center mobile-show pt2 pb1">
+                <Link to="/">
                     <svg className="logo" width="40" height="40" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                         <g fill="none" fillRule="evenodd">
                             <path
@@ -28,9 +27,9 @@ const Header = ({ siteTitle }) => (
                             />
                         </g>
                     </svg>
-                </div>
-                <div className="pt2 pb2">Built by Opteo</div>
-            </Link>
+                </Link>
+            </div>
+            <div className="pt2 pb2"><a href="https://opteo.com/">Built by Opteo</a></div>
         </div>
     </header>
 )
