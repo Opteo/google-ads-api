@@ -103,6 +103,7 @@ const formatConstraints = (constraints: any): string => {
             return constraint
         }
 
+        //@ts-ignore
         let key
         let val
         let op
@@ -123,11 +124,16 @@ const formatConstraints = (constraints: any): string => {
             if (constraint.val.length === 0) {
                 val = `()`
             } else {
-                val = `("${constraint.val.sort().join(`","`)}")`
+                const vals = constraint.val
+                    //@ts-ignore
+                    .map(v => translateEnumValue(key, v))
+                    .sort()
+                    .join(`","`)
+                val = `("${vals}")`
             }
+        } else {
+            val = translateEnumValue(key, val)
         }
-
-        val = translateEnumValue(key, val)
 
         return `${key} ${op} ${val}`
     }

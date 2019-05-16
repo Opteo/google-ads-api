@@ -1,7 +1,7 @@
 import { orderBy } from 'lodash'
 import { newCustomerWithMetrics, newCustomer } from '../test_utils'
 
-import { AdGroupStatus } from 'google-ads-node/build/lib/enums'
+import { AdGroupStatus, AdType } from 'google-ads-node/build/lib/enums'
 
 describe('Reporting', async () => {
     const customer = newCustomerWithMetrics()
@@ -193,16 +193,18 @@ describe('Reporting', async () => {
         })
     })
 
-    // TODO: Make this work
-    // it('supports using enums as constraints', async () => {
-    //     const row = await customer.report({
-    //         entity: 'ad_group',
-    //         attributes: ['ad_group.id', 'status'],
-    //         constraints: [{ 'ad_group.status': AdGroupStatus.ENABLED }],
-    //         limit: 1,
-    //     })
-    //     expect(row.ad_group.status).toEqual(AdGroupStatus.ENABLED)
-    // })
+    it('supports using enums as constraints', async () => {
+        const rows = await customer.report({
+            entity: 'ad_group_ad',
+            attributes: ['ad_group.id', 'ad_group.status'],
+            constraints: [
+                { 'ad_group.status': AdGroupStatus.ENABLED },
+                { 'ad_group_ad.ad.type': [AdType.TEXT_AD, AdType.EXPANDED_TEXT_AD] },
+            ],
+            limit: 1,
+        })
+        expect(rows[0].ad_group.status).toEqual(AdGroupStatus.ENABLED)
+    })
 
     it("retrieves no rows for entities that don't exist", async () => {
         const row = await customer.report({
