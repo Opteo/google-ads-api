@@ -26,7 +26,7 @@
   </a>
 </p>
 
-# Features
+# Features 
 
 -   Simple and easy to use API
 -   Uses [gRPC](https://grpc.io/) and [Protocol Buffers](https://developers.google.com/protocol-buffers/) internally (recommended by Google)
