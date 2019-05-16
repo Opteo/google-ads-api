@@ -2,24 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [1.6.1](https://github.com/Opteo/google-ads-api/compare/v1.6.0...v1.6.1) (2019-05-16)
+# 2.0.0 (2019-05-16)
 
 
+### Breaking Changes
 
-# [1.6.0](https://github.com/Opteo/google-ads-api/compare/v1.5.0...v1.6.0) (2019-05-16)
+* **breaking:** renamed customer.adGroupCriterion to customer.adGroupCriteria
+* **breaking:** renamed customer.biddingStrategys to customer.biddingStrategies
+* **breaking:** renamed customer.campaignCriterion to customer.campaignCriteria
+* **breaking:** renamed customer.customerNegativeCriterions to customer.customerNegativeCriteria
+* **breaking:** renamed customer.sharedCriterion to customer.sharedCriteria
+* **breaking:** removed all customer.somethingView services because they don't actually offer any useful functionality
+
+### Features
+
+* **New docs**: New docs published at https://opteo.com/dev/google-ads-api
 
 
 ### Bug Fixes
 
-* **customer:** added customer interface type ([f275c53](https://github.com/Opteo/google-ads-api/commit/f275c53))
-* **docs:** add path prefix to Gatsby ([10b3e13](https://github.com/Opteo/google-ads-api/commit/10b3e13))
-
-
-### Features
-
-* **docs:** better types for entity fields ([9753350](https://github.com/Opteo/google-ads-api/commit/9753350))
-* **services:**  imporoved service generation. Still need to update test generation. Start of reference docs generation. ([4517ef6](https://github.com/Opteo/google-ads-api/commit/4517ef6))
-
+* **fix(mutations)**: single-entity creates and updates now work correctly for MerchantCenterLink, CustomerClientLink, AccountBudgetProposal, and BillingSetup. Attempts at using an array of entities to mutate will now result in an error.
+* **fix(services)**: Fixed CustomerManagerLink create and update operations, which were failing due to a typo.
 
 
 # [1.5.0](https://github.com/Opteo/google-ads-api/compare/v1.4.0...v1.5.0) (2019-04-30)
