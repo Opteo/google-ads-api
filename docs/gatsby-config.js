@@ -17,14 +17,14 @@ module.exports = {
                 path: `${__dirname}/content`,
             },
         },
-        {
-            resolve: `gatsby-plugin-github-ribbon`,
-            options: {
-                project: `https://github.com/Opteo/google-ads-api`,
-                color: `black`, //`red`, `green`, `darkblue`, `orange`, `gray`, or `white`.
-                position: `right`, //`left` or `right`
-            },
-        },
+        // {
+        //     resolve: `gatsby-plugin-github-ribbon`,
+        //     options: {
+        //         project: `https://github.com/Opteo/google-ads-api`,
+        //         color: `black`, //`red`, `green`, `darkblue`, `orange`, `gray`, or `white`.
+        //         position: `right`, //`left` or `right`
+        //     },
+        // },
         {
             resolve: `gatsby-transformer-remark`,
             options: {
