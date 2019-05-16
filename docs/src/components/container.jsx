@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { Helmet } from 'react-helmet'
 
 import Section from '../components/section'
 import Sidebar from '../components/sidebar/sidebar'
@@ -56,6 +57,21 @@ class Container extends React.Component {
 
         return (
             <div className="w-100 items-start">
+                <Helmet>
+                    <meta charSet="utf-8" />
+                    <title>Google Ads API client library for NodeJS</title>
+                    <link rel="canonical" href="https://opteo.com/dev/google-ads-api" />
+                    <meta
+                        name="description"
+                        content="The unofficial Google Ads API library for NodeJS. Built with a simple and easy to use interface, uses gRPC and Protocol Buffers internally, and has first-class typescript support."
+                    />
+                    <link rel="icon" type="image/png" href="/images/favicon.png" />
+                    <meta
+                        name="keywords"
+                        content="google ads, adwords, google ads api, adwords api, refresh token, access token, nodejs, node, javascript"
+                    />
+                    <meta name="robots" content="index, follow" />
+                </Helmet>
                 <div className="">
                     <Sidebar sectionGroups={section_ids} currentSection={this.state.current_section} />
                 </div>

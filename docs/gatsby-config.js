@@ -9,11 +9,20 @@ module.exports = {
         // this (optional) plugin enables Progressive Web App + Offline functionality
         // To learn more, visit: https://gatsby.dev/offline
         `gatsby-plugin-offline`,
+        `gatsby-plugin-react-helmet`,
         {
             resolve: 'gatsby-source-filesystem',
             options: {
                 name: 'content',
                 path: `${__dirname}/content`,
+            },
+        },
+        {
+            resolve: `gatsby-plugin-github-ribbon`,
+            options: {
+                project: `https://github.com/Opteo/google-ads-api`,
+                color: `black`, //`red`, `green`, `darkblue`, `orange`, `gray`, or `white`.
+                position: `right`, //`left` or `right`
             },
         },
         {
