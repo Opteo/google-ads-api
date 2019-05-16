@@ -29,6 +29,7 @@ const Header = ({ siteTitle }) => (
                         </g>
                     </svg>
                 </div>
+                <div className="pt2 pb2">Built by Opteo</div>
             </Link>
         </div>
     </header>

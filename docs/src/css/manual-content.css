@@ -9,6 +9,15 @@
     font-weight: 500;
 }
 
+.manual-content h2 {
+    margin-top: 3rem;
+}
+
+.manual-content h3 {
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+}
+
 .manual-content p {
     margin-top: 1rem;
     margin-bottom: 1rem;
