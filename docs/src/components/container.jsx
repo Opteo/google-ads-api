@@ -64,7 +64,7 @@ class Container extends React.Component {
                     style={{ marginLeft: '280px', width: 'calc(100% - 280px)' }}
                 >
                     <h1>Google Ads API</h1>
-                    <h3 class="mb0">Unofficial Google Ads API client library for Node</h3>
+                    <h3 className="mb0">Unofficial Google Ads API client library for Node</h3>
                     <div className="mt4">
                         <a className="ph1" href="https://developers.google.com/google-ads/api/docs/release-notes">
                             <img
