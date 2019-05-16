@@ -25,6 +25,6 @@ The official Google Ads client libraries are robust, but they don't always offer
 
 This library aims to offer a better way to use the Google Ads API. 
 
--   [`google-ads-node`](https://github.com/Opteo/google-ads-node) is a low-level Node implementation of the API which imitates the stucture of the other client libraries.
--   `google-ads-api` (this library) is a wrapper around `google-ads-node` to provide a better developer experience.
+-   **[google-ads-node](https://github.com/Opteo/google-ads-node)** is a low-level Node implementation of the API which imitates the stucture of the other client libraries.
+-   **[google-ads-api](https://github.com/Opteo/google-ads-api)** (this library) is a wrapper around `google-ads-node` to provide a better developer experience.
 
