@@ -25,7 +25,7 @@ const result = await customer.adGroupFeeds.create([ad_group_feed, other_ad_group
 
 // Example result
 {
-	results : ['customers/3827277046/adGroupFeeds/36337683057~43009393'],
+	results : ['customers/3827277046/adGroupFeeds/45808681193~90651045'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

@@ -13,6 +13,6 @@ let result = await customer.adGroupCriterionLabels.get('customers/1234567890/adG
 ```javascript
 
 // Example result
-(// Todo: add example get() return here)
+(/* Todo: add example get() return here */)
 
 ```

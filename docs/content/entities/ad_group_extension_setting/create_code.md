@@ -28,7 +28,7 @@ const result = await customer.adGroupExtensionSettings.create(
 
 // Example result
 {
-	results : ['customers/3827277046/adGroupExtensionSettings/36337683057~SITELINK'],
+	results : ['customers/3827277046/adGroupExtensionSettings/69639056828~SITELINK'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

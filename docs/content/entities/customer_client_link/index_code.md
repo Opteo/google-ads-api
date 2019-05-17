@@ -8,6 +8,6 @@ title: CustomerClientLink
 ```javascript
 
 // Example CustomerClientLink
-const customer_client_link = // Todo: add example get() return here
+const customer_client_link = /* Todo: add example get() return here */
 
 ```

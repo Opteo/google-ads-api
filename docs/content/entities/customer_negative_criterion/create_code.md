@@ -28,7 +28,7 @@ const result = await customer.customerNegativeCriteria.create(
 
 // Example result
 {
-	results : ['customers/3827277046/customerNegativeCriteria/1163177997'],
+	results : ['customers/3827277046/customerNegativeCriteria/114607059163'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

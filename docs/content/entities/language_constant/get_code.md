@@ -7,16 +7,10 @@ entity: LanguageConstant
 
 ```javascript
 // Getting the entity
-let result = await customer.languageConstants.get('languageConstants/1150')
+let result = await customer.languageConstants.get('languageConstants/1018')
 ```
 
 ```javascript
 // Example result
-;({
-  resource_name: 'languageConstants/1150',
-  code: 'zh_HK',
-  id: 1150,
-  name: 'Chinese (Hong Kong SAR)',
-  targetable: false,
-})
+;({ resource_name: 'languageConstants/1018', code: 'zh_TW', id: 1018, name: 'Chinese (traditional)', targetable: true })
 ```

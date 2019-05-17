@@ -1,11 +1,6 @@
 module.exports = {
     name: 'SharedSet',
     object: {
-        resource_name: {
-            _type: 'string',
-            _description:
-                'The resource name of the shared set. Shared set resource names have the form: <code>customers/{customer_id}/sharedSets/{shared_set_id}</code>',
-        },
         reference_count: {
             _type: 'int64',
             _description: 'The number of campaigns associated with this shared set. Read only.',
@@ -25,6 +20,10 @@ module.exports = {
             _description:
                 'The name of this shared set. Required. Shared Sets must have names that are unique among active shared sets of the same type. The length of this string should be between 1 and 255 UTF-8 bytes, inclusive.',
         },
+        member_count: {
+            _type: 'int64',
+            _description: 'The number of shared criteria within this shared set. Read only.',
+        },
         type: {
             _type: 'enum',
             _enums: [
@@ -36,11 +35,12 @@ module.exports = {
             _description:
                 'The type of this shared set: each shared set holds only a single kind of resource. Required. Immutable.',
         },
-        member_count: {
-            _type: 'int64',
-            _description: 'The number of shared criteria within this shared set. Read only.',
-        },
         id: { _type: 'int64', _description: 'The ID of this shared set. Read only.' },
+        resource_name: {
+            _type: 'string',
+            _description:
+                'The resource name of the shared set. Shared set resource names have the form: <code>customers/{customer_id}/sharedSets/{shared_set_id}</code>',
+        },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],
 }

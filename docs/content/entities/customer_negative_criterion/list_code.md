@@ -28,9 +28,9 @@ let result = await customer.customerNegativeCriteria.list({
 ;[
   {
     customer_negative_criterion: {
-      resource_name: 'customers/3827277046/customerNegativeCriteria/1163177997',
-      content_label: { type: 2 },
-      id: 1163177997,
+      resource_name: 'customers/3827277046/customerNegativeCriteria/114607059163',
+      content_label: { type: 1 },
+      id: 114607059163,
       type: 22,
     },
     customer: {
@@ -46,6 +46,7 @@ let result = await customer.customerNegativeCriteria.list({
       has_partners_badge: false,
       id: 3827277046,
       manager: false,
+      pay_per_conversion_eligibility_failure_reasons: [5],
       remarketing_setting: {
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 875176189 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-875176189\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-875176189');\n</script>\n",

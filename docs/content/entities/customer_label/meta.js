@@ -1,6 +1,11 @@
 module.exports = {
     name: 'CustomerLabel',
     object: {
+        resource_name: {
+            _type: 'string',
+            _description:
+                'Name of the resource. Customer label resource names have the form: <code>customers/{customer_id}/customerLabels/{label_id}</code>',
+        },
         label: {
             _type: 'string',
             _description:
@@ -9,11 +14,6 @@ module.exports = {
         customer: {
             _type: 'string',
             _description: 'The resource name of the customer to which the label is attached. Read only.',
-        },
-        resource_name: {
-            _type: 'string',
-            _description:
-                'Name of the resource. Customer label resource names have the form: <code>customers/{customer_id}/customerLabels/{label_id}</code>',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

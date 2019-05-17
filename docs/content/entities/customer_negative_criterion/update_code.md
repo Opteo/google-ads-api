@@ -9,7 +9,7 @@ entity: CustomerNegativeCriterion
 // Updating the entity
 
 const customer_negative_criterion = {
-  resource_name: 'customers/3827277046/customerNegativeCriteria/1163177997', // The resource_name is required
+  resource_name: 'customers/3827277046/customerNegativeCriteria/114607059163', // The resource_name is required
   // ...any other fields that you would like to update
 }
 
@@ -29,7 +29,7 @@ const result = await customer.customerNegativeCriteria.update(
 
 // Example result
 {
-	results : ['customers/3827277046/customerNegativeCriteria/1163177997'],
+	results : ['customers/3827277046/customerNegativeCriteria/114607059163'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

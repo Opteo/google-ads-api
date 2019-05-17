@@ -8,5 +8,5 @@ entity: AdGroupFeed
 ```javascript
 // Deleting the entity
 
-await customer.adGroupFeeds.delete('customers/3827277046/adGroupFeeds/36337683057~43009393')
+await customer.adGroupFeeds.delete('customers/3827277046/adGroupFeeds/45808681193~90651045')
 ```

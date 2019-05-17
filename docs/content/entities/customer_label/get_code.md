@@ -13,6 +13,6 @@ let result = await customer.customerLabels.get('customers/1234567890/customerLab
 ```javascript
 
 // Example result
-(// Todo: add example get() return here)
+(/* Todo: add example get() return here */)
 
 ```

@@ -1,6 +1,7 @@
 module.exports = {
     name: 'KeywordPlan',
     object: {
+        id: { _type: 'int64', _description: 'The ID of the keyword plan.' },
         resource_name: {
             _type: 'string',
             _description:
@@ -12,6 +13,10 @@ module.exports = {
                 'The name of the keyword plan. This field is required and should not be empty when creating new keyword plans.',
         },
         forecast_period: {
+            date_range: {
+                end_date: { _type: 'string', _description: 'The end date, in yyyy-mm-dd format.' },
+                start_date: { _type: 'string', _description: 'The start date, in yyyy-mm-dd format.' },
+            },
             date_interval: {
                 _type: 'enum',
                 _enums: [
@@ -27,12 +32,7 @@ module.exports = {
                 ],
                 _description: 'A future date range relative to the current date used for forecasting.',
             },
-            date_range: {
-                start_date: { _type: 'string', _description: 'The start date, in yyyy-mm-dd format.' },
-                end_date: { _type: 'string', _description: 'The end date, in yyyy-mm-dd format.' },
-            },
         },
-        id: { _type: 'int64', _description: 'The ID of the keyword plan.' },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],
 }

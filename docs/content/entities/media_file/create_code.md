@@ -25,7 +25,7 @@ const result = await customer.mediaFiles.create([media_file, other_media_file], 
 
 // Example result
 {
-	results : ['customers/3827277046/mediaFiles/2844631150'],
+	results : ['customers/3827277046/mediaFiles/4565915444'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

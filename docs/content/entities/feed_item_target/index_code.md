@@ -8,6 +8,6 @@ title: FeedItemTarget
 ```javascript
 
 // Example FeedItemTarget
-const feed_item_target = // Todo: add example get() return here
+const feed_item_target = /* Todo: add example get() return here */
 
 ```

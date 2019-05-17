@@ -24,6 +24,7 @@ let result = await customer.adGroupAds.get('customers/9262111890/adGroupAds/6323
       path_1: 'path one here2',
       path_2: 'path two here2',
     },
+    final_app_urls: [],
     final_mobile_urls: [],
     final_urls: [{ value: 'http://opteo.com' }],
     id: 303721890851,

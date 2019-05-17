@@ -42,6 +42,11 @@ module.exports = {
             },
             _oneof: 'criterion',
         },
+        hotel_advance_booking_window: {
+            max_days: { _type: 'int64', _description: 'High end of the number of days prior to the stay.' },
+            min_days: { _type: 'int64', _description: 'Low end of the number of days prior to the stay.' },
+            _oneof: 'criterion',
+        },
         hotel_date_selection_type: {
             type: {
                 _type: 'enum',
@@ -56,11 +61,6 @@ module.exports = {
                 ],
                 _description: 'Type of the hotel date selection',
             },
-            _oneof: 'criterion',
-        },
-        hotel_advance_booking_window: {
-            max_days: { _type: 'int64', _description: 'High end of the number of days prior to the stay.' },
-            min_days: { _type: 'int64', _description: 'Low end of the number of days prior to the stay.' },
             _oneof: 'criterion',
         },
         resource_name: {

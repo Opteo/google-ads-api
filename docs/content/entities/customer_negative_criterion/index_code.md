@@ -8,9 +8,9 @@ title: CustomerNegativeCriterion
 ```javascript
 // Example CustomerNegativeCriterion
 const customer_negative_criterion = {
-  resource_name: 'customers/3827277046/customerNegativeCriteria/1163177997',
-  content_label: { type: 2 },
-  id: 1163177997,
+  resource_name: 'customers/3827277046/customerNegativeCriteria/114607059163',
+  content_label: { type: 1 },
+  id: 114607059163,
   type: 22,
 }
 ```

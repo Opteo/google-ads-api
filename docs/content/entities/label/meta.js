@@ -1,7 +1,6 @@
 module.exports = {
     name: 'Label',
     object: {
-        id: { _type: 'int64', _description: 'Id of the label. Read only.' },
         status: {
             _type: 'enum',
             _enums: [
@@ -33,6 +32,7 @@ module.exports = {
                     "Background color of the label in RGB format. This string must match the regular expression '^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$'. Note: The background color may not be visible for manager accounts.",
             },
         },
+        id: { _type: 'int64', _description: 'Id of the label. Read only.' },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],
 }

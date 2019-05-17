@@ -15,6 +15,6 @@ let result = await customer.keywordPlanNegativeKeywords.get(
 ```javascript
 
 // Example result
-(// Todo: add example get() return here)
+(/* Todo: add example get() return here */)
 
 ```

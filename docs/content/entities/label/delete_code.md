@@ -8,5 +8,5 @@ entity: Label
 ```javascript
 // Deleting the entity
 
-await customer.labels.delete('customers/3827277046/labels/872103121')
+await customer.labels.delete('customers/3827277046/labels/3345231412')
 ```

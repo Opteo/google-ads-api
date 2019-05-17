@@ -13,6 +13,6 @@ let result = await customer.feedItemTargets.get('customers/1234567890/feedItemTa
 ```javascript
 
 // Example result
-(// Todo: add example get() return here)
+(/* Todo: add example get() return here */)
 
 ```

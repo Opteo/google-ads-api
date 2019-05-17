@@ -9,7 +9,7 @@ entity: UserList
 // Updating the entity
 
 const user_list = {
-  resource_name: 'customers/3827277046/userLists/508846109', // The resource_name is required
+  resource_name: 'customers/3827277046/userLists/509186086', // The resource_name is required
   // ...any other fields that you would like to update
 }
 
@@ -26,7 +26,7 @@ const result = await customer.userLists.update([user_list, other_user_list], {
 
 // Example result
 {
-	results : ['customers/3827277046/userLists/508846109'],
+	results : ['customers/3827277046/userLists/509186086'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

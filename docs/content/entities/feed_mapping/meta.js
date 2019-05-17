@@ -1,6 +1,11 @@
 module.exports = {
     name: 'FeedMapping',
     object: {
+        attribute_field_mappings: {
+            _type: 'array',
+            _description:
+                'Feed attributes to field mappings. These mappings are a one-to-many relationship meaning that 1 feed attribute can be used to populate multiple placeholder fields, but 1 placeholder field can only draw data from 1 feed attribute. Ad Customizer is an exception, 1 placeholder field can be mapped to multiple feed attributes. Required.',
+        },
         status: {
             _type: 'enum',
             _enums: [
@@ -120,11 +125,6 @@ module.exports = {
             _oneof: 'target',
         },
         feed: { _type: 'string', _description: 'The feed of this feed mapping.' },
-        attribute_field_mappings: {
-            _type: 'array',
-            _description:
-                'Feed attributes to field mappings. These mappings are a one-to-many relationship meaning that 1 feed attribute can be used to populate multiple placeholder fields, but 1 placeholder field can only draw data from 1 feed attribute. Ad Customizer is an exception, 1 placeholder field can be mapped to multiple feed attributes. Required.',
-        },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],
 }

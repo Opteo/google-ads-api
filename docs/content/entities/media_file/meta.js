@@ -1,8 +1,8 @@
 module.exports = {
     name: 'MediaFile',
     object: {
-        file_size: { _type: 'int64', _description: 'The size of the media file in bytes.' },
         id: { _type: 'int64', _description: 'The ID of the media file.' },
+        file_size: { _type: 'int64', _description: 'The size of the media file in bytes.' },
         mime_type: {
             _type: 'enum',
             _enums: [
@@ -37,7 +37,6 @@ module.exports = {
                 'The resource name of the media file. Media file resource names have the form: <code>customers/{customer_id}/mediaFiles/{media_file_id}</code>',
         },
         video: {
-            youtube_video_id: { _type: 'string', _description: 'The YouTube video ID (as seen in YouTube URLs).' },
             ad_duration_millis: { _type: 'int64', _description: 'The duration of the Video in milliseconds.' },
             advertising_id_code: {
                 _type: 'string',
@@ -49,6 +48,7 @@ module.exports = {
                 _description:
                     'The Industry Standard Commercial Identifier code for this video, used mainly for television commercials.',
             },
+            youtube_video_id: { _type: 'string', _description: 'The YouTube video ID (as seen in YouTube URLs).' },
             _oneof: 'mediatype',
         },
         image: { data: { _type: 'byte', _description: 'Raw image data.' }, _oneof: 'mediatype' },

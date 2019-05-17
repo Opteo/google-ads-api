@@ -13,6 +13,6 @@ let result = await customer.remarketingActions.get('customers/1234567890/remarke
 ```javascript
 
 // Example result
-(// Todo: add example get() return here)
+(/* Todo: add example get() return here */)
 
 ```

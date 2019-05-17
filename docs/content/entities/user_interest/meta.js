@@ -1,6 +1,7 @@
 module.exports = {
     name: 'UserInterest',
     object: {
+        user_interest_id: { _type: 'int64', _description: 'The ID of the user interest.' },
         launched_to_all: {
             _type: 'boolean',
             _description: 'True if the user interest is launched to all channels and locales.',
@@ -12,7 +13,6 @@ module.exports = {
         },
         availabilities: { _type: 'array', _description: 'Availability information of the user interest.' },
         user_interest_parent: { _type: 'string', _description: 'The parent of the user interest.' },
-        name: { _type: 'string', _description: 'The name of the user interest.' },
         taxonomy_type: {
             _type: 'enum',
             _enums: [
@@ -29,7 +29,7 @@ module.exports = {
             ],
             _description: 'Taxonomy type of the user interest.',
         },
-        user_interest_id: { _type: 'int64', _description: 'The ID of the user interest.' },
+        name: { _type: 'string', _description: 'The name of the user interest.' },
     },
     methods: ['get', 'list'],
 }

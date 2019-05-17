@@ -8,6 +8,6 @@ title: KeywordPlanNegativeKeyword
 ```javascript
 
 // Example KeywordPlanNegativeKeyword
-const keyword_plan_negative_keyword = // Todo: add example get() return here
+const keyword_plan_negative_keyword = /* Todo: add example get() return here */
 
 ```

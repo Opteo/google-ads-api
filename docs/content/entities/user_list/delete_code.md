@@ -8,5 +8,5 @@ entity: UserList
 ```javascript
 // Deleting the entity
 
-await customer.userLists.delete('customers/3827277046/userLists/508846109')
+await customer.userLists.delete('customers/3827277046/userLists/509186086')
 ```

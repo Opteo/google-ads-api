@@ -49,8 +49,8 @@ module.exports = {
             ],
             _description: 'Represents the status of the changed resource.',
         },
-        ad_group_ad: { _type: 'string', _description: 'The AdGroupAd affected by this change.' },
         ad_group_criterion: { _type: 'string', _description: 'The AdGroupCriterion affected by this change.' },
+        ad_group_ad: { _type: 'string', _description: 'The AdGroupAd affected by this change.' },
         resource_name: {
             _type: 'string',
             _description:

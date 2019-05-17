@@ -9,7 +9,7 @@ entity: AdGroupLabel
 // Updating the entity
 
 const ad_group_label = {
-  resource_name: 'customers/3827277046/adGroupLabels/42877626370~3345231412', // The resource_name is required
+  resource_name: 'customers/3827277046/adGroupLabels/69639056828~3345231412', // The resource_name is required
   // ...any other fields that you would like to update
 }
 
@@ -26,7 +26,7 @@ const result = await customer.adGroupLabels.update([ad_group_label, other_ad_gro
 
 // Example result
 {
-	results : ['customers/3827277046/adGroupLabels/42877626370~3345231412'],
+	results : ['customers/3827277046/adGroupLabels/69639056828~3345231412'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

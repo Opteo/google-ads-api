@@ -8,6 +8,6 @@ title: CustomInterest
 ```javascript
 
 // Example CustomInterest
-const custom_interest = // Todo: add example get() return here
+const custom_interest = /* Todo: add example get() return here */
 
 ```

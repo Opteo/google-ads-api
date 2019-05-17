@@ -28,23 +28,33 @@ let result = await customer.userLists.list({
 ;[
   {
     user_list: {
-      resource_name: 'customers/3827277046/userLists/508846109',
+      resource_name: 'customers/3827277046/userLists/509186086',
       access_reason: 2,
       account_user_list_status: 2,
-      description: 'People who visited pages that contain your remarketing tags',
+      description: 'Combined audience based on available data sources',
       eligible_for_display: true,
       eligible_for_search: true,
-      id: 508846109,
+      id: 509186086,
+      logical_user_list: {
+        rules: [
+          {
+            operator: 3,
+            ruleOperandsList: [
+              { userList: { value: 'customers/3827277046/userLists/508846109' } },
+              { userList: { value: 'customers/3827277046/userLists/614318739' } },
+            ],
+          },
+        ],
+      },
       membership_life_span: 30,
       membership_status: 2,
       name: 'My user list',
       read_only: true,
-      rule_based_user_list: { prepopulation_status: 3 },
-      size_for_display: 0,
-      size_for_search: 0,
+      size_for_display: 16,
+      size_for_search: 19,
       size_range_for_display: 2,
       size_range_for_search: 2,
-      type: 5,
+      type: 3,
     },
     customer: {
       resource_name: 'customers/3827277046',
@@ -59,6 +69,7 @@ let result = await customer.userLists.list({
       has_partners_badge: false,
       id: 3827277046,
       manager: false,
+      pay_per_conversion_eligibility_failure_reasons: [5],
       remarketing_setting: {
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 875176189 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-875176189\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-875176189');\n</script>\n",

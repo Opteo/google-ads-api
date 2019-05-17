@@ -1,6 +1,12 @@
 module.exports = {
     name: 'OperatingSystemVersionConstant',
     object: {
+        id: { _type: 'int64', _description: 'The ID of the operating system version.' },
+        resource_name: {
+            _type: 'string',
+            _description:
+                'The resource name of the operating system version constant. Operating system version constant resource names have the form: <code>operatingSystemVersionConstants/{criterion_id}</code>',
+        },
         operator_type: {
             _type: 'enum',
             _enums: [
@@ -14,12 +20,6 @@ module.exports = {
         os_major_version: { _type: 'int32', _description: 'The OS Major Version number.' },
         os_minor_version: { _type: 'int32', _description: 'The OS Minor Version number.' },
         name: { _type: 'string', _description: 'Name of the operating system.' },
-        id: { _type: 'int64', _description: 'The ID of the operating system version.' },
-        resource_name: {
-            _type: 'string',
-            _description:
-                'The resource name of the operating system version constant. Operating system version constant resource names have the form: <code>operatingSystemVersionConstants/{criterion_id}</code>',
-        },
     },
     methods: ['get', 'list'],
 }

@@ -28,11 +28,14 @@ let result = await customer.labels.list({
 ;[
   {
     label: {
-      resource_name: 'customers/3827277046/labels/872103121',
-      id: 872103121,
+      resource_name: 'customers/3827277046/labels/3345231412',
+      id: 3345231412,
       name: 'My label',
       status: 2,
-      text_label: { background_color: '#6633FF', description: 'Non brand, traditional cold traffic via search' },
+      text_label: {
+        background_color: '#E993EB',
+        description: 'Adgroups where Chloe will write new ads that kick butt.',
+      },
     },
     customer: {
       resource_name: 'customers/3827277046',
@@ -47,6 +50,7 @@ let result = await customer.labels.list({
       has_partners_badge: false,
       id: 3827277046,
       manager: false,
+      pay_per_conversion_eligibility_failure_reasons: [5],
       remarketing_setting: {
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 875176189 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-875176189\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-875176189');\n</script>\n",

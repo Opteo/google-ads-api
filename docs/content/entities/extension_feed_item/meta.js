@@ -1,15 +1,198 @@
 module.exports = {
     name: 'ExtensionFeedItem',
     object: {
+        promotion_feed_item: {
+            tracking_url_template: { _type: 'string', _description: 'URL template for constructing a tracking URL.' },
+            promotion_code: {
+                _type: 'string',
+                _description: 'A code the user should use in order to be eligible for the promotion.',
+            },
+            money_amount_off: {
+                currency_code: { _type: 'string', _description: 'Three-character ISO 4217 currency code.' },
+                amount_micros: {
+                    _type: 'int64',
+                    _description: 'Amount in micros. One million is equivalent to one unit.',
+                },
+            },
+            promotion_target: {
+                _type: 'string',
+                _description: 'A freeform description of what the promotion is targeting. This field is required.',
+            },
+            promotion_start_date: {
+                _type: 'string',
+                _description: 'Start date of when the promotion is eligible to be redeemed.',
+            },
+            final_mobile_urls: {
+                _type: 'array',
+                _description: 'A list of possible final mobile URLs after all cross domain redirects.',
+            },
+            orders_over_amount: {
+                currency_code: { _type: 'string', _description: 'Three-character ISO 4217 currency code.' },
+                amount_micros: {
+                    _type: 'int64',
+                    _description: 'Amount in micros. One million is equivalent to one unit.',
+                },
+            },
+            language_code: {
+                _type: 'string',
+                _description: 'The language of the promotion. Represented as BCP 47 language tag.',
+            },
+            discount_modifier: {
+                _type: 'enum',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    {
+                        s: 'UNKNOWN',
+                        description: 'Used for return value only. Represents value unknown in this version.',
+                    },
+                    { s: 'UP_TO', description: "'Up to'." },
+                ],
+                _description: 'Enum that modifies the qualification of the discount.',
+            },
+            percent_off: {
+                _type: 'int64',
+                _description:
+                    'Percentage off discount in the promotion in micros. One million is equivalent to one percent. Either this or money_off_amount is required.',
+            },
+            final_urls: {
+                _type: 'array',
+                _description: 'A list of possible final URLs after all cross domain redirects. This field is required.',
+            },
+            url_custom_parameters: {
+                _type: 'array',
+                _description:
+                    'A list of mappings to be used for substituting URL custom parameter tags in the tracking_url_template, final_urls, and/or final_mobile_urls.',
+            },
+            promotion_end_date: {
+                _type: 'string',
+                _description: 'End date of when the promotion is eligible to be redeemed.',
+            },
+            final_url_suffix: {
+                _type: 'string',
+                _description: 'URL template for appending params to landing page URLs served with parallel tracking.',
+            },
+            occasion: {
+                _type: 'enum',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    {
+                        s: 'UNKNOWN',
+                        description: 'Used for return value only. Represents value unknown in this version.',
+                    },
+                    { s: 'NEW_YEARS', description: "New Year's." },
+                    { s: 'CHINESE_NEW_YEAR', description: 'Chinese New Year.' },
+                    { s: 'VALENTINES_DAY', description: "Valentine's Day." },
+                    { s: 'EASTER', description: 'Easter.' },
+                    { s: 'MOTHERS_DAY', description: "Mother's Day." },
+                    { s: 'FATHERS_DAY', description: "Father's Day." },
+                    { s: 'LABOR_DAY', description: 'Labor Day.' },
+                    { s: 'BACK_TO_SCHOOL', description: 'Back To School.' },
+                    { s: 'HALLOWEEN', description: 'Halloween.' },
+                    { s: 'BLACK_FRIDAY', description: 'Black Friday.' },
+                    { s: 'CYBER_MONDAY', description: 'Cyber Monday.' },
+                    { s: 'CHRISTMAS', description: 'Christmas.' },
+                    { s: 'BOXING_DAY', description: 'Boxing Day.' },
+                    { s: 'INDEPENDENCE_DAY', description: 'Independence Day in any country.' },
+                    { s: 'NATIONAL_DAY', description: 'National Day in any country.' },
+                    { s: 'END_OF_SEASON', description: 'End of any season.' },
+                    { s: 'WINTER_SALE', description: 'Winter Sale.' },
+                    { s: 'SUMMER_SALE', description: 'Summer sale.' },
+                    { s: 'FALL_SALE', description: 'Fall Sale.' },
+                    { s: 'SPRING_SALE', description: 'Spring Sale.' },
+                    { s: 'RAMADAN', description: 'Ramadan.' },
+                    { s: 'EID_AL_FITR', description: 'Eid al-Fitr.' },
+                    { s: 'EID_AL_ADHA', description: 'Eid al-Adha.' },
+                    { s: 'SINGLES_DAY', description: 'Singles Day.' },
+                    { s: 'WOMENS_DAY', description: "Women's Day." },
+                    { s: 'HOLI', description: 'Holi.' },
+                    { s: 'PARENTS_DAY', description: "Parent's Day." },
+                    { s: 'ST_NICHOLAS_DAY', description: 'St. Nicholas Day.' },
+                    { s: 'CARNIVAL', description: 'Carnival.' },
+                    { s: 'EPIPHANY', description: "Epiphany, also known as Three Kings' Day." },
+                    { s: 'ROSH_HASHANAH', description: 'Rosh Hashanah.' },
+                    { s: 'PASSOVER', description: 'Passover.' },
+                    { s: 'HANUKKAH', description: 'Hanukkah.' },
+                    { s: 'DIWALI', description: 'Diwali.' },
+                    { s: 'NAVRATRI', description: 'Navratri.' },
+                    { s: 'SONGKRAN', description: 'Available in Thai: Songkran.' },
+                    { s: 'YEAR_END_GIFT', description: 'Available in Japanese: Year-end Gift.' },
+                ],
+                _description:
+                    'The occasion the promotion was intended for. If an occasion is set, the redemption window will need to fall within the date range associated with the occasion.',
+            },
+            _oneof: 'extension',
+        },
+        device: {
+            _type: 'enum',
+            _enums: [
+                { s: 'UNSPECIFIED', description: 'Not specified.' },
+                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
+                { s: 'MOBILE', description: 'Mobile.' },
+            ],
+            _description: 'The targeted device.',
+        },
+        text_message_feed_item: {
+            extension_text: { _type: 'string', _description: 'The message text populated in the messaging app.' },
+            text: { _type: 'string', _description: 'The text to show in the ad. This field is required.' },
+            phone_number: {
+                _type: 'string',
+                _description: "The advertiser's phone number the message will be sent to. Required.",
+            },
+            business_name: {
+                _type: 'string',
+                _description: 'The business name to prepend to the message text. This field is required.',
+            },
+            country_code: {
+                _type: 'string',
+                _description:
+                    "Uppercase two-letter country code of the advertiser's phone number. This field is required.",
+            },
+            _oneof: 'extension',
+        },
+        location_feed_item: {
+            address_line1: { _type: 'string', _description: 'Line 1 of the business address.' },
+            province: { _type: 'string', _description: 'Province of the business address.' },
+            city: { _type: 'string', _description: 'City of the business address.' },
+            business_name: { _type: 'string', _description: 'The name of the business.' },
+            address_line2: { _type: 'string', _description: 'Line 2 of the business address.' },
+            phone_number: { _type: 'string', _description: 'Phone number of the business.' },
+            country_code: { _type: 'string', _description: 'Country code of the business address.' },
+            postal_code: { _type: 'string', _description: 'Postal code of the business address.' },
+            _oneof: 'extension',
+        },
         structured_snippet_feed_item: {
-            header: { _type: 'string', _description: 'The header of the snippet. This string must not be empty.' },
             values: {
                 _type: 'array',
                 _description: 'The values in the snippet. The maximum size of this collection is 10.',
             },
+            header: { _type: 'string', _description: 'The header of the snippet. This string must not be empty.' },
             _oneof: 'extension',
         },
+        extension_type: {
+            _type: 'enum',
+            _enums: [
+                { s: 'UNSPECIFIED', description: 'Not specified.' },
+                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
+                { s: 'NONE', description: 'None.' },
+                { s: 'APP', description: 'App.' },
+                { s: 'CALL', description: 'Call.' },
+                { s: 'CALLOUT', description: 'Callout.' },
+                { s: 'MESSAGE', description: 'Message.' },
+                { s: 'PRICE', description: 'Price.' },
+                { s: 'PROMOTION', description: 'Promotion.' },
+                { s: 'REVIEW', description: 'Review.' },
+                { s: 'SITELINK', description: 'Sitelink.' },
+                { s: 'STRUCTURED_SNIPPET', description: 'Structured snippet.' },
+                { s: 'LOCATION', description: 'Location.' },
+                { s: 'AFFILIATE_LOCATION', description: 'Affiliate location.' },
+            ],
+            _description: 'The extension type of the extension feed item. This field is read-only.',
+        },
         sitelink_feed_item: {
+            final_url_suffix: {
+                _type: 'string',
+                _description: 'Final URL suffix to be appended to landing page URLs served with parallel tracking.',
+            },
             line2: {
                 _type: 'string',
                 _description:
@@ -39,35 +222,29 @@ module.exports = {
                 _description:
                     'A list of mappings to be used for substituting URL custom parameter tags in the tracking_url_template, final_urls, and/or final_mobile_urls.',
             },
-            final_url_suffix: {
-                _type: 'string',
-                _description: 'Final URL suffix to be appended to landing page URLs served with parallel tracking.',
-            },
             _oneof: 'extension',
-        },
-        extension_type: {
-            _type: 'enum',
-            _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'NONE', description: 'None.' },
-                { s: 'APP', description: 'App.' },
-                { s: 'CALL', description: 'Call.' },
-                { s: 'CALLOUT', description: 'Callout.' },
-                { s: 'MESSAGE', description: 'Message.' },
-                { s: 'PRICE', description: 'Price.' },
-                { s: 'PROMOTION', description: 'Promotion.' },
-                { s: 'REVIEW', description: 'Review.' },
-                { s: 'SITELINK', description: 'Sitelink.' },
-                { s: 'STRUCTURED_SNIPPET', description: 'Structured snippet.' },
-            ],
-            _description: 'The extension type of the extension feed item. This field is read-only.',
         },
         callout_feed_item: {
             callout_text: {
                 _type: 'string',
                 _description: 'The callout text. The length of this string should be between 1 and 25, inclusive.',
             },
+            _oneof: 'extension',
+        },
+        affiliate_location_feed_item: {
+            chain_id: {
+                _type: 'int64',
+                _description: 'Id of the retail chain that is advertised as a seller of your product.',
+            },
+            address_line1: { _type: 'string', _description: 'Line 1 of the business address.' },
+            province: { _type: 'string', _description: 'Province of the business address.' },
+            city: { _type: 'string', _description: 'City of the business address.' },
+            business_name: { _type: 'string', _description: 'The name of the business.' },
+            chain_name: { _type: 'string', _description: 'Name of chain.' },
+            address_line2: { _type: 'string', _description: 'Line 2 of the business address.' },
+            phone_number: { _type: 'string', _description: 'Phone number of the business.' },
+            country_code: { _type: 'string', _description: 'Country code of the business address.' },
+            postal_code: { _type: 'string', _description: 'Postal code of the business address.' },
             _oneof: 'extension',
         },
         call_feed_item: {
@@ -128,12 +305,41 @@ module.exports = {
             ],
             _description: 'Status of the feed item. This field is read-only.',
         },
+        ad_schedules: {
+            _type: 'array',
+            _description:
+                'List of non-overlapping schedules specifying all time intervals for which the feed item may serve. There can be a maximum of 6 schedules per day.',
+        },
         start_date_time: {
             _type: 'string',
             _description:
                 'Start time in which this feed item is effective and can begin serving. The format is "YYYY-MM-DD HH:MM:SS". Examples: "2018-03-05 09:15:00" or "2018-02-01 14:34:30"',
         },
         price_feed_item: {
+            price_qualifier: {
+                _type: 'enum',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    {
+                        s: 'UNKNOWN',
+                        description: 'Used for return value only. Represents value unknown in this version.',
+                    },
+                    { s: 'FROM', description: "'From' qualifier for the price." },
+                    { s: 'UP_TO', description: "'Up to' qualifier for the price." },
+                    { s: 'AVERAGE', description: "'Average' qualifier for the price." },
+                ],
+                _description: 'Price qualifier for all offers of this price extension.',
+            },
+            price_offerings: { _type: 'array', _description: 'The price offerings in this price extension.' },
+            final_url_suffix: {
+                _type: 'string',
+                _description: 'URL template for appending params to landing page URLs served with parallel tracking.',
+            },
+            tracking_url_template: {
+                _type: 'string',
+                _description: 'Tracking URL template for all offers of this price extension.',
+            },
+            language_code: { _type: 'string', _description: 'The code of the language used for this price extension.' },
             type: {
                 _type: 'enum',
                 _enums: [
@@ -166,30 +372,6 @@ module.exports = {
                 ],
                 _description: 'Price extension type of this extension.',
             },
-            price_qualifier: {
-                _type: 'enum',
-                _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
-                    {
-                        s: 'UNKNOWN',
-                        description: 'Used for return value only. Represents value unknown in this version.',
-                    },
-                    { s: 'FROM', description: "'From' qualifier for the price." },
-                    { s: 'UP_TO', description: "'Up to' qualifier for the price." },
-                    { s: 'AVERAGE', description: "'Average' qualifier for the price." },
-                ],
-                _description: 'Price qualifier for all offers of this price extension.',
-            },
-            price_offerings: { _type: 'array', _description: 'The price offerings in this price extension.' },
-            final_url_suffix: {
-                _type: 'string',
-                _description: 'URL template for appending params to landing page URLs served with parallel tracking.',
-            },
-            tracking_url_template: {
-                _type: 'string',
-                _description: 'Tracking URL template for all offers of this price extension.',
-            },
-            language_code: { _type: 'string', _description: 'The code of the language used for this price extension.' },
             _oneof: 'extension',
         },
         end_date_time: {
@@ -245,147 +427,6 @@ module.exports = {
             tracking_url_template: {
                 _type: 'string',
                 _description: 'URL template for constructing a tracking URL. Default value is "{lpurl}".',
-            },
-            _oneof: 'extension',
-        },
-        promotion_feed_item: {
-            language_code: {
-                _type: 'string',
-                _description: 'The language of the promotion. Represented as BCP 47 language tag.',
-            },
-            discount_modifier: {
-                _type: 'enum',
-                _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
-                    {
-                        s: 'UNKNOWN',
-                        description: 'Used for return value only. Represents value unknown in this version.',
-                    },
-                    { s: 'UP_TO', description: "'Up to'." },
-                ],
-                _description: 'Enum that modifies the qualification of the discount.',
-            },
-            percent_off: {
-                _type: 'int64',
-                _description:
-                    'Percentage off discount in the promotion in micros. One million is equivalent to one percent. Either this or money_off_amount is required.',
-            },
-            final_urls: {
-                _type: 'array',
-                _description: 'A list of possible final URLs after all cross domain redirects. This field is required.',
-            },
-            url_custom_parameters: {
-                _type: 'array',
-                _description:
-                    'A list of mappings to be used for substituting URL custom parameter tags in the tracking_url_template, final_urls, and/or final_mobile_urls.',
-            },
-            promotion_end_date: {
-                _type: 'string',
-                _description:
-                    'End date of when the promotion is eligible to be redeemed. This field is currently mutate only.',
-            },
-            final_url_suffix: {
-                _type: 'string',
-                _description: 'URL template for appending params to landing page URLs served with parallel tracking.',
-            },
-            occasion: {
-                _type: 'enum',
-                _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
-                    {
-                        s: 'UNKNOWN',
-                        description: 'Used for return value only. Represents value unknown in this version.',
-                    },
-                    { s: 'NEW_YEARS', description: "New Year's." },
-                    { s: 'CHINESE_NEW_YEAR', description: 'Chinese New Year.' },
-                    { s: 'VALENTINES_DAY', description: "Valentine's Day." },
-                    { s: 'EASTER', description: 'Easter.' },
-                    { s: 'MOTHERS_DAY', description: "Mother's Day." },
-                    { s: 'FATHERS_DAY', description: "Father's Day." },
-                    { s: 'LABOR_DAY', description: 'Labor Day.' },
-                    { s: 'BACK_TO_SCHOOL', description: 'Back To School.' },
-                    { s: 'HALLOWEEN', description: 'Halloween.' },
-                    { s: 'BLACK_FRIDAY', description: 'Black Friday.' },
-                    { s: 'CYBER_MONDAY', description: 'Cyber Monday.' },
-                    { s: 'CHRISTMAS', description: 'Christmas.' },
-                    { s: 'BOXING_DAY', description: 'Boxing Day.' },
-                    { s: 'INDEPENDENCE_DAY', description: 'Independence Day in any country.' },
-                    { s: 'NATIONAL_DAY', description: 'National Day in any country.' },
-                    { s: 'END_OF_SEASON', description: 'End of any season.' },
-                    { s: 'WINTER_SALE', description: 'Winter Sale.' },
-                    { s: 'SUMMER_SALE', description: 'Summer sale.' },
-                    { s: 'FALL_SALE', description: 'Fall Sale.' },
-                    { s: 'SPRING_SALE', description: 'Spring Sale.' },
-                    { s: 'RAMADAN', description: 'Ramadan.' },
-                    { s: 'EID_AL_FITR', description: 'Eid al-Fitr.' },
-                    { s: 'EID_AL_ADHA', description: 'Eid al-Adha.' },
-                    { s: 'SINGLES_DAY', description: 'Singles Day.' },
-                    { s: 'WOMENS_DAY', description: "Women's Day." },
-                    { s: 'HOLI', description: 'Holi.' },
-                    { s: 'PARENTS_DAY', description: "Parent's Day." },
-                    { s: 'ST_NICHOLAS_DAY', description: 'St. Nicholas Day.' },
-                    { s: 'CARNIVAL', description: 'Carnival.' },
-                    { s: 'EPIPHANY', description: "Epiphany, also known as Three Kings' Day." },
-                    { s: 'ROSH_HASHANAH', description: 'Rosh Hashanah.' },
-                    { s: 'PASSOVER', description: 'Passover.' },
-                    { s: 'HANUKKAH', description: 'Hanukkah.' },
-                    { s: 'DIWALI', description: 'Diwali.' },
-                    { s: 'NAVRATRI', description: 'Navratri.' },
-                    { s: 'SONGKRAN', description: 'Available in Thai: Songkran.' },
-                    { s: 'YEAR_END_GIFT', description: 'Available in Japanese: Year-end Gift.' },
-                ],
-                _description:
-                    'The occasion the promotion was intended for. If an occasion is set, the redemption window will need to fall within the date range associated with the occasion.',
-            },
-            tracking_url_template: { _type: 'string', _description: 'URL template for constructing a tracking URL.' },
-            money_amount_off: {
-                currency_code: { _type: 'string', _description: 'Three-character ISO 4217 currency code.' },
-                amount_micros: {
-                    _type: 'int64',
-                    _description: 'Amount in micros. One million is equivalent to one unit.',
-                },
-            },
-            promotion_code: {
-                _type: 'string',
-                _description: 'A code the user should use in order to be eligible for the promotion.',
-            },
-            promotion_target: {
-                _type: 'string',
-                _description: 'A freeform description of what the promotion is targeting. This field is required.',
-            },
-            promotion_start_date: {
-                _type: 'string',
-                _description:
-                    'Start date of when the promotion is eligible to be redeemed. This field is currently mutate only.',
-            },
-            orders_over_amount: {
-                currency_code: { _type: 'string', _description: 'Three-character ISO 4217 currency code.' },
-                amount_micros: {
-                    _type: 'int64',
-                    _description: 'Amount in micros. One million is equivalent to one unit.',
-                },
-            },
-            final_mobile_urls: {
-                _type: 'array',
-                _description: 'A list of possible final mobile URLs after all cross domain redirects.',
-            },
-            _oneof: 'extension',
-        },
-        text_message_feed_item: {
-            extension_text: { _type: 'string', _description: 'The message text populated in the messaging app.' },
-            text: { _type: 'string', _description: 'The text to show in the ad. This field is required.' },
-            phone_number: {
-                _type: 'string',
-                _description: "The advertiser's phone number the message will be sent to. Required.",
-            },
-            business_name: {
-                _type: 'string',
-                _description: 'The business name to prepend to the message text. This field is required.',
-            },
-            country_code: {
-                _type: 'string',
-                _description:
-                    "Uppercase two-letter country code of the advertiser's phone number. This field is required.",
             },
             _oneof: 'extension',
         },

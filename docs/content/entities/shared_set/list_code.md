@@ -49,6 +49,7 @@ let result = await customer.sharedSets.list({
       has_partners_badge: false,
       id: 9262111890,
       manager: false,
+      pay_per_conversion_eligibility_failure_reasons: [8, 2],
       remarketing_setting: {
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 797556569 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-797556569\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-797556569');\n</script>\n",

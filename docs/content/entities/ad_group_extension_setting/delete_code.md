@@ -8,5 +8,5 @@ entity: AdGroupExtensionSetting
 ```javascript
 // Deleting the entity
 
-await customer.adGroupExtensionSettings.delete('customers/3827277046/adGroupExtensionSettings/36337683057~SITELINK')
+await customer.adGroupExtensionSettings.delete('customers/3827277046/adGroupExtensionSettings/69639056828~SITELINK')
 ```

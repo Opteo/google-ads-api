@@ -9,7 +9,7 @@ entity: AdGroupExtensionSetting
 // Updating the entity
 
 const ad_group_extension_setting = {
-  resource_name: 'customers/3827277046/adGroupExtensionSettings/36337683057~SITELINK', // The resource_name is required
+  resource_name: 'customers/3827277046/adGroupExtensionSettings/69639056828~SITELINK', // The resource_name is required
   // ...any other fields that you would like to update
 }
 
@@ -29,7 +29,7 @@ const result = await customer.adGroupExtensionSettings.update(
 
 // Example result
 {
-	results : ['customers/3827277046/adGroupExtensionSettings/36337683057~SITELINK'],
+	results : ['customers/3827277046/adGroupExtensionSettings/69639056828~SITELINK'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

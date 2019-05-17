@@ -61,9 +61,11 @@ let result = await customer.adGroupBidModifiers.list({
       resource_name: 'customers/9262111890/campaigns/1485014801',
       ad_serving_optimization_status: 2,
       advertising_channel_type: 2,
+      base_campaign: 'customers/9262111890/campaigns/1485014801',
       bidding_strategy_type: 9,
       campaign_budget: 'customers/9262111890/campaignBudgets/1548344372',
       end_date: '2037-12-30',
+      experiment_type: 2,
       frequency_caps: [],
       geo_target_type_setting: { negative_geo_target_type: 2, positive_geo_target_type: 2 },
       id: 1485014801,
@@ -95,6 +97,7 @@ let result = await customer.adGroupBidModifiers.list({
       has_partners_badge: false,
       id: 9262111890,
       manager: false,
+      pay_per_conversion_eligibility_failure_reasons: [8, 2],
       remarketing_setting: {
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 797556569 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-797556569\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-797556569');\n</script>\n",

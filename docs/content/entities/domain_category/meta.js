@@ -1,6 +1,21 @@
 module.exports = {
     name: 'DomainCategory',
     object: {
+        recommended_cpc_bid_micros: {
+            _type: 'int64',
+            _description: 'The recommended cost per click for the category.',
+        },
+        campaign: { _type: 'string', _description: 'The campaign this category is recommended for.' },
+        resource_name: {
+            _type: 'string',
+            _description:
+                'The resource name of the domain category. Domain category resource names have the form: <code>customers/{customer_id}/domainCategories/{campaign_id}~{category_base64}~{language_code}</code>',
+        },
+        category_rank: {
+            _type: 'int64',
+            _description:
+                'The position of this category in the set of categories. Lower numbers indicate a better match for the domain. null indicates not recommended.',
+        },
         coverage_fraction: {
             _type: 'double',
             _description: 'Fraction of pages on your site that this category matches.',
@@ -20,21 +35,6 @@ module.exports = {
             _type: 'string',
             _description:
                 'Recommended category for the website domain. e.g. if you have a website about electronics, the categories could be "cameras", "televisions", etc.',
-        },
-        recommended_cpc_bid_micros: {
-            _type: 'int64',
-            _description: 'The recommended cost per click for the category.',
-        },
-        campaign: { _type: 'string', _description: 'The campaign this category is recommended for.' },
-        resource_name: {
-            _type: 'string',
-            _description:
-                'The resource name of the domain category. Domain category resource names have the form: <code>customers/{customer_id}/domainCategories/{campaign_id}~{category_base64}~{language_code}</code>',
-        },
-        category_rank: {
-            _type: 'int64',
-            _description:
-                'The position of this category in the set of categories. Lower numbers indicate a better match for the domain. null indicates not recommended.',
         },
     },
     methods: ['get', 'list'],

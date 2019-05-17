@@ -8,13 +8,14 @@ title: AdGroupExtensionSetting
 ```javascript
 // Example AdGroupExtensionSetting
 const ad_group_extension_setting = {
-  resource_name: 'customers/3827277046/adGroupExtensionSettings/36337683057~SITELINK',
-  ad_group: 'customers/3827277046/adGroups/36337683057',
+  resource_name: 'customers/3827277046/adGroupExtensionSettings/69639056828~SITELINK',
+  ad_group: 'customers/3827277046/adGroups/69639056828',
   extension_feed_items: [
-    { value: 'customers/3827277046/extensionFeedItems/9779152283' },
-    { value: 'customers/3827277046/extensionFeedItems/9780600045' },
-    { value: 'customers/3827277046/extensionFeedItems/9784349521' },
-    { value: 'customers/3827277046/extensionFeedItems/9784362487' },
+    { value: 'customers/3827277046/extensionFeedItems/48199744867' },
+    { value: 'customers/3827277046/extensionFeedItems/48199839565' },
+    { value: 'customers/3827277046/extensionFeedItems/48200356726' },
+    { value: 'customers/3827277046/extensionFeedItems/48200575108' },
+    { value: 'customers/3827277046/extensionFeedItems/48200618792' },
   ],
   extension_type: 10,
 }
