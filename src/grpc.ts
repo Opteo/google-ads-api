@@ -84,7 +84,8 @@ export default class GrpcClient {
             response = await this.searchWithRetry(throttler, next_page_request)
             results = results.concat(response.resultsList)
 
-            if (results.length >= limit) {
+            // If there is no limit, `limit` will be set to 0.
+            if (limit && results.length >= limit) {
                 results = results.slice(0, limit)
                 break
             }
@@ -111,7 +112,7 @@ export default class GrpcClient {
         }
 
         const has_limit = query.toLowerCase().includes(' limit ')
-        let limit = 0
+        let limit = 0 // The default limit is 0, which means no limit.
         if (has_limit) {
             limit = +query
                 .toLowerCase()
