@@ -41,6 +41,7 @@ let result = await customer.keywordPlans.list({
       has_partners_badge: false,
       id: 3827277046,
       manager: false,
+      pay_per_conversion_eligibility_failure_reasons: [5],
       remarketing_setting: {
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 875176189 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-875176189\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-875176189');\n</script>\n",

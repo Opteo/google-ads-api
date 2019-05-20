@@ -1,6 +1,12 @@
 module.exports = {
     name: 'KeywordPlanKeyword',
     object: {
+        keyword_plan_ad_group: {
+            _type: 'string',
+            _description: 'The Keyword Plan ad group to which this keyword belongs.',
+        },
+        text: { _type: 'string', _description: 'The keyword text.' },
+        id: { _type: 'int64', _description: 'The ID of the Keyword Plan keyword.' },
         match_type: {
             _type: 'enum',
             _enums: [
@@ -22,12 +28,6 @@ module.exports = {
             _description:
                 'A keyword level max cpc bid in micros, in the account currency, that overrides the keyword plan ad group cpc bid.',
         },
-        keyword_plan_ad_group: {
-            _type: 'string',
-            _description: 'The Keyword Plan ad group to which this keyword belongs.',
-        },
-        text: { _type: 'string', _description: 'The keyword text.' },
-        id: { _type: 'int64', _description: 'The ID of the Keyword Plan keyword.' },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],
 }

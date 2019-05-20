@@ -8,11 +8,11 @@ title: MobileDeviceConstant
 ```javascript
 // Example MobileDeviceConstant
 const mobile_device_constant = {
-  resource_name: 'mobileDeviceConstants/610508',
-  id: 610508,
-  manufacturer_name: 'Microsoft',
-  name: 'windows rt tablet',
-  operating_system_name: 'Other/Unknown',
-  type: 3,
+  resource_name: 'mobileDeviceConstants/605309',
+  id: 605309,
+  manufacturer_name: 'T-Mobile',
+  name: 'myTouch 3G Slide',
+  operating_system_name: 'Android',
+  type: 2,
 }
 ```

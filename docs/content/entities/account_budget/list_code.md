@@ -30,7 +30,7 @@ let result = await customer.accountBudgets.list({
     account_budget: {
       resource_name: 'customers/3827277046/accountBudgets/295854560',
       adjusted_spending_limit_type: 2,
-      amount_served_micros: 95547060000,
+      amount_served_micros: 100064050000,
       approved_end_time_type: 3,
       approved_spending_limit_type: 2,
       approved_start_date_time: '2017-01-01 12:22:14',
@@ -41,7 +41,7 @@ let result = await customer.accountBudgets.list({
       proposed_spending_limit_type: 2,
       proposed_start_date_time: '2017-01-01 12:22:14',
       status: 3,
-      total_adjustments_micros: 843320000,
+      total_adjustments_micros: 851000000,
     },
     billing_setup: {
       resource_name: 'customers/3827277046/billingSetups/295854200',
@@ -70,6 +70,7 @@ let result = await customer.accountBudgets.list({
       has_partners_badge: false,
       id: 3827277046,
       manager: false,
+      pay_per_conversion_eligibility_failure_reasons: [5],
       remarketing_setting: {
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 875176189 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-875176189\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-875176189');\n</script>\n",

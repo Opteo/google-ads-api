@@ -43,6 +43,29 @@ module.exports = {
             _description: 'The total adjustments amount. An example of an adjustment is courtesy credits.',
         },
         pending_proposal: {
+            start_date_time: { _type: 'string', _description: 'The start time in yyyy-MM-dd HH:mm:ss format.' },
+            account_budget_proposal: {
+                _type: 'string',
+                _description:
+                    'The resource name of the proposal. AccountBudgetProposal resource names have the form: <code>customers/{customer_id}/accountBudgetProposals/{account_budget_proposal_id}</code>',
+            },
+            purchase_order_number: {
+                _type: 'string',
+                _description:
+                    'A purchase order number is a value that helps users reference this budget in their monthly invoices.',
+            },
+            creation_date_time: {
+                _type: 'string',
+                _description:
+                    'The time when this account-level budget proposal was created. Formatted as yyyy-MM-dd HH:mm:ss.',
+            },
+            end_date_time: { _type: 'string', _description: 'The end time in yyyy-MM-dd HH:mm:ss format.' },
+            spending_limit_micros: {
+                _type: 'int64',
+                _description: 'The spending limit in micros. One million is equivalent to one unit.',
+            },
+            notes: { _type: 'string', _description: 'Notes associated with this budget.' },
+            name: { _type: 'string', _description: 'The name to assign to the account-level budget.' },
             end_time_type: {
                 _type: 'enum',
                 _enums: [
@@ -83,29 +106,6 @@ module.exports = {
                 ],
                 _description: 'The spending limit as a well-defined type, e.g. INFINITE.',
             },
-            account_budget_proposal: {
-                _type: 'string',
-                _description:
-                    'The resource name of the proposal. AccountBudgetProposal resource names have the form: <code>customers/{customer_id}/accountBudgetProposals/{account_budget_proposal_id}</code>',
-            },
-            start_date_time: { _type: 'string', _description: 'The start time in yyyy-MM-dd HH:mm:ss format.' },
-            purchase_order_number: {
-                _type: 'string',
-                _description:
-                    'A purchase order number is a value that helps users reference this budget in their monthly invoices.',
-            },
-            creation_date_time: {
-                _type: 'string',
-                _description:
-                    'The time when this account-level budget proposal was created. Formatted as yyyy-MM-dd HH:mm:ss.',
-            },
-            end_date_time: { _type: 'string', _description: 'The end time in yyyy-MM-dd HH:mm:ss format.' },
-            spending_limit_micros: {
-                _type: 'int64',
-                _description: 'The spending limit in micros. One million is equivalent to one unit.',
-            },
-            notes: { _type: 'string', _description: 'Notes associated with this budget.' },
-            name: { _type: 'string', _description: 'The name to assign to the account-level budget.' },
         },
         approved_spending_limit_micros: {
             _type: 'int64',
@@ -147,6 +147,11 @@ module.exports = {
             _description: 'The approved end time in yyyy-MM-dd HH:mm:ss format.',
             _oneof: 'approvedEndTime',
         },
+        purchase_order_number: {
+            _type: 'string',
+            _description:
+                'A purchase order number is a value that helps users reference this budget in their monthly invoices.',
+        },
         approved_end_time_type: {
             _type: 'enum',
             _enums: [
@@ -167,11 +172,6 @@ module.exports = {
             _type: 'int64',
             _description:
                 'The value of Ads that have been served, in micros. This includes overdelivery costs, in which case a credit might be automatically applied to the budget (see total_adjustments_micros).',
-        },
-        purchase_order_number: {
-            _type: 'string',
-            _description:
-                'A purchase order number is a value that helps users reference this budget in their monthly invoices.',
         },
         resource_name: {
             _type: 'string',

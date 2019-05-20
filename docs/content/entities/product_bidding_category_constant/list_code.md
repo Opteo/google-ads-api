@@ -28,12 +28,13 @@ let result = await customer.productBiddingCategoryConstants.list({
 ;[
   {
     product_bidding_category_constant: {
-      resource_name: 'productBiddingCategoryConstants/AU~LEVEL1~1',
+      resource_name: 'productBiddingCategoryConstants/AU~LEVEL3~55',
       country_code: 'AU',
-      id: 1,
+      id: 55,
       language_code: 'en',
-      level: 2,
-      localized_name: 'Animals & Pet Supplies',
+      level: 4,
+      localized_name: 'Musical Instrument & Orchestra Accessories',
+      product_bidding_category_constant_parent: 'productBiddingCategoryConstants/AU~LEVEL2~5710',
       status: 2,
     },
   },

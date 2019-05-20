@@ -1,46 +1,6 @@
 module.exports = {
     name: 'AdGroup',
     object: {
-        effective_target_roas: {
-            _type: 'double',
-            _description: 'The effective target ROAS (return-on-ad-spend). This field is read-only.',
-        },
-        type: {
-            _type: 'enum',
-            _enums: [
-                { s: 'UNSPECIFIED', description: 'The type has not been specified.' },
-                {
-                    s: 'UNKNOWN',
-                    description: 'The received value is not known in this version.\n\nThis is a response-only value.',
-                },
-                { s: 'SEARCH_STANDARD', description: 'The default ad group type for Search campaigns.' },
-                { s: 'DISPLAY_STANDARD', description: 'The default ad group type for Display campaigns.' },
-                {
-                    s: 'SHOPPING_PRODUCT_ADS',
-                    description: 'The ad group type for Shopping campaigns serving standard product ads.',
-                },
-                { s: 'HOTEL_ADS', description: 'The default ad group type for Hotel campaigns.' },
-                { s: 'SHOPPING_SMART_ADS', description: 'The type for ad groups in Smart Shopping campaigns.' },
-                { s: 'VIDEO_BUMPER', description: 'Short unskippable in-stream video ads.' },
-                { s: 'VIDEO_TRUE_VIEW_IN_STREAM', description: 'TrueView (skippable) in-stream video ads.' },
-                { s: 'VIDEO_TRUE_VIEW_IN_DISPLAY', description: 'TrueView in-display video ads.' },
-                { s: 'VIDEO_NON_SKIPPABLE_IN_STREAM', description: 'Unskippable in-stream video ads.' },
-                { s: 'VIDEO_OUTSTREAM', description: 'Outstream video ads.' },
-                { s: 'SEARCH_DYNAMIC_ADS', description: 'Ad group type for Dynamic Search Ads ad groups.' },
-            ],
-            _description: 'The type of the ad group.',
-        },
-        percent_cpc_bid_micros: {
-            _type: 'int64',
-            _description:
-                'The percent cpc bid amount, expressed as a fraction of the advertised price for some good or service. The valid range for the fraction is [0,1) and the value stored here is 1,000,000 * [fraction].',
-        },
-        targeting_setting: {
-            target_restrictions: {
-                _type: 'array',
-                _description: 'The per-targeting-dimension setting to restrict the reach of your campaign or ad group.',
-            },
-        },
         cpc_bid_micros: { _type: 'int64', _description: 'The maximum CPC (cost-per-click) bid.' },
         status: {
             _type: 'enum',
@@ -171,6 +131,46 @@ module.exports = {
             _type: 'int64',
             _description:
                 'Average amount in micros that the advertiser is willing to pay for every thousand times the ad is shown.',
+        },
+        effective_target_roas: {
+            _type: 'double',
+            _description: 'The effective target ROAS (return-on-ad-spend). This field is read-only.',
+        },
+        type: {
+            _type: 'enum',
+            _enums: [
+                { s: 'UNSPECIFIED', description: 'The type has not been specified.' },
+                {
+                    s: 'UNKNOWN',
+                    description: 'The received value is not known in this version.\n\nThis is a response-only value.',
+                },
+                { s: 'SEARCH_STANDARD', description: 'The default ad group type for Search campaigns.' },
+                { s: 'DISPLAY_STANDARD', description: 'The default ad group type for Display campaigns.' },
+                {
+                    s: 'SHOPPING_PRODUCT_ADS',
+                    description: 'The ad group type for Shopping campaigns serving standard product ads.',
+                },
+                { s: 'HOTEL_ADS', description: 'The default ad group type for Hotel campaigns.' },
+                { s: 'SHOPPING_SMART_ADS', description: 'The type for ad groups in Smart Shopping campaigns.' },
+                { s: 'VIDEO_BUMPER', description: 'Short unskippable in-stream video ads.' },
+                { s: 'VIDEO_TRUE_VIEW_IN_STREAM', description: 'TrueView (skippable) in-stream video ads.' },
+                { s: 'VIDEO_TRUE_VIEW_IN_DISPLAY', description: 'TrueView in-display video ads.' },
+                { s: 'VIDEO_NON_SKIPPABLE_IN_STREAM', description: 'Unskippable in-stream video ads.' },
+                { s: 'VIDEO_OUTSTREAM', description: 'Outstream video ads.' },
+                { s: 'SEARCH_DYNAMIC_ADS', description: 'Ad group type for Dynamic Search Ads ad groups.' },
+            ],
+            _description: 'The type of the ad group.',
+        },
+        percent_cpc_bid_micros: {
+            _type: 'int64',
+            _description:
+                'The percent cpc bid amount, expressed as a fraction of the advertised price for some good or service. The valid range for the fraction is [0,1) and the value stored here is 1,000,000 * [fraction].',
+        },
+        targeting_setting: {
+            target_restrictions: {
+                _type: 'array',
+                _description: 'The per-targeting-dimension setting to restrict the reach of your campaign or ad group.',
+            },
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

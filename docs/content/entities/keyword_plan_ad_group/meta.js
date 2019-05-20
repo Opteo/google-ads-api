@@ -1,10 +1,6 @@
 module.exports = {
     name: 'KeywordPlanAdGroup',
     object: {
-        keyword_plan_campaign: {
-            _type: 'string',
-            _description: 'The keyword plan campaign to which this ad group belongs.',
-        },
         id: { _type: 'int64', _description: 'The ID of the keyword plan ad group.' },
         cpc_bid_micros: {
             _type: 'int64',
@@ -20,6 +16,10 @@ module.exports = {
             _type: 'string',
             _description:
                 'The name of the keyword plan ad group. This field is required and should not be empty when creating keyword plan ad group.',
+        },
+        keyword_plan_campaign: {
+            _type: 'string',
+            _description: 'The keyword plan campaign to which this ad group belongs.',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

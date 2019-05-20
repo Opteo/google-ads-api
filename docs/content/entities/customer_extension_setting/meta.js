@@ -26,6 +26,8 @@ module.exports = {
                 { s: 'REVIEW', description: 'Review.' },
                 { s: 'SITELINK', description: 'Sitelink.' },
                 { s: 'STRUCTURED_SNIPPET', description: 'Structured snippet.' },
+                { s: 'LOCATION', description: 'Location.' },
+                { s: 'AFFILIATE_LOCATION', description: 'Affiliate location.' },
             ],
             _description: 'The extension type of the customer extension setting.',
         },

@@ -8,5 +8,5 @@ entity: ConversionAction
 ```javascript
 // Deleting the entity
 
-await customer.conversionActions.delete('customers/3827277046/conversionActions/238277646')
+await customer.conversionActions.delete('customers/9262111890/conversionActions/314732636')
 ```

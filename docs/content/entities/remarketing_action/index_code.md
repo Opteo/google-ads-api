@@ -8,6 +8,6 @@ title: RemarketingAction
 ```javascript
 
 // Example RemarketingAction
-const remarketing_action = // Todo: add example get() return here
+const remarketing_action = /* Todo: add example get() return here */
 
 ```

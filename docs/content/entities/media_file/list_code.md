@@ -28,13 +28,14 @@ let result = await customer.mediaFiles.list({
 ;[
   {
     media_file: {
-      resource_name: 'customers/3827277046/mediaFiles/2844631150',
+      resource_name: 'customers/3827277046/mediaFiles/4565915444',
       file_size: 0,
-      id: 2844631150,
+      id: 4565915444,
       mime_type: 1,
       name: 'My media file',
       source_url: '',
-      type: 1,
+      type: 6,
+      video: { ad_duration_millis: 40356, youtube_video_id: 'V_jS8nLLpZI' },
     },
     customer: {
       resource_name: 'customers/3827277046',
@@ -49,6 +50,7 @@ let result = await customer.mediaFiles.list({
       has_partners_badge: false,
       id: 3827277046,
       manager: false,
+      pay_per_conversion_eligibility_failure_reasons: [5],
       remarketing_setting: {
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 875176189 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-875176189\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-875176189');\n</script>\n",

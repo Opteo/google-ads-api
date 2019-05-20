@@ -25,7 +25,7 @@ const result = await customer.userLists.create([user_list, other_user_list], {
 
 // Example result
 {
-	results : ['customers/3827277046/userLists/508846109'],
+	results : ['customers/3827277046/userLists/509186086'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

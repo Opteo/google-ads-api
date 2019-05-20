@@ -1,3 +1,15 @@
+/*
+
+    To update the google ads api version, you must:
+
+    1. Update google-ads-node in package.json
+    2. yarn && yarn build
+    3. update scripts/schema.json (https://googleads.googleapis.com/$discovery/rest?version=v1)
+    4. update compiled_resources.json by running `pbjs -t json googleapis/google/rpc/*.proto googleapis/google/longrunning/*.proto googleapis//google/ads/googleads/v1/common/*.proto googleapis//google/ads/googleads/v1/errors/*.proto googleapis//google/ads/googleads/v1/enums/*.proto googleapis//google/ads/googleads/v1/resources/*.proto googleapis//google/ads/googleads/v1/services/*.proto > compiled_resources.json`
+    5. clear the .cache folder in the root of this project to make sure you get new examples from our test account
+
+*/
+
 const fs = require('fs-extra')
 const template = require('lodash.template')
 const camelCase = require('lodash.camelcase')
@@ -119,8 +131,12 @@ const method_compilers = {}
 
 const $RefParser = require('json-schema-ref-parser')
 
+// get this from https://googleads.googleapis.com/$discovery/rest?version=v1
 const raw_schema = require('./schema.json')
+
 // TODO: get this from google-ads-node
+// To regenerate this file, run (in google-ads-node):
+// pbjs -t json googleapis/google/rpc/*.proto googleapis/google/longrunning/*.proto googleapis//google/ads/googleads/v1/common/*.proto googleapis//google/ads/googleads/v1/errors/*.proto googleapis//google/ads/googleads/v1/enums/*.proto googleapis//google/ads/googleads/v1/resources/*.proto googleapis//google/ads/googleads/v1/services/*.proto > compiled_resources.json
 const raw_compiled_services = require('./compiled_resources.json')
 
 // console.log(raw_compiled_services)
@@ -234,7 +250,7 @@ const _entities = Object.keys(compiled_services).forEach(entity => {
     }
 
     if (!entities.includes(entity.replace('Service', ''))) {
-        console.log(entity)
+        // console.log(entity)
     }
 })
 
@@ -377,7 +393,6 @@ async function compileService(entity, schema) {
         const new_obj = {}
 
         Object.keys(obj).forEach(key => {
-            console.log(key)
             const _new_object = {}
 
             if (obj[key].enum) {
@@ -516,7 +531,7 @@ async function compileService(entity, schema) {
         } catch {
             try {
                 listed = await customer[camelCase(resource_url_name)].list({
-                    limit: 1,
+                    limit: 100,
                 })
                 fs.writeJsonSync(cache_path, listed)
             } catch (e) {
@@ -528,18 +543,17 @@ async function compileService(entity, schema) {
         if (listed.length === 0) {
             try {
                 listed = await customer_scary[camelCase(resource_url_name)].list({
-                    limit: 1,
+                    limit: 100,
                 })
                 scary = listed.length > 0
-                console.log(listed.length)
                 fs.writeJsonSync(cache_path, listed)
             } catch (e) {
                 console.error(e)
             }
         }
 
-        let example_object_list = '// Todo: add example list() return here'
-        let example_object_get = '// Todo: add example get() return here'
+        let example_object_list = '/* Todo: add example list() return here */'
+        let example_object_get = '/* Todo: add example get() return here */'
         let example_resource_name = `customers/1234567890/${resource_url_name}/123123123`
 
         if (listed.length > 0) {

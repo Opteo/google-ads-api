@@ -25,7 +25,7 @@ const result = await customer.extensionFeedItems.create([extension_feed_item, ot
 
 // Example result
 {
-	results : ['customers/3827277046/extensionFeedItems/9779152283'],
+	results : ['customers/3827277046/extensionFeedItems/13881705221'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

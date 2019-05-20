@@ -13,6 +13,6 @@ let result = await customer.customerClientLinks.get('customers/1234567890/custom
 ```javascript
 
 // Example result
-(// Todo: add example get() return here)
+(/* Todo: add example get() return here */)
 
 ```

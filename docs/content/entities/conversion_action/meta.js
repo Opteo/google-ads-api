@@ -1,6 +1,48 @@
 module.exports = {
     name: 'ConversionAction',
     object: {
+        name: {
+            _type: 'string',
+            _description:
+                'The name of the conversion action. This field is required and should not be empty when creating new conversion actions.',
+        },
+        category: {
+            _type: 'enum',
+            _enums: [
+                { s: 'UNSPECIFIED', description: 'Not specified.' },
+                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
+                { s: 'DEFAULT', description: 'Default category.' },
+                { s: 'PAGE_VIEW', description: 'User visiting a page.' },
+                { s: 'PURCHASE', description: 'Purchase, sales, or "order placed" event.' },
+                { s: 'SIGNUP', description: 'Signup user action.' },
+                { s: 'LEAD', description: 'Lead-generating action.' },
+                { s: 'DOWNLOAD', description: 'Software download action (as for an app).' },
+            ],
+            _description: 'The category of conversions reported for this conversion action.',
+        },
+        id: { _type: 'int64', _description: 'The ID of the conversion action.' },
+        value_settings: {
+            default_currency_code: {
+                _type: 'string',
+                _description:
+                    'The currency code to use when conversion events for this conversion action are sent with an invalid or missing currency code, or when this conversion action is configured to always use the default value.',
+            },
+            always_use_default_value: {
+                _type: 'boolean',
+                _description:
+                    'Controls whether the default value and default currency code are used in place of the value and currency code specified in conversion events for this conversion action.',
+            },
+            default_value: {
+                _type: 'double',
+                _description:
+                    'The value to use when conversion events for this conversion action are sent with an invalid, disallowed or missing value, or when this conversion action is configured to always use the default value.',
+            },
+        },
+        resource_name: {
+            _type: 'string',
+            _description:
+                'The resource name of the conversion action. Conversion action resource names have the form: <code>customers/{customer_id}/conversionActions/{conversion_action_id}</code>',
+        },
         include_in_conversions_metric: {
             _type: 'boolean',
             _description: 'Whether this conversion action should be included in the "conversions" metric.',
@@ -155,48 +197,6 @@ module.exports = {
                 },
             ],
             _description: 'The status of this conversion action for conversion event accrual.',
-        },
-        name: {
-            _type: 'string',
-            _description:
-                'The name of the conversion action. This field is required and should not be empty when creating new conversion actions.',
-        },
-        category: {
-            _type: 'enum',
-            _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'DEFAULT', description: 'Default category.' },
-                { s: 'PAGE_VIEW', description: 'User visiting a page.' },
-                { s: 'PURCHASE', description: 'Purchase, sales, or "order placed" event.' },
-                { s: 'SIGNUP', description: 'Signup user action.' },
-                { s: 'LEAD', description: 'Lead-generating action.' },
-                { s: 'DOWNLOAD', description: 'Software download action (as for an app).' },
-            ],
-            _description: 'The category of conversions reported for this conversion action.',
-        },
-        id: { _type: 'int64', _description: 'The ID of the conversion action.' },
-        value_settings: {
-            default_value: {
-                _type: 'double',
-                _description:
-                    'The value to use when conversion events for this conversion action are sent with an invalid, disallowed or missing value, or when this conversion action is configured to always use the default value.',
-            },
-            default_currency_code: {
-                _type: 'string',
-                _description:
-                    'The currency code to use when conversion events for this conversion action are sent with an invalid or missing currency code, or when this conversion action is configured to always use the default value.',
-            },
-            always_use_default_value: {
-                _type: 'boolean',
-                _description:
-                    'Controls whether the default value and default currency code are used in place of the value and currency code specified in conversion events for this conversion action.',
-            },
-        },
-        resource_name: {
-            _type: 'string',
-            _description:
-                'The resource name of the conversion action. Conversion action resource names have the form: <code>customers/{customer_id}/conversionActions/{conversion_action_id}</code>',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

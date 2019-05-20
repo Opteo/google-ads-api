@@ -7,23 +7,23 @@ entity: TopicConstant
 
 ```javascript
 // Getting the entity
-let result = await customer.topicConstants.get('topicConstants/1786')
+let result = await customer.topicConstants.get('topicConstants/115')
 ```
 
 ```javascript
 // Example result
 ;({
-  resource_name: 'topicConstants/1786',
-  id: 1786,
+  resource_name: 'topicConstants/115',
+  id: 115,
   path: [
     { value: '' },
-    { value: 'Computers & Electronics' },
-    { value: 'Consumer Electronics' },
-    { value: 'Camera & Photo Equipment' },
-    { value: 'Cameras & Camcorders' },
-    { value: 'Camcorders' },
-    { value: 'Body Mounted & Action Cameras' },
+    { value: 'People & Society' },
+    { value: 'Family & Relationships' },
+    { value: 'Family' },
+    { value: 'Parenting' },
+    { value: 'Babies & Toddlers' },
+    { value: 'Baby Care & Hygiene' },
   ],
-  topic_constant_parent: 'topicConstants/308',
+  topic_constant_parent: 'topicConstants/1374',
 })
 ```

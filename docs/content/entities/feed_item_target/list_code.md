@@ -24,8 +24,8 @@ let result = await customer.feedItemTargets.list({
 ```
 
 ```javascript
-
 // Example result
-[// Todo: add example list() return here]
-
+;[
+  /* Todo: add example list() return here */
+]
 ```

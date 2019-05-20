@@ -28,21 +28,22 @@ let result = await customer.campaignBidModifiers.list({
 ;[
   {
     campaign_bid_modifier: {
-      resource_name: 'customers/3827277046/campaignBidModifiers/729684361~8000',
-      campaign: 'customers/3827277046/campaigns/729684361',
+      resource_name: 'customers/3827277046/campaignBidModifiers/881817006~8000',
+      campaign: 'customers/3827277046/campaigns/881817006',
       criterion_id: 8000,
     },
     campaign: {
-      resource_name: 'customers/3827277046/campaigns/729684361',
-      ad_serving_optimization_status: 4,
+      resource_name: 'customers/3827277046/campaigns/881817006',
+      ad_serving_optimization_status: 5,
       advertising_channel_type: 2,
-      bidding_strategy_type: 3,
-      campaign_budget: 'customers/3827277046/campaignBudgets/1005523652',
+      base_campaign: 'customers/3827277046/campaigns/881817006',
+      bidding_strategy_type: 6,
+      campaign_budget: 'customers/3827277046/campaignBudgets/1159840470',
       end_date: '2037-12-30',
+      experiment_type: 2,
       frequency_caps: [],
       geo_target_type_setting: { negative_geo_target_type: 2, positive_geo_target_type: 4 },
-      id: 729684361,
-      manual_cpc: { enhanced_cpc_enabled: false },
+      id: 881817006,
       name: 'My campaign',
       network_settings: {
         target_content_network: false,
@@ -53,9 +54,12 @@ let result = await customer.campaignBidModifiers.list({
       payment_mode: 4,
       selective_optimization: { conversion_actions: [] },
       serving_status: 2,
-      start_date: '2017-01-04',
-      status: 3,
+      start_date: '2017-07-12',
+      status: 2,
+      target_cpa: { target_cpa_micros: 20000000 },
       targeting_setting: { target_restrictions: [{ targetingDimension: 3, bidOnly: { value: false } }] },
+      tracking_url_template:
+        'https://ad.atdmt.com/s/go;adv=11202207688256;ec=11202207688723;c.a={campaignid};s.a=google;p.a={campaignid};as.a={adgroupid};qpb=1;?bidkw={keyword:defaultkeyword}&dvc={device}&h={lpurl}?utm_source=adwords&utm_medium=PPC&utm_campaign={campaignid}&utm_term={ifsearch:{keyword}}{ifcontent:{placement}}&utm_content={creative}&network={network}&adgroupid={adgroupid}&matchtype={matchtype}&adposition={adposition}&targetid={targetid}&target={target}&device={device}&devicemodel={devicemodel}',
       url_custom_parameters: [],
     },
     customer: {
@@ -71,6 +75,7 @@ let result = await customer.campaignBidModifiers.list({
       has_partners_badge: false,
       id: 3827277046,
       manager: false,
+      pay_per_conversion_eligibility_failure_reasons: [5],
       remarketing_setting: {
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 875176189 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-875176189\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-875176189');\n</script>\n",

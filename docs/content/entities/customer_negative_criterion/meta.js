@@ -1,6 +1,11 @@
 module.exports = {
     name: 'CustomerNegativeCriterion',
     object: {
+        resource_name: {
+            _type: 'string',
+            _description:
+                'The resource name of the customer negative criterion. Customer negative criterion resource names have the form: <code>customers/{customer_id}/customerNegativeCriteria/{criterion_id}</code>',
+        },
         content_label: {
             type: {
                 _type: 'enum',
@@ -40,6 +45,7 @@ module.exports = {
                 _description:
                     'A string that uniquely identifies a mobile application to Google Ads API. The format of this string is "{platform}-{platform_native_id}", where platform is "1" for iOS apps and "2" for Android apps, and where platform_native_id is the mobile application identifier native to the corresponding platform. For iOS, this native identifier is the 9 digit string that appears at the end of an App Store URL (e.g., "476943146" for "Flood-It! 2" whose App Store link is http://itunes.apple.com/us/app/flood-it!-2/id476943146). For Android, this native identifier is the application\'s package name (e.g., "com.labpixies.colordrips" for "Color Drips" given Google Play link https://play.google.com/store/apps/details?id=com.labpixies.colordrips). A well formed app id for Google Ads API would thus be "1-476943146" for iOS and "2-com.labpixies.colordrips" for Android. This field is required and must be set in CREATE operations.',
             },
+            name: { _type: 'string', _description: 'Name of this mobile application.' },
             _oneof: 'criterion',
         },
         youtube_video: {
@@ -87,6 +93,7 @@ module.exports = {
                 { s: 'MOBILE_DEVICE', description: 'Mobile device.' },
                 { s: 'CUSTOM_AFFINITY', description: 'Custom affinity.' },
                 { s: 'CUSTOM_INTENT', description: 'Custom intent.' },
+                { s: 'LOCATION_GROUP', description: 'Location group.' },
             ],
             _description: 'The type of the criterion.',
         },
@@ -97,11 +104,6 @@ module.exports = {
                 _description: 'The mobile app category constant resource name.',
             },
             _oneof: 'criterion',
-        },
-        resource_name: {
-            _type: 'string',
-            _description:
-                'The resource name of the customer negative criterion. Customer negative criterion resource names have the form: <code>customers/{customer_id}/customerNegativeCriteria/{criterion_id}</code>',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

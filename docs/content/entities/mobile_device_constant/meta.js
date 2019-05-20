@@ -1,6 +1,12 @@
 module.exports = {
     name: 'MobileDeviceConstant',
     object: {
+        resource_name: {
+            _type: 'string',
+            _description:
+                'The resource name of the mobile device constant. Mobile device constant resource names have the form: <code>mobileDeviceConstants/{criterion_id}</code>',
+        },
+        manufacturer_name: { _type: 'string', _description: 'The manufacturer of the mobile device.' },
         operating_system_name: { _type: 'string', _description: 'The operating system of the mobile device.' },
         name: { _type: 'string', _description: 'The name of the mobile device.' },
         type: {
@@ -14,12 +20,6 @@ module.exports = {
             _description: 'The type of mobile device.',
         },
         id: { _type: 'int64', _description: 'The ID of the mobile device constant.' },
-        manufacturer_name: { _type: 'string', _description: 'The manufacturer of the mobile device.' },
-        resource_name: {
-            _type: 'string',
-            _description:
-                'The resource name of the mobile device constant. Mobile device constant resource names have the form: <code>mobileDeviceConstants/{criterion_id}</code>',
-        },
     },
     methods: ['get', 'list'],
 }

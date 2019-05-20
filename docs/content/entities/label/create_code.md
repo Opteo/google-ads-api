@@ -25,7 +25,7 @@ const result = await customer.labels.create([label, other_label], {
 
 // Example result
 {
-	results : ['customers/3827277046/labels/872103121'],
+	results : ['customers/3827277046/labels/3345231412'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

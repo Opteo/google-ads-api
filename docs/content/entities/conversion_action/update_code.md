@@ -9,7 +9,7 @@ entity: ConversionAction
 // Updating the entity
 
 const conversion_action = {
-  resource_name: 'customers/3827277046/conversionActions/238277646', // The resource_name is required
+  resource_name: 'customers/9262111890/conversionActions/314732636', // The resource_name is required
   // ...any other fields that you would like to update
 }
 
@@ -26,7 +26,7 @@ const result = await customer.conversionActions.update([conversion_action, other
 
 // Example result
 {
-	results : ['customers/3827277046/conversionActions/238277646'],
+	results : ['customers/9262111890/conversionActions/314732636'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

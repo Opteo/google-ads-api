@@ -1643,6 +1643,10 @@
                             "actionHeadline": {
                               "type": "google.protobuf.StringValue",
                               "id": 2
+                            },
+                            "companionBanner": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 3
                             }
                           }
                         },
@@ -1811,6 +1815,30 @@
                             }
                           }
                         },
+                        "AppEngagementAdInfo": {
+                          "fields": {
+                            "headlines": {
+                              "rule": "repeated",
+                              "type": "AdTextAsset",
+                              "id": 1
+                            },
+                            "descriptions": {
+                              "rule": "repeated",
+                              "type": "AdTextAsset",
+                              "id": 2
+                            },
+                            "images": {
+                              "rule": "repeated",
+                              "type": "AdImageAsset",
+                              "id": 3
+                            },
+                            "videos": {
+                              "rule": "repeated",
+                              "type": "AdVideoAsset",
+                              "id": 4
+                            }
+                          }
+                        },
                         "LegacyAppInstallAdInfo": {
                           "fields": {
                             "appId": {
@@ -1910,6 +1938,25 @@
                             }
                           }
                         },
+                        "DisplayUploadAdInfo": {
+                          "oneofs": {
+                            "mediaAsset": {
+                              "oneof": [
+                                "mediaBundle"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "displayUploadProductType": {
+                              "type": "google.ads.googleads.v1.enums.DisplayUploadProductTypeEnum.DisplayUploadProductType",
+                              "id": 1
+                            },
+                            "mediaBundle": {
+                              "type": "AdMediaBundleAsset",
+                              "id": 2
+                            }
+                          }
+                        },
                         "YoutubeVideoAsset": {
                           "fields": {
                             "youtubeVideoId": {
@@ -1959,6 +2006,14 @@
                             "url": {
                               "type": "google.protobuf.StringValue",
                               "id": 3
+                            }
+                          }
+                        },
+                        "TextAsset": {
+                          "fields": {
+                            "text": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 1
                             }
                           }
                         },
@@ -2182,6 +2237,10 @@
                             "appId": {
                               "type": "google.protobuf.StringValue",
                               "id": 2
+                            },
+                            "name": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 3
                             }
                           }
                         },
@@ -2751,6 +2810,27 @@
                             }
                           }
                         },
+                        "LocationGroupInfo": {
+                          "fields": {
+                            "feed": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 1
+                            },
+                            "geoTargetConstants": {
+                              "rule": "repeated",
+                              "type": "google.protobuf.StringValue",
+                              "id": 2
+                            },
+                            "radius": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 3
+                            },
+                            "radiusUnits": {
+                              "type": "google.ads.googleads.v1.enums.LocationGroupRadiusUnitsEnum.LocationGroupRadiusUnits",
+                              "id": 4
+                            }
+                          }
+                        },
                         "CriterionCategoryAvailability": {
                           "fields": {
                             "channel": {
@@ -2905,6 +2985,86 @@
                             "calloutText": {
                               "type": "google.protobuf.StringValue",
                               "id": 1
+                            }
+                          }
+                        },
+                        "LocationFeedItem": {
+                          "fields": {
+                            "businessName": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 1
+                            },
+                            "addressLine_1": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 2
+                            },
+                            "addressLine_2": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 3
+                            },
+                            "city": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 4
+                            },
+                            "province": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 5
+                            },
+                            "postalCode": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 6
+                            },
+                            "countryCode": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 7
+                            },
+                            "phoneNumber": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 8
+                            }
+                          }
+                        },
+                        "AffiliateLocationFeedItem": {
+                          "fields": {
+                            "businessName": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 1
+                            },
+                            "addressLine_1": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 2
+                            },
+                            "addressLine_2": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 3
+                            },
+                            "city": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 4
+                            },
+                            "province": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 5
+                            },
+                            "postalCode": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 6
+                            },
+                            "countryCode": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 7
+                            },
+                            "phoneNumber": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 8
+                            },
+                            "chainId": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 9
+                            },
+                            "chainName": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 10
                             }
                           }
                         },
@@ -3136,6 +3296,18 @@
                             }
                           }
                         },
+                        "FinalAppUrl": {
+                          "fields": {
+                            "osType": {
+                              "type": "google.ads.googleads.v1.enums.AppUrlOperatingSystemTypeEnum.AppUrlOperatingSystemType",
+                              "id": 1
+                            },
+                            "url": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 2
+                            }
+                          }
+                        },
                         "FrequencyCapEntry": {
                           "fields": {
                             "key": {
@@ -3342,9 +3514,37 @@
                               "type": "google.protobuf.DoubleValue",
                               "id": 62
                             },
+                            "allConversionsFromClickToCall": {
+                              "type": "google.protobuf.DoubleValue",
+                              "id": 118
+                            },
+                            "allConversionsFromDirections": {
+                              "type": "google.protobuf.DoubleValue",
+                              "id": 119
+                            },
                             "allConversionsFromInteractionsValuePerInteraction": {
                               "type": "google.protobuf.DoubleValue",
                               "id": 67
+                            },
+                            "allConversionsFromMenu": {
+                              "type": "google.protobuf.DoubleValue",
+                              "id": 120
+                            },
+                            "allConversionsFromOrder": {
+                              "type": "google.protobuf.DoubleValue",
+                              "id": 121
+                            },
+                            "allConversionsFromOtherEngagement": {
+                              "type": "google.protobuf.DoubleValue",
+                              "id": 122
+                            },
+                            "allConversionsFromStoreVisit": {
+                              "type": "google.protobuf.DoubleValue",
+                              "id": 123
+                            },
+                            "allConversionsFromStoreWebsite": {
+                              "type": "google.protobuf.DoubleValue",
+                              "id": 124
                             },
                             "averageCost": {
                               "type": "google.protobuf.DoubleValue",
@@ -3397,6 +3597,18 @@
                             "clicks": {
                               "type": "google.protobuf.Int64Value",
                               "id": 19
+                            },
+                            "combinedClicks": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 115
+                            },
+                            "combinedClicksPerQuery": {
+                              "type": "google.protobuf.DoubleValue",
+                              "id": 116
+                            },
+                            "combinedQueries": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 117
                             },
                             "contentBudgetLostImpressionShare": {
                               "type": "google.protobuf.DoubleValue",
@@ -3526,6 +3738,10 @@
                               "type": "google.protobuf.Int64Value",
                               "id": 36
                             },
+                            "impressionsFromStoreReach": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 125
+                            },
                             "impressions": {
                               "type": "google.protobuf.Int64Value",
                               "id": 37
@@ -3550,6 +3766,30 @@
                             "invalidClicks": {
                               "type": "google.protobuf.Int64Value",
                               "id": 41
+                            },
+                            "mobileFriendlyClicksPercentage": {
+                              "type": "google.protobuf.DoubleValue",
+                              "id": 109
+                            },
+                            "organicClicks": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 110
+                            },
+                            "organicClicksPerQuery": {
+                              "type": "google.protobuf.DoubleValue",
+                              "id": 111
+                            },
+                            "organicImpressions": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 112
+                            },
+                            "organicImpressionsPerQuery": {
+                              "type": "google.protobuf.DoubleValue",
+                              "id": 113
+                            },
+                            "organicQueries": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 114
                             },
                             "percentNewVisitors": {
                               "type": "google.protobuf.DoubleValue",
@@ -3615,9 +3855,17 @@
                               "type": "google.protobuf.DoubleValue",
                               "id": 92
                             },
+                            "speedScore": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 107
+                            },
                             "topImpressionPercentage": {
                               "type": "google.protobuf.DoubleValue",
                               "id": 93
+                            },
+                            "validAcceleratedMobilePagesClicksPercentage": {
+                              "type": "google.protobuf.DoubleValue",
+                              "id": 108
                             },
                             "valuePerAllConversions": {
                               "type": "google.protobuf.DoubleValue",
@@ -3718,7 +3966,8 @@
                                 "textList",
                                 "languageCode",
                                 "destinationTextList",
-                                "destinationMismatch"
+                                "destinationMismatch",
+                                "destinationNotWorking"
                               ]
                             }
                           },
@@ -3746,6 +3995,10 @@
                             "destinationMismatch": {
                               "type": "DestinationMismatch",
                               "id": 7
+                            },
+                            "destinationNotWorking": {
+                              "type": "DestinationNotWorking",
+                              "id": 8
                             }
                           },
                           "nested": {
@@ -3782,6 +4035,22 @@
                                   "rule": "repeated",
                                   "type": "google.ads.googleads.v1.enums.PolicyTopicEvidenceDestinationMismatchUrlTypeEnum.PolicyTopicEvidenceDestinationMismatchUrlType",
                                   "id": 1
+                                }
+                              }
+                            },
+                            "DestinationNotWorking": {
+                              "fields": {
+                                "expandedUrl": {
+                                  "type": "google.protobuf.StringValue",
+                                  "id": 3
+                                },
+                                "device": {
+                                  "type": "google.ads.googleads.v1.enums.PolicyTopicEvidenceDestinationNotWorkingDeviceEnum.PolicyTopicEvidenceDestinationNotWorkingDevice",
+                                  "id": 4
+                                },
+                                "lastCheckedDateTime": {
+                                  "type": "google.protobuf.StringValue",
+                                  "id": 5
                                 }
                               }
                             }
@@ -3913,13 +4182,33 @@
                               "type": "google.protobuf.StringValue",
                               "id": 62
                             },
+                            "geoTargetCounty": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 68
+                            },
+                            "geoTargetDistrict": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 69
+                            },
                             "geoTargetMetro": {
                               "type": "google.protobuf.StringValue",
                               "id": 63
                             },
+                            "geoTargetMostSpecificLocation": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 72
+                            },
+                            "geoTargetPostalCode": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 71
+                            },
                             "geoTargetRegion": {
                               "type": "google.protobuf.StringValue",
                               "id": 64
+                            },
+                            "geoTargetState": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 67
                             },
                             "hotelBookingWindowDays": {
                               "type": "google.protobuf.Int64Value",
@@ -4097,6 +4386,10 @@
                               "type": "google.protobuf.StringValue",
                               "id": 21
                             },
+                            "searchEngineResultsPageType": {
+                              "type": "google.ads.googleads.v1.enums.SearchEngineResultsPageTypeEnum.SearchEngineResultsPageType",
+                              "id": 70
+                            },
                             "searchTermMatchType": {
                               "type": "google.ads.googleads.v1.enums.SearchTermMatchTypeEnum.SearchTermMatchType",
                               "id": 22
@@ -4128,6 +4421,129 @@
                             "info": {
                               "type": "KeywordInfo",
                               "id": 2
+                            }
+                          }
+                        },
+                        "BidModifierSimulationPointList": {
+                          "fields": {
+                            "points": {
+                              "rule": "repeated",
+                              "type": "BidModifierSimulationPoint",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "CpcBidSimulationPointList": {
+                          "fields": {
+                            "points": {
+                              "rule": "repeated",
+                              "type": "CpcBidSimulationPoint",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "TargetCpaSimulationPointList": {
+                          "fields": {
+                            "points": {
+                              "rule": "repeated",
+                              "type": "TargetCpaSimulationPoint",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "BidModifierSimulationPoint": {
+                          "fields": {
+                            "bidModifier": {
+                              "type": "google.protobuf.DoubleValue",
+                              "id": 1
+                            },
+                            "biddableConversions": {
+                              "type": "google.protobuf.DoubleValue",
+                              "id": 2
+                            },
+                            "biddableConversionsValue": {
+                              "type": "google.protobuf.DoubleValue",
+                              "id": 3
+                            },
+                            "clicks": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 4
+                            },
+                            "costMicros": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 5
+                            },
+                            "impressions": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 6
+                            },
+                            "topSlotImpressions": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 7
+                            }
+                          }
+                        },
+                        "CpcBidSimulationPoint": {
+                          "fields": {
+                            "cpcBidMicros": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 1
+                            },
+                            "biddableConversions": {
+                              "type": "google.protobuf.DoubleValue",
+                              "id": 2
+                            },
+                            "biddableConversionsValue": {
+                              "type": "google.protobuf.DoubleValue",
+                              "id": 3
+                            },
+                            "clicks": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 4
+                            },
+                            "costMicros": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 5
+                            },
+                            "impressions": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 6
+                            },
+                            "topSlotImpressions": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 7
+                            }
+                          }
+                        },
+                        "TargetCpaSimulationPoint": {
+                          "fields": {
+                            "targetCpaMicros": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 1
+                            },
+                            "biddableConversions": {
+                              "type": "google.protobuf.DoubleValue",
+                              "id": 2
+                            },
+                            "biddableConversionsValue": {
+                              "type": "google.protobuf.DoubleValue",
+                              "id": 3
+                            },
+                            "clicks": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 4
+                            },
+                            "costMicros": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 5
+                            },
+                            "impressions": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 6
+                            },
+                            "topSlotImpressions": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 7
                             }
                           }
                         },
@@ -4679,7 +5095,10 @@
                                 "CANNOT_DISABLE_CALL_CONVERSION_AND_SET_CONVERSION_TYPE_ID": 127,
                                 "CANNOT_SET_PATH2_WITHOUT_PATH1": 128,
                                 "MISSING_DYNAMIC_SEARCH_ADS_SETTING_DOMAIN_NAME": 129,
-                                "INCOMPATIBLE_WITH_RESTRICTION_TYPE": 130
+                                "INCOMPATIBLE_WITH_RESTRICTION_TYPE": 130,
+                                "CUSTOMER_CONSENT_FOR_CALL_RECORDING_REQUIRED": 131,
+                                "MISSING_IMAGE_OR_MEDIA_BUNDLE": 132,
+                                "PRODUCT_TYPE_NOT_SUPPORTED_IN_THIS_CAMPAIGN": 133
                               }
                             }
                           }
@@ -4854,7 +5273,8 @@
                                 "CUSTOMER_NOT_WHITELISTED_FOR_ASSET_TYPE": 2,
                                 "DUPLICATE_ASSET": 3,
                                 "DUPLICATE_ASSET_NAME": 4,
-                                "ASSET_DATA_IS_MISSING": 5
+                                "ASSET_DATA_IS_MISSING": 5,
+                                "CANNOT_MODIFY_ASSET_NAME": 6
                               }
                             }
                           }
@@ -4952,7 +5372,8 @@
                                 "DUPLICATE_NAME": 2,
                                 "CANNOT_CHANGE_BIDDING_STRATEGY_TYPE": 3,
                                 "CANNOT_REMOVE_ASSOCIATED_STRATEGY": 4,
-                                "BIDDING_STRATEGY_NOT_SUPPORTED": 5
+                                "BIDDING_STRATEGY_NOT_SUPPORTED": 5,
+                                "INCOMPATIBLE_BIDDING_STRATEGY_AND_BIDDING_STRATEGY_GOAL_TYPE": 6
                               }
                             }
                           }
@@ -5316,6 +5737,7 @@
                                 "MISSING_SHOPPING_SETTING": 77,
                                 "INVALID_MATCHING_FUNCTION": 78,
                                 "LOCATION_FILTER_NOT_ALLOWED": 79,
+                                "INVALID_FEED_FOR_LOCATION_FILTER": 98,
                                 "LOCATION_FILTER_INVALID": 80,
                                 "CANNOT_ATTACH_CRITERIA_AT_CAMPAIGN_AND_ADGROUP": 81,
                                 "HOTEL_LENGTH_OF_STAY_OVERLAPS_WITH_EXISTING_CRITERION": 82,
@@ -5570,6 +5992,7 @@
                                 "imageError",
                                 "languageCodeError",
                                 "mediaBundleError",
+                                "mediaUploadError",
                                 "mediaFileError",
                                 "multiplierError",
                                 "newResourceCreationError",
@@ -5585,6 +6008,7 @@
                                 "operationAccessDeniedError",
                                 "resourceAccessDeniedError",
                                 "resourceCountLimitExceededError",
+                                "youtubeVideoRegistrationError",
                                 "adGroupBidModifierError",
                                 "contextError",
                                 "fieldError",
@@ -5627,7 +6051,8 @@
                                 "policyViolationError",
                                 "mutateJobError",
                                 "partialFailureError",
-                                "policyValidationParameterError"
+                                "policyValidationParameterError",
+                                "sizeLimitError"
                               ]
                             }
                           },
@@ -5780,6 +6205,10 @@
                               "type": "MediaBundleErrorEnum.MediaBundleError",
                               "id": 42
                             },
+                            "mediaUploadError": {
+                              "type": "MediaUploadErrorEnum.MediaUploadError",
+                              "id": 116
+                            },
                             "mediaFileError": {
                               "type": "MediaFileErrorEnum.MediaFileError",
                               "id": 86
@@ -5839,6 +6268,10 @@
                             "resourceCountLimitExceededError": {
                               "type": "ResourceCountLimitExceededErrorEnum.ResourceCountLimitExceededError",
                               "id": 57
+                            },
+                            "youtubeVideoRegistrationError": {
+                              "type": "YoutubeVideoRegistrationErrorEnum.YoutubeVideoRegistrationError",
+                              "id": 117
                             },
                             "adGroupBidModifierError": {
                               "type": "AdGroupBidModifierErrorEnum.AdGroupBidModifierError",
@@ -6011,6 +6444,10 @@
                             "policyValidationParameterError": {
                               "type": "PolicyValidationParameterErrorEnum.PolicyValidationParameterError",
                               "id": 114
+                            },
+                            "sizeLimitError": {
+                              "type": "SizeLimitErrorEnum.SizeLimitError",
+                              "id": 118
                             }
                           }
                         },
@@ -6387,7 +6824,13 @@
                                 "INVALID_CONVERSION_REPORTING_STATE": 87,
                                 "IMAGE_SIZE_WRONG": 88,
                                 "EMAIL_DELIVERY_NOT_AVAILABLE_IN_COUNTRY": 89,
-                                "AUTO_REPLY_NOT_AVAILABLE_IN_COUNTRY": 90
+                                "AUTO_REPLY_NOT_AVAILABLE_IN_COUNTRY": 90,
+                                "INVALID_LATITUDE_VALUE": 91,
+                                "INVALID_LONGITUDE_VALUE": 92,
+                                "TOO_MANY_LABELS": 93,
+                                "INVALID_IMAGE_URL": 94,
+                                "MISSING_LATITUDE_VALUE": 95,
+                                "MISSING_LONGITUDE_VALUE": 96
                               }
                             }
                           }
@@ -6810,6 +7253,21 @@
                             }
                           }
                         },
+                        "MediaUploadErrorEnum": {
+                          "fields": {},
+                          "nested": {
+                            "MediaUploadError": {
+                              "values": {
+                                "UNSPECIFIED": 0,
+                                "UNKNOWN": 1,
+                                "FILE_TOO_BIG": 2,
+                                "UNPARSEABLE_IMAGE": 3,
+                                "ANIMATED_IMAGE_NOT_ALLOWED": 4,
+                                "FORMAT_NOT_ALLOWED": 5
+                              }
+                            }
+                          }
+                        },
                         "MultiplierErrorEnum": {
                           "fields": {},
                           "nested": {
@@ -7002,6 +7460,8 @@
                                 "BAD_LIMIT_VALUE": 15,
                                 "BAD_NUMBER": 5,
                                 "BAD_OPERATOR": 3,
+                                "BAD_PARAMETER_NAME": 61,
+                                "BAD_PARAMETER_VALUE": 62,
                                 "BAD_RESOURCE_TYPE_IN_FROM_CLAUSE": 45,
                                 "BAD_SYMBOL": 2,
                                 "BAD_VALUE": 4,
@@ -7228,6 +7688,19 @@
                             }
                           }
                         },
+                        "SizeLimitErrorEnum": {
+                          "fields": {},
+                          "nested": {
+                            "SizeLimitError": {
+                              "values": {
+                                "UNSPECIFIED": 0,
+                                "UNKNOWN": 1,
+                                "REQUEST_SIZE_LIMIT_EXCEEDED": 2,
+                                "RESPONSE_SIZE_LIMIT_EXCEEDED": 3
+                              }
+                            }
+                          }
+                        },
                         "StringFormatErrorEnum": {
                           "fields": {},
                           "nested": {
@@ -7349,6 +7822,19 @@
                                 "RULE_TYPE_IS_NOT_SUPPORTED": 34,
                                 "CAN_NOT_ADD_A_SIMILAR_USERLIST_AS_LOGICAL_LIST_OPERAND": 35,
                                 "CAN_NOT_MIX_CRM_BASED_IN_LOGICAL_LIST_WITH_OTHER_LISTS": 36
+                              }
+                            }
+                          }
+                        },
+                        "YoutubeVideoRegistrationErrorEnum": {
+                          "fields": {},
+                          "nested": {
+                            "YoutubeVideoRegistrationError": {
+                              "values": {
+                                "UNSPECIFIED": 0,
+                                "UNKNOWN": 1,
+                                "VIDEO_NOT_FOUND": 2,
+                                "VIDEO_NOT_ACCESSIBLE": 3
                               }
                             }
                           }
@@ -7606,7 +8092,10 @@
                                 "LEGACY_RESPONSIVE_DISPLAY_AD": 16,
                                 "APP_AD": 17,
                                 "LEGACY_APP_INSTALL_AD": 18,
-                                "RESPONSIVE_DISPLAY_AD": 19
+                                "RESPONSIVE_DISPLAY_AD": 19,
+                                "HTML5_UPLOAD_AD": 21,
+                                "DYNAMIC_HTML5_AD": 22,
+                                "APP_ENGAGEMENT_AD": 23
                               }
                             }
                           }
@@ -7628,7 +8117,8 @@
                                 "VIDEO_OUTSTREAM": 9,
                                 "VIDEO_ACTION": 10,
                                 "VIDEO_NON_SKIPPABLE": 11,
-                                "APP_CAMPAIGN": 12
+                                "APP_CAMPAIGN": 12,
+                                "APP_CAMPAIGN_FOR_ENGAGEMENT": 13
                               }
                             }
                           }
@@ -7774,6 +8264,19 @@
                             }
                           }
                         },
+                        "AppUrlOperatingSystemTypeEnum": {
+                          "fields": {},
+                          "nested": {
+                            "AppUrlOperatingSystemType": {
+                              "values": {
+                                "UNSPECIFIED": 0,
+                                "UNKNOWN": 1,
+                                "IOS": 2,
+                                "ANDROID": 3
+                              }
+                            }
+                          }
+                        },
                         "AssetTypeEnum": {
                           "fields": {},
                           "nested": {
@@ -7783,7 +8286,8 @@
                                 "UNKNOWN": 1,
                                 "YOUTUBE_VIDEO": 2,
                                 "MEDIA_BUNDLE": 3,
-                                "IMAGE": 4
+                                "IMAGE": 4,
+                                "TEXT": 5
                               }
                             }
                           }
@@ -7948,7 +8452,8 @@
                                 "UNSPECIFIED": 0,
                                 "UNKNOWN": 1,
                                 "STANDARD": 2,
-                                "HOTEL_ADS_COMMISSION": 3
+                                "HOTEL_ADS_COMMISSION": 3,
+                                "FIXED_CPA": 4
                               }
                             }
                           }
@@ -7991,6 +8496,20 @@
                                 "UNSPECIFIED": 0,
                                 "UNKNOWN": 1,
                                 "CALLOUT_TEXT": 2
+                              }
+                            }
+                          }
+                        },
+                        "CampaignExperimentTypeEnum": {
+                          "fields": {},
+                          "nested": {
+                            "CampaignExperimentType": {
+                              "values": {
+                                "UNSPECIFIED": 0,
+                                "UNKNOWN": 1,
+                                "BASE": 2,
+                                "DRAFT": 3,
+                                "EXPERIMENT": 4
                               }
                             }
                           }
@@ -8410,7 +8929,8 @@
                                 "APP_PAYMENT_MODEL": 27,
                                 "MOBILE_DEVICE": 28,
                                 "CUSTOM_AFFINITY": 29,
-                                "CUSTOM_INTENT": 30
+                                "CUSTOM_INTENT": 30,
+                                "LOCATION_GROUP": 31
                               }
                             }
                           }
@@ -8499,6 +9019,24 @@
                             }
                           }
                         },
+                        "CustomerPayPerConversionEligibilityFailureReasonEnum": {
+                          "fields": {},
+                          "nested": {
+                            "CustomerPayPerConversionEligibilityFailureReason": {
+                              "values": {
+                                "UNSPECIFIED": 0,
+                                "UNKNOWN": 1,
+                                "NOT_ENOUGH_CONVERSIONS": 2,
+                                "CONVERSION_LAG_TOO_HIGH": 3,
+                                "HAS_CAMPAIGN_WITH_SHARED_BUDGET": 4,
+                                "HAS_UPLOAD_CLICKS_CONVERSION": 5,
+                                "AVERAGE_DAILY_SPEND_TOO_HIGH": 6,
+                                "ANALYSIS_NOT_COMPLETE": 7,
+                                "OTHER": 8
+                              }
+                            }
+                          }
+                        },
                         "DataDrivenModelStatusEnum": {
                           "fields": {},
                           "nested": {
@@ -8557,6 +9095,27 @@
                                 "ALL_FORMATS": 2,
                                 "NON_NATIVE": 3,
                                 "NATIVE": 4
+                              }
+                            }
+                          }
+                        },
+                        "DisplayUploadProductTypeEnum": {
+                          "fields": {},
+                          "nested": {
+                            "DisplayUploadProductType": {
+                              "values": {
+                                "UNSPECIFIED": 0,
+                                "UNKNOWN": 1,
+                                "HTML5_UPLOAD_AD": 2,
+                                "DYNAMIC_HTML5_EDUCATION_AD": 3,
+                                "DYNAMIC_HTML5_FLIGHT_AD": 4,
+                                "DYNAMIC_HTML5_HOTEL_RENTAL_AD": 5,
+                                "DYNAMIC_HTML5_JOB_AD": 6,
+                                "DYNAMIC_HTML5_LOCAL_AD": 7,
+                                "DYNAMIC_HTML5_REAL_ESTATE_AD": 8,
+                                "DYNAMIC_HTML5_CUSTOM_AD": 9,
+                                "DYNAMIC_HTML5_TRAVEL_AD": 10,
+                                "DYNAMIC_HTML5_HOTEL_AD": 11
                               }
                             }
                           }
@@ -8631,7 +9190,9 @@
                                 "PROMOTION": 8,
                                 "REVIEW": 9,
                                 "SITELINK": 10,
-                                "STRUCTURED_SNIPPET": 11
+                                "STRUCTURED_SNIPPET": 11,
+                                "LOCATION": 12,
+                                "AFFILIATE_LOCATION": 13
                               }
                             }
                           }
@@ -9286,6 +9847,19 @@
                             }
                           }
                         },
+                        "LocationGroupRadiusUnitsEnum": {
+                          "fields": {},
+                          "nested": {
+                            "LocationGroupRadiusUnits": {
+                              "values": {
+                                "UNSPECIFIED": 0,
+                                "UNKNOWN": 1,
+                                "METERS": 2,
+                                "MILES": 3
+                              }
+                            }
+                          }
+                        },
                         "LocationPlaceholderFieldEnum": {
                           "fields": {},
                           "nested": {
@@ -9545,7 +10119,8 @@
                                 "UNSPECIFIED": 0,
                                 "UNKNOWN": 1,
                                 "CLICKS": 4,
-                                "CONVERSION_VALUE": 5
+                                "CONVERSION_VALUE": 5,
+                                "CONVERSIONS": 6
                               }
                             }
                           }
@@ -9634,6 +10209,7 @@
                                 "UNKNOWN": 1,
                                 "PROHIBITED": 2,
                                 "LIMITED": 4,
+                                "FULLY_LIMITED": 8,
                                 "DESCRIPTIVE": 5,
                                 "BROADENING": 6,
                                 "AREA_OF_INTEREST_ONLY": 7
@@ -9653,6 +10229,20 @@
                                 "FINAL_MOBILE_URL": 4,
                                 "TRACKING_URL": 5,
                                 "MOBILE_TRACKING_URL": 6
+                              }
+                            }
+                          }
+                        },
+                        "PolicyTopicEvidenceDestinationNotWorkingDeviceEnum": {
+                          "fields": {},
+                          "nested": {
+                            "PolicyTopicEvidenceDestinationNotWorkingDevice": {
+                              "values": {
+                                "UNSPECIFIED": 0,
+                                "UNKNOWN": 1,
+                                "DESKTOP": 2,
+                                "ANDROID": 3,
+                                "IOS": 4
                               }
                             }
                           }
@@ -10040,8 +10630,25 @@
                                 "SEARCH_PARTNERS_OPT_IN": 8,
                                 "MAXIMIZE_CLICKS_OPT_IN": 9,
                                 "OPTIMIZE_AD_ROTATION": 10,
+                                "CALLOUT_EXTENSION": 11,
+                                "SITELINK_EXTENSION": 12,
+                                "CALL_EXTENSION": 13,
                                 "KEYWORD_MATCH_TYPE": 14,
                                 "MOVE_UNUSED_BUDGET": 15
+                              }
+                            }
+                          }
+                        },
+                        "SearchEngineResultsPageTypeEnum": {
+                          "fields": {},
+                          "nested": {
+                            "SearchEngineResultsPageType": {
+                              "values": {
+                                "UNSPECIFIED": 0,
+                                "UNKNOWN": 1,
+                                "ADS_ONLY": 2,
+                                "ORGANIC_ONLY": 3,
+                                "ADS_AND_ORGANIC": 4
                               }
                             }
                           }
@@ -10115,6 +10722,34 @@
                                 "UNKNOWN": 1,
                                 "NEGATIVE_KEYWORDS": 2,
                                 "NEGATIVE_PLACEMENTS": 3
+                              }
+                            }
+                          }
+                        },
+                        "SimulationModificationMethodEnum": {
+                          "fields": {},
+                          "nested": {
+                            "SimulationModificationMethod": {
+                              "values": {
+                                "UNSPECIFIED": 0,
+                                "UNKNOWN": 1,
+                                "UNIFORM": 2,
+                                "DEFAULT": 3
+                              }
+                            }
+                          }
+                        },
+                        "SimulationTypeEnum": {
+                          "fields": {},
+                          "nested": {
+                            "SimulationType": {
+                              "values": {
+                                "UNSPECIFIED": 0,
+                                "UNKNOWN": 1,
+                                "CPC_BID": 2,
+                                "CPV_BID": 3,
+                                "TARGET_CPA": 4,
+                                "BID_MODIFIER": 5
                               }
                             }
                           }
@@ -10937,7 +11572,9 @@
                                 "legacyResponsiveDisplayAd",
                                 "appAd",
                                 "legacyAppInstallAd",
-                                "responsiveDisplayAd"
+                                "responsiveDisplayAd",
+                                "displayUploadAd",
+                                "appEngagementAd"
                               ]
                             }
                           },
@@ -10950,6 +11587,11 @@
                               "rule": "repeated",
                               "type": "google.protobuf.StringValue",
                               "id": 2
+                            },
+                            "finalAppUrls": {
+                              "rule": "repeated",
+                              "type": "google.ads.googleads.v1.common.FinalAppUrl",
+                              "id": 35
                             },
                             "finalMobileUrls": {
                               "rule": "repeated",
@@ -11053,6 +11695,14 @@
                             "responsiveDisplayAd": {
                               "type": "google.ads.googleads.v1.common.ResponsiveDisplayAdInfo",
                               "id": 31
+                            },
+                            "displayUploadAd": {
+                              "type": "google.ads.googleads.v1.common.DisplayUploadAdInfo",
+                              "id": 33
+                            },
+                            "appEngagementAd": {
+                              "type": "google.ads.googleads.v1.common.AppEngagementAdInfo",
+                              "id": 34
                             }
                           }
                         },
@@ -11567,6 +12217,49 @@
                             }
                           }
                         },
+                        "AdGroupCriterionSimulation": {
+                          "oneofs": {
+                            "pointList": {
+                              "oneof": [
+                                "cpcBidPointList"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "resourceName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "adGroupId": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 2
+                            },
+                            "criterionId": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 3
+                            },
+                            "type": {
+                              "type": "google.ads.googleads.v1.enums.SimulationTypeEnum.SimulationType",
+                              "id": 4
+                            },
+                            "modificationMethod": {
+                              "type": "google.ads.googleads.v1.enums.SimulationModificationMethodEnum.SimulationModificationMethod",
+                              "id": 5
+                            },
+                            "startDate": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 6
+                            },
+                            "endDate": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 7
+                            },
+                            "cpcBidPointList": {
+                              "type": "google.ads.googleads.v1.common.CpcBidSimulationPointList",
+                              "id": 8
+                            }
+                          }
+                        },
                         "AdGroupExtensionSetting": {
                           "fields": {
                             "resourceName": {
@@ -11637,6 +12330,50 @@
                             }
                           }
                         },
+                        "AdGroupSimulation": {
+                          "oneofs": {
+                            "pointList": {
+                              "oneof": [
+                                "cpcBidPointList",
+                                "targetCpaPointList"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "resourceName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "adGroupId": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 2
+                            },
+                            "type": {
+                              "type": "google.ads.googleads.v1.enums.SimulationTypeEnum.SimulationType",
+                              "id": 3
+                            },
+                            "modificationMethod": {
+                              "type": "google.ads.googleads.v1.enums.SimulationModificationMethodEnum.SimulationModificationMethod",
+                              "id": 4
+                            },
+                            "startDate": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 5
+                            },
+                            "endDate": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 6
+                            },
+                            "cpcBidPointList": {
+                              "type": "google.ads.googleads.v1.common.CpcBidSimulationPointList",
+                              "id": 8
+                            },
+                            "targetCpaPointList": {
+                              "type": "google.ads.googleads.v1.common.TargetCpaSimulationPointList",
+                              "id": 9
+                            }
+                          }
+                        },
                         "AdParameter": {
                           "fields": {
                             "resourceName": {
@@ -11679,7 +12416,8 @@
                               "oneof": [
                                 "youtubeVideoAsset",
                                 "mediaBundleAsset",
-                                "imageAsset"
+                                "imageAsset",
+                                "textAsset"
                               ]
                             }
                           },
@@ -11711,6 +12449,10 @@
                             "imageAsset": {
                               "type": "google.ads.googleads.v1.common.ImageAsset",
                               "id": 7
+                            },
+                            "textAsset": {
+                              "type": "google.ads.googleads.v1.common.TextAsset",
+                              "id": 8
                             }
                           }
                         },
@@ -11961,6 +12703,14 @@
                               "type": "AppCampaignSetting",
                               "id": 51
                             },
+                            "experimentType": {
+                              "type": "google.ads.googleads.v1.enums.CampaignExperimentTypeEnum.CampaignExperimentType",
+                              "id": 17
+                            },
+                            "baseCampaign": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 28
+                            },
                             "campaignBudget": {
                               "type": "google.protobuf.StringValue",
                               "id": 6
@@ -12088,50 +12838,6 @@
                                 }
                               }
                             },
-                            "ShoppingSetting": {
-                              "fields": {
-                                "merchantId": {
-                                  "type": "google.protobuf.Int64Value",
-                                  "id": 1
-                                },
-                                "salesCountry": {
-                                  "type": "google.protobuf.StringValue",
-                                  "id": 2
-                                },
-                                "campaignPriority": {
-                                  "type": "google.protobuf.Int32Value",
-                                  "id": 3
-                                },
-                                "enableLocal": {
-                                  "type": "google.protobuf.BoolValue",
-                                  "id": 4
-                                }
-                              }
-                            },
-                            "GeoTargetTypeSetting": {
-                              "fields": {
-                                "positiveGeoTargetType": {
-                                  "type": "google.ads.googleads.v1.enums.PositiveGeoTargetTypeEnum.PositiveGeoTargetType",
-                                  "id": 1
-                                },
-                                "negativeGeoTargetType": {
-                                  "type": "google.ads.googleads.v1.enums.NegativeGeoTargetTypeEnum.NegativeGeoTargetType",
-                                  "id": 2
-                                }
-                              }
-                            },
-                            "VanityPharma": {
-                              "fields": {
-                                "vanityPharmaDisplayUrlMode": {
-                                  "type": "google.ads.googleads.v1.enums.VanityPharmaDisplayUrlModeEnum.VanityPharmaDisplayUrlMode",
-                                  "id": 1
-                                },
-                                "vanityPharmaText": {
-                                  "type": "google.ads.googleads.v1.enums.VanityPharmaTextEnum.VanityPharmaText",
-                                  "id": 2
-                                }
-                              }
-                            },
                             "DynamicSearchAdsSetting": {
                               "fields": {
                                 "domainName": {
@@ -12161,6 +12867,47 @@
                                 }
                               }
                             },
+                            "GeoTargetTypeSetting": {
+                              "fields": {
+                                "positiveGeoTargetType": {
+                                  "type": "google.ads.googleads.v1.enums.PositiveGeoTargetTypeEnum.PositiveGeoTargetType",
+                                  "id": 1
+                                },
+                                "negativeGeoTargetType": {
+                                  "type": "google.ads.googleads.v1.enums.NegativeGeoTargetTypeEnum.NegativeGeoTargetType",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "SelectiveOptimization": {
+                              "fields": {
+                                "conversionActions": {
+                                  "rule": "repeated",
+                                  "type": "google.protobuf.StringValue",
+                                  "id": 1
+                                }
+                              }
+                            },
+                            "ShoppingSetting": {
+                              "fields": {
+                                "merchantId": {
+                                  "type": "google.protobuf.Int64Value",
+                                  "id": 1
+                                },
+                                "salesCountry": {
+                                  "type": "google.protobuf.StringValue",
+                                  "id": 2
+                                },
+                                "campaignPriority": {
+                                  "type": "google.protobuf.Int32Value",
+                                  "id": 3
+                                },
+                                "enableLocal": {
+                                  "type": "google.protobuf.BoolValue",
+                                  "id": 4
+                                }
+                              }
+                            },
                             "AppCampaignSetting": {
                               "fields": {
                                 "biddingStrategyGoalType": {
@@ -12177,12 +12924,15 @@
                                 }
                               }
                             },
-                            "SelectiveOptimization": {
+                            "VanityPharma": {
                               "fields": {
-                                "conversionActions": {
-                                  "rule": "repeated",
-                                  "type": "google.protobuf.StringValue",
+                                "vanityPharmaDisplayUrlMode": {
+                                  "type": "google.ads.googleads.v1.enums.VanityPharmaDisplayUrlModeEnum.VanityPharmaDisplayUrlMode",
                                   "id": 1
+                                },
+                                "vanityPharmaText": {
+                                  "type": "google.ads.googleads.v1.enums.VanityPharmaTextEnum.VanityPharmaText",
+                                  "id": 2
                                 }
                               }
                             }
@@ -12327,7 +13077,8 @@
                                 "userInterest",
                                 "webpage",
                                 "operatingSystemVersion",
-                                "mobileDevice"
+                                "mobileDevice",
+                                "locationGroup"
                               ]
                             }
                           },
@@ -12455,6 +13206,53 @@
                             "mobileDevice": {
                               "type": "google.ads.googleads.v1.common.MobileDeviceInfo",
                               "id": 33
+                            },
+                            "locationGroup": {
+                              "type": "google.ads.googleads.v1.common.LocationGroupInfo",
+                              "id": 34
+                            }
+                          }
+                        },
+                        "CampaignCriterionSimulation": {
+                          "oneofs": {
+                            "pointList": {
+                              "oneof": [
+                                "bidModifierPointList"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "resourceName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "campaignId": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 2
+                            },
+                            "criterionId": {
+                              "type": "google.protobuf.Int64Value",
+                              "id": 3
+                            },
+                            "type": {
+                              "type": "google.ads.googleads.v1.enums.SimulationTypeEnum.SimulationType",
+                              "id": 4
+                            },
+                            "modificationMethod": {
+                              "type": "google.ads.googleads.v1.enums.SimulationModificationMethodEnum.SimulationModificationMethod",
+                              "id": 5
+                            },
+                            "startDate": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 6
+                            },
+                            "endDate": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 7
+                            },
+                            "bidModifierPointList": {
+                              "type": "google.ads.googleads.v1.common.BidModifierSimulationPointList",
+                              "id": 8
                             }
                           }
                         },
@@ -12853,6 +13651,11 @@
                             "remarketingSetting": {
                               "type": "RemarketingSetting",
                               "id": 15
+                            },
+                            "payPerConversionEligibilityFailureReasons": {
+                              "rule": "repeated",
+                              "type": "google.ads.googleads.v1.enums.CustomerPayPerConversionEligibilityFailureReasonEnum.CustomerPayPerConversionEligibilityFailureReason",
+                              "id": 16
                             }
                           }
                         },
@@ -13170,6 +13973,18 @@
                             }
                           }
                         },
+                        "ExpandedLandingPageView": {
+                          "fields": {
+                            "resourceName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "expandedFinalUrl": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 2
+                            }
+                          }
+                        },
                         "ExtensionFeedItem": {
                           "oneofs": {
                             "extension": {
@@ -13181,7 +13996,9 @@
                                 "calloutFeedItem",
                                 "textMessageFeedItem",
                                 "priceFeedItem",
-                                "promotionFeedItem"
+                                "promotionFeedItem",
+                                "locationFeedItem",
+                                "affiliateLocationFeedItem"
                               ]
                             }
                           },
@@ -13201,6 +14018,15 @@
                             "endDateTime": {
                               "type": "google.protobuf.StringValue",
                               "id": 6
+                            },
+                            "adSchedules": {
+                              "rule": "repeated",
+                              "type": "google.ads.googleads.v1.common.AdScheduleInfo",
+                              "id": 16
+                            },
+                            "device": {
+                              "type": "google.ads.googleads.v1.enums.FeedItemTargetDeviceEnum.FeedItemTargetDevice",
+                              "id": 17
                             },
                             "status": {
                               "type": "google.ads.googleads.v1.enums.FeedItemStatusEnum.FeedItemStatus",
@@ -13237,6 +14063,14 @@
                             "promotionFeedItem": {
                               "type": "google.ads.googleads.v1.common.PromotionFeedItem",
                               "id": 12
+                            },
+                            "locationFeedItem": {
+                              "type": "google.ads.googleads.v1.common.LocationFeedItem",
+                              "id": 14
+                            },
+                            "affiliateLocationFeedItem": {
+                              "type": "google.ads.googleads.v1.common.AffiliateLocationFeedItem",
+                              "id": 15
                             }
                           }
                         },
@@ -14136,6 +14970,18 @@
                             }
                           }
                         },
+                        "LandingPageView": {
+                          "fields": {
+                            "resourceName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "unexpandedFinalUrl": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 2
+                            }
+                          }
+                        },
                         "LanguageConstant": {
                           "fields": {
                             "resourceName": {
@@ -14363,6 +15209,10 @@
                             "status": {
                               "type": "google.ads.googleads.v1.enums.MutateJobStatusEnum.MutateJobStatus",
                               "id": 5
+                            },
+                            "longRunningOperation": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 6
                             }
                           },
                           "nested": {
@@ -14417,6 +15267,18 @@
                             "operatorType": {
                               "type": "google.ads.googleads.v1.enums.OperatingSystemVersionOperatorTypeEnum.OperatingSystemVersionOperatorType",
                               "id": 6
+                            }
+                          }
+                        },
+                        "PaidOrganicSearchTermView": {
+                          "fields": {
+                            "resourceName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "searchTerm": {
+                              "type": "google.protobuf.StringValue",
+                              "id": 2
                             }
                           }
                         },
@@ -14513,6 +15375,9 @@
                                 "searchPartnersOptInRecommendation",
                                 "maximizeClicksOptInRecommendation",
                                 "optimizeAdRotationRecommendation",
+                                "calloutExtensionRecommendation",
+                                "sitelinkExtensionRecommendation",
+                                "callExtensionRecommendation",
                                 "keywordMatchTypeRecommendation",
                                 "moveUnusedBudgetRecommendation"
                               ]
@@ -14582,6 +15447,18 @@
                             "optimizeAdRotationRecommendation": {
                               "type": "OptimizeAdRotationRecommendation",
                               "id": 16
+                            },
+                            "calloutExtensionRecommendation": {
+                              "type": "CalloutExtensionRecommendation",
+                              "id": 17
+                            },
+                            "sitelinkExtensionRecommendation": {
+                              "type": "SitelinkExtensionRecommendation",
+                              "id": 18
+                            },
+                            "callExtensionRecommendation": {
+                              "type": "CallExtensionRecommendation",
+                              "id": 19
                             },
                             "keywordMatchTypeRecommendation": {
                               "type": "KeywordMatchTypeRecommendation",
@@ -14672,6 +15549,22 @@
                                 }
                               }
                             },
+                            "TextAdRecommendation": {
+                              "fields": {
+                                "ad": {
+                                  "type": "Ad",
+                                  "id": 1
+                                },
+                                "creationDate": {
+                                  "type": "google.protobuf.StringValue",
+                                  "id": 2
+                                },
+                                "autoApplyDate": {
+                                  "type": "google.protobuf.StringValue",
+                                  "id": 3
+                                }
+                              }
+                            },
                             "TargetCpaOptInRecommendation": {
                               "fields": {
                                 "options": {
@@ -14707,31 +15600,15 @@
                                 }
                               }
                             },
-                            "MoveUnusedBudgetRecommendation": {
+                            "KeywordMatchTypeRecommendation": {
                               "fields": {
-                                "excessCampaignBudget": {
-                                  "type": "google.protobuf.StringValue",
+                                "keyword": {
+                                  "type": "google.ads.googleads.v1.common.KeywordInfo",
                                   "id": 1
                                 },
-                                "budgetRecommendation": {
-                                  "type": "CampaignBudgetRecommendation",
+                                "recommendedMatchType": {
+                                  "type": "google.ads.googleads.v1.enums.KeywordMatchTypeEnum.KeywordMatchType",
                                   "id": 2
-                                }
-                              }
-                            },
-                            "TextAdRecommendation": {
-                              "fields": {
-                                "ad": {
-                                  "type": "Ad",
-                                  "id": 1
-                                },
-                                "creationDate": {
-                                  "type": "google.protobuf.StringValue",
-                                  "id": 2
-                                },
-                                "autoApplyDate": {
-                                  "type": "google.protobuf.StringValue",
-                                  "id": 3
                                 }
                               }
                             },
@@ -14746,6 +15623,18 @@
                             "EnhancedCpcOptInRecommendation": {
                               "fields": {}
                             },
+                            "CallExtensionRecommendation": {
+                              "fields": {
+                                "recommendedExtensions": {
+                                  "rule": "repeated",
+                                  "type": "google.ads.googleads.v1.common.CallFeedItem",
+                                  "id": 1
+                                }
+                              }
+                            },
+                            "SearchPartnersOptInRecommendation": {
+                              "fields": {}
+                            },
                             "MaximizeClicksOptInRecommendation": {
                               "fields": {
                                 "recommendedBudgetAmountMicros": {
@@ -14757,18 +15646,33 @@
                             "OptimizeAdRotationRecommendation": {
                               "fields": {}
                             },
-                            "SearchPartnersOptInRecommendation": {
-                              "fields": {}
-                            },
-                            "KeywordMatchTypeRecommendation": {
+                            "MoveUnusedBudgetRecommendation": {
                               "fields": {
-                                "keyword": {
-                                  "type": "google.ads.googleads.v1.common.KeywordInfo",
+                                "excessCampaignBudget": {
+                                  "type": "google.protobuf.StringValue",
                                   "id": 1
                                 },
-                                "recommendedMatchType": {
-                                  "type": "google.ads.googleads.v1.enums.KeywordMatchTypeEnum.KeywordMatchType",
+                                "budgetRecommendation": {
+                                  "type": "CampaignBudgetRecommendation",
                                   "id": 2
+                                }
+                              }
+                            },
+                            "CalloutExtensionRecommendation": {
+                              "fields": {
+                                "recommendedExtensions": {
+                                  "rule": "repeated",
+                                  "type": "google.ads.googleads.v1.common.CalloutFeedItem",
+                                  "id": 1
+                                }
+                              }
+                            },
+                            "SitelinkExtensionRecommendation": {
+                              "fields": {
+                                "recommendedExtensions": {
+                                  "rule": "repeated",
+                                  "type": "google.ads.googleads.v1.common.SitelinkFeedItem",
+                                  "id": 1
                                 }
                               }
                             }
@@ -15720,6 +16624,25 @@
                             }
                           }
                         },
+                        "AdGroupCriterionSimulationService": {
+                          "methods": {
+                            "GetAdGroupCriterionSimulation": {
+                              "requestType": "GetAdGroupCriterionSimulationRequest",
+                              "responseType": "google.ads.googleads.v1.resources.AdGroupCriterionSimulation",
+                              "options": {
+                                "(google.api.http).get": "/v1/{resource_name=customers/*/adGroupCriterionSimulations/*}"
+                              }
+                            }
+                          }
+                        },
+                        "GetAdGroupCriterionSimulationRequest": {
+                          "fields": {
+                            "resourceName": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
                         "AdGroupExtensionSettingService": {
                           "methods": {
                             "GetAdGroupExtensionSetting": {
@@ -16096,6 +17019,25 @@
                           }
                         },
                         "MutateAdGroupResult": {
+                          "fields": {
+                            "resourceName": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "AdGroupSimulationService": {
+                          "methods": {
+                            "GetAdGroupSimulation": {
+                              "requestType": "GetAdGroupSimulationRequest",
+                              "responseType": "google.ads.googleads.v1.resources.AdGroupSimulation",
+                              "options": {
+                                "(google.api.http).get": "/v1/{resource_name=customers/*/adGroupSimulations/*}"
+                              }
+                            }
+                          }
+                        },
+                        "GetAdGroupSimulationRequest": {
                           "fields": {
                             "resourceName": {
                               "type": "string",
@@ -16790,6 +17732,25 @@
                           }
                         },
                         "MutateCampaignCriterionResult": {
+                          "fields": {
+                            "resourceName": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "CampaignCriterionSimulationService": {
+                          "methods": {
+                            "GetCampaignCriterionSimulation": {
+                              "requestType": "GetCampaignCriterionSimulationRequest",
+                              "responseType": "google.ads.googleads.v1.resources.CampaignCriterionSimulation",
+                              "options": {
+                                "(google.api.http).get": "/v1/{resource_name=customers/*/campaignCriterionSimulations/*}"
+                              }
+                            }
+                          }
+                        },
+                        "GetCampaignCriterionSimulationRequest": {
                           "fields": {
                             "resourceName": {
                               "type": "string",
@@ -18573,6 +19534,25 @@
                             }
                           }
                         },
+                        "ExpandedLandingPageViewService": {
+                          "methods": {
+                            "GetExpandedLandingPageView": {
+                              "requestType": "GetExpandedLandingPageViewRequest",
+                              "responseType": "google.ads.googleads.v1.resources.ExpandedLandingPageView",
+                              "options": {
+                                "(google.api.http).get": "/v1/{resource_name=customers/*/expandedLandingPageViews/*}"
+                              }
+                            }
+                          }
+                        },
+                        "GetExpandedLandingPageViewRequest": {
+                          "fields": {
+                            "resourceName": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
                         "ExtensionFeedItemService": {
                           "methods": {
                             "GetExtensionFeedItem": {
@@ -19354,6 +20334,10 @@
                               "type": "google.ads.googleads.v1.resources.AdGroupCriterionLabel",
                               "id": 121
                             },
+                            "adGroupCriterionSimulation": {
+                              "type": "google.ads.googleads.v1.resources.AdGroupCriterionSimulation",
+                              "id": 110
+                            },
                             "adGroupExtensionSetting": {
                               "type": "google.ads.googleads.v1.resources.AdGroupExtensionSetting",
                               "id": 112
@@ -19365,6 +20349,14 @@
                             "adGroupLabel": {
                               "type": "google.ads.googleads.v1.resources.AdGroupLabel",
                               "id": 115
+                            },
+                            "adGroupSimulation": {
+                              "type": "google.ads.googleads.v1.resources.AdGroupSimulation",
+                              "id": 107
+                            },
+                            "adParameter": {
+                              "type": "google.ads.googleads.v1.resources.AdParameter",
+                              "id": 130
                             },
                             "ageRangeView": {
                               "type": "google.ads.googleads.v1.resources.AgeRangeView",
@@ -19409,6 +20401,10 @@
                             "campaignCriterion": {
                               "type": "google.ads.googleads.v1.resources.CampaignCriterion",
                               "id": 20
+                            },
+                            "campaignCriterionSimulation": {
+                              "type": "google.ads.googleads.v1.resources.CampaignCriterionSimulation",
+                              "id": 111
                             },
                             "campaignExtensionSetting": {
                               "type": "google.ads.googleads.v1.resources.CampaignExtensionSetting",
@@ -19490,6 +20486,10 @@
                               "type": "google.ads.googleads.v1.resources.DynamicSearchAdsSearchTermView",
                               "id": 106
                             },
+                            "expandedLandingPageView": {
+                              "type": "google.ads.googleads.v1.resources.ExpandedLandingPageView",
+                              "id": 128
+                            },
                             "extensionFeedItem": {
                               "type": "google.ads.googleads.v1.resources.ExtensionFeedItem",
                               "id": 85
@@ -19566,6 +20566,10 @@
                               "type": "google.ads.googleads.v1.resources.Label",
                               "id": 52
                             },
+                            "landingPageView": {
+                              "type": "google.ads.googleads.v1.resources.LandingPageView",
+                              "id": 126
+                            },
                             "languageConstant": {
                               "type": "google.ads.googleads.v1.resources.LanguageConstant",
                               "id": 55
@@ -19590,9 +20594,17 @@
                               "type": "google.ads.googleads.v1.resources.MobileDeviceConstant",
                               "id": 98
                             },
+                            "mutateJob": {
+                              "type": "google.ads.googleads.v1.resources.MutateJob",
+                              "id": 127
+                            },
                             "operatingSystemVersionConstant": {
                               "type": "google.ads.googleads.v1.resources.OperatingSystemVersionConstant",
                               "id": 86
+                            },
+                            "paidOrganicSearchTermView": {
+                              "type": "google.ads.googleads.v1.resources.PaidOrganicSearchTermView",
+                              "id": 129
                             },
                             "parentalStatusView": {
                               "type": "google.ads.googleads.v1.resources.ParentalStatusView",
@@ -20985,6 +21997,25 @@
                             }
                           }
                         },
+                        "LandingPageViewService": {
+                          "methods": {
+                            "GetLandingPageView": {
+                              "requestType": "GetLandingPageViewRequest",
+                              "responseType": "google.ads.googleads.v1.resources.LandingPageView",
+                              "options": {
+                                "(google.api.http).get": "/v1/{resource_name=customers/*/landingPageViews/*}"
+                              }
+                            }
+                          }
+                        },
+                        "GetLandingPageViewRequest": {
+                          "fields": {
+                            "resourceName": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
                         "LanguageConstantService": {
                           "methods": {
                             "GetLanguageConstant": {
@@ -21434,6 +22465,25 @@
                             }
                           }
                         },
+                        "PaidOrganicSearchTermViewService": {
+                          "methods": {
+                            "GetPaidOrganicSearchTermView": {
+                              "requestType": "GetPaidOrganicSearchTermViewRequest",
+                              "responseType": "google.ads.googleads.v1.resources.PaidOrganicSearchTermView",
+                              "options": {
+                                "(google.api.http).get": "/v1/{resource_name=customers/*/paidOrganicSearchTermViews/*}"
+                              }
+                            }
+                          }
+                        },
+                        "GetPaidOrganicSearchTermViewRequest": {
+                          "fields": {
+                            "resourceName": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
                         "ParentalStatusViewService": {
                           "methods": {
                             "GetParentalStatusView": {
@@ -21579,6 +22629,9 @@
                                 "textAd",
                                 "keyword",
                                 "targetCpaOptIn",
+                                "calloutExtension",
+                                "callExtension",
+                                "sitelinkExtension",
                                 "moveUnusedBudget"
                               ]
                             }
@@ -21603,6 +22656,18 @@
                             "targetCpaOptIn": {
                               "type": "TargetCpaOptInParameters",
                               "id": 5
+                            },
+                            "calloutExtension": {
+                              "type": "CalloutExtensionParameters",
+                              "id": 6
+                            },
+                            "callExtension": {
+                              "type": "CallExtensionParameters",
+                              "id": 7
+                            },
+                            "sitelinkExtension": {
+                              "type": "SitelinkExtensionParameters",
+                              "id": 8
                             },
                             "moveUnusedBudget": {
                               "type": "MoveUnusedBudgetParameters",
@@ -21651,6 +22716,33 @@
                                 "newCampaignBudgetAmountMicros": {
                                   "type": "google.protobuf.Int64Value",
                                   "id": 2
+                                }
+                              }
+                            },
+                            "CalloutExtensionParameters": {
+                              "fields": {
+                                "calloutExtensions": {
+                                  "rule": "repeated",
+                                  "type": "google.ads.googleads.v1.common.CalloutFeedItem",
+                                  "id": 1
+                                }
+                              }
+                            },
+                            "CallExtensionParameters": {
+                              "fields": {
+                                "callExtensions": {
+                                  "rule": "repeated",
+                                  "type": "google.ads.googleads.v1.common.CallFeedItem",
+                                  "id": 1
+                                }
+                              }
+                            },
+                            "SitelinkExtensionParameters": {
+                              "fields": {
+                                "sitelinkExtensions": {
+                                  "rule": "repeated",
+                                  "type": "google.ads.googleads.v1.common.SitelinkFeedItem",
+                                  "id": 1
                                 }
                               }
                             },

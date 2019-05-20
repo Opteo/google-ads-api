@@ -1,196 +1,6 @@
 module.exports = {
     name: 'CampaignCriterion',
     object: {
-        location: {
-            geo_target_constant: { _type: 'string', _description: 'The geo target constant resource name.' },
-            _oneof: 'criterion',
-        },
-        resource_name: {
-            _type: 'string',
-            _description:
-                'The resource name of the campaign criterion. Campaign criterion resource names have the form: <code>customers/{customer_id}/campaignCriteria/{campaign_id}~{criterion_id}</code>',
-        },
-        parental_status: {
-            type: {
-                _type: 'enum',
-                _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
-                    {
-                        s: 'UNKNOWN',
-                        description: 'Used for return value only. Represents value unknown in this version.',
-                    },
-                    { s: 'PARENT', description: 'Parent.' },
-                    { s: 'NOT_A_PARENT', description: 'Not a parent.' },
-                    { s: 'UNDETERMINED', description: 'Undetermined parental status.' },
-                ],
-                _description: 'Type of the parental status.',
-            },
-            _oneof: 'criterion',
-        },
-        content_label: {
-            type: {
-                _type: 'enum',
-                _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
-                    {
-                        s: 'UNKNOWN',
-                        description: 'Used for return value only. Represents value unknown in this version.',
-                    },
-                    { s: 'SEXUALLY_SUGGESTIVE', description: 'Sexually suggestive content.' },
-                    { s: 'BELOW_THE_FOLD', description: 'Below the fold placement.' },
-                    { s: 'PARKED_DOMAIN', description: 'Parked domain.' },
-                    { s: 'GAME', description: 'Game.' },
-                    { s: 'JUVENILE', description: 'Juvenile, gross & bizarre content.' },
-                    { s: 'PROFANITY', description: 'Profanity & rough language.' },
-                    { s: 'TRAGEDY', description: 'Death & tragedy.' },
-                    { s: 'VIDEO', description: 'Video.' },
-                    { s: 'VIDEO_RATING_DV_G', description: 'Content rating: G.' },
-                    { s: 'VIDEO_RATING_DV_PG', description: 'Content rating: PG.' },
-                    { s: 'VIDEO_RATING_DV_T', description: 'Content rating: T.' },
-                    { s: 'VIDEO_RATING_DV_MA', description: 'Content rating: MA.' },
-                    { s: 'VIDEO_NOT_YET_RATED', description: 'Content rating: not yet rated.' },
-                    { s: 'EMBEDDED_VIDEO', description: 'Embedded video.' },
-                    { s: 'LIVE_STREAMING_VIDEO', description: 'Live streaming video.' },
-                ],
-                _description: 'Content label type, required for CREATE operations.',
-            },
-            _oneof: 'criterion',
-        },
-        criterion_id: { _type: 'int64', _description: 'The ID of the criterion. This field is ignored during mutate.' },
-        age_range: {
-            type: {
-                _type: 'enum',
-                _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
-                    {
-                        s: 'UNKNOWN',
-                        description: 'Used for return value only. Represents value unknown in this version.',
-                    },
-                    { s: 'AGE_RANGE_18_24', description: 'Between 18 and 24 years old.' },
-                    { s: 'AGE_RANGE_25_34', description: 'Between 25 and 34 years old.' },
-                    { s: 'AGE_RANGE_35_44', description: 'Between 35 and 44 years old.' },
-                    { s: 'AGE_RANGE_45_54', description: 'Between 45 and 54 years old.' },
-                    { s: 'AGE_RANGE_55_64', description: 'Between 55 and 64 years old.' },
-                    { s: 'AGE_RANGE_65_UP', description: '65 years old and beyond.' },
-                    { s: 'AGE_RANGE_UNDETERMINED', description: 'Undetermined age range.' },
-                ],
-                _description: 'Type of the age range.',
-            },
-            _oneof: 'criterion',
-        },
-        youtube_video: {
-            video_id: { _type: 'string', _description: 'YouTube video id as it appears on the YouTube watch page.' },
-            _oneof: 'criterion',
-        },
-        youtube_channel: {
-            channel_id: {
-                _type: 'string',
-                _description: 'The YouTube uploader channel id or the channel code of a YouTube channel.',
-            },
-            _oneof: 'criterion',
-        },
-        topic: {
-            topic_constant: { _type: 'string', _description: 'The Topic Constant resource name.' },
-            path: {
-                _type: 'array',
-                _description:
-                    'The category to target or exclude. Each subsequent element in the array describes a more specific sub-category. For example, "Pets &amp; Animals", "Pets", "Dogs" represents the "Pets &amp; Animals/Pets/Dogs" category.',
-            },
-            _oneof: 'criterion',
-        },
-        negative: {
-            _type: 'boolean',
-            _description: 'Whether to target (<code>false</code>) or exclude (<code>true</code>) the criterion.',
-        },
-        mobile_app_category: {
-            mobile_app_category_constant: {
-                _type: 'string',
-                _description: 'The mobile app category constant resource name.',
-            },
-            _oneof: 'criterion',
-        },
-        campaign: { _type: 'string', _description: 'The campaign to which the criterion belongs.' },
-        keyword: {
-            match_type: {
-                _type: 'enum',
-                _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
-                    {
-                        s: 'UNKNOWN',
-                        description: 'Used for return value only. Represents value unknown in this version.',
-                    },
-                    { s: 'EXACT', description: 'Exact match.' },
-                    { s: 'PHRASE', description: 'Phrase match.' },
-                    { s: 'BROAD', description: 'Broad match.' },
-                ],
-                _description: 'The match type of the keyword.',
-            },
-            text: { _type: 'string', _description: 'The text of the keyword (at most 80 characters and 10 words).' },
-            _oneof: 'criterion',
-        },
-        proximity: {
-            radius_units: {
-                _type: 'enum',
-                _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
-                    {
-                        s: 'UNKNOWN',
-                        description: 'Used for return value only. Represents value unknown in this version.',
-                    },
-                    { s: 'MILES', description: 'Miles' },
-                    { s: 'KILOMETERS', description: 'Kilometers' },
-                ],
-                _description: 'The unit of measurement of the radius. Default is KILOMETERS.',
-            },
-            address: {
-                city_name: { _type: 'string', _description: 'Name of the city.' },
-                country_code: { _type: 'string', _description: 'Country code.' },
-                postal_code: { _type: 'string', _description: 'Postal code.' },
-                street_address2: {
-                    _type: 'string',
-                    _description:
-                        'Street address line 2. This field is write-only. It is only used for calculating the longitude and latitude of an address when geo_point is empty.',
-                },
-                province_code: { _type: 'string', _description: 'Province or state code.' },
-                province_name: { _type: 'string', _description: 'Province or state name.' },
-                street_address: { _type: 'string', _description: 'Street address line 1.' },
-            },
-            geo_point: {
-                latitude_in_micro_degrees: { _type: 'int32', _description: 'Micro degrees for the latitude.' },
-                longitude_in_micro_degrees: { _type: 'int32', _description: 'Micro degrees for the longitude.' },
-            },
-            radius: { _type: 'double', _description: 'The radius of the proximity.' },
-            _oneof: 'criterion',
-        },
-        language: {
-            language_constant: { _type: 'string', _description: 'The language constant resource name.' },
-            _oneof: 'criterion',
-        },
-        gender: {
-            type: {
-                _type: 'enum',
-                _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
-                    {
-                        s: 'UNKNOWN',
-                        description: 'Used for return value only. Represents value unknown in this version.',
-                    },
-                    { s: 'MALE', description: 'Male.' },
-                    { s: 'FEMALE', description: 'Female.' },
-                    { s: 'UNDETERMINED', description: 'Undetermined gender.' },
-                ],
-                _description: 'Type of the gender.',
-            },
-            _oneof: 'criterion',
-        },
-        mobile_application: {
-            app_id: {
-                _type: 'string',
-                _description:
-                    'A string that uniquely identifies a mobile application to Google Ads API. The format of this string is "{platform}-{platform_native_id}", where platform is "1" for iOS apps and "2" for Android apps, and where platform_native_id is the mobile application identifier native to the corresponding platform. For iOS, this native identifier is the 9 digit string that appears at the end of an App Store URL (e.g., "476943146" for "Flood-It! 2" whose App Store link is http://itunes.apple.com/us/app/flood-it!-2/id476943146). For Android, this native identifier is the application\'s package name (e.g., "com.labpixies.colordrips" for "Color Drips" given Google Play link https://play.google.com/store/apps/details?id=com.labpixies.colordrips). A well formed app id for Google Ads API would thus be "1-476943146" for iOS and "2-com.labpixies.colordrips" for Android. This field is required and must be set in CREATE operations.',
-            },
-            _oneof: 'criterion',
-        },
         listing_scope: {
             dimensions: { _type: 'array', _description: 'Scope of the campaign criterion.' },
             _oneof: 'criterion',
@@ -340,15 +150,16 @@ module.exports = {
                 { s: 'MOBILE_DEVICE', description: 'Mobile device.' },
                 { s: 'CUSTOM_AFFINITY', description: 'Custom affinity.' },
                 { s: 'CUSTOM_INTENT', description: 'Custom intent.' },
+                { s: 'LOCATION_GROUP', description: 'Location group.' },
             ],
             _description: 'The type of the criterion.',
         },
-        user_list: {
-            user_list: { _type: 'string', _description: 'The User List resource name.' },
-            _oneof: 'criterion',
-        },
         ip_block: {
             ip_address: { _type: 'string', _description: 'The IP address of this IP block.' },
+            _oneof: 'criterion',
+        },
+        user_list: {
+            user_list: { _type: 'string', _description: 'The User List resource name.' },
             _oneof: 'criterion',
         },
         user_interest: {
@@ -370,6 +181,229 @@ module.exports = {
         },
         placement: {
             url: { _type: 'string', _description: 'URL of the placement. For example, "http://www.domain.com".' },
+            _oneof: 'criterion',
+        },
+        location: {
+            geo_target_constant: { _type: 'string', _description: 'The geo target constant resource name.' },
+            _oneof: 'criterion',
+        },
+        parental_status: {
+            type: {
+                _type: 'enum',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    {
+                        s: 'UNKNOWN',
+                        description: 'Used for return value only. Represents value unknown in this version.',
+                    },
+                    { s: 'PARENT', description: 'Parent.' },
+                    { s: 'NOT_A_PARENT', description: 'Not a parent.' },
+                    { s: 'UNDETERMINED', description: 'Undetermined parental status.' },
+                ],
+                _description: 'Type of the parental status.',
+            },
+            _oneof: 'criterion',
+        },
+        resource_name: {
+            _type: 'string',
+            _description:
+                'The resource name of the campaign criterion. Campaign criterion resource names have the form: <code>customers/{customer_id}/campaignCriteria/{campaign_id}~{criterion_id}</code>',
+        },
+        content_label: {
+            type: {
+                _type: 'enum',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    {
+                        s: 'UNKNOWN',
+                        description: 'Used for return value only. Represents value unknown in this version.',
+                    },
+                    { s: 'SEXUALLY_SUGGESTIVE', description: 'Sexually suggestive content.' },
+                    { s: 'BELOW_THE_FOLD', description: 'Below the fold placement.' },
+                    { s: 'PARKED_DOMAIN', description: 'Parked domain.' },
+                    { s: 'GAME', description: 'Game.' },
+                    { s: 'JUVENILE', description: 'Juvenile, gross & bizarre content.' },
+                    { s: 'PROFANITY', description: 'Profanity & rough language.' },
+                    { s: 'TRAGEDY', description: 'Death & tragedy.' },
+                    { s: 'VIDEO', description: 'Video.' },
+                    { s: 'VIDEO_RATING_DV_G', description: 'Content rating: G.' },
+                    { s: 'VIDEO_RATING_DV_PG', description: 'Content rating: PG.' },
+                    { s: 'VIDEO_RATING_DV_T', description: 'Content rating: T.' },
+                    { s: 'VIDEO_RATING_DV_MA', description: 'Content rating: MA.' },
+                    { s: 'VIDEO_NOT_YET_RATED', description: 'Content rating: not yet rated.' },
+                    { s: 'EMBEDDED_VIDEO', description: 'Embedded video.' },
+                    { s: 'LIVE_STREAMING_VIDEO', description: 'Live streaming video.' },
+                ],
+                _description: 'Content label type, required for CREATE operations.',
+            },
+            _oneof: 'criterion',
+        },
+        age_range: {
+            type: {
+                _type: 'enum',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    {
+                        s: 'UNKNOWN',
+                        description: 'Used for return value only. Represents value unknown in this version.',
+                    },
+                    { s: 'AGE_RANGE_18_24', description: 'Between 18 and 24 years old.' },
+                    { s: 'AGE_RANGE_25_34', description: 'Between 25 and 34 years old.' },
+                    { s: 'AGE_RANGE_35_44', description: 'Between 35 and 44 years old.' },
+                    { s: 'AGE_RANGE_45_54', description: 'Between 45 and 54 years old.' },
+                    { s: 'AGE_RANGE_55_64', description: 'Between 55 and 64 years old.' },
+                    { s: 'AGE_RANGE_65_UP', description: '65 years old and beyond.' },
+                    { s: 'AGE_RANGE_UNDETERMINED', description: 'Undetermined age range.' },
+                ],
+                _description: 'Type of the age range.',
+            },
+            _oneof: 'criterion',
+        },
+        criterion_id: { _type: 'int64', _description: 'The ID of the criterion. This field is ignored during mutate.' },
+        youtube_video: {
+            video_id: { _type: 'string', _description: 'YouTube video id as it appears on the YouTube watch page.' },
+            _oneof: 'criterion',
+        },
+        topic: {
+            topic_constant: { _type: 'string', _description: 'The Topic Constant resource name.' },
+            path: {
+                _type: 'array',
+                _description:
+                    'The category to target or exclude. Each subsequent element in the array describes a more specific sub-category. For example, "Pets &amp; Animals", "Pets", "Dogs" represents the "Pets &amp; Animals/Pets/Dogs" category.',
+            },
+            _oneof: 'criterion',
+        },
+        youtube_channel: {
+            channel_id: {
+                _type: 'string',
+                _description: 'The YouTube uploader channel id or the channel code of a YouTube channel.',
+            },
+            _oneof: 'criterion',
+        },
+        negative: {
+            _type: 'boolean',
+            _description: 'Whether to target (<code>false</code>) or exclude (<code>true</code>) the criterion.',
+        },
+        mobile_app_category: {
+            mobile_app_category_constant: {
+                _type: 'string',
+                _description: 'The mobile app category constant resource name.',
+            },
+            _oneof: 'criterion',
+        },
+        keyword: {
+            match_type: {
+                _type: 'enum',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    {
+                        s: 'UNKNOWN',
+                        description: 'Used for return value only. Represents value unknown in this version.',
+                    },
+                    { s: 'EXACT', description: 'Exact match.' },
+                    { s: 'PHRASE', description: 'Phrase match.' },
+                    { s: 'BROAD', description: 'Broad match.' },
+                ],
+                _description: 'The match type of the keyword.',
+            },
+            text: { _type: 'string', _description: 'The text of the keyword (at most 80 characters and 10 words).' },
+            _oneof: 'criterion',
+        },
+        campaign: { _type: 'string', _description: 'The campaign to which the criterion belongs.' },
+        language: {
+            language_constant: { _type: 'string', _description: 'The language constant resource name.' },
+            _oneof: 'criterion',
+        },
+        proximity: {
+            radius_units: {
+                _type: 'enum',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    {
+                        s: 'UNKNOWN',
+                        description: 'Used for return value only. Represents value unknown in this version.',
+                    },
+                    { s: 'MILES', description: 'Miles' },
+                    { s: 'KILOMETERS', description: 'Kilometers' },
+                ],
+                _description: 'The unit of measurement of the radius. Default is KILOMETERS.',
+            },
+            address: {
+                city_name: { _type: 'string', _description: 'Name of the city.' },
+                postal_code: { _type: 'string', _description: 'Postal code.' },
+                country_code: { _type: 'string', _description: 'Country code.' },
+                street_address2: {
+                    _type: 'string',
+                    _description:
+                        'Street address line 2. This field is write-only. It is only used for calculating the longitude and latitude of an address when geo_point is empty.',
+                },
+                province_name: { _type: 'string', _description: 'Province or state name.' },
+                province_code: { _type: 'string', _description: 'Province or state code.' },
+                street_address: { _type: 'string', _description: 'Street address line 1.' },
+            },
+            geo_point: {
+                longitude_in_micro_degrees: { _type: 'int32', _description: 'Micro degrees for the longitude.' },
+                latitude_in_micro_degrees: { _type: 'int32', _description: 'Micro degrees for the latitude.' },
+            },
+            radius: { _type: 'double', _description: 'The radius of the proximity.' },
+            _oneof: 'criterion',
+        },
+        gender: {
+            type: {
+                _type: 'enum',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    {
+                        s: 'UNKNOWN',
+                        description: 'Used for return value only. Represents value unknown in this version.',
+                    },
+                    { s: 'MALE', description: 'Male.' },
+                    { s: 'FEMALE', description: 'Female.' },
+                    { s: 'UNDETERMINED', description: 'Undetermined gender.' },
+                ],
+                _description: 'Type of the gender.',
+            },
+            _oneof: 'criterion',
+        },
+        mobile_application: {
+            app_id: {
+                _type: 'string',
+                _description:
+                    'A string that uniquely identifies a mobile application to Google Ads API. The format of this string is "{platform}-{platform_native_id}", where platform is "1" for iOS apps and "2" for Android apps, and where platform_native_id is the mobile application identifier native to the corresponding platform. For iOS, this native identifier is the 9 digit string that appears at the end of an App Store URL (e.g., "476943146" for "Flood-It! 2" whose App Store link is http://itunes.apple.com/us/app/flood-it!-2/id476943146). For Android, this native identifier is the application\'s package name (e.g., "com.labpixies.colordrips" for "Color Drips" given Google Play link https://play.google.com/store/apps/details?id=com.labpixies.colordrips). A well formed app id for Google Ads API would thus be "1-476943146" for iOS and "2-com.labpixies.colordrips" for Android. This field is required and must be set in CREATE operations.',
+            },
+            name: { _type: 'string', _description: 'Name of this mobile application.' },
+            _oneof: 'criterion',
+        },
+        location_group: {
+            radius: {
+                _type: 'int64',
+                _description:
+                    'Distance in units specifying the radius around targeted locations. This is required and must be set in CREATE operations.',
+            },
+            geo_target_constants: {
+                _type: 'array',
+                _description:
+                    'Geo target constant(s) restricting the scope of the geographic area within the feed. Currently only one geo target constant is allowed.',
+            },
+            radius_units: {
+                _type: 'enum',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    {
+                        s: 'UNKNOWN',
+                        description: 'Used for return value only. Represents value unknown in this version.',
+                    },
+                    { s: 'METERS', description: 'Meters' },
+                    { s: 'MILES', description: 'Miles' },
+                ],
+                _description:
+                    'Unit of the radius, miles and meters supported currently. This is required and must be set in CREATE operations.',
+            },
+            feed: {
+                _type: 'string',
+                _description:
+                    'Feed specifying locations for targeting. This is required and must be set in CREATE operations.',
+            },
             _oneof: 'criterion',
         },
     },

@@ -1,24 +1,10 @@
 module.exports = {
     name: 'CampaignBudget',
     object: {
-        amount_micros: {
-            _type: 'int64',
-            _description:
-                'The amount of the budget, in the local currency for the account. Amount is specified in micros, where one million is equivalent to one currency unit.',
-        },
-        explicitly_shared: {
+        has_recommended_budget: {
             _type: 'boolean',
             _description:
-                "Specifies whether the budget is explicitly shared. Defaults to true if unspecified in a create operation. If true, the budget was created with the purpose of sharing across one or more campaigns. If false, the budget was created with the intention of only being used with a single campaign. The budget's name and status will stay in sync with the campaign's name and status. Attempting to share the budget with a second campaign will result in an error. A non-shared budget can become an explicitly shared. The same operation must also assign the budget a name. A shared campaign budget can never become non-shared.",
-        },
-        reference_count: {
-            _type: 'int64',
-            _description: 'The number of campaigns actively using the budget. This field is read-only.',
-        },
-        recommended_budget_amount_micros: {
-            _type: 'int64',
-            _description:
-                'The recommended budget amount. If no recommendation is available, this will be set to the budget amount. Amount is specified in micros, where one million is equivalent to one currency unit. This field is read-only.',
+                'Indicates whether there is a recommended budget for this campaign budget. This field is read-only.',
         },
         status: {
             _type: 'enum',
@@ -30,10 +16,10 @@ module.exports = {
             ],
             _description: 'The status of this campaign budget. This field is read-only.',
         },
-        has_recommended_budget: {
-            _type: 'boolean',
+        recommended_budget_amount_micros: {
+            _type: 'int64',
             _description:
-                'Indicates whether there is a recommended budget for this campaign budget. This field is read-only.',
+                'The recommended budget amount. If no recommendation is available, this will be set to the budget amount. Amount is specified in micros, where one million is equivalent to one currency unit. This field is read-only.',
         },
         period: {
             _type: 'enum',
@@ -104,8 +90,21 @@ module.exports = {
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'STANDARD', description: 'Budget type for standard Google Ads usage.' },
-                { s: 'HOTEL_ADS_COMMISSION', description: 'Budget type for Hotels Ads commission program.' },
+                {
+                    s: 'STANDARD',
+                    description:
+                        'Budget type for standard Google Ads usage.\nCaps daily spend at two times the specified budget amount.\nFull details: https://support.google.com/google-ads/answer/6385083',
+                },
+                {
+                    s: 'HOTEL_ADS_COMMISSION',
+                    description:
+                        'Budget type for Hotels Ads commission program.\nFull details: https://support.google.com/google-ads/answer/9243945\n\nThis type is only supported by campaigns with\nAdvertisingChannelType.HOTEL, BiddingStrategyType.COMMISSION and\nPaymentMode.CONVERSION_VALUE.',
+                },
+                {
+                    s: 'FIXED_CPA',
+                    description:
+                        'Budget type with a fixed cost-per-acquisition (conversion).\nFull details: https://support.google.com/google-ads/answer/7528254\n\nThis type is only supported by campaigns with\nAdvertisingChannelType.DISPLAY (excluding\nAdvertisingChannelSubType.DISPLAY_GMAIL),\nBiddingStrategyType.TARGET_CPA and PaymentMode.CONVERSIONS.',
+                },
             ],
             _description: 'The type of the campaign budget.',
         },
@@ -113,6 +112,20 @@ module.exports = {
             _type: 'int64',
             _description:
                 'The estimated change in weekly cost in micros if the recommended budget is applied. One million is equivalent to one currency unit. This field is read-only.',
+        },
+        explicitly_shared: {
+            _type: 'boolean',
+            _description:
+                "Specifies whether the budget is explicitly shared. Defaults to true if unspecified in a create operation. If true, the budget was created with the purpose of sharing across one or more campaigns. If false, the budget was created with the intention of only being used with a single campaign. The budget's name and status will stay in sync with the campaign's name and status. Attempting to share the budget with a second campaign will result in an error. A non-shared budget can become an explicitly shared. The same operation must also assign the budget a name. A shared campaign budget can never become non-shared.",
+        },
+        amount_micros: {
+            _type: 'int64',
+            _description:
+                'The amount of the budget, in the local currency for the account. Amount is specified in micros, where one million is equivalent to one currency unit. Monthly spend is capped at 30.4 times this amount.',
+        },
+        reference_count: {
+            _type: 'int64',
+            _description: 'The number of campaigns actively using the budget. This field is read-only.',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

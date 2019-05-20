@@ -25,7 +25,7 @@ const result = await customer.adGroupAdLabels.create([ad_group_ad_label, other_a
 
 // Example result
 {
-	results : ['customers/3827277046/adGroupAdLabels/37706041185~191743801329~1091971976'],
+	results : ['customers/3827277046/adGroupAdLabels/37706041345~204347238383~1285360183'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

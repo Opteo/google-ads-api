@@ -1,6 +1,23 @@
 module.exports = {
     name: 'AdGroupExtensionSetting',
     object: {
+        device: {
+            _type: 'enum',
+            _enums: [
+                { s: 'UNSPECIFIED', description: 'Not specified.' },
+                { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
+                {
+                    s: 'MOBILE',
+                    description: 'Mobile. The extensions in the extension setting will only serve on\nmobile devices.',
+                },
+                {
+                    s: 'DESKTOP',
+                    description:
+                        'Desktop. The extensions in the extension setting will only serve on\ndesktop devices.',
+                },
+            ],
+            _description: 'The device for which the extensions will serve. Optional.',
+        },
         ad_group: {
             _type: 'string',
             _description:
@@ -31,25 +48,10 @@ module.exports = {
                 { s: 'REVIEW', description: 'Review.' },
                 { s: 'SITELINK', description: 'Sitelink.' },
                 { s: 'STRUCTURED_SNIPPET', description: 'Structured snippet.' },
+                { s: 'LOCATION', description: 'Location.' },
+                { s: 'AFFILIATE_LOCATION', description: 'Affiliate location.' },
             ],
             _description: 'The extension type of the ad group extension setting.',
-        },
-        device: {
-            _type: 'enum',
-            _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
-                {
-                    s: 'MOBILE',
-                    description: 'Mobile. The extensions in the extension setting will only serve on\nmobile devices.',
-                },
-                {
-                    s: 'DESKTOP',
-                    description:
-                        'Desktop. The extensions in the extension setting will only serve on\ndesktop devices.',
-                },
-            ],
-            _description: 'The device for which the extensions will serve. Optional.',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

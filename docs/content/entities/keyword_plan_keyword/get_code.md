@@ -13,6 +13,6 @@ let result = await customer.keywordPlanKeywords.get('customers/1234567890/keywor
 ```javascript
 
 // Example result
-(// Todo: add example get() return here)
+(/* Todo: add example get() return here */)
 
 ```

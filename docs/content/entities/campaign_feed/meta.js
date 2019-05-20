@@ -2,16 +2,6 @@ module.exports = {
     name: 'CampaignFeed',
     object: {
         matching_function: {
-            function_string: {
-                _type: 'string',
-                _description:
-                    'String representation of the Function. Examples: 1) IDENTITY(true) or IDENTITY(false). All or none feed items serve. 2) EQUALS(CONTEXT.DEVICE,"Mobile") 3) IN(FEED_ITEM_ID,{1000001,1000002,1000003}) 4) CONTAINS_ANY(FeedAttribute[12345678,0],{"Mars cruise","Venus cruise"}) 5) AND(IN(FEED_ITEM_ID,{10001,10002}),EQUALS(CONTEXT.DEVICE,"Mobile")) See https: //developers.google.com/adwords/api/docs/guides/feed-matching-functions Note that because multiple strings may represent the same underlying function (whitespace and single versus double quotation marks, for example), the value returned may not be identical to the string sent in a mutate request.',
-            },
-            left_operands: {
-                _type: 'array',
-                _description:
-                    'The operands on the left hand side of the equation. This is also the operand to be used for single operand expressions such as NOT.',
-            },
             operator: {
                 _type: 'enum',
                 _enums: [
@@ -37,6 +27,16 @@ module.exports = {
                 _description: 'Operator for a function.',
             },
             right_operands: { _type: 'array', _description: 'The operands on the right hand side of the equation.' },
+            function_string: {
+                _type: 'string',
+                _description:
+                    'String representation of the Function. Examples: 1) IDENTITY(true) or IDENTITY(false). All or none feed items serve. 2) EQUALS(CONTEXT.DEVICE,"Mobile") 3) IN(FEED_ITEM_ID,{1000001,1000002,1000003}) 4) CONTAINS_ANY(FeedAttribute[12345678,0],{"Mars cruise","Venus cruise"}) 5) AND(IN(FEED_ITEM_ID,{10001,10002}),EQUALS(CONTEXT.DEVICE,"Mobile")) See https: //developers.google.com/adwords/api/docs/guides/feed-matching-functions Note that because multiple strings may represent the same underlying function (whitespace and single versus double quotation marks, for example), the value returned may not be identical to the string sent in a mutate request.',
+            },
+            left_operands: {
+                _type: 'array',
+                _description:
+                    'The operands on the left hand side of the equation. This is also the operand to be used for single operand expressions such as NOT.',
+            },
         },
         campaign: { _type: 'string', _description: 'The campaign to which the CampaignFeed belongs.' },
         resource_name: {
