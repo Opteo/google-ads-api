@@ -10,10 +10,10 @@ title: Using global mutate
 Sometimes you may want to create multiple resources of different types at once, such as creating a new campaign and its required budget. The `customer.mutateResources` method is designed for this use case, and supports:
 
 -   **Atomic Mutations**: If any of the operations fail, all other operations will be rolled back.
--   **Temporary resource ids**: Define your entity relationships using your own temporary IDs.
--   **All mutation types**: Create, update, and delete resources.
+-   **Temporary Resource IDs**: Define your entity relationships using your own temporary IDs.
+-   **All Mutation Types**: Create, update, and delete resources.
 
-A basic example of creating a budget and a campaign (which uses this budget) is shown below:
+A basic example of creating a budget, and a campaign that uses this budget, is shown below:
 
 ```javascript
 const { results } = await customer.mutateResources([
@@ -52,8 +52,8 @@ await customer.mutateResources(operations, { partial_failure: true })
 As well as creating resources, `mutateResources` also supports updating and deleting multiple resources (which also works with temporary resource ids). Use the `_operation` field in an operation to specify the mode, being either `create`, `update` or `delete`. This field isn't required and defaults to `create`. In the example below, these operations are executed:
 
 1. A new budget with the temporary resource id `-1` is created.
-2. An existing campaign (id of `456`) is updated to use the new budget (`-1`)
-3. The original budget that was being used by the campaign is deleted
+2. An existing campaign (id of `456`) is updated to use the new budget (`-1`).
+3. The original budget used by the campaign is deleted.
 
 ```javascript
 const response = await customer.mutateResources([
@@ -84,4 +84,4 @@ const response = await customer.mutateResources([
 
 _Note_: Using `customer.mutateResources()` with a single operation is equivalent to using any of the standard `customer.someResource.create|update|delete()` methods, but your ts definitions won't be as good.
 
-For more information about this method, see the customer resource's [mutateResources section](/#mutateResources-customer)
+For more information about this method, see the customer resource's [mutateResources section](/#mutateResources-customer).

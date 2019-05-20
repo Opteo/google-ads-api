@@ -9,7 +9,7 @@ title: Reporting Concepts
 
 "Reporting" just means fetching data about an account.
 
-All data Google Ads is queriable via SQL-like tables. There is one table per resource (such as `campaign` or `ad_group_ad`.) 
+All data in Google Ads is queriable via SQL-like tables. There is one table per resource (such as `campaign` or `ad_group_ad`). 
 These tables and their associated fields can be found in the [core resources](/#accountbudget) section of this page, or in the ["API Fields"](https://developers.google.com/google-ads/api/docs/fields/account_budget)
  section of the official docs.
 
@@ -17,8 +17,8 @@ These tables and their associated fields can be found in the [core resources](/#
 
 There are four types of resources available for querying.
 
-1. **Core resources** directly map to entities in your account. Example: `campaign`, `ad_group_criterion`.
-2. **Criteria View Resources** offer a more convenient way to query ad_group and campaign criteria (criteria are targeting options such as keywords or placements). They may also aggregate metrics differently. Example: `keyword_view` is a subset of ad_group_criterion, while `age_range_view` is a subset of campaign_criterion.
+1. **Core Resources** directly map to entities in your account. Example: `campaign`, `ad_group_criterion`.
+2. **Criteria View Resources** offer a more convenient way to query ad_group and campaign criteria (criteria are targeting options, such as keywords or placements). They may also aggregate metrics differently. Example: `keyword_view` is a subset of ad_group_criterion, while `age_range_view` is a subset of campaign_criterion.
 3. **Click & Search Term Resources** are like core resources, except that they are by nature read-only. Example: `click_view`, `search_term_view`.
 4. **Constant Resources** are just a convenient way to query Google Ads constants (and their IDs). They aren't specific to your account. Example: `geo_target_constant`, `mobile_device_constant`.
 
@@ -29,9 +29,9 @@ Resources contain three types of fields:
 
 1. **Metrics** hold data about the performance of your account, and change through time. Example: `metrics.clicks` or `metrics.historical_quality_score`. 
 
-3. **Segments** allow you to segment your metrics by your chosen field, meaning that your result will have more rows. Example: `segments.device` or `segments.conversion_action`. 
+3. **Segments** allow you to segment your metrics by your chosen field, meaning your result will have more rows. Example: `segments.device` or `segments.conversion_action`. 
 
-1. **Attributes** are static information about an resource. All fields described in the [core resources](/#accountbudget) section of this page are attributes. It is not possible to query the past value of an attribute. Example: `campaign.name` or `ad_group_criterion.keyword.text`.
+1. **Attributes** are static information about a resource. All fields described in the [core resources](/#accountbudget) section of this page are attributes. It is not possible to query the past value of an attribute. Example: `campaign.name` or `ad_group_criterion.keyword.text`.
 
 <!-- For reference, this is the complete list of core resources: 
 account_budget, 

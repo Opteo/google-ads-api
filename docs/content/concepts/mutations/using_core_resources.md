@@ -7,7 +7,7 @@ title: Using core resources
 
 ## Mutations
 
-A "mutation" is a change to a google ads account, such as a new campaign or an adjusted bid.
+A "mutation" is a change to a Google Ads account, such as a new campaign or an adjusted bid.
 
 
 ### Making changes using core resources
@@ -34,7 +34,7 @@ For more details on this method, check the `create()` section for the core resou
 
 #### Update
 
-The `update` method works the same way as `create` and takes a single entity or array of entities to update. All properties passed (that can be updated) will be updated, so if you **don't want to update an attribute, don't include it**.
+The `update` method works the same way as `create` and takes a single entity or array of entities to update. All properties passed (that can be updated) will be updated, so **if you don't want to update an attribute, don't include it**.
 
 The `results` property of the response object will contain the updated entity resource names.
 

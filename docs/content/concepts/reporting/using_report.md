@@ -8,7 +8,7 @@ title: Using the Query Builder
 
 ### Using the query builder
 
-The `customer.report()` method is a safer and more structured way to use GAQL. It is also more practical to use when your queries need to be built dynamically. If you are using typescript, it will give you handy autocomplete, too!
+The `customer.report()` method is a safer and more structured way to use GAQL. It's also more practical to use when your queries need to be built dynamically. If you are using typescript, it will give you handy autocomplete, too!
 
 ```javascript
 const response = await customer.report({
@@ -25,7 +25,7 @@ const response = await customer.report({
 
 ```
 
-For full infomation on the arguments of `customer.report()`, see the [customer core resource](/#report)
+For full infomation on the arguments of `customer.report()`, see the [customer core resource](/#report).
 
 Every core resource also has `get()` and `list()` methods, which offer a convenient way to select every attribute of a resource. This can be quite valuable since GAQL does not support `SELECT *`. See the [campaign](/#get-campaign) core resource for an example.
 

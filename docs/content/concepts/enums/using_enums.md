@@ -9,8 +9,8 @@ title: Using Enums
 
 All enums are represented as numbers in the Google Ads API. This means:
 
--   Numbers must be used for enums when making mutate calls (create, update, delete)
--   Reports will include numbers instead of strings for enum fields
+-   Numbers must be used for enums when making mutate calls (create, update, delete).
+-   Reports will include numbers instead of strings for enum fields.
 
 For example:
 
@@ -58,7 +58,7 @@ const campaign_to_update = {
 await customer.campaigns.update(campaign) // This will set the status to "PAUSED"
 ```
 
-The [`enums.ts`](https://github.com/Opteo/google-ads-node/blob/master/src/lib/enums.ts) file (found in our companion library) lists out all enums available in the google ads API. For example:
+The [`enums.ts`](https://github.com/Opteo/google-ads-node/blob/master/src/lib/enums.ts) file (found in our companion library) lists out all enums available in the Google Ads API. For example:
 
 ```typescript
 // Note that this will be compiled to an object by typescript.
@@ -90,4 +90,4 @@ customer.query(`
 ```
 
 -   When using `customer.query()`, you must use strings.
--   When using `customer.report()`, both strings and numbers are supported
+-   When using `customer.report()`, both strings and numbers are supported.
