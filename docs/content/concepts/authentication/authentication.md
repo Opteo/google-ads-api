@@ -12,10 +12,10 @@ Before you can use the Google Ads API, you'll need to gather some authentication
 -   **Client id** and **client secret**: These are your OAuth credentials. You'll find them in your [Google Cloud Console](https://console.cloud.google.com/apis/api/googleads.googleapis.com/). If you don't already have these tokens, see [google's instructions](https://developers.google.com/google-ads/api/docs/oauth/cloud-project).
 -   **Developer token**: You'll find this in your Google Ads account, in the API Center. You will need to apply for one. 
 
-Then, for every Google Ads account that you want to access, you'll need:
+Then, for every Google Ads account you want to access, you'll need:
 
 -   **Customer account ID**: This is the CID of the account you want to access, which will look like `xxx-xxx-xxxx`.
--   **Login customer ID**: _(only required if accessing the account via an MCC)_ This is usually the CID of the highest-level account in your MCC structure, also in the format `xxx-xxx-xxxx`.
+-   **Login customer ID** _(only required if accessing the account via an MCC)_: This is usually the CID of the highest-level account in your MCC structure, also in the format `xxx-xxx-xxxx`.
 -   **Refresh token**: You'll get this token when somebody authorises you to query their Google Ads account via OAuth. To get started, you can use https://refresh-token-helper.opteo.com/ to generate a single refresh token.
 
 
