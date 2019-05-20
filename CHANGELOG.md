@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [2.1.0](https://github.com/Opteo/google-ads-api/compare/v1.6.1...v2.1.0) (2019-05-20)
+
+
+### Bug Fixes
+
+* **npm:** remove examples directory and unused dependency ([8ad1366](https://github.com/Opteo/google-ads-api/commit/8ad1366))
+* **report:** Fixed issue with pagination cutting off results when no limit is set ([#49](https://github.com/Opteo/google-ads-api/issues/49)) ([07023f4](https://github.com/Opteo/google-ads-api/commit/07023f4))
+
+
+### Features
+
+* **API:** Google ads api v1.2 ([#47](https://github.com/Opteo/google-ads-api/issues/47)) ([110b150](https://github.com/Opteo/google-ads-api/commit/110b150))
+* **docs:** metadata in <head> ([#45](https://github.com/Opteo/google-ads-api/issues/45)) ([361c5a5](https://github.com/Opteo/google-ads-api/commit/361c5a5))
+
+
+
 # 2.0.0 (2019-05-16)
 
 
