@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { Link } from 'gatsby'
+import AdBlockDetect from 'react-ad-block-detect'
 
 import SidebarSectionGroups from './sidebarSectionGroups'
 import SidebarSearch from './sidebarSearch'
@@ -65,6 +66,12 @@ class Sidebar extends React.Component {
                 <Link className="f3 tc pt3-5 pb2  opteo-gray hover-opteo-gray" to="/">
                     google-ads-api
                 </Link>
+                <AdBlockDetect>
+                    <div className="opteo-red ma3">
+                        Due to the nature of this library, this page will not work properly with an ad blocker. Consider
+                        disabling your ad blocker and refreshing this page.
+                    </div>
+                </AdBlockDetect>
                 <div className="mono f7 tc opteo-middle-gray">v2.1.1</div>
                 <SidebarSearch changeHandler={this.handleSearch} />
                 <SidebarSectionGroups
