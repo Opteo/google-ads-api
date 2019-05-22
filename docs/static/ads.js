@@ -1,1 +1,2 @@
-window.ads_script_loaded = true
+window.script_loaded = true
+
