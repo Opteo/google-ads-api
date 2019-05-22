@@ -65,7 +65,7 @@ class Sidebar extends React.Component {
                 <Link className="f3 tc pt3-5 pb2  opteo-gray hover-opteo-gray" to="/">
                     google-ads-api
                 </Link>
-                <div className="mono f7 tc opteo-middle-gray">v2.0.0</div>
+                <div className="mono f7 tc opteo-middle-gray">v2.1.1</div>
                 <SidebarSearch changeHandler={this.handleSearch} />
                 <SidebarSectionGroups
                     sectionGroups={sectionGroups}
