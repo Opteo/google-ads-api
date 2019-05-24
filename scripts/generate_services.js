@@ -97,8 +97,7 @@ const readme_object_compiler = template(fs.readFileSync(__dirname + '/templates/
 })
 
 const readme_object_compiler_code = template(
-    fs.readFileSync(__dirname + '/templates/template_readme_object_code.hbs', 'utf-8'),
-    {
+    fs.readFileSync(__dirname + '/templates/template_readme_object_code.hbs', 'utf-8'), {
         interpolate: /{{([\s\S]+?)}}/g,
     }
 )
@@ -109,7 +108,8 @@ const readme_object_compiler_code = template(
 
 const method_compilers = {}
 
-;[
+;
+[
     'get',
     'list',
     'create',
@@ -122,8 +122,7 @@ const method_compilers = {}
     'delete_code',
 ].forEach(method => {
     method_compilers[method] = template(
-        fs.readFileSync(__dirname + `/templates/template_readme_${method}.hbs`, 'utf-8'),
-        {
+        fs.readFileSync(__dirname + `/templates/template_readme_${method}.hbs`, 'utf-8'), {
             interpolate: /{{([\s\S]+?)}}/g,
         }
     )
@@ -147,7 +146,7 @@ const raw_compiled_services = require('./compiled_resources.json')
 
 const compiled_resources =
     raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v1.nested.resources.nested
-// raw_compiled_services.nested.
+    // raw_compiled_services.nested.
 
 // console.log(compiled_resources)
 const references = raw_schema.schemas
@@ -235,6 +234,11 @@ const entities = [
     'UserInterest',
     'UserList',
     'Video',
+    // 'CampaignDraft', Very unique -- wait until somebody wants it.
+    // 'CampaignExperiment', Very unique -- wait until somebody wants it.
+    'AdGroupCriterionSimulation',
+    'AdGroupSimulation',
+    'CampaignCriterionSimulation',
 ]
 
 const compiled_services =
@@ -412,7 +416,7 @@ async function compileService(entity, schema) {
             } else {
                 const markdown_description = sanitiseHtml(obj[key].description)
 
-                new_obj[snakeCaseGads(key)] = { ..._new_object, _description: markdown_description }
+                new_obj[snakeCaseGads(key)] = {..._new_object, _description: markdown_description }
             }
 
             const matching_resource = compiled_resources[capitalise(parent_field_name)]
@@ -563,7 +567,8 @@ async function compileService(entity, schema) {
             })
 
             // Reorder the object to put the least interesting things at the bottom
-            ;['ad_group', 'campaign', 'customer'].forEach(key => {
+            ;
+            ['ad_group', 'campaign', 'customer'].forEach(key => {
                 if (chosen_example[key]) {
                     const customer_temp_object = chosen_example[key]
                     delete chosen_example[key]
@@ -663,11 +668,10 @@ async function compileService(entity, schema) {
         console.log(err)
     }
 
-    if (
-        !existing_service
-            .toString()
-            .slice(0, 20)
-            .includes('manual_mode')
+    if (!existing_service
+        .toString()
+        .slice(0, 20)
+        .includes('manual_mode')
     ) {
         fs.ensureFileSync(file_path)
         fs.writeFileSync(file_path, compiled_service)
@@ -696,7 +700,8 @@ async function compileService(entity, schema) {
     // console.log({ file_path }) g
 }
 
-;(async () => {
+;
+(async() => {
     schema = await $RefParser.dereference(__dirname + '/schema.json', {
         resolve: { gads: myResolver },
     })

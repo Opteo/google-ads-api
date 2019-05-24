@@ -27,7 +27,7 @@ import CarrierConstantService from './services/carrier_constant'
 import ChangeStatusService from './services/change_status'
 import ConversionActionService from './services/conversion_action'
 import ConversionUploadService from './services/conversion_upload'
-import ConversionAdjustmentUploadService from './services/conversion_adjustment_upload'
+// import ConversionAdjustmentUploadService from './services/conversion_adjustment_upload'
 import CustomInterestService from './services/custom_interest'
 import CustomerClientLinkService from './services/customer_client_link'
 import CustomerClientService from './services/customer_client'
@@ -69,6 +69,9 @@ import TopicConstantService from './services/topic_constant'
 import UserInterestService from './services/user_interest'
 import UserListService from './services/user_list'
 import VideoService from './services/video'
+import AdGroupSimulationService from './services/ad_group_simulation'
+import AdGroupCriterionSimulationService from './services/ad_group_criterion_simulation'
+import CampaignCriterionSimulationService from './services/campaign_criterion_simulation'
 
 /* Customer */
 import CustomerService, {
@@ -127,7 +130,7 @@ export interface CustomerInstance {
     changeStatus: ChangeStatusService
     conversionActions: ConversionActionService
     conversionUploads: ConversionUploadService
-    conversionAdjustmentUploads: ConversionAdjustmentUploadService
+    // conversionAdjustmentUploads: ConversionAdjustmentUploadService
     customInterests: CustomInterestService
     customerClientLinks: CustomerClientLinkService
     customerClients: CustomerClientService
@@ -163,6 +166,9 @@ export interface CustomerInstance {
     userInterests: UserInterestService
     userLists: UserListService
     videos: VideoService
+    adGroupSimulations: AdGroupSimulationService
+    adGroupCriterionSimulations: AdGroupCriterionSimulationService
+    campaignCriterionSimulations: CampaignCriterionSimulationService
 }
 
 export default function Customer(
@@ -230,12 +236,12 @@ export default function Customer(
         changeStatus: new ChangeStatusService(cid, client, throttler, 'ChangeStatusService'),
         conversionActions: new ConversionActionService(cid, client, throttler, 'ConversionActionService'),
         conversionUploads: new ConversionUploadService(cid, client, throttler, 'ConversionUploadService'),
-        conversionAdjustmentUploads: new ConversionAdjustmentUploadService(
-            cid,
-            client,
-            throttler,
-            'ConversionAdjustmentUploadService'
-        ),
+        // conversionAdjustmentUploads: new ConversionAdjustmentUploadService(
+        //     cid,
+        //     client,
+        //     throttler,
+        //     'ConversionAdjustmentUploadService'
+        // ),
         customInterests: new CustomInterestService(cid, client, throttler, 'CustomInterestService'),
         customerClientLinks: new CustomerClientLinkService(cid, client, throttler, 'CustomerClientLinkService'),
         customerClients: new CustomerClientService(cid, client, throttler, 'CustomerClientService'),
@@ -304,5 +310,18 @@ export default function Customer(
         userInterests: new UserInterestService(cid, client, throttler, 'UserInterestService'),
         userLists: new UserListService(cid, client, throttler, 'UserListService'),
         videos: new VideoService(cid, client, throttler, 'VideoService'),
+        adGroupSimulations: new AdGroupSimulationService(cid, client, throttler, 'AdGroupSimulationService'),
+        adGroupCriterionSimulations: new AdGroupCriterionSimulationService(
+            cid,
+            client,
+            throttler,
+            'AdGroupCriterionSimulationService'
+        ),
+        campaignCriterionSimulations: new CampaignCriterionSimulationService(
+            cid,
+            client,
+            throttler,
+            'CampaignCriterionSimulationService'
+        ),
     }
 }
