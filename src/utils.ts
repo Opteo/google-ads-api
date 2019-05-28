@@ -1,7 +1,7 @@
 import { snakeCase, isObject, isString, isArray, isUndefined, values, get } from 'lodash'
 import * as maps from 'google-ads-node/build/lib/mapping'
 
-import { ReportOptions, Constraint } from './types'
+import { ReportOptions, Constraint, ConstraintValue } from './types'
 import { enums } from './index'
 
 function unrollConstraintShorthand(constraint: any): Constraint {
@@ -97,14 +97,35 @@ export function buildReportQuery(config: ReportOptions) {
     return query
 }
 
+export const verifyConstraintType = (key: string, constraint: any): void => {
+    if (!['number', 'string', 'boolean'].includes(typeof constraint)) {
+        throw new Error(
+            `The value of the constraint ${key} must be a string, number, or boolean. Here, typeof ${key} is ${typeof constraint}`
+        )
+    }
+}
+
+export const addQuotesIfMissing = (constraint: ConstraintValue): string => {
+    const string_constraint = constraint.toString()
+
+    if (string_constraint.startsWith(`'`) && string_constraint.endsWith(`'`)) {
+        return string_constraint
+    }
+
+    if (string_constraint.startsWith(`"`) && string_constraint.endsWith(`"`)) {
+        return string_constraint
+    }
+
+    return `"${string_constraint}"`
+}
+
 const formatConstraints = (constraints: any): string => {
     const formatConstraint = (constraint: any): string => {
         if (isString(constraint)) {
             return constraint
         }
 
-        //@ts-ignore
-        let key
+        let key: any
         let val
         let op
 
@@ -125,14 +146,20 @@ const formatConstraints = (constraints: any): string => {
                 val = `()`
             } else {
                 const vals = constraint.val
-                    //@ts-ignore
-                    .map(v => translateEnumValue(key, v))
+                    .map((v: ConstraintValue) => {
+                        verifyConstraintType(key, v)
+                        let _v = translateEnumValue(key, v)
+                        _v = addQuotesIfMissing(_v)
+                        return _v
+                    })
                     .sort()
-                    .join(`","`)
-                val = `("${vals}")`
+                    .join(`,`)
+                val = `(${vals})`
             }
         } else {
+            verifyConstraintType(key, val)
             val = translateEnumValue(key, val)
+            val = addQuotesIfMissing(val)
         }
 
         return `${key} ${op} ${val}`
@@ -147,7 +174,7 @@ const formatConstraints = (constraints: any): string => {
     return constraints
 }
 
-export function translateEnumValue(key: string, value: string | number): string | number {
+export function translateEnumValue(key: string, value: ConstraintValue): ConstraintValue {
     const enum_name = get(maps, key)
     if (enum_name && typeof value === 'number') {
         return getEnumString(enum_name, value as number)
