@@ -69,7 +69,7 @@ class Sidebar extends React.Component {
                     Due to the nature of this library, this page will not work properly with an ad blocker. Consider
                     disabling your ad blocker and refreshing this page.
                 </div>
-                <div className="mono f7 tc opteo-middle-gray">v2.1.1</div>
+                <div className="mono f7 tc opteo-middle-gray">v2.2.0</div>
                 <SidebarSearch changeHandler={this.handleSearch} />
                 <SidebarSectionGroups
                     sectionGroups={sectionGroups}
