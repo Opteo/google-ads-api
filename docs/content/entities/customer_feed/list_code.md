@@ -28,7 +28,6 @@ let result = await customer.customerFeeds.list({
 ;[
   {
     customer_feed: {
-      resource_name: 'customers/9262111890/customerFeeds/82896692',
       feed: 'customers/9262111890/feeds/82896692',
       matching_function: {
         function_string: 'EQUALS(FEED_ITEM_ID,51840594005)',
@@ -37,10 +36,10 @@ let result = await customer.customerFeeds.list({
         right_operands: [{ constantOperand: { longValue: { value: 51840594005 } } }],
       },
       placeholder_types: [2],
+      resource_name: 'customers/9262111890/customerFeeds/82896692',
       status: 2,
     },
     feed: {
-      resource_name: 'customers/9262111890/feeds/82896692',
       attributes: [
         { id: { value: 1 }, name: { value: 'SitelinkName' }, type: 4, isPartOfKey: { value: false } },
         { id: { value: 2 }, name: { value: 'SitelinkUrl' }, type: 6, isPartOfKey: { value: false } },
@@ -54,10 +53,10 @@ let result = await customer.customerFeeds.list({
       id: 82896692,
       name: 'My feed',
       origin: 3,
+      resource_name: 'customers/9262111890/feeds/82896692',
       status: 2,
     },
     customer: {
-      resource_name: 'customers/9262111890',
       auto_tagging_enabled: false,
       call_reporting_setting: {
         call_conversion_action: 'customers/9262111890/conversionActions/179',
@@ -74,6 +73,7 @@ let result = await customer.customerFeeds.list({
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 797556569 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-797556569\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-797556569');\n</script>\n",
       },
+      resource_name: 'customers/9262111890',
       test_account: true,
       time_zone: 'Europe/London',
     },

@@ -8,7 +8,6 @@ title: CampaignFeed
 ```javascript
 // Example CampaignFeed
 const campaign_feed = {
-  resource_name: 'customers/9262111890/campaignFeeds/1483704368~82896692',
   campaign: 'customers/9262111890/campaigns/1483704368',
   feed: 'customers/9262111890/feeds/82896692',
   matching_function: {
@@ -23,6 +22,7 @@ const campaign_feed = {
     ],
   },
   placeholder_types: [2],
+  resource_name: 'customers/9262111890/campaignFeeds/1483704368~82896692',
   status: 2,
 }
 ```

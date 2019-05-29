@@ -13,7 +13,6 @@ let result = await customer.feedMappings.get('customers/9262111890/feedMappings/
 ```javascript
 // Example result
 ;({
-  resource_name: 'customers/9262111890/feedMappings/82896692~91300060',
   attribute_field_mappings: [
     {
       feedAttributeId: { value: 1 },
@@ -218,6 +217,7 @@ let result = await customer.feedMappings.get('customers/9262111890/feedMappings/
   ],
   feed: 'customers/9262111890/feeds/82896692',
   placeholder_type: 2,
+  resource_name: 'customers/9262111890/feedMappings/82896692~91300060',
   status: 2,
 })
 ```

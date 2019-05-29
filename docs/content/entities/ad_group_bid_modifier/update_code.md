@@ -9,7 +9,7 @@ entity: AdGroupBidModifier
 // Updating the entity
 
 const ad_group_bid_modifier = {
-  resource_name: 'customers/9262111890/adGroupBidModifiers/66537099246~30000', // The resource_name is required
+  resource_name: 'customers/9262111890/adGroupBidModifiers/57176985017~30000', // The resource_name is required
   // ...any other fields that you would like to update
 }
 
@@ -26,7 +26,7 @@ const result = await customer.adGroupBidModifiers.update([ad_group_bid_modifier,
 
 // Example result
 {
-	results : ['customers/9262111890/adGroupBidModifiers/66537099246~30000'],
+	results : ['customers/9262111890/adGroupBidModifiers/57176985017~30000'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

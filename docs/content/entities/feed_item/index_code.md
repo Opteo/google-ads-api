@@ -8,7 +8,6 @@ title: FeedItem
 ```javascript
 // Example FeedItem
 const feed_item = {
-  resource_name: 'customers/3827277046/feedItems/43009393~9779152283',
   attribute_values: [
     {
       feedAttributeId: { value: 1 },
@@ -59,6 +58,7 @@ const feed_item = {
       qualityDisapprovalReasonsList: [],
     },
   ],
+  resource_name: 'customers/3827277046/feedItems/43009393~9779152283',
   status: 2,
   url_custom_parameters: [],
 }

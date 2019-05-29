@@ -8,8 +8,8 @@ title: KeywordPlan
 ```javascript
 // Example KeywordPlan
 const keyword_plan = {
-  resource_name: 'customers/3827277046/keywordPlans/4739396',
   id: 4739396,
   name: 'My keyword plan',
+  resource_name: 'customers/3827277046/keywordPlans/4739396',
 }
 ```

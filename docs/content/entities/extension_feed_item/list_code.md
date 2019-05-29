@@ -28,9 +28,9 @@ let result = await customer.extensionFeedItems.list({
 ;[
   {
     extension_feed_item: {
-      resource_name: 'customers/3827277046/extensionFeedItems/13881705221',
       ad_schedules: [],
       extension_type: 11,
+      resource_name: 'customers/3827277046/extensionFeedItems/13881705221',
       status: 2,
       structured_snippet_feed_item: {
         header: 'Types',
@@ -48,7 +48,6 @@ let result = await customer.extensionFeedItems.list({
       },
     },
     ad_group: {
-      resource_name: 'customers/3827277046/adGroups/37706041185',
       campaign: 'customers/3827277046/campaigns/729684361',
       cpc_bid_micros: 4770000,
       cpm_bid_micros: 10000,
@@ -57,6 +56,7 @@ let result = await customer.extensionFeedItems.list({
       explorer_auto_optimizer_setting: { opt_in: false },
       id: 37706041185,
       name: 'My ad group',
+      resource_name: 'customers/3827277046/adGroups/37706041185',
       status: 2,
       target_cpa_micros: 0,
       targeting_setting: {
@@ -73,7 +73,6 @@ let result = await customer.extensionFeedItems.list({
       url_custom_parameters: [],
     },
     campaign: {
-      resource_name: 'customers/3827277046/campaigns/729684361',
       ad_serving_optimization_status: 4,
       advertising_channel_type: 2,
       base_campaign: 'customers/3827277046/campaigns/729684361',
@@ -93,6 +92,7 @@ let result = await customer.extensionFeedItems.list({
         target_search_network: true,
       },
       payment_mode: 4,
+      resource_name: 'customers/3827277046/campaigns/729684361',
       selective_optimization: { conversion_actions: [] },
       serving_status: 2,
       start_date: '2017-01-04',
@@ -101,7 +101,6 @@ let result = await customer.extensionFeedItems.list({
       url_custom_parameters: [],
     },
     customer: {
-      resource_name: 'customers/3827277046',
       auto_tagging_enabled: true,
       call_reporting_setting: {
         call_conversion_action: 'customers/3827277046/conversionActions/179',
@@ -118,6 +117,7 @@ let result = await customer.extensionFeedItems.list({
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 875176189 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-875176189\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-875176189');\n</script>\n",
       },
+      resource_name: 'customers/3827277046',
       test_account: false,
       time_zone: 'Europe/London',
       tracking_url_template:

@@ -7,17 +7,17 @@ entity: CampaignCriterion
 
 ```javascript
 // Getting the entity
-let result = await customer.campaignCriteria.get('customers/9262111890/campaignCriteria/1599497210~1000')
+let result = await customer.campaignCriteria.get('customers/9262111890/campaignCriteria/1483704368~1000')
 ```
 
 ```javascript
 // Example result
 ;({
-  resource_name: 'customers/9262111890/campaignCriteria/1599497210~1000',
-  campaign: 'customers/9262111890/campaigns/1599497210',
+  campaign: 'customers/9262111890/campaigns/1483704368',
   criterion_id: 1000,
   language: { language_constant: 'languageConstants/1000' },
   negative: false,
+  resource_name: 'customers/9262111890/campaignCriteria/1483704368~1000',
   type: 20,
 })
 ```

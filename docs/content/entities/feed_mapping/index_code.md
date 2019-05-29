@@ -8,7 +8,6 @@ title: FeedMapping
 ```javascript
 // Example FeedMapping
 const feed_mapping = {
-  resource_name: 'customers/9262111890/feedMappings/82896692~91300060',
   attribute_field_mappings: [
     {
       feedAttributeId: { value: 1 },
@@ -213,6 +212,7 @@ const feed_mapping = {
   ],
   feed: 'customers/9262111890/feeds/82896692',
   placeholder_type: 2,
+  resource_name: 'customers/9262111890/feedMappings/82896692~91300060',
   status: 2,
 }
 ```

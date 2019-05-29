@@ -1,49 +1,141 @@
 module.exports = {
     name: 'Campaign',
     object: {
-        targeting_setting: {
-            target_restrictions: {
-                _type: 'array',
-                _description: 'The per-targeting-dimension setting to restrict the reach of your campaign or ad group.',
-            },
-        },
-        selective_optimization: {
-            conversion_actions: {
-                _type: 'array',
-                _description: 'The selected set of conversion actions for optimizing this campaign.',
-            },
-        },
-        end_date: {
-            _type: 'string',
-            _description: 'The date when campaign ended. This field must not be used in WHERE clauses.',
-        },
-        target_spend: {
-            target_spend_micros: {
-                _type: 'int64',
-                _description:
-                    'The spend target under which to maximize clicks. A TargetSpend bidder will attempt to spend the smaller of this value or the natural throttling spend amount. If not specified, the budget is used as the spend target.',
-            },
-            cpc_bid_ceiling_micros: {
-                _type: 'int64',
-                _description:
-                    'Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
-            },
-            _oneof: 'campaignBiddingStrategy',
-        },
-        status: {
+        ad_serving_optimization_status: {
+            _description: 'The ad serving optimization status of the campaign.',
+            _enums: [
+                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                {
+                    s: 'UNKNOWN',
+                    description: 'The received value is not known in this version.\n\nThis is a response-only value.',
+                },
+                { s: 'OPTIMIZE', description: 'Ad serving is optimized based on CTR for the campaign.' },
+                {
+                    s: 'CONVERSION_OPTIMIZE',
+                    description:
+                        'Ad serving is optimized based on CTR * Conversion for the campaign. If\nthe campaign is not in the conversion optimizer bidding strategy, it will\ndefault to OPTIMIZED.',
+                },
+                { s: 'ROTATE', description: 'Ads are rotated evenly for 90 days, then optimized for clicks.' },
+                {
+                    s: 'ROTATE_INDEFINITELY',
+                    description:
+                        'Show lower performing ads more evenly with higher performing ads, and do\nnot optimize.',
+                },
+                { s: 'UNAVAILABLE', description: 'Ad serving optimization status is not available.' },
+            ],
             _type: 'enum',
+        },
+        advertising_channel_sub_type: {
+            _description:
+                'Optional refinement to <code>advertising_channel_type</code>. Must be a valid sub-type of the parent channel type. Can be set only when creating campaigns. After campaign is created, the field can not be changed.',
+            _enums: [
+                { s: 'UNSPECIFIED', description: 'Not specified.' },
+                { s: 'UNKNOWN', description: 'Used as a return value only. Represents value unknown in this version.' },
+                { s: 'SEARCH_MOBILE_APP', description: 'Mobile app campaigns for Search.' },
+                { s: 'DISPLAY_MOBILE_APP', description: 'Mobile app campaigns for Display.' },
+                { s: 'SEARCH_EXPRESS', description: 'AdWords express campaigns for search.' },
+                { s: 'DISPLAY_EXPRESS', description: 'AdWords Express campaigns for display.' },
+                { s: 'SHOPPING_SMART_ADS', description: 'Smart Shopping campaigns.' },
+                { s: 'DISPLAY_GMAIL_AD', description: 'Gmail Ad campaigns.' },
+                { s: 'DISPLAY_SMART_CAMPAIGN', description: 'Smart display campaigns.' },
+                { s: 'VIDEO_OUTSTREAM', description: 'Video Outstream campaigns.' },
+                { s: 'VIDEO_ACTION', description: 'Video TrueView for Action campaigns.' },
+                { s: 'VIDEO_NON_SKIPPABLE', description: 'Video campaigns with non-skippable video ads.' },
+                {
+                    s: 'APP_CAMPAIGN',
+                    description:
+                        "App Campaign that allows you to easily promote your Android or iOS app\nacross Google's top properties including Search, Play, YouTube, and the\nGoogle Display Network.",
+                },
+                {
+                    s: 'APP_CAMPAIGN_FOR_ENGAGEMENT',
+                    description:
+                        'App Campaign for engagement, focused on driving re-engagement with the\napp across several of Google’s top properties including Search, YouTube,\nand the Google Display Network.',
+                },
+            ],
+            _type: 'enum',
+        },
+        advertising_channel_type: {
+            _description:
+                'The primary serving target for ads within the campaign. The targeting options can be refined in <code>network_settings</code>. This field is required and should not be empty when creating new campaigns. Can be set only when creating campaigns. After the campaign is created, the field can not be changed.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'ENABLED', description: 'Campaign is currently serving ads depending on budget information.' },
-                { s: 'PAUSED', description: 'Campaign has been paused by the user.' },
-                { s: 'REMOVED', description: 'Campaign has been removed.' },
+                { s: 'SEARCH', description: 'Search Network. Includes display bundled, and Search+ campaigns.' },
+                { s: 'DISPLAY', description: 'Google Display Network only.' },
+                {
+                    s: 'SHOPPING',
+                    description: 'Shopping campaigns serve on the shopping property\nand on google.com search results.',
+                },
+                { s: 'HOTEL', description: 'Hotel Ads campaigns.' },
+                { s: 'VIDEO', description: 'Video campaigns.' },
+                {
+                    s: 'MULTI_CHANNEL',
+                    description: 'App Campaigns, and App Campaigns for Engagement, that run\nacross multiple channels.',
+                },
             ],
-            _description: 'The status of the campaign. When a new campaign is added, the status defaults to ENABLED.',
-        },
-        manual_cpv: { _oneof: 'campaignBiddingStrategy' },
-        bidding_strategy_type: {
             _type: 'enum',
+        },
+        app_campaign_setting: {
+            app_id: { _description: 'A string that uniquely identifies a mobile application.', _type: 'string' },
+            app_store: {
+                _description: 'The application store that distributes this specific app.',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    {
+                        s: 'UNKNOWN',
+                        description: 'Used for return value only. Represents value unknown in this version.',
+                    },
+                    { s: 'APPLE_APP_STORE', description: 'Apple app store.' },
+                    { s: 'GOOGLE_APP_STORE', description: 'Google play.' },
+                ],
+                _type: 'enum',
+            },
+            bidding_strategy_goal_type: {
+                _description:
+                    'Represents the goal which the bidding strategy of this app campaign should optimize towards.',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    {
+                        s: 'UNKNOWN',
+                        description: 'Used for return value only. Represents value unknown in this version.',
+                    },
+                    {
+                        s: 'OPTIMIZE_INSTALLS_TARGET_INSTALL_COST',
+                        description:
+                            'Aim to maximize the number of app installs. The cpa bid is the\ntarget cost per install.',
+                    },
+                    {
+                        s: 'OPTIMIZE_IN_APP_CONVERSIONS_TARGET_INSTALL_COST',
+                        description:
+                            'Aim to maximize the long term number of selected in-app conversions from\napp installs. The cpa bid is the target cost per install.',
+                    },
+                    {
+                        s: 'OPTIMIZE_IN_APP_CONVERSIONS_TARGET_CONVERSION_COST',
+                        description:
+                            'Aim to maximize the long term number of selected in-app conversions from\napp installs. The cpa bid is the target cost per in-app conversion. Note\nthat the actual cpa may seem higher than the target cpa at first, since\nthe long term conversions haven’t happened yet.',
+                    },
+                    {
+                        s: 'OPTIMIZE_RETURN_ON_ADVERTISING_SPEND',
+                        description:
+                            "Aim to maximize all conversions' value, i.e. install + selected in-app\nconversions while achieving or exceeding target return on advertising\nspend.",
+                    },
+                ],
+                _type: 'enum',
+            },
+        },
+        base_campaign: {
+            _description:
+                'The resource name of the base campaign of a draft or experiment campaign. For base campaigns, this is equal to <code>resource_name</code>. This field is read-only.',
+            _type: 'string',
+        },
+        bidding_strategy: {
+            _description: 'Portfolio bidding strategy used by campaign.',
+            _oneof: 'campaignBiddingStrategy',
+            _type: 'string',
+        },
+        bidding_strategy_type: {
+            _description:
+                'The type of bidding strategy. A bidding strategy can be created by setting either the bidding scheme to create a standard bidding strategy or the <code>bidding_strategy</code> field to create a portfolio bidding strategy. This field is read-only.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -109,106 +201,86 @@ module.exports = {
                         'Target Spend is an automated bid strategy that sets your bids\nto help get as many clicks as possible within your budget.',
                 },
             ],
-            _description:
-                'The type of bidding strategy. A bidding strategy can be created by setting either the bidding scheme to create a standard bidding strategy or the <code>bidding_strategy</code> field to create a portfolio bidding strategy. This field is read-only.',
+            _type: 'enum',
+        },
+        campaign_budget: { _description: 'The budget of the campaign.', _type: 'string' },
+        commission: {
+            _oneof: 'campaignBiddingStrategy',
+            commission_rate_micros: {
+                _description:
+                    'Commission rate defines the portion of the conversion value that the advertiser will be billed. A commission rate of x should be passed into this field as (x * 1,000,000). For example, 106,000 represents a commission rate of 0.106 (10.6%).',
+                _type: 'int64',
+            },
         },
         dynamic_search_ads_setting: {
-            language_code: {
-                _type: 'string',
-                _description: 'The language code specifying the language of the domain, e.g., "en".',
-            },
             domain_name: {
-                _type: 'string',
                 _description:
                     'The Internet domain name that this setting represents, e.g., "google.com" or "www.google.com".',
+                _type: 'string',
+            },
+            feeds: { _description: 'The list of page feeds associated with the campaign.', _type: 'array' },
+            language_code: {
+                _description: 'The language code specifying the language of the domain, e.g., "en".',
+                _type: 'string',
             },
             use_supplied_urls_only: {
-                _type: 'boolean',
                 _description: 'Whether the campaign uses advertiser supplied URLs exclusively.',
-            },
-            feeds: { _type: 'array', _description: 'The list of page feeds associated with the campaign.' },
-        },
-        manual_cpc: {
-            enhanced_cpc_enabled: {
                 _type: 'boolean',
-                _description: 'Whether bids are to be enhanced based on conversion optimizer data.',
             },
-            _oneof: 'campaignBiddingStrategy',
         },
-        payment_mode: {
-            _type: 'enum',
+        end_date: {
+            _description: 'The date when campaign ended. This field must not be used in WHERE clauses.',
+            _type: 'string',
+        },
+        experiment_type: {
+            _description: 'The type of campaign: normal, draft, or experiment.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'CLICKS', description: 'Pay per click.' },
+                { s: 'BASE', description: 'This is a regular campaign.' },
                 {
-                    s: 'CONVERSION_VALUE',
+                    s: 'DRAFT',
                     description:
-                        'Pay per conversion value. This mode is only supported by campaigns with\nAdvertisingChannelType.HOTEL, BiddingStrategyType.COMMISSION, and\nBudgetType.HOTEL_ADS_COMMISSION.',
+                        'This is a draft version of a campaign.\nIt has some modifications from a base campaign,\nbut it does not serve or accrue metrics.',
                 },
                 {
-                    s: 'CONVERSIONS',
+                    s: 'EXPERIMENT',
                     description:
-                        'Pay per conversion. This mode is only supported by campaigns with\nAdvertisingChannelType.DISPLAY (excluding\nAdvertisingChannelSubType.DISPLAY_GMAIL), BiddingStrategyType.TARGET_CPA,\nand BudgetType.FIXED_CPA. The customer must also be eligible for this\nmode. See Customer.eligibility_failure_reasons for details.',
+                        'This is an experiment version of a campaign.\nIt has some modifications from a base campaign,\nand a percentage of traffic is being diverted\nfrom the BASE campaign to this experiment campaign.',
                 },
             ],
-            _description: 'Payment mode for the campaign.',
-        },
-        ad_serving_optimization_status: {
             _type: 'enum',
-            _enums: [
-                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
-                {
-                    s: 'UNKNOWN',
-                    description: 'The received value is not known in this version.\n\nThis is a response-only value.',
-                },
-                { s: 'OPTIMIZE', description: 'Ad serving is optimized based on CTR for the campaign.' },
-                {
-                    s: 'CONVERSION_OPTIMIZE',
-                    description:
-                        'Ad serving is optimized based on CTR * Conversion for the campaign. If\nthe campaign is not in the conversion optimizer bidding strategy, it will\ndefault to OPTIMIZED.',
-                },
-                { s: 'ROTATE', description: 'Ads are rotated evenly for 90 days, then optimized for clicks.' },
-                {
-                    s: 'ROTATE_INDEFINITELY',
-                    description:
-                        'Show lower performing ads more evenly with higher performing ads, and do\nnot optimize.',
-                },
-                { s: 'UNAVAILABLE', description: 'Ad serving optimization status is not available.' },
-            ],
-            _description: 'The ad serving optimization status of the campaign.',
-        },
-        name: {
-            _type: 'string',
-            _description:
-                'The name of the campaign. This field is required and should not be empty when creating new campaigns. It must not contain any null (code point 0x0), NL line feed (code point 0xA) or carriage return (code point 0xD) characters.',
-        },
-        url_custom_parameters: {
-            _type: 'array',
-            _description:
-                'The list of mappings used to substitute custom parameter tags in a <code>tracking_url_template</code>, <code>final_urls</code>, or <code>mobile_final_urls</code>.',
-        },
-        maximize_conversion_value: {
-            target_roas: {
-                _type: 'double',
-                _description:
-                    'The target return on ad spend (ROAS) option. If set, the bid strategy will maximize revenue while averaging the target return on ad spend. If the target ROAS is high, the bid strategy may not be able to spend the full budget. If the target ROAS is not set, the bid strategy will aim to achieve the highest possible ROAS for the budget.',
-            },
-            _oneof: 'campaignBiddingStrategy',
         },
         final_url_suffix: {
-            _type: 'string',
             _description:
                 'Suffix used to append query parameters to landing pages that are served with parallel tracking.',
-        },
-        resource_name: {
             _type: 'string',
-            _description:
-                'The resource name of the campaign. Campaign resource names have the form: <code>customers/{customer_id}/campaigns/{campaign_id}</code>',
+        },
+        frequency_caps: {
+            _description: "A list that limits how often each user will see this campaign's ads.",
+            _type: 'array',
         },
         geo_target_type_setting: {
-            positive_geo_target_type: {
+            negative_geo_target_type: {
+                _description: 'The setting used for negative geotargeting in this particular campaign.',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
+                    {
+                        s: 'DONT_CARE',
+                        description:
+                            'Specifies that a user is excluded from seeing the ad if either their\nArea of Interest (AOI) or their Location of Presence (LOP) matches the\ngeo target.',
+                    },
+                    {
+                        s: 'LOCATION_OF_PRESENCE',
+                        description:
+                            'Specifies that a user is excluded from seeing the ad\nonly if their Location of Presence (LOP) matches the geo target.',
+                    },
+                ],
                 _type: 'enum',
+            },
+            positive_geo_target_type: {
+                _description: 'The setting used for positive geotargeting in this particular campaign.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
@@ -228,53 +300,103 @@ module.exports = {
                             "Specifies that the ad is triggered only if the user's\nLocation of Presence (LOP) matches.",
                     },
                 ],
-                _description: 'The setting used for positive geotargeting in this particular campaign.',
-            },
-            negative_geo_target_type: {
                 _type: 'enum',
-                _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
-                    { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
-                    {
-                        s: 'DONT_CARE',
-                        description:
-                            'Specifies that a user is excluded from seeing the ad if either their\nArea of Interest (AOI) or their Location of Presence (LOP) matches the\ngeo target.',
-                    },
-                    {
-                        s: 'LOCATION_OF_PRESENCE',
-                        description:
-                            'Specifies that a user is excluded from seeing the ad\nonly if their Location of Presence (LOP) matches the geo target.',
-                    },
-                ],
-                _description: 'The setting used for negative geotargeting in this particular campaign.',
             },
         },
-        frequency_caps: {
-            _type: 'array',
-            _description: "A list that limits how often each user will see this campaign's ads.",
+        hotel_setting: { hotel_center_id: { _description: 'The linked Hotel Center account.', _type: 'int64' } },
+        id: { _description: 'The ID of the campaign.', _type: 'int64' },
+        manual_cpc: {
+            _oneof: 'campaignBiddingStrategy',
+            enhanced_cpc_enabled: {
+                _description: 'Whether bids are to be enhanced based on conversion optimizer data.',
+                _type: 'boolean',
+            },
         },
-        experiment_type: {
-            _type: 'enum',
+        manual_cpm: { _oneof: 'campaignBiddingStrategy' },
+        manual_cpv: { _oneof: 'campaignBiddingStrategy' },
+        maximize_conversion_value: {
+            _oneof: 'campaignBiddingStrategy',
+            target_roas: {
+                _description:
+                    'The target return on ad spend (ROAS) option. If set, the bid strategy will maximize revenue while averaging the target return on ad spend. If the target ROAS is high, the bid strategy may not be able to spend the full budget. If the target ROAS is not set, the bid strategy will aim to achieve the highest possible ROAS for the budget.',
+                _type: 'double',
+            },
+        },
+        maximize_conversions: { _oneof: 'campaignBiddingStrategy' },
+        name: {
+            _description:
+                'The name of the campaign. This field is required and should not be empty when creating new campaigns. It must not contain any null (code point 0x0), NL line feed (code point 0xA) or carriage return (code point 0xD) characters.',
+            _type: 'string',
+        },
+        network_settings: {
+            target_content_network: {
+                _description:
+                    'Whether ads will be served on specified placements in the Google Display Network. Placements are specified using the Placement criterion.',
+                _type: 'boolean',
+            },
+            target_google_search: {
+                _description: 'Whether ads will be served with google.com search results.',
+                _type: 'boolean',
+            },
+            target_partner_search_network: {
+                _description:
+                    'Whether ads will be served on the Google Partner Network. This is available only to some select Google partner accounts.',
+                _type: 'boolean',
+            },
+            target_search_network: {
+                _description:
+                    'Whether ads will be served on partner sites in the Google Search Network (requires <code>target_google_search</code> to also be <code>true</code>).',
+                _type: 'boolean',
+            },
+        },
+        payment_mode: {
+            _description: 'Payment mode for the campaign.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'BASE', description: 'This is a regular campaign.' },
+                { s: 'CLICKS', description: 'Pay per click.' },
                 {
-                    s: 'DRAFT',
+                    s: 'CONVERSION_VALUE',
                     description:
-                        'This is a draft version of a campaign.\nIt has some modifications from a base campaign,\nbut it does not serve or accrue metrics.',
+                        'Pay per conversion value. This mode is only supported by campaigns with\nAdvertisingChannelType.HOTEL, BiddingStrategyType.COMMISSION, and\nBudgetType.HOTEL_ADS_COMMISSION.',
                 },
                 {
-                    s: 'EXPERIMENT',
+                    s: 'CONVERSIONS',
                     description:
-                        'This is an experiment version of a campaign.\nIt has some modifications from a base campaign,\nand a percentage of traffic is being diverted\nfrom the BASE campaign to this experiment campaign.',
+                        'Pay per conversion. This mode is only supported by campaigns with\nAdvertisingChannelType.DISPLAY (excluding\nAdvertisingChannelSubType.DISPLAY_GMAIL), BiddingStrategyType.TARGET_CPA,\nand BudgetType.FIXED_CPA. The customer must also be eligible for this\nmode. See Customer.eligibility_failure_reasons for details.',
                 },
             ],
-            _description: 'The type of campaign: normal, draft, or experiment.',
-        },
-        tracking_url_template: { _type: 'string', _description: 'The URL template for constructing a tracking URL.' },
-        serving_status: {
             _type: 'enum',
+        },
+        percent_cpc: {
+            _oneof: 'campaignBiddingStrategy',
+            cpc_bid_ceiling_micros: {
+                _description:
+                    'Maximum bid limit that can be set by the bid strategy. This is an optional field entered by the advertiser and specified in local micros. Note: A zero value is interpreted in the same way as having bid_ceiling undefined.',
+                _type: 'int64',
+            },
+            enhanced_cpc_enabled: {
+                _description:
+                    'Adjusts the bid for each auction upward or downward, depending on the likelihood of a conversion. Individual bids may exceed cpc_bid_ceiling_micros, but the average bid amount for a campaign should not.',
+                _type: 'boolean',
+            },
+        },
+        real_time_bidding_setting: {
+            opt_in: { _description: 'Whether the campaign is opted in to real-time bidding.', _type: 'boolean' },
+        },
+        resource_name: {
+            _description:
+                'The resource name of the campaign. Campaign resource names have the form: <code>customers/{customer_id}/campaigns/{campaign_id}</code>',
+            _type: 'string',
+        },
+        selective_optimization: {
+            conversion_actions: {
+                _description: 'The selected set of conversion actions for optimizing this campaign.',
+                _type: 'array',
+            },
+        },
+        serving_status: {
+            _description: 'The ad serving status of the campaign.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'No value has been specified.' },
                 {
@@ -287,39 +409,134 @@ module.exports = {
                 { s: 'PENDING', description: 'Pending.' },
                 { s: 'SUSPENDED', description: 'Suspended.' },
             ],
-            _description: 'The ad serving status of the campaign.',
+            _type: 'enum',
+        },
+        shopping_setting: {
+            campaign_priority: {
+                _description:
+                    'Priority of the campaign. Campaigns with numerically higher priorities take precedence over those with lower priorities. This field is required for Shopping campaigns, with values between 0 and 2, inclusive. This field is optional for Smart Shopping campaigns, but must be equal to 3 if set.',
+                _type: 'int32',
+            },
+            enable_local: { _description: 'Whether to include local products.', _type: 'boolean' },
+            merchant_id: {
+                _description:
+                    'ID of the Merchant Center account. This field is required for create operations. This field is immutable for Shopping campaigns.',
+                _type: 'int64',
+            },
+            sales_country: {
+                _description:
+                    "Sales country of products to include in the campaign. This field is required for Shopping campaigns. This field is immutable. This field is optional for non-Shopping campaigns, but it must be equal to 'ZZ' if set.",
+                _type: 'string',
+            },
         },
         start_date: {
-            _type: 'string',
             _description: 'The date when campaign started. This field must not be used in WHERE clauses.',
+            _type: 'string',
         },
-        manual_cpm: { _oneof: 'campaignBiddingStrategy' },
-        target_cpm: { _oneof: 'campaignBiddingStrategy' },
-        advertising_channel_type: {
-            _type: 'enum',
+        status: {
+            _description: 'The status of the campaign. When a new campaign is added, the status defaults to ENABLED.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'SEARCH', description: 'Search Network. Includes display bundled, and Search+ campaigns.' },
-                { s: 'DISPLAY', description: 'Google Display Network only.' },
-                {
-                    s: 'SHOPPING',
-                    description: 'Shopping campaigns serve on the shopping property\nand on google.com search results.',
-                },
-                { s: 'HOTEL', description: 'Hotel Ads campaigns.' },
-                { s: 'VIDEO', description: 'Video campaigns.' },
-                {
-                    s: 'MULTI_CHANNEL',
-                    description: 'App Campaigns, and App Campaigns for Engagement, that run\nacross multiple channels.',
-                },
+                { s: 'ENABLED', description: 'Campaign is currently serving ads depending on budget information.' },
+                { s: 'PAUSED', description: 'Campaign has been paused by the user.' },
+                { s: 'REMOVED', description: 'Campaign has been removed.' },
             ],
-            _description:
-                'The primary serving target for ads within the campaign. The targeting options can be refined in <code>network_settings</code>. This field is required and should not be empty when creating new campaigns. Can be set only when creating campaigns. After the campaign is created, the field can not be changed.',
+            _type: 'enum',
         },
-        hotel_setting: { hotel_center_id: { _type: 'int64', _description: 'The linked Hotel Center account.' } },
+        target_cpa: {
+            _oneof: 'campaignBiddingStrategy',
+            cpc_bid_ceiling_micros: {
+                _description:
+                    'Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
+                _type: 'int64',
+            },
+            cpc_bid_floor_micros: {
+                _description:
+                    'Minimum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
+                _type: 'int64',
+            },
+            target_cpa_micros: {
+                _description:
+                    'Average CPA target. This target should be greater than or equal to minimum billable unit based on the currency for the account.',
+                _type: 'int64',
+            },
+        },
+        target_cpm: { _oneof: 'campaignBiddingStrategy' },
+        target_impression_share: {
+            _oneof: 'campaignBiddingStrategy',
+            cpc_bid_ceiling_micros: {
+                _description:
+                    'The highest CPC bid the automated bidding system is permitted to specify. This is a required field entered by the advertiser that sets the ceiling and specified in local micros.',
+                _type: 'int64',
+            },
+            location: {
+                _description: 'The targeted location on the search results page.',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    {
+                        s: 'UNKNOWN',
+                        description: 'Used for return value only. Represents value unknown in this version.',
+                    },
+                    { s: 'ANYWHERE_ON_PAGE', description: 'Any location on the web page.' },
+                    { s: 'TOP_OF_PAGE', description: 'Top box of ads.' },
+                    { s: 'ABSOLUTE_TOP_OF_PAGE', description: 'Top slot in the top box of ads.' },
+                ],
+                _type: 'enum',
+            },
+            location_fraction_micros: {
+                _description:
+                    'The desired fraction of ads to be shown in the targeted location in micros. E.g. 1% equals 10,000.',
+                _type: 'int64',
+            },
+        },
+        target_roas: {
+            _oneof: 'campaignBiddingStrategy',
+            cpc_bid_ceiling_micros: {
+                _description:
+                    'Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
+                _type: 'int64',
+            },
+            cpc_bid_floor_micros: {
+                _description:
+                    'Minimum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
+                _type: 'int64',
+            },
+            target_roas: {
+                _description:
+                    'Required. The desired revenue (based on conversion data) per unit of spend. Value must be between 0.01 and 1000.0, inclusive.',
+                _type: 'double',
+            },
+        },
+        target_spend: {
+            _oneof: 'campaignBiddingStrategy',
+            cpc_bid_ceiling_micros: {
+                _description:
+                    'Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
+                _type: 'int64',
+            },
+            target_spend_micros: {
+                _description:
+                    'The spend target under which to maximize clicks. A TargetSpend bidder will attempt to spend the smaller of this value or the natural throttling spend amount. If not specified, the budget is used as the spend target.',
+                _type: 'int64',
+            },
+        },
+        targeting_setting: {
+            target_restrictions: {
+                _description: 'The per-targeting-dimension setting to restrict the reach of your campaign or ad group.',
+                _type: 'array',
+            },
+        },
+        tracking_setting: { tracking_url: { _description: 'The url used for dynamic tracking.', _type: 'string' } },
+        tracking_url_template: { _description: 'The URL template for constructing a tracking URL.', _type: 'string' },
+        url_custom_parameters: {
+            _description:
+                'The list of mappings used to substitute custom parameter tags in a <code>tracking_url_template</code>, <code>final_urls</code>, or <code>mobile_final_urls</code>.',
+            _type: 'array',
+        },
         vanity_pharma: {
             vanity_pharma_display_url_mode: {
-                _type: 'enum',
+                _description: 'The display mode for vanity pharma URLs.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -335,10 +552,11 @@ module.exports = {
                         description: 'Replace vanity pharma URL with description of the website.',
                     },
                 ],
-                _description: 'The display mode for vanity pharma URLs.',
+                _type: 'enum',
             },
             vanity_pharma_text: {
-                _type: 'enum',
+                _description:
+                    'The text that will be displayed in display URL of the text ad when website description is the selected display mode for vanity pharma URLs.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -400,150 +618,11 @@ module.exports = {
                             'Prescription vaccine website with website content in Spanish (Sitio de\nvacunas con receta).',
                     },
                 ],
-                _description:
-                    'The text that will be displayed in display URL of the text ad when website description is the selected display mode for vanity pharma URLs.',
-            },
-        },
-        id: { _type: 'int64', _description: 'The ID of the campaign.' },
-        target_cpa: {
-            target_cpa_micros: {
-                _type: 'int64',
-                _description:
-                    'Average CPA target. This target should be greater than or equal to minimum billable unit based on the currency for the account.',
-            },
-            cpc_bid_ceiling_micros: {
-                _type: 'int64',
-                _description:
-                    'Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
-            },
-            cpc_bid_floor_micros: {
-                _type: 'int64',
-                _description:
-                    'Minimum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
-            },
-            _oneof: 'campaignBiddingStrategy',
-        },
-        base_campaign: {
-            _type: 'string',
-            _description:
-                'The resource name of the base campaign of a draft or experiment campaign. For base campaigns, this is equal to <code>resource_name</code>. This field is read-only.',
-        },
-        bidding_strategy: {
-            _type: 'string',
-            _description: 'Portfolio bidding strategy used by campaign.',
-            _oneof: 'campaignBiddingStrategy',
-        },
-        commission: {
-            commission_rate_micros: {
-                _type: 'int64',
-                _description:
-                    'Commission rate defines the portion of the conversion value that the advertiser will be billed. A commission rate of x should be passed into this field as (x * 1,000,000). For example, 106,000 represents a commission rate of 0.106 (10.6%).',
-            },
-            _oneof: 'campaignBiddingStrategy',
-        },
-        campaign_budget: { _type: 'string', _description: 'The budget of the campaign.' },
-        real_time_bidding_setting: {
-            opt_in: { _type: 'boolean', _description: 'Whether the campaign is opted in to real-time bidding.' },
-        },
-        maximize_conversions: { _oneof: 'campaignBiddingStrategy' },
-        advertising_channel_sub_type: {
-            _type: 'enum',
-            _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used as a return value only. Represents value unknown in this version.' },
-                { s: 'SEARCH_MOBILE_APP', description: 'Mobile app campaigns for Search.' },
-                { s: 'DISPLAY_MOBILE_APP', description: 'Mobile app campaigns for Display.' },
-                { s: 'SEARCH_EXPRESS', description: 'AdWords express campaigns for search.' },
-                { s: 'DISPLAY_EXPRESS', description: 'AdWords Express campaigns for display.' },
-                { s: 'SHOPPING_SMART_ADS', description: 'Smart Shopping campaigns.' },
-                { s: 'DISPLAY_GMAIL_AD', description: 'Gmail Ad campaigns.' },
-                { s: 'DISPLAY_SMART_CAMPAIGN', description: 'Smart display campaigns.' },
-                { s: 'VIDEO_OUTSTREAM', description: 'Video Outstream campaigns.' },
-                { s: 'VIDEO_ACTION', description: 'Video TrueView for Action campaigns.' },
-                { s: 'VIDEO_NON_SKIPPABLE', description: 'Video campaigns with non-skippable video ads.' },
-                {
-                    s: 'APP_CAMPAIGN',
-                    description:
-                        "App Campaign that allows you to easily promote your Android or iOS app\nacross Google's top properties including Search, Play, YouTube, and the\nGoogle Display Network.",
-                },
-                {
-                    s: 'APP_CAMPAIGN_FOR_ENGAGEMENT',
-                    description:
-                        'App Campaign for engagement, focused on driving re-engagement with the\napp across several of Google’s top properties including Search, YouTube,\nand the Google Display Network.',
-                },
-            ],
-            _description:
-                'Optional refinement to <code>advertising_channel_type</code>. Must be a valid sub-type of the parent channel type. Can be set only when creating campaigns. After campaign is created, the field can not be changed.',
-        },
-        tracking_setting: { tracking_url: { _type: 'string', _description: 'The url used for dynamic tracking.' } },
-        target_impression_share: {
-            location_fraction_micros: {
-                _type: 'int64',
-                _description:
-                    'The desired fraction of ads to be shown in the targeted location in micros. E.g. 1% equals 10,000.',
-            },
-            cpc_bid_ceiling_micros: {
-                _type: 'int64',
-                _description:
-                    'The highest CPC bid the automated bidding system is permitted to specify. This is a required field entered by the advertiser that sets the ceiling and specified in local micros.',
-            },
-            location: {
                 _type: 'enum',
-                _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
-                    {
-                        s: 'UNKNOWN',
-                        description: 'Used for return value only. Represents value unknown in this version.',
-                    },
-                    { s: 'ANYWHERE_ON_PAGE', description: 'Any location on the web page.' },
-                    { s: 'TOP_OF_PAGE', description: 'Top box of ads.' },
-                    { s: 'ABSOLUTE_TOP_OF_PAGE', description: 'Top slot in the top box of ads.' },
-                ],
-                _description: 'The targeted location on the search results page.',
-            },
-            _oneof: 'campaignBiddingStrategy',
-        },
-        target_roas: {
-            cpc_bid_ceiling_micros: {
-                _type: 'int64',
-                _description:
-                    'Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
-            },
-            target_roas: {
-                _type: 'double',
-                _description:
-                    'Required. The desired revenue (based on conversion data) per unit of spend. Value must be between 0.01 and 1000.0, inclusive.',
-            },
-            cpc_bid_floor_micros: {
-                _type: 'int64',
-                _description:
-                    'Minimum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
-            },
-            _oneof: 'campaignBiddingStrategy',
-        },
-        network_settings: {
-            target_content_network: {
-                _type: 'boolean',
-                _description:
-                    'Whether ads will be served on specified placements in the Google Display Network. Placements are specified using the Placement criterion.',
-            },
-            target_google_search: {
-                _type: 'boolean',
-                _description: 'Whether ads will be served with google.com search results.',
-            },
-            target_partner_search_network: {
-                _type: 'boolean',
-                _description:
-                    'Whether ads will be served on the Google Partner Network. This is available only to some select Google partner accounts.',
-            },
-            target_search_network: {
-                _type: 'boolean',
-                _description:
-                    'Whether ads will be served on partner sites in the Google Search Network (requires <code>target_google_search</code> to also be <code>true</code>).',
             },
         },
         video_brand_safety_suitability: {
-            _type: 'enum',
+            _description: '3-Tier Brand Safety setting for the campaign.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -563,86 +642,7 @@ module.exports = {
                         "This option lets you show ads on a reduced range of content that's\nappropriate for brands with particularly strict guidelines around\ninappropriate language and sexual suggestiveness; above and beyond what\nYouTube's advertiser-friendly content guidelines address. The videos\naccessible in this sensitive category meet heightened requirements,\nespecially for inappropriate language and sexual suggestiveness. For\nexample, your ads will be excluded from showing on some of YouTube's most\npopular music videos and other pop culture content across YouTube and\nGoogle video partners.",
                 },
             ],
-            _description: '3-Tier Brand Safety setting for the campaign.',
-        },
-        app_campaign_setting: {
-            app_store: {
-                _type: 'enum',
-                _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
-                    {
-                        s: 'UNKNOWN',
-                        description: 'Used for return value only. Represents value unknown in this version.',
-                    },
-                    { s: 'APPLE_APP_STORE', description: 'Apple app store.' },
-                    { s: 'GOOGLE_APP_STORE', description: 'Google play.' },
-                ],
-                _description: 'The application store that distributes this specific app.',
-            },
-            bidding_strategy_goal_type: {
-                _type: 'enum',
-                _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
-                    {
-                        s: 'UNKNOWN',
-                        description: 'Used for return value only. Represents value unknown in this version.',
-                    },
-                    {
-                        s: 'OPTIMIZE_INSTALLS_TARGET_INSTALL_COST',
-                        description:
-                            'Aim to maximize the number of app installs. The cpa bid is the\ntarget cost per install.',
-                    },
-                    {
-                        s: 'OPTIMIZE_IN_APP_CONVERSIONS_TARGET_INSTALL_COST',
-                        description:
-                            'Aim to maximize the long term number of selected in-app conversions from\napp installs. The cpa bid is the target cost per install.',
-                    },
-                    {
-                        s: 'OPTIMIZE_IN_APP_CONVERSIONS_TARGET_CONVERSION_COST',
-                        description:
-                            'Aim to maximize the long term number of selected in-app conversions from\napp installs. The cpa bid is the target cost per in-app conversion. Note\nthat the actual cpa may seem higher than the target cpa at first, since\nthe long term conversions haven’t happened yet.',
-                    },
-                    {
-                        s: 'OPTIMIZE_RETURN_ON_ADVERTISING_SPEND',
-                        description:
-                            "Aim to maximize all conversions' value, i.e. install + selected in-app\nconversions while achieving or exceeding target return on advertising\nspend.",
-                    },
-                ],
-                _description:
-                    'Represents the goal which the bidding strategy of this app campaign should optimize towards.',
-            },
-            app_id: { _type: 'string', _description: 'A string that uniquely identifies a mobile application.' },
-        },
-        shopping_setting: {
-            campaign_priority: {
-                _type: 'int32',
-                _description:
-                    'Priority of the campaign. Campaigns with numerically higher priorities take precedence over those with lower priorities. This field is required for Shopping campaigns, with values between 0 and 2, inclusive. This field is optional for Smart Shopping campaigns, but must be equal to 3 if set.',
-            },
-            sales_country: {
-                _type: 'string',
-                _description:
-                    "Sales country of products to include in the campaign. This field is required for Shopping campaigns. This field is immutable. This field is optional for non-Shopping campaigns, but it must be equal to 'ZZ' if set.",
-            },
-            enable_local: { _type: 'boolean', _description: 'Whether to include local products.' },
-            merchant_id: {
-                _type: 'int64',
-                _description:
-                    'ID of the Merchant Center account. This field is required for create operations. This field is immutable for Shopping campaigns.',
-            },
-        },
-        percent_cpc: {
-            cpc_bid_ceiling_micros: {
-                _type: 'int64',
-                _description:
-                    'Maximum bid limit that can be set by the bid strategy. This is an optional field entered by the advertiser and specified in local micros. Note: A zero value is interpreted in the same way as having bid_ceiling undefined.',
-            },
-            enhanced_cpc_enabled: {
-                _type: 'boolean',
-                _description:
-                    'Adjusts the bid for each auction upward or downward, depending on the likelihood of a conversion. Individual bids may exceed cpc_bid_ceiling_micros, but the average bid amount for a campaign should not.',
-            },
-            _oneof: 'campaignBiddingStrategy',
+            _type: 'enum',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

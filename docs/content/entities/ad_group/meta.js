@@ -1,49 +1,8 @@
 module.exports = {
     name: 'AdGroup',
     object: {
-        cpc_bid_micros: { _type: 'int64', _description: 'The maximum CPC (cost-per-click) bid.' },
-        status: {
-            _type: 'enum',
-            _enums: [
-                { s: 'UNSPECIFIED', description: 'The status has not been specified.' },
-                {
-                    s: 'UNKNOWN',
-                    description: 'The received value is not known in this version.\n\nThis is a response-only value.',
-                },
-                { s: 'ENABLED', description: 'The ad group is enabled.' },
-                { s: 'PAUSED', description: 'The ad group is paused.' },
-                { s: 'REMOVED', description: 'The ad group is removed.' },
-            ],
-            _description: 'The status of the ad group.',
-        },
-        name: {
-            _type: 'string',
-            _description:
-                'The name of the ad group. This field is required and should not be empty when creating new ad groups. It must contain fewer than 255 UTF-8 full-width characters. It must not contain any null (code point 0x0), NL line feed (code point 0xA) or carriage return (code point 0xD) characters.',
-        },
-        url_custom_parameters: {
-            _type: 'array',
-            _description:
-                'The list of mappings used to substitute custom parameter tags in a <code>tracking_url_template</code>, <code>final_urls</code>, or <code>mobile_final_urls</code>.',
-        },
-        final_url_suffix: { _type: 'string', _description: 'URL template for appending params to Final URL.' },
-        resource_name: {
-            _type: 'string',
-            _description:
-                'The resource name of the ad group. Ad group resource names have the form: <code>customers/{customer_id}/adGroups/{ad_group_id}</code>',
-        },
-        tracking_url_template: { _type: 'string', _description: 'The URL template for constructing a tracking URL.' },
-        target_cpa_micros: { _type: 'int64', _description: 'The target CPA (cost-per-acquisition).' },
-        explorer_auto_optimizer_setting: {
-            opt_in: { _type: 'boolean', _description: 'Indicates whether the optimizer is turned on.' },
-        },
-        effective_target_cpa_micros: {
-            _type: 'int64',
-            _description: 'The effective target CPA (cost-per-acquisition). This field is read-only.',
-        },
-        campaign: { _type: 'string', _description: 'The campaign to which the ad group belongs.' },
         ad_rotation_mode: {
-            _type: 'enum',
+            _description: 'The ad rotation mode of the ad group.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'The ad rotation mode has not been specified.' },
                 {
@@ -53,29 +12,18 @@ module.exports = {
                 { s: 'OPTIMIZE', description: 'Optimize ad group ads based on clicks or conversions.' },
                 { s: 'ROTATE_FOREVER', description: 'Rotate evenly forever.' },
             ],
-            _description: 'The ad rotation mode of the ad group.',
-        },
-        effective_target_roas_source: {
             _type: 'enum',
-            _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                {
-                    s: 'CAMPAIGN_BIDDING_STRATEGY',
-                    description: 'Effective bid or target is inherited from campaign bidding strategy.',
-                },
-                { s: 'AD_GROUP', description: 'The bid or target is defined on the ad group.' },
-                { s: 'AD_GROUP_CRITERION', description: 'The bid or target is defined on the ad group criterion.' },
-            ],
-            _description: 'Source of the effective target ROAS. This field is read-only.',
         },
+        campaign: { _description: 'The campaign to which the ad group belongs.', _type: 'string' },
+        cpc_bid_micros: { _description: 'The maximum CPC (cost-per-click) bid.', _type: 'int64' },
         cpm_bid_micros: {
-            _type: 'int64',
             _description: 'The maximum CPM (cost-per-thousand viewable impressions) bid.',
+            _type: 'int64',
         },
-        id: { _type: 'int64', _description: 'The ID of the ad group.' },
+        cpv_bid_micros: { _description: 'The CPV (cost-per-view) bid.', _type: 'int64' },
         display_custom_bid_dimension: {
-            _type: 'enum',
+            _description:
+                'Allows advertisers to specify a targeting dimension on which to place absolute bids. This is only applicable for campaigns that target only the display network and not search.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -104,11 +52,14 @@ module.exports = {
                 { s: 'PARENTAL_STATUS', description: 'Criteria for parental status targeting.' },
                 { s: 'INCOME_RANGE', description: 'Criteria for income range targeting.' },
             ],
-            _description:
-                'Allows advertisers to specify a targeting dimension on which to place absolute bids. This is only applicable for campaigns that target only the display network and not search.',
+            _type: 'enum',
+        },
+        effective_target_cpa_micros: {
+            _description: 'The effective target CPA (cost-per-acquisition). This field is read-only.',
+            _type: 'int64',
         },
         effective_target_cpa_source: {
-            _type: 'enum',
+            _description: 'Source of the effective target CPA. This field is read-only.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -119,25 +70,80 @@ module.exports = {
                 { s: 'AD_GROUP', description: 'The bid or target is defined on the ad group.' },
                 { s: 'AD_GROUP_CRITERION', description: 'The bid or target is defined on the ad group criterion.' },
             ],
-            _description: 'Source of the effective target CPA. This field is read-only.',
-        },
-        cpv_bid_micros: { _type: 'int64', _description: 'The CPV (cost-per-view) bid.' },
-        target_roas: {
-            _type: 'double',
-            _description:
-                "The target ROAS (return-on-ad-spend) override. If the ad group's campaign bidding strategy is a standard Target ROAS strategy, then this field overrides the target ROAS specified in the campaign's bidding strategy. Otherwise, this value is ignored.",
-        },
-        target_cpm_micros: {
-            _type: 'int64',
-            _description:
-                'Average amount in micros that the advertiser is willing to pay for every thousand times the ad is shown.',
+            _type: 'enum',
         },
         effective_target_roas: {
-            _type: 'double',
             _description: 'The effective target ROAS (return-on-ad-spend). This field is read-only.',
+            _type: 'double',
         },
-        type: {
+        effective_target_roas_source: {
+            _description: 'Source of the effective target ROAS. This field is read-only.',
+            _enums: [
+                { s: 'UNSPECIFIED', description: 'Not specified.' },
+                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
+                {
+                    s: 'CAMPAIGN_BIDDING_STRATEGY',
+                    description: 'Effective bid or target is inherited from campaign bidding strategy.',
+                },
+                { s: 'AD_GROUP', description: 'The bid or target is defined on the ad group.' },
+                { s: 'AD_GROUP_CRITERION', description: 'The bid or target is defined on the ad group criterion.' },
+            ],
             _type: 'enum',
+        },
+        explorer_auto_optimizer_setting: {
+            opt_in: { _description: 'Indicates whether the optimizer is turned on.', _type: 'boolean' },
+        },
+        final_url_suffix: { _description: 'URL template for appending params to Final URL.', _type: 'string' },
+        id: { _description: 'The ID of the ad group.', _type: 'int64' },
+        name: {
+            _description:
+                'The name of the ad group. This field is required and should not be empty when creating new ad groups. It must contain fewer than 255 UTF-8 full-width characters. It must not contain any null (code point 0x0), NL line feed (code point 0xA) or carriage return (code point 0xD) characters.',
+            _type: 'string',
+        },
+        percent_cpc_bid_micros: {
+            _description:
+                'The percent cpc bid amount, expressed as a fraction of the advertised price for some good or service. The valid range for the fraction is [0,1) and the value stored here is 1,000,000 * [fraction].',
+            _type: 'int64',
+        },
+        resource_name: {
+            _description:
+                'The resource name of the ad group. Ad group resource names have the form: <code>customers/{customer_id}/adGroups/{ad_group_id}</code>',
+            _type: 'string',
+        },
+        status: {
+            _description: 'The status of the ad group.',
+            _enums: [
+                { s: 'UNSPECIFIED', description: 'The status has not been specified.' },
+                {
+                    s: 'UNKNOWN',
+                    description: 'The received value is not known in this version.\n\nThis is a response-only value.',
+                },
+                { s: 'ENABLED', description: 'The ad group is enabled.' },
+                { s: 'PAUSED', description: 'The ad group is paused.' },
+                { s: 'REMOVED', description: 'The ad group is removed.' },
+            ],
+            _type: 'enum',
+        },
+        target_cpa_micros: { _description: 'The target CPA (cost-per-acquisition).', _type: 'int64' },
+        target_cpm_micros: {
+            _description:
+                'Average amount in micros that the advertiser is willing to pay for every thousand times the ad is shown.',
+            _type: 'int64',
+        },
+        target_roas: {
+            _description:
+                "The target ROAS (return-on-ad-spend) override. If the ad group's campaign bidding strategy is a standard Target ROAS strategy, then this field overrides the target ROAS specified in the campaign's bidding strategy. Otherwise, this value is ignored.",
+            _type: 'double',
+        },
+        targeting_setting: {
+            target_restrictions: {
+                _description: 'The per-targeting-dimension setting to restrict the reach of your campaign or ad group.',
+                _type: 'array',
+            },
+        },
+        tracking_url_template: { _description: 'The URL template for constructing a tracking URL.', _type: 'string' },
+        type: {
+            _description: 'The type of the ad group.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'The type has not been specified.' },
                 {
@@ -159,18 +165,12 @@ module.exports = {
                 { s: 'VIDEO_OUTSTREAM', description: 'Outstream video ads.' },
                 { s: 'SEARCH_DYNAMIC_ADS', description: 'Ad group type for Dynamic Search Ads ad groups.' },
             ],
-            _description: 'The type of the ad group.',
+            _type: 'enum',
         },
-        percent_cpc_bid_micros: {
-            _type: 'int64',
+        url_custom_parameters: {
             _description:
-                'The percent cpc bid amount, expressed as a fraction of the advertised price for some good or service. The valid range for the fraction is [0,1) and the value stored here is 1,000,000 * [fraction].',
-        },
-        targeting_setting: {
-            target_restrictions: {
-                _type: 'array',
-                _description: 'The per-targeting-dimension setting to restrict the reach of your campaign or ad group.',
-            },
+                'The list of mappings used to substitute custom parameter tags in a <code>tracking_url_template</code>, <code>final_urls</code>, or <code>mobile_final_urls</code>.',
+            _type: 'array',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

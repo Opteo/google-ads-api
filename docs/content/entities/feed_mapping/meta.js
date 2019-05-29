@@ -2,22 +2,32 @@ module.exports = {
     name: 'FeedMapping',
     object: {
         attribute_field_mappings: {
-            _type: 'array',
             _description:
                 'Feed attributes to field mappings. These mappings are a one-to-many relationship meaning that 1 feed attribute can be used to populate multiple placeholder fields, but 1 placeholder field can only draw data from 1 feed attribute. Ad Customizer is an exception, 1 placeholder field can be mapped to multiple feed attributes. Required.',
+            _type: 'array',
         },
-        status: {
-            _type: 'enum',
+        criterion_type: {
+            _description:
+                'The criterion type of this mapping (i.e., if the mapping maps feed attributes to criterion fields).',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'ENABLED', description: 'Feed mapping is enabled.' },
-                { s: 'REMOVED', description: 'Feed mapping has been removed.' },
+                {
+                    s: 'LOCATION_EXTENSION_TARGETING',
+                    description: 'Allows campaign targeting at locations within a location feed.',
+                },
+                {
+                    s: 'DSA_PAGE_FEED',
+                    description: 'Allows url targeting for your dynamic search ads within a page feed.',
+                },
             ],
-            _description: 'Status of the feed mapping. This field is read-only.',
-        },
-        placeholder_type: {
+            _oneof: 'target',
             _type: 'enum',
+        },
+        feed: { _description: 'The feed of this feed mapping.', _type: 'string' },
+        placeholder_type: {
+            _description:
+                'The placeholder type of this mapping (i.e., if the mapping maps feed attributes to placeholder fields).',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -97,34 +107,24 @@ module.exports = {
                 { s: 'DYNAMIC_LOCAL', description: 'Indicates that this feed is for local deals dynamic remarketing.' },
                 { s: 'DYNAMIC_JOB', description: 'Indicates that this feed is for job dynamic remarketing.' },
             ],
-            _description:
-                'The placeholder type of this mapping (i.e., if the mapping maps feed attributes to placeholder fields).',
             _oneof: 'target',
+            _type: 'enum',
         },
         resource_name: {
-            _type: 'string',
             _description:
                 'The resource name of the feed mapping. Feed mapping resource names have the form: <code>customers/{customer_id}/feedMappings/{feed_id}~{feed_mapping_id}</code>',
+            _type: 'string',
         },
-        criterion_type: {
-            _type: 'enum',
+        status: {
+            _description: 'Status of the feed mapping. This field is read-only.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                {
-                    s: 'LOCATION_EXTENSION_TARGETING',
-                    description: 'Allows campaign targeting at locations within a location feed.',
-                },
-                {
-                    s: 'DSA_PAGE_FEED',
-                    description: 'Allows url targeting for your dynamic search ads within a page feed.',
-                },
+                { s: 'ENABLED', description: 'Feed mapping is enabled.' },
+                { s: 'REMOVED', description: 'Feed mapping has been removed.' },
             ],
-            _description:
-                'The criterion type of this mapping (i.e., if the mapping maps feed attributes to criterion fields).',
-            _oneof: 'target',
+            _type: 'enum',
         },
-        feed: { _type: 'string', _description: 'The feed of this feed mapping.' },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],
 }

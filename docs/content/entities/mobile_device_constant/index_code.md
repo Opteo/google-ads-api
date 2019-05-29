@@ -8,11 +8,11 @@ title: MobileDeviceConstant
 ```javascript
 // Example MobileDeviceConstant
 const mobile_device_constant = {
-  resource_name: 'mobileDeviceConstants/605309',
   id: 605309,
   manufacturer_name: 'T-Mobile',
   name: 'myTouch 3G Slide',
   operating_system_name: 'Android',
+  resource_name: 'mobileDeviceConstants/605309',
   type: 2,
 }
 ```

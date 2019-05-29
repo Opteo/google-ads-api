@@ -13,7 +13,6 @@ let result = await customer.feedItems.get('customers/3827277046/feedItems/430093
 ```javascript
 // Example result
 ;({
-  resource_name: 'customers/3827277046/feedItems/43009393~9779152283',
   attribute_values: [
     {
       feedAttributeId: { value: 1 },
@@ -64,6 +63,7 @@ let result = await customer.feedItems.get('customers/3827277046/feedItems/430093
       qualityDisapprovalReasonsList: [],
     },
   ],
+  resource_name: 'customers/3827277046/feedItems/43009393~9779152283',
   status: 2,
   url_custom_parameters: [],
 })

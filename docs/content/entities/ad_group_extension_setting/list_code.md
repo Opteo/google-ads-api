@@ -28,7 +28,6 @@ let result = await customer.adGroupExtensionSettings.list({
 ;[
   {
     ad_group_extension_setting: {
-      resource_name: 'customers/3827277046/adGroupExtensionSettings/69639056828~SITELINK',
       ad_group: 'customers/3827277046/adGroups/69639056828',
       extension_feed_items: [
         { value: 'customers/3827277046/extensionFeedItems/48199744867' },
@@ -38,9 +37,9 @@ let result = await customer.adGroupExtensionSettings.list({
         { value: 'customers/3827277046/extensionFeedItems/48200618792' },
       ],
       extension_type: 10,
+      resource_name: 'customers/3827277046/adGroupExtensionSettings/69639056828~SITELINK',
     },
     ad_group: {
-      resource_name: 'customers/3827277046/adGroups/69639056828',
       campaign: 'customers/3827277046/campaigns/954460701',
       cpc_bid_micros: 4500000,
       cpm_bid_micros: 10000,
@@ -49,6 +48,7 @@ let result = await customer.adGroupExtensionSettings.list({
       explorer_auto_optimizer_setting: { opt_in: false },
       id: 69639056828,
       name: 'My ad group',
+      resource_name: 'customers/3827277046/adGroups/69639056828',
       status: 2,
       target_cpa_micros: 0,
       targeting_setting: {
@@ -66,7 +66,6 @@ let result = await customer.adGroupExtensionSettings.list({
       url_custom_parameters: [],
     },
     campaign: {
-      resource_name: 'customers/3827277046/campaigns/954460701',
       ad_serving_optimization_status: 5,
       advertising_channel_type: 2,
       base_campaign: 'customers/3827277046/campaigns/954460701',
@@ -86,6 +85,7 @@ let result = await customer.adGroupExtensionSettings.list({
         target_search_network: false,
       },
       payment_mode: 4,
+      resource_name: 'customers/3827277046/campaigns/954460701',
       selective_optimization: { conversion_actions: [] },
       serving_status: 2,
       start_date: '2017-10-13',
@@ -94,7 +94,6 @@ let result = await customer.adGroupExtensionSettings.list({
       url_custom_parameters: [],
     },
     customer: {
-      resource_name: 'customers/3827277046',
       auto_tagging_enabled: true,
       call_reporting_setting: {
         call_conversion_action: 'customers/3827277046/conversionActions/179',
@@ -111,6 +110,7 @@ let result = await customer.adGroupExtensionSettings.list({
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 875176189 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-875176189\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-875176189');\n</script>\n",
       },
+      resource_name: 'customers/3827277046',
       test_account: false,
       time_zone: 'Europe/London',
       tracking_url_template:

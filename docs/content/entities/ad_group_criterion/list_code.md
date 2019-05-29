@@ -28,7 +28,6 @@ let result = await customer.adGroupCriteria.list({
 ;[
   {
     ad_group_criterion: {
-      resource_name: 'customers/9262111890/adGroupCriteria/60170225920~521456008776',
       ad_group: 'customers/9262111890/adGroups/60170225920',
       approval_status: 4,
       criterion_id: 521456008776,
@@ -40,13 +39,13 @@ let result = await customer.adGroupCriteria.list({
       final_urls: [],
       keyword: { match_type: 4, text: 'test-keyword-478619' },
       negative: false,
+      resource_name: 'customers/9262111890/adGroupCriteria/60170225920~521456008776',
       status: 3,
       system_serving_status: 3,
       type: 2,
       url_custom_parameters: [],
     },
     ad_group: {
-      resource_name: 'customers/9262111890/adGroups/60170225920',
       campaign: 'customers/9262111890/campaigns/1485014801',
       cpc_bid_micros: 1000000,
       cpm_bid_micros: 10000,
@@ -54,13 +53,13 @@ let result = await customer.adGroupCriteria.list({
       effective_target_cpa_micros: 0,
       id: 60170225920,
       name: 'My ad group',
+      resource_name: 'customers/9262111890/adGroups/60170225920',
       status: 2,
       target_cpa_micros: 0,
       type: 2,
       url_custom_parameters: [],
     },
     campaign: {
-      resource_name: 'customers/9262111890/campaigns/1485014801',
       ad_serving_optimization_status: 2,
       advertising_channel_type: 2,
       base_campaign: 'customers/9262111890/campaigns/1485014801',
@@ -79,6 +78,7 @@ let result = await customer.adGroupCriteria.list({
         target_search_network: true,
       },
       payment_mode: 4,
+      resource_name: 'customers/9262111890/campaigns/1485014801',
       selective_optimization: { conversion_actions: [] },
       serving_status: 2,
       start_date: '2018-07-24',
@@ -87,7 +87,6 @@ let result = await customer.adGroupCriteria.list({
       url_custom_parameters: [],
     },
     customer: {
-      resource_name: 'customers/9262111890',
       auto_tagging_enabled: false,
       call_reporting_setting: {
         call_conversion_action: 'customers/9262111890/conversionActions/179',
@@ -104,6 +103,7 @@ let result = await customer.adGroupCriteria.list({
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 797556569 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-797556569\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-797556569');\n</script>\n",
       },
+      resource_name: 'customers/9262111890',
       test_account: true,
       time_zone: 'Europe/London',
     },

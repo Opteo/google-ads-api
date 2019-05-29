@@ -13,7 +13,6 @@ let result = await customer.adGroupFeeds.get('customers/3827277046/adGroupFeeds/
 ```javascript
 // Example result
 ;({
-  resource_name: 'customers/3827277046/adGroupFeeds/45808681193~90651045',
   ad_group: 'customers/3827277046/adGroups/45808681193',
   feed: 'customers/3827277046/feeds/90651045',
   matching_function: {
@@ -29,6 +28,7 @@ let result = await customer.adGroupFeeds.get('customers/3827277046/adGroupFeeds/
     ],
   },
   placeholder_types: [1],
+  resource_name: 'customers/3827277046/adGroupFeeds/45808681193~90651045',
   status: 2,
 })
 ```

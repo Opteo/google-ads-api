@@ -13,9 +13,9 @@ let result = await customer.customerNegativeCriteria.get('customers/3827277046/c
 ```javascript
 // Example result
 ;({
-  resource_name: 'customers/3827277046/customerNegativeCriteria/114607059163',
   content_label: { type: 1 },
   id: 114607059163,
+  resource_name: 'customers/3827277046/customerNegativeCriteria/114607059163',
   type: 22,
 })
 ```

@@ -8,7 +8,6 @@ title: AdGroupCriterion
 ```javascript
 // Example AdGroupCriterion
 const ad_group_criterion = {
-  resource_name: 'customers/9262111890/adGroupCriteria/60170225920~521456008776',
   ad_group: 'customers/9262111890/adGroups/60170225920',
   approval_status: 4,
   criterion_id: 521456008776,
@@ -20,6 +19,7 @@ const ad_group_criterion = {
   final_urls: [],
   keyword: { match_type: 4, text: 'test-keyword-478619' },
   negative: false,
+  resource_name: 'customers/9262111890/adGroupCriteria/60170225920~521456008776',
   status: 3,
   system_serving_status: 3,
   type: 2,

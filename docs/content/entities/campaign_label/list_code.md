@@ -28,19 +28,18 @@ let result = await customer.campaignLabels.list({
 ;[
   {
     campaign_label: {
-      resource_name: 'customers/3827277046/campaignLabels/881817006~898377018',
       campaign: 'customers/3827277046/campaigns/881817006',
       label: 'customers/3827277046/labels/898377018',
+      resource_name: 'customers/3827277046/campaignLabels/881817006~898377018',
     },
     label: {
-      resource_name: 'customers/3827277046/labels/898377018',
       id: 898377018,
       name: 'My label',
+      resource_name: 'customers/3827277046/labels/898377018',
       status: 2,
       text_label: { background_color: '#CCCCFF', description: '' },
     },
     campaign: {
-      resource_name: 'customers/3827277046/campaigns/881817006',
       ad_serving_optimization_status: 5,
       advertising_channel_type: 2,
       base_campaign: 'customers/3827277046/campaigns/881817006',
@@ -59,6 +58,7 @@ let result = await customer.campaignLabels.list({
         target_search_network: true,
       },
       payment_mode: 4,
+      resource_name: 'customers/3827277046/campaigns/881817006',
       selective_optimization: { conversion_actions: [] },
       serving_status: 2,
       start_date: '2017-07-12',
@@ -70,7 +70,6 @@ let result = await customer.campaignLabels.list({
       url_custom_parameters: [],
     },
     customer: {
-      resource_name: 'customers/3827277046',
       auto_tagging_enabled: true,
       call_reporting_setting: {
         call_conversion_action: 'customers/3827277046/conversionActions/179',
@@ -87,6 +86,7 @@ let result = await customer.campaignLabels.list({
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 875176189 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-875176189\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-875176189');\n</script>\n",
       },
+      resource_name: 'customers/3827277046',
       test_account: false,
       time_zone: 'Europe/London',
       tracking_url_template:

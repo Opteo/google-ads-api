@@ -8,10 +8,10 @@ title: LanguageConstant
 ```javascript
 // Example LanguageConstant
 const language_constant = {
-  resource_name: 'languageConstants/1018',
   code: 'zh_TW',
   id: 1018,
   name: 'Chinese (traditional)',
+  resource_name: 'languageConstants/1018',
   targetable: true,
 }
 ```

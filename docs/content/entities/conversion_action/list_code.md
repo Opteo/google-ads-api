@@ -28,7 +28,6 @@ let result = await customer.conversionActions.list({
 ;[
   {
     conversion_action: {
-      resource_name: 'customers/9262111890/conversionActions/314732636',
       attribution_model_settings: { attribution_model: 105, data_driven_model_status: 5 },
       category: 5,
       click_through_lookback_window_days: 7,
@@ -38,6 +37,7 @@ let result = await customer.conversionActions.list({
       name: 'My conversion action',
       owner_customer: 'customers/9262111890',
       phone_call_duration_seconds: 60,
+      resource_name: 'customers/9262111890/conversionActions/314732636',
       status: 3,
       tag_snippets: [
         {
@@ -94,7 +94,6 @@ let result = await customer.conversionActions.list({
       view_through_lookback_window_days: 1,
     },
     customer: {
-      resource_name: 'customers/9262111890',
       auto_tagging_enabled: false,
       call_reporting_setting: {
         call_conversion_action: 'customers/9262111890/conversionActions/179',
@@ -111,6 +110,7 @@ let result = await customer.conversionActions.list({
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 797556569 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-797556569\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-797556569');\n</script>\n",
       },
+      resource_name: 'customers/9262111890',
       test_account: true,
       time_zone: 'Europe/London',
     },

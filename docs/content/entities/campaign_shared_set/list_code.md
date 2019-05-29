@@ -28,22 +28,21 @@ let result = await customer.campaignSharedSets.list({
 ;[
   {
     campaign_shared_set: {
-      resource_name: 'customers/9262111890/campaignSharedSets/1485014801~1788591305',
       campaign: 'customers/9262111890/campaigns/1485014801',
+      resource_name: 'customers/9262111890/campaignSharedSets/1485014801~1788591305',
       shared_set: 'customers/9262111890/sharedSets/1788591305',
       status: 3,
     },
     shared_set: {
-      resource_name: 'customers/9262111890/sharedSets/1788591305',
       id: 1788591305,
       member_count: 6,
       name: 'My shared set',
       reference_count: 0,
+      resource_name: 'customers/9262111890/sharedSets/1788591305',
       status: 2,
       type: 2,
     },
     campaign: {
-      resource_name: 'customers/9262111890/campaigns/1485014801',
       ad_serving_optimization_status: 2,
       advertising_channel_type: 2,
       base_campaign: 'customers/9262111890/campaigns/1485014801',
@@ -62,6 +61,7 @@ let result = await customer.campaignSharedSets.list({
         target_search_network: true,
       },
       payment_mode: 4,
+      resource_name: 'customers/9262111890/campaigns/1485014801',
       selective_optimization: { conversion_actions: [] },
       serving_status: 2,
       start_date: '2018-07-24',
@@ -70,7 +70,6 @@ let result = await customer.campaignSharedSets.list({
       url_custom_parameters: [],
     },
     customer: {
-      resource_name: 'customers/9262111890',
       auto_tagging_enabled: false,
       call_reporting_setting: {
         call_conversion_action: 'customers/9262111890/conversionActions/179',
@@ -87,6 +86,7 @@ let result = await customer.campaignSharedSets.list({
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 797556569 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-797556569\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-797556569');\n</script>\n",
       },
+      resource_name: 'customers/9262111890',
       test_account: true,
       time_zone: 'Europe/London',
     },

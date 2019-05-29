@@ -1,10 +1,15 @@
 module.exports = {
     name: 'CustomerManagerLink',
     object: {
-        manager_customer: { _type: 'string', _description: 'The manager customer linked to the customer.' },
-        manager_link_id: { _type: 'int64', _description: 'ID of the customer-manager link. This field is read only.' },
+        manager_customer: { _description: 'The manager customer linked to the customer.', _type: 'string' },
+        manager_link_id: { _description: 'ID of the customer-manager link. This field is read only.', _type: 'int64' },
+        resource_name: {
+            _description:
+                'Name of the resource. CustomerManagerLink resource names have the form: <code>customers/{customer_id}/customerManagerLinks/{manager_customer_id}~{manager_link_id}</code>',
+            _type: 'string',
+        },
         status: {
-            _type: 'enum',
+            _description: 'Status of the link between the customer and the manager.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -21,12 +26,7 @@ module.exports = {
                     description: 'Indicates relationship has been requested by manager, but manager\ncanceled it.',
                 },
             ],
-            _description: 'Status of the link between the customer and the manager.',
-        },
-        resource_name: {
-            _type: 'string',
-            _description:
-                'Name of the resource. CustomerManagerLink resource names have the form: <code>customers/{customer_id}/customerManagerLinks/{manager_customer_id}~{manager_link_id}</code>',
+            _type: 'enum',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

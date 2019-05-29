@@ -1,16 +1,15 @@
 module.exports = {
     name: 'CampaignBidModifier',
     object: {
-        campaign: { _type: 'string', _description: 'The campaign to which this criterion belongs.' },
-        resource_name: {
-            _type: 'string',
-            _description:
-                'The resource name of the campaign bid modifier. Campaign bid modifier resource names have the form: <code>customers/{customer_id}/campaignBidModifiers/{campaign_id}~{criterion_id}</code>',
+        bid_modifier: { _description: 'The modifier for the bid when the criterion matches.', _type: 'double' },
+        campaign: { _description: 'The campaign to which this criterion belongs.', _type: 'string' },
+        criterion_id: {
+            _description: 'The ID of the criterion to bid modify. This field is ignored for mutates.',
+            _type: 'int64',
         },
-        bid_modifier: { _type: 'double', _description: 'The modifier for the bid when the criterion matches.' },
         interaction_type: {
             type: {
-                _type: 'enum',
+                _description: 'The interaction type.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -19,12 +18,13 @@ module.exports = {
                     },
                     { s: 'CALLS', description: 'Calls.' },
                 ],
-                _description: 'The interaction type.',
+                _type: 'enum',
             },
         },
-        criterion_id: {
-            _type: 'int64',
-            _description: 'The ID of the criterion to bid modify. This field is ignored for mutates.',
+        resource_name: {
+            _description:
+                'The resource name of the campaign bid modifier. Campaign bid modifier resource names have the form: <code>customers/{customer_id}/campaignBidModifiers/{campaign_id}~{criterion_id}</code>',
+            _type: 'string',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],
