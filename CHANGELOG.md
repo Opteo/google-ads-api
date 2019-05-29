@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [2.2.0](https://github.com/Opteo/google-ads-api/compare/v2.1.1...v2.2.0) (2019-05-29)
+
+
+### Bug Fixes
+
+* **report:** make sure that we respect google's snakeCase method for parsing results ([#56](https://github.com/Opteo/google-ads-api/issues/56)) ([0e7e5c1](https://github.com/Opteo/google-ads-api/commit/0e7e5c1))
+
+
+### Features
+
+* **report:** automatically add quotes around constraint values ([#54](https://github.com/Opteo/google-ads-api/issues/54)) ([5563a72](https://github.com/Opteo/google-ads-api/commit/5563a72))
+
+
+
 ## [2.1.1](https://github.com/Opteo/google-ads-api/compare/v2.1.0...v2.1.1) (2019-05-21)
 
 
