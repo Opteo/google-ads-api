@@ -1,5 +1,5 @@
 import { getEnumString, enums } from '../index'
-import { translateEnumValue, buildReportQuery } from '../utils'
+import { translateEnumValue, buildReportQuery, snakeCaseGads } from '../utils'
 import { ReportOptions } from '../types'
 
 test('getEnumString', () => {
@@ -33,6 +33,13 @@ describe('translateEnumValue', () => {
         const outputs = inputs.map(([name, value]) => translateEnumValue(name as string, value))
 
         expect(outputs).toEqual(['PAUSED', 'ENABLED', 'SHOPPING'])
+    })
+})
+
+describe('snakeCaseGads', () => {
+    it('should apply snakecase in the google way', () => {
+        expect(snakeCaseGads('headlinePart1')).toEqual('headline_part1')
+        expect(snakeCaseGads('adGroupAd')).toEqual('ad_group_ad')
     })
 })
 

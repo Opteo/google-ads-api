@@ -181,7 +181,7 @@ export const formatQueryResults = (result: Array<object>): Array<object> => {
 
 const formatEntity = (entity: any, final: any = {}): object => {
     for (const key in entity) {
-        const underscore_key = snakeCase(key)
+        const underscore_key = snakeCaseGads(key)
         const value = entity[key]
 
         if (isObject(value) && !Array.isArray(value)) {
@@ -202,6 +202,20 @@ export const normaliseCustomerId = (id: string | undefined): string => {
         return id.split('-').join('')
     }
     return ''
+}
+
+/* 
+    lodash.snakeCase will convert headlinePart1 to headline_part_1, 
+    but we need headline_part1.
+*/
+export const snakeCaseGads = (str: string): string => {
+    const snaked = snakeCase(str)
+    const last_character = snaked[snaked.length - 1]
+
+    if (!isNaN(+last_character)) {
+        return snaked.slice(0, snaked.length - 2) + last_character
+    }
+    return snaked
 }
 
 export function parseResult(rows: any) {
