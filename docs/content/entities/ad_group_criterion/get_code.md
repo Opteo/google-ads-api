@@ -13,7 +13,6 @@ let result = await customer.adGroupCriteria.get('customers/9262111890/adGroupCri
 ```javascript
 // Example result
 ;({
-  resource_name: 'customers/9262111890/adGroupCriteria/60170225920~521456008776',
   ad_group: 'customers/9262111890/adGroups/60170225920',
   approval_status: 4,
   criterion_id: 521456008776,
@@ -25,6 +24,7 @@ let result = await customer.adGroupCriteria.get('customers/9262111890/adGroupCri
   final_urls: [],
   keyword: { match_type: 4, text: 'test-keyword-478619' },
   negative: false,
+  resource_name: 'customers/9262111890/adGroupCriteria/60170225920~521456008776',
   status: 3,
   system_serving_status: 3,
   type: 2,

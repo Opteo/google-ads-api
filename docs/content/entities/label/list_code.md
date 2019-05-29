@@ -28,9 +28,9 @@ let result = await customer.labels.list({
 ;[
   {
     label: {
-      resource_name: 'customers/3827277046/labels/3345231412',
       id: 3345231412,
       name: 'My label',
+      resource_name: 'customers/3827277046/labels/3345231412',
       status: 2,
       text_label: {
         background_color: '#E993EB',
@@ -38,7 +38,6 @@ let result = await customer.labels.list({
       },
     },
     customer: {
-      resource_name: 'customers/3827277046',
       auto_tagging_enabled: true,
       call_reporting_setting: {
         call_conversion_action: 'customers/3827277046/conversionActions/179',
@@ -55,6 +54,7 @@ let result = await customer.labels.list({
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 875176189 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-875176189\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-875176189');\n</script>\n",
       },
+      resource_name: 'customers/3827277046',
       test_account: false,
       time_zone: 'Europe/London',
       tracking_url_template:

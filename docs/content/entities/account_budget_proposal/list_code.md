@@ -28,7 +28,6 @@ let result = await customer.accountBudgetProposals.list({
 ;[
   {
     account_budget_proposal: {
-      resource_name: 'customers/3827277046/accountBudgetProposals/265265547',
       account_budget: 'customers/3827277046/accountBudgets/295854560',
       approval_date_time: '2017-01-01 12:25:18',
       approved_end_time_type: 3,
@@ -41,10 +40,10 @@ let result = await customer.accountBudgetProposals.list({
       proposed_name: '',
       proposed_spending_limit_type: 2,
       proposed_start_date_time: '2017-01-01 12:22:14',
+      resource_name: 'customers/3827277046/accountBudgetProposals/265265547',
       status: 4,
     },
     billing_setup: {
-      resource_name: 'customers/3827277046/billingSetups/295854200',
       end_time_type: 3,
       id: 295854200,
       payments_account: 'customers/3827277046/paymentsAccounts/2445-9502-2490-5474',
@@ -54,11 +53,11 @@ let result = await customer.accountBudgetProposals.list({
         payments_profile_id: '4466-6664-9412',
         payments_profile_name: 'Opteo LTD',
       },
+      resource_name: 'customers/3827277046/billingSetups/295854200',
       start_date_time: '2017-01-01 12:22:14',
       status: 4,
     },
     customer: {
-      resource_name: 'customers/3827277046',
       auto_tagging_enabled: true,
       call_reporting_setting: {
         call_conversion_action: 'customers/3827277046/conversionActions/179',
@@ -75,6 +74,7 @@ let result = await customer.accountBudgetProposals.list({
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 875176189 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-875176189\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-875176189');\n</script>\n",
       },
+      resource_name: 'customers/3827277046',
       test_account: false,
       time_zone: 'Europe/London',
       tracking_url_template:

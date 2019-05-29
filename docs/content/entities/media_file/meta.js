@@ -1,10 +1,16 @@
 module.exports = {
     name: 'MediaFile',
     object: {
-        id: { _type: 'int64', _description: 'The ID of the media file.' },
-        file_size: { _type: 'int64', _description: 'The size of the media file in bytes.' },
+        audio: {
+            _oneof: 'mediatype',
+            ad_duration_millis: { _description: 'The duration of the Audio in milliseconds.', _type: 'int64' },
+        },
+        file_size: { _description: 'The size of the media file in bytes.', _type: 'int64' },
+        id: { _description: 'The ID of the media file.', _type: 'int64' },
+        image: { _oneof: 'mediatype', data: { _description: 'Raw image data.', _type: 'byte' } },
+        media_bundle: { _oneof: 'mediatype', data: { _description: 'Raw zipped data.', _type: 'byte' } },
         mime_type: {
-            _type: 'enum',
+            _description: 'The mime type of the media file.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'The mime type has not been specified.' },
                 {
@@ -24,45 +30,24 @@ module.exports = {
                 { s: 'AUDIO_MP3', description: 'MIME type of audio/mp3.' },
                 { s: 'HTML5_AD_ZIP', description: 'MIME type of application/x-html5-ad-zip.' },
             ],
-            _description: 'The mime type of the media file.',
-        },
-        media_bundle: { data: { _type: 'byte', _description: 'Raw zipped data.' }, _oneof: 'mediatype' },
-        source_url: {
-            _type: 'string',
-            _description: 'The URL of where the original media file was downloaded from (or a file name).',
-        },
-        resource_name: {
-            _type: 'string',
-            _description:
-                'The resource name of the media file. Media file resource names have the form: <code>customers/{customer_id}/mediaFiles/{media_file_id}</code>',
-        },
-        video: {
-            ad_duration_millis: { _type: 'int64', _description: 'The duration of the Video in milliseconds.' },
-            advertising_id_code: {
-                _type: 'string',
-                _description:
-                    'The Advertising Digital Identification code for this video, as defined by the American Association of Advertising Agencies, used mainly for television commercials.',
-            },
-            isci_code: {
-                _type: 'string',
-                _description:
-                    'The Industry Standard Commercial Identifier code for this video, used mainly for television commercials.',
-            },
-            youtube_video_id: { _type: 'string', _description: 'The YouTube video ID (as seen in YouTube URLs).' },
-            _oneof: 'mediatype',
-        },
-        image: { data: { _type: 'byte', _description: 'Raw image data.' }, _oneof: 'mediatype' },
-        audio: {
-            ad_duration_millis: { _type: 'int64', _description: 'The duration of the Audio in milliseconds.' },
-            _oneof: 'mediatype',
+            _type: 'enum',
         },
         name: {
-            _type: 'string',
             _description:
                 'The name of the media file. The name can be used by clients to help identify previously uploaded media.',
+            _type: 'string',
+        },
+        resource_name: {
+            _description:
+                'The resource name of the media file. Media file resource names have the form: <code>customers/{customer_id}/mediaFiles/{media_file_id}</code>',
+            _type: 'string',
+        },
+        source_url: {
+            _description: 'The URL of where the original media file was downloaded from (or a file name).',
+            _type: 'string',
         },
         type: {
-            _type: 'enum',
+            _description: 'Type of the media file.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'The media type has not been specified.' },
                 {
@@ -76,7 +61,22 @@ module.exports = {
                 { s: 'VIDEO', description: 'Video file.' },
                 { s: 'DYNAMIC_IMAGE', description: 'Animated image, such as animated GIF.' },
             ],
-            _description: 'Type of the media file.',
+            _type: 'enum',
+        },
+        video: {
+            _oneof: 'mediatype',
+            ad_duration_millis: { _description: 'The duration of the Video in milliseconds.', _type: 'int64' },
+            advertising_id_code: {
+                _description:
+                    'The Advertising Digital Identification code for this video, as defined by the American Association of Advertising Agencies, used mainly for television commercials.',
+                _type: 'string',
+            },
+            isci_code: {
+                _description:
+                    'The Industry Standard Commercial Identifier code for this video, used mainly for television commercials.',
+                _type: 'string',
+            },
+            youtube_video_id: { _description: 'The YouTube video ID (as seen in YouTube URLs).', _type: 'string' },
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

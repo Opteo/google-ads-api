@@ -28,16 +28,15 @@ let result = await customer.sharedSets.list({
 ;[
   {
     shared_set: {
-      resource_name: 'customers/9262111890/sharedSets/1802068178',
       id: 1802068178,
       member_count: 0,
       name: 'My shared set',
       reference_count: 0,
+      resource_name: 'customers/9262111890/sharedSets/1802068178',
       status: 3,
       type: 2,
     },
     customer: {
-      resource_name: 'customers/9262111890',
       auto_tagging_enabled: false,
       call_reporting_setting: {
         call_conversion_action: 'customers/9262111890/conversionActions/179',
@@ -54,6 +53,7 @@ let result = await customer.sharedSets.list({
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 797556569 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-797556569\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-797556569');\n</script>\n",
       },
+      resource_name: 'customers/9262111890',
       test_account: true,
       time_zone: 'Europe/London',
     },

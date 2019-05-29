@@ -1,36 +1,18 @@
 module.exports = {
     name: 'ProductBiddingCategoryConstant',
     object: {
-        localized_name: {
-            _type: 'string',
-            _description: 'Display value of the product bidding category localized according to language_code.',
-        },
-        resource_name: {
-            _type: 'string',
-            _description:
-                'The resource name of the product bidding category. Product bidding category resource names have the form: <code>productBiddingCategoryConstants/{country_code}~{level}~{id}</code>',
-        },
         country_code: {
-            _type: 'string',
             _description: 'Two-letter upper-case country code of the product bidding category.',
-        },
-        language_code: { _type: 'string', _description: 'Language code of the product bidding category.' },
-        status: {
-            _type: 'enum',
-            _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'ACTIVE', description: 'The category is active and can be used for bidding.' },
-                { s: 'OBSOLETE', description: 'The category is obsolete. Used only for reporting purposes.' },
-            ],
-            _description: 'Status of the product bidding category.',
-        },
-        product_bidding_category_constant_parent: {
             _type: 'string',
-            _description: 'Resource name of the parent product bidding category.',
         },
+        id: {
+            _description:
+                'ID of the product bidding category. This ID is equivalent to the google_product_category ID as described in this article: https://support.google.com/merchants/answer/6324436.',
+            _type: 'int64',
+        },
+        language_code: { _description: 'Language code of the product bidding category.', _type: 'string' },
         level: {
-            _type: 'enum',
+            _description: 'Level of the product bidding category.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -40,12 +22,30 @@ module.exports = {
                 { s: 'LEVEL4', description: 'Level 4.' },
                 { s: 'LEVEL5', description: 'Level 5.' },
             ],
-            _description: 'Level of the product bidding category.',
+            _type: 'enum',
         },
-        id: {
-            _type: 'int64',
+        localized_name: {
+            _description: 'Display value of the product bidding category localized according to language_code.',
+            _type: 'string',
+        },
+        product_bidding_category_constant_parent: {
+            _description: 'Resource name of the parent product bidding category.',
+            _type: 'string',
+        },
+        resource_name: {
             _description:
-                'ID of the product bidding category. This ID is equivalent to the google_product_category ID as described in this article: https://support.google.com/merchants/answer/6324436.',
+                'The resource name of the product bidding category. Product bidding category resource names have the form: <code>productBiddingCategoryConstants/{country_code}~{level}~{id}</code>',
+            _type: 'string',
+        },
+        status: {
+            _description: 'Status of the product bidding category.',
+            _enums: [
+                { s: 'UNSPECIFIED', description: 'Not specified.' },
+                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
+                { s: 'ACTIVE', description: 'The category is active and can be used for bidding.' },
+                { s: 'OBSOLETE', description: 'The category is obsolete. Used only for reporting purposes.' },
+            ],
+            _type: 'enum',
         },
     },
     methods: ['get', 'list'],

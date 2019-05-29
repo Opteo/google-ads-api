@@ -25,7 +25,7 @@ const result = await customer.adGroupBidModifiers.create([ad_group_bid_modifier,
 
 // Example result
 {
-	results : ['customers/9262111890/adGroupBidModifiers/66537099246~30000'],
+	results : ['customers/9262111890/adGroupBidModifiers/57176985017~30000'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

@@ -1,153 +1,33 @@
 module.exports = {
     name: 'AdGroupAd',
     object: {
-        policy_summary: {
-            approval_status: {
-                _type: 'enum',
-                _enums: [
-                    { s: 'UNSPECIFIED', description: 'No value has been specified.' },
-                    {
-                        s: 'UNKNOWN',
-                        description:
-                            'The received value is not known in this version.\n\nThis is a response-only value.',
-                    },
-                    { s: 'DISAPPROVED', description: 'Will not serve.' },
-                    { s: 'APPROVED_LIMITED', description: 'Serves with restrictions.' },
-                    { s: 'APPROVED', description: 'Serves without restrictions.' },
-                    {
-                        s: 'AREA_OF_INTEREST_ONLY',
-                        description:
-                            'Will not serve in targeted countries, but may serve for users who are\nsearching for information about the targeted countries.',
-                    },
-                ],
-                _description:
-                    'The overall approval status of this ad, calculated based on the status of its individual policy topic entries.',
-            },
-            policy_topic_entries: { _type: 'array', _description: 'The list of policy findings for this ad.' },
-            review_status: {
-                _type: 'enum',
-                _enums: [
-                    { s: 'UNSPECIFIED', description: 'No value has been specified.' },
-                    {
-                        s: 'UNKNOWN',
-                        description:
-                            'The received value is not known in this version.\n\nThis is a response-only value.',
-                    },
-                    { s: 'REVIEW_IN_PROGRESS', description: 'Currently under review.' },
-                    { s: 'REVIEWED', description: 'Primary review complete. Other reviews may be continuing.' },
-                    {
-                        s: 'UNDER_APPEAL',
-                        description:
-                            'The resource has been resubmitted for approval or its policy decision has\nbeen appealed.',
-                    },
-                ],
-                _description: 'Where in the review process this ad is.',
-            },
-        },
-        ad_group: { _type: 'string', _description: 'The ad group to which the ad belongs.' },
-        resource_name: {
-            _type: 'string',
-            _description:
-                'The resource name of the ad. Ad group ad resource names have the form: <code>customers/{customer_id}/adGroupAds/{ad_group_id}~{ad_id}</code>',
-        },
-        ad_strength: {
-            _type: 'enum',
-            _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'PENDING', description: 'The ad strength is currently pending.' },
-                { s: 'NO_ADS', description: 'No ads could be generated.' },
-                { s: 'POOR', description: 'Poor strength.' },
-                { s: 'AVERAGE', description: 'Average strength.' },
-                { s: 'GOOD', description: 'Good strength.' },
-                { s: 'EXCELLENT', description: 'Excellent strength.' },
-            ],
-            _description: 'Overall ad strength for this ad group ad.',
-        },
-        status: {
-            _type: 'enum',
-            _enums: [
-                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
-                {
-                    s: 'UNKNOWN',
-                    description: 'The received value is not known in this version.\n\nThis is a response-only value.',
-                },
-                { s: 'ENABLED', description: 'The ad group ad is enabled.' },
-                { s: 'PAUSED', description: 'The ad group ad is paused.' },
-                { s: 'REMOVED', description: 'The ad group ad is removed.' },
-            ],
-            _description: 'The status of the ad.',
-        },
         ad: {
-            final_app_urls: {
-                _type: 'array',
-                _description:
-                    'A list of final app URLs that will be used on mobile if the user has the specific app installed.',
-            },
-            final_urls: {
-                _type: 'array',
-                _description: 'The list of possible final URLs after all cross-domain redirects for the ad.',
-            },
-            id: { _type: 'int64', _description: 'The ID of the ad.' },
-            responsive_search_ad: {
-                headlines: {
-                    _type: 'array',
-                    _description:
-                        'List of text assets for headlines. When the ad serves the headlines will be selected from this list.',
-                },
-                path2: {
-                    _type: 'string',
-                    _description:
-                        'Second part of text that may appear appended to the url displayed in the ad. This field can only be set when path1 is also set.',
-                },
-                descriptions: {
-                    _type: 'array',
-                    _description:
-                        'List of text assets for descriptions. When the ad serves the descriptions will be selected from this list.',
-                },
-                path1: {
-                    _type: 'string',
-                    _description: 'First part of text that may appear appended to the url displayed in the ad.',
-                },
-                _oneof: 'adData',
-            },
-            legacy_app_install_ad: {
-                description1: { _type: 'string', _description: 'The first description line of the ad.' },
-                headline: { _type: 'string', _description: 'The headline of the ad.' },
-                app_store: {
-                    _type: 'enum',
-                    _enums: [
-                        { s: 'UNSPECIFIED', description: 'Not specified.' },
-                        {
-                            s: 'UNKNOWN',
-                            description: 'Used for return value only. Represents value unknown in this version.',
-                        },
-                        { s: 'APPLE_APP_STORE', description: 'Apple iTunes.' },
-                        { s: 'GOOGLE_PLAY', description: 'Google Play.' },
-                        { s: 'WINDOWS_STORE', description: 'Windows Store.' },
-                        { s: 'WINDOWS_PHONE_STORE', description: 'Windows Phone Store.' },
-                        { s: 'CN_APP_STORE', description: 'The app is hosted in a Chinese app store.' },
-                    ],
-                    _description: 'The app store the mobile app is available in.',
-                },
-                app_id: { _type: 'string', _description: 'The id of the mobile app.' },
-                description2: { _type: 'string', _description: 'The second description line of the ad.' },
-                _oneof: 'adData',
-            },
             added_by_google_ads: {
-                _type: 'boolean',
                 _description:
                     'Indicates if this ad was automatically added by Google Ads and not by a user. For example, this could happen when ads are automatically created as suggestions for new ads based on knowledge of how existing ads are performing.',
+                _type: 'boolean',
             },
             app_ad: {
+                _oneof: 'adData',
                 descriptions: {
-                    _type: 'array',
                     _description:
                         'List of text assets for descriptions. When the ad serves the descriptions will be selected from this list.',
+                    _type: 'array',
                 },
+                headlines: {
+                    _description:
+                        'List of text assets for headlines. When the ad serves the headlines will be selected from this list.',
+                    _type: 'array',
+                },
+                html_5_media_bundles: {
+                    _description: 'List of media bundle assets that may be used with the ad.',
+                    _type: 'array',
+                },
+                images: { _description: 'List of image assets that may be displayed with the ad.', _type: 'array' },
                 mandatory_ad_text: {
                     pinned_field: {
-                        _type: 'enum',
+                        _description:
+                            'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
                         _enums: [
                             { s: 'UNSPECIFIED', description: 'No value has been specified.' },
                             {
@@ -161,85 +41,99 @@ module.exports = {
                             { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.' },
                             { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.' },
                         ],
-                        _description:
-                            'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
+                        _type: 'enum',
                     },
-                    text: { _type: 'string', _description: 'Asset text.' },
-                },
-                images: { _type: 'array', _description: 'List of image assets that may be displayed with the ad.' },
-                html_5_media_bundles: {
-                    _type: 'array',
-                    _description: 'List of media bundle assets that may be used with the ad.',
-                },
-                headlines: {
-                    _type: 'array',
-                    _description:
-                        'List of text assets for headlines. When the ad serves the headlines will be selected from this list.',
+                    text: { _description: 'Asset text.', _type: 'string' },
                 },
                 youtube_videos: {
-                    _type: 'array',
                     _description: 'List of YouTube video assets that may be displayed with the ad.',
+                    _type: 'array',
                 },
-                _oneof: 'adData',
-            },
-            hotel_ad: { _oneof: 'adData' },
-            type: {
-                _type: 'enum',
-                _enums: [
-                    { s: 'UNSPECIFIED', description: 'No value has been specified.' },
-                    {
-                        s: 'UNKNOWN',
-                        description:
-                            'The received value is not known in this version.\n\nThis is a response-only value.',
-                    },
-                    { s: 'TEXT_AD', description: 'The ad is a text ad.' },
-                    { s: 'EXPANDED_TEXT_AD', description: 'The ad is an expanded text ad.' },
-                    { s: 'CALL_ONLY_AD', description: 'The ad is a call only ad.' },
-                    { s: 'EXPANDED_DYNAMIC_SEARCH_AD', description: 'The ad is an expanded dynamic search ad.' },
-                    { s: 'HOTEL_AD', description: 'The ad is a hotel ad.' },
-                    { s: 'SHOPPING_SMART_AD', description: 'The ad is a Smart Shopping ad.' },
-                    { s: 'SHOPPING_PRODUCT_AD', description: 'The ad is a standard Shopping ad.' },
-                    { s: 'VIDEO_AD', description: 'The ad is a video ad.' },
-                    { s: 'GMAIL_AD', description: 'This ad is a Gmail ad.' },
-                    { s: 'IMAGE_AD', description: 'This ad is an Image ad.' },
-                    { s: 'RESPONSIVE_SEARCH_AD', description: 'The ad is a responsive search ad.' },
-                    { s: 'LEGACY_RESPONSIVE_DISPLAY_AD', description: 'The ad is a legacy responsive display ad.' },
-                    { s: 'APP_AD', description: 'The ad is an app ad.' },
-                    { s: 'LEGACY_APP_INSTALL_AD', description: 'The ad is a legacy app install ad.' },
-                    { s: 'RESPONSIVE_DISPLAY_AD', description: 'The ad is a responsive display ad.' },
-                    {
-                        s: 'HTML5_UPLOAD_AD',
-                        description: 'The ad is a display upload ad with the HTML5_UPLOAD_AD product type.',
-                    },
-                    {
-                        s: 'DYNAMIC_HTML5_AD',
-                        description: 'The ad is a display upload ad with one of the DYNAMIC_HTML5_* product\ntypes.',
-                    },
-                    { s: 'APP_ENGAGEMENT_AD', description: 'The ad is an app engagement ad.' },
-                ],
-                _description: 'The type of ad.',
             },
             app_engagement_ad: {
-                headlines: {
-                    _type: 'array',
-                    _description:
-                        'List of text assets for headlines. When the ad serves the headlines will be selected from this list.',
-                },
+                _oneof: 'adData',
                 descriptions: {
-                    _type: 'array',
                     _description:
                         'List of text assets for descriptions. When the ad serves the descriptions will be selected from this list.',
+                    _type: 'array',
                 },
-                images: { _type: 'array', _description: 'List of image assets that may be displayed with the ad.' },
-                videos: { _type: 'array', _description: 'List of video assets that may be displayed with the ad.' },
+                headlines: {
+                    _description:
+                        'List of text assets for headlines. When the ad serves the headlines will be selected from this list.',
+                    _type: 'array',
+                },
+                images: { _description: 'List of image assets that may be displayed with the ad.', _type: 'array' },
+                videos: { _description: 'List of video assets that may be displayed with the ad.', _type: 'array' },
+            },
+            call_only_ad: {
                 _oneof: 'adData',
+                business_name: { _description: 'The business name in the ad.', _type: 'string' },
+                call_tracked: {
+                    _description:
+                        'Whether to enable call tracking for the creative. Enabling call tracking also enables call conversions.',
+                    _type: 'boolean',
+                },
+                conversion_action: {
+                    _description:
+                        'The conversion action to attribute a call conversion to. If not set a default conversion action is used. This field only has effect if call_tracked is set to true. Otherwise this field is ignored.',
+                    _type: 'string',
+                },
+                conversion_reporting_state: {
+                    _description:
+                        'The call conversion behavior of this call only ad. It can use its own call conversion setting, inherit the account level setting, or be disabled.',
+                    _enums: [
+                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        {
+                            s: 'UNKNOWN',
+                            description: 'Used for return value only. Represents value unknown in this version.',
+                        },
+                        { s: 'DISABLED', description: 'Call conversion action is disabled.' },
+                        {
+                            s: 'USE_ACCOUNT_LEVEL_CALL_CONVERSION_ACTION',
+                            description:
+                                'Call conversion action will use call conversion type set at the\naccount level.',
+                        },
+                        {
+                            s: 'USE_RESOURCE_LEVEL_CALL_CONVERSION_ACTION',
+                            description:
+                                'Call conversion action will use call conversion type set at the resource\n(call only ads/call extensions) level.',
+                        },
+                    ],
+                    _type: 'enum',
+                },
+                country_code: { _description: 'The country code in the ad.', _type: 'string' },
+                description1: { _description: "The first line of the ad's description.", _type: 'string' },
+                description2: { _description: "The second line of the ad's description.", _type: 'string' },
+                disable_call_conversion: {
+                    _description:
+                        'Whether to disable call conversion for the creative. If set to <code>true</code>, disables call conversions even when <code>call_tracked</code> is <code>true</code>. If <code>call_tracked</code> is <code>false</code>, this field is ignored.',
+                    _type: 'boolean',
+                },
+                headline1: { _description: 'First headline in the ad.', _type: 'string' },
+                headline2: { _description: 'Second headline in the ad.', _type: 'string' },
+                phone_number: { _description: 'The phone number in the ad.', _type: 'string' },
+                phone_number_verification_url: {
+                    _description: 'The URL to be used for phone number verification.',
+                    _type: 'string',
+                },
+            },
+            device_preference: {
+                _description:
+                    'The device preference for the ad. You can only specify a preference for mobile devices. When this preference is set the ad will be preferred over other ads when being displayed on a mobile device. The ad can still be displayed on other device types, e.g. if no other ads are available. If unspecified (no device preference), all devices are targeted. This is only supported by some ad types.',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
+                    { s: 'MOBILE', description: 'Mobile devices with full browsers.' },
+                    { s: 'TABLET', description: 'Tablets with full browsers.' },
+                    { s: 'DESKTOP', description: 'Computers.' },
+                    { s: 'OTHER', description: 'Other device types.' },
+                ],
+                _type: 'enum',
             },
             display_upload_ad: {
-                media_bundle: {
-                    asset: { _type: 'string', _description: 'The Asset resource name of this media bundle.' },
-                },
+                _oneof: 'adData',
                 display_upload_product_type: {
-                    _type: 'enum',
+                    _description: 'The product type of this ad. See comments on the enum for details.',
                     _enums: [
                         { s: 'UNSPECIFIED', description: 'Not specified.' },
                         { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
@@ -294,151 +188,100 @@ module.exports = {
                                 'Dynamic HTML5 hotel ad. This product type requires the\nupload_media_bundle field in DisplayUploadAdInfo to be set. Can only be\nused in a hotel campaign.',
                         },
                     ],
-                    _description: 'The product type of this ad. See comments on the enum for details.',
+                    _type: 'enum',
                 },
-                _oneof: 'adData',
+                media_bundle: {
+                    asset: { _description: 'The Asset resource name of this media bundle.', _type: 'string' },
+                },
             },
-            text_ad: {
-                description1: { _type: 'string', _description: "The first line of the ad's description." },
-                headline: { _type: 'string', _description: 'The headline of the ad.' },
-                description2: { _type: 'string', _description: "The second line of the ad's description." },
-                _oneof: 'adData',
-            },
-            system_managed_resource_source: {
-                _type: 'enum',
-                _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
-                    {
-                        s: 'UNKNOWN',
-                        description: 'Used for return value only. Represents value unknown in this version.',
-                    },
-                    { s: 'AD_VARIATIONS', description: 'Generated ad variations experiment ad.' },
-                ],
-                _description:
-                    'If this ad is system managed, then this field will indicate the source. This field is read-only.',
-            },
-            shopping_product_ad: { _oneof: 'adData' },
-            device_preference: {
-                _type: 'enum',
-                _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
-                    { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
-                    { s: 'MOBILE', description: 'Mobile devices with full browsers.' },
-                    { s: 'TABLET', description: 'Tablets with full browsers.' },
-                    { s: 'DESKTOP', description: 'Computers.' },
-                    { s: 'OTHER', description: 'Other device types.' },
-                ],
-                _description:
-                    'The device preference for the ad. You can only specify a preference for mobile devices. When this preference is set the ad will be preferred over other ads when being displayed on a mobile device. The ad can still be displayed on other device types, e.g. if no other ads are available. If unspecified (no device preference), all devices are targeted. This is only supported by some ad types.',
-            },
-            name: {
+            display_url: {
+                _description: 'The URL that appears in the ad description for some ad formats.',
                 _type: 'string',
-                _description:
-                    'The name of the ad. This is only used to be able to identify the ad. It does not need to be unique and does not affect the served ad.',
             },
-            legacy_responsive_display_ad: {
-                promo_text: {
+            expanded_dynamic_search_ad: {
+                _oneof: 'adData',
+                description: { _description: 'The description of the ad.', _type: 'string' },
+            },
+            expanded_text_ad: {
+                _oneof: 'adData',
+                description: { _description: 'The description of the ad.', _type: 'string' },
+                description2: { _description: 'The second description of the ad.', _type: 'string' },
+                headline_part1: { _description: "The first part of the ad's headline.", _type: 'string' },
+                headline_part2: { _description: "The second part of the ad's headline.", _type: 'string' },
+                headline_part3: { _description: "The third part of the ad's headline.", _type: 'string' },
+                path1: { _description: "The text that can appear alongside the ad's displayed URL.", _type: 'string' },
+                path2: {
+                    _description: "Additional text that can appear alongside the ad's displayed URL.",
                     _type: 'string',
+                },
+            },
+            final_app_urls: {
+                _description:
+                    'A list of final app URLs that will be used on mobile if the user has the specific app installed.',
+                _type: 'array',
+            },
+            final_mobile_urls: {
+                _description: 'The list of possible final mobile URLs after all cross-domain redirects for the ad.',
+                _type: 'array',
+            },
+            final_urls: {
+                _description: 'The list of possible final URLs after all cross-domain redirects for the ad.',
+                _type: 'array',
+            },
+            gmail_ad: {
+                _oneof: 'adData',
+                header_image: {
                     _description:
-                        "Promotion text used for dyanmic formats of responsive ads. For example 'Free two-day shipping'.",
-                },
-                accent_color: {
+                        'The MediaFile resource name of the header image. Valid image types are GIF, JPEG and PNG. The minimum size is 300x100 pixels and the aspect ratio must be between 3:1 and 5:1 (+-1%).',
                     _type: 'string',
-                    _description:
-                        'The accent color of the ad in hexadecimal, e.g. #ffffff for white. If one of main_color and accent_color is set, the other is required as well.',
                 },
-                logo_image: {
-                    _type: 'string',
-                    _description: 'The MediaFile resource name of the logo image used in the ad.',
-                },
-                main_color: {
-                    _type: 'string',
-                    _description:
-                        'The main color of the ad in hexadecimal, e.g. #ffffff for white. If one of main_color and accent_color is set, the other is required as well.',
-                },
-                short_headline: { _type: 'string', _description: "The short version of the ad's headline." },
-                price_prefix: { _type: 'string', _description: "Prefix before price. E.g. 'as low as'." },
-                description: { _type: 'string', _description: 'The description of the ad.' },
-                square_logo_image: {
-                    _type: 'string',
-                    _description: 'The MediaFile resource name of the square logo image used in the ad.',
-                },
-                long_headline: { _type: 'string', _description: "The long version of the ad's headline." },
-                call_to_action_text: { _type: 'string', _description: 'The call-to-action text for the ad.' },
-                square_marketing_image: {
-                    _type: 'string',
-                    _description: 'The MediaFile resource name of the square marketing image used in the ad.',
-                },
-                format_setting: {
-                    _type: 'enum',
-                    _enums: [
-                        { s: 'UNSPECIFIED', description: 'Not specified.' },
-                        { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
-                        { s: 'ALL_FORMATS', description: 'Text, image and native formats.' },
-                        { s: 'NON_NATIVE', description: 'Text and image formats.' },
-                        {
-                            s: 'NATIVE',
-                            description:
-                                'Native format, i.e. the format rendering is controlled by the publisher\nand not by Google.',
-                        },
-                    ],
-                    _description: 'Specifies which format the ad will be served in. Default is ALL_FORMATS.',
-                },
-                business_name: { _type: 'string', _description: 'The business name in the ad.' },
                 marketing_image: {
-                    _type: 'string',
-                    _description: 'The MediaFile resource name of the marketing image used in the ad.',
-                },
-                allow_flexible_color: {
-                    _type: 'boolean',
                     _description:
-                        "Advertiser's consent to allow flexible color. When true, the ad may be served with different color if necessary. When false, the ad will be served with the specified colors or a neutral color. The default value is true. Must be true if main_color and accent_color are not set.",
+                        'The MediaFile resource name of the marketing image. Valid image types are GIF, JPEG and PNG. The image must either be landscape with a minimum size of 600x314 pixels and aspect ratio of 600:314 (+-1%) or square with a minimum size of 300x300 pixels and aspect ratio of 1:1 (+-1%)',
+                    _type: 'string',
                 },
-                _oneof: 'adData',
-            },
-            url_collections: {
-                _type: 'array',
-                _description:
-                    'Additional URLs for the ad that are tagged with a unique identifier that can be referenced from other fields in the ad.',
-            },
-            url_custom_parameters: {
-                _type: 'array',
-                _description:
-                    'The list of mappings that can be used to substitute custom parameter tags in a <code>tracking_url_template</code>, <code>final_urls</code>, or <code>mobile_final_urls</code>.',
-            },
-            video_ad: {
-                media_file: { _type: 'string', _description: 'The MediaFile resource to use for the video.' },
-                bumper: {},
-                out_stream: {
-                    headline: { _type: 'string', _description: 'The headline of the ad.' },
-                    description: { _type: 'string', _description: 'The description line.' },
-                },
-                non_skippable: {},
-                in_stream: {
-                    action_headline: {
-                        _type: 'string',
+                marketing_image_description: { _description: 'Description of the marketing image.', _type: 'string' },
+                marketing_image_display_call_to_action: {
+                    text: { _description: 'Text for the display-call-to-action.', _type: 'string' },
+                    text_color: {
                         _description:
-                            'Additional text displayed with the CTA (call-to-action) button to give context and encourage clicking on the button.',
-                    },
-                    companion_banner: {
+                            'Text color for the display-call-to-action in hexadecimal, e.g. #ffffff for white.',
                         _type: 'string',
-                        _description: 'The MediaFile resource name of the companion banner used with the ad.',
                     },
-                    action_button_label: {
-                        _type: 'string',
+                    url_collection_id: {
                         _description:
-                            "Label on the CTA (call-to-action) button taking the user to the video ad's final URL. Required for TrueView for action campaigns, optional otherwise.",
+                            'Identifies the url collection in the ad.url_collections field. If not set the url defaults to final_url.',
+                        _type: 'string',
                     },
                 },
-                _oneof: 'adData',
+                marketing_image_headline: { _description: 'Headline of the marketing image.', _type: 'string' },
+                product_images: { _description: 'Product images. Up to 15 images are supported.', _type: 'array' },
+                product_videos: {
+                    _description:
+                        'Product videos. Up to 7 videos are supported. At least one product video or a marketing image must be specified.',
+                    _type: 'array',
+                },
+                teaser: {
+                    business_name: { _description: 'Business name of the advertiser.', _type: 'string' },
+                    description: { _description: 'Description of the teaser.', _type: 'string' },
+                    headline: { _description: 'Headline of the teaser.', _type: 'string' },
+                    logo_image: {
+                        _description:
+                            'The MediaFile resource name of the logo image. Valid image types are GIF, JPEG and PNG. The minimum size is 144x144 pixels and the aspect ratio must be 1:1 (+-1%).',
+                        _type: 'string',
+                    },
+                },
             },
+            hotel_ad: { _oneof: 'adData' },
+            id: { _description: 'The ID of the ad.', _type: 'int64' },
             image_ad: {
-                pixel_height: { _type: 'int64', _description: 'Height in pixels of the full size image.' },
-                image_url: { _type: 'string', _description: 'URL of the full size image.' },
-                preview_pixel_height: { _type: 'int64', _description: 'Height in pixels of the preview size image.' },
-                preview_image_url: { _type: 'string', _description: 'URL of the preview size image.' },
+                _oneof: 'adData',
+                ad_id_to_copy_image_from: { _description: 'An ad ID to copy the image from.', _type: 'int64' },
+                data: { _description: 'Raw image data as bytes.', _type: 'byte' },
+                image_url: { _description: 'URL of the full size image.', _type: 'string' },
+                media_file: { _description: 'The MediaFile resource to use for the image.', _type: 'string' },
                 mime_type: {
-                    _type: 'enum',
+                    _description: 'The mime type of the image.',
                     _enums: [
                         { s: 'UNSPECIFIED', description: 'The mime type has not been specified.' },
                         {
@@ -459,92 +302,59 @@ module.exports = {
                         { s: 'AUDIO_MP3', description: 'MIME type of audio/mp3.' },
                         { s: 'HTML5_AD_ZIP', description: 'MIME type of application/x-html5-ad-zip.' },
                     ],
-                    _description: 'The mime type of the image.',
+                    _type: 'enum',
                 },
-                ad_id_to_copy_image_from: { _type: 'int64', _description: 'An ad ID to copy the image from.' },
-                data: { _type: 'byte', _description: 'Raw image data as bytes.' },
-                pixel_width: { _type: 'int64', _description: 'Width in pixels of the full size image.' },
-                preview_pixel_width: { _type: 'int64', _description: 'Width in pixels of the preview size image.' },
-                media_file: { _type: 'string', _description: 'The MediaFile resource to use for the image.' },
                 name: {
-                    _type: 'string',
                     _description:
                         "The name of the image. If the image was created from a MediaFile, this is the MediaFile's name. If the image was created from bytes, this is empty.",
-                },
-                _oneof: 'adData',
-            },
-            tracking_url_template: {
-                _type: 'string',
-                _description: 'The URL template for constructing a tracking URL.',
-            },
-            shopping_smart_ad: { _oneof: 'adData' },
-            expanded_dynamic_search_ad: {
-                description: { _type: 'string', _description: 'The description of the ad.' },
-                _oneof: 'adData',
-            },
-            call_only_ad: {
-                phone_number: { _type: 'string', _description: 'The phone number in the ad.' },
-                country_code: { _type: 'string', _description: 'The country code in the ad.' },
-                headline1: { _type: 'string', _description: 'First headline in the ad.' },
-                phone_number_verification_url: {
                     _type: 'string',
-                    _description: 'The URL to be used for phone number verification.',
                 },
-                description1: { _type: 'string', _description: "The first line of the ad's description." },
-                conversion_action: {
-                    _type: 'string',
-                    _description:
-                        'The conversion action to attribute a call conversion to. If not set a default conversion action is used. This field only has effect if call_tracked is set to true. Otherwise this field is ignored.',
-                },
-                conversion_reporting_state: {
-                    _type: 'enum',
+                pixel_height: { _description: 'Height in pixels of the full size image.', _type: 'int64' },
+                pixel_width: { _description: 'Width in pixels of the full size image.', _type: 'int64' },
+                preview_image_url: { _description: 'URL of the preview size image.', _type: 'string' },
+                preview_pixel_height: { _description: 'Height in pixels of the preview size image.', _type: 'int64' },
+                preview_pixel_width: { _description: 'Width in pixels of the preview size image.', _type: 'int64' },
+            },
+            legacy_app_install_ad: {
+                _oneof: 'adData',
+                app_id: { _description: 'The id of the mobile app.', _type: 'string' },
+                app_store: {
+                    _description: 'The app store the mobile app is available in.',
                     _enums: [
                         { s: 'UNSPECIFIED', description: 'Not specified.' },
                         {
                             s: 'UNKNOWN',
                             description: 'Used for return value only. Represents value unknown in this version.',
                         },
-                        { s: 'DISABLED', description: 'Call conversion action is disabled.' },
-                        {
-                            s: 'USE_ACCOUNT_LEVEL_CALL_CONVERSION_ACTION',
-                            description:
-                                'Call conversion action will use call conversion type set at the\naccount level.',
-                        },
-                        {
-                            s: 'USE_RESOURCE_LEVEL_CALL_CONVERSION_ACTION',
-                            description:
-                                'Call conversion action will use call conversion type set at the resource\n(call only ads/call extensions) level.',
-                        },
+                        { s: 'APPLE_APP_STORE', description: 'Apple iTunes.' },
+                        { s: 'GOOGLE_PLAY', description: 'Google Play.' },
+                        { s: 'WINDOWS_STORE', description: 'Windows Store.' },
+                        { s: 'WINDOWS_PHONE_STORE', description: 'Windows Phone Store.' },
+                        { s: 'CN_APP_STORE', description: 'The app is hosted in a Chinese app store.' },
                     ],
-                    _description:
-                        'The call conversion behavior of this call only ad. It can use its own call conversion setting, inherit the account level setting, or be disabled.',
-                },
-                description2: { _type: 'string', _description: "The second line of the ad's description." },
-                disable_call_conversion: {
-                    _type: 'boolean',
-                    _description:
-                        'Whether to disable call conversion for the creative. If set to <code>true</code>, disables call conversions even when <code>call_tracked</code> is <code>true</code>. If <code>call_tracked</code> is <code>false</code>, this field is ignored.',
-                },
-                headline2: { _type: 'string', _description: 'Second headline in the ad.' },
-                business_name: { _type: 'string', _description: 'The business name in the ad.' },
-                call_tracked: {
-                    _type: 'boolean',
-                    _description:
-                        'Whether to enable call tracking for the creative. Enabling call tracking also enables call conversions.',
-                },
-                _oneof: 'adData',
-            },
-            display_url: {
-                _type: 'string',
-                _description: 'The URL that appears in the ad description for some ad formats.',
-            },
-            responsive_display_ad: {
-                call_to_action_text: {
-                    _type: 'string',
-                    _description: 'The call-to-action text for the ad. Maximum display width is 30.',
-                },
-                format_setting: {
                     _type: 'enum',
+                },
+                description1: { _description: 'The first description line of the ad.', _type: 'string' },
+                description2: { _description: 'The second description line of the ad.', _type: 'string' },
+                headline: { _description: 'The headline of the ad.', _type: 'string' },
+            },
+            legacy_responsive_display_ad: {
+                _oneof: 'adData',
+                accent_color: {
+                    _description:
+                        'The accent color of the ad in hexadecimal, e.g. #ffffff for white. If one of main_color and accent_color is set, the other is required as well.',
+                    _type: 'string',
+                },
+                allow_flexible_color: {
+                    _description:
+                        "Advertiser's consent to allow flexible color. When true, the ad may be served with different color if necessary. When false, the ad will be served with the specified colors or a neutral color. The default value is true. Must be true if main_color and accent_color are not set.",
+                    _type: 'boolean',
+                },
+                business_name: { _description: 'The business name in the ad.', _type: 'string' },
+                call_to_action_text: { _description: 'The call-to-action text for the ad.', _type: 'string' },
+                description: { _description: 'The description of the ad.', _type: 'string' },
+                format_setting: {
+                    _description: 'Specifies which format the ad will be served in. Default is ALL_FORMATS.',
                     _enums: [
                         { s: 'UNSPECIFIED', description: 'Not specified.' },
                         { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
@@ -556,70 +366,97 @@ module.exports = {
                                 'Native format, i.e. the format rendering is controlled by the publisher\nand not by Google.',
                         },
                     ],
-                    _description: 'Specifies which format the ad will be served in. Default is ALL_FORMATS.',
+                    _type: 'enum',
                 },
-                business_name: {
+                logo_image: {
+                    _description: 'The MediaFile resource name of the logo image used in the ad.',
                     _type: 'string',
-                    _description: 'The advertiser/brand name. Maximum display width is 25.',
                 },
-                headlines: {
-                    _type: 'array',
-                    _description:
-                        'Short format headlines for the ad. The maximum length is 30 characters. At least 1 and max 5 headlines can be specified.',
-                },
-                descriptions: {
-                    _type: 'array',
-                    _description:
-                        'Descriptive texts for the ad. The maximum length is 90 characters. At least 1 and max 5 headlines can be specified.',
-                },
-                marketing_images: {
-                    _type: 'array',
-                    _description:
-                        'Marketing images to be used in the ad. Valid image types are GIF, JPEG, and PNG. The minimum size is 600x314 and the aspect ratio must be 1.91:1 (+-1%). At least one marketing_image is required. Combined with square_marketing_images the maximum is 15.',
-                },
-                allow_flexible_color: {
-                    _type: 'boolean',
-                    _description:
-                        "Advertiser's consent to allow flexible color. When true, the ad may be served with different color if necessary. When false, the ad will be served with the specified colors or a neutral color. The default value is true. Must be true if main_color and accent_color are not set.",
-                },
-                promo_text: {
-                    _type: 'string',
-                    _description:
-                        "Promotion text used for dyanmic formats of responsive ads. For example 'Free two-day shipping'.",
-                },
-                accent_color: {
-                    _type: 'string',
-                    _description:
-                        'The accent color of the ad in hexadecimal, e.g. #ffffff for white. If one of main_color and accent_color is set, the other is required as well.',
-                },
+                long_headline: { _description: "The long version of the ad's headline.", _type: 'string' },
                 main_color: {
-                    _type: 'string',
                     _description:
                         'The main color of the ad in hexadecimal, e.g. #ffffff for white. If one of main_color and accent_color is set, the other is required as well.',
+                    _type: 'string',
                 },
-                square_marketing_images: {
-                    _type: 'array',
+                marketing_image: {
+                    _description: 'The MediaFile resource name of the marketing image used in the ad.',
+                    _type: 'string',
+                },
+                price_prefix: { _description: "Prefix before price. E.g. 'as low as'.", _type: 'string' },
+                promo_text: {
                     _description:
-                        'Square marketing images to be used in the ad. Valid image types are GIF, JPEG, and PNG. The minimum size is 300x300 and the aspect ratio must be 1:1 (+-1%). At least one square marketing_image is required. Combined with marketing_images the maximum is 15.',
+                        "Promotion text used for dyanmic formats of responsive ads. For example 'Free two-day shipping'.",
+                    _type: 'string',
                 },
-                square_logo_images: {
-                    _type: 'array',
+                short_headline: { _description: "The short version of the ad's headline.", _type: 'string' },
+                square_logo_image: {
+                    _description: 'The MediaFile resource name of the square logo image used in the ad.',
+                    _type: 'string',
+                },
+                square_marketing_image: {
+                    _description: 'The MediaFile resource name of the square marketing image used in the ad.',
+                    _type: 'string',
+                },
+            },
+            name: {
+                _description:
+                    'The name of the ad. This is only used to be able to identify the ad. It does not need to be unique and does not affect the served ad.',
+                _type: 'string',
+            },
+            responsive_display_ad: {
+                _oneof: 'adData',
+                accent_color: {
                     _description:
-                        'Square logo images to be used in the ad. Valid image types are GIF, JPEG, and PNG. The minimum size is 128x128 and the aspect ratio must be 1:1 (+-1%). Combined with square_logo_images the maximum is 5.',
+                        'The accent color of the ad in hexadecimal, e.g. #ffffff for white. If one of main_color and accent_color is set, the other is required as well.',
+                    _type: 'string',
                 },
-                youtube_videos: {
+                allow_flexible_color: {
+                    _description:
+                        "Advertiser's consent to allow flexible color. When true, the ad may be served with different color if necessary. When false, the ad will be served with the specified colors or a neutral color. The default value is true. Must be true if main_color and accent_color are not set.",
+                    _type: 'boolean',
+                },
+                business_name: {
+                    _description: 'The advertiser/brand name. Maximum display width is 25.',
+                    _type: 'string',
+                },
+                call_to_action_text: {
+                    _description: 'The call-to-action text for the ad. Maximum display width is 30.',
+                    _type: 'string',
+                },
+                descriptions: {
+                    _description:
+                        'Descriptive texts for the ad. The maximum length is 90 characters. At least 1 and max 5 headlines can be specified.',
                     _type: 'array',
-                    _description: 'Optional YouTube vidoes for the ad. A maximum of 5 videos can be specified.',
+                },
+                format_setting: {
+                    _description: 'Specifies which format the ad will be served in. Default is ALL_FORMATS.',
+                    _enums: [
+                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
+                        { s: 'ALL_FORMATS', description: 'Text, image and native formats.' },
+                        { s: 'NON_NATIVE', description: 'Text and image formats.' },
+                        {
+                            s: 'NATIVE',
+                            description:
+                                'Native format, i.e. the format rendering is controlled by the publisher\nand not by Google.',
+                        },
+                    ],
+                    _type: 'enum',
+                },
+                headlines: {
+                    _description:
+                        'Short format headlines for the ad. The maximum length is 30 characters. At least 1 and max 5 headlines can be specified.',
+                    _type: 'array',
                 },
                 logo_images: {
-                    _type: 'array',
                     _description:
                         'Logo images to be used in the ad. Valid image types are GIF, JPEG, and PNG. The minimum size is 512x128 and the aspect ratio must be 4:1 (+-1%). Combined with square_logo_images the maximum is 5.',
+                    _type: 'array',
                 },
-                price_prefix: { _type: 'string', _description: "Prefix before price. E.g. 'as low as'." },
                 long_headline: {
                     pinned_field: {
-                        _type: 'enum',
+                        _description:
+                            'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
                         _enums: [
                             { s: 'UNSPECIFIED', description: 'No value has been specified.' },
                             {
@@ -633,74 +470,237 @@ module.exports = {
                             { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.' },
                             { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.' },
                         ],
-                        _description:
-                            'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
+                        _type: 'enum',
                     },
-                    text: { _type: 'string', _description: 'Asset text.' },
+                    text: { _description: 'Asset text.', _type: 'string' },
                 },
-                _oneof: 'adData',
-            },
-            gmail_ad: {
-                product_images: { _type: 'array', _description: 'Product images. Up to 15 images are supported.' },
-                teaser: {
-                    business_name: { _type: 'string', _description: 'Business name of the advertiser.' },
-                    headline: { _type: 'string', _description: 'Headline of the teaser.' },
-                    description: { _type: 'string', _description: 'Description of the teaser.' },
-                    logo_image: {
-                        _type: 'string',
-                        _description:
-                            'The MediaFile resource name of the logo image. Valid image types are GIF, JPEG and PNG. The minimum size is 144x144 pixels and the aspect ratio must be 1:1 (+-1%).',
-                    },
-                },
-                marketing_image: {
-                    _type: 'string',
+                main_color: {
                     _description:
-                        'The MediaFile resource name of the marketing image. Valid image types are GIF, JPEG and PNG. The image must either be landscape with a minimum size of 600x314 pixels and aspect ratio of 600:314 (+-1%) or square with a minimum size of 300x300 pixels and aspect ratio of 1:1 (+-1%)',
-                },
-                marketing_image_headline: { _type: 'string', _description: 'Headline of the marketing image.' },
-                header_image: {
+                        'The main color of the ad in hexadecimal, e.g. #ffffff for white. If one of main_color and accent_color is set, the other is required as well.',
                     _type: 'string',
+                },
+                marketing_images: {
                     _description:
-                        'The MediaFile resource name of the header image. Valid image types are GIF, JPEG and PNG. The minimum size is 300x100 pixels and the aspect ratio must be between 3:1 and 5:1 (+-1%).',
-                },
-                marketing_image_description: { _type: 'string', _description: 'Description of the marketing image.' },
-                marketing_image_display_call_to_action: {
-                    text_color: {
-                        _type: 'string',
-                        _description:
-                            'Text color for the display-call-to-action in hexadecimal, e.g. #ffffff for white.',
-                    },
-                    text: { _type: 'string', _description: 'Text for the display-call-to-action.' },
-                    url_collection_id: {
-                        _type: 'string',
-                        _description:
-                            'Identifies the url collection in the ad.url_collections field. If not set the url defaults to final_url.',
-                    },
-                },
-                product_videos: {
+                        'Marketing images to be used in the ad. Valid image types are GIF, JPEG, and PNG. The minimum size is 600x314 and the aspect ratio must be 1.91:1 (+-1%). At least one marketing_image is required. Combined with square_marketing_images the maximum is 15.',
                     _type: 'array',
+                },
+                price_prefix: { _description: "Prefix before price. E.g. 'as low as'.", _type: 'string' },
+                promo_text: {
                     _description:
-                        'Product videos. Up to 7 videos are supported. At least one product video or a marketing image must be specified.',
-                },
-                _oneof: 'adData',
-            },
-            final_mobile_urls: {
-                _type: 'array',
-                _description: 'The list of possible final mobile URLs after all cross-domain redirects for the ad.',
-            },
-            expanded_text_ad: {
-                description: { _type: 'string', _description: 'The description of the ad.' },
-                description2: { _type: 'string', _description: 'The second description of the ad.' },
-                path2: {
+                        "Promotion text used for dyanmic formats of responsive ads. For example 'Free two-day shipping'.",
                     _type: 'string',
-                    _description: "Additional text that can appear alongside the ad's displayed URL.",
                 },
-                headline_part3: { _type: 'string', _description: "The third part of the ad's headline." },
-                headline_part2: { _type: 'string', _description: "The second part of the ad's headline." },
-                path1: { _type: 'string', _description: "The text that can appear alongside the ad's displayed URL." },
-                headline_part1: { _type: 'string', _description: "The first part of the ad's headline." },
-                _oneof: 'adData',
+                square_logo_images: {
+                    _description:
+                        'Square logo images to be used in the ad. Valid image types are GIF, JPEG, and PNG. The minimum size is 128x128 and the aspect ratio must be 1:1 (+-1%). Combined with square_logo_images the maximum is 5.',
+                    _type: 'array',
+                },
+                square_marketing_images: {
+                    _description:
+                        'Square marketing images to be used in the ad. Valid image types are GIF, JPEG, and PNG. The minimum size is 300x300 and the aspect ratio must be 1:1 (+-1%). At least one square marketing_image is required. Combined with marketing_images the maximum is 15.',
+                    _type: 'array',
+                },
+                youtube_videos: {
+                    _description: 'Optional YouTube vidoes for the ad. A maximum of 5 videos can be specified.',
+                    _type: 'array',
+                },
             },
+            responsive_search_ad: {
+                _oneof: 'adData',
+                descriptions: {
+                    _description:
+                        'List of text assets for descriptions. When the ad serves the descriptions will be selected from this list.',
+                    _type: 'array',
+                },
+                headlines: {
+                    _description:
+                        'List of text assets for headlines. When the ad serves the headlines will be selected from this list.',
+                    _type: 'array',
+                },
+                path1: {
+                    _description: 'First part of text that may appear appended to the url displayed in the ad.',
+                    _type: 'string',
+                },
+                path2: {
+                    _description:
+                        'Second part of text that may appear appended to the url displayed in the ad. This field can only be set when path1 is also set.',
+                    _type: 'string',
+                },
+            },
+            shopping_product_ad: { _oneof: 'adData' },
+            shopping_smart_ad: { _oneof: 'adData' },
+            system_managed_resource_source: {
+                _description:
+                    'If this ad is system managed, then this field will indicate the source. This field is read-only.',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    {
+                        s: 'UNKNOWN',
+                        description: 'Used for return value only. Represents value unknown in this version.',
+                    },
+                    { s: 'AD_VARIATIONS', description: 'Generated ad variations experiment ad.' },
+                ],
+                _type: 'enum',
+            },
+            text_ad: {
+                _oneof: 'adData',
+                description1: { _description: "The first line of the ad's description.", _type: 'string' },
+                description2: { _description: "The second line of the ad's description.", _type: 'string' },
+                headline: { _description: 'The headline of the ad.', _type: 'string' },
+            },
+            tracking_url_template: {
+                _description: 'The URL template for constructing a tracking URL.',
+                _type: 'string',
+            },
+            type: {
+                _description: 'The type of ad.',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                    {
+                        s: 'UNKNOWN',
+                        description:
+                            'The received value is not known in this version.\n\nThis is a response-only value.',
+                    },
+                    { s: 'TEXT_AD', description: 'The ad is a text ad.' },
+                    { s: 'EXPANDED_TEXT_AD', description: 'The ad is an expanded text ad.' },
+                    { s: 'CALL_ONLY_AD', description: 'The ad is a call only ad.' },
+                    { s: 'EXPANDED_DYNAMIC_SEARCH_AD', description: 'The ad is an expanded dynamic search ad.' },
+                    { s: 'HOTEL_AD', description: 'The ad is a hotel ad.' },
+                    { s: 'SHOPPING_SMART_AD', description: 'The ad is a Smart Shopping ad.' },
+                    { s: 'SHOPPING_PRODUCT_AD', description: 'The ad is a standard Shopping ad.' },
+                    { s: 'VIDEO_AD', description: 'The ad is a video ad.' },
+                    { s: 'GMAIL_AD', description: 'This ad is a Gmail ad.' },
+                    { s: 'IMAGE_AD', description: 'This ad is an Image ad.' },
+                    { s: 'RESPONSIVE_SEARCH_AD', description: 'The ad is a responsive search ad.' },
+                    { s: 'LEGACY_RESPONSIVE_DISPLAY_AD', description: 'The ad is a legacy responsive display ad.' },
+                    { s: 'APP_AD', description: 'The ad is an app ad.' },
+                    { s: 'LEGACY_APP_INSTALL_AD', description: 'The ad is a legacy app install ad.' },
+                    { s: 'RESPONSIVE_DISPLAY_AD', description: 'The ad is a responsive display ad.' },
+                    {
+                        s: 'HTML5_UPLOAD_AD',
+                        description: 'The ad is a display upload ad with the HTML5_UPLOAD_AD product type.',
+                    },
+                    {
+                        s: 'DYNAMIC_HTML5_AD',
+                        description: 'The ad is a display upload ad with one of the DYNAMIC_HTML5_* product\ntypes.',
+                    },
+                    { s: 'APP_ENGAGEMENT_AD', description: 'The ad is an app engagement ad.' },
+                ],
+                _type: 'enum',
+            },
+            url_collections: {
+                _description:
+                    'Additional URLs for the ad that are tagged with a unique identifier that can be referenced from other fields in the ad.',
+                _type: 'array',
+            },
+            url_custom_parameters: {
+                _description:
+                    'The list of mappings that can be used to substitute custom parameter tags in a <code>tracking_url_template</code>, <code>final_urls</code>, or <code>mobile_final_urls</code>.',
+                _type: 'array',
+            },
+            video_ad: {
+                _oneof: 'adData',
+                bumper: {},
+                in_stream: {
+                    action_button_label: {
+                        _description:
+                            "Label on the CTA (call-to-action) button taking the user to the video ad's final URL. Required for TrueView for action campaigns, optional otherwise.",
+                        _type: 'string',
+                    },
+                    action_headline: {
+                        _description:
+                            'Additional text displayed with the CTA (call-to-action) button to give context and encourage clicking on the button.',
+                        _type: 'string',
+                    },
+                    companion_banner: {
+                        _description: 'The MediaFile resource name of the companion banner used with the ad.',
+                        _type: 'string',
+                    },
+                },
+                media_file: { _description: 'The MediaFile resource to use for the video.', _type: 'string' },
+                non_skippable: {},
+                out_stream: {
+                    description: { _description: 'The description line.', _type: 'string' },
+                    headline: { _description: 'The headline of the ad.', _type: 'string' },
+                },
+            },
+        },
+        ad_group: { _description: 'The ad group to which the ad belongs.', _type: 'string' },
+        ad_strength: {
+            _description: 'Overall ad strength for this ad group ad.',
+            _enums: [
+                { s: 'UNSPECIFIED', description: 'Not specified.' },
+                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
+                { s: 'PENDING', description: 'The ad strength is currently pending.' },
+                { s: 'NO_ADS', description: 'No ads could be generated.' },
+                { s: 'POOR', description: 'Poor strength.' },
+                { s: 'AVERAGE', description: 'Average strength.' },
+                { s: 'GOOD', description: 'Good strength.' },
+                { s: 'EXCELLENT', description: 'Excellent strength.' },
+            ],
+            _type: 'enum',
+        },
+        policy_summary: {
+            approval_status: {
+                _description:
+                    'The overall approval status of this ad, calculated based on the status of its individual policy topic entries.',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                    {
+                        s: 'UNKNOWN',
+                        description:
+                            'The received value is not known in this version.\n\nThis is a response-only value.',
+                    },
+                    { s: 'DISAPPROVED', description: 'Will not serve.' },
+                    { s: 'APPROVED_LIMITED', description: 'Serves with restrictions.' },
+                    { s: 'APPROVED', description: 'Serves without restrictions.' },
+                    {
+                        s: 'AREA_OF_INTEREST_ONLY',
+                        description:
+                            'Will not serve in targeted countries, but may serve for users who are\nsearching for information about the targeted countries.',
+                    },
+                ],
+                _type: 'enum',
+            },
+            policy_topic_entries: { _description: 'The list of policy findings for this ad.', _type: 'array' },
+            review_status: {
+                _description: 'Where in the review process this ad is.',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                    {
+                        s: 'UNKNOWN',
+                        description:
+                            'The received value is not known in this version.\n\nThis is a response-only value.',
+                    },
+                    { s: 'REVIEW_IN_PROGRESS', description: 'Currently under review.' },
+                    { s: 'REVIEWED', description: 'Primary review complete. Other reviews may be continuing.' },
+                    {
+                        s: 'UNDER_APPEAL',
+                        description:
+                            'The resource has been resubmitted for approval or its policy decision has\nbeen appealed.',
+                    },
+                ],
+                _type: 'enum',
+            },
+        },
+        resource_name: {
+            _description:
+                'The resource name of the ad. Ad group ad resource names have the form: <code>customers/{customer_id}/adGroupAds/{ad_group_id}~{ad_id}</code>',
+            _type: 'string',
+        },
+        status: {
+            _description: 'The status of the ad.',
+            _enums: [
+                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                {
+                    s: 'UNKNOWN',
+                    description: 'The received value is not known in this version.\n\nThis is a response-only value.',
+                },
+                { s: 'ENABLED', description: 'The ad group ad is enabled.' },
+                { s: 'PAUSED', description: 'The ad group ad is paused.' },
+                { s: 'REMOVED', description: 'The ad group ad is removed.' },
+            ],
+            _type: 'enum',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

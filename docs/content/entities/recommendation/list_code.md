@@ -28,16 +28,15 @@ let result = await customer.recommendations.list({
 ;[
   {
     recommendation: {
-      resource_name:
-        'customers/3827277046/recommendations/MTk5MDY3NzIzLTE2My0xNTU4MDMxMzE4MDAwLSs5NTQ0NjA3MDEtNTEwMzQ0MTkyODctMTU1ODk1OTI3NTQzMjA5ODY4NzE',
       ad_group: 'customers/3827277046/adGroups/51034419287',
       campaign: 'customers/3827277046/campaigns/954460701',
       campaign_budget: 'customers/3827277046/campaignBudgets/1234926420',
       dismissed: false,
+      resource_name:
+        'customers/3827277046/recommendations/MTk5MDY3NzIzLTE2My0xNTU5MDYwMjA2MDAwLSs5NTQ0NjA3MDEtNTEwMzQ0MTkyODctMTU1ODk1OTI3NTQzMjA5ODY4NzE',
       type: 3,
     },
     campaign_budget: {
-      resource_name: 'customers/3827277046/campaignBudgets/1234926420',
       amount_micros: 100000000,
       delivery_method: 3,
       explicitly_shared: false,
@@ -46,11 +45,11 @@ let result = await customer.recommendations.list({
       name: 'My campaign budget',
       period: 2,
       reference_count: 1,
+      resource_name: 'customers/3827277046/campaignBudgets/1234926420',
       status: 2,
       type: 2,
     },
     ad_group: {
-      resource_name: 'customers/3827277046/adGroups/51034419287',
       campaign: 'customers/3827277046/campaigns/954460701',
       cpc_bid_micros: 4500000,
       cpm_bid_micros: 10000,
@@ -59,6 +58,7 @@ let result = await customer.recommendations.list({
       explorer_auto_optimizer_setting: { opt_in: false },
       id: 51034419287,
       name: 'My ad group',
+      resource_name: 'customers/3827277046/adGroups/51034419287',
       status: 2,
       target_cpa_micros: 0,
       targeting_setting: {
@@ -76,7 +76,6 @@ let result = await customer.recommendations.list({
       url_custom_parameters: [],
     },
     campaign: {
-      resource_name: 'customers/3827277046/campaigns/954460701',
       ad_serving_optimization_status: 5,
       advertising_channel_type: 2,
       base_campaign: 'customers/3827277046/campaigns/954460701',
@@ -96,6 +95,7 @@ let result = await customer.recommendations.list({
         target_search_network: false,
       },
       payment_mode: 4,
+      resource_name: 'customers/3827277046/campaigns/954460701',
       selective_optimization: { conversion_actions: [] },
       serving_status: 2,
       start_date: '2017-10-13',
@@ -104,7 +104,6 @@ let result = await customer.recommendations.list({
       url_custom_parameters: [],
     },
     customer: {
-      resource_name: 'customers/3827277046',
       auto_tagging_enabled: true,
       call_reporting_setting: {
         call_conversion_action: 'customers/3827277046/conversionActions/179',
@@ -121,6 +120,7 @@ let result = await customer.recommendations.list({
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 875176189 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-875176189\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-875176189');\n</script>\n",
       },
+      resource_name: 'customers/3827277046',
       test_account: false,
       time_zone: 'Europe/London',
       tracking_url_template:

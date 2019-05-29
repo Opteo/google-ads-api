@@ -13,8 +13,8 @@ let result = await customer.campaignSharedSets.get('customers/9262111890/campaig
 ```javascript
 // Example result
 ;({
-  resource_name: 'customers/9262111890/campaignSharedSets/1485014801~1788591305',
   campaign: 'customers/9262111890/campaigns/1485014801',
+  resource_name: 'customers/9262111890/campaignSharedSets/1485014801~1788591305',
   shared_set: 'customers/9262111890/sharedSets/1788591305',
   status: 3,
 })

@@ -15,7 +15,6 @@ let result = await customer.adGroupExtensionSettings.get(
 ```javascript
 // Example result
 ;({
-  resource_name: 'customers/3827277046/adGroupExtensionSettings/69639056828~SITELINK',
   ad_group: 'customers/3827277046/adGroups/69639056828',
   extension_feed_items: [
     { value: 'customers/3827277046/extensionFeedItems/48199744867' },
@@ -25,5 +24,6 @@ let result = await customer.adGroupExtensionSettings.get(
     { value: 'customers/3827277046/extensionFeedItems/48200618792' },
   ],
   extension_type: 10,
+  resource_name: 'customers/3827277046/adGroupExtensionSettings/69639056828~SITELINK',
 })
 ```

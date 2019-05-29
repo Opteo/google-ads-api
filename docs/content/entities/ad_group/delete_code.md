@@ -8,5 +8,5 @@ entity: AdGroup
 ```javascript
 // Deleting the entity
 
-await customer.adGroups.delete('customers/9262111890/adGroups/66537099246')
+await customer.adGroups.delete('customers/9262111890/adGroups/60937781178')
 ```

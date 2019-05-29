@@ -12,5 +12,5 @@ let result = await customer.mobileAppCategoryConstants.get('mobileAppCategoryCon
 
 ```javascript
 // Example result
-;({ resource_name: 'mobileAppCategoryConstants/60013', id: 60013, name: 'Video Players & Editors' })
+;({ id: 60013, name: 'Video Players & Editors', resource_name: 'mobileAppCategoryConstants/60013' })
 ```

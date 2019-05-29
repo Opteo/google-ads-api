@@ -28,24 +28,23 @@ let result = await customer.adGroupBidModifiers.list({
 ;[
   {
     ad_group_bid_modifier: {
-      resource_name: 'customers/9262111890/adGroupBidModifiers/66537099246~30000',
-      ad_group: 'customers/9262111890/adGroups/66537099246',
-      base_ad_group: 'customers/9262111890/adGroups/66537099246',
+      ad_group: 'customers/9262111890/adGroups/57176985017',
+      base_ad_group: 'customers/9262111890/adGroups/57176985017',
       criterion_id: 30000,
       device: { type: 4 },
+      resource_name: 'customers/9262111890/adGroupBidModifiers/57176985017~30000',
     },
     ad_group: {
-      resource_name: 'customers/9262111890/adGroups/66537099246',
       campaign: 'customers/9262111890/campaigns/1485014801',
-      cpc_bid_micros: 1000000,
+      cpc_bid_micros: 10000,
       cpm_bid_micros: 10000,
       cpv_bid_micros: 0,
       effective_target_cpa_micros: 0,
-      id: 66537099246,
+      id: 57176985017,
       name: 'My ad group',
-      status: 2,
+      resource_name: 'customers/9262111890/adGroups/57176985017',
+      status: 4,
       target_cpa_micros: 0,
-      target_cpm_micros: 10000,
       targeting_setting: {
         target_restrictions: [
           { targetingDimension: 5, bidOnly: { value: true } },
@@ -58,7 +57,6 @@ let result = await customer.adGroupBidModifiers.list({
       url_custom_parameters: [],
     },
     campaign: {
-      resource_name: 'customers/9262111890/campaigns/1485014801',
       ad_serving_optimization_status: 2,
       advertising_channel_type: 2,
       base_campaign: 'customers/9262111890/campaigns/1485014801',
@@ -77,6 +75,7 @@ let result = await customer.adGroupBidModifiers.list({
         target_search_network: true,
       },
       payment_mode: 4,
+      resource_name: 'customers/9262111890/campaigns/1485014801',
       selective_optimization: { conversion_actions: [] },
       serving_status: 2,
       start_date: '2018-07-24',
@@ -85,7 +84,6 @@ let result = await customer.adGroupBidModifiers.list({
       url_custom_parameters: [],
     },
     customer: {
-      resource_name: 'customers/9262111890',
       auto_tagging_enabled: false,
       call_reporting_setting: {
         call_conversion_action: 'customers/9262111890/conversionActions/179',
@@ -102,6 +100,7 @@ let result = await customer.adGroupBidModifiers.list({
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 797556569 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-797556569\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-797556569');\n</script>\n",
       },
+      resource_name: 'customers/9262111890',
       test_account: true,
       time_zone: 'Europe/London',
     },

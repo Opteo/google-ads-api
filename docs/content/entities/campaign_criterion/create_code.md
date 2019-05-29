@@ -25,7 +25,7 @@ const result = await customer.campaignCriteria.create([campaign_criterion, other
 
 // Example result
 {
-	results : ['customers/9262111890/campaignCriteria/1599497210~1000'],
+	results : ['customers/9262111890/campaignCriteria/1483704368~1000'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

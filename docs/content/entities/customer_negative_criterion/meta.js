@@ -1,14 +1,10 @@
 module.exports = {
     name: 'CustomerNegativeCriterion',
     object: {
-        resource_name: {
-            _type: 'string',
-            _description:
-                'The resource name of the customer negative criterion. Customer negative criterion resource names have the form: <code>customers/{customer_id}/customerNegativeCriteria/{criterion_id}</code>',
-        },
         content_label: {
+            _oneof: 'criterion',
             type: {
-                _type: 'enum',
+                _description: 'Content label type, required for CREATE operations.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -31,36 +27,37 @@ module.exports = {
                     { s: 'EMBEDDED_VIDEO', description: 'Embedded video.' },
                     { s: 'LIVE_STREAMING_VIDEO', description: 'Live streaming video.' },
                 ],
-                _description: 'Content label type, required for CREATE operations.',
+                _type: 'enum',
             },
-            _oneof: 'criterion',
         },
-        placement: {
-            url: { _type: 'string', _description: 'URL of the placement. For example, "http://www.domain.com".' },
+        id: { _description: 'The ID of the criterion.', _type: 'int64' },
+        mobile_app_category: {
             _oneof: 'criterion',
+            mobile_app_category_constant: {
+                _description: 'The mobile app category constant resource name.',
+                _type: 'string',
+            },
         },
         mobile_application: {
+            _oneof: 'criterion',
             app_id: {
-                _type: 'string',
                 _description:
                     'A string that uniquely identifies a mobile application to Google Ads API. The format of this string is "{platform}-{platform_native_id}", where platform is "1" for iOS apps and "2" for Android apps, and where platform_native_id is the mobile application identifier native to the corresponding platform. For iOS, this native identifier is the 9 digit string that appears at the end of an App Store URL (e.g., "476943146" for "Flood-It! 2" whose App Store link is http://itunes.apple.com/us/app/flood-it!-2/id476943146). For Android, this native identifier is the application\'s package name (e.g., "com.labpixies.colordrips" for "Color Drips" given Google Play link https://play.google.com/store/apps/details?id=com.labpixies.colordrips). A well formed app id for Google Ads API would thus be "1-476943146" for iOS and "2-com.labpixies.colordrips" for Android. This field is required and must be set in CREATE operations.',
-            },
-            name: { _type: 'string', _description: 'Name of this mobile application.' },
-            _oneof: 'criterion',
-        },
-        youtube_video: {
-            video_id: { _type: 'string', _description: 'YouTube video id as it appears on the YouTube watch page.' },
-            _oneof: 'criterion',
-        },
-        youtube_channel: {
-            channel_id: {
                 _type: 'string',
-                _description: 'The YouTube uploader channel id or the channel code of a YouTube channel.',
             },
+            name: { _description: 'Name of this mobile application.', _type: 'string' },
+        },
+        placement: {
             _oneof: 'criterion',
+            url: { _description: 'URL of the placement. For example, "http://www.domain.com".', _type: 'string' },
+        },
+        resource_name: {
+            _description:
+                'The resource name of the customer negative criterion. Customer negative criterion resource names have the form: <code>customers/{customer_id}/customerNegativeCriteria/{criterion_id}</code>',
+            _type: 'string',
         },
         type: {
-            _type: 'enum',
+            _description: 'The type of the criterion.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -95,15 +92,18 @@ module.exports = {
                 { s: 'CUSTOM_INTENT', description: 'Custom intent.' },
                 { s: 'LOCATION_GROUP', description: 'Location group.' },
             ],
-            _description: 'The type of the criterion.',
+            _type: 'enum',
         },
-        id: { _type: 'int64', _description: 'The ID of the criterion.' },
-        mobile_app_category: {
-            mobile_app_category_constant: {
-                _type: 'string',
-                _description: 'The mobile app category constant resource name.',
-            },
+        youtube_channel: {
             _oneof: 'criterion',
+            channel_id: {
+                _description: 'The YouTube uploader channel id or the channel code of a YouTube channel.',
+                _type: 'string',
+            },
+        },
+        youtube_video: {
+            _oneof: 'criterion',
+            video_id: { _description: 'YouTube video id as it appears on the YouTube watch page.', _type: 'string' },
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

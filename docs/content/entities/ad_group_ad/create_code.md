@@ -25,7 +25,7 @@ const result = await customer.adGroupAds.create([ad_group_ad, other_ad_group_ad]
 
 // Example result
 {
-	results : ['customers/9262111890/adGroupAds/63236814369~303721890851'],
+	results : ['customers/9262111890/adGroupAds/56328868446~284706472002'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

@@ -28,10 +28,10 @@ let result = await customer.carrierConstants.list({
 ;[
   {
     carrier_constant: {
-      resource_name: 'carrierConstants/70720',
       country_code: 'TW',
       id: 70720,
       name: 'Long Distance & Mobile Business Group',
+      resource_name: 'carrierConstants/70720',
     },
   },
 ]

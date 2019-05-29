@@ -28,16 +28,15 @@ let result = await customer.biddingStrategies.list({
 ;[
   {
     bidding_strategy: {
-      resource_name: 'customers/3827277046/biddingStrategies/1534381593',
       campaign_count: 0,
       id: 1534381593,
       name: 'My bidding strategy',
       non_removed_campaign_count: 0,
+      resource_name: 'customers/3827277046/biddingStrategies/1534381593',
       status: 2,
       type: 2,
     },
     customer: {
-      resource_name: 'customers/3827277046',
       auto_tagging_enabled: true,
       call_reporting_setting: {
         call_conversion_action: 'customers/3827277046/conversionActions/179',
@@ -54,6 +53,7 @@ let result = await customer.biddingStrategies.list({
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 875176189 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-875176189\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-875176189');\n</script>\n",
       },
+      resource_name: 'customers/3827277046',
       test_account: false,
       time_zone: 'Europe/London',
       tracking_url_template:
