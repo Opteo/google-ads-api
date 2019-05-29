@@ -1,5 +1,5 @@
 import { getEnumString, enums } from '../index'
-import { translateEnumValue, buildReportQuery, snakeCaseGads } from '../utils'
+import { translateEnumValue, buildReportQuery, verifyConstraintType, addQuotesIfMissing, snakeCaseGads } from '../utils'
 import { ReportOptions } from '../types'
 
 test('getEnumString', () => {
@@ -43,6 +43,34 @@ describe('snakeCaseGads', () => {
     })
 })
 
+describe('addQuotesIfMissing', () => {
+    it('should add quotes only when quotes are missing', () => {
+        expect(addQuotesIfMissing(true)).toEqual(`"true"`)
+        expect(addQuotesIfMissing('true')).toEqual(`"true"`)
+        expect(addQuotesIfMissing(`"true"`)).toEqual(`"true"`)
+        expect(addQuotesIfMissing('customer/133/campaign/456')).toEqual(`"customer/133/campaign/456"`)
+        expect(addQuotesIfMissing(`'customer/133/campaign/456'`)).toEqual(`'customer/133/campaign/456'`)
+        expect(addQuotesIfMissing(123)).toEqual(`"123"`)
+        expect(addQuotesIfMissing(`123`)).toEqual(`"123"`)
+        expect(addQuotesIfMissing(`"123"`)).toEqual(`"123"`)
+    })
+})
+
+describe('verifyConstraintType', () => {
+    it('should throw if a constraint value is not of a supported type', () => {
+        expect(() => verifyConstraintType('key', undefined)).toThrow()
+        expect(() => verifyConstraintType('key', null)).toThrow()
+        expect(() => verifyConstraintType('key', { hello: 'yes' })).toThrow()
+        expect(() => verifyConstraintType('key', [1, 'yes'])).toThrow()
+    })
+
+    it('should not throw if a constraint value is of a supported type', () => {
+        expect(() => verifyConstraintType('key', true)).not.toThrow()
+        expect(() => verifyConstraintType('key', 'hello')).not.toThrow()
+        expect(() => verifyConstraintType('key', 123.66)).not.toThrow()
+    })
+})
+
 describe('buildReportQuery', () => {
     it('should translate enums in constraints to their key (string) value', () => {
         const options: ReportOptions = {
@@ -67,7 +95,7 @@ describe('buildReportQuery', () => {
         const query = buildReportQuery(options)
 
         expect(query).toEqual(
-            `SELECT ad_group.name, campaign.name FROM ad_group WHERE ad_group.status = PAUSED AND campaign.advertising_channel_type = SEARCH AND campaign_budget.status = ENABLED AND metrics.clicks > 10`
+            `SELECT ad_group.name, campaign.name FROM ad_group WHERE ad_group.status = "PAUSED" AND campaign.advertising_channel_type = "SEARCH" AND campaign_budget.status = "ENABLED" AND metrics.clicks > "10"`
         )
     })
 
