@@ -3,7 +3,7 @@
     To update the google ads api version, you must:
 
     1. Update google-ads-node in package.json
-    1.1 Update sidebar.jsx version and badge version in readme.md + container.jsx
+    1.1 Update badge version in readme.md + container.jsx
     2. yarn && yarn build
     3. update scripts/schema.json (https://googleads.googleapis.com/$discovery/rest?version=v1)
     4. update compiled_resources.json by running `pbjs -t json googleapis/google/rpc/*.proto googleapis/google/longrunning/*.proto googleapis//google/ads/googleads/v1/common/*.proto googleapis//google/ads/googleads/v1/errors/*.proto googleapis//google/ads/googleads/v1/enums/*.proto googleapis//google/ads/googleads/v1/resources/*.proto googleapis//google/ads/googleads/v1/services/*.proto > compiled_resources.json`
@@ -72,8 +72,8 @@ function sortObject(object) {
     var sortedObj = {},
         keys = Object.keys(object)
 
-    keys.sort(function(key1, key2) {;
-        (key1 = key1.toLowerCase()), (key2 = key2.toLowerCase())
+    keys.sort(function(key1, key2) {
+        ;(key1 = key1.toLowerCase()), (key2 = key2.toLowerCase())
         if (key1 < key2) return -1
         if (key1 > key2) return 1
         return 0
@@ -121,7 +121,8 @@ const readme_object_compiler = template(fs.readFileSync(__dirname + '/templates/
 })
 
 const readme_object_compiler_code = template(
-    fs.readFileSync(__dirname + '/templates/template_readme_object_code.hbs', 'utf-8'), {
+    fs.readFileSync(__dirname + '/templates/template_readme_object_code.hbs', 'utf-8'),
+    {
         interpolate: /{{([\s\S]+?)}}/g,
     }
 )
@@ -132,8 +133,7 @@ const readme_object_compiler_code = template(
 
 const method_compilers = {}
 
-;
-[
+;[
     'get',
     'list',
     'create',
@@ -146,7 +146,8 @@ const method_compilers = {}
     'delete_code',
 ].forEach(method => {
     method_compilers[method] = template(
-        fs.readFileSync(__dirname + `/templates/template_readme_${method}.hbs`, 'utf-8'), {
+        fs.readFileSync(__dirname + `/templates/template_readme_${method}.hbs`, 'utf-8'),
+        {
             interpolate: /{{([\s\S]+?)}}/g,
         }
     )
@@ -170,7 +171,7 @@ const raw_compiled_services = require('./compiled_resources.json')
 
 const compiled_resources =
     raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v1.nested.resources.nested
-    // raw_compiled_services.nested.
+// raw_compiled_services.nested.
 
 // console.log(compiled_resources)
 const references = raw_schema.schemas
@@ -440,7 +441,7 @@ async function compileService(entity, schema) {
             } else {
                 const markdown_description = sanitiseHtml(obj[key].description)
 
-                new_obj[snakeCaseGads(key)] = {..._new_object, _description: markdown_description }
+                new_obj[snakeCaseGads(key)] = { ..._new_object, _description: markdown_description }
             }
 
             const matching_resource = compiled_resources[capitalise(parent_field_name)]
@@ -593,8 +594,7 @@ async function compileService(entity, schema) {
             chosen_example = sortObject(chosen_example)
 
             // Reorder the object to put the least interesting things at the bottom
-            ;
-            ['ad_group', 'campaign', 'customer'].forEach(key => {
+            ;['ad_group', 'campaign', 'customer'].forEach(key => {
                 if (chosen_example[key]) {
                     const customer_temp_object = chosen_example[key]
                     delete chosen_example[key]
@@ -694,10 +694,11 @@ async function compileService(entity, schema) {
         console.log(err)
     }
 
-    if (!existing_service
-        .toString()
-        .slice(0, 20)
-        .includes('manual_mode')
+    if (
+        !existing_service
+            .toString()
+            .slice(0, 20)
+            .includes('manual_mode')
     ) {
         fs.ensureFileSync(file_path)
         fs.writeFileSync(file_path, compiled_service)
@@ -726,8 +727,7 @@ async function compileService(entity, schema) {
     // console.log({ file_path }) g
 }
 
-;
-(async() => {
+;(async () => {
     schema = await $RefParser.dereference(__dirname + '/schema.json', {
         resolve: { gads: myResolver },
     })
