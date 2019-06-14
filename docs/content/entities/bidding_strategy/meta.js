@@ -1,89 +1,108 @@
 module.exports = {
     name: 'BiddingStrategy',
     object: {
-        resource_name: {
-            _type: 'string',
+        campaign_count: {
+            _description: 'The number of campaigns attached to this bidding strategy. This field is read-only.',
+            _type: 'int64',
+        },
+        enhanced_cpc: { _oneof: 'scheme' },
+        id: { _description: 'The ID of the bidding strategy.', _type: 'int64' },
+        name: {
             _description:
-                'The resource name of the bidding strategy. Bidding strategy resource names have the form: <code>customers/{customer_id}/biddingStrategies/{bidding_strategy_id}</code>',
+                'The name of the bidding strategy. All bidding strategies within an account must be named distinctly. The length of this string should be between 1 and 255, inclusive, in UTF-8 bytes, (trimmed).',
+            _type: 'string',
         },
         non_removed_campaign_count: {
-            _type: 'int64',
             _description:
                 'The number of non-removed campaigns attached to this bidding strategy. This field is read-only.',
+            _type: 'int64',
         },
-        target_outrank_share: {
+        page_one_promoted: {
+            _oneof: 'scheme',
+            bid_modifier: {
+                _description:
+                    "Bid multiplier to be applied to the relevant bid estimate (depending on the <code>strategy_goal</code>) in determining a keyword's new CPC bid.",
+                _type: 'double',
+            },
             cpc_bid_ceiling_micros: {
-                _type: 'int64',
                 _description:
                     'Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
-            },
-            target_outrank_share_micros: {
-                _type: 'int32',
-                _description:
-                    'The target fraction of auctions where the advertiser should outrank the competitor. The advertiser outranks the competitor in an auction if either the advertiser appears above the competitor in the search results, or appears in the search results when the competitor does not. Value must be between 1 and 1000000, inclusive.',
+                _type: 'int64',
             },
             only_raise_cpc_bids: {
-                _type: 'boolean',
                 _description:
-                    "Whether the strategy should always follow bid estimate changes, or only increase. If false, always set a keyword's new bid to the current bid estimate. If true, only updates a keyword's bid if the current bid estimate is greater than the current bid.",
-            },
-            competitor_domain: { _type: 'string', _description: "Competitor's visible domain URL." },
-            raise_cpc_bid_when_quality_score_is_low: {
+                    "Whether the strategy should always follow bid estimate changes, or only increase. If false, always sets a keyword's new bid to the current bid estimate. If true, only updates a keyword's bid if the current bid estimate is greater than the current bid.",
                 _type: 'boolean',
+            },
+            raise_cpc_bid_when_budget_constrained: {
+                _description:
+                    'Whether the strategy is allowed to raise bids when the throttling rate of the budget it is serving out of rises above a threshold.',
+                _type: 'boolean',
+            },
+            raise_cpc_bid_when_quality_score_is_low: {
                 _description:
                     'Whether the strategy is allowed to raise bids on keywords with lower-range quality scores.',
+                _type: 'boolean',
             },
-            _oneof: 'scheme',
+            strategy_goal: {
+                _description: 'The strategy goal of where impressions are desired to be shown on search result pages.',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    {
+                        s: 'UNKNOWN',
+                        description: 'Used for return value only. Represents value unknown in this version.',
+                    },
+                    { s: 'FIRST_PAGE', description: 'First page on google.com.' },
+                    { s: 'FIRST_PAGE_PROMOTED', description: 'Top slots of the first page on google.com.' },
+                ],
+                _type: 'enum',
+            },
+        },
+        resource_name: {
+            _description:
+                'The resource name of the bidding strategy. Bidding strategy resource names have the form: <code>customers/{customer_id}/biddingStrategies/{bidding_strategy_id}</code>',
+            _type: 'string',
+        },
+        status: {
+            _description: 'The status of the bidding strategy. This field is read-only.',
+            _enums: [
+                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                {
+                    s: 'UNKNOWN',
+                    description: 'The received value is not known in this version.\n\nThis is a response-only value.',
+                },
+                { s: 'ENABLED', description: 'The bidding strategy is enabled.' },
+                { s: 'REMOVED', description: 'The bidding strategy is removed.' },
+            ],
+            _type: 'enum',
         },
         target_cpa: {
-            target_cpa_micros: {
+            _oneof: 'scheme',
+            cpc_bid_ceiling_micros: {
+                _description:
+                    'Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
                 _type: 'int64',
+            },
+            cpc_bid_floor_micros: {
+                _description:
+                    'Minimum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
+                _type: 'int64',
+            },
+            target_cpa_micros: {
                 _description:
                     'Average CPA target. This target should be greater than or equal to minimum billable unit based on the currency for the account.',
-            },
-            cpc_bid_ceiling_micros: {
                 _type: 'int64',
-                _description:
-                    'Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
             },
-            cpc_bid_floor_micros: {
-                _type: 'int64',
-                _description:
-                    'Minimum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
-            },
-            _oneof: 'scheme',
-        },
-        target_roas: {
-            cpc_bid_ceiling_micros: {
-                _type: 'int64',
-                _description:
-                    'Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
-            },
-            target_roas: {
-                _type: 'double',
-                _description:
-                    'Required. The desired revenue (based on conversion data) per unit of spend. Value must be between 0.01 and 1000.0, inclusive.',
-            },
-            cpc_bid_floor_micros: {
-                _type: 'int64',
-                _description:
-                    'Minimum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
-            },
-            _oneof: 'scheme',
         },
         target_impression_share: {
-            location_fraction_micros: {
-                _type: 'int64',
-                _description:
-                    'The desired fraction of ads to be shown in the targeted location in micros. E.g. 1% equals 10,000.',
-            },
+            _oneof: 'scheme',
             cpc_bid_ceiling_micros: {
-                _type: 'int64',
                 _description:
                     'The highest CPC bid the automated bidding system is permitted to specify. This is a required field entered by the advertiser that sets the ceiling and specified in local micros.',
+                _type: 'int64',
             },
             location: {
-                _type: 'enum',
+                _description: 'The targeted location on the search results page.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -94,12 +113,72 @@ module.exports = {
                     { s: 'TOP_OF_PAGE', description: 'Top box of ads.' },
                     { s: 'ABSOLUTE_TOP_OF_PAGE', description: 'Top slot in the top box of ads.' },
                 ],
-                _description: 'The targeted location on the search results page.',
+                _type: 'enum',
             },
+            location_fraction_micros: {
+                _description:
+                    'The desired fraction of ads to be shown in the targeted location in micros. E.g. 1% equals 10,000.',
+                _type: 'int64',
+            },
+        },
+        target_outrank_share: {
             _oneof: 'scheme',
+            competitor_domain: { _description: "Competitor's visible domain URL.", _type: 'string' },
+            cpc_bid_ceiling_micros: {
+                _description:
+                    'Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
+                _type: 'int64',
+            },
+            only_raise_cpc_bids: {
+                _description:
+                    "Whether the strategy should always follow bid estimate changes, or only increase. If false, always set a keyword's new bid to the current bid estimate. If true, only updates a keyword's bid if the current bid estimate is greater than the current bid.",
+                _type: 'boolean',
+            },
+            raise_cpc_bid_when_quality_score_is_low: {
+                _description:
+                    'Whether the strategy is allowed to raise bids on keywords with lower-range quality scores.',
+                _type: 'boolean',
+            },
+            target_outrank_share_micros: {
+                _description:
+                    'The target fraction of auctions where the advertiser should outrank the competitor. The advertiser outranks the competitor in an auction if either the advertiser appears above the competitor in the search results, or appears in the search results when the competitor does not. Value must be between 1 and 1000000, inclusive.',
+                _type: 'int32',
+            },
+        },
+        target_roas: {
+            _oneof: 'scheme',
+            cpc_bid_ceiling_micros: {
+                _description:
+                    'Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
+                _type: 'int64',
+            },
+            cpc_bid_floor_micros: {
+                _description:
+                    'Minimum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
+                _type: 'int64',
+            },
+            target_roas: {
+                _description:
+                    'Required. The desired revenue (based on conversion data) per unit of spend. Value must be between 0.01 and 1000.0, inclusive.',
+                _type: 'double',
+            },
+        },
+        target_spend: {
+            _oneof: 'scheme',
+            cpc_bid_ceiling_micros: {
+                _description:
+                    'Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
+                _type: 'int64',
+            },
+            target_spend_micros: {
+                _description:
+                    'The spend target under which to maximize clicks. A TargetSpend bidder will attempt to spend the smaller of this value or the natural throttling spend amount. If not specified, the budget is used as the spend target.',
+                _type: 'int64',
+            },
         },
         type: {
-            _type: 'enum',
+            _description:
+                'The type of the bidding strategy. Create a bidding strategy by setting the bidding scheme. This field is read-only.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -165,87 +244,8 @@ module.exports = {
                         'Target Spend is an automated bid strategy that sets your bids\nto help get as many clicks as possible within your budget.',
                 },
             ],
-            _description:
-                'The type of the bidding strategy. Create a bidding strategy by setting the bidding scheme. This field is read-only.',
-        },
-        enhanced_cpc: { _oneof: 'scheme' },
-        target_spend: {
-            target_spend_micros: {
-                _type: 'int64',
-                _description:
-                    'The spend target under which to maximize clicks. A TargetSpend bidder will attempt to spend the smaller of this value or the natural throttling spend amount. If not specified, the budget is used as the spend target.',
-            },
-            cpc_bid_ceiling_micros: {
-                _type: 'int64',
-                _description:
-                    'Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
-            },
-            _oneof: 'scheme',
-        },
-        campaign_count: {
-            _type: 'int64',
-            _description: 'The number of campaigns attached to this bidding strategy. This field is read-only.',
-        },
-        status: {
             _type: 'enum',
-            _enums: [
-                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
-                {
-                    s: 'UNKNOWN',
-                    description: 'The received value is not known in this version.\n\nThis is a response-only value.',
-                },
-                { s: 'ENABLED', description: 'The bidding strategy is enabled.' },
-                { s: 'REMOVED', description: 'The bidding strategy is removed.' },
-            ],
-            _description: 'The status of the bidding strategy. This field is read-only.',
         },
-        name: {
-            _type: 'string',
-            _description:
-                'The name of the bidding strategy. All bidding strategies within an account must be named distinctly. The length of this string should be between 1 and 255, inclusive, in UTF-8 bytes, (trimmed).',
-        },
-        page_one_promoted: {
-            raise_cpc_bid_when_quality_score_is_low: {
-                _type: 'boolean',
-                _description:
-                    'Whether the strategy is allowed to raise bids on keywords with lower-range quality scores.',
-            },
-            cpc_bid_ceiling_micros: {
-                _type: 'int64',
-                _description:
-                    'Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
-            },
-            strategy_goal: {
-                _type: 'enum',
-                _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
-                    {
-                        s: 'UNKNOWN',
-                        description: 'Used for return value only. Represents value unknown in this version.',
-                    },
-                    { s: 'FIRST_PAGE', description: 'First page on google.com.' },
-                    { s: 'FIRST_PAGE_PROMOTED', description: 'Top slots of the first page on google.com.' },
-                ],
-                _description: 'The strategy goal of where impressions are desired to be shown on search result pages.',
-            },
-            raise_cpc_bid_when_budget_constrained: {
-                _type: 'boolean',
-                _description:
-                    'Whether the strategy is allowed to raise bids when the throttling rate of the budget it is serving out of rises above a threshold.',
-            },
-            bid_modifier: {
-                _type: 'double',
-                _description:
-                    "Bid multiplier to be applied to the relevant bid estimate (depending on the <code>strategy_goal</code>) in determining a keyword's new CPC bid.",
-            },
-            only_raise_cpc_bids: {
-                _type: 'boolean',
-                _description:
-                    "Whether the strategy should always follow bid estimate changes, or only increase. If false, always sets a keyword's new bid to the current bid estimate. If true, only updates a keyword's bid if the current bid estimate is greater than the current bid.",
-            },
-            _oneof: 'scheme',
-        },
-        id: { _type: 'int64', _description: 'The ID of the bidding strategy.' },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],
 }

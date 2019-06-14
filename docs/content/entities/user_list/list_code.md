@@ -28,7 +28,6 @@ let result = await customer.userLists.list({
 ;[
   {
     user_list: {
-      resource_name: 'customers/3827277046/userLists/509186086',
       access_reason: 2,
       account_user_list_status: 2,
       description: 'Combined audience based on available data sources',
@@ -50,14 +49,14 @@ let result = await customer.userLists.list({
       membership_status: 2,
       name: 'My user list',
       read_only: true,
+      resource_name: 'customers/3827277046/userLists/509186086',
       size_for_display: 16,
-      size_for_search: 19,
+      size_for_search: 20,
       size_range_for_display: 2,
       size_range_for_search: 2,
       type: 3,
     },
     customer: {
-      resource_name: 'customers/3827277046',
       auto_tagging_enabled: true,
       call_reporting_setting: {
         call_conversion_action: 'customers/3827277046/conversionActions/179',
@@ -74,6 +73,7 @@ let result = await customer.userLists.list({
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 875176189 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-875176189\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-875176189');\n</script>\n",
       },
+      resource_name: 'customers/3827277046',
       test_account: false,
       time_zone: 'Europe/London',
       tracking_url_template:

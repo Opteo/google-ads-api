@@ -13,9 +13,8 @@ let result = await customer.accountBudgets.get('customers/3827277046/accountBudg
 ```javascript
 // Example result
 ;({
-  resource_name: 'customers/3827277046/accountBudgets/295854560',
   adjusted_spending_limit_type: 2,
-  amount_served_micros: 100064050000,
+  amount_served_micros: 101340410000,
   approved_end_time_type: 3,
   approved_spending_limit_type: 2,
   approved_start_date_time: '2017-01-01 12:22:14',
@@ -25,6 +24,7 @@ let result = await customer.accountBudgets.get('customers/3827277046/accountBudg
   proposed_end_time_type: 3,
   proposed_spending_limit_type: 2,
   proposed_start_date_time: '2017-01-01 12:22:14',
+  resource_name: 'customers/3827277046/accountBudgets/295854560',
   status: 3,
   total_adjustments_micros: 851000000,
 })

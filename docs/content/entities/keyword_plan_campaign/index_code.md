@@ -8,7 +8,6 @@ title: KeywordPlanCampaign
 ```javascript
 // Example KeywordPlanCampaign
 const keyword_plan_campaign = {
-  resource_name: 'customers/3827277046/keywordPlanCampaigns/4773388',
   cpc_bid_micros: 5370000,
   geo_targets: [],
   id: 4773388,
@@ -16,5 +15,6 @@ const keyword_plan_campaign = {
   keyword_plan_network: 2,
   language_constants: [{ value: 'languageConstants/1000' }],
   name: 'My keyword plan campaign',
+  resource_name: 'customers/3827277046/keywordPlanCampaigns/4773388',
 }
 ```

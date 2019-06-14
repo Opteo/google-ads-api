@@ -8,9 +8,9 @@ title: ExtensionFeedItem
 ```javascript
 // Example ExtensionFeedItem
 const extension_feed_item = {
-  resource_name: 'customers/3827277046/extensionFeedItems/13881705221',
   ad_schedules: [],
   extension_type: 11,
+  resource_name: 'customers/3827277046/extensionFeedItems/13881705221',
   status: 2,
   structured_snippet_feed_item: {
     header: 'Types',

@@ -1,12 +1,23 @@
 module.exports = {
     name: 'CustomerClientLink',
     object: {
+        client_customer: { _description: 'The client customer linked to this customer.', _type: 'string' },
+        hidden: {
+            _description:
+                'The visibility of the link. Users can choose whether or not to see hidden links in the AdWords UI. Default value is false',
+            _type: 'boolean',
+        },
         manager_link_id: {
-            _type: 'int64',
             _description: 'This is uniquely identifies a customer client link. Read only.',
+            _type: 'int64',
+        },
+        resource_name: {
+            _description:
+                'Name of the resource. CustomerClientLink resource names have the form: <code>customers/{customer_id}/customerClientLinks/{client_customer_id}~{manager_link_id}</code>',
+            _type: 'string',
         },
         status: {
-            _type: 'enum',
+            _description: 'This is the status of the link between client and manager.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -23,18 +34,7 @@ module.exports = {
                     description: 'Indicates relationship has been requested by manager, but manager\ncanceled it.',
                 },
             ],
-            _description: 'This is the status of the link between client and manager.',
-        },
-        resource_name: {
-            _type: 'string',
-            _description:
-                'Name of the resource. CustomerClientLink resource names have the form: <code>customers/{customer_id}/customerClientLinks/{client_customer_id}~{manager_link_id}</code>',
-        },
-        client_customer: { _type: 'string', _description: 'The client customer linked to this customer.' },
-        hidden: {
-            _type: 'boolean',
-            _description:
-                'The visibility of the link. Users can choose whether or not to see hidden links in the AdWords UI. Default value is false',
+            _type: 'enum',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

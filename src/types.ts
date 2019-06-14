@@ -183,6 +183,12 @@ type DateConstant =
     | 'TODAY'
 
 /**
+ *  Constraint value
+ * @interface
+ */
+export type ConstraintValue = string | number | boolean | Array<string | number | boolean>
+
+/**
  *  Constraint object with full parameters
  * @interface
  */
@@ -206,7 +212,7 @@ export interface Constraint {
         | 'IS NOT NULL'
         | 'DURING'
         | 'BETWEEN'
-    val: string | number | Array<string>
+    val: ConstraintValue
 }
 
 /**

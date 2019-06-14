@@ -12,5 +12,5 @@ let result = await customer.languageConstants.get('languageConstants/1018')
 
 ```javascript
 // Example result
-;({ resource_name: 'languageConstants/1018', code: 'zh_TW', id: 1018, name: 'Chinese (traditional)', targetable: true })
+;({ code: 'zh_TW', id: 1018, name: 'Chinese (traditional)', resource_name: 'languageConstants/1018', targetable: true })
 ```

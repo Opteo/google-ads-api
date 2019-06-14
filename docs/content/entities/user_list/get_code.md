@@ -13,7 +13,6 @@ let result = await customer.userLists.get('customers/3827277046/userLists/509186
 ```javascript
 // Example result
 ;({
-  resource_name: 'customers/3827277046/userLists/509186086',
   access_reason: 2,
   account_user_list_status: 2,
   description: 'Combined audience based on available data sources',
@@ -35,8 +34,9 @@ let result = await customer.userLists.get('customers/3827277046/userLists/509186
   membership_status: 2,
   name: 'My user list',
   read_only: true,
+  resource_name: 'customers/3827277046/userLists/509186086',
   size_for_display: 16,
-  size_for_search: 19,
+  size_for_search: 20,
   size_range_for_display: 2,
   size_range_for_search: 2,
   type: 3,

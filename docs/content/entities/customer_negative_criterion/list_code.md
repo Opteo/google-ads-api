@@ -28,13 +28,12 @@ let result = await customer.customerNegativeCriteria.list({
 ;[
   {
     customer_negative_criterion: {
-      resource_name: 'customers/3827277046/customerNegativeCriteria/114607059163',
       content_label: { type: 1 },
       id: 114607059163,
+      resource_name: 'customers/3827277046/customerNegativeCriteria/114607059163',
       type: 22,
     },
     customer: {
-      resource_name: 'customers/3827277046',
       auto_tagging_enabled: true,
       call_reporting_setting: {
         call_conversion_action: 'customers/3827277046/conversionActions/179',
@@ -51,6 +50,7 @@ let result = await customer.customerNegativeCriteria.list({
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 875176189 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-875176189\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-875176189');\n</script>\n",
       },
+      resource_name: 'customers/3827277046',
       test_account: false,
       time_zone: 'Europe/London',
       tracking_url_template:

@@ -68,6 +68,29 @@ const capitalise = s => {
     return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
+function sortObject(object) {
+    var sortedObj = {},
+        keys = Object.keys(object)
+
+    keys.sort(function(key1, key2) {;
+        (key1 = key1.toLowerCase()), (key2 = key2.toLowerCase())
+        if (key1 < key2) return -1
+        if (key1 > key2) return 1
+        return 0
+    })
+
+    for (var index in keys) {
+        var key = keys[index]
+        if (typeof object[key] == 'object' && !(object[key] instanceof Array)) {
+            sortedObj[key] = sortObject(object[key])
+        } else {
+            sortedObj[key] = object[key]
+        }
+    }
+
+    return sortedObj
+}
+
 var execP = Promise.promisify(require('child_process').exec)
 
 const service_template_file = fs.readFileSync(__dirname + '/templates/template_service.hbs', 'utf-8')
@@ -482,7 +505,7 @@ async function compileService(entity, schema) {
 
     const meta = {
         name: entity,
-        object: unroll(schema.schemas[`GoogleAdsGoogleadsV1Resources__${entity}`].properties, entity),
+        object: sortObject(unroll(schema.schemas[`GoogleAdsGoogleadsV1Resources__${entity}`].properties, entity)),
     }
 
     const file_path = `${__dirname}/../src/services/${ent}.ts`
@@ -566,6 +589,8 @@ async function compileService(entity, schema) {
             let chosen_example = maxBy(listed, block => {
                 return JSON.stringify(block).length
             })
+
+            chosen_example = sortObject(chosen_example)
 
             // Reorder the object to put the least interesting things at the bottom
             ;

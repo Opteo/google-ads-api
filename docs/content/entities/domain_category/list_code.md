@@ -28,19 +28,18 @@ let result = await customer.domainCategories.list({
 ;[
   {
     domain_category: {
-      resource_name:
-        'customers/3827277046/domainCategories/1398297003~bGFuZGluZyBwYWdlcyBmcm9tIHlvdXIgc3RhbmRhcmQgYWQgZ3JvdXBz~en',
       campaign: 'customers/3827277046/campaigns/1398297003',
       category: 'landing pages from your standard ad groups',
       category_rank: 0,
-      coverage_fraction: 1.3888888888888888,
+      coverage_fraction: 1.5151515151515151,
       domain: 'opteo.com',
       has_children: false,
       language_code: 'en',
-      recommended_cpc_bid_micros: 77458144,
+      recommended_cpc_bid_micros: 58591483,
+      resource_name:
+        'customers/3827277046/domainCategories/1398297003~bGFuZGluZyBwYWdlcyBmcm9tIHlvdXIgc3RhbmRhcmQgYWQgZ3JvdXBz~en',
     },
     campaign: {
-      resource_name: 'customers/3827277046/campaigns/1398297003',
       ad_serving_optimization_status: 2,
       advertising_channel_type: 2,
       base_campaign: 'customers/3827277046/campaigns/1398297003',
@@ -66,6 +65,7 @@ let result = await customer.domainCategories.list({
         target_search_network: true,
       },
       payment_mode: 4,
+      resource_name: 'customers/3827277046/campaigns/1398297003',
       selective_optimization: { conversion_actions: [] },
       serving_status: 2,
       start_date: '2018-05-10',
@@ -74,7 +74,6 @@ let result = await customer.domainCategories.list({
       url_custom_parameters: [],
     },
     customer: {
-      resource_name: 'customers/3827277046',
       auto_tagging_enabled: true,
       call_reporting_setting: {
         call_conversion_action: 'customers/3827277046/conversionActions/179',
@@ -91,6 +90,7 @@ let result = await customer.domainCategories.list({
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 875176189 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-875176189\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-875176189');\n</script>\n",
       },
+      resource_name: 'customers/3827277046',
       test_account: false,
       time_zone: 'Europe/London',
       tracking_url_template:

@@ -13,7 +13,6 @@ let result = await customer.campaignFeeds.get('customers/9262111890/campaignFeed
 ```javascript
 // Example result
 ;({
-  resource_name: 'customers/9262111890/campaignFeeds/1483704368~82896692',
   campaign: 'customers/9262111890/campaigns/1483704368',
   feed: 'customers/9262111890/feeds/82896692',
   matching_function: {
@@ -28,6 +27,7 @@ let result = await customer.campaignFeeds.get('customers/9262111890/campaignFeed
     ],
   },
   placeholder_types: [2],
+  resource_name: 'customers/9262111890/campaignFeeds/1483704368~82896692',
   status: 2,
 })
 ```

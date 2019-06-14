@@ -8,7 +8,6 @@ title: ConversionAction
 ```javascript
 // Example ConversionAction
 const conversion_action = {
-  resource_name: 'customers/9262111890/conversionActions/314732636',
   attribution_model_settings: { attribution_model: 105, data_driven_model_status: 5 },
   category: 5,
   click_through_lookback_window_days: 7,
@@ -18,6 +17,7 @@ const conversion_action = {
   name: 'My conversion action',
   owner_customer: 'customers/9262111890',
   phone_call_duration_seconds: 60,
+  resource_name: 'customers/9262111890/conversionActions/314732636',
   status: 3,
   tag_snippets: [
     {

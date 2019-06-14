@@ -28,7 +28,6 @@ let result = await customer.adGroupFeeds.list({
 ;[
   {
     ad_group_feed: {
-      resource_name: 'customers/3827277046/adGroupFeeds/45808681193~90651045',
       ad_group: 'customers/3827277046/adGroups/45808681193',
       feed: 'customers/3827277046/feeds/90651045',
       matching_function: {
@@ -44,10 +43,10 @@ let result = await customer.adGroupFeeds.list({
         ],
       },
       placeholder_types: [1],
+      resource_name: 'customers/3827277046/adGroupFeeds/45808681193~90651045',
       status: 2,
     },
     feed: {
-      resource_name: 'customers/3827277046/feeds/90651045',
       attributes: [
         { id: { value: 1 }, name: { value: 'SitelinkText' }, type: 4, isPartOfKey: { value: false } },
         { id: { value: 2 }, name: { value: 'SitelinkURL' }, type: 6, isPartOfKey: { value: false } },
@@ -58,10 +57,10 @@ let result = await customer.adGroupFeeds.list({
       id: 90651045,
       name: 'My feed',
       origin: 1,
+      resource_name: 'customers/3827277046/feeds/90651045',
       status: 2,
     },
     ad_group: {
-      resource_name: 'customers/3827277046/adGroups/45808681193',
       campaign: 'customers/3827277046/campaigns/881817006',
       cpc_bid_micros: 2720000,
       cpm_bid_micros: 10000,
@@ -71,6 +70,7 @@ let result = await customer.adGroupFeeds.list({
       explorer_auto_optimizer_setting: { opt_in: false },
       id: 45808681193,
       name: 'My ad group',
+      resource_name: 'customers/3827277046/adGroups/45808681193',
       status: 2,
       target_cpa_micros: 0,
       targeting_setting: {
@@ -87,7 +87,6 @@ let result = await customer.adGroupFeeds.list({
       url_custom_parameters: [],
     },
     campaign: {
-      resource_name: 'customers/3827277046/campaigns/881817006',
       ad_serving_optimization_status: 5,
       advertising_channel_type: 2,
       base_campaign: 'customers/3827277046/campaigns/881817006',
@@ -106,6 +105,7 @@ let result = await customer.adGroupFeeds.list({
         target_search_network: true,
       },
       payment_mode: 4,
+      resource_name: 'customers/3827277046/campaigns/881817006',
       selective_optimization: { conversion_actions: [] },
       serving_status: 2,
       start_date: '2017-07-12',
@@ -117,7 +117,6 @@ let result = await customer.adGroupFeeds.list({
       url_custom_parameters: [],
     },
     customer: {
-      resource_name: 'customers/3827277046',
       auto_tagging_enabled: true,
       call_reporting_setting: {
         call_conversion_action: 'customers/3827277046/conversionActions/179',
@@ -134,6 +133,7 @@ let result = await customer.adGroupFeeds.list({
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 875176189 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-875176189\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-875176189');\n</script>\n",
       },
+      resource_name: 'customers/3827277046',
       test_account: false,
       time_zone: 'Europe/London',
       tracking_url_template:

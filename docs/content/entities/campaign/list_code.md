@@ -28,7 +28,6 @@ let result = await customer.campaigns.list({
 ;[
   {
     campaign: {
-      resource_name: 'customers/9262111890/campaigns/1568629385',
       ad_serving_optimization_status: 2,
       advertising_channel_type: 3,
       base_campaign: 'customers/9262111890/campaigns/1568629385',
@@ -39,6 +38,7 @@ let result = await customer.campaigns.list({
       frequency_caps: [],
       geo_target_type_setting: { negative_geo_target_type: 2, positive_geo_target_type: 2 },
       id: 1568629385,
+      labels: [],
       name: 'My campaign',
       network_settings: {
         target_content_network: true,
@@ -47,6 +47,7 @@ let result = await customer.campaigns.list({
         target_search_network: false,
       },
       payment_mode: 4,
+      resource_name: 'customers/9262111890/campaigns/1568629385',
       selective_optimization: { conversion_actions: [] },
       serving_status: 2,
       start_date: '2018-09-19',
@@ -55,7 +56,6 @@ let result = await customer.campaigns.list({
       url_custom_parameters: [],
     },
     campaign_budget: {
-      resource_name: 'customers/9262111890/campaignBudgets/1624493702',
       amount_micros: 12000000,
       delivery_method: 2,
       explicitly_shared: false,
@@ -64,11 +64,11 @@ let result = await customer.campaigns.list({
       name: 'My campaign budget',
       period: 2,
       reference_count: 0,
+      resource_name: 'customers/9262111890/campaignBudgets/1624493702',
       status: 3,
       type: 2,
     },
     customer: {
-      resource_name: 'customers/9262111890',
       auto_tagging_enabled: false,
       call_reporting_setting: {
         call_conversion_action: 'customers/9262111890/conversionActions/179',
@@ -85,6 +85,7 @@ let result = await customer.campaigns.list({
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 797556569 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-797556569\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-797556569');\n</script>\n",
       },
+      resource_name: 'customers/9262111890',
       test_account: true,
       time_zone: 'Europe/London',
     },

@@ -32,6 +32,8 @@
 -   Uses [gRPC](https://grpc.io/) and [Protocol Buffers](https://developers.google.com/protocol-buffers/) internally (recommended by Google)
 -   Typescript definitions for all [Google Ads API resources, enums and errors](https://developers.google.com/google-ads/api/reference/rpc/google.ads.googleads.v1.resources)
 
+> The Google Ads API is the new replacement to the AdWords API. Google will deprecate the AdWords API sometime in 2020.
+
 # Installation
 
 ```bash
@@ -47,7 +49,7 @@ The documentation is divided into two main sections:
 - [General concepts](https://opteo.com/dev/google-ads-api) for general usage of this library.
 - [Core resources](https://opteo.com/dev/google-ads-api/#accountbudget) for the specific fields and methods available per resource.
 
-You can improve it by sending pull requests with edits to [these files](https://github.com/Opteo/google-ads-api/tree/master/docs/content). More instructions [here](https://github.com/Opteo/google-ads-api/tree/master/docs/). All help and feedback welcome!
+You can improve the documentation by sending pull requests with edits to [these files](https://github.com/Opteo/google-ads-api/tree/master/docs/content). More instructions [here](https://github.com/Opteo/google-ads-api/tree/master/docs/). All help and feedback welcome!
 
 # Basic Example
 

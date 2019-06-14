@@ -15,7 +15,7 @@ The `customer.get(resource_name)` method returns the Customer identified by a re
 #### Arguments
 
 - ##### id *required*
-    The ID (aka CID) of that customer, without dashes, of the form `xxxxxxxxxx`.
+    The ID (aka CID) of that customer, without dashes, such as `1231231234`.
 
 
 #### Returns

@@ -28,7 +28,6 @@ let result = await customer.topicConstants.list({
 ;[
   {
     topic_constant: {
-      resource_name: 'topicConstants/115',
       id: 115,
       path: [
         { value: '' },
@@ -39,6 +38,7 @@ let result = await customer.topicConstants.list({
         { value: 'Babies & Toddlers' },
         { value: 'Baby Care & Hygiene' },
       ],
+      resource_name: 'topicConstants/115',
       topic_constant_parent: 'topicConstants/1374',
     },
   },

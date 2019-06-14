@@ -13,7 +13,6 @@ let result = await customer.customerFeeds.get('customers/9262111890/customerFeed
 ```javascript
 // Example result
 ;({
-  resource_name: 'customers/9262111890/customerFeeds/82896692',
   feed: 'customers/9262111890/feeds/82896692',
   matching_function: {
     function_string: 'EQUALS(FEED_ITEM_ID,51840594005)',
@@ -22,6 +21,7 @@ let result = await customer.customerFeeds.get('customers/9262111890/customerFeed
     right_operands: [{ constantOperand: { longValue: { value: 51840594005 } } }],
   },
   placeholder_types: [2],
+  resource_name: 'customers/9262111890/customerFeeds/82896692',
   status: 2,
 })
 ```

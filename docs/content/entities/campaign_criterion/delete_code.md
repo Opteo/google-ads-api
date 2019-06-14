@@ -8,5 +8,5 @@ entity: CampaignCriterion
 ```javascript
 // Deleting the entity
 
-await customer.campaignCriteria.delete('customers/9262111890/campaignCriteria/1599497210~1000')
+await customer.campaignCriteria.delete('customers/9262111890/campaignCriteria/1483704368~1000')
 ```

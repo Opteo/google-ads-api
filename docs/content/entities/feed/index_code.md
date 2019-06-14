@@ -8,7 +8,6 @@ title: Feed
 ```javascript
 // Example Feed
 const feed = {
-  resource_name: 'customers/9262111890/feeds/82896692',
   attributes: [
     { id: { value: 1 }, name: { value: 'SitelinkName' }, type: 4, isPartOfKey: { value: false } },
     { id: { value: 2 }, name: { value: 'SitelinkUrl' }, type: 6, isPartOfKey: { value: false } },
@@ -22,6 +21,7 @@ const feed = {
   id: 82896692,
   name: 'My feed',
   origin: 3,
+  resource_name: 'customers/9262111890/feeds/82896692',
   status: 2,
 }
 ```

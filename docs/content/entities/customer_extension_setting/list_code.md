@@ -28,12 +28,11 @@ let result = await customer.customerExtensionSettings.list({
 ;[
   {
     customer_extension_setting: {
-      resource_name: 'customers/9262111890/customerExtensionSettings/STRUCTURED_SNIPPET',
       extension_feed_items: [{ value: 'customers/9262111890/extensionFeedItems/51842375274' }],
       extension_type: 11,
+      resource_name: 'customers/9262111890/customerExtensionSettings/STRUCTURED_SNIPPET',
     },
     customer: {
-      resource_name: 'customers/9262111890',
       auto_tagging_enabled: false,
       call_reporting_setting: {
         call_conversion_action: 'customers/9262111890/conversionActions/179',
@@ -50,6 +49,7 @@ let result = await customer.customerExtensionSettings.list({
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 797556569 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-797556569\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-797556569');\n</script>\n",
       },
+      resource_name: 'customers/9262111890',
       test_account: true,
       time_zone: 'Europe/London',
     },
