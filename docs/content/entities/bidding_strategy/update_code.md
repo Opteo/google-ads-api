@@ -9,7 +9,7 @@ entity: BiddingStrategy
 // Updating the entity
 
 const bidding_strategy = {
-  resource_name: 'customers/3827277046/biddingStrategies/1534381593', // The resource_name is required
+  resource_name: 'customers/3827277046/biddingStrategies/2039955526', // The resource_name is required
   // ...any other fields that you would like to update
 }
 
@@ -26,7 +26,7 @@ const result = await customer.biddingStrategies.update([bidding_strategy, other_
 
 // Example result
 {
-	results : ['customers/3827277046/biddingStrategies/1534381593'],
+	results : ['customers/3827277046/biddingStrategies/2039955526'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

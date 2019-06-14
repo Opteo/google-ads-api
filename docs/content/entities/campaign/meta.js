@@ -51,6 +51,7 @@ module.exports = {
                     description:
                         'App Campaign for engagement, focused on driving re-engagement with the\napp across several of Google’s top properties including Search, YouTube,\nand the Google Display Network.',
                 },
+                { s: 'SHOPPING_COMPARISON_LISTING_ADS', description: 'Shopping Comparison Listing campaigns.' },
             ],
             _type: 'enum',
         },
@@ -139,6 +140,11 @@ module.exports = {
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
+                {
+                    s: 'COMMISSION',
+                    description:
+                        'Commission is an automatic bidding strategy in which the advertiser pays\na certain portion of the conversion value.',
+                },
                 {
                     s: 'ENHANCED_CPC',
                     description:
@@ -269,12 +275,12 @@ module.exports = {
                     {
                         s: 'DONT_CARE',
                         description:
-                            'Specifies that a user is excluded from seeing the ad if either their\nArea of Interest (AOI) or their Location of Presence (LOP) matches the\ngeo target.',
+                            "Specifies that a user is excluded from seeing the ad if they\nare in, or show interest in, advertiser's excluded locations.",
                     },
                     {
                         s: 'LOCATION_OF_PRESENCE',
                         description:
-                            'Specifies that a user is excluded from seeing the ad\nonly if their Location of Presence (LOP) matches the geo target.',
+                            "Specifies that a user is excluded from seeing the ad if they\nare in advertiser's excluded locations.",
                     },
                 ],
                 _type: 'enum',
@@ -287,17 +293,17 @@ module.exports = {
                     {
                         s: 'DONT_CARE',
                         description:
-                            'Specifies that either Area of Interest (AOI) or\nLocation of Presence (LOP) may trigger the ad.',
+                            "Specifies that an ad is triggered if the user is in,\nor shows interest in, advertiser's targeted locations.",
                     },
                     {
                         s: 'AREA_OF_INTEREST',
                         description:
-                            "Specifies that the ad is triggered only if the user's Area of Interest\n(AOI) matches.",
+                            "Specifies that an ad is triggered if the user\nsearches for advertiser's targeted locations.",
                     },
                     {
                         s: 'LOCATION_OF_PRESENCE',
                         description:
-                            "Specifies that the ad is triggered only if the user's\nLocation of Presence (LOP) matches.",
+                            "Specifies that an ad is triggered if the user is in\nor regularly in advertiser's targeted locations.",
                     },
                 ],
                 _type: 'enum',
@@ -305,6 +311,7 @@ module.exports = {
         },
         hotel_setting: { hotel_center_id: { _description: 'The linked Hotel Center account.', _type: 'int64' } },
         id: { _description: 'The ID of the campaign.', _type: 'int64' },
+        labels: { _description: 'The resource names of labels attached to this campaign.', _type: 'array' },
         manual_cpc: {
             _oneof: 'campaignBiddingStrategy',
             enhanced_cpc_enabled: {

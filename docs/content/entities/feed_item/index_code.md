@@ -59,7 +59,7 @@ const feed_item = {
     },
   ],
   resource_name: 'customers/3827277046/feedItems/43009393~9779152283',
-  status: 2,
+  status: 3,
   url_custom_parameters: [],
 }
 ```

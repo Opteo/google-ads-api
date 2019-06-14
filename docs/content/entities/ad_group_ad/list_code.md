@@ -51,6 +51,7 @@ let result = await customer.adGroupAds.list({
       status: 2,
     },
     ad_group: {
+      base_ad_group: 'customers/9262111890/adGroups/56328868446',
       campaign: 'customers/9262111890/campaigns/1485014801',
       cpc_bid_micros: 1000000,
       cpm_bid_micros: 10000,

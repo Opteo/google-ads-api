@@ -79,7 +79,7 @@ let result = await customer.feedItems.list({
         },
       ],
       resource_name: 'customers/3827277046/feedItems/43009393~9779152283',
-      status: 2,
+      status: 3,
       url_custom_parameters: [],
     },
     ad_group_ad: {
@@ -88,10 +88,10 @@ let result = await customer.feedItems.list({
         display_url: '',
         expanded_text_ad: {
           description: 'Get simple "recommended actions" to maximize your clients\' Adwords performance.',
-          headline_part_1: 'Adwords tool for agencies',
-          headline_part_2: 'Manage all clients in 1 place.',
-          path_1: 'adwords',
-          path_2: 'tool',
+          headline_part1: 'Adwords tool for agencies',
+          headline_part2: 'Manage all clients in 1 place.',
+          path1: 'adwords',
+          path2: 'tool',
         },
         final_app_urls: [],
         final_mobile_urls: [],
@@ -159,7 +159,6 @@ let result = await customer.feedItems.list({
       frequency_caps: [],
       geo_target_type_setting: { negative_geo_target_type: 2, positive_geo_target_type: 4 },
       id: 729684361,
-      labels: [],
       manual_cpc: { enhanced_cpc_enabled: false },
       name: 'My campaign',
       network_settings: {

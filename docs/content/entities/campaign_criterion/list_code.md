@@ -33,6 +33,7 @@ let result = await customer.campaignCriteria.list({
       language: { language_constant: 'languageConstants/1000' },
       negative: false,
       resource_name: 'customers/9262111890/campaignCriteria/1483704368~1000',
+      status: 2,
       type: 20,
     },
     language_constant: {

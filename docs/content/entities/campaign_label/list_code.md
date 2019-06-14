@@ -37,7 +37,7 @@ let result = await customer.campaignLabels.list({
       name: 'My label',
       resource_name: 'customers/3827277046/labels/898377018',
       status: 2,
-      text_label: { background_color: '#CCCCFF', description: '' },
+      text_label: { background_color: '#ccccff', description: '' },
     },
     campaign: {
       ad_serving_optimization_status: 5,

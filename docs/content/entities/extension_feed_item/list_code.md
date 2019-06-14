@@ -48,6 +48,7 @@ let result = await customer.extensionFeedItems.list({
       },
     },
     ad_group: {
+      base_ad_group: 'customers/3827277046/adGroups/37706041185',
       campaign: 'customers/3827277046/campaigns/729684361',
       cpc_bid_micros: 4770000,
       cpm_bid_micros: 10000,

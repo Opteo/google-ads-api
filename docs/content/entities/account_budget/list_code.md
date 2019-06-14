@@ -29,7 +29,7 @@ let result = await customer.accountBudgets.list({
   {
     account_budget: {
       adjusted_spending_limit_type: 2,
-      amount_served_micros: 101340410000,
+      amount_served_micros: 108884540000,
       approved_end_time_type: 3,
       approved_spending_limit_type: 2,
       approved_start_date_time: '2017-01-01 12:22:14',

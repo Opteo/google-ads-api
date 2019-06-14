@@ -52,6 +52,7 @@ let result = await customer.videos.list({
       status: 2,
     },
     ad_group: {
+      base_ad_group: 'customers/3827277046/adGroups/55719719421',
       campaign: 'customers/3827277046/campaigns/1546686126',
       cpc_bid_micros: 0,
       cpm_bid_micros: 10000,

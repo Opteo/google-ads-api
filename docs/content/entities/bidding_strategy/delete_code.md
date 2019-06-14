@@ -8,5 +8,5 @@ entity: BiddingStrategy
 ```javascript
 // Deleting the entity
 
-await customer.biddingStrategies.delete('customers/3827277046/biddingStrategies/1534381593')
+await customer.biddingStrategies.delete('customers/3827277046/biddingStrategies/2039955526')
 ```

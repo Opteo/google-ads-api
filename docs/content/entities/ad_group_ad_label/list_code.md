@@ -63,6 +63,7 @@ let result = await customer.adGroupAdLabels.list({
       text_label: { background_color: '#336666', description: '' },
     },
     ad_group: {
+      base_ad_group: 'customers/3827277046/adGroups/37706041345',
       campaign: 'customers/3827277046/campaigns/729684361',
       cpc_bid_micros: 4770000,
       cpm_bid_micros: 10000,

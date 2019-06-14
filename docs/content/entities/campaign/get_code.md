@@ -23,7 +23,6 @@ let result = await customer.campaigns.get('customers/9262111890/campaigns/156862
   frequency_caps: [],
   geo_target_type_setting: { negative_geo_target_type: 2, positive_geo_target_type: 2 },
   id: 1568629385,
-  labels: [],
   name: 'My campaign',
   network_settings: {
     target_content_network: true,
