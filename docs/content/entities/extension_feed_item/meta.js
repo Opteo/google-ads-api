@@ -412,6 +412,17 @@ module.exports = {
                 _type: 'array',
             },
         },
+        targeted_ad_group: {
+            _description: 'The targeted ad group.',
+            _oneof: 'servingResourceTargeting',
+            _type: 'string',
+        },
+        targeted_campaign: {
+            _description: 'The targeted campaign.',
+            _oneof: 'servingResourceTargeting',
+            _type: 'string',
+        },
+        targeted_geo_target_constant: { _description: 'The targeted geo target constant.', _type: 'string' },
         text_message_feed_item: {
             _oneof: 'extension',
             business_name: {

@@ -9,7 +9,7 @@ entity: AdGroupCriterionLabel
 // Updating the entity
 
 const ad_group_criterion_label = {
-  resource_name: 'customers/1234567890/adGroupCriterionLabels/123123123', // The resource_name is required
+  resource_name: 'customers/3827277046/adGroupCriterionLabels/45808681353~331634074542~3866969030', // The resource_name is required
   // ...any other fields that you would like to update
 }
 
@@ -29,7 +29,7 @@ const result = await customer.adGroupCriterionLabels.update(
 
 // Example result
 {
-	results : ['customers/1234567890/adGroupCriterionLabels/123123123'],
+	results : ['customers/3827277046/adGroupCriterionLabels/45808681353~331634074542~3866969030'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

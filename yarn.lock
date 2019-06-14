@@ -1923,10 +1923,10 @@ globals@^11.1.0:
   resolved "https://registry.yarnpkg.com/globals/-/globals-11.11.0.tgz#dcf93757fa2de5486fbeed7118538adf789e9c2e"
   integrity sha512-WHq43gS+6ufNOEqlrDBxVEbb8ntfXrfAUU2ZOpCxrBdGKW3gyv8mCxAfIBD0DroPKGrJ2eSsXsLtY9MPntsyTw==
 
-google-ads-node@^1.11.1:
-  version "1.11.1"
-  resolved "https://registry.yarnpkg.com/google-ads-node/-/google-ads-node-1.11.1.tgz#f07e0b3509fddbbfa3eef5f09d70db9ddff1377a"
-  integrity sha512-yg11Xg5GW5faqoto0BtHhL/g12JOnNAqf0cmjJNyiXnl/aAsGYV1iJJzISczi35Pb9X4mK6Awkauydzxded21Q==
+google-ads-node@^1.12.3:
+  version "1.12.3"
+  resolved "https://registry.yarnpkg.com/google-ads-node/-/google-ads-node-1.12.3.tgz#2f585f4e589b4494c5cddd99dff11f0edb33126c"
+  integrity sha512-JUPzrbGNK88pbIHtQSRKnlcPFVcNJWdAEFokRRgCaofj2pyNRL9puP7Wn2j5KA8UIdKCc+UBMK6Out1N745Saw==
   dependencies:
     "@types/cosmiconfig" "^5.0.3"
     "@types/google-protobuf" "^3.2.7"
@@ -1936,8 +1936,8 @@ google-ads-node@^1.11.1:
     "@types/protobufjs" "^6.0.0"
     cosmiconfig "^5.2.0"
     google-auth-library "^3.1.0"
-    google-protobuf "^3.7.0-rc.2"
-    grpc "^1.18.0"
+    google-protobuf "^3.8.0"
+    grpc "^1.21.1"
     lodash.camelcase "^4.3.0"
     lodash.get "^4.4.2"
     lodash.set "^4.3.2"
@@ -1966,10 +1966,10 @@ google-p12-pem@^1.0.0:
     node-forge "^0.8.0"
     pify "^4.0.0"
 
-google-protobuf@^3.7.0-rc.2:
-  version "3.7.1"
-  resolved "https://registry.yarnpkg.com/google-protobuf/-/google-protobuf-3.7.1.tgz#9ef0fa3bc9ee416ba3fbe32b21ec6b7626f898e2"
-  integrity sha512-6fvlUey6cNKtWSEn1bt4CT4wc2EID1fVluHS1dOnqIlxyIu3cBid2BvWE8Rwl6wN+hRTgiAKhfyydAGV/weZYQ==
+google-protobuf@^3.8.0:
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/google-protobuf/-/google-protobuf-3.8.0.tgz#4fd2ee3a97751cb543dc5de85ffd264aff9f4980"
+  integrity sha512-tx39PTc//HaIT7K/baUF/8JYLGDozEi1e4xwPP1qSx3InP78cNpbSJpxiDsDMwj77qNOndVBDXnn7oi9zKxZew==
 
 graceful-fs@^4.1.11, graceful-fs@^4.1.2:
   version "4.1.11"
@@ -1986,10 +1986,10 @@ growly@^1.3.0:
   resolved "https://registry.yarnpkg.com/growly/-/growly-1.3.0.tgz#f10748cbe76af964b7c96c93c6bcc28af120c081"
   integrity sha1-8QdIy+dq+WS3yWyTxrzCivEgwIE=
 
-grpc@^1.18.0:
-  version "1.20.2"
-  resolved "https://registry.yarnpkg.com/grpc/-/grpc-1.20.2.tgz#be94dcce68f4756170ff19db5faaaa7d0587d2b2"
-  integrity sha512-sJS1Ri8bxwh2F1IUwJ2c2w5SKY6/cleWuheO8gIvlUbJAtUWZEATVF+QCR4fgNnQWnYWPXm7oEeNoxh/93u9cg==
+grpc@^1.21.1:
+  version "1.21.1"
+  resolved "https://registry.yarnpkg.com/grpc/-/grpc-1.21.1.tgz#541c0f4bccffcf6aef200536179594633d4579cf"
+  integrity sha512-PFsZQazf62nP05a0xm23mlImMuw5oVlqF/0zakmsdqJgvbABe+d6VThY2PfhqJmWEL/FhQ6QNYsxS5EAM6++7g==
   dependencies:
     lodash.camelcase "^4.3.0"
     lodash.clone "^4.5.0"

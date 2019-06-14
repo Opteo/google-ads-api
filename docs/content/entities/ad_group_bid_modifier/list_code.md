@@ -35,6 +35,7 @@ let result = await customer.adGroupBidModifiers.list({
       resource_name: 'customers/9262111890/adGroupBidModifiers/57176985017~30000',
     },
     ad_group: {
+      base_ad_group: 'customers/9262111890/adGroups/57176985017',
       campaign: 'customers/9262111890/campaigns/1485014801',
       cpc_bid_micros: 10000,
       cpm_bid_micros: 10000,

@@ -183,6 +183,11 @@ module.exports = {
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
                 {
+                    s: 'COMMISSION',
+                    description:
+                        'Commission is an automatic bidding strategy in which the advertiser pays\na certain portion of the conversion value.',
+                },
+                {
                     s: 'ENHANCED_CPC',
                     description:
                         'Enhanced CPC is a bidding strategy that raises bids for clicks\nthat seem more likely to lead to a conversion and lowers\nthem for clicks where they seem less likely.',

@@ -40,6 +40,7 @@ module.exports = {
                     { s: 'MOBILE', description: 'Mobile devices with full browsers.' },
                     { s: 'TABLET', description: 'Tablets with full browsers.' },
                     { s: 'DESKTOP', description: 'Computers.' },
+                    { s: 'CONNECTED_TV', description: 'Smart TVs and game consoles.' },
                     { s: 'OTHER', description: 'Other device types.' },
                 ],
                 _type: 'enum',

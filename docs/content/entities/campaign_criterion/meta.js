@@ -127,6 +127,7 @@ module.exports = {
                     { s: 'MOBILE', description: 'Mobile devices with full browsers.' },
                     { s: 'TABLET', description: 'Tablets with full browsers.' },
                     { s: 'DESKTOP', description: 'Computers.' },
+                    { s: 'CONNECTED_TV', description: 'Smart TVs and game consoles.' },
                     { s: 'OTHER', description: 'Other device types.' },
                 ],
                 _type: 'enum',
@@ -326,6 +327,20 @@ module.exports = {
             _description:
                 'The resource name of the campaign criterion. Campaign criterion resource names have the form: <code>customers/{customer_id}/campaignCriteria/{campaign_id}~{criterion_id}</code>',
             _type: 'string',
+        },
+        status: {
+            _description: 'The status of the criterion.',
+            _enums: [
+                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                {
+                    s: 'UNKNOWN',
+                    description: 'The received value is not known in this version.\n\nThis is a response-only value.',
+                },
+                { s: 'ENABLED', description: 'The campaign criterion is enabled.' },
+                { s: 'PAUSED', description: 'The campaign criterion is paused.' },
+                { s: 'REMOVED', description: 'The campaign criterion is removed.' },
+            ],
+            _type: 'enum',
         },
         topic: {
             _oneof: 'criterion',

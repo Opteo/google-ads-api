@@ -53,6 +53,8 @@ let result = await customer.adGroupFeeds.list({
         { id: { value: 3 }, name: { value: 'SitelinkFinalURLFingerprint' }, type: 8, isPartOfKey: { value: false } },
         { id: { value: 4 }, name: { value: 'SitelinkSource' }, type: 2, isPartOfKey: { value: false } },
         { id: { value: 5 }, name: { value: 'SitelinkExtractionReuse' }, type: 2, isPartOfKey: { value: false } },
+        { id: { value: 6 }, name: { value: 'SitelinkDescriptionLine2' }, type: 4, isPartOfKey: { value: false } },
+        { id: { value: 7 }, name: { value: 'SitelinkDescriptionLine3' }, type: 4, isPartOfKey: { value: false } },
       ],
       id: 90651045,
       name: 'My feed',
@@ -61,6 +63,7 @@ let result = await customer.adGroupFeeds.list({
       status: 2,
     },
     ad_group: {
+      base_ad_group: 'customers/3827277046/adGroups/45808681193',
       campaign: 'customers/3827277046/campaigns/881817006',
       cpc_bid_micros: 2720000,
       cpm_bid_micros: 10000,

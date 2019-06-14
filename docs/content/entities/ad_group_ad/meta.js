@@ -126,6 +126,7 @@ module.exports = {
                     { s: 'MOBILE', description: 'Mobile devices with full browsers.' },
                     { s: 'TABLET', description: 'Tablets with full browsers.' },
                     { s: 'DESKTOP', description: 'Computers.' },
+                    { s: 'CONNECTED_TV', description: 'Smart TVs and game consoles.' },
                     { s: 'OTHER', description: 'Other device types.' },
                 ],
                 _type: 'enum',
@@ -527,6 +528,14 @@ module.exports = {
                     _type: 'string',
                 },
             },
+            shopping_comparison_listing_ad: {
+                _oneof: 'adData',
+                headline: {
+                    _description:
+                        'Headline of the ad. This field is required. Allowed length is between 25 and 45 characters.',
+                    _type: 'string',
+                },
+            },
             shopping_product_ad: { _oneof: 'adData' },
             shopping_smart_ad: { _oneof: 'adData' },
             system_managed_resource_source: {
@@ -585,6 +594,7 @@ module.exports = {
                         description: 'The ad is a display upload ad with one of the DYNAMIC_HTML5_* product\ntypes.',
                     },
                     { s: 'APP_ENGAGEMENT_AD', description: 'The ad is an app engagement ad.' },
+                    { s: 'SHOPPING_COMPARISON_LISTING_AD', description: 'The ad is a Shopping Comparison Listing ad.' },
                 ],
                 _type: 'enum',
             },

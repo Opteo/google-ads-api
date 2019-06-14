@@ -40,6 +40,7 @@ let result = await customer.adGroupExtensionSettings.list({
       resource_name: 'customers/3827277046/adGroupExtensionSettings/69639056828~SITELINK',
     },
     ad_group: {
+      base_ad_group: 'customers/3827277046/adGroups/69639056828',
       campaign: 'customers/3827277046/campaigns/954460701',
       cpc_bid_micros: 4500000,
       cpm_bid_micros: 10000,

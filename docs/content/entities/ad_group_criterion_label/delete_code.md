@@ -8,5 +8,7 @@ entity: AdGroupCriterionLabel
 ```javascript
 // Deleting the entity
 
-await customer.adGroupCriterionLabels.delete('customers/1234567890/adGroupCriterionLabels/123123123')
+await customer.adGroupCriterionLabels.delete(
+  'customers/3827277046/adGroupCriterionLabels/45808681353~331634074542~3866969030'
+)
 ```

@@ -7,12 +7,16 @@ entity: AdGroupCriterionLabel
 
 ```javascript
 // Getting the entity
-let result = await customer.adGroupCriterionLabels.get('customers/1234567890/adGroupCriterionLabels/123123123')
+let result = await customer.adGroupCriterionLabels.get(
+  'customers/3827277046/adGroupCriterionLabels/45808681353~331634074542~3866969030'
+)
 ```
 
 ```javascript
-
 // Example result
-(/* Todo: add example get() return here */)
-
+;({
+  ad_group_criterion: 'customers/3827277046/adGroupCriteria/45808681353~331634074542',
+  label: 'customers/3827277046/labels/3866969030',
+  resource_name: 'customers/3827277046/adGroupCriterionLabels/45808681353~331634074542~3866969030',
+})
 ```

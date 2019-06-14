@@ -38,11 +38,12 @@ let result = await customer.adGroupLabels.list({
       resource_name: 'customers/3827277046/labels/3345231412',
       status: 2,
       text_label: {
-        background_color: '#E993EB',
+        background_color: '#e993eb',
         description: 'Adgroups where Chloe will write new ads that kick butt.',
       },
     },
     ad_group: {
+      base_ad_group: 'customers/3827277046/adGroups/69639056828',
       campaign: 'customers/3827277046/campaigns/954460701',
       cpc_bid_micros: 4500000,
       cpm_bid_micros: 10000,

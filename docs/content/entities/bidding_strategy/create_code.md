@@ -25,7 +25,7 @@ const result = await customer.biddingStrategies.create([bidding_strategy, other_
 
 // Example result
 {
-	results : ['customers/3827277046/biddingStrategies/1534381593'],
+	results : ['customers/3827277046/biddingStrategies/2039955526'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

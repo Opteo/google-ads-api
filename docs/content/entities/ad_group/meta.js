@@ -14,6 +14,11 @@ module.exports = {
             ],
             _type: 'enum',
         },
+        base_ad_group: {
+            _description:
+                'For draft or experiment ad groups, this field is the resource name of the base ad group from which this ad group was created. If a draft or experiment ad group does not have a base ad group, then this field is null. For base ad groups, this field equals the ad group resource name. This field is read-only.',
+            _type: 'string',
+        },
         campaign: { _description: 'The campaign to which the ad group belongs.', _type: 'string' },
         cpc_bid_micros: { _description: 'The maximum CPC (cost-per-click) bid.', _type: 'int64' },
         cpm_bid_micros: {
@@ -164,6 +169,10 @@ module.exports = {
                 { s: 'VIDEO_NON_SKIPPABLE_IN_STREAM', description: 'Unskippable in-stream video ads.' },
                 { s: 'VIDEO_OUTSTREAM', description: 'Outstream video ads.' },
                 { s: 'SEARCH_DYNAMIC_ADS', description: 'Ad group type for Dynamic Search Ads ad groups.' },
+                {
+                    s: 'SHOPPING_COMPARISON_LISTING_ADS',
+                    description: 'The type for ad groups in Shopping Comparison Listing campaigns.',
+                },
             ],
             _type: 'enum',
         },

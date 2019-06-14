@@ -61,7 +61,6 @@ let result = await customer.adGroups.list({
       frequency_caps: [],
       geo_target_type_setting: { negative_geo_target_type: 2, positive_geo_target_type: 2 },
       id: 1485014801,
-      labels: [],
       name: 'My campaign',
       network_settings: {
         target_content_network: true,
