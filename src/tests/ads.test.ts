@@ -1,6 +1,30 @@
-import { enums } from '../index'
+import { enums, types } from '../index'
 import { newCustomer, CID, ADGROUP_ID } from '../test_utils'
 const customer = newCustomer()
+
+describe('Text Ads', async () => {
+    it('can create an expanded text ad', async () => {
+        const ad: types.AdGroupAd = {
+            ad_group: `customers/${CID}/adGroups/${ADGROUP_ID}`,
+            status: enums.AdGroupAdStatus.PAUSED,
+            ad: {
+                final_urls: ['http://www.example.com'],
+                expanded_text_ad: {
+                    headline_part1: 'adfasdf',
+                    headline_part2: 'erertert',
+                    headline_part3: 'toutytyiyu',
+                    description: 'asdfasdfasdfadsf asdf asd',
+                    description2: 'asdfasdfasdf',
+                    path1: 'pathq',
+                    path2: 'pathr',
+                },
+            },
+        }
+
+        const { results } = await customer.adGroupAds.create(ad, { validate_only: true })
+        expect(results instanceof Array).toEqual(true)
+    })
+})
 
 describe('Image Ads', async () => {
     it('can upload an image ad', async () => {
