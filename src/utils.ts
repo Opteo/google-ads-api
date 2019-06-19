@@ -35,11 +35,8 @@ export function buildReportQuery(config: ReportOptions) {
               }
           )
         : Object.keys(constraints).map(key => {
-              return {
-                  key,
-                  op: '=',
-                  val: (constraints as any)[key],
-              }
+              const val = (constraints as any)[key]
+              return unrollConstraintShorthand({ [key]: val })
           })
 
     /* ATTRIBUTES */

@@ -99,6 +99,25 @@ describe('buildReportQuery', () => {
         )
     })
 
+    it('should support constraints as objects', () => {
+        const options: ReportOptions = {
+            entity: 'ad_group',
+            attributes: ['ad_group.name'],
+            constraints: {
+                'ad_group.name': 'My AdGroup',
+                'ad_group.status': enums.AdGroupStatus.PAUSED,
+                'metrics.clicks': 0,
+                'campaign.id': [123, 456],
+            },
+        }
+
+        const query = buildReportQuery(options)
+
+        expect(query).toEqual(
+            `SELECT ad_group.name FROM ad_group WHERE ad_group.name = "My AdGroup" AND ad_group.status = "PAUSED" AND campaign.id IN ("123","456") AND metrics.clicks = "0"`
+        )
+    })
+
     it(`should throw an error if "val" is undefined`, () => {
         const id = undefined
 
