@@ -25,7 +25,7 @@ const result = await customer.customInterests.create([custom_interest, other_cus
 
 // Example result
 {
-	results : ['customers/1234567890/customInterests/123123123'],
+	results : ['customers/3827277046/customInterests/13338354'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

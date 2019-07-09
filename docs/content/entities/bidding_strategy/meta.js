@@ -211,7 +211,7 @@ module.exports = {
                 {
                     s: 'PAGE_ONE_PROMOTED',
                     description:
-                        'Page-One Promoted bidding scheme, which sets max cpc bids to\ntarget impressions on page one or page one promoted slots on google.com.',
+                        'Page-One Promoted bidding scheme, which sets max cpc bids to\ntarget impressions on page one or page one promoted slots on google.com.\nThis enum value is deprecated.',
                 },
                 {
                     s: 'PERCENT_CPC',
@@ -236,7 +236,7 @@ module.exports = {
                 {
                     s: 'TARGET_OUTRANK_SHARE',
                     description:
-                        'Target Outrank Share is an automated bidding strategy that sets bids\nbased on the target fraction of auctions where the advertiser\nshould outrank a specific competitor.',
+                        'Target Outrank Share is an automated bidding strategy that sets bids\nbased on the target fraction of auctions where the advertiser\nshould outrank a specific competitor.\nThis enum value is deprecated.',
                 },
                 {
                     s: 'TARGET_ROAS',

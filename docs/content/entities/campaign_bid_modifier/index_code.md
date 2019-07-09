@@ -8,8 +8,8 @@ title: CampaignBidModifier
 ```javascript
 // Example CampaignBidModifier
 const campaign_bid_modifier = {
-  campaign: 'customers/3827277046/campaigns/881817006',
+  campaign: 'customers/3827277046/campaigns/2015922405',
   criterion_id: 8000,
-  resource_name: 'customers/3827277046/campaignBidModifiers/881817006~8000',
+  resource_name: 'customers/3827277046/campaignBidModifiers/2015922405~8000',
 }
 ```

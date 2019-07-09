@@ -8,19 +8,17 @@ entity: Recommendation
 ```javascript
 // Getting the entity
 let result = await customer.recommendations.get(
-  'customers/3827277046/recommendations/MTk5MDY3NzIzLTE2My0xNTYwNDE4MjY4MDAwLSs5NTQzOTUxNzgtNDcwNzU0NDMxMzMtMTAxMzI0MDgzMTkwMTA2MjIwNDI'
+  'customers/3827277046/recommendations/MTk5MDY3NzIzLTExNS0xNTYyNTQwMjkyOTMzLSsyMDE1OTIyNDA1'
 )
 ```
 
 ```javascript
 // Example result
 ;({
-  ad_group: 'customers/3827277046/adGroups/47075443133',
-  campaign: 'customers/3827277046/campaigns/954395178',
-  campaign_budget: 'customers/3827277046/campaignBudgets/1234781036',
-  dismissed: false,
-  resource_name:
-    'customers/3827277046/recommendations/MTk5MDY3NzIzLTE2My0xNTYwNDE4MjY4MDAwLSs5NTQzOTUxNzgtNDcwNzU0NDMxMzMtMTAxMzI0MDgzMTkwMTA2MjIwNDI',
-  type: 3,
+  campaign: 'customers/3827277046/campaigns/2015922405',
+  campaign_budget: 'customers/3827277046/campaignBudgets/2079279762',
+  dismissed: true,
+  resource_name: 'customers/3827277046/recommendations/MTk5MDY3NzIzLTExNS0xNTYyNTQwMjkyOTMzLSsyMDE1OTIyNDA1',
+  type: 8,
 })
 ```

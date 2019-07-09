@@ -210,6 +210,14 @@ const formatEntity = (entity: any, final: any = {}): object => {
 
         if (isObject(value) && !Array.isArray(value)) {
             final[underscore_key] = formatEntity(value, final[underscore_key])
+        } else if (Array.isArray(value)) {
+            final[underscore_key] = value.map(v => {
+                if (isObject(v) && !Array.isArray(v)) {
+                    return formatEntity(v, final[underscore_key])
+                }
+
+                return v
+            })
         } else {
             final[underscore_key] = value
         }

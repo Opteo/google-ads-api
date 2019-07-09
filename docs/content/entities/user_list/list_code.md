@@ -38,9 +38,10 @@ let result = await customer.userLists.list({
         rules: [
           {
             operator: 3,
-            ruleOperandsList: [
-              { userList: { value: 'customers/3827277046/userLists/508846109' } },
-              { userList: { value: 'customers/3827277046/userLists/614318739' } },
+            ruleOperands: [
+              { user: 'customers/3827277046/userLists/814539380' },
+              { user: 'customers/3827277046/userLists/508846109' },
+              { user: 'customers/3827277046/userLists/614318739' },
             ],
           },
         ],
@@ -50,10 +51,10 @@ let result = await customer.userLists.list({
       name: 'My user list',
       read_only: true,
       resource_name: 'customers/3827277046/userLists/509186086',
-      size_for_display: 8,
-      size_for_search: 16,
-      size_range_for_display: 2,
-      size_range_for_search: 2,
+      size_for_display: 5300,
+      size_for_search: 5400,
+      size_range_for_display: 4,
+      size_range_for_search: 4,
       type: 3,
     },
     customer: {
@@ -61,6 +62,7 @@ let result = await customer.userLists.list({
       call_reporting_setting: {
         call_conversion_action: 'customers/3827277046/conversionActions/179',
         call_conversion_reporting_enabled: true,
+        call_reporting_enabled: true,
       },
       conversion_tracking_setting: { conversion_tracking_id: 875176189 },
       currency_code: 'GBP',
@@ -76,8 +78,6 @@ let result = await customer.userLists.list({
       resource_name: 'customers/3827277046',
       test_account: false,
       time_zone: 'Europe/London',
-      tracking_url_template:
-        '{lpurl}?utm_source=adwords&utm_medium=PPC&utm_campaign={campaignid}&utm_term={ifsearch:{keyword}}{ifcontent:{placement}}&utm_content={creative}&network={network}&adgroupid={adgroupid}&matchtype={matchtype}&adposition={adposition}&targetid={targetid}&target={target}&device={device}&devicemodel={devicemodel}',
     },
   },
 ]

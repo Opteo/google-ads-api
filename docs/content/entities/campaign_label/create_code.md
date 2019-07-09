@@ -25,7 +25,7 @@ const result = await customer.campaignLabels.create([campaign_label, other_campa
 
 // Example result
 {
-	results : ['customers/3827277046/campaignLabels/881817006~898377018'],
+	results : ['customers/3827277046/campaignLabels/2015922405~3889728468'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

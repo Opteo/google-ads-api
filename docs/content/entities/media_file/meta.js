@@ -43,7 +43,8 @@ module.exports = {
             _type: 'string',
         },
         source_url: {
-            _description: 'The URL of where the original media file was downloaded from (or a file name).',
+            _description:
+                'The URL of where the original media file was downloaded from (or a file name). Only used for media of type AUDIO and IMAGE.',
             _type: 'string',
         },
         type: {

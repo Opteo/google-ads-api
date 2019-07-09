@@ -77,12 +77,12 @@
         "ts-jest": "^24.0.0",
         "tslint": "^5.12.1",
         "turndown": "^5.0.3",
-        "typescript": "^3.3.1"
+        "typescript": "^3.3.1",
+        "bluebird": "^3.5.2"
     },
     "dependencies": {
-        "bluebird": "^3.5.2",
         "bottleneck": "^2.16.1",
-        "google-ads-node": "^1.12.3",
+        "google-ads-node": "^1.13.1",
         "lodash": "^4.17.11",
         "redis": "^2.8.0",
         "request": "^2.88.0"

@@ -46,6 +46,7 @@ describe('Error', async () => {
                 pageToken: '',
                 pageSize: 10000,
                 validateOnly: false,
+                returnSummaryRow: false,
             })
             expect(typeof err.request_id).toBe('string')
         }

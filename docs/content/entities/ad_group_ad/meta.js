@@ -404,6 +404,11 @@ module.exports = {
                     'The name of the ad. This is only used to be able to identify the ad. It does not need to be unique and does not affect the served ad.',
                 _type: 'string',
             },
+            resource_name: {
+                _description:
+                    'The resource name of the ad. Ad resource names have the form: <code>customers/{customer_id}/ads/{ad_id}</code>',
+                _type: 'string',
+            },
             responsive_display_ad: {
                 _oneof: 'adData',
                 accent_color: {
@@ -610,7 +615,12 @@ module.exports = {
             },
             video_ad: {
                 _oneof: 'adData',
-                bumper: {},
+                bumper: {
+                    companion_banner: {
+                        _description: 'The MediaFile resource name of the companion banner used with the ad.',
+                        _type: 'string',
+                    },
+                },
                 in_stream: {
                     action_button_label: {
                         _description:
@@ -628,7 +638,12 @@ module.exports = {
                     },
                 },
                 media_file: { _description: 'The MediaFile resource to use for the video.', _type: 'string' },
-                non_skippable: {},
+                non_skippable: {
+                    companion_banner: {
+                        _description: 'The MediaFile resource name of the companion banner used with the ad.',
+                        _type: 'string',
+                    },
+                },
                 out_stream: {
                     description: { _description: 'The description line.', _type: 'string' },
                     headline: { _description: 'The headline of the ad.', _type: 'string' },

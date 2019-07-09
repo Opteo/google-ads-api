@@ -10,8 +10,8 @@ title: FeedMapping
 const feed_mapping = {
   attribute_field_mappings: [
     {
-      feedAttributeId: { value: 1 },
-      fieldId: { value: 1 },
+      feedAttributeId: 1,
+      fieldId: 1,
       sitelinkField: 2,
       callField: 0,
       appField: 0,
@@ -35,8 +35,8 @@ const feed_mapping = {
       jobField: 0,
     },
     {
-      feedAttributeId: { value: 2 },
-      fieldId: { value: 2 },
+      feedAttributeId: 2,
+      fieldId: 2,
       sitelinkField: 1,
       callField: 0,
       appField: 0,
@@ -60,8 +60,8 @@ const feed_mapping = {
       jobField: 0,
     },
     {
-      feedAttributeId: { value: 3 },
-      fieldId: { value: 3 },
+      feedAttributeId: 3,
+      fieldId: 3,
       sitelinkField: 3,
       callField: 0,
       appField: 0,
@@ -85,8 +85,8 @@ const feed_mapping = {
       jobField: 0,
     },
     {
-      feedAttributeId: { value: 4 },
-      fieldId: { value: 4 },
+      feedAttributeId: 4,
+      fieldId: 4,
       sitelinkField: 4,
       callField: 0,
       appField: 0,
@@ -110,8 +110,8 @@ const feed_mapping = {
       jobField: 0,
     },
     {
-      feedAttributeId: { value: 5 },
-      fieldId: { value: 5 },
+      feedAttributeId: 5,
+      fieldId: 5,
       sitelinkField: 5,
       callField: 0,
       appField: 0,
@@ -135,8 +135,8 @@ const feed_mapping = {
       jobField: 0,
     },
     {
-      feedAttributeId: { value: 6 },
-      fieldId: { value: 6 },
+      feedAttributeId: 6,
+      fieldId: 6,
       sitelinkField: 6,
       callField: 0,
       appField: 0,
@@ -160,8 +160,8 @@ const feed_mapping = {
       jobField: 0,
     },
     {
-      feedAttributeId: { value: 7 },
-      fieldId: { value: 7 },
+      feedAttributeId: 7,
+      fieldId: 7,
       sitelinkField: 7,
       callField: 0,
       appField: 0,
@@ -185,8 +185,8 @@ const feed_mapping = {
       jobField: 0,
     },
     {
-      feedAttributeId: { value: 8 },
-      fieldId: { value: 8 },
+      feedAttributeId: 8,
+      fieldId: 8,
       sitelinkField: 8,
       callField: 0,
       appField: 0,

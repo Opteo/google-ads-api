@@ -184,7 +184,7 @@ export default class Service {
             // Always return results as an array for consistency
             results: is_single_result
                 ? [response.result.resource_name]
-                : response.results_list.map((r: any) => r.resourceName),
+                : response.results_list.map((r: any) => r.resource_name),
         }
     }
 

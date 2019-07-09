@@ -4,7 +4,7 @@ module.exports = {
         attribute_values: { _description: "The feed item's attribute values.", _type: 'array' },
         end_date_time: {
             _description:
-                'End time in which this feed item is no longer effective and will stop serving. The format is "YYYY-MM-DD HH:MM:SS". Examples: "2018-03-05 09:15:00" or "2018-02-01 14:34:30"',
+                'End time in which this feed item is no longer effective and will stop serving. The time is in the customer\'s time zone. The format is "YYYY-MM-DD HH:MM:SS". Examples: "2018-03-05 09:15:00" or "2018-02-01 14:34:30"',
             _type: 'string',
         },
         feed: { _description: 'The feed to which this feed item belongs.', _type: 'string' },
@@ -33,7 +33,7 @@ module.exports = {
         },
         start_date_time: {
             _description:
-                'Start time in which this feed item is effective and can begin serving. The format is "YYYY-MM-DD HH:MM:SS". Examples: "2018-03-05 09:15:00" or "2018-02-01 14:34:30"',
+                'Start time in which this feed item is effective and can begin serving. The time is in the customer\'s time zone. The format is "YYYY-MM-DD HH:MM:SS". Examples: "2018-03-05 09:15:00" or "2018-02-01 14:34:30"',
             _type: 'string',
         },
         status: {

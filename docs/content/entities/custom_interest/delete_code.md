@@ -8,5 +8,5 @@ entity: CustomInterest
 ```javascript
 // Deleting the entity
 
-await customer.customInterests.delete('customers/1234567890/customInterests/123123123')
+await customer.customInterests.delete('customers/3827277046/customInterests/13338354')
 ```

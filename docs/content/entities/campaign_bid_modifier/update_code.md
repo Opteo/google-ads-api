@@ -9,7 +9,7 @@ entity: CampaignBidModifier
 // Updating the entity
 
 const campaign_bid_modifier = {
-  resource_name: 'customers/3827277046/campaignBidModifiers/881817006~8000', // The resource_name is required
+  resource_name: 'customers/3827277046/campaignBidModifiers/2015922405~8000', // The resource_name is required
   // ...any other fields that you would like to update
 }
 
@@ -26,7 +26,7 @@ const result = await customer.campaignBidModifiers.update([campaign_bid_modifier
 
 // Example result
 {
-	results : ['customers/3827277046/campaignBidModifiers/881817006~8000'],
+	results : ['customers/3827277046/campaignBidModifiers/2015922405~8000'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

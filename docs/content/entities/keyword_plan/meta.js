@@ -18,8 +18,14 @@ module.exports = {
                 _type: 'enum',
             },
             date_range: {
-                end_date: { _description: 'The end date, in yyyy-mm-dd format.', _type: 'string' },
-                start_date: { _description: 'The start date, in yyyy-mm-dd format.', _type: 'string' },
+                end_date: {
+                    _description: 'The end date, in yyyy-mm-dd format. This date is inclusive.',
+                    _type: 'string',
+                },
+                start_date: {
+                    _description: 'The start date, in yyyy-mm-dd format. This date is inclusive.',
+                    _type: 'string',
+                },
             },
         },
         id: { _description: 'The ID of the keyword plan.', _type: 'int64' },

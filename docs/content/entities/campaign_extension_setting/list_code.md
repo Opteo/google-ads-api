@@ -30,10 +30,10 @@ let result = await customer.campaignExtensionSettings.list({
     campaign_extension_setting: {
       campaign: 'customers/9262111890/campaigns/1483704368',
       extension_feed_items: [
-        { value: 'customers/9262111890/extensionFeedItems/51842193961' },
-        { value: 'customers/9262111890/extensionFeedItems/51842200495' },
-        { value: 'customers/9262111890/extensionFeedItems/51844020102' },
-        { value: 'customers/9262111890/extensionFeedItems/51844028388' },
+        'customers/9262111890/extensionFeedItems/51842193961',
+        'customers/9262111890/extensionFeedItems/51842200495',
+        'customers/9262111890/extensionFeedItems/51844020102',
+        'customers/9262111890/extensionFeedItems/51844028388',
       ],
       extension_type: 10,
       resource_name: 'customers/9262111890/campaignExtensionSettings/1483704368~SITELINK',
@@ -47,8 +47,9 @@ let result = await customer.campaignExtensionSettings.list({
       end_date: '2037-12-30',
       experiment_type: 2,
       frequency_caps: [],
-      geo_target_type_setting: { negative_geo_target_type: 2, positive_geo_target_type: 2 },
+      geo_target_type_setting: { negative_geo_target_type: 4, positive_geo_target_type: 5 },
       id: 1483704368,
+      labels: [],
       name: 'My campaign',
       network_settings: {
         target_content_network: false,

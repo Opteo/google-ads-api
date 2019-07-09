@@ -8,5 +8,5 @@ entity: CampaignBidModifier
 ```javascript
 // Deleting the entity
 
-await customer.campaignBidModifiers.delete('customers/3827277046/campaignBidModifiers/881817006~8000')
+await customer.campaignBidModifiers.delete('customers/3827277046/campaignBidModifiers/2015922405~8000')
 ```
