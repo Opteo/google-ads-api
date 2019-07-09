@@ -3,26 +3,60 @@ import { newCustomer, CID, ADGROUP_ID } from '../test_utils'
 const customer = newCustomer()
 
 describe('Text Ads', async () => {
-    it('can create an expanded text ad', async () => {
-        const ad: types.AdGroupAd = {
-            ad_group: `customers/${CID}/adGroups/${ADGROUP_ID}`,
-            status: enums.AdGroupAdStatus.PAUSED,
-            ad: {
-                final_urls: ['http://www.example.com'],
-                expanded_text_ad: {
-                    headline_part1: 'adfasdf',
-                    headline_part2: 'erertert',
-                    headline_part3: 'toutytyiyu',
-                    description: 'asdfasdfasdfadsf asdf asd',
-                    description2: 'asdfasdfasdf',
-                    path1: 'pathq',
-                    path2: 'pathr',
-                },
-            },
-        }
+    let adgroup_ad_rn = ''
+    let ad_rn = ''
 
-        const { results } = await customer.adGroupAds.create(ad, { validate_only: true })
+    const ad: types.AdGroupAd = {
+        ad_group: `customers/${CID}/adGroups/${ADGROUP_ID}`,
+        status: enums.AdGroupAdStatus.PAUSED,
+        ad: {
+            final_urls: ['http://www.example.com'],
+            expanded_text_ad: {
+                headline_part1: 'adfasdf',
+                headline_part2: 'erertert',
+                headline_part3: 'toutytyiyu',
+                description: 'asdfasdfasdfadsf asdf asd',
+                description2: 'asdfasdfasdf',
+                path1: 'pathq',
+                path2: 'pathr',
+            },
+        },
+    }
+
+    it('can create an expanded text ad', async () => {
+        const { results } = await customer.adGroupAds.create(ad, { validate_only: false })
         expect(results instanceof Array).toEqual(true)
+
+        adgroup_ad_rn = results[0]
+
+        const ad_id = adgroup_ad_rn.split('/')[3].split('~')[1]
+        const customer_id = adgroup_ad_rn.split('/')[1]
+
+        ad_rn = `customers/${customer_id}/ads/${ad_id}`
+    })
+
+    // TODO: make this work and publish new docs for it
+
+    // it('can edit the ad using the adService (no metrics reset)', async () => {
+    //     const returned_ad = await customer.ads.update({
+    //         resource_name: ad_rn,
+    //         // final_urls: ['other_headline'],
+    //         expanded_text_ad: {
+    //             headline_part1: 'hello',
+    //         },
+    //     })
+
+    //     console.log(returned_ad)
+    // })
+
+    it('can get the ad via the adService', async () => {
+        const returned_ad = await customer.ads.get(ad_rn)
+        // console.log(returned_ad)
+        expect(returned_ad).toEqual(expect.objectContaining(ad.ad!))
+    })
+
+    it('can delete the ad', async () => {
+        await customer.adGroupAds.delete(adgroup_ad_rn)
     })
 })
 
