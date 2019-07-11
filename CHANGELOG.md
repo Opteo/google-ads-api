@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+
+# 3.0.0 (2019-07-11)
+
+
+### Breaking Changes
+
+* **breaking:** Support for the new version of the Google Ads API, v2. Here are google's  migration docs: https://developers.google.com/google-ads/api/docs/migration-v1-v2
+* **breaking:** Simplified our parsing of arrays in query/report responses. For example, `final_urls : [{ value : 'hello.com' }]` will now by `final_urls : [ 'hello.com' ]`.
+
+### Features
+
+* **Better errors for partial_failure**: When using `partial_failure = true`, the response object will now contain an `errors` array containing any errors your operations may have encountered.
+
+
 # [2.3.0](https://github.com/Opteo/google-ads-api/compare/v2.2.0...v2.3.0) (2019-06-14)
 
 
