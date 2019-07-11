@@ -7,7 +7,7 @@ import { ServiceCreateOptions } from '../types'
 /**
  * @constants
  */
-const RESOURCE_URL_NAME = 'Ads'
+const RESOURCE_URL_NAME = 'ads'
 const MUTATE_METHOD = 'mutateAds'
 const MUTATE_REQUEST = 'MutateAdsRequest'
 const OPERATION_REQUEST = 'AdOperation'

@@ -4,7 +4,7 @@ import * as fields from 'google-ads-node/build/lib/fields'
 import { getFieldMask } from 'google-ads-node/build/lib/utils'
 
 import GrpcClient from '../grpc'
-import { formatQueryResults, buildReportQuery, parseResult } from '../utils'
+import { formatQueryResults, buildReportQuery, parseResult, parsePartialFailureErrors } from '../utils'
 import { ServiceListOptions, ServiceCreateOptions } from '../types'
 import { GrpcError } from '../error'
 import { ReportOptions, PreReportHook, PostReportHook } from '../types'
@@ -178,6 +178,10 @@ export default class Service {
 
         const is_single_result = response.hasOwnProperty(`result`)
 
+        if (response.partial_failure_error) {
+            response.partial_failure_error.errors = parsePartialFailureErrors(response.partial_failure_error.errors)
+        }
+
         return {
             request: request.toObject(),
             partial_failure_error: response.partial_failure_error,
@@ -193,6 +197,12 @@ export default class Service {
         try {
             const response = await service.mutate(request)
             const parsed_results = this.parseServiceResults([response])[0] as any
+
+            if (parsed_results.partial_failure_error) {
+                parsed_results.partial_failure_error.errors = parsePartialFailureErrors(
+                    parsed_results.partial_failure_error.errors
+                )
+            }
             return {
                 request: request.toObject(),
                 partial_failure_error: parsed_results.partial_failure_error,

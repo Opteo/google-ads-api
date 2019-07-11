@@ -278,3 +278,15 @@ export function getEnumString(type: string, value: number): string {
     }
     return e[value]
 }
+
+export function parsePartialFailureErrors(errors: any[]) {
+    return errors.map((error: any) => {
+        for (const key in error.error_code as any) {
+            if ((error.error_code as any)[key] === 0) {
+                delete (error.error_code as any)[key]
+            }
+        }
+
+        return error
+    })
+}
