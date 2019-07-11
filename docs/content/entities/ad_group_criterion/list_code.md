@@ -53,6 +53,7 @@ let result = await customer.adGroupCriteria.list({
       cpv_bid_micros: 0,
       effective_target_cpa_micros: 0,
       id: 60170225920,
+      labels: [],
       name: 'My ad group',
       resource_name: 'customers/9262111890/adGroups/60170225920',
       status: 2,
@@ -69,8 +70,9 @@ let result = await customer.adGroupCriteria.list({
       end_date: '2037-12-30',
       experiment_type: 2,
       frequency_caps: [],
-      geo_target_type_setting: { negative_geo_target_type: 2, positive_geo_target_type: 2 },
+      geo_target_type_setting: { negative_geo_target_type: 4, positive_geo_target_type: 5 },
       id: 1485014801,
+      labels: [],
       name: 'My campaign',
       network_settings: {
         target_content_network: true,

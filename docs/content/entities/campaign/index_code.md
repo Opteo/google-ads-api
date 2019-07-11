@@ -16,8 +16,9 @@ const campaign = {
   end_date: '2037-12-30',
   experiment_type: 2,
   frequency_caps: [],
-  geo_target_type_setting: { negative_geo_target_type: 2, positive_geo_target_type: 2 },
+  geo_target_type_setting: { negative_geo_target_type: 4, positive_geo_target_type: 5 },
   id: 1568629385,
+  labels: [],
   name: 'My campaign',
   network_settings: {
     target_content_network: true,

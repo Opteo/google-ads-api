@@ -9,7 +9,7 @@ entity: CampaignLabel
 // Updating the entity
 
 const campaign_label = {
-  resource_name: 'customers/3827277046/campaignLabels/881817006~898377018', // The resource_name is required
+  resource_name: 'customers/3827277046/campaignLabels/2015922405~3889728468', // The resource_name is required
   // ...any other fields that you would like to update
 }
 
@@ -26,7 +26,7 @@ const result = await customer.campaignLabels.update([campaign_label, other_campa
 
 // Example result
 {
-	results : ['customers/3827277046/campaignLabels/881817006~898377018'],
+	results : ['customers/3827277046/campaignLabels/2015922405~3889728468'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

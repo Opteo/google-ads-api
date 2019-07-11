@@ -43,7 +43,7 @@ const { results } = await customer.mutateResources([
 console.log(results) // ['customers/123/campaignBudgets/123123', 'customers/123/campaigns/321321']
 ```
 
-By default, `mutateResources` is atomic and will rollback if one operation fails -- no new resources will be added to the client account if one operation fails. This mode can be disabled by setting the `partial_failure` option to `true`. The `validate_only` option is also supported in this method. See the [Google Ads API documentation](https://developers.google.com/google-ads/api/reference/rpc/google.ads.googleads.v1.services#google.ads.googleads.v1.services.MutateGoogleAdsRequest) for more details on these settings.
+By default, `mutateResources` is atomic and will rollback if one operation fails -- no new resources will be added to the client account if one operation fails. This mode can be disabled by setting the `partial_failure` option to `true`. The `validate_only` option is also supported in this method. See the [Google Ads API documentation](https://developers.google.com/google-ads/api/reference/rpc/google.ads.googleads.2.services#google.ads.googleads.v2.services.MutateGoogleAdsRequest) for more details on these settings.
 
 ```javascript
 await customer.mutateResources(operations, { partial_failure: true })

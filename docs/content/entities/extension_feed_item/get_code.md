@@ -7,29 +7,23 @@ entity: ExtensionFeedItem
 
 ```javascript
 // Getting the entity
-let result = await customer.extensionFeedItems.get('customers/3827277046/extensionFeedItems/13881705221')
+let result = await customer.extensionFeedItems.get('customers/3827277046/extensionFeedItems/13882206517')
 ```
 
 ```javascript
 // Example result
 ;({
   ad_schedules: [],
-  extension_type: 11,
-  resource_name: 'customers/3827277046/extensionFeedItems/13881705221',
-  status: 2,
-  structured_snippet_feed_item: {
-    header: 'Types',
-    values: [
-      { value: 'Ad Testing' },
-      { value: 'Bid Optimization' },
-      { value: 'Account Structuring' },
-      { value: 'Search Query Analysis' },
-      { value: 'LP Error Detection' },
-      { value: 'Ad Extension Management' },
-      { value: 'QS Optimization' },
-      { value: 'Segment Analysis' },
-      { value: 'Performance Monitoring' },
-    ],
+  call_feed_item: {
+    call_conversion_action: 'customers/3827277046/conversionActions/179',
+    call_conversion_reporting_state: 4,
+    call_conversion_tracking_disabled: false,
+    call_tracking_enabled: true,
+    country_code: 'GB',
+    phone_number: '02035751125',
   },
+  extension_type: 4,
+  resource_name: 'customers/3827277046/extensionFeedItems/13882206517',
+  status: 2,
 })
 ```

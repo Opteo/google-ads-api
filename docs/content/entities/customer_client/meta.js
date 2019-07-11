@@ -7,7 +7,7 @@ module.exports = {
         },
         hidden: {
             _description:
-                'Specifies whether this is a hidden account. Learn more about hidden accounts <a href="https://support.google.com/google-ads/answer/7519830">here</a>. Read only.',
+                'Specifies whether this is a <a href="https://support.google.com/google-ads/answer/7519830">hidden account</a>. Read only.',
             _type: 'boolean',
         },
         level: {

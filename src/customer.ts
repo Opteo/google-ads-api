@@ -4,6 +4,7 @@ import CampaignBudgetService from './services/campaign_budget'
 import AdGroupService from './services/ad_group'
 import AccountBudgetProposalService from './services/account_budget_proposal'
 import AccountBudgetService from './services/account_budget'
+import AdService from './services/ad'
 import AdGroupAdLabelService from './services/ad_group_ad_label'
 import AdGroupAdService from './services/ad_group_ad'
 import AdGroupBidModifierService from './services/ad_group_bid_modifier'
@@ -109,6 +110,7 @@ export interface CustomerInstance {
     adGroups: AdGroupService
     accountBudgetProposals: AccountBudgetProposalService
     accountBudgets: AccountBudgetService
+    ads: AdService
     adGroupAdLabels: AdGroupAdLabelService
     adGroupAds: AdGroupAdService
     adGroupBidModifiers: AdGroupBidModifierService
@@ -200,6 +202,7 @@ export default function Customer(
             'AccountBudgetProposalService'
         ),
         accountBudgets: new AccountBudgetService(cid, client, throttler, 'AccountBudgetService'),
+        ads: new AdService(cid, client, throttler, 'AdService'),
         adGroupAdLabels: new AdGroupAdLabelService(cid, client, throttler, 'AdGroupAdLabelService'),
         adGroupAds: new AdGroupAdService(cid, client, throttler, 'AdGroupAdService'),
         adGroupBidModifiers: new AdGroupBidModifierService(cid, client, throttler, 'AdGroupBidModifierService'),

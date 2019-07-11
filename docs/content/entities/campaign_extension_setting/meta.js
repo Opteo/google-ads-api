@@ -40,7 +40,6 @@ module.exports = {
                 { s: 'MESSAGE', description: 'Message.' },
                 { s: 'PRICE', description: 'Price.' },
                 { s: 'PROMOTION', description: 'Promotion.' },
-                { s: 'REVIEW', description: 'Review.' },
                 { s: 'SITELINK', description: 'Sitelink.' },
                 { s: 'STRUCTURED_SNIPPET', description: 'Structured snippet.' },
                 { s: 'LOCATION', description: 'Location.' },

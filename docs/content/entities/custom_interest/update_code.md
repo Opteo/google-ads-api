@@ -9,7 +9,7 @@ entity: CustomInterest
 // Updating the entity
 
 const custom_interest = {
-  resource_name: 'customers/1234567890/customInterests/123123123', // The resource_name is required
+  resource_name: 'customers/3827277046/customInterests/13338354', // The resource_name is required
   // ...any other fields that you would like to update
 }
 
@@ -26,7 +26,7 @@ const result = await customer.customInterests.update([custom_interest, other_cus
 
 // Example result
 {
-	results : ['customers/1234567890/customInterests/123123123'],
+	results : ['customers/3827277046/customInterests/13338354'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

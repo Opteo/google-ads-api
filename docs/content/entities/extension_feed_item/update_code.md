@@ -9,7 +9,7 @@ entity: ExtensionFeedItem
 // Updating the entity
 
 const extension_feed_item = {
-  resource_name: 'customers/3827277046/extensionFeedItems/13881705221', // The resource_name is required
+  resource_name: 'customers/3827277046/extensionFeedItems/13882206517', // The resource_name is required
   // ...any other fields that you would like to update
 }
 
@@ -26,7 +26,7 @@ const result = await customer.extensionFeedItems.update([extension_feed_item, ot
 
 // Example result
 {
-	results : ['customers/3827277046/extensionFeedItems/13881705221'],
+	results : ['customers/3827277046/extensionFeedItems/13882206517'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

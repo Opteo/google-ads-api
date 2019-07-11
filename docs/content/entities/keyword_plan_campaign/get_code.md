@@ -18,7 +18,7 @@ let result = await customer.keywordPlanCampaigns.get('customers/3827277046/keywo
   id: 4773388,
   keyword_plan: 'customers/3827277046/keywordPlans/4739396',
   keyword_plan_network: 2,
-  language_constants: [{ value: 'languageConstants/1000' }],
+  language_constants: ['languageConstants/1000'],
   name: 'My keyword plan campaign',
   resource_name: 'customers/3827277046/keywordPlanCampaigns/4773388',
 })

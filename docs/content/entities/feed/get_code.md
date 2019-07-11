@@ -14,14 +14,14 @@ let result = await customer.feeds.get('customers/9262111890/feeds/82896692')
 // Example result
 ;({
   attributes: [
-    { id: { value: 1 }, name: { value: 'SitelinkName' }, type: 4, isPartOfKey: { value: false } },
-    { id: { value: 2 }, name: { value: 'SitelinkUrl' }, type: 6, isPartOfKey: { value: false } },
-    { id: { value: 3 }, name: { value: 'SitelinkDescription1' }, type: 4, isPartOfKey: { value: false } },
-    { id: { value: 4 }, name: { value: 'SitelinkDescription2' }, type: 4, isPartOfKey: { value: false } },
-    { id: { value: 5 }, name: { value: 'SitelinkFinalUrls' }, type: 12, isPartOfKey: { value: false } },
-    { id: { value: 6 }, name: { value: 'SitelinkFinalMobileUrls' }, type: 12, isPartOfKey: { value: false } },
-    { id: { value: 7 }, name: { value: 'SitelinkTrackingUrl' }, type: 6, isPartOfKey: { value: false } },
-    { id: { value: 8 }, name: { value: 'SitelinkFinalUrlSuffix' }, type: 4, isPartOfKey: { value: false } },
+    { id: 1, name: 'SitelinkName', type: 4, isPartOfKey: false },
+    { id: 2, name: 'SitelinkUrl', type: 6, isPartOfKey: false },
+    { id: 3, name: 'SitelinkDescription1', type: 4, isPartOfKey: false },
+    { id: 4, name: 'SitelinkDescription2', type: 4, isPartOfKey: false },
+    { id: 5, name: 'SitelinkFinalUrls', type: 12, isPartOfKey: false },
+    { id: 6, name: 'SitelinkFinalMobileUrls', type: 12, isPartOfKey: false },
+    { id: 7, name: 'SitelinkTrackingUrl', type: 6, isPartOfKey: false },
+    { id: 8, name: 'SitelinkFinalUrlSuffix', type: 4, isPartOfKey: false },
   ],
   id: 82896692,
   name: 'My feed',

@@ -26,6 +26,7 @@ module.exports = {
                     { s: 'VIDEO_NOT_YET_RATED', description: 'Content rating: not yet rated.' },
                     { s: 'EMBEDDED_VIDEO', description: 'Embedded video.' },
                     { s: 'LIVE_STREAMING_VIDEO', description: 'Live streaming video.' },
+                    { s: 'SOCIAL_ISSUES', description: 'Sensitive social issues.' },
                 ],
                 _type: 'enum',
             },

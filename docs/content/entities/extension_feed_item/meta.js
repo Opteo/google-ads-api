@@ -29,7 +29,7 @@ module.exports = {
                 _type: 'string',
             },
             app_store: {
-                _description: 'The application store that the target application belongs to.',
+                _description: 'The application store that the target application belongs to. This field is required.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -50,12 +50,13 @@ module.exports = {
                 _type: 'string',
             },
             final_urls: {
-                _description: 'A list of possible final URLs after all cross domain redirects.',
+                _description:
+                    'A list of possible final URLs after all cross domain redirects. This list must not be empty.',
                 _type: 'array',
             },
             link_text: {
                 _description:
-                    'The visible text displayed when the link is rendered in an ad. The length of this string should be between 1 and 25, inclusive.',
+                    'The visible text displayed when the link is rendered in an ad. This string must not be empty, and the length of this string should be between 1 and 25, inclusive.',
                 _type: 'string',
             },
             tracking_url_template: {
@@ -134,7 +135,7 @@ module.exports = {
         },
         end_date_time: {
             _description:
-                'End time in which this feed item is no longer effective and will stop serving. The format is "YYYY-MM-DD HH:MM:SS". Examples: "2018-03-05 09:15:00" or "2018-02-01 14:34:30"',
+                'End time in which this feed item is no longer effective and will stop serving. The time is in the customer\'s time zone. The format is "YYYY-MM-DD HH:MM:SS". Examples: "2018-03-05 09:15:00" or "2018-02-01 14:34:30"',
             _type: 'string',
         },
         extension_type: {
@@ -149,7 +150,6 @@ module.exports = {
                 { s: 'MESSAGE', description: 'Message.' },
                 { s: 'PRICE', description: 'Price.' },
                 { s: 'PROMOTION', description: 'Promotion.' },
-                { s: 'REVIEW', description: 'Review.' },
                 { s: 'SITELINK', description: 'Sitelink.' },
                 { s: 'STRUCTURED_SNIPPET', description: 'Structured snippet.' },
                 { s: 'LOCATION', description: 'Location.' },
@@ -391,7 +391,7 @@ module.exports = {
         },
         start_date_time: {
             _description:
-                'Start time in which this feed item is effective and can begin serving. The format is "YYYY-MM-DD HH:MM:SS". Examples: "2018-03-05 09:15:00" or "2018-02-01 14:34:30"',
+                'Start time in which this feed item is effective and can begin serving. The time is in the customer\'s time zone. The format is "YYYY-MM-DD HH:MM:SS". Examples: "2018-03-05 09:15:00" or "2018-02-01 14:34:30"',
             _type: 'string',
         },
         status: {
@@ -423,6 +423,23 @@ module.exports = {
             _type: 'string',
         },
         targeted_geo_target_constant: { _description: 'The targeted geo target constant.', _type: 'string' },
+        targeted_keyword: {
+            match_type: {
+                _description: 'The match type of the keyword.',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    {
+                        s: 'UNKNOWN',
+                        description: 'Used for return value only. Represents value unknown in this version.',
+                    },
+                    { s: 'EXACT', description: 'Exact match.' },
+                    { s: 'PHRASE', description: 'Phrase match.' },
+                    { s: 'BROAD', description: 'Broad match.' },
+                ],
+                _type: 'enum',
+            },
+            text: { _description: 'The text of the keyword (at most 80 characters and 10 words).', _type: 'string' },
+        },
         text_message_feed_item: {
             _oneof: 'extension',
             business_name: {

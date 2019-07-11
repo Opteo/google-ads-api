@@ -5,8 +5,8 @@
     1. Update google-ads-node in package.json
     1.1 Update badge version in readme.md + container.jsx
     2. yarn && yarn build
-    3. update scripts/schema.json (https://googleads.googleapis.com/$discovery/rest?version=v1)
-    4. update compiled_resources.json by running `pbjs -t json googleapis/google/rpc/*.proto googleapis/google/longrunning/*.proto googleapis//google/ads/googleads/v1/common/*.proto googleapis//google/ads/googleads/v1/errors/*.proto googleapis//google/ads/googleads/v1/enums/*.proto googleapis//google/ads/googleads/v1/resources/*.proto googleapis//google/ads/googleads/v1/services/*.proto > compiled_resources.json`
+    3. update scripts/schema.json (https://googleads.googleapis.com/$discovery/rest?version=v2)
+    4. update compiled_resources.json by running `pbjs -t json googleapis/google/rpc/*.proto googleapis/google/longrunning/*.proto googleapis//google/ads/googleads/v2/common/*.proto googleapis//google/ads/googleads/v2/errors/*.proto googleapis//google/ads/googleads/v2/enums/*.proto googleapis//google/ads/googleads/v2/resources/*.proto googleapis//google/ads/googleads/v2/services/*.proto > compiled_resources.json`
     5. clear the .cache folder in the root of this project to make sure you get new examples from our test account
 
 */
@@ -155,22 +155,22 @@ const method_compilers = {}
 
 const $RefParser = require('json-schema-ref-parser')
 
-// get this from https://googleads.googleapis.com/$discovery/rest?version=v1
+// get this from https://googleads.googleapis.com/$discovery/rest?version=v2
 const raw_schema = require('./schema.json')
 
 // TODO: get this from google-ads-node
 // To regenerate this file, run (in google-ads-node):
-// pbjs -t json googleapis/google/rpc/*.proto googleapis/google/longrunning/*.proto googleapis//google/ads/googleads/v1/common/*.proto googleapis//google/ads/googleads/v1/errors/*.proto googleapis//google/ads/googleads/v1/enums/*.proto googleapis//google/ads/googleads/v1/resources/*.proto googleapis//google/ads/googleads/v1/services/*.proto > compiled_resources.json
+// pbjs -t json googleapis/google/rpc/*.proto googleapis/google/longrunning/*.proto googleapis//google/ads/googleads/v2/common/*.proto googleapis//google/ads/googleads/v2/errors/*.proto googleapis//google/ads/googleads/v2/enums/*.proto googleapis//google/ads/googleads/v2/resources/*.proto googleapis//google/ads/googleads/v2/services/*.proto > compiled_resources.json
 const raw_compiled_services = require('./compiled_resources.json')
 
 // console.log(raw_compiled_services)
 // console.log(raw_compiled_services.nested.google.nested)
 // console.log(
-//     raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v1.nested.resources.nested.Ad.oneofs.adData
+//     raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v2.nested.resources.nested.Ad.oneofs.adData
 // )
 
 const compiled_resources =
-    raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v1.nested.resources.nested
+    raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v2.nested.resources.nested
 // raw_compiled_services.nested.
 
 // console.log(compiled_resources)
@@ -267,7 +267,7 @@ const entities = [
 ]
 
 const compiled_services =
-    raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v1.nested.services.nested
+    raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v2.nested.services.nested
 
 const _entities = Object.keys(compiled_services).forEach(entity => {
     if (!entity.includes('Service')) {
@@ -506,7 +506,7 @@ async function compileService(entity, schema) {
 
     const meta = {
         name: entity,
-        object: sortObject(unroll(schema.schemas[`GoogleAdsGoogleadsV1Resources__${entity}`].properties, entity)),
+        object: sortObject(unroll(schema.schemas[`GoogleAdsGoogleadsV2Resources__${entity}`].properties, entity)),
     }
 
     const file_path = `${__dirname}/../src/services/${ent}.ts`
@@ -515,7 +515,7 @@ async function compileService(entity, schema) {
 
     await fs.ensureDir(docs_file_path)
 
-    if (schema.schemas[`GoogleAdsGoogleadsV1Services__${mutate_request}`]) {
+    if (schema.schemas[`GoogleAdsGoogleadsV2Services__${mutate_request}`]) {
         compiled_service = service_compiler({
             RESOURCE_URL_NAME: resource_url_name,
             MUTATE_METHOD: mutate_method,
@@ -527,7 +527,7 @@ async function compileService(entity, schema) {
             TYPE: type,
             PARAM: param,
             ENTITY: ent,
-            // ENTITY_DOC: pretty(schema.schemas[`GoogleAdsGoogleadsV1Resources__${entity}`].properties),
+            // ENTITY_DOC: pretty(schema.schemas[`GoogleAdsGoogleadsV2Resources__${entity}`].properties),
         })
 
         meta.methods = ['get', 'list', 'create', 'update', 'delete']
@@ -543,7 +543,7 @@ async function compileService(entity, schema) {
             TYPE: type,
             PARAM: param,
             ENTITY: ent,
-            // ENTITY_DOC: pretty(schema.schemas[`GoogleAdsGoogleadsV1Resources__${entity}`].properties),
+            // ENTITY_DOC: pretty(schema.schemas[`GoogleAdsGoogleadsV2Resources__${entity}`].properties),
         })
 
         meta.methods = ['get', 'list']

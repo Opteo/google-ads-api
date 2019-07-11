@@ -16,12 +16,12 @@ module.exports = {
         },
         campaign: {
             _description:
-                'The campaign targeted by this recommendation. This will be set only when the recommendation affects a single campaign. This field will be set for the following recommendation types: ENHANCED_CPC_OPT_IN, KEYWORD, MAXIMIZE_CLICKS_OPT_IN, MAXIMIZE_CONVERSIONS_OPT_IN, OPTIMIZE_AD_ROTATION, SEARCH_PARTNERS_OPT_IN, TARGET_CPA_OPT_IN, TEXT_AD',
+                'The campaign targeted by this recommendation. This will be set only when the recommendation affects a single campaign. This field will be set for the following recommendation types: CALL_EXTENSION, CALLOUT_EXTENSION, ENHANCED_CPC_OPT_IN, KEYWORD, KEYWORD_MATCH_TYPE, MAXIMIZE_CLICKS_OPT_IN, MAXIMIZE_CONVERSIONS_OPT_IN, OPTIMIZE_AD_ROTATION, SEARCH_PARTNERS_OPT_IN, SITELINK_EXTENSION, TARGET_CPA_OPT_IN, TEXT_AD',
             _type: 'string',
         },
         campaign_budget: {
             _description:
-                'The budget targeted by this recommendation. This will be set only when the recommendation affects a single campaign budget. This field will be set for the following recommendation types: CAMPAIGN_BUDGET',
+                'The budget targeted by this recommendation. This will be set only when the recommendation affects a single campaign budget. This field will be set for the following recommendation types: CAMPAIGN_BUDGET, MOVE_UNUSED_BUDGET',
             _type: 'string',
         },
         campaign_budget_recommendation: {
@@ -586,6 +586,11 @@ module.exports = {
                         'The name of the ad. This is only used to be able to identify the ad. It does not need to be unique and does not affect the served ad.',
                     _type: 'string',
                 },
+                resource_name: {
+                    _description:
+                        'The resource name of the ad. Ad resource names have the form: <code>customers/{customer_id}/ads/{ad_id}</code>',
+                    _type: 'string',
+                },
                 responsive_display_ad: {
                     _oneof: 'adData',
                     accent_color: {
@@ -796,7 +801,12 @@ module.exports = {
                 },
                 video_ad: {
                     _oneof: 'adData',
-                    bumper: {},
+                    bumper: {
+                        companion_banner: {
+                            _description: 'The MediaFile resource name of the companion banner used with the ad.',
+                            _type: 'string',
+                        },
+                    },
                     in_stream: {
                         action_button_label: {
                             _description:
@@ -814,7 +824,12 @@ module.exports = {
                         },
                     },
                     media_file: { _description: 'The MediaFile resource to use for the video.', _type: 'string' },
-                    non_skippable: {},
+                    non_skippable: {
+                        companion_banner: {
+                            _description: 'The MediaFile resource name of the companion banner used with the ad.',
+                            _type: 'string',
+                        },
+                    },
                     out_stream: {
                         description: { _description: 'The description line.', _type: 'string' },
                         headline: { _description: 'The headline of the ad.', _type: 'string' },

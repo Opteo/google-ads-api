@@ -28,10 +28,10 @@ let result = await customer.biddingStrategies.list({
 ;[
   {
     bidding_strategy: {
-      campaign_count: 3,
+      campaign_count: 7,
       id: 2039955526,
       name: 'My bidding strategy',
-      non_removed_campaign_count: 3,
+      non_removed_campaign_count: 7,
       resource_name: 'customers/3827277046/biddingStrategies/2039955526',
       status: 2,
       target_impression_share: { cpc_bid_ceiling_micros: 10000000, location: 4, location_fraction_micros: 900000 },
@@ -42,6 +42,7 @@ let result = await customer.biddingStrategies.list({
       call_reporting_setting: {
         call_conversion_action: 'customers/3827277046/conversionActions/179',
         call_conversion_reporting_enabled: true,
+        call_reporting_enabled: true,
       },
       conversion_tracking_setting: { conversion_tracking_id: 875176189 },
       currency_code: 'GBP',
@@ -57,8 +58,6 @@ let result = await customer.biddingStrategies.list({
       resource_name: 'customers/3827277046',
       test_account: false,
       time_zone: 'Europe/London',
-      tracking_url_template:
-        '{lpurl}?utm_source=adwords&utm_medium=PPC&utm_campaign={campaignid}&utm_term={ifsearch:{keyword}}{ifcontent:{placement}}&utm_content={creative}&network={network}&adgroupid={adgroupid}&matchtype={matchtype}&adposition={adposition}&targetid={targetid}&target={target}&device={device}&devicemodel={devicemodel}',
     },
   },
 ]

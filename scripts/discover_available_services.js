@@ -2,7 +2,7 @@ const raw_compiled_services = require('./compiled_resources.json')
 const startsWith = require('lodash.startswith')
 
 const compiled_services =
-	raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v1.nested.services.nested
+	raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v2.nested.services.nested
 
 // console.log(compiled_services)
 

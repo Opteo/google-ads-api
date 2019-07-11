@@ -169,7 +169,7 @@ module.exports = {
                 {
                     s: 'PAGE_ONE_PROMOTED',
                     description:
-                        'Page-One Promoted bidding scheme, which sets max cpc bids to\ntarget impressions on page one or page one promoted slots on google.com.',
+                        'Page-One Promoted bidding scheme, which sets max cpc bids to\ntarget impressions on page one or page one promoted slots on google.com.\nThis enum value is deprecated.',
                 },
                 {
                     s: 'PERCENT_CPC',
@@ -194,7 +194,7 @@ module.exports = {
                 {
                     s: 'TARGET_OUTRANK_SHARE',
                     description:
-                        'Target Outrank Share is an automated bidding strategy that sets bids\nbased on the target fraction of auctions where the advertiser\nshould outrank a specific competitor.',
+                        'Target Outrank Share is an automated bidding strategy that sets bids\nbased on the target fraction of auctions where the advertiser\nshould outrank a specific competitor.\nThis enum value is deprecated.',
                 },
                 {
                     s: 'TARGET_ROAS',
@@ -273,12 +273,12 @@ module.exports = {
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
                     {
-                        s: 'DONT_CARE',
+                        s: 'PRESENCE_OR_INTEREST',
                         description:
                             "Specifies that a user is excluded from seeing the ad if they\nare in, or show interest in, advertiser's excluded locations.",
                     },
                     {
-                        s: 'LOCATION_OF_PRESENCE',
+                        s: 'PRESENCE',
                         description:
                             "Specifies that a user is excluded from seeing the ad if they\nare in advertiser's excluded locations.",
                     },
@@ -291,17 +291,17 @@ module.exports = {
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
                     {
-                        s: 'DONT_CARE',
+                        s: 'PRESENCE_OR_INTEREST',
                         description:
                             "Specifies that an ad is triggered if the user is in,\nor shows interest in, advertiser's targeted locations.",
                     },
                     {
-                        s: 'AREA_OF_INTEREST',
+                        s: 'SEARCH_INTEREST',
                         description:
                             "Specifies that an ad is triggered if the user\nsearches for advertiser's targeted locations.",
                     },
                     {
-                        s: 'LOCATION_OF_PRESENCE',
+                        s: 'PRESENCE',
                         description:
                             "Specifies that an ad is triggered if the user is in\nor regularly in advertiser's targeted locations.",
                     },

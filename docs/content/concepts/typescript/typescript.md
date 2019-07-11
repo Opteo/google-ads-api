@@ -23,9 +23,9 @@ const campaign: types.Campaign = {
 The [`resources.ts`](https://github.com/Opteo/google-ads-node/blob/master/src/lib/resources.ts) file (found in our companion library) is a good reference for all exported types. For example, you'll find:
 
 ```typescript
-// Example interface for the v1 common "TextAdInfo" entity in the Google Ads API
+// Example interface for the v2 common "TextAdInfo" entity in the Google Ads API
 
-/* .google.ads.googleads.v1.common.TextAdInfo */
+/* .google.ads.googleads.v2.common.TextAdInfo */
 export interface TextAdInfo {
     headline?: string
     description_1?: string
