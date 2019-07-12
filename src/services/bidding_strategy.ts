@@ -8,7 +8,7 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
  * @constants
  */
 const RESOURCE_URL_NAME = 'biddingStrategies'
-const MUTATE_METHOD = 'mutatebiddingStrategies'
+const MUTATE_METHOD = 'mutateBiddingStrategies'
 const MUTATE_REQUEST = 'MutateBiddingStrategiesRequest'
 const OPERATION_REQUEST = 'BiddingStrategyOperation'
 const GET_METHOD = 'getBiddingStrategy'
