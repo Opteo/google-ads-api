@@ -33,30 +33,45 @@ describe('Text Ads', async () => {
         const customer_id = adgroup_ad_rn.split('/')[1]
 
         ad_rn = `customers/${customer_id}/ads/${ad_id}`
+
+        // Give adwords servers a moment to breathe to avoid concurrent_modification error
+        await new Promise(resolve => {
+            setTimeout(() => {
+                resolve()
+            }, 1000)
+        })
     })
 
-    // TODO: make this work and publish new docs for it
+    it('can edit the ad using the adService (no metrics reset)', async () => {
+        const { results } = await customer.ads.update({
+            resource_name: ad_rn,
+            expanded_text_ad: {
+                headline_part1: 'hello',
+            },
+        })
 
-    // it('can edit the ad using the adService (no metrics reset)', async () => {
-    //     const returned_ad = await customer.ads.update({
-    //         resource_name: ad_rn,
-    //         // final_urls: ['other_headline'],
-    //         expanded_text_ad: {
-    //             headline_part1: 'hello',
-    //         },
-    //     })
-
-    //     console.log(returned_ad)
-    // })
+        expect(typeof results[0] === 'string').toEqual(true)
+    })
 
     it('can get the ad via the adService', async () => {
         const returned_ad = await customer.ads.get(ad_rn)
-        // console.log(returned_ad)
-        expect(returned_ad).toEqual(expect.objectContaining(ad.ad!))
+
+        expect(returned_ad).toEqual(
+            expect.objectContaining({
+                final_urls: ['http://www.example.com'],
+                expanded_text_ad: expect.objectContaining({
+                    headline_part1: 'hello', // This part should have been modified
+                    headline_part2: 'erertert', // This part should be the same
+                }),
+            })
+        )
     })
 
     it('can delete the ad', async () => {
         await customer.adGroupAds.delete(adgroup_ad_rn)
+
+        const deleted_ad = await customer.adGroupAds.get(adgroup_ad_rn)
+        expect(deleted_ad.status).toBe(enums.AdGroupAdStatus.REMOVED)
     })
 })
 
