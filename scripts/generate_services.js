@@ -192,6 +192,7 @@ let schema
 const entities = [
     'AccountBudgetProposal',
     'AccountBudget',
+    // 'Ad',
     'AdGroupAdLabel',
     'AdGroupAd',
     'AdGroupBidModifier',
@@ -638,9 +639,9 @@ async function compileService(entity, schema) {
 
         const AN = ['O', 'A'].includes(entity.slice(0, 1)) ? 'an' : 'a'
 
-        fs.writeFileSync(docs_file_path + 'meta.js', meta_compiler({ JSON_META: JSON.stringify(meta) }))
+        writeIfNotManualMode(docs_file_path + 'meta.js', meta_compiler({ JSON_META: JSON.stringify(meta) }))
 
-        fs.writeFileSync(
+        writeIfNotManualMode(
             docs_file_path + 'index.md',
             readme_object_compiler({
                 ENTITY: entity,
@@ -650,7 +651,7 @@ async function compileService(entity, schema) {
             })
         )
 
-        fs.writeFileSync(
+        writeIfNotManualMode(
             docs_file_path + 'index_code.md',
             readme_object_compiler_code({
                 ENTITY: entity,
@@ -681,28 +682,12 @@ async function compileService(entity, schema) {
                 AN,
             })
 
-            fs.writeFileSync(docs_file_path + `${method}.md`, compiled_md)
-            fs.writeFileSync(docs_file_path + `${method}_code.md`, compiled_md_code)
+            writeIfNotManualMode(docs_file_path + `${method}.md`, compiled_md)
+            writeIfNotManualMode(docs_file_path + `${method}_code.md`, compiled_md_code)
         })
     }
 
-    let existing_service = ''
-
-    try {
-        existing_service = fs.readFileSync(file_path)
-    } catch (err) {
-        console.log(err)
-    }
-
-    if (
-        !existing_service
-            .toString()
-            .slice(0, 20)
-            .includes('manual_mode')
-    ) {
-        fs.ensureFileSync(file_path)
-        fs.writeFileSync(file_path, compiled_service)
-    }
+    writeIfNotManualMode(file_path, compiled_service)
 
     if (!entity.toLowerCase().includes('constant')) {
         // const compiled_service_test = service_test_compiler({
@@ -746,3 +731,22 @@ async function compileService(entity, schema) {
 
     console.log('Finished compiling all services')
 })()
+
+function writeIfNotManualMode(file_path, data) {
+    let existing_file = ''
+    try {
+        existing_file = fs.readFileSync(file_path)
+    } catch (err) {
+        // console.log(err)
+    }
+
+    if (
+        !existing_file
+            .toString()
+            .slice(0, 200)
+            .includes('manual_mode')
+    ) {
+        fs.ensureFileSync(file_path)
+        fs.writeFileSync(file_path, data)
+    }
+}
