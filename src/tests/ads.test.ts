@@ -2,7 +2,7 @@ import { enums, types } from '../index'
 import { newCustomer, CID, ADGROUP_ID } from '../test_utils'
 const customer = newCustomer()
 
-describe('Text Ads', async () => {
+describe('Text Ads', () => {
     let adgroup_ad_rn = ''
     let ad_rn = ''
 
@@ -75,7 +75,7 @@ describe('Text Ads', async () => {
     })
 })
 
-describe('Image Ads', async () => {
+describe('Image Ads', () => {
     it('can upload an image ad', async () => {
         const ad = {
             ad_group: `customers/${CID}/adGroups/${ADGROUP_ID}`,
@@ -97,6 +97,20 @@ describe('Image Ads', async () => {
 
         const { results } = await customer.adGroupAds.create(ad, { validate_only: true })
         expect(results instanceof Array).toEqual(true)
+    })
+})
+
+describe('Reporting fields', () => {
+    it('can get policy summary field', async () => {
+        const results = await customer.report({
+            entity: 'ad_group_ad',
+            attributes: ['ad_group_ad.status', 'ad_group_ad.policy_summary'],
+            limit: 1,
+        })
+
+        expect(results instanceof Array).toEqual(true)
+        expect(typeof results[0].ad_group_ad.status).toEqual('number')
+        expect(typeof results[0].ad_group_ad.policy_summary.review_status).toEqual('number')
     })
 })
 

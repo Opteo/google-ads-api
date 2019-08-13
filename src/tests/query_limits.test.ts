@@ -2,7 +2,7 @@ import { newCustomerWithMetrics } from '../test_utils'
 const customer = newCustomerWithMetrics()
 jest.setTimeout(30000)
 
-describe('Query Limits', async () => {
+describe('Query Limits', () => {
     it('limits correctly, default page_size', async () => {
         const data = await customer.report({
             entity: 'keyword_view',

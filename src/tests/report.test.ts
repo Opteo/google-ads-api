@@ -3,7 +3,7 @@ import { newCustomerWithMetrics, newCustomer } from '../test_utils'
 
 import { AdGroupStatus, AdType } from 'google-ads-node/build/lib/enums'
 
-describe('Reporting', async () => {
+describe('Reporting', () => {
     const customer = newCustomerWithMetrics()
 
     it('retrieves API attributes', async () => {
@@ -216,7 +216,7 @@ describe('Reporting', async () => {
     })
 })
 
-describe('Reporting (zero metric rows)', async () => {
+describe('Reporting (zero metric rows)', () => {
     const customer = newCustomer()
 
     it('retrieves no rows because all metrics are zero', async () => {

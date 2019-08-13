@@ -1,8 +1,8 @@
 import { newCustomer, CID } from '../test_utils'
 const customer = newCustomer()
 
-describe('Campaign', async () => {
-    describe('reporting', async () => {
+describe('Campaign', () => {
+    describe('reporting', () => {
         it('can retrieve a list of Campaigns with all fields (if valid)', async () => {
             const campaigns = await customer.campaigns.list()
             expect(campaigns).toBeInstanceOf(Array)

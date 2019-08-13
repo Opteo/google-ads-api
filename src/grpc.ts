@@ -43,6 +43,7 @@ export default class GrpcClient {
             {
                 expiration: 1000 * 60 * 5,
             },
+            // @ts-ignore
             request
         )
         return response

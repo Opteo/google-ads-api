@@ -4,7 +4,7 @@ const customer = newCustomer()
 
 jest.setTimeout(30000)
 
-describe('Error', async () => {
+describe('Error', () => {
     it('throws an error when an entity is invalid', async () => {
         await expect(
             customer.report({

@@ -3,8 +3,8 @@ import { CampaignBudget } from 'google-ads-node/build/lib/resources'
 import { newCustomer, CID, getRandomName } from '../test_utils'
 const customer = newCustomer()
 
-describe('CampaignBudget', async () => {
-    describe('reporting', async () => {
+describe('CampaignBudget', () => {
+    describe('reporting', () => {
         it('can retrieve a list of CampaignBudgets with all fields (if valid)', async () => {
             const campaign_budgets = await customer.campaignBudgets.list()
             expect(campaign_budgets).toBeInstanceOf(Array)

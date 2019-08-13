@@ -6,7 +6,7 @@ import { newCustomer, CID_WITH_METRICS } from '../test_utils'
 const customer = newCustomer()
 // const mcc_customer = newMccCustomer()
 
-describe('AdGroupCriterion', async () => {
+describe('AdGroupCriterion', () => {
     describe('mutation', () => {
         // it('can update a client customer link', async () => {
         //     const link: CustomerClientLink = {

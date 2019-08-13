@@ -10,8 +10,8 @@ import { toMicros } from '../index'
 import { newCustomer, KEYWORD_ID, CID, getRandomName, ADGROUP_ID } from '../test_utils'
 const customer = newCustomer()
 
-describe('AdGroupCriterion', async () => {
-    describe('reporting', async () => {
+describe('AdGroupCriterion', () => {
+    describe('reporting',  () => {
         it('can retrieve a list of AdGroupCriterions with all fields (if valid)', async () => {
             const ad_group_criterions = await customer.adGroupCriteria.list()
             expect(ad_group_criterions).toBeInstanceOf(Array)
