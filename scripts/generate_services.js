@@ -11,14 +11,7 @@
 
 */
 
-const fs = require('fs-extra')
-const template = require('lodash.template')
-const camelCase = require('lodash.camelcase')
-const snakeCase = require('lodash.snakecase')
-const endsWith = require('lodash.endswith')
-const isnan = require('lodash.isnan')
-const get = require('lodash.get')
-const maxBy = require('lodash.maxby')
+const { fs, template, camelCase, snakeCase, endsWith, get, maxBy} = require('lodash')
 
 const Promise = require('bluebird')
 

@@ -63,14 +63,6 @@
         "fs-extra": "^7.0.1",
         "jest": "^24.1.0",
         "json-schema-ref-parser": "^6.1.0",
-        "lodash.camelcase": "^4.3.0",
-        "lodash.endswith": "^4.2.1",
-        "lodash.get": "^4.4.2",
-        "lodash.isnan": "^3.0.2",
-        "lodash.maxby": "^4.6.0",
-        "lodash.snakecase": "^4.1.1",
-        "lodash.startswith": "^4.2.1",
-        "lodash.template": "^4.4.0",
         "npm-run-all": "^4.1.5",
         "prettier": "^1.17.1",
         "showdown": "^1.9.0",
@@ -82,8 +74,8 @@
     },
     "dependencies": {
         "bottleneck": "^2.16.1",
-        "google-ads-node": "^1.13.3",
-        "lodash": "^4.17.11",
+        "google-ads-node": "^1.13.4",
+        "lodash": "^4.17.15",
         "redis": "^2.8.0",
         "request": "^2.88.0"
     }

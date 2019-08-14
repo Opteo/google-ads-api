@@ -1,17 +1,13 @@
-// Auto Generated File! Do Not Edit.
-
-// @ts-ignore
 import { AdGroupCriterion } from 'google-ads-node/build/lib/resources'
 import { KeywordMatchType, AdGroupCriterionStatus } from 'google-ads-node/build/lib/enums'
 
 import { toMicros } from '../index'
 
-// @ts-ignore
-import { newCustomer, KEYWORD_ID, CID, getRandomName, ADGROUP_ID } from '../test_utils'
+import { newCustomer, CID, getRandomName, ADGROUP_ID } from '../test_utils'
 const customer = newCustomer()
 
 describe('AdGroupCriterion', () => {
-    describe('reporting',  () => {
+    describe('reporting', () => {
         it('can retrieve a list of AdGroupCriterions with all fields (if valid)', async () => {
             const ad_group_criterions = await customer.adGroupCriteria.list()
             expect(ad_group_criterions).toBeInstanceOf(Array)

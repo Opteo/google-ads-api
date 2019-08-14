@@ -1,4 +1,4 @@
-const endsWith = require('lodash.endswith')
+const { endsWith } = require('lodash')
 
 export const getSectionId = node => {
     const { title } = node.frontmatter
