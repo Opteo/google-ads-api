@@ -8,13 +8,6 @@ All notable changes to this project will be documented in this file. See [standa
 ### Bug Fixes
 
 * **parsing:** upgrade all dependencies including google-ads-node to fix [#67](https://github.com/Opteo/google-ads-api/issues/67) ([20610c2](https://github.com/Opteo/google-ads-api/commit/20610c2))
-* **report:** allow `IN` clause when using object-style constraints ([#60](https://github.com/Opteo/google-ads-api/issues/60)) ([e03817f](https://github.com/Opteo/google-ads-api/commit/e03817f))
-
-
-### Features
-
-* **services:** Added support for new AdService, allowing in-place ad edits ([6d1aba1](https://github.com/Opteo/google-ads-api/commit/6d1aba1))
-
 
 
 # [3.1.0] (2019-07-15)
