@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.1](https://github.com/Opteo/google-ads-api/compare/v3.2.0...v3.2.1) (2019-08-29)
+
+
+### Bug Fixes
+
+* **billingSetups:** removed billingSetups.update, which isn't supported by the Google Ads API. ([04e6b01](https://github.com/Opteo/google-ads-api/commit/04e6b01))
+* **build:** allow { esModuleInterop: false } in tsconfig when using this library ([1050ff4](https://github.com/Opteo/google-ads-api/commit/1050ff4))
+
+
+
 # [3.2.0](https://github.com/Opteo/google-ads-api/compare/v2.3.0...v3.2.0) (2019-08-14)
 
 
