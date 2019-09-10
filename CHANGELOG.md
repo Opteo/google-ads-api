@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [3.4.0](https://github.com/Opteo/google-ads-api/compare/v3.2.1...v3.4.0) (2019-09-10)
+
+
+### Bug Fixes
+
+* **keyword plan:** types, parsing + tests ([e59e3fb](https://github.com/Opteo/google-ads-api/commit/e59e3fb))
+
+
+### Features
+
+* **keyword plans:** support for forecast and historical metrics ([2485a3a](https://github.com/Opteo/google-ads-api/commit/2485a3a))
+
+
+
 ## [3.2.1](https://github.com/Opteo/google-ads-api/compare/v3.2.0...v3.2.1) (2019-08-29)
 
 
