@@ -1,5 +1,6 @@
 // @ts-ignore
 import { KeywordPlan } from 'google-ads-node/build/lib/resources'
+import { GenerateForecastMetricsRequest, GenerateHistoricalMetricsRequest } from 'google-ads-node'
 
 import Service, { Mutation } from './service'
 import { ServiceListOptions, ServiceCreateOptions } from '../types'
@@ -14,6 +15,52 @@ const OPERATION_REQUEST = 'KeywordPlanOperation'
 const GET_METHOD = 'getKeywordPlan'
 const GET_REQUEST = 'GetKeywordPlanRequest'
 const RESOURCE = 'KeywordPlan'
+
+/**
+ * @interfaces
+ */
+export interface GenerateForecastMetricsResponse {
+    campaignForecasts: {
+        keywordPlanCampaign: string
+        campaignForecast: {
+            impressions: number
+            ctr: number
+            averageCpc: number
+            clicks: number
+            costMicros: number
+        }
+    }[]
+    adGroupForecasts: {
+        keywordPlanAdGroup: string
+        adGroupForecast: {
+            impressions: number
+            ctr: number
+            averageCpc: number
+            clicks: number
+            costMicros: number
+        }
+    }[]
+    keywordForecasts: {
+        keywordPlanAdGroupKeyword: string
+        keywordForecast: {
+            impressions: number
+            ctr: number
+            averageCpc: number
+            clicks: number
+            costMicros: number
+        }
+    }[]
+}
+
+export interface GenerateHistoricalMetricsResponse {
+    metrics: {
+        searchQuery: string
+        keywordMetrics?: {
+            avgMonthlySearches: number
+            competition: number
+        }
+    }[]
+}
 
 export default class KeywordPlanService extends Service {
     public async get(id: number | string): Promise<KeywordPlan> {
@@ -64,5 +111,17 @@ export default class KeywordPlanService extends Service {
             entity_id: id,
             ...options,
         })
+    }
+    
+    public async generateForecastMetrics(id: number | string): Promise<GenerateForecastMetricsResponse> {
+        const request = new GenerateForecastMetricsRequest()
+        request.setKeywordPlan(`customers/${this.cid}/${RESOURCE_URL_NAME}/${id}`)
+        return await this.service.generateForecastMetrics(request)
+    }
+
+    public async generateHistoricalMetrics(id: number | string): Promise<GenerateHistoricalMetricsResponse> {
+        const request = new GenerateHistoricalMetricsRequest()
+        request.setKeywordPlan(`customers/${this.cid}/${RESOURCE_URL_NAME}/${id}`)
+        return await this.service.generateHistoricalMetrics(request)
     }
 }
