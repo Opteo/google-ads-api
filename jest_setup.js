@@ -4,4 +4,4 @@ if (result.error) {
     throw result.error
 }
 
-jest.setTimeout(30000)
+jest.setTimeout(120000)
