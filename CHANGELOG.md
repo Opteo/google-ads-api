@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.4.1](https://github.com/Opteo/google-ads-api/compare/v3.4.0...v3.4.1) (2019-09-24)
+
+
+
 # [3.4.0](https://github.com/Opteo/google-ads-api/compare/v3.2.1...v3.4.0) (2019-09-10)
 
 
