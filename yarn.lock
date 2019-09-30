@@ -2010,10 +2010,10 @@ globals@^11.1.0:
   resolved "https://registry.yarnpkg.com/globals/-/globals-11.12.0.tgz#ab8795338868a0babd8525758018c2a7eb95c42e"
   integrity sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==
 
-google-ads-node@^1.13.7:
-  version "1.13.7"
-  resolved "https://registry.yarnpkg.com/google-ads-node/-/google-ads-node-1.13.7.tgz#d2e0d807fcf36661f8181e871340c2a5752a9688"
-  integrity sha512-wA6w16eePF1rx8ATncSaG3d8mE+WELEBqzqfLx9v7C7B6+QLLMAw+ZASc5Qe+j8BOnh/JmB4tfnmMrZ/XC+bkA==
+google-ads-node@^1.13.8:
+  version "1.13.8"
+  resolved "https://registry.yarnpkg.com/google-ads-node/-/google-ads-node-1.13.8.tgz#3635bec5b0556adff0fff876e82fe3389f74a58f"
+  integrity sha512-ZDInLX1f1uUm70X0AeP2uiFKwzkNjSrosSsnBn0bfzXANRpYTdLNcOqx11t5w0na54er4PoeJ0MJUHfja9mjOg==
   dependencies:
     "@types/cosmiconfig" "^5.0.3"
     "@types/google-protobuf" "^3.2.7"
@@ -2029,6 +2029,7 @@ google-ads-node@^1.13.7:
     lodash.camelcase "^4.3.0"
     lodash.get "^4.4.2"
     lodash.set "^4.3.2"
+    lodash.snakecase "^4.1.1"
     protobufjs "^6.8.8"
 
 google-auth-library@^3.1.0:
@@ -3154,6 +3155,11 @@ lodash.set@^4.3.2:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/lodash.set/-/lodash.set-4.3.2.tgz#d8757b1da807dde24816b0d6a84bea1a76230b23"
   integrity sha1-2HV7HagH3eJIFrDWqEvqGnYjCyM=
+
+lodash.snakecase@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/lodash.snakecase/-/lodash.snakecase-4.1.1.tgz#39d714a35357147837aefd64b5dcbb16becd8f8d"
+  integrity sha1-OdcUo1NXFHg3rv1ktdy7Fr7Nj40=
 
 lodash.sortby@^4.7.0:
   version "4.7.0"
