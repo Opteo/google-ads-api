@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.4.3](https://github.com/Opteo/google-ads-api/compare/v3.4.2...v3.4.3) (2019-10-22)
+
+
+### Bug Fixes
+
+* **parsing:** fix for [#79](https://github.com/Opteo/google-ads-api/issues/79), where url_custom_parameters was incorrectly parsed ([cb45781](https://github.com/Opteo/google-ads-api/commit/cb45781))
+
+
+
 ## [3.4.2](https://github.com/Opteo/google-ads-api/compare/v3.4.1...v3.4.2) (2019-09-30)
 
 
