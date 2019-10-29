@@ -23,8 +23,8 @@ describe('Recommendations', () => {
 
     it('Applies a recommendation', async () => {
         expect.assertions(2)
-        const { resultsList } = await customer.recommendations.applyRecommendation(recommendationResourceName)
-        expect(resultsList instanceof Array).toEqual(true)
-        expect(resultsList[0]).toHaveProperty('resourceName')
+        const { results } = await customer.recommendations.applyRecommendation(recommendationResourceName)
+        expect(results instanceof Array).toEqual(true)
+        expect(typeof results[0]).toEqual('string')
     })
 })
