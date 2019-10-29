@@ -1,6 +1,12 @@
 // @ts-ignore
 import { Recommendation } from 'google-ads-node/build/lib/resources'
-import { ApplyRecommendationRequest, ApplyRecommendationOperation, ApplyRecommendationResponse } from 'google-ads-node'
+import {
+    ApplyRecommendationRequest,
+    ApplyRecommendationOperation,
+    ApplyRecommendationResponse,
+    DismissRecommendationRequest,
+    DismissRecommendationResponse,
+} from 'google-ads-node'
 
 import Service, { Mutation } from './service'
 import { ServiceListOptions, ServiceCreateOptions } from '../types'
@@ -41,6 +47,29 @@ export default class RecommendationService extends Service {
         }
 
         const response: ApplyRecommendationResponse.AsObject = await this.service.applyRecommendation(request)
+        return {
+            request: request.toObject(),
+            partial_failure_error: response.partialFailureError,
+            results: response.resultsList.map(r => r.resourceName),
+        }
+    }
+
+    public async dismissRecommendation(resourceName: string, options?: ServiceCreateOptions): Promise<Mutation> {
+        const request = new DismissRecommendationRequest()
+        const operation = new DismissRecommendationRequest.DismissRecommendationOperation()
+        operation.setResourceName(resourceName)
+
+        request.setCustomerId(this.cid)
+        request.setOperationsList([operation])
+
+        if (options && options.hasOwnProperty('partial_failure')) {
+            if (!request.setPartialFailure) {
+                throw new Error(`This method does not support the partial_failure option.`)
+            }
+            request.setPartialFailure(options.partial_failure as boolean)
+        }
+
+        const response: DismissRecommendationResponse.AsObject = await this.service.dismissRecommendation(request)
         return {
             request: request.toObject(),
             partial_failure_error: response.partialFailureError,
