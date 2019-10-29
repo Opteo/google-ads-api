@@ -9,7 +9,6 @@ describe('Recommendations', () => {
     it('Lists recommendations', async () => {
         expect.assertions(2)
         const recommendations = await customer.recommendations.list()
-        console.log(recommendations)
         expect(recommendations).toBeInstanceOf(Array)
         expect(typeof recommendations[0].recommendation.resource_name).toEqual('string')
         recommendationResourceName = recommendations[0].recommendation.resource_name as string
