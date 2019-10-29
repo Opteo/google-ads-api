@@ -2,7 +2,7 @@
 import { Recommendation } from 'google-ads-node/build/lib/resources'
 import { ApplyRecommendationRequest, ApplyRecommendationOperation, ApplyRecommendationResponse } from 'google-ads-node'
 
-import Service from './service'
+import Service, { Mutation } from './service'
 import { ServiceListOptions, ServiceCreateOptions } from '../types'
 
 /**
@@ -26,15 +26,25 @@ export default class RecommendationService extends Service {
         return this.getListResults('recommendation', options)
     }
 
-    public async applyRecommendation(
-        resourceName: string,
-        options?: ServiceCreateOptions
-    ): Promise<ApplyRecommendationResponse.AsObject> {
+    public async applyRecommendation(resourceName: string, options?: ServiceCreateOptions): Promise<Mutation> {
         const request = new ApplyRecommendationRequest()
         const operation = new ApplyRecommendationOperation()
         operation.setResourceName(resourceName)
         request.setCustomerId(this.cid)
         request.setOperationsList([operation])
-        return this.service.applyRecommendation(request, options)
+
+        if (options && options.hasOwnProperty('partial_failure')) {
+            if (!request.setPartialFailure) {
+                throw new Error(`This method does not support the partial_failure option.`)
+            }
+            request.setPartialFailure(options.partial_failure as boolean)
+        }
+
+        const response: ApplyRecommendationResponse.AsObject = await this.service.applyRecommendation(request)
+        return {
+            request: request.toObject(),
+            partial_failure_error: response.partialFailureError,
+            results: response.resultsList.map(r => r.resourceName),
+        }
     }
 }
