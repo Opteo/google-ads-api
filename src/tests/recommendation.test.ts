@@ -23,7 +23,9 @@ describe('Recommendations', () => {
 
     it('Applies a recommendation', async () => {
         expect.assertions(2)
-        const { resultsList } = await customer.recommendations.applyRecommendation(recommendationResourceName)
+        const { resultsList } = await customer.recommendations.applyRecommendation(recommendationResourceName, {
+            validate_only: true,
+        })
         expect(resultsList instanceof Array).toEqual(true)
         expect(resultsList[0]).toHaveProperty('resourceName')
     })
