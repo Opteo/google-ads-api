@@ -32,12 +32,25 @@ export default class RecommendationService extends Service {
         return this.getListResults('recommendation', options)
     }
 
-    public async applyRecommendation(resourceName: string, options?: ServiceCreateOptions): Promise<Mutation> {
+    public async applyRecommendation(
+        resourceName: string | string[],
+        options?: ServiceCreateOptions
+    ): Promise<Mutation> {
         const request = new ApplyRecommendationRequest()
-        const operation = new ApplyRecommendationOperation()
-        operation.setResourceName(resourceName)
         request.setCustomerId(this.cid)
-        request.setOperationsList([operation])
+
+        if (resourceName instanceof Array) {
+            const operations = resourceName.map(name => {
+                const operation = new ApplyRecommendationOperation()
+                operation.setResourceName(name)
+                return operation
+            })
+            request.setOperationsList(operations)
+        } else {
+            const operation = new ApplyRecommendationOperation()
+            operation.setResourceName(resourceName)
+            request.setOperationsList([operation])
+        }
 
         if (options && options.hasOwnProperty('partial_failure')) {
             if (!request.setPartialFailure) {
@@ -54,13 +67,25 @@ export default class RecommendationService extends Service {
         }
     }
 
-    public async dismissRecommendation(resourceName: string, options?: ServiceCreateOptions): Promise<Mutation> {
+    public async dismissRecommendation(
+        resourceName: string | string[],
+        options?: ServiceCreateOptions
+    ): Promise<Mutation> {
         const request = new DismissRecommendationRequest()
-        const operation = new DismissRecommendationRequest.DismissRecommendationOperation()
-        operation.setResourceName(resourceName)
-
         request.setCustomerId(this.cid)
-        request.setOperationsList([operation])
+
+        if (resourceName instanceof Array) {
+            const operations = resourceName.map(name => {
+                const operation = new DismissRecommendationRequest.DismissRecommendationOperation()
+                operation.setResourceName(name)
+                return operation
+            })
+            request.setOperationsList(operations)
+        } else {
+            const operation = new DismissRecommendationRequest.DismissRecommendationOperation()
+            operation.setResourceName(resourceName)
+            request.setOperationsList([operation])
+        }
 
         if (options && options.hasOwnProperty('partial_failure')) {
             if (!request.setPartialFailure) {
