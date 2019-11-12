@@ -58,13 +58,15 @@ export default class Service {
     protected cid: string
     protected client: GrpcClient
     protected service: any
+    protected readonly prevent_mutations: boolean
 
     private throttler: Bottleneck
 
-    constructor(cid: string, client: GrpcClient, throttler: Bottleneck, name: string) {
+    constructor(cid: string, client: GrpcClient, throttler: Bottleneck, name: string, prevent_mutations: boolean) {
         this.cid = cid
         this.client = client
         this.throttler = throttler
+        this.prevent_mutations = prevent_mutations
 
         // This is the child specific service, e.g. "CampaignService"
         this.service = client.getService(name)
@@ -172,6 +174,11 @@ export default class Service {
                 throw new Error(`This method does not support the partial_failure option.`)
             }
             request.setPartialFailure(options.partial_failure)
+        }
+
+        // Make all requests immutable if prevent_mutations is enabled
+        if (this.prevent_mutations) {
+            request.setValidateOnly(true)
         }
 
         const response = await this.serviceCall(options.mutate, request)

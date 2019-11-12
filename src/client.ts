@@ -23,6 +23,7 @@ interface CustomerAuth {
 interface CustomerOptions extends CustomerAuth {
     pre_report_hook?: PreReportHook
     post_report_hook?: PostReportHook
+    prevent_mutations?: boolean
 }
 
 export default class GoogleAdsApi {
@@ -61,6 +62,7 @@ export default class GoogleAdsApi {
         login_customer_id,
         pre_report_hook,
         post_report_hook,
+        prevent_mutations,
     }: CustomerOptions): CustomerInstance {
         if (!customer_account_id || !refresh_token) {
             throw new Error('Must specify {customer_account_id, refresh_token}')
@@ -68,6 +70,7 @@ export default class GoogleAdsApi {
 
         pre_report_hook = pre_report_hook || noop
         post_report_hook = post_report_hook || noop
+        prevent_mutations = prevent_mutations || false
 
         customer_account_id = normaliseCustomerId(customer_account_id)
         login_customer_id = normaliseCustomerId(login_customer_id)
@@ -80,6 +83,13 @@ export default class GoogleAdsApi {
             login_customer_id
         )
 
-        return Customer(customer_account_id, client, this.throttler, pre_report_hook, post_report_hook)
+        return Customer(
+            customer_account_id,
+            client,
+            this.throttler,
+            pre_report_hook,
+            post_report_hook,
+            prevent_mutations
+        )
     }
 }

@@ -27,9 +27,10 @@ export default class CustomerService extends Service {
         throttler: Bottleneck,
         name: string,
         pre_report_hook: PreReportHook,
-        post_report_hook: PostReportHook
+        post_report_hook: PostReportHook,
+        prevent_mutations: boolean
     ) {
-        super(cid, client, throttler, name)
+        super(cid, client, throttler, name, prevent_mutations)
 
         this.pre_report_hook = pre_report_hook
         this.post_report_hook = post_report_hook
@@ -82,6 +83,11 @@ export default class CustomerService extends Service {
             request.setValidateOnly(options.validate_only as boolean)
         }
 
+        // Make all requests immutable if prevent_mutations is enabled
+        if (this.prevent_mutations) {
+            request.setValidateOnly(true)
+        }
+
         await this.service.mutateCustomer(request)
     }
 
@@ -101,6 +107,11 @@ export default class CustomerService extends Service {
         }
         if (options && options.hasOwnProperty('partial_failure')) {
             request.setPartialFailure(options.partial_failure as boolean)
+        }
+
+        // Make all requests immutable if prevent_mutations is enabled
+        if (this.prevent_mutations) {
+            request.setValidateOnly(true)
         }
 
         const ops: Array<grpc.MutateOperation> = []

@@ -178,9 +178,18 @@ export default function Customer(
     client: GrpcClient,
     throttler: Bottleneck,
     pre_report_hook: PreReportHook,
-    post_report_hook: PostReportHook
+    post_report_hook: PostReportHook,
+    prevent_mutations: boolean
 ): CustomerInstance {
-    const cusService = new CustomerService(cid, client, throttler, 'CustomerService', pre_report_hook, post_report_hook)
+    const cusService = new CustomerService(
+        cid,
+        client,
+        throttler,
+        'CustomerService',
+        pre_report_hook,
+        post_report_hook,
+        prevent_mutations
+    )
 
     return {
         /* Top level customer methods */
@@ -192,139 +201,271 @@ export default function Customer(
         mutateResources: (operations, options) => cusService.mutateResources(operations, options),
 
         /* Services */
-        campaigns: new CampaignService(cid, client, throttler, 'CampaignService'),
-        campaignBudgets: new CampaignBudgetService(cid, client, throttler, 'CampaignBudgetService'),
-        adGroups: new AdGroupService(cid, client, throttler, 'AdGroupService'),
+        campaigns: new CampaignService(cid, client, throttler, 'CampaignService', prevent_mutations),
+        campaignBudgets: new CampaignBudgetService(cid, client, throttler, 'CampaignBudgetService', prevent_mutations),
+        adGroups: new AdGroupService(cid, client, throttler, 'AdGroupService', prevent_mutations),
         accountBudgetProposals: new AccountBudgetProposalService(
             cid,
             client,
             throttler,
-            'AccountBudgetProposalService'
+            'AccountBudgetProposalService',
+            prevent_mutations
         ),
-        accountBudgets: new AccountBudgetService(cid, client, throttler, 'AccountBudgetService'),
-        ads: new AdService(cid, client, throttler, 'AdService'),
-        adGroupAdLabels: new AdGroupAdLabelService(cid, client, throttler, 'AdGroupAdLabelService'),
-        adGroupAds: new AdGroupAdService(cid, client, throttler, 'AdGroupAdService'),
-        adGroupBidModifiers: new AdGroupBidModifierService(cid, client, throttler, 'AdGroupBidModifierService'),
+        accountBudgets: new AccountBudgetService(cid, client, throttler, 'AccountBudgetService', prevent_mutations),
+        ads: new AdService(cid, client, throttler, 'AdService', prevent_mutations),
+        adGroupAdLabels: new AdGroupAdLabelService(cid, client, throttler, 'AdGroupAdLabelService', prevent_mutations),
+        adGroupAds: new AdGroupAdService(cid, client, throttler, 'AdGroupAdService', prevent_mutations),
+        adGroupBidModifiers: new AdGroupBidModifierService(
+            cid,
+            client,
+            throttler,
+            'AdGroupBidModifierService',
+            prevent_mutations
+        ),
         adGroupCriterionLabels: new AdGroupCriterionLabelService(
             cid,
             client,
             throttler,
-            'AdGroupCriterionLabelService'
+            'AdGroupCriterionLabelService',
+            prevent_mutations
         ),
-        adGroupCriteria: new AdGroupCriterionService(cid, client, throttler, 'AdGroupCriterionService'),
+        adGroupCriteria: new AdGroupCriterionService(
+            cid,
+            client,
+            throttler,
+            'AdGroupCriterionService',
+            prevent_mutations
+        ),
         adGroupExtensionSettings: new AdGroupExtensionSettingService(
             cid,
             client,
             throttler,
-            'AdGroupExtensionSettingService'
+            'AdGroupExtensionSettingService',
+            prevent_mutations
         ),
-        adGroupFeeds: new AdGroupFeedService(cid, client, throttler, 'AdGroupFeedService'),
-        adGroupLabels: new AdGroupLabelService(cid, client, throttler, 'AdGroupLabelService'),
-        assets: new AssetService(cid, client, throttler, 'AssetService'),
-        biddingStrategies: new BiddingStrategyService(cid, client, throttler, 'BiddingStrategyService'),
-        billingSetups: new BillingSetupService(cid, client, throttler, 'BillingSetupService'),
-        campaignBidModifiers: new CampaignBidModifierService(cid, client, throttler, 'CampaignBidModifierService'),
-        campaignCriteria: new CampaignCriterionService(cid, client, throttler, 'CampaignCriterionService'),
+        adGroupFeeds: new AdGroupFeedService(cid, client, throttler, 'AdGroupFeedService', prevent_mutations),
+        adGroupLabels: new AdGroupLabelService(cid, client, throttler, 'AdGroupLabelService', prevent_mutations),
+        assets: new AssetService(cid, client, throttler, 'AssetService', prevent_mutations),
+        biddingStrategies: new BiddingStrategyService(
+            cid,
+            client,
+            throttler,
+            'BiddingStrategyService',
+            prevent_mutations
+        ),
+        billingSetups: new BillingSetupService(cid, client, throttler, 'BillingSetupService', prevent_mutations),
+        campaignBidModifiers: new CampaignBidModifierService(
+            cid,
+            client,
+            throttler,
+            'CampaignBidModifierService',
+            prevent_mutations
+        ),
+        campaignCriteria: new CampaignCriterionService(
+            cid,
+            client,
+            throttler,
+            'CampaignCriterionService',
+            prevent_mutations
+        ),
         campaignExtensionSettings: new CampaignExtensionSettingService(
             cid,
             client,
             throttler,
-            'CampaignExtensionSettingService'
+            'CampaignExtensionSettingService',
+            prevent_mutations
         ),
-        campaignFeeds: new CampaignFeedService(cid, client, throttler, 'CampaignFeedService'),
-        campaignLabels: new CampaignLabelService(cid, client, throttler, 'CampaignLabelService'),
-        campaignSharedSets: new CampaignSharedSetService(cid, client, throttler, 'CampaignSharedSetService'),
-        carrierConstants: new CarrierConstantService(cid, client, throttler, 'CarrierConstantService'),
-        changeStatus: new ChangeStatusService(cid, client, throttler, 'ChangeStatusService'),
-        conversionActions: new ConversionActionService(cid, client, throttler, 'ConversionActionService'),
-        conversionUploads: new ConversionUploadService(cid, client, throttler, 'ConversionUploadService'),
+        campaignFeeds: new CampaignFeedService(cid, client, throttler, 'CampaignFeedService', prevent_mutations),
+        campaignLabels: new CampaignLabelService(cid, client, throttler, 'CampaignLabelService', prevent_mutations),
+        campaignSharedSets: new CampaignSharedSetService(
+            cid,
+            client,
+            throttler,
+            'CampaignSharedSetService',
+            prevent_mutations
+        ),
+        carrierConstants: new CarrierConstantService(
+            cid,
+            client,
+            throttler,
+            'CarrierConstantService',
+            prevent_mutations
+        ),
+        changeStatus: new ChangeStatusService(cid, client, throttler, 'ChangeStatusService', prevent_mutations),
+        conversionActions: new ConversionActionService(
+            cid,
+            client,
+            throttler,
+            'ConversionActionService',
+            prevent_mutations
+        ),
+        conversionUploads: new ConversionUploadService(
+            cid,
+            client,
+            throttler,
+            'ConversionUploadService',
+            prevent_mutations
+        ),
         // conversionAdjustmentUploads: new ConversionAdjustmentUploadService(
         //     cid,
         //     client,
         //     throttler,
         //     'ConversionAdjustmentUploadService'
         // ),
-        customInterests: new CustomInterestService(cid, client, throttler, 'CustomInterestService'),
-        customerClientLinks: new CustomerClientLinkService(cid, client, throttler, 'CustomerClientLinkService'),
-        customerClients: new CustomerClientService(cid, client, throttler, 'CustomerClientService'),
+        customInterests: new CustomInterestService(cid, client, throttler, 'CustomInterestService', prevent_mutations),
+        customerClientLinks: new CustomerClientLinkService(
+            cid,
+            client,
+            throttler,
+            'CustomerClientLinkService',
+            prevent_mutations
+        ),
+        customerClients: new CustomerClientService(cid, client, throttler, 'CustomerClientService', prevent_mutations),
         customerExtensionSettings: new CustomerExtensionSettingService(
             cid,
             client,
             throttler,
-            'CustomerExtensionSettingService'
+            'CustomerExtensionSettingService',
+            prevent_mutations
         ),
-        customerFeeds: new CustomerFeedService(cid, client, throttler, 'CustomerFeedService'),
-        customerLabels: new CustomerLabelService(cid, client, throttler, 'CustomerLabelService'),
-        customerManagerLinks: new CustomerManagerLinkService(cid, client, throttler, 'CustomerManagerLinkService'),
+        customerFeeds: new CustomerFeedService(cid, client, throttler, 'CustomerFeedService', prevent_mutations),
+        customerLabels: new CustomerLabelService(cid, client, throttler, 'CustomerLabelService', prevent_mutations),
+        customerManagerLinks: new CustomerManagerLinkService(
+            cid,
+            client,
+            throttler,
+            'CustomerManagerLinkService',
+            prevent_mutations
+        ),
         customerNegativeCriteria: new CustomerNegativeCriterionService(
             cid,
             client,
             throttler,
-            'CustomerNegativeCriterionService'
+            'CustomerNegativeCriterionService',
+            prevent_mutations
         ),
-        domainCategories: new DomainCategoryService(cid, client, throttler, 'DomainCategoryService'),
-        extensionFeedItems: new ExtensionFeedItemService(cid, client, throttler, 'ExtensionFeedItemService'),
-        feedItems: new FeedItemService(cid, client, throttler, 'FeedItemService'),
-        feedItemTargets: new FeedItemTargetService(cid, client, throttler, 'FeedItemTargetService'),
-        feedMappings: new FeedMappingService(cid, client, throttler, 'FeedMappingService'),
-        feeds: new FeedService(cid, client, throttler, 'FeedService'),
-        geoTargetConstants: new GeoTargetConstantService(cid, client, throttler, 'GeoTargetConstantService'),
-        keywordPlanAdGroups: new KeywordPlanAdGroupService(cid, client, throttler, 'KeywordPlanAdGroupService'),
-        keywordPlanCampaigns: new KeywordPlanCampaignService(cid, client, throttler, 'KeywordPlanCampaignService'),
+        domainCategories: new DomainCategoryService(cid, client, throttler, 'DomainCategoryService', prevent_mutations),
+        extensionFeedItems: new ExtensionFeedItemService(
+            cid,
+            client,
+            throttler,
+            'ExtensionFeedItemService',
+            prevent_mutations
+        ),
+        feedItems: new FeedItemService(cid, client, throttler, 'FeedItemService', prevent_mutations),
+        feedItemTargets: new FeedItemTargetService(cid, client, throttler, 'FeedItemTargetService', prevent_mutations),
+        feedMappings: new FeedMappingService(cid, client, throttler, 'FeedMappingService', prevent_mutations),
+        feeds: new FeedService(cid, client, throttler, 'FeedService', prevent_mutations),
+        geoTargetConstants: new GeoTargetConstantService(
+            cid,
+            client,
+            throttler,
+            'GeoTargetConstantService',
+            prevent_mutations
+        ),
+        keywordPlanAdGroups: new KeywordPlanAdGroupService(
+            cid,
+            client,
+            throttler,
+            'KeywordPlanAdGroupService',
+            prevent_mutations
+        ),
+        keywordPlanCampaigns: new KeywordPlanCampaignService(
+            cid,
+            client,
+            throttler,
+            'KeywordPlanCampaignService',
+            prevent_mutations
+        ),
         // keywordPlanIdeas: new KeywordPlanIdeaService(cid, client, throttler, 'KeywordPlanIdeaService'),
-        keywordPlanKeywords: new KeywordPlanKeywordService(cid, client, throttler, 'KeywordPlanKeywordService'),
+        keywordPlanKeywords: new KeywordPlanKeywordService(
+            cid,
+            client,
+            throttler,
+            'KeywordPlanKeywordService',
+            prevent_mutations
+        ),
         keywordPlanNegativeKeywords: new KeywordPlanNegativeKeywordService(
             cid,
             client,
             throttler,
-            'KeywordPlanNegativeKeywordService'
+            'KeywordPlanNegativeKeywordService',
+            prevent_mutations
         ),
-        keywordPlans: new KeywordPlanService(cid, client, throttler, 'KeywordPlanService'),
-        labels: new LabelService(cid, client, throttler, 'LabelService'),
-        languageConstants: new LanguageConstantService(cid, client, throttler, 'LanguageConstantService'),
-        mediaFiles: new MediaFileService(cid, client, throttler, 'MediaFileService'),
+        keywordPlans: new KeywordPlanService(cid, client, throttler, 'KeywordPlanService', prevent_mutations),
+        labels: new LabelService(cid, client, throttler, 'LabelService', prevent_mutations),
+        languageConstants: new LanguageConstantService(
+            cid,
+            client,
+            throttler,
+            'LanguageConstantService',
+            prevent_mutations
+        ),
+        mediaFiles: new MediaFileService(cid, client, throttler, 'MediaFileService', prevent_mutations),
         // merchantCenterLinks: new MerchantCenterLinkService(cid, client, throttler, 'MerchantCenterLinkService'),
         mobileAppCategoryConstants: new MobileAppCategoryConstantService(
             cid,
             client,
             throttler,
-            'MobileAppCategoryConstantService'
+            'MobileAppCategoryConstantService',
+            prevent_mutations
         ),
-        mobileDeviceConstants: new MobileDeviceConstantService(cid, client, throttler, 'MobileDeviceConstantService'),
+        mobileDeviceConstants: new MobileDeviceConstantService(
+            cid,
+            client,
+            throttler,
+            'MobileDeviceConstantService',
+            prevent_mutations
+        ),
         operatingSystemVersionConstants: new OperatingSystemVersionConstantService(
             cid,
             client,
             throttler,
-            'OperatingSystemVersionConstantService'
+            'OperatingSystemVersionConstantService',
+            prevent_mutations
         ),
         // paymentsAccounts: new PaymentsAccountService(cid, client, throttler, 'PaymentsAccountService'),
         productBiddingCategoryConstants: new ProductBiddingCategoryConstantService(
             cid,
             client,
             throttler,
-            'ProductBiddingCategoryConstantService'
+            'ProductBiddingCategoryConstantService',
+            prevent_mutations
         ),
-        recommendations: new RecommendationService(cid, client, throttler, 'RecommendationService'),
-        remarketingActions: new RemarketingActionService(cid, client, throttler, 'RemarketingActionService'),
-        sharedCriteria: new SharedCriterionService(cid, client, throttler, 'SharedCriterionService'),
-        sharedSets: new SharedSetService(cid, client, throttler, 'SharedSetService'),
-        topicConstants: new TopicConstantService(cid, client, throttler, 'TopicConstantService'),
-        userInterests: new UserInterestService(cid, client, throttler, 'UserInterestService'),
-        userLists: new UserListService(cid, client, throttler, 'UserListService'),
-        videos: new VideoService(cid, client, throttler, 'VideoService'),
-        adGroupSimulations: new AdGroupSimulationService(cid, client, throttler, 'AdGroupSimulationService'),
+        recommendations: new RecommendationService(cid, client, throttler, 'RecommendationService', prevent_mutations),
+        remarketingActions: new RemarketingActionService(
+            cid,
+            client,
+            throttler,
+            'RemarketingActionService',
+            prevent_mutations
+        ),
+        sharedCriteria: new SharedCriterionService(cid, client, throttler, 'SharedCriterionService', prevent_mutations),
+        sharedSets: new SharedSetService(cid, client, throttler, 'SharedSetService', prevent_mutations),
+        topicConstants: new TopicConstantService(cid, client, throttler, 'TopicConstantService', prevent_mutations),
+        userInterests: new UserInterestService(cid, client, throttler, 'UserInterestService', prevent_mutations),
+        userLists: new UserListService(cid, client, throttler, 'UserListService', prevent_mutations),
+        videos: new VideoService(cid, client, throttler, 'VideoService', prevent_mutations),
+        adGroupSimulations: new AdGroupSimulationService(
+            cid,
+            client,
+            throttler,
+            'AdGroupSimulationService',
+            prevent_mutations
+        ),
         adGroupCriterionSimulations: new AdGroupCriterionSimulationService(
             cid,
             client,
             throttler,
-            'AdGroupCriterionSimulationService'
+            'AdGroupCriterionSimulationService',
+            prevent_mutations
         ),
         campaignCriterionSimulations: new CampaignCriterionSimulationService(
             cid,
             client,
             throttler,
-            'CampaignCriterionSimulationService'
+            'CampaignCriterionSimulationService',
+            prevent_mutations
         ),
     }
 }

@@ -2,7 +2,16 @@ import { AdGroup, Customer } from 'google-ads-node/build/lib/resources'
 import { AdGroupStatus, CampaignStatus } from 'google-ads-node/build/lib/enums'
 import { enums } from '..'
 
-import { newCustomerWithMetrics, newCustomer, CID, CID_WITH_METRICS, getRandomName, CAMPAIGN_ID } from '../test_utils'
+import {
+    newCustomerWithMetrics,
+    newCustomer,
+    newImmutableCustomer,
+    CID,
+    CID_WITH_METRICS,
+    getRandomName,
+    CAMPAIGN_ID,
+    ADGROUP_ID,
+} from '../test_utils'
 import { MutateResourceOperation } from '../types'
 const customer = newCustomerWithMetrics()
 const customer_no_metrics = newCustomer()
@@ -382,6 +391,49 @@ describe('customer', () => {
             } catch (err) {
                 expect(err.message).toContain('does not exist')
             }
+        })
+
+        it('should always use validate only if mutation protection is enabled (customer level)', async () => {
+            const immutable_customer = newImmutableCustomer()
+
+            const response = await immutable_customer.mutateResources([
+                {
+                    _resource: 'CampaignBudget',
+                    resource_name: `customers/${CID}/campaignBudgets/-1`,
+                    name: getRandomName('budget'),
+                    amount_micros: 3000000,
+                    explicitly_shared: true,
+                },
+            ])
+
+            expect(response.results).toEqual([])
+            expect((response.request as any).validateOnly).toEqual(true)
+        })
+
+        it('should always use validate only if mutation protection is enabled (service level)', async () => {
+            const immutable_customer = newImmutableCustomer()
+
+            /* Create */
+            const create_response = await immutable_customer.campaignBudgets.create({
+                name: getRandomName('budget'),
+                amount_micros: 3000000,
+                explicitly_shared: true,
+            })
+            expect(create_response.results).toEqual([])
+            expect((create_response.request as any).validateOnly).toEqual(true)
+
+            /* Delete */
+            const delete_response = await immutable_customer.campaigns.delete(CAMPAIGN_ID)
+            expect(delete_response.results).toEqual([])
+            expect((delete_response.request as any).validateOnly).toEqual(true)
+
+            /* Update */
+            const update_response = await immutable_customer.adGroups.update({
+                resource_name: `customers/${CID}/adGroups/${ADGROUP_ID}`,
+                name: getRandomName('adgroup'),
+            })
+            expect(update_response.results).toEqual([])
+            expect((update_response.request as any).validateOnly).toEqual(true)
         })
     })
 })
