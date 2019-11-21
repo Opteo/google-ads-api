@@ -67,14 +67,14 @@
         "prettier": "^1.17.1",
         "showdown": "^1.9.0",
         "standard-version": "^5.0.2",
-        "ts-jest": "^24.0.0",
+        "ts-jest": "^24.1.0",
         "tslint": "^5.12.1",
         "turndown": "^5.0.3",
-        "typescript": "^3.3.1"
+        "typescript": "^3.7.2"
     },
     "dependencies": {
         "bottleneck": "^2.16.1",
-        "google-ads-node": "^1.13.9",
+        "google-ads-node": "^1.14.0",
         "lodash": "^4.17.15",
         "redis": "^2.8.0",
         "request": "^2.88.0"
