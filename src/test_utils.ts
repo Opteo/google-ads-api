@@ -1,4 +1,5 @@
 import { GoogleAdsApi } from './index'
+import { GoogleAdsNodeOptions } from './grpc'
 
 export const CID = process.env.GADS_CID as string
 export const CID_WITH_METRICS = process.env.GADS_CID_WITH_METRICS as string
@@ -43,6 +44,20 @@ export function newMccCustomer() {
         customer_account_id: process.env.GADS_LOGIN_CUSTOMER_ID as string,
         login_customer_id: process.env.GADS_LOGIN_CUSTOMER_ID as string,
         refresh_token: process.env.GADS_REFRESH_TOKEN as string,
+    })
+}
+
+export function newCustomerWithNodeOptions(options: GoogleAdsNodeOptions) {
+    const client = new GoogleAdsApi({
+        client_id: process.env.GADS_CLIENT_ID as string,
+        client_secret: process.env.GADS_CLIENT_SECRET as string,
+        developer_token: process.env.GADS_DEVELOPER_TOKEN as string,
+    })
+    return client.Customer({
+        customer_account_id: process.env.GADS_CID as string,
+        login_customer_id: process.env.GADS_LOGIN_CUSTOMER_ID as string,
+        refresh_token: process.env.GADS_REFRESH_TOKEN as string,
+        gads_node_options: options,
     })
 }
 

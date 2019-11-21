@@ -3,7 +3,7 @@ import crypto from 'crypto'
 import { noop } from 'lodash'
 
 import Customer, { CustomerInstance } from './customer'
-import GrpcClient from './grpc'
+import GrpcClient, { GoogleAdsNodeOptions } from './grpc'
 import { normaliseCustomerId } from './utils'
 import { PreReportHook, PostReportHook } from './types'
 
@@ -23,6 +23,7 @@ interface CustomerAuth {
 interface CustomerOptions extends CustomerAuth {
     pre_report_hook?: PreReportHook
     post_report_hook?: PostReportHook
+    gads_node_options?: GoogleAdsNodeOptions
 }
 
 export default class GoogleAdsApi {
@@ -61,6 +62,7 @@ export default class GoogleAdsApi {
         login_customer_id,
         pre_report_hook,
         post_report_hook,
+        gads_node_options,
     }: CustomerOptions): CustomerInstance {
         if (!customer_account_id || !refresh_token) {
             throw new Error('Must specify {customer_account_id, refresh_token}')
@@ -77,7 +79,8 @@ export default class GoogleAdsApi {
             this.options.client_id,
             this.options.client_secret,
             refresh_token as string,
-            login_customer_id
+            login_customer_id,
+            gads_node_options
         )
 
         return Customer(customer_account_id, client, this.throttler, pre_report_hook, post_report_hook)
