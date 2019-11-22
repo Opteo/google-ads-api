@@ -21,8 +21,8 @@ export default class GrpcClient {
         client_id: string,
         client_secret: string,
         refresh_token: string,
-        login_customer_id?: string,
-        gads_node_options?: GoogleAdsNodeOptions
+        login_customer_id: string,
+        gads_node_options: GoogleAdsNodeOptions
     ) {
 
         const additional_options: any = {}

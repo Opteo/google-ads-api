@@ -20,10 +20,9 @@ interface CustomerAuth {
     login_customer_id?: string
 }
 
-interface CustomerOptions extends CustomerAuth {
+interface CustomerOptions extends CustomerAuth, GoogleAdsNodeOptions {
     pre_report_hook?: PreReportHook
     post_report_hook?: PostReportHook
-    gads_node_options?: GoogleAdsNodeOptions
 }
 
 export default class GoogleAdsApi {
@@ -62,7 +61,8 @@ export default class GoogleAdsApi {
         login_customer_id,
         pre_report_hook,
         post_report_hook,
-        gads_node_options,
+        prevent_mutations,
+        logging,
     }: CustomerOptions): CustomerInstance {
         if (!customer_account_id || !refresh_token) {
             throw new Error('Must specify {customer_account_id, refresh_token}')
@@ -73,6 +73,11 @@ export default class GoogleAdsApi {
 
         customer_account_id = normaliseCustomerId(customer_account_id)
         login_customer_id = normaliseCustomerId(login_customer_id)
+
+        const gads_node_options = {
+            prevent_mutations,
+            logging,
+        }
 
         const client = new GrpcClient(
             this.options.developer_token,

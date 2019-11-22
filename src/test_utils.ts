@@ -57,7 +57,7 @@ export function newCustomerWithNodeOptions(options: GoogleAdsNodeOptions) {
         customer_account_id: process.env.GADS_CID as string,
         login_customer_id: process.env.GADS_LOGIN_CUSTOMER_ID as string,
         refresh_token: process.env.GADS_REFRESH_TOKEN as string,
-        gads_node_options: options,
+        ...options,
     })
 }
 
