@@ -1,9 +1,19 @@
 import { AdGroup, Customer } from 'google-ads-node/build/lib/resources'
 import { AdGroupStatus, CampaignStatus } from 'google-ads-node/build/lib/enums'
+import { RequestLog } from 'google-ads-node'
 import { enums } from '..'
 
-import { newCustomerWithMetrics, newCustomer, CID, CID_WITH_METRICS, getRandomName, CAMPAIGN_ID } from '../test_utils'
+import {
+    newCustomerWithMetrics,
+    newCustomer,
+    CID,
+    CID_WITH_METRICS,
+    getRandomName,
+    CAMPAIGN_ID,
+    newCustomerWithNodeOptions,
+} from '../test_utils'
 import { MutateResourceOperation } from '../types'
+
 const customer = newCustomerWithMetrics()
 const customer_no_metrics = newCustomer()
 
@@ -383,5 +393,33 @@ describe('customer', () => {
                 expect(err.message).toContain('does not exist')
             }
         })
+    })
+})
+
+describe('customer options', () => {
+    it('should use google-ads-node options if specified', async done => {
+        const cus = newCustomerWithNodeOptions({
+            prevent_mutations: true,
+            logging: {
+                output: 'none',
+                verbosity: 'info',
+                callback(message: RequestLog) {
+                    expect(message).toBeDefined()
+                    expect(message.request!.method).toContain('GoogleAdsService/Mutate')
+                    // Validate only will always be true when prevent mutations is enabled
+                    expect(message.request!.body.validateOnly).toEqual(true)
+                    done()
+                },
+            },
+        })
+        await cus.mutateResources([
+            {
+                _resource: 'CampaignBudget',
+                resource_name: `customers/${CID}/campaignBudgets/-1`,
+                name: getRandomName('budget'),
+                amount_micros: 3000000,
+                explicitly_shared: true,
+            },
+        ])
     })
 })

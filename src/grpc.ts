@@ -1,4 +1,4 @@
-import { GoogleAdsClient, SearchGoogleAdsRequest } from 'google-ads-node'
+import { GoogleAdsClient, SearchGoogleAdsRequest, LogOptions } from 'google-ads-node'
 import Bottleneck from 'bottleneck'
 
 import { getAccessToken } from './token'
@@ -6,6 +6,11 @@ import { getAccessToken } from './token'
 interface BuildSearchRequestResponse {
     request: SearchGoogleAdsRequest
     limit: number
+}
+
+export interface GoogleAdsNodeOptions {
+    prevent_mutations?: boolean
+    logging?: LogOptions
 }
 
 export default class GrpcClient {
@@ -16,8 +21,20 @@ export default class GrpcClient {
         client_id: string,
         client_secret: string,
         refresh_token: string,
-        login_customer_id?: string
+        login_customer_id: string,
+        gads_node_options: GoogleAdsNodeOptions
     ) {
+
+        const additional_options: any = {}
+
+        // Apply google-ads-node options if specified
+        if(gads_node_options?.prevent_mutations) {
+            additional_options.preventMutations = gads_node_options.prevent_mutations
+        }
+        if(gads_node_options?.logging) {
+            additional_options.logging = gads_node_options.logging
+        }
+
         this.client = new GoogleAdsClient({
             developer_token,
             client_id,
@@ -32,6 +49,7 @@ export default class GrpcClient {
                     refresh_token: refreshToken,
                 })
             },
+            ...additional_options
         })
     }
 
