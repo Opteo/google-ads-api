@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [3.5.0](https://github.com/Opteo/google-ads-api/compare/v3.4.3...v3.5.0) (2019-11-25)
+
+
+### Features
+
+* **client:** support for prevent mutations & logging from google-ads-node ([#91](https://github.com/Opteo/google-ads-api/issues/91)) ([4079f1b](https://github.com/Opteo/google-ads-api/commit/4079f1b))
+* **services:** added recommendation service methods ([#84](https://github.com/Opteo/google-ads-api/issues/84)) ([e9a8c7d](https://github.com/Opteo/google-ads-api/commit/e9a8c7d))
+
+
+
 ## [3.4.3](https://github.com/Opteo/google-ads-api/compare/v3.4.2...v3.4.3) (2019-10-22)
 
 
