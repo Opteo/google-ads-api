@@ -8,5 +8,5 @@ entity: KeywordPlanNegativeKeyword
 ```javascript
 // Deleting the entity
 
-await customer.keywordPlanNegativeKeywords.delete('customers/1234567890/keywordPlanNegativeKeywords/123123123')
+await customer.keywordPlanNegativeKeywords.delete('customers/9262111890/keywordPlanNegativeKeywords/13119148')
 ```

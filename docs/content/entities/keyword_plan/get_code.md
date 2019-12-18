@@ -7,10 +7,15 @@ entity: KeywordPlan
 
 ```javascript
 // Getting the entity
-let result = await customer.keywordPlans.get('customers/3827277046/keywordPlans/4739396')
+let result = await customer.keywordPlans.get('customers/9262111890/keywordPlans/115113466')
 ```
 
 ```javascript
 // Example result
-;({ id: 4739396, name: 'My keyword plan', resource_name: 'customers/3827277046/keywordPlans/4739396' })
+;({
+  forecast_period: { date_interval: 4 },
+  id: 115113466,
+  name: 'My keyword plan',
+  resource_name: 'customers/9262111890/keywordPlans/115113466',
+})
 ```

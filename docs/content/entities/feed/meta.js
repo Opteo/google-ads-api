@@ -5,7 +5,7 @@ module.exports = {
             _oneof: 'systemFeedGenerationData',
             chain_ids: {
                 _description: 'The list of chains that the affiliate location feed will sync the locations from.',
-                _type: 'array',
+                _type: 'array of strings',
             },
             relationship_type: {
                 _description: 'The relationship the chains have with the advertiser.',
@@ -21,14 +21,86 @@ module.exports = {
             },
         },
         attribute_operations: {
-            _description:
-                'The list of operations changing the feed attributes. Attributes can only be added, not removed.',
-            _type: 'array',
+            _type: 'array of objects',
+            operator: {
+                _description: 'Type of list operation to perform.',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'Unspecified.' },
+                    {
+                        s: 'UNKNOWN',
+                        description: 'Used for return value only. Represents value unknown in this version.',
+                    },
+                    { s: 'ADD', description: 'Add the attribute to the existing attributes.' },
+                ],
+                _type: 'enum',
+            },
+            value: {
+                id: { _description: 'ID of the attribute.', _type: 'int64' },
+                is_part_of_key: {
+                    _description:
+                        "Indicates that data corresponding to this attribute is part of a FeedItem's unique key. It defaults to false if it is unspecified. Note that a unique key is not required in a Feed's schema, in which case the FeedItems must be referenced by their feed_item_id.",
+                    _type: 'boolean',
+                },
+                name: { _description: 'The name of the attribute. Required.', _type: 'string' },
+                type: {
+                    _description: 'Data type for feed attribute. Required.',
+                    _enums: [
+                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        {
+                            s: 'UNKNOWN',
+                            description: 'Used for return value only. Represents value unknown in this version.',
+                        },
+                        { s: 'INT64', description: 'Int64.' },
+                        { s: 'DOUBLE', description: 'Double.' },
+                        { s: 'STRING', description: 'String.' },
+                        { s: 'BOOLEAN', description: 'Boolean.' },
+                        { s: 'URL', description: 'Url.' },
+                        { s: 'DATE_TIME', description: 'Datetime.' },
+                        { s: 'INT64_LIST', description: 'Int64 list.' },
+                        { s: 'DOUBLE_LIST', description: 'Double (8 bytes) list.' },
+                        { s: 'STRING_LIST', description: 'String list.' },
+                        { s: 'BOOLEAN_LIST', description: 'Boolean list.' },
+                        { s: 'URL_LIST', description: 'Url list.' },
+                        { s: 'DATE_TIME_LIST', description: 'Datetime list.' },
+                        { s: 'PRICE', description: 'Price.' },
+                    ],
+                    _type: 'enum',
+                },
+            },
         },
         attributes: {
-            _description:
-                "The Feed's attributes. Required on CREATE. Disallowed on UPDATE. Use attribute_operations to add new attributes.",
-            _type: 'array',
+            _type: 'array of objects',
+            id: { _description: 'ID of the attribute.', _type: 'int64' },
+            is_part_of_key: {
+                _description:
+                    "Indicates that data corresponding to this attribute is part of a FeedItem's unique key. It defaults to false if it is unspecified. Note that a unique key is not required in a Feed's schema, in which case the FeedItems must be referenced by their feed_item_id.",
+                _type: 'boolean',
+            },
+            name: { _description: 'The name of the attribute. Required.', _type: 'string' },
+            type: {
+                _description: 'Data type for feed attribute. Required.',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    {
+                        s: 'UNKNOWN',
+                        description: 'Used for return value only. Represents value unknown in this version.',
+                    },
+                    { s: 'INT64', description: 'Int64.' },
+                    { s: 'DOUBLE', description: 'Double.' },
+                    { s: 'STRING', description: 'String.' },
+                    { s: 'BOOLEAN', description: 'Boolean.' },
+                    { s: 'URL', description: 'Url.' },
+                    { s: 'DATE_TIME', description: 'Datetime.' },
+                    { s: 'INT64_LIST', description: 'Int64 list.' },
+                    { s: 'DOUBLE_LIST', description: 'Double (8 bytes) list.' },
+                    { s: 'STRING_LIST', description: 'String list.' },
+                    { s: 'BOOLEAN_LIST', description: 'Boolean list.' },
+                    { s: 'URL_LIST', description: 'Url list.' },
+                    { s: 'DATE_TIME_LIST', description: 'Datetime list.' },
+                    { s: 'PRICE', description: 'Price.' },
+                ],
+                _type: 'enum',
+            },
         },
         id: { _description: 'The ID of the feed. This field is read-only.', _type: 'int64' },
         name: { _description: 'Name of the feed. Required.', _type: 'string' },
@@ -65,7 +137,7 @@ module.exports = {
             category_filters: {
                 _description:
                     "Used to filter Google My Business listings by categories. If entries exist in category_filters, only listings that belong to any of the categories are candidates to be sync'd into FeedItems. If no entries exist in category_filters, then all listings are candidates for syncing.",
-                _type: 'array',
+                _type: 'array of strings',
             },
             email_address: {
                 _description:
@@ -75,7 +147,7 @@ module.exports = {
             label_filters: {
                 _description:
                     'Used to filter Google My Business listings by labels. If entries exist in label_filters, only listings that has any of the labels set are candidates to be synchronized into FeedItems. If no entries exist in label_filters, then all listings are candidates for syncing.',
-                _type: 'array',
+                _type: 'array of strings',
             },
             oauth_info: {
                 http_authorization_header: {

@@ -25,7 +25,7 @@ const result = await customer.keywordPlans.create([keyword_plan, other_keyword_p
 
 // Example result
 {
-	results : ['customers/3827277046/keywordPlans/4739396'],
+	results : ['customers/9262111890/keywordPlans/115113466'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

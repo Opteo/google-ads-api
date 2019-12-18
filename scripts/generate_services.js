@@ -10,8 +10,8 @@
     5. clear the .cache folder in the root of this project to make sure you get new examples from our test account
 
 */
-
-const { fs, template, camelCase, snakeCase, endsWith, get, maxBy} = require('lodash')
+const fs = require('fs-extra')
+const { template, camelCase, snakeCase, endsWith, get, maxBy } = require('lodash')
 
 const Promise = require('bluebird')
 
@@ -196,7 +196,7 @@ const entities = [
     'AdGroupLabel',
     'AdGroup',
     // 'AdParameter', // Missing protos?
-    //'Asset', // Needs custom implementation (only create exists)
+    'Asset',
     'BiddingStrategy',
     'BillingSetup',
     'CampaignBidModifier',
@@ -432,7 +432,14 @@ async function compileService(entity, schema) {
 
             if (_new_object._type === 'object') {
                 new_obj[snakeCaseGads(key)] = unroll(obj[key].properties, key)
+            } else if (_new_object._type === 'array' && obj[key].items.type === 'object') {
+                new_obj[snakeCaseGads(key)] = unroll(obj[key].items.properties, key)
+                new_obj[snakeCaseGads(key)]._type = 'array of objects'
             } else {
+                if (_new_object._type === 'array') {
+                    _new_object._type = 'array of ' + obj[key].items.type + 's'
+                }
+
                 const markdown_description = sanitiseHtml(obj[key].description)
 
                 new_obj[snakeCaseGads(key)] = { ..._new_object, _description: markdown_description }
@@ -708,6 +715,9 @@ async function compileService(entity, schema) {
 ;(async () => {
     schema = await $RefParser.dereference(__dirname + '/schema.json', {
         resolve: { gads: myResolver },
+        dereference: {
+            circular: 'ignore', // Don't allow circular $refs
+        },
     })
 
     for (const entity of entities) {
@@ -715,12 +725,14 @@ async function compileService(entity, schema) {
         await compileService(entity, schema)
     }
 
-    const result = await execP(`prettier --write ${__dirname}/../src/services/*.ts`)
+    const result = await execP(`node ./node_modules/prettier/bin-prettier.js --write ${__dirname}/../src/services/*.ts`)
     console.log('prettifying js...')
-    await execP(`prettier --write ${__dirname}/../docs/content/**/*.js`)
+    await execP(`node ./node_modules/prettier/bin-prettier.js --write ${__dirname}/../docs/content/**/*.js`)
     console.log('prettifying md...')
 
-    await execP(`prettier --tab-width 2 --write ${__dirname}/../docs/content/**/*_code.md`)
+    await execP(
+        `node ./node_modules/prettier/bin-prettier.js --tab-width 2 --write ${__dirname}/../docs/content/**/*_code.md`
+    )
 
     console.log('Finished compiling all services')
 })()

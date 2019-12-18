@@ -1,3 +1,5 @@
+// manual_mode: This file has been manually modified and should not be touched by generate_services.js
+
 import {
     KeywordPlan,
     GenerateForecastMetricsResponse,

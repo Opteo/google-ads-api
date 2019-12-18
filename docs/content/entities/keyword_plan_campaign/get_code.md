@@ -7,19 +7,19 @@ entity: KeywordPlanCampaign
 
 ```javascript
 // Getting the entity
-let result = await customer.keywordPlanCampaigns.get('customers/3827277046/keywordPlanCampaigns/4773388')
+let result = await customer.keywordPlanCampaigns.get('customers/9262111890/keywordPlanCampaigns/115088623')
 ```
 
 ```javascript
 // Example result
 ;({
-  cpc_bid_micros: 5370000,
-  geo_targets: [],
-  id: 4773388,
-  keyword_plan: 'customers/3827277046/keywordPlans/4739396',
+  cpc_bid_micros: 1000000,
+  geo_targets: [{ geo_target_constant: 'geoTargetConstants/1021278' }],
+  id: 115088623,
+  keyword_plan: 'customers/9262111890/keywordPlans/115133472',
   keyword_plan_network: 2,
   language_constants: ['languageConstants/1000'],
   name: 'My keyword plan campaign',
-  resource_name: 'customers/3827277046/keywordPlanCampaigns/4773388',
+  resource_name: 'customers/9262111890/keywordPlanCampaigns/115088623',
 })
 ```

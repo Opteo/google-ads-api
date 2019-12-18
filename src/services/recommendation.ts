@@ -1,4 +1,5 @@
-// @ts-ignore
+// manual_mode: This file has been manually modified and should not be touched by generate_services.js
+
 import { Recommendation } from 'google-ads-node/build/lib/resources'
 import {
     ApplyRecommendationRequest,

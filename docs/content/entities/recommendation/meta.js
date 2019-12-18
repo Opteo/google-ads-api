@@ -8,11 +8,66 @@ module.exports = {
         },
         call_extension_recommendation: {
             _oneof: 'recommendation',
-            recommended_extensions: { _description: 'Call extensions recommended to be added.', _type: 'array' },
+            recommended_extensions: {
+                _type: 'array of objects',
+                call_conversion_action: {
+                    _description:
+                        'The conversion action to attribute a call conversion to. If not set a default conversion action is used. This field only has effect if call_tracking_enabled is set to true. Otherwise this field is ignored.',
+                    _type: 'string',
+                },
+                call_conversion_reporting_state: {
+                    _description:
+                        'Enum value that indicates whether this call extension uses its own call conversion setting (or just have call conversion disabled), or following the account level setting.',
+                    _enums: [
+                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        {
+                            s: 'UNKNOWN',
+                            description: 'Used for return value only. Represents value unknown in this version.',
+                        },
+                        { s: 'DISABLED', description: 'Call conversion action is disabled.' },
+                        {
+                            s: 'USE_ACCOUNT_LEVEL_CALL_CONVERSION_ACTION',
+                            description:
+                                'Call conversion action will use call conversion type set at the\naccount level.',
+                        },
+                        {
+                            s: 'USE_RESOURCE_LEVEL_CALL_CONVERSION_ACTION',
+                            description:
+                                'Call conversion action will use call conversion type set at the resource\n(call only ads/call extensions) level.',
+                        },
+                    ],
+                    _type: 'enum',
+                },
+                call_conversion_tracking_disabled: {
+                    _description:
+                        'If true, disable call conversion tracking. call_conversion_action should not be set if this is true. Optional.',
+                    _type: 'boolean',
+                },
+                call_tracking_enabled: {
+                    _description:
+                        'Indicates whether call tracking is enabled. By default, call tracking is not enabled.',
+                    _type: 'boolean',
+                },
+                country_code: {
+                    _description:
+                        "Uppercase two-letter country code of the advertiser's phone number. This string must not be empty.",
+                    _type: 'string',
+                },
+                phone_number: {
+                    _description: "The advertiser's phone number to append to the ad. This string must not be empty.",
+                    _type: 'string',
+                },
+            },
         },
         callout_extension_recommendation: {
             _oneof: 'recommendation',
-            recommended_extensions: { _description: 'Callout extensions recommended to be added.', _type: 'array' },
+            recommended_extensions: {
+                _type: 'array of objects',
+                callout_text: {
+                    _description: 'The callout text. The length of this string should be between 1 and 25, inclusive.',
+                    _type: 'string',
+                },
+            },
         },
         campaign: {
             _description:
@@ -27,9 +82,36 @@ module.exports = {
         campaign_budget_recommendation: {
             _oneof: 'recommendation',
             budget_options: {
-                _description:
-                    'The budget amounts and associated impact estimates for some values of possible budget amounts.',
-                _type: 'array',
+                _type: 'array of objects',
+                budget_amount_micros: { _description: 'The budget amount for this option.', _type: 'int64' },
+                impact: {
+                    base_metrics: {
+                        clicks: { _description: 'Number of ad clicks.', _type: 'double' },
+                        conversions: { _description: 'Number of conversions.', _type: 'double' },
+                        cost_micros: {
+                            _description: 'Cost (in micros) for advertising, in the local currency for the account.',
+                            _type: 'int64',
+                        },
+                        impressions: { _description: 'Number of ad impressions.', _type: 'double' },
+                        video_views: {
+                            _description: 'Number of video views for a video ad campaign.',
+                            _type: 'double',
+                        },
+                    },
+                    potential_metrics: {
+                        clicks: { _description: 'Number of ad clicks.', _type: 'double' },
+                        conversions: { _description: 'Number of conversions.', _type: 'double' },
+                        cost_micros: {
+                            _description: 'Cost (in micros) for advertising, in the local currency for the account.',
+                            _type: 'int64',
+                        },
+                        impressions: { _description: 'Number of ad impressions.', _type: 'double' },
+                        video_views: {
+                            _description: 'Number of video views for a video ad campaign.',
+                            _type: 'double',
+                        },
+                    },
+                },
             },
             current_budget_amount_micros: { _description: 'The current budget amount in micros.', _type: 'int64' },
             recommended_budget_amount_micros: {
@@ -137,9 +219,38 @@ module.exports = {
             _oneof: 'recommendation',
             budget_recommendation: {
                 budget_options: {
-                    _description:
-                        'The budget amounts and associated impact estimates for some values of possible budget amounts.',
-                    _type: 'array',
+                    _type: 'array of objects',
+                    budget_amount_micros: { _description: 'The budget amount for this option.', _type: 'int64' },
+                    impact: {
+                        base_metrics: {
+                            clicks: { _description: 'Number of ad clicks.', _type: 'double' },
+                            conversions: { _description: 'Number of conversions.', _type: 'double' },
+                            cost_micros: {
+                                _description:
+                                    'Cost (in micros) for advertising, in the local currency for the account.',
+                                _type: 'int64',
+                            },
+                            impressions: { _description: 'Number of ad impressions.', _type: 'double' },
+                            video_views: {
+                                _description: 'Number of video views for a video ad campaign.',
+                                _type: 'double',
+                            },
+                        },
+                        potential_metrics: {
+                            clicks: { _description: 'Number of ad clicks.', _type: 'double' },
+                            conversions: { _description: 'Number of conversions.', _type: 'double' },
+                            cost_micros: {
+                                _description:
+                                    'Cost (in micros) for advertising, in the local currency for the account.',
+                                _type: 'int64',
+                            },
+                            impressions: { _description: 'Number of ad impressions.', _type: 'double' },
+                            video_views: {
+                                _description: 'Number of video views for a video ad campaign.',
+                                _type: 'double',
+                            },
+                        },
+                    },
                 },
                 current_budget_amount_micros: { _description: 'The current budget amount in micros.', _type: 'int64' },
                 recommended_budget_amount_micros: {
@@ -158,13 +269,106 @@ module.exports = {
         search_partners_opt_in_recommendation: { _oneof: 'recommendation' },
         sitelink_extension_recommendation: {
             _oneof: 'recommendation',
-            recommended_extensions: { _description: 'Sitelink extensions recommended to be added.', _type: 'array' },
+            recommended_extensions: {
+                _type: 'array of objects',
+                final_mobile_urls: {
+                    _description: 'A list of possible final mobile URLs after all cross domain redirects.',
+                    _type: 'array of strings',
+                },
+                final_url_suffix: {
+                    _description: 'Final URL suffix to be appended to landing page URLs served with parallel tracking.',
+                    _type: 'string',
+                },
+                final_urls: {
+                    _description: 'A list of possible final URLs after all cross domain redirects.',
+                    _type: 'array of strings',
+                },
+                line1: {
+                    _description:
+                        'First line of the description for the sitelink. If this value is set, line2 must also be set. The length of this string should be between 0 and 35, inclusive.',
+                    _type: 'string',
+                },
+                line2: {
+                    _description:
+                        'Second line of the description for the sitelink. If this value is set, line1 must also be set. The length of this string should be between 0 and 35, inclusive.',
+                    _type: 'string',
+                },
+                link_text: {
+                    _description:
+                        'URL display text for the sitelink. The length of this string should be between 1 and 25, inclusive.',
+                    _type: 'string',
+                },
+                tracking_url_template: {
+                    _description: 'URL template for constructing a tracking URL.',
+                    _type: 'string',
+                },
+                url_custom_parameters: {
+                    _type: 'array of objects',
+                    key: { _description: 'The key matching the parameter tag name.', _type: 'string' },
+                    value: { _description: 'The value to be substituted.', _type: 'string' },
+                },
+            },
         },
         target_cpa_opt_in_recommendation: {
             _oneof: 'recommendation',
             options: {
-                _description: 'The available goals and corresponding options for Target CPA strategy.',
-                _type: 'array',
+                _type: 'array of objects',
+                goal: {
+                    _description: 'The goal achieved by this option.',
+                    _enums: [
+                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        {
+                            s: 'UNKNOWN',
+                            description: 'Used for return value only. Represents value unknown in this version.',
+                        },
+                        { s: 'SAME_COST', description: 'Recommendation to set Target CPA to maintain the same cost.' },
+                        {
+                            s: 'SAME_CONVERSIONS',
+                            description: 'Recommendation to set Target CPA to maintain the same conversions.',
+                        },
+                        { s: 'SAME_CPA', description: 'Recommendation to set Target CPA to maintain the same CPA.' },
+                        {
+                            s: 'CLOSEST_CPA',
+                            description:
+                                'Recommendation to set Target CPA to a value that is as close as possible\nto, yet lower than, the actual CPA (computed for past 28 days).',
+                        },
+                    ],
+                    _type: 'enum',
+                },
+                impact: {
+                    base_metrics: {
+                        clicks: { _description: 'Number of ad clicks.', _type: 'double' },
+                        conversions: { _description: 'Number of conversions.', _type: 'double' },
+                        cost_micros: {
+                            _description: 'Cost (in micros) for advertising, in the local currency for the account.',
+                            _type: 'int64',
+                        },
+                        impressions: { _description: 'Number of ad impressions.', _type: 'double' },
+                        video_views: {
+                            _description: 'Number of video views for a video ad campaign.',
+                            _type: 'double',
+                        },
+                    },
+                    potential_metrics: {
+                        clicks: { _description: 'Number of ad clicks.', _type: 'double' },
+                        conversions: { _description: 'Number of conversions.', _type: 'double' },
+                        cost_micros: {
+                            _description: 'Cost (in micros) for advertising, in the local currency for the account.',
+                            _type: 'int64',
+                        },
+                        impressions: { _description: 'Number of ad impressions.', _type: 'double' },
+                        video_views: {
+                            _description: 'Number of video views for a video ad campaign.',
+                            _type: 'double',
+                        },
+                    },
+                },
+                required_campaign_budget_amount_micros: {
+                    _description:
+                        'The minimum campaign budget, in local currency for the account, required to achieve the target CPA. Amount is specified in micros, where one million is equivalent to one currency unit.',
+                    _type: 'int64',
+                },
+                target_cpa_micros: { _description: 'Average CPA target.', _type: 'int64' },
             },
             recommended_target_cpa_micros: {
                 _description:
@@ -183,20 +387,57 @@ module.exports = {
                 app_ad: {
                     _oneof: 'adData',
                     descriptions: {
-                        _description:
-                            'List of text assets for descriptions. When the ad serves the descriptions will be selected from this list.',
-                        _type: 'array',
+                        _type: 'array of objects',
+                        pinned_field: {
+                            _description:
+                                'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
+                            _enums: [
+                                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                                {
+                                    s: 'UNKNOWN',
+                                    description:
+                                        'The received value is not known in this version.\n\nThis is a response-only value.',
+                                },
+                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.' },
+                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.' },
+                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.' },
+                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.' },
+                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.' },
+                            ],
+                            _type: 'enum',
+                        },
+                        text: { _description: 'Asset text.', _type: 'string' },
                     },
                     headlines: {
-                        _description:
-                            'List of text assets for headlines. When the ad serves the headlines will be selected from this list.',
-                        _type: 'array',
+                        _type: 'array of objects',
+                        pinned_field: {
+                            _description:
+                                'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
+                            _enums: [
+                                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                                {
+                                    s: 'UNKNOWN',
+                                    description:
+                                        'The received value is not known in this version.\n\nThis is a response-only value.',
+                                },
+                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.' },
+                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.' },
+                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.' },
+                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.' },
+                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.' },
+                            ],
+                            _type: 'enum',
+                        },
+                        text: { _description: 'Asset text.', _type: 'string' },
                     },
                     html_5_media_bundles: {
-                        _description: 'List of media bundle assets that may be used with the ad.',
-                        _type: 'array',
+                        _type: 'array of objects',
+                        asset: { _description: 'The Asset resource name of this media bundle.', _type: 'string' },
                     },
-                    images: { _description: 'List of image assets that may be displayed with the ad.', _type: 'array' },
+                    images: {
+                        _type: 'array of objects',
+                        asset: { _description: 'The Asset resource name of this image.', _type: 'string' },
+                    },
                     mandatory_ad_text: {
                         pinned_field: {
                             _description:
@@ -219,24 +460,64 @@ module.exports = {
                         text: { _description: 'Asset text.', _type: 'string' },
                     },
                     youtube_videos: {
-                        _description: 'List of YouTube video assets that may be displayed with the ad.',
-                        _type: 'array',
+                        _type: 'array of objects',
+                        asset: { _description: 'The Asset resource name of this video.', _type: 'string' },
                     },
                 },
                 app_engagement_ad: {
                     _oneof: 'adData',
                     descriptions: {
-                        _description:
-                            'List of text assets for descriptions. When the ad serves the descriptions will be selected from this list.',
-                        _type: 'array',
+                        _type: 'array of objects',
+                        pinned_field: {
+                            _description:
+                                'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
+                            _enums: [
+                                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                                {
+                                    s: 'UNKNOWN',
+                                    description:
+                                        'The received value is not known in this version.\n\nThis is a response-only value.',
+                                },
+                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.' },
+                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.' },
+                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.' },
+                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.' },
+                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.' },
+                            ],
+                            _type: 'enum',
+                        },
+                        text: { _description: 'Asset text.', _type: 'string' },
                     },
                     headlines: {
-                        _description:
-                            'List of text assets for headlines. When the ad serves the headlines will be selected from this list.',
-                        _type: 'array',
+                        _type: 'array of objects',
+                        pinned_field: {
+                            _description:
+                                'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
+                            _enums: [
+                                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                                {
+                                    s: 'UNKNOWN',
+                                    description:
+                                        'The received value is not known in this version.\n\nThis is a response-only value.',
+                                },
+                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.' },
+                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.' },
+                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.' },
+                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.' },
+                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.' },
+                            ],
+                            _type: 'enum',
+                        },
+                        text: { _description: 'Asset text.', _type: 'string' },
                     },
-                    images: { _description: 'List of image assets that may be displayed with the ad.', _type: 'array' },
-                    videos: { _description: 'List of video assets that may be displayed with the ad.', _type: 'array' },
+                    images: {
+                        _type: 'array of objects',
+                        asset: { _description: 'The Asset resource name of this image.', _type: 'string' },
+                    },
+                    videos: {
+                        _type: 'array of objects',
+                        asset: { _description: 'The Asset resource name of this video.', _type: 'string' },
+                    },
                 },
                 call_only_ad: {
                     _oneof: 'adData',
@@ -393,17 +674,33 @@ module.exports = {
                     },
                 },
                 final_app_urls: {
-                    _description:
-                        'A list of final app URLs that will be used on mobile if the user has the specific app installed.',
-                    _type: 'array',
+                    _type: 'array of objects',
+                    os_type: {
+                        _description: 'The operating system targeted by this URL. Required.',
+                        _enums: [
+                            { s: 'UNSPECIFIED', description: 'Not specified.' },
+                            {
+                                s: 'UNKNOWN',
+                                description: 'Used for return value only. Represents value unknown in this version.',
+                            },
+                            { s: 'IOS', description: 'The Apple IOS operating system.' },
+                            { s: 'ANDROID', description: 'The Android operating system.' },
+                        ],
+                        _type: 'enum',
+                    },
+                    url: {
+                        _description:
+                            'The app deep link URL. Deep links specify a location in an app that corresponds to the content you\'d like to show, and should be of the form {scheme}://{host_path} The scheme identifies which app to open. For your app, you can use a custom scheme that starts with the app\'s name. The host and path specify the unique location in the app where your content exists. Example: "exampleapp://productid_1234". Required.',
+                        _type: 'string',
+                    },
                 },
                 final_mobile_urls: {
                     _description: 'The list of possible final mobile URLs after all cross-domain redirects for the ad.',
-                    _type: 'array',
+                    _type: 'array of strings',
                 },
                 final_urls: {
                     _description: 'The list of possible final URLs after all cross-domain redirects for the ad.',
-                    _type: 'array',
+                    _type: 'array of strings',
                 },
                 gmail_ad: {
                     _oneof: 'adData',
@@ -435,11 +732,34 @@ module.exports = {
                         },
                     },
                     marketing_image_headline: { _description: 'Headline of the marketing image.', _type: 'string' },
-                    product_images: { _description: 'Product images. Up to 15 images are supported.', _type: 'array' },
+                    product_images: {
+                        _type: 'array of objects',
+                        description: { _description: 'Description of the product.', _type: 'string' },
+                        display_call_to_action: {
+                            text: { _description: 'Text for the display-call-to-action.', _type: 'string' },
+                            text_color: {
+                                _description:
+                                    'Text color for the display-call-to-action in hexadecimal, e.g. #ffffff for white.',
+                                _type: 'string',
+                            },
+                            url_collection_id: {
+                                _description:
+                                    'Identifies the url collection in the ad.url_collections field. If not set the url defaults to final_url.',
+                                _type: 'string',
+                            },
+                        },
+                        product_image: {
+                            _description:
+                                'The MediaFile resource name of the product image. Valid image types are GIF, JPEG and PNG. The minimum size is 300x300 pixels and the aspect ratio must be 1:1 (+-1%).',
+                            _type: 'string',
+                        },
+                    },
                     product_videos: {
-                        _description:
-                            'Product videos. Up to 7 videos are supported. At least one product video or a marketing image must be specified.',
-                        _type: 'array',
+                        _type: 'array of objects',
+                        product_video: {
+                            _description: 'The MediaFile resource name of a video which must be hosted on YouTube.',
+                            _type: 'string',
+                        },
                     },
                     teaser: {
                         business_name: { _description: 'Business name of the advertiser.', _type: 'string' },
@@ -612,9 +932,26 @@ module.exports = {
                         _type: 'string',
                     },
                     descriptions: {
-                        _description:
-                            'Descriptive texts for the ad. The maximum length is 90 characters. At least 1 and max 5 headlines can be specified.',
-                        _type: 'array',
+                        _type: 'array of objects',
+                        pinned_field: {
+                            _description:
+                                'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
+                            _enums: [
+                                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                                {
+                                    s: 'UNKNOWN',
+                                    description:
+                                        'The received value is not known in this version.\n\nThis is a response-only value.',
+                                },
+                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.' },
+                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.' },
+                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.' },
+                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.' },
+                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.' },
+                            ],
+                            _type: 'enum',
+                        },
+                        text: { _description: 'Asset text.', _type: 'string' },
                     },
                     format_setting: {
                         _description: 'Specifies which format the ad will be served in. Default is ALL_FORMATS.',
@@ -632,14 +969,30 @@ module.exports = {
                         _type: 'enum',
                     },
                     headlines: {
-                        _description:
-                            'Short format headlines for the ad. The maximum length is 30 characters. At least 1 and max 5 headlines can be specified.',
-                        _type: 'array',
+                        _type: 'array of objects',
+                        pinned_field: {
+                            _description:
+                                'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
+                            _enums: [
+                                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                                {
+                                    s: 'UNKNOWN',
+                                    description:
+                                        'The received value is not known in this version.\n\nThis is a response-only value.',
+                                },
+                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.' },
+                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.' },
+                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.' },
+                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.' },
+                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.' },
+                            ],
+                            _type: 'enum',
+                        },
+                        text: { _description: 'Asset text.', _type: 'string' },
                     },
                     logo_images: {
-                        _description:
-                            'Logo images to be used in the ad. Valid image types are GIF, JPEG, and PNG. The minimum size is 512x128 and the aspect ratio must be 4:1 (+-1%). Combined with square_logo_images the maximum is 5.',
-                        _type: 'array',
+                        _type: 'array of objects',
+                        asset: { _description: 'The Asset resource name of this image.', _type: 'string' },
                     },
                     long_headline: {
                         pinned_field: {
@@ -668,9 +1021,8 @@ module.exports = {
                         _type: 'string',
                     },
                     marketing_images: {
-                        _description:
-                            'Marketing images to be used in the ad. Valid image types are GIF, JPEG, and PNG. The minimum size is 600x314 and the aspect ratio must be 1.91:1 (+-1%). At least one marketing_image is required. Combined with square_marketing_images the maximum is 15.',
-                        _type: 'array',
+                        _type: 'array of objects',
+                        asset: { _description: 'The Asset resource name of this image.', _type: 'string' },
                     },
                     price_prefix: { _description: "Prefix before price. E.g. 'as low as'.", _type: 'string' },
                     promo_text: {
@@ -679,31 +1031,63 @@ module.exports = {
                         _type: 'string',
                     },
                     square_logo_images: {
-                        _description:
-                            'Square logo images to be used in the ad. Valid image types are GIF, JPEG, and PNG. The minimum size is 128x128 and the aspect ratio must be 1:1 (+-1%). Combined with square_logo_images the maximum is 5.',
-                        _type: 'array',
+                        _type: 'array of objects',
+                        asset: { _description: 'The Asset resource name of this image.', _type: 'string' },
                     },
                     square_marketing_images: {
-                        _description:
-                            'Square marketing images to be used in the ad. Valid image types are GIF, JPEG, and PNG. The minimum size is 300x300 and the aspect ratio must be 1:1 (+-1%). At least one square marketing_image is required. Combined with marketing_images the maximum is 15.',
-                        _type: 'array',
+                        _type: 'array of objects',
+                        asset: { _description: 'The Asset resource name of this image.', _type: 'string' },
                     },
                     youtube_videos: {
-                        _description: 'Optional YouTube vidoes for the ad. A maximum of 5 videos can be specified.',
-                        _type: 'array',
+                        _type: 'array of objects',
+                        asset: { _description: 'The Asset resource name of this video.', _type: 'string' },
                     },
                 },
                 responsive_search_ad: {
                     _oneof: 'adData',
                     descriptions: {
-                        _description:
-                            'List of text assets for descriptions. When the ad serves the descriptions will be selected from this list.',
-                        _type: 'array',
+                        _type: 'array of objects',
+                        pinned_field: {
+                            _description:
+                                'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
+                            _enums: [
+                                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                                {
+                                    s: 'UNKNOWN',
+                                    description:
+                                        'The received value is not known in this version.\n\nThis is a response-only value.',
+                                },
+                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.' },
+                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.' },
+                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.' },
+                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.' },
+                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.' },
+                            ],
+                            _type: 'enum',
+                        },
+                        text: { _description: 'Asset text.', _type: 'string' },
                     },
                     headlines: {
-                        _description:
-                            'List of text assets for headlines. When the ad serves the headlines will be selected from this list.',
-                        _type: 'array',
+                        _type: 'array of objects',
+                        pinned_field: {
+                            _description:
+                                'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
+                            _enums: [
+                                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                                {
+                                    s: 'UNKNOWN',
+                                    description:
+                                        'The received value is not known in this version.\n\nThis is a response-only value.',
+                                },
+                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.' },
+                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.' },
+                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.' },
+                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.' },
+                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.' },
+                            ],
+                            _type: 'enum',
+                        },
+                        text: { _description: 'Asset text.', _type: 'string' },
                     },
                     path1: {
                         _description: 'First part of text that may appear appended to the url displayed in the ad.',
@@ -790,14 +1174,25 @@ module.exports = {
                     _type: 'enum',
                 },
                 url_collections: {
-                    _description:
-                        'Additional URLs for the ad that are tagged with a unique identifier that can be referenced from other fields in the ad.',
-                    _type: 'array',
+                    _type: 'array of objects',
+                    final_mobile_urls: {
+                        _description: 'A list of possible final mobile URLs.',
+                        _type: 'array of strings',
+                    },
+                    final_urls: { _description: 'A list of possible final URLs.', _type: 'array of strings' },
+                    tracking_url_template: {
+                        _description: 'URL template for constructing a tracking URL.',
+                        _type: 'string',
+                    },
+                    url_collection_id: {
+                        _description: 'Unique identifier for this UrlCollection instance.',
+                        _type: 'string',
+                    },
                 },
                 url_custom_parameters: {
-                    _description:
-                        'The list of mappings that can be used to substitute custom parameter tags in a <code>tracking_url_template</code>, <code>final_urls</code>, or <code>mobile_final_urls</code>.',
-                    _type: 'array',
+                    _type: 'array of objects',
+                    key: { _description: 'The key matching the parameter tag name.', _type: 'string' },
+                    value: { _description: 'The value to be substituted.', _type: 'string' },
                 },
                 video_ad: {
                     _oneof: 'adData',

@@ -27,27 +27,31 @@ let result = await customer.keywordPlans.list({
 // Example result
 ;[
   {
-    keyword_plan: { id: 4739396, name: 'My keyword plan', resource_name: 'customers/3827277046/keywordPlans/4739396' },
+    keyword_plan: {
+      forecast_period: { date_interval: 4 },
+      id: 115113466,
+      name: 'My keyword plan',
+      resource_name: 'customers/9262111890/keywordPlans/115113466',
+    },
     customer: {
-      auto_tagging_enabled: true,
+      auto_tagging_enabled: false,
       call_reporting_setting: {
-        call_conversion_action: 'customers/3827277046/conversionActions/179',
+        call_conversion_action: 'customers/9262111890/conversionActions/179',
         call_conversion_reporting_enabled: true,
-        call_reporting_enabled: true,
       },
-      conversion_tracking_setting: { conversion_tracking_id: 875176189 },
-      currency_code: 'GBP',
+      conversion_tracking_setting: { conversion_tracking_id: 797556569 },
+      currency_code: 'EUR',
       descriptive_name: 'My customer',
       has_partners_badge: false,
-      id: 3827277046,
+      id: 9262111890,
       manager: false,
-      pay_per_conversion_eligibility_failure_reasons: [5],
+      pay_per_conversion_eligibility_failure_reasons: [8, 2],
       remarketing_setting: {
         google_global_site_tag:
-          "<!-- Global site tag (gtag.js) - Google Ads: 875176189 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-875176189\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-875176189');\n</script>\n",
+          "<!-- Global site tag (gtag.js) - Google Ads: 797556569 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-797556569\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-797556569');\n</script>\n",
       },
-      resource_name: 'customers/3827277046',
-      test_account: false,
+      resource_name: 'customers/9262111890',
+      test_account: true,
       time_zone: 'Europe/London',
     },
   },

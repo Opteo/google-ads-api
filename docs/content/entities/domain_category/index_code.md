@@ -9,14 +9,13 @@ title: DomainCategory
 // Example DomainCategory
 const domain_category = {
   campaign: 'customers/3827277046/campaigns/1398201241',
-  category: 'landing pages from your standard ad groups',
-  category_rank: 0,
-  coverage_fraction: 4.166666666666667,
+  category: 'google sheets/dashboards with google sheets',
+  category_rank: 2,
+  coverage_fraction: 1.6129032258064515,
   domain: 'opteo.com',
   has_children: false,
   language_code: 'en',
-  recommended_cpc_bid_micros: 41404277,
   resource_name:
-    'customers/3827277046/domainCategories/1398201241~bGFuZGluZyBwYWdlcyBmcm9tIHlvdXIgc3RhbmRhcmQgYWQgZ3JvdXBz~en',
+    'customers/3827277046/domainCategories/1398201241~Z29vZ2xlIHNoZWV0cy9kYXNoYm9hcmRzIHdpdGggZ29vZ2xlIHNoZWV0cw~en',
 }
 ```

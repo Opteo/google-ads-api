@@ -2,7 +2,60 @@ module.exports = {
     name: 'CampaignCriterionSimulation',
     object: {
         bid_modifier_point_list: {
-            points: { _description: 'Projected metrics for a series of bid modifier amounts.', _type: 'array' },
+            points: {
+                _type: 'array of objects',
+                bid_modifier: {
+                    _description: 'The simulated bid modifier upon which projected metrics are based.',
+                    _type: 'double',
+                },
+                biddable_conversions: {
+                    _description:
+                        'Projected number of biddable conversions. Only search advertising channel type supports this field.',
+                    _type: 'double',
+                },
+                biddable_conversions_value: {
+                    _description:
+                        'Projected total value of biddable conversions. Only search advertising channel type supports this field.',
+                    _type: 'double',
+                },
+                clicks: { _description: 'Projected number of clicks.', _type: 'int64' },
+                cost_micros: { _description: 'Projected cost in micros.', _type: 'int64' },
+                impressions: { _description: 'Projected number of impressions.', _type: 'int64' },
+                parent_biddable_conversions: {
+                    _description:
+                        'Projected number of biddable conversions for the parent resource. Only search advertising channel type supports this field.',
+                    _type: 'double',
+                },
+                parent_biddable_conversions_value: {
+                    _description:
+                        'Projected total value of biddable conversions for the parent resource. Only search advertising channel type supports this field.',
+                    _type: 'double',
+                },
+                parent_clicks: { _description: 'Projected number of clicks for the parent resource.', _type: 'int64' },
+                parent_cost_micros: {
+                    _description: 'Projected cost in micros for the parent resource.',
+                    _type: 'int64',
+                },
+                parent_impressions: {
+                    _description: 'Projected number of impressions for the parent resource.',
+                    _type: 'int64',
+                },
+                parent_required_budget_micros: {
+                    _description:
+                        'Projected minimum daily budget that must be available to the parent resource to realize this simulation.',
+                    _type: 'int64',
+                },
+                parent_top_slot_impressions: {
+                    _description:
+                        'Projected number of top slot impressions for the parent resource. Only search advertising channel type supports this field.',
+                    _type: 'int64',
+                },
+                top_slot_impressions: {
+                    _description:
+                        'Projected number of top slot impressions. Only search advertising channel type supports this field.',
+                    _type: 'int64',
+                },
+            },
         },
         campaign_id: { _description: 'Campaign ID of the simulation.', _type: 'int64' },
         criterion_id: { _description: 'Criterion ID of the simulation.', _type: 'int64' },

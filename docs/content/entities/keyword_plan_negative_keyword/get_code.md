@@ -7,14 +7,16 @@ entity: KeywordPlanNegativeKeyword
 
 ```javascript
 // Getting the entity
-let result = await customer.keywordPlanNegativeKeywords.get(
-  'customers/1234567890/keywordPlanNegativeKeywords/123123123'
-)
+let result = await customer.keywordPlanNegativeKeywords.get('customers/9262111890/keywordPlanNegativeKeywords/13119148')
 ```
 
 ```javascript
-
 // Example result
-(/* Todo: add example get() return here */)
-
+;({
+  id: 13119148,
+  keyword_plan_campaign: 'customers/9262111890/keywordPlanCampaigns/115088623',
+  match_type: 4,
+  resource_name: 'customers/9262111890/keywordPlanNegativeKeywords/13119148',
+  text: 'moon walk',
+})
 ```

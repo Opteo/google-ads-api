@@ -28,7 +28,14 @@ module.exports = {
         },
         basic_user_list: {
             _oneof: 'userList',
-            actions: { _description: 'Actions associated with this user list.', _type: 'array' },
+            actions: {
+                _type: 'array of objects',
+                conversion_action: {
+                    _description: "A conversion action that's not generated from remarketing.",
+                    _type: 'string',
+                },
+                remarketing_action: { _description: 'A remarketing action.', _type: 'string' },
+            },
         },
         closing_reason: {
             _description:
@@ -106,9 +113,25 @@ module.exports = {
         logical_user_list: {
             _oneof: 'userList',
             rules: {
-                _description:
-                    'Logical list rules that define this user list. The rules are defined as a logical operator (ALL/ANY/NONE) and a list of user lists. All the rules are ANDed when they are evaluated. Required for creating a logical user list.',
-                _type: 'array',
+                _type: 'array of objects',
+                operator: {
+                    _description: 'The logical operator of the rule.',
+                    _enums: [
+                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        {
+                            s: 'UNKNOWN',
+                            description: 'Used for return value only. Represents value unknown in this version.',
+                        },
+                        { s: 'ALL', description: 'And - all of the operands.' },
+                        { s: 'ANY', description: 'Or - at least one of the operands.' },
+                        { s: 'NONE', description: 'Not - none of the operands.' },
+                    ],
+                    _type: 'enum',
+                },
+                rule_operands: {
+                    _type: 'array of objects',
+                    user_list: { _description: 'Resource name of a user list as an operand.', _type: 'string' },
+                },
             },
         },
         membership_life_span: {
@@ -150,9 +173,98 @@ module.exports = {
             combined_rule_user_list: {
                 left_operand: {
                     rule_item_groups: {
-                        _description:
-                            'List of rule item groups that defines this rule. Rule item groups are grouped together based on rule_type.',
-                        _type: 'array',
+                        _type: 'array of objects',
+                        rule_items: {
+                            _type: 'array of objects',
+                            date_rule_item: {
+                                offset_in_days: {
+                                    _description:
+                                        'The relative date value of the right hand side denoted by number of days offset from now. The value field will override this field when both are present.',
+                                    _type: 'int64',
+                                },
+                                operator: {
+                                    _description:
+                                        'Date comparison operator. This field is required and must be populated when creating new date rule item.',
+                                    _enums: [
+                                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                                        {
+                                            s: 'UNKNOWN',
+                                            description:
+                                                'Used for return value only. Represents value unknown in this version.',
+                                        },
+                                        { s: 'EQUALS', description: 'Equals.' },
+                                        { s: 'NOT_EQUALS', description: 'Not Equals.' },
+                                        { s: 'BEFORE', description: 'Before.' },
+                                        { s: 'AFTER', description: 'After.' },
+                                    ],
+                                    _type: 'enum',
+                                },
+                                value: {
+                                    _description:
+                                        "String representing date value to be compared with the rule variable. Supported date format is YYYY-MM-DD. Times are reported in the customer's time zone.",
+                                    _type: 'string',
+                                },
+                            },
+                            name: {
+                                _description:
+                                    "Rule variable name. It should match the corresponding key name fired by the pixel. A name must begin with US-ascii letters or underscore or UTF8 code that is greater than 127 and consist of US-ascii letters or digits or underscore or UTF8 code that is greater than 127. For websites, there are two built-in variable URL (name = 'url__') and referrer URL (name = 'ref_url__'). This field must be populated when creating a new rule item.",
+                                _type: 'string',
+                            },
+                            number_rule_item: {
+                                operator: {
+                                    _description:
+                                        'Number comparison operator. This field is required and must be populated when creating a new number rule item.',
+                                    _enums: [
+                                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                                        {
+                                            s: 'UNKNOWN',
+                                            description:
+                                                'Used for return value only. Represents value unknown in this version.',
+                                        },
+                                        { s: 'GREATER_THAN', description: 'Greater than.' },
+                                        { s: 'GREATER_THAN_OR_EQUAL', description: 'Greater than or equal.' },
+                                        { s: 'EQUALS', description: 'Equals.' },
+                                        { s: 'NOT_EQUALS', description: 'Not equals.' },
+                                        { s: 'LESS_THAN', description: 'Less than.' },
+                                        { s: 'LESS_THAN_OR_EQUAL', description: 'Less than or equal.' },
+                                    ],
+                                    _type: 'enum',
+                                },
+                                value: {
+                                    _description:
+                                        'Number value to be compared with the variable. This field is required and must be populated when creating a new number rule item.',
+                                    _type: 'double',
+                                },
+                            },
+                            string_rule_item: {
+                                operator: {
+                                    _description:
+                                        'String comparison operator. This field is required and must be populated when creating a new string rule item.',
+                                    _enums: [
+                                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                                        {
+                                            s: 'UNKNOWN',
+                                            description:
+                                                'Used for return value only. Represents value unknown in this version.',
+                                        },
+                                        { s: 'CONTAINS', description: 'Contains.' },
+                                        { s: 'EQUALS', description: 'Equals.' },
+                                        { s: 'STARTS_WITH', description: 'Starts with.' },
+                                        { s: 'ENDS_WITH', description: 'Ends with.' },
+                                        { s: 'NOT_EQUALS', description: 'Not equals.' },
+                                        { s: 'NOT_CONTAINS', description: 'Not contains.' },
+                                        { s: 'NOT_STARTS_WITH', description: 'Not starts with.' },
+                                        { s: 'NOT_ENDS_WITH', description: 'Not ends with.' },
+                                    ],
+                                    _type: 'enum',
+                                },
+                                value: {
+                                    _description:
+                                        'The right hand side of the string rule item. For URLs or referrer URLs, the value can not contain illegal URL chars such as newlines, quotes, tabs, or parentheses. This field is required and must be populated when creating a new string rule item.',
+                                    _type: 'string',
+                                },
+                            },
+                        },
                     },
                     rule_type: {
                         _description:
@@ -171,9 +283,98 @@ module.exports = {
                 },
                 right_operand: {
                     rule_item_groups: {
-                        _description:
-                            'List of rule item groups that defines this rule. Rule item groups are grouped together based on rule_type.',
-                        _type: 'array',
+                        _type: 'array of objects',
+                        rule_items: {
+                            _type: 'array of objects',
+                            date_rule_item: {
+                                offset_in_days: {
+                                    _description:
+                                        'The relative date value of the right hand side denoted by number of days offset from now. The value field will override this field when both are present.',
+                                    _type: 'int64',
+                                },
+                                operator: {
+                                    _description:
+                                        'Date comparison operator. This field is required and must be populated when creating new date rule item.',
+                                    _enums: [
+                                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                                        {
+                                            s: 'UNKNOWN',
+                                            description:
+                                                'Used for return value only. Represents value unknown in this version.',
+                                        },
+                                        { s: 'EQUALS', description: 'Equals.' },
+                                        { s: 'NOT_EQUALS', description: 'Not Equals.' },
+                                        { s: 'BEFORE', description: 'Before.' },
+                                        { s: 'AFTER', description: 'After.' },
+                                    ],
+                                    _type: 'enum',
+                                },
+                                value: {
+                                    _description:
+                                        "String representing date value to be compared with the rule variable. Supported date format is YYYY-MM-DD. Times are reported in the customer's time zone.",
+                                    _type: 'string',
+                                },
+                            },
+                            name: {
+                                _description:
+                                    "Rule variable name. It should match the corresponding key name fired by the pixel. A name must begin with US-ascii letters or underscore or UTF8 code that is greater than 127 and consist of US-ascii letters or digits or underscore or UTF8 code that is greater than 127. For websites, there are two built-in variable URL (name = 'url__') and referrer URL (name = 'ref_url__'). This field must be populated when creating a new rule item.",
+                                _type: 'string',
+                            },
+                            number_rule_item: {
+                                operator: {
+                                    _description:
+                                        'Number comparison operator. This field is required and must be populated when creating a new number rule item.',
+                                    _enums: [
+                                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                                        {
+                                            s: 'UNKNOWN',
+                                            description:
+                                                'Used for return value only. Represents value unknown in this version.',
+                                        },
+                                        { s: 'GREATER_THAN', description: 'Greater than.' },
+                                        { s: 'GREATER_THAN_OR_EQUAL', description: 'Greater than or equal.' },
+                                        { s: 'EQUALS', description: 'Equals.' },
+                                        { s: 'NOT_EQUALS', description: 'Not equals.' },
+                                        { s: 'LESS_THAN', description: 'Less than.' },
+                                        { s: 'LESS_THAN_OR_EQUAL', description: 'Less than or equal.' },
+                                    ],
+                                    _type: 'enum',
+                                },
+                                value: {
+                                    _description:
+                                        'Number value to be compared with the variable. This field is required and must be populated when creating a new number rule item.',
+                                    _type: 'double',
+                                },
+                            },
+                            string_rule_item: {
+                                operator: {
+                                    _description:
+                                        'String comparison operator. This field is required and must be populated when creating a new string rule item.',
+                                    _enums: [
+                                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                                        {
+                                            s: 'UNKNOWN',
+                                            description:
+                                                'Used for return value only. Represents value unknown in this version.',
+                                        },
+                                        { s: 'CONTAINS', description: 'Contains.' },
+                                        { s: 'EQUALS', description: 'Equals.' },
+                                        { s: 'STARTS_WITH', description: 'Starts with.' },
+                                        { s: 'ENDS_WITH', description: 'Ends with.' },
+                                        { s: 'NOT_EQUALS', description: 'Not equals.' },
+                                        { s: 'NOT_CONTAINS', description: 'Not contains.' },
+                                        { s: 'NOT_STARTS_WITH', description: 'Not starts with.' },
+                                        { s: 'NOT_ENDS_WITH', description: 'Not ends with.' },
+                                    ],
+                                    _type: 'enum',
+                                },
+                                value: {
+                                    _description:
+                                        'The right hand side of the string rule item. For URLs or referrer URLs, the value can not contain illegal URL chars such as newlines, quotes, tabs, or parentheses. This field is required and must be populated when creating a new string rule item.',
+                                    _type: 'string',
+                                },
+                            },
+                        },
                     },
                     rule_type: {
                         _description:
@@ -213,9 +414,98 @@ module.exports = {
                 },
                 rule: {
                     rule_item_groups: {
-                        _description:
-                            'List of rule item groups that defines this rule. Rule item groups are grouped together based on rule_type.',
-                        _type: 'array',
+                        _type: 'array of objects',
+                        rule_items: {
+                            _type: 'array of objects',
+                            date_rule_item: {
+                                offset_in_days: {
+                                    _description:
+                                        'The relative date value of the right hand side denoted by number of days offset from now. The value field will override this field when both are present.',
+                                    _type: 'int64',
+                                },
+                                operator: {
+                                    _description:
+                                        'Date comparison operator. This field is required and must be populated when creating new date rule item.',
+                                    _enums: [
+                                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                                        {
+                                            s: 'UNKNOWN',
+                                            description:
+                                                'Used for return value only. Represents value unknown in this version.',
+                                        },
+                                        { s: 'EQUALS', description: 'Equals.' },
+                                        { s: 'NOT_EQUALS', description: 'Not Equals.' },
+                                        { s: 'BEFORE', description: 'Before.' },
+                                        { s: 'AFTER', description: 'After.' },
+                                    ],
+                                    _type: 'enum',
+                                },
+                                value: {
+                                    _description:
+                                        "String representing date value to be compared with the rule variable. Supported date format is YYYY-MM-DD. Times are reported in the customer's time zone.",
+                                    _type: 'string',
+                                },
+                            },
+                            name: {
+                                _description:
+                                    "Rule variable name. It should match the corresponding key name fired by the pixel. A name must begin with US-ascii letters or underscore or UTF8 code that is greater than 127 and consist of US-ascii letters or digits or underscore or UTF8 code that is greater than 127. For websites, there are two built-in variable URL (name = 'url__') and referrer URL (name = 'ref_url__'). This field must be populated when creating a new rule item.",
+                                _type: 'string',
+                            },
+                            number_rule_item: {
+                                operator: {
+                                    _description:
+                                        'Number comparison operator. This field is required and must be populated when creating a new number rule item.',
+                                    _enums: [
+                                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                                        {
+                                            s: 'UNKNOWN',
+                                            description:
+                                                'Used for return value only. Represents value unknown in this version.',
+                                        },
+                                        { s: 'GREATER_THAN', description: 'Greater than.' },
+                                        { s: 'GREATER_THAN_OR_EQUAL', description: 'Greater than or equal.' },
+                                        { s: 'EQUALS', description: 'Equals.' },
+                                        { s: 'NOT_EQUALS', description: 'Not equals.' },
+                                        { s: 'LESS_THAN', description: 'Less than.' },
+                                        { s: 'LESS_THAN_OR_EQUAL', description: 'Less than or equal.' },
+                                    ],
+                                    _type: 'enum',
+                                },
+                                value: {
+                                    _description:
+                                        'Number value to be compared with the variable. This field is required and must be populated when creating a new number rule item.',
+                                    _type: 'double',
+                                },
+                            },
+                            string_rule_item: {
+                                operator: {
+                                    _description:
+                                        'String comparison operator. This field is required and must be populated when creating a new string rule item.',
+                                    _enums: [
+                                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                                        {
+                                            s: 'UNKNOWN',
+                                            description:
+                                                'Used for return value only. Represents value unknown in this version.',
+                                        },
+                                        { s: 'CONTAINS', description: 'Contains.' },
+                                        { s: 'EQUALS', description: 'Equals.' },
+                                        { s: 'STARTS_WITH', description: 'Starts with.' },
+                                        { s: 'ENDS_WITH', description: 'Ends with.' },
+                                        { s: 'NOT_EQUALS', description: 'Not equals.' },
+                                        { s: 'NOT_CONTAINS', description: 'Not contains.' },
+                                        { s: 'NOT_STARTS_WITH', description: 'Not starts with.' },
+                                        { s: 'NOT_ENDS_WITH', description: 'Not ends with.' },
+                                    ],
+                                    _type: 'enum',
+                                },
+                                value: {
+                                    _description:
+                                        'The right hand side of the string rule item. For URLs or referrer URLs, the value can not contain illegal URL chars such as newlines, quotes, tabs, or parentheses. This field is required and must be populated when creating a new string rule item.',
+                                    _type: 'string',
+                                },
+                            },
+                        },
                     },
                     rule_type: {
                         _description:
@@ -241,9 +531,98 @@ module.exports = {
             expression_rule_user_list: {
                 rule: {
                     rule_item_groups: {
-                        _description:
-                            'List of rule item groups that defines this rule. Rule item groups are grouped together based on rule_type.',
-                        _type: 'array',
+                        _type: 'array of objects',
+                        rule_items: {
+                            _type: 'array of objects',
+                            date_rule_item: {
+                                offset_in_days: {
+                                    _description:
+                                        'The relative date value of the right hand side denoted by number of days offset from now. The value field will override this field when both are present.',
+                                    _type: 'int64',
+                                },
+                                operator: {
+                                    _description:
+                                        'Date comparison operator. This field is required and must be populated when creating new date rule item.',
+                                    _enums: [
+                                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                                        {
+                                            s: 'UNKNOWN',
+                                            description:
+                                                'Used for return value only. Represents value unknown in this version.',
+                                        },
+                                        { s: 'EQUALS', description: 'Equals.' },
+                                        { s: 'NOT_EQUALS', description: 'Not Equals.' },
+                                        { s: 'BEFORE', description: 'Before.' },
+                                        { s: 'AFTER', description: 'After.' },
+                                    ],
+                                    _type: 'enum',
+                                },
+                                value: {
+                                    _description:
+                                        "String representing date value to be compared with the rule variable. Supported date format is YYYY-MM-DD. Times are reported in the customer's time zone.",
+                                    _type: 'string',
+                                },
+                            },
+                            name: {
+                                _description:
+                                    "Rule variable name. It should match the corresponding key name fired by the pixel. A name must begin with US-ascii letters or underscore or UTF8 code that is greater than 127 and consist of US-ascii letters or digits or underscore or UTF8 code that is greater than 127. For websites, there are two built-in variable URL (name = 'url__') and referrer URL (name = 'ref_url__'). This field must be populated when creating a new rule item.",
+                                _type: 'string',
+                            },
+                            number_rule_item: {
+                                operator: {
+                                    _description:
+                                        'Number comparison operator. This field is required and must be populated when creating a new number rule item.',
+                                    _enums: [
+                                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                                        {
+                                            s: 'UNKNOWN',
+                                            description:
+                                                'Used for return value only. Represents value unknown in this version.',
+                                        },
+                                        { s: 'GREATER_THAN', description: 'Greater than.' },
+                                        { s: 'GREATER_THAN_OR_EQUAL', description: 'Greater than or equal.' },
+                                        { s: 'EQUALS', description: 'Equals.' },
+                                        { s: 'NOT_EQUALS', description: 'Not equals.' },
+                                        { s: 'LESS_THAN', description: 'Less than.' },
+                                        { s: 'LESS_THAN_OR_EQUAL', description: 'Less than or equal.' },
+                                    ],
+                                    _type: 'enum',
+                                },
+                                value: {
+                                    _description:
+                                        'Number value to be compared with the variable. This field is required and must be populated when creating a new number rule item.',
+                                    _type: 'double',
+                                },
+                            },
+                            string_rule_item: {
+                                operator: {
+                                    _description:
+                                        'String comparison operator. This field is required and must be populated when creating a new string rule item.',
+                                    _enums: [
+                                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                                        {
+                                            s: 'UNKNOWN',
+                                            description:
+                                                'Used for return value only. Represents value unknown in this version.',
+                                        },
+                                        { s: 'CONTAINS', description: 'Contains.' },
+                                        { s: 'EQUALS', description: 'Equals.' },
+                                        { s: 'STARTS_WITH', description: 'Starts with.' },
+                                        { s: 'ENDS_WITH', description: 'Ends with.' },
+                                        { s: 'NOT_EQUALS', description: 'Not equals.' },
+                                        { s: 'NOT_CONTAINS', description: 'Not contains.' },
+                                        { s: 'NOT_STARTS_WITH', description: 'Not starts with.' },
+                                        { s: 'NOT_ENDS_WITH', description: 'Not ends with.' },
+                                    ],
+                                    _type: 'enum',
+                                },
+                                value: {
+                                    _description:
+                                        'The right hand side of the string rule item. For URLs or referrer URLs, the value can not contain illegal URL chars such as newlines, quotes, tabs, or parentheses. This field is required and must be populated when creating a new string rule item.',
+                                    _type: 'string',
+                                },
+                            },
+                        },
                     },
                     rule_type: {
                         _description:

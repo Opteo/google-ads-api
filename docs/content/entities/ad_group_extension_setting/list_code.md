@@ -29,6 +29,7 @@ let result = await customer.adGroupExtensionSettings.list({
   {
     ad_group_extension_setting: {
       ad_group: 'customers/3827277046/adGroups/69639056828',
+      device: 0,
       extension_feed_items: [
         'customers/3827277046/extensionFeedItems/48199744867',
         'customers/3827277046/extensionFeedItems/48199839565',
@@ -40,12 +41,16 @@ let result = await customer.adGroupExtensionSettings.list({
       resource_name: 'customers/3827277046/adGroupExtensionSettings/69639056828~SITELINK',
     },
     ad_group: {
+      ad_rotation_mode: 0,
       base_ad_group: 'customers/3827277046/adGroups/69639056828',
       campaign: 'customers/3827277046/campaigns/954460701',
       cpc_bid_micros: 4500000,
       cpm_bid_micros: 10000,
       cpv_bid_micros: 0,
+      display_custom_bid_dimension: 0,
       effective_target_cpa_micros: 0,
+      effective_target_cpa_source: 0,
+      effective_target_roas_source: 0,
       explorer_auto_optimizer_setting: { opt_in: false },
       id: 69639056828,
       labels: ['customers/3827277046/labels/3345231412'],
@@ -55,13 +60,13 @@ let result = await customer.adGroupExtensionSettings.list({
       target_cpa_micros: 0,
       targeting_setting: {
         target_restrictions: [
-          { targetingDimension: 3, bidOnly: false },
-          { targetingDimension: 4, bidOnly: false },
-          { targetingDimension: 5, bidOnly: false },
-          { targetingDimension: 6, bidOnly: false },
-          { targetingDimension: 7, bidOnly: false },
-          { targetingDimension: 8, bidOnly: false },
-          { targetingDimension: 9, bidOnly: false },
+          { targeting_dimension: 3, bid_only: false },
+          { targeting_dimension: 4, bid_only: false },
+          { targeting_dimension: 5, bid_only: false },
+          { targeting_dimension: 6, bid_only: false },
+          { targeting_dimension: 7, bid_only: false },
+          { targeting_dimension: 8, bid_only: false },
+          { targeting_dimension: 9, bid_only: false },
         ],
       },
       type: 2,
@@ -69,6 +74,7 @@ let result = await customer.adGroupExtensionSettings.list({
     },
     campaign: {
       ad_serving_optimization_status: 5,
+      advertising_channel_sub_type: 0,
       advertising_channel_type: 2,
       base_campaign: 'customers/3827277046/campaigns/954460701',
       bidding_strategy_type: 9,
@@ -88,12 +94,12 @@ let result = await customer.adGroupExtensionSettings.list({
       },
       payment_mode: 4,
       resource_name: 'customers/3827277046/campaigns/954460701',
-      selective_optimization: { conversion_actions: [] },
       serving_status: 2,
       start_date: '2017-10-13',
       status: 3,
-      targeting_setting: { target_restrictions: [{ targetingDimension: 3, bidOnly: false }] },
+      targeting_setting: { target_restrictions: [{ targeting_dimension: 3, bid_only: false }] },
       url_custom_parameters: [],
+      video_brand_safety_suitability: 0,
     },
     customer: {
       auto_tagging_enabled: true,
@@ -105,10 +111,11 @@ let result = await customer.adGroupExtensionSettings.list({
       conversion_tracking_setting: { conversion_tracking_id: 875176189 },
       currency_code: 'GBP',
       descriptive_name: 'My customer',
+      final_url_suffix: 'gclid={gclid}',
       has_partners_badge: false,
       id: 3827277046,
       manager: false,
-      pay_per_conversion_eligibility_failure_reasons: [5],
+      pay_per_conversion_eligibility_failure_reasons: [],
       remarketing_setting: {
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 875176189 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-875176189\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-875176189');\n</script>\n",
@@ -116,6 +123,8 @@ let result = await customer.adGroupExtensionSettings.list({
       resource_name: 'customers/3827277046',
       test_account: false,
       time_zone: 'Europe/London',
+      tracking_url_template:
+        'https://w.opteo.co/workers/parallel?url={lpurl}&domain_id=123443&campaign_id={campaignid}&adgroup_id={adgroupid}&matchtype={matchtype}&network={network}&device={device}',
     },
   },
 ]

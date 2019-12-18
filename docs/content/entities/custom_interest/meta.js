@@ -4,9 +4,24 @@ module.exports = {
         description: { _description: 'Description of this custom interest audience.', _type: 'string' },
         id: { _description: 'Id of the custom interest.', _type: 'int64' },
         members: {
-            _description:
-                'List of custom interest members that this custom interest is composed of. Members can be added during CustomInterest creation. If members are presented in UPDATE operation, existing members will be overridden.',
-            _type: 'array',
+            _type: 'array of objects',
+            member_type: {
+                _description: 'The type of custom interest member, KEYWORD or URL.',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    {
+                        s: 'UNKNOWN',
+                        description: 'Used for return value only. Represents value unknown in this version.',
+                    },
+                    { s: 'KEYWORD', description: 'Custom interest member type KEYWORD.' },
+                    { s: 'URL', description: 'Custom interest member type URL.' },
+                ],
+                _type: 'enum',
+            },
+            parameter: {
+                _description: 'Keyword text when member_type is KEYWORD or URL string when member_type is URL.',
+                _type: 'string',
+            },
         },
         name: {
             _description:

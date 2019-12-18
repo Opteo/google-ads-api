@@ -8,5 +8,5 @@ entity: KeywordPlanAdGroup
 ```javascript
 // Deleting the entity
 
-await customer.keywordPlanAdGroups.delete('customers/1234567890/keywordPlanAdGroups/123123123')
+await customer.keywordPlanAdGroups.delete('customers/9262111890/keywordPlanAdGroups/104819196')
 ```

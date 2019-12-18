@@ -132,12 +132,12 @@ module.exports = {
         },
         final_mobile_urls: {
             _description: 'The list of possible final mobile URLs after all cross-domain redirects.',
-            _type: 'array',
+            _type: 'array of strings',
         },
         final_url_suffix: { _description: 'URL template for appending params to final URL.', _type: 'string' },
         final_urls: {
             _description: 'The list of possible final URLs after all cross-domain redirects for the ad.',
-            _type: 'array',
+            _type: 'array of strings',
         },
         gender: {
             _oneof: 'criterion',
@@ -516,7 +516,7 @@ module.exports = {
             path: {
                 _description:
                     'The category to target or exclude. Each subsequent element in the array describes a more specific sub-category. For example, "Pets &amp; Animals", "Pets", "Dogs" represents the "Pets &amp; Animals/Pets/Dogs" category.',
-                _type: 'array',
+                _type: 'array of strings',
             },
             topic_constant: { _description: 'The Topic Constant resource name.', _type: 'string' },
         },
@@ -560,9 +560,9 @@ module.exports = {
             _type: 'enum',
         },
         url_custom_parameters: {
-            _description:
-                'The list of mappings used to substitute custom parameter tags in a <code>tracking_url_template</code>, <code>final_urls</code>, or <code>mobile_final_urls</code>.',
-            _type: 'array',
+            _type: 'array of objects',
+            key: { _description: 'The key matching the parameter tag name.', _type: 'string' },
+            value: { _description: 'The value to be substituted.', _type: 'string' },
         },
         user_interest: {
             _oneof: 'criterion',
@@ -575,9 +575,46 @@ module.exports = {
         webpage: {
             _oneof: 'criterion',
             conditions: {
-                _description:
-                    'Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting. This field is required for CREATE operations and is prohibited on UPDATE operations.',
-                _type: 'array',
+                _type: 'array of objects',
+                argument: { _description: 'Argument of webpage targeting condition.', _type: 'string' },
+                operand: {
+                    _description: 'Operand of webpage targeting condition.',
+                    _enums: [
+                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        {
+                            s: 'UNKNOWN',
+                            description: 'Used for return value only. Represents value unknown in this version.',
+                        },
+                        { s: 'URL', description: 'Operand denoting a webpage URL targeting condition.' },
+                        { s: 'CATEGORY', description: 'Operand denoting a webpage category targeting condition.' },
+                        { s: 'PAGE_TITLE', description: 'Operand denoting a webpage title targeting condition.' },
+                        { s: 'PAGE_CONTENT', description: 'Operand denoting a webpage content targeting condition.' },
+                        {
+                            s: 'CUSTOM_LABEL',
+                            description: 'Operand denoting a webpage custom label targeting condition.',
+                        },
+                    ],
+                    _type: 'enum',
+                },
+                operator: {
+                    _description: 'Operator of webpage targeting condition.',
+                    _enums: [
+                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        {
+                            s: 'UNKNOWN',
+                            description: 'Used for return value only. Represents value unknown in this version.',
+                        },
+                        {
+                            s: 'EQUALS',
+                            description: 'The argument web condition is equal to the compared web condition.',
+                        },
+                        {
+                            s: 'CONTAINS',
+                            description: 'The argument web condition is part of the compared web condition.',
+                        },
+                    ],
+                    _type: 'enum',
+                },
             },
             criterion_name: {
                 _description:

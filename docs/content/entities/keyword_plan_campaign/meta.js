@@ -6,7 +6,10 @@ module.exports = {
                 'A default max cpc bid in micros, and in the account currency, for all ad groups under the campaign. This field is required and should not be empty when creating Keyword Plan campaigns.',
             _type: 'int64',
         },
-        geo_targets: { _description: 'The geo targets. Max number allowed: 20.', _type: 'array' },
+        geo_targets: {
+            _type: 'array of objects',
+            geo_target_constant: { _description: 'Required. The resource name of the geo target.', _type: 'string' },
+        },
         id: { _description: 'The ID of the Keyword Plan campaign.', _type: 'int64' },
         keyword_plan: { _description: 'The keyword plan this campaign belongs to.', _type: 'string' },
         keyword_plan_network: {
@@ -22,7 +25,7 @@ module.exports = {
         },
         language_constants: {
             _description: 'The languages targeted for the Keyword Plan campaign. Max allowed: 1.',
-            _type: 'array',
+            _type: 'array of strings',
         },
         name: {
             _description:

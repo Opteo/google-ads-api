@@ -100,7 +100,7 @@ module.exports = {
         },
         final_url_suffix: { _description: 'URL template for appending params to Final URL.', _type: 'string' },
         id: { _description: 'The ID of the ad group.', _type: 'int64' },
-        labels: { _description: 'The resource names of labels attached to this ad group.', _type: 'array' },
+        labels: { _description: 'The resource names of labels attached to this ad group.', _type: 'array of strings' },
         name: {
             _description:
                 'The name of the ad group. This field is required and should not be empty when creating new ad groups. It must contain fewer than 255 UTF-8 full-width characters. It must not contain any null (code point 0x0), NL line feed (code point 0xA) or carriage return (code point 0xD) characters.',
@@ -143,8 +143,47 @@ module.exports = {
         },
         targeting_setting: {
             target_restrictions: {
-                _description: 'The per-targeting-dimension setting to restrict the reach of your campaign or ad group.',
-                _type: 'array',
+                _type: 'array of objects',
+                bid_only: {
+                    _description:
+                        'Indicates whether to restrict your ads to show only for the criteria you have selected for this targeting_dimension, or to target all values for this targeting_dimension and show ads based on your targeting in other TargetingDimensions. A value of <code>true</code> means that these criteria will only apply bid modifiers, and not affect targeting. A value of <code>false</code> means that these criteria will restrict targeting as well as applying bid modifiers.',
+                    _type: 'boolean',
+                },
+                targeting_dimension: {
+                    _description: 'The targeting dimension that these settings apply to.',
+                    _enums: [
+                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        {
+                            s: 'UNKNOWN',
+                            description: 'Used for return value only. Represents value unknown in this version.',
+                        },
+                        {
+                            s: 'KEYWORD',
+                            description:
+                                'Keyword criteria, e.g. \'mars cruise\'. KEYWORD may be used as a custom bid\ndimension. Keywords are always a targeting dimension, so may not be set\nas a target "ALL" dimension with TargetRestriction.',
+                        },
+                        {
+                            s: 'AUDIENCE',
+                            description:
+                                'Audience criteria, which include user list, user interest, custom\naffinity,  and custom in market.',
+                        },
+                        {
+                            s: 'TOPIC',
+                            description:
+                                "Topic criteria for targeting categories of content, e.g.\n'category::Animals>Pets' Used for Display and Video targeting.",
+                        },
+                        { s: 'GENDER', description: 'Criteria for targeting gender.' },
+                        { s: 'AGE_RANGE', description: 'Criteria for targeting age ranges.' },
+                        {
+                            s: 'PLACEMENT',
+                            description:
+                                "Placement criteria, which include websites like 'www.flowers4sale.com',\nas well as mobile applications, mobile app categories, YouTube videos,\nand YouTube channels.",
+                        },
+                        { s: 'PARENTAL_STATUS', description: 'Criteria for parental status targeting.' },
+                        { s: 'INCOME_RANGE', description: 'Criteria for income range targeting.' },
+                    ],
+                    _type: 'enum',
+                },
             },
         },
         tracking_url_template: { _description: 'The URL template for constructing a tracking URL.', _type: 'string' },
@@ -178,9 +217,9 @@ module.exports = {
             _type: 'enum',
         },
         url_custom_parameters: {
-            _description:
-                'The list of mappings used to substitute custom parameter tags in a <code>tracking_url_template</code>, <code>final_urls</code>, or <code>mobile_final_urls</code>.',
-            _type: 'array',
+            _type: 'array of objects',
+            key: { _description: 'The key matching the parameter tag name.', _type: 'string' },
+            value: { _description: 'The value to be substituted.', _type: 'string' },
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

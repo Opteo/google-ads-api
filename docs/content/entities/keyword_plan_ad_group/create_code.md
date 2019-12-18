@@ -25,7 +25,7 @@ const result = await customer.keywordPlanAdGroups.create([keyword_plan_ad_group,
 
 // Example result
 {
-	results : ['customers/1234567890/keywordPlanAdGroups/123123123'],
+	results : ['customers/9262111890/keywordPlanAdGroups/104819196'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

@@ -9,7 +9,7 @@ entity: KeywordPlanNegativeKeyword
 // Updating the entity
 
 const keyword_plan_negative_keyword = {
-  resource_name: 'customers/1234567890/keywordPlanNegativeKeywords/123123123', // The resource_name is required
+  resource_name: 'customers/9262111890/keywordPlanNegativeKeywords/13119148', // The resource_name is required
   // ...any other fields that you would like to update
 }
 
@@ -29,7 +29,7 @@ const result = await customer.keywordPlanNegativeKeywords.update(
 
 // Example result
 {
-	results : ['customers/1234567890/keywordPlanNegativeKeywords/123123123'],
+	results : ['customers/9262111890/keywordPlanNegativeKeywords/13119148'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

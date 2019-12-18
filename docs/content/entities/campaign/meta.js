@@ -224,7 +224,7 @@ module.exports = {
                     'The Internet domain name that this setting represents, e.g., "google.com" or "www.google.com".',
                 _type: 'string',
             },
-            feeds: { _description: 'The list of page feeds associated with the campaign.', _type: 'array' },
+            feeds: { _description: 'The list of page feeds associated with the campaign.', _type: 'array of strings' },
             language_code: {
                 _description: 'The language code specifying the language of the domain, e.g., "en".',
                 _type: 'string',
@@ -263,8 +263,56 @@ module.exports = {
             _type: 'string',
         },
         frequency_caps: {
-            _description: "A list that limits how often each user will see this campaign's ads.",
-            _type: 'array',
+            _type: 'array of objects',
+            cap: {
+                _description: 'Maximum number of events allowed during the time range by this cap.',
+                _type: 'int32',
+            },
+            key: {
+                event_type: {
+                    _description: 'The type of event that the cap applies to (e.g. impression).',
+                    _enums: [
+                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        {
+                            s: 'UNKNOWN',
+                            description: 'Used for return value only. Represents value unknown in this version.',
+                        },
+                        { s: 'IMPRESSION', description: 'The cap applies on ad impressions.' },
+                        { s: 'VIDEO_VIEW', description: 'The cap applies on video ad views.' },
+                    ],
+                    _type: 'enum',
+                },
+                level: {
+                    _description:
+                        'The level on which the cap is to be applied (e.g. ad group ad, ad group). The cap is applied to all the entities of this level.',
+                    _enums: [
+                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        {
+                            s: 'UNKNOWN',
+                            description: 'Used for return value only. Represents value unknown in this version.',
+                        },
+                        { s: 'AD_GROUP_AD', description: 'The cap is applied at the ad group ad level.' },
+                        { s: 'AD_GROUP', description: 'The cap is applied at the ad group level.' },
+                        { s: 'CAMPAIGN', description: 'The cap is applied at the campaign level.' },
+                    ],
+                    _type: 'enum',
+                },
+                time_length: { _description: 'Number of time units the cap lasts.', _type: 'int32' },
+                time_unit: {
+                    _description: 'Unit of time the cap is defined at (e.g. day, week).',
+                    _enums: [
+                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        {
+                            s: 'UNKNOWN',
+                            description: 'Used for return value only. Represents value unknown in this version.',
+                        },
+                        { s: 'DAY', description: 'The cap would define limit per one day.' },
+                        { s: 'WEEK', description: 'The cap would define limit per one week.' },
+                        { s: 'MONTH', description: 'The cap would define limit per one month.' },
+                    ],
+                    _type: 'enum',
+                },
+            },
         },
         geo_target_type_setting: {
             negative_geo_target_type: {
@@ -311,7 +359,7 @@ module.exports = {
         },
         hotel_setting: { hotel_center_id: { _description: 'The linked Hotel Center account.', _type: 'int64' } },
         id: { _description: 'The ID of the campaign.', _type: 'int64' },
-        labels: { _description: 'The resource names of labels attached to this campaign.', _type: 'array' },
+        labels: { _description: 'The resource names of labels attached to this campaign.', _type: 'array of strings' },
         manual_cpc: {
             _oneof: 'campaignBiddingStrategy',
             enhanced_cpc_enabled: {
@@ -399,7 +447,7 @@ module.exports = {
         selective_optimization: {
             conversion_actions: {
                 _description: 'The selected set of conversion actions for optimizing this campaign.',
-                _type: 'array',
+                _type: 'array of strings',
             },
         },
         serving_status: {
@@ -530,16 +578,55 @@ module.exports = {
         },
         targeting_setting: {
             target_restrictions: {
-                _description: 'The per-targeting-dimension setting to restrict the reach of your campaign or ad group.',
-                _type: 'array',
+                _type: 'array of objects',
+                bid_only: {
+                    _description:
+                        'Indicates whether to restrict your ads to show only for the criteria you have selected for this targeting_dimension, or to target all values for this targeting_dimension and show ads based on your targeting in other TargetingDimensions. A value of <code>true</code> means that these criteria will only apply bid modifiers, and not affect targeting. A value of <code>false</code> means that these criteria will restrict targeting as well as applying bid modifiers.',
+                    _type: 'boolean',
+                },
+                targeting_dimension: {
+                    _description: 'The targeting dimension that these settings apply to.',
+                    _enums: [
+                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        {
+                            s: 'UNKNOWN',
+                            description: 'Used for return value only. Represents value unknown in this version.',
+                        },
+                        {
+                            s: 'KEYWORD',
+                            description:
+                                'Keyword criteria, e.g. \'mars cruise\'. KEYWORD may be used as a custom bid\ndimension. Keywords are always a targeting dimension, so may not be set\nas a target "ALL" dimension with TargetRestriction.',
+                        },
+                        {
+                            s: 'AUDIENCE',
+                            description:
+                                'Audience criteria, which include user list, user interest, custom\naffinity,  and custom in market.',
+                        },
+                        {
+                            s: 'TOPIC',
+                            description:
+                                "Topic criteria for targeting categories of content, e.g.\n'category::Animals>Pets' Used for Display and Video targeting.",
+                        },
+                        { s: 'GENDER', description: 'Criteria for targeting gender.' },
+                        { s: 'AGE_RANGE', description: 'Criteria for targeting age ranges.' },
+                        {
+                            s: 'PLACEMENT',
+                            description:
+                                "Placement criteria, which include websites like 'www.flowers4sale.com',\nas well as mobile applications, mobile app categories, YouTube videos,\nand YouTube channels.",
+                        },
+                        { s: 'PARENTAL_STATUS', description: 'Criteria for parental status targeting.' },
+                        { s: 'INCOME_RANGE', description: 'Criteria for income range targeting.' },
+                    ],
+                    _type: 'enum',
+                },
             },
         },
         tracking_setting: { tracking_url: { _description: 'The url used for dynamic tracking.', _type: 'string' } },
         tracking_url_template: { _description: 'The URL template for constructing a tracking URL.', _type: 'string' },
         url_custom_parameters: {
-            _description:
-                'The list of mappings used to substitute custom parameter tags in a <code>tracking_url_template</code>, <code>final_urls</code>, or <code>mobile_final_urls</code>.',
-            _type: 'array',
+            _type: 'array of objects',
+            key: { _description: 'The key matching the parameter tag name.', _type: 'string' },
+            value: { _description: 'The value to be substituted.', _type: 'string' },
         },
         vanity_pharma: {
             vanity_pharma_display_url_mode: {

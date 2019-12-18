@@ -16,6 +16,7 @@ const account_budget_proposal = {
   billing_setup: 'customers/3827277046/billingSetups/295854200',
   creation_date_time: '2017-01-01 12:25:18',
   id: 265265547,
+  proposal_type: 0,
   proposed_end_time_type: 3,
   proposed_name: '',
   proposed_spending_limit_type: 2,

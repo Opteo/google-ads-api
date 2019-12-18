@@ -28,7 +28,7 @@ const result = await customer.keywordPlanNegativeKeywords.create(
 
 // Example result
 {
-	results : ['customers/1234567890/keywordPlanNegativeKeywords/123123123'],
+	results : ['customers/9262111890/keywordPlanNegativeKeywords/13119148'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

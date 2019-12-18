@@ -9,7 +9,7 @@ entity: AdGroupFeed
 // Updating the entity
 
 const ad_group_feed = {
-  resource_name: 'customers/3827277046/adGroupFeeds/45808681193~90651045', // The resource_name is required
+  resource_name: 'customers/3827277046/adGroupFeeds/69639056828~43009393', // The resource_name is required
   // ...any other fields that you would like to update
 }
 
@@ -26,7 +26,7 @@ const result = await customer.adGroupFeeds.update([ad_group_feed, other_ad_group
 
 // Example result
 {
-	results : ['customers/3827277046/adGroupFeeds/45808681193~90651045'],
+	results : ['customers/3827277046/adGroupFeeds/69639056828~43009393'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

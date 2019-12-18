@@ -26,7 +26,7 @@ module.exports = {
         extension_feed_items: {
             _description:
                 'The resource names of the extension feed items to serve under the ad group. ExtensionFeedItem resource names have the form: <code>customers/{customer_id}/extensionFeedItems/{feed_item_id}</code>',
-            _type: 'array',
+            _type: 'array of strings',
         },
         extension_type: {
             _description: 'The extension type of the ad group extension setting.',

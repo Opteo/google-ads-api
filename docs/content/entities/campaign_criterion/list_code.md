@@ -45,6 +45,7 @@ let result = await customer.campaignCriteria.list({
     },
     campaign: {
       ad_serving_optimization_status: 2,
+      advertising_channel_sub_type: 0,
       advertising_channel_type: 2,
       base_campaign: 'customers/9262111890/campaigns/1483704368',
       bidding_strategy_type: 9,
@@ -64,12 +65,12 @@ let result = await customer.campaignCriteria.list({
       },
       payment_mode: 4,
       resource_name: 'customers/9262111890/campaigns/1483704368',
-      selective_optimization: { conversion_actions: [] },
       serving_status: 2,
       start_date: '2018-07-23',
       status: 2,
       target_spend: { cpc_bid_ceiling_micros: 12000000 },
       url_custom_parameters: [],
+      video_brand_safety_suitability: 0,
     },
     customer: {
       auto_tagging_enabled: false,

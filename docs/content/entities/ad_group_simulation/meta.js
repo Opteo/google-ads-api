@@ -4,11 +4,39 @@ module.exports = {
         ad_group_id: { _description: 'Ad group id of the simulation.', _type: 'int64' },
         cpc_bid_point_list: {
             _oneof: 'pointList',
-            points: { _description: 'Projected metrics for a series of CPC bid amounts.', _type: 'array' },
+            points: {
+                _type: 'array of objects',
+                biddable_conversions: { _description: 'Projected number of biddable conversions.', _type: 'double' },
+                biddable_conversions_value: {
+                    _description: 'Projected total value of biddable conversions.',
+                    _type: 'double',
+                },
+                clicks: { _description: 'Projected number of clicks.', _type: 'int64' },
+                cost_micros: { _description: 'Projected cost in micros.', _type: 'int64' },
+                cpc_bid_micros: {
+                    _description: 'The simulated CPC bid upon which projected metrics are based.',
+                    _type: 'int64',
+                },
+                impressions: { _description: 'Projected number of impressions.', _type: 'int64' },
+                top_slot_impressions: {
+                    _description:
+                        'Projected number of top slot impressions. Only search advertising channel type supports this field.',
+                    _type: 'int64',
+                },
+            },
         },
         cpv_bid_point_list: {
             _oneof: 'pointList',
-            points: { _description: 'Projected metrics for a series of CPV bid amounts.', _type: 'array' },
+            points: {
+                _type: 'array of objects',
+                cost_micros: { _description: 'Projected cost in micros.', _type: 'int64' },
+                cpv_bid_micros: {
+                    _description: 'The simulated CPV bid upon which projected metrics are based.',
+                    _type: 'int64',
+                },
+                impressions: { _description: 'Projected number of impressions.', _type: 'int64' },
+                views: { _description: 'Projected number of views.', _type: 'int64' },
+            },
         },
         end_date: { _description: 'Last day on which the simulation is based, in YYYY-MM-DD format', _type: 'string' },
         modification_method: {
@@ -40,7 +68,26 @@ module.exports = {
         },
         target_cpa_point_list: {
             _oneof: 'pointList',
-            points: { _description: 'Projected metrics for a series of target CPA amounts.', _type: 'array' },
+            points: {
+                _type: 'array of objects',
+                biddable_conversions: { _description: 'Projected number of biddable conversions.', _type: 'double' },
+                biddable_conversions_value: {
+                    _description: 'Projected total value of biddable conversions.',
+                    _type: 'double',
+                },
+                clicks: { _description: 'Projected number of clicks.', _type: 'int64' },
+                cost_micros: { _description: 'Projected cost in micros.', _type: 'int64' },
+                impressions: { _description: 'Projected number of impressions.', _type: 'int64' },
+                target_cpa_micros: {
+                    _description: 'The simulated target CPA upon which projected metrics are based.',
+                    _type: 'int64',
+                },
+                top_slot_impressions: {
+                    _description:
+                        'Projected number of top slot impressions. Only search advertising channel type supports this field.',
+                    _type: 'int64',
+                },
+            },
         },
         type: {
             _description: 'The field that the simulation modifies.',

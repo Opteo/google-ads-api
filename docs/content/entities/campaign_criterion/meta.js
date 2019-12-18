@@ -200,7 +200,146 @@ module.exports = {
         },
         listing_scope: {
             _oneof: 'criterion',
-            dimensions: { _description: 'Scope of the campaign criterion.', _type: 'array' },
+            dimensions: {
+                _type: 'array of objects',
+                hotel_city: {
+                    city_criterion: { _description: 'The Geo Target Constant resource name.', _type: 'string' },
+                },
+                hotel_class: { value: { _description: 'Long value of the hotel class.', _type: 'int64' } },
+                hotel_country_region: {
+                    country_region_criterion: {
+                        _description: 'The Geo Target Constant resource name.',
+                        _type: 'string',
+                    },
+                },
+                hotel_id: { value: { _description: 'String value of the hotel ID.', _type: 'string' } },
+                hotel_state: {
+                    state_criterion: { _description: 'The Geo Target Constant resource name.', _type: 'string' },
+                },
+                listing_brand: { value: { _description: 'String value of the listing brand.', _type: 'string' } },
+                listing_custom_attribute: {
+                    index: {
+                        _description: 'Indicates the index of the custom attribute.',
+                        _enums: [
+                            { s: 'UNSPECIFIED', description: 'Not specified.' },
+                            {
+                                s: 'UNKNOWN',
+                                description: 'Used for return value only. Represents value unknown in this version.',
+                            },
+                            { s: 'INDEX0', description: 'First listing custom attribute.' },
+                            { s: 'INDEX1', description: 'Second listing custom attribute.' },
+                            { s: 'INDEX2', description: 'Third listing custom attribute.' },
+                            { s: 'INDEX3', description: 'Fourth listing custom attribute.' },
+                            { s: 'INDEX4', description: 'Fifth listing custom attribute.' },
+                        ],
+                        _type: 'enum',
+                    },
+                    value: { _description: 'String value of the listing custom attribute.', _type: 'string' },
+                },
+                product_bidding_category: {
+                    country_code: {
+                        _description:
+                            'Two-letter upper-case country code of the product bidding category. It must match the campaign.shopping_setting.sales_country field.',
+                        _type: 'string',
+                    },
+                    id: {
+                        _description:
+                            'ID of the product bidding category. This ID is equivalent to the google_product_category ID as described in this article: https://support.google.com/merchants/answer/6324436.',
+                        _type: 'int64',
+                    },
+                    level: {
+                        _description: 'Level of the product bidding category.',
+                        _enums: [
+                            { s: 'UNSPECIFIED', description: 'Not specified.' },
+                            {
+                                s: 'UNKNOWN',
+                                description: 'Used for return value only. Represents value unknown in this version.',
+                            },
+                            { s: 'LEVEL1', description: 'Level 1.' },
+                            { s: 'LEVEL2', description: 'Level 2.' },
+                            { s: 'LEVEL3', description: 'Level 3.' },
+                            { s: 'LEVEL4', description: 'Level 4.' },
+                            { s: 'LEVEL5', description: 'Level 5.' },
+                        ],
+                        _type: 'enum',
+                    },
+                },
+                product_channel: {
+                    channel: {
+                        _description: 'Value of the locality.',
+                        _enums: [
+                            { s: 'UNSPECIFIED', description: 'Not specified.' },
+                            {
+                                s: 'UNKNOWN',
+                                description: 'Used for return value only. Represents value unknown in this version.',
+                            },
+                            { s: 'ONLINE', description: 'The item is sold online.' },
+                            { s: 'LOCAL', description: 'The item is sold in local stores.' },
+                        ],
+                        _type: 'enum',
+                    },
+                },
+                product_channel_exclusivity: {
+                    channel_exclusivity: {
+                        _description: 'Value of the availability.',
+                        _enums: [
+                            { s: 'UNSPECIFIED', description: 'Not specified.' },
+                            {
+                                s: 'UNKNOWN',
+                                description: 'Used for return value only. Represents value unknown in this version.',
+                            },
+                            {
+                                s: 'SINGLE_CHANNEL',
+                                description:
+                                    'The item is sold through one channel only, either local stores or online\nas indicated by its ProductChannel.',
+                            },
+                            {
+                                s: 'MULTI_CHANNEL',
+                                description:
+                                    'The item is matched to its online or local stores counterpart, indicating\nit is available for purchase in both ShoppingProductChannels.',
+                            },
+                        ],
+                        _type: 'enum',
+                    },
+                },
+                product_condition: {
+                    condition: {
+                        _description: 'Value of the condition.',
+                        _enums: [
+                            { s: 'UNSPECIFIED', description: 'Not specified.' },
+                            {
+                                s: 'UNKNOWN',
+                                description: 'Used for return value only. Represents value unknown in this version.',
+                            },
+                            { s: 'NEW', description: 'The product condition is new.' },
+                            { s: 'REFURBISHED', description: 'The product condition is refurbished.' },
+                            { s: 'USED', description: 'The product condition is used.' },
+                        ],
+                        _type: 'enum',
+                    },
+                },
+                product_item_id: { value: { _description: 'Value of the id.', _type: 'string' } },
+                product_type: {
+                    level: {
+                        _description: 'Level of the type.',
+                        _enums: [
+                            { s: 'UNSPECIFIED', description: 'Not specified.' },
+                            {
+                                s: 'UNKNOWN',
+                                description: 'Used for return value only. Represents value unknown in this version.',
+                            },
+                            { s: 'LEVEL1', description: 'Level 1.' },
+                            { s: 'LEVEL2', description: 'Level 2.' },
+                            { s: 'LEVEL3', description: 'Level 3.' },
+                            { s: 'LEVEL4', description: 'Level 4.' },
+                            { s: 'LEVEL5', description: 'Level 5.' },
+                        ],
+                        _type: 'enum',
+                    },
+                    value: { _description: 'Value of the type.', _type: 'string' },
+                },
+                unknown_listing_dimension: {},
+            },
         },
         location: {
             _oneof: 'criterion',
@@ -216,7 +355,7 @@ module.exports = {
             geo_target_constants: {
                 _description:
                     'Geo target constant(s) restricting the scope of the geographic area within the feed. Currently only one geo target constant is allowed.',
-                _type: 'array',
+                _type: 'array of strings',
             },
             radius: {
                 _description:
@@ -348,7 +487,7 @@ module.exports = {
             path: {
                 _description:
                     'The category to target or exclude. Each subsequent element in the array describes a more specific sub-category. For example, "Pets &amp; Animals", "Pets", "Dogs" represents the "Pets &amp; Animals/Pets/Dogs" category.',
-                _type: 'array',
+                _type: 'array of strings',
             },
             topic_constant: { _description: 'The Topic Constant resource name.', _type: 'string' },
         },
@@ -401,9 +540,46 @@ module.exports = {
         webpage: {
             _oneof: 'criterion',
             conditions: {
-                _description:
-                    'Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting. This field is required for CREATE operations and is prohibited on UPDATE operations.',
-                _type: 'array',
+                _type: 'array of objects',
+                argument: { _description: 'Argument of webpage targeting condition.', _type: 'string' },
+                operand: {
+                    _description: 'Operand of webpage targeting condition.',
+                    _enums: [
+                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        {
+                            s: 'UNKNOWN',
+                            description: 'Used for return value only. Represents value unknown in this version.',
+                        },
+                        { s: 'URL', description: 'Operand denoting a webpage URL targeting condition.' },
+                        { s: 'CATEGORY', description: 'Operand denoting a webpage category targeting condition.' },
+                        { s: 'PAGE_TITLE', description: 'Operand denoting a webpage title targeting condition.' },
+                        { s: 'PAGE_CONTENT', description: 'Operand denoting a webpage content targeting condition.' },
+                        {
+                            s: 'CUSTOM_LABEL',
+                            description: 'Operand denoting a webpage custom label targeting condition.',
+                        },
+                    ],
+                    _type: 'enum',
+                },
+                operator: {
+                    _description: 'Operator of webpage targeting condition.',
+                    _enums: [
+                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        {
+                            s: 'UNKNOWN',
+                            description: 'Used for return value only. Represents value unknown in this version.',
+                        },
+                        {
+                            s: 'EQUALS',
+                            description: 'The argument web condition is equal to the compared web condition.',
+                        },
+                        {
+                            s: 'CONTAINS',
+                            description: 'The argument web condition is part of the compared web condition.',
+                        },
+                    ],
+                    _type: 'enum',
+                },
             },
             criterion_name: {
                 _description:

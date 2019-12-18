@@ -5,7 +5,7 @@ module.exports = {
         path: {
             _description:
                 'The category to target or exclude. Each subsequent element in the array describes a more specific sub-category. For example, {"Pets &amp; Animals", "Pets", "Dogs"} represents the "Pets &amp; Animals/Pets/Dogs" category. List of available topic categories at https://developers.google.com/adwords/api/docs/appendix/verticals',
-            _type: 'array',
+            _type: 'array of strings',
         },
         resource_name: {
             _description:

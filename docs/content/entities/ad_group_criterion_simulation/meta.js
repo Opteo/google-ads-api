@@ -3,7 +3,26 @@ module.exports = {
     object: {
         ad_group_id: { _description: 'AdGroup ID of the simulation.', _type: 'int64' },
         cpc_bid_point_list: {
-            points: { _description: 'Projected metrics for a series of CPC bid amounts.', _type: 'array' },
+            points: {
+                _type: 'array of objects',
+                biddable_conversions: { _description: 'Projected number of biddable conversions.', _type: 'double' },
+                biddable_conversions_value: {
+                    _description: 'Projected total value of biddable conversions.',
+                    _type: 'double',
+                },
+                clicks: { _description: 'Projected number of clicks.', _type: 'int64' },
+                cost_micros: { _description: 'Projected cost in micros.', _type: 'int64' },
+                cpc_bid_micros: {
+                    _description: 'The simulated CPC bid upon which projected metrics are based.',
+                    _type: 'int64',
+                },
+                impressions: { _description: 'Projected number of impressions.', _type: 'int64' },
+                top_slot_impressions: {
+                    _description:
+                        'Projected number of top slot impressions. Only search advertising channel type supports this field.',
+                    _type: 'int64',
+                },
+            },
         },
         criterion_id: { _description: 'Criterion ID of the simulation.', _type: 'int64' },
         end_date: { _description: 'Last day on which the simulation is based, in YYYY-MM-DD format.', _type: 'string' },

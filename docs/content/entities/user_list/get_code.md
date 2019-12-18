@@ -15,6 +15,7 @@ let result = await customer.userLists.get('customers/3827277046/userLists/509186
 ;({
   access_reason: 2,
   account_user_list_status: 2,
+  closing_reason: 0,
   description: 'Combined audience based on available data sources',
   eligible_for_display: true,
   eligible_for_search: true,
@@ -23,10 +24,10 @@ let result = await customer.userLists.get('customers/3827277046/userLists/509186
     rules: [
       {
         operator: 3,
-        ruleOperands: [
-          { user: 'customers/3827277046/userLists/814539380' },
-          { user: 'customers/3827277046/userLists/508846109' },
-          { user: 'customers/3827277046/userLists/614318739' },
+        rule_operands: [
+          { user_list: 'customers/3827277046/userLists/814539380' },
+          { user_list: 'customers/3827277046/userLists/508846109' },
+          { user_list: 'customers/3827277046/userLists/614318739' },
         ],
       },
     ],
@@ -36,8 +37,8 @@ let result = await customer.userLists.get('customers/3827277046/userLists/509186
   name: 'My user list',
   read_only: true,
   resource_name: 'customers/3827277046/userLists/509186086',
-  size_for_display: 5300,
-  size_for_search: 5400,
+  size_for_display: 8800,
+  size_for_search: 9600,
   size_range_for_display: 4,
   size_range_for_search: 4,
   type: 3,

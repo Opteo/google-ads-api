@@ -20,6 +20,8 @@ let result = await customer.adGroupCriteria.get('customers/9262111890/adGroupCri
   effective_cpc_bid_source: 6,
   effective_cpm_bid_micros: 10000,
   effective_cpm_bid_source: 6,
+  effective_cpv_bid_source: 0,
+  effective_percent_cpc_bid_source: 0,
   final_mobile_urls: [],
   final_urls: [],
   keyword: { match_type: 4, text: 'test-keyword-478619' },

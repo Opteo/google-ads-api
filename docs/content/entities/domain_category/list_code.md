@@ -29,18 +29,18 @@ let result = await customer.domainCategories.list({
   {
     domain_category: {
       campaign: 'customers/3827277046/campaigns/1398201241',
-      category: 'landing pages from your standard ad groups',
-      category_rank: 0,
-      coverage_fraction: 4.166666666666667,
+      category: 'google sheets/dashboards with google sheets',
+      category_rank: 2,
+      coverage_fraction: 1.6129032258064515,
       domain: 'opteo.com',
       has_children: false,
       language_code: 'en',
-      recommended_cpc_bid_micros: 41404277,
       resource_name:
-        'customers/3827277046/domainCategories/1398201241~bGFuZGluZyBwYWdlcyBmcm9tIHlvdXIgc3RhbmRhcmQgYWQgZ3JvdXBz~en',
+        'customers/3827277046/domainCategories/1398201241~Z29vZ2xlIHNoZWV0cy9kYXNoYm9hcmRzIHdpdGggZ29vZ2xlIHNoZWV0cw~en',
     },
     campaign: {
       ad_serving_optimization_status: 5,
+      advertising_channel_sub_type: 0,
       advertising_channel_type: 2,
       base_campaign: 'customers/3827277046/campaigns/1398201241',
       bidding_strategy: 'customers/3827277046/biddingStrategies/2053936084',
@@ -71,12 +71,12 @@ let result = await customer.domainCategories.list({
       },
       payment_mode: 4,
       resource_name: 'customers/3827277046/campaigns/1398201241',
-      selective_optimization: { conversion_actions: [] },
       serving_status: 2,
       start_date: '2018-05-10',
       status: 3,
-      targeting_setting: { target_restrictions: [{ targetingDimension: 3, bidOnly: false }] },
+      targeting_setting: { target_restrictions: [{ targeting_dimension: 3, bid_only: false }] },
       url_custom_parameters: [],
+      video_brand_safety_suitability: 0,
     },
     customer: {
       auto_tagging_enabled: true,
@@ -88,10 +88,11 @@ let result = await customer.domainCategories.list({
       conversion_tracking_setting: { conversion_tracking_id: 875176189 },
       currency_code: 'GBP',
       descriptive_name: 'My customer',
+      final_url_suffix: 'gclid={gclid}',
       has_partners_badge: false,
       id: 3827277046,
       manager: false,
-      pay_per_conversion_eligibility_failure_reasons: [5],
+      pay_per_conversion_eligibility_failure_reasons: [],
       remarketing_setting: {
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 875176189 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-875176189\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-875176189');\n</script>\n",
@@ -99,6 +100,8 @@ let result = await customer.domainCategories.list({
       resource_name: 'customers/3827277046',
       test_account: false,
       time_zone: 'Europe/London',
+      tracking_url_template:
+        'https://w.opteo.co/workers/parallel?url={lpurl}&domain_id=123443&campaign_id={campaignid}&adgroup_id={adgroupid}&matchtype={matchtype}&network={network}&device={device}',
     },
   },
 ]

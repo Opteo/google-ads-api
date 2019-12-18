@@ -1,3 +1,5 @@
+// manual_mode: This file has been manually modified and should not be touched by generate_services.js
+
 import { Asset } from 'google-ads-node/build/lib/resources'
 
 import Service, { Mutation } from './service'
@@ -34,27 +36,6 @@ export default class AdGroupAdService extends Service {
             operation: OPERATION_REQUEST,
             mutate: MUTATE_METHOD,
             entity: [RESOURCE, asset],
-            ...options,
-        })
-    }
-
-    public async update(asset: Asset | Array<Asset>, options?: ServiceCreateOptions): Promise<Mutation> {
-        return this.serviceUpdate({
-            request: MUTATE_REQUEST,
-            operation: OPERATION_REQUEST,
-            mutate: MUTATE_METHOD,
-            entity: [RESOURCE, asset],
-            ...options,
-        })
-    }
-
-    public async delete(id: number | string, options?: ServiceCreateOptions) {
-        return this.serviceDelete({
-            request: MUTATE_REQUEST,
-            operation: OPERATION_REQUEST,
-            mutate: MUTATE_METHOD,
-            resource: `${RESOURCE_URL_NAME}/${id}`,
-            entity_id: id,
             ...options,
         })
     }

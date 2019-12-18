@@ -2,9 +2,59 @@ module.exports = {
     name: 'ExtensionFeedItem',
     object: {
         ad_schedules: {
-            _description:
-                'List of non-overlapping schedules specifying all time intervals for which the feed item may serve. There can be a maximum of 6 schedules per day.',
-            _type: 'array',
+            _type: 'array of objects',
+            day_of_week: {
+                _description:
+                    'Day of the week the schedule applies to. This field is required for CREATE operations and is prohibited on UPDATE operations.',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
+                    { s: 'MONDAY', description: 'Monday.' },
+                    { s: 'TUESDAY', description: 'Tuesday.' },
+                    { s: 'WEDNESDAY', description: 'Wednesday.' },
+                    { s: 'THURSDAY', description: 'Thursday.' },
+                    { s: 'FRIDAY', description: 'Friday.' },
+                    { s: 'SATURDAY', description: 'Saturday.' },
+                    { s: 'SUNDAY', description: 'Sunday.' },
+                ],
+                _type: 'enum',
+            },
+            end_hour: {
+                _description:
+                    'Ending hour in 24 hour time; 24 signifies end of the day. This field must be between 0 and 24, inclusive. This field is required for CREATE operations and is prohibited on UPDATE operations.',
+                _type: 'int32',
+            },
+            end_minute: {
+                _description:
+                    'Minutes after the end hour at which this schedule ends. The schedule is exclusive of the end minute. This field is required for CREATE operations and is prohibited on UPDATE operations.',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
+                    { s: 'ZERO', description: 'Zero minutes past the hour.' },
+                    { s: 'FIFTEEN', description: 'Fifteen minutes past the hour.' },
+                    { s: 'THIRTY', description: 'Thirty minutes past the hour.' },
+                    { s: 'FORTY_FIVE', description: 'Forty-five minutes past the hour.' },
+                ],
+                _type: 'enum',
+            },
+            start_hour: {
+                _description:
+                    'Starting hour in 24 hour time. This field must be between 0 and 23, inclusive. This field is required for CREATE operations and is prohibited on UPDATE operations.',
+                _type: 'int32',
+            },
+            start_minute: {
+                _description:
+                    'Minutes after the start hour at which this schedule starts. This field is required for CREATE operations and is prohibited on UPDATE operations.',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
+                    { s: 'ZERO', description: 'Zero minutes past the hour.' },
+                    { s: 'FIFTEEN', description: 'Fifteen minutes past the hour.' },
+                    { s: 'THIRTY', description: 'Thirty minutes past the hour.' },
+                    { s: 'FORTY_FIVE', description: 'Forty-five minutes past the hour.' },
+                ],
+                _type: 'enum',
+            },
         },
         affiliate_location_feed_item: {
             _oneof: 'extension',
@@ -43,7 +93,7 @@ module.exports = {
             },
             final_mobile_urls: {
                 _description: 'A list of possible final mobile URLs after all cross domain redirects.',
-                _type: 'array',
+                _type: 'array of strings',
             },
             final_url_suffix: {
                 _description: 'URL template for appending params to landing page URLs served with parallel tracking.',
@@ -52,7 +102,7 @@ module.exports = {
             final_urls: {
                 _description:
                     'A list of possible final URLs after all cross domain redirects. This list must not be empty.',
-                _type: 'array',
+                _type: 'array of strings',
             },
             link_text: {
                 _description:
@@ -64,9 +114,9 @@ module.exports = {
                 _type: 'string',
             },
             url_custom_parameters: {
-                _description:
-                    'A list of mappings to be used for substituting URL custom parameter tags in the tracking_url_template, final_urls, and/or final_mobile_urls.',
-                _type: 'array',
+                _type: 'array of objects',
+                key: { _description: 'The key matching the parameter tag name.', _type: 'string' },
+                value: { _description: 'The value to be substituted.', _type: 'string' },
             },
         },
         call_feed_item: {
@@ -175,7 +225,43 @@ module.exports = {
                 _type: 'string',
             },
             language_code: { _description: 'The code of the language used for this price extension.', _type: 'string' },
-            price_offerings: { _description: 'The price offerings in this price extension.', _type: 'array' },
+            price_offerings: {
+                _type: 'array of objects',
+                description: { _description: 'Description text of this offer.', _type: 'string' },
+                final_mobile_urls: {
+                    _description: 'A list of possible final mobile URLs after all cross domain redirects.',
+                    _type: 'array of strings',
+                },
+                final_urls: {
+                    _description: 'A list of possible final URLs after all cross domain redirects.',
+                    _type: 'array of strings',
+                },
+                header: { _description: 'Header text of this offer.', _type: 'string' },
+                price: {
+                    amount_micros: {
+                        _description: 'Amount in micros. One million is equivalent to one unit.',
+                        _type: 'int64',
+                    },
+                    currency_code: { _description: 'Three-character ISO 4217 currency code.', _type: 'string' },
+                },
+                unit: {
+                    _description: 'Price unit for this offer.',
+                    _enums: [
+                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        {
+                            s: 'UNKNOWN',
+                            description: 'Used for return value only. Represents value unknown in this version.',
+                        },
+                        { s: 'PER_HOUR', description: 'Per hour.' },
+                        { s: 'PER_DAY', description: 'Per day.' },
+                        { s: 'PER_WEEK', description: 'Per week.' },
+                        { s: 'PER_MONTH', description: 'Per month.' },
+                        { s: 'PER_YEAR', description: 'Per year.' },
+                        { s: 'PER_NIGHT', description: 'Per night.' },
+                    ],
+                    _type: 'enum',
+                },
+            },
             price_qualifier: {
                 _description: 'Price qualifier for all offers of this price extension.',
                 _enums: [
@@ -243,7 +329,7 @@ module.exports = {
             },
             final_mobile_urls: {
                 _description: 'A list of possible final mobile URLs after all cross domain redirects.',
-                _type: 'array',
+                _type: 'array of strings',
             },
             final_url_suffix: {
                 _description: 'URL template for appending params to landing page URLs served with parallel tracking.',
@@ -251,7 +337,7 @@ module.exports = {
             },
             final_urls: {
                 _description: 'A list of possible final URLs after all cross domain redirects. This field is required.',
-                _type: 'array',
+                _type: 'array of strings',
             },
             language_code: {
                 _description: 'The language of the promotion. Represented as BCP 47 language tag.',
@@ -343,9 +429,9 @@ module.exports = {
             },
             tracking_url_template: { _description: 'URL template for constructing a tracking URL.', _type: 'string' },
             url_custom_parameters: {
-                _description:
-                    'A list of mappings to be used for substituting URL custom parameter tags in the tracking_url_template, final_urls, and/or final_mobile_urls.',
-                _type: 'array',
+                _type: 'array of objects',
+                key: { _description: 'The key matching the parameter tag name.', _type: 'string' },
+                value: { _description: 'The value to be substituted.', _type: 'string' },
             },
         },
         resource_name: {
@@ -357,7 +443,7 @@ module.exports = {
             _oneof: 'extension',
             final_mobile_urls: {
                 _description: 'A list of possible final mobile URLs after all cross domain redirects.',
-                _type: 'array',
+                _type: 'array of strings',
             },
             final_url_suffix: {
                 _description: 'Final URL suffix to be appended to landing page URLs served with parallel tracking.',
@@ -365,7 +451,7 @@ module.exports = {
             },
             final_urls: {
                 _description: 'A list of possible final URLs after all cross domain redirects.',
-                _type: 'array',
+                _type: 'array of strings',
             },
             line1: {
                 _description:
@@ -384,9 +470,9 @@ module.exports = {
             },
             tracking_url_template: { _description: 'URL template for constructing a tracking URL.', _type: 'string' },
             url_custom_parameters: {
-                _description:
-                    'A list of mappings to be used for substituting URL custom parameter tags in the tracking_url_template, final_urls, and/or final_mobile_urls.',
-                _type: 'array',
+                _type: 'array of objects',
+                key: { _description: 'The key matching the parameter tag name.', _type: 'string' },
+                value: { _description: 'The value to be substituted.', _type: 'string' },
             },
         },
         start_date_time: {
@@ -409,7 +495,7 @@ module.exports = {
             header: { _description: 'The header of the snippet. This string must not be empty.', _type: 'string' },
             values: {
                 _description: 'The values in the snippet. The maximum size of this collection is 10.',
-                _type: 'array',
+                _type: 'array of strings',
             },
         },
         targeted_ad_group: {

@@ -29,7 +29,7 @@ let result = await customer.accountBudgets.list({
   {
     account_budget: {
       adjusted_spending_limit_type: 2,
-      amount_served_micros: 118743720000,
+      amount_served_micros: 159294620000,
       approved_end_time_type: 3,
       approved_spending_limit_type: 2,
       approved_start_date_time: '2017-01-01 12:22:14',
@@ -41,7 +41,7 @@ let result = await customer.accountBudgets.list({
       proposed_start_date_time: '2017-01-01 12:22:14',
       resource_name: 'customers/3827277046/accountBudgets/295854560',
       status: 3,
-      total_adjustments_micros: 870720000,
+      total_adjustments_micros: 978440000,
     },
     billing_setup: {
       end_time_type: 3,
@@ -67,10 +67,11 @@ let result = await customer.accountBudgets.list({
       conversion_tracking_setting: { conversion_tracking_id: 875176189 },
       currency_code: 'GBP',
       descriptive_name: 'My customer',
+      final_url_suffix: 'gclid={gclid}',
       has_partners_badge: false,
       id: 3827277046,
       manager: false,
-      pay_per_conversion_eligibility_failure_reasons: [5],
+      pay_per_conversion_eligibility_failure_reasons: [],
       remarketing_setting: {
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 875176189 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-875176189\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-875176189');\n</script>\n",
@@ -78,6 +79,8 @@ let result = await customer.accountBudgets.list({
       resource_name: 'customers/3827277046',
       test_account: false,
       time_zone: 'Europe/London',
+      tracking_url_template:
+        'https://w.opteo.co/workers/parallel?url={lpurl}&domain_id=123443&campaign_id={campaignid}&adgroup_id={adgroupid}&matchtype={matchtype}&network={network}&device={device}',
     },
   },
 ]

@@ -7,12 +7,16 @@ entity: KeywordPlanAdGroup
 
 ```javascript
 // Getting the entity
-let result = await customer.keywordPlanAdGroups.get('customers/1234567890/keywordPlanAdGroups/123123123')
+let result = await customer.keywordPlanAdGroups.get('customers/9262111890/keywordPlanAdGroups/104819196')
 ```
 
 ```javascript
-
 // Example result
-(/* Todo: add example get() return here */)
-
+;({
+  cpc_bid_micros: 2500000,
+  id: 104819196,
+  keyword_plan_campaign: 'customers/9262111890/keywordPlanCampaigns/115088623',
+  name: 'My keyword plan ad group',
+  resource_name: 'customers/9262111890/keywordPlanAdGroups/104819196',
+})
 ```

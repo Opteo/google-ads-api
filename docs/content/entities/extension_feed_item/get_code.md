@@ -22,6 +22,7 @@ let result = await customer.extensionFeedItems.get('customers/3827277046/extensi
     country_code: 'GB',
     phone_number: '02035751125',
   },
+  device: 0,
   extension_type: 4,
   resource_name: 'customers/3827277046/extensionFeedItems/13882206517',
   status: 2,

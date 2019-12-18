@@ -8,5 +8,5 @@ entity: KeywordPlanCampaign
 ```javascript
 // Deleting the entity
 
-await customer.keywordPlanCampaigns.delete('customers/3827277046/keywordPlanCampaigns/4773388')
+await customer.keywordPlanCampaigns.delete('customers/9262111890/keywordPlanCampaigns/115088623')
 ```

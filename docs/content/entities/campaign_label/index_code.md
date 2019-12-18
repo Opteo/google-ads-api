@@ -8,8 +8,8 @@ title: CampaignLabel
 ```javascript
 // Example CampaignLabel
 const campaign_label = {
-  campaign: 'customers/3827277046/campaigns/2015922405',
-  label: 'customers/3827277046/labels/3889728468',
-  resource_name: 'customers/3827277046/campaignLabels/2015922405~3889728468',
+  campaign: 'customers/3827277046/campaigns/881817006',
+  label: 'customers/3827277046/labels/898377018',
+  resource_name: 'customers/3827277046/campaignLabels/881817006~898377018',
 }
 ```

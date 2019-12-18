@@ -29,6 +29,7 @@ let result = await customer.campaigns.list({
   {
     campaign: {
       ad_serving_optimization_status: 2,
+      advertising_channel_sub_type: 0,
       advertising_channel_type: 3,
       base_campaign: 'customers/9262111890/campaigns/1568629385',
       bidding_strategy_type: 9,
@@ -48,12 +49,12 @@ let result = await customer.campaigns.list({
       },
       payment_mode: 4,
       resource_name: 'customers/9262111890/campaigns/1568629385',
-      selective_optimization: { conversion_actions: [] },
       serving_status: 2,
       start_date: '2018-09-19',
       status: 4,
       target_spend: { cpc_bid_ceiling_micros: 1000000 },
       url_custom_parameters: [],
+      video_brand_safety_suitability: 0,
     },
     campaign_budget: {
       amount_micros: 12000000,

@@ -9,6 +9,7 @@ title: CampaignExtensionSetting
 // Example CampaignExtensionSetting
 const campaign_extension_setting = {
   campaign: 'customers/9262111890/campaigns/1483704368',
+  device: 0,
   extension_feed_items: [
     'customers/9262111890/extensionFeedItems/51842193961',
     'customers/9262111890/extensionFeedItems/51842200495',

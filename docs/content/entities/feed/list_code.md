@@ -29,14 +29,14 @@ let result = await customer.feeds.list({
   {
     feed: {
       attributes: [
-        { id: 1, name: 'SitelinkName', type: 4, isPartOfKey: false },
-        { id: 2, name: 'SitelinkUrl', type: 6, isPartOfKey: false },
-        { id: 3, name: 'SitelinkDescription1', type: 4, isPartOfKey: false },
-        { id: 4, name: 'SitelinkDescription2', type: 4, isPartOfKey: false },
-        { id: 5, name: 'SitelinkFinalUrls', type: 12, isPartOfKey: false },
-        { id: 6, name: 'SitelinkFinalMobileUrls', type: 12, isPartOfKey: false },
-        { id: 7, name: 'SitelinkTrackingUrl', type: 6, isPartOfKey: false },
-        { id: 8, name: 'SitelinkFinalUrlSuffix', type: 4, isPartOfKey: false },
+        { id: 1, name: 'SitelinkName', type: 4, is_part_of_key: false },
+        { id: 2, name: 'SitelinkUrl', type: 6, is_part_of_key: false },
+        { id: 3, name: 'SitelinkDescription1', type: 4, is_part_of_key: false },
+        { id: 4, name: 'SitelinkDescription2', type: 4, is_part_of_key: false },
+        { id: 5, name: 'SitelinkFinalUrls', type: 12, is_part_of_key: false },
+        { id: 6, name: 'SitelinkFinalMobileUrls', type: 12, is_part_of_key: false },
+        { id: 7, name: 'SitelinkTrackingUrl', type: 6, is_part_of_key: false },
+        { id: 8, name: 'SitelinkFinalUrlSuffix', type: 4, is_part_of_key: false },
       ],
       id: 82896692,
       name: 'My feed',
