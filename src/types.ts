@@ -12,9 +12,11 @@ export interface ReportOptions {
         | fields.AdGroupBidModifierFields
         | fields.AdGroupCriterionFields
         | fields.AdGroupCriterionLabelFields
+        | fields.AdGroupCriterionSimulationFields
         | fields.AdGroupExtensionSettingFields
         | fields.AdGroupFeedFields
         | fields.AdGroupLabelFields
+        | fields.AdGroupSimulationFields
         | fields.AdScheduleViewFields
         | fields.AgeRangeViewFields
         | fields.AssetFields
@@ -25,6 +27,7 @@ export interface ReportOptions {
         | fields.CampaignBidModifierFields
         | fields.CampaignBudgetFields
         | fields.CampaignCriterionFields
+        | fields.CampaignCriterionSimulationFields
         | fields.CampaignExtensionSettingFields
         | fields.CampaignFeedFields
         | fields.CampaignLabelFields
