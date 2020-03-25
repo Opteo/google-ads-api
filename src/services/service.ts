@@ -226,7 +226,15 @@ export default class Service {
 
     protected async serviceCall(call: string, request: any): Promise<any> {
         try {
-            const response = await this.service[call](request)
+            const response = await new Promise((resolve, reject) => {
+                this.service[call](request, (err: any, res: any) => {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        resolve(res)
+                    }
+                })
+            })
             const parsed_results = this.parseServiceResults([response])
             /* 
                 Since get returns an object, we always return the first item.

@@ -46,7 +46,8 @@ describe('Error', () => {
                 pageToken: '',
                 pageSize: 10000,
                 validateOnly: false,
-                returnSummaryRow: false,
+                returnTotalResultsCount: false,
+                summaryRowSetting: 0,
             })
             expect(typeof err.request_id).toBe('string')
         }

@@ -81,8 +81,15 @@ export default class CustomerService extends Service {
         if (options && options.hasOwnProperty('validate_only')) {
             request.setValidateOnly(options.validate_only as boolean)
         }
-
-        await this.service.mutateCustomer(request)
+        await new Promise((resolve, reject) => {
+            this.service.mutateCustomer(request, (err: any, res: any) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(res)
+                }
+            })
+        })
     }
 
     // TODO: Add support for this service method

@@ -31,7 +31,15 @@ export default class GeoTargetConstantService extends Service {
     public async suggest(options: SuggestGeoTargetConstantsRequest): Promise<any> {
         const pb = this.buildResource('SuggestGeoTargetConstantsRequest', options)
 
-        const response = await this.service.suggestGeoTargetConstants(pb)
+        const response: any = await new Promise((resolve, reject) => {
+            this.service.suggestGeoTargetConstants(pb, (err: any, res: any) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(res)
+                }
+            })
+        })
 
         const parsed = this.parseServiceResults(values(response.geoTargetConstantSuggestions))
 
