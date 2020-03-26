@@ -53,6 +53,23 @@ describe('customer', () => {
             )
         })
 
+        // fairly useless test as it will always pass, just used to checkout the generics functionality
+        it('retrieves data using a generic', async () => {
+            interface Campaign {
+                campaign: {
+                    resource_name: string,
+                    name: string
+                }
+            }
+
+            await customer.report<Campaign>({
+                entity: 'campaign',
+                attributes: ['campaign.name'],
+                limit: 5,
+            })
+            expect(true)
+        })
+
         it('retrieves data when using segments', async () => {
             const ad_group = await customer.report({
                 entity: 'ad_group',

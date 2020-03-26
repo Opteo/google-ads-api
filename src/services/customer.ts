@@ -10,7 +10,7 @@ import Bottleneck from 'bottleneck'
 import Service, { Mutation } from './service'
 import { ReportOptions, ServiceCreateOptions, PreReportHook, PostReportHook, MutateResourceOperation } from '../types'
 
-export type ReportResponse = Promise<Array<any>>
+export type ReportResponse<T> = Promise<Array<T>>
 export type QueryResponse = Promise<Array<any>>
 export type ListResponse = Promise<Array<{ customer: Customer }>>
 export type GetResponse = Promise<Customer>
@@ -35,7 +35,7 @@ export default class CustomerService extends Service {
         this.post_report_hook = post_report_hook
     }
 
-    public async report(options: ReportOptions): ReportResponse {
+    public async report<T>(options: ReportOptions): ReportResponse<T> {
         const results = await this.serviceReport(options, this.pre_report_hook, this.post_report_hook)
         return results
     }
