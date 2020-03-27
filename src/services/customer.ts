@@ -10,7 +10,7 @@ import Bottleneck from 'bottleneck'
 import Service, { Mutation } from './service'
 import { ReportOptions, ServiceCreateOptions, PreReportHook, PostReportHook, MutateResourceOperation } from '../types'
 
-export type ReportResponse<T> = Promise<Array<T>>
+export type ReportResponse<T> = Promise<T>
 export type QueryResponse = Promise<Array<any>>
 export type ListResponse = Promise<Array<{ customer: Customer }>>
 export type GetResponse = Promise<Customer>

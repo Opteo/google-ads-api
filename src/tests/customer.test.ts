@@ -62,7 +62,7 @@ describe('customer', () => {
                 }
             }
 
-            await customer.report<Campaign>({
+            await customer.report<Campaign[]>({
                 entity: 'campaign',
                 attributes: ['campaign.name'],
                 limit: 5,

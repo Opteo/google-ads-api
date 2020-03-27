@@ -94,7 +94,7 @@ import { ReportOptions, ServiceCreateOptions, PostReportHook, PreReportHook, Mut
 
 export interface CustomerInstance {
     /* Global customer methods */
-    report: <T = any>(options: ReportOptions) => ReportResponse<T>
+    report: <T = any[]>(options: ReportOptions) => ReportResponse<T>
     query: (qry: string) => QueryResponse
     list: () => ListResponse
     get: (id: number | string) => GetResponse
