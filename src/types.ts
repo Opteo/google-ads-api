@@ -1,9 +1,5 @@
 import * as fields from 'google-ads-node/build/lib/fields'
 
-export const wasd = () => {
-    console.log(fields)
-}
-
 export interface ReportOptions {
     entity: fields.ResourceName
     attributes?:
