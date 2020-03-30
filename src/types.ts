@@ -171,7 +171,7 @@ export interface ReportOptions {
  * @readonly
  * @union {string}
  */
-type DateConstant =
+export type DateConstant =
     | 'LAST_7_DAYS'
     | 'LAST_14_DAYS'
     | 'LAST_30_DAYS'
