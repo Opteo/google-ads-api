@@ -292,7 +292,6 @@ export default class Service {
         options: ReportOptions,
         pre_report_hook: PreReportHook,
         post_report_hook: PostReportHook,
-        callback: any
     ): Promise<any> {
         const query = this.buildCustomerReportQuery(options)
 
