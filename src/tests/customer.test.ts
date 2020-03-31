@@ -142,6 +142,29 @@ describe('customer', () => {
         })
     })
 
+    describe('stream', () => {
+        it('retrieves data from a stream', async () => {
+            // interface Campaign {
+            //     campaign: {
+            //         resource_name: string,
+            //         name: string
+            //     }
+            // }
+
+            await customer.stream({
+                entity: 'campaign',
+                attributes: ['campaign.name'],
+                limit: 6,
+            }, (err: any, chunks: any) => {
+                if(err) {
+                    console.log(err);
+                } else {
+                    console.log(chunks);
+                }
+            })
+        })
+    })
+
     describe('query', () => {
         it('can retrieve data via an gaql string', async () => {
             const campaigns = await customer.query(`

@@ -8,6 +8,7 @@ import { formatQueryResults, buildReportQuery, parseResult, parsePartialFailureE
 import { ServiceListOptions, ServiceCreateOptions } from '../types'
 import { GrpcError } from '../error'
 import { ReportOptions, PreReportHook, PostReportHook } from '../types'
+import { SearchGoogleAdsStreamResponse, ClientReadableStream } from 'google-ads-node'
 
 interface GetOptions {
     request: string
@@ -287,6 +288,50 @@ export default class Service {
         return parsed_results
     }
 
+    protected async serviceStream(
+        options: ReportOptions,
+        pre_report_hook: PreReportHook,
+        post_report_hook: PostReportHook,
+        callback: any
+    ): Promise<any> {
+        const query = this.buildCustomerReportQuery(options)
+
+        const hook_result = await pre_report_hook({
+            cid: this.cid,
+            query,
+        })
+
+        if (hook_result) {
+            return hook_result
+        }
+
+        const call = this.streamSearchData(query)
+        // Listen for data (max 10,000 rows per chunk)
+        // Called when the stream has finished
+
+        // call.on("error", err => console.error(err));
+
+        // Called when the stream has finished
+        // call.on("end", () => {
+        //     console.log("Finished streaming data");
+        // });
+
+        // call.on("data", (chunk: SearchGoogleAdsStreamResponse.AsObject) => {
+        //     console.log(chunk.resultsList);
+        // });
+
+        // const parsed_results = this.parseServiceResults(results)
+
+        // await post_report_hook({
+        //     cid: this.cid,
+        //     query,
+        //     result: parsed_results,
+        //     report_config: options,
+        // })
+
+        return call
+    }
+
     /* Base query method used in global customer instance */
     protected async serviceQuery(qry: string): Promise<any> {
         const results = await this.getSearchData(qry)
@@ -313,6 +358,17 @@ export default class Service {
         } catch (err) {
             throw new GrpcError(err, request)
         }
+    }
+
+    private streamSearchData(query: string): ClientReadableStream<SearchGoogleAdsStreamResponse> {
+        const { request } = this.client.buildSearchStreamRequest(this.cid, query)
+        // try {
+            const response = this.client.streamSearchData(request)
+            return response
+        // } catch (err) {
+            // console.log(err)
+            // throw new GrpcError(err)
+        // }
     }
 
     private buildListQuery(resource: string, options?: ServiceListOptions): string {

@@ -82,6 +82,7 @@ import CustomerService, {
     GetResponse,
     UpdateResponse,
     MutateResourcesResponse,
+    // StreamResponse,
 } from './services/customer'
 
 /* gRPC Client */
@@ -95,6 +96,7 @@ import { ReportOptions, ServiceCreateOptions, PostReportHook, PreReportHook, Mut
 export interface CustomerInstance {
     /* Global customer methods */
     report: <T = any[]>(options: ReportOptions) => ReportResponse<T>
+    stream: (options: ReportOptions, callback: any) => Promise<any>
     query: (qry: string) => QueryResponse
     list: () => ListResponse
     get: (id: number | string) => GetResponse
@@ -185,6 +187,7 @@ export default function Customer(
     return {
         /* Top level customer methods */
         report: options => cusService.report(options),
+        stream: (options, callback) => cusService.stream(options, callback),
         query: qry => cusService.query(qry),
         list: () => cusService.list(),
         get: id => cusService.get(id),
