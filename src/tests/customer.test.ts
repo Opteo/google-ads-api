@@ -143,25 +143,53 @@ describe('customer', () => {
     })
 
     describe('stream', () => {
-        it('retrieves data from a stream', async () => {
-            // interface Campaign {
-            //     campaign: {
-            //         resource_name: string,
-            //         name: string
-            //     }
-            // }
-
-            await customer.stream({
-                entity: 'campaign',
-                attributes: ['campaign.name'],
-                limit: 6,
-            }, (err: any, chunks: any) => {
-                if(err) {
-                    console.log(err);
-                } else {
-                    console.log(chunks);
-                }
+        interface SearchTermView {
+            search_term_view: {
+                resource_name: string,
+                search_term: string
+            }
+            metrics: {
+                clicks: number
+            }
+        }
+        it('retrieves 50 items from a stream', async () => {
+            const generator = customer.stream<SearchTermView>({
+                entity: 'search_term_view',
+                metrics: ['metrics.clicks'],
+                attributes: ['search_term_view.search_term'],
+                order_by: 'metrics.clicks',
+                sort_order: 'desc',
+                limit: 50,
             })
+
+            let count = 0
+
+            for await (let item of generator) {
+                item
+                count++
+            }
+
+            expect(count).toBe(50)
+        })
+
+        it('retrieves greater than 10000 items from a stream', async () => {
+            const thing = customer.stream<SearchTermView>({
+                entity: 'search_term_view',
+                metrics: ['metrics.clicks'],
+                attributes: ['search_term_view.search_term'],
+                order_by: 'metrics.clicks',
+                sort_order: 'desc',
+                limit: 12000,
+            })
+
+            let count = 0
+
+            for await (let item of thing) {
+                item
+                count++
+            }
+
+            expect(count).toBeGreaterThan(10000)
         })
     })
 

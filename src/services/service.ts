@@ -288,47 +288,72 @@ export default class Service {
         return parsed_results
     }
 
-    protected async serviceStream(
-        options: ReportOptions,
-        pre_report_hook: PreReportHook,
-        post_report_hook: PostReportHook,
-    ): Promise<any> {
+    protected serviceStream<T>(options: ReportOptions, pre_report_hook: PreReportHook) {
         const query = this.buildCustomerReportQuery(options)
 
-        const hook_result = await pre_report_hook({
-            cid: this.cid,
-            query,
-        })
+        const call = this.streamSearchData(query)
 
-        if (hook_result) {
-            return hook_result
+        return this.streamGenerator<T>(call)
+    }
+
+    private async* streamGenerator<T>(call: ClientReadableStream<SearchGoogleAdsStreamResponse>) {
+        let done = false
+        const accumulator: T[] = []
+
+        function createNewPromise() {
+            let resolveMe = () => {
+                console.log('this should never happen')
+            }
+
+            let rejectMe = (err: Error) => {
+                console.log('this should never happen', err)
+            }
+
+            const p = new Promise((resolve, reject) => { 
+                resolveMe = resolve
+                rejectMe = reject
+            })
+
+            return {p, resolveMe, rejectMe}
         }
 
-        const call = this.streamSearchData(query)
-        // Listen for data (max 10,000 rows per chunk)
-        // Called when the stream has finished
+        let next_chunk_arrived = createNewPromise()
 
-        // call.on("error", err => console.error(err));
+        call.on('data', (chunk: SearchGoogleAdsStreamResponse.AsObject) => {
+            const results = this.parseServiceResults(chunk.resultsList)
+            for (const item of results) {
+                accumulator.push(item as T)
+            }
+            next_chunk_arrived.resolveMe()
+            next_chunk_arrived = createNewPromise()
+        })
 
-        // Called when the stream has finished
-        // call.on("end", () => {
-        //     console.log("Finished streaming data");
-        // });
+        call.on('end', () => {
+            done = true
+            next_chunk_arrived.resolveMe()
+        })
 
-        // call.on("data", (chunk: SearchGoogleAdsStreamResponse.AsObject) => {
-        //     console.log(chunk.resultsList);
-        // });
-
-        // const parsed_results = this.parseServiceResults(results)
-
-        // await post_report_hook({
-        //     cid: this.cid,
-        //     query,
-        //     result: parsed_results,
-        //     report_config: options,
-        // })
-
-        return call
+        call.on('error', (err: Error) => {
+            next_chunk_arrived.rejectMe(err)
+        })
+        
+        try {
+            while (!done || accumulator.length) {
+                if (accumulator.length !== 0) {
+                    const p = accumulator.shift()
+                    if (p === undefined) {
+                        throw new Error('UNDEFINED_STREAM_ERROR')
+                    }
+                    yield p
+                } else {
+                    await next_chunk_arrived.p
+                }
+            }
+        } finally {
+            call.destroy()
+        }
+        
+        return
     }
 
     /* Base query method used in global customer instance */
@@ -362,11 +387,11 @@ export default class Service {
     private streamSearchData(query: string): ClientReadableStream<SearchGoogleAdsStreamResponse> {
         const { request } = this.client.buildSearchStreamRequest(this.cid, query)
         // try {
-            const response = this.client.streamSearchData(request)
-            return response
+        const response = this.client.streamSearchData(request)
+        return response
         // } catch (err) {
-            // console.log(err)
-            // throw new GrpcError(err)
+        // console.log(err)
+        // throw new GrpcError(err)
         // }
     }
 

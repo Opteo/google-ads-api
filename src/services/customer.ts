@@ -9,10 +9,8 @@ import Bottleneck from 'bottleneck'
 
 import Service, { Mutation } from './service'
 import { ReportOptions, ServiceCreateOptions, PreReportHook, PostReportHook, MutateResourceOperation } from '../types'
-import { SearchGoogleAdsStreamResponse } from 'google-ads-node'
 
 export type ReportResponse<T> = Promise<T>
-// export type StreamResponse = Promise<any>
 export type QueryResponse = Promise<Array<any>>
 export type ListResponse = Promise<Array<{ customer: Customer }>>
 export type GetResponse = Promise<Customer>
@@ -42,33 +40,11 @@ export default class CustomerService extends Service {
         return results
     }
 
-    public async stream(options: ReportOptions, callback: any): Promise<any> {
-        const results = await this.serviceStream(
+    public stream<T>(options: ReportOptions) {
+        return this.serviceStream<T>(
             options,
             this.pre_report_hook,
-            this.post_report_hook
         )
-
-
-        const res = new Promise((resolve, reject) => {
-            results.on('error', (err: any) => {
-                reject(err)
-            })
-    
-            results.on("data", (chunk: SearchGoogleAdsStreamResponse.AsObject) => {
-                resolve(chunk.resultsList);
-            });
-        })
-        
-        let chunks
-        let errors
-        try {
-            chunks = await res
-        } catch (err) {
-            errors = err
-        }
-
-        callback(errors, chunks)
     }
 
     public async query(qry: string): QueryResponse {

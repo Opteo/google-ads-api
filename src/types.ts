@@ -1,6 +1,6 @@
 import * as fields from 'google-ads-node/build/lib/fields'
 
-export interface ReportOptions {
+interface BaseReportOptions {
     entity: fields.ResourceName
     attributes?:
         | fields.AccountBudgetFields
@@ -163,8 +163,13 @@ export interface ReportOptions {
     limit?: number
     order_by?: string | Array<string>
     sort_order?: string
+}
+
+export interface ReportOptions extends BaseReportOptions {
     page_size?: number
 }
+
+export interface StreamOptions extends BaseReportOptions {}
 
 /**
  * String union for Date Constant
