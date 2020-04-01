@@ -24,7 +24,7 @@ module.exports = {
             _type: 'array of strings',
         },
         extension_type: {
-            _description: 'The extension type of the customer extension setting.',
+            _description: 'Immutable. The extension type of the customer extension setting.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -39,12 +39,13 @@ module.exports = {
                 { s: 'STRUCTURED_SNIPPET', description: 'Structured snippet.' },
                 { s: 'LOCATION', description: 'Location.' },
                 { s: 'AFFILIATE_LOCATION', description: 'Affiliate location.' },
+                { s: 'HOTEL_CALLOUT', description: 'Hotel callout' },
             ],
             _type: 'enum',
         },
         resource_name: {
             _description:
-                'The resource name of the customer extension setting. CustomerExtensionSetting resource names have the form: <code>customers/{customer_id}/customerExtensionSettings/{extension_type}</code>',
+                'Immutable. The resource name of the customer extension setting. CustomerExtensionSetting resource names have the form: <code>customers/{customer_id}/customerExtensionSettings/{extension_type}</code>',
             _type: 'string',
         },
     },

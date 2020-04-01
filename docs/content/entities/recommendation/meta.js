@@ -3,12 +3,14 @@ module.exports = {
     object: {
         ad_group: {
             _description:
-                'The ad group targeted by this recommendation. This will be set only when the recommendation affects a single ad group. This field will be set for the following recommendation types: KEYWORD, OPTIMIZE_AD_ROTATION, TEXT_AD',
+                'Output only. The ad group targeted by this recommendation. This will be set only when the recommendation affects a single ad group. This field will be set for the following recommendation types: KEYWORD, OPTIMIZE_AD_ROTATION, TEXT_AD',
             _type: 'string',
         },
         call_extension_recommendation: {
             _oneof: 'recommendation',
+            _parent_description: 'Output only. The Call extension recommendation.',
             recommended_extensions: {
+                _parent_description: 'Output only. Call extensions recommended to be added.',
                 _type: 'array of objects',
                 call_conversion_action: {
                     _description:
@@ -61,7 +63,9 @@ module.exports = {
         },
         callout_extension_recommendation: {
             _oneof: 'recommendation',
+            _parent_description: 'Output only. The Callout extension recommendation.',
             recommended_extensions: {
+                _parent_description: 'Output only. Callout extensions recommended to be added.',
                 _type: 'array of objects',
                 callout_text: {
                     _description: 'The callout text. The length of this string should be between 1 and 25, inclusive.',
@@ -71,81 +75,113 @@ module.exports = {
         },
         campaign: {
             _description:
-                'The campaign targeted by this recommendation. This will be set only when the recommendation affects a single campaign. This field will be set for the following recommendation types: CALL_EXTENSION, CALLOUT_EXTENSION, ENHANCED_CPC_OPT_IN, KEYWORD, KEYWORD_MATCH_TYPE, MAXIMIZE_CLICKS_OPT_IN, MAXIMIZE_CONVERSIONS_OPT_IN, OPTIMIZE_AD_ROTATION, SEARCH_PARTNERS_OPT_IN, SITELINK_EXTENSION, TARGET_CPA_OPT_IN, TEXT_AD',
+                'Output only. The campaign targeted by this recommendation. This will be set only when the recommendation affects a single campaign. This field will be set for the following recommendation types: CALL_EXTENSION, CALLOUT_EXTENSION, ENHANCED_CPC_OPT_IN, KEYWORD, KEYWORD_MATCH_TYPE, MAXIMIZE_CLICKS_OPT_IN, MAXIMIZE_CONVERSIONS_OPT_IN, OPTIMIZE_AD_ROTATION, SEARCH_PARTNERS_OPT_IN, SITELINK_EXTENSION, TARGET_CPA_OPT_IN, TEXT_AD',
             _type: 'string',
         },
         campaign_budget: {
             _description:
-                'The budget targeted by this recommendation. This will be set only when the recommendation affects a single campaign budget. This field will be set for the following recommendation types: CAMPAIGN_BUDGET, MOVE_UNUSED_BUDGET',
+                'Output only. The budget targeted by this recommendation. This will be set only when the recommendation affects a single campaign budget. This field will be set for the following recommendation types: CAMPAIGN_BUDGET, MOVE_UNUSED_BUDGET',
             _type: 'string',
         },
         campaign_budget_recommendation: {
             _oneof: 'recommendation',
+            _parent_description: 'Output only. The campaign budget recommendation.',
             budget_options: {
+                _parent_description:
+                    'Output only. The budget amounts and associated impact estimates for some values of possible budget amounts.',
                 _type: 'array of objects',
-                budget_amount_micros: { _description: 'The budget amount for this option.', _type: 'int64' },
+                budget_amount_micros: {
+                    _description: 'Output only. The budget amount for this option.',
+                    _type: 'int64',
+                },
                 impact: {
+                    _parent_description:
+                        'Output only. The impact estimate if budget is changed to amount specified in this option.',
                     base_metrics: {
-                        clicks: { _description: 'Number of ad clicks.', _type: 'double' },
-                        conversions: { _description: 'Number of conversions.', _type: 'double' },
+                        _parent_description: 'Output only. Base metrics at the time the recommendation was generated.',
+                        clicks: { _description: 'Output only. Number of ad clicks.', _type: 'double' },
+                        conversions: { _description: 'Output only. Number of conversions.', _type: 'double' },
                         cost_micros: {
-                            _description: 'Cost (in micros) for advertising, in the local currency for the account.',
+                            _description:
+                                'Output only. Cost (in micros) for advertising, in the local currency for the account.',
                             _type: 'int64',
                         },
-                        impressions: { _description: 'Number of ad impressions.', _type: 'double' },
+                        impressions: { _description: 'Output only. Number of ad impressions.', _type: 'double' },
                         video_views: {
-                            _description: 'Number of video views for a video ad campaign.',
+                            _description: 'Output only. Number of video views for a video ad campaign.',
                             _type: 'double',
                         },
                     },
                     potential_metrics: {
-                        clicks: { _description: 'Number of ad clicks.', _type: 'double' },
-                        conversions: { _description: 'Number of conversions.', _type: 'double' },
+                        _parent_description: 'Output only. Estimated metrics if the recommendation is applied.',
+                        clicks: { _description: 'Output only. Number of ad clicks.', _type: 'double' },
+                        conversions: { _description: 'Output only. Number of conversions.', _type: 'double' },
                         cost_micros: {
-                            _description: 'Cost (in micros) for advertising, in the local currency for the account.',
+                            _description:
+                                'Output only. Cost (in micros) for advertising, in the local currency for the account.',
                             _type: 'int64',
                         },
-                        impressions: { _description: 'Number of ad impressions.', _type: 'double' },
+                        impressions: { _description: 'Output only. Number of ad impressions.', _type: 'double' },
                         video_views: {
-                            _description: 'Number of video views for a video ad campaign.',
+                            _description: 'Output only. Number of video views for a video ad campaign.',
                             _type: 'double',
                         },
                     },
                 },
             },
-            current_budget_amount_micros: { _description: 'The current budget amount in micros.', _type: 'int64' },
+            current_budget_amount_micros: {
+                _description: 'Output only. The current budget amount in micros.',
+                _type: 'int64',
+            },
             recommended_budget_amount_micros: {
-                _description: 'The recommended budget amount in micros.',
+                _description: 'Output only. The recommended budget amount in micros.',
                 _type: 'int64',
             },
         },
-        dismissed: { _description: 'Whether the recommendation is dismissed or not.', _type: 'boolean' },
-        enhanced_cpc_opt_in_recommendation: { _oneof: 'recommendation' },
+        dismissed: { _description: 'Output only. Whether the recommendation is dismissed or not.', _type: 'boolean' },
+        enhanced_cpc_opt_in_recommendation: {
+            _oneof: 'recommendation',
+            _parent_description: 'Output only. The Enhanced Cost-Per-Click Opt-In recommendation.',
+        },
         impact: {
+            _parent_description:
+                'Output only. The impact on account performance as a result of applying the recommendation.',
             base_metrics: {
-                clicks: { _description: 'Number of ad clicks.', _type: 'double' },
-                conversions: { _description: 'Number of conversions.', _type: 'double' },
+                _parent_description: 'Output only. Base metrics at the time the recommendation was generated.',
+                clicks: { _description: 'Output only. Number of ad clicks.', _type: 'double' },
+                conversions: { _description: 'Output only. Number of conversions.', _type: 'double' },
                 cost_micros: {
-                    _description: 'Cost (in micros) for advertising, in the local currency for the account.',
+                    _description:
+                        'Output only. Cost (in micros) for advertising, in the local currency for the account.',
                     _type: 'int64',
                 },
-                impressions: { _description: 'Number of ad impressions.', _type: 'double' },
-                video_views: { _description: 'Number of video views for a video ad campaign.', _type: 'double' },
+                impressions: { _description: 'Output only. Number of ad impressions.', _type: 'double' },
+                video_views: {
+                    _description: 'Output only. Number of video views for a video ad campaign.',
+                    _type: 'double',
+                },
             },
             potential_metrics: {
-                clicks: { _description: 'Number of ad clicks.', _type: 'double' },
-                conversions: { _description: 'Number of conversions.', _type: 'double' },
+                _parent_description: 'Output only. Estimated metrics if the recommendation is applied.',
+                clicks: { _description: 'Output only. Number of ad clicks.', _type: 'double' },
+                conversions: { _description: 'Output only. Number of conversions.', _type: 'double' },
                 cost_micros: {
-                    _description: 'Cost (in micros) for advertising, in the local currency for the account.',
+                    _description:
+                        'Output only. Cost (in micros) for advertising, in the local currency for the account.',
                     _type: 'int64',
                 },
-                impressions: { _description: 'Number of ad impressions.', _type: 'double' },
-                video_views: { _description: 'Number of video views for a video ad campaign.', _type: 'double' },
+                impressions: { _description: 'Output only. Number of ad impressions.', _type: 'double' },
+                video_views: {
+                    _description: 'Output only. Number of video views for a video ad campaign.',
+                    _type: 'double',
+                },
             },
         },
         keyword_match_type_recommendation: {
             _oneof: 'recommendation',
+            _parent_description: 'Output only. The keyword match type recommendation.',
             keyword: {
+                _parent_description: 'Output only. The existing keyword where the match type should be more broad.',
                 match_type: {
                     _description: 'The match type of the keyword.',
                     _enums: [
@@ -166,7 +202,7 @@ module.exports = {
                 },
             },
             recommended_match_type: {
-                _description: 'The recommended new match type.',
+                _description: 'Output only. The recommended new match type.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -182,7 +218,9 @@ module.exports = {
         },
         keyword_recommendation: {
             _oneof: 'recommendation',
+            _parent_description: 'Output only. The keyword recommendation.',
             keyword: {
+                _parent_description: 'Output only. The recommended keyword.',
                 match_type: {
                     _description: 'The match type of the keyword.',
                     _enums: [
@@ -202,74 +240,109 @@ module.exports = {
                     _type: 'string',
                 },
             },
-            recommended_cpc_bid_micros: { _description: 'The recommended CPC (cost-per-click) bid.', _type: 'int64' },
+            recommended_cpc_bid_micros: {
+                _description: 'Output only. The recommended CPC (cost-per-click) bid.',
+                _type: 'int64',
+            },
         },
         maximize_clicks_opt_in_recommendation: {
             _oneof: 'recommendation',
+            _parent_description: 'Output only. The MaximizeClicks Opt-In recommendation.',
             recommended_budget_amount_micros: {
-                _description: 'The recommended new budget amount. Only set if the current budget is too high.',
+                _description:
+                    'Output only. The recommended new budget amount. Only set if the current budget is too high.',
                 _type: 'int64',
             },
         },
         maximize_conversions_opt_in_recommendation: {
             _oneof: 'recommendation',
-            recommended_budget_amount_micros: { _description: 'The recommended new budget amount.', _type: 'int64' },
+            _parent_description: 'Output only. The MaximizeConversions Opt-In recommendation.',
+            recommended_budget_amount_micros: {
+                _description: 'Output only. The recommended new budget amount.',
+                _type: 'int64',
+            },
         },
         move_unused_budget_recommendation: {
             _oneof: 'recommendation',
+            _parent_description: 'Output only. The move unused budget recommendation.',
             budget_recommendation: {
+                _parent_description: 'Output only. The recommendation for the constrained budget to increase.',
                 budget_options: {
+                    _parent_description:
+                        'Output only. The budget amounts and associated impact estimates for some values of possible budget amounts.',
                     _type: 'array of objects',
-                    budget_amount_micros: { _description: 'The budget amount for this option.', _type: 'int64' },
+                    budget_amount_micros: {
+                        _description: 'Output only. The budget amount for this option.',
+                        _type: 'int64',
+                    },
                     impact: {
+                        _parent_description:
+                            'Output only. The impact estimate if budget is changed to amount specified in this option.',
                         base_metrics: {
-                            clicks: { _description: 'Number of ad clicks.', _type: 'double' },
-                            conversions: { _description: 'Number of conversions.', _type: 'double' },
+                            _parent_description:
+                                'Output only. Base metrics at the time the recommendation was generated.',
+                            clicks: { _description: 'Output only. Number of ad clicks.', _type: 'double' },
+                            conversions: { _description: 'Output only. Number of conversions.', _type: 'double' },
                             cost_micros: {
                                 _description:
-                                    'Cost (in micros) for advertising, in the local currency for the account.',
+                                    'Output only. Cost (in micros) for advertising, in the local currency for the account.',
                                 _type: 'int64',
                             },
-                            impressions: { _description: 'Number of ad impressions.', _type: 'double' },
+                            impressions: { _description: 'Output only. Number of ad impressions.', _type: 'double' },
                             video_views: {
-                                _description: 'Number of video views for a video ad campaign.',
+                                _description: 'Output only. Number of video views for a video ad campaign.',
                                 _type: 'double',
                             },
                         },
                         potential_metrics: {
-                            clicks: { _description: 'Number of ad clicks.', _type: 'double' },
-                            conversions: { _description: 'Number of conversions.', _type: 'double' },
+                            _parent_description: 'Output only. Estimated metrics if the recommendation is applied.',
+                            clicks: { _description: 'Output only. Number of ad clicks.', _type: 'double' },
+                            conversions: { _description: 'Output only. Number of conversions.', _type: 'double' },
                             cost_micros: {
                                 _description:
-                                    'Cost (in micros) for advertising, in the local currency for the account.',
+                                    'Output only. Cost (in micros) for advertising, in the local currency for the account.',
                                 _type: 'int64',
                             },
-                            impressions: { _description: 'Number of ad impressions.', _type: 'double' },
+                            impressions: { _description: 'Output only. Number of ad impressions.', _type: 'double' },
                             video_views: {
-                                _description: 'Number of video views for a video ad campaign.',
+                                _description: 'Output only. Number of video views for a video ad campaign.',
                                 _type: 'double',
                             },
                         },
                     },
                 },
-                current_budget_amount_micros: { _description: 'The current budget amount in micros.', _type: 'int64' },
+                current_budget_amount_micros: {
+                    _description: 'Output only. The current budget amount in micros.',
+                    _type: 'int64',
+                },
                 recommended_budget_amount_micros: {
-                    _description: 'The recommended budget amount in micros.',
+                    _description: 'Output only. The recommended budget amount in micros.',
                     _type: 'int64',
                 },
             },
-            excess_campaign_budget: { _description: "The excess budget's resource_name.", _type: 'string' },
+            excess_campaign_budget: {
+                _description: "Output only. The excess budget's resource_name.",
+                _type: 'string',
+            },
         },
-        optimize_ad_rotation_recommendation: { _oneof: 'recommendation' },
+        optimize_ad_rotation_recommendation: {
+            _oneof: 'recommendation',
+            _parent_description: 'Output only. The Optimize Ad Rotation recommendation.',
+        },
         resource_name: {
             _description:
-                'The resource name of the recommendation. <code>customers/{customer_id}/recommendations/{recommendation_id}</code>',
+                'Immutable. The resource name of the recommendation. <code>customers/{customer_id}/recommendations/{recommendation_id}</code>',
             _type: 'string',
         },
-        search_partners_opt_in_recommendation: { _oneof: 'recommendation' },
+        search_partners_opt_in_recommendation: {
+            _oneof: 'recommendation',
+            _parent_description: 'Output only. The Search Partners Opt-In recommendation.',
+        },
         sitelink_extension_recommendation: {
             _oneof: 'recommendation',
+            _parent_description: 'Output only. The Sitelink extension recommendation.',
             recommended_extensions: {
+                _parent_description: 'Output only. Sitelink extensions recommended to be added.',
                 _type: 'array of objects',
                 final_mobile_urls: {
                     _description: 'A list of possible final mobile URLs after all cross domain redirects.',
@@ -303,6 +376,8 @@ module.exports = {
                     _type: 'string',
                 },
                 url_custom_parameters: {
+                    _parent_description:
+                        'A list of mappings to be used for substituting URL custom parameter tags in the tracking_url_template, final_urls, and/or final_mobile_urls.',
                     _type: 'array of objects',
                     key: { _description: 'The key matching the parameter tag name.', _type: 'string' },
                     value: { _description: 'The value to be substituted.', _type: 'string' },
@@ -311,10 +386,13 @@ module.exports = {
         },
         target_cpa_opt_in_recommendation: {
             _oneof: 'recommendation',
+            _parent_description: 'Output only. The TargetCPA opt-in recommendation.',
             options: {
+                _parent_description:
+                    'Output only. The available goals and corresponding options for Target CPA strategy.',
                 _type: 'array of objects',
                 goal: {
-                    _description: 'The goal achieved by this option.',
+                    _description: 'Output only. The goal achieved by this option.',
                     _enums: [
                         { s: 'UNSPECIFIED', description: 'Not specified.' },
                         {
@@ -336,57 +414,67 @@ module.exports = {
                     _type: 'enum',
                 },
                 impact: {
+                    _parent_description: 'Output only. The impact estimate if this option is selected.',
                     base_metrics: {
-                        clicks: { _description: 'Number of ad clicks.', _type: 'double' },
-                        conversions: { _description: 'Number of conversions.', _type: 'double' },
+                        _parent_description: 'Output only. Base metrics at the time the recommendation was generated.',
+                        clicks: { _description: 'Output only. Number of ad clicks.', _type: 'double' },
+                        conversions: { _description: 'Output only. Number of conversions.', _type: 'double' },
                         cost_micros: {
-                            _description: 'Cost (in micros) for advertising, in the local currency for the account.',
+                            _description:
+                                'Output only. Cost (in micros) for advertising, in the local currency for the account.',
                             _type: 'int64',
                         },
-                        impressions: { _description: 'Number of ad impressions.', _type: 'double' },
+                        impressions: { _description: 'Output only. Number of ad impressions.', _type: 'double' },
                         video_views: {
-                            _description: 'Number of video views for a video ad campaign.',
+                            _description: 'Output only. Number of video views for a video ad campaign.',
                             _type: 'double',
                         },
                     },
                     potential_metrics: {
-                        clicks: { _description: 'Number of ad clicks.', _type: 'double' },
-                        conversions: { _description: 'Number of conversions.', _type: 'double' },
+                        _parent_description: 'Output only. Estimated metrics if the recommendation is applied.',
+                        clicks: { _description: 'Output only. Number of ad clicks.', _type: 'double' },
+                        conversions: { _description: 'Output only. Number of conversions.', _type: 'double' },
                         cost_micros: {
-                            _description: 'Cost (in micros) for advertising, in the local currency for the account.',
+                            _description:
+                                'Output only. Cost (in micros) for advertising, in the local currency for the account.',
                             _type: 'int64',
                         },
-                        impressions: { _description: 'Number of ad impressions.', _type: 'double' },
+                        impressions: { _description: 'Output only. Number of ad impressions.', _type: 'double' },
                         video_views: {
-                            _description: 'Number of video views for a video ad campaign.',
+                            _description: 'Output only. Number of video views for a video ad campaign.',
                             _type: 'double',
                         },
                     },
                 },
                 required_campaign_budget_amount_micros: {
                     _description:
-                        'The minimum campaign budget, in local currency for the account, required to achieve the target CPA. Amount is specified in micros, where one million is equivalent to one currency unit.',
+                        'Output only. The minimum campaign budget, in local currency for the account, required to achieve the target CPA. Amount is specified in micros, where one million is equivalent to one currency unit.',
                     _type: 'int64',
                 },
-                target_cpa_micros: { _description: 'Average CPA target.', _type: 'int64' },
+                target_cpa_micros: { _description: 'Output only. Average CPA target.', _type: 'int64' },
             },
             recommended_target_cpa_micros: {
                 _description:
-                    'The recommended average CPA target. See required budget amount and impact of using this recommendation in options list.',
+                    'Output only. The recommended average CPA target. See required budget amount and impact of using this recommendation in options list.',
                 _type: 'int64',
             },
         },
         text_ad_recommendation: {
             _oneof: 'recommendation',
+            _parent_description: 'Output only. Add expanded text ad recommendation.',
             ad: {
+                _parent_description: 'Output only. Recommended ad.',
                 added_by_google_ads: {
                     _description:
-                        'Indicates if this ad was automatically added by Google Ads and not by a user. For example, this could happen when ads are automatically created as suggestions for new ads based on knowledge of how existing ads are performing.',
+                        'Output only. Indicates if this ad was automatically added by Google Ads and not by a user. For example, this could happen when ads are automatically created as suggestions for new ads based on knowledge of how existing ads are performing.',
                     _type: 'boolean',
                 },
                 app_ad: {
                     _oneof: 'adData',
+                    _parent_description: 'Details pertaining to an app ad.',
                     descriptions: {
+                        _parent_description:
+                            'List of text assets for descriptions. When the ad serves the descriptions will be selected from this list.',
                         _type: 'array of objects',
                         pinned_field: {
                             _description:
@@ -409,6 +497,8 @@ module.exports = {
                         text: { _description: 'Asset text.', _type: 'string' },
                     },
                     headlines: {
+                        _parent_description:
+                            'List of text assets for headlines. When the ad serves the headlines will be selected from this list.',
                         _type: 'array of objects',
                         pinned_field: {
                             _description:
@@ -431,14 +521,18 @@ module.exports = {
                         text: { _description: 'Asset text.', _type: 'string' },
                     },
                     html_5_media_bundles: {
+                        _parent_description: 'List of media bundle assets that may be used with the ad.',
                         _type: 'array of objects',
                         asset: { _description: 'The Asset resource name of this media bundle.', _type: 'string' },
                     },
                     images: {
+                        _parent_description: 'List of image assets that may be displayed with the ad.',
                         _type: 'array of objects',
                         asset: { _description: 'The Asset resource name of this image.', _type: 'string' },
                     },
                     mandatory_ad_text: {
+                        _parent_description:
+                            'An optional text asset that, if specified, must always be displayed when the ad is served.',
                         pinned_field: {
                             _description:
                                 'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
@@ -460,13 +554,17 @@ module.exports = {
                         text: { _description: 'Asset text.', _type: 'string' },
                     },
                     youtube_videos: {
+                        _parent_description: 'List of YouTube video assets that may be displayed with the ad.',
                         _type: 'array of objects',
                         asset: { _description: 'The Asset resource name of this video.', _type: 'string' },
                     },
                 },
                 app_engagement_ad: {
                     _oneof: 'adData',
+                    _parent_description: 'Details pertaining to an app engagement ad.',
                     descriptions: {
+                        _parent_description:
+                            'List of text assets for descriptions. When the ad serves the descriptions will be selected from this list.',
                         _type: 'array of objects',
                         pinned_field: {
                             _description:
@@ -489,6 +587,8 @@ module.exports = {
                         text: { _description: 'Asset text.', _type: 'string' },
                     },
                     headlines: {
+                        _parent_description:
+                            'List of text assets for headlines. When the ad serves the headlines will be selected from this list.',
                         _type: 'array of objects',
                         pinned_field: {
                             _description:
@@ -511,16 +611,19 @@ module.exports = {
                         text: { _description: 'Asset text.', _type: 'string' },
                     },
                     images: {
+                        _parent_description: 'List of image assets that may be displayed with the ad.',
                         _type: 'array of objects',
                         asset: { _description: 'The Asset resource name of this image.', _type: 'string' },
                     },
                     videos: {
+                        _parent_description: 'List of video assets that may be displayed with the ad.',
                         _type: 'array of objects',
                         asset: { _description: 'The Asset resource name of this video.', _type: 'string' },
                     },
                 },
                 call_only_ad: {
                     _oneof: 'adData',
+                    _parent_description: 'Details pertaining to a call-only ad.',
                     business_name: { _description: 'The business name in the ad.', _type: 'string' },
                     call_tracked: {
                         _description:
@@ -587,6 +690,7 @@ module.exports = {
                 },
                 display_upload_ad: {
                     _oneof: 'adData',
+                    _parent_description: 'Details pertaining to a display upload ad.',
                     display_upload_product_type: {
                         _description: 'The product type of this ad. See comments on the enum for details.',
                         _enums: [
@@ -646,6 +750,8 @@ module.exports = {
                         _type: 'enum',
                     },
                     media_bundle: {
+                        _parent_description:
+                            'A media bundle asset to be used in the ad. For information about the media bundle for HTML5_UPLOAD_AD see https://support.google.com/google-ads/answer/1722096 Media bundles that are part of dynamic product types use a special format that needs to be created through the Google Web Designer. See https://support.google.com/webdesigner/answer/7543898 for more information.',
                         asset: { _description: 'The Asset resource name of this media bundle.', _type: 'string' },
                     },
                 },
@@ -655,10 +761,14 @@ module.exports = {
                 },
                 expanded_dynamic_search_ad: {
                     _oneof: 'adData',
+                    _parent_description:
+                        'Details pertaining to an Expanded Dynamic Search Ad. This type of ad has its headline, final URLs, and display URL auto-generated at serving time according to domain name specific information provided by <code>dynamic_search_ads_setting</code> linked at the campaign level.',
                     description: { _description: 'The description of the ad.', _type: 'string' },
+                    description2: { _description: 'The second description of the ad.', _type: 'string' },
                 },
                 expanded_text_ad: {
                     _oneof: 'adData',
+                    _parent_description: 'Details pertaining to an expanded text ad.',
                     description: { _description: 'The description of the ad.', _type: 'string' },
                     description2: { _description: 'The second description of the ad.', _type: 'string' },
                     headline_part1: { _description: "The first part of the ad's headline.", _type: 'string' },
@@ -674,6 +784,8 @@ module.exports = {
                     },
                 },
                 final_app_urls: {
+                    _parent_description:
+                        'A list of final app URLs that will be used on mobile if the user has the specific app installed.',
                     _type: 'array of objects',
                     os_type: {
                         _description: 'The operating system targeted by this URL. Required.',
@@ -698,12 +810,14 @@ module.exports = {
                     _description: 'The list of possible final mobile URLs after all cross-domain redirects for the ad.',
                     _type: 'array of strings',
                 },
+                final_url_suffix: { _description: 'The suffix to use when constructing a final URL.', _type: 'string' },
                 final_urls: {
                     _description: 'The list of possible final URLs after all cross-domain redirects for the ad.',
                     _type: 'array of strings',
                 },
                 gmail_ad: {
                     _oneof: 'adData',
+                    _parent_description: 'Details pertaining to a Gmail ad.',
                     header_image: {
                         _description:
                             'The MediaFile resource name of the header image. Valid image types are GIF, JPEG and PNG. The minimum size is 300x100 pixels and the aspect ratio must be between 3:1 and 5:1 (+-1%).',
@@ -719,6 +833,7 @@ module.exports = {
                         _type: 'string',
                     },
                     marketing_image_display_call_to_action: {
+                        _parent_description: 'Display-call-to-action of the marketing image.',
                         text: { _description: 'Text for the display-call-to-action.', _type: 'string' },
                         text_color: {
                             _description:
@@ -733,9 +848,11 @@ module.exports = {
                     },
                     marketing_image_headline: { _description: 'Headline of the marketing image.', _type: 'string' },
                     product_images: {
+                        _parent_description: 'Product images. Up to 15 images are supported.',
                         _type: 'array of objects',
                         description: { _description: 'Description of the product.', _type: 'string' },
                         display_call_to_action: {
+                            _parent_description: 'Display-call-to-action of the product image.',
                             text: { _description: 'Text for the display-call-to-action.', _type: 'string' },
                             text_color: {
                                 _description:
@@ -755,6 +872,8 @@ module.exports = {
                         },
                     },
                     product_videos: {
+                        _parent_description:
+                            'Product videos. Up to 7 videos are supported. At least one product video or a marketing image must be specified.',
                         _type: 'array of objects',
                         product_video: {
                             _description: 'The MediaFile resource name of a video which must be hosted on YouTube.',
@@ -762,6 +881,7 @@ module.exports = {
                         },
                     },
                     teaser: {
+                        _parent_description: 'The Gmail teaser.',
                         business_name: { _description: 'Business name of the advertiser.', _type: 'string' },
                         description: { _description: 'Description of the teaser.', _type: 'string' },
                         headline: { _description: 'Headline of the teaser.', _type: 'string' },
@@ -772,10 +892,11 @@ module.exports = {
                         },
                     },
                 },
-                hotel_ad: { _oneof: 'adData' },
-                id: { _description: 'The ID of the ad.', _type: 'int64' },
+                hotel_ad: { _oneof: 'adData', _parent_description: 'Details pertaining to a hotel ad.' },
+                id: { _description: 'Output only. The ID of the ad.', _type: 'int64' },
                 image_ad: {
                     _oneof: 'adData',
+                    _parent_description: 'Details pertaining to an Image ad.',
                     ad_id_to_copy_image_from: { _description: 'An ad ID to copy the image from.', _type: 'int64' },
                     data: { _description: 'Raw image data as bytes.', _type: 'byte' },
                     image_url: { _description: 'URL of the full size image.', _type: 'string' },
@@ -820,6 +941,7 @@ module.exports = {
                 },
                 legacy_app_install_ad: {
                     _oneof: 'adData',
+                    _parent_description: 'Immutable. Details pertaining to a legacy app install ad.',
                     app_id: { _description: 'The id of the mobile app.', _type: 'string' },
                     app_store: {
                         _description: 'The app store the mobile app is available in.',
@@ -843,6 +965,7 @@ module.exports = {
                 },
                 legacy_responsive_display_ad: {
                     _oneof: 'adData',
+                    _parent_description: 'Details pertaining to a legacy responsive display ad.',
                     accent_color: {
                         _description:
                             'The accent color of the ad in hexadecimal, e.g. #ffffff for white. If one of main_color and accent_color is set, the other is required as well.',
@@ -903,16 +1026,17 @@ module.exports = {
                 },
                 name: {
                     _description:
-                        'The name of the ad. This is only used to be able to identify the ad. It does not need to be unique and does not affect the served ad.',
+                        'Immutable. The name of the ad. This is only used to be able to identify the ad. It does not need to be unique and does not affect the served ad.',
                     _type: 'string',
                 },
                 resource_name: {
                     _description:
-                        'The resource name of the ad. Ad resource names have the form: <code>customers/{customer_id}/ads/{ad_id}</code>',
+                        'Immutable. The resource name of the ad. Ad resource names have the form: <code>customers/{customer_id}/ads/{ad_id}</code>',
                     _type: 'string',
                 },
                 responsive_display_ad: {
                     _oneof: 'adData',
+                    _parent_description: 'Details pertaining to a responsive display ad.',
                     accent_color: {
                         _description:
                             'The accent color of the ad in hexadecimal, e.g. #ffffff for white. If one of main_color and accent_color is set, the other is required as well.',
@@ -932,6 +1056,8 @@ module.exports = {
                         _type: 'string',
                     },
                     descriptions: {
+                        _parent_description:
+                            'Descriptive texts for the ad. The maximum length is 90 characters. At least 1 and max 5 headlines can be specified.',
                         _type: 'array of objects',
                         pinned_field: {
                             _description:
@@ -969,6 +1095,8 @@ module.exports = {
                         _type: 'enum',
                     },
                     headlines: {
+                        _parent_description:
+                            'Short format headlines for the ad. The maximum length is 30 characters. At least 1 and max 5 headlines can be specified.',
                         _type: 'array of objects',
                         pinned_field: {
                             _description:
@@ -991,10 +1119,13 @@ module.exports = {
                         text: { _description: 'Asset text.', _type: 'string' },
                     },
                     logo_images: {
+                        _parent_description:
+                            'Logo images to be used in the ad. Valid image types are GIF, JPEG, and PNG. The minimum size is 512x128 and the aspect ratio must be 4:1 (+-1%). Combined with square_logo_images the maximum is 5.',
                         _type: 'array of objects',
                         asset: { _description: 'The Asset resource name of this image.', _type: 'string' },
                     },
                     long_headline: {
+                        _parent_description: 'A required long format headline. The maximum length is 90 characters.',
                         pinned_field: {
                             _description:
                                 'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
@@ -1021,6 +1152,8 @@ module.exports = {
                         _type: 'string',
                     },
                     marketing_images: {
+                        _parent_description:
+                            'Marketing images to be used in the ad. Valid image types are GIF, JPEG, and PNG. The minimum size is 600x314 and the aspect ratio must be 1.91:1 (+-1%). At least one marketing_image is required. Combined with square_marketing_images the maximum is 15.',
                         _type: 'array of objects',
                         asset: { _description: 'The Asset resource name of this image.', _type: 'string' },
                     },
@@ -1031,21 +1164,30 @@ module.exports = {
                         _type: 'string',
                     },
                     square_logo_images: {
+                        _parent_description:
+                            'Square logo images to be used in the ad. Valid image types are GIF, JPEG, and PNG. The minimum size is 128x128 and the aspect ratio must be 1:1 (+-1%). Combined with square_logo_images the maximum is 5.',
                         _type: 'array of objects',
                         asset: { _description: 'The Asset resource name of this image.', _type: 'string' },
                     },
                     square_marketing_images: {
+                        _parent_description:
+                            'Square marketing images to be used in the ad. Valid image types are GIF, JPEG, and PNG. The minimum size is 300x300 and the aspect ratio must be 1:1 (+-1%). At least one square marketing_image is required. Combined with marketing_images the maximum is 15.',
                         _type: 'array of objects',
                         asset: { _description: 'The Asset resource name of this image.', _type: 'string' },
                     },
                     youtube_videos: {
+                        _parent_description:
+                            'Optional YouTube videos for the ad. A maximum of 5 videos can be specified.',
                         _type: 'array of objects',
                         asset: { _description: 'The Asset resource name of this video.', _type: 'string' },
                     },
                 },
                 responsive_search_ad: {
                     _oneof: 'adData',
+                    _parent_description: 'Details pertaining to a responsive search ad.',
                     descriptions: {
+                        _parent_description:
+                            'List of text assets for descriptions. When the ad serves the descriptions will be selected from this list.',
                         _type: 'array of objects',
                         pinned_field: {
                             _description:
@@ -1068,6 +1210,8 @@ module.exports = {
                         text: { _description: 'Asset text.', _type: 'string' },
                     },
                     headlines: {
+                        _parent_description:
+                            'List of text assets for headlines. When the ad serves the headlines will be selected from this list.',
                         _type: 'array of objects',
                         pinned_field: {
                             _description:
@@ -1101,17 +1245,24 @@ module.exports = {
                 },
                 shopping_comparison_listing_ad: {
                     _oneof: 'adData',
+                    _parent_description: 'Details pertaining to a Shopping Comparison Listing ad.',
                     headline: {
                         _description:
                             'Headline of the ad. This field is required. Allowed length is between 25 and 45 characters.',
                         _type: 'string',
                     },
                 },
-                shopping_product_ad: { _oneof: 'adData' },
-                shopping_smart_ad: { _oneof: 'adData' },
+                shopping_product_ad: {
+                    _oneof: 'adData',
+                    _parent_description: 'Details pertaining to a Shopping product ad.',
+                },
+                shopping_smart_ad: {
+                    _oneof: 'adData',
+                    _parent_description: 'Details pertaining to a Smart Shopping ad.',
+                },
                 system_managed_resource_source: {
                     _description:
-                        'If this ad is system managed, then this field will indicate the source. This field is read-only.',
+                        'Output only. If this ad is system managed, then this field will indicate the source. This field is read-only.',
                     _enums: [
                         { s: 'UNSPECIFIED', description: 'Not specified.' },
                         {
@@ -1124,6 +1275,7 @@ module.exports = {
                 },
                 text_ad: {
                     _oneof: 'adData',
+                    _parent_description: 'Details pertaining to a text ad.',
                     description1: { _description: "The first line of the ad's description.", _type: 'string' },
                     description2: { _description: "The second line of the ad's description.", _type: 'string' },
                     headline: { _description: 'The headline of the ad.', _type: 'string' },
@@ -1133,7 +1285,7 @@ module.exports = {
                     _type: 'string',
                 },
                 type: {
-                    _description: 'The type of ad.',
+                    _description: 'Output only. The type of ad.',
                     _enums: [
                         { s: 'UNSPECIFIED', description: 'No value has been specified.' },
                         {
@@ -1174,6 +1326,8 @@ module.exports = {
                     _type: 'enum',
                 },
                 url_collections: {
+                    _parent_description:
+                        'Additional URLs for the ad that are tagged with a unique identifier that can be referenced from other fields in the ad.',
                     _type: 'array of objects',
                     final_mobile_urls: {
                         _description: 'A list of possible final mobile URLs.',
@@ -1190,19 +1344,36 @@ module.exports = {
                     },
                 },
                 url_custom_parameters: {
+                    _parent_description:
+                        'The list of mappings that can be used to substitute custom parameter tags in a <code>tracking_url_template</code>, <code>final_urls</code>, or <code>mobile_final_urls</code>.',
                     _type: 'array of objects',
                     key: { _description: 'The key matching the parameter tag name.', _type: 'string' },
                     value: { _description: 'The value to be substituted.', _type: 'string' },
                 },
                 video_ad: {
                     _oneof: 'adData',
+                    _parent_description: 'Details pertaining to a Video ad.',
                     bumper: {
+                        _parent_description: 'Video bumper in-stream ad format.',
                         companion_banner: {
                             _description: 'The MediaFile resource name of the companion banner used with the ad.',
                             _type: 'string',
                         },
                     },
+                    discovery: {
+                        _parent_description: 'Video TrueView discovery ad format.',
+                        description1: {
+                            _description: 'First text line for a TrueView video discovery ad.',
+                            _type: 'string',
+                        },
+                        description2: {
+                            _description: 'Second text line for a TrueView video discovery ad.',
+                            _type: 'string',
+                        },
+                        headline: { _description: 'The headline of the ad.', _type: 'string' },
+                    },
                     in_stream: {
+                        _parent_description: 'Video TrueView in-stream ad format.',
                         action_button_label: {
                             _description:
                                 "Label on the CTA (call-to-action) button taking the user to the video ad's final URL. Required for TrueView for action campaigns, optional otherwise.",
@@ -1220,12 +1391,14 @@ module.exports = {
                     },
                     media_file: { _description: 'The MediaFile resource to use for the video.', _type: 'string' },
                     non_skippable: {
+                        _parent_description: 'Video non-skippable in-stream ad format.',
                         companion_banner: {
                             _description: 'The MediaFile resource name of the companion banner used with the ad.',
                             _type: 'string',
                         },
                     },
                     out_stream: {
+                        _parent_description: 'Video out-stream ad format.',
                         description: { _description: 'The description line.', _type: 'string' },
                         headline: { _description: 'The headline of the ad.', _type: 'string' },
                     },
@@ -1233,16 +1406,16 @@ module.exports = {
             },
             auto_apply_date: {
                 _description:
-                    'Date, if present, is the earliest when the recommendation will be auto applied. YYYY-MM-DD format, e.g., 2018-04-17.',
+                    'Output only. Date, if present, is the earliest when the recommendation will be auto applied. YYYY-MM-DD format, e.g., 2018-04-17.',
                 _type: 'string',
             },
             creation_date: {
-                _description: 'Creation date of the recommended ad. YYYY-MM-DD format, e.g., 2018-04-17.',
+                _description: 'Output only. Creation date of the recommended ad. YYYY-MM-DD format, e.g., 2018-04-17.',
                 _type: 'string',
             },
         },
         type: {
-            _description: 'The type of recommendation.',
+            _description: 'Output only. The type of recommendation.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },

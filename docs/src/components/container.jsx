@@ -85,7 +85,7 @@ class Container extends React.Component {
                         <a className="ph1" href="https://developers.google.com/google-ads/api/docs/release-notes">
                             <img
                                 className="br1"
-                                src="https://img.shields.io/badge/google%20ads-v1.3.0-009688.svg?style=flat-square"
+                                src="https://img.shields.io/badge/google%20ads-v1.4.0-009688.svg?style=flat-square"
                                 alt="Google Ads version number"
                             />
                         </a>

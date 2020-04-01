@@ -2,14 +2,18 @@ module.exports = {
     name: 'AdGroupAd',
     object: {
         ad: {
+            _parent_description: 'Immutable. The ad.',
             added_by_google_ads: {
                 _description:
-                    'Indicates if this ad was automatically added by Google Ads and not by a user. For example, this could happen when ads are automatically created as suggestions for new ads based on knowledge of how existing ads are performing.',
+                    'Output only. Indicates if this ad was automatically added by Google Ads and not by a user. For example, this could happen when ads are automatically created as suggestions for new ads based on knowledge of how existing ads are performing.',
                 _type: 'boolean',
             },
             app_ad: {
                 _oneof: 'adData',
+                _parent_description: 'Details pertaining to an app ad.',
                 descriptions: {
+                    _parent_description:
+                        'List of text assets for descriptions. When the ad serves the descriptions will be selected from this list.',
                     _type: 'array of objects',
                     pinned_field: {
                         _description:
@@ -32,6 +36,8 @@ module.exports = {
                     text: { _description: 'Asset text.', _type: 'string' },
                 },
                 headlines: {
+                    _parent_description:
+                        'List of text assets for headlines. When the ad serves the headlines will be selected from this list.',
                     _type: 'array of objects',
                     pinned_field: {
                         _description:
@@ -54,14 +60,18 @@ module.exports = {
                     text: { _description: 'Asset text.', _type: 'string' },
                 },
                 html_5_media_bundles: {
+                    _parent_description: 'List of media bundle assets that may be used with the ad.',
                     _type: 'array of objects',
                     asset: { _description: 'The Asset resource name of this media bundle.', _type: 'string' },
                 },
                 images: {
+                    _parent_description: 'List of image assets that may be displayed with the ad.',
                     _type: 'array of objects',
                     asset: { _description: 'The Asset resource name of this image.', _type: 'string' },
                 },
                 mandatory_ad_text: {
+                    _parent_description:
+                        'An optional text asset that, if specified, must always be displayed when the ad is served.',
                     pinned_field: {
                         _description:
                             'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
@@ -83,13 +93,17 @@ module.exports = {
                     text: { _description: 'Asset text.', _type: 'string' },
                 },
                 youtube_videos: {
+                    _parent_description: 'List of YouTube video assets that may be displayed with the ad.',
                     _type: 'array of objects',
                     asset: { _description: 'The Asset resource name of this video.', _type: 'string' },
                 },
             },
             app_engagement_ad: {
                 _oneof: 'adData',
+                _parent_description: 'Details pertaining to an app engagement ad.',
                 descriptions: {
+                    _parent_description:
+                        'List of text assets for descriptions. When the ad serves the descriptions will be selected from this list.',
                     _type: 'array of objects',
                     pinned_field: {
                         _description:
@@ -112,6 +126,8 @@ module.exports = {
                     text: { _description: 'Asset text.', _type: 'string' },
                 },
                 headlines: {
+                    _parent_description:
+                        'List of text assets for headlines. When the ad serves the headlines will be selected from this list.',
                     _type: 'array of objects',
                     pinned_field: {
                         _description:
@@ -134,16 +150,19 @@ module.exports = {
                     text: { _description: 'Asset text.', _type: 'string' },
                 },
                 images: {
+                    _parent_description: 'List of image assets that may be displayed with the ad.',
                     _type: 'array of objects',
                     asset: { _description: 'The Asset resource name of this image.', _type: 'string' },
                 },
                 videos: {
+                    _parent_description: 'List of video assets that may be displayed with the ad.',
                     _type: 'array of objects',
                     asset: { _description: 'The Asset resource name of this video.', _type: 'string' },
                 },
             },
             call_only_ad: {
                 _oneof: 'adData',
+                _parent_description: 'Details pertaining to a call-only ad.',
                 business_name: { _description: 'The business name in the ad.', _type: 'string' },
                 call_tracked: {
                     _description:
@@ -210,6 +229,7 @@ module.exports = {
             },
             display_upload_ad: {
                 _oneof: 'adData',
+                _parent_description: 'Details pertaining to a display upload ad.',
                 display_upload_product_type: {
                     _description: 'The product type of this ad. See comments on the enum for details.',
                     _enums: [
@@ -269,6 +289,8 @@ module.exports = {
                     _type: 'enum',
                 },
                 media_bundle: {
+                    _parent_description:
+                        'A media bundle asset to be used in the ad. For information about the media bundle for HTML5_UPLOAD_AD see https://support.google.com/google-ads/answer/1722096 Media bundles that are part of dynamic product types use a special format that needs to be created through the Google Web Designer. See https://support.google.com/webdesigner/answer/7543898 for more information.',
                     asset: { _description: 'The Asset resource name of this media bundle.', _type: 'string' },
                 },
             },
@@ -278,10 +300,14 @@ module.exports = {
             },
             expanded_dynamic_search_ad: {
                 _oneof: 'adData',
+                _parent_description:
+                    'Details pertaining to an Expanded Dynamic Search Ad. This type of ad has its headline, final URLs, and display URL auto-generated at serving time according to domain name specific information provided by <code>dynamic_search_ads_setting</code> linked at the campaign level.',
                 description: { _description: 'The description of the ad.', _type: 'string' },
+                description2: { _description: 'The second description of the ad.', _type: 'string' },
             },
             expanded_text_ad: {
                 _oneof: 'adData',
+                _parent_description: 'Details pertaining to an expanded text ad.',
                 description: { _description: 'The description of the ad.', _type: 'string' },
                 description2: { _description: 'The second description of the ad.', _type: 'string' },
                 headline_part1: { _description: "The first part of the ad's headline.", _type: 'string' },
@@ -294,6 +320,8 @@ module.exports = {
                 },
             },
             final_app_urls: {
+                _parent_description:
+                    'A list of final app URLs that will be used on mobile if the user has the specific app installed.',
                 _type: 'array of objects',
                 os_type: {
                     _description: 'The operating system targeted by this URL. Required.',
@@ -318,12 +346,14 @@ module.exports = {
                 _description: 'The list of possible final mobile URLs after all cross-domain redirects for the ad.',
                 _type: 'array of strings',
             },
+            final_url_suffix: { _description: 'The suffix to use when constructing a final URL.', _type: 'string' },
             final_urls: {
                 _description: 'The list of possible final URLs after all cross-domain redirects for the ad.',
                 _type: 'array of strings',
             },
             gmail_ad: {
                 _oneof: 'adData',
+                _parent_description: 'Details pertaining to a Gmail ad.',
                 header_image: {
                     _description:
                         'The MediaFile resource name of the header image. Valid image types are GIF, JPEG and PNG. The minimum size is 300x100 pixels and the aspect ratio must be between 3:1 and 5:1 (+-1%).',
@@ -336,6 +366,7 @@ module.exports = {
                 },
                 marketing_image_description: { _description: 'Description of the marketing image.', _type: 'string' },
                 marketing_image_display_call_to_action: {
+                    _parent_description: 'Display-call-to-action of the marketing image.',
                     text: { _description: 'Text for the display-call-to-action.', _type: 'string' },
                     text_color: {
                         _description:
@@ -350,9 +381,11 @@ module.exports = {
                 },
                 marketing_image_headline: { _description: 'Headline of the marketing image.', _type: 'string' },
                 product_images: {
+                    _parent_description: 'Product images. Up to 15 images are supported.',
                     _type: 'array of objects',
                     description: { _description: 'Description of the product.', _type: 'string' },
                     display_call_to_action: {
+                        _parent_description: 'Display-call-to-action of the product image.',
                         text: { _description: 'Text for the display-call-to-action.', _type: 'string' },
                         text_color: {
                             _description:
@@ -372,6 +405,8 @@ module.exports = {
                     },
                 },
                 product_videos: {
+                    _parent_description:
+                        'Product videos. Up to 7 videos are supported. At least one product video or a marketing image must be specified.',
                     _type: 'array of objects',
                     product_video: {
                         _description: 'The MediaFile resource name of a video which must be hosted on YouTube.',
@@ -379,6 +414,7 @@ module.exports = {
                     },
                 },
                 teaser: {
+                    _parent_description: 'The Gmail teaser.',
                     business_name: { _description: 'Business name of the advertiser.', _type: 'string' },
                     description: { _description: 'Description of the teaser.', _type: 'string' },
                     headline: { _description: 'Headline of the teaser.', _type: 'string' },
@@ -389,10 +425,11 @@ module.exports = {
                     },
                 },
             },
-            hotel_ad: { _oneof: 'adData' },
-            id: { _description: 'The ID of the ad.', _type: 'int64' },
+            hotel_ad: { _oneof: 'adData', _parent_description: 'Details pertaining to a hotel ad.' },
+            id: { _description: 'Output only. The ID of the ad.', _type: 'int64' },
             image_ad: {
                 _oneof: 'adData',
+                _parent_description: 'Details pertaining to an Image ad.',
                 ad_id_to_copy_image_from: { _description: 'An ad ID to copy the image from.', _type: 'int64' },
                 data: { _description: 'Raw image data as bytes.', _type: 'byte' },
                 image_url: { _description: 'URL of the full size image.', _type: 'string' },
@@ -434,6 +471,7 @@ module.exports = {
             },
             legacy_app_install_ad: {
                 _oneof: 'adData',
+                _parent_description: 'Immutable. Details pertaining to a legacy app install ad.',
                 app_id: { _description: 'The id of the mobile app.', _type: 'string' },
                 app_store: {
                     _description: 'The app store the mobile app is available in.',
@@ -457,6 +495,7 @@ module.exports = {
             },
             legacy_responsive_display_ad: {
                 _oneof: 'adData',
+                _parent_description: 'Details pertaining to a legacy responsive display ad.',
                 accent_color: {
                     _description:
                         'The accent color of the ad in hexadecimal, e.g. #ffffff for white. If one of main_color and accent_color is set, the other is required as well.',
@@ -517,16 +556,17 @@ module.exports = {
             },
             name: {
                 _description:
-                    'The name of the ad. This is only used to be able to identify the ad. It does not need to be unique and does not affect the served ad.',
+                    'Immutable. The name of the ad. This is only used to be able to identify the ad. It does not need to be unique and does not affect the served ad.',
                 _type: 'string',
             },
             resource_name: {
                 _description:
-                    'The resource name of the ad. Ad resource names have the form: <code>customers/{customer_id}/ads/{ad_id}</code>',
+                    'Immutable. The resource name of the ad. Ad resource names have the form: <code>customers/{customer_id}/ads/{ad_id}</code>',
                 _type: 'string',
             },
             responsive_display_ad: {
                 _oneof: 'adData',
+                _parent_description: 'Details pertaining to a responsive display ad.',
                 accent_color: {
                     _description:
                         'The accent color of the ad in hexadecimal, e.g. #ffffff for white. If one of main_color and accent_color is set, the other is required as well.',
@@ -546,6 +586,8 @@ module.exports = {
                     _type: 'string',
                 },
                 descriptions: {
+                    _parent_description:
+                        'Descriptive texts for the ad. The maximum length is 90 characters. At least 1 and max 5 headlines can be specified.',
                     _type: 'array of objects',
                     pinned_field: {
                         _description:
@@ -583,6 +625,8 @@ module.exports = {
                     _type: 'enum',
                 },
                 headlines: {
+                    _parent_description:
+                        'Short format headlines for the ad. The maximum length is 30 characters. At least 1 and max 5 headlines can be specified.',
                     _type: 'array of objects',
                     pinned_field: {
                         _description:
@@ -605,10 +649,13 @@ module.exports = {
                     text: { _description: 'Asset text.', _type: 'string' },
                 },
                 logo_images: {
+                    _parent_description:
+                        'Logo images to be used in the ad. Valid image types are GIF, JPEG, and PNG. The minimum size is 512x128 and the aspect ratio must be 4:1 (+-1%). Combined with square_logo_images the maximum is 5.',
                     _type: 'array of objects',
                     asset: { _description: 'The Asset resource name of this image.', _type: 'string' },
                 },
                 long_headline: {
+                    _parent_description: 'A required long format headline. The maximum length is 90 characters.',
                     pinned_field: {
                         _description:
                             'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
@@ -635,6 +682,8 @@ module.exports = {
                     _type: 'string',
                 },
                 marketing_images: {
+                    _parent_description:
+                        'Marketing images to be used in the ad. Valid image types are GIF, JPEG, and PNG. The minimum size is 600x314 and the aspect ratio must be 1.91:1 (+-1%). At least one marketing_image is required. Combined with square_marketing_images the maximum is 15.',
                     _type: 'array of objects',
                     asset: { _description: 'The Asset resource name of this image.', _type: 'string' },
                 },
@@ -645,21 +694,29 @@ module.exports = {
                     _type: 'string',
                 },
                 square_logo_images: {
+                    _parent_description:
+                        'Square logo images to be used in the ad. Valid image types are GIF, JPEG, and PNG. The minimum size is 128x128 and the aspect ratio must be 1:1 (+-1%). Combined with square_logo_images the maximum is 5.',
                     _type: 'array of objects',
                     asset: { _description: 'The Asset resource name of this image.', _type: 'string' },
                 },
                 square_marketing_images: {
+                    _parent_description:
+                        'Square marketing images to be used in the ad. Valid image types are GIF, JPEG, and PNG. The minimum size is 300x300 and the aspect ratio must be 1:1 (+-1%). At least one square marketing_image is required. Combined with marketing_images the maximum is 15.',
                     _type: 'array of objects',
                     asset: { _description: 'The Asset resource name of this image.', _type: 'string' },
                 },
                 youtube_videos: {
+                    _parent_description: 'Optional YouTube videos for the ad. A maximum of 5 videos can be specified.',
                     _type: 'array of objects',
                     asset: { _description: 'The Asset resource name of this video.', _type: 'string' },
                 },
             },
             responsive_search_ad: {
                 _oneof: 'adData',
+                _parent_description: 'Details pertaining to a responsive search ad.',
                 descriptions: {
+                    _parent_description:
+                        'List of text assets for descriptions. When the ad serves the descriptions will be selected from this list.',
                     _type: 'array of objects',
                     pinned_field: {
                         _description:
@@ -682,6 +739,8 @@ module.exports = {
                     text: { _description: 'Asset text.', _type: 'string' },
                 },
                 headlines: {
+                    _parent_description:
+                        'List of text assets for headlines. When the ad serves the headlines will be selected from this list.',
                     _type: 'array of objects',
                     pinned_field: {
                         _description:
@@ -715,17 +774,21 @@ module.exports = {
             },
             shopping_comparison_listing_ad: {
                 _oneof: 'adData',
+                _parent_description: 'Details pertaining to a Shopping Comparison Listing ad.',
                 headline: {
                     _description:
                         'Headline of the ad. This field is required. Allowed length is between 25 and 45 characters.',
                     _type: 'string',
                 },
             },
-            shopping_product_ad: { _oneof: 'adData' },
-            shopping_smart_ad: { _oneof: 'adData' },
+            shopping_product_ad: {
+                _oneof: 'adData',
+                _parent_description: 'Details pertaining to a Shopping product ad.',
+            },
+            shopping_smart_ad: { _oneof: 'adData', _parent_description: 'Details pertaining to a Smart Shopping ad.' },
             system_managed_resource_source: {
                 _description:
-                    'If this ad is system managed, then this field will indicate the source. This field is read-only.',
+                    'Output only. If this ad is system managed, then this field will indicate the source. This field is read-only.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -738,6 +801,7 @@ module.exports = {
             },
             text_ad: {
                 _oneof: 'adData',
+                _parent_description: 'Details pertaining to a text ad.',
                 description1: { _description: "The first line of the ad's description.", _type: 'string' },
                 description2: { _description: "The second line of the ad's description.", _type: 'string' },
                 headline: { _description: 'The headline of the ad.', _type: 'string' },
@@ -747,7 +811,7 @@ module.exports = {
                 _type: 'string',
             },
             type: {
-                _description: 'The type of ad.',
+                _description: 'Output only. The type of ad.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'No value has been specified.' },
                     {
@@ -784,6 +848,8 @@ module.exports = {
                 _type: 'enum',
             },
             url_collections: {
+                _parent_description:
+                    'Additional URLs for the ad that are tagged with a unique identifier that can be referenced from other fields in the ad.',
                 _type: 'array of objects',
                 final_mobile_urls: { _description: 'A list of possible final mobile URLs.', _type: 'array of strings' },
                 final_urls: { _description: 'A list of possible final URLs.', _type: 'array of strings' },
@@ -797,19 +863,36 @@ module.exports = {
                 },
             },
             url_custom_parameters: {
+                _parent_description:
+                    'The list of mappings that can be used to substitute custom parameter tags in a <code>tracking_url_template</code>, <code>final_urls</code>, or <code>mobile_final_urls</code>.',
                 _type: 'array of objects',
                 key: { _description: 'The key matching the parameter tag name.', _type: 'string' },
                 value: { _description: 'The value to be substituted.', _type: 'string' },
             },
             video_ad: {
                 _oneof: 'adData',
+                _parent_description: 'Details pertaining to a Video ad.',
                 bumper: {
+                    _parent_description: 'Video bumper in-stream ad format.',
                     companion_banner: {
                         _description: 'The MediaFile resource name of the companion banner used with the ad.',
                         _type: 'string',
                     },
                 },
+                discovery: {
+                    _parent_description: 'Video TrueView discovery ad format.',
+                    description1: {
+                        _description: 'First text line for a TrueView video discovery ad.',
+                        _type: 'string',
+                    },
+                    description2: {
+                        _description: 'Second text line for a TrueView video discovery ad.',
+                        _type: 'string',
+                    },
+                    headline: { _description: 'The headline of the ad.', _type: 'string' },
+                },
                 in_stream: {
+                    _parent_description: 'Video TrueView in-stream ad format.',
                     action_button_label: {
                         _description:
                             "Label on the CTA (call-to-action) button taking the user to the video ad's final URL. Required for TrueView for action campaigns, optional otherwise.",
@@ -827,20 +910,22 @@ module.exports = {
                 },
                 media_file: { _description: 'The MediaFile resource to use for the video.', _type: 'string' },
                 non_skippable: {
+                    _parent_description: 'Video non-skippable in-stream ad format.',
                     companion_banner: {
                         _description: 'The MediaFile resource name of the companion banner used with the ad.',
                         _type: 'string',
                     },
                 },
                 out_stream: {
+                    _parent_description: 'Video out-stream ad format.',
                     description: { _description: 'The description line.', _type: 'string' },
                     headline: { _description: 'The headline of the ad.', _type: 'string' },
                 },
             },
         },
-        ad_group: { _description: 'The ad group to which the ad belongs.', _type: 'string' },
+        ad_group: { _description: 'Immutable. The ad group to which the ad belongs.', _type: 'string' },
         ad_strength: {
-            _description: 'Overall ad strength for this ad group ad.',
+            _description: 'Output only. Overall ad strength for this ad group ad.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -854,9 +939,10 @@ module.exports = {
             _type: 'enum',
         },
         policy_summary: {
+            _parent_description: 'Output only. Policy information for the ad.',
             approval_status: {
                 _description:
-                    'The overall approval status of this ad, calculated based on the status of its individual policy topic entries.',
+                    'Output only. The overall approval status of this ad, calculated based on the status of its individual policy topic entries.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'No value has been specified.' },
                     {
@@ -876,11 +962,17 @@ module.exports = {
                 _type: 'enum',
             },
             policy_topic_entries: {
+                _parent_description: 'Output only. The list of policy findings for this ad.',
                 _type: 'array of objects',
                 constraints: {
+                    _parent_description:
+                        'Indicates how serving of this resource may be affected (e.g. not serving in a country).',
                     _type: 'array of objects',
                     certificate_domain_mismatch_in_country_list: {
+                        _parent_description:
+                            "Countries where the resource's domain is not covered by the certificates associated with it.",
                         countries: {
+                            _parent_description: 'Countries in which serving is restricted.',
                             _type: 'array of objects',
                             country_criterion: {
                                 _description:
@@ -894,7 +986,9 @@ module.exports = {
                         },
                     },
                     certificate_missing_in_country_list: {
+                        _parent_description: 'Countries where a certificate is required for serving.',
                         countries: {
+                            _parent_description: 'Countries in which serving is restricted.',
                             _type: 'array of objects',
                             country_criterion: {
                                 _description:
@@ -908,7 +1002,9 @@ module.exports = {
                         },
                     },
                     country_constraint_list: {
+                        _parent_description: 'Countries where the resource cannot serve.',
                         countries: {
+                            _parent_description: 'Countries in which serving is restricted.',
                             _type: 'array of objects',
                             country_criterion: {
                                 _description:
@@ -921,17 +1017,22 @@ module.exports = {
                             _type: 'int32',
                         },
                     },
-                    reseller_constraint: {},
+                    reseller_constraint: { _parent_description: 'Reseller constraint.' },
                 },
                 evidences: {
+                    _parent_description:
+                        'Additional information that explains policy finding (e.g. the brand name for a trademark finding).',
                     _type: 'array of objects',
                     destination_mismatch: {
+                        _parent_description: "Mismatch between the destinations of a resource's URLs.",
                         url_types: {
                             _description: 'The set of URLs that did not match each other.',
                             _type: 'array of strings',
                         },
                     },
                     destination_not_working: {
+                        _parent_description:
+                            "Details when the destination is returning an HTTP error code or isn't functional in all locations for commonly used devices.",
                         device: {
                             _description: 'The type of device that failed to load the URL.',
                             _enums: [
@@ -977,6 +1078,8 @@ module.exports = {
                         },
                     },
                     destination_text_list: {
+                        _parent_description:
+                            'The text in the destination of the resource that is causing a policy finding.',
                         destination_texts: {
                             _description: "List of text found in the resource's destination page.",
                             _type: 'array of strings',
@@ -988,12 +1091,14 @@ module.exports = {
                         _type: 'string',
                     },
                     text_list: {
+                        _parent_description: 'List of evidence found in the text of a resource.',
                         texts: {
                             _description: 'The fragments of text from the resource that caused the policy finding.',
                             _type: 'array of strings',
                         },
                     },
                     website_list: {
+                        _parent_description: 'List of websites linked with this resource.',
                         websites: {
                             _description: 'Websites that caused the policy finding.',
                             _type: 'array of strings',
@@ -1035,7 +1140,7 @@ module.exports = {
                 },
             },
             review_status: {
-                _description: 'Where in the review process this ad is.',
+                _description: 'Output only. Where in the review process this ad is.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'No value has been specified.' },
                     {
@@ -1050,13 +1155,18 @@ module.exports = {
                         description:
                             'The resource has been resubmitted for approval or its policy decision has\nbeen appealed.',
                     },
+                    {
+                        s: 'ELIGIBLE_MAY_SERVE',
+                        description:
+                            'The resource is eligible and may be serving but could still undergo\nfurther review.',
+                    },
                 ],
                 _type: 'enum',
             },
         },
         resource_name: {
             _description:
-                'The resource name of the ad. Ad group ad resource names have the form: <code>customers/{customer_id}/adGroupAds/{ad_group_id}~{ad_id}</code>',
+                'Immutable. The resource name of the ad. Ad group ad resource names have the form: <code>customers/{customer_id}/adGroupAds/{ad_group_id}~{ad_id}</code>',
             _type: 'string',
         },
         status: {

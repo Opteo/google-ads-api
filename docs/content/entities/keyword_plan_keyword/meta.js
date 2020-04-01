@@ -6,7 +6,7 @@ module.exports = {
                 'A keyword level max cpc bid in micros, in the account currency, that overrides the keyword plan ad group cpc bid.',
             _type: 'int64',
         },
-        id: { _description: 'The ID of the Keyword Plan keyword.', _type: 'int64' },
+        id: { _description: 'Output only. The ID of the Keyword Plan keyword.', _type: 'int64' },
         keyword_plan_ad_group: {
             _description: 'The Keyword Plan ad group to which this keyword belongs.',
             _type: 'string',
@@ -24,7 +24,7 @@ module.exports = {
         },
         resource_name: {
             _description:
-                'The resource name of the Keyword Plan ad group keyword. KeywordPlanKeyword resource names have the form: <code>customers/{customer_id}/keywordPlanKeywords/{kp_ad_group_keyword_id}</code>',
+                'Immutable. The resource name of the Keyword Plan ad group keyword. KeywordPlanKeyword resource names have the form: <code>customers/{customer_id}/keywordPlanKeywords/{kp_ad_group_keyword_id}</code>',
             _type: 'string',
         },
         text: { _description: 'The keyword text.', _type: 'string' },

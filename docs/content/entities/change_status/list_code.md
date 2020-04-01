@@ -28,10 +28,12 @@ let result = await customer.changeStatus.list({
 ;[
   {
     change_status: {
+      ad_group: 'customers/9262111890/adGroups/0',
+      campaign: 'customers/9262111890/campaigns/0',
       feed: 'customers/9262111890/feeds/82896692',
       feed_item: 'customers/9262111890/feedItems/82896692~51844020102',
-      last_change_date_time: '2019-12-15 10:59:40.333135',
-      resource_name: 'customers/9262111890/changeStatus/1576407580333135-10-82896692-51844020102',
+      last_change_date_time: '2020-03-14 16:43:05.519295',
+      resource_name: 'customers/9262111890/changeStatus/1584204185519295-10-82896692-51844020102',
       resource_status: 3,
       resource_type: 10,
     },
@@ -108,6 +110,7 @@ let result = await customer.changeStatus.list({
     },
     ad_group: {
       ad_rotation_mode: 0,
+      campaign: 'customers/9262111890/campaigns/0',
       display_custom_bid_dimension: 0,
       effective_target_cpa_source: 0,
       effective_target_roas_source: 0,

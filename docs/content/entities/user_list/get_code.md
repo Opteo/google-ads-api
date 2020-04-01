@@ -37,9 +37,9 @@ let result = await customer.userLists.get('customers/3827277046/userLists/509186
   name: 'My user list',
   read_only: true,
   resource_name: 'customers/3827277046/userLists/509186086',
-  size_for_display: 8800,
-  size_for_search: 9600,
-  size_range_for_display: 4,
+  size_for_display: 11000,
+  size_for_search: 9900,
+  size_range_for_display: 5,
   size_range_for_search: 4,
   type: 3,
 })

@@ -85,7 +85,6 @@ let result = await customer.feedItems.list({
       ad: {
         added_by_google_ads: false,
         device_preference: 0,
-        display_url: '',
         expanded_text_ad: {
           description: 'Top Rated AdWords PPC Tool. Designed For Agencies. Try It Free!',
           headline_part1: 'Top Rated Google Ad Tool',
@@ -245,7 +244,7 @@ let result = await customer.feedItems.list({
       test_account: false,
       time_zone: 'Europe/London',
       tracking_url_template:
-        'https://w.opteo.co/workers/parallel?url={lpurl}&domain_id=123443&campaign_id={campaignid}&adgroup_id={adgroupid}&matchtype={matchtype}&network={network}&device={device}',
+        'https://w.opteo.co/workers/parallel?url={lpurl}&domain_id=123443&campaign_id={campaignid}&adgroup_id={adgroupid}&matchtype={matchtype}&network={network}&device={device}&keyword={keyword}&targetid={targetid}',
     },
   },
 ]

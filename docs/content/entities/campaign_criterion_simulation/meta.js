@@ -2,7 +2,9 @@ module.exports = {
     name: 'CampaignCriterionSimulation',
     object: {
         bid_modifier_point_list: {
+            _parent_description: 'Output only. Simulation points if the simulation type is BID_MODIFIER.',
             points: {
+                _parent_description: 'Projected metrics for a series of bid modifier amounts.',
                 _type: 'array of objects',
                 bid_modifier: {
                     _description: 'The simulated bid modifier upon which projected metrics are based.',
@@ -57,11 +59,14 @@ module.exports = {
                 },
             },
         },
-        campaign_id: { _description: 'Campaign ID of the simulation.', _type: 'int64' },
-        criterion_id: { _description: 'Criterion ID of the simulation.', _type: 'int64' },
-        end_date: { _description: 'Last day on which the simulation is based, in YYYY-MM-DD format.', _type: 'string' },
+        campaign_id: { _description: 'Output only. Campaign ID of the simulation.', _type: 'int64' },
+        criterion_id: { _description: 'Output only. Criterion ID of the simulation.', _type: 'int64' },
+        end_date: {
+            _description: 'Output only. Last day on which the simulation is based, in YYYY-MM-DD format.',
+            _type: 'string',
+        },
         modification_method: {
-            _description: 'How the simulation modifies the field.',
+            _description: 'Output only. How the simulation modifies the field.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -80,15 +85,15 @@ module.exports = {
         },
         resource_name: {
             _description:
-                'The resource name of the campaign criterion simulation. Campaign criterion simulation resource names have the form: <code>customers/{customer_id}/campaignCriterionSimulations/{campaign_id}~{criterion_id}~{type}~{modification_method}~{start_date}~{end_date}</code>',
+                'Output only. The resource name of the campaign criterion simulation. Campaign criterion simulation resource names have the form: <code>customers/{customer_id}/campaignCriterionSimulations/{campaign_id}~{criterion_id}~{type}~{modification_method}~{start_date}~{end_date}</code>',
             _type: 'string',
         },
         start_date: {
-            _description: 'First day on which the simulation is based, in YYYY-MM-DD format.',
+            _description: 'Output only. First day on which the simulation is based, in YYYY-MM-DD format.',
             _type: 'string',
         },
         type: {
-            _description: 'The field that the simulation modifies.',
+            _description: 'Output only. The field that the simulation modifies.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },

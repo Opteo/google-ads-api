@@ -2,8 +2,10 @@ module.exports = {
     name: 'CustomInterest',
     object: {
         description: { _description: 'Description of this custom interest audience.', _type: 'string' },
-        id: { _description: 'Id of the custom interest.', _type: 'int64' },
+        id: { _description: 'Output only. Id of the custom interest.', _type: 'int64' },
         members: {
+            _parent_description:
+                'List of custom interest members that this custom interest is composed of. Members can be added during CustomInterest creation. If members are presented in UPDATE operation, existing members will be overridden.',
             _type: 'array of objects',
             member_type: {
                 _description: 'The type of custom interest member, KEYWORD or URL.',
@@ -30,7 +32,7 @@ module.exports = {
         },
         resource_name: {
             _description:
-                'The resource name of the custom interest. Custom interest resource names have the form: <code>customers/{customer_id}/customInterests/{custom_interest_id}</code>',
+                'Immutable. The resource name of the custom interest. Custom interest resource names have the form: <code>customers/{customer_id}/customInterests/{custom_interest_id}</code>',
             _type: 'string',
         },
         status: {

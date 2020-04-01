@@ -3,7 +3,7 @@ module.exports = {
     object: {
         campaign: {
             _description:
-                'The resource name of the campaign. The linked extension feed items will serve under this campaign. Campaign resource names have the form: <code>customers/{customer_id}/campaigns/{campaign_id}</code>',
+                'Immutable. The resource name of the campaign. The linked extension feed items will serve under this campaign. Campaign resource names have the form: <code>customers/{customer_id}/campaigns/{campaign_id}</code>',
             _type: 'string',
         },
         device: {
@@ -29,7 +29,7 @@ module.exports = {
             _type: 'array of strings',
         },
         extension_type: {
-            _description: 'The extension type of the customer extension setting.',
+            _description: 'Immutable. The extension type of the customer extension setting.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -44,12 +44,13 @@ module.exports = {
                 { s: 'STRUCTURED_SNIPPET', description: 'Structured snippet.' },
                 { s: 'LOCATION', description: 'Location.' },
                 { s: 'AFFILIATE_LOCATION', description: 'Affiliate location.' },
+                { s: 'HOTEL_CALLOUT', description: 'Hotel callout' },
             ],
             _type: 'enum',
         },
         resource_name: {
             _description:
-                'The resource name of the campaign extension setting. CampaignExtensionSetting resource names have the form: <code>customers/{customer_id}/campaignExtensionSettings/{campaign_id}~{extension_type}</code>',
+                'Immutable. The resource name of the campaign extension setting. CampaignExtensionSetting resource names have the form: <code>customers/{customer_id}/campaignExtensionSettings/{campaign_id}~{extension_type}</code>',
             _type: 'string',
         },
     },

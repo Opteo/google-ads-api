@@ -9,7 +9,7 @@ title: AccountBudget
 // Example AccountBudget
 const account_budget = {
   adjusted_spending_limit_type: 2,
-  amount_served_micros: 159294620000,
+  amount_served_micros: 195261900000,
   approved_end_time_type: 3,
   approved_spending_limit_type: 2,
   approved_start_date_time: '2017-01-01 12:22:14',
@@ -21,6 +21,6 @@ const account_budget = {
   proposed_start_date_time: '2017-01-01 12:22:14',
   resource_name: 'customers/3827277046/accountBudgets/295854560',
   status: 3,
-  total_adjustments_micros: 978440000,
+  total_adjustments_micros: 1137220000,
 }
 ```

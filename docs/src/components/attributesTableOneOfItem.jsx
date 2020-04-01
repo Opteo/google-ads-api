@@ -21,6 +21,7 @@ class AttributesTableOneOfItem extends React.Component {
         const { sectionKey, oneOfKey, details, nestingDepth, section } = this.props
         const unique_oneof_key = 'oneof' + sectionKey
         const unique_attribute_key = unique_oneof_key + oneOfKey
+        const description = details._parent_description
 
         return (
             <li
@@ -68,6 +69,7 @@ class AttributesTableOneOfItem extends React.Component {
                         </svg>
                     </div>
                 </div>
+                <div className={`ml3 ${this.state.open ? 'mt2' : 'mb3'}`}  dangerouslySetInnerHTML={{ __html: description }} />
                 {typeof details !== 'object' ? null : (
                     <div
                         style={{ display: this.state.open ? 'block' : 'none' }}

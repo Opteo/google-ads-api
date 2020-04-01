@@ -3,14 +3,26 @@ module.exports = {
     object: {
         audio: {
             _oneof: 'mediatype',
-            ad_duration_millis: { _description: 'The duration of the Audio in milliseconds.', _type: 'int64' },
+            _parent_description: 'Output only. Encapsulates an Audio.',
+            ad_duration_millis: {
+                _description: 'Output only. The duration of the Audio in milliseconds.',
+                _type: 'int64',
+            },
         },
-        file_size: { _description: 'The size of the media file in bytes.', _type: 'int64' },
-        id: { _description: 'The ID of the media file.', _type: 'int64' },
-        image: { _oneof: 'mediatype', data: { _description: 'Raw image data.', _type: 'byte' } },
-        media_bundle: { _oneof: 'mediatype', data: { _description: 'Raw zipped data.', _type: 'byte' } },
+        file_size: { _description: 'Output only. The size of the media file in bytes.', _type: 'int64' },
+        id: { _description: 'Output only. The ID of the media file.', _type: 'int64' },
+        image: {
+            _oneof: 'mediatype',
+            _parent_description: 'Immutable. Encapsulates an Image.',
+            data: { _description: 'Immutable. Raw image data.', _type: 'byte' },
+        },
+        media_bundle: {
+            _oneof: 'mediatype',
+            _parent_description: 'Immutable. A ZIP archive media the content of which contains HTML5 assets.',
+            data: { _description: 'Immutable. Raw zipped data.', _type: 'byte' },
+        },
         mime_type: {
-            _description: 'The mime type of the media file.',
+            _description: 'Output only. The mime type of the media file.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'The mime type has not been specified.' },
                 {
@@ -34,21 +46,21 @@ module.exports = {
         },
         name: {
             _description:
-                'The name of the media file. The name can be used by clients to help identify previously uploaded media.',
+                'Immutable. The name of the media file. The name can be used by clients to help identify previously uploaded media.',
             _type: 'string',
         },
         resource_name: {
             _description:
-                'The resource name of the media file. Media file resource names have the form: <code>customers/{customer_id}/mediaFiles/{media_file_id}</code>',
+                'Immutable. The resource name of the media file. Media file resource names have the form: <code>customers/{customer_id}/mediaFiles/{media_file_id}</code>',
             _type: 'string',
         },
         source_url: {
             _description:
-                'The URL of where the original media file was downloaded from (or a file name). Only used for media of type AUDIO and IMAGE.',
+                'Immutable. The URL of where the original media file was downloaded from (or a file name). Only used for media of type AUDIO and IMAGE.',
             _type: 'string',
         },
         type: {
-            _description: 'Type of the media file.',
+            _description: 'Immutable. Type of the media file.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'The media type has not been specified.' },
                 {
@@ -66,18 +78,25 @@ module.exports = {
         },
         video: {
             _oneof: 'mediatype',
-            ad_duration_millis: { _description: 'The duration of the Video in milliseconds.', _type: 'int64' },
+            _parent_description: 'Immutable. Encapsulates a Video.',
+            ad_duration_millis: {
+                _description: 'Output only. The duration of the Video in milliseconds.',
+                _type: 'int64',
+            },
             advertising_id_code: {
                 _description:
-                    'The Advertising Digital Identification code for this video, as defined by the American Association of Advertising Agencies, used mainly for television commercials.',
+                    'Output only. The Advertising Digital Identification code for this video, as defined by the American Association of Advertising Agencies, used mainly for television commercials.',
                 _type: 'string',
             },
             isci_code: {
                 _description:
-                    'The Industry Standard Commercial Identifier code for this video, used mainly for television commercials.',
+                    'Output only. The Industry Standard Commercial Identifier code for this video, used mainly for television commercials.',
                 _type: 'string',
             },
-            youtube_video_id: { _description: 'The YouTube video ID (as seen in YouTube URLs).', _type: 'string' },
+            youtube_video_id: {
+                _description: 'Immutable. The YouTube video ID (as seen in YouTube URLs).',
+                _type: 'string',
+            },
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

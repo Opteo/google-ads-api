@@ -3,7 +3,7 @@ module.exports = {
     object: {
         access_reason: {
             _description:
-                'Indicates the reason this account has been granted access to the list. The reason can be SHARED, OWNED, LICENSED or SUBSCRIBED. This field is read-only.',
+                'Output only. Indicates the reason this account has been granted access to the list. The reason can be SHARED, OWNED, LICENSED or SUBSCRIBED. This field is read-only.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -28,7 +28,9 @@ module.exports = {
         },
         basic_user_list: {
             _oneof: 'userList',
+            _parent_description: 'User list targeting as a collection of conversion or remarketing actions.',
             actions: {
+                _parent_description: 'Actions associated with this user list.',
                 _type: 'array of objects',
                 conversion_action: {
                     _description: "A conversion action that's not generated from remarketing.",
@@ -49,6 +51,7 @@ module.exports = {
         },
         crm_based_user_list: {
             _oneof: 'userList',
+            _parent_description: 'User list of CRM users provided by the advertiser.',
             app_id: {
                 _description:
                     'A string that uniquely identifies a mobile application from which the data was collected to the Google Ads API. For iOS, the ID string is the 9 digit string that appears at the end of an App Store URL (e.g., "476943146" for "Flood-It! 2" whose App Store link is http://itunes.apple.com/us/app/flood-it!-2/id476943146). For Android, the ID string is the application\'s package name (e.g., "com.labpixies.colordrips" for "Color Drips" given Google Play link https://play.google.com/store/apps/details?id=com.labpixies.colordrips). Required when creating CrmBasedUserList for uploading mobile advertising IDs.',
@@ -97,14 +100,15 @@ module.exports = {
         },
         description: { _description: 'Description of this user list.', _type: 'string' },
         eligible_for_display: {
-            _description: 'Indicates this user list is eligible for Google Display Network. This field is read-only.',
+            _description:
+                'Output only. Indicates this user list is eligible for Google Display Network. This field is read-only.',
             _type: 'boolean',
         },
         eligible_for_search: {
             _description: 'Indicates if this user list is eligible for Google Search Network.',
             _type: 'boolean',
         },
-        id: { _description: 'Id of the user list.', _type: 'int64' },
+        id: { _description: 'Output only. Id of the user list.', _type: 'int64' },
         integration_code: {
             _description:
                 'An ID from external system. It is used by user list sellers to correlate IDs on their systems.',
@@ -112,7 +116,10 @@ module.exports = {
         },
         logical_user_list: {
             _oneof: 'userList',
+            _parent_description: 'User list that is a custom combination of user lists and user interests.',
             rules: {
+                _parent_description:
+                    'Logical list rules that define this user list. The rules are defined as a logical operator (ALL/ANY/NONE) and a list of user lists. All the rules are ANDed when they are evaluated. Required for creating a logical user list.',
                 _type: 'array of objects',
                 operator: {
                     _description: 'The logical operator of the rule.',
@@ -129,6 +136,7 @@ module.exports = {
                     _type: 'enum',
                 },
                 rule_operands: {
+                    _parent_description: 'The list of operands of the rule.',
                     _type: 'array of objects',
                     user_list: { _description: 'Resource name of a user list as an operand.', _type: 'string' },
                 },
@@ -160,23 +168,32 @@ module.exports = {
         },
         read_only: {
             _description:
-                'A flag that indicates if a user may edit a list. Depends on the list ownership and list type. For example, external remarketing user lists are not editable. This field is read-only.',
+                'Output only. A flag that indicates if a user may edit a list. Depends on the list ownership and list type. For example, external remarketing user lists are not editable. This field is read-only.',
             _type: 'boolean',
         },
         resource_name: {
             _description:
-                'The resource name of the user list. User list resource names have the form: <code>customers/{customer_id}/userLists/{user_list_id}</code>',
+                'Immutable. The resource name of the user list. User list resource names have the form: <code>customers/{customer_id}/userLists/{user_list_id}</code>',
             _type: 'string',
         },
         rule_based_user_list: {
             _oneof: 'userList',
+            _parent_description: 'User list generated by a rule.',
             combined_rule_user_list: {
+                _parent_description:
+                    'User lists defined by combining two rules. There are two operators: AND, where the left and right operands have to be true; AND_NOT where left operand is true but right operand is false.',
                 left_operand: {
+                    _parent_description:
+                        'Left operand of the combined rule. This field is required and must be populated when creating new combined rule based user list.',
                     rule_item_groups: {
+                        _parent_description:
+                            'List of rule item groups that defines this rule. Rule item groups are grouped together based on rule_type.',
                         _type: 'array of objects',
                         rule_items: {
+                            _parent_description: 'Rule items that will be grouped together based on rule_type.',
                             _type: 'array of objects',
                             date_rule_item: {
+                                _parent_description: 'An atomic rule fragment composed of a date operation.',
                                 offset_in_days: {
                                     _description:
                                         'The relative date value of the right hand side denoted by number of days offset from now. The value field will override this field when both are present.',
@@ -211,6 +228,7 @@ module.exports = {
                                 _type: 'string',
                             },
                             number_rule_item: {
+                                _parent_description: 'An atomic rule fragment composed of a number operation.',
                                 operator: {
                                     _description:
                                         'Number comparison operator. This field is required and must be populated when creating a new number rule item.',
@@ -237,6 +255,7 @@ module.exports = {
                                 },
                             },
                             string_rule_item: {
+                                _parent_description: 'An atomic rule fragment composed of a string operation.',
                                 operator: {
                                     _description:
                                         'String comparison operator. This field is required and must be populated when creating a new string rule item.',
@@ -282,11 +301,17 @@ module.exports = {
                     },
                 },
                 right_operand: {
+                    _parent_description:
+                        'Right operand of the combined rule. This field is required and must be populated when creating new combined rule based user list.',
                     rule_item_groups: {
+                        _parent_description:
+                            'List of rule item groups that defines this rule. Rule item groups are grouped together based on rule_type.',
                         _type: 'array of objects',
                         rule_items: {
+                            _parent_description: 'Rule items that will be grouped together based on rule_type.',
                             _type: 'array of objects',
                             date_rule_item: {
+                                _parent_description: 'An atomic rule fragment composed of a date operation.',
                                 offset_in_days: {
                                     _description:
                                         'The relative date value of the right hand side denoted by number of days offset from now. The value field will override this field when both are present.',
@@ -321,6 +346,7 @@ module.exports = {
                                 _type: 'string',
                             },
                             number_rule_item: {
+                                _parent_description: 'An atomic rule fragment composed of a number operation.',
                                 operator: {
                                     _description:
                                         'Number comparison operator. This field is required and must be populated when creating a new number rule item.',
@@ -347,6 +373,7 @@ module.exports = {
                                 },
                             },
                             string_rule_item: {
+                                _parent_description: 'An atomic rule fragment composed of a string operation.',
                                 operator: {
                                     _description:
                                         'String comparison operator. This field is required and must be populated when creating a new string rule item.',
@@ -407,17 +434,25 @@ module.exports = {
                 },
             },
             date_specific_rule_user_list: {
+                _parent_description:
+                    'Visitors of a page during specific dates. The visiting periods are defined as follows: Between start_date (inclusive) and end_date (inclusive); Before end_date (exclusive) with start_date = 2000-01-01; After start_date (exclusive) with end_date = 2037-12-30.',
                 end_date: {
                     _description:
                         "End date of users visit. If set to 2037-12-30, then the list includes all users after start_date. The date's format should be YYYY-MM-DD. Required for creating a data specific rule user list.",
                     _type: 'string',
                 },
                 rule: {
+                    _parent_description:
+                        'Boolean rule that defines visitor of a page. Required for creating a date specific rule user list.',
                     rule_item_groups: {
+                        _parent_description:
+                            'List of rule item groups that defines this rule. Rule item groups are grouped together based on rule_type.',
                         _type: 'array of objects',
                         rule_items: {
+                            _parent_description: 'Rule items that will be grouped together based on rule_type.',
                             _type: 'array of objects',
                             date_rule_item: {
+                                _parent_description: 'An atomic rule fragment composed of a date operation.',
                                 offset_in_days: {
                                     _description:
                                         'The relative date value of the right hand side denoted by number of days offset from now. The value field will override this field when both are present.',
@@ -452,6 +487,7 @@ module.exports = {
                                 _type: 'string',
                             },
                             number_rule_item: {
+                                _parent_description: 'An atomic rule fragment composed of a number operation.',
                                 operator: {
                                     _description:
                                         'Number comparison operator. This field is required and must be populated when creating a new number rule item.',
@@ -478,6 +514,7 @@ module.exports = {
                                 },
                             },
                             string_rule_item: {
+                                _parent_description: 'An atomic rule fragment composed of a string operation.',
                                 operator: {
                                     _description:
                                         'String comparison operator. This field is required and must be populated when creating a new string rule item.',
@@ -529,12 +566,19 @@ module.exports = {
                 },
             },
             expression_rule_user_list: {
+                _parent_description: 'Visitors of a page. The page visit is defined by one boolean rule expression.',
                 rule: {
+                    _parent_description:
+                        'Boolean rule that defines this user list. The rule consists of a list of rule item groups and each rule item group consists of a list of rule items. All the rule item groups are ORed or ANDed together for evaluation based on rule.rule_type. Required for creating an expression rule user list.',
                     rule_item_groups: {
+                        _parent_description:
+                            'List of rule item groups that defines this rule. Rule item groups are grouped together based on rule_type.',
                         _type: 'array of objects',
                         rule_items: {
+                            _parent_description: 'Rule items that will be grouped together based on rule_type.',
                             _type: 'array of objects',
                             date_rule_item: {
+                                _parent_description: 'An atomic rule fragment composed of a date operation.',
                                 offset_in_days: {
                                     _description:
                                         'The relative date value of the right hand side denoted by number of days offset from now. The value field will override this field when both are present.',
@@ -569,6 +613,7 @@ module.exports = {
                                 _type: 'string',
                             },
                             number_rule_item: {
+                                _parent_description: 'An atomic rule fragment composed of a number operation.',
                                 operator: {
                                     _description:
                                         'Number comparison operator. This field is required and must be populated when creating a new number rule item.',
@@ -595,6 +640,7 @@ module.exports = {
                                 },
                             },
                             string_rule_item: {
+                                _parent_description: 'An atomic rule fragment composed of a string operation.',
                                 operator: {
                                     _description:
                                         'String comparison operator. This field is required and must be populated when creating a new string rule item.',
@@ -658,21 +704,23 @@ module.exports = {
         },
         similar_user_list: {
             _oneof: 'userList',
+            _parent_description:
+                'Output only. User list which are similar to users from another UserList. These lists are readonly and automatically created by google.',
             seed_user_list: { _description: 'Seed UserList from which this list is derived.', _type: 'string' },
         },
         size_for_display: {
             _description:
-                'Estimated number of users in this user list, on the Google Display Network. This value is null if the number of users has not yet been determined. This field is read-only.',
+                'Output only. Estimated number of users in this user list, on the Google Display Network. This value is null if the number of users has not yet been determined. This field is read-only.',
             _type: 'int64',
         },
         size_for_search: {
             _description:
-                'Estimated number of users in this user list in the google.com domain. These are the users available for targeting in Search campaigns. This value is null if the number of users has not yet been determined. This field is read-only.',
+                'Output only. Estimated number of users in this user list in the google.com domain. These are the users available for targeting in Search campaigns. This value is null if the number of users has not yet been determined. This field is read-only.',
             _type: 'int64',
         },
         size_range_for_display: {
             _description:
-                'Size range in terms of number of users of the UserList, on the Google Display Network. This field is read-only.',
+                'Output only. Size range in terms of number of users of the UserList, on the Google Display Network. This field is read-only.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -736,7 +784,7 @@ module.exports = {
         },
         size_range_for_search: {
             _description:
-                'Size range in terms of number of users of the UserList, for Search ads. This field is read-only.',
+                'Output only. Size range in terms of number of users of the UserList, for Search ads. This field is read-only.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -799,7 +847,7 @@ module.exports = {
             _type: 'enum',
         },
         type: {
-            _description: 'Type of this list. This field is read-only.',
+            _description: 'Output only. Type of this list. This field is read-only.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
