@@ -57,7 +57,7 @@ describe('customer', () => {
         it('retrieves data using a generic', async () => {
             interface Campaign {
                 campaign: {
-                    resource_name: string,
+                    resource_name: string
                     name: string
                 }
             }
@@ -145,7 +145,7 @@ describe('customer', () => {
     describe('stream', () => {
         interface SearchTermView {
             search_term_view: {
-                resource_name: string,
+                resource_name: string
                 search_term: string
             }
             metrics: {
@@ -173,7 +173,7 @@ describe('customer', () => {
         })
 
         it('retrieves greater than 10000 items from a stream', async () => {
-            const thing = customer.stream<SearchTermView>({
+            const generator = customer.stream<SearchTermView>({
                 entity: 'search_term_view',
                 metrics: ['metrics.clicks'],
                 attributes: ['search_term_view.search_term'],
@@ -184,7 +184,7 @@ describe('customer', () => {
 
             let count = 0
 
-            for await (let item of thing) {
+            for await (let item of generator) {
                 item
                 count++
             }
