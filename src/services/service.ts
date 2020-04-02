@@ -296,7 +296,7 @@ export default class Service {
         return this.streamGenerator<T>(call)
     }
 
-    private async* streamGenerator<T>(call: ClientReadableStream<SearchGoogleAdsStreamResponse>) {
+    private async *streamGenerator<T>(call: ClientReadableStream<SearchGoogleAdsStreamResponse>) {
         let done = false
         const accumulator: T[] = []
 
@@ -309,12 +309,12 @@ export default class Service {
                 console.log('this should never happen', err)
             }
 
-            const p = new Promise((resolve, reject) => { 
+            const p = new Promise((resolve, reject) => {
                 resolveMe = resolve
                 rejectMe = reject
             })
 
-            return {p, resolveMe, rejectMe}
+            return { p, resolveMe, rejectMe }
         }
 
         let next_chunk_arrived = createNewPromise()
@@ -336,7 +336,7 @@ export default class Service {
         call.on('error', (err: Error) => {
             next_chunk_arrived.rejectMe(err)
         })
-        
+
         try {
             while (!done || accumulator.length) {
                 if (accumulator.length !== 0) {
@@ -352,7 +352,7 @@ export default class Service {
         } finally {
             call.destroy()
         }
-        
+
         return
     }
 
@@ -386,13 +386,12 @@ export default class Service {
 
     private streamSearchData(query: string): ClientReadableStream<SearchGoogleAdsStreamResponse> {
         const { request } = this.client.buildSearchStreamRequest(this.cid, query)
-        // try {
-        const response = this.client.streamSearchData(request)
-        return response
-        // } catch (err) {
-        // console.log(err)
-        // throw new GrpcError(err)
-        // }
+        try {
+            const response = this.client.streamSearchData(request)
+            return response
+        } catch (err) {
+            throw new Error(err)
+        }
     }
 
     private buildListQuery(resource: string, options?: ServiceListOptions): string {
