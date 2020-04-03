@@ -5,7 +5,7 @@ import { getFieldMask } from 'google-ads-node/build/lib/utils'
 
 import GrpcClient from '../grpc'
 import { formatQueryResults, buildReportQuery, parseResult, parsePartialFailureErrors } from '../utils'
-import { ServiceListOptions, ServiceCreateOptions } from '../types'
+import { ServiceListOptions, ServiceCreateOptions, ReportStreamOptions } from '../types'
 import { GrpcError } from '../error'
 import { ReportOptions, PreReportHook, PostReportHook } from '../types'
 import { SearchGoogleAdsStreamResponse, ClientReadableStream } from 'google-ads-node'
@@ -288,15 +288,17 @@ export default class Service {
         return parsed_results
     }
 
-    protected serviceStream<T>(options: ReportOptions): AsyncGenerator<T> {
+    protected serviceReportStream<T>(options: ReportStreamOptions): AsyncGenerator<T> {
         const query = this.buildCustomerReportQuery(options)
 
         const call = this.streamSearchData(query)
 
-        return this.streamGenerator<T>(call)
+        return this.reportStreamGenerator<T>(call)
     }
 
-    private async *streamGenerator<T>(call: ClientReadableStream<SearchGoogleAdsStreamResponse>): AsyncGenerator<T> {
+    private async *reportStreamGenerator<T>(
+        call: ClientReadableStream<SearchGoogleAdsStreamResponse>
+    ): AsyncGenerator<T> {
         let done = false
         const accumulator: T[] = []
 

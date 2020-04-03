@@ -8,7 +8,14 @@ import GrpcClient from '../grpc'
 import Bottleneck from 'bottleneck'
 
 import Service, { Mutation } from './service'
-import { ReportOptions, ServiceCreateOptions, PreReportHook, PostReportHook, MutateResourceOperation } from '../types'
+import {
+    ReportOptions,
+    ServiceCreateOptions,
+    PreReportHook,
+    PostReportHook,
+    MutateResourceOperation,
+    ReportStreamOptions,
+} from '../types'
 
 export type ReportResponse<T> = Promise<T>
 export type QueryResponse = Promise<Array<any>>
@@ -40,8 +47,8 @@ export default class CustomerService extends Service {
         return results
     }
 
-    public stream<T>(options: ReportOptions): AsyncGenerator<T> {
-        return this.serviceStream<T>(options)
+    public reportStream<T>(options: ReportStreamOptions): AsyncGenerator<T> {
+        return this.serviceReportStream<T>(options)
     }
 
     public async query(qry: string): QueryResponse {

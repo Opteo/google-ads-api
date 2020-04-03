@@ -153,7 +153,7 @@ describe('customer', () => {
             }
         }
         it('retrieves 50 items from a stream', async () => {
-            const generator = customer.stream<SearchTermView>({
+            const generator = customer.reportStream<SearchTermView>({
                 entity: 'search_term_view',
                 metrics: ['metrics.clicks'],
                 attributes: ['search_term_view.search_term'],
@@ -173,7 +173,7 @@ describe('customer', () => {
         })
 
         it('retrieves greater than 10000 items from a stream', async () => {
-            const generator = customer.stream<SearchTermView>({
+            const generator = customer.reportStream<SearchTermView>({
                 entity: 'search_term_view',
                 metrics: ['metrics.clicks'],
                 attributes: ['search_term_view.search_term'],

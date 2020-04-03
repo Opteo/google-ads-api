@@ -175,7 +175,7 @@ export interface ReportOptions extends BaseReportOptions {
     page_size?: number
 }
 
-export interface StreamOptions extends BaseReportOptions {}
+export interface ReportStreamOptions extends BaseReportOptions {}
 
 /**
  * String union for Date Constant
