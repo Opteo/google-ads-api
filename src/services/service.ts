@@ -288,7 +288,7 @@ export default class Service {
         return parsed_results
     }
 
-    protected serviceStream<T>(options: ReportOptions, pre_report_hook: PreReportHook) {
+    protected serviceStream<T>(options: ReportOptions) {
         const query = this.buildCustomerReportQuery(options)
 
         const call = this.streamSearchData(query)
@@ -300,14 +300,10 @@ export default class Service {
         let done = false
         const accumulator: T[] = []
 
-        function createNewPromise() {
-            let resolveMe = () => {
-                console.log('this should never happen')
-            }
+        function createNextChunkArrivedPromise() {
+            let resolveMe = () => {}
 
-            let rejectMe = (err: Error) => {
-                console.log('this should never happen', err)
-            }
+            let rejectMe = (err: Error) => {}
 
             const p = new Promise((resolve, reject) => {
                 resolveMe = resolve
@@ -317,15 +313,15 @@ export default class Service {
             return { p, resolveMe, rejectMe }
         }
 
-        let next_chunk_arrived = createNewPromise()
+        let next_chunk_arrived = createNextChunkArrivedPromise()
 
         call.on('data', (chunk: SearchGoogleAdsStreamResponse.AsObject) => {
             const results = this.parseServiceResults(chunk.resultsList)
             for (const item of results) {
-                accumulator.push(item as T)
+                accumulator.push(item)
             }
             next_chunk_arrived.resolveMe()
-            next_chunk_arrived = createNewPromise()
+            next_chunk_arrived = createNextChunkArrivedPromise()
         })
 
         call.on('end', () => {
@@ -340,11 +336,11 @@ export default class Service {
         try {
             while (!done || accumulator.length) {
                 if (accumulator.length !== 0) {
-                    const p = accumulator.shift()
-                    if (p === undefined) {
+                    const item = accumulator.shift()
+                    if (item === undefined) {
                         throw new Error('UNDEFINED_STREAM_ERROR')
                     }
-                    yield p
+                    yield item
                 } else {
                     await next_chunk_arrived.p
                 }

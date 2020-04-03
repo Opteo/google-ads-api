@@ -41,10 +41,7 @@ export default class CustomerService extends Service {
     }
 
     public stream<T>(options: ReportOptions) {
-        return this.serviceStream<T>(
-            options,
-            this.pre_report_hook,
-        )
+        return this.serviceStream<T>(options)
     }
 
     public async query(qry: string): QueryResponse {
