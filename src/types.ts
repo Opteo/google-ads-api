@@ -157,7 +157,7 @@ export type Segments =
     | fields.TopicViewSegments
     | fields.VideoSegments
 
-export interface ReportOptions {
+export interface BaseReportOptions {
     entity: fields.ResourceName
     attributes?: Attributes
     metrics?: Metrics
@@ -169,8 +169,13 @@ export interface ReportOptions {
     limit?: number
     order_by?: string | Array<string>
     sort_order?: string
+}
+
+export interface ReportOptions extends BaseReportOptions {
     page_size?: number
 }
+
+export interface ReportStreamOptions extends BaseReportOptions {}
 
 /**
  * String union for Date Constant
