@@ -40,7 +40,7 @@ export default class CustomerService extends Service {
         return results
     }
 
-    public stream<T>(options: ReportOptions) {
+    public stream<T>(options: ReportOptions): AsyncGenerator<T> {
         return this.serviceStream<T>(options)
     }
 

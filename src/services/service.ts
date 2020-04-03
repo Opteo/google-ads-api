@@ -288,7 +288,7 @@ export default class Service {
         return parsed_results
     }
 
-    protected serviceStream<T>(options: ReportOptions) {
+    protected serviceStream<T>(options: ReportOptions): AsyncGenerator<T> {
         const query = this.buildCustomerReportQuery(options)
 
         const call = this.streamSearchData(query)
@@ -296,7 +296,7 @@ export default class Service {
         return this.streamGenerator<T>(call)
     }
 
-    private async *streamGenerator<T>(call: ClientReadableStream<SearchGoogleAdsStreamResponse>) {
+    private async *streamGenerator<T>(call: ClientReadableStream<SearchGoogleAdsStreamResponse>): AsyncGenerator<T> {
         let done = false
         const accumulator: T[] = []
 
