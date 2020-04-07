@@ -90,11 +90,19 @@ import GrpcClient from './grpc'
 /* Utils */
 import Bottleneck from 'bottleneck'
 import { Customer } from 'google-ads-node/build/lib/resources'
-import { ReportOptions, ServiceCreateOptions, PostReportHook, PreReportHook, MutateResourceOperation } from './types'
+import {
+    ReportOptions,
+    ServiceCreateOptions,
+    PostReportHook,
+    PreReportHook,
+    MutateResourceOperation,
+    ReportStreamOptions,
+} from './types'
 
 export interface CustomerInstance {
     /* Global customer methods */
     report: <T = any[]>(options: ReportOptions) => ReportResponse<T>
+    reportStream: <T = any>(options: ReportStreamOptions) => AsyncGenerator<T>
     query: (qry: string) => QueryResponse
     list: () => ListResponse
     get: (id: number | string) => GetResponse
@@ -185,6 +193,7 @@ export default function Customer(
     return {
         /* Top level customer methods */
         report: options => cusService.report(options),
+        reportStream: options => cusService.reportStream(options),
         query: qry => cusService.query(qry),
         list: () => cusService.list(),
         get: id => cusService.get(id),

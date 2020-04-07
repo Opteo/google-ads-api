@@ -7,7 +7,7 @@
 </p>
 <p align="center">
   <a href="https://developers.google.com/google-ads/api/docs/release-notes">
-    <img src="https://img.shields.io/badge/google%20ads-v3.0.0-009688.svg?style=flat-square">
+    <img src="https://img.shields.io/badge/google%20ads-v3.6.0-009688.svg?style=flat-square">
   </a>
   <a href="https://www.npmjs.com/package/google-ads-api">
     <img src="https://img.shields.io/npm/v/google-ads-api.svg?style=flat-square">
