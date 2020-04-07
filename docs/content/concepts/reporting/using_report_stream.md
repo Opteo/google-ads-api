@@ -7,11 +7,11 @@ title: Using Report Stream
 
 ### Using Report Stream
 
-The `customer.streamReport()` method is equivalent to customer.report(), except that it returns an async generator that you can use to access rows of data as they come back from the API.
+The `customer.reportStream()` method is equivalent to customer.report(), except that it returns an async generator that you can use to access rows of data as they come back from the API.
 
-Unlike `report()`, `streamReport()` does not support the page_size argument.
+Unlike `report()`, `reportStream()` does not support the `page_size` argument.
 
-The main advantage of `streamReport` is performance. Not only are you able to get rows before the entire set has finished downloading, but the total time to finish the request will be shorter, especially for large requests (10,000+ rows).
+The main advantage of `reportStream` is performance. Not only are you able to get rows before the entire set has finished downloading, but the total time to finish the request will be shorter, especially for large requests (10,000+ rows).
 
 Unfortunately, Google has hardwired the stream's chunk size to 10,000 rows, so there is no benefit to streaming for smaller requests. We're working with them to find a solution.
 
