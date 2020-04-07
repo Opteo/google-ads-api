@@ -225,7 +225,7 @@ export default class Service {
         return `customers/${this.cid}/${resource}`
     }
 
-    protected async serviceCall(call: string, request: any): Promise<any> {
+    protected async serviceCall(call: string, request: any, all_results: boolean = false): Promise<any> {
         try {
             const response = await new Promise((resolve, reject) => {
                 this.service[call](request, (err: any, res: any) => {
@@ -241,7 +241,7 @@ export default class Service {
                 Since get returns an object, we always return the first item.
                 This should only ever be one item here, and it should exist.
             */
-            return parsed_results[0]
+            return all_results ? parsed_results : parsed_results[0]
         } catch (err) {
             throw new GrpcError(err, request)
         }
@@ -256,6 +256,12 @@ export default class Service {
     protected buildResource(resource: string, data: any): unknown {
         const pb = this.client.buildResource(resource, data)
         return pb
+    }
+
+    protected buildResources(resource: string, data: Array<any>): unknown {
+        return data.map(dat => {
+            return this.buildResource(resource, dat)
+        })
     }
 
     /* Base report method used in global customer instance */
