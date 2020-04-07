@@ -2,16 +2,16 @@
 order: 3.5
 type: manual
 entity: reporting
-title: Using Stream Report
+title: Using Report Stream
 ---
 
-### Using Stream Report
+### Using Report Stream
 
-The `customer.streamReport()` accepts very similar arguments to `customer.report()`. `page_size` is no longer an optional argument. This is because Googles new streaming method uses chunks rather than pages. Chunk sizes are currently defaulted to 10,000 rows. Hopefully this will be adjustable soon.
+The `customer.reportStream()` accepts very similar arguments to `customer.report()`. `page_size` is no longer an optional argument. This is because Googles new streaming method uses chunks rather than pages. Chunk sizes are currently defaulted to 10,000 rows. Hopefully this will be adjustable soon.
 
 This method currently doesn't cache results
 
-The main advantage of `streamReport` is performance. When getting results with a size greater than 1 chunk (10,000 rows), it will fetch those results quicker.
+The main advantage of `reportStream` is performance. When getting results with a size greater than 1 chunk (10,000 rows), it will fetch those results quicker.
 
 ```javascript
 interface SearchTermView {
