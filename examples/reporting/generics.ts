@@ -26,6 +26,8 @@ async function main() {
             attributes: ['campaign.name'],
             limit: 5,
         })
+
+        console.log(result)
     } catch (err) {
         console.log(err)
     }

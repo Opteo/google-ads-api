@@ -14,7 +14,7 @@ async function main() {
     })
 
     try {
-        const results = customer.reportStream({
+        const search_terms = customer.reportStream({
             entity: 'search_term_view',
             metrics: ['metrics.clicks'],
             attributes: ['search_term_view.search_term'],
@@ -22,6 +22,10 @@ async function main() {
             sort_order: 'desc',
             limit: 50,
         })
+
+        for await (const search_term of search_terms) {
+            console.log(search_term)
+        }
     } catch (err) {
         console.log(err)
     }
