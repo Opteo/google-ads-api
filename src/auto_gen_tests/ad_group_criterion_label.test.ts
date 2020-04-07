@@ -7,7 +7,7 @@ import { AdGroupCriterionLabel } from 'google-ads-node/build/lib/resources'
 import { newCustomer, BUDGET_ID, CID, getRandomName } from '../test_utils'
 const customer = newCustomer()
 
-describe('AdGroupCriterionLabel', async () => {
+describe('AdGroupCriterionLabel',  () => {
 
     describe('reporting', async () => {
         it('can retrieve a list of AdGroupCriterionLabels with all fields (if valid)', async () => {

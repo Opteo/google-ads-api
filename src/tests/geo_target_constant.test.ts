@@ -1,7 +1,7 @@
 import { newCustomer } from '../test_utils'
 const customer = newCustomer()
 
-describe('Geo Target Constants', async () => {
+describe('Geo Target Constants', () => {
     const location_id = '1021278'
 
     it('Retrieves Single Geo Target Constant', async () => {

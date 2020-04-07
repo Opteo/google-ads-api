@@ -1,7 +1,19 @@
 import { AdGroup, Customer } from 'google-ads-node/build/lib/resources'
 import { AdGroupStatus, CampaignStatus } from 'google-ads-node/build/lib/enums'
+import { RequestLog } from 'google-ads-node'
+import { enums } from '..'
 
-import { newCustomerWithMetrics, newCustomer, CID, CID_WITH_METRICS } from '../test_utils'
+import {
+    newCustomerWithMetrics,
+    newCustomer,
+    CID,
+    CID_WITH_METRICS,
+    getRandomName,
+    CAMPAIGN_ID,
+    newCustomerWithNodeOptions,
+} from '../test_utils'
+import { MutateResourceOperation } from '../types'
+
 const customer = newCustomerWithMetrics()
 const customer_no_metrics = newCustomer()
 
@@ -39,6 +51,23 @@ describe('customer', () => {
                     cost_micros: expect.any(Number),
                 })
             )
+        })
+
+        // fairly useless test as it will always pass, just used to checkout the generics functionality
+        it('retrieves data using a generic', async () => {
+            interface Campaign {
+                campaign: {
+                    resource_name: string
+                    name: string
+                }
+            }
+
+            await customer.report<Campaign[]>({
+                entity: 'campaign',
+                attributes: ['campaign.name'],
+                limit: 5,
+            })
+            expect(true)
         })
 
         it('retrieves data when using segments', async () => {
@@ -113,8 +142,59 @@ describe('customer', () => {
         })
     })
 
+    describe('stream', () => {
+        interface SearchTermView {
+            search_term_view: {
+                resource_name: string
+                search_term: string
+            }
+            metrics: {
+                clicks: number
+            }
+        }
+        it('retrieves 50 items from a stream', async () => {
+            const generator = customer.reportStream<SearchTermView>({
+                entity: 'search_term_view',
+                metrics: ['metrics.clicks'],
+                attributes: ['search_term_view.search_term'],
+                order_by: 'metrics.clicks',
+                sort_order: 'desc',
+                limit: 50,
+            })
+
+            let count = 0
+
+            for await (let item of generator) {
+                item
+                count++
+            }
+
+            expect(count).toBe(50)
+        })
+
+        it('retrieves greater than 10000 items from a stream', async () => {
+            const generator = customer.reportStream<SearchTermView>({
+                entity: 'search_term_view',
+                metrics: ['metrics.clicks'],
+                attributes: ['search_term_view.search_term'],
+                order_by: 'metrics.clicks',
+                sort_order: 'desc',
+                limit: 12000,
+            })
+
+            let count = 0
+
+            for await (let item of generator) {
+                item
+                count++
+            }
+
+            expect(count).toBeGreaterThan(10000)
+        })
+    })
+
     describe('query', () => {
-        it('can retrieve data via an awql string', async () => {
+        it('can retrieve data via an gaql string', async () => {
             const campaigns = await customer.query(`
                 SELECT 
                     ad_group.id, 
@@ -180,5 +260,234 @@ describe('customer', () => {
             })
             done()
         })
+    })
+
+    describe('mutate', () => {
+        it('should be able to perform mutations with temporary resource ids', async () => {
+            const response = await customer.mutateResources(
+                [
+                    {
+                        _resource: 'CampaignBudget',
+                        resource_name: `customers/${CID_WITH_METRICS}/campaignBudgets/-1`,
+                        name: getRandomName('budget'),
+                        amount_micros: 3000000,
+                        explicitly_shared: true,
+                    },
+                    {
+                        _resource: 'Campaign',
+                        resource_name: `customers/${CID_WITH_METRICS}/campaigns/-2`,
+                        campaign_budget: `customers/${CID_WITH_METRICS}/campaignBudgets/-1`,
+                        name: getRandomName('campaign'),
+                        advertising_channel_type: enums.AdvertisingChannelType.SEARCH,
+                        status: enums.CampaignStatus.PAUSED,
+                        manual_cpc: {
+                            enhanced_cpc_enabled: true,
+                        },
+                    },
+                    {
+                        _resource: 'AdGroup',
+                        resource_name: `customers/${CID_WITH_METRICS}/adGroups/-3`,
+                        campaign: `customers/${CID_WITH_METRICS}/campaigns/-2`,
+                        name: getRandomName('adgroup'),
+                        status: enums.AdGroupStatus.PAUSED,
+                    },
+                    {
+                        _resource: 'AdGroup',
+                        resource_name: `customers/${CID_WITH_METRICS}/adGroups/-4`,
+                        campaign: `customers/${CID_WITH_METRICS}/campaigns/-2`,
+                        name: getRandomName('adgroup'),
+                        status: enums.AdGroupStatus.PAUSED,
+                    },
+                ],
+                {
+                    validate_only: true,
+                }
+            )
+            expect(response.results).toEqual([])
+        })
+
+        it('should be atomic by default', async () => {
+            await expect(
+                customer.mutateResources(
+                    [
+                        {
+                            _resource: 'CampaignBudget',
+                            resource_name: `customers/${CID_WITH_METRICS}/campaignBudgets/-1`,
+                            name: getRandomName('budget'),
+                            amount_micros: 3000000,
+                            explicitly_shared: true,
+                        },
+                        {
+                            _resource: 'Campaign',
+                            resource_name: `customers/${CID_WITH_METRICS}/campaigns/-2`,
+                            campaign_budget: `customers/${CID_WITH_METRICS}/campaignBudgets/123`,
+                            name: getRandomName('campaign'),
+                            advertising_channel_type: enums.AdvertisingChannelType.SEARCH,
+                            status: enums.CampaignStatus.PAUSED,
+                            manual_cpc: {
+                                enhanced_cpc_enabled: true,
+                            },
+                        },
+                    ],
+                    { validate_only: true }
+                )
+            ).rejects.toThrow()
+        })
+
+        it('should support partial failures', async () => {
+            const response = await customer_no_metrics.mutateResources(
+                [
+                    {
+                        _resource: 'CampaignBudget',
+                        resource_name: `customers/${CID}/campaignBudgets/-1`,
+                        name: getRandomName('budget'),
+                        amount_micros: 3000000,
+                        explicitly_shared: true,
+                    },
+                    {
+                        _resource: 'Campaign',
+                        resource_name: `customers/${CID}/campaigns/-2`,
+                        campaign_budget: `customers/${CID}/campaignBudgets/123`,
+                        name: getRandomName('campaign'),
+                        advertising_channel_type: enums.AdvertisingChannelType.SEARCH,
+                        status: enums.CampaignStatus.PAUSED,
+                        manual_cpc: {
+                            enhanced_cpc_enabled: true,
+                        },
+                    },
+                    {
+                        _resource: 'AdGroup',
+                        resource_name: `customers/${CID_WITH_METRICS}/adGroups/-3`,
+                        campaign: `customers/${CID_WITH_METRICS}/campaigns/-2`,
+                        name: getRandomName('adgroup'),
+                        status: enums.AdGroupStatus.PAUSED,
+                    },
+                ],
+                { partial_failure: true }
+            )
+            /* The first resource should exist, and the other two should fail to be created */
+            expect(response.results).toEqual([expect.any(String), '', ''])
+            expect(response.partial_failure_error).toBeDefined()
+            expect(response.partial_failure_error.message).toContain('Multiple errors')
+        })
+
+        it('should support specifying the _operation type', async () => {
+            const response = await customer_no_metrics.mutateResources(
+                [
+                    {
+                        _resource: 'CampaignBudget',
+                        _operation: 'create',
+                        resource_name: `customers/${CID}/campaignBudgets/-1`,
+                        name: getRandomName('budget'),
+                        amount_micros: 3000000,
+                        explicitly_shared: true,
+                    },
+                    {
+                        _resource: 'Campaign',
+                        _operation: 'update',
+                        resource_name: `customers/${CID}/campaigns/${CAMPAIGN_ID}`,
+                        campaign_budget: `customers/${CID}/campaignBudgets/${-1}`,
+                    },
+                ],
+                { validate_only: true }
+            )
+            expect(response.results).toEqual([])
+        })
+
+        it('should support deleting resources', async () => {
+            const campaigns = await customer_no_metrics.campaigns.list({
+                limit: 3,
+                constraints: [
+                    {
+                        'campaign.status': enums.CampaignStatus.ENABLED,
+                    },
+                ],
+            })
+            const campaign_resource_names = campaigns.map(({ campaign }) => campaign.resource_name)
+
+            const operations = campaign_resource_names.map(resource_name => {
+                return {
+                    _resource: 'Campaign',
+                    _operation: 'delete',
+                    resource_name,
+                }
+            }) as Array<MutateResourceOperation>
+
+            const response = await customer_no_metrics.mutateResources(operations, {
+                validate_only: true,
+            })
+            expect(response.results).toEqual([])
+        })
+
+        it('should throw an error when missing a resource_name in delete mode', async () => {
+            try {
+                // @ts-ignore
+                await customer.mutateResources([{ _resource: 'Campaign', _operation: 'delete', id: 123 }])
+            } catch (err) {
+                expect(err.message).toContain('Must specify "resource_name"')
+            }
+        })
+
+        it('should throw an error if the _operation type is invalid', async () => {
+            try {
+                // @ts-ignore
+                await customer.mutateResources([{ _resource: 'Campaign', _operation: 'slice' }])
+            } catch (err) {
+                expect(err.message).toContain('must be one of')
+            }
+        })
+
+        it('should throw an error when the _resource key is missing', async () => {
+            try {
+                // @ts-ignore
+                await customer.mutateResources([{ name: 'wasd' }])
+            } catch (err) {
+                expect(err.message).toContain('Missing "_resource"')
+            }
+        })
+
+        it('should throw an error if the resource type is invalid', async () => {
+            try {
+                await customer.mutateResources([
+                    {
+                        _resource: 'CampaignFakeResource',
+                        resource_name: `customers/${CID_WITH_METRICS}/campaignBudgets/-1`,
+                        name: getRandomName('budget'),
+                        amount_micros: 3000000,
+                        explicitly_shared: true,
+                    },
+                ])
+            } catch (err) {
+                expect(err.message).toContain('does not exist')
+            }
+        })
+    })
+})
+
+describe('customer options', () => {
+    it('should use google-ads-node options if specified', async done => {
+        const cus = newCustomerWithNodeOptions({
+            prevent_mutations: true,
+            logging: {
+                output: 'none',
+                verbosity: 'info',
+                callback(message: RequestLog) {
+                    expect(message).toBeDefined()
+                    expect(message.request!.method).toContain('GoogleAdsService/Mutate')
+                    // Validate only will always be true when prevent mutations is enabled
+                    expect(message.request!.body.validateOnly).toEqual(true)
+                    done()
+                },
+            },
+        })
+        await cus.mutateResources([
+            {
+                _resource: 'CampaignBudget',
+                resource_name: `customers/${CID}/campaignBudgets/-1`,
+                name: getRandomName('budget'),
+                amount_micros: 3000000,
+                explicitly_shared: true,
+            },
+        ])
     })
 })

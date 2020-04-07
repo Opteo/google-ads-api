@@ -1,13 +1,14 @@
 import { get } from 'lodash'
-import { SearchGoogleAdsRequest } from 'google-ads-node'
+import { SearchGoogleAdsRequest, MutateGoogleAdsRequest } from 'google-ads-node'
 
-export class SearchGrpcError extends Error {
-    public code: number
-    public request: object
-    public request_id: string
-    public failure: any
+export class GrpcError extends Error {
+    public readonly code: number
+    public readonly request: object
+    public readonly request_id: string
+    public readonly location: string
+    public readonly failure: any
 
-    constructor(err: any, request: SearchGoogleAdsRequest) {
+    constructor(err: any, request: SearchGoogleAdsRequest | MutateGoogleAdsRequest) {
         const { code, details } = err
 
         super(details)
@@ -24,6 +25,7 @@ export class SearchGrpcError extends Error {
         }
         this.request = request.toObject()
         this.request_id = get(err, "metadata._internal_repr['request-id'][0]")
+        this.location = get(err, "metadata._internal_repr['location'][0]")
         this.failure = err
     }
 }

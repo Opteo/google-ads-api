@@ -1,7 +1,7 @@
 import { snakeCase, isObject, isString, isArray, isUndefined, values, get } from 'lodash'
 import * as maps from 'google-ads-node/build/lib/mapping'
 
-import { ReportOptions, Constraint } from './types'
+import { ReportOptions, Constraint, ConstraintValue } from './types'
 import { enums } from './index'
 
 function unrollConstraintShorthand(constraint: any): Constraint {
@@ -25,14 +25,19 @@ export function buildReportQuery(config: ReportOptions) {
     const segments = config.segments ? config.segments.sort() : []
     const constraints = config.constraints || []
 
-    const normalised_constraints = constraints.map(
-        (constraint: Constraint | string | object): Constraint | string => {
-            if (isString(constraint)) {
-                return constraint
-            }
-            return unrollConstraintShorthand(constraint)
-        }
-    )
+    const normalised_constraints = Array.isArray(constraints)
+        ? constraints.map(
+              (constraint: Constraint | string | object): Constraint | string => {
+                  if (isString(constraint)) {
+                      return constraint
+                  }
+                  return unrollConstraintShorthand(constraint)
+              }
+          )
+        : Object.keys(constraints).map(key => {
+              const val = (constraints as any)[key]
+              return unrollConstraintShorthand({ [key]: val })
+          })
 
     /* ATTRIBUTES */
     const all_selected_attributes = (attributes as any).concat(metrics, segments).join(', ')
@@ -89,13 +94,35 @@ export function buildReportQuery(config: ReportOptions) {
     return query
 }
 
+export const verifyConstraintType = (key: string, constraint: any): void => {
+    if (!['number', 'string', 'boolean'].includes(typeof constraint)) {
+        throw new Error(
+            `The value of the constraint ${key} must be a string, number, or boolean. Here, typeof ${key} is ${typeof constraint}`
+        )
+    }
+}
+
+export const addQuotesIfMissing = (constraint: ConstraintValue): string => {
+    const string_constraint = constraint.toString()
+
+    if (string_constraint.startsWith(`'`) && string_constraint.endsWith(`'`)) {
+        return string_constraint
+    }
+
+    if (string_constraint.startsWith(`"`) && string_constraint.endsWith(`"`)) {
+        return string_constraint
+    }
+
+    return `"${string_constraint}"`
+}
+
 const formatConstraints = (constraints: any): string => {
     const formatConstraint = (constraint: any): string => {
         if (isString(constraint)) {
             return constraint
         }
 
-        let key
+        let key: any
         let val
         let op
 
@@ -115,11 +142,22 @@ const formatConstraints = (constraints: any): string => {
             if (constraint.val.length === 0) {
                 val = `()`
             } else {
-                val = `("${constraint.val.sort().join(`","`)}")`
+                const vals = constraint.val
+                    .map((v: ConstraintValue) => {
+                        verifyConstraintType(key, v)
+                        let _v = translateEnumValue(key, v)
+                        _v = addQuotesIfMissing(_v)
+                        return _v
+                    })
+                    .sort()
+                    .join(`,`)
+                val = `(${vals})`
             }
+        } else {
+            verifyConstraintType(key, val)
+            val = translateEnumValue(key, val)
+            val = addQuotesIfMissing(val)
         }
-
-        val = translateEnumValue(key, val)
 
         return `${key} ${op} ${val}`
     }
@@ -133,7 +171,7 @@ const formatConstraints = (constraints: any): string => {
     return constraints
 }
 
-export function translateEnumValue(key: string, value: string | number): string | number {
+export function translateEnumValue(key: string, value: ConstraintValue): ConstraintValue {
     const enum_name = get(maps, key)
     if (enum_name && typeof value === 'number') {
         return getEnumString(enum_name, value as number)
@@ -167,11 +205,19 @@ export const formatQueryResults = (result: Array<object>): Array<object> => {
 
 const formatEntity = (entity: any, final: any = {}): object => {
     for (const key in entity) {
-        const underscore_key = snakeCase(key)
+        const underscore_key = snakeCaseGads(key)
         const value = entity[key]
 
         if (isObject(value) && !Array.isArray(value)) {
             final[underscore_key] = formatEntity(value, final[underscore_key])
+        } else if (Array.isArray(value)) {
+            final[underscore_key] = value.map(v => {
+                if (isObject(v) && !Array.isArray(v)) {
+                    return formatEntity(v, final[underscore_key])
+                }
+
+                return v
+            })
         } else {
             final[underscore_key] = value
         }
@@ -188,6 +234,20 @@ export const normaliseCustomerId = (id: string | undefined): string => {
         return id.split('-').join('')
     }
     return ''
+}
+
+/* 
+    lodash.snakeCase will convert headlinePart1 to headline_part_1, 
+    but we need headline_part1.
+*/
+export const snakeCaseGads = (str: string): string => {
+    const snaked = snakeCase(str)
+    const last_character = snaked[snaked.length - 1]
+
+    if (!isNaN(+last_character)) {
+        return snaked.slice(0, snaked.length - 2) + last_character
+    }
+    return snaked
 }
 
 export function parseResult(rows: any) {
@@ -217,4 +277,16 @@ export function getEnumString(type: string, value: number): string {
         throw new Error(`Could not find value "${value}" on enum "${type}"`)
     }
     return e[value]
+}
+
+export function parsePartialFailureErrors(errors: any[]) {
+    return errors.map((error: any) => {
+        for (const key in error.error_code as any) {
+            if ((error.error_code as any)[key] === 0) {
+                delete (error.error_code as any)[key]
+            }
+        }
+
+        return error
+    })
 }

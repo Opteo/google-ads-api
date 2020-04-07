@@ -29,10 +29,7 @@ export default class MediaFileService extends Service {
         return this.getListResults('media_file', options)
     }
 
-    public async create(
-        media_file: MediaFile | Array<MediaFile>,
-        options?: ServiceCreateOptions
-    ): Promise<Mutation> {
+    public async create(media_file: MediaFile | Array<MediaFile>, options?: ServiceCreateOptions): Promise<Mutation> {
         return this.serviceCreate({
             request: MUTATE_REQUEST,
             operation: OPERATION_REQUEST,
@@ -42,10 +39,7 @@ export default class MediaFileService extends Service {
         })
     }
 
-    public async update(
-        media_file: MediaFile | Array<MediaFile>,
-        options?: ServiceCreateOptions
-    ): Promise<Mutation> {
+    public async update(media_file: MediaFile | Array<MediaFile>, options?: ServiceCreateOptions): Promise<Mutation> {
         return this.serviceUpdate({
             request: MUTATE_REQUEST,
             operation: OPERATION_REQUEST,

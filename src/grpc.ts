@@ -1,4 +1,11 @@
-import { GoogleAdsClient, SearchGoogleAdsRequest } from 'google-ads-node'
+import {
+    GoogleAdsClient,
+    SearchGoogleAdsRequest,
+    LogOptions,
+    ClientReadableStream,
+    SearchGoogleAdsStreamResponse,
+    SearchGoogleAdsStreamRequest,
+} from 'google-ads-node'
 import Bottleneck from 'bottleneck'
 
 import { getAccessToken } from './token'
@@ -6,6 +13,15 @@ import { getAccessToken } from './token'
 interface BuildSearchRequestResponse {
     request: SearchGoogleAdsRequest
     limit: number
+}
+
+interface BuildSearchStreamRequestResponse {
+    request: SearchGoogleAdsStreamRequest
+}
+
+export interface GoogleAdsNodeOptions {
+    prevent_mutations?: boolean
+    logging?: LogOptions
 }
 
 export default class GrpcClient {
@@ -16,8 +32,19 @@ export default class GrpcClient {
         client_id: string,
         client_secret: string,
         refresh_token: string,
-        login_customer_id?: string
+        login_customer_id: string,
+        gads_node_options: GoogleAdsNodeOptions
     ) {
+        const additional_options: any = {}
+
+        // Apply google-ads-node options if specified
+        if (gads_node_options?.prevent_mutations) {
+            additional_options.preventMutations = gads_node_options.prevent_mutations
+        }
+        if (gads_node_options?.logging) {
+            additional_options.logging = gads_node_options.logging
+        }
+
         this.client = new GoogleAdsClient({
             developer_token,
             client_id,
@@ -32,7 +59,15 @@ export default class GrpcClient {
                     refresh_token: refreshToken,
                 })
             },
+            ...additional_options,
         })
+    }
+
+    public streamSearchData(
+        request: SearchGoogleAdsStreamRequest
+    ): ClientReadableStream<SearchGoogleAdsStreamResponse> {
+        const service = this.client.getService('GoogleAdsService', { useStreaming: true })
+        return service.searchStream(request)
     }
 
     public async searchWithRetry(throttler: Bottleneck, request: SearchGoogleAdsRequest) {
@@ -43,6 +78,7 @@ export default class GrpcClient {
             {
                 expiration: 1000 * 60 * 5,
             },
+            // @ts-ignore
             request
         )
         return response
@@ -84,7 +120,8 @@ export default class GrpcClient {
             response = await this.searchWithRetry(throttler, next_page_request)
             results = results.concat(response.resultsList)
 
-            if (results.length >= limit) {
+            // If there is no limit, `limit` will be set to 0.
+            if (limit && results.length >= limit) {
                 results = results.slice(0, limit)
                 break
             }
@@ -111,7 +148,7 @@ export default class GrpcClient {
         }
 
         const has_limit = query.toLowerCase().includes(' limit ')
-        let limit = 0
+        let limit = 0 // The default limit is 0, which means no limit.
         if (has_limit) {
             limit = +query
                 .toLowerCase()
@@ -120,6 +157,14 @@ export default class GrpcClient {
         }
 
         return { request, limit }
+    }
+
+    public buildSearchStreamRequest(customer_id: string, query: string): BuildSearchStreamRequestResponse {
+        const request = new SearchGoogleAdsStreamRequest()
+        request.setCustomerId(customer_id)
+        request.setQuery(query)
+
+        return { request }
     }
 
     public getService(name: string): any {

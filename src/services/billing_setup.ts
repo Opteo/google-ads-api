@@ -1,4 +1,3 @@
-// @ts-ignore
 import { BillingSetup } from 'google-ads-node/build/lib/resources'
 
 import Service, { Mutation } from './service'
@@ -8,8 +7,8 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
  * @constants
  */
 const RESOURCE_URL_NAME = 'billingSetups'
-const MUTATE_METHOD = 'mutateBillingSetups'
-const MUTATE_REQUEST = 'MutateBillingSetupsRequest'
+const MUTATE_METHOD = 'mutateBillingSetup'
+const MUTATE_REQUEST = 'MutateBillingSetupRequest'
 const OPERATION_REQUEST = 'BillingSetupOperation'
 const GET_METHOD = 'getBillingSetup'
 const GET_REQUEST = 'GetBillingSetupRequest'
@@ -34,19 +33,6 @@ export default class BillingSetupService extends Service {
         options?: ServiceCreateOptions
     ): Promise<Mutation> {
         return this.serviceCreate({
-            request: MUTATE_REQUEST,
-            operation: OPERATION_REQUEST,
-            mutate: MUTATE_METHOD,
-            entity: [RESOURCE, billing_setup],
-            ...options,
-        })
-    }
-
-    public async update(
-        billing_setup: BillingSetup | Array<BillingSetup>,
-        options?: ServiceCreateOptions
-    ): Promise<Mutation> {
-        return this.serviceUpdate({
             request: MUTATE_REQUEST,
             operation: OPERATION_REQUEST,
             mutate: MUTATE_METHOD,

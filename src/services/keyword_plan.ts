@@ -1,5 +1,11 @@
-// @ts-ignore
-import { KeywordPlan } from 'google-ads-node/build/lib/resources'
+// manual_mode: This file has been manually modified and should not be touched by generate_services.js
+
+import {
+    KeywordPlan,
+    GenerateForecastMetricsResponse,
+    GenerateHistoricalMetricsResponse,
+} from 'google-ads-node/build/lib/resources'
+import { GenerateForecastMetricsRequest, GenerateHistoricalMetricsRequest } from 'google-ads-node'
 
 import Service, { Mutation } from './service'
 import { ServiceListOptions, ServiceCreateOptions } from '../types'
@@ -64,5 +70,38 @@ export default class KeywordPlanService extends Service {
             entity_id: id,
             ...options,
         })
+    }
+
+    public async generateForecastMetrics(id: number | string): Promise<GenerateForecastMetricsResponse> {
+        const request = new GenerateForecastMetricsRequest()
+        request.setKeywordPlan(`customers/${this.cid}/${RESOURCE_URL_NAME}/${id}`)
+        const response = await new Promise((resolve, reject) => {
+            this.service.generateForecastMetrics(request, (err: any, res: any) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(res)
+                }
+            })
+        })
+
+        const [parsed] = this.parseServiceResults([response]) as GenerateForecastMetricsResponse[]
+        return parsed
+    }
+
+    public async generateHistoricalMetrics(id: number | string): Promise<GenerateHistoricalMetricsResponse> {
+        const request = new GenerateHistoricalMetricsRequest()
+        request.setKeywordPlan(`customers/${this.cid}/${RESOURCE_URL_NAME}/${id}`)
+        const response = await new Promise((resolve, reject) => {
+            this.service.generateHistoricalMetrics(request, (err: any, res: any) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(res)
+                }
+            })
+        })
+        const [parsed] = this.parseServiceResults([response]) as GenerateHistoricalMetricsResponse[]
+        return parsed
     }
 }

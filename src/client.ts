@@ -2,8 +2,8 @@ import Bottleneck from 'bottleneck'
 import crypto from 'crypto'
 import { noop } from 'lodash'
 
-import CustomerInstance from './customer'
-import GrpcClient from './grpc'
+import Customer, { CustomerInstance } from './customer'
+import GrpcClient, { GoogleAdsNodeOptions } from './grpc'
 import { normaliseCustomerId } from './utils'
 import { PreReportHook, PostReportHook } from './types'
 
@@ -20,7 +20,7 @@ interface CustomerAuth {
     login_customer_id?: string
 }
 
-interface CustomerOptions extends CustomerAuth {
+interface CustomerOptions extends CustomerAuth, GoogleAdsNodeOptions {
     pre_report_hook?: PreReportHook
     post_report_hook?: PostReportHook
 }
@@ -61,7 +61,9 @@ export default class GoogleAdsApi {
         login_customer_id,
         pre_report_hook,
         post_report_hook,
-    }: CustomerOptions) {
+        prevent_mutations,
+        logging,
+    }: CustomerOptions): CustomerInstance {
         if (!customer_account_id || !refresh_token) {
             throw new Error('Must specify {customer_account_id, refresh_token}')
         }
@@ -72,14 +74,20 @@ export default class GoogleAdsApi {
         customer_account_id = normaliseCustomerId(customer_account_id)
         login_customer_id = normaliseCustomerId(login_customer_id)
 
+        const gads_node_options = {
+            prevent_mutations,
+            logging,
+        }
+
         const client = new GrpcClient(
             this.options.developer_token,
             this.options.client_id,
             this.options.client_secret,
             refresh_token as string,
-            login_customer_id
+            login_customer_id,
+            gads_node_options
         )
 
-        return CustomerInstance(customer_account_id, client, this.throttler, pre_report_hook, post_report_hook)
+        return Customer(customer_account_id, client, this.throttler, pre_report_hook, post_report_hook)
     }
 }

@@ -4,10 +4,11 @@ import * as fields from 'google-ads-node/build/lib/fields'
 import { getFieldMask } from 'google-ads-node/build/lib/utils'
 
 import GrpcClient from '../grpc'
-import { formatQueryResults, buildReportQuery, parseResult } from '../utils'
-import { ServiceListOptions, ServiceCreateOptions } from '../types'
-import { SearchGrpcError } from '../error'
+import { formatQueryResults, buildReportQuery, parseResult, parsePartialFailureErrors } from '../utils'
+import { ServiceListOptions, ServiceCreateOptions, ReportStreamOptions } from '../types'
+import { GrpcError } from '../error'
 import { ReportOptions, PreReportHook, PostReportHook } from '../types'
+import { SearchGoogleAdsStreamResponse, ClientReadableStream } from 'google-ads-node'
 
 interface GetOptions {
     request: string
@@ -91,24 +92,18 @@ export default class Service {
 
         const operations = []
 
-        if (Array.isArray(options.entity[1])) {
-            for (const entity of options.entity[1]) {
-                const operation = new operationType()
+        // If the user passed in only one entity, convert it to an array of length 1
+        if (!Array.isArray(options.entity[1])) {
+            options.entity[1] = [options.entity[1]]
+        }
 
-                const pb = this.buildResource(options.entity[0], entity)
-                operation.setUpdate(pb)
-
-                const mask = getFieldMask(entity)
-                operation.setUpdateMask(mask)
-
-                operations.push(operation)
-            }
-        } else {
+        for (const entity of options.entity[1] as Array<object>) {
             const operation = new operationType()
-            const pb = this.buildResource(...options.entity)
+
+            const pb = this.buildResource(options.entity[0], entity)
             operation.setUpdate(pb)
 
-            const mask = getFieldMask(options.entity[1])
+            const mask = getFieldMask(entity)
             operation.setUpdateMask(mask)
 
             operations.push(operation)
@@ -117,7 +112,7 @@ export default class Service {
         return this.mutate(request, operations, options)
     }
 
-    protected async serviceDelete(options: DelMutateOptions): Promise<any> {
+    protected async serviceDelete(options: DelMutateOptions): Promise<Mutation> {
         const request = new (grpc as any)[options.request]()
         const operation = new (grpc as any)[options.operation]()
 
@@ -136,16 +131,14 @@ export default class Service {
 
         const operations = []
 
-        if (Array.isArray(options.entity[1])) {
-            for (const entity of options.entity[1]) {
-                const operation = new operationType()
-                const pb = this.buildResource(options.entity[0], entity)
-                operation.setCreate(pb)
-                operations.push(operation)
-            }
-        } else {
+        // If the user passed in only one entity, convert it to an array of length 1
+        if (!Array.isArray(options.entity[1])) {
+            options.entity[1] = [options.entity[1]]
+        }
+
+        for (const entity of options.entity[1] as Array<object>) {
             const operation = new operationType()
-            const pb = this.buildResource(...options.entity)
+            const pb = this.buildResource(options.entity[0], entity)
             operation.setCreate(pb)
             operations.push(operation)
         }
@@ -159,21 +152,69 @@ export default class Service {
         options: MutateOptions | DelMutateOptions
     ): Promise<Mutation> {
         request.setCustomerId(this.cid)
-        request.setOperationsList(operations)
+
+        if (!request.setOperationsList) {
+            if (operations.length > 1) {
+                throw new Error(`This method only accepts one operation, but ${operations.length} were passed in.`)
+            }
+            request.setOperation(operations[0])
+        } else {
+            request.setOperationsList(operations)
+        }
 
         if (options.hasOwnProperty('validate_only')) {
+            if (!request.setValidateOnly) {
+                throw new Error(`This method does not support the validate_only option.`)
+            }
             request.setValidateOnly(options.validate_only)
         }
         if (options.hasOwnProperty('partial_failure')) {
+            if (!request.setPartialFailure) {
+                throw new Error(`This method does not support the partial_failure option.`)
+            }
             request.setPartialFailure(options.partial_failure)
         }
 
         const response = await this.serviceCall(options.mutate, request)
 
+        const is_single_result = response.hasOwnProperty(`result`)
+
+        if (response.partial_failure_error) {
+            response.partial_failure_error.errors = parsePartialFailureErrors(response.partial_failure_error.errors)
+        }
+
         return {
             request: request.toObject(),
             partial_failure_error: response.partial_failure_error,
-            results: response.results_list.map((r: any) => r.resourceName),
+            // Always return results as an array for consistency
+            results: is_single_result
+                ? [response.result.resource_name]
+                : response.results_list.map((r: any) => r.resource_name),
+        }
+    }
+
+    protected async globalMutate(request: grpc.MutateGoogleAdsRequest): Promise<Mutation> {
+        const service = this.client.getService('GoogleAdsService')
+        try {
+            const response = await service.mutate(request)
+            const parsed_results = this.parseServiceResults([response])[0] as any
+
+            if (parsed_results.partial_failure_error) {
+                parsed_results.partial_failure_error.errors = parsePartialFailureErrors(
+                    parsed_results.partial_failure_error.errors
+                )
+            }
+            return {
+                request: request.toObject(),
+                partial_failure_error: parsed_results.partial_failure_error,
+                results: parsed_results.mutate_operation_responses.map((r: any) => {
+                    // @ts-ignore Object.values not recognised
+                    const { resource_name } = Object.values(r)[0]
+                    return resource_name
+                }),
+            }
+        } catch (err) {
+            throw new GrpcError(err, request)
         }
     }
 
@@ -184,17 +225,25 @@ export default class Service {
         return `customers/${this.cid}/${resource}`
     }
 
-    protected async serviceCall(call: string, request: any): Promise<any> {
+    protected async serviceCall(call: string, request: any, all_results: boolean = false): Promise<any> {
         try {
-            const response = await this.service[call](request)
+            const response = await new Promise((resolve, reject) => {
+                this.service[call](request, (err: any, res: any) => {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        resolve(res)
+                    }
+                })
+            })
             const parsed_results = this.parseServiceResults([response])
             /* 
                 Since get returns an object, we always return the first item.
                 This should only ever be one item here, and it should exist.
             */
-            return parsed_results[0]
+            return all_results ? parsed_results : parsed_results[0]
         } catch (err) {
-            throw new SearchGrpcError(err, request)
+            throw new GrpcError(err, request)
         }
     }
 
@@ -207,6 +256,12 @@ export default class Service {
     protected buildResource(resource: string, data: any): unknown {
         const pb = this.client.buildResource(resource, data)
         return pb
+    }
+
+    protected buildResources(resource: string, data: Array<any>): unknown {
+        return data.map(dat => {
+            return this.buildResource(resource, dat)
+        })
     }
 
     /* Base report method used in global customer instance */
@@ -239,6 +294,72 @@ export default class Service {
         return parsed_results
     }
 
+    protected serviceReportStream<T>(options: ReportStreamOptions): AsyncGenerator<T> {
+        const query = this.buildCustomerReportQuery(options)
+
+        const call = this.streamSearchData(query)
+
+        return this.reportStreamGenerator<T>(call)
+    }
+
+    private async *reportStreamGenerator<T>(
+        call: ClientReadableStream<SearchGoogleAdsStreamResponse>
+    ): AsyncGenerator<T> {
+        let done = false
+        const accumulator: T[] = []
+
+        function createNextChunkArrivedPromise() {
+            let resolveMe = () => {}
+
+            let rejectMe = (err: Error) => {}
+
+            const p = new Promise((resolve, reject) => {
+                resolveMe = resolve
+                rejectMe = reject
+            })
+
+            return { p, resolveMe, rejectMe }
+        }
+
+        let next_chunk_arrived = createNextChunkArrivedPromise()
+
+        call.on('data', (chunk: SearchGoogleAdsStreamResponse.AsObject) => {
+            const results = this.parseServiceResults(chunk.resultsList)
+            for (const item of results) {
+                accumulator.push(item)
+            }
+            next_chunk_arrived.resolveMe()
+            next_chunk_arrived = createNextChunkArrivedPromise()
+        })
+
+        call.on('end', () => {
+            done = true
+            next_chunk_arrived.resolveMe()
+        })
+
+        call.on('error', (err: Error) => {
+            next_chunk_arrived.rejectMe(err)
+        })
+
+        try {
+            while (!done || accumulator.length) {
+                if (accumulator.length !== 0) {
+                    const item = accumulator.shift()
+                    if (item === undefined) {
+                        throw new Error('UNDEFINED_STREAM_ERROR')
+                    }
+                    yield item
+                } else {
+                    await next_chunk_arrived.p
+                }
+            }
+        } finally {
+            call.destroy()
+        }
+
+        return
+    }
+
     /* Base query method used in global customer instance */
     protected async serviceQuery(qry: string): Promise<any> {
         const results = await this.getSearchData(qry)
@@ -263,7 +384,17 @@ export default class Service {
             const response = await this.client.searchIterator(this.throttler, request, limit)
             return response
         } catch (err) {
-            throw new SearchGrpcError(err, request)
+            throw new GrpcError(err, request)
+        }
+    }
+
+    private streamSearchData(query: string): ClientReadableStream<SearchGoogleAdsStreamResponse> {
+        const { request } = this.client.buildSearchStreamRequest(this.cid, query)
+        try {
+            const response = this.client.streamSearchData(request)
+            return response
+        } catch (err) {
+            throw new Error(err)
         }
     }
 

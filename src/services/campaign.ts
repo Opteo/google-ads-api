@@ -29,10 +29,7 @@ export default class CampaignService extends Service {
         return this.getListResults('campaign', options)
     }
 
-    public async create(
-        campaign: Campaign | Array<Campaign>,
-        options?: ServiceCreateOptions
-    ): Promise<Mutation> {
+    public async create(campaign: Campaign | Array<Campaign>, options?: ServiceCreateOptions): Promise<Mutation> {
         return this.serviceCreate({
             request: MUTATE_REQUEST,
             operation: OPERATION_REQUEST,
@@ -42,10 +39,7 @@ export default class CampaignService extends Service {
         })
     }
 
-    public async update(
-        campaign: Campaign | Array<Campaign>,
-        options?: ServiceCreateOptions
-    ): Promise<Mutation> {
+    public async update(campaign: Campaign | Array<Campaign>, options?: ServiceCreateOptions): Promise<Mutation> {
         return this.serviceUpdate({
             request: MUTATE_REQUEST,
             operation: OPERATION_REQUEST,

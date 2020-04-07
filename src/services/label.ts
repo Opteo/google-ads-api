@@ -29,10 +29,7 @@ export default class LabelService extends Service {
         return this.getListResults('label', options)
     }
 
-    public async create(
-        label: Label | Array<Label>,
-        options?: ServiceCreateOptions
-    ): Promise<Mutation> {
+    public async create(label: Label | Array<Label>, options?: ServiceCreateOptions): Promise<Mutation> {
         return this.serviceCreate({
             request: MUTATE_REQUEST,
             operation: OPERATION_REQUEST,
@@ -42,10 +39,7 @@ export default class LabelService extends Service {
         })
     }
 
-    public async update(
-        label: Label | Array<Label>,
-        options?: ServiceCreateOptions
-    ): Promise<Mutation> {
+    public async update(label: Label | Array<Label>, options?: ServiceCreateOptions): Promise<Mutation> {
         return this.serviceUpdate({
             request: MUTATE_REQUEST,
             operation: OPERATION_REQUEST,

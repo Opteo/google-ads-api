@@ -1,0 +1,31 @@
+---
+type: list_code
+entity: {{ ENTITY }} 
+title: List {{ ENTITY }} 
+order: 3.1
+---
+
+``` javascript
+
+// Listing all the {{ RESOURCE_URL_NAME }} in the account
+let result = await customer.{{ RESOURCE_URL_NAME }}.list()
+
+// Listing with constraints, sorting, and a limited number of results
+let result = await customer.{{ RESOURCE_URL_NAME }}.list({
+    constraints: [{
+        key : '{{ENTITY_SNAKECASE}}.some_field',
+        op : '=',
+        val : 'yellow submarine'
+    }],
+    limit: 15,
+    order_by : '{{ENTITY_SNAKECASE}}.some_field.sub_field'
+})
+
+```
+
+``` javascript
+
+// Example result
+[{{ EXAMPLE_OBJECT_LIST }}]
+
+```

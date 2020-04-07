@@ -8,8 +8,8 @@ import { ServiceListOptions, ServiceCreateOptions } from '../types'
  * @constants
  */
 const RESOURCE_URL_NAME = 'customerManagerLinks'
-const MUTATE_METHOD = 'mutateCustomerManagerLinks'
-const MUTATE_REQUEST = 'MutateCustomerManagerLinksRequest'
+const MUTATE_METHOD = 'mutateCustomerManagerLink'
+const MUTATE_REQUEST = 'MutateCustomerManagerLinkRequest'
 const OPERATION_REQUEST = 'CustomerManagerLinkOperation'
 const GET_METHOD = 'getCustomerManagerLink'
 const GET_REQUEST = 'GetCustomerManagerLinkRequest'

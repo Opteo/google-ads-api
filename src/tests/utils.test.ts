@@ -1,5 +1,5 @@
 import { getEnumString, enums } from '../index'
-import { translateEnumValue, buildReportQuery } from '../utils'
+import { translateEnumValue, buildReportQuery, verifyConstraintType, addQuotesIfMissing, snakeCaseGads } from '../utils'
 import { ReportOptions } from '../types'
 
 test('getEnumString', () => {
@@ -36,6 +36,41 @@ describe('translateEnumValue', () => {
     })
 })
 
+describe('snakeCaseGads', () => {
+    it('should apply snakecase in the google way', () => {
+        expect(snakeCaseGads('headlinePart1')).toEqual('headline_part1')
+        expect(snakeCaseGads('adGroupAd')).toEqual('ad_group_ad')
+    })
+})
+
+describe('addQuotesIfMissing', () => {
+    it('should add quotes only when quotes are missing', () => {
+        expect(addQuotesIfMissing(true)).toEqual(`"true"`)
+        expect(addQuotesIfMissing('true')).toEqual(`"true"`)
+        expect(addQuotesIfMissing(`"true"`)).toEqual(`"true"`)
+        expect(addQuotesIfMissing('customer/133/campaign/456')).toEqual(`"customer/133/campaign/456"`)
+        expect(addQuotesIfMissing(`'customer/133/campaign/456'`)).toEqual(`'customer/133/campaign/456'`)
+        expect(addQuotesIfMissing(123)).toEqual(`"123"`)
+        expect(addQuotesIfMissing(`123`)).toEqual(`"123"`)
+        expect(addQuotesIfMissing(`"123"`)).toEqual(`"123"`)
+    })
+})
+
+describe('verifyConstraintType', () => {
+    it('should throw if a constraint value is not of a supported type', () => {
+        expect(() => verifyConstraintType('key', undefined)).toThrow()
+        expect(() => verifyConstraintType('key', null)).toThrow()
+        expect(() => verifyConstraintType('key', { hello: 'yes' })).toThrow()
+        expect(() => verifyConstraintType('key', [1, 'yes'])).toThrow()
+    })
+
+    it('should not throw if a constraint value is of a supported type', () => {
+        expect(() => verifyConstraintType('key', true)).not.toThrow()
+        expect(() => verifyConstraintType('key', 'hello')).not.toThrow()
+        expect(() => verifyConstraintType('key', 123.66)).not.toThrow()
+    })
+})
+
 describe('buildReportQuery', () => {
     it('should translate enums in constraints to their key (string) value', () => {
         const options: ReportOptions = {
@@ -60,7 +95,26 @@ describe('buildReportQuery', () => {
         const query = buildReportQuery(options)
 
         expect(query).toEqual(
-            `SELECT ad_group.name, campaign.name FROM ad_group WHERE ad_group.status = PAUSED AND campaign.advertising_channel_type = SEARCH AND campaign_budget.status = ENABLED AND metrics.clicks > 10`
+            `SELECT ad_group.name, campaign.name FROM ad_group WHERE ad_group.status = "PAUSED" AND campaign.advertising_channel_type = "SEARCH" AND campaign_budget.status = "ENABLED" AND metrics.clicks > "10"`
+        )
+    })
+
+    it('should support constraints as objects', () => {
+        const options: ReportOptions = {
+            entity: 'ad_group',
+            attributes: ['ad_group.name'],
+            constraints: {
+                'ad_group.name': 'My AdGroup',
+                'ad_group.status': enums.AdGroupStatus.PAUSED,
+                'metrics.clicks': 0,
+                'campaign.id': [123, 456],
+            },
+        }
+
+        const query = buildReportQuery(options)
+
+        expect(query).toEqual(
+            `SELECT ad_group.name FROM ad_group WHERE ad_group.name = "My AdGroup" AND ad_group.status = "PAUSED" AND campaign.id IN ("123","456") AND metrics.clicks = "0"`
         )
     })
 

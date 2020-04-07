@@ -9,5 +9,8 @@ import * as types from 'google-ads-node/build/lib/resources'
 
 /* Helpers */
 import { fromMicros, toMicros, getEnumString } from './utils'
+import { CustomerInstance } from './customer'
 
-export { GoogleAdsApi, enums, types, fromMicros, toMicros, getEnumString }
+import * as LibTypes from './types'
+
+export { GoogleAdsApi, enums, types, LibTypes, fromMicros, toMicros, getEnumString, CustomerInstance }
