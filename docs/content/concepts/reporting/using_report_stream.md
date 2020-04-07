@@ -7,11 +7,13 @@ title: Using Report Stream
 
 ### Using Report Stream
 
-The `customer.reportStream()` accepts very similar arguments to `customer.report()`. `page_size` is no longer an optional argument. This is because Googles new streaming method uses chunks rather than pages. Chunk sizes are currently defaulted to 10,000 rows. Hopefully this will be adjustable soon.
+The `customer.streamReport()` method is equivalent to customer.report(), except that it returns an async generator that you can use to access rows of data as they come back from the API.
 
-This method currently doesn't cache results
+Unlike `report()`, `streamReport()` does not support the page_size argument.
 
-The main advantage of `reportStream` is performance. When getting results with a size greater than 1 chunk (10,000 rows), it will fetch those results quicker.
+The main advantage of `streamReport` is performance. Not only are you able to get rows before the entire set has finished downloading, but the total time to finish the request will be shorter, especially for large requests (10,000+ rows).
+
+Unfortunately, Google has hardwired the stream's chunk size to 10,000 rows, so there is no benefit to streaming for smaller requests. We're working with them to find a solution.
 
 ```javascript
 interface SearchTermView {
