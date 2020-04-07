@@ -30,10 +30,7 @@ const generator = customer.reportStream<SearchTermView>({
     attributes: ['search_term_view.search_term'],
     order_by: 'metrics.clicks',
     sort_order: 'desc',
-    limit: 50,
 })
-
-let count = 0
 
 for await (let item of generator) {
     // process each SearchTermView
