@@ -2,20 +2,20 @@ module.exports = {
     name: 'AccountBudgetProposal',
     object: {
         account_budget: {
-            _description: 'The resource name of the account-level budget associated with this proposal.',
+            _description: 'Immutable. The resource name of the account-level budget associated with this proposal.',
             _type: 'string',
         },
         approval_date_time: {
-            _description: 'The date time when this account-level budget was approved, if applicable.',
+            _description: 'Output only. The date time when this account-level budget was approved, if applicable.',
             _type: 'string',
         },
         approved_end_date_time: {
-            _description: 'The approved end date time in yyyy-mm-dd hh:mm:ss format.',
+            _description: 'Output only. The approved end date time in yyyy-mm-dd hh:mm:ss format.',
             _oneof: 'approvedEndTime',
             _type: 'string',
         },
         approved_end_time_type: {
-            _description: 'The approved end date time as a well-defined type, e.g. FOREVER.',
+            _description: 'Output only. The approved end date time as a well-defined type, e.g. FOREVER.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -26,12 +26,12 @@ module.exports = {
             _type: 'enum',
         },
         approved_spending_limit_micros: {
-            _description: 'The approved spending limit in micros. One million is equivalent to one unit.',
+            _description: 'Output only. The approved spending limit in micros. One million is equivalent to one unit.',
             _oneof: 'approvedSpendingLimit',
             _type: 'int64',
         },
         approved_spending_limit_type: {
-            _description: 'The approved spending limit as a well-defined type, e.g. INFINITE.',
+            _description: 'Output only. The approved spending limit as a well-defined type, e.g. INFINITE.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -41,21 +41,22 @@ module.exports = {
             _type: 'enum',
         },
         approved_start_date_time: {
-            _description: 'The approved start date time in yyyy-mm-dd hh:mm:ss format.',
+            _description: 'Output only. The approved start date time in yyyy-mm-dd hh:mm:ss format.',
             _type: 'string',
         },
         billing_setup: {
-            _description: 'The resource name of the billing setup associated with this proposal.',
+            _description: 'Immutable. The resource name of the billing setup associated with this proposal.',
             _type: 'string',
         },
         creation_date_time: {
             _description:
-                'The date time when this account-level budget proposal was created, which is not the same as its approval date time, if applicable.',
+                'Output only. The date time when this account-level budget proposal was created, which is not the same as its approval date time, if applicable.',
             _type: 'string',
         },
-        id: { _description: 'The ID of the proposal.', _type: 'int64' },
+        id: { _description: 'Output only. The ID of the proposal.', _type: 'int64' },
         proposal_type: {
-            _description: 'The type of this proposal, e.g. END to end the budget associated with this proposal.',
+            _description:
+                'Immutable. The type of this proposal, e.g. END to end the budget associated with this proposal.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -67,12 +68,12 @@ module.exports = {
             _type: 'enum',
         },
         proposed_end_date_time: {
-            _description: 'The proposed end date time in yyyy-mm-dd hh:mm:ss format.',
+            _description: 'Immutable. The proposed end date time in yyyy-mm-dd hh:mm:ss format.',
             _oneof: 'proposedEndTime',
             _type: 'string',
         },
         proposed_end_time_type: {
-            _description: 'The proposed end date time as a well-defined type, e.g. FOREVER.',
+            _description: 'Immutable. The proposed end date time as a well-defined type, e.g. FOREVER.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -82,20 +83,20 @@ module.exports = {
             _oneof: 'proposedEndTime',
             _type: 'enum',
         },
-        proposed_name: { _description: 'The name to assign to the account-level budget.', _type: 'string' },
-        proposed_notes: { _description: 'Notes associated with this budget.', _type: 'string' },
+        proposed_name: { _description: 'Immutable. The name to assign to the account-level budget.', _type: 'string' },
+        proposed_notes: { _description: 'Immutable. Notes associated with this budget.', _type: 'string' },
         proposed_purchase_order_number: {
             _description:
-                'A purchase order number is a value that enables the user to help them reference this budget in their monthly invoices.',
+                'Immutable. A purchase order number is a value that enables the user to help them reference this budget in their monthly invoices.',
             _type: 'string',
         },
         proposed_spending_limit_micros: {
-            _description: 'The proposed spending limit in micros. One million is equivalent to one unit.',
+            _description: 'Immutable. The proposed spending limit in micros. One million is equivalent to one unit.',
             _oneof: 'proposedSpendingLimit',
             _type: 'int64',
         },
         proposed_spending_limit_type: {
-            _description: 'The proposed spending limit as a well-defined type, e.g. INFINITE.',
+            _description: 'Immutable. The proposed spending limit as a well-defined type, e.g. INFINITE.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -105,12 +106,12 @@ module.exports = {
             _type: 'enum',
         },
         proposed_start_date_time: {
-            _description: 'The proposed start date time in yyyy-mm-dd hh:mm:ss format.',
+            _description: 'Immutable. The proposed start date time in yyyy-mm-dd hh:mm:ss format.',
             _oneof: 'proposedStartTime',
             _type: 'string',
         },
         proposed_start_time_type: {
-            _description: 'The proposed start date time as a well-defined type, e.g. NOW.',
+            _description: 'Immutable. The proposed start date time as a well-defined type, e.g. NOW.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -122,12 +123,12 @@ module.exports = {
         },
         resource_name: {
             _description:
-                'The resource name of the proposal. AccountBudgetProposal resource names have the form: <code>customers/{customer_id}/accountBudgetProposals/{account_budget_proposal_id}</code>',
+                'Immutable. The resource name of the proposal. AccountBudgetProposal resource names have the form: <code>customers/{customer_id}/accountBudgetProposals/{account_budget_proposal_id}</code>',
             _type: 'string',
         },
         status: {
             _description:
-                'The status of this proposal. When a new proposal is created, the status defaults to PENDING.',
+                'Output only. The status of this proposal. When a new proposal is created, the status defaults to PENDING.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },

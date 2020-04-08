@@ -47,11 +47,6 @@ let result = await customer.adGroupCriterionLabels.list({
       final_urls: [],
       keyword: { match_type: 2, text: 'opteo adwords' },
       negative: false,
-      position_estimates: {
-        first_page_cpc_micros: 550000,
-        first_position_cpc_micros: 2880000,
-        top_of_page_cpc_micros: 1220000,
-      },
       resource_name: 'customers/3827277046/adGroupCriteria/45808681353~331634074542',
       status: 3,
       system_serving_status: 2,
@@ -150,7 +145,7 @@ let result = await customer.adGroupCriterionLabels.list({
       test_account: false,
       time_zone: 'Europe/London',
       tracking_url_template:
-        'https://w.opteo.co/workers/parallel?url={lpurl}&domain_id=123443&campaign_id={campaignid}&adgroup_id={adgroupid}&matchtype={matchtype}&network={network}&device={device}',
+        'https://w.opteo.co/workers/parallel?url={lpurl}&domain_id=123443&campaign_id={campaignid}&adgroup_id={adgroupid}&matchtype={matchtype}&network={network}&device={device}&keyword={keyword}&targetid={targetid}',
     },
   },
 ]

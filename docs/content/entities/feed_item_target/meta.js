@@ -1,9 +1,10 @@
 module.exports = {
     name: 'FeedItemTarget',
     object: {
-        ad_group: { _description: 'The targeted ad group.', _oneof: 'target', _type: 'string' },
+        ad_group: { _description: 'Immutable. The targeted ad group.', _oneof: 'target', _type: 'string' },
         ad_schedule: {
             _oneof: 'target',
+            _parent_description: 'Immutable. The targeted schedule.',
             day_of_week: {
                 _description:
                     'Day of the week the schedule applies to. This field is required for CREATE operations and is prohibited on UPDATE operations.',
@@ -57,9 +58,9 @@ module.exports = {
                 _type: 'enum',
             },
         },
-        campaign: { _description: 'The targeted campaign.', _oneof: 'target', _type: 'string' },
+        campaign: { _description: 'Immutable. The targeted campaign.', _oneof: 'target', _type: 'string' },
         device: {
-            _description: 'The targeted device.',
+            _description: 'Immutable. The targeted device.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -68,13 +69,16 @@ module.exports = {
             _oneof: 'target',
             _type: 'enum',
         },
-        feed_item: { _description: 'The feed item to which this feed item target belongs.', _type: 'string' },
+        feed_item: {
+            _description: 'Immutable. The feed item to which this feed item target belongs.',
+            _type: 'string',
+        },
         feed_item_target_id: {
-            _description: 'The ID of the targeted resource. This field is read-only.',
+            _description: 'Output only. The ID of the targeted resource. This field is read-only.',
             _type: 'int64',
         },
         feed_item_target_type: {
-            _description: 'The target type of this feed item target. This field is read-only.',
+            _description: 'Output only. The target type of this feed item target. This field is read-only.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -85,12 +89,13 @@ module.exports = {
             _type: 'enum',
         },
         geo_target_constant: {
-            _description: 'The targeted geo target constant resource name.',
+            _description: 'Immutable. The targeted geo target constant resource name.',
             _oneof: 'target',
             _type: 'string',
         },
         keyword: {
             _oneof: 'target',
+            _parent_description: 'Immutable. The targeted keyword.',
             match_type: {
                 _description: 'The match type of the keyword.',
                 _enums: [
@@ -109,8 +114,18 @@ module.exports = {
         },
         resource_name: {
             _description:
-                'The resource name of the feed item target. Feed item target resource names have the form: <code>customers/{customer_id}/feedItemTargets/{feed_id}~{feed_item_id}~{feed_item_target_type}~{feed_item_target_id}</code>',
+                'Immutable. The resource name of the feed item target. Feed item target resource names have the form: <code>customers/{customer_id}/feedItemTargets/{feed_id}~{feed_item_id}~{feed_item_target_type}~{feed_item_target_id}</code>',
             _type: 'string',
+        },
+        status: {
+            _description: 'Output only. Status of the feed item target. This field is read-only.',
+            _enums: [
+                { s: 'UNSPECIFIED', description: 'Not specified.' },
+                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
+                { s: 'ENABLED', description: 'Feed item target is enabled.' },
+                { s: 'REMOVED', description: 'Feed item target has been removed.' },
+            ],
+            _type: 'enum',
         },
     },
     methods: ['get', 'list', 'create', 'update', 'delete'],

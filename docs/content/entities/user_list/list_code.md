@@ -52,9 +52,9 @@ let result = await customer.userLists.list({
       name: 'My user list',
       read_only: true,
       resource_name: 'customers/3827277046/userLists/509186086',
-      size_for_display: 8800,
-      size_for_search: 9600,
-      size_range_for_display: 4,
+      size_for_display: 11000,
+      size_for_search: 9900,
+      size_range_for_display: 5,
       size_range_for_search: 4,
       type: 3,
     },
@@ -81,7 +81,7 @@ let result = await customer.userLists.list({
       test_account: false,
       time_zone: 'Europe/London',
       tracking_url_template:
-        'https://w.opteo.co/workers/parallel?url={lpurl}&domain_id=123443&campaign_id={campaignid}&adgroup_id={adgroupid}&matchtype={matchtype}&network={network}&device={device}',
+        'https://w.opteo.co/workers/parallel?url={lpurl}&domain_id=123443&campaign_id={campaignid}&adgroup_id={adgroupid}&matchtype={matchtype}&network={network}&device={device}&keyword={keyword}&targetid={targetid}',
     },
   },
 ]

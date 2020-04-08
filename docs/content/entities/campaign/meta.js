@@ -27,7 +27,7 @@ module.exports = {
         },
         advertising_channel_sub_type: {
             _description:
-                'Optional refinement to <code>advertising_channel_type</code>. Must be a valid sub-type of the parent channel type. Can be set only when creating campaigns. After campaign is created, the field can not be changed.',
+                'Immutable. Optional refinement to <code>advertising_channel_type</code>. Must be a valid sub-type of the parent channel type. Can be set only when creating campaigns. After campaign is created, the field can not be changed.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used as a return value only. Represents value unknown in this version.' },
@@ -57,7 +57,7 @@ module.exports = {
         },
         advertising_channel_type: {
             _description:
-                'The primary serving target for ads within the campaign. The targeting options can be refined in <code>network_settings</code>. This field is required and should not be empty when creating new campaigns. Can be set only when creating campaigns. After the campaign is created, the field can not be changed.',
+                'Immutable. The primary serving target for ads within the campaign. The targeting options can be refined in <code>network_settings</code>. This field is required and should not be empty when creating new campaigns. Can be set only when creating campaigns. After the campaign is created, the field can not be changed.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -77,9 +77,13 @@ module.exports = {
             _type: 'enum',
         },
         app_campaign_setting: {
-            app_id: { _description: 'A string that uniquely identifies a mobile application.', _type: 'string' },
+            _parent_description: 'The setting related to App Campaign.',
+            app_id: {
+                _description: 'Immutable. A string that uniquely identifies a mobile application.',
+                _type: 'string',
+            },
             app_store: {
-                _description: 'The application store that distributes this specific app.',
+                _description: 'Immutable. The application store that distributes this specific app.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -126,7 +130,7 @@ module.exports = {
         },
         base_campaign: {
             _description:
-                'The resource name of the base campaign of a draft or experiment campaign. For base campaigns, this is equal to <code>resource_name</code>. This field is read-only.',
+                'Output only. The resource name of the base campaign of a draft or experiment campaign. For base campaigns, this is equal to <code>resource_name</code>. This field is read-only.',
             _type: 'string',
         },
         bidding_strategy: {
@@ -136,7 +140,7 @@ module.exports = {
         },
         bidding_strategy_type: {
             _description:
-                'The type of bidding strategy. A bidding strategy can be created by setting either the bidding scheme to create a standard bidding strategy or the <code>bidding_strategy</code> field to create a portfolio bidding strategy. This field is read-only.',
+                'Output only. The type of bidding strategy. A bidding strategy can be created by setting either the bidding scheme to create a standard bidding strategy or the <code>bidding_strategy</code> field to create a portfolio bidding strategy. This field is read-only.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -212,6 +216,8 @@ module.exports = {
         campaign_budget: { _description: 'The budget of the campaign.', _type: 'string' },
         commission: {
             _oneof: 'campaignBiddingStrategy',
+            _parent_description:
+                'Commission is an automatic bidding strategy in which the advertiser pays a certain portion of the conversion value.',
             commission_rate_micros: {
                 _description:
                     'Commission rate defines the portion of the conversion value that the advertiser will be billed. A commission rate of x should be passed into this field as (x * 1,000,000). For example, 106,000 represents a commission rate of 0.106 (10.6%).',
@@ -219,12 +225,16 @@ module.exports = {
             },
         },
         dynamic_search_ads_setting: {
+            _parent_description: 'The setting for controlling Dynamic Search Ads (DSA).',
             domain_name: {
                 _description:
                     'The Internet domain name that this setting represents, e.g., "google.com" or "www.google.com".',
                 _type: 'string',
             },
-            feeds: { _description: 'The list of page feeds associated with the campaign.', _type: 'array of strings' },
+            feeds: {
+                _description: 'Output only. The list of page feeds associated with the campaign.',
+                _type: 'array of strings',
+            },
             language_code: {
                 _description: 'The language code specifying the language of the domain, e.g., "en".',
                 _type: 'string',
@@ -239,7 +249,7 @@ module.exports = {
             _type: 'string',
         },
         experiment_type: {
-            _description: 'The type of campaign: normal, draft, or experiment.',
+            _description: 'Output only. The type of campaign: normal, draft, or experiment.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -263,12 +273,15 @@ module.exports = {
             _type: 'string',
         },
         frequency_caps: {
+            _parent_description: "A list that limits how often each user will see this campaign's ads.",
             _type: 'array of objects',
             cap: {
                 _description: 'Maximum number of events allowed during the time range by this cap.',
                 _type: 'int32',
             },
             key: {
+                _parent_description:
+                    'The key of a particular frequency cap. There can be no more than one frequency cap with the same key.',
                 event_type: {
                     _description: 'The type of event that the cap applies to (e.g. impression).',
                     _enums: [
@@ -315,6 +328,7 @@ module.exports = {
             },
         },
         geo_target_type_setting: {
+            _parent_description: 'The setting for ads geotargeting.',
             negative_geo_target_type: {
                 _description: 'The setting used for negative geotargeting in this particular campaign.',
                 _enums: [
@@ -357,33 +371,55 @@ module.exports = {
                 _type: 'enum',
             },
         },
-        hotel_setting: { hotel_center_id: { _description: 'The linked Hotel Center account.', _type: 'int64' } },
-        id: { _description: 'The ID of the campaign.', _type: 'int64' },
-        labels: { _description: 'The resource names of labels attached to this campaign.', _type: 'array of strings' },
+        hotel_setting: {
+            _parent_description: 'Immutable. The hotel setting for the campaign.',
+            hotel_center_id: { _description: 'Immutable. The linked Hotel Center account.', _type: 'int64' },
+        },
+        id: { _description: 'Output only. The ID of the campaign.', _type: 'int64' },
+        labels: {
+            _description: 'Output only. The resource names of labels attached to this campaign.',
+            _type: 'array of strings',
+        },
         manual_cpc: {
             _oneof: 'campaignBiddingStrategy',
+            _parent_description:
+                'Standard Manual CPC bidding strategy. Manual click-based bidding where user pays per click.',
             enhanced_cpc_enabled: {
                 _description: 'Whether bids are to be enhanced based on conversion optimizer data.',
                 _type: 'boolean',
             },
         },
-        manual_cpm: { _oneof: 'campaignBiddingStrategy' },
-        manual_cpv: { _oneof: 'campaignBiddingStrategy' },
+        manual_cpm: {
+            _oneof: 'campaignBiddingStrategy',
+            _parent_description:
+                'Standard Manual CPM bidding strategy. Manual impression-based bidding where user pays per thousand impressions.',
+        },
+        manual_cpv: {
+            _oneof: 'campaignBiddingStrategy',
+            _parent_description: 'Output only. A bidding strategy that pays a configurable amount per video view.',
+        },
         maximize_conversion_value: {
             _oneof: 'campaignBiddingStrategy',
+            _parent_description:
+                'Standard Maximize Conversion Value bidding strategy that automatically sets bids to maximize revenue while spending your budget.',
             target_roas: {
                 _description:
                     'The target return on ad spend (ROAS) option. If set, the bid strategy will maximize revenue while averaging the target return on ad spend. If the target ROAS is high, the bid strategy may not be able to spend the full budget. If the target ROAS is not set, the bid strategy will aim to achieve the highest possible ROAS for the budget.',
                 _type: 'double',
             },
         },
-        maximize_conversions: { _oneof: 'campaignBiddingStrategy' },
+        maximize_conversions: {
+            _oneof: 'campaignBiddingStrategy',
+            _parent_description:
+                'Standard Maximize Conversions bidding strategy that automatically maximizes number of conversions given a daily budget.',
+        },
         name: {
             _description:
                 'The name of the campaign. This field is required and should not be empty when creating new campaigns. It must not contain any null (code point 0x0), NL line feed (code point 0xA) or carriage return (code point 0xD) characters.',
             _type: 'string',
         },
         network_settings: {
+            _parent_description: 'The network settings for the campaign.',
             target_content_network: {
                 _description:
                     'Whether ads will be served on specified placements in the Google Display Network. Placements are specified using the Placement criterion.',
@@ -420,11 +456,18 @@ module.exports = {
                     description:
                         'Pay per conversion. This mode is only supported by campaigns with\nAdvertisingChannelType.DISPLAY (excluding\nAdvertisingChannelSubType.DISPLAY_GMAIL), BiddingStrategyType.TARGET_CPA,\nand BudgetType.FIXED_CPA. The customer must also be eligible for this\nmode. See Customer.eligibility_failure_reasons for details.',
                 },
+                {
+                    s: 'GUEST_STAY',
+                    description:
+                        'Pay per guest stay value. This mode is only supported by campaigns with\nAdvertisingChannelType.HOTEL, BiddingStrategyType.COMMISSION, and\nBudgetType.HOTEL_ADS_COMMISSION.',
+                },
             ],
             _type: 'enum',
         },
         percent_cpc: {
             _oneof: 'campaignBiddingStrategy',
+            _parent_description:
+                'Standard Percent Cpc bidding strategy where bids are a fraction of the advertised price for some good or service.',
             cpc_bid_ceiling_micros: {
                 _description:
                     'Maximum bid limit that can be set by the bid strategy. This is an optional field entered by the advertiser and specified in local micros. Note: A zero value is interpreted in the same way as having bid_ceiling undefined.',
@@ -437,21 +480,25 @@ module.exports = {
             },
         },
         real_time_bidding_setting: {
+            _parent_description:
+                'Settings for Real-Time Bidding, a feature only available for campaigns targeting the Ad Exchange network.',
             opt_in: { _description: 'Whether the campaign is opted in to real-time bidding.', _type: 'boolean' },
         },
         resource_name: {
             _description:
-                'The resource name of the campaign. Campaign resource names have the form: <code>customers/{customer_id}/campaigns/{campaign_id}</code>',
+                'Immutable. The resource name of the campaign. Campaign resource names have the form: <code>customers/{customer_id}/campaigns/{campaign_id}</code>',
             _type: 'string',
         },
         selective_optimization: {
+            _parent_description:
+                'Selective optimization setting for this campaign, which includes a set of conversion actions to optimize this campaign towards.',
             conversion_actions: {
                 _description: 'The selected set of conversion actions for optimizing this campaign.',
                 _type: 'array of strings',
             },
         },
         serving_status: {
-            _description: 'The ad serving status of the campaign.',
+            _description: 'Output only. The ad serving status of the campaign.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'No value has been specified.' },
                 {
@@ -467,6 +514,7 @@ module.exports = {
             _type: 'enum',
         },
         shopping_setting: {
+            _parent_description: 'The setting for controlling Shopping campaigns.',
             campaign_priority: {
                 _description:
                     'Priority of the campaign. Campaigns with numerically higher priorities take precedence over those with lower priorities. This field is required for Shopping campaigns, with values between 0 and 2, inclusive. This field is optional for Smart Shopping campaigns, but must be equal to 3 if set.',
@@ -475,12 +523,12 @@ module.exports = {
             enable_local: { _description: 'Whether to include local products.', _type: 'boolean' },
             merchant_id: {
                 _description:
-                    'ID of the Merchant Center account. This field is required for create operations. This field is immutable for Shopping campaigns.',
+                    'Immutable. ID of the Merchant Center account. This field is required for create operations. This field is immutable for Shopping campaigns.',
                 _type: 'int64',
             },
             sales_country: {
                 _description:
-                    "Sales country of products to include in the campaign. This field is required for Shopping campaigns. This field is immutable. This field is optional for non-Shopping campaigns, but it must be equal to 'ZZ' if set.",
+                    "Immutable. Sales country of products to include in the campaign. This field is required for Shopping campaigns. This field is immutable. This field is optional for non-Shopping campaigns, but it must be equal to 'ZZ' if set.",
                 _type: 'string',
             },
         },
@@ -501,6 +549,8 @@ module.exports = {
         },
         target_cpa: {
             _oneof: 'campaignBiddingStrategy',
+            _parent_description:
+                'Standard Target CPA bidding strategy that automatically sets bids to help get as many conversions as possible at the target cost-per-acquisition (CPA) you set.',
             cpc_bid_ceiling_micros: {
                 _description:
                     'Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
@@ -517,9 +567,14 @@ module.exports = {
                 _type: 'int64',
             },
         },
-        target_cpm: { _oneof: 'campaignBiddingStrategy' },
+        target_cpm: {
+            _oneof: 'campaignBiddingStrategy',
+            _parent_description: 'A bidding strategy that automatically optimizes cost per thousand impressions.',
+        },
         target_impression_share: {
             _oneof: 'campaignBiddingStrategy',
+            _parent_description:
+                'Target Impression Share bidding strategy. An automated bidding strategy that sets bids to achieve a desired percentage of impressions.',
             cpc_bid_ceiling_micros: {
                 _description:
                     'The highest CPC bid the automated bidding system is permitted to specify. This is a required field entered by the advertiser that sets the ceiling and specified in local micros.',
@@ -547,6 +602,8 @@ module.exports = {
         },
         target_roas: {
             _oneof: 'campaignBiddingStrategy',
+            _parent_description:
+                'Standard Target ROAS bidding strategy that automatically maximizes revenue while averaging a specific target return on ad spend (ROAS).',
             cpc_bid_ceiling_micros: {
                 _description:
                     'Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
@@ -565,6 +622,8 @@ module.exports = {
         },
         target_spend: {
             _oneof: 'campaignBiddingStrategy',
+            _parent_description:
+                'Standard Target Spend bidding strategy that automatically sets your bids to help get as many clicks as possible within your budget.',
             cpc_bid_ceiling_micros: {
                 _description:
                     'Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.',
@@ -577,7 +636,71 @@ module.exports = {
             },
         },
         targeting_setting: {
+            _parent_description: 'Setting for targeting related features.',
+            target_restriction_operations: {
+                _parent_description:
+                    'The list of operations changing the target restrictions. Adding a target restriction with a targeting dimension that already exists causes the existing target restriction to be replaced with the new value.',
+                _type: 'array of objects',
+                operator: {
+                    _description: 'Type of list operation to perform.',
+                    _enums: [
+                        { s: 'UNSPECIFIED', description: 'Unspecified.' },
+                        {
+                            s: 'UNKNOWN',
+                            description: 'Used for return value only. Represents value unknown in this version.',
+                        },
+                        { s: 'ADD', description: 'Add the restriction to the existing restrictions.' },
+                        { s: 'REMOVE', description: 'Remove the restriction from the existing restrictions.' },
+                    ],
+                    _type: 'enum',
+                },
+                value: {
+                    _parent_description: 'The target restriction being added to or removed from the list.',
+                    bid_only: {
+                        _description:
+                            'Indicates whether to restrict your ads to show only for the criteria you have selected for this targeting_dimension, or to target all values for this targeting_dimension and show ads based on your targeting in other TargetingDimensions. A value of <code>true</code> means that these criteria will only apply bid modifiers, and not affect targeting. A value of <code>false</code> means that these criteria will restrict targeting as well as applying bid modifiers.',
+                        _type: 'boolean',
+                    },
+                    targeting_dimension: {
+                        _description: 'The targeting dimension that these settings apply to.',
+                        _enums: [
+                            { s: 'UNSPECIFIED', description: 'Not specified.' },
+                            {
+                                s: 'UNKNOWN',
+                                description: 'Used for return value only. Represents value unknown in this version.',
+                            },
+                            {
+                                s: 'KEYWORD',
+                                description:
+                                    'Keyword criteria, e.g. \'mars cruise\'. KEYWORD may be used as a custom bid\ndimension. Keywords are always a targeting dimension, so may not be set\nas a target "ALL" dimension with TargetRestriction.',
+                            },
+                            {
+                                s: 'AUDIENCE',
+                                description:
+                                    'Audience criteria, which include user list, user interest, custom\naffinity,  and custom in market.',
+                            },
+                            {
+                                s: 'TOPIC',
+                                description:
+                                    "Topic criteria for targeting categories of content, e.g.\n'category::Animals>Pets' Used for Display and Video targeting.",
+                            },
+                            { s: 'GENDER', description: 'Criteria for targeting gender.' },
+                            { s: 'AGE_RANGE', description: 'Criteria for targeting age ranges.' },
+                            {
+                                s: 'PLACEMENT',
+                                description:
+                                    "Placement criteria, which include websites like 'www.flowers4sale.com',\nas well as mobile applications, mobile app categories, YouTube videos,\nand YouTube channels.",
+                            },
+                            { s: 'PARENTAL_STATUS', description: 'Criteria for parental status targeting.' },
+                            { s: 'INCOME_RANGE', description: 'Criteria for income range targeting.' },
+                        ],
+                        _type: 'enum',
+                    },
+                },
+            },
             target_restrictions: {
+                _parent_description:
+                    'The per-targeting-dimension setting to restrict the reach of your campaign or ad group.',
                 _type: 'array of objects',
                 bid_only: {
                     _description:
@@ -621,14 +744,20 @@ module.exports = {
                 },
             },
         },
-        tracking_setting: { tracking_url: { _description: 'The url used for dynamic tracking.', _type: 'string' } },
+        tracking_setting: {
+            _parent_description: 'Output only. Campaign-level settings for tracking information.',
+            tracking_url: { _description: 'Output only. The url used for dynamic tracking.', _type: 'string' },
+        },
         tracking_url_template: { _description: 'The URL template for constructing a tracking URL.', _type: 'string' },
         url_custom_parameters: {
+            _parent_description:
+                'The list of mappings used to substitute custom parameter tags in a <code>tracking_url_template</code>, <code>final_urls</code>, or <code>mobile_final_urls</code>.',
             _type: 'array of objects',
             key: { _description: 'The key matching the parameter tag name.', _type: 'string' },
             value: { _description: 'The value to be substituted.', _type: 'string' },
         },
         vanity_pharma: {
+            _parent_description: 'Describes how unbranded pharma ads will be displayed.',
             vanity_pharma_display_url_mode: {
                 _description: 'The display mode for vanity pharma URLs.',
                 _enums: [
@@ -716,7 +845,7 @@ module.exports = {
             },
         },
         video_brand_safety_suitability: {
-            _description: '3-Tier Brand Safety setting for the campaign.',
+            _description: 'Output only. 3-Tier Brand Safety setting for the campaign.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },

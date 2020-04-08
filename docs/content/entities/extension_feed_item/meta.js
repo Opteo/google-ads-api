@@ -2,6 +2,8 @@ module.exports = {
     name: 'ExtensionFeedItem',
     object: {
         ad_schedules: {
+            _parent_description:
+                'List of non-overlapping schedules specifying all time intervals for which the feed item may serve. There can be a maximum of 6 schedules per day.',
             _type: 'array of objects',
             day_of_week: {
                 _description:
@@ -58,6 +60,8 @@ module.exports = {
         },
         affiliate_location_feed_item: {
             _oneof: 'extension',
+            _parent_description:
+                'Output only. Affiliate location extension. Feed locations are populated by Google Ads based on a chain ID. This field is read-only.',
             address_line1: { _description: 'Line 1 of the business address.', _type: 'string' },
             address_line2: { _description: 'Line 2 of the business address.', _type: 'string' },
             business_name: { _description: 'The name of the business.', _type: 'string' },
@@ -74,6 +78,7 @@ module.exports = {
         },
         app_feed_item: {
             _oneof: 'extension',
+            _parent_description: 'App extension.',
             app_id: {
                 _description: 'The store-specific ID for the target application. This string must not be empty.',
                 _type: 'string',
@@ -114,6 +119,8 @@ module.exports = {
                 _type: 'string',
             },
             url_custom_parameters: {
+                _parent_description:
+                    'A list of mappings to be used for substituting URL custom parameter tags in the tracking_url_template, final_urls, and/or final_mobile_urls.',
                 _type: 'array of objects',
                 key: { _description: 'The key matching the parameter tag name.', _type: 'string' },
                 value: { _description: 'The value to be substituted.', _type: 'string' },
@@ -121,6 +128,7 @@ module.exports = {
         },
         call_feed_item: {
             _oneof: 'extension',
+            _parent_description: 'Call extension.',
             call_conversion_action: {
                 _description:
                     'The conversion action to attribute a call conversion to. If not set a default conversion action is used. This field only has effect if call_tracking_enabled is set to true. Otherwise this field is ignored.',
@@ -169,6 +177,7 @@ module.exports = {
         },
         callout_feed_item: {
             _oneof: 'extension',
+            _parent_description: 'Callout extension.',
             callout_text: {
                 _description: 'The callout text. The length of this string should be between 1 and 25, inclusive.',
                 _type: 'string',
@@ -189,7 +198,7 @@ module.exports = {
             _type: 'string',
         },
         extension_type: {
-            _description: 'The extension type of the extension feed item. This field is read-only.',
+            _description: 'Output only. The extension type of the extension feed item. This field is read-only.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -204,11 +213,27 @@ module.exports = {
                 { s: 'STRUCTURED_SNIPPET', description: 'Structured snippet.' },
                 { s: 'LOCATION', description: 'Location.' },
                 { s: 'AFFILIATE_LOCATION', description: 'Affiliate location.' },
+                { s: 'HOTEL_CALLOUT', description: 'Hotel callout' },
             ],
             _type: 'enum',
         },
+        hotel_callout_feed_item: {
+            _oneof: 'extension',
+            _parent_description: 'Hotel Callout extension.',
+            language_code: {
+                _description: 'The language of the hotel callout text. IETF BCP 47 compliant language code.',
+                _type: 'string',
+            },
+            text: {
+                _description: 'The callout text. The length of this string should be between 1 and 25, inclusive.',
+                _type: 'string',
+            },
+        },
+        id: { _description: 'Output only. The ID of this feed item. Read-only.', _type: 'int64' },
         location_feed_item: {
             _oneof: 'extension',
+            _parent_description:
+                'Output only. Location extension. Locations are synced from a GMB account into a feed. This field is read-only.',
             address_line1: { _description: 'Line 1 of the business address.', _type: 'string' },
             address_line2: { _description: 'Line 2 of the business address.', _type: 'string' },
             business_name: { _description: 'The name of the business.', _type: 'string' },
@@ -220,12 +245,14 @@ module.exports = {
         },
         price_feed_item: {
             _oneof: 'extension',
+            _parent_description: 'Price extension.',
             final_url_suffix: {
                 _description: 'URL template for appending params to landing page URLs served with parallel tracking.',
                 _type: 'string',
             },
             language_code: { _description: 'The code of the language used for this price extension.', _type: 'string' },
             price_offerings: {
+                _parent_description: 'The price offerings in this price extension.',
                 _type: 'array of objects',
                 description: { _description: 'Description text of this offer.', _type: 'string' },
                 final_mobile_urls: {
@@ -238,6 +265,7 @@ module.exports = {
                 },
                 header: { _description: 'Header text of this offer.', _type: 'string' },
                 price: {
+                    _parent_description: 'Price value of this offer.',
                     amount_micros: {
                         _description: 'Amount in micros. One million is equivalent to one unit.',
                         _type: 'int64',
@@ -315,6 +343,7 @@ module.exports = {
         },
         promotion_feed_item: {
             _oneof: 'extension',
+            _parent_description: 'Promotion extension.',
             discount_modifier: {
                 _description: 'Enum that modifies the qualification of the discount.',
                 _enums: [
@@ -344,6 +373,8 @@ module.exports = {
                 _type: 'string',
             },
             money_amount_off: {
+                _parent_description:
+                    'Money amount off for discount in the promotion. Either this or percent_off is required.',
                 amount_micros: {
                     _description: 'Amount in micros. One million is equivalent to one unit.',
                     _type: 'int64',
@@ -400,6 +431,8 @@ module.exports = {
                 _type: 'enum',
             },
             orders_over_amount: {
+                _parent_description:
+                    'The amount the total order needs to be for the user to be eligible for the promotion.',
                 amount_micros: {
                     _description: 'Amount in micros. One million is equivalent to one unit.',
                     _type: 'int64',
@@ -429,6 +462,8 @@ module.exports = {
             },
             tracking_url_template: { _description: 'URL template for constructing a tracking URL.', _type: 'string' },
             url_custom_parameters: {
+                _parent_description:
+                    'A list of mappings to be used for substituting URL custom parameter tags in the tracking_url_template, final_urls, and/or final_mobile_urls.',
                 _type: 'array of objects',
                 key: { _description: 'The key matching the parameter tag name.', _type: 'string' },
                 value: { _description: 'The value to be substituted.', _type: 'string' },
@@ -436,11 +471,12 @@ module.exports = {
         },
         resource_name: {
             _description:
-                'The resource name of the extension feed item. Extension feed item resource names have the form: <code>customers/{customer_id}/extensionFeedItems/{feed_item_id}</code>',
+                'Immutable. The resource name of the extension feed item. Extension feed item resource names have the form: <code>customers/{customer_id}/extensionFeedItems/{feed_item_id}</code>',
             _type: 'string',
         },
         sitelink_feed_item: {
             _oneof: 'extension',
+            _parent_description: 'Sitelink extension.',
             final_mobile_urls: {
                 _description: 'A list of possible final mobile URLs after all cross domain redirects.',
                 _type: 'array of strings',
@@ -470,6 +506,8 @@ module.exports = {
             },
             tracking_url_template: { _description: 'URL template for constructing a tracking URL.', _type: 'string' },
             url_custom_parameters: {
+                _parent_description:
+                    'A list of mappings to be used for substituting URL custom parameter tags in the tracking_url_template, final_urls, and/or final_mobile_urls.',
                 _type: 'array of objects',
                 key: { _description: 'The key matching the parameter tag name.', _type: 'string' },
                 value: { _description: 'The value to be substituted.', _type: 'string' },
@@ -481,7 +519,7 @@ module.exports = {
             _type: 'string',
         },
         status: {
-            _description: 'Status of the feed item. This field is read-only.',
+            _description: 'Output only. Status of the feed item. This field is read-only.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -492,6 +530,7 @@ module.exports = {
         },
         structured_snippet_feed_item: {
             _oneof: 'extension',
+            _parent_description: 'Structured snippet extension.',
             header: { _description: 'The header of the snippet. This string must not be empty.', _type: 'string' },
             values: {
                 _description: 'The values in the snippet. The maximum size of this collection is 10.',
@@ -510,6 +549,7 @@ module.exports = {
         },
         targeted_geo_target_constant: { _description: 'The targeted geo target constant.', _type: 'string' },
         targeted_keyword: {
+            _parent_description: 'The targeted keyword.',
             match_type: {
                 _description: 'The match type of the keyword.',
                 _enums: [
@@ -528,6 +568,7 @@ module.exports = {
         },
         text_message_feed_item: {
             _oneof: 'extension',
+            _parent_description: 'Text message extension.',
             business_name: {
                 _description: 'The business name to prepend to the message text. This field is required.',
                 _type: 'string',

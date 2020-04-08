@@ -163,7 +163,7 @@ const raw_compiled_services = require('./compiled_resources.json')
 // )
 
 const compiled_resources =
-    raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v2.nested.resources.nested
+    raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v3.nested.resources.nested
 // raw_compiled_services.nested.
 
 // console.log(compiled_resources)
@@ -185,7 +185,7 @@ let schema
 const entities = [
     'AccountBudgetProposal',
     'AccountBudget',
-    // 'Ad',
+    'Ad',
     'AdGroupAdLabel',
     'AdGroupAd',
     'AdGroupBidModifier',
@@ -227,8 +227,8 @@ const entities = [
     'FeedMapping',
     'Feed',
     'GeoTargetConstant',
-    // 'GoogleAdsField', // Not required
-    // 'GoogleAds', // Not required
+    // // 'GoogleAdsField', // Not required
+    // // 'GoogleAds', // Not required
     'KeywordPlanAdGroup',
     'KeywordPlanCampaign',
     //'KeywordPlanIdea', // Not really a resource -- just a random function in a service
@@ -241,9 +241,9 @@ const entities = [
     // 'MerchantCenterLink', // Missing protos?
     'MobileAppCategoryConstant',
     'MobileDeviceConstant',
-    // 'MutateJob', // Not to implement yet
+    // // 'MutateJob', // Not to implement yet
     'OperatingSystemVersionConstant',
-    // 'PaymentsAccount', // Missing protos?
+    // // 'PaymentsAccount', // Missing protos?
     'ProductBiddingCategoryConstant',
     'Recommendation',
     'RemarketingAction',
@@ -261,7 +261,7 @@ const entities = [
 ]
 
 const compiled_services =
-    raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v2.nested.services.nested
+    raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v3.nested.services.nested
 
 const _entities = Object.keys(compiled_services).forEach(entity => {
     if (!entity.includes('Service')) {
@@ -430,18 +430,21 @@ async function compileService(entity, schema) {
                 _new_object._type = obj[key].format || obj[key].type
             }
 
+            const markdown_description = sanitiseHtml(obj[key].description)
+
             if (_new_object._type === 'object') {
-                new_obj[snakeCaseGads(key)] = unroll(obj[key].properties, key)
+                new_obj[snakeCaseGads(key)] = new_obj[snakeCaseGads(key)] = {
+                    ...unroll(obj[key].properties, key),
+                    _parent_description: markdown_description,
+                }
             } else if (_new_object._type === 'array' && obj[key].items.type === 'object') {
                 new_obj[snakeCaseGads(key)] = unroll(obj[key].items.properties, key)
                 new_obj[snakeCaseGads(key)]._type = 'array of objects'
+                new_obj[snakeCaseGads(key)]._parent_description = markdown_description
             } else {
                 if (_new_object._type === 'array') {
                     _new_object._type = 'array of ' + obj[key].items.type + 's'
                 }
-
-                const markdown_description = sanitiseHtml(obj[key].description)
-
                 new_obj[snakeCaseGads(key)] = { ..._new_object, _description: markdown_description }
             }
 
@@ -507,7 +510,7 @@ async function compileService(entity, schema) {
 
     const meta = {
         name: entity,
-        object: sortObject(unroll(schema.schemas[`GoogleAdsGoogleadsV2Resources__${entity}`].properties, entity)),
+        object: sortObject(unroll(schema.schemas[`GoogleAdsGoogleadsV3Resources__${entity}`].properties, entity)),
     }
 
     const file_path = `${__dirname}/../src/services/${ent}.ts`
@@ -516,7 +519,7 @@ async function compileService(entity, schema) {
 
     await fs.ensureDir(docs_file_path)
 
-    if (schema.schemas[`GoogleAdsGoogleadsV2Services__${mutate_request}`]) {
+    if (schema.schemas[`GoogleAdsGoogleadsV3Services__${mutate_request}`]) {
         compiled_service = service_compiler({
             RESOURCE_URL_NAME: resource_url_name,
             MUTATE_METHOD: mutate_method,

@@ -1,19 +1,19 @@
 module.exports = {
     name: 'CustomerClientLink',
     object: {
-        client_customer: { _description: 'The client customer linked to this customer.', _type: 'string' },
+        client_customer: { _description: 'Immutable. The client customer linked to this customer.', _type: 'string' },
         hidden: {
             _description:
                 'The visibility of the link. Users can choose whether or not to see hidden links in the AdWords UI. Default value is false',
             _type: 'boolean',
         },
         manager_link_id: {
-            _description: 'This is uniquely identifies a customer client link. Read only.',
+            _description: 'Output only. This is uniquely identifies a customer client link. Read only.',
             _type: 'int64',
         },
         resource_name: {
             _description:
-                'Name of the resource. CustomerClientLink resource names have the form: <code>customers/{customer_id}/customerClientLinks/{client_customer_id}~{manager_link_id}</code>',
+                'Immutable. Name of the resource. CustomerClientLink resource names have the form: <code>customers/{customer_id}/customerClientLinks/{client_customer_id}~{manager_link_id}</code>',
             _type: 'string',
         },
         status: {

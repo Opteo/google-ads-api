@@ -1,10 +1,11 @@
 module.exports = {
     name: 'OperatingSystemVersionConstant',
     object: {
-        id: { _description: 'The ID of the operating system version.', _type: 'int64' },
-        name: { _description: 'Name of the operating system.', _type: 'string' },
+        id: { _description: 'Output only. The ID of the operating system version.', _type: 'int64' },
+        name: { _description: 'Output only. Name of the operating system.', _type: 'string' },
         operator_type: {
-            _description: 'Determines whether this constant represents a single version or a range of versions.',
+            _description:
+                'Output only. Determines whether this constant represents a single version or a range of versions.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -13,11 +14,11 @@ module.exports = {
             ],
             _type: 'enum',
         },
-        os_major_version: { _description: 'The OS Major Version number.', _type: 'int32' },
-        os_minor_version: { _description: 'The OS Minor Version number.', _type: 'int32' },
+        os_major_version: { _description: 'Output only. The OS Major Version number.', _type: 'int32' },
+        os_minor_version: { _description: 'Output only. The OS Minor Version number.', _type: 'int32' },
         resource_name: {
             _description:
-                'The resource name of the operating system version constant. Operating system version constant resource names have the form: <code>operatingSystemVersionConstants/{criterion_id}</code>',
+                'Output only. The resource name of the operating system version constant. Operating system version constant resource names have the form: <code>operatingSystemVersionConstants/{criterion_id}</code>',
             _type: 'string',
         },
     },

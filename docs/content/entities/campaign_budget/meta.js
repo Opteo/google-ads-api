@@ -31,12 +31,12 @@ module.exports = {
         },
         has_recommended_budget: {
             _description:
-                'Indicates whether there is a recommended budget for this campaign budget. This field is read-only.',
+                'Output only. Indicates whether there is a recommended budget for this campaign budget. This field is read-only.',
             _type: 'boolean',
         },
         id: {
             _description:
-                'The ID of the campaign budget. A campaign budget is created using the CampaignBudgetService create operation and is assigned a budget ID. A budget ID can be shared across different campaigns; the system will then allocate the campaign budget among different campaigns to get optimum results.',
+                'Output only. The ID of the campaign budget. A campaign budget is created using the CampaignBudgetService create operation and is assigned a budget ID. A budget ID can be shared across different campaigns; the system will then allocate the campaign budget among different campaigns to get optimum results.',
             _type: 'int64',
         },
         name: {
@@ -45,52 +45,50 @@ module.exports = {
             _type: 'string',
         },
         period: {
-            _description: 'Period over which to spend the budget. Defaults to DAILY if not specified.',
+            _description: 'Immutable. Period over which to spend the budget. Defaults to DAILY if not specified.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
                 { s: 'DAILY', description: 'Daily budget.' },
-                { s: 'CUSTOM', description: 'Custom budget.' },
-                { s: 'FIXED_DAILY', description: 'Fixed daily budget.' },
             ],
             _type: 'enum',
         },
         recommended_budget_amount_micros: {
             _description:
-                'The recommended budget amount. If no recommendation is available, this will be set to the budget amount. Amount is specified in micros, where one million is equivalent to one currency unit. This field is read-only.',
+                'Output only. The recommended budget amount. If no recommendation is available, this will be set to the budget amount. Amount is specified in micros, where one million is equivalent to one currency unit. This field is read-only.',
             _type: 'int64',
         },
         recommended_budget_estimated_change_weekly_clicks: {
             _description:
-                'The estimated change in weekly clicks if the recommended budget is applied. This field is read-only.',
+                'Output only. The estimated change in weekly clicks if the recommended budget is applied. This field is read-only.',
             _type: 'int64',
         },
         recommended_budget_estimated_change_weekly_cost_micros: {
             _description:
-                'The estimated change in weekly cost in micros if the recommended budget is applied. One million is equivalent to one currency unit. This field is read-only.',
+                'Output only. The estimated change in weekly cost in micros if the recommended budget is applied. One million is equivalent to one currency unit. This field is read-only.',
             _type: 'int64',
         },
         recommended_budget_estimated_change_weekly_interactions: {
             _description:
-                'The estimated change in weekly interactions if the recommended budget is applied. This field is read-only.',
+                'Output only. The estimated change in weekly interactions if the recommended budget is applied. This field is read-only.',
             _type: 'int64',
         },
         recommended_budget_estimated_change_weekly_views: {
             _description:
-                'The estimated change in weekly views if the recommended budget is applied. This field is read-only.',
+                'Output only. The estimated change in weekly views if the recommended budget is applied. This field is read-only.',
             _type: 'int64',
         },
         reference_count: {
-            _description: 'The number of campaigns actively using the budget. This field is read-only.',
+            _description: 'Output only. The number of campaigns actively using the budget. This field is read-only.',
             _type: 'int64',
         },
         resource_name: {
             _description:
-                'The resource name of the campaign budget. Campaign budget resource names have the form: <code>customers/{customer_id}/campaignBudgets/{budget_id}</code>',
+                'Immutable. The resource name of the campaign budget. Campaign budget resource names have the form: <code>customers/{customer_id}/campaignBudgets/{budget_id}</code>',
             _type: 'string',
         },
         status: {
-            _description: 'The status of this campaign budget. This field is read-only.',
+            _description: 'Output only. The status of this campaign budget. This field is read-only.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -105,7 +103,7 @@ module.exports = {
             _type: 'int64',
         },
         type: {
-            _description: 'The type of the campaign budget.',
+            _description: 'Immutable. The type of the campaign budget.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },

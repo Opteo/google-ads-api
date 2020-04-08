@@ -2,9 +2,11 @@ module.exports = {
     name: 'FeedMapping',
     object: {
         attribute_field_mappings: {
+            _parent_description:
+                'Immutable. Feed attributes to field mappings. These mappings are a one-to-many relationship meaning that 1 feed attribute can be used to populate multiple placeholder fields, but 1 placeholder field can only draw data from 1 feed attribute. Ad Customizer is an exception, 1 placeholder field can be mapped to multiple feed attributes. Required.',
             _type: 'array of objects',
             ad_customizer_field: {
-                _description: 'Ad Customizer Placeholder Fields',
+                _description: 'Immutable. Ad Customizer Placeholder Fields',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -19,7 +21,7 @@ module.exports = {
                 _type: 'enum',
             },
             affiliate_location_field: {
-                _description: 'Affiliate Location Placeholder Fields. This field is read-only.',
+                _description: 'Output only. Affiliate Location Placeholder Fields. This field is read-only.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -41,7 +43,7 @@ module.exports = {
                 _type: 'enum',
             },
             app_field: {
-                _description: 'App Placeholder Fields.',
+                _description: 'Immutable. App Placeholder Fields.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -82,7 +84,7 @@ module.exports = {
                 _type: 'enum',
             },
             call_field: {
-                _description: 'Call Placeholder Fields.',
+                _description: 'Immutable. Call Placeholder Fields.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -116,7 +118,7 @@ module.exports = {
                 _type: 'enum',
             },
             callout_field: {
-                _description: 'Callout Placeholder Fields.',
+                _description: 'Immutable. Callout Placeholder Fields.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -128,7 +130,7 @@ module.exports = {
                 _type: 'enum',
             },
             custom_field: {
-                _description: 'Custom Placeholder Fields',
+                _description: 'Immutable. Custom Placeholder Fields',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -219,7 +221,7 @@ module.exports = {
                 _type: 'enum',
             },
             dsa_page_feed_field: {
-                _description: 'Dynamic Search Ad Page Feed Fields.',
+                _description: 'Immutable. Dynamic Search Ad Page Feed Fields.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -239,7 +241,7 @@ module.exports = {
                 _type: 'enum',
             },
             education_field: {
-                _description: 'Education Placeholder Fields',
+                _description: 'Immutable. Education Placeholder Fields',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -311,14 +313,14 @@ module.exports = {
                 ],
                 _type: 'enum',
             },
-            feed_attribute_id: { _description: 'Feed attribute from which to map.', _type: 'int64' },
+            feed_attribute_id: { _description: 'Immutable. Feed attribute from which to map.', _type: 'int64' },
             field_id: {
                 _description:
-                    'The placeholder field ID. If a placeholder field enum is not published in the current API version, then this field will be populated and the field oneof will be empty. This field is read-only.',
+                    'Output only. The placeholder field ID. If a placeholder field enum is not published in the current API version, then this field will be populated and the field oneof will be empty. This field is read-only.',
                 _type: 'int64',
             },
             flight_field: {
-                _description: 'Flight Placeholder Fields',
+                _description: 'Immutable. Flight Placeholder Fields',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -390,7 +392,7 @@ module.exports = {
                 _type: 'enum',
             },
             hotel_field: {
-                _description: 'Hotel Placeholder Fields',
+                _description: 'Immutable. Hotel Placeholder Fields',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -477,7 +479,7 @@ module.exports = {
                 _type: 'enum',
             },
             job_field: {
-                _description: 'Job Placeholder Fields',
+                _description: 'Immutable. Job Placeholder Fields',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -555,7 +557,7 @@ module.exports = {
                 _type: 'enum',
             },
             local_field: {
-                _description: 'Local Placeholder Fields',
+                _description: 'Immutable. Local Placeholder Fields',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -635,7 +637,7 @@ module.exports = {
                 _type: 'enum',
             },
             location_extension_targeting_field: {
-                _description: 'Location Target Fields.',
+                _description: 'Immutable. Location Target Fields.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -652,7 +654,7 @@ module.exports = {
                 _type: 'enum',
             },
             location_field: {
-                _description: 'Location Placeholder Fields. This field is read-only.',
+                _description: 'Output only. Location Placeholder Fields. This field is read-only.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -671,7 +673,7 @@ module.exports = {
                 _type: 'enum',
             },
             message_field: {
-                _description: 'Message Placeholder Fields.',
+                _description: 'Immutable. Message Placeholder Fields.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -698,7 +700,7 @@ module.exports = {
                 _type: 'enum',
             },
             price_field: {
-                _description: 'Price Placeholder Fields.',
+                _description: 'Immutable. Price Placeholder Fields.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -933,7 +935,7 @@ module.exports = {
                 _type: 'enum',
             },
             promotion_field: {
-                _description: 'Promotion Placeholder Fields.',
+                _description: 'Immutable. Promotion Placeholder Fields.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -997,7 +999,7 @@ module.exports = {
                 _type: 'enum',
             },
             real_estate_field: {
-                _description: 'Real Estate Placeholder Fields',
+                _description: 'Immutable. Real Estate Placeholder Fields',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -1071,7 +1073,7 @@ module.exports = {
                 _type: 'enum',
             },
             sitelink_field: {
-                _description: 'Sitelink Placeholder Fields.',
+                _description: 'Immutable. Sitelink Placeholder Fields.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -1102,7 +1104,7 @@ module.exports = {
                 _type: 'enum',
             },
             structured_snippet_field: {
-                _description: 'Structured Snippet Placeholder Fields.',
+                _description: 'Immutable. Structured Snippet Placeholder Fields.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -1123,7 +1125,7 @@ module.exports = {
                 _type: 'enum',
             },
             travel_field: {
-                _description: 'Travel Placeholder Fields',
+                _description: 'Immutable. Travel Placeholder Fields',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -1213,7 +1215,7 @@ module.exports = {
         },
         criterion_type: {
             _description:
-                'The criterion type of this mapping (i.e., if the mapping maps feed attributes to criterion fields).',
+                'Immutable. The criterion type of this mapping (i.e., if the mapping maps feed attributes to criterion fields).',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -1229,10 +1231,10 @@ module.exports = {
             _oneof: 'target',
             _type: 'enum',
         },
-        feed: { _description: 'The feed of this feed mapping.', _type: 'string' },
+        feed: { _description: 'Immutable. The feed of this feed mapping.', _type: 'string' },
         placeholder_type: {
             _description:
-                'The placeholder type of this mapping (i.e., if the mapping maps feed attributes to placeholder fields).',
+                'Immutable. The placeholder type of this mapping (i.e., if the mapping maps feed attributes to placeholder fields).',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -1317,11 +1319,11 @@ module.exports = {
         },
         resource_name: {
             _description:
-                'The resource name of the feed mapping. Feed mapping resource names have the form: <code>customers/{customer_id}/feedMappings/{feed_id}~{feed_mapping_id}</code>',
+                'Immutable. The resource name of the feed mapping. Feed mapping resource names have the form: <code>customers/{customer_id}/feedMappings/{feed_id}~{feed_mapping_id}</code>',
             _type: 'string',
         },
         status: {
-            _description: 'Status of the feed mapping. This field is read-only.',
+            _description: 'Output only. Status of the feed mapping. This field is read-only.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },

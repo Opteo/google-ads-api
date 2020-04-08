@@ -1,10 +1,10 @@
 module.exports = {
     name: 'AdGroupBidModifier',
     object: {
-        ad_group: { _description: 'The ad group to which this criterion belongs.', _type: 'string' },
+        ad_group: { _description: 'Immutable. The ad group to which this criterion belongs.', _type: 'string' },
         base_ad_group: {
             _description:
-                'The base ad group from which this draft/trial adgroup bid modifier was created. If ad_group is a base ad group then this field will be equal to ad_group. If the ad group was created in the draft or trial and has no corresponding base ad group, then this field will be null. This field is readonly.',
+                'Output only. The base ad group from which this draft/trial adgroup bid modifier was created. If ad_group is a base ad group then this field will be equal to ad_group. If the ad group was created in the draft or trial and has no corresponding base ad group, then this field will be null. This field is readonly.',
             _type: 'string',
         },
         bid_modifier: {
@@ -13,7 +13,7 @@ module.exports = {
             _type: 'double',
         },
         bid_modifier_source: {
-            _description: 'Bid modifier source.',
+            _description: 'Output only. Bid modifier source.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -27,11 +27,12 @@ module.exports = {
             _type: 'enum',
         },
         criterion_id: {
-            _description: 'The ID of the criterion to bid modify. This field is ignored for mutates.',
+            _description: 'Output only. The ID of the criterion to bid modify. This field is ignored for mutates.',
             _type: 'int64',
         },
         device: {
             _oneof: 'criterion',
+            _parent_description: 'Immutable. A device criterion.',
             type: {
                 _description: 'Type of the device.',
                 _enums: [
@@ -48,11 +49,13 @@ module.exports = {
         },
         hotel_advance_booking_window: {
             _oneof: 'criterion',
+            _parent_description: 'Immutable. Criterion for number of days prior to the stay the booking is being made.',
             max_days: { _description: 'High end of the number of days prior to the stay.', _type: 'int64' },
             min_days: { _description: 'Low end of the number of days prior to the stay.', _type: 'int64' },
         },
         hotel_check_in_day: {
             _oneof: 'criterion',
+            _parent_description: 'Immutable. Criterion for day of the week the booking is for.',
             day_of_week: {
                 _description: 'The day of the week.',
                 _enums: [
@@ -71,6 +74,7 @@ module.exports = {
         },
         hotel_date_selection_type: {
             _oneof: 'criterion',
+            _parent_description: 'Immutable. Criterion for hotel date selection (default dates vs. user selected).',
             type: {
                 _description: 'Type of the hotel date selection',
                 _enums: [
@@ -87,11 +91,13 @@ module.exports = {
         },
         hotel_length_of_stay: {
             _oneof: 'criterion',
+            _parent_description: 'Immutable. Criterion for length of hotel stay in nights.',
             max_nights: { _description: 'High end of the number of nights in the stay.', _type: 'int64' },
             min_nights: { _description: 'Low end of the number of nights in the stay.', _type: 'int64' },
         },
         preferred_content: {
             _oneof: 'criterion',
+            _parent_description: 'Immutable. A preferred content criterion.',
             type: {
                 _description: 'Type of the preferred content.',
                 _enums: [
@@ -104,7 +110,7 @@ module.exports = {
         },
         resource_name: {
             _description:
-                'The resource name of the ad group bid modifier. Ad group bid modifier resource names have the form: <code>customers/{customer_id}/adGroupBidModifiers/{ad_group_id}~{criterion_id}</code>',
+                'Immutable. The resource name of the ad group bid modifier. Ad group bid modifier resource names have the form: <code>customers/{customer_id}/adGroupBidModifiers/{ad_group_id}~{criterion_id}</code>',
             _type: 'string',
         },
     },

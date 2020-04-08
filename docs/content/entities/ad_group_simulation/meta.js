@@ -1,10 +1,12 @@
 module.exports = {
     name: 'AdGroupSimulation',
     object: {
-        ad_group_id: { _description: 'Ad group id of the simulation.', _type: 'int64' },
+        ad_group_id: { _description: 'Output only. Ad group id of the simulation.', _type: 'int64' },
         cpc_bid_point_list: {
             _oneof: 'pointList',
+            _parent_description: 'Output only. Simulation points if the simulation type is CPC_BID.',
             points: {
+                _parent_description: 'Projected metrics for a series of CPC bid amounts.',
                 _type: 'array of objects',
                 biddable_conversions: { _description: 'Projected number of biddable conversions.', _type: 'double' },
                 biddable_conversions_value: {
@@ -27,7 +29,9 @@ module.exports = {
         },
         cpv_bid_point_list: {
             _oneof: 'pointList',
+            _parent_description: 'Output only. Simulation points if the simulation type is CPV_BID.',
             points: {
+                _parent_description: 'Projected metrics for a series of CPV bid amounts.',
                 _type: 'array of objects',
                 cost_micros: { _description: 'Projected cost in micros.', _type: 'int64' },
                 cpv_bid_micros: {
@@ -38,9 +42,12 @@ module.exports = {
                 views: { _description: 'Projected number of views.', _type: 'int64' },
             },
         },
-        end_date: { _description: 'Last day on which the simulation is based, in YYYY-MM-DD format', _type: 'string' },
+        end_date: {
+            _description: 'Output only. Last day on which the simulation is based, in YYYY-MM-DD format',
+            _type: 'string',
+        },
         modification_method: {
-            _description: 'How the simulation modifies the field.',
+            _description: 'Output only. How the simulation modifies the field.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -59,16 +66,18 @@ module.exports = {
         },
         resource_name: {
             _description:
-                'The resource name of the ad group simulation. Ad group simulation resource names have the form: <code>customers/{customer_id}/adGroupSimulations/{ad_group_id}~{type}~{modification_method}~{start_date}~{end_date}</code>',
+                'Output only. The resource name of the ad group simulation. Ad group simulation resource names have the form: <code>customers/{customer_id}/adGroupSimulations/{ad_group_id}~{type}~{modification_method}~{start_date}~{end_date}</code>',
             _type: 'string',
         },
         start_date: {
-            _description: 'First day on which the simulation is based, in YYYY-MM-DD format.',
+            _description: 'Output only. First day on which the simulation is based, in YYYY-MM-DD format.',
             _type: 'string',
         },
         target_cpa_point_list: {
             _oneof: 'pointList',
+            _parent_description: 'Output only. Simulation points if the simulation type is TARGET_CPA.',
             points: {
+                _parent_description: 'Projected metrics for a series of target CPA amounts.',
                 _type: 'array of objects',
                 biddable_conversions: { _description: 'Projected number of biddable conversions.', _type: 'double' },
                 biddable_conversions_value: {
@@ -90,7 +99,7 @@ module.exports = {
             },
         },
         type: {
-            _description: 'The field that the simulation modifies.',
+            _description: 'Output only. The field that the simulation modifies.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },

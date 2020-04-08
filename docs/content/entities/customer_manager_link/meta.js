@@ -1,11 +1,17 @@
 module.exports = {
     name: 'CustomerManagerLink',
     object: {
-        manager_customer: { _description: 'The manager customer linked to the customer.', _type: 'string' },
-        manager_link_id: { _description: 'ID of the customer-manager link. This field is read only.', _type: 'int64' },
+        manager_customer: {
+            _description: 'Output only. The manager customer linked to the customer.',
+            _type: 'string',
+        },
+        manager_link_id: {
+            _description: 'Output only. ID of the customer-manager link. This field is read only.',
+            _type: 'int64',
+        },
         resource_name: {
             _description:
-                'Name of the resource. CustomerManagerLink resource names have the form: <code>customers/{customer_id}/customerManagerLinks/{manager_customer_id}~{manager_link_id}</code>',
+                'Immutable. Name of the resource. CustomerManagerLink resource names have the form: <code>customers/{customer_id}/customerManagerLinks/{manager_customer_id}~{manager_link_id}</code>',
             _type: 'string',
         },
         status: {

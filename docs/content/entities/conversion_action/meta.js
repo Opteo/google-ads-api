@@ -3,6 +3,7 @@ module.exports = {
     object: {
         app_id: { _description: 'App ID for an app conversion action.', _type: 'string' },
         attribution_model_settings: {
+            _parent_description: "Settings related to this conversion action's attribution model.",
             attribution_model: {
                 _description: 'The attribution model type of this conversion action.',
                 _enums: [
@@ -45,7 +46,7 @@ module.exports = {
                 _type: 'enum',
             },
             data_driven_model_status: {
-                _description: 'The status of the data-driven attribution model for the conversion action.',
+                _description: 'Output only. The status of the data-driven attribution model for the conversion action.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -101,7 +102,7 @@ module.exports = {
             ],
             _type: 'enum',
         },
-        id: { _description: 'The ID of the conversion action.', _type: 'int64' },
+        id: { _description: 'Output only. The ID of the conversion action.', _type: 'int64' },
         include_in_conversions_metric: {
             _description: 'Whether this conversion action should be included in the "conversions" metric.',
             _type: 'boolean',
@@ -113,7 +114,7 @@ module.exports = {
         },
         owner_customer: {
             _description:
-                'The resource name of the conversion action owner customer, or null if this is a system-defined conversion action.',
+                'Output only. The resource name of the conversion action owner customer, or null if this is a system-defined conversion action.',
             _type: 'string',
         },
         phone_call_duration_seconds: {
@@ -123,7 +124,7 @@ module.exports = {
         },
         resource_name: {
             _description:
-                'The resource name of the conversion action. Conversion action resource names have the form: <code>customers/{customer_id}/conversionActions/{conversion_action_id}</code>',
+                'Immutable. The resource name of the conversion action. Conversion action resource names have the form: <code>customers/{customer_id}/conversionActions/{conversion_action_id}</code>',
             _type: 'string',
         },
         status: {
@@ -142,6 +143,7 @@ module.exports = {
             _type: 'enum',
         },
         tag_snippets: {
+            _parent_description: 'Output only. The snippets used for tracking conversions.',
             _type: 'array of objects',
             event_snippet: {
                 _description:
@@ -196,7 +198,7 @@ module.exports = {
             },
         },
         type: {
-            _description: 'The type of this conversion action.',
+            _description: 'Immutable. The type of this conversion action.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -230,6 +232,8 @@ module.exports = {
             _type: 'enum',
         },
         value_settings: {
+            _parent_description:
+                'Settings related to the value for conversion events associated with this conversion action.',
             always_use_default_value: {
                 _description:
                     'Controls whether the default value and default currency code are used in place of the value and currency code specified in conversion events for this conversion action.',

@@ -29,14 +29,15 @@ let result = await customer.domainCategories.list({
   {
     domain_category: {
       campaign: 'customers/3827277046/campaigns/1398201241',
-      category: 'google sheets/dashboards with google sheets',
-      category_rank: 2,
-      coverage_fraction: 1.6129032258064515,
+      category: 'landing pages from your standard ad groups',
+      category_rank: 0,
+      coverage_fraction: 3.508771929824561,
       domain: 'opteo.com',
       has_children: false,
       language_code: 'en',
+      recommended_cpc_bid_micros: 7056951,
       resource_name:
-        'customers/3827277046/domainCategories/1398201241~Z29vZ2xlIHNoZWV0cy9kYXNoYm9hcmRzIHdpdGggZ29vZ2xlIHNoZWV0cw~en',
+        'customers/3827277046/domainCategories/1398201241~bGFuZGluZyBwYWdlcyBmcm9tIHlvdXIgc3RhbmRhcmQgYWQgZ3JvdXBz~en',
     },
     campaign: {
       ad_serving_optimization_status: 5,
@@ -101,7 +102,7 @@ let result = await customer.domainCategories.list({
       test_account: false,
       time_zone: 'Europe/London',
       tracking_url_template:
-        'https://w.opteo.co/workers/parallel?url={lpurl}&domain_id=123443&campaign_id={campaignid}&adgroup_id={adgroupid}&matchtype={matchtype}&network={network}&device={device}',
+        'https://w.opteo.co/workers/parallel?url={lpurl}&domain_id=123443&campaign_id={campaignid}&adgroup_id={adgroupid}&matchtype={matchtype}&network={network}&device={device}&keyword={keyword}&targetid={targetid}',
     },
   },
 ]
