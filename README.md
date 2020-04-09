@@ -118,4 +118,4 @@ await customer.campaigns.delete(new_campaign_resource_name)
 
 There are many more examples in the [full documentation](https://opteo.com/dev/google-ads-api).
 
-You can also find a couple ready-to-run examples [in this branch](https://github.com/Opteo/google-ads-api/tree/561e5b4782a3a184c920d04aefdbc6e7547f0ae4/examples).
+You can also find a couple ready-to-run examples in the [/examples directory](https://github.com/Opteo/google-ads-api/tree/master/examples).
