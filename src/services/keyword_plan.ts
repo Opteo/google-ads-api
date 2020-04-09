@@ -75,7 +75,16 @@ export default class KeywordPlanService extends Service {
     public async generateForecastMetrics(id: number | string): Promise<GenerateForecastMetricsResponse> {
         const request = new GenerateForecastMetricsRequest()
         request.setKeywordPlan(`customers/${this.cid}/${RESOURCE_URL_NAME}/${id}`)
-        const response = await this.service.generateForecastMetrics(request)
+        const response = await new Promise((resolve, reject) => {
+            this.service.generateForecastMetrics(request, (err: any, res: any) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(res)
+                }
+            })
+        })
+
         const [parsed] = this.parseServiceResults([response]) as GenerateForecastMetricsResponse[]
         return parsed
     }
@@ -83,7 +92,15 @@ export default class KeywordPlanService extends Service {
     public async generateHistoricalMetrics(id: number | string): Promise<GenerateHistoricalMetricsResponse> {
         const request = new GenerateHistoricalMetricsRequest()
         request.setKeywordPlan(`customers/${this.cid}/${RESOURCE_URL_NAME}/${id}`)
-        const response = await this.service.generateHistoricalMetrics(request)
+        const response = await new Promise((resolve, reject) => {
+            this.service.generateHistoricalMetrics(request, (err: any, res: any) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(res)
+                }
+            })
+        })
         const [parsed] = this.parseServiceResults([response]) as GenerateHistoricalMetricsResponse[]
         return parsed
     }

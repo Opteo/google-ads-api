@@ -1,9 +1,10 @@
 module.exports = {
     name: 'AdGroupCriterion',
     object: {
-        ad_group: { _description: 'The ad group to which the criterion belongs.', _type: 'string' },
+        ad_group: { _description: 'Immutable. The ad group to which the criterion belongs.', _type: 'string' },
         age_range: {
             _oneof: 'criterion',
+            _parent_description: 'Immutable. Age range.',
             type: {
                 _description: 'Type of the age range.',
                 _enums: [
@@ -25,6 +26,7 @@ module.exports = {
         },
         app_payment_model: {
             _oneof: 'criterion',
+            _parent_description: 'Immutable. App Payment Model.',
             type: {
                 _description: 'Type of the app payment model.',
                 _enums: [
@@ -39,7 +41,7 @@ module.exports = {
             },
         },
         approval_status: {
-            _description: 'Approval status of the criterion.',
+            _description: 'Output only. Approval status of the criterion.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
@@ -58,18 +60,26 @@ module.exports = {
         cpc_bid_micros: { _description: 'The CPC (cost-per-click) bid.', _type: 'int64' },
         cpm_bid_micros: { _description: 'The CPM (cost-per-thousand viewable impressions) bid.', _type: 'int64' },
         cpv_bid_micros: { _description: 'The CPV (cost-per-view) bid.', _type: 'int64' },
-        criterion_id: { _description: 'The ID of the criterion. This field is ignored for mutates.', _type: 'int64' },
+        criterion_id: {
+            _description: 'Output only. The ID of the criterion. This field is ignored for mutates.',
+            _type: 'int64',
+        },
         custom_affinity: {
             _oneof: 'criterion',
+            _parent_description: 'Immutable. Custom Affinity.',
             custom_affinity: { _description: 'The CustomInterest resource name.', _type: 'string' },
         },
         custom_intent: {
             _oneof: 'criterion',
+            _parent_description: 'Immutable. Custom Intent.',
             custom_intent: { _description: 'The CustomInterest resource name.', _type: 'string' },
         },
-        effective_cpc_bid_micros: { _description: 'The effective CPC (cost-per-click) bid.', _type: 'int64' },
+        effective_cpc_bid_micros: {
+            _description: 'Output only. The effective CPC (cost-per-click) bid.',
+            _type: 'int64',
+        },
         effective_cpc_bid_source: {
-            _description: 'Source of the effective CPC bid.',
+            _description: 'Output only. Source of the effective CPC bid.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -83,11 +93,11 @@ module.exports = {
             _type: 'enum',
         },
         effective_cpm_bid_micros: {
-            _description: 'The effective CPM (cost-per-thousand viewable impressions) bid.',
+            _description: 'Output only. The effective CPM (cost-per-thousand viewable impressions) bid.',
             _type: 'int64',
         },
         effective_cpm_bid_source: {
-            _description: 'Source of the effective CPM bid.',
+            _description: 'Output only. Source of the effective CPM bid.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -100,9 +110,12 @@ module.exports = {
             ],
             _type: 'enum',
         },
-        effective_cpv_bid_micros: { _description: 'The effective CPV (cost-per-view) bid.', _type: 'int64' },
+        effective_cpv_bid_micros: {
+            _description: 'Output only. The effective CPV (cost-per-view) bid.',
+            _type: 'int64',
+        },
         effective_cpv_bid_source: {
-            _description: 'Source of the effective CPV bid.',
+            _description: 'Output only. Source of the effective CPV bid.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -115,9 +128,12 @@ module.exports = {
             ],
             _type: 'enum',
         },
-        effective_percent_cpc_bid_micros: { _description: 'The effective Percent CPC bid amount.', _type: 'int64' },
+        effective_percent_cpc_bid_micros: {
+            _description: 'Output only. The effective Percent CPC bid amount.',
+            _type: 'int64',
+        },
         effective_percent_cpc_bid_source: {
-            _description: 'Source of the effective Percent CPC bid.',
+            _description: 'Output only. Source of the effective Percent CPC bid.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -141,6 +157,7 @@ module.exports = {
         },
         gender: {
             _oneof: 'criterion',
+            _parent_description: 'Immutable. Gender.',
             type: {
                 _description: 'Type of the gender.',
                 _enums: [
@@ -158,6 +175,7 @@ module.exports = {
         },
         income_range: {
             _oneof: 'criterion',
+            _parent_description: 'Immutable. Income range.',
             type: {
                 _description: 'Type of the income range.',
                 _enums: [
@@ -179,6 +197,7 @@ module.exports = {
         },
         keyword: {
             _oneof: 'criterion',
+            _parent_description: 'Immutable. Keyword.',
             match_type: {
                 _description: 'The match type of the keyword.',
                 _enums: [
@@ -197,42 +216,35 @@ module.exports = {
         },
         listing_group: {
             _oneof: 'criterion',
+            _parent_description: 'Immutable. Listing group.',
             case_value: {
+                _parent_description:
+                    'Dimension value with which this listing group is refining its parent. Undefined for the root group.',
                 hotel_city: {
+                    _parent_description: 'City the hotel is located in.',
                     city_criterion: { _description: 'The Geo Target Constant resource name.', _type: 'string' },
                 },
-                hotel_class: { value: { _description: 'Long value of the hotel class.', _type: 'int64' } },
+                hotel_class: {
+                    _parent_description: 'Class of the hotel as a number of stars 1 to 5.',
+                    value: { _description: 'Long value of the hotel class.', _type: 'int64' },
+                },
                 hotel_country_region: {
+                    _parent_description: 'Country or Region the hotel is located in.',
                     country_region_criterion: {
                         _description: 'The Geo Target Constant resource name.',
                         _type: 'string',
                     },
                 },
-                hotel_id: { value: { _description: 'String value of the hotel ID.', _type: 'string' } },
+                hotel_id: {
+                    _parent_description: 'Advertiser-specific hotel ID.',
+                    value: { _description: 'String value of the hotel ID.', _type: 'string' },
+                },
                 hotel_state: {
+                    _parent_description: 'State the hotel is located in.',
                     state_criterion: { _description: 'The Geo Target Constant resource name.', _type: 'string' },
                 },
-                listing_brand: { value: { _description: 'String value of the listing brand.', _type: 'string' } },
-                listing_custom_attribute: {
-                    index: {
-                        _description: 'Indicates the index of the custom attribute.',
-                        _enums: [
-                            { s: 'UNSPECIFIED', description: 'Not specified.' },
-                            {
-                                s: 'UNKNOWN',
-                                description: 'Used for return value only. Represents value unknown in this version.',
-                            },
-                            { s: 'INDEX0', description: 'First listing custom attribute.' },
-                            { s: 'INDEX1', description: 'Second listing custom attribute.' },
-                            { s: 'INDEX2', description: 'Third listing custom attribute.' },
-                            { s: 'INDEX3', description: 'Fourth listing custom attribute.' },
-                            { s: 'INDEX4', description: 'Fifth listing custom attribute.' },
-                        ],
-                        _type: 'enum',
-                    },
-                    value: { _description: 'String value of the listing custom attribute.', _type: 'string' },
-                },
                 product_bidding_category: {
+                    _parent_description: 'Bidding category of a product offer.',
                     country_code: {
                         _description:
                             'Two-letter upper-case country code of the product bidding category. It must match the campaign.shopping_setting.sales_country field.',
@@ -240,7 +252,7 @@ module.exports = {
                     },
                     id: {
                         _description:
-                            'ID of the product bidding category. This ID is equivalent to the google_product_category ID as described in this article: https://support.google.com/merchants/answer/6324436.',
+                            'ID of the product bidding category. This ID is equivalent to the google_product_category ID as described in this article: https://support.google.com/merchants/answer/6324436',
                         _type: 'int64',
                     },
                     level: {
@@ -260,7 +272,12 @@ module.exports = {
                         _type: 'enum',
                     },
                 },
+                product_brand: {
+                    _parent_description: 'Brand of a product offer.',
+                    value: { _description: 'String value of the product brand.', _type: 'string' },
+                },
                 product_channel: {
+                    _parent_description: 'Locality of a product offer.',
                     channel: {
                         _description: 'Value of the locality.',
                         _enums: [
@@ -276,6 +293,7 @@ module.exports = {
                     },
                 },
                 product_channel_exclusivity: {
+                    _parent_description: 'Availability of a product offer.',
                     channel_exclusivity: {
                         _description: 'Value of the availability.',
                         _enums: [
@@ -299,6 +317,7 @@ module.exports = {
                     },
                 },
                 product_condition: {
+                    _parent_description: 'Condition of a product offer.',
                     condition: {
                         _description: 'Value of the condition.',
                         _enums: [
@@ -314,8 +333,32 @@ module.exports = {
                         _type: 'enum',
                     },
                 },
-                product_item_id: { value: { _description: 'Value of the id.', _type: 'string' } },
+                product_custom_attribute: {
+                    _parent_description: 'Custom attribute of a product offer.',
+                    index: {
+                        _description: 'Indicates the index of the custom attribute.',
+                        _enums: [
+                            { s: 'UNSPECIFIED', description: 'Not specified.' },
+                            {
+                                s: 'UNKNOWN',
+                                description: 'Used for return value only. Represents value unknown in this version.',
+                            },
+                            { s: 'INDEX0', description: 'First product custom attribute.' },
+                            { s: 'INDEX1', description: 'Second product custom attribute.' },
+                            { s: 'INDEX2', description: 'Third product custom attribute.' },
+                            { s: 'INDEX3', description: 'Fourth product custom attribute.' },
+                            { s: 'INDEX4', description: 'Fifth product custom attribute.' },
+                        ],
+                        _type: 'enum',
+                    },
+                    value: { _description: 'String value of the product custom attribute.', _type: 'string' },
+                },
+                product_item_id: {
+                    _parent_description: 'Item id of a product offer.',
+                    value: { _description: 'Value of the id.', _type: 'string' },
+                },
                 product_type: {
+                    _parent_description: 'Type of a product offer.',
                     level: {
                         _description: 'Level of the type.',
                         _enums: [
@@ -334,7 +377,9 @@ module.exports = {
                     },
                     value: { _description: 'Value of the type.', _type: 'string' },
                 },
-                unknown_listing_dimension: {},
+                unknown_listing_dimension: {
+                    _parent_description: 'Unknown dimension. Set when no other listing dimension is set.',
+                },
             },
             parent_ad_group_criterion: {
                 _description:
@@ -361,6 +406,7 @@ module.exports = {
         },
         mobile_app_category: {
             _oneof: 'criterion',
+            _parent_description: 'Immutable. Mobile app category.',
             mobile_app_category_constant: {
                 _description: 'The mobile app category constant resource name.',
                 _type: 'string',
@@ -368,20 +414,22 @@ module.exports = {
         },
         mobile_application: {
             _oneof: 'criterion',
+            _parent_description: 'Immutable. Mobile application.',
             app_id: {
                 _description:
-                    'A string that uniquely identifies a mobile application to Google Ads API. The format of this string is "{platform}-{platform_native_id}", where platform is "1" for iOS apps and "2" for Android apps, and where platform_native_id is the mobile application identifier native to the corresponding platform. For iOS, this native identifier is the 9 digit string that appears at the end of an App Store URL (e.g., "476943146" for "Flood-It! 2" whose App Store link is http://itunes.apple.com/us/app/flood-it!-2/id476943146). For Android, this native identifier is the application\'s package name (e.g., "com.labpixies.colordrips" for "Color Drips" given Google Play link https://play.google.com/store/apps/details?id=com.labpixies.colordrips). A well formed app id for Google Ads API would thus be "1-476943146" for iOS and "2-com.labpixies.colordrips" for Android. This field is required and must be set in CREATE operations.',
+                    'A string that uniquely identifies a mobile application to Google Ads API. The format of this string is "{platform}-{platform_native_id}", where platform is "1" for iOS apps and "2" for Android apps, and where platform_native_id is the mobile application identifier native to the corresponding platform. For iOS, this native identifier is the 9 digit string that appears at the end of an App Store URL (e.g., "476943146" for "Flood-It! 2" whose App Store link is "http://itunes.apple.com/us/app/flood-it!-2/id476943146"). For Android, this native identifier is the application\'s package name (e.g., "com.labpixies.colordrips" for "Color Drips" given Google Play link "https://play.google.com/store/apps/details?id=com.labpixies.colordrips"). A well formed app id for Google Ads API would thus be "1-476943146" for iOS and "2-com.labpixies.colordrips" for Android. This field is required and must be set in CREATE operations.',
                 _type: 'string',
             },
             name: { _description: 'Name of this mobile application.', _type: 'string' },
         },
         negative: {
             _description:
-                'Whether to target (<code>false</code>) or exclude (<code>true</code>) the criterion. This field is immutable. To switch a criterion from positive to negative, remove then re-add it.',
+                'Immutable. Whether to target (<code>false</code>) or exclude (<code>true</code>) the criterion. This field is immutable. To switch a criterion from positive to negative, remove then re-add it.',
             _type: 'boolean',
         },
         parental_status: {
             _oneof: 'criterion',
+            _parent_description: 'Immutable. Parental status.',
             type: {
                 _description: 'Type of the parental status.',
                 _enums: [
@@ -404,38 +452,41 @@ module.exports = {
         },
         placement: {
             _oneof: 'criterion',
+            _parent_description: 'Immutable. Placement.',
             url: { _description: 'URL of the placement. For example, "http://www.domain.com".', _type: 'string' },
         },
         position_estimates: {
+            _parent_description: 'Output only. Estimates for criterion bids at various positions.',
             estimated_add_clicks_at_first_position_cpc: {
                 _description:
-                    'Estimate of how many clicks per week you might get by changing your keyword bid to the value in first_position_cpc_micros.',
+                    'Output only. Estimate of how many clicks per week you might get by changing your keyword bid to the value in first_position_cpc_micros.',
                 _type: 'int64',
             },
             estimated_add_cost_at_first_position_cpc: {
                 _description:
-                    'Estimate of how your cost per week might change when changing your keyword bid to the value in first_position_cpc_micros.',
+                    'Output only. Estimate of how your cost per week might change when changing your keyword bid to the value in first_position_cpc_micros.',
                 _type: 'int64',
             },
             first_page_cpc_micros: {
                 _description:
-                    'The estimate of the CPC bid required for ad to be shown on first page of search results.',
+                    'Output only. The estimate of the CPC bid required for ad to be shown on first page of search results.',
                 _type: 'int64',
             },
             first_position_cpc_micros: {
                 _description:
-                    'The estimate of the CPC bid required for ad to be displayed in first position, at the top of the first page of search results.',
+                    'Output only. The estimate of the CPC bid required for ad to be displayed in first position, at the top of the first page of search results.',
                 _type: 'int64',
             },
             top_of_page_cpc_micros: {
                 _description:
-                    'The estimate of the CPC bid required for ad to be displayed at the top of the first page of search results.',
+                    'Output only. The estimate of the CPC bid required for ad to be displayed at the top of the first page of search results.',
                 _type: 'int64',
             },
         },
         quality_info: {
+            _parent_description: 'Output only. Information regarding the quality of the criterion.',
             creative_quality_score: {
-                _description: 'The performance of the ad compared to other advertisers.',
+                _description: 'Output only. The performance of the ad compared to other advertisers.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -449,7 +500,7 @@ module.exports = {
                 _type: 'enum',
             },
             post_click_quality_score: {
-                _description: 'The quality score of the landing page.',
+                _description: 'Output only. The quality score of the landing page.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -464,11 +515,11 @@ module.exports = {
             },
             quality_score: {
                 _description:
-                    'The quality score. This field may not be populated if Google does not have enough information to determine a value.',
+                    'Output only. The quality score. This field may not be populated if Google does not have enough information to determine a value.',
                 _type: 'int32',
             },
             search_predicted_ctr: {
-                _description: 'The click-through rate compared to that of other advertisers.',
+                _description: 'Output only. The click-through rate compared to that of other advertisers.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -484,7 +535,7 @@ module.exports = {
         },
         resource_name: {
             _description:
-                'The resource name of the ad group criterion. Ad group criterion resource names have the form: <code>customers/{customer_id}/adGroupCriteria/{ad_group_id}~{criterion_id}</code>',
+                'Immutable. The resource name of the ad group criterion. Ad group criterion resource names have the form: <code>customers/{customer_id}/adGroupCriteria/{ad_group_id}~{criterion_id}</code>',
             _type: 'string',
         },
         status: {
@@ -502,7 +553,7 @@ module.exports = {
             _type: 'enum',
         },
         system_serving_status: {
-            _description: 'Serving status of the criterion.',
+            _description: 'Output only. Serving status of the criterion.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
@@ -513,6 +564,7 @@ module.exports = {
         },
         topic: {
             _oneof: 'criterion',
+            _parent_description: 'Immutable. Topic.',
             path: {
                 _description:
                     'The category to target or exclude. Each subsequent element in the array describes a more specific sub-category. For example, "Pets &amp; Animals", "Pets", "Dogs" represents the "Pets &amp; Animals/Pets/Dogs" category.',
@@ -522,7 +574,7 @@ module.exports = {
         },
         tracking_url_template: { _description: 'The URL template for constructing a tracking URL.', _type: 'string' },
         type: {
-            _description: 'The type of the criterion.',
+            _description: 'Output only. The type of the criterion.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -560,21 +612,28 @@ module.exports = {
             _type: 'enum',
         },
         url_custom_parameters: {
+            _parent_description:
+                'The list of mappings used to substitute custom parameter tags in a <code>tracking_url_template</code>, <code>final_urls</code>, or <code>mobile_final_urls</code>.',
             _type: 'array of objects',
             key: { _description: 'The key matching the parameter tag name.', _type: 'string' },
             value: { _description: 'The value to be substituted.', _type: 'string' },
         },
         user_interest: {
             _oneof: 'criterion',
+            _parent_description: 'Immutable. User Interest.',
             user_interest_category: { _description: 'The UserInterest resource name.', _type: 'string' },
         },
         user_list: {
             _oneof: 'criterion',
+            _parent_description: 'Immutable. User List.',
             user_list: { _description: 'The User List resource name.', _type: 'string' },
         },
         webpage: {
             _oneof: 'criterion',
+            _parent_description: 'Immutable. Webpage',
             conditions: {
+                _parent_description:
+                    'Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting. This field is required for CREATE operations and is prohibited on UPDATE operations.',
                 _type: 'array of objects',
                 argument: { _description: 'Argument of webpage targeting condition.', _type: 'string' },
                 operand: {
@@ -624,6 +683,7 @@ module.exports = {
         },
         youtube_channel: {
             _oneof: 'criterion',
+            _parent_description: 'Immutable. YouTube Channel.',
             channel_id: {
                 _description: 'The YouTube uploader channel id or the channel code of a YouTube channel.',
                 _type: 'string',
@@ -631,6 +691,7 @@ module.exports = {
         },
         youtube_video: {
             _oneof: 'criterion',
+            _parent_description: 'Immutable. YouTube Video.',
             video_id: { _description: 'YouTube video id as it appears on the YouTube watch page.', _type: 'string' },
         },
     },

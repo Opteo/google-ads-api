@@ -28,17 +28,17 @@ let result = await customer.recommendations.list({
 ;[
   {
     recommendation: {
-      ad_group: 'customers/3827277046/adGroups/77057366352',
+      ad_group: 'customers/3827277046/adGroups/77057364872',
       campaign: 'customers/3827277046/campaigns/2081620945',
       campaign_budget: 'customers/3827277046/campaignBudgets/6449346159',
       dismissed: false,
       impact: {
-        base_metrics: { clicks: 7, cost_micros: 48580000, impressions: 83 },
-        potential_metrics: { clicks: 8, cost_micros: 56737345, impressions: 161 },
+        base_metrics: { clicks: 1, cost_micros: 7730000, impressions: 2 },
+        potential_metrics: { clicks: 1, conversions: 0.3, cost_micros: 7730000, impressions: 15 },
       },
-      keyword_recommendation: { keyword: { match_type: 3, text: 'google ad manager account' } },
+      keyword_recommendation: { keyword: { match_type: 3, text: 'google adwords performance report' } },
       resource_name:
-        'customers/3827277046/recommendations/MTk5MDY3NzIzLTE2My0xNTc2NjAyNzAzMDAwLSsyMDgxNjIwOTQ1LTc3MDU3MzY2MzUyLTUyMjUxMDM0NTMzMDAxNzk2NzQ',
+        'customers/3827277046/recommendations/MTk5MDY3NzIzLTE2My0xNTg1NzI5MTA1MDAwLSsyMDgxNjIwOTQ1LTc3MDU3MzY0ODcyLTEyMjQ0NDA0MTU3NDEyNjU0MDg',
       type: 3,
     },
     campaign_budget: {
@@ -56,22 +56,22 @@ let result = await customer.recommendations.list({
     },
     ad_group: {
       ad_rotation_mode: 0,
-      base_ad_group: 'customers/3827277046/adGroups/77057366352',
+      base_ad_group: 'customers/3827277046/adGroups/77057364872',
       campaign: 'customers/3827277046/campaigns/2081620945',
       cpc_bid_micros: 6310000,
       cpm_bid_micros: 10000000,
       cpv_bid_micros: 0,
       display_custom_bid_dimension: 0,
-      effective_target_cpa_micros: 15000000,
-      effective_target_cpa_source: 5,
+      effective_target_cpa_micros: 12000000,
+      effective_target_cpa_source: 6,
       effective_target_roas_source: 0,
       explorer_auto_optimizer_setting: { opt_in: false },
-      id: 77057366352,
+      id: 77057364872,
       labels: [],
       name: 'My ad group',
-      resource_name: 'customers/3827277046/adGroups/77057366352',
+      resource_name: 'customers/3827277046/adGroups/77057364872',
       status: 2,
-      target_cpa_micros: 0,
+      target_cpa_micros: 12000000,
       target_cpm_micros: 10000,
       targeting_setting: {
         target_restrictions: [
@@ -144,7 +144,7 @@ let result = await customer.recommendations.list({
       test_account: false,
       time_zone: 'Europe/London',
       tracking_url_template:
-        'https://w.opteo.co/workers/parallel?url={lpurl}&domain_id=123443&campaign_id={campaignid}&adgroup_id={adgroupid}&matchtype={matchtype}&network={network}&device={device}',
+        'https://w.opteo.co/workers/parallel?url={lpurl}&domain_id=123443&campaign_id={campaignid}&adgroup_id={adgroupid}&matchtype={matchtype}&network={network}&device={device}&keyword={keyword}&targetid={targetid}',
     },
   },
 ]

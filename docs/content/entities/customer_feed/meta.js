@@ -1,7 +1,7 @@
 module.exports = {
     name: 'CustomerFeed',
     object: {
-        feed: { _description: 'The feed being linked to the customer.', _type: 'string' },
+        feed: { _description: 'Immutable. The feed being linked to the customer.', _type: 'string' },
         matching_function: {
             _description:
                 'Matching function associated with the CustomerFeed. The matching function is used to filter the set of feed items selected. Required.',
@@ -13,11 +13,11 @@ module.exports = {
         },
         resource_name: {
             _description:
-                'The resource name of the customer feed. Customer feed resource names have the form: <code>customers/{customer_id}/customerFeeds/{feed_id}</code>',
+                'Immutable. The resource name of the customer feed. Customer feed resource names have the form: <code>customers/{customer_id}/customerFeeds/{feed_id}</code>',
             _type: 'string',
         },
         status: {
-            _description: 'Status of the customer feed. This field is read-only.',
+            _description: 'Output only. Status of the customer feed. This field is read-only.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },

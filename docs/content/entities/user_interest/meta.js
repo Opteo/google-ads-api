@@ -2,8 +2,10 @@ module.exports = {
     name: 'UserInterest',
     object: {
         availabilities: {
+            _parent_description: 'Output only. Availability information of the user interest.',
             _type: 'array of objects',
             channel: {
+                _parent_description: 'Channel types and subtypes that are available to the category.',
                 advertising_channel_sub_type: {
                     _description: 'Channel subtypes under the channel type the category is available to.',
                     _type: 'array of strings',
@@ -69,6 +71,7 @@ module.exports = {
                 },
             },
             locale: {
+                _parent_description: 'Locales that are available to the category for the channel.',
                 _type: 'array of objects',
                 availability_mode: {
                     _description:
@@ -103,17 +106,17 @@ module.exports = {
             },
         },
         launched_to_all: {
-            _description: 'True if the user interest is launched to all channels and locales.',
+            _description: 'Output only. True if the user interest is launched to all channels and locales.',
             _type: 'boolean',
         },
-        name: { _description: 'The name of the user interest.', _type: 'string' },
+        name: { _description: 'Output only. The name of the user interest.', _type: 'string' },
         resource_name: {
             _description:
-                'The resource name of the user interest. User interest resource names have the form: <code>customers/{customer_id}/userInterests/{user_interest_id}</code>',
+                'Output only. The resource name of the user interest. User interest resource names have the form: <code>customers/{customer_id}/userInterests/{user_interest_id}</code>',
             _type: 'string',
         },
         taxonomy_type: {
-            _description: 'Taxonomy type of the user interest.',
+            _description: 'Output only. Taxonomy type of the user interest.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -128,8 +131,8 @@ module.exports = {
             ],
             _type: 'enum',
         },
-        user_interest_id: { _description: 'The ID of the user interest.', _type: 'int64' },
-        user_interest_parent: { _description: 'The parent of the user interest.', _type: 'string' },
+        user_interest_id: { _description: 'Output only. The ID of the user interest.', _type: 'int64' },
+        user_interest_parent: { _description: 'Output only. The parent of the user interest.', _type: 'string' },
     },
     methods: ['get', 'list'],
 }

@@ -7,7 +7,7 @@
 </p>
 <p align="center">
   <a href="https://developers.google.com/google-ads/api/docs/release-notes">
-    <img src="https://img.shields.io/badge/google%20ads-v2.0.0-009688.svg?style=flat-square">
+    <img src="https://img.shields.io/badge/google%20ads-v3.6.0-009688.svg?style=flat-square">
   </a>
   <a href="https://www.npmjs.com/package/google-ads-api">
     <img src="https://img.shields.io/npm/v/google-ads-api.svg?style=flat-square">
@@ -118,4 +118,4 @@ await customer.campaigns.delete(new_campaign_resource_name)
 
 There are many more examples in the [full documentation](https://opteo.com/dev/google-ads-api).
 
-You can also find a couple ready-to-run examples [in this branch](https://github.com/Opteo/google-ads-api/tree/561e5b4782a3a184c920d04aefdbc6e7547f0ae4/examples).
+You can also find a couple ready-to-run examples in the [/examples directory](https://github.com/Opteo/google-ads-api/tree/master/examples).

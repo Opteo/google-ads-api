@@ -1,7 +1,7 @@
 module.exports = {
     name: 'Label',
     object: {
-        id: { _description: 'Id of the label. Read only.', _type: 'int64' },
+        id: { _description: 'Output only. Id of the label. Read only.', _type: 'int64' },
         name: {
             _description:
                 'The name of the label. This field is required and should not be empty when creating a new label. The length of this string should be between 1 and 80, inclusive.',
@@ -9,11 +9,11 @@ module.exports = {
         },
         resource_name: {
             _description:
-                'Name of the resource. Label resource names have the form: <code>customers/{customer_id}/labels/{label_id}</code>',
+                'Immutable. Name of the resource. Label resource names have the form: <code>customers/{customer_id}/labels/{label_id}</code>',
             _type: 'string',
         },
         status: {
-            _description: 'Status of the label. Read only.',
+            _description: 'Output only. Status of the label. Read only.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -23,6 +23,7 @@ module.exports = {
             _type: 'enum',
         },
         text_label: {
+            _parent_description: 'A type of label displaying text on a colored background.',
             background_color: {
                 _description:
                     "Background color of the label in RGB format. This string must match the regular expression '^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$'. Note: The background color may not be visible for manager accounts.",

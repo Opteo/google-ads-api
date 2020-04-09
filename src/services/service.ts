@@ -5,9 +5,10 @@ import { getFieldMask } from 'google-ads-node/build/lib/utils'
 
 import GrpcClient from '../grpc'
 import { formatQueryResults, buildReportQuery, parseResult, parsePartialFailureErrors } from '../utils'
-import { ServiceListOptions, ServiceCreateOptions } from '../types'
+import { ServiceListOptions, ServiceCreateOptions, ReportStreamOptions } from '../types'
 import { GrpcError } from '../error'
 import { ReportOptions, PreReportHook, PostReportHook } from '../types'
+import { SearchGoogleAdsStreamResponse, ClientReadableStream } from 'google-ads-node'
 
 interface GetOptions {
     request: string
@@ -224,15 +225,23 @@ export default class Service {
         return `customers/${this.cid}/${resource}`
     }
 
-    protected async serviceCall(call: string, request: any): Promise<any> {
+    protected async serviceCall(call: string, request: any, all_results: boolean = false): Promise<any> {
         try {
-            const response = await this.service[call](request)
+            const response = await new Promise((resolve, reject) => {
+                this.service[call](request, (err: any, res: any) => {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        resolve(res)
+                    }
+                })
+            })
             const parsed_results = this.parseServiceResults([response])
             /* 
                 Since get returns an object, we always return the first item.
                 This should only ever be one item here, and it should exist.
             */
-            return parsed_results[0]
+            return all_results ? parsed_results : parsed_results[0]
         } catch (err) {
             throw new GrpcError(err, request)
         }
@@ -247,6 +256,12 @@ export default class Service {
     protected buildResource(resource: string, data: any): unknown {
         const pb = this.client.buildResource(resource, data)
         return pb
+    }
+
+    protected buildResources(resource: string, data: Array<any>): unknown {
+        return data.map(dat => {
+            return this.buildResource(resource, dat)
+        })
     }
 
     /* Base report method used in global customer instance */
@@ -279,6 +294,72 @@ export default class Service {
         return parsed_results
     }
 
+    protected serviceReportStream<T>(options: ReportStreamOptions): AsyncGenerator<T> {
+        const query = this.buildCustomerReportQuery(options)
+
+        const call = this.streamSearchData(query)
+
+        return this.reportStreamGenerator<T>(call)
+    }
+
+    private async *reportStreamGenerator<T>(
+        call: ClientReadableStream<SearchGoogleAdsStreamResponse>
+    ): AsyncGenerator<T> {
+        let done = false
+        const accumulator: T[] = []
+
+        function createNextChunkArrivedPromise() {
+            let resolveMe = () => {}
+
+            let rejectMe = (err: Error) => {}
+
+            const p = new Promise((resolve, reject) => {
+                resolveMe = resolve
+                rejectMe = reject
+            })
+
+            return { p, resolveMe, rejectMe }
+        }
+
+        let next_chunk_arrived = createNextChunkArrivedPromise()
+
+        call.on('data', (chunk: SearchGoogleAdsStreamResponse.AsObject) => {
+            const results = this.parseServiceResults(chunk.resultsList)
+            for (const item of results) {
+                accumulator.push(item)
+            }
+            next_chunk_arrived.resolveMe()
+            next_chunk_arrived = createNextChunkArrivedPromise()
+        })
+
+        call.on('end', () => {
+            done = true
+            next_chunk_arrived.resolveMe()
+        })
+
+        call.on('error', (err: Error) => {
+            next_chunk_arrived.rejectMe(err)
+        })
+
+        try {
+            while (!done || accumulator.length) {
+                if (accumulator.length !== 0) {
+                    const item = accumulator.shift()
+                    if (item === undefined) {
+                        throw new Error('UNDEFINED_STREAM_ERROR')
+                    }
+                    yield item
+                } else {
+                    await next_chunk_arrived.p
+                }
+            }
+        } finally {
+            call.destroy()
+        }
+
+        return
+    }
+
     /* Base query method used in global customer instance */
     protected async serviceQuery(qry: string): Promise<any> {
         const results = await this.getSearchData(qry)
@@ -304,6 +385,16 @@ export default class Service {
             return response
         } catch (err) {
             throw new GrpcError(err, request)
+        }
+    }
+
+    private streamSearchData(query: string): ClientReadableStream<SearchGoogleAdsStreamResponse> {
+        const { request } = this.client.buildSearchStreamRequest(this.cid, query)
+        try {
+            const response = this.client.streamSearchData(request)
+            return response
+        } catch (err) {
+            throw new Error(err)
         }
     }
 

@@ -2,12 +2,13 @@ module.exports = {
     name: 'CampaignBidModifier',
     object: {
         bid_modifier: { _description: 'The modifier for the bid when the criterion matches.', _type: 'double' },
-        campaign: { _description: 'The campaign to which this criterion belongs.', _type: 'string' },
+        campaign: { _description: 'Output only. The campaign to which this criterion belongs.', _type: 'string' },
         criterion_id: {
-            _description: 'The ID of the criterion to bid modify. This field is ignored for mutates.',
+            _description: 'Output only. The ID of the criterion to bid modify. This field is ignored for mutates.',
             _type: 'int64',
         },
         interaction_type: {
+            _parent_description: 'Immutable. Criterion for interaction type. Only supported for search campaigns.',
             type: {
                 _description: 'The interaction type.',
                 _enums: [
@@ -23,7 +24,7 @@ module.exports = {
         },
         resource_name: {
             _description:
-                'The resource name of the campaign bid modifier. Campaign bid modifier resource names have the form: <code>customers/{customer_id}/campaignBidModifiers/{campaign_id}~{criterion_id}</code>',
+                'Immutable. The resource name of the campaign bid modifier. Campaign bid modifier resource names have the form: <code>customers/{customer_id}/campaignBidModifiers/{campaign_id}~{criterion_id}</code>',
             _type: 'string',
         },
     },

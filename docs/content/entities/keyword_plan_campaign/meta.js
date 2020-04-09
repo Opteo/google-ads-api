@@ -7,10 +7,11 @@ module.exports = {
             _type: 'int64',
         },
         geo_targets: {
+            _parent_description: 'The geo targets. Max number allowed: 20.',
             _type: 'array of objects',
             geo_target_constant: { _description: 'Required. The resource name of the geo target.', _type: 'string' },
         },
-        id: { _description: 'The ID of the Keyword Plan campaign.', _type: 'int64' },
+        id: { _description: 'Output only. The ID of the Keyword Plan campaign.', _type: 'int64' },
         keyword_plan: { _description: 'The keyword plan this campaign belongs to.', _type: 'string' },
         keyword_plan_network: {
             _description:
@@ -34,7 +35,7 @@ module.exports = {
         },
         resource_name: {
             _description:
-                'The resource name of the Keyword Plan campaign. KeywordPlanCampaign resource names have the form: <code>customers/{customer_id}/keywordPlanCampaigns/{kp_campaign_id}</code>',
+                'Immutable. The resource name of the Keyword Plan campaign. KeywordPlanCampaign resource names have the form: <code>customers/{customer_id}/keywordPlanCampaigns/{kp_campaign_id}</code>',
             _type: 'string',
         },
     },

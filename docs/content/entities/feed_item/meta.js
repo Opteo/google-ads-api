@@ -2,6 +2,7 @@ module.exports = {
     name: 'FeedItem',
     object: {
         attribute_values: {
+            _parent_description: "The feed item's attribute values.",
             _type: 'array of objects',
             boolean_value: {
                 _description:
@@ -38,6 +39,8 @@ module.exports = {
                 _type: 'array of strings',
             },
             price_value: {
+                _parent_description:
+                    'Price value. Should be set if feed_attribute_id refers to a feed attribute of type PRICE.',
                 amount_micros: {
                     _description: 'Amount in micros. One million is equivalent to one unit.',
                     _type: 'int64',
@@ -46,7 +49,7 @@ module.exports = {
             },
             string_value: {
                 _description:
-                    'String value. Should be set if feed_attribute_id refers to a feed attribute of type STRING, URL or DATE_TIME. For STRING the maximum length is 1500 characters. For URL the maximum length is 2076 characters. For DATE_TIME the format of the string must be the same as start and end time for the feed item.',
+                    'String value. Should be set if feed_attribute_id refers to a feed attribute of type STRING, URL or DATE_TIME. For STRING the maximum length is 1500 characters. For URL the maximum length is 2076 characters. For DATE_TIME the string must be in the format "YYYYMMDD HHMMSS".',
                 _type: 'string',
             },
             string_values: {
@@ -60,7 +63,7 @@ module.exports = {
                 'End time in which this feed item is no longer effective and will stop serving. The time is in the customer\'s time zone. The format is "YYYY-MM-DD HH:MM:SS". Examples: "2018-03-05 09:15:00" or "2018-02-01 14:34:30"',
             _type: 'string',
         },
-        feed: { _description: 'The feed to which this feed item belongs.', _type: 'string' },
+        feed: { _description: 'Immutable. The feed to which this feed item belongs.', _type: 'string' },
         geo_targeting_restriction: {
             _description: 'Geo targeting restriction specifies the type of location that can be used for targeting.',
             _enums: [
@@ -73,12 +76,14 @@ module.exports = {
             ],
             _type: 'enum',
         },
-        id: { _description: 'The ID of this feed item.', _type: 'int64' },
+        id: { _description: 'Output only. The ID of this feed item.', _type: 'int64' },
         policy_infos: {
+            _parent_description:
+                "Output only. List of info about a feed item's validation and approval state for active feed mappings. There will be an entry in the list for each type of feed mapping associated with the feed, e.g. a feed with a sitelink and a call feed mapping would cause every feed item associated with that feed to have an entry in this list for both sitelink and call. This field is read-only.",
             _type: 'array of objects',
             approval_status: {
                 _description:
-                    'The overall approval status of the placeholder type, calculated based on the status of its individual policy topic entries.',
+                    'Output only. The overall approval status of the placeholder type, calculated based on the status of its individual policy topic entries.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'No value has been specified.' },
                     {
@@ -98,11 +103,11 @@ module.exports = {
                 _type: 'enum',
             },
             feed_mapping_resource_name: {
-                _description: 'The FeedMapping that contains the placeholder type.',
+                _description: 'Output only. The FeedMapping that contains the placeholder type.',
                 _type: 'string',
             },
             placeholder_type_enum: {
-                _description: 'The placeholder type.',
+                _description: 'Output only. The placeholder type.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Not specified.' },
                     {
@@ -192,11 +197,17 @@ module.exports = {
                 _type: 'enum',
             },
             policy_topic_entries: {
+                _parent_description: 'Output only. The list of policy findings for the placeholder type.',
                 _type: 'array of objects',
                 constraints: {
+                    _parent_description:
+                        'Indicates how serving of this resource may be affected (e.g. not serving in a country).',
                     _type: 'array of objects',
                     certificate_domain_mismatch_in_country_list: {
+                        _parent_description:
+                            "Countries where the resource's domain is not covered by the certificates associated with it.",
                         countries: {
+                            _parent_description: 'Countries in which serving is restricted.',
                             _type: 'array of objects',
                             country_criterion: {
                                 _description:
@@ -210,7 +221,9 @@ module.exports = {
                         },
                     },
                     certificate_missing_in_country_list: {
+                        _parent_description: 'Countries where a certificate is required for serving.',
                         countries: {
+                            _parent_description: 'Countries in which serving is restricted.',
                             _type: 'array of objects',
                             country_criterion: {
                                 _description:
@@ -224,7 +237,9 @@ module.exports = {
                         },
                     },
                     country_constraint_list: {
+                        _parent_description: 'Countries where the resource cannot serve.',
                         countries: {
+                            _parent_description: 'Countries in which serving is restricted.',
                             _type: 'array of objects',
                             country_criterion: {
                                 _description:
@@ -237,17 +252,22 @@ module.exports = {
                             _type: 'int32',
                         },
                     },
-                    reseller_constraint: {},
+                    reseller_constraint: { _parent_description: 'Reseller constraint.' },
                 },
                 evidences: {
+                    _parent_description:
+                        'Additional information that explains policy finding (e.g. the brand name for a trademark finding).',
                     _type: 'array of objects',
                     destination_mismatch: {
+                        _parent_description: "Mismatch between the destinations of a resource's URLs.",
                         url_types: {
                             _description: 'The set of URLs that did not match each other.',
                             _type: 'array of strings',
                         },
                     },
                     destination_not_working: {
+                        _parent_description:
+                            "Details when the destination is returning an HTTP error code or isn't functional in all locations for commonly used devices.",
                         device: {
                             _description: 'The type of device that failed to load the URL.',
                             _enums: [
@@ -293,6 +313,8 @@ module.exports = {
                         },
                     },
                     destination_text_list: {
+                        _parent_description:
+                            'The text in the destination of the resource that is causing a policy finding.',
                         destination_texts: {
                             _description: "List of text found in the resource's destination page.",
                             _type: 'array of strings',
@@ -304,12 +326,14 @@ module.exports = {
                         _type: 'string',
                     },
                     text_list: {
+                        _parent_description: 'List of evidence found in the text of a resource.',
                         texts: {
                             _description: 'The fragments of text from the resource that caused the policy finding.',
                             _type: 'array of strings',
                         },
                     },
                     website_list: {
+                        _parent_description: 'List of websites linked with this resource.',
                         websites: {
                             _description: 'Websites that caused the policy finding.',
                             _type: 'array of strings',
@@ -351,7 +375,7 @@ module.exports = {
                 },
             },
             quality_approval_status: {
-                _description: 'Placeholder type quality evaluation approval status.',
+                _description: 'Output only. Placeholder type quality evaluation approval status.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'No value has been specified.' },
                     {
@@ -368,11 +392,11 @@ module.exports = {
                 _type: 'enum',
             },
             quality_disapproval_reasons: {
-                _description: 'List of placeholder type quality evaluation disapproval reasons.',
+                _description: 'Output only. List of placeholder type quality evaluation disapproval reasons.',
                 _type: 'array of strings',
             },
             review_status: {
-                _description: 'Where the placeholder type is in the review process.',
+                _description: 'Output only. Where the placeholder type is in the review process.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'No value has been specified.' },
                     {
@@ -387,25 +411,31 @@ module.exports = {
                         description:
                             'The resource has been resubmitted for approval or its policy decision has\nbeen appealed.',
                     },
+                    {
+                        s: 'ELIGIBLE_MAY_SERVE',
+                        description:
+                            'The resource is eligible and may be serving but could still undergo\nfurther review.',
+                    },
                 ],
                 _type: 'enum',
             },
             validation_errors: {
+                _parent_description: 'Output only. List of placeholder type validation errors.',
                 _type: 'array of objects',
-                description: { _description: 'The description of the validation error.', _type: 'string' },
+                description: { _description: 'Output only. The description of the validation error.', _type: 'string' },
                 extra_info: {
                     _description:
-                        'Any extra information related to this error which is not captured by validation_error and feed_attribute_id (e.g. placeholder field IDs when feed_attribute_id is not mapped). Note that extra_info is not localized.',
+                        'Output only. Any extra information related to this error which is not captured by validation_error and feed_attribute_id (e.g. placeholder field IDs when feed_attribute_id is not mapped). Note that extra_info is not localized.',
                     _type: 'string',
                 },
                 feed_attribute_ids: {
                     _description:
-                        'Set of feed attributes in the feed item flagged during validation. If empty, no specific feed attributes can be associated with the error (e.g. error across the entire feed item).',
+                        'Output only. Set of feed attributes in the feed item flagged during validation. If empty, no specific feed attributes can be associated with the error (e.g. error across the entire feed item).',
                     _type: 'array of strings',
                 },
                 validation_error: {
                     _description:
-                        "Error code indicating what validation error was triggered. The description of the error can be found in the 'description' field.",
+                        "Output only. Error code indicating what validation error was triggered. The description of the error can be found in the 'description' field.",
                     _enums: [
                         { s: 'UNSPECIFIED', description: 'No value has been specified.' },
                         {
@@ -661,12 +691,14 @@ module.exports = {
                         { s: 'INVALID_IMAGE_URL', description: 'Invalid image url.' },
                         { s: 'MISSING_LATITUDE_VALUE', description: 'Latitude value is missing.' },
                         { s: 'MISSING_LONGITUDE_VALUE', description: 'Longitude value is missing.' },
+                        { s: 'ADDRESS_NOT_FOUND', description: 'Unable to find address.' },
+                        { s: 'ADDRESS_NOT_TARGETABLE', description: 'Cannot target provided address.' },
                     ],
                     _type: 'enum',
                 },
             },
             validation_status: {
-                _description: 'The validation status of the palceholder type.',
+                _description: 'Output only. The validation status of the palceholder type.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'No value has been specified.' },
                     {
@@ -682,7 +714,7 @@ module.exports = {
         },
         resource_name: {
             _description:
-                'The resource name of the feed item. Feed item resource names have the form: <code>customers/{customer_id}/feedItems/{feed_id}~{feed_item_id}</code>',
+                'Immutable. The resource name of the feed item. Feed item resource names have the form: <code>customers/{customer_id}/feedItems/{feed_id}~{feed_item_id}</code>',
             _type: 'string',
         },
         start_date_time: {
@@ -691,7 +723,7 @@ module.exports = {
             _type: 'string',
         },
         status: {
-            _description: 'Status of the feed item. This field is read-only.',
+            _description: 'Output only. Status of the feed item. This field is read-only.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -701,6 +733,8 @@ module.exports = {
             _type: 'enum',
         },
         url_custom_parameters: {
+            _parent_description:
+                'The list of mappings used to substitute custom parameter tags in a <code>tracking_url_template</code>, <code>final_urls</code>, or <code>mobile_final_urls</code>.',
             _type: 'array of objects',
             key: { _description: 'The key matching the parameter tag name.', _type: 'string' },
             value: { _description: 'The value to be substituted.', _type: 'string' },

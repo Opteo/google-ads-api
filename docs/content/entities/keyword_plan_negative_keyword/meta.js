@@ -1,7 +1,7 @@
 module.exports = {
     name: 'KeywordPlanNegativeKeyword',
     object: {
-        id: { _description: 'The ID of the Keyword Plan negative keyword.', _type: 'int64' },
+        id: { _description: 'Output only. The ID of the Keyword Plan negative keyword.', _type: 'int64' },
         keyword_plan_campaign: {
             _description: 'The Keyword Plan campaign to which this negative keyword belongs.',
             _type: 'string',
@@ -19,7 +19,7 @@ module.exports = {
         },
         resource_name: {
             _description:
-                'The resource name of the Keyword Plan negative keyword. KeywordPlanNegativeKeyword resource names have the form: <code>customers/{customer_id}/keywordPlanNegativeKeywords/{kp_negative_keyword_id}</code>',
+                'Immutable. The resource name of the Keyword Plan negative keyword. KeywordPlanNegativeKeyword resource names have the form: <code>customers/{customer_id}/keywordPlanNegativeKeywords/{kp_negative_keyword_id}</code>',
             _type: 'string',
         },
         text: { _description: 'The keyword text.', _type: 'string' },

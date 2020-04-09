@@ -31,7 +31,6 @@ let result = await customer.adGroupAds.list({
       ad: {
         added_by_google_ads: false,
         device_preference: 0,
-        display_url: '',
         expanded_text_ad: {
           description: 'my description here2',
           headline_part1: 'headline part 1 here2',

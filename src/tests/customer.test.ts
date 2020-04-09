@@ -53,6 +53,23 @@ describe('customer', () => {
             )
         })
 
+        // fairly useless test as it will always pass, just used to checkout the generics functionality
+        it('retrieves data using a generic', async () => {
+            interface Campaign {
+                campaign: {
+                    resource_name: string
+                    name: string
+                }
+            }
+
+            await customer.report<Campaign[]>({
+                entity: 'campaign',
+                attributes: ['campaign.name'],
+                limit: 5,
+            })
+            expect(true)
+        })
+
         it('retrieves data when using segments', async () => {
             const ad_group = await customer.report({
                 entity: 'ad_group',
@@ -122,6 +139,57 @@ describe('customer', () => {
             })
             expect(data).toEqual([])
             expect(data.length).toEqual(0)
+        })
+    })
+
+    describe('stream', () => {
+        interface SearchTermView {
+            search_term_view: {
+                resource_name: string
+                search_term: string
+            }
+            metrics: {
+                clicks: number
+            }
+        }
+        it('retrieves 50 items from a stream', async () => {
+            const generator = customer.reportStream<SearchTermView>({
+                entity: 'search_term_view',
+                metrics: ['metrics.clicks'],
+                attributes: ['search_term_view.search_term'],
+                order_by: 'metrics.clicks',
+                sort_order: 'desc',
+                limit: 50,
+            })
+
+            let count = 0
+
+            for await (let item of generator) {
+                item
+                count++
+            }
+
+            expect(count).toBe(50)
+        })
+
+        it('retrieves greater than 10000 items from a stream', async () => {
+            const generator = customer.reportStream<SearchTermView>({
+                entity: 'search_term_view',
+                metrics: ['metrics.clicks'],
+                attributes: ['search_term_view.search_term'],
+                order_by: 'metrics.clicks',
+                sort_order: 'desc',
+                limit: 12000,
+            })
+
+            let count = 0
+
+            for await (let item of generator) {
+                item
+                count++
+            }
+
+            expect(count).toBeGreaterThan(10000)
         })
     })
 

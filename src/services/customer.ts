@@ -8,9 +8,16 @@ import GrpcClient from '../grpc'
 import Bottleneck from 'bottleneck'
 
 import Service, { Mutation } from './service'
-import { ReportOptions, ServiceCreateOptions, PreReportHook, PostReportHook, MutateResourceOperation } from '../types'
+import {
+    ReportOptions,
+    ServiceCreateOptions,
+    PreReportHook,
+    PostReportHook,
+    MutateResourceOperation,
+    ReportStreamOptions,
+} from '../types'
 
-export type ReportResponse = Promise<Array<any>>
+export type ReportResponse<T> = Promise<T>
 export type QueryResponse = Promise<Array<any>>
 export type ListResponse = Promise<Array<{ customer: Customer }>>
 export type GetResponse = Promise<Customer>
@@ -35,9 +42,13 @@ export default class CustomerService extends Service {
         this.post_report_hook = post_report_hook
     }
 
-    public async report(options: ReportOptions): ReportResponse {
+    public async report<T>(options: ReportOptions): ReportResponse<T> {
         const results = await this.serviceReport(options, this.pre_report_hook, this.post_report_hook)
         return results
+    }
+
+    public reportStream<T>(options: ReportStreamOptions): AsyncGenerator<T> {
+        return this.serviceReportStream<T>(options)
     }
 
     public async query(qry: string): QueryResponse {
@@ -81,8 +92,15 @@ export default class CustomerService extends Service {
         if (options && options.hasOwnProperty('validate_only')) {
             request.setValidateOnly(options.validate_only as boolean)
         }
-
-        await this.service.mutateCustomer(request)
+        await new Promise((resolve, reject) => {
+            this.service.mutateCustomer(request, (err: any, res: any) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(res)
+                }
+            })
+        })
     }
 
     // TODO: Add support for this service method

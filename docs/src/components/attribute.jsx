@@ -19,42 +19,49 @@ class Attribute extends React.Component {
     render() {
         const { data, name, enums, section, nestingDepth, ofManyChild } = this.props
 
-        const { _description } = data
+        const { _description, _parent_description } = data
 
         return (
             <div
                 key={`${section}-${name}`}
                 className={
-                    ofManyChild && enums ? 'w-100 pl3 pr3 pb3'
-                    : ofManyChild && nestingDepth === 0 ? 'w-100 pb3 ph3'
-                    : nestingDepth === 0 ? 'w-100 pv3 bt b--opteo-light-gray'
-                    : ofManyChild ? 'w-100 pa3'
-                    : 'w-100 pa3 bt b--opteo-light-gray'}
+                    ofManyChild && enums
+                        ? 'w-100 pl3 pr3 pb3'
+                        : ofManyChild && nestingDepth === 0
+                        ? 'w-100 pb3 ph3'
+                        : nestingDepth === 0
+                        ? 'w-100 pv3 bt b--opteo-light-gray'
+                        : ofManyChild
+                        ? 'w-100 pa3'
+                        : 'w-100 pa3 bt b--opteo-light-gray'
+                }
             >
-                { !ofManyChild && (
-                <div>
-                    <span className="mono fw6 mv0 opteo-gray">{name}</span>
-                    {(() => {
-                        if (data._type) {
-                            return <span className="f7 fw5 mv0 opteo-middle-gray"> {data._type}</span>
-                        } else {
-                            return <span className="f7 fw5 mv0 opteo-middle-gray"> object</span>
-                        }
-                    })()}
-                </div>
+                {!ofManyChild && (
+                    <div>
+                        <span className="mono fw6 mv0 opteo-gray">{name}</span>
+                        {(() => {
+                            if (data._type) {
+                                return <span className="f7 fw5 mv0 opteo-middle-gray"> {data._type}</span>
+                            } else {
+                                return <span className="f7 fw5 mv0 opteo-middle-gray"> object</span>
+                            }
+                        })()}
+                        <div className="mt2" dangerouslySetInnerHTML={{ __html: _parent_description }} />
+                    </div>
                 )}
-                {enums && <Enums enums={enums} />}
+
                 {(() => {
                     if (_description) {
                         return <div className="mt2" dangerouslySetInnerHTML={{ __html: _description }} />
                     } else {
                         if (ofManyChild) {
                             return (
-                                <div 
+                                <div
                                     style={{ display: this.state.child_shown || ofManyChild ? 'block' : 'none' }}
                                     className={
-                                        nestingDepth === 0 ? 'mt3 br3 ba b--opteo-light-gray'
-                                        : 'br3 ba b--opteo-light-gray'
+                                        nestingDepth === 0
+                                            ? 'mt3 br3 ba b--opteo-light-gray'
+                                            : 'br3 ba b--opteo-light-gray'
                                     }
                                 >
                                     <div className="table-heading opteo-middle-gray">Child Fields</div>
@@ -75,13 +82,18 @@ class Attribute extends React.Component {
                                         {this.state.child_shown ? 'Hide Child Fields -' : 'Show Child Fields +'}
                                     </button>
                                     <div style={{ display: this.state.child_shown ? 'block' : 'none' }}>
-                                        <AttributesTable data={data} section={section} nestingDepth={nestingDepth + 1}/>
+                                        <AttributesTable
+                                            data={data}
+                                            section={section}
+                                            nestingDepth={nestingDepth + 1}
+                                        />
                                     </div>
                                 </div>
                             )
                         }
                     }
                 })()}
+                {enums && <Enums enums={enums} />}
             </div>
         )
     }

@@ -3,6 +3,8 @@ module.exports = {
     object: {
         affiliate_location_feed_data: {
             _oneof: 'systemFeedGenerationData',
+            _parent_description:
+                'Data used to configure an affiliate location feed populated with the specified chains.',
             chain_ids: {
                 _description: 'The list of chains that the affiliate location feed will sync the locations from.',
                 _type: 'array of strings',
@@ -21,9 +23,11 @@ module.exports = {
             },
         },
         attribute_operations: {
+            _parent_description:
+                'The list of operations changing the feed attributes. Attributes can only be added, not removed.',
             _type: 'array of objects',
             operator: {
-                _description: 'Type of list operation to perform.',
+                _description: 'Output only. Type of list operation to perform.',
                 _enums: [
                     { s: 'UNSPECIFIED', description: 'Unspecified.' },
                     {
@@ -35,6 +39,7 @@ module.exports = {
                 _type: 'enum',
             },
             value: {
+                _parent_description: 'Output only. The feed attribute being added to the list.',
                 id: { _description: 'ID of the attribute.', _type: 'int64' },
                 is_part_of_key: {
                     _description:
@@ -69,6 +74,8 @@ module.exports = {
             },
         },
         attributes: {
+            _parent_description:
+                "The Feed's attributes. Required on CREATE, unless system_feed_generation_data is provided, in which case Google Ads will update the feed with the correct attributes. Disallowed on UPDATE. Use attribute_operations to add new attributes.",
             _type: 'array of objects',
             id: { _description: 'ID of the attribute.', _type: 'int64' },
             is_part_of_key: {
@@ -102,10 +109,10 @@ module.exports = {
                 _type: 'enum',
             },
         },
-        id: { _description: 'The ID of the feed. This field is read-only.', _type: 'int64' },
-        name: { _description: 'Name of the feed. Required.', _type: 'string' },
+        id: { _description: 'Output only. The ID of the feed. This field is read-only.', _type: 'int64' },
+        name: { _description: 'Immutable. Name of the feed. Required.', _type: 'string' },
         origin: {
-            _description: 'Specifies who manages the FeedAttributes for the Feed.',
+            _description: 'Immutable. Specifies who manages the FeedAttributes for the Feed.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
@@ -124,6 +131,7 @@ module.exports = {
         },
         places_location_feed_data: {
             _oneof: 'systemFeedGenerationData',
+            _parent_description: 'Data used to configure a location feed populated from Google My Business Locations.',
             business_account_id: {
                 _description:
                     'Plus page ID of the managed business whose locations should be used. If this field is not set, then all businesses accessible by the user (specified by email_address) are used. This field is mutate-only and is not selectable.',
@@ -150,6 +158,8 @@ module.exports = {
                 _type: 'array of strings',
             },
             oauth_info: {
+                _parent_description:
+                    'Immutable. Required authentication token (from OAuth API) for the email. This field can only be specified in a create request. All its subfields are not selectable.',
                 http_authorization_header: {
                     _description: 'The HTTP authorization header used to obtain authorization.',
                     _type: 'string',
@@ -163,11 +173,11 @@ module.exports = {
         },
         resource_name: {
             _description:
-                'The resource name of the feed. Feed resource names have the form: <code>customers/{customer_id}/feeds/{feed_id}</code>',
+                'Immutable. The resource name of the feed. Feed resource names have the form: <code>customers/{customer_id}/feeds/{feed_id}</code>',
             _type: 'string',
         },
         status: {
-            _description: 'Status of the feed. This field is read-only.',
+            _description: 'Output only. Status of the feed. This field is read-only.',
             _enums: [
                 { s: 'UNSPECIFIED', description: 'Not specified.' },
                 { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
