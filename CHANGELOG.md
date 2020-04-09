@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [3.6.0](https://github.com/Opteo/google-ads-api/compare/v3.5.2...v3.6.0) (2020-04-09)
+
+
+### Features
+
+* Google Ads API v3 update ([#117](https://github.com/Opteo/google-ads-api/issues/117)) ([46fc5e9](https://github.com/Opteo/google-ads-api/commit/46fc5e9)), closes [#19](https://github.com/Opteo/google-ads-api/issues/19)
+
+
+
 ## [3.5.2](https://github.com/Opteo/google-ads-api/compare/v3.5.1...v3.5.2) (2020-03-11)
 
 
