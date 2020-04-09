@@ -7,7 +7,13 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Features
 
-* Google Ads API v3 update ([#117](https://github.com/Opteo/google-ads-api/issues/117)) ([46fc5e9](https://github.com/Opteo/google-ads-api/commit/46fc5e9)), closes [#19](https://github.com/Opteo/google-ads-api/issues/19)
+* Google Ads API v3 update ([#117](https://github.com/Opteo/google-ads-api/issues/117)) ([46fc5e9](https://github.com/Opteo/google-ads-api/commit/46fc5e9)). https://developers.google.com/google-ads/api/docs/release-notes
+* Support for new `customer.reportStream()`, which uses GRPC streaming instead of pagination.
+* Support for generics in `customer.report()`, and `customer.reportStream()`.
+* Support for the conversion upload service.
+* Export new `libTypes` variable containing typescript interfaces for library functions.
+* Updated docs on http://opteo.com/dev/google-ads-api.
+* New examples directory.
 
 
 
