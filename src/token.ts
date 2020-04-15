@@ -16,6 +16,13 @@ interface TokenReturn {
     expires_in: number
 }
 
+// FIXME getAccessTokenForServiceAccount = async (ServiceAccount definito in client.ts) => {
+//    ...... nostra impl
+//    ... deve ritornare una promise dove nel then risolve con il body della CURL JSON parsato
+//    .. attenzione a gestione cache token che evita di generarli a diritto, sotto si trova
+//    come l'hanno implementata
+// }
+
 export const getAccessToken = async ({ client_id, client_secret, refresh_token }: TokenAuth) => {
     const hash = getTokenHash({
         client_id,

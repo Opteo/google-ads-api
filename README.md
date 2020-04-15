@@ -56,6 +56,7 @@ You can improve the documentation by sending pull requests with edits to [these 
 ```javascript
 import { GoogleAdsApi, types, enums } from 'google-ads-api'
 
+// FIXME documentare service account
 // 1. Create a new client with your credentials
 const client = new GoogleAdsApi({
     client_id: '<CLIENT_ID>',
