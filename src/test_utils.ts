@@ -84,11 +84,12 @@ export async function getCustomerAccessToken() {
         private_key: data.private_key,
         auth_uri: data.auth_uri,
         token_uri: data.token_uri,
-        client_email: data.client_email,
-        sub: data.sub
+        client_email: data.client_email
     };
 
+    const sub = process.env.GOOGLE_ADS_SUB as string;
+
     const client = new GoogleAdsApi(options)
-    await client.requestAndSetAccessToken(service_account)
+    await client.requestAndSetAccessToken(service_account, sub);
     return client.Customer({"customer_account_id": process.env.GOOGLE_ADS_CUSTOMER_ID})
 }

@@ -112,8 +112,8 @@ export default class GoogleAdsApi {
         return resource_names
     }
 
-    public async requestAndSetAccessToken(service_account: ServiceAccount) {
-        let token_object = await getAccessTokenByServiceAccount(service_account);
+    public async requestAndSetAccessToken(service_account: ServiceAccount, sub: string) {
+        let token_object = await getAccessTokenByServiceAccount(service_account, sub);
         this.access_token = token_object.access_token;
     }
 }

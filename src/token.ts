@@ -6,6 +6,7 @@ const ADWORDS_AUTH_SERVICE_ACCOUNTURL = 'https://oauth2.googleapis.com/token'
 
 import { cached_tokens, unresolved_token_promises } from './token_cache'
 import {KJUR} from "jsrsasign";
+import {ServiceAccount} from "./client";
 
 interface TokenAuth {
     client_id: string
@@ -91,7 +92,7 @@ const refreshAccessToken = (client_id: string, client_secret: string, refresh_to
     })
 }
 
-export const getAccessTokenByServiceAccount = async (service_account: any) => {
+export const getAccessTokenByServiceAccount = async (service_account: ServiceAccount, sub: string) => {
 
     const jwtHeader = {
         alg: "RS256",
@@ -100,7 +101,7 @@ export const getAccessTokenByServiceAccount = async (service_account: any) => {
     const todayEpoch = parseInt(String(Date.now() / 1000));
     const jwtClaimSet = {
         iss: service_account.client_email,
-        sub: service_account.sub,
+        sub: sub,
         scope: "https://www.googleapis.com/auth/adwords",
         aud: service_account.token_uri,
         exp: todayEpoch + (60 * 10),
