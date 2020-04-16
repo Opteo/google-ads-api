@@ -73,8 +73,10 @@
         "typescript": "^3.7.2"
     },
     "dependencies": {
+        "@types/jsrsasign": "^8.0.2",
         "bottleneck": "^2.16.1",
         "google-ads-node": "2.0.4",
+        "jsrsasign": "^8.0.15",
         "lodash": "^4.17.15",
         "redis": "^2.8.0",
         "request": "^2.88.0"

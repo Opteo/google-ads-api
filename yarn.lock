@@ -430,6 +430,11 @@
   dependencies:
     "@types/jest-diff" "*"
 
+"@types/jsrsasign@^8.0.2":
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/@types/jsrsasign/-/jsrsasign-8.0.2.tgz#39f19045f33a7e2bd09a195556c1450d2e82f4c9"
+  integrity sha512-H9E1AhOgouH0Zi7O1TAfntNXzMgFZWncB0MY/bfVs4v4gUBVsEM/ZCjBqPmw3QfsL2ZdcBb7YunXykMLpqNBhQ==
+
 "@types/lodash.camelcase@^4.3.6":
   version "4.3.6"
   resolved "https://registry.yarnpkg.com/@types/lodash.camelcase/-/lodash.camelcase-4.3.6.tgz#393c748b70cd926fc629e6502a9d0929f217d5fd"
@@ -3048,6 +3053,11 @@ jsprim@^1.2.2:
     extsprintf "1.3.0"
     json-schema "0.2.3"
     verror "1.10.0"
+
+jsrsasign@^8.0.15:
+  version "8.0.15"
+  resolved "https://registry.yarnpkg.com/jsrsasign/-/jsrsasign-8.0.15.tgz#0d56856efa75fad84b578655249700f500388112"
+  integrity sha512-6UKHqnNs5lYROn03wf1BTw7DQx5tW616DTigjbo0JHV97D3HzIqYmPVCBSNsfEfQOrfpFqmPZJvaC3cMNOT0Yw==
 
 jwa@^1.4.1:
   version "1.4.1"

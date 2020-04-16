@@ -41,6 +41,7 @@ export default class GrpcClient {
         readonly refresh_token: string,
         login_customer_id: string,
         linked_customer_id: string,
+        access_token: string,
         gads_node_options: GoogleAdsNodeOptions
     ) {
         const additional_options: any = {}
@@ -60,6 +61,7 @@ export default class GrpcClient {
             refresh_token,
             login_customer_id,
             linked_customer_id,
+            access_token,
             parseResults: true,
             async accessTokenGetter(clientId: string, clientSecret: string, refreshToken: string) {
                 return getAccessToken({

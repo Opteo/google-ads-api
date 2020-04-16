@@ -1,19 +1,19 @@
 import Bottleneck from 'bottleneck'
 import crypto from 'crypto'
-import { noop } from 'lodash'
-
+import { noop, isEmpty } from 'lodash'
 import Customer, { CustomerInstance } from './customer'
 import GrpcClient, { GoogleAdsNodeOptions } from './grpc'
 import { normaliseCustomerId } from './utils'
-import { ClientOptions, CustomerOptions } from './types'
+import { ClientOptions, CustomerOptions, ServiceAccount } from './types'
 import AccessibleCustomersService from './services/accessible_customers'
-
+import { getAccessTokenByServiceAccount } from './token'
 interface ListAccessibleCustomersOptions extends GoogleAdsNodeOptions {
     refresh_token: string
 }
 
 export default class GoogleAdsApi {
     private readonly options: ClientOptions
+    private access_token: string = '';
     private throttler: Bottleneck
 
     constructor(options: ClientOptions) {
@@ -52,7 +52,8 @@ export default class GoogleAdsApi {
         prevent_mutations,
         logging,
     }: CustomerOptions): CustomerInstance {
-        if (!customer_account_id || !refresh_token) {
+
+        if (!customer_account_id || (!refresh_token && isEmpty(this.access_token))) {
             throw new Error('Must specify {customer_account_id, refresh_token}')
         }
 
@@ -75,6 +76,7 @@ export default class GoogleAdsApi {
             refresh_token as string,
             login_customer_id,
             linked_customer_id,
+            this.access_token,
             gads_node_options
         )
 
@@ -109,4 +111,10 @@ export default class GoogleAdsApi {
         const { resource_names } = await cusService.listAccessibleCustomers()
         return resource_names
     }
+
+    public async requestAndSetAccessToken(service_account: ServiceAccount) {
+        let token_object = await getAccessTokenByServiceAccount(service_account);
+        this.access_token = token_object.access_token;
+    }
 }
+

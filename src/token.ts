@@ -2,8 +2,10 @@ import crypto from 'crypto'
 import request from 'request'
 
 const ADWORDS_AUTH_URL = 'https://accounts.google.com/o/oauth2/token'
+const ADWORDS_AUTH_SERVICE_ACCOUNTURL = 'https://oauth2.googleapis.com/token'
 
 import { cached_tokens, unresolved_token_promises } from './token_cache'
+import {KJUR} from "jsrsasign";
 
 interface TokenAuth {
     client_id: string
@@ -15,13 +17,6 @@ interface TokenReturn {
     access_token: string
     expires_in: number
 }
-
-// FIXME getAccessTokenForServiceAccount = async (ServiceAccount definito in client.ts) => {
-//    ...... nostra impl
-//    ... deve ritornare una promise dove nel then risolve con il body della CURL JSON parsato
-//    .. attenzione a gestione cache token che evita di generarli a diritto, sotto si trova
-//    come l'hanno implementata
-// }
 
 export const getAccessToken = async ({ client_id, client_secret, refresh_token }: TokenAuth) => {
     const hash = getTokenHash({
@@ -81,6 +76,68 @@ const refreshAccessToken = (client_id: string, client_secret: string, refresh_to
             client_secret,
             refresh_token,
             grant_type: 'refresh_token',
+        },
+    }
+
+    return new Promise((resolve, reject) => {
+        request(options, (error, response, body) => {
+            if (error) {
+                reject(error)
+            } else {
+                const token = JSON.parse(body)
+                resolve(token)
+            }
+        })
+    })
+}
+
+export const getAccessTokenByServiceAccount = async (service_account: any) => {
+
+    const jwtHeader = {
+        alg: "RS256",
+        typ: "JWT"
+    };
+    const todayEpoch = parseInt(String(Date.now() / 1000));
+    const jwtClaimSet = {
+        iss: service_account.client_email,
+        sub: service_account.sub,
+        scope: "https://www.googleapis.com/auth/adwords",
+        aud: service_account.token_uri,
+        exp: todayEpoch + (60 * 10),
+        iat: todayEpoch
+    };
+
+    let sJWS = KJUR.jws.JWS
+    const v = sJWS.sign(
+        jwtHeader.alg,
+        jwtHeader,
+        JSON.stringify(jwtClaimSet),
+        service_account.private_key
+    );
+    const now = Date.now()
+    const token_promise = requestAccessTokenByServiceAccount(v).then(token => {
+        return {
+            access_token: token.access_token,
+            expires_in: now + token.expires_in,
+        }
+    })
+    .catch(e => {
+        return Promise.reject(e)
+    })
+
+    return await token_promise
+}
+
+const requestAccessTokenByServiceAccount = (assertion: string): Promise<TokenReturn> => {
+    const options = {
+        url: ADWORDS_AUTH_SERVICE_ACCOUNTURL,
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        form: {
+            "grant_type": 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+            "assertion": assertion,
         },
     }
 

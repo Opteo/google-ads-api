@@ -326,3 +326,11 @@ interface CreateCustomerFlowSettingsWithCustomer {
 export type CreateCustomerFlowSettings =
     | CreateCustomerFlowSettingsWithoutCustomer
     | CreateCustomerFlowSettingsWithCustomer
+
+export interface ServiceAccount {
+    readonly private_key: string
+    readonly auth_uri: string
+    readonly token_uri: string
+    readonly client_email: string
+    readonly sub: string
+}

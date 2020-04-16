@@ -69,3 +69,26 @@ export function newCustomerWithNodeOptions(options: GoogleAdsNodeOptions) {
 export function getRandomName(entity: string) {
     return `test-${entity}-${(Math.random() * 100000 + 1).toFixed(0)}`
 }
+
+
+export async function getCustomerAccessToken() {
+
+    const data =  JSON.parse(process.env.GOOGLE_ADS_SERVICE_ACCOUNT as string);
+    const options = {
+        developer_token: process.env.GOOGLE_ADS_DEVELOPER_TOKEN as string,
+        client_id: data.client_id,
+        client_secret: ''
+    }
+
+    const service_account = {
+        private_key: data.private_key,
+        auth_uri: data.auth_uri,
+        token_uri: data.token_uri,
+        client_email: data.client_email,
+        sub: data.sub
+    };
+
+    const client = new GoogleAdsApi(options)
+    await client.requestAndSetAccessToken(service_account)
+    return client.Customer({"customer_account_id": process.env.GOOGLE_ADS_CUSTOMER_ID})
+}
