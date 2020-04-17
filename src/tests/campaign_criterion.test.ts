@@ -15,6 +15,8 @@ describe('CampaignCriteria', () => {
         const p = await customer.campaignCriteria.update(campaign_device_bid, {
             validate_only: true,
         })
-        console.log(p)
+
+        expect(p.results.length).toBe(0)
+        expect(p.partial_failure_error).toBe(undefined)
     })
 })
