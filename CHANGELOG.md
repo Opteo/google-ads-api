@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.6.1](https://github.com/Opteo/google-ads-api/compare/v3.6.0...v3.6.1) (2020-04-20)
+
+
+### Bug Fixes
+
+* **deps:** updated google-ads-node to 1.15.2 ([#119](https://github.com/Opteo/google-ads-api/issues/119)) ([034e6b0](https://github.com/Opteo/google-ads-api/commit/034e6b0))
+
+
+
 # [3.6.0](https://github.com/Opteo/google-ads-api/compare/v3.5.2...v3.6.0) (2020-04-09)
 
 
