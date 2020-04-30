@@ -119,7 +119,7 @@ export const getAccessTokenByServiceAccount = async (service_account: ServiceAcc
     const token_promise = requestAccessTokenByServiceAccount(v).then(token => {
         return {
             access_token: token.access_token,
-            expires_in: now + token.expires_in,
+            expires_in: now + (token.expires_in * 1000),
         }
     })
     .catch(e => {
