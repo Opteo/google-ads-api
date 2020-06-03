@@ -5,6 +5,9 @@ src/config.ts
 src/tests/debug.test.ts
 package-lock.json
 
+# IDEs
+.idea
+
 # Logs
 logs
 *.log

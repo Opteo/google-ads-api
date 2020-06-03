@@ -11,11 +11,13 @@ import {
     getRandomName,
     CAMPAIGN_ID,
     newCustomerWithNodeOptions,
+    newMccCustomer,
 } from '../test_utils'
-import { MutateResourceOperation } from '../types'
+import { CreateCustomerOptions, MutateResourceOperation } from '../types'
 
 const customer = newCustomerWithMetrics()
 const customer_no_metrics = newCustomer()
+const master_customer = newMccCustomer()
 
 describe('customer', () => {
     describe('report', () => {
@@ -259,6 +261,27 @@ describe('customer', () => {
                 validate_only: true,
             })
             done()
+        })
+    })
+
+    describe('create', () => {
+        it('should create a new sub customer', async () => {
+            const c: CreateCustomerOptions = {
+                customer_id: (process.env.GADS_LOGIN_CUSTOMER_ID as string).replace('-', ''),
+                customer_client: {
+                    descriptive_name: getRandomName('account'),
+                    currency_code: 'CAD',
+                    time_zone: 'America/Toronto',
+                }
+            }
+            const result = await master_customer.createCustomerClient(c)
+
+            expect(result).not.toBeNull()
+            expect(result).toBeDefined()
+            expect(typeof result).toBe('object')
+            expect(result.resource_name).toBeDefined()
+            expect(result.resource_name!.includes('customers/')).toEqual(true);
+
         })
     })
 

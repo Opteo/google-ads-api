@@ -1,4 +1,5 @@
 import * as fields from 'google-ads-node/build/lib/fields'
+import { CreateCustomerClientRequest, Customer } from 'google-ads-node/build/lib/resources';
 
 export type Attributes =
     | fields.AccountBudgetFields
@@ -255,6 +256,13 @@ export interface MutateResourceOperation {
     _operation?: 'create' | 'update' | 'delete'
     // Allow any resource field
     [key: string]: any
+}
+
+export interface CreateCustomerOptions extends CreateCustomerClientRequest {
+    // Master Account ID
+    customer_id: string
+    // Customer/Account properties to support creation flow
+    customer_client: Customer;
 }
 
 interface PreQueryHookArgs {

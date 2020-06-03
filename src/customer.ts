@@ -82,6 +82,7 @@ import CustomerService, {
     GetResponse,
     UpdateResponse,
     MutateResourcesResponse,
+    CreateCustomerResponse,
 } from './services/customer'
 
 /* gRPC Client */
@@ -97,6 +98,7 @@ import {
     PreReportHook,
     MutateResourceOperation,
     ReportStreamOptions,
+    CreateCustomerOptions,
 } from './types'
 
 export interface CustomerInstance {
@@ -111,6 +113,7 @@ export interface CustomerInstance {
         operations: Array<MutateResourceOperation>,
         options?: ServiceCreateOptions
     ) => MutateResourcesResponse
+    createCustomerClient: (options: CreateCustomerOptions) => CreateCustomerResponse
 
     /* Services */
     campaigns: CampaignService
@@ -199,6 +202,7 @@ export default function Customer(
         get: id => cusService.get(id),
         update: (customer, options) => cusService.update(customer, options),
         mutateResources: (operations, options) => cusService.mutateResources(operations, options),
+        createCustomerClient: (options) => cusService.createCustomerClient(options),
 
         /* Services */
         campaigns: new CampaignService(cid, client, throttler, 'CampaignService'),

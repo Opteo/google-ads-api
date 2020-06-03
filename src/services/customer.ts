@@ -1,8 +1,11 @@
 // manual_mode: This file has been manually modified and should not be touched by generate_services.js
 
 import * as grpc from 'google-ads-node'
-import { Customer } from 'google-ads-node/build/lib/resources'
+import {
+    Customer, CreateCustomerClientResponse
+} from 'google-ads-node/build/lib/resources'
 import { getFieldMask } from 'google-ads-node/build/lib/utils'
+import { StringValue } from "google-protobuf/google/protobuf/wrappers_pb";
 
 import GrpcClient from '../grpc'
 import Bottleneck from 'bottleneck'
@@ -15,6 +18,7 @@ import {
     PostReportHook,
     MutateResourceOperation,
     ReportStreamOptions,
+    CreateCustomerOptions,
 } from '../types'
 
 export type ReportResponse<T> = Promise<T>
@@ -23,6 +27,7 @@ export type ListResponse = Promise<Array<{ customer: Customer }>>
 export type GetResponse = Promise<Customer>
 export type UpdateResponse = Promise<void>
 export type MutateResourcesResponse = Promise<Mutation>
+export type CreateCustomerResponse = Promise<CreateCustomerClientResponse>
 
 export default class CustomerService extends Service {
     private post_report_hook: PostReportHook
@@ -182,5 +187,36 @@ export default class CustomerService extends Service {
         const response = await this.globalMutate(request)
 
         return response
+    }
+
+    /**
+     * @ref https://developers.google.com/google-ads/api/reference/rpc/v3/CustomerService method CreateCustomerClient
+     */
+    public async createCustomerClient(
+        options: CreateCustomerOptions
+    ): CreateCustomerResponse {
+        const request = new grpc.CreateCustomerClientRequest();
+
+        const customerClientPB = this.buildResource('Customer', options.customer_client) as grpc.Customer
+
+        request.setCustomerId(options.customer_id)
+        request.setCustomerClient(customerClientPB)
+
+        if (options.access_role) {
+            request.setAccessRole(options.access_role)
+        }
+
+        if (options.email_address) {
+            const emailValue = new StringValue()
+
+            emailValue.setValue(options.email_address)
+
+            request.setEmailAddress(emailValue)
+        }
+
+        return this.serviceCall(
+        'createCustomerClient',
+          request,
+        ) as CreateCustomerResponse
     }
 }
