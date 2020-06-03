@@ -1,7 +1,7 @@
-import { AdGroup, Customer } from 'google-ads-node/build/lib/resources'
+import { AdGroup, CreateCustomerClientResponse, Customer } from 'google-ads-node/build/lib/resources'
 import { AdGroupStatus, CampaignStatus } from 'google-ads-node/build/lib/enums'
 import { RequestLog } from 'google-ads-node'
-import { enums } from '..'
+import { CustomerInstance, enums } from '..'
 
 import {
     newCustomerWithMetrics,
@@ -11,10 +11,11 @@ import {
     getRandomName,
     CAMPAIGN_ID,
     newCustomerWithNodeOptions,
-    newMccCustomer,
+    newMccCustomer, newGadsAPIClient,
 } from '../test_utils'
-import { CreateCustomerOptions, MutateResourceOperation } from '../types'
+import { CreateCustomerFlowSettings, CreateCustomerOptions, MutateResourceOperation } from '../types'
 
+const client = newGadsAPIClient()
 const customer = newCustomerWithMetrics()
 const customer_no_metrics = newCustomer()
 const master_customer = newMccCustomer()
@@ -265,7 +266,7 @@ describe('customer', () => {
     })
 
     describe('create', () => {
-        it('should create a new sub customer', async () => {
+        it('should create a new sub customer and return reference to new resource', async () => {
             const c: CreateCustomerOptions = {
                 customer_id: (process.env.GADS_LOGIN_CUSTOMER_ID as string).replace('-', ''),
                 customer_client: {
@@ -279,9 +280,35 @@ describe('customer', () => {
             expect(result).not.toBeNull()
             expect(result).toBeDefined()
             expect(typeof result).toBe('object')
-            expect(result.resource_name).toBeDefined()
-            expect(result.resource_name!.includes('customers/')).toEqual(true);
+            expect((result as CreateCustomerClientResponse).resource_name).toBeDefined()
+            expect((result as CreateCustomerClientResponse).resource_name!.includes('customers/')).toEqual(true);
+        })
 
+        it('should create a new sub customer and return CustomerInstance', async () => {
+            const c: CreateCustomerOptions = {
+                customer_id: (process.env.GADS_LOGIN_CUSTOMER_ID as string).replace('-', ''),
+                customer_client: {
+                    descriptive_name: getRandomName('account'),
+                    currency_code: 'CAD',
+                    time_zone: 'America/Toronto',
+                }
+            }
+            const flow_settings: CreateCustomerFlowSettings = {
+                return_customer: true,
+                customer_options: {
+                    refresh_token: process.env.GADS_REFRESH_TOKEN_WITH_METRICS as string,
+                    login_customer_id: process.env.GADS_LOGIN_CUSTOMER_ID as string
+                },
+                gads_api_client: client
+            }
+
+            const result = await master_customer.createCustomerClient(c, flow_settings)
+
+            expect(result).not.toBeNull()
+            expect(result).toBeDefined()
+            expect(typeof result).toBe('object')
+            expect((result as CustomerInstance).cid).toBeDefined()
+            expect((result as CustomerInstance).createCustomerClient).toBeDefined()
         })
     })
 

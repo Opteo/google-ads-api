@@ -18,8 +18,9 @@ import {
     PostReportHook,
     MutateResourceOperation,
     ReportStreamOptions,
-    CreateCustomerOptions,
+    CreateCustomerOptions, CreateCustomerFlowSettings,
 } from '../types'
+import { CustomerInstance } from '../customer';
 
 export type ReportResponse<T> = Promise<T>
 export type QueryResponse = Promise<Array<any>>
@@ -27,7 +28,7 @@ export type ListResponse = Promise<Array<{ customer: Customer }>>
 export type GetResponse = Promise<Customer>
 export type UpdateResponse = Promise<void>
 export type MutateResourcesResponse = Promise<Mutation>
-export type CreateCustomerResponse = Promise<CreateCustomerClientResponse>
+export type CreateCustomerResponse = Promise<CreateCustomerClientResponse | CustomerInstance>
 
 export default class CustomerService extends Service {
     private post_report_hook: PostReportHook
@@ -108,9 +109,6 @@ export default class CustomerService extends Service {
         })
     }
 
-    // TODO: Add support for this service method
-    // public async create(customer: Customer)
-
     public async mutateResources(
         operations: Array<MutateResourceOperation>,
         options?: ServiceCreateOptions
@@ -190,11 +188,21 @@ export default class CustomerService extends Service {
     }
 
     /**
+     * Create new Customer/Account under Master Account
      * @ref https://developers.google.com/google-ads/api/reference/rpc/v3/CustomerService method CreateCustomerClient
+     * @param {CreateCustomerOptions} options
+     * @param {CreateCustomerFlowSettings} [flow_settings]
+     * @param {boolean} [flow_settings.return_customer] Optional flag set to False by default. Provide True if you
+     *   prefer to have Customer instance as result instead of CreateCustomerClientResponse
      */
     public async createCustomerClient(
-        options: CreateCustomerOptions
+        options: CreateCustomerOptions,
+        flow_settings: CreateCustomerFlowSettings = { return_customer: false }
     ): CreateCustomerResponse {
+        if (flow_settings && flow_settings.return_customer && !flow_settings.customer_options) {
+            throw new TypeError(`Missing 'customer_options' in 'flow_settings'. It should be an object with: 'login_customer_id' and 'refresh_token'`)
+        }
+
         const request = new grpc.CreateCustomerClientRequest();
 
         const customerClientPB = this.buildResource('Customer', options.customer_client) as grpc.Customer
@@ -214,9 +222,20 @@ export default class CustomerService extends Service {
             request.setEmailAddress(emailValue)
         }
 
-        return this.serviceCall(
-        'createCustomerClient',
-          request,
-        ) as CreateCustomerResponse
+        const response = await this.serviceCall(
+                'createCustomerClient',
+                request,
+            ) as CreateCustomerClientResponse
+
+        if (!flow_settings || !flow_settings.return_customer) {
+            return response
+        }
+
+        const customer_id = (response.resource_name as string).split('/')[1]
+
+        return flow_settings.gads_api_client.Customer({
+            customer_account_id: customer_id,
+            ...flow_settings.customer_options
+        });
     }
 }
