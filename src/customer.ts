@@ -103,7 +103,7 @@ import {
 
 export interface CustomerInstance {
     /* Base Customer properties for easy access */
-    cid: string,
+    readonly cid: string,
 
     /* Global customer methods */
     report: <T = any[]>(options: ReportOptions) => ReportResponse<T>
