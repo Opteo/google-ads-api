@@ -17,6 +17,7 @@ export default class AccessibleCustomersService extends Service {
     ) {
         super('', client, throttler, name)
     }
+
     public listAccessibleCustomers(): ListAccessibleCustomersResponse {
         const request = new grpc.ListAccessibleCustomersRequest()
         return this.serviceCall('listAccessibleCustomers', request)

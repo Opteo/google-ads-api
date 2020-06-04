@@ -115,7 +115,7 @@ export default class GoogleAdsApi {
             this.options.client_id,
             this.options.client_secret,
             refresh_token as string,
-            '',
+            '', // login-customer-id not needed for this function
             gads_node_options
         )
 
