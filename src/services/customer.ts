@@ -57,7 +57,7 @@ export default class CustomerService extends Service {
         return results
     }
 
-    public async listAccessibleCustomers(): ListAccessibleCustomersResponse {
+    public listAccessibleCustomers(): ListAccessibleCustomersResponse {
         const request = new grpc.ListAccessibleCustomersRequest()
         return this.serviceCall('listAccessibleCustomers', request)
     }
