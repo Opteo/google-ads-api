@@ -77,11 +77,7 @@ async function main() {
         //     },
         //     {
         //            return_customer: true,
-        //            gads_api_client: client,
-        //            customer_options: {
-        //              refresh_token: '<REFRESH_TOKEN>',
-        //              login_customer_id: master_customer_account_id
-        //            }
+        //            gads_api: client
         //        }
         //    );
         //

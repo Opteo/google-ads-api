@@ -295,11 +295,7 @@ describe('customer', () => {
             }
             const flow_settings: CreateCustomerFlowSettings = {
                 return_customer: true,
-                customer_options: {
-                    refresh_token: process.env.GADS_REFRESH_TOKEN_WITH_METRICS as string,
-                    login_customer_id: process.env.GADS_LOGIN_CUSTOMER_ID as string
-                },
-                gads_api_client: client
+                gads_api: client
             }
 
             const result = await master_customer.createCustomerClient(c, flow_settings)

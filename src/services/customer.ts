@@ -199,8 +199,8 @@ export default class CustomerService extends Service {
         options: CreateCustomerOptions,
         flow_settings: CreateCustomerFlowSettings = { return_customer: false }
     ): CreateCustomerResponse {
-        if (flow_settings && flow_settings.return_customer && !flow_settings.customer_options) {
-            throw new TypeError(`Missing 'customer_options' in 'flow_settings'. It should be an object with: 'login_customer_id' and 'refresh_token'`)
+        if (flow_settings && flow_settings.return_customer && !flow_settings.gads_api) {
+            throw new TypeError(`Missing 'gads_api' in 'flow_settings'.`)
         }
 
         const request = new grpc.CreateCustomerClientRequest();
@@ -233,9 +233,10 @@ export default class CustomerService extends Service {
 
         const customer_id = (response.resource_name as string).split('/')[1]
 
-        return flow_settings.gads_api_client.Customer({
+        return flow_settings.gads_api.Customer({
             customer_account_id: customer_id,
-            ...flow_settings.customer_options
+            refresh_token: this.client.refreshToken,
+            login_customer_id: options.customer_id
         });
     }
 }

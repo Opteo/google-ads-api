@@ -308,8 +308,7 @@ interface CreateCustomerFlowSettingsWithoutCustomer {
 interface CreateCustomerFlowSettingsWithCustomer {
     // Having `true` will result in CustomerInstance instance as result instead of CreateCustomerClientResponse
     return_customer: true
-    customer_options: Required<Pick<CustomerOptions, 'login_customer_id' | 'refresh_token'>>
-    gads_api_client: GoogleAdsApi
+    gads_api: GoogleAdsApi
 }
 
 export type CreateCustomerFlowSettings =
