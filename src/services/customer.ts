@@ -19,6 +19,7 @@ import {
 
 export type ReportResponse<T> = Promise<T>
 export type QueryResponse = Promise<Array<any>>
+export type ListAccessibleCustomersResponse = Promise<{ resource_names: Array<string> }>
 export type ListResponse = Promise<Array<{ customer: Customer }>>
 export type GetResponse = Promise<Customer>
 export type UpdateResponse = Promise<void>
@@ -56,12 +57,10 @@ export default class CustomerService extends Service {
         return results
     }
 
-    // TODO: Potentially add this at some point
-    // public async listAccessibleCustomers(): Promise<any> {
-    //     const request = new grpc.ListAccessibleCustomersRequest()
-    //     const response = await this.service.listAccessibleCustomers(request)
-    //     console.log(response)
-    // }
+    public async listAccessibleCustomers(): ListAccessibleCustomersResponse {
+        const request = new grpc.ListAccessibleCustomersRequest()
+        return await this.serviceCall('listAccessibleCustomers', request)
+    }
 
     public async list(): ListResponse {
         return this.getListResults('customer')

@@ -78,6 +78,7 @@ import CampaignCriterionSimulationService from './services/campaign_criterion_si
 import CustomerService, {
     ReportResponse,
     QueryResponse,
+    ListAccessibleCustomersResponse,
     ListResponse,
     GetResponse,
     UpdateResponse,
@@ -104,6 +105,7 @@ export interface CustomerInstance {
     report: <T = any[]>(options: ReportOptions) => ReportResponse<T>
     reportStream: <T = any>(options: ReportStreamOptions) => AsyncGenerator<T>
     query: (qry: string) => QueryResponse
+    listAccessibleCustomers: () => ListAccessibleCustomersResponse
     list: () => ListResponse
     get: (id: number | string) => GetResponse
     update: (customer: Customer, options?: ServiceCreateOptions) => UpdateResponse
@@ -195,6 +197,7 @@ export default function Customer(
         report: options => cusService.report(options),
         reportStream: options => cusService.reportStream(options),
         query: qry => cusService.query(qry),
+        listAccessibleCustomers: () => cusService.listAccessibleCustomers(),
         list: () => cusService.list(),
         get: id => cusService.get(id),
         update: (customer, options) => cusService.update(customer, options),
