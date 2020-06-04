@@ -31,7 +31,7 @@ export default class GrpcClient {
         developer_token: string,
         client_id: string,
         client_secret: string,
-        private readonly refresh_token: string,
+        readonly refresh_token: string,
         login_customer_id: string,
         gads_node_options: GoogleAdsNodeOptions
     ) {
@@ -63,8 +63,8 @@ export default class GrpcClient {
         })
     }
 
-    get refreshToken() {
-        return this.refresh_token
+    public getRefreshToken() {
+      return this.refresh_token
     }
 
     public streamSearchData(

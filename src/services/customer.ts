@@ -31,21 +31,15 @@ export type MutateResourcesResponse = Promise<Mutation>
 export type CreateCustomerResponse = Promise<CreateCustomerClientResponse | CustomerInstance>
 
 export default class CustomerService extends Service {
-    private post_report_hook: PostReportHook
-    private pre_report_hook: PreReportHook
-
     constructor(
         cid: string,
         client: GrpcClient,
         throttler: Bottleneck,
         name: string,
-        pre_report_hook: PreReportHook,
-        post_report_hook: PostReportHook
+        private readonly pre_report_hook: PreReportHook,
+        private readonly post_report_hook: PostReportHook
     ) {
         super(cid, client, throttler, name)
-
-        this.pre_report_hook = pre_report_hook
-        this.post_report_hook = post_report_hook
     }
 
     public async report<T>(options: ReportOptions): ReportResponse<T> {
@@ -235,7 +229,7 @@ export default class CustomerService extends Service {
 
         return flow_settings.gads_api.Customer({
             customer_account_id: customer_id,
-            refresh_token: this.client.refreshToken,
+            refresh_token: this.client.getRefreshToken(),
             login_customer_id: options.customer_id
         });
     }
