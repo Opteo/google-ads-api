@@ -56,13 +56,6 @@ export default class CustomerService extends Service {
         return results
     }
 
-    // TODO: Potentially add this at some point
-    // public async listAccessibleCustomers(): Promise<any> {
-    //     const request = new grpc.ListAccessibleCustomersRequest()
-    //     const response = await this.service.listAccessibleCustomers(request)
-    //     console.log(response)
-    // }
-
     public async list(): ListResponse {
         return this.getListResults('customer')
     }
