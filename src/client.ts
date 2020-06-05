@@ -3,9 +3,14 @@ import crypto from 'crypto'
 import { noop } from 'lodash'
 
 import Customer, { CustomerInstance } from './customer'
-import GrpcClient  from './grpc'
+import GrpcClient, { GoogleAdsNodeOptions }  from './grpc'
 import { normaliseCustomerId } from './utils'
 import { ClientOptions, CustomerOptions } from './types'
+import AccessibleCustomersService from "./services/accessible_customers";
+
+interface ListAccessibleCustomersOptions extends GoogleAdsNodeOptions {
+    refresh_token: string
+}
 
 export default class GoogleAdsApi {
     private readonly options: ClientOptions
@@ -71,5 +76,33 @@ export default class GoogleAdsApi {
         )
 
         return Customer(customer_account_id, client, this.throttler, pre_report_hook, post_report_hook)
+    }
+
+    public async listAccessibleCustomers({
+        refresh_token,
+        prevent_mutations,
+        logging,
+    }: ListAccessibleCustomersOptions): Promise<Array<string>> {
+        if (!refresh_token) {
+            throw new Error('Must specify {refresh_token}')
+        }
+
+        const gads_node_options = {
+            prevent_mutations,
+            logging,
+        }
+
+        const client = new GrpcClient(
+            this.options.developer_token,
+            this.options.client_id,
+            this.options.client_secret,
+            refresh_token as string,
+            '', // login-customer-id not needed for this function
+            gads_node_options
+        )
+
+        const cusService = new AccessibleCustomersService(client, this.throttler, 'CustomerService')
+        const { resource_names } = await cusService.listAccessibleCustomers()
+        return resource_names
     }
 }
