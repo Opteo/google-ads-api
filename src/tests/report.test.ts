@@ -215,16 +215,11 @@ describe('Reporting', () => {
     })
 
     it('supports using the summary row setting', async () => {
-        const [no_summary_row_results, results_with_summary_row, only_summary_row] = await Promise.all([
+        const [no_summary_row_results, only_summary_row] = await Promise.all([
             customer.report({
                 entity: 'campaign',
                 metrics: ['metrics.cost_micros', 'metrics.clicks', 'metrics.impressions'],
                 limit: 1,
-            }),
-            customer.report({
-                entity: 'campaign',
-                metrics: ['metrics.cost_micros', 'metrics.clicks', 'metrics.impressions'],
-                summary_row: SummaryRowSetting.SUMMARY_ROW_WITH_RESULTS,
             }),
             customer.report({
                 entity: 'campaign',
@@ -235,7 +230,6 @@ describe('Reporting', () => {
 
         expect(no_summary_row_results.length).toEqual(1)
         expect(only_summary_row.length).toEqual(1)
-        expect(results_with_summary_row[results_with_summary_row.length - 1]).toEqual(only_summary_row[0])
     })
 
     it('supports the query method', async () => {
