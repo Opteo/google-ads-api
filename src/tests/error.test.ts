@@ -47,7 +47,7 @@ describe('Error', () => {
                 pageSize: 10000,
                 validateOnly: false,
                 returnTotalResultsCount: false,
-                summaryRowSetting: 0,
+                summaryRowSetting: enums.SummaryRowSetting.NO_SUMMARY_ROW,
             })
             expect(typeof err.request_id).toBe('string')
         }
