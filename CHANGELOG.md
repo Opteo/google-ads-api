@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [3.7.0](https://github.com/Opteo/google-ads-api/compare/v3.6.2...v3.7.0) (2020-06-05)
+
+
+### Bug Fixes
+
+* **tests:** removed unreliable summary row test ([c51c318](https://github.com/Opteo/google-ads-api/commit/c51c318))
+
+
+### Features
+
+* **customer:** added createCustomerClient method ([#130](https://github.com/Opteo/google-ads-api/issues/130)) ([c054406](https://github.com/Opteo/google-ads-api/commit/c054406))
+* **customer:** added listAccessibleCustomers method ([#132](https://github.com/Opteo/google-ads-api/issues/132)) ([a8e8d3d](https://github.com/Opteo/google-ads-api/commit/a8e8d3d))
+* **reporting:** added support for specifying summary row setting ([#134](https://github.com/Opteo/google-ads-api/issues/134)) ([ce36202](https://github.com/Opteo/google-ads-api/commit/ce36202))
+
+
+
 ## [3.6.2](https://github.com/Opteo/google-ads-api/compare/v3.6.1...v3.6.2) (2020-05-28)
 
 
