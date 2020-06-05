@@ -1,4 +1,7 @@
 import * as fields from 'google-ads-node/build/lib/fields'
+import { CreateCustomerClientRequest, Customer } from 'google-ads-node/build/lib/resources';
+import { GoogleAdsNodeOptions } from './grpc';
+import GoogleAdsApi from './client';
 
 export type Attributes =
     | fields.AccountBudgetFields
@@ -257,6 +260,13 @@ export interface MutateResourceOperation {
     [key: string]: any
 }
 
+export interface CreateCustomerOptions extends CreateCustomerClientRequest {
+    // Master Account ID
+    customer_id: string
+    // Customer/Account properties to support creation flow
+    customer_client: Customer
+}
+
 interface PreQueryHookArgs {
     query: string
     cid: string
@@ -271,3 +281,36 @@ interface PostQueryHookArgs {
 
 export type PreReportHook = (options: PreQueryHookArgs) => void | Promise<any>
 export type PostReportHook = (options: PostQueryHookArgs) => void
+
+export interface ClientOptions {
+    readonly client_id: string
+    readonly client_secret: string
+    readonly developer_token: string
+    readonly redis_options?: any
+}
+
+export interface CustomerAuth {
+    customer_account_id?: string
+    refresh_token?: string
+    login_customer_id?: string
+}
+
+export interface CustomerOptions extends CustomerAuth, GoogleAdsNodeOptions {
+    pre_report_hook?: PreReportHook
+    post_report_hook?: PostReportHook
+}
+
+interface CreateCustomerFlowSettingsWithoutCustomer {
+    // Set to `true` if you want to have CustomerInstance instance as result instead of CreateCustomerClientResponse
+    return_customer: false
+}
+
+interface CreateCustomerFlowSettingsWithCustomer {
+    // Having `true` will result in CustomerInstance instance as result instead of CreateCustomerClientResponse
+    return_customer: true
+    gads_api: GoogleAdsApi
+}
+
+export type CreateCustomerFlowSettings =
+  | CreateCustomerFlowSettingsWithoutCustomer
+  | CreateCustomerFlowSettingsWithCustomer

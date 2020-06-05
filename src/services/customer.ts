@@ -1,8 +1,11 @@
 // manual_mode: This file has been manually modified and should not be touched by generate_services.js
 
 import * as grpc from 'google-ads-node'
-import { Customer } from 'google-ads-node/build/lib/resources'
+import {
+    Customer, CreateCustomerClientResponse
+} from 'google-ads-node/build/lib/resources'
 import { getFieldMask } from 'google-ads-node/build/lib/utils'
+import { StringValue } from "google-protobuf/google/protobuf/wrappers_pb";
 
 import GrpcClient from '../grpc'
 import Bottleneck from 'bottleneck'
@@ -15,7 +18,9 @@ import {
     PostReportHook,
     MutateResourceOperation,
     ReportStreamOptions,
+    CreateCustomerOptions, CreateCustomerFlowSettings,
 } from '../types'
+import { CustomerInstance } from '../customer';
 
 export type ReportResponse<T> = Promise<T>
 export type QueryResponse = Promise<Array<any>>
@@ -23,23 +28,18 @@ export type ListResponse = Promise<Array<{ customer: Customer }>>
 export type GetResponse = Promise<Customer>
 export type UpdateResponse = Promise<void>
 export type MutateResourcesResponse = Promise<Mutation>
+export type CreateCustomerResponse = Promise<CreateCustomerClientResponse | CustomerInstance>
 
 export default class CustomerService extends Service {
-    private post_report_hook: PostReportHook
-    private pre_report_hook: PreReportHook
-
     constructor(
         cid: string,
         client: GrpcClient,
         throttler: Bottleneck,
         name: string,
-        pre_report_hook: PreReportHook,
-        post_report_hook: PostReportHook
+        private readonly pre_report_hook: PreReportHook,
+        private readonly post_report_hook: PostReportHook
     ) {
         super(cid, client, throttler, name)
-
-        this.pre_report_hook = pre_report_hook
-        this.post_report_hook = post_report_hook
     }
 
     public async report<T>(options: ReportOptions): ReportResponse<T> {
@@ -95,9 +95,6 @@ export default class CustomerService extends Service {
             })
         })
     }
-
-    // TODO: Add support for this service method
-    // public async create(customer: Customer)
 
     public async mutateResources(
         operations: Array<MutateResourceOperation>,
@@ -175,5 +172,58 @@ export default class CustomerService extends Service {
         const response = await this.globalMutate(request)
 
         return response
+    }
+
+    /**
+     * Create new Customer/Account under Master Account
+     * @ref https://developers.google.com/google-ads/api/reference/rpc/v3/CustomerService method CreateCustomerClient
+     * @param {CreateCustomerOptions} options
+     * @param {CreateCustomerFlowSettings} [flow_settings]
+     * @param {boolean} [flow_settings.return_customer] Optional flag set to False by default. Provide True if you
+     *   prefer to have Customer instance as result instead of CreateCustomerClientResponse
+     */
+    public async createCustomerClient(
+        options: CreateCustomerOptions,
+        flow_settings: CreateCustomerFlowSettings = { return_customer: false }
+    ): CreateCustomerResponse {
+        if (flow_settings && flow_settings.return_customer && !flow_settings.gads_api) {
+            throw new TypeError(`Missing 'gads_api' in 'flow_settings'.`)
+        }
+
+        const request = new grpc.CreateCustomerClientRequest();
+
+        const customerClientPB = this.buildResource('Customer', options.customer_client) as grpc.Customer
+
+        request.setCustomerId(options.customer_id)
+        request.setCustomerClient(customerClientPB)
+
+        if (options.access_role) {
+            request.setAccessRole(options.access_role)
+        }
+
+        if (options.email_address) {
+            const emailValue = new StringValue()
+
+            emailValue.setValue(options.email_address)
+
+            request.setEmailAddress(emailValue)
+        }
+
+        const response = await this.serviceCall(
+                'createCustomerClient',
+                request,
+            ) as CreateCustomerClientResponse
+
+        if (!flow_settings || !flow_settings.return_customer) {
+            return response
+        }
+
+        const customer_id = (response.resource_name as string).split('/')[1]
+
+        return flow_settings.gads_api.Customer({
+            customer_account_id: customer_id,
+            refresh_token: this.client.getRefreshToken(),
+            login_customer_id: options.customer_id
+        });
     }
 }

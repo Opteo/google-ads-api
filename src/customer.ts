@@ -82,6 +82,7 @@ import CustomerService, {
     GetResponse,
     UpdateResponse,
     MutateResourcesResponse,
+    CreateCustomerResponse,
 } from './services/customer'
 
 /* gRPC Client */
@@ -97,9 +98,13 @@ import {
     PreReportHook,
     MutateResourceOperation,
     ReportStreamOptions,
+    CreateCustomerOptions, CreateCustomerFlowSettings,
 } from './types'
 
 export interface CustomerInstance {
+    /* Base Customer properties for easy access */
+    readonly cid: string,
+
     /* Global customer methods */
     report: <T = any[]>(options: ReportOptions) => ReportResponse<T>
     reportStream: <T = any>(options: ReportStreamOptions) => AsyncGenerator<T>
@@ -111,6 +116,7 @@ export interface CustomerInstance {
         operations: Array<MutateResourceOperation>,
         options?: ServiceCreateOptions
     ) => MutateResourcesResponse
+    createCustomerClient: (options: CreateCustomerOptions, flow_settings?: CreateCustomerFlowSettings) => CreateCustomerResponse
 
     /* Services */
     campaigns: CampaignService
@@ -191,6 +197,9 @@ export default function Customer(
     const cusService = new CustomerService(cid, client, throttler, 'CustomerService', pre_report_hook, post_report_hook)
 
     return {
+        /* Base Customer properties for easy access */
+        cid,
+
         /* Top level customer methods */
         report: options => cusService.report(options),
         reportStream: options => cusService.reportStream(options),
@@ -199,6 +208,7 @@ export default function Customer(
         get: id => cusService.get(id),
         update: (customer, options) => cusService.update(customer, options),
         mutateResources: (operations, options) => cusService.mutateResources(operations, options),
+        createCustomerClient: (options, flow_settings?) => cusService.createCustomerClient(options, flow_settings),
 
         /* Services */
         campaigns: new CampaignService(cid, client, throttler, 'CampaignService'),
