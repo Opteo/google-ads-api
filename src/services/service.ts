@@ -7,7 +7,7 @@ import { SummaryRowSetting } from 'google-ads-node/build/lib/enums'
 
 import GrpcClient from '../grpc'
 import { formatQueryResults, buildReportQuery, parseResult, parsePartialFailureErrors } from '../utils'
-import { ServiceListOptions, ServiceCreateOptions, ReportStreamOptions } from '../types'
+import { ServiceListOptions, ServiceCreateOptions, ReportStreamOptions, QueryOptions } from '../types'
 import { GrpcError } from '../error'
 import { ReportOptions, PreReportHook, PostReportHook } from '../types'
 
@@ -362,8 +362,8 @@ export default class Service {
     }
 
     /* Base query method used in global customer instance */
-    protected async serviceQuery(qry: string): Promise<any> {
-        const results = await this.getSearchData(qry)
+    protected async serviceQuery(qry: string, options?: QueryOptions): Promise<any> {
+        const results = await this.getSearchData(qry, 10000, options?.summary_row)
         return this.parseServiceResults(results)
     }
 

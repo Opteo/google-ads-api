@@ -98,17 +98,19 @@ import {
     PreReportHook,
     MutateResourceOperation,
     ReportStreamOptions,
-    CreateCustomerOptions, CreateCustomerFlowSettings,
+    CreateCustomerOptions,
+    CreateCustomerFlowSettings,
+    QueryOptions,
 } from './types'
 
 export interface CustomerInstance {
     /* Base Customer properties for easy access */
-    readonly cid: string,
+    readonly cid: string
 
     /* Global customer methods */
     report: <T = any[]>(options: ReportOptions) => ReportResponse<T>
     reportStream: <T = any>(options: ReportStreamOptions) => AsyncGenerator<T>
-    query: (qry: string) => QueryResponse
+    query: (qry: string, options?: QueryOptions) => QueryResponse
     list: () => ListResponse
     get: (id: number | string) => GetResponse
     update: (customer: Customer, options?: ServiceCreateOptions) => UpdateResponse
@@ -116,7 +118,10 @@ export interface CustomerInstance {
         operations: Array<MutateResourceOperation>,
         options?: ServiceCreateOptions
     ) => MutateResourcesResponse
-    createCustomerClient: (options: CreateCustomerOptions, flow_settings?: CreateCustomerFlowSettings) => CreateCustomerResponse
+    createCustomerClient: (
+        options: CreateCustomerOptions,
+        flow_settings?: CreateCustomerFlowSettings
+    ) => CreateCustomerResponse
 
     /* Services */
     campaigns: CampaignService
@@ -203,7 +208,7 @@ export default function Customer(
         /* Top level customer methods */
         report: options => cusService.report(options),
         reportStream: options => cusService.reportStream(options),
-        query: qry => cusService.query(qry),
+        query: (qry, options) => cusService.query(qry, options),
         list: () => cusService.list(),
         get: id => cusService.get(id),
         update: (customer, options) => cusService.update(customer, options),

@@ -176,6 +176,10 @@ export interface BaseReportOptions {
     summary_row?: SummaryRowSetting
 }
 
+export interface QueryOptions {
+    summary_row?: SummaryRowSetting
+}
+
 export interface ReportOptions extends BaseReportOptions {
     page_size?: number
 }

@@ -237,6 +237,26 @@ describe('Reporting', () => {
         expect(only_summary_row.length).toEqual(1)
         expect(results_with_summary_row[results_with_summary_row.length - 1]).toEqual(only_summary_row[0])
     })
+
+    it('supports the query method', async () => {
+        const [results] = await customer.query(`SELECT campaign.id, metrics.cost_micros FROM campaign`)
+        expect(results).toEqual({
+            campaign: {
+                resource_name: expect.any(String),
+                id: expect.any(Number),
+            },
+            metrics: {
+                cost_micros: expect.any(Number),
+            },
+        })
+    })
+
+    it('supports specifying the summary row setting with query', async () => {
+        const summary_results = await customer.query(`SELECT metrics.clicks FROM campaign`, {
+            summary_row: SummaryRowSetting.SUMMARY_ROW_ONLY,
+        })
+        expect(summary_results.length).toEqual(1)
+    })
 })
 
 describe('Reporting (zero metric rows)', () => {
