@@ -6,7 +6,13 @@ import { SearchGoogleAdsStreamResponse, ClientReadableStream } from 'google-ads-
 import { SummaryRowSetting } from 'google-ads-node/build/lib/enums'
 
 import GrpcClient from '../grpc'
-import { formatQueryResults, buildReportQuery, parseResult, parsePartialFailureErrors } from '../utils'
+import {
+    formatQueryResults,
+    buildReportQuery,
+    parseResult,
+    parsePartialFailureErrors,
+    createTotalResultsIterable
+} from '../utils'
 import { ServiceListOptions, ServiceCreateOptions, ReportStreamOptions, QueryOptions } from '../types'
 import { GrpcError } from '../error'
 import { ReportOptions, PreReportHook, PostReportHook } from '../types'
@@ -282,7 +288,12 @@ export default class Service {
             return hook_result
         }
 
-        const results = await this.getSearchData(query, options.page_size, options.summary_row)
+        const results = await this.getSearchData(
+          query,
+          options.page_size,
+          options.summary_row,
+          options.return_total_results_count
+        )
         const parsed_results = this.parseServiceResults(results)
 
         await post_report_hook({
@@ -363,7 +374,12 @@ export default class Service {
 
     /* Base query method used in global customer instance */
     protected async serviceQuery(qry: string, options?: QueryOptions): Promise<any> {
-        const results = await this.getSearchData(qry, 10000, options?.summary_row)
+        const results = await this.getSearchData(
+          qry,
+          10000,
+          options?.summary_row,
+          options?.return_total_results_count
+        )
         return this.parseServiceResults(results)
     }
 
@@ -375,15 +391,28 @@ export default class Service {
     private async getSearchData(
         query: string,
         page_size: number = 10000,
-        summary_row: SummaryRowSetting = SummaryRowSetting.NO_SUMMARY_ROW
+        summary_row: SummaryRowSetting = SummaryRowSetting.NO_SUMMARY_ROW,
+        return_total_results_count: boolean = false
     ): Promise<any> {
-        const { request, limit } = this.client.buildSearchRequest(this.cid, query, page_size, undefined, summary_row)
+        const { request, limit } = this.client.buildSearchRequest(
+            this.cid,
+            query,
+            page_size,
+            undefined,
+            summary_row,
+            return_total_results_count
+        )
         try {
             if (limit && page_size && page_size >= limit) {
                 const response = await this.client.searchWithRetry(this.throttler, request)
                 if (response && response.hasOwnProperty('resultsList')) {
+                    if (return_total_results_count && response.hasOwnProperty('totalResultsCount')) {
+                        return createTotalResultsIterable(response)
+                    }
+
                     return response.resultsList
                 }
+
                 return []
             }
             const response = await this.client.searchIterator(this.throttler, request, limit)

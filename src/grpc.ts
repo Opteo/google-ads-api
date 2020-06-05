@@ -145,7 +145,8 @@ export default class GrpcClient {
         query: string,
         page_size?: number,
         page_token?: string,
-        summary_row?: SummaryRowSetting
+        summary_row?: SummaryRowSetting,
+        return_total_results_count?: boolean
     ): BuildSearchRequestResponse {
         const request = new SearchGoogleAdsRequest()
         request.setCustomerId(customer_id)
@@ -159,6 +160,9 @@ export default class GrpcClient {
         }
         if (summary_row) {
             request.setSummaryRowSetting(summary_row)
+        }
+        if (return_total_results_count) {
+            request.setReturnTotalResultsCount(return_total_results_count)
         }
 
         const has_limit = query.toLowerCase().includes(' limit ')

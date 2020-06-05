@@ -174,10 +174,12 @@ export interface BaseReportOptions {
     order_by?: string | Array<string>
     sort_order?: string
     summary_row?: SummaryRowSetting
+    return_total_results_count?: boolean
 }
 
 export interface QueryOptions {
     summary_row?: SummaryRowSetting
+    return_total_results_count?: boolean
 }
 
 export interface ReportOptions extends BaseReportOptions {
@@ -320,3 +322,12 @@ interface CreateCustomerFlowSettingsWithCustomer {
 export type CreateCustomerFlowSettings =
     | CreateCustomerFlowSettingsWithoutCustomer
     | CreateCustomerFlowSettingsWithCustomer
+
+export type TotalResultsIterableData = {
+    totalResultsCount: number
+    resultsList: Array<object>
+}
+export type TotalResultsIterable = {
+    [Symbol.iterator](): Generator
+    totalResultsCount: number
+}

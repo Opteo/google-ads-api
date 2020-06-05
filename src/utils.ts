@@ -1,7 +1,13 @@
 import { snakeCase, isObject, isString, isArray, isUndefined, values, get } from 'lodash'
 import * as maps from 'google-ads-node/build/lib/mapping'
 
-import { ReportOptions, Constraint, ConstraintValue } from './types'
+import {
+    ReportOptions,
+    Constraint,
+    ConstraintValue,
+    TotalResultsIterableData,
+    TotalResultsIterable
+} from './types'
 import { enums } from './index'
 
 function unrollConstraintShorthand(constraint: any): Constraint {
@@ -194,12 +200,32 @@ const formatOrderBy = (entity: string, order_by: string | Array<string>, sort_or
     return ` ORDER BY ${order_by} ${sort_order}`
 }
 
-export const formatQueryResults = (result: Array<object>): Array<object> => {
+export function createTotalResultsIterable(data: TotalResultsIterableData): TotalResultsIterable {
+    return {
+        *[Symbol.iterator]() {
+            for (let i = 0, l = data.resultsList.length; i < l; ++i) {
+                yield data.resultsList[i]
+            }
+        },
+        totalResultsCount: data.totalResultsCount
+    }
+}
+
+export const formatQueryResults = (result: Array<object> | TotalResultsIterable): Array<object> | TotalResultsIterable => {
     const parsed_results: Array<object> = []
+
     for (const row of result) {
         const parsed_row = formatEntity(row)
         parsed_results.push(parsed_row)
     }
+
+    if (result.hasOwnProperty('totalResultsCount')) {
+        return createTotalResultsIterable({
+            resultsList: parsed_results,
+            totalResultsCount: (result as TotalResultsIterable).totalResultsCount
+        })
+    }
+
     return parsed_results
 }
 
