@@ -2,13 +2,14 @@ import Bottleneck from 'bottleneck'
 import * as grpc from 'google-ads-node'
 import * as fields from 'google-ads-node/build/lib/fields'
 import { getFieldMask } from 'google-ads-node/build/lib/utils'
+import { SearchGoogleAdsStreamResponse, ClientReadableStream } from 'google-ads-node'
+import { SummaryRowSetting } from 'google-ads-node/build/lib/enums'
 
 import GrpcClient from '../grpc'
 import { formatQueryResults, buildReportQuery, parseResult, parsePartialFailureErrors } from '../utils'
 import { ServiceListOptions, ServiceCreateOptions, ReportStreamOptions } from '../types'
 import { GrpcError } from '../error'
 import { ReportOptions, PreReportHook, PostReportHook } from '../types'
-import { SearchGoogleAdsStreamResponse, ClientReadableStream } from 'google-ads-node'
 
 interface GetOptions {
     request: string
@@ -281,7 +282,7 @@ export default class Service {
             return hook_result
         }
 
-        const results = await this.getSearchData(query, options.page_size)
+        const results = await this.getSearchData(query, options.page_size, options.summary_row)
         const parsed_results = this.parseServiceResults(results)
 
         await post_report_hook({
@@ -371,8 +372,12 @@ export default class Service {
         return parseResult(formatted)
     }
 
-    private async getSearchData(query: string, page_size: number = 10000): Promise<any> {
-        const { request, limit } = this.client.buildSearchRequest(this.cid, query, page_size)
+    private async getSearchData(
+        query: string,
+        page_size: number = 10000,
+        summary_row: SummaryRowSetting = SummaryRowSetting.NO_SUMMARY_ROW
+    ): Promise<any> {
+        const { request, limit } = this.client.buildSearchRequest(this.cid, query, page_size, undefined, summary_row)
         try {
             if (limit && page_size && page_size >= limit) {
                 const response = await this.client.searchWithRetry(this.throttler, request)

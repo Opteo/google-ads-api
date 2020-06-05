@@ -1,7 +1,8 @@
 import * as fields from 'google-ads-node/build/lib/fields'
-import { CreateCustomerClientRequest, Customer } from 'google-ads-node/build/lib/resources';
-import { GoogleAdsNodeOptions } from './grpc';
-import GoogleAdsApi from './client';
+import { CreateCustomerClientRequest, Customer } from 'google-ads-node/build/lib/resources'
+import { SummaryRowSetting } from 'google-ads-node/build/lib/enums'
+import { GoogleAdsNodeOptions } from './grpc'
+import GoogleAdsApi from './client'
 
 export type Attributes =
     | fields.AccountBudgetFields
@@ -172,6 +173,7 @@ export interface BaseReportOptions {
     limit?: number
     order_by?: string | Array<string>
     sort_order?: string
+    summary_row?: SummaryRowSetting
 }
 
 export interface ReportOptions extends BaseReportOptions {
@@ -312,5 +314,5 @@ interface CreateCustomerFlowSettingsWithCustomer {
 }
 
 export type CreateCustomerFlowSettings =
-  | CreateCustomerFlowSettingsWithoutCustomer
-  | CreateCustomerFlowSettingsWithCustomer
+    | CreateCustomerFlowSettingsWithoutCustomer
+    | CreateCustomerFlowSettingsWithCustomer

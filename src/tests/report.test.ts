@@ -1,7 +1,6 @@
 import { orderBy } from 'lodash'
 import { newCustomerWithMetrics, newCustomer } from '../test_utils'
-
-import { AdGroupStatus, AdType } from 'google-ads-node/build/lib/enums'
+import { AdGroupStatus, AdType, SummaryRowSetting } from 'google-ads-node/build/lib/enums'
 
 describe('Reporting', () => {
     const customer = newCustomerWithMetrics()
@@ -213,6 +212,30 @@ describe('Reporting', () => {
             constraints: [{ 'campaign.id': '0123456789' }],
         })
         expect(row.length).toEqual(0)
+    })
+
+    it('supports using the summary row setting', async () => {
+        const [no_summary_row_results, results_with_summary_row, only_summary_row] = await Promise.all([
+            customer.report({
+                entity: 'campaign',
+                metrics: ['metrics.cost_micros', 'metrics.clicks', 'metrics.impressions'],
+                limit: 1,
+            }),
+            customer.report({
+                entity: 'campaign',
+                metrics: ['metrics.cost_micros', 'metrics.clicks', 'metrics.impressions'],
+                summary_row: SummaryRowSetting.SUMMARY_ROW_WITH_RESULTS,
+            }),
+            customer.report({
+                entity: 'campaign',
+                metrics: ['metrics.cost_micros', 'metrics.clicks', 'metrics.impressions'],
+                summary_row: SummaryRowSetting.SUMMARY_ROW_ONLY,
+            }),
+        ])
+
+        expect(no_summary_row_results.length).toEqual(1)
+        expect(only_summary_row.length).toEqual(1)
+        expect(results_with_summary_row[results_with_summary_row.length - 1]).toEqual(only_summary_row[0])
     })
 })
 

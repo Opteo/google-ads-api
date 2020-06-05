@@ -9,6 +9,7 @@ import {
 import Bottleneck from 'bottleneck'
 
 import { getAccessToken } from './token'
+import { SummaryRowSetting } from 'google-ads-node/build/lib/enums'
 
 interface BuildSearchRequestResponse {
     request: SearchGoogleAdsRequest
@@ -64,7 +65,7 @@ export default class GrpcClient {
     }
 
     public getRefreshToken() {
-      return this.refresh_token
+        return this.refresh_token
     }
 
     public streamSearchData(
@@ -115,6 +116,11 @@ export default class GrpcClient {
         let response = await this.searchWithRetry(throttler, request)
         results = results.concat(response.resultsList)
 
+        const summary_row = request.getSummaryRowSetting()
+        if ([SummaryRowSetting.SUMMARY_ROW_ONLY, SummaryRowSetting.SUMMARY_ROW_WITH_RESULTS].includes(summary_row)) {
+            results = results.concat([response.summaryRow])
+        }
+
         const hasNextPage = (res: any) => res && res.nextPageToken
 
         while (hasNextPage(response)) {
@@ -138,7 +144,8 @@ export default class GrpcClient {
         customer_id: string,
         query: string,
         page_size?: number,
-        page_token?: string
+        page_token?: string,
+        summary_row?: SummaryRowSetting
     ): BuildSearchRequestResponse {
         const request = new SearchGoogleAdsRequest()
         request.setCustomerId(customer_id)
@@ -149,6 +156,9 @@ export default class GrpcClient {
         }
         if (page_token) {
             request.setPageToken(page_token)
+        }
+        if (summary_row) {
+            request.setSummaryRowSetting(summary_row)
         }
 
         const has_limit = query.toLowerCase().includes(' limit ')
