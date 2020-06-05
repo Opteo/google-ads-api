@@ -1,11 +1,9 @@
 // manual_mode: This file has been manually modified and should not be touched by generate_services.js
 
 import * as grpc from 'google-ads-node'
-import {
-    Customer, CreateCustomerClientResponse
-} from 'google-ads-node/build/lib/resources'
+import { Customer, CreateCustomerClientResponse } from 'google-ads-node/build/lib/resources'
 import { getFieldMask } from 'google-ads-node/build/lib/utils'
-import { StringValue } from "google-protobuf/google/protobuf/wrappers_pb";
+import { StringValue } from 'google-protobuf/google/protobuf/wrappers_pb'
 
 import GrpcClient from '../grpc'
 import Bottleneck from 'bottleneck'
@@ -18,9 +16,11 @@ import {
     PostReportHook,
     MutateResourceOperation,
     ReportStreamOptions,
-    CreateCustomerOptions, CreateCustomerFlowSettings,
+    CreateCustomerOptions,
+    CreateCustomerFlowSettings,
+    QueryOptions,
 } from '../types'
-import { CustomerInstance } from '../customer';
+import { CustomerInstance } from '../customer'
 
 export type ReportResponse<T> = Promise<T>
 export type QueryResponse = Promise<Array<any>>
@@ -51,8 +51,8 @@ export default class CustomerService extends Service {
         return this.serviceReportStream<T>(options)
     }
 
-    public async query(qry: string): QueryResponse {
-        const results = await this.serviceQuery(qry)
+    public async query(qry: string, options?: QueryOptions): QueryResponse {
+        const results = await this.serviceQuery(qry, options)
         return results
     }
 
@@ -197,7 +197,7 @@ export default class CustomerService extends Service {
             throw new TypeError(`Missing 'gads_api' in 'flow_settings'.`)
         }
 
-        const request = new grpc.CreateCustomerClientRequest();
+        const request = new grpc.CreateCustomerClientRequest()
 
         const customerClientPB = this.buildResource('Customer', options.customer_client) as grpc.Customer
 
@@ -216,10 +216,7 @@ export default class CustomerService extends Service {
             request.setEmailAddress(emailValue)
         }
 
-        const response = await this.serviceCall(
-                'createCustomerClient',
-                request,
-            ) as CreateCustomerClientResponse
+        const response = (await this.serviceCall('createCustomerClient', request)) as CreateCustomerClientResponse
 
         if (!flow_settings || !flow_settings.return_customer) {
             return response
@@ -230,7 +227,7 @@ export default class CustomerService extends Service {
         return flow_settings.gads_api.Customer({
             customer_account_id: customer_id,
             refresh_token: this.client.getRefreshToken(),
-            login_customer_id: options.customer_id
-        });
+            login_customer_id: options.customer_id,
+        })
     }
 }
