@@ -3,27 +3,9 @@ import crypto from 'crypto'
 import { noop } from 'lodash'
 
 import Customer, { CustomerInstance } from './customer'
-import GrpcClient, { GoogleAdsNodeOptions } from './grpc'
+import GrpcClient  from './grpc'
 import { normaliseCustomerId } from './utils'
-import { PreReportHook, PostReportHook } from './types'
-
-interface ClientOptions {
-    readonly client_id: string
-    readonly client_secret: string
-    readonly developer_token: string
-    readonly redis_options?: any
-}
-
-interface CustomerAuth {
-    customer_account_id?: string
-    refresh_token?: string
-    login_customer_id?: string
-}
-
-interface CustomerOptions extends CustomerAuth, GoogleAdsNodeOptions {
-    pre_report_hook?: PreReportHook
-    post_report_hook?: PostReportHook
-}
+import { ClientOptions, CustomerOptions } from './types'
 
 export default class GoogleAdsApi {
     private readonly options: ClientOptions

@@ -25,13 +25,13 @@ export interface GoogleAdsNodeOptions {
 }
 
 export default class GrpcClient {
-    private client: GoogleAdsClient
+    private readonly client: GoogleAdsClient
 
     constructor(
         developer_token: string,
         client_id: string,
         client_secret: string,
-        refresh_token: string,
+        readonly refresh_token: string,
         login_customer_id: string,
         gads_node_options: GoogleAdsNodeOptions
     ) {
@@ -61,6 +61,10 @@ export default class GrpcClient {
             },
             ...additional_options,
         })
+    }
+
+    public getRefreshToken() {
+      return this.refresh_token
     }
 
     public streamSearchData(
