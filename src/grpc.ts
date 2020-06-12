@@ -116,11 +116,6 @@ export default class GrpcClient {
         let response = await this.searchWithRetry(throttler, request)
         results = results.concat(response.resultsList)
 
-        const summary_row = request.getSummaryRowSetting()
-        if ([SummaryRowSetting.SUMMARY_ROW_ONLY, SummaryRowSetting.SUMMARY_ROW_WITH_RESULTS].includes(summary_row)) {
-            results = results.concat([response.summaryRow])
-        }
-
         const hasNextPage = (res: any) => res && res.nextPageToken
 
         while (hasNextPage(response)) {
@@ -135,6 +130,11 @@ export default class GrpcClient {
                 results = results.slice(0, limit)
                 break
             }
+        }
+
+        const summary_row = request.getSummaryRowSetting()
+        if ([SummaryRowSetting.SUMMARY_ROW_ONLY, SummaryRowSetting.SUMMARY_ROW_WITH_RESULTS].includes(summary_row)) {
+            results = results.concat([response.summaryRow])
         }
 
         return results
