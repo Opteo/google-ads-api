@@ -2027,7 +2027,7 @@ globals@^11.1.0:
   resolved "https://registry.yarnpkg.com/globals/-/globals-11.12.0.tgz#ab8795338868a0babd8525758018c2a7eb95c42e"
   integrity sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==
 
-google-ads-node@^1.15.4:
+google-ads-node@1.15.4:
   version "1.15.4"
   resolved "https://registry.yarnpkg.com/google-ads-node/-/google-ads-node-1.15.4.tgz#234fc02bb1ddc0d191605ab3e5fb423529a18245"
   integrity sha512-zV3e4A4yZhwifNCDMn+hhMPJHKXEaAvZGUWCiior4MNtuYVYSVt4HHYaV+hPK+4lsSY4XjLDFGq3Kmpwun4maQ==
