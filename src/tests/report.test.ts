@@ -1,4 +1,4 @@
-import { orderBy } from 'lodash'
+import { orderBy, maxBy } from 'lodash'
 import { newCustomerWithMetrics, newCustomer } from '../test_utils'
 import { AdGroupStatus, AdType, SummaryRowSetting } from 'google-ads-node/build/lib/enums'
 
@@ -230,6 +230,22 @@ describe('Reporting', () => {
 
         expect(no_summary_row_results.length).toEqual(1)
         expect(only_summary_row.length).toEqual(1)
+    })
+
+    it('ensures the summary row is the last row when rows > page size', async () => {
+        const rows = await customer.report({
+            entity: 'keyword_view',
+            metrics: ['metrics.cost_micros'],
+            page_size: 5,
+            limit: 10,
+            summary_row: SummaryRowSetting.SUMMARY_ROW_WITH_RESULTS,
+        })
+
+        const highest_spending_keyword = maxBy(rows, r => r.metrics.cost_micros)
+
+        // 11 = 2 pages * 5 rows of data + 1 summary row
+        expect(rows.length).toEqual(11)
+        expect(rows[10].metrics.cost_micros).toBeGreaterThanOrEqual(highest_spending_keyword.metrics.cost_micros)
     })
 
     it('supports the query method', async () => {
