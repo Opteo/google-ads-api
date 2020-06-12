@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.7.1](https://github.com/Opteo/google-ads-api/compare/v3.7.0...v3.7.1) (2020-06-12)
+
+
+### Bug Fixes
+
+* **report:** ensure summary row is at the end of results when over page size ([9edac85](https://github.com/Opteo/google-ads-api/commit/9edac85))
+
+
+
 # [3.7.0](https://github.com/Opteo/google-ads-api/compare/v3.6.2...v3.7.0) (2020-06-05)
 
 
