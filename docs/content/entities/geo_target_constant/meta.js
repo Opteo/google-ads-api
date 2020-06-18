@@ -20,13 +20,18 @@ module.exports = {
         status: {
             _description: 'Output only. Geo target constant status.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
                 {
                     s: 'UNKNOWN',
                     description: 'The received value is not known in this version.\n\nThis is a response-only value.',
+                    index: 1,
                 },
-                { s: 'ENABLED', description: 'The geo target constant is valid.' },
-                { s: 'REMOVAL_PLANNED', description: 'The geo target constant is obsolete and will be removed.' },
+                { s: 'ENABLED', description: 'The geo target constant is valid.', index: 2 },
+                {
+                    s: 'REMOVAL_PLANNED',
+                    description: 'The geo target constant is obsolete and will be removed.',
+                    index: 3,
+                },
             ],
             _type: 'enum',
         },

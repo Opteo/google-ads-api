@@ -15,14 +15,23 @@ module.exports = {
         bid_modifier_source: {
             _description: 'Output only. Bid modifier source.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
                 {
                     s: 'CAMPAIGN',
                     description:
                         'The bid modifier is specified at the campaign level, on the campaign\nlevel criterion.',
+                    index: 2,
                 },
-                { s: 'AD_GROUP', description: 'The bid modifier is specified (overridden) at the ad group level.' },
+                {
+                    s: 'AD_GROUP',
+                    description: 'The bid modifier is specified (overridden) at the ad group level.',
+                    index: 3,
+                },
             ],
             _type: 'enum',
         },
@@ -36,13 +45,13 @@ module.exports = {
             type: {
                 _description: 'Type of the device.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
-                    { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
-                    { s: 'MOBILE', description: 'Mobile devices with full browsers.' },
-                    { s: 'TABLET', description: 'Tablets with full browsers.' },
-                    { s: 'DESKTOP', description: 'Computers.' },
-                    { s: 'CONNECTED_TV', description: 'Smart TVs and game consoles.' },
-                    { s: 'OTHER', description: 'Other device types.' },
+                    { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                    { s: 'UNKNOWN', description: 'The value is unknown in this version.', index: 1 },
+                    { s: 'MOBILE', description: 'Mobile devices with full browsers.', index: 2 },
+                    { s: 'TABLET', description: 'Tablets with full browsers.', index: 3 },
+                    { s: 'DESKTOP', description: 'Computers.', index: 4 },
+                    { s: 'CONNECTED_TV', description: 'Smart TVs and game consoles.', index: 6 },
+                    { s: 'OTHER', description: 'Other device types.', index: 5 },
                 ],
                 _type: 'enum',
             },
@@ -59,15 +68,15 @@ module.exports = {
             day_of_week: {
                 _description: 'The day of the week.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
-                    { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
-                    { s: 'MONDAY', description: 'Monday.' },
-                    { s: 'TUESDAY', description: 'Tuesday.' },
-                    { s: 'WEDNESDAY', description: 'Wednesday.' },
-                    { s: 'THURSDAY', description: 'Thursday.' },
-                    { s: 'FRIDAY', description: 'Friday.' },
-                    { s: 'SATURDAY', description: 'Saturday.' },
-                    { s: 'SUNDAY', description: 'Sunday.' },
+                    { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                    { s: 'UNKNOWN', description: 'The value is unknown in this version.', index: 1 },
+                    { s: 'MONDAY', description: 'Monday.', index: 2 },
+                    { s: 'TUESDAY', description: 'Tuesday.', index: 3 },
+                    { s: 'WEDNESDAY', description: 'Wednesday.', index: 4 },
+                    { s: 'THURSDAY', description: 'Thursday.', index: 5 },
+                    { s: 'FRIDAY', description: 'Friday.', index: 6 },
+                    { s: 'SATURDAY', description: 'Saturday.', index: 7 },
+                    { s: 'SUNDAY', description: 'Sunday.', index: 8 },
                 ],
                 _type: 'enum',
             },
@@ -78,13 +87,14 @@ module.exports = {
             type: {
                 _description: 'Type of the hotel date selection',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                     {
                         s: 'UNKNOWN',
                         description: 'Used for return value only. Represents value unknown in this version.',
+                        index: 1,
                     },
-                    { s: 'DEFAULT_SELECTION', description: 'Dates selected by default.' },
-                    { s: 'USER_SELECTED', description: 'Dates selected by the user.' },
+                    { s: 'DEFAULT_SELECTION', description: 'Dates selected by default.', index: 50 },
+                    { s: 'USER_SELECTED', description: 'Dates selected by the user.', index: 51 },
                 ],
                 _type: 'enum',
             },
@@ -101,9 +111,9 @@ module.exports = {
             type: {
                 _description: 'Type of the preferred content.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
-                    { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
-                    { s: 'YOUTUBE_TOP_CONTENT', description: 'Represents top content on YouTube.' },
+                    { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                    { s: 'UNKNOWN', description: 'The value is unknown in this version.', index: 1 },
+                    { s: 'YOUTUBE_TOP_CONTENT', description: 'Represents top content on YouTube.', index: 400 },
                 ],
                 _type: 'enum',
             },

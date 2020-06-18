@@ -11,7 +11,7 @@
 
 */
 const fs = require('fs-extra')
-const { template, camelCase, snakeCase, endsWith, get, maxBy } = require('lodash')
+const { template, camelCase, snakeCase, endsWith, get, maxBy, map } = require('lodash')
 
 const Promise = require('bluebird')
 
@@ -164,9 +164,17 @@ const raw_compiled_services = require('./compiled_resources.json')
 
 const compiled_resources =
     raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v3.nested.resources.nested
-// raw_compiled_services.nested.
 
-// console.log(compiled_resources)
+const compiled_resources_enums =
+    raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v3.nested.enums.nested
+
+// We need this atrocity to figure out what the real enum numbers are. It works 99% of the time, every time.
+const enums_keyed_by_values = {}
+map(compiled_resources_enums, ({ nested }, key) => {
+    const enum_values = nested[Object.keys(nested)[0]].values
+    enums_keyed_by_values[Object.keys(enum_values).join(',')] = enum_values
+})
+
 const references = raw_schema.schemas
 
 var myResolver = {
@@ -419,11 +427,13 @@ async function compileService(entity, schema) {
             const _new_object = {}
 
             if (obj[key].enum) {
+                const matching_complied_resources_enum = enums_keyed_by_values[obj[key].enum.join(',')]
                 _new_object._type = 'enum'
                 _new_object._enums = obj[key].enum.map((_enum, index) => {
                     return {
                         s: _enum,
                         description: obj[key].enumDescriptions[index],
+                        index: get(matching_complied_resources_enum, _enum),
                     }
                 })
             } else {

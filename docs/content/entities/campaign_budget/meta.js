@@ -10,16 +10,22 @@ module.exports = {
             _description:
                 'The delivery method that determines the rate at which the campaign budget is spent. Defaults to STANDARD if unspecified in a create operation.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
                 {
                     s: 'STANDARD',
                     description: 'The budget server will throttle serving evenly across\nthe entire time period.',
+                    index: 2,
                 },
                 {
                     s: 'ACCELERATED',
                     description:
                         'The budget server will not throttle serving,\nand ads will serve as fast as possible.',
+                    index: 3,
                 },
             ],
             _type: 'enum',
@@ -47,9 +53,13 @@ module.exports = {
         period: {
             _description: 'Immutable. Period over which to spend the budget. Defaults to DAILY if not specified.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'DAILY', description: 'Daily budget.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'DAILY', description: 'Daily budget.', index: 2 },
             ],
             _type: 'enum',
         },
@@ -90,10 +100,14 @@ module.exports = {
         status: {
             _description: 'Output only. The status of this campaign budget. This field is read-only.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'ENABLED', description: 'Budget is enabled.' },
-                { s: 'REMOVED', description: 'Budget is removed.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'ENABLED', description: 'Budget is enabled.', index: 2 },
+                { s: 'REMOVED', description: 'Budget is removed.', index: 3 },
             ],
             _type: 'enum',
         },
@@ -105,22 +119,29 @@ module.exports = {
         type: {
             _description: 'Immutable. The type of the campaign budget.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
                 {
                     s: 'STANDARD',
                     description:
                         'Budget type for standard Google Ads usage.\nCaps daily spend at two times the specified budget amount.\nFull details: https://support.google.com/google-ads/answer/6385083',
+                    index: 2,
                 },
                 {
                     s: 'HOTEL_ADS_COMMISSION',
                     description:
                         'Budget type for Hotels Ads commission program.\nFull details: https://support.google.com/google-ads/answer/9243945\n\nThis type is only supported by campaigns with\nAdvertisingChannelType.HOTEL, BiddingStrategyType.COMMISSION and\nPaymentMode.CONVERSION_VALUE.',
+                    index: 3,
                 },
                 {
                     s: 'FIXED_CPA',
                     description:
                         'Budget type with a fixed cost-per-acquisition (conversion).\nFull details: https://support.google.com/google-ads/answer/7528254\n\nThis type is only supported by campaigns with\nAdvertisingChannelType.DISPLAY (excluding\nAdvertisingChannelSubType.DISPLAY_GMAIL),\nBiddingStrategyType.TARGET_CPA and PaymentMode.CONVERSIONS.',
+                    index: 4,
                 },
             ],
             _type: 'enum',

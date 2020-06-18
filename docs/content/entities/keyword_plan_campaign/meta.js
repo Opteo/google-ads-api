@@ -17,10 +17,10 @@ module.exports = {
             _description:
                 'Targeting network. This field is required and should not be empty when creating Keyword Plan campaigns.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
-                { s: 'GOOGLE_SEARCH', description: 'Google Search.' },
-                { s: 'GOOGLE_SEARCH_AND_PARTNERS', description: 'Google Search + Search partners.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                { s: 'UNKNOWN', description: 'The value is unknown in this version.', index: 1 },
+                { s: 'GOOGLE_SEARCH', description: 'Google Search.', index: 2 },
+                { s: 'GOOGLE_SEARCH_AND_PARTNERS', description: 'Google Search + Search partners.', index: 3 },
             ],
             _type: 'enum',
         },

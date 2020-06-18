@@ -21,21 +21,24 @@ module.exports = {
                     _description:
                         'Enum value that indicates whether this call extension uses its own call conversion setting (or just have call conversion disabled), or following the account level setting.',
                     _enums: [
-                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                         {
                             s: 'UNKNOWN',
                             description: 'Used for return value only. Represents value unknown in this version.',
+                            index: 1,
                         },
-                        { s: 'DISABLED', description: 'Call conversion action is disabled.' },
+                        { s: 'DISABLED', description: 'Call conversion action is disabled.', index: 2 },
                         {
                             s: 'USE_ACCOUNT_LEVEL_CALL_CONVERSION_ACTION',
                             description:
                                 'Call conversion action will use call conversion type set at the\naccount level.',
+                            index: 3,
                         },
                         {
                             s: 'USE_RESOURCE_LEVEL_CALL_CONVERSION_ACTION',
                             description:
                                 'Call conversion action will use call conversion type set at the resource\n(call only ads/call extensions) level.',
+                            index: 4,
                         },
                     ],
                     _type: 'enum',
@@ -185,14 +188,15 @@ module.exports = {
                 match_type: {
                     _description: 'The match type of the keyword.',
                     _enums: [
-                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                         {
                             s: 'UNKNOWN',
                             description: 'Used for return value only. Represents value unknown in this version.',
+                            index: 1,
                         },
-                        { s: 'EXACT', description: 'Exact match.' },
-                        { s: 'PHRASE', description: 'Phrase match.' },
-                        { s: 'BROAD', description: 'Broad match.' },
+                        { s: 'EXACT', description: 'Exact match.', index: 2 },
+                        { s: 'PHRASE', description: 'Phrase match.', index: 3 },
+                        { s: 'BROAD', description: 'Broad match.', index: 4 },
                     ],
                     _type: 'enum',
                 },
@@ -204,14 +208,15 @@ module.exports = {
             recommended_match_type: {
                 _description: 'Output only. The recommended new match type.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                     {
                         s: 'UNKNOWN',
                         description: 'Used for return value only. Represents value unknown in this version.',
+                        index: 1,
                     },
-                    { s: 'EXACT', description: 'Exact match.' },
-                    { s: 'PHRASE', description: 'Phrase match.' },
-                    { s: 'BROAD', description: 'Broad match.' },
+                    { s: 'EXACT', description: 'Exact match.', index: 2 },
+                    { s: 'PHRASE', description: 'Phrase match.', index: 3 },
+                    { s: 'BROAD', description: 'Broad match.', index: 4 },
                 ],
                 _type: 'enum',
             },
@@ -224,14 +229,15 @@ module.exports = {
                 match_type: {
                     _description: 'The match type of the keyword.',
                     _enums: [
-                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                         {
                             s: 'UNKNOWN',
                             description: 'Used for return value only. Represents value unknown in this version.',
+                            index: 1,
                         },
-                        { s: 'EXACT', description: 'Exact match.' },
-                        { s: 'PHRASE', description: 'Phrase match.' },
-                        { s: 'BROAD', description: 'Broad match.' },
+                        { s: 'EXACT', description: 'Exact match.', index: 2 },
+                        { s: 'PHRASE', description: 'Phrase match.', index: 3 },
+                        { s: 'BROAD', description: 'Broad match.', index: 4 },
                     ],
                     _type: 'enum',
                 },
@@ -394,21 +400,32 @@ module.exports = {
                 goal: {
                     _description: 'Output only. The goal achieved by this option.',
                     _enums: [
-                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                         {
                             s: 'UNKNOWN',
                             description: 'Used for return value only. Represents value unknown in this version.',
+                            index: 1,
                         },
-                        { s: 'SAME_COST', description: 'Recommendation to set Target CPA to maintain the same cost.' },
+                        {
+                            s: 'SAME_COST',
+                            description: 'Recommendation to set Target CPA to maintain the same cost.',
+                            index: 2,
+                        },
                         {
                             s: 'SAME_CONVERSIONS',
                             description: 'Recommendation to set Target CPA to maintain the same conversions.',
+                            index: 3,
                         },
-                        { s: 'SAME_CPA', description: 'Recommendation to set Target CPA to maintain the same CPA.' },
+                        {
+                            s: 'SAME_CPA',
+                            description: 'Recommendation to set Target CPA to maintain the same CPA.',
+                            index: 4,
+                        },
                         {
                             s: 'CLOSEST_CPA',
                             description:
                                 'Recommendation to set Target CPA to a value that is as close as possible\nto, yet lower than, the actual CPA (computed for past 28 days).',
+                            index: 5,
                         },
                     ],
                     _type: 'enum',
@@ -480,17 +497,18 @@ module.exports = {
                             _description:
                                 'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
                             _enums: [
-                                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                                { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
                                 {
                                     s: 'UNKNOWN',
                                     description:
                                         'The received value is not known in this version.\n\nThis is a response-only value.',
+                                    index: 1,
                                 },
-                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.' },
-                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.' },
-                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.' },
-                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.' },
-                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.' },
+                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.', index: 2 },
+                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.', index: 3 },
+                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.', index: 4 },
+                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.', index: 5 },
+                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.', index: 6 },
                             ],
                             _type: 'enum',
                         },
@@ -504,17 +522,18 @@ module.exports = {
                             _description:
                                 'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
                             _enums: [
-                                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                                { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
                                 {
                                     s: 'UNKNOWN',
                                     description:
                                         'The received value is not known in this version.\n\nThis is a response-only value.',
+                                    index: 1,
                                 },
-                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.' },
-                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.' },
-                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.' },
-                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.' },
-                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.' },
+                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.', index: 2 },
+                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.', index: 3 },
+                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.', index: 4 },
+                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.', index: 5 },
+                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.', index: 6 },
                             ],
                             _type: 'enum',
                         },
@@ -537,17 +556,18 @@ module.exports = {
                             _description:
                                 'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
                             _enums: [
-                                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                                { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
                                 {
                                     s: 'UNKNOWN',
                                     description:
                                         'The received value is not known in this version.\n\nThis is a response-only value.',
+                                    index: 1,
                                 },
-                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.' },
-                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.' },
-                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.' },
-                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.' },
-                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.' },
+                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.', index: 2 },
+                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.', index: 3 },
+                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.', index: 4 },
+                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.', index: 5 },
+                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.', index: 6 },
                             ],
                             _type: 'enum',
                         },
@@ -570,17 +590,18 @@ module.exports = {
                             _description:
                                 'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
                             _enums: [
-                                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                                { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
                                 {
                                     s: 'UNKNOWN',
                                     description:
                                         'The received value is not known in this version.\n\nThis is a response-only value.',
+                                    index: 1,
                                 },
-                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.' },
-                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.' },
-                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.' },
-                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.' },
-                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.' },
+                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.', index: 2 },
+                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.', index: 3 },
+                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.', index: 4 },
+                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.', index: 5 },
+                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.', index: 6 },
                             ],
                             _type: 'enum',
                         },
@@ -594,17 +615,18 @@ module.exports = {
                             _description:
                                 'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
                             _enums: [
-                                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                                { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
                                 {
                                     s: 'UNKNOWN',
                                     description:
                                         'The received value is not known in this version.\n\nThis is a response-only value.',
+                                    index: 1,
                                 },
-                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.' },
-                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.' },
-                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.' },
-                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.' },
-                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.' },
+                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.', index: 2 },
+                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.', index: 3 },
+                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.', index: 4 },
+                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.', index: 5 },
+                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.', index: 6 },
                             ],
                             _type: 'enum',
                         },
@@ -639,21 +661,24 @@ module.exports = {
                         _description:
                             'The call conversion behavior of this call only ad. It can use its own call conversion setting, inherit the account level setting, or be disabled.',
                         _enums: [
-                            { s: 'UNSPECIFIED', description: 'Not specified.' },
+                            { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                             {
                                 s: 'UNKNOWN',
                                 description: 'Used for return value only. Represents value unknown in this version.',
+                                index: 1,
                             },
-                            { s: 'DISABLED', description: 'Call conversion action is disabled.' },
+                            { s: 'DISABLED', description: 'Call conversion action is disabled.', index: 2 },
                             {
                                 s: 'USE_ACCOUNT_LEVEL_CALL_CONVERSION_ACTION',
                                 description:
                                     'Call conversion action will use call conversion type set at the\naccount level.',
+                                index: 3,
                             },
                             {
                                 s: 'USE_RESOURCE_LEVEL_CALL_CONVERSION_ACTION',
                                 description:
                                     'Call conversion action will use call conversion type set at the resource\n(call only ads/call extensions) level.',
+                                index: 4,
                             },
                         ],
                         _type: 'enum',
@@ -678,13 +703,13 @@ module.exports = {
                     _description:
                         'The device preference for the ad. You can only specify a preference for mobile devices. When this preference is set the ad will be preferred over other ads when being displayed on a mobile device. The ad can still be displayed on other device types, e.g. if no other ads are available. If unspecified (no device preference), all devices are targeted. This is only supported by some ad types.',
                     _enums: [
-                        { s: 'UNSPECIFIED', description: 'Not specified.' },
-                        { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
-                        { s: 'MOBILE', description: 'Mobile devices with full browsers.' },
-                        { s: 'TABLET', description: 'Tablets with full browsers.' },
-                        { s: 'DESKTOP', description: 'Computers.' },
-                        { s: 'CONNECTED_TV', description: 'Smart TVs and game consoles.' },
-                        { s: 'OTHER', description: 'Other device types.' },
+                        { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                        { s: 'UNKNOWN', description: 'The value is unknown in this version.', index: 1 },
+                        { s: 'MOBILE', description: 'Mobile devices with full browsers.', index: 2 },
+                        { s: 'TABLET', description: 'Tablets with full browsers.', index: 3 },
+                        { s: 'DESKTOP', description: 'Computers.', index: 4 },
+                        { s: 'CONNECTED_TV', description: 'Smart TVs and game consoles.', index: 6 },
+                        { s: 'OTHER', description: 'Other device types.', index: 5 },
                     ],
                     _type: 'enum',
                 },
@@ -694,57 +719,67 @@ module.exports = {
                     display_upload_product_type: {
                         _description: 'The product type of this ad. See comments on the enum for details.',
                         _enums: [
-                            { s: 'UNSPECIFIED', description: 'Not specified.' },
-                            { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
+                            { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                            { s: 'UNKNOWN', description: 'The value is unknown in this version.', index: 1 },
                             {
                                 s: 'HTML5_UPLOAD_AD',
                                 description:
                                     'HTML5 upload ad. This product type requires the upload_media_bundle\nfield in DisplayUploadAdInfo to be set.',
+                                index: 2,
                             },
                             {
                                 s: 'DYNAMIC_HTML5_EDUCATION_AD',
                                 description:
                                     'Dynamic HTML5 education ad. This product type requires the\nupload_media_bundle field in DisplayUploadAdInfo to be set. Can only be\nused in an education campaign.',
+                                index: 3,
                             },
                             {
                                 s: 'DYNAMIC_HTML5_FLIGHT_AD',
                                 description:
                                     'Dynamic HTML5 flight ad. This product type requires the\nupload_media_bundle field in DisplayUploadAdInfo to be set. Can only be\nused in a flight campaign.',
+                                index: 4,
                             },
                             {
                                 s: 'DYNAMIC_HTML5_HOTEL_RENTAL_AD',
                                 description:
                                     'Dynamic HTML5 hotel and rental ad. This product type requires the\nupload_media_bundle field in DisplayUploadAdInfo to be set. Can only be\nused in a hotel campaign.',
+                                index: 5,
                             },
                             {
                                 s: 'DYNAMIC_HTML5_JOB_AD',
                                 description:
                                     'Dynamic HTML5 job ad. This product type requires the\nupload_media_bundle field in DisplayUploadAdInfo to be set. Can only be\nused in a job campaign.',
+                                index: 6,
                             },
                             {
                                 s: 'DYNAMIC_HTML5_LOCAL_AD',
                                 description:
                                     'Dynamic HTML5 local ad. This product type requires the\nupload_media_bundle field in DisplayUploadAdInfo to be set. Can only be\nused in a local campaign.',
+                                index: 7,
                             },
                             {
                                 s: 'DYNAMIC_HTML5_REAL_ESTATE_AD',
                                 description:
                                     'Dynamic HTML5 real estate ad. This product type requires the\nupload_media_bundle field in DisplayUploadAdInfo to be set. Can only be\nused in a real estate campaign.',
+                                index: 8,
                             },
                             {
                                 s: 'DYNAMIC_HTML5_CUSTOM_AD',
                                 description:
                                     'Dynamic HTML5 custom ad. This product type requires the\nupload_media_bundle field in DisplayUploadAdInfo to be set. Can only be\nused in a custom campaign.',
+                                index: 9,
                             },
                             {
                                 s: 'DYNAMIC_HTML5_TRAVEL_AD',
                                 description:
                                     'Dynamic HTML5 travel ad. This product type requires the\nupload_media_bundle field in DisplayUploadAdInfo to be set. Can only be\nused in a travel campaign.',
+                                index: 10,
                             },
                             {
                                 s: 'DYNAMIC_HTML5_HOTEL_AD',
                                 description:
                                     'Dynamic HTML5 hotel ad. This product type requires the\nupload_media_bundle field in DisplayUploadAdInfo to be set. Can only be\nused in a hotel campaign.',
+                                index: 11,
                             },
                         ],
                         _type: 'enum',
@@ -790,13 +825,14 @@ module.exports = {
                     os_type: {
                         _description: 'The operating system targeted by this URL. Required.',
                         _enums: [
-                            { s: 'UNSPECIFIED', description: 'Not specified.' },
+                            { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                             {
                                 s: 'UNKNOWN',
                                 description: 'Used for return value only. Represents value unknown in this version.',
+                                index: 1,
                             },
-                            { s: 'IOS', description: 'The Apple IOS operating system.' },
-                            { s: 'ANDROID', description: 'The Android operating system.' },
+                            { s: 'IOS', description: 'The Apple IOS operating system.', index: 2 },
+                            { s: 'ANDROID', description: 'The Android operating system.', index: 3 },
                         ],
                         _type: 'enum',
                     },
@@ -904,24 +940,25 @@ module.exports = {
                     mime_type: {
                         _description: 'The mime type of the image.',
                         _enums: [
-                            { s: 'UNSPECIFIED', description: 'The mime type has not been specified.' },
+                            { s: 'UNSPECIFIED', description: 'The mime type has not been specified.', index: 0 },
                             {
                                 s: 'UNKNOWN',
                                 description:
                                     'The received value is not known in this version.\n\nThis is a response-only value.',
+                                index: 1,
                             },
-                            { s: 'IMAGE_JPEG', description: 'MIME type of image/jpeg.' },
-                            { s: 'IMAGE_GIF', description: 'MIME type of image/gif.' },
-                            { s: 'IMAGE_PNG', description: 'MIME type of image/png.' },
-                            { s: 'FLASH', description: 'MIME type of application/x-shockwave-flash.' },
-                            { s: 'TEXT_HTML', description: 'MIME type of text/html.' },
-                            { s: 'PDF', description: 'MIME type of application/pdf.' },
-                            { s: 'MSWORD', description: 'MIME type of application/msword.' },
-                            { s: 'MSEXCEL', description: 'MIME type of application/vnd.ms-excel.' },
-                            { s: 'RTF', description: 'MIME type of application/rtf.' },
-                            { s: 'AUDIO_WAV', description: 'MIME type of audio/wav.' },
-                            { s: 'AUDIO_MP3', description: 'MIME type of audio/mp3.' },
-                            { s: 'HTML5_AD_ZIP', description: 'MIME type of application/x-html5-ad-zip.' },
+                            { s: 'IMAGE_JPEG', description: 'MIME type of image/jpeg.', index: 2 },
+                            { s: 'IMAGE_GIF', description: 'MIME type of image/gif.', index: 3 },
+                            { s: 'IMAGE_PNG', description: 'MIME type of image/png.', index: 4 },
+                            { s: 'FLASH', description: 'MIME type of application/x-shockwave-flash.', index: 5 },
+                            { s: 'TEXT_HTML', description: 'MIME type of text/html.', index: 6 },
+                            { s: 'PDF', description: 'MIME type of application/pdf.', index: 7 },
+                            { s: 'MSWORD', description: 'MIME type of application/msword.', index: 8 },
+                            { s: 'MSEXCEL', description: 'MIME type of application/vnd.ms-excel.', index: 9 },
+                            { s: 'RTF', description: 'MIME type of application/rtf.', index: 10 },
+                            { s: 'AUDIO_WAV', description: 'MIME type of audio/wav.', index: 11 },
+                            { s: 'AUDIO_MP3', description: 'MIME type of audio/mp3.', index: 12 },
+                            { s: 'HTML5_AD_ZIP', description: 'MIME type of application/x-html5-ad-zip.', index: 13 },
                         ],
                         _type: 'enum',
                     },
@@ -946,16 +983,17 @@ module.exports = {
                     app_store: {
                         _description: 'The app store the mobile app is available in.',
                         _enums: [
-                            { s: 'UNSPECIFIED', description: 'Not specified.' },
+                            { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                             {
                                 s: 'UNKNOWN',
                                 description: 'Used for return value only. Represents value unknown in this version.',
+                                index: 1,
                             },
-                            { s: 'APPLE_APP_STORE', description: 'Apple iTunes.' },
-                            { s: 'GOOGLE_PLAY', description: 'Google Play.' },
-                            { s: 'WINDOWS_STORE', description: 'Windows Store.' },
-                            { s: 'WINDOWS_PHONE_STORE', description: 'Windows Phone Store.' },
-                            { s: 'CN_APP_STORE', description: 'The app is hosted in a Chinese app store.' },
+                            { s: 'APPLE_APP_STORE', description: 'Apple iTunes.', index: 2 },
+                            { s: 'GOOGLE_PLAY', description: 'Google Play.', index: 3 },
+                            { s: 'WINDOWS_STORE', description: 'Windows Store.', index: 4 },
+                            { s: 'WINDOWS_PHONE_STORE', description: 'Windows Phone Store.', index: 5 },
+                            { s: 'CN_APP_STORE', description: 'The app is hosted in a Chinese app store.', index: 6 },
                         ],
                         _type: 'enum',
                     },
@@ -982,14 +1020,15 @@ module.exports = {
                     format_setting: {
                         _description: 'Specifies which format the ad will be served in. Default is ALL_FORMATS.',
                         _enums: [
-                            { s: 'UNSPECIFIED', description: 'Not specified.' },
-                            { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
-                            { s: 'ALL_FORMATS', description: 'Text, image and native formats.' },
-                            { s: 'NON_NATIVE', description: 'Text and image formats.' },
+                            { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                            { s: 'UNKNOWN', description: 'The value is unknown in this version.', index: 1 },
+                            { s: 'ALL_FORMATS', description: 'Text, image and native formats.', index: 2 },
+                            { s: 'NON_NATIVE', description: 'Text and image formats.', index: 3 },
                             {
                                 s: 'NATIVE',
                                 description:
                                     'Native format, i.e. the format rendering is controlled by the publisher\nand not by Google.',
+                                index: 4,
                             },
                         ],
                         _type: 'enum',
@@ -1063,17 +1102,18 @@ module.exports = {
                             _description:
                                 'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
                             _enums: [
-                                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                                { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
                                 {
                                     s: 'UNKNOWN',
                                     description:
                                         'The received value is not known in this version.\n\nThis is a response-only value.',
+                                    index: 1,
                                 },
-                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.' },
-                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.' },
-                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.' },
-                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.' },
-                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.' },
+                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.', index: 2 },
+                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.', index: 3 },
+                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.', index: 4 },
+                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.', index: 5 },
+                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.', index: 6 },
                             ],
                             _type: 'enum',
                         },
@@ -1082,14 +1122,15 @@ module.exports = {
                     format_setting: {
                         _description: 'Specifies which format the ad will be served in. Default is ALL_FORMATS.',
                         _enums: [
-                            { s: 'UNSPECIFIED', description: 'Not specified.' },
-                            { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
-                            { s: 'ALL_FORMATS', description: 'Text, image and native formats.' },
-                            { s: 'NON_NATIVE', description: 'Text and image formats.' },
+                            { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                            { s: 'UNKNOWN', description: 'The value is unknown in this version.', index: 1 },
+                            { s: 'ALL_FORMATS', description: 'Text, image and native formats.', index: 2 },
+                            { s: 'NON_NATIVE', description: 'Text and image formats.', index: 3 },
                             {
                                 s: 'NATIVE',
                                 description:
                                     'Native format, i.e. the format rendering is controlled by the publisher\nand not by Google.',
+                                index: 4,
                             },
                         ],
                         _type: 'enum',
@@ -1102,17 +1143,18 @@ module.exports = {
                             _description:
                                 'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
                             _enums: [
-                                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                                { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
                                 {
                                     s: 'UNKNOWN',
                                     description:
                                         'The received value is not known in this version.\n\nThis is a response-only value.',
+                                    index: 1,
                                 },
-                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.' },
-                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.' },
-                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.' },
-                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.' },
-                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.' },
+                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.', index: 2 },
+                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.', index: 3 },
+                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.', index: 4 },
+                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.', index: 5 },
+                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.', index: 6 },
                             ],
                             _type: 'enum',
                         },
@@ -1130,17 +1172,18 @@ module.exports = {
                             _description:
                                 'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
                             _enums: [
-                                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                                { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
                                 {
                                     s: 'UNKNOWN',
                                     description:
                                         'The received value is not known in this version.\n\nThis is a response-only value.',
+                                    index: 1,
                                 },
-                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.' },
-                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.' },
-                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.' },
-                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.' },
-                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.' },
+                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.', index: 2 },
+                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.', index: 3 },
+                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.', index: 4 },
+                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.', index: 5 },
+                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.', index: 6 },
                             ],
                             _type: 'enum',
                         },
@@ -1193,17 +1236,18 @@ module.exports = {
                             _description:
                                 'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
                             _enums: [
-                                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                                { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
                                 {
                                     s: 'UNKNOWN',
                                     description:
                                         'The received value is not known in this version.\n\nThis is a response-only value.',
+                                    index: 1,
                                 },
-                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.' },
-                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.' },
-                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.' },
-                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.' },
-                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.' },
+                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.', index: 2 },
+                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.', index: 3 },
+                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.', index: 4 },
+                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.', index: 5 },
+                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.', index: 6 },
                             ],
                             _type: 'enum',
                         },
@@ -1217,17 +1261,18 @@ module.exports = {
                             _description:
                                 'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
                             _enums: [
-                                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                                { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
                                 {
                                     s: 'UNKNOWN',
                                     description:
                                         'The received value is not known in this version.\n\nThis is a response-only value.',
+                                    index: 1,
                                 },
-                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.' },
-                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.' },
-                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.' },
-                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.' },
-                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.' },
+                                { s: 'HEADLINE_1', description: 'The asset is used in headline 1.', index: 2 },
+                                { s: 'HEADLINE_2', description: 'The asset is used in headline 2.', index: 3 },
+                                { s: 'HEADLINE_3', description: 'The asset is used in headline 3.', index: 4 },
+                                { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.', index: 5 },
+                                { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.', index: 6 },
                             ],
                             _type: 'enum',
                         },
@@ -1264,12 +1309,13 @@ module.exports = {
                     _description:
                         'Output only. If this ad is system managed, then this field will indicate the source. This field is read-only.',
                     _enums: [
-                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                         {
                             s: 'UNKNOWN',
                             description: 'Used for return value only. Represents value unknown in this version.',
+                            index: 1,
                         },
-                        { s: 'AD_VARIATIONS', description: 'Generated ad variations experiment ad.' },
+                        { s: 'AD_VARIATIONS', description: 'Generated ad variations experiment ad.', index: 2 },
                     ],
                     _type: 'enum',
                 },
@@ -1287,40 +1333,52 @@ module.exports = {
                 type: {
                     _description: 'Output only. The type of ad.',
                     _enums: [
-                        { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                        { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
                         {
                             s: 'UNKNOWN',
                             description:
                                 'The received value is not known in this version.\n\nThis is a response-only value.',
+                            index: 1,
                         },
-                        { s: 'TEXT_AD', description: 'The ad is a text ad.' },
-                        { s: 'EXPANDED_TEXT_AD', description: 'The ad is an expanded text ad.' },
-                        { s: 'CALL_ONLY_AD', description: 'The ad is a call only ad.' },
-                        { s: 'EXPANDED_DYNAMIC_SEARCH_AD', description: 'The ad is an expanded dynamic search ad.' },
-                        { s: 'HOTEL_AD', description: 'The ad is a hotel ad.' },
-                        { s: 'SHOPPING_SMART_AD', description: 'The ad is a Smart Shopping ad.' },
-                        { s: 'SHOPPING_PRODUCT_AD', description: 'The ad is a standard Shopping ad.' },
-                        { s: 'VIDEO_AD', description: 'The ad is a video ad.' },
-                        { s: 'GMAIL_AD', description: 'This ad is a Gmail ad.' },
-                        { s: 'IMAGE_AD', description: 'This ad is an Image ad.' },
-                        { s: 'RESPONSIVE_SEARCH_AD', description: 'The ad is a responsive search ad.' },
-                        { s: 'LEGACY_RESPONSIVE_DISPLAY_AD', description: 'The ad is a legacy responsive display ad.' },
-                        { s: 'APP_AD', description: 'The ad is an app ad.' },
-                        { s: 'LEGACY_APP_INSTALL_AD', description: 'The ad is a legacy app install ad.' },
-                        { s: 'RESPONSIVE_DISPLAY_AD', description: 'The ad is a responsive display ad.' },
+                        { s: 'TEXT_AD', description: 'The ad is a text ad.', index: 2 },
+                        { s: 'EXPANDED_TEXT_AD', description: 'The ad is an expanded text ad.', index: 3 },
+                        { s: 'CALL_ONLY_AD', description: 'The ad is a call only ad.', index: 6 },
+                        {
+                            s: 'EXPANDED_DYNAMIC_SEARCH_AD',
+                            description: 'The ad is an expanded dynamic search ad.',
+                            index: 7,
+                        },
+                        { s: 'HOTEL_AD', description: 'The ad is a hotel ad.', index: 8 },
+                        { s: 'SHOPPING_SMART_AD', description: 'The ad is a Smart Shopping ad.', index: 9 },
+                        { s: 'SHOPPING_PRODUCT_AD', description: 'The ad is a standard Shopping ad.', index: 10 },
+                        { s: 'VIDEO_AD', description: 'The ad is a video ad.', index: 12 },
+                        { s: 'GMAIL_AD', description: 'This ad is a Gmail ad.', index: 13 },
+                        { s: 'IMAGE_AD', description: 'This ad is an Image ad.', index: 14 },
+                        { s: 'RESPONSIVE_SEARCH_AD', description: 'The ad is a responsive search ad.', index: 15 },
+                        {
+                            s: 'LEGACY_RESPONSIVE_DISPLAY_AD',
+                            description: 'The ad is a legacy responsive display ad.',
+                            index: 16,
+                        },
+                        { s: 'APP_AD', description: 'The ad is an app ad.', index: 17 },
+                        { s: 'LEGACY_APP_INSTALL_AD', description: 'The ad is a legacy app install ad.', index: 18 },
+                        { s: 'RESPONSIVE_DISPLAY_AD', description: 'The ad is a responsive display ad.', index: 19 },
                         {
                             s: 'HTML5_UPLOAD_AD',
                             description: 'The ad is a display upload ad with the HTML5_UPLOAD_AD product type.',
+                            index: 21,
                         },
                         {
                             s: 'DYNAMIC_HTML5_AD',
                             description:
                                 'The ad is a display upload ad with one of the DYNAMIC_HTML5_* product\ntypes.',
+                            index: 22,
                         },
-                        { s: 'APP_ENGAGEMENT_AD', description: 'The ad is an app engagement ad.' },
+                        { s: 'APP_ENGAGEMENT_AD', description: 'The ad is an app engagement ad.', index: 23 },
                         {
                             s: 'SHOPPING_COMPARISON_LISTING_AD',
                             description: 'The ad is a Shopping Comparison Listing ad.',
+                            index: 24,
                         },
                     ],
                     _type: 'enum',
@@ -1417,49 +1475,73 @@ module.exports = {
         type: {
             _description: 'Output only. The type of recommendation.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'CAMPAIGN_BUDGET', description: 'Budget recommendation for budget constrained campaigns.' },
-                { s: 'KEYWORD', description: 'Keyword recommendation.' },
-                { s: 'TEXT_AD', description: 'Recommendation to add a new text ad.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                {
+                    s: 'CAMPAIGN_BUDGET',
+                    description: 'Budget recommendation for budget constrained campaigns.',
+                    index: 2,
+                },
+                { s: 'KEYWORD', description: 'Keyword recommendation.', index: 3 },
+                { s: 'TEXT_AD', description: 'Recommendation to add a new text ad.', index: 4 },
                 {
                     s: 'TARGET_CPA_OPT_IN',
                     description: 'Recommendation to update a campaign to use a Target CPA bidding strategy.',
+                    index: 5,
                 },
                 {
                     s: 'MAXIMIZE_CONVERSIONS_OPT_IN',
                     description:
                         'Recommendation to update a campaign to use the Maximize Conversions\nbidding strategy.',
+                    index: 6,
                 },
                 {
                     s: 'ENHANCED_CPC_OPT_IN',
                     description: 'Recommendation to enable Enhanced Cost Per Click for a campaign.',
+                    index: 7,
                 },
                 {
                     s: 'SEARCH_PARTNERS_OPT_IN',
                     description:
                         "Recommendation to start showing your campaign's ads on Google Search\nPartners Websites.",
+                    index: 8,
                 },
                 {
                     s: 'MAXIMIZE_CLICKS_OPT_IN',
                     description: 'Recommendation to update a campaign to use a Maximize Clicks bidding\nstrategy.',
+                    index: 9,
                 },
                 {
                     s: 'OPTIMIZE_AD_ROTATION',
                     description:
                         'Recommendation to start using the "Optimize" ad rotation setting for the\ngiven ad group.',
+                    index: 10,
                 },
-                { s: 'CALLOUT_EXTENSION', description: 'Recommendation to add callout extensions to a campaign.' },
-                { s: 'SITELINK_EXTENSION', description: 'Recommendation to add sitelink extensions to a campaign.' },
-                { s: 'CALL_EXTENSION', description: 'Recommendation to add call extensions to a campaign.' },
+                {
+                    s: 'CALLOUT_EXTENSION',
+                    description: 'Recommendation to add callout extensions to a campaign.',
+                    index: 11,
+                },
+                {
+                    s: 'SITELINK_EXTENSION',
+                    description: 'Recommendation to add sitelink extensions to a campaign.',
+                    index: 12,
+                },
+                { s: 'CALL_EXTENSION', description: 'Recommendation to add call extensions to a campaign.', index: 13 },
                 {
                     s: 'KEYWORD_MATCH_TYPE',
                     description:
                         'Recommendation to change an existing keyword from one match type to a\nbroader match type.',
+                    index: 14,
                 },
                 {
                     s: 'MOVE_UNUSED_BUDGET',
                     description: 'Recommendation to move unused budget from one budget to a constrained\nbudget.',
+                    index: 15,
                 },
             ],
             _type: 'enum',

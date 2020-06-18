@@ -17,10 +17,14 @@ module.exports = {
         approved_end_time_type: {
             _description: 'Output only. The approved end date time as a well-defined type, e.g. FOREVER.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'NOW', description: 'As soon as possible.' },
-                { s: 'FOREVER', description: 'An infinite point in the future.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'NOW', description: 'As soon as possible.', index: 2 },
+                { s: 'FOREVER', description: 'An infinite point in the future.', index: 3 },
             ],
             _oneof: 'approvedEndTime',
             _type: 'enum',
@@ -33,9 +37,13 @@ module.exports = {
         approved_spending_limit_type: {
             _description: 'Output only. The approved spending limit as a well-defined type, e.g. INFINITE.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'INFINITE', description: 'Infinite, indicates unlimited spending power.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'INFINITE', description: 'Infinite, indicates unlimited spending power.', index: 2 },
             ],
             _oneof: 'approvedSpendingLimit',
             _type: 'enum',
@@ -58,12 +66,20 @@ module.exports = {
             _description:
                 'Immutable. The type of this proposal, e.g. END to end the budget associated with this proposal.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'CREATE', description: 'Identifies a request to create a new budget.' },
-                { s: 'UPDATE', description: 'Identifies a request to edit an existing budget.' },
-                { s: 'END', description: 'Identifies a request to end a budget that has already started.' },
-                { s: 'REMOVE', description: "Identifies a request to remove a budget that hasn't started yet." },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'CREATE', description: 'Identifies a request to create a new budget.', index: 2 },
+                { s: 'UPDATE', description: 'Identifies a request to edit an existing budget.', index: 3 },
+                { s: 'END', description: 'Identifies a request to end a budget that has already started.', index: 4 },
+                {
+                    s: 'REMOVE',
+                    description: "Identifies a request to remove a budget that hasn't started yet.",
+                    index: 5,
+                },
             ],
             _type: 'enum',
         },
@@ -75,10 +91,14 @@ module.exports = {
         proposed_end_time_type: {
             _description: 'Immutable. The proposed end date time as a well-defined type, e.g. FOREVER.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'NOW', description: 'As soon as possible.' },
-                { s: 'FOREVER', description: 'An infinite point in the future.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'NOW', description: 'As soon as possible.', index: 2 },
+                { s: 'FOREVER', description: 'An infinite point in the future.', index: 3 },
             ],
             _oneof: 'proposedEndTime',
             _type: 'enum',
@@ -98,9 +118,13 @@ module.exports = {
         proposed_spending_limit_type: {
             _description: 'Immutable. The proposed spending limit as a well-defined type, e.g. INFINITE.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'INFINITE', description: 'Infinite, indicates unlimited spending power.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'INFINITE', description: 'Infinite, indicates unlimited spending power.', index: 2 },
             ],
             _oneof: 'proposedSpendingLimit',
             _type: 'enum',
@@ -113,10 +137,14 @@ module.exports = {
         proposed_start_time_type: {
             _description: 'Immutable. The proposed start date time as a well-defined type, e.g. NOW.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'NOW', description: 'As soon as possible.' },
-                { s: 'FOREVER', description: 'An infinite point in the future.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'NOW', description: 'As soon as possible.', index: 2 },
+                { s: 'FOREVER', description: 'An infinite point in the future.', index: 3 },
             ],
             _oneof: 'proposedStartTime',
             _type: 'enum',
@@ -130,19 +158,25 @@ module.exports = {
             _description:
                 'Output only. The status of this proposal. When a new proposal is created, the status defaults to PENDING.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'PENDING', description: 'The proposal is pending approval.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'PENDING', description: 'The proposal is pending approval.', index: 2 },
                 {
                     s: 'APPROVED_HELD',
                     description:
                         'The proposal has been approved but the corresponding billing setup\nhas not.  This can occur for proposals that set up the first budget\nwhen signing up for billing or when performing a change of bill-to\noperation.',
+                    index: 3,
                 },
-                { s: 'APPROVED', description: 'The proposal has been approved.' },
-                { s: 'CANCELLED', description: 'The proposal has been cancelled by the user.' },
+                { s: 'APPROVED', description: 'The proposal has been approved.', index: 4 },
+                { s: 'CANCELLED', description: 'The proposal has been cancelled by the user.', index: 5 },
                 {
                     s: 'REJECTED',
                     description: 'The proposal has been rejected by the user, e.g. by rejecting an\nacceptance email.',
+                    index: 6,
                 },
             ],
             _type: 'enum',

@@ -12,12 +12,13 @@ module.exports = {
             type: {
                 _description: 'The interaction type.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                     {
                         s: 'UNKNOWN',
                         description: 'Used for return value only. Represents value unknown in this version.',
+                        index: 1,
                     },
-                    { s: 'CALLS', description: 'Calls.' },
+                    { s: 'CALLS', description: 'Calls.', index: 8000 },
                 ],
                 _type: 'enum',
             },

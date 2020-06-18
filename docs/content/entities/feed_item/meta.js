@@ -67,11 +67,16 @@ module.exports = {
         geo_targeting_restriction: {
             _description: 'Geo targeting restriction specifies the type of location that can be used for targeting.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
                 {
                     s: 'LOCATION_OF_PRESENCE',
                     description: 'Indicates that request context should match the physical location of\nthe user.',
+                    index: 2,
                 },
             ],
             _type: 'enum',
@@ -85,19 +90,21 @@ module.exports = {
                 _description:
                     'Output only. The overall approval status of the placeholder type, calculated based on the status of its individual policy topic entries.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                    { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
                     {
                         s: 'UNKNOWN',
                         description:
                             'The received value is not known in this version.\n\nThis is a response-only value.',
+                        index: 1,
                     },
-                    { s: 'DISAPPROVED', description: 'Will not serve.' },
-                    { s: 'APPROVED_LIMITED', description: 'Serves with restrictions.' },
-                    { s: 'APPROVED', description: 'Serves without restrictions.' },
+                    { s: 'DISAPPROVED', description: 'Will not serve.', index: 2 },
+                    { s: 'APPROVED_LIMITED', description: 'Serves with restrictions.', index: 3 },
+                    { s: 'APPROVED', description: 'Serves without restrictions.', index: 4 },
                     {
                         s: 'AREA_OF_INTEREST_ONLY',
                         description:
                             'Will not serve in targeted countries, but may serve for users who are\nsearching for information about the targeted countries.',
+                        index: 5,
                     },
                 ],
                 _type: 'enum',
@@ -109,90 +116,119 @@ module.exports = {
             placeholder_type_enum: {
                 _description: 'Output only. The placeholder type.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                     {
                         s: 'UNKNOWN',
                         description: 'Used for return value only. Represents value unknown in this version.',
+                        index: 1,
                     },
                     {
                         s: 'SITELINK',
                         description:
                             'Lets you show links in your ad to pages from your website, including the\nmain landing page.',
+                        index: 2,
                     },
                     {
                         s: 'CALL',
                         description:
                             'Lets you attach a phone number to an ad, allowing customers to call\ndirectly from the ad.',
+                        index: 3,
                     },
                     {
                         s: 'APP',
                         description:
                             'Lets you provide users with a link that points to a mobile app in\naddition to a website.',
+                        index: 4,
                     },
                     {
                         s: 'LOCATION',
                         description:
                             'Lets you show locations of businesses from your Google My Business\naccount in your ad. This helps people find your locations by showing your\nads with your address, a map to your location, or the distance to your\nbusiness. This extension type is useful to draw customers to your\nbrick-and-mortar location.',
+                        index: 5,
                     },
                     {
                         s: 'AFFILIATE_LOCATION',
                         description:
                             'If you sell your product through retail chains, affiliate location\nextensions let you show nearby stores that carry your products.',
+                        index: 6,
                     },
                     {
                         s: 'CALLOUT',
                         description:
                             'Lets you include additional text with your search ads that provide\ndetailed information about your business, including products and services\nyou offer. Callouts appear in ads at the top and bottom of Google search\nresults.',
+                        index: 7,
                     },
                     {
                         s: 'STRUCTURED_SNIPPET',
                         description:
                             'Lets you add more info to your ad, specific to some predefined categories\nsuch as types, brands, styles, etc. A minimum of 3 text (SNIPPETS) values\nare required.',
+                        index: 8,
                     },
                     {
                         s: 'MESSAGE',
                         description:
                             'Allows users to see your ad, click an icon, and contact you directly by\ntext message. With one tap on your ad, people can contact you to book an\nappointment, get a quote, ask for information, or request a service.',
+                        index: 9,
                     },
                     {
                         s: 'PRICE',
                         description:
                             'Lets you display prices for a list of items along with your ads. A price\nfeed is composed of three to eight price table rows.',
+                        index: 10,
                     },
                     {
                         s: 'PROMOTION',
                         description:
                             'Allows you to highlight sales and other promotions that let users see how\nthey can save by buying now.',
+                        index: 11,
                     },
                     {
                         s: 'AD_CUSTOMIZER',
                         description:
                             'Lets you dynamically inject custom data into the title and description\nof your ads.',
+                        index: 12,
                     },
                     {
                         s: 'DYNAMIC_EDUCATION',
                         description: 'Indicates that this feed is for education dynamic remarketing.',
+                        index: 13,
                     },
-                    { s: 'DYNAMIC_FLIGHT', description: 'Indicates that this feed is for flight dynamic remarketing.' },
+                    {
+                        s: 'DYNAMIC_FLIGHT',
+                        description: 'Indicates that this feed is for flight dynamic remarketing.',
+                        index: 14,
+                    },
                     {
                         s: 'DYNAMIC_CUSTOM',
                         description:
                             "Indicates that this feed is for a custom dynamic remarketing type. Use\nthis only if the other business types don't apply to your products or\nservices.",
+                        index: 15,
                     },
                     {
                         s: 'DYNAMIC_HOTEL',
                         description: 'Indicates that this feed is for hotels and rentals dynamic remarketing.',
+                        index: 16,
                     },
                     {
                         s: 'DYNAMIC_REAL_ESTATE',
                         description: 'Indicates that this feed is for real estate dynamic remarketing.',
+                        index: 17,
                     },
-                    { s: 'DYNAMIC_TRAVEL', description: 'Indicates that this feed is for travel dynamic remarketing.' },
+                    {
+                        s: 'DYNAMIC_TRAVEL',
+                        description: 'Indicates that this feed is for travel dynamic remarketing.',
+                        index: 18,
+                    },
                     {
                         s: 'DYNAMIC_LOCAL',
                         description: 'Indicates that this feed is for local deals dynamic remarketing.',
+                        index: 19,
                     },
-                    { s: 'DYNAMIC_JOB', description: 'Indicates that this feed is for job dynamic remarketing.' },
+                    {
+                        s: 'DYNAMIC_JOB',
+                        description: 'Indicates that this feed is for job dynamic remarketing.',
+                        index: 20,
+                    },
                 ],
                 _type: 'enum',
             },
@@ -271,35 +307,39 @@ module.exports = {
                         device: {
                             _description: 'The type of device that failed to load the URL.',
                             _enums: [
-                                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                                { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
                                 {
                                     s: 'UNKNOWN',
                                     description:
                                         'The received value is not known in this version.\n\nThis is a response-only value.',
+                                    index: 1,
                                 },
-                                { s: 'DESKTOP', description: "Landing page doesn't work on desktop device." },
-                                { s: 'ANDROID', description: "Landing page doesn't work on Android device." },
-                                { s: 'IOS', description: "Landing page doesn't work on iOS device." },
+                                { s: 'DESKTOP', description: "Landing page doesn't work on desktop device.", index: 2 },
+                                { s: 'ANDROID', description: "Landing page doesn't work on Android device.", index: 3 },
+                                { s: 'IOS', description: "Landing page doesn't work on iOS device.", index: 4 },
                             ],
                             _type: 'enum',
                         },
                         dns_error_type: {
                             _description: 'The type of DNS error.',
                             _enums: [
-                                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                                { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
                                 {
                                     s: 'UNKNOWN',
                                     description:
                                         'The received value is not known in this version.\n\nThis is a response-only value.',
+                                    index: 1,
                                 },
                                 {
                                     s: 'HOSTNAME_NOT_FOUND',
                                     description: 'Host name not found in DNS when fetching landing page.',
+                                    index: 2,
                                 },
                                 {
                                     s: 'GOOGLE_CRAWLER_DNS_ISSUE',
                                     description:
                                         "Google internal crawler issue when communicating with DNS. This error\ndoesn't mean the landing page doesn't work. Google will recrawl the\nlanding page.",
+                                    index: 3,
                                 },
                             ],
                             _type: 'enum',
@@ -348,27 +388,35 @@ module.exports = {
                 type: {
                     _description: 'Describes the negative or positive effect this policy will have on serving.',
                     _enums: [
-                        { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                        { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
                         {
                             s: 'UNKNOWN',
                             description:
                                 'The received value is not known in this version.\n\nThis is a response-only value.',
+                            index: 1,
                         },
-                        { s: 'PROHIBITED', description: 'The resource will not be served.' },
-                        { s: 'LIMITED', description: 'The resource will not be served under some circumstances.' },
+                        { s: 'PROHIBITED', description: 'The resource will not be served.', index: 2 },
+                        {
+                            s: 'LIMITED',
+                            description: 'The resource will not be served under some circumstances.',
+                            index: 4,
+                        },
                         {
                             s: 'FULLY_LIMITED',
                             description: 'The resource cannot serve at all because of the current targeting\ncriteria.',
+                            index: 8,
                         },
                         {
                             s: 'DESCRIPTIVE',
                             description: 'May be of interest, but does not limit how the resource is served.',
+                            index: 5,
                         },
-                        { s: 'BROADENING', description: 'Could increase coverage beyond normal.' },
+                        { s: 'BROADENING', description: 'Could increase coverage beyond normal.', index: 6 },
                         {
                             s: 'AREA_OF_INTEREST_ONLY',
                             description:
                                 'Constrained for all targeted countries, but may serve in other countries\nthrough area of interest.',
+                            index: 7,
                         },
                     ],
                     _type: 'enum',
@@ -377,16 +425,18 @@ module.exports = {
             quality_approval_status: {
                 _description: 'Output only. Placeholder type quality evaluation approval status.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                    { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
                     {
                         s: 'UNKNOWN',
                         description: 'Used for return value only. Represents value unknown in this version.',
+                        index: 1,
                     },
-                    { s: 'APPROVED', description: 'Meets all quality expectations.' },
+                    { s: 'APPROVED', description: 'Meets all quality expectations.', index: 2 },
                     {
                         s: 'DISAPPROVED',
                         description:
                             'Does not meet some quality expectations. The specific reason is found in\nthe quality_disapproval_reasons field.',
+                        index: 3,
                     },
                 ],
                 _type: 'enum',
@@ -398,23 +448,30 @@ module.exports = {
             review_status: {
                 _description: 'Output only. Where the placeholder type is in the review process.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                    { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
                     {
                         s: 'UNKNOWN',
                         description:
                             'The received value is not known in this version.\n\nThis is a response-only value.',
+                        index: 1,
                     },
-                    { s: 'REVIEW_IN_PROGRESS', description: 'Currently under review.' },
-                    { s: 'REVIEWED', description: 'Primary review complete. Other reviews may be continuing.' },
+                    { s: 'REVIEW_IN_PROGRESS', description: 'Currently under review.', index: 2 },
+                    {
+                        s: 'REVIEWED',
+                        description: 'Primary review complete. Other reviews may be continuing.',
+                        index: 3,
+                    },
                     {
                         s: 'UNDER_APPEAL',
                         description:
                             'The resource has been resubmitted for approval or its policy decision has\nbeen appealed.',
+                        index: 4,
                     },
                     {
                         s: 'ELIGIBLE_MAY_SERVE',
                         description:
                             'The resource is eligible and may be serving but could still undergo\nfurther review.',
+                        index: 5,
                     },
                 ],
                 _type: 'enum',
@@ -700,14 +757,15 @@ module.exports = {
             validation_status: {
                 _description: 'Output only. The validation status of the palceholder type.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                    { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
                     {
                         s: 'UNKNOWN',
                         description: 'Used for return value only. Represents value unknown in this version.',
+                        index: 1,
                     },
-                    { s: 'PENDING', description: 'Validation pending.' },
-                    { s: 'INVALID', description: 'An error was found.' },
-                    { s: 'VALID', description: 'Feed item is semantically well-formed.' },
+                    { s: 'PENDING', description: 'Validation pending.', index: 2 },
+                    { s: 'INVALID', description: 'An error was found.', index: 3 },
+                    { s: 'VALID', description: 'Feed item is semantically well-formed.', index: 4 },
                 ],
                 _type: 'enum',
             },
@@ -725,10 +783,14 @@ module.exports = {
         status: {
             _description: 'Output only. Status of the feed item. This field is read-only.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'ENABLED', description: 'Feed item is enabled.' },
-                { s: 'REMOVED', description: 'Feed item has been removed.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'ENABLED', description: 'Feed item is enabled.', index: 2 },
+                { s: 'REMOVED', description: 'Feed item has been removed.', index: 3 },
             ],
             _type: 'enum',
         },

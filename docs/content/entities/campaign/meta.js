@@ -4,24 +4,31 @@ module.exports = {
         ad_serving_optimization_status: {
             _description: 'The ad serving optimization status of the campaign.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
                 {
                     s: 'UNKNOWN',
                     description: 'The received value is not known in this version.\n\nThis is a response-only value.',
+                    index: 1,
                 },
-                { s: 'OPTIMIZE', description: 'Ad serving is optimized based on CTR for the campaign.' },
+                { s: 'OPTIMIZE', description: 'Ad serving is optimized based on CTR for the campaign.', index: 2 },
                 {
                     s: 'CONVERSION_OPTIMIZE',
                     description:
                         'Ad serving is optimized based on CTR * Conversion for the campaign. If\nthe campaign is not in the conversion optimizer bidding strategy, it will\ndefault to OPTIMIZED.',
+                    index: 3,
                 },
-                { s: 'ROTATE', description: 'Ads are rotated evenly for 90 days, then optimized for clicks.' },
+                {
+                    s: 'ROTATE',
+                    description: 'Ads are rotated evenly for 90 days, then optimized for clicks.',
+                    index: 4,
+                },
                 {
                     s: 'ROTATE_INDEFINITELY',
                     description:
                         'Show lower performing ads more evenly with higher performing ads, and do\nnot optimize.',
+                    index: 5,
                 },
-                { s: 'UNAVAILABLE', description: 'Ad serving optimization status is not available.' },
+                { s: 'UNAVAILABLE', description: 'Ad serving optimization status is not available.', index: 6 },
             ],
             _type: 'enum',
         },
@@ -29,29 +36,39 @@ module.exports = {
             _description:
                 'Immutable. Optional refinement to <code>advertising_channel_type</code>. Must be a valid sub-type of the parent channel type. Can be set only when creating campaigns. After campaign is created, the field can not be changed.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used as a return value only. Represents value unknown in this version.' },
-                { s: 'SEARCH_MOBILE_APP', description: 'Mobile app campaigns for Search.' },
-                { s: 'DISPLAY_MOBILE_APP', description: 'Mobile app campaigns for Display.' },
-                { s: 'SEARCH_EXPRESS', description: 'AdWords express campaigns for search.' },
-                { s: 'DISPLAY_EXPRESS', description: 'AdWords Express campaigns for display.' },
-                { s: 'SHOPPING_SMART_ADS', description: 'Smart Shopping campaigns.' },
-                { s: 'DISPLAY_GMAIL_AD', description: 'Gmail Ad campaigns.' },
-                { s: 'DISPLAY_SMART_CAMPAIGN', description: 'Smart display campaigns.' },
-                { s: 'VIDEO_OUTSTREAM', description: 'Video Outstream campaigns.' },
-                { s: 'VIDEO_ACTION', description: 'Video TrueView for Action campaigns.' },
-                { s: 'VIDEO_NON_SKIPPABLE', description: 'Video campaigns with non-skippable video ads.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used as a return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'SEARCH_MOBILE_APP', description: 'Mobile app campaigns for Search.', index: 2 },
+                { s: 'DISPLAY_MOBILE_APP', description: 'Mobile app campaigns for Display.', index: 3 },
+                { s: 'SEARCH_EXPRESS', description: 'AdWords express campaigns for search.', index: 4 },
+                { s: 'DISPLAY_EXPRESS', description: 'AdWords Express campaigns for display.', index: 5 },
+                { s: 'SHOPPING_SMART_ADS', description: 'Smart Shopping campaigns.', index: 6 },
+                { s: 'DISPLAY_GMAIL_AD', description: 'Gmail Ad campaigns.', index: 7 },
+                { s: 'DISPLAY_SMART_CAMPAIGN', description: 'Smart display campaigns.', index: 8 },
+                { s: 'VIDEO_OUTSTREAM', description: 'Video Outstream campaigns.', index: 9 },
+                { s: 'VIDEO_ACTION', description: 'Video TrueView for Action campaigns.', index: 10 },
+                { s: 'VIDEO_NON_SKIPPABLE', description: 'Video campaigns with non-skippable video ads.', index: 11 },
                 {
                     s: 'APP_CAMPAIGN',
                     description:
                         "App Campaign that allows you to easily promote your Android or iOS app\nacross Google's top properties including Search, Play, YouTube, and the\nGoogle Display Network.",
+                    index: 12,
                 },
                 {
                     s: 'APP_CAMPAIGN_FOR_ENGAGEMENT',
                     description:
                         'App Campaign for engagement, focused on driving re-engagement with the\napp across several of Google’s top properties including Search, YouTube,\nand the Google Display Network.',
+                    index: 13,
                 },
-                { s: 'SHOPPING_COMPARISON_LISTING_ADS', description: 'Shopping Comparison Listing campaigns.' },
+                {
+                    s: 'SHOPPING_COMPARISON_LISTING_ADS',
+                    description: 'Shopping Comparison Listing campaigns.',
+                    index: 15,
+                },
             ],
             _type: 'enum',
         },
@@ -59,19 +76,29 @@ module.exports = {
             _description:
                 'Immutable. The primary serving target for ads within the campaign. The targeting options can be refined in <code>network_settings</code>. This field is required and should not be empty when creating new campaigns. Can be set only when creating campaigns. After the campaign is created, the field can not be changed.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'SEARCH', description: 'Search Network. Includes display bundled, and Search+ campaigns.' },
-                { s: 'DISPLAY', description: 'Google Display Network only.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                {
+                    s: 'SEARCH',
+                    description: 'Search Network. Includes display bundled, and Search+ campaigns.',
+                    index: 2,
+                },
+                { s: 'DISPLAY', description: 'Google Display Network only.', index: 3 },
                 {
                     s: 'SHOPPING',
                     description: 'Shopping campaigns serve on the shopping property\nand on google.com search results.',
+                    index: 4,
                 },
-                { s: 'HOTEL', description: 'Hotel Ads campaigns.' },
-                { s: 'VIDEO', description: 'Video campaigns.' },
+                { s: 'HOTEL', description: 'Hotel Ads campaigns.', index: 5 },
+                { s: 'VIDEO', description: 'Video campaigns.', index: 6 },
                 {
                     s: 'MULTI_CHANNEL',
                     description: 'App Campaigns, and App Campaigns for Engagement, that run\nacross multiple channels.',
+                    index: 7,
                 },
             ],
             _type: 'enum',
@@ -85,13 +112,14 @@ module.exports = {
             app_store: {
                 _description: 'Immutable. The application store that distributes this specific app.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                     {
                         s: 'UNKNOWN',
                         description: 'Used for return value only. Represents value unknown in this version.',
+                        index: 1,
                     },
-                    { s: 'APPLE_APP_STORE', description: 'Apple app store.' },
-                    { s: 'GOOGLE_APP_STORE', description: 'Google play.' },
+                    { s: 'APPLE_APP_STORE', description: 'Apple app store.', index: 2 },
+                    { s: 'GOOGLE_APP_STORE', description: 'Google play.', index: 3 },
                 ],
                 _type: 'enum',
             },
@@ -99,30 +127,35 @@ module.exports = {
                 _description:
                     'Represents the goal which the bidding strategy of this app campaign should optimize towards.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                     {
                         s: 'UNKNOWN',
                         description: 'Used for return value only. Represents value unknown in this version.',
+                        index: 1,
                     },
                     {
                         s: 'OPTIMIZE_INSTALLS_TARGET_INSTALL_COST',
                         description:
                             'Aim to maximize the number of app installs. The cpa bid is the\ntarget cost per install.',
+                        index: 2,
                     },
                     {
                         s: 'OPTIMIZE_IN_APP_CONVERSIONS_TARGET_INSTALL_COST',
                         description:
                             'Aim to maximize the long term number of selected in-app conversions from\napp installs. The cpa bid is the target cost per install.',
+                        index: 3,
                     },
                     {
                         s: 'OPTIMIZE_IN_APP_CONVERSIONS_TARGET_CONVERSION_COST',
                         description:
                             'Aim to maximize the long term number of selected in-app conversions from\napp installs. The cpa bid is the target cost per in-app conversion. Note\nthat the actual cpa may seem higher than the target cpa at first, since\nthe long term conversions haven’t happened yet.',
+                        index: 4,
                     },
                     {
                         s: 'OPTIMIZE_RETURN_ON_ADVERTISING_SPEND',
                         description:
                             "Aim to maximize all conversions' value, i.e. install + selected in-app\nconversions while achieving or exceeding target return on advertising\nspend.",
+                        index: 5,
                     },
                 ],
                 _type: 'enum',
@@ -142,73 +175,94 @@ module.exports = {
             _description:
                 'Output only. The type of bidding strategy. A bidding strategy can be created by setting either the bidding scheme to create a standard bidding strategy or the <code>bidding_strategy</code> field to create a portfolio bidding strategy. This field is read-only.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
                 {
                     s: 'COMMISSION',
                     description:
                         'Commission is an automatic bidding strategy in which the advertiser pays\na certain portion of the conversion value.',
+                    index: 16,
                 },
                 {
                     s: 'ENHANCED_CPC',
                     description:
                         'Enhanced CPC is a bidding strategy that raises bids for clicks\nthat seem more likely to lead to a conversion and lowers\nthem for clicks where they seem less likely.',
+                    index: 2,
                 },
-                { s: 'MANUAL_CPC', description: 'Manual click based bidding where user pays per click.' },
+                { s: 'MANUAL_CPC', description: 'Manual click based bidding where user pays per click.', index: 3 },
                 {
                     s: 'MANUAL_CPM',
                     description: 'Manual impression based bidding\nwhere user pays per thousand impressions.',
+                    index: 4,
                 },
-                { s: 'MANUAL_CPV', description: 'A bidding strategy that pays a configurable amount per video view.' },
+                {
+                    s: 'MANUAL_CPV',
+                    description: 'A bidding strategy that pays a configurable amount per video view.',
+                    index: 13,
+                },
                 {
                     s: 'MAXIMIZE_CONVERSIONS',
                     description:
                         'A bidding strategy that automatically maximizes number of conversions\ngiven a daily budget.',
+                    index: 10,
                 },
                 {
                     s: 'MAXIMIZE_CONVERSION_VALUE',
                     description:
                         'An automated bidding strategy that automatically sets bids to maximize\nrevenue while spending your budget.',
+                    index: 11,
                 },
                 {
                     s: 'PAGE_ONE_PROMOTED',
                     description:
                         'Page-One Promoted bidding scheme, which sets max cpc bids to\ntarget impressions on page one or page one promoted slots on google.com.\nThis enum value is deprecated.',
+                    index: 5,
                 },
                 {
                     s: 'PERCENT_CPC',
                     description:
                         'Percent Cpc is bidding strategy where bids are a fraction of the\nadvertised price for some good or service.',
+                    index: 12,
                 },
                 {
                     s: 'TARGET_CPA',
                     description:
                         'Target CPA is an automated bid strategy that sets bids\nto help get as many conversions as possible\nat the target cost-per-acquisition (CPA) you set.',
+                    index: 6,
                 },
                 {
                     s: 'TARGET_CPM',
                     description:
                         'Target CPM is an automated bid strategy that sets bids to help get\nas many impressions as possible at the target cost per one thousand\nimpressions (CPM) you set.',
+                    index: 14,
                 },
                 {
                     s: 'TARGET_IMPRESSION_SHARE',
                     description:
                         'An automated bidding strategy that sets bids so that a certain percentage\nof search ads are shown at the top of the first page (or other targeted\nlocation).',
+                    index: 15,
                 },
                 {
                     s: 'TARGET_OUTRANK_SHARE',
                     description:
                         'Target Outrank Share is an automated bidding strategy that sets bids\nbased on the target fraction of auctions where the advertiser\nshould outrank a specific competitor.\nThis enum value is deprecated.',
+                    index: 7,
                 },
                 {
                     s: 'TARGET_ROAS',
                     description:
                         'Target ROAS is an automated bidding strategy\nthat helps you maximize revenue while averaging\na specific target Return On Average Spend (ROAS).',
+                    index: 8,
                 },
                 {
                     s: 'TARGET_SPEND',
                     description:
                         'Target Spend is an automated bid strategy that sets your bids\nto help get as many clicks as possible within your budget.',
+                    index: 9,
                 },
             ],
             _type: 'enum',
@@ -251,18 +305,24 @@ module.exports = {
         experiment_type: {
             _description: 'Output only. The type of campaign: normal, draft, or experiment.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'BASE', description: 'This is a regular campaign.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'BASE', description: 'This is a regular campaign.', index: 2 },
                 {
                     s: 'DRAFT',
                     description:
                         'This is a draft version of a campaign.\nIt has some modifications from a base campaign,\nbut it does not serve or accrue metrics.',
+                    index: 3,
                 },
                 {
                     s: 'EXPERIMENT',
                     description:
                         'This is an experiment version of a campaign.\nIt has some modifications from a base campaign,\nand a percentage of traffic is being diverted\nfrom the BASE campaign to this experiment campaign.',
+                    index: 4,
                 },
             ],
             _type: 'enum',
@@ -285,13 +345,14 @@ module.exports = {
                 event_type: {
                     _description: 'The type of event that the cap applies to (e.g. impression).',
                     _enums: [
-                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                         {
                             s: 'UNKNOWN',
                             description: 'Used for return value only. Represents value unknown in this version.',
+                            index: 1,
                         },
-                        { s: 'IMPRESSION', description: 'The cap applies on ad impressions.' },
-                        { s: 'VIDEO_VIEW', description: 'The cap applies on video ad views.' },
+                        { s: 'IMPRESSION', description: 'The cap applies on ad impressions.', index: 2 },
+                        { s: 'VIDEO_VIEW', description: 'The cap applies on video ad views.', index: 3 },
                     ],
                     _type: 'enum',
                 },
@@ -299,14 +360,15 @@ module.exports = {
                     _description:
                         'The level on which the cap is to be applied (e.g. ad group ad, ad group). The cap is applied to all the entities of this level.',
                     _enums: [
-                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                         {
                             s: 'UNKNOWN',
                             description: 'Used for return value only. Represents value unknown in this version.',
+                            index: 1,
                         },
-                        { s: 'AD_GROUP_AD', description: 'The cap is applied at the ad group ad level.' },
-                        { s: 'AD_GROUP', description: 'The cap is applied at the ad group level.' },
-                        { s: 'CAMPAIGN', description: 'The cap is applied at the campaign level.' },
+                        { s: 'AD_GROUP_AD', description: 'The cap is applied at the ad group ad level.', index: 2 },
+                        { s: 'AD_GROUP', description: 'The cap is applied at the ad group level.', index: 3 },
+                        { s: 'CAMPAIGN', description: 'The cap is applied at the campaign level.', index: 4 },
                     ],
                     _type: 'enum',
                 },
@@ -314,14 +376,15 @@ module.exports = {
                 time_unit: {
                     _description: 'Unit of time the cap is defined at (e.g. day, week).',
                     _enums: [
-                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                         {
                             s: 'UNKNOWN',
                             description: 'Used for return value only. Represents value unknown in this version.',
+                            index: 1,
                         },
-                        { s: 'DAY', description: 'The cap would define limit per one day.' },
-                        { s: 'WEEK', description: 'The cap would define limit per one week.' },
-                        { s: 'MONTH', description: 'The cap would define limit per one month.' },
+                        { s: 'DAY', description: 'The cap would define limit per one day.', index: 2 },
+                        { s: 'WEEK', description: 'The cap would define limit per one week.', index: 3 },
+                        { s: 'MONTH', description: 'The cap would define limit per one month.', index: 4 },
                     ],
                     _type: 'enum',
                 },
@@ -332,17 +395,19 @@ module.exports = {
             negative_geo_target_type: {
                 _description: 'The setting used for negative geotargeting in this particular campaign.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
-                    { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
+                    { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                    { s: 'UNKNOWN', description: 'The value is unknown in this version.', index: 1 },
                     {
                         s: 'PRESENCE_OR_INTEREST',
                         description:
                             "Specifies that a user is excluded from seeing the ad if they\nare in, or show interest in, advertiser's excluded locations.",
+                        index: 4,
                     },
                     {
                         s: 'PRESENCE',
                         description:
                             "Specifies that a user is excluded from seeing the ad if they\nare in advertiser's excluded locations.",
+                        index: 5,
                     },
                 ],
                 _type: 'enum',
@@ -350,22 +415,25 @@ module.exports = {
             positive_geo_target_type: {
                 _description: 'The setting used for positive geotargeting in this particular campaign.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
-                    { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
+                    { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                    { s: 'UNKNOWN', description: 'The value is unknown in this version.', index: 1 },
                     {
                         s: 'PRESENCE_OR_INTEREST',
                         description:
                             "Specifies that an ad is triggered if the user is in,\nor shows interest in, advertiser's targeted locations.",
+                        index: 5,
                     },
                     {
                         s: 'SEARCH_INTEREST',
                         description:
                             "Specifies that an ad is triggered if the user\nsearches for advertiser's targeted locations.",
+                        index: 6,
                     },
                     {
                         s: 'PRESENCE',
                         description:
                             "Specifies that an ad is triggered if the user is in\nor regularly in advertiser's targeted locations.",
+                        index: 7,
                     },
                 ],
                 _type: 'enum',
@@ -443,23 +511,30 @@ module.exports = {
         payment_mode: {
             _description: 'Payment mode for the campaign.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'CLICKS', description: 'Pay per click.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'CLICKS', description: 'Pay per click.', index: 4 },
                 {
                     s: 'CONVERSION_VALUE',
                     description:
                         'Pay per conversion value. This mode is only supported by campaigns with\nAdvertisingChannelType.HOTEL, BiddingStrategyType.COMMISSION, and\nBudgetType.HOTEL_ADS_COMMISSION.',
+                    index: 5,
                 },
                 {
                     s: 'CONVERSIONS',
                     description:
                         'Pay per conversion. This mode is only supported by campaigns with\nAdvertisingChannelType.DISPLAY (excluding\nAdvertisingChannelSubType.DISPLAY_GMAIL), BiddingStrategyType.TARGET_CPA,\nand BudgetType.FIXED_CPA. The customer must also be eligible for this\nmode. See Customer.eligibility_failure_reasons for details.',
+                    index: 6,
                 },
                 {
                     s: 'GUEST_STAY',
                     description:
                         'Pay per guest stay value. This mode is only supported by campaigns with\nAdvertisingChannelType.HOTEL, BiddingStrategyType.COMMISSION, and\nBudgetType.HOTEL_ADS_COMMISSION.',
+                    index: 7,
                 },
             ],
             _type: 'enum',
@@ -500,16 +575,17 @@ module.exports = {
         serving_status: {
             _description: 'Output only. The ad serving status of the campaign.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
                 {
                     s: 'UNKNOWN',
                     description: 'The received value is not known in this version.\n\nThis is a response-only value.',
+                    index: 1,
                 },
-                { s: 'SERVING', description: 'Serving.' },
-                { s: 'NONE', description: 'None.' },
-                { s: 'ENDED', description: 'Ended.' },
-                { s: 'PENDING', description: 'Pending.' },
-                { s: 'SUSPENDED', description: 'Suspended.' },
+                { s: 'SERVING', description: 'Serving.', index: 2 },
+                { s: 'NONE', description: 'None.', index: 3 },
+                { s: 'ENDED', description: 'Ended.', index: 4 },
+                { s: 'PENDING', description: 'Pending.', index: 5 },
+                { s: 'SUSPENDED', description: 'Suspended.', index: 6 },
             ],
             _type: 'enum',
         },
@@ -539,11 +615,19 @@ module.exports = {
         status: {
             _description: 'The status of the campaign. When a new campaign is added, the status defaults to ENABLED.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'ENABLED', description: 'Campaign is currently serving ads depending on budget information.' },
-                { s: 'PAUSED', description: 'Campaign has been paused by the user.' },
-                { s: 'REMOVED', description: 'Campaign has been removed.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                {
+                    s: 'ENABLED',
+                    description: 'Campaign is currently serving ads depending on budget information.',
+                    index: 2,
+                },
+                { s: 'PAUSED', description: 'Campaign has been paused by the user.', index: 3 },
+                { s: 'REMOVED', description: 'Campaign has been removed.', index: 4 },
             ],
             _type: 'enum',
         },
@@ -583,14 +667,15 @@ module.exports = {
             location: {
                 _description: 'The targeted location on the search results page.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                     {
                         s: 'UNKNOWN',
                         description: 'Used for return value only. Represents value unknown in this version.',
+                        index: 1,
                     },
-                    { s: 'ANYWHERE_ON_PAGE', description: 'Any location on the web page.' },
-                    { s: 'TOP_OF_PAGE', description: 'Top box of ads.' },
-                    { s: 'ABSOLUTE_TOP_OF_PAGE', description: 'Top slot in the top box of ads.' },
+                    { s: 'ANYWHERE_ON_PAGE', description: 'Any location on the web page.', index: 2 },
+                    { s: 'TOP_OF_PAGE', description: 'Top box of ads.', index: 3 },
+                    { s: 'ABSOLUTE_TOP_OF_PAGE', description: 'Top slot in the top box of ads.', index: 4 },
                 ],
                 _type: 'enum',
             },
@@ -664,35 +749,40 @@ module.exports = {
                     targeting_dimension: {
                         _description: 'The targeting dimension that these settings apply to.',
                         _enums: [
-                            { s: 'UNSPECIFIED', description: 'Not specified.' },
+                            { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                             {
                                 s: 'UNKNOWN',
                                 description: 'Used for return value only. Represents value unknown in this version.',
+                                index: 1,
                             },
                             {
                                 s: 'KEYWORD',
                                 description:
                                     'Keyword criteria, e.g. \'mars cruise\'. KEYWORD may be used as a custom bid\ndimension. Keywords are always a targeting dimension, so may not be set\nas a target "ALL" dimension with TargetRestriction.',
+                                index: 2,
                             },
                             {
                                 s: 'AUDIENCE',
                                 description:
                                     'Audience criteria, which include user list, user interest, custom\naffinity,  and custom in market.',
+                                index: 3,
                             },
                             {
                                 s: 'TOPIC',
                                 description:
                                     "Topic criteria for targeting categories of content, e.g.\n'category::Animals>Pets' Used for Display and Video targeting.",
+                                index: 4,
                             },
-                            { s: 'GENDER', description: 'Criteria for targeting gender.' },
-                            { s: 'AGE_RANGE', description: 'Criteria for targeting age ranges.' },
+                            { s: 'GENDER', description: 'Criteria for targeting gender.', index: 5 },
+                            { s: 'AGE_RANGE', description: 'Criteria for targeting age ranges.', index: 6 },
                             {
                                 s: 'PLACEMENT',
                                 description:
                                     "Placement criteria, which include websites like 'www.flowers4sale.com',\nas well as mobile applications, mobile app categories, YouTube videos,\nand YouTube channels.",
+                                index: 7,
                             },
-                            { s: 'PARENTAL_STATUS', description: 'Criteria for parental status targeting.' },
-                            { s: 'INCOME_RANGE', description: 'Criteria for income range targeting.' },
+                            { s: 'PARENTAL_STATUS', description: 'Criteria for parental status targeting.', index: 8 },
+                            { s: 'INCOME_RANGE', description: 'Criteria for income range targeting.', index: 9 },
                         ],
                         _type: 'enum',
                     },
@@ -710,35 +800,40 @@ module.exports = {
                 targeting_dimension: {
                     _description: 'The targeting dimension that these settings apply to.',
                     _enums: [
-                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                         {
                             s: 'UNKNOWN',
                             description: 'Used for return value only. Represents value unknown in this version.',
+                            index: 1,
                         },
                         {
                             s: 'KEYWORD',
                             description:
                                 'Keyword criteria, e.g. \'mars cruise\'. KEYWORD may be used as a custom bid\ndimension. Keywords are always a targeting dimension, so may not be set\nas a target "ALL" dimension with TargetRestriction.',
+                            index: 2,
                         },
                         {
                             s: 'AUDIENCE',
                             description:
                                 'Audience criteria, which include user list, user interest, custom\naffinity,  and custom in market.',
+                            index: 3,
                         },
                         {
                             s: 'TOPIC',
                             description:
                                 "Topic criteria for targeting categories of content, e.g.\n'category::Animals>Pets' Used for Display and Video targeting.",
+                            index: 4,
                         },
-                        { s: 'GENDER', description: 'Criteria for targeting gender.' },
-                        { s: 'AGE_RANGE', description: 'Criteria for targeting age ranges.' },
+                        { s: 'GENDER', description: 'Criteria for targeting gender.', index: 5 },
+                        { s: 'AGE_RANGE', description: 'Criteria for targeting age ranges.', index: 6 },
                         {
                             s: 'PLACEMENT',
                             description:
                                 "Placement criteria, which include websites like 'www.flowers4sale.com',\nas well as mobile applications, mobile app categories, YouTube videos,\nand YouTube channels.",
+                            index: 7,
                         },
-                        { s: 'PARENTAL_STATUS', description: 'Criteria for parental status targeting.' },
-                        { s: 'INCOME_RANGE', description: 'Criteria for income range targeting.' },
+                        { s: 'PARENTAL_STATUS', description: 'Criteria for parental status targeting.', index: 8 },
+                        { s: 'INCOME_RANGE', description: 'Criteria for income range targeting.', index: 9 },
                     ],
                     _type: 'enum',
                 },
@@ -761,18 +856,21 @@ module.exports = {
             vanity_pharma_display_url_mode: {
                 _description: 'The display mode for vanity pharma URLs.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                     {
                         s: 'UNKNOWN',
                         description: 'Used for return value only. Represents value unknown in this version.',
+                        index: 1,
                     },
                     {
                         s: 'MANUFACTURER_WEBSITE_URL',
                         description: 'Replace vanity pharma URL with manufacturer website url.',
+                        index: 2,
                     },
                     {
                         s: 'WEBSITE_DESCRIPTION',
                         description: 'Replace vanity pharma URL with description of the website.',
+                        index: 3,
                     },
                 ],
                 _type: 'enum',
@@ -781,64 +879,77 @@ module.exports = {
                 _description:
                     'The text that will be displayed in display URL of the text ad when website description is the selected display mode for vanity pharma URLs.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                     {
                         s: 'UNKNOWN',
                         description: 'Used for return value only. Represents value unknown in this version.',
+                        index: 1,
                     },
                     {
                         s: 'PRESCRIPTION_TREATMENT_WEBSITE_EN',
                         description: 'Prescription treatment website with website content in English.',
+                        index: 2,
                     },
                     {
                         s: 'PRESCRIPTION_TREATMENT_WEBSITE_ES',
                         description:
                             'Prescription treatment website with website content in Spanish\n(Sitio de tratamientos con receta).',
+                        index: 3,
                     },
                     {
                         s: 'PRESCRIPTION_DEVICE_WEBSITE_EN',
                         description: 'Prescription device website with website content in English.',
+                        index: 4,
                     },
                     {
                         s: 'PRESCRIPTION_DEVICE_WEBSITE_ES',
                         description:
                             'Prescription device website with website content in Spanish (Sitio de\ndispositivos con receta).',
+                        index: 5,
                     },
                     {
                         s: 'MEDICAL_DEVICE_WEBSITE_EN',
                         description: 'Medical device website with website content in English.',
+                        index: 6,
                     },
                     {
                         s: 'MEDICAL_DEVICE_WEBSITE_ES',
                         description:
                             'Medical device website with website content in Spanish (Sitio de\ndispositivos médicos).',
+                        index: 7,
                     },
                     {
                         s: 'PREVENTATIVE_TREATMENT_WEBSITE_EN',
                         description: 'Preventative treatment website with website content in English.',
+                        index: 8,
                     },
                     {
                         s: 'PREVENTATIVE_TREATMENT_WEBSITE_ES',
                         description:
                             'Preventative treatment website with website content in Spanish (Sitio de\ntratamientos preventivos).',
+                        index: 9,
                     },
                     {
                         s: 'PRESCRIPTION_CONTRACEPTION_WEBSITE_EN',
                         description: 'Prescription contraception website with website content in English.',
+                        index: 10,
                     },
                     {
                         s: 'PRESCRIPTION_CONTRACEPTION_WEBSITE_ES',
                         description:
                             'Prescription contraception website with website content in Spanish (Sitio\nde anticonceptivos con receta).',
+                        index: 11,
                     },
                     {
                         s: 'PRESCRIPTION_VACCINE_WEBSITE_EN',
                         description: 'Prescription vaccine website with website content in English.',
+                        index: 12,
                     },
                     {
                         s: 'PRESCRIPTION_VACCINE_WEBSITE_ES',
                         description:
                             'Prescription vaccine website with website content in Spanish (Sitio de\nvacunas con receta).',
+                        index: 13,
                     },
                 ],
                 _type: 'enum',
@@ -847,22 +958,29 @@ module.exports = {
         video_brand_safety_suitability: {
             _description: 'Output only. 3-Tier Brand Safety setting for the campaign.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
                 {
                     s: 'EXPANDED_INVENTORY',
                     description:
                         'This option lets you show ads across all inventory on YouTube and video\npartners that meet our standards for monetization. This option may be an\nappropriate choice for brands that want maximum access to the full\nbreadth of videos eligible for ads, including, for example, videos that\nhave strong profanity in the context of comedy or a documentary, or\nexcessive violence as featured in video games.',
+                    index: 2,
                 },
                 {
                     s: 'STANDARD_INVENTORY',
                     description:
                         "This option lets you show ads across a wide range of content that's\nappropriate for most brands, such as popular music videos, documentaries,\nand movie trailers. The content you can show ads on is based on YouTube's\nadvertiser-friendly content guidelines that take into account, for\nexample, the strength or frequency of profanity, or the appropriateness\nof subject matter like sensitive events. Ads won't show, for example, on\ncontent with repeated strong profanity, strong sexual content, or graphic\nviolence.",
+                    index: 3,
                 },
                 {
                     s: 'LIMITED_INVENTORY',
                     description:
                         "This option lets you show ads on a reduced range of content that's\nappropriate for brands with particularly strict guidelines around\ninappropriate language and sexual suggestiveness; above and beyond what\nYouTube's advertiser-friendly content guidelines address. The videos\naccessible in this sensitive category meet heightened requirements,\nespecially for inappropriate language and sexual suggestiveness. For\nexample, your ads will be excluded from showing on some of YouTube's most\npopular music videos and other pop culture content across YouTube and\nGoogle video partners.",
+                    index: 4,
                 },
             ],
             _type: 'enum',

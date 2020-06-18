@@ -5,13 +5,17 @@ module.exports = {
             _description:
                 'Output only. Indicates the reason this account has been granted access to the list. The reason can be SHARED, OWNED, LICENSED or SUBSCRIBED. This field is read-only.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'OWNED', description: 'The resource is owned by the user.' },
-                { s: 'SHARED', description: 'The resource is shared to the user.' },
-                { s: 'LICENSED', description: 'The resource is licensed to the user.' },
-                { s: 'SUBSCRIBED', description: 'The user subscribed to the resource.' },
-                { s: 'AFFILIATED', description: 'The resource is accessible to the user.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'OWNED', description: 'The resource is owned by the user.', index: 2 },
+                { s: 'SHARED', description: 'The resource is shared to the user.', index: 3 },
+                { s: 'LICENSED', description: 'The resource is licensed to the user.', index: 4 },
+                { s: 'SUBSCRIBED', description: 'The user subscribed to the resource.', index: 5 },
+                { s: 'AFFILIATED', description: 'The resource is accessible to the user.', index: 6 },
             ],
             _type: 'enum',
         },
@@ -19,10 +23,14 @@ module.exports = {
             _description:
                 'Indicates if this share is still enabled. When a UserList is shared with the user this field is set to ENABLED. Later the userList owner can decide to revoke the share and make it DISABLED. The default value of this field is set to ENABLED.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'ENABLED', description: 'The access is enabled.' },
-                { s: 'DISABLED', description: 'The access is disabled.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'ENABLED', description: 'The access is enabled.', index: 2 },
+                { s: 'DISABLED', description: 'The access is disabled.', index: 3 },
             ],
             _type: 'enum',
         },
@@ -43,9 +51,17 @@ module.exports = {
             _description:
                 'Indicating the reason why this user list membership status is closed. It is only populated on lists that were automatically closed due to inactivity, and will be cleared once the list membership status becomes open.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'UNUSED', description: 'The userlist was closed because of not being used for over one year.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                {
+                    s: 'UNUSED',
+                    description: 'The userlist was closed because of not being used for over one year.',
+                    index: 2,
+                },
             ],
             _type: 'enum',
         },
@@ -61,17 +77,23 @@ module.exports = {
                 _description:
                     'Data source of the list. Default value is FIRST_PARTY. Only whitelisted customers can create third-party sourced CRM lists.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                     {
                         s: 'UNKNOWN',
                         description: 'Used for return value only. Represents value unknown in this version.',
+                        index: 1,
                     },
-                    { s: 'FIRST_PARTY', description: 'The uploaded data is first-party data.' },
+                    { s: 'FIRST_PARTY', description: 'The uploaded data is first-party data.', index: 2 },
                     {
                         s: 'THIRD_PARTY_CREDIT_BUREAU',
                         description: 'The uploaded data is from a third-party credit bureau.',
+                        index: 3,
                     },
-                    { s: 'THIRD_PARTY_VOTER_FILE', description: 'The uploaded data is from a third-party voter file.' },
+                    {
+                        s: 'THIRD_PARTY_VOTER_FILE',
+                        description: 'The uploaded data is from a third-party voter file.',
+                        index: 4,
+                    },
                 ],
                 _type: 'enum',
             },
@@ -79,21 +101,28 @@ module.exports = {
                 _description:
                     'Matching key type of the list. Mixed data types are not allowed on the same list. This field is required for an ADD operation.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                     {
                         s: 'UNKNOWN',
                         description: 'Used for return value only. Represents value unknown in this version.',
+                        index: 1,
                     },
                     {
                         s: 'CONTACT_INFO',
                         description:
                             'Members are matched from customer info such as email address, phone\nnumber or physical address.',
+                        index: 2,
                     },
                     {
                         s: 'CRM_ID',
                         description: 'Members are matched from a user id generated and assigned by the\nadvertiser.',
+                        index: 3,
                     },
-                    { s: 'MOBILE_ADVERTISING_ID', description: 'Members are matched from mobile advertising ids.' },
+                    {
+                        s: 'MOBILE_ADVERTISING_ID',
+                        description: 'Members are matched from mobile advertising ids.',
+                        index: 4,
+                    },
                 ],
                 _type: 'enum',
             },
@@ -124,14 +153,15 @@ module.exports = {
                 operator: {
                     _description: 'The logical operator of the rule.',
                     _enums: [
-                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                         {
                             s: 'UNKNOWN',
                             description: 'Used for return value only. Represents value unknown in this version.',
+                            index: 1,
                         },
-                        { s: 'ALL', description: 'And - all of the operands.' },
-                        { s: 'ANY', description: 'Or - at least one of the operands.' },
-                        { s: 'NONE', description: 'Not - none of the operands.' },
+                        { s: 'ALL', description: 'And - all of the operands.', index: 2 },
+                        { s: 'ANY', description: 'Or - at least one of the operands.', index: 3 },
+                        { s: 'NONE', description: 'Not - none of the operands.', index: 4 },
                     ],
                     _type: 'enum',
                 },
@@ -151,12 +181,17 @@ module.exports = {
             _description:
                 'Membership status of this user list. Indicates whether a user list is open or active. Only open user lists can accumulate more users and can be targeted to.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'OPEN', description: 'Open status - List is accruing members and can be targeted to.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'OPEN', description: 'Open status - List is accruing members and can be targeted to.', index: 2 },
                 {
                     s: 'CLOSED',
                     description: 'Closed status - No new members being added. Cannot be used for targeting.',
+                    index: 3,
                 },
             ],
             _type: 'enum',
@@ -203,16 +238,17 @@ module.exports = {
                                     _description:
                                         'Date comparison operator. This field is required and must be populated when creating new date rule item.',
                                     _enums: [
-                                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                                        { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                                         {
                                             s: 'UNKNOWN',
                                             description:
                                                 'Used for return value only. Represents value unknown in this version.',
+                                            index: 1,
                                         },
-                                        { s: 'EQUALS', description: 'Equals.' },
-                                        { s: 'NOT_EQUALS', description: 'Not Equals.' },
-                                        { s: 'BEFORE', description: 'Before.' },
-                                        { s: 'AFTER', description: 'After.' },
+                                        { s: 'EQUALS', description: 'Equals.', index: 2 },
+                                        { s: 'NOT_EQUALS', description: 'Not Equals.', index: 3 },
+                                        { s: 'BEFORE', description: 'Before.', index: 4 },
+                                        { s: 'AFTER', description: 'After.', index: 5 },
                                     ],
                                     _type: 'enum',
                                 },
@@ -233,18 +269,19 @@ module.exports = {
                                     _description:
                                         'Number comparison operator. This field is required and must be populated when creating a new number rule item.',
                                     _enums: [
-                                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                                        { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                                         {
                                             s: 'UNKNOWN',
                                             description:
                                                 'Used for return value only. Represents value unknown in this version.',
+                                            index: 1,
                                         },
-                                        { s: 'GREATER_THAN', description: 'Greater than.' },
-                                        { s: 'GREATER_THAN_OR_EQUAL', description: 'Greater than or equal.' },
-                                        { s: 'EQUALS', description: 'Equals.' },
-                                        { s: 'NOT_EQUALS', description: 'Not equals.' },
-                                        { s: 'LESS_THAN', description: 'Less than.' },
-                                        { s: 'LESS_THAN_OR_EQUAL', description: 'Less than or equal.' },
+                                        { s: 'GREATER_THAN', description: 'Greater than.', index: 2 },
+                                        { s: 'GREATER_THAN_OR_EQUAL', description: 'Greater than or equal.', index: 3 },
+                                        { s: 'EQUALS', description: 'Equals.', index: 4 },
+                                        { s: 'NOT_EQUALS', description: 'Not equals.', index: 5 },
+                                        { s: 'LESS_THAN', description: 'Less than.', index: 6 },
+                                        { s: 'LESS_THAN_OR_EQUAL', description: 'Less than or equal.', index: 7 },
                                     ],
                                     _type: 'enum',
                                 },
@@ -260,20 +297,21 @@ module.exports = {
                                     _description:
                                         'String comparison operator. This field is required and must be populated when creating a new string rule item.',
                                     _enums: [
-                                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                                        { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                                         {
                                             s: 'UNKNOWN',
                                             description:
                                                 'Used for return value only. Represents value unknown in this version.',
+                                            index: 1,
                                         },
-                                        { s: 'CONTAINS', description: 'Contains.' },
-                                        { s: 'EQUALS', description: 'Equals.' },
-                                        { s: 'STARTS_WITH', description: 'Starts with.' },
-                                        { s: 'ENDS_WITH', description: 'Ends with.' },
-                                        { s: 'NOT_EQUALS', description: 'Not equals.' },
-                                        { s: 'NOT_CONTAINS', description: 'Not contains.' },
-                                        { s: 'NOT_STARTS_WITH', description: 'Not starts with.' },
-                                        { s: 'NOT_ENDS_WITH', description: 'Not ends with.' },
+                                        { s: 'CONTAINS', description: 'Contains.', index: 2 },
+                                        { s: 'EQUALS', description: 'Equals.', index: 3 },
+                                        { s: 'STARTS_WITH', description: 'Starts with.', index: 4 },
+                                        { s: 'ENDS_WITH', description: 'Ends with.', index: 5 },
+                                        { s: 'NOT_EQUALS', description: 'Not equals.', index: 6 },
+                                        { s: 'NOT_CONTAINS', description: 'Not contains.', index: 7 },
+                                        { s: 'NOT_STARTS_WITH', description: 'Not starts with.', index: 8 },
+                                        { s: 'NOT_ENDS_WITH', description: 'Not ends with.', index: 9 },
                                     ],
                                     _type: 'enum',
                                 },
@@ -289,13 +327,14 @@ module.exports = {
                         _description:
                             'Rule type is used to determine how to group rule items. The default is OR of ANDs (disjunctive normal form). That is, rule items will be ANDed together within rule item groups and the groups themselves will be ORed together. Currently AND of ORs (conjunctive normal form) is only supported for ExpressionRuleUserList.',
                         _enums: [
-                            { s: 'UNSPECIFIED', description: 'Not specified.' },
+                            { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                             {
                                 s: 'UNKNOWN',
                                 description: 'Used for return value only. Represents value unknown in this version.',
+                                index: 1,
                             },
-                            { s: 'AND_OF_ORS', description: 'Conjunctive normal form.' },
-                            { s: 'OR_OF_ANDS', description: 'Disjunctive normal form.' },
+                            { s: 'AND_OF_ORS', description: 'Conjunctive normal form.', index: 2 },
+                            { s: 'OR_OF_ANDS', description: 'Disjunctive normal form.', index: 3 },
                         ],
                         _type: 'enum',
                     },
@@ -321,16 +360,17 @@ module.exports = {
                                     _description:
                                         'Date comparison operator. This field is required and must be populated when creating new date rule item.',
                                     _enums: [
-                                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                                        { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                                         {
                                             s: 'UNKNOWN',
                                             description:
                                                 'Used for return value only. Represents value unknown in this version.',
+                                            index: 1,
                                         },
-                                        { s: 'EQUALS', description: 'Equals.' },
-                                        { s: 'NOT_EQUALS', description: 'Not Equals.' },
-                                        { s: 'BEFORE', description: 'Before.' },
-                                        { s: 'AFTER', description: 'After.' },
+                                        { s: 'EQUALS', description: 'Equals.', index: 2 },
+                                        { s: 'NOT_EQUALS', description: 'Not Equals.', index: 3 },
+                                        { s: 'BEFORE', description: 'Before.', index: 4 },
+                                        { s: 'AFTER', description: 'After.', index: 5 },
                                     ],
                                     _type: 'enum',
                                 },
@@ -351,18 +391,19 @@ module.exports = {
                                     _description:
                                         'Number comparison operator. This field is required and must be populated when creating a new number rule item.',
                                     _enums: [
-                                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                                        { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                                         {
                                             s: 'UNKNOWN',
                                             description:
                                                 'Used for return value only. Represents value unknown in this version.',
+                                            index: 1,
                                         },
-                                        { s: 'GREATER_THAN', description: 'Greater than.' },
-                                        { s: 'GREATER_THAN_OR_EQUAL', description: 'Greater than or equal.' },
-                                        { s: 'EQUALS', description: 'Equals.' },
-                                        { s: 'NOT_EQUALS', description: 'Not equals.' },
-                                        { s: 'LESS_THAN', description: 'Less than.' },
-                                        { s: 'LESS_THAN_OR_EQUAL', description: 'Less than or equal.' },
+                                        { s: 'GREATER_THAN', description: 'Greater than.', index: 2 },
+                                        { s: 'GREATER_THAN_OR_EQUAL', description: 'Greater than or equal.', index: 3 },
+                                        { s: 'EQUALS', description: 'Equals.', index: 4 },
+                                        { s: 'NOT_EQUALS', description: 'Not equals.', index: 5 },
+                                        { s: 'LESS_THAN', description: 'Less than.', index: 6 },
+                                        { s: 'LESS_THAN_OR_EQUAL', description: 'Less than or equal.', index: 7 },
                                     ],
                                     _type: 'enum',
                                 },
@@ -378,20 +419,21 @@ module.exports = {
                                     _description:
                                         'String comparison operator. This field is required and must be populated when creating a new string rule item.',
                                     _enums: [
-                                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                                        { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                                         {
                                             s: 'UNKNOWN',
                                             description:
                                                 'Used for return value only. Represents value unknown in this version.',
+                                            index: 1,
                                         },
-                                        { s: 'CONTAINS', description: 'Contains.' },
-                                        { s: 'EQUALS', description: 'Equals.' },
-                                        { s: 'STARTS_WITH', description: 'Starts with.' },
-                                        { s: 'ENDS_WITH', description: 'Ends with.' },
-                                        { s: 'NOT_EQUALS', description: 'Not equals.' },
-                                        { s: 'NOT_CONTAINS', description: 'Not contains.' },
-                                        { s: 'NOT_STARTS_WITH', description: 'Not starts with.' },
-                                        { s: 'NOT_ENDS_WITH', description: 'Not ends with.' },
+                                        { s: 'CONTAINS', description: 'Contains.', index: 2 },
+                                        { s: 'EQUALS', description: 'Equals.', index: 3 },
+                                        { s: 'STARTS_WITH', description: 'Starts with.', index: 4 },
+                                        { s: 'ENDS_WITH', description: 'Ends with.', index: 5 },
+                                        { s: 'NOT_EQUALS', description: 'Not equals.', index: 6 },
+                                        { s: 'NOT_CONTAINS', description: 'Not contains.', index: 7 },
+                                        { s: 'NOT_STARTS_WITH', description: 'Not starts with.', index: 8 },
+                                        { s: 'NOT_ENDS_WITH', description: 'Not ends with.', index: 9 },
                                     ],
                                     _type: 'enum',
                                 },
@@ -407,13 +449,14 @@ module.exports = {
                         _description:
                             'Rule type is used to determine how to group rule items. The default is OR of ANDs (disjunctive normal form). That is, rule items will be ANDed together within rule item groups and the groups themselves will be ORed together. Currently AND of ORs (conjunctive normal form) is only supported for ExpressionRuleUserList.',
                         _enums: [
-                            { s: 'UNSPECIFIED', description: 'Not specified.' },
+                            { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                             {
                                 s: 'UNKNOWN',
                                 description: 'Used for return value only. Represents value unknown in this version.',
+                                index: 1,
                             },
-                            { s: 'AND_OF_ORS', description: 'Conjunctive normal form.' },
-                            { s: 'OR_OF_ANDS', description: 'Disjunctive normal form.' },
+                            { s: 'AND_OF_ORS', description: 'Conjunctive normal form.', index: 2 },
+                            { s: 'OR_OF_ANDS', description: 'Disjunctive normal form.', index: 3 },
                         ],
                         _type: 'enum',
                     },
@@ -422,13 +465,14 @@ module.exports = {
                     _description:
                         'Operator to connect the two operands. Required for creating a combined rule user list.',
                     _enums: [
-                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                         {
                             s: 'UNKNOWN',
                             description: 'Used for return value only. Represents value unknown in this version.',
+                            index: 1,
                         },
-                        { s: 'AND', description: 'A AND B.' },
-                        { s: 'AND_NOT', description: 'A AND NOT B.' },
+                        { s: 'AND', description: 'A AND B.', index: 2 },
+                        { s: 'AND_NOT', description: 'A AND NOT B.', index: 3 },
                     ],
                     _type: 'enum',
                 },
@@ -462,16 +506,17 @@ module.exports = {
                                     _description:
                                         'Date comparison operator. This field is required and must be populated when creating new date rule item.',
                                     _enums: [
-                                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                                        { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                                         {
                                             s: 'UNKNOWN',
                                             description:
                                                 'Used for return value only. Represents value unknown in this version.',
+                                            index: 1,
                                         },
-                                        { s: 'EQUALS', description: 'Equals.' },
-                                        { s: 'NOT_EQUALS', description: 'Not Equals.' },
-                                        { s: 'BEFORE', description: 'Before.' },
-                                        { s: 'AFTER', description: 'After.' },
+                                        { s: 'EQUALS', description: 'Equals.', index: 2 },
+                                        { s: 'NOT_EQUALS', description: 'Not Equals.', index: 3 },
+                                        { s: 'BEFORE', description: 'Before.', index: 4 },
+                                        { s: 'AFTER', description: 'After.', index: 5 },
                                     ],
                                     _type: 'enum',
                                 },
@@ -492,18 +537,19 @@ module.exports = {
                                     _description:
                                         'Number comparison operator. This field is required and must be populated when creating a new number rule item.',
                                     _enums: [
-                                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                                        { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                                         {
                                             s: 'UNKNOWN',
                                             description:
                                                 'Used for return value only. Represents value unknown in this version.',
+                                            index: 1,
                                         },
-                                        { s: 'GREATER_THAN', description: 'Greater than.' },
-                                        { s: 'GREATER_THAN_OR_EQUAL', description: 'Greater than or equal.' },
-                                        { s: 'EQUALS', description: 'Equals.' },
-                                        { s: 'NOT_EQUALS', description: 'Not equals.' },
-                                        { s: 'LESS_THAN', description: 'Less than.' },
-                                        { s: 'LESS_THAN_OR_EQUAL', description: 'Less than or equal.' },
+                                        { s: 'GREATER_THAN', description: 'Greater than.', index: 2 },
+                                        { s: 'GREATER_THAN_OR_EQUAL', description: 'Greater than or equal.', index: 3 },
+                                        { s: 'EQUALS', description: 'Equals.', index: 4 },
+                                        { s: 'NOT_EQUALS', description: 'Not equals.', index: 5 },
+                                        { s: 'LESS_THAN', description: 'Less than.', index: 6 },
+                                        { s: 'LESS_THAN_OR_EQUAL', description: 'Less than or equal.', index: 7 },
                                     ],
                                     _type: 'enum',
                                 },
@@ -519,20 +565,21 @@ module.exports = {
                                     _description:
                                         'String comparison operator. This field is required and must be populated when creating a new string rule item.',
                                     _enums: [
-                                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                                        { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                                         {
                                             s: 'UNKNOWN',
                                             description:
                                                 'Used for return value only. Represents value unknown in this version.',
+                                            index: 1,
                                         },
-                                        { s: 'CONTAINS', description: 'Contains.' },
-                                        { s: 'EQUALS', description: 'Equals.' },
-                                        { s: 'STARTS_WITH', description: 'Starts with.' },
-                                        { s: 'ENDS_WITH', description: 'Ends with.' },
-                                        { s: 'NOT_EQUALS', description: 'Not equals.' },
-                                        { s: 'NOT_CONTAINS', description: 'Not contains.' },
-                                        { s: 'NOT_STARTS_WITH', description: 'Not starts with.' },
-                                        { s: 'NOT_ENDS_WITH', description: 'Not ends with.' },
+                                        { s: 'CONTAINS', description: 'Contains.', index: 2 },
+                                        { s: 'EQUALS', description: 'Equals.', index: 3 },
+                                        { s: 'STARTS_WITH', description: 'Starts with.', index: 4 },
+                                        { s: 'ENDS_WITH', description: 'Ends with.', index: 5 },
+                                        { s: 'NOT_EQUALS', description: 'Not equals.', index: 6 },
+                                        { s: 'NOT_CONTAINS', description: 'Not contains.', index: 7 },
+                                        { s: 'NOT_STARTS_WITH', description: 'Not starts with.', index: 8 },
+                                        { s: 'NOT_ENDS_WITH', description: 'Not ends with.', index: 9 },
                                     ],
                                     _type: 'enum',
                                 },
@@ -548,13 +595,14 @@ module.exports = {
                         _description:
                             'Rule type is used to determine how to group rule items. The default is OR of ANDs (disjunctive normal form). That is, rule items will be ANDed together within rule item groups and the groups themselves will be ORed together. Currently AND of ORs (conjunctive normal form) is only supported for ExpressionRuleUserList.',
                         _enums: [
-                            { s: 'UNSPECIFIED', description: 'Not specified.' },
+                            { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                             {
                                 s: 'UNKNOWN',
                                 description: 'Used for return value only. Represents value unknown in this version.',
+                                index: 1,
                             },
-                            { s: 'AND_OF_ORS', description: 'Conjunctive normal form.' },
-                            { s: 'OR_OF_ANDS', description: 'Disjunctive normal form.' },
+                            { s: 'AND_OF_ORS', description: 'Conjunctive normal form.', index: 2 },
+                            { s: 'OR_OF_ANDS', description: 'Disjunctive normal form.', index: 3 },
                         ],
                         _type: 'enum',
                     },
@@ -588,16 +636,17 @@ module.exports = {
                                     _description:
                                         'Date comparison operator. This field is required and must be populated when creating new date rule item.',
                                     _enums: [
-                                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                                        { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                                         {
                                             s: 'UNKNOWN',
                                             description:
                                                 'Used for return value only. Represents value unknown in this version.',
+                                            index: 1,
                                         },
-                                        { s: 'EQUALS', description: 'Equals.' },
-                                        { s: 'NOT_EQUALS', description: 'Not Equals.' },
-                                        { s: 'BEFORE', description: 'Before.' },
-                                        { s: 'AFTER', description: 'After.' },
+                                        { s: 'EQUALS', description: 'Equals.', index: 2 },
+                                        { s: 'NOT_EQUALS', description: 'Not Equals.', index: 3 },
+                                        { s: 'BEFORE', description: 'Before.', index: 4 },
+                                        { s: 'AFTER', description: 'After.', index: 5 },
                                     ],
                                     _type: 'enum',
                                 },
@@ -618,18 +667,19 @@ module.exports = {
                                     _description:
                                         'Number comparison operator. This field is required and must be populated when creating a new number rule item.',
                                     _enums: [
-                                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                                        { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                                         {
                                             s: 'UNKNOWN',
                                             description:
                                                 'Used for return value only. Represents value unknown in this version.',
+                                            index: 1,
                                         },
-                                        { s: 'GREATER_THAN', description: 'Greater than.' },
-                                        { s: 'GREATER_THAN_OR_EQUAL', description: 'Greater than or equal.' },
-                                        { s: 'EQUALS', description: 'Equals.' },
-                                        { s: 'NOT_EQUALS', description: 'Not equals.' },
-                                        { s: 'LESS_THAN', description: 'Less than.' },
-                                        { s: 'LESS_THAN_OR_EQUAL', description: 'Less than or equal.' },
+                                        { s: 'GREATER_THAN', description: 'Greater than.', index: 2 },
+                                        { s: 'GREATER_THAN_OR_EQUAL', description: 'Greater than or equal.', index: 3 },
+                                        { s: 'EQUALS', description: 'Equals.', index: 4 },
+                                        { s: 'NOT_EQUALS', description: 'Not equals.', index: 5 },
+                                        { s: 'LESS_THAN', description: 'Less than.', index: 6 },
+                                        { s: 'LESS_THAN_OR_EQUAL', description: 'Less than or equal.', index: 7 },
                                     ],
                                     _type: 'enum',
                                 },
@@ -645,20 +695,21 @@ module.exports = {
                                     _description:
                                         'String comparison operator. This field is required and must be populated when creating a new string rule item.',
                                     _enums: [
-                                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                                        { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                                         {
                                             s: 'UNKNOWN',
                                             description:
                                                 'Used for return value only. Represents value unknown in this version.',
+                                            index: 1,
                                         },
-                                        { s: 'CONTAINS', description: 'Contains.' },
-                                        { s: 'EQUALS', description: 'Equals.' },
-                                        { s: 'STARTS_WITH', description: 'Starts with.' },
-                                        { s: 'ENDS_WITH', description: 'Ends with.' },
-                                        { s: 'NOT_EQUALS', description: 'Not equals.' },
-                                        { s: 'NOT_CONTAINS', description: 'Not contains.' },
-                                        { s: 'NOT_STARTS_WITH', description: 'Not starts with.' },
-                                        { s: 'NOT_ENDS_WITH', description: 'Not ends with.' },
+                                        { s: 'CONTAINS', description: 'Contains.', index: 2 },
+                                        { s: 'EQUALS', description: 'Equals.', index: 3 },
+                                        { s: 'STARTS_WITH', description: 'Starts with.', index: 4 },
+                                        { s: 'ENDS_WITH', description: 'Ends with.', index: 5 },
+                                        { s: 'NOT_EQUALS', description: 'Not equals.', index: 6 },
+                                        { s: 'NOT_CONTAINS', description: 'Not contains.', index: 7 },
+                                        { s: 'NOT_STARTS_WITH', description: 'Not starts with.', index: 8 },
+                                        { s: 'NOT_ENDS_WITH', description: 'Not ends with.', index: 9 },
                                     ],
                                     _type: 'enum',
                                 },
@@ -674,13 +725,14 @@ module.exports = {
                         _description:
                             'Rule type is used to determine how to group rule items. The default is OR of ANDs (disjunctive normal form). That is, rule items will be ANDed together within rule item groups and the groups themselves will be ORed together. Currently AND of ORs (conjunctive normal form) is only supported for ExpressionRuleUserList.',
                         _enums: [
-                            { s: 'UNSPECIFIED', description: 'Not specified.' },
+                            { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                             {
                                 s: 'UNKNOWN',
                                 description: 'Used for return value only. Represents value unknown in this version.',
+                                index: 1,
                             },
-                            { s: 'AND_OF_ORS', description: 'Conjunctive normal form.' },
-                            { s: 'OR_OF_ANDS', description: 'Disjunctive normal form.' },
+                            { s: 'AND_OF_ORS', description: 'Conjunctive normal form.', index: 2 },
+                            { s: 'OR_OF_ANDS', description: 'Disjunctive normal form.', index: 3 },
                         ],
                         _type: 'enum',
                     },
@@ -690,14 +742,15 @@ module.exports = {
                 _description:
                     "The status of pre-population. The field is default to NONE if not set which means the previous users will not be considered. If set to REQUESTED, past site visitors or app users who match the list definition will be included in the list (works on the Display Network only). This will only add past users from within the last 30 days, depending on the list's membership duration and the date when the remarketing tag is added. The status will be updated to FINISHED once request is processed, or FAILED if the request fails.",
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                     {
                         s: 'UNKNOWN',
                         description: 'Used for return value only. Represents value unknown in this version.',
+                        index: 1,
                     },
-                    { s: 'REQUESTED', description: 'Prepopoulation is being requested.' },
-                    { s: 'FINISHED', description: 'Prepopulation is finished.' },
-                    { s: 'FAILED', description: 'Prepopulation failed.' },
+                    { s: 'REQUESTED', description: 'Prepopoulation is being requested.', index: 2 },
+                    { s: 'FINISHED', description: 'Prepopulation is finished.', index: 3 },
+                    { s: 'FAILED', description: 'Prepopulation failed.', index: 4 },
                 ],
                 _type: 'enum',
             },
@@ -722,63 +775,84 @@ module.exports = {
             _description:
                 'Output only. Size range in terms of number of users of the UserList, on the Google Display Network. This field is read-only.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'LESS_THAN_FIVE_HUNDRED', description: 'User list has less than 500 users.' },
-                { s: 'LESS_THAN_ONE_THOUSAND', description: 'User list has number of users in range of 500 to 1000.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'LESS_THAN_FIVE_HUNDRED', description: 'User list has less than 500 users.', index: 2 },
+                {
+                    s: 'LESS_THAN_ONE_THOUSAND',
+                    description: 'User list has number of users in range of 500 to 1000.',
+                    index: 3,
+                },
                 {
                     s: 'ONE_THOUSAND_TO_TEN_THOUSAND',
                     description: 'User list has number of users in range of 1000 to 10000.',
+                    index: 4,
                 },
                 {
                     s: 'TEN_THOUSAND_TO_FIFTY_THOUSAND',
                     description: 'User list has number of users in range of 10000 to 50000.',
+                    index: 5,
                 },
                 {
                     s: 'FIFTY_THOUSAND_TO_ONE_HUNDRED_THOUSAND',
                     description: 'User list has number of users in range of 50000 to 100000.',
+                    index: 6,
                 },
                 {
                     s: 'ONE_HUNDRED_THOUSAND_TO_THREE_HUNDRED_THOUSAND',
                     description: 'User list has number of users in range of 100000 to 300000.',
+                    index: 7,
                 },
                 {
                     s: 'THREE_HUNDRED_THOUSAND_TO_FIVE_HUNDRED_THOUSAND',
                     description: 'User list has number of users in range of 300000 to 500000.',
+                    index: 8,
                 },
                 {
                     s: 'FIVE_HUNDRED_THOUSAND_TO_ONE_MILLION',
                     description: 'User list has number of users in range of 500000 to 1 million.',
+                    index: 9,
                 },
                 {
                     s: 'ONE_MILLION_TO_TWO_MILLION',
                     description: 'User list has number of users in range of 1 to 2 millions.',
+                    index: 10,
                 },
                 {
                     s: 'TWO_MILLION_TO_THREE_MILLION',
                     description: 'User list has number of users in range of 2 to 3 millions.',
+                    index: 11,
                 },
                 {
                     s: 'THREE_MILLION_TO_FIVE_MILLION',
                     description: 'User list has number of users in range of 3 to 5 millions.',
+                    index: 12,
                 },
                 {
                     s: 'FIVE_MILLION_TO_TEN_MILLION',
                     description: 'User list has number of users in range of 5 to 10 millions.',
+                    index: 13,
                 },
                 {
                     s: 'TEN_MILLION_TO_TWENTY_MILLION',
                     description: 'User list has number of users in range of 10 to 20 millions.',
+                    index: 14,
                 },
                 {
                     s: 'TWENTY_MILLION_TO_THIRTY_MILLION',
                     description: 'User list has number of users in range of 20 to 30 millions.',
+                    index: 15,
                 },
                 {
                     s: 'THIRTY_MILLION_TO_FIFTY_MILLION',
                     description: 'User list has number of users in range of 30 to 50 millions.',
+                    index: 16,
                 },
-                { s: 'OVER_FIFTY_MILLION', description: 'User list has over 50 million users.' },
+                { s: 'OVER_FIFTY_MILLION', description: 'User list has over 50 million users.', index: 17 },
             ],
             _type: 'enum',
         },
@@ -786,80 +860,118 @@ module.exports = {
             _description:
                 'Output only. Size range in terms of number of users of the UserList, for Search ads. This field is read-only.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'LESS_THAN_FIVE_HUNDRED', description: 'User list has less than 500 users.' },
-                { s: 'LESS_THAN_ONE_THOUSAND', description: 'User list has number of users in range of 500 to 1000.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'LESS_THAN_FIVE_HUNDRED', description: 'User list has less than 500 users.', index: 2 },
+                {
+                    s: 'LESS_THAN_ONE_THOUSAND',
+                    description: 'User list has number of users in range of 500 to 1000.',
+                    index: 3,
+                },
                 {
                     s: 'ONE_THOUSAND_TO_TEN_THOUSAND',
                     description: 'User list has number of users in range of 1000 to 10000.',
+                    index: 4,
                 },
                 {
                     s: 'TEN_THOUSAND_TO_FIFTY_THOUSAND',
                     description: 'User list has number of users in range of 10000 to 50000.',
+                    index: 5,
                 },
                 {
                     s: 'FIFTY_THOUSAND_TO_ONE_HUNDRED_THOUSAND',
                     description: 'User list has number of users in range of 50000 to 100000.',
+                    index: 6,
                 },
                 {
                     s: 'ONE_HUNDRED_THOUSAND_TO_THREE_HUNDRED_THOUSAND',
                     description: 'User list has number of users in range of 100000 to 300000.',
+                    index: 7,
                 },
                 {
                     s: 'THREE_HUNDRED_THOUSAND_TO_FIVE_HUNDRED_THOUSAND',
                     description: 'User list has number of users in range of 300000 to 500000.',
+                    index: 8,
                 },
                 {
                     s: 'FIVE_HUNDRED_THOUSAND_TO_ONE_MILLION',
                     description: 'User list has number of users in range of 500000 to 1 million.',
+                    index: 9,
                 },
                 {
                     s: 'ONE_MILLION_TO_TWO_MILLION',
                     description: 'User list has number of users in range of 1 to 2 millions.',
+                    index: 10,
                 },
                 {
                     s: 'TWO_MILLION_TO_THREE_MILLION',
                     description: 'User list has number of users in range of 2 to 3 millions.',
+                    index: 11,
                 },
                 {
                     s: 'THREE_MILLION_TO_FIVE_MILLION',
                     description: 'User list has number of users in range of 3 to 5 millions.',
+                    index: 12,
                 },
                 {
                     s: 'FIVE_MILLION_TO_TEN_MILLION',
                     description: 'User list has number of users in range of 5 to 10 millions.',
+                    index: 13,
                 },
                 {
                     s: 'TEN_MILLION_TO_TWENTY_MILLION',
                     description: 'User list has number of users in range of 10 to 20 millions.',
+                    index: 14,
                 },
                 {
                     s: 'TWENTY_MILLION_TO_THIRTY_MILLION',
                     description: 'User list has number of users in range of 20 to 30 millions.',
+                    index: 15,
                 },
                 {
                     s: 'THIRTY_MILLION_TO_FIFTY_MILLION',
                     description: 'User list has number of users in range of 30 to 50 millions.',
+                    index: 16,
                 },
-                { s: 'OVER_FIFTY_MILLION', description: 'User list has over 50 million users.' },
+                { s: 'OVER_FIFTY_MILLION', description: 'User list has over 50 million users.', index: 17 },
             ],
             _type: 'enum',
         },
         type: {
             _description: 'Output only. Type of this list. This field is read-only.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'REMARKETING', description: 'UserList represented as a collection of conversion types.' },
-                { s: 'LOGICAL', description: 'UserList represented as a combination of other user lists/interests.' },
-                { s: 'EXTERNAL_REMARKETING', description: 'UserList created in the Google Ad Manager platform.' },
-                { s: 'RULE_BASED', description: 'UserList associated with a rule.' },
-                { s: 'SIMILAR', description: 'UserList with users similar to users of another UserList.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                {
+                    s: 'REMARKETING',
+                    description: 'UserList represented as a collection of conversion types.',
+                    index: 2,
+                },
+                {
+                    s: 'LOGICAL',
+                    description: 'UserList represented as a combination of other user lists/interests.',
+                    index: 3,
+                },
+                {
+                    s: 'EXTERNAL_REMARKETING',
+                    description: 'UserList created in the Google Ad Manager platform.',
+                    index: 4,
+                },
+                { s: 'RULE_BASED', description: 'UserList associated with a rule.', index: 5 },
+                { s: 'SIMILAR', description: 'UserList with users similar to users of another UserList.', index: 6 },
                 {
                     s: 'CRM_BASED',
                     description:
                         'UserList of first-party CRM data provided by advertiser in the form of\nemails or other formats.',
+                    index: 7,
                 },
             ],
             _type: 'enum',
