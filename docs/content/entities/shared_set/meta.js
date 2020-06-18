@@ -23,10 +23,14 @@ module.exports = {
         status: {
             _description: 'Output only. The status of this shared set. Read only.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'ENABLED', description: 'The shared set is enabled.' },
-                { s: 'REMOVED', description: 'The shared set is removed and can no longer be used.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'ENABLED', description: 'The shared set is enabled.', index: 2 },
+                { s: 'REMOVED', description: 'The shared set is removed and can no longer be used.', index: 3 },
             ],
             _type: 'enum',
         },
@@ -34,10 +38,22 @@ module.exports = {
             _description:
                 'Immutable. The type of this shared set: each shared set holds only a single kind of resource. Required. Immutable.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'NEGATIVE_KEYWORDS', description: 'A set of keywords that can be excluded from targeting.' },
-                { s: 'NEGATIVE_PLACEMENTS', description: 'A set of placements that can be excluded from targeting.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                {
+                    s: 'NEGATIVE_KEYWORDS',
+                    description: 'A set of keywords that can be excluded from targeting.',
+                    index: 2,
+                },
+                {
+                    s: 'NEGATIVE_PLACEMENTS',
+                    description: 'A set of placements that can be excluded from targeting.',
+                    index: 3,
+                },
             ],
             _type: 'enum',
         },

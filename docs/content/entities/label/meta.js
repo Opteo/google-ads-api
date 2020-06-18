@@ -15,10 +15,14 @@ module.exports = {
         status: {
             _description: 'Output only. Status of the label. Read only.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'ENABLED', description: 'Label is enabled.' },
-                { s: 'REMOVED', description: 'Label is removed.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'ENABLED', description: 'Label is enabled.', index: 2 },
+                { s: 'REMOVED', description: 'Label is removed.', index: 3 },
             ],
             _type: 'enum',
         },

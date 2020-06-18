@@ -18,10 +18,18 @@ module.exports = {
         status: {
             _description: 'Output only. The status of this campaign shared set. Read only.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'ENABLED', description: 'The campaign shared set is enabled.' },
-                { s: 'REMOVED', description: 'The campaign shared set is removed and can no longer be used.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'ENABLED', description: 'The campaign shared set is enabled.', index: 2 },
+                {
+                    s: 'REMOVED',
+                    description: 'The campaign shared set is removed and can no longer be used.',
+                    index: 3,
+                },
             ],
             _type: 'enum',
         },

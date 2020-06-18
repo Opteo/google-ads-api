@@ -4,13 +4,14 @@ module.exports = {
         ad_rotation_mode: {
             _description: 'The ad rotation mode of the ad group.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'The ad rotation mode has not been specified.' },
+                { s: 'UNSPECIFIED', description: 'The ad rotation mode has not been specified.', index: 0 },
                 {
                     s: 'UNKNOWN',
                     description: 'The received value is not known in this version.\n\nThis is a response-only value.',
+                    index: 1,
                 },
-                { s: 'OPTIMIZE', description: 'Optimize ad group ads based on clicks or conversions.' },
-                { s: 'ROTATE_FOREVER', description: 'Rotate evenly forever.' },
+                { s: 'OPTIMIZE', description: 'Optimize ad group ads based on clicks or conversions.', index: 2 },
+                { s: 'ROTATE_FOREVER', description: 'Rotate evenly forever.', index: 3 },
             ],
             _type: 'enum',
         },
@@ -30,32 +31,40 @@ module.exports = {
             _description:
                 'Allows advertisers to specify a targeting dimension on which to place absolute bids. This is only applicable for campaigns that target only the display network and not search.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
                 {
                     s: 'KEYWORD',
                     description:
                         'Keyword criteria, e.g. \'mars cruise\'. KEYWORD may be used as a custom bid\ndimension. Keywords are always a targeting dimension, so may not be set\nas a target "ALL" dimension with TargetRestriction.',
+                    index: 2,
                 },
                 {
                     s: 'AUDIENCE',
                     description:
                         'Audience criteria, which include user list, user interest, custom\naffinity,  and custom in market.',
+                    index: 3,
                 },
                 {
                     s: 'TOPIC',
                     description:
                         "Topic criteria for targeting categories of content, e.g.\n'category::Animals>Pets' Used for Display and Video targeting.",
+                    index: 4,
                 },
-                { s: 'GENDER', description: 'Criteria for targeting gender.' },
-                { s: 'AGE_RANGE', description: 'Criteria for targeting age ranges.' },
+                { s: 'GENDER', description: 'Criteria for targeting gender.', index: 5 },
+                { s: 'AGE_RANGE', description: 'Criteria for targeting age ranges.', index: 6 },
                 {
                     s: 'PLACEMENT',
                     description:
                         "Placement criteria, which include websites like 'www.flowers4sale.com',\nas well as mobile applications, mobile app categories, YouTube videos,\nand YouTube channels.",
+                    index: 7,
                 },
-                { s: 'PARENTAL_STATUS', description: 'Criteria for parental status targeting.' },
-                { s: 'INCOME_RANGE', description: 'Criteria for income range targeting.' },
+                { s: 'PARENTAL_STATUS', description: 'Criteria for parental status targeting.', index: 8 },
+                { s: 'INCOME_RANGE', description: 'Criteria for income range targeting.', index: 9 },
             ],
             _type: 'enum',
         },
@@ -66,14 +75,23 @@ module.exports = {
         effective_target_cpa_source: {
             _description: 'Output only. Source of the effective target CPA. This field is read-only.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
                 {
                     s: 'CAMPAIGN_BIDDING_STRATEGY',
                     description: 'Effective bid or target is inherited from campaign bidding strategy.',
+                    index: 5,
                 },
-                { s: 'AD_GROUP', description: 'The bid or target is defined on the ad group.' },
-                { s: 'AD_GROUP_CRITERION', description: 'The bid or target is defined on the ad group criterion.' },
+                { s: 'AD_GROUP', description: 'The bid or target is defined on the ad group.', index: 6 },
+                {
+                    s: 'AD_GROUP_CRITERION',
+                    description: 'The bid or target is defined on the ad group criterion.',
+                    index: 7,
+                },
             ],
             _type: 'enum',
         },
@@ -84,14 +102,23 @@ module.exports = {
         effective_target_roas_source: {
             _description: 'Output only. Source of the effective target ROAS. This field is read-only.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
                 {
                     s: 'CAMPAIGN_BIDDING_STRATEGY',
                     description: 'Effective bid or target is inherited from campaign bidding strategy.',
+                    index: 5,
                 },
-                { s: 'AD_GROUP', description: 'The bid or target is defined on the ad group.' },
-                { s: 'AD_GROUP_CRITERION', description: 'The bid or target is defined on the ad group criterion.' },
+                { s: 'AD_GROUP', description: 'The bid or target is defined on the ad group.', index: 6 },
+                {
+                    s: 'AD_GROUP_CRITERION',
+                    description: 'The bid or target is defined on the ad group criterion.',
+                    index: 7,
+                },
             ],
             _type: 'enum',
         },
@@ -123,14 +150,15 @@ module.exports = {
         status: {
             _description: 'The status of the ad group.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'The status has not been specified.' },
+                { s: 'UNSPECIFIED', description: 'The status has not been specified.', index: 0 },
                 {
                     s: 'UNKNOWN',
                     description: 'The received value is not known in this version.\n\nThis is a response-only value.',
+                    index: 1,
                 },
-                { s: 'ENABLED', description: 'The ad group is enabled.' },
-                { s: 'PAUSED', description: 'The ad group is paused.' },
-                { s: 'REMOVED', description: 'The ad group is removed.' },
+                { s: 'ENABLED', description: 'The ad group is enabled.', index: 2 },
+                { s: 'PAUSED', description: 'The ad group is paused.', index: 3 },
+                { s: 'REMOVED', description: 'The ad group is removed.', index: 4 },
             ],
             _type: 'enum',
         },
@@ -174,35 +202,40 @@ module.exports = {
                     targeting_dimension: {
                         _description: 'The targeting dimension that these settings apply to.',
                         _enums: [
-                            { s: 'UNSPECIFIED', description: 'Not specified.' },
+                            { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                             {
                                 s: 'UNKNOWN',
                                 description: 'Used for return value only. Represents value unknown in this version.',
+                                index: 1,
                             },
                             {
                                 s: 'KEYWORD',
                                 description:
                                     'Keyword criteria, e.g. \'mars cruise\'. KEYWORD may be used as a custom bid\ndimension. Keywords are always a targeting dimension, so may not be set\nas a target "ALL" dimension with TargetRestriction.',
+                                index: 2,
                             },
                             {
                                 s: 'AUDIENCE',
                                 description:
                                     'Audience criteria, which include user list, user interest, custom\naffinity,  and custom in market.',
+                                index: 3,
                             },
                             {
                                 s: 'TOPIC',
                                 description:
                                     "Topic criteria for targeting categories of content, e.g.\n'category::Animals>Pets' Used for Display and Video targeting.",
+                                index: 4,
                             },
-                            { s: 'GENDER', description: 'Criteria for targeting gender.' },
-                            { s: 'AGE_RANGE', description: 'Criteria for targeting age ranges.' },
+                            { s: 'GENDER', description: 'Criteria for targeting gender.', index: 5 },
+                            { s: 'AGE_RANGE', description: 'Criteria for targeting age ranges.', index: 6 },
                             {
                                 s: 'PLACEMENT',
                                 description:
                                     "Placement criteria, which include websites like 'www.flowers4sale.com',\nas well as mobile applications, mobile app categories, YouTube videos,\nand YouTube channels.",
+                                index: 7,
                             },
-                            { s: 'PARENTAL_STATUS', description: 'Criteria for parental status targeting.' },
-                            { s: 'INCOME_RANGE', description: 'Criteria for income range targeting.' },
+                            { s: 'PARENTAL_STATUS', description: 'Criteria for parental status targeting.', index: 8 },
+                            { s: 'INCOME_RANGE', description: 'Criteria for income range targeting.', index: 9 },
                         ],
                         _type: 'enum',
                     },
@@ -220,35 +253,40 @@ module.exports = {
                 targeting_dimension: {
                     _description: 'The targeting dimension that these settings apply to.',
                     _enums: [
-                        { s: 'UNSPECIFIED', description: 'Not specified.' },
+                        { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                         {
                             s: 'UNKNOWN',
                             description: 'Used for return value only. Represents value unknown in this version.',
+                            index: 1,
                         },
                         {
                             s: 'KEYWORD',
                             description:
                                 'Keyword criteria, e.g. \'mars cruise\'. KEYWORD may be used as a custom bid\ndimension. Keywords are always a targeting dimension, so may not be set\nas a target "ALL" dimension with TargetRestriction.',
+                            index: 2,
                         },
                         {
                             s: 'AUDIENCE',
                             description:
                                 'Audience criteria, which include user list, user interest, custom\naffinity,  and custom in market.',
+                            index: 3,
                         },
                         {
                             s: 'TOPIC',
                             description:
                                 "Topic criteria for targeting categories of content, e.g.\n'category::Animals>Pets' Used for Display and Video targeting.",
+                            index: 4,
                         },
-                        { s: 'GENDER', description: 'Criteria for targeting gender.' },
-                        { s: 'AGE_RANGE', description: 'Criteria for targeting age ranges.' },
+                        { s: 'GENDER', description: 'Criteria for targeting gender.', index: 5 },
+                        { s: 'AGE_RANGE', description: 'Criteria for targeting age ranges.', index: 6 },
                         {
                             s: 'PLACEMENT',
                             description:
                                 "Placement criteria, which include websites like 'www.flowers4sale.com',\nas well as mobile applications, mobile app categories, YouTube videos,\nand YouTube channels.",
+                            index: 7,
                         },
-                        { s: 'PARENTAL_STATUS', description: 'Criteria for parental status targeting.' },
-                        { s: 'INCOME_RANGE', description: 'Criteria for income range targeting.' },
+                        { s: 'PARENTAL_STATUS', description: 'Criteria for parental status targeting.', index: 8 },
+                        { s: 'INCOME_RANGE', description: 'Criteria for income range targeting.', index: 9 },
                     ],
                     _type: 'enum',
                 },
@@ -258,30 +296,37 @@ module.exports = {
         type: {
             _description: 'Immutable. The type of the ad group.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'The type has not been specified.' },
+                { s: 'UNSPECIFIED', description: 'The type has not been specified.', index: 0 },
                 {
                     s: 'UNKNOWN',
                     description: 'The received value is not known in this version.\n\nThis is a response-only value.',
+                    index: 1,
                 },
-                { s: 'SEARCH_STANDARD', description: 'The default ad group type for Search campaigns.' },
-                { s: 'DISPLAY_STANDARD', description: 'The default ad group type for Display campaigns.' },
+                { s: 'SEARCH_STANDARD', description: 'The default ad group type for Search campaigns.', index: 2 },
+                { s: 'DISPLAY_STANDARD', description: 'The default ad group type for Display campaigns.', index: 3 },
                 {
                     s: 'SHOPPING_PRODUCT_ADS',
                     description: 'The ad group type for Shopping campaigns serving standard product ads.',
+                    index: 4,
                 },
-                { s: 'HOTEL_ADS', description: 'The default ad group type for Hotel campaigns.' },
-                { s: 'SHOPPING_SMART_ADS', description: 'The type for ad groups in Smart Shopping campaigns.' },
-                { s: 'VIDEO_BUMPER', description: 'Short unskippable in-stream video ads.' },
-                { s: 'VIDEO_TRUE_VIEW_IN_STREAM', description: 'TrueView (skippable) in-stream video ads.' },
-                { s: 'VIDEO_TRUE_VIEW_IN_DISPLAY', description: 'TrueView in-display video ads.' },
-                { s: 'VIDEO_NON_SKIPPABLE_IN_STREAM', description: 'Unskippable in-stream video ads.' },
-                { s: 'VIDEO_OUTSTREAM', description: 'Outstream video ads.' },
-                { s: 'SEARCH_DYNAMIC_ADS', description: 'Ad group type for Dynamic Search Ads ad groups.' },
+                { s: 'HOTEL_ADS', description: 'The default ad group type for Hotel campaigns.', index: 6 },
+                {
+                    s: 'SHOPPING_SMART_ADS',
+                    description: 'The type for ad groups in Smart Shopping campaigns.',
+                    index: 7,
+                },
+                { s: 'VIDEO_BUMPER', description: 'Short unskippable in-stream video ads.', index: 8 },
+                { s: 'VIDEO_TRUE_VIEW_IN_STREAM', description: 'TrueView (skippable) in-stream video ads.', index: 9 },
+                { s: 'VIDEO_TRUE_VIEW_IN_DISPLAY', description: 'TrueView in-display video ads.', index: 10 },
+                { s: 'VIDEO_NON_SKIPPABLE_IN_STREAM', description: 'Unskippable in-stream video ads.', index: 11 },
+                { s: 'VIDEO_OUTSTREAM', description: 'Outstream video ads.', index: 12 },
+                { s: 'SEARCH_DYNAMIC_ADS', description: 'Ad group type for Dynamic Search Ads ad groups.', index: 13 },
                 {
                     s: 'SHOPPING_COMPARISON_LISTING_ADS',
                     description: 'The type for ad groups in Shopping Comparison Listing campaigns.',
+                    index: 14,
                 },
-                { s: 'PROMOTED_HOTEL_ADS', description: 'The ad group type for Promoted Hotel ad groups.' },
+                { s: 'PROMOTED_HOTEL_ADS', description: 'The ad group type for Promoted Hotel ad groups.', index: 15 },
             ],
             _type: 'enum',
         },

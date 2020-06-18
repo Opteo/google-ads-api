@@ -14,13 +14,17 @@ module.exports = {
         level: {
             _description: 'Output only. Level of the product bidding category.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'LEVEL1', description: 'Level 1.' },
-                { s: 'LEVEL2', description: 'Level 2.' },
-                { s: 'LEVEL3', description: 'Level 3.' },
-                { s: 'LEVEL4', description: 'Level 4.' },
-                { s: 'LEVEL5', description: 'Level 5.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'LEVEL1', description: 'Level 1.', index: 7 },
+                { s: 'LEVEL2', description: 'Level 2.', index: 8 },
+                { s: 'LEVEL3', description: 'Level 3.', index: 9 },
+                { s: 'LEVEL4', description: 'Level 4.', index: 10 },
+                { s: 'LEVEL5', description: 'Level 5.', index: 11 },
             ],
             _type: 'enum',
         },
@@ -41,10 +45,14 @@ module.exports = {
         status: {
             _description: 'Output only. Status of the product bidding category.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'ACTIVE', description: 'The category is active and can be used for bidding.' },
-                { s: 'OBSOLETE', description: 'The category is obsolete. Used only for reporting purposes.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'ACTIVE', description: 'The category is active and can be used for bidding.', index: 2 },
+                { s: 'OBSOLETE', description: 'The category is obsolete. Used only for reporting purposes.', index: 3 },
             ],
             _type: 'enum',
         },

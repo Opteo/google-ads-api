@@ -6,15 +6,16 @@ module.exports = {
             date_interval: {
                 _description: 'A future date range relative to the current date used for forecasting.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
-                    { s: 'UNKNOWN', description: 'The value is unknown in this version.' },
+                    { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                    { s: 'UNKNOWN', description: 'The value is unknown in this version.', index: 1 },
                     {
                         s: 'NEXT_WEEK',
                         description:
                             "The next week date range for keyword plan. The next week is based\non the default locale of the user's account and is mostly SUN-SAT or\nMON-SUN.\nThis can be different from next-7 days.",
+                        index: 3,
                     },
-                    { s: 'NEXT_MONTH', description: 'The next month date range for keyword plan.' },
-                    { s: 'NEXT_QUARTER', description: 'The next quarter date range for keyword plan.' },
+                    { s: 'NEXT_MONTH', description: 'The next month date range for keyword plan.', index: 4 },
+                    { s: 'NEXT_QUARTER', description: 'The next quarter date range for keyword plan.', index: 5 },
                 ],
                 _type: 'enum',
             },

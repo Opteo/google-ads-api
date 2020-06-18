@@ -20,10 +20,14 @@ module.exports = {
         status: {
             _description: 'Output only. Status of the campaign feed. This field is read-only.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'ENABLED', description: 'Feed link is enabled.' },
-                { s: 'REMOVED', description: 'Feed link has been removed.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'ENABLED', description: 'Feed link is enabled.', index: 2 },
+                { s: 'REMOVED', description: 'Feed link has been removed.', index: 3 },
             ],
             _type: 'enum',
         },

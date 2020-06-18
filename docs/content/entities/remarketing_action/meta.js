@@ -29,39 +29,48 @@ module.exports = {
                 _description:
                     'The format of the web page where the tracking tag and snippet will be installed, e.g. HTML.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                     {
                         s: 'UNKNOWN',
                         description: 'Used for return value only. Represents value unknown in this version.',
+                        index: 1,
                     },
-                    { s: 'HTML', description: 'Standard HTML page format.' },
-                    { s: 'AMP', description: 'Google AMP page format.' },
+                    { s: 'HTML', description: 'Standard HTML page format.', index: 2 },
+                    { s: 'AMP', description: 'Google AMP page format.', index: 3 },
                 ],
                 _type: 'enum',
             },
             type: {
                 _description: 'The type of the generated tag snippets for tracking conversions.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                     {
                         s: 'UNKNOWN',
                         description: 'Used for return value only. Represents value unknown in this version.',
+                        index: 1,
                     },
-                    { s: 'WEBPAGE', description: 'The snippet that is fired as a result of a website page loading.' },
+                    {
+                        s: 'WEBPAGE',
+                        description: 'The snippet that is fired as a result of a website page loading.',
+                        index: 2,
+                    },
                     {
                         s: 'WEBPAGE_ONCLICK',
                         description:
                             'The snippet contains a JavaScript function which fires the tag. This\nfunction is typically called from an onClick handler added to a link or\nbutton element on the page.',
+                        index: 3,
                     },
                     {
                         s: 'CLICK_TO_CALL',
                         description:
                             'For embedding on a mobile webpage. The snippet contains a JavaScript\nfunction which fires the tag.',
+                        index: 4,
                     },
                     {
                         s: 'WEBSITE_CALL',
                         description:
                             'The snippet that is used to replace the phone number on your website with\na Google forwarding number for call tracking purposes.',
+                        index: 5,
                     },
                 ],
                 _type: 'enum',
