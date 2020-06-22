@@ -11,7 +11,8 @@ import {
     getRandomName,
     CAMPAIGN_ID,
     newCustomerWithNodeOptions,
-    newMccCustomer, newGadsAPIClient,
+    newMccCustomer,
+    newGadsAPIClient,
 } from '../test_utils'
 import { CreateCustomerFlowSettings, CreateCustomerOptions, MutateResourceOperation } from '../types'
 
@@ -273,7 +274,7 @@ describe('customer', () => {
                     descriptive_name: getRandomName('account'),
                     currency_code: 'CAD',
                     time_zone: 'America/Toronto',
-                }
+                },
             }
             const result = await master_customer.createCustomerClient(c)
 
@@ -281,7 +282,7 @@ describe('customer', () => {
             expect(result).toBeDefined()
             expect(typeof result).toBe('object')
             expect((result as CreateCustomerClientResponse).resource_name).toBeDefined()
-            expect((result as CreateCustomerClientResponse).resource_name!.includes('customers/')).toEqual(true);
+            expect((result as CreateCustomerClientResponse).resource_name!.includes('customers/')).toEqual(true)
         })
 
         it('should create a new sub customer and return CustomerInstance', async () => {
@@ -291,11 +292,11 @@ describe('customer', () => {
                     descriptive_name: getRandomName('account'),
                     currency_code: 'CAD',
                     time_zone: 'America/Toronto',
-                }
+                },
             }
             const flow_settings: CreateCustomerFlowSettings = {
                 return_customer: true,
-                gads_api: client
+                gads_api: client,
             }
 
             const result = await master_customer.createCustomerClient(c, flow_settings)
