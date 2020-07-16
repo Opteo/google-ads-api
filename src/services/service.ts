@@ -210,7 +210,7 @@ export default class Service {
                 partial_failure_error: parsed_results.partial_failure_error,
                 results: parsed_results.mutate_operation_responses.map((r: any) => {
                     // @ts-ignore Object.values not recognised
-                    const { resource_name } = Object.values(r)[0]
+                    const { resource_name } = Object.values(r).filter(r => r)[0]
                     return resource_name
                 }),
             }

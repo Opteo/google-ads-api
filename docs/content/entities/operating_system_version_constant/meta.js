@@ -7,10 +7,18 @@ module.exports = {
             _description:
                 'Output only. Determines whether this constant represents a single version or a range of versions.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'EQUALS_TO', description: 'Equals to the specified version.' },
-                { s: 'GREATER_THAN_EQUALS_TO', description: 'Greater than or equals to the specified version.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'EQUALS_TO', description: 'Equals to the specified version.', index: 2 },
+                {
+                    s: 'GREATER_THAN_EQUALS_TO',
+                    description: 'Greater than or equals to the specified version.',
+                    index: 4,
+                },
             ],
             _type: 'enum',
         },

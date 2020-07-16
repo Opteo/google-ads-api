@@ -16,10 +16,14 @@ module.exports = {
         type: {
             _description: 'Output only. The type of mobile device.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'MOBILE', description: 'Mobile phones.' },
-                { s: 'TABLET', description: 'Tablets.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'MOBILE', description: 'Mobile phones.', index: 2 },
+                { s: 'TABLET', description: 'Tablets.', index: 3 },
             ],
             _type: 'enum',
         },

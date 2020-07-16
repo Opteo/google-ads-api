@@ -9,11 +9,15 @@ module.exports = {
         match_type: {
             _description: 'The keyword match type.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'EXACT', description: 'Exact match.' },
-                { s: 'PHRASE', description: 'Phrase match.' },
-                { s: 'BROAD', description: 'Broad match.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'EXACT', description: 'Exact match.', index: 2 },
+                { s: 'PHRASE', description: 'Phrase match.', index: 3 },
+                { s: 'BROAD', description: 'Broad match.', index: 4 },
             ],
             _type: 'enum',
         },

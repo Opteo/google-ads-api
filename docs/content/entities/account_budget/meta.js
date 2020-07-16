@@ -11,9 +11,13 @@ module.exports = {
             _description:
                 'Output only. The adjusted spending limit as a well-defined type, e.g. INFINITE. This will only be populated if the adjusted spending limit is INFINITE, which is guaranteed to be true if the approved spending limit is INFINITE.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'INFINITE', description: 'Infinite, indicates unlimited spending power.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'INFINITE', description: 'Infinite, indicates unlimited spending power.', index: 2 },
             ],
             _oneof: 'adjustedSpendingLimit',
             _type: 'enum',
@@ -31,10 +35,14 @@ module.exports = {
         approved_end_time_type: {
             _description: 'Output only. The approved end time as a well-defined type, e.g. FOREVER.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'NOW', description: 'As soon as possible.' },
-                { s: 'FOREVER', description: 'An infinite point in the future.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'NOW', description: 'As soon as possible.', index: 2 },
+                { s: 'FOREVER', description: 'An infinite point in the future.', index: 3 },
             ],
             _oneof: 'approvedEndTime',
             _type: 'enum',
@@ -49,9 +57,13 @@ module.exports = {
             _description:
                 'Output only. The approved spending limit as a well-defined type, e.g. INFINITE. This will only be populated if the approved spending limit is INFINITE.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'INFINITE', description: 'Infinite, indicates unlimited spending power.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'INFINITE', description: 'Infinite, indicates unlimited spending power.', index: 2 },
             ],
             _oneof: 'approvedSpendingLimit',
             _type: 'enum',
@@ -88,13 +100,14 @@ module.exports = {
             end_time_type: {
                 _description: 'Output only. The end time as a well-defined type, e.g. FOREVER.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                     {
                         s: 'UNKNOWN',
                         description: 'Used for return value only. Represents value unknown in this version.',
+                        index: 1,
                     },
-                    { s: 'NOW', description: 'As soon as possible.' },
-                    { s: 'FOREVER', description: 'An infinite point in the future.' },
+                    { s: 'NOW', description: 'As soon as possible.', index: 2 },
+                    { s: 'FOREVER', description: 'An infinite point in the future.', index: 3 },
                 ],
                 _type: 'enum',
             },
@@ -104,15 +117,24 @@ module.exports = {
                 _description:
                     'Output only. The type of this proposal, e.g. END to end the budget associated with this proposal.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                     {
                         s: 'UNKNOWN',
                         description: 'Used for return value only. Represents value unknown in this version.',
+                        index: 1,
                     },
-                    { s: 'CREATE', description: 'Identifies a request to create a new budget.' },
-                    { s: 'UPDATE', description: 'Identifies a request to edit an existing budget.' },
-                    { s: 'END', description: 'Identifies a request to end a budget that has already started.' },
-                    { s: 'REMOVE', description: "Identifies a request to remove a budget that hasn't started yet." },
+                    { s: 'CREATE', description: 'Identifies a request to create a new budget.', index: 2 },
+                    { s: 'UPDATE', description: 'Identifies a request to edit an existing budget.', index: 3 },
+                    {
+                        s: 'END',
+                        description: 'Identifies a request to end a budget that has already started.',
+                        index: 4,
+                    },
+                    {
+                        s: 'REMOVE',
+                        description: "Identifies a request to remove a budget that hasn't started yet.",
+                        index: 5,
+                    },
                 ],
                 _type: 'enum',
             },
@@ -128,12 +150,13 @@ module.exports = {
             spending_limit_type: {
                 _description: 'Output only. The spending limit as a well-defined type, e.g. INFINITE.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                     {
                         s: 'UNKNOWN',
                         description: 'Used for return value only. Represents value unknown in this version.',
+                        index: 1,
                     },
-                    { s: 'INFINITE', description: 'Infinite, indicates unlimited spending power.' },
+                    { s: 'INFINITE', description: 'Infinite, indicates unlimited spending power.', index: 2 },
                 ],
                 _type: 'enum',
             },
@@ -150,10 +173,14 @@ module.exports = {
         proposed_end_time_type: {
             _description: 'Output only. The proposed end time as a well-defined type, e.g. FOREVER.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'NOW', description: 'As soon as possible.' },
-                { s: 'FOREVER', description: 'An infinite point in the future.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'NOW', description: 'As soon as possible.', index: 2 },
+                { s: 'FOREVER', description: 'An infinite point in the future.', index: 3 },
             ],
             _oneof: 'proposedEndTime',
             _type: 'enum',
@@ -166,9 +193,13 @@ module.exports = {
         proposed_spending_limit_type: {
             _description: 'Output only. The proposed spending limit as a well-defined type, e.g. INFINITE.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'INFINITE', description: 'Infinite, indicates unlimited spending power.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'INFINITE', description: 'Infinite, indicates unlimited spending power.', index: 2 },
             ],
             _oneof: 'proposedSpendingLimit',
             _type: 'enum',
@@ -191,11 +222,15 @@ module.exports = {
         status: {
             _description: 'Output only. The status of this account-level budget.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'PENDING', description: 'The account budget is pending approval.' },
-                { s: 'APPROVED', description: 'The account budget has been approved.' },
-                { s: 'CANCELLED', description: 'The account budget has been cancelled by the user.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'PENDING', description: 'The account budget is pending approval.', index: 2 },
+                { s: 'APPROVED', description: 'The account budget has been approved.', index: 3 },
+                { s: 'CANCELLED', description: 'The account budget has been cancelled by the user.', index: 4 },
             ],
             _type: 'enum',
         },

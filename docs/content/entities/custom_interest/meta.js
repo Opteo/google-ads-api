@@ -10,13 +10,14 @@ module.exports = {
             member_type: {
                 _description: 'The type of custom interest member, KEYWORD or URL.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                     {
                         s: 'UNKNOWN',
                         description: 'Used for return value only. Represents value unknown in this version.',
+                        index: 1,
                     },
-                    { s: 'KEYWORD', description: 'Custom interest member type KEYWORD.' },
-                    { s: 'URL', description: 'Custom interest member type URL.' },
+                    { s: 'KEYWORD', description: 'Custom interest member type KEYWORD.', index: 2 },
+                    { s: 'URL', description: 'Custom interest member type URL.', index: 3 },
                 ],
                 _type: 'enum',
             },
@@ -39,12 +40,21 @@ module.exports = {
             _description:
                 'Status of this custom interest. Indicates whether the custom interest is enabled or removed.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'ENABLED', description: 'Enabled status - custom interest is enabled and can be targeted to.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                {
+                    s: 'ENABLED',
+                    description: 'Enabled status - custom interest is enabled and can be targeted to.',
+                    index: 2,
+                },
                 {
                     s: 'REMOVED',
                     description: 'Removed status - custom interest is removed and cannot be used for\ntargeting.',
+                    index: 3,
                 },
             ],
             _type: 'enum',
@@ -53,13 +63,22 @@ module.exports = {
             _description:
                 'Type of the custom interest, CUSTOM_AFFINITY or CUSTOM_INTENT. By default the type is set to CUSTOM_AFFINITY.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
                 {
                     s: 'CUSTOM_AFFINITY',
                     description: 'Allows brand advertisers to define custom affinity audience lists.',
+                    index: 2,
                 },
-                { s: 'CUSTOM_INTENT', description: 'Allows advertisers to define custom intent audience lists.' },
+                {
+                    s: 'CUSTOM_INTENT',
+                    description: 'Allows advertisers to define custom intent audience lists.',
+                    index: 3,
+                },
             ],
             _type: 'enum',
         },

@@ -30,13 +30,14 @@ module.exports = {
         status: {
             _description: 'Output only. The status of the bidding strategy. This field is read-only.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'No value has been specified.' },
+                { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
                 {
                     s: 'UNKNOWN',
                     description: 'The received value is not known in this version.\n\nThis is a response-only value.',
+                    index: 1,
                 },
-                { s: 'ENABLED', description: 'The bidding strategy is enabled.' },
-                { s: 'REMOVED', description: 'The bidding strategy is removed.' },
+                { s: 'ENABLED', description: 'The bidding strategy is enabled.', index: 2 },
+                { s: 'REMOVED', description: 'The bidding strategy is removed.', index: 3 },
             ],
             _type: 'enum',
         },
@@ -72,14 +73,15 @@ module.exports = {
             location: {
                 _description: 'The targeted location on the search results page.',
                 _enums: [
-                    { s: 'UNSPECIFIED', description: 'Not specified.' },
+                    { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
                     {
                         s: 'UNKNOWN',
                         description: 'Used for return value only. Represents value unknown in this version.',
+                        index: 1,
                     },
-                    { s: 'ANYWHERE_ON_PAGE', description: 'Any location on the web page.' },
-                    { s: 'TOP_OF_PAGE', description: 'Top box of ads.' },
-                    { s: 'ABSOLUTE_TOP_OF_PAGE', description: 'Top slot in the top box of ads.' },
+                    { s: 'ANYWHERE_ON_PAGE', description: 'Any location on the web page.', index: 2 },
+                    { s: 'TOP_OF_PAGE', description: 'Top box of ads.', index: 3 },
+                    { s: 'ABSOLUTE_TOP_OF_PAGE', description: 'Top slot in the top box of ads.', index: 4 },
                 ],
                 _type: 'enum',
             },
@@ -128,73 +130,94 @@ module.exports = {
             _description:
                 'Output only. The type of the bidding strategy. Create a bidding strategy by setting the bidding scheme. This field is read-only.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
                 {
                     s: 'COMMISSION',
                     description:
                         'Commission is an automatic bidding strategy in which the advertiser pays\na certain portion of the conversion value.',
+                    index: 16,
                 },
                 {
                     s: 'ENHANCED_CPC',
                     description:
                         'Enhanced CPC is a bidding strategy that raises bids for clicks\nthat seem more likely to lead to a conversion and lowers\nthem for clicks where they seem less likely.',
+                    index: 2,
                 },
-                { s: 'MANUAL_CPC', description: 'Manual click based bidding where user pays per click.' },
+                { s: 'MANUAL_CPC', description: 'Manual click based bidding where user pays per click.', index: 3 },
                 {
                     s: 'MANUAL_CPM',
                     description: 'Manual impression based bidding\nwhere user pays per thousand impressions.',
+                    index: 4,
                 },
-                { s: 'MANUAL_CPV', description: 'A bidding strategy that pays a configurable amount per video view.' },
+                {
+                    s: 'MANUAL_CPV',
+                    description: 'A bidding strategy that pays a configurable amount per video view.',
+                    index: 13,
+                },
                 {
                     s: 'MAXIMIZE_CONVERSIONS',
                     description:
                         'A bidding strategy that automatically maximizes number of conversions\ngiven a daily budget.',
+                    index: 10,
                 },
                 {
                     s: 'MAXIMIZE_CONVERSION_VALUE',
                     description:
                         'An automated bidding strategy that automatically sets bids to maximize\nrevenue while spending your budget.',
+                    index: 11,
                 },
                 {
                     s: 'PAGE_ONE_PROMOTED',
                     description:
                         'Page-One Promoted bidding scheme, which sets max cpc bids to\ntarget impressions on page one or page one promoted slots on google.com.\nThis enum value is deprecated.',
+                    index: 5,
                 },
                 {
                     s: 'PERCENT_CPC',
                     description:
                         'Percent Cpc is bidding strategy where bids are a fraction of the\nadvertised price for some good or service.',
+                    index: 12,
                 },
                 {
                     s: 'TARGET_CPA',
                     description:
                         'Target CPA is an automated bid strategy that sets bids\nto help get as many conversions as possible\nat the target cost-per-acquisition (CPA) you set.',
+                    index: 6,
                 },
                 {
                     s: 'TARGET_CPM',
                     description:
                         'Target CPM is an automated bid strategy that sets bids to help get\nas many impressions as possible at the target cost per one thousand\nimpressions (CPM) you set.',
+                    index: 14,
                 },
                 {
                     s: 'TARGET_IMPRESSION_SHARE',
                     description:
                         'An automated bidding strategy that sets bids so that a certain percentage\nof search ads are shown at the top of the first page (or other targeted\nlocation).',
+                    index: 15,
                 },
                 {
                     s: 'TARGET_OUTRANK_SHARE',
                     description:
                         'Target Outrank Share is an automated bidding strategy that sets bids\nbased on the target fraction of auctions where the advertiser\nshould outrank a specific competitor.\nThis enum value is deprecated.',
+                    index: 7,
                 },
                 {
                     s: 'TARGET_ROAS',
                     description:
                         'Target ROAS is an automated bidding strategy\nthat helps you maximize revenue while averaging\na specific target Return On Average Spend (ROAS).',
+                    index: 8,
                 },
                 {
                     s: 'TARGET_SPEND',
                     description:
                         'Target Spend is an automated bid strategy that sets your bids\nto help get as many clicks as possible within your budget.',
+                    index: 9,
                 },
             ],
             _type: 'enum',

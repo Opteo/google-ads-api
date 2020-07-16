@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.7.4](https://github.com/Opteo/google-ads-api/compare/v3.7.3...v3.7.4) (2020-06-26)
+
+
+
+## [3.7.3](https://github.com/Opteo/google-ads-api/compare/v3.7.2...v3.7.3) (2020-06-25)
+
+
+
+## [3.7.2](https://github.com/Opteo/google-ads-api/compare/v3.7.1...v3.7.2) (2020-06-23)
+
+
+### Bug Fixes
+
+* **docs:** show correct numbers for enums, fixes [#78](https://github.com/Opteo/google-ads-api/issues/78) and [#120](https://github.com/Opteo/google-ads-api/issues/120) ([90e85d1](https://github.com/Opteo/google-ads-api/commit/90e85d1))
+
+
+
 ## [3.7.1](https://github.com/Opteo/google-ads-api/compare/v3.7.0...v3.7.1) (2020-06-12)
 
 

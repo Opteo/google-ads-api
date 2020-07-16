@@ -68,17 +68,23 @@ module.exports = {
         modification_method: {
             _description: 'Output only. How the simulation modifies the field.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
                 {
                     s: 'UNIFORM',
                     description:
                         'The values in a simulation were applied to all children of a given\nresource uniformly. Overrides on child resources were not respected.',
+                    index: 2,
                 },
                 {
                     s: 'DEFAULT',
                     description:
                         'The values in a simulation were applied to the given resource.\nOverrides on child resources were respected, and traffic estimates\ndo not include these resources.',
+                    index: 3,
                 },
             ],
             _type: 'enum',
@@ -95,12 +101,16 @@ module.exports = {
         type: {
             _description: 'Output only. The field that the simulation modifies.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'CPC_BID', description: 'The simulation is for a cpc bid.' },
-                { s: 'CPV_BID', description: 'The simulation is for a cpv bid.' },
-                { s: 'TARGET_CPA', description: 'The simulation is for a cpa target.' },
-                { s: 'BID_MODIFIER', description: 'The simulation is for a bid modifier.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'CPC_BID', description: 'The simulation is for a cpc bid.', index: 2 },
+                { s: 'CPV_BID', description: 'The simulation is for a cpv bid.', index: 3 },
+                { s: 'TARGET_CPA', description: 'The simulation is for a cpa target.', index: 4 },
+                { s: 'BID_MODIFIER', description: 'The simulation is for a bid modifier.', index: 5 },
             ],
             _type: 'enum',
         },

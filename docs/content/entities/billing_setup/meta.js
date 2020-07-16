@@ -9,10 +9,14 @@ module.exports = {
         end_time_type: {
             _description: 'Output only. The end time as a type. The only possible value is FOREVER.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'NOW', description: 'As soon as possible.' },
-                { s: 'FOREVER', description: 'An infinite point in the future.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'NOW', description: 'As soon as possible.', index: 2 },
+                { s: 'FOREVER', description: 'An infinite point in the future.', index: 3 },
             ],
             _oneof: 'endTime',
             _type: 'enum',
@@ -65,10 +69,14 @@ module.exports = {
         start_time_type: {
             _description: 'Immutable. The start time as a type. Only NOW is allowed.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'NOW', description: 'As soon as possible.' },
-                { s: 'FOREVER', description: 'An infinite point in the future.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'NOW', description: 'As soon as possible.', index: 2 },
+                { s: 'FOREVER', description: 'An infinite point in the future.', index: 3 },
             ],
             _oneof: 'startTime',
             _type: 'enum',
@@ -76,16 +84,25 @@ module.exports = {
         status: {
             _description: 'Output only. The status of the billing setup.',
             _enums: [
-                { s: 'UNSPECIFIED', description: 'Not specified.' },
-                { s: 'UNKNOWN', description: 'Used for return value only. Represents value unknown in this version.' },
-                { s: 'PENDING', description: 'The billing setup is pending approval.' },
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'PENDING', description: 'The billing setup is pending approval.', index: 2 },
                 {
                     s: 'APPROVED_HELD',
                     description:
                         'The billing setup has been approved but the corresponding first budget\nhas not.  This can only occur for billing setups configured for monthly\ninvoicing.',
+                    index: 3,
                 },
-                { s: 'APPROVED', description: 'The billing setup has been approved.' },
-                { s: 'CANCELLED', description: 'The billing setup was cancelled by the user prior to approval.' },
+                { s: 'APPROVED', description: 'The billing setup has been approved.', index: 4 },
+                {
+                    s: 'CANCELLED',
+                    description: 'The billing setup was cancelled by the user prior to approval.',
+                    index: 5,
+                },
             ],
             _type: 'enum',
         },
