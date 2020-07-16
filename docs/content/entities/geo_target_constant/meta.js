@@ -37,5 +37,5 @@ module.exports = {
         },
         target_type: { _description: 'Output only. Geo target constant target type.', _type: 'string' },
     },
-    methods: ['get', 'list'],
+    methods: ['get', 'list', 'suggest'],
 }
