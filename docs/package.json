@@ -7,8 +7,8 @@
   "dependencies": {
     "gatsby": "^2.3.24",
     "gatsby-plugin-github-ribbon": "^1.0.0-beta.5",
+    "gatsby-plugin-google-fonts": "^1.0.1",
     "gatsby-plugin-offline": "^2.1.0",
-    "gatsby-plugin-prefetch-google-fonts": "^1.4.2",
     "gatsby-plugin-react-helmet": "^3.0.12",
     "gatsby-remark-autolink-headers": "^2.0.16",
     "gatsby-remark-external-links": "^0.0.4",

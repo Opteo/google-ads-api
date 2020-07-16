@@ -54,16 +54,14 @@ module.exports = {
                             target: '_blank',
                             rel: null,
                         },
-                    },
+                    },                    
                     {
-                        resolve: `gatsby-plugin-prefetch-google-fonts`,
+                        resolve: `gatsby-plugin-google-fonts`,
                         options: {
                             fonts: [
-                                {
-                                    family: `Roboto Mono`,
-                                    variants: [`400`],
-                                },
+                                `Roboto Mono\:400`,
                             ],
+                            display: 'swap',
                         },
                     },
                 ],
