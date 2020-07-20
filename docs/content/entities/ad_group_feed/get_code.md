@@ -27,7 +27,7 @@ let result = await customer.adGroupFeeds.get('customers/3827277046/adGroupFeeds/
       { constant_operand: { long_value: 48200618792 } },
     ],
   },
-  placeholder_types: [2],
+  placeholder_types: [],
   resource_name: 'customers/3827277046/adGroupFeeds/69639056828~43009393',
   status: 2,
 })

@@ -10,11 +10,7 @@ import Service from './service'
 export type ListAccessibleCustomersResponse = Promise<{ resource_names: Array<string> }>
 
 export default class AccessibleCustomersService extends Service {
-    constructor(
-        client: GrpcClient,
-        throttler: Bottleneck,
-        name: string
-    ) {
+    constructor(client: GrpcClient, throttler: Bottleneck, name: string) {
         super('', client, throttler, name)
     }
 

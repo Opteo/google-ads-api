@@ -39,7 +39,7 @@ let result = await customer.userLists.list({
         rules: [
           {
             operator: 3,
-            rule_operands: [
+            rule_operands_list: [
               { user_list: 'customers/3827277046/userLists/814539380' },
               { user_list: 'customers/3827277046/userLists/508846109' },
               { user_list: 'customers/3827277046/userLists/614318739' },
@@ -52,10 +52,10 @@ let result = await customer.userLists.list({
       name: 'My user list',
       read_only: true,
       resource_name: 'customers/3827277046/userLists/509186086',
-      size_for_display: 11000,
-      size_for_search: 9900,
-      size_range_for_display: 5,
-      size_range_for_search: 4,
+      size_for_display: 320,
+      size_for_search: 490,
+      size_range_for_display: 2,
+      size_range_for_search: 2,
       type: 3,
     },
     customer: {
@@ -68,10 +68,12 @@ let result = await customer.userLists.list({
       conversion_tracking_setting: { conversion_tracking_id: 875176189 },
       currency_code: 'GBP',
       descriptive_name: 'My customer',
-      final_url_suffix: 'gclid={gclid}',
+      final_url_suffix:
+        'wickedsource=google&wickedid={creative}&wtm_term={ifsearch:{keyword}}{ifcontent:{placement}}&wtm_campaign={campaignid}&wtm_content={adgroupid}&wickedplacement={placement}&wickedkeyword={keyword}&gclid={gclid}',
       has_partners_badge: false,
       id: 3827277046,
       manager: false,
+      optimization_score: 0.8214771414132993,
       pay_per_conversion_eligibility_failure_reasons: [],
       remarketing_setting: {
         google_global_site_tag:
@@ -81,7 +83,7 @@ let result = await customer.userLists.list({
       test_account: false,
       time_zone: 'Europe/London',
       tracking_url_template:
-        'https://w.opteo.co/workers/parallel?url={lpurl}&domain_id=123443&campaign_id={campaignid}&adgroup_id={adgroupid}&matchtype={matchtype}&network={network}&device={device}&keyword={keyword}&targetid={targetid}',
+        'https://w.opteo.co/workers/ct?url={lpurl}&domain_id=123443&campaign_id={campaignid}&adgroup_id={adgroupid}&matchtype={matchtype}&network={network}&device={device}&keyword={keyword}&targetid={targetid}',
     },
   },
 ]

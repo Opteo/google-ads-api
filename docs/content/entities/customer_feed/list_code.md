@@ -35,7 +35,7 @@ let result = await customer.customerFeeds.list({
         operator: 4,
         right_operands: [{ constant_operand: { long_value: 51840594005 } }],
       },
-      placeholder_types: [2],
+      placeholder_types: [],
       resource_name: 'customers/9262111890/customerFeeds/82896692',
       status: 2,
     },
@@ -68,7 +68,7 @@ let result = await customer.customerFeeds.list({
       has_partners_badge: false,
       id: 9262111890,
       manager: false,
-      pay_per_conversion_eligibility_failure_reasons: [8, 2],
+      pay_per_conversion_eligibility_failure_reasons: [],
       remarketing_setting: {
         google_global_site_tag:
           "<!-- Global site tag (gtag.js) - Google Ads: 797556569 -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=AW-797556569\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n\n  gtag('config', 'AW-797556569');\n</script>\n",

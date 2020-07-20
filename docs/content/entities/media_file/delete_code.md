@@ -8,5 +8,5 @@ entity: MediaFile
 ```javascript
 // Deleting the entity
 
-await customer.mediaFiles.delete('customers/3827277046/mediaFiles/4565915444')
+await customer.mediaFiles.delete('customers/3827277046/mediaFiles/44067075104')
 ```

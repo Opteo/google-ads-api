@@ -1,3 +1,4 @@
+// @ts-ignore
 import { BillingSetup } from 'google-ads-node/build/lib/resources'
 
 import Service, { Mutation } from './service'

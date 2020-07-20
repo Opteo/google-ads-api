@@ -327,6 +327,7 @@ module.exports = {
                     index: 14,
                 },
                 { s: 'PROMOTED_HOTEL_ADS', description: 'The ad group type for Promoted Hotel ad groups.', index: 15 },
+                { s: 'VIDEO_RESPONSIVE', description: 'Video responsive ad groups.', index: 16 },
             ],
             _type: 'enum',
         },

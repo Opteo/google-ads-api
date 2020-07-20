@@ -8,5 +8,5 @@ entity: CustomerNegativeCriterion
 ```javascript
 // Deleting the entity
 
-await customer.customerNegativeCriteria.delete('customers/3827277046/customerNegativeCriteria/297329731575')
+await customer.customerNegativeCriteria.delete('customers/3827277046/customerNegativeCriteria/61276056204')
 ```

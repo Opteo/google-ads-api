@@ -76,6 +76,11 @@ module.exports = {
             _parent_description: 'Immutable. Custom Intent.',
             custom_intent: { _description: 'The CustomInterest resource name.', _type: 'string' },
         },
+        disapproval_reasons: {
+            _description:
+                'Output only. List of disapproval reasons of the criterion. The different reasons for disapproving a criterion can be found here: https://support.google.com/adspolicy/answer/6008942 This field is read-only.',
+            _type: 'array of strings',
+        },
         effective_cpc_bid_micros: {
             _description: 'Output only. The effective CPC (cost-per-click) bid.',
             _type: 'int64',

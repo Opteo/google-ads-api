@@ -26,7 +26,7 @@ let result = await customer.campaignFeeds.get('customers/9262111890/campaignFeed
       { constant_operand: { long_value: 51844028388 } },
     ],
   },
-  placeholder_types: [2],
+  placeholder_types: [],
   resource_name: 'customers/9262111890/campaignFeeds/1483704368~82896692',
   status: 2,
 })

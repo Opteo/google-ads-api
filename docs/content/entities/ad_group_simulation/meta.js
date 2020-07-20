@@ -104,6 +104,31 @@ module.exports = {
                 },
             },
         },
+        target_roas_point_list: {
+            _oneof: 'pointList',
+            _parent_description: 'Output only. Simulation points if the simulation type is TARGET_ROAS.',
+            points: {
+                _parent_description: 'Projected metrics for a series of target ROAS amounts.',
+                _type: 'array of objects',
+                biddable_conversions: { _description: 'Projected number of biddable conversions.', _type: 'double' },
+                biddable_conversions_value: {
+                    _description: 'Projected total value of biddable conversions.',
+                    _type: 'double',
+                },
+                clicks: { _description: 'Projected number of clicks.', _type: 'int64' },
+                cost_micros: { _description: 'Projected cost in micros.', _type: 'int64' },
+                impressions: { _description: 'Projected number of impressions.', _type: 'int64' },
+                target_roas: {
+                    _description: 'The simulated target ROAS upon which projected metrics are based.',
+                    _type: 'double',
+                },
+                top_slot_impressions: {
+                    _description:
+                        'Projected number of top slot impressions. Only Search advertising channel type supports this field.',
+                    _type: 'int64',
+                },
+            },
+        },
         type: {
             _description: 'Output only. The field that the simulation modifies.',
             _enums: [
@@ -117,6 +142,7 @@ module.exports = {
                 { s: 'CPV_BID', description: 'The simulation is for a cpv bid.', index: 3 },
                 { s: 'TARGET_CPA', description: 'The simulation is for a cpa target.', index: 4 },
                 { s: 'BID_MODIFIER', description: 'The simulation is for a bid modifier.', index: 5 },
+                { s: 'TARGET_ROAS', description: 'The simulation is for a ROAS target.', index: 6 },
             ],
             _type: 'enum',
         },

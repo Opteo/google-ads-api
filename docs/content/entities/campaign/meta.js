@@ -64,6 +64,7 @@ module.exports = {
                         'App Campaign for engagement, focused on driving re-engagement with the\napp across several of Google’s top properties including Search, YouTube,\nand the Google Display Network.',
                     index: 13,
                 },
+                { s: 'LOCAL_CAMPAIGN', description: 'Campaigns specialized for local advertising.', index: 14 },
                 {
                     s: 'SHOPPING_COMPARISON_LISTING_ADS',
                     description: 'Shopping Comparison Listing campaigns.',
@@ -100,6 +101,8 @@ module.exports = {
                     description: 'App Campaigns, and App Campaigns for Engagement, that run\nacross multiple channels.',
                     index: 7,
                 },
+                { s: 'LOCAL', description: 'Local ads campaigns.', index: 8 },
+                { s: 'SMART', description: 'Smart campaigns.', index: 9 },
             ],
             _type: 'enum',
         },
@@ -448,6 +451,31 @@ module.exports = {
             _description: 'Output only. The resource names of labels attached to this campaign.',
             _type: 'array of strings',
         },
+        local_campaign_setting: {
+            _parent_description: 'The setting for local campaign.',
+            location_source_type: {
+                _description: 'The location source type for this local campaign.',
+                _enums: [
+                    { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
+                    {
+                        s: 'UNKNOWN',
+                        description: 'Used for return value only. Represents value unknown in this version.',
+                        index: 1,
+                    },
+                    {
+                        s: 'GOOGLE_MY_BUSINESS',
+                        description: "Locations associated with the customer's linked Google My Business\naccount.",
+                        index: 2,
+                    },
+                    {
+                        s: 'AFFILIATE',
+                        description: 'Affiliate (chain) store locations. For example, Best Buy store locations.',
+                        index: 3,
+                    },
+                ],
+                _type: 'enum',
+            },
+        },
         manual_cpc: {
             _oneof: 'campaignBiddingStrategy',
             _parent_description:
@@ -508,6 +536,19 @@ module.exports = {
                 _type: 'boolean',
             },
         },
+        optimization_goal_setting: {
+            _parent_description:
+                'Optimization goal setting for this campaign, which includes a set of optimization goal types.',
+            optimization_goal_types: {
+                _description: 'The list of optimization goal types.',
+                _type: 'array of strings',
+            },
+        },
+        optimization_score: {
+            _description:
+                'Output only. Optimization score of the campaign. Optimization score is an estimate of how well a campaign is set to perform. It ranges from 0% (0.0) to 100% (1.0), with 100% indicating that the campaign is performing at full potential. See "About optimization score" at https://support.google.com/google-ads/answer/9061546. This field is read-only.',
+            _type: 'double',
+        },
         payment_mode: {
             _description: 'Payment mode for the campaign.',
             _enums: [
@@ -533,7 +574,7 @@ module.exports = {
                 {
                     s: 'GUEST_STAY',
                     description:
-                        'Pay per guest stay value. This mode is only supported by campaigns with\nAdvertisingChannelType.HOTEL, BiddingStrategyType.COMMISSION, and\nBudgetType.HOTEL_ADS_COMMISSION.',
+                        'Pay per guest stay value. This mode is only supported by campaigns with\nAdvertisingChannelType.HOTEL, BiddingStrategyType.COMMISSION, and\nBudgetType.STANDARD.',
                     index: 7,
                 },
             ],

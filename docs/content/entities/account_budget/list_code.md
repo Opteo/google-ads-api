@@ -29,7 +29,7 @@ let result = await customer.accountBudgets.list({
   {
     account_budget: {
       adjusted_spending_limit_type: 2,
-      amount_served_micros: 195261900000,
+      amount_served_micros: 227337890000,
       approved_end_time_type: 3,
       approved_spending_limit_type: 2,
       approved_start_date_time: '2017-01-01 12:22:14',
@@ -41,7 +41,7 @@ let result = await customer.accountBudgets.list({
       proposed_start_date_time: '2017-01-01 12:22:14',
       resource_name: 'customers/3827277046/accountBudgets/295854560',
       status: 3,
-      total_adjustments_micros: 1137220000,
+      total_adjustments_micros: 1176390000,
     },
     billing_setup: {
       end_time_type: 3,
@@ -67,10 +67,12 @@ let result = await customer.accountBudgets.list({
       conversion_tracking_setting: { conversion_tracking_id: 875176189 },
       currency_code: 'GBP',
       descriptive_name: 'My customer',
-      final_url_suffix: 'gclid={gclid}',
+      final_url_suffix:
+        'wickedsource=google&wickedid={creative}&wtm_term={ifsearch:{keyword}}{ifcontent:{placement}}&wtm_campaign={campaignid}&wtm_content={adgroupid}&wickedplacement={placement}&wickedkeyword={keyword}&gclid={gclid}',
       has_partners_badge: false,
       id: 3827277046,
       manager: false,
+      optimization_score: 0.8214771414132993,
       pay_per_conversion_eligibility_failure_reasons: [],
       remarketing_setting: {
         google_global_site_tag:
@@ -80,7 +82,7 @@ let result = await customer.accountBudgets.list({
       test_account: false,
       time_zone: 'Europe/London',
       tracking_url_template:
-        'https://w.opteo.co/workers/parallel?url={lpurl}&domain_id=123443&campaign_id={campaignid}&adgroup_id={adgroupid}&matchtype={matchtype}&network={network}&device={device}&keyword={keyword}&targetid={targetid}',
+        'https://w.opteo.co/workers/ct?url={lpurl}&domain_id=123443&campaign_id={campaignid}&adgroup_id={adgroupid}&matchtype={matchtype}&network={network}&device={device}&keyword={keyword}&targetid={targetid}',
     },
   },
 ]

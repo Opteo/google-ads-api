@@ -24,6 +24,7 @@ let result = await customer.extensionFeedItems.get('customers/3827277046/extensi
   },
   device: 0,
   extension_type: 4,
+  id: 13882206517,
   resource_name: 'customers/3827277046/extensionFeedItems/13882206517',
   status: 2,
 })

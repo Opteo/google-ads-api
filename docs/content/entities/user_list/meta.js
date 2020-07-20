@@ -228,7 +228,7 @@ module.exports = {
                             _parent_description: 'Rule items that will be grouped together based on rule_type.',
                             _type: 'array of objects',
                             date_rule_item: {
-                                _parent_description: 'An atomic rule fragment composed of a date operation.',
+                                _parent_description: 'An atomic rule item composed of a date operation.',
                                 offset_in_days: {
                                     _description:
                                         'The relative date value of the right hand side denoted by number of days offset from now. The value field will override this field when both are present.',
@@ -264,7 +264,7 @@ module.exports = {
                                 _type: 'string',
                             },
                             number_rule_item: {
-                                _parent_description: 'An atomic rule fragment composed of a number operation.',
+                                _parent_description: 'An atomic rule item composed of a number operation.',
                                 operator: {
                                     _description:
                                         'Number comparison operator. This field is required and must be populated when creating a new number rule item.',
@@ -292,7 +292,7 @@ module.exports = {
                                 },
                             },
                             string_rule_item: {
-                                _parent_description: 'An atomic rule fragment composed of a string operation.',
+                                _parent_description: 'An atomic rule item composed of a string operation.',
                                 operator: {
                                     _description:
                                         'String comparison operator. This field is required and must be populated when creating a new string rule item.',
@@ -350,7 +350,7 @@ module.exports = {
                             _parent_description: 'Rule items that will be grouped together based on rule_type.',
                             _type: 'array of objects',
                             date_rule_item: {
-                                _parent_description: 'An atomic rule fragment composed of a date operation.',
+                                _parent_description: 'An atomic rule item composed of a date operation.',
                                 offset_in_days: {
                                     _description:
                                         'The relative date value of the right hand side denoted by number of days offset from now. The value field will override this field when both are present.',
@@ -386,7 +386,7 @@ module.exports = {
                                 _type: 'string',
                             },
                             number_rule_item: {
-                                _parent_description: 'An atomic rule fragment composed of a number operation.',
+                                _parent_description: 'An atomic rule item composed of a number operation.',
                                 operator: {
                                     _description:
                                         'Number comparison operator. This field is required and must be populated when creating a new number rule item.',
@@ -414,7 +414,7 @@ module.exports = {
                                 },
                             },
                             string_rule_item: {
-                                _parent_description: 'An atomic rule fragment composed of a string operation.',
+                                _parent_description: 'An atomic rule item composed of a string operation.',
                                 operator: {
                                     _description:
                                         'String comparison operator. This field is required and must be populated when creating a new string rule item.',
@@ -496,7 +496,7 @@ module.exports = {
                             _parent_description: 'Rule items that will be grouped together based on rule_type.',
                             _type: 'array of objects',
                             date_rule_item: {
-                                _parent_description: 'An atomic rule fragment composed of a date operation.',
+                                _parent_description: 'An atomic rule item composed of a date operation.',
                                 offset_in_days: {
                                     _description:
                                         'The relative date value of the right hand side denoted by number of days offset from now. The value field will override this field when both are present.',
@@ -532,7 +532,7 @@ module.exports = {
                                 _type: 'string',
                             },
                             number_rule_item: {
-                                _parent_description: 'An atomic rule fragment composed of a number operation.',
+                                _parent_description: 'An atomic rule item composed of a number operation.',
                                 operator: {
                                     _description:
                                         'Number comparison operator. This field is required and must be populated when creating a new number rule item.',
@@ -560,7 +560,7 @@ module.exports = {
                                 },
                             },
                             string_rule_item: {
-                                _parent_description: 'An atomic rule fragment composed of a string operation.',
+                                _parent_description: 'An atomic rule item composed of a string operation.',
                                 operator: {
                                     _description:
                                         'String comparison operator. This field is required and must be populated when creating a new string rule item.',
@@ -626,7 +626,7 @@ module.exports = {
                             _parent_description: 'Rule items that will be grouped together based on rule_type.',
                             _type: 'array of objects',
                             date_rule_item: {
-                                _parent_description: 'An atomic rule fragment composed of a date operation.',
+                                _parent_description: 'An atomic rule item composed of a date operation.',
                                 offset_in_days: {
                                     _description:
                                         'The relative date value of the right hand side denoted by number of days offset from now. The value field will override this field when both are present.',
@@ -662,7 +662,7 @@ module.exports = {
                                 _type: 'string',
                             },
                             number_rule_item: {
-                                _parent_description: 'An atomic rule fragment composed of a number operation.',
+                                _parent_description: 'An atomic rule item composed of a number operation.',
                                 operator: {
                                     _description:
                                         'Number comparison operator. This field is required and must be populated when creating a new number rule item.',
@@ -690,7 +690,7 @@ module.exports = {
                                 },
                             },
                             string_rule_item: {
-                                _parent_description: 'An atomic rule fragment composed of a string operation.',
+                                _parent_description: 'An atomic rule item composed of a string operation.',
                                 operator: {
                                     _description:
                                         'String comparison operator. This field is required and must be populated when creating a new string rule item.',

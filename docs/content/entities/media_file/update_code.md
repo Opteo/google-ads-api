@@ -9,7 +9,7 @@ entity: MediaFile
 // Updating the entity
 
 const media_file = {
-  resource_name: 'customers/3827277046/mediaFiles/4565915444', // The resource_name is required
+  resource_name: 'customers/3827277046/mediaFiles/44067075104', // The resource_name is required
   // ...any other fields that you would like to update
 }
 
@@ -26,7 +26,7 @@ const result = await customer.mediaFiles.update([media_file, other_media_file], 
 
 // Example result
 {
-	results : ['customers/3827277046/mediaFiles/4565915444'],
+	results : ['customers/3827277046/mediaFiles/44067075104'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

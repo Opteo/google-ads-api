@@ -32,33 +32,33 @@ let result = await customer.feedItems.list({
         {
           feed_attribute_id: 1,
           string_value: 'AdWords Knowledge Base',
-          integer_values: [],
-          boolean_values: [],
-          string_values: [],
-          double_values: [],
+          integer_values_list: [],
+          boolean_values_list: [],
+          string_values_list: [],
+          double_values_list: [],
         },
         {
           feed_attribute_id: 3,
           string_value: 'Adwords Guides, Case Studies',
-          integer_values: [],
-          boolean_values: [],
-          string_values: [],
-          double_values: [],
+          integer_values_list: [],
+          boolean_values_list: [],
+          string_values_list: [],
+          double_values_list: [],
         },
         {
           feed_attribute_id: 4,
           string_value: 'Chrome Extensions and more!',
-          integer_values: [],
-          boolean_values: [],
-          string_values: [],
-          double_values: [],
+          integer_values_list: [],
+          boolean_values_list: [],
+          string_values_list: [],
+          double_values_list: [],
         },
         {
           feed_attribute_id: 5,
-          integer_values: [],
-          boolean_values: [],
-          string_values: ['https://opteo.com/docs'],
-          double_values: [],
+          integer_values_list: [],
+          boolean_values_list: [],
+          string_values_list: ['https://opteo.com/docs'],
+          double_values_list: [],
         },
       ],
       feed: 'customers/3827277046/feeds/43009393',
@@ -70,11 +70,13 @@ let result = await customer.feedItems.list({
           feed_mapping_resource_name: 'customers/3827277046/feedMappings/43009393~46066123',
           review_status: 3,
           approval_status: 2,
-          policy_topic_entries: [{ topic: 'DESTINATION_MISMATCH', type: 2, evidences: [], constraints: [] }],
+          policy_topic_entries_list: [
+            { topic: 'DESTINATION_MISMATCH', type: 2, evidences_list: [], constraints_list: [] },
+          ],
           validation_status: 4,
-          validation_errors: [],
+          validation_errors_list: [],
           quality_approval_status: 0,
-          quality_disapproval_reasons: [],
+          quality_disapproval_reasons_list: [],
         },
       ],
       resource_name: 'customers/3827277046/feedItems/43009393~9779152283',
@@ -110,8 +112,8 @@ let result = await customer.feedItems.list({
           {
             topic: 'TRADEMARKS_IN_AD_TEXT',
             type: 4,
-            evidences: [{ text_list: { texts: ['Google'] } }],
-            constraints: [
+            evidences_list: [{ text_list: { texts: ['Google'] } }],
+            constraints_list: [
               {
                 country_constraint_list: {
                   total_targeted_countries: 23,
@@ -231,10 +233,12 @@ let result = await customer.feedItems.list({
       conversion_tracking_setting: { conversion_tracking_id: 875176189 },
       currency_code: 'GBP',
       descriptive_name: 'My customer',
-      final_url_suffix: 'gclid={gclid}',
+      final_url_suffix:
+        'wickedsource=google&wickedid={creative}&wtm_term={ifsearch:{keyword}}{ifcontent:{placement}}&wtm_campaign={campaignid}&wtm_content={adgroupid}&wickedplacement={placement}&wickedkeyword={keyword}&gclid={gclid}',
       has_partners_badge: false,
       id: 3827277046,
       manager: false,
+      optimization_score: 0.8214771414132993,
       pay_per_conversion_eligibility_failure_reasons: [],
       remarketing_setting: {
         google_global_site_tag:
@@ -244,7 +248,7 @@ let result = await customer.feedItems.list({
       test_account: false,
       time_zone: 'Europe/London',
       tracking_url_template:
-        'https://w.opteo.co/workers/parallel?url={lpurl}&domain_id=123443&campaign_id={campaignid}&adgroup_id={adgroupid}&matchtype={matchtype}&network={network}&device={device}&keyword={keyword}&targetid={targetid}',
+        'https://w.opteo.co/workers/ct?url={lpurl}&domain_id=123443&campaign_id={campaignid}&adgroup_id={adgroupid}&matchtype={matchtype}&network={network}&device={device}&keyword={keyword}&targetid={targetid}',
     },
   },
 ]

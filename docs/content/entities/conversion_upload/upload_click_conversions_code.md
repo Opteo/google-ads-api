@@ -9,12 +9,12 @@ entity: ConversionUpload
 // uploading ClickConversions
 
 const click_conversions: ClickConversion[] = [
-    {
-        // Your ClickConversion here
-    },
-    {
-        // Your ClickConversion here
-    },
+  {
+    // Your ClickConversion here
+  },
+  {
+    // Your ClickConversion here
+  },
 ]
 
 // Getting identifying information for all uploads
@@ -22,11 +22,11 @@ const result = await customer.conversionUploads.uploadClickConversions(click_con
 
 // Getting identifying information for all uploads with options
 const result = await customer.conversionUploads.uploadClickConversions(
-    click_conversions,
-    {
-        validate_only: true,
-    },
-    true
+  click_conversions,
+  {
+    validate_only: true,
+  },
+  true
 )
 
 // Getting identifying information for the first uploaded item

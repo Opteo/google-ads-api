@@ -1,6 +1,7 @@
 module.exports = {
     name: 'Asset',
     object: {
+        book_on_google_asset: { _oneof: 'assetData', _parent_description: 'A book on google asset.' },
         id: { _description: 'Output only. The ID of the asset.', _type: 'int64' },
         image_asset: {
             _oneof: 'assetData',
@@ -48,7 +49,7 @@ module.exports = {
                 _type: 'byte',
             },
         },
-        name: { _description: 'Immutable. Optional name of the asset.', _type: 'string' },
+        name: { _description: 'Optional name of the asset.', _type: 'string' },
         resource_name: {
             _description:
                 'Immutable. The resource name of the asset. Asset resource names have the form: <code>customers/{customer_id}/assets/{asset_id}</code>',
@@ -72,6 +73,7 @@ module.exports = {
                 { s: 'MEDIA_BUNDLE', description: 'Media bundle asset.', index: 3 },
                 { s: 'IMAGE', description: 'Image asset.', index: 4 },
                 { s: 'TEXT', description: 'Text asset.', index: 5 },
+                { s: 'BOOK_ON_GOOGLE', description: 'Book on Google asset.', index: 7 },
             ],
             _type: 'enum',
         },
