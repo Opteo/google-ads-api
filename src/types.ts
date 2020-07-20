@@ -7,6 +7,7 @@ import GoogleAdsApi from './client'
 export type Attributes =
     | fields.AccountBudgetFields
     | fields.AccountBudgetProposalFields
+    | fields.AccountLinkFields
     | fields.AdGroupFields
     | fields.AdGroupAdFields
     | fields.AdGroupAdLabelFields
@@ -65,9 +66,9 @@ export type Attributes =
     | fields.HotelPerformanceViewFields
     | fields.KeywordPlanFields
     | fields.KeywordPlanAdGroupFields
+    | fields.KeywordPlanAdGroupKeywordFields
     | fields.KeywordPlanCampaignFields
-    | fields.KeywordPlanKeywordFields
-    | fields.KeywordPlanNegativeKeywordFields
+    | fields.KeywordPlanCampaignKeywordFields
     | fields.KeywordViewFields
     | fields.LabelFields
     | fields.LanguageConstantFields
@@ -86,6 +87,7 @@ export type Attributes =
     | fields.SharedCriterionFields
     | fields.SharedSetFields
     | fields.ShoppingPerformanceViewFields
+    | fields.ThirdPartyAppAnalyticsLinkFields
     | fields.TopicConstantFields
     | fields.TopicViewFields
     | fields.UserInterestFields
