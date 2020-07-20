@@ -3,10 +3,10 @@ import crypto from 'crypto'
 import { noop } from 'lodash'
 
 import Customer, { CustomerInstance } from './customer'
-import GrpcClient, { GoogleAdsNodeOptions }  from './grpc'
+import GrpcClient, { GoogleAdsNodeOptions } from './grpc'
 import { normaliseCustomerId } from './utils'
 import { ClientOptions, CustomerOptions } from './types'
-import AccessibleCustomersService from "./services/accessible_customers";
+import AccessibleCustomersService from './services/accessible_customers'
 
 interface ListAccessibleCustomersOptions extends GoogleAdsNodeOptions {
     refresh_token: string
@@ -46,6 +46,7 @@ export default class GoogleAdsApi {
         customer_account_id,
         refresh_token,
         login_customer_id,
+        linked_customer_id,
         pre_report_hook,
         post_report_hook,
         prevent_mutations,
@@ -60,6 +61,7 @@ export default class GoogleAdsApi {
 
         customer_account_id = normaliseCustomerId(customer_account_id)
         login_customer_id = normaliseCustomerId(login_customer_id)
+        linked_customer_id = normaliseCustomerId(linked_customer_id)
 
         const gads_node_options = {
             prevent_mutations,
@@ -72,6 +74,7 @@ export default class GoogleAdsApi {
             this.options.client_secret,
             refresh_token as string,
             login_customer_id,
+            linked_customer_id,
             gads_node_options
         )
 
@@ -98,6 +101,7 @@ export default class GoogleAdsApi {
             this.options.client_secret,
             refresh_token as string,
             '', // login-customer-id not needed for this function
+            '', // linked-customer-id not needed for this function
             gads_node_options
         )
 

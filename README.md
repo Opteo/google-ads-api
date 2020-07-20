@@ -7,7 +7,7 @@
 </p>
 <p align="center">
   <a href="https://developers.google.com/google-ads/api/docs/release-notes">
-    <img src="https://img.shields.io/badge/google%20ads-v3.6.0-009688.svg?style=flat-square">
+    <img src="https://img.shields.io/badge/google%20ads-v4.0.0-009688.svg?style=flat-square">
   </a>
   <a href="https://www.npmjs.com/package/google-ads-api">
     <img src="https://img.shields.io/npm/v/google-ads-api.svg?style=flat-square">
@@ -30,7 +30,7 @@
 
 -   Simple and easy to use API
 -   Uses [gRPC](https://grpc.io/) and [Protocol Buffers](https://developers.google.com/protocol-buffers/) internally (recommended by Google)
--   Typescript definitions for all [Google Ads API resources, enums and errors](https://developers.google.com/google-ads/api/reference/rpc/google.ads.googleads.v2.resources)
+-   Typescript definitions for all [Google Ads API resources, enums and errors](https://developers.google.com/google-ads/api/reference/rpc/google.ads.googleads.v4.resources)
 
 > The Google Ads API is the new replacement to the AdWords API. Google will deprecate the AdWords API sometime in 2020.
 

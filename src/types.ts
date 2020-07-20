@@ -304,6 +304,7 @@ export interface CustomerAuth {
     customer_account_id?: string
     refresh_token?: string
     login_customer_id?: string
+    linked_customer_id?: string
 }
 
 export interface CustomerOptions extends CustomerAuth, GoogleAdsNodeOptions {
