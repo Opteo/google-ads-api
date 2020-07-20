@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [4.0.0](https://github.com/Opteo/google-ads-api/compare/v3.5.2...v4.0.0) (2020-07-20)
+
+
+### Bug Fixes
+
+* **deps:** updated google-ads-node to 1.15.2 ([#119](https://github.com/Opteo/google-ads-api/issues/119)) ([034e6b0](https://github.com/Opteo/google-ads-api/commit/034e6b0))
+* **docs:** show correct numbers for enums, fixes [#78](https://github.com/Opteo/google-ads-api/issues/78) and [#120](https://github.com/Opteo/google-ads-api/issues/120) ([90e85d1](https://github.com/Opteo/google-ads-api/commit/90e85d1))
+* **report:** ensure summary row is at the end of results when over page size ([9edac85](https://github.com/Opteo/google-ads-api/commit/9edac85))
+* **tests:** removed unreliable summary row test ([c51c318](https://github.com/Opteo/google-ads-api/commit/c51c318))
+
+
+### Features
+
+* **api:** Releasing v4.0.0 ([121b0aa](https://github.com/Opteo/google-ads-api/commit/121b0aa))
+* **api:** upgraded Google Ads Api v4.0.0 ([#152](https://github.com/Opteo/google-ads-api/issues/152)) ([b1742aa](https://github.com/Opteo/google-ads-api/commit/b1742aa))
+* **customer:** added createCustomerClient method ([#130](https://github.com/Opteo/google-ads-api/issues/130)) ([c054406](https://github.com/Opteo/google-ads-api/commit/c054406))
+* **customer:** added listAccessibleCustomers method ([#132](https://github.com/Opteo/google-ads-api/issues/132)) ([a8e8d3d](https://github.com/Opteo/google-ads-api/commit/a8e8d3d))
+* **reporting:** added support for specifying summary row setting ([#134](https://github.com/Opteo/google-ads-api/issues/134)) ([ce36202](https://github.com/Opteo/google-ads-api/commit/ce36202))
+* Google Ads API v3 update ([#117](https://github.com/Opteo/google-ads-api/issues/117)) ([46fc5e9](https://github.com/Opteo/google-ads-api/commit/46fc5e9)), closes [#19](https://github.com/Opteo/google-ads-api/issues/19)
+
+
+### BREAKING CHANGES
+
+* **api:** Some services have been removed/replaced
+
+
+
 ## [3.7.4](https://github.com/Opteo/google-ads-api/compare/v3.7.3...v3.7.4) (2020-06-26)
 
 
