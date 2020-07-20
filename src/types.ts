@@ -7,6 +7,7 @@ import GoogleAdsApi from './client'
 export type Attributes =
     | fields.AccountBudgetFields
     | fields.AccountBudgetProposalFields
+    | fields.AccountLinkFields
     | fields.AdGroupFields
     | fields.AdGroupAdFields
     | fields.AdGroupAdLabelFields
@@ -63,11 +64,12 @@ export type Attributes =
     | fields.GroupPlacementViewFields
     | fields.HotelGroupViewFields
     | fields.HotelPerformanceViewFields
+    | fields.IncomeRangeViewFields
     | fields.KeywordPlanFields
     | fields.KeywordPlanAdGroupFields
+    | fields.KeywordPlanAdGroupKeywordFields
     | fields.KeywordPlanCampaignFields
-    | fields.KeywordPlanKeywordFields
-    | fields.KeywordPlanNegativeKeywordFields
+    | fields.KeywordPlanCampaignKeywordFields
     | fields.KeywordViewFields
     | fields.LabelFields
     | fields.LanguageConstantFields
@@ -86,6 +88,7 @@ export type Attributes =
     | fields.SharedCriterionFields
     | fields.SharedSetFields
     | fields.ShoppingPerformanceViewFields
+    | fields.ThirdPartyAppAnalyticsLinkFields
     | fields.TopicConstantFields
     | fields.TopicViewFields
     | fields.UserInterestFields
@@ -117,6 +120,7 @@ export type Metrics =
     | fields.GroupPlacementViewMetrics
     | fields.HotelGroupViewMetrics
     | fields.HotelPerformanceViewMetrics
+    | fields.IncomeRangeViewMetrics
     | fields.KeywordViewMetrics
     | fields.LocationViewMetrics
     | fields.ManagedPlacementViewMetrics
@@ -151,6 +155,7 @@ export type Segments =
     | fields.GroupPlacementViewSegments
     | fields.HotelGroupViewSegments
     | fields.HotelPerformanceViewSegments
+    | fields.IncomeRangeViewSegments
     | fields.KeywordViewSegments
     | fields.LocationViewSegments
     | fields.ManagedPlacementViewSegments
@@ -299,6 +304,7 @@ export interface CustomerAuth {
     customer_account_id?: string
     refresh_token?: string
     login_customer_id?: string
+    linked_customer_id?: string
 }
 
 export interface CustomerOptions extends CustomerAuth, GoogleAdsNodeOptions {

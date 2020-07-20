@@ -48,8 +48,6 @@ import KeywordPlanAdGroupService from './services/keyword_plan_ad_group'
 import KeywordPlanCampaignService from './services/keyword_plan_campaign'
 // TODO: Missing protos
 // import KeywordPlanIdeaService from './services/keyword_plan_idea'
-import KeywordPlanKeywordService from './services/keyword_plan_keyword'
-import KeywordPlanNegativeKeywordService from './services/keyword_plan_negative_keyword'
 import KeywordPlanService from './services/keyword_plan'
 import LabelService from './services/label'
 import LanguageConstantService from './services/language_constant'
@@ -169,8 +167,6 @@ export interface CustomerInstance {
     geoTargetConstants: GeoTargetConstantService
     keywordPlanAdGroups: KeywordPlanAdGroupService
     keywordPlanCampaigns: KeywordPlanCampaignService
-    keywordPlanKeywords: KeywordPlanKeywordService
-    keywordPlanNegativeKeywords: KeywordPlanNegativeKeywordService
     keywordPlans: KeywordPlanService
     labels: LabelService
     languageConstants: LanguageConstantService
@@ -297,13 +293,6 @@ export default function Customer(
         keywordPlanAdGroups: new KeywordPlanAdGroupService(cid, client, throttler, 'KeywordPlanAdGroupService'),
         keywordPlanCampaigns: new KeywordPlanCampaignService(cid, client, throttler, 'KeywordPlanCampaignService'),
         // keywordPlanIdeas: new KeywordPlanIdeaService(cid, client, throttler, 'KeywordPlanIdeaService'),
-        keywordPlanKeywords: new KeywordPlanKeywordService(cid, client, throttler, 'KeywordPlanKeywordService'),
-        keywordPlanNegativeKeywords: new KeywordPlanNegativeKeywordService(
-            cid,
-            client,
-            throttler,
-            'KeywordPlanNegativeKeywordService'
-        ),
         keywordPlans: new KeywordPlanService(cid, client, throttler, 'KeywordPlanService'),
         labels: new LabelService(cid, client, throttler, 'LabelService'),
         languageConstants: new LanguageConstantService(cid, client, throttler, 'LanguageConstantService'),

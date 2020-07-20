@@ -8,24 +8,27 @@ entity: Recommendation
 ```javascript
 // Getting the entity
 let result = await customer.recommendations.get(
-  'customers/3827277046/recommendations/MTk5MDY3NzIzLTE2My0xNTg1NzI5MTA1MDAwLSsyMDgxNjIwOTQ1LTc3MDU3MzY0ODcyLTEyMjQ0NDA0MTU3NDEyNjU0MDg'
+  'customers/3827277046/recommendations/MTk5MDY3NzIzLTE2My0xNTk1MTg1NjIwMDAwLSsyMDgxNjIwOTQ4LTc3MDU3MzYzMjcyLTIyNzkzMTg2Nzk5NTk5NTgxOTU'
 )
 ```
 
 ```javascript
 // Example result
 ;({
-  ad_group: 'customers/3827277046/adGroups/77057364872',
-  campaign: 'customers/3827277046/campaigns/2081620945',
-  campaign_budget: 'customers/3827277046/campaignBudgets/6449346159',
+  ad_group: 'customers/3827277046/adGroups/77057363272',
+  campaign: 'customers/3827277046/campaigns/2081620948',
+  campaign_budget: 'customers/3827277046/campaignBudgets/6449346162',
   dismissed: false,
   impact: {
-    base_metrics: { clicks: 1, cost_micros: 7730000, impressions: 2 },
-    potential_metrics: { clicks: 1, conversions: 0.3, cost_micros: 7730000, impressions: 15 },
+    base_metrics: { clicks: 2, cost_micros: 20460000, impressions: 12 },
+    potential_metrics: { clicks: 4, conversions: 0.05, cost_micros: 36006832, impressions: 110 },
   },
-  keyword_recommendation: { keyword: { match_type: 3, text: 'google adwords performance report' } },
+  keyword_recommendation: {
+    keyword: { match_type: 2, text: 'google adwords management' },
+    recommended_cpc_bid_micros: 9600000,
+  },
   resource_name:
-    'customers/3827277046/recommendations/MTk5MDY3NzIzLTE2My0xNTg1NzI5MTA1MDAwLSsyMDgxNjIwOTQ1LTc3MDU3MzY0ODcyLTEyMjQ0NDA0MTU3NDEyNjU0MDg',
+    'customers/3827277046/recommendations/MTk5MDY3NzIzLTE2My0xNTk1MTg1NjIwMDAwLSsyMDgxNjIwOTQ4LTc3MDU3MzYzMjcyLTIyNzkzMTg2Nzk5NTk5NTgxOTU',
   type: 3,
 })
 ```

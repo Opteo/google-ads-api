@@ -8,20 +8,20 @@ export const BUDGET_ID = +(process.env.GADS_BUDGET_ID as string)
 export const ADGROUP_ID = +(process.env.GADS_ADGROUP_ID as string)
 
 export const newGadsAPIClient = (() => {
-   let client: GoogleAdsApi;
+    let client: GoogleAdsApi
 
-   return () => {
-       if (!client) {
-           client =  new GoogleAdsApi({
+    return () => {
+        if (!client) {
+            client = new GoogleAdsApi({
                 client_id: process.env.GADS_CLIENT_ID as string,
                 client_secret: process.env.GADS_CLIENT_SECRET as string,
                 developer_token: process.env.GADS_DEVELOPER_TOKEN as string,
-            });
-       }
+            })
+        }
 
-       return client;
-   }
-})();
+        return client
+    }
+})()
 
 export function newCustomer(client?: GoogleAdsApi) {
     if (!client) {

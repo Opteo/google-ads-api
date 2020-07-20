@@ -316,7 +316,7 @@ module.exports = {
         expanded_dynamic_search_ad: {
             _oneof: 'adData',
             _parent_description:
-                'Details pertaining to an Expanded Dynamic Search Ad. This type of ad has its headline, final URLs, and display URL auto-generated at serving time according to domain name specific information provided by <code>dynamic_search_ads_setting</code> linked at the campaign level.',
+                'Immutable. Details pertaining to an Expanded Dynamic Search Ad. This type of ad has its headline, final URLs, and display URL auto-generated at serving time according to domain name specific information provided by <code>dynamic_search_ads_setting</code> linked at the campaign level.',
             description: { _description: 'The description of the ad.', _type: 'string' },
             description2: { _description: 'The second description of the ad.', _type: 'string' },
         },
@@ -369,7 +369,7 @@ module.exports = {
         },
         gmail_ad: {
             _oneof: 'adData',
-            _parent_description: 'Details pertaining to a Gmail ad.',
+            _parent_description: 'Immutable. Details pertaining to a Gmail ad.',
             header_image: {
                 _description:
                     'The MediaFile resource name of the header image. Valid image types are GIF, JPEG and PNG. The minimum size is 300x100 pixels and the aspect ratio must be between 3:1 and 5:1 (+-1%).',
@@ -444,7 +444,7 @@ module.exports = {
         id: { _description: 'Output only. The ID of the ad.', _type: 'int64' },
         image_ad: {
             _oneof: 'adData',
-            _parent_description: 'Details pertaining to an Image ad.',
+            _parent_description: 'Immutable. Details pertaining to an Image ad.',
             ad_id_to_copy_image_from: { _description: 'An ad ID to copy the image from.', _type: 'int64' },
             data: { _description: 'Raw image data as bytes.', _type: 'byte' },
             image_url: { _description: 'URL of the full size image.', _type: 'string' },
@@ -570,6 +570,112 @@ module.exports = {
             square_marketing_image: {
                 _description: 'The MediaFile resource name of the square marketing image used in the ad.',
                 _type: 'string',
+            },
+        },
+        local_ad: {
+            _oneof: 'adData',
+            _parent_description: 'Details pertaining to a local ad.',
+            call_to_actions: {
+                _parent_description:
+                    'List of text assets for call-to-actions. When the ad serves the call-to-actions will be selected from this list. Call-to-actions are optional and at most 5 can be specified.',
+                _type: 'array of objects',
+                pinned_field: {
+                    _description:
+                        'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
+                    _enums: [
+                        { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
+                        {
+                            s: 'UNKNOWN',
+                            description:
+                                'The received value is not known in this version.\n\nThis is a response-only value.',
+                            index: 1,
+                        },
+                        { s: 'HEADLINE_1', description: 'The asset is used in headline 1.', index: 2 },
+                        { s: 'HEADLINE_2', description: 'The asset is used in headline 2.', index: 3 },
+                        { s: 'HEADLINE_3', description: 'The asset is used in headline 3.', index: 4 },
+                        { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.', index: 5 },
+                        { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.', index: 6 },
+                    ],
+                    _type: 'enum',
+                },
+                text: { _description: 'Asset text.', _type: 'string' },
+            },
+            descriptions: {
+                _parent_description:
+                    'List of text assets for descriptions. When the ad serves the descriptions will be selected from this list. At least 1 and at most 5 descriptions must be specified.',
+                _type: 'array of objects',
+                pinned_field: {
+                    _description:
+                        'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
+                    _enums: [
+                        { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
+                        {
+                            s: 'UNKNOWN',
+                            description:
+                                'The received value is not known in this version.\n\nThis is a response-only value.',
+                            index: 1,
+                        },
+                        { s: 'HEADLINE_1', description: 'The asset is used in headline 1.', index: 2 },
+                        { s: 'HEADLINE_2', description: 'The asset is used in headline 2.', index: 3 },
+                        { s: 'HEADLINE_3', description: 'The asset is used in headline 3.', index: 4 },
+                        { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.', index: 5 },
+                        { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.', index: 6 },
+                    ],
+                    _type: 'enum',
+                },
+                text: { _description: 'Asset text.', _type: 'string' },
+            },
+            headlines: {
+                _parent_description:
+                    'List of text assets for headlines. When the ad serves the headlines will be selected from this list. At least 1 and at most 5 headlines must be specified.',
+                _type: 'array of objects',
+                pinned_field: {
+                    _description:
+                        'The pinned field of the asset. This restricts the asset to only serve within this field. Multiple assets can be pinned to the same field. An asset that is unpinned or pinned to a different field will not serve in a field where some other asset has been pinned.',
+                    _enums: [
+                        { s: 'UNSPECIFIED', description: 'No value has been specified.', index: 0 },
+                        {
+                            s: 'UNKNOWN',
+                            description:
+                                'The received value is not known in this version.\n\nThis is a response-only value.',
+                            index: 1,
+                        },
+                        { s: 'HEADLINE_1', description: 'The asset is used in headline 1.', index: 2 },
+                        { s: 'HEADLINE_2', description: 'The asset is used in headline 2.', index: 3 },
+                        { s: 'HEADLINE_3', description: 'The asset is used in headline 3.', index: 4 },
+                        { s: 'DESCRIPTION_1', description: 'The asset is used in description 1.', index: 5 },
+                        { s: 'DESCRIPTION_2', description: 'The asset is used in description 2.', index: 6 },
+                    ],
+                    _type: 'enum',
+                },
+                text: { _description: 'Asset text.', _type: 'string' },
+            },
+            logo_images: {
+                _parent_description:
+                    'List of logo image assets that may be displayed with the ad. The images must be 128x128 pixels and not larger than 120KB. At least 1 and at most 5 image assets must be specified.',
+                _type: 'array of objects',
+                asset: { _description: 'The Asset resource name of this image.', _type: 'string' },
+            },
+            marketing_images: {
+                _parent_description:
+                    'List of marketing image assets that may be displayed with the ad. The images must be 314x600 pixels or 320x320 pixels. At least 1 and at most 20 image assets must be specified.',
+                _type: 'array of objects',
+                asset: { _description: 'The Asset resource name of this image.', _type: 'string' },
+            },
+            path1: {
+                _description: 'First part of optional text that may appear appended to the url displayed in the ad.',
+                _type: 'string',
+            },
+            path2: {
+                _description:
+                    'Second part of optional text that may appear appended to the url displayed in the ad. This field can only be set when path1 is also set.',
+                _type: 'string',
+            },
+            videos: {
+                _parent_description:
+                    'List of YouTube video assets that may be displayed with the ad. Videos are optional and at most 20 can be specified.',
+                _type: 'array of objects',
+                asset: { _description: 'The Asset resource name of this video.', _type: 'string' },
             },
         },
         name: {
@@ -820,7 +926,7 @@ module.exports = {
         },
         text_ad: {
             _oneof: 'adData',
-            _parent_description: 'Details pertaining to a text ad.',
+            _parent_description: 'Immutable. Details pertaining to a text ad.',
             description1: { _description: "The first line of the ad's description.", _type: 'string' },
             description2: { _description: "The second line of the ad's description.", _type: 'string' },
             headline: { _description: 'The headline of the ad.', _type: 'string' },
@@ -854,6 +960,7 @@ module.exports = {
                 { s: 'APP_AD', description: 'The ad is an app ad.', index: 17 },
                 { s: 'LEGACY_APP_INSTALL_AD', description: 'The ad is a legacy app install ad.', index: 18 },
                 { s: 'RESPONSIVE_DISPLAY_AD', description: 'The ad is a responsive display ad.', index: 19 },
+                { s: 'LOCAL_AD', description: 'The ad is a local ad.', index: 20 },
                 {
                     s: 'HTML5_UPLOAD_AD',
                     description: 'The ad is a display upload ad with the HTML5_UPLOAD_AD product type.',
@@ -870,6 +977,12 @@ module.exports = {
                     description: 'The ad is a Shopping Comparison Listing ad.',
                     index: 24,
                 },
+                { s: 'VIDEO_BUMPER_AD', description: 'Video bumper ad.', index: 25 },
+                { s: 'VIDEO_NON_SKIPPABLE_IN_STREAM_AD', description: 'Video non-skippable in-stream ad.', index: 26 },
+                { s: 'VIDEO_OUTSTREAM_AD', description: 'Video outstream ad.', index: 27 },
+                { s: 'VIDEO_TRUEVIEW_DISCOVERY_AD', description: 'Video TrueView in-display ad.', index: 28 },
+                { s: 'VIDEO_TRUEVIEW_IN_STREAM_AD', description: 'Video TrueView in-stream ad.', index: 29 },
+                { s: 'VIDEO_RESPONSIVE_AD', description: 'Video responsive ad.', index: 30 },
             ],
             _type: 'enum',
         },
@@ -884,7 +997,7 @@ module.exports = {
         },
         url_custom_parameters: {
             _parent_description:
-                'The list of mappings that can be used to substitute custom parameter tags in a <code>tracking_url_template</code>, <code>final_urls</code>, or <code>mobile_final_urls</code>.',
+                'The list of mappings that can be used to substitute custom parameter tags in a <code>tracking_url_template</code>, <code>final_urls</code>, or <code>mobile_final_urls</code>. For mutates, please use url custom parameter operations.',
             _type: 'array of objects',
             key: { _description: 'The key matching the parameter tag name.', _type: 'string' },
             value: { _description: 'The value to be substituted.', _type: 'string' },

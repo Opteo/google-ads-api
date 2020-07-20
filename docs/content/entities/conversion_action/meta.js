@@ -99,6 +99,61 @@ module.exports = {
                 { s: 'SIGNUP', description: 'Signup user action.', index: 5 },
                 { s: 'LEAD', description: 'Lead-generating action.', index: 6 },
                 { s: 'DOWNLOAD', description: 'Software download action (as for an app).', index: 7 },
+                {
+                    s: 'ADD_TO_CART',
+                    description: 'The addition of items to a shopping cart or bag on an advertiser site.',
+                    index: 8,
+                },
+                {
+                    s: 'BEGIN_CHECKOUT',
+                    description: 'When someone enters the checkout flow on an advertiser site.',
+                    index: 9,
+                },
+                {
+                    s: 'SUBSCRIBE_PAID',
+                    description: 'The start of a paid subscription for a product or service.',
+                    index: 10,
+                },
+                {
+                    s: 'PHONE_CALL_LEAD',
+                    description: "A call to indicate interest in an advertiser's offering.",
+                    index: 11,
+                },
+                {
+                    s: 'IMPORTED_LEAD',
+                    description: 'A lead conversion imported from an external source into Google Ads.',
+                    index: 12,
+                },
+                {
+                    s: 'SUBMIT_LEAD_FORM',
+                    description: 'A submission of a form on an advertiser site indicating business\ninterest.',
+                    index: 13,
+                },
+                {
+                    s: 'BOOK_APPOINTMENT',
+                    description: "A booking of an appointment with an advertiser's business.",
+                    index: 14,
+                },
+                { s: 'REQUEST_QUOTE', description: 'A quote or price estimate request.', index: 15 },
+                {
+                    s: 'GET_DIRECTIONS',
+                    description: "A search for an advertiser's business location with intention to visit.",
+                    index: 16,
+                },
+                { s: 'OUTBOUND_CLICK', description: "A click to an advertiser's partner's site.", index: 17 },
+                {
+                    s: 'CONTACT',
+                    description: 'A call, SMS, email, chat or other type of contact to an advertiser.',
+                    index: 18,
+                },
+                {
+                    s: 'ENGAGEMENT',
+                    description:
+                        'A website engagement event such as long site time or a Google Analytics\n(GA) Smart Goal. Intended to be used for GA, Firebase, GA Gold goal\nimports.',
+                    index: 19,
+                },
+                { s: 'STORE_VISIT', description: 'A visit to a physical store location.', index: 20 },
+                { s: 'STORE_SALE', description: 'A sale occurring in a physical store.', index: 21 },
             ],
             _type: 'enum',
         },
@@ -121,10 +176,29 @@ module.exports = {
             ],
             _type: 'enum',
         },
+        firebase_settings: {
+            _parent_description: 'Output only. Firebase settings for Firebase conversion types.',
+            event_name: { _description: 'Output only. The event name of a Firebase conversion.', _type: 'string' },
+            project_id: { _description: 'Output only. The Firebase project ID of the conversion.', _type: 'string' },
+        },
         id: { _description: 'Output only. The ID of the conversion action.', _type: 'int64' },
         include_in_conversions_metric: {
             _description: 'Whether this conversion action should be included in the "conversions" metric.',
             _type: 'boolean',
+        },
+        mobile_app_vendor: {
+            _description: 'Output only. Mobile app vendor for an app conversion action.',
+            _enums: [
+                { s: 'UNSPECIFIED', description: 'Not specified.', index: 0 },
+                {
+                    s: 'UNKNOWN',
+                    description: 'Used for return value only. Represents value unknown in this version.',
+                    index: 1,
+                },
+                { s: 'APPLE_APP_STORE', description: 'Mobile app vendor for Apple app store.', index: 2 },
+                { s: 'GOOGLE_APP_STORE', description: 'Mobile app vendor for Google app store.', index: 3 },
+            ],
+            _type: 'enum',
         },
         name: {
             _description:
@@ -230,6 +304,13 @@ module.exports = {
                 _type: 'enum',
             },
         },
+        third_party_app_analytics_settings: {
+            _parent_description: 'Output only. Third Party App Analytics settings for third party conversion types.',
+            event_name: {
+                _description: 'Output only. The event name of a third-party app analytics conversion.',
+                _type: 'string',
+            },
+        },
         type: {
             _description: 'Immutable. The type of this conversion action.',
             _enums: [
@@ -277,6 +358,78 @@ module.exports = {
                     description:
                         "Conversions that occur when a user calls a dynamically-generated phone\nnumber from an advertiser's website.",
                     index: 9,
+                },
+                {
+                    s: 'STORE_SALES_DIRECT_UPLOAD',
+                    description:
+                        'Store Sales conversion based on first-party or third-party merchant\ndata uploads.\nOnly whitelisted customers can use store sales direct upload types.',
+                    index: 10,
+                },
+                {
+                    s: 'STORE_SALES',
+                    description:
+                        'Store Sales conversion based on first-party or third-party merchant\ndata uploads and/or from in-store purchases using cards from payment\nnetworks.\nOnly whitelisted customers can use store sales types.',
+                    index: 11,
+                },
+                {
+                    s: 'FIREBASE_ANDROID_FIRST_OPEN',
+                    description: 'Android app first open conversions tracked via Firebase.',
+                    index: 12,
+                },
+                {
+                    s: 'FIREBASE_ANDROID_IN_APP_PURCHASE',
+                    description: 'Android app in app purchase conversions tracked via Firebase.',
+                    index: 13,
+                },
+                {
+                    s: 'FIREBASE_ANDROID_CUSTOM',
+                    description: 'Android app custom conversions tracked via Firebase.',
+                    index: 14,
+                },
+                {
+                    s: 'FIREBASE_IOS_FIRST_OPEN',
+                    description: 'iOS app first open conversions tracked via Firebase.',
+                    index: 15,
+                },
+                {
+                    s: 'FIREBASE_IOS_IN_APP_PURCHASE',
+                    description: 'iOS app in app purchase conversions tracked via Firebase.',
+                    index: 16,
+                },
+                {
+                    s: 'FIREBASE_IOS_CUSTOM',
+                    description: 'iOS app custom conversions tracked via Firebase.',
+                    index: 17,
+                },
+                {
+                    s: 'THIRD_PARTY_APP_ANALYTICS_ANDROID_FIRST_OPEN',
+                    description: 'Android app first open conversions tracked via Third Party App Analytics.',
+                    index: 18,
+                },
+                {
+                    s: 'THIRD_PARTY_APP_ANALYTICS_ANDROID_IN_APP_PURCHASE',
+                    description: 'Android app in app purchase conversions tracked via Third Party App\nAnalytics.',
+                    index: 19,
+                },
+                {
+                    s: 'THIRD_PARTY_APP_ANALYTICS_ANDROID_CUSTOM',
+                    description: 'Android app custom conversions tracked via Third Party App Analytics.',
+                    index: 20,
+                },
+                {
+                    s: 'THIRD_PARTY_APP_ANALYTICS_IOS_FIRST_OPEN',
+                    description: 'iOS app first open conversions tracked via Third Party App Analytics.',
+                    index: 21,
+                },
+                {
+                    s: 'THIRD_PARTY_APP_ANALYTICS_IOS_IN_APP_PURCHASE',
+                    description: 'iOS app in app purchase conversions tracked via Third Party App\nAnalytics.',
+                    index: 22,
+                },
+                {
+                    s: 'THIRD_PARTY_APP_ANALYTICS_IOS_CUSTOM',
+                    description: 'iOS app custom conversions tracked via Third Party App Analytics.',
+                    index: 23,
                 },
             ],
             _type: 'enum',

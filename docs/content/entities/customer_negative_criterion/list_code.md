@@ -28,15 +28,13 @@ let result = await customer.customerNegativeCriteria.list({
 ;[
   {
     customer_negative_criterion: {
-      id: 297329731575,
-      mobile_app_category: { mobile_app_category_constant: 'mobileAppCategoryConstants/60506' },
-      resource_name: 'customers/3827277046/customerNegativeCriteria/297329731575',
-      type: 4,
-    },
-    mobile_app_category_constant: {
-      id: 60506,
-      name: 'My mobile app category constant',
-      resource_name: 'mobileAppCategoryConstants/60506',
+      id: 61276056204,
+      mobile_application: {
+        app_id: '2-com.duolingo',
+        name: 'Mobile App: Duolingo: Learn Languages Free (Google Play), by Duolingo',
+      },
+      resource_name: 'customers/3827277046/customerNegativeCriteria/61276056204',
+      type: 5,
     },
     customer: {
       auto_tagging_enabled: true,
@@ -48,10 +46,12 @@ let result = await customer.customerNegativeCriteria.list({
       conversion_tracking_setting: { conversion_tracking_id: 875176189 },
       currency_code: 'GBP',
       descriptive_name: 'My customer',
-      final_url_suffix: 'gclid={gclid}',
+      final_url_suffix:
+        'wickedsource=google&wickedid={creative}&wtm_term={ifsearch:{keyword}}{ifcontent:{placement}}&wtm_campaign={campaignid}&wtm_content={adgroupid}&wickedplacement={placement}&wickedkeyword={keyword}&gclid={gclid}',
       has_partners_badge: false,
       id: 3827277046,
       manager: false,
+      optimization_score: 0.8214771414132993,
       pay_per_conversion_eligibility_failure_reasons: [],
       remarketing_setting: {
         google_global_site_tag:
@@ -61,7 +61,7 @@ let result = await customer.customerNegativeCriteria.list({
       test_account: false,
       time_zone: 'Europe/London',
       tracking_url_template:
-        'https://w.opteo.co/workers/parallel?url={lpurl}&domain_id=123443&campaign_id={campaignid}&adgroup_id={adgroupid}&matchtype={matchtype}&network={network}&device={device}&keyword={keyword}&targetid={targetid}',
+        'https://w.opteo.co/workers/ct?url={lpurl}&domain_id=123443&campaign_id={campaignid}&adgroup_id={adgroupid}&matchtype={matchtype}&network={network}&device={device}&keyword={keyword}&targetid={targetid}',
     },
   },
 ]

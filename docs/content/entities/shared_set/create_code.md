@@ -25,7 +25,7 @@ const result = await customer.sharedSets.create([shared_set, other_shared_set], 
 
 // Example result
 {
-	results : ['customers/9262111890/sharedSets/1802068178'],
+	results : ['customers/9262111890/sharedSets/1788591305'],
 	partial_failure_error : null,
 	request: { /* your request object */ }
 }

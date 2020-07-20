@@ -24,7 +24,7 @@ let result = await customer.userLists.get('customers/3827277046/userLists/509186
     rules: [
       {
         operator: 3,
-        rule_operands: [
+        rule_operands_list: [
           { user_list: 'customers/3827277046/userLists/814539380' },
           { user_list: 'customers/3827277046/userLists/508846109' },
           { user_list: 'customers/3827277046/userLists/614318739' },
@@ -37,10 +37,10 @@ let result = await customer.userLists.get('customers/3827277046/userLists/509186
   name: 'My user list',
   read_only: true,
   resource_name: 'customers/3827277046/userLists/509186086',
-  size_for_display: 11000,
-  size_for_search: 9900,
-  size_range_for_display: 5,
-  size_range_for_search: 4,
+  size_for_display: 320,
+  size_for_search: 490,
+  size_range_for_display: 2,
+  size_range_for_search: 2,
   type: 3,
 })
 ```

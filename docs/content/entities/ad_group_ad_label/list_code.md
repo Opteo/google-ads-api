@@ -57,7 +57,9 @@ let result = await customer.adGroupAdLabels.list({
       ad_strength: 0,
       policy_summary: {
         approval_status: 2,
-        policy_topic_entries: [{ topic: 'ONE_WEBSITE_PER_AD_GROUP', type: 2, evidences: [], constraints: [] }],
+        policy_topic_entries: [
+          { topic: 'ONE_WEBSITE_PER_AD_GROUP', type: 2, evidences_list: [], constraints_list: [] },
+        ],
         review_status: 3,
       },
       resource_name: 'customers/3827277046/adGroupAds/37706041345~206217423725',
@@ -141,10 +143,12 @@ let result = await customer.adGroupAdLabels.list({
       conversion_tracking_setting: { conversion_tracking_id: 875176189 },
       currency_code: 'GBP',
       descriptive_name: 'My customer',
-      final_url_suffix: 'gclid={gclid}',
+      final_url_suffix:
+        'wickedsource=google&wickedid={creative}&wtm_term={ifsearch:{keyword}}{ifcontent:{placement}}&wtm_campaign={campaignid}&wtm_content={adgroupid}&wickedplacement={placement}&wickedkeyword={keyword}&gclid={gclid}',
       has_partners_badge: false,
       id: 3827277046,
       manager: false,
+      optimization_score: 0.8214771414132993,
       pay_per_conversion_eligibility_failure_reasons: [],
       remarketing_setting: {
         google_global_site_tag:
@@ -154,7 +158,7 @@ let result = await customer.adGroupAdLabels.list({
       test_account: false,
       time_zone: 'Europe/London',
       tracking_url_template:
-        'https://w.opteo.co/workers/parallel?url={lpurl}&domain_id=123443&campaign_id={campaignid}&adgroup_id={adgroupid}&matchtype={matchtype}&network={network}&device={device}&keyword={keyword}&targetid={targetid}',
+        'https://w.opteo.co/workers/ct?url={lpurl}&domain_id=123443&campaign_id={campaignid}&adgroup_id={adgroupid}&matchtype={matchtype}&network={network}&device={device}&keyword={keyword}&targetid={targetid}',
     },
   },
 ]

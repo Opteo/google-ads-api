@@ -11,6 +11,7 @@ const ad_group_criterion = {
   ad_group: 'customers/9262111890/adGroups/60170225920',
   approval_status: 4,
   criterion_id: 521456008776,
+  disapproval_reasons: [],
   effective_cpc_bid_micros: 1000000,
   effective_cpc_bid_source: 6,
   effective_cpm_bid_micros: 10000,

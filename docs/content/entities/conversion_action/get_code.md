@@ -19,6 +19,7 @@ let result = await customer.conversionActions.get('customers/9262111890/conversi
   counting_type: 3,
   id: 314732636,
   include_in_conversions_metric: true,
+  mobile_app_vendor: 1,
   name: 'My conversion action',
   owner_customer: 'customers/9262111890',
   phone_call_duration_seconds: 60,

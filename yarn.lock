@@ -2032,10 +2032,10 @@ globals@^11.1.0:
   resolved "https://registry.yarnpkg.com/globals/-/globals-11.12.0.tgz#ab8795338868a0babd8525758018c2a7eb95c42e"
   integrity sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==
 
-google-ads-node@1.15.7:
-  version "1.15.7"
-  resolved "https://registry.yarnpkg.com/google-ads-node/-/google-ads-node-1.15.7.tgz#689237a4185eee46ab796833cba7129959ea555b"
-  integrity sha512-nvaHju5wKfjlhAUGvhGKdyFGd/hsERXJiGxwYDIyI7+r343JOGkkxWMBYd7PHmJM8X3tPChyruR3Q8H0U1yI9w==
+google-ads-node@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/google-ads-node/-/google-ads-node-2.0.1.tgz#08d93eb04b740a509d120e4e82c114c99606ea66"
+  integrity sha512-kvTV07nSCABi0E7/38fGg7xsXbz9VOg0WGE7Zw08z+pCuN9fXWqLysRU0TYUejXWa/9Z+1C+qMcWYjryHv3Azw==
   dependencies:
     "@types/cosmiconfig" "^5.0.3"
     "@types/google-protobuf" "^3.2.7"

@@ -77,6 +77,7 @@ module.exports = {
                 { s: 'CPV_BID', description: 'The simulation is for a cpv bid.', index: 3 },
                 { s: 'TARGET_CPA', description: 'The simulation is for a cpa target.', index: 4 },
                 { s: 'BID_MODIFIER', description: 'The simulation is for a bid modifier.', index: 5 },
+                { s: 'TARGET_ROAS', description: 'The simulation is for a ROAS target.', index: 6 },
             ],
             _type: 'enum',
         },

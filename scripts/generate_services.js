@@ -163,10 +163,10 @@ const raw_compiled_services = require('./compiled_resources.json')
 // )
 
 const compiled_resources =
-    raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v3.nested.resources.nested
+    raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v4.nested.resources.nested
 
 const compiled_resources_enums =
-    raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v3.nested.enums.nested
+    raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v4.nested.enums.nested
 
 // We need this atrocity to figure out what the real enum numbers are. It works 99% of the time, every time.
 const enums_keyed_by_values = {}
@@ -193,6 +193,7 @@ let schema
 const entities = [
     'AccountBudgetProposal',
     'AccountBudget',
+    'AccountLink',
     'Ad',
     'AdGroupAdLabel',
     'AdGroupAd',
@@ -238,10 +239,10 @@ const entities = [
     // // 'GoogleAdsField', // Not required
     // // 'GoogleAds', // Not required
     'KeywordPlanAdGroup',
+    'KeywordPlanAdGroupKeyword',
     'KeywordPlanCampaign',
+    'KeywordPlanCampaignKeyword',
     //'KeywordPlanIdea', // Not really a resource -- just a random function in a service
-    'KeywordPlanKeyword',
-    'KeywordPlanNegativeKeyword',
     'KeywordPlan',
     'Label',
     'LanguageConstant',
@@ -257,6 +258,7 @@ const entities = [
     'RemarketingAction',
     'SharedCriterion',
     'SharedSet',
+    'ThirdPartyAppAnalyticsLink',
     'TopicConstant',
     'UserInterest',
     'UserList',
@@ -269,7 +271,7 @@ const entities = [
 ]
 
 const compiled_services =
-    raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v3.nested.services.nested
+    raw_compiled_services.nested.google.nested.ads.nested.googleads.nested.v4.nested.services.nested
 
 const _entities = Object.keys(compiled_services).forEach(entity => {
     if (!entity.includes('Service')) {
@@ -520,7 +522,7 @@ async function compileService(entity, schema) {
 
     const meta = {
         name: entity,
-        object: sortObject(unroll(schema.schemas[`GoogleAdsGoogleadsV3Resources__${entity}`].properties, entity)),
+        object: sortObject(unroll(schema.schemas[`GoogleAdsGoogleadsV4Resources__${entity}`].properties, entity)),
     }
 
     const file_path = `${__dirname}/../src/services/${ent}.ts`
@@ -529,7 +531,7 @@ async function compileService(entity, schema) {
 
     await fs.ensureDir(docs_file_path)
 
-    if (schema.schemas[`GoogleAdsGoogleadsV3Services__${mutate_request}`]) {
+    if (schema.schemas[`GoogleAdsGoogleadsV4Services__${mutate_request}`]) {
         compiled_service = service_compiler({
             RESOURCE_URL_NAME: resource_url_name,
             MUTATE_METHOD: mutate_method,

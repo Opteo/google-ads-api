@@ -39,6 +39,8 @@ module.exports = {
                                 'App Campaigns, and App Campaigns for Engagement, that run\nacross multiple channels.',
                             index: 7,
                         },
+                        { s: 'LOCAL', description: 'Local ads campaigns.', index: 8 },
+                        { s: 'SMART', description: 'Smart campaigns.', index: 9 },
                     ],
                     _type: 'enum',
                 },

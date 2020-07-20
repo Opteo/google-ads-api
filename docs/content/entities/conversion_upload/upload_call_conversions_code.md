@@ -9,12 +9,12 @@ entity: ConversionUpload
 // uploading CallConversions
 
 const call_conversions: CallConversion[] = [
-    {
-        // Your CallConversion here
-    },
-    {
-        // Your CallConversion here
-    },
+  {
+    // Your CallConversion here
+  },
+  {
+    // Your CallConversion here
+  },
 ]
 
 // Getting identifying information for all uploads
@@ -22,11 +22,11 @@ const result = await customer.conversionUploads.uploadCallConversions(call_conve
 
 // Getting identifying information for all uploads with options
 const result = await customer.conversionUploads.uploadCallConversions(
-    call_conversions,
-    {
-        validate_only: true,
-    },
-    true
+  call_conversions,
+  {
+    validate_only: true,
+  },
+  true
 )
 
 // Getting identifying information for the first uploaded item
