@@ -64,6 +64,7 @@ export type Attributes =
     | fields.GroupPlacementViewFields
     | fields.HotelGroupViewFields
     | fields.HotelPerformanceViewFields
+    | fields.IncomeRangeViewFields
     | fields.KeywordPlanFields
     | fields.KeywordPlanAdGroupFields
     | fields.KeywordPlanAdGroupKeywordFields
@@ -119,6 +120,7 @@ export type Metrics =
     | fields.GroupPlacementViewMetrics
     | fields.HotelGroupViewMetrics
     | fields.HotelPerformanceViewMetrics
+    | fields.IncomeRangeViewMetrics
     | fields.KeywordViewMetrics
     | fields.LocationViewMetrics
     | fields.ManagedPlacementViewMetrics
@@ -153,6 +155,7 @@ export type Segments =
     | fields.GroupPlacementViewSegments
     | fields.HotelGroupViewSegments
     | fields.HotelPerformanceViewSegments
+    | fields.IncomeRangeViewSegments
     | fields.KeywordViewSegments
     | fields.LocationViewSegments
     | fields.ManagedPlacementViewSegments
