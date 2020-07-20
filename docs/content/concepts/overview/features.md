@@ -31,7 +31,9 @@ This library aims to offer a better way to use the Google Ads API.
 ### Google Ads API versions
 
 We aim to release new versions of this library within a few weeks of [new API versions](https://developers.google.com/google-ads/api/docs/release-notes) becoming available. These are the releases so far:
-- **v2.0 of the official google ads API**: Versions `3.0.0` and above of this library
+- **v4.0 of the official google ads API**: Versions `4.0.0` and above of this library
+- **v3.0 of the official google ads API**: Versions `3.6.0` to `3.7.4` of this library
+- **v2.0 of the official google ads API**: Versions `3.0.0` to `3.5.2` of this library
 - **v1.3 of the official google ads API**: Versions `2.3.0` to `2.3.0` of this library
 - **v1.2 of the official google ads API**: Versions `2.1.0` to `2.2.0` of this library
 - **v1.1 of the official google ads API**: Versions `1.2.0` to `2.0.0` of this library
