@@ -65,6 +65,7 @@ import RemarketingActionService from './services/remarketing_action'
 import SharedCriterionService from './services/shared_criterion'
 import SharedSetService from './services/shared_set'
 import TopicConstantService from './services/topic_constant'
+import ThirdPartyAppAnalyticsLinkService from './services/third_party_app_analytics_link'
 import UserInterestService from './services/user_interest'
 import UserListService from './services/user_list'
 import VideoService from './services/video'
@@ -100,6 +101,9 @@ import {
     CreateCustomerFlowSettings,
     QueryOptions,
 } from './types'
+import KeywordPlanAdGroupKeywordService from './services/keyword_plan_ad_group_keyword'
+import KeywordPlanCampaignKeywordService from './services/keyword_plan_campaign_keyword'
+import AccountLinkService from './services/account_link'
 
 export interface CustomerInstance {
     /* Base Customer properties for easy access */
@@ -127,6 +131,7 @@ export interface CustomerInstance {
     adGroups: AdGroupService
     accountBudgetProposals: AccountBudgetProposalService
     accountBudgets: AccountBudgetService
+    accountLinks: AccountLinkService
     ads: AdService
     adGroupAdLabels: AdGroupAdLabelService
     adGroupAds: AdGroupAdService
@@ -165,8 +170,10 @@ export interface CustomerInstance {
     feedMappings: FeedMappingService
     feeds: FeedService
     geoTargetConstants: GeoTargetConstantService
+    keywordPlanAdGroupKeywords: KeywordPlanAdGroupKeywordService
     keywordPlanAdGroups: KeywordPlanAdGroupService
     keywordPlanCampaigns: KeywordPlanCampaignService
+    keywordPlanCampaignKeywords: KeywordPlanCampaignKeywordService
     keywordPlans: KeywordPlanService
     labels: LabelService
     languageConstants: LanguageConstantService
@@ -180,6 +187,7 @@ export interface CustomerInstance {
     sharedCriteria: SharedCriterionService
     sharedSets: SharedSetService
     topicConstants: TopicConstantService
+    thirdPartyAppAnalyticsLinks: ThirdPartyAppAnalyticsLinkService
     userInterests: UserInterestService
     userLists: UserListService
     videos: VideoService
@@ -222,6 +230,7 @@ export default function Customer(
             'AccountBudgetProposalService'
         ),
         accountBudgets: new AccountBudgetService(cid, client, throttler, 'AccountBudgetService'),
+        accountLinks: new AccountLinkService(cid, client, throttler, 'AccountLinkService'),
         ads: new AdService(cid, client, throttler, 'AdService'),
         adGroupAdLabels: new AdGroupAdLabelService(cid, client, throttler, 'AdGroupAdLabelService'),
         adGroupAds: new AdGroupAdService(cid, client, throttler, 'AdGroupAdService'),
@@ -291,7 +300,19 @@ export default function Customer(
         feeds: new FeedService(cid, client, throttler, 'FeedService'),
         geoTargetConstants: new GeoTargetConstantService(cid, client, throttler, 'GeoTargetConstantService'),
         keywordPlanAdGroups: new KeywordPlanAdGroupService(cid, client, throttler, 'KeywordPlanAdGroupService'),
+        keywordPlanAdGroupKeywords: new KeywordPlanAdGroupKeywordService(
+            cid,
+            client,
+            throttler,
+            'KeywordPlanAdGroupKeywordService'
+        ),
         keywordPlanCampaigns: new KeywordPlanCampaignService(cid, client, throttler, 'KeywordPlanCampaignService'),
+        keywordPlanCampaignKeywords: new KeywordPlanCampaignKeywordService(
+            cid,
+            client,
+            throttler,
+            'KeywordPlanCampaignKeywordService'
+        ),
         // keywordPlanIdeas: new KeywordPlanIdeaService(cid, client, throttler, 'KeywordPlanIdeaService'),
         keywordPlans: new KeywordPlanService(cid, client, throttler, 'KeywordPlanService'),
         labels: new LabelService(cid, client, throttler, 'LabelService'),
@@ -323,6 +344,12 @@ export default function Customer(
         sharedCriteria: new SharedCriterionService(cid, client, throttler, 'SharedCriterionService'),
         sharedSets: new SharedSetService(cid, client, throttler, 'SharedSetService'),
         topicConstants: new TopicConstantService(cid, client, throttler, 'TopicConstantService'),
+        thirdPartyAppAnalyticsLinks: new ThirdPartyAppAnalyticsLinkService(
+            cid,
+            client,
+            throttler,
+            'ThirdPartyAppAnalyticsLinkService'
+        ),
         userInterests: new UserInterestService(cid, client, throttler, 'UserInterestService'),
         userLists: new UserListService(cid, client, throttler, 'UserListService'),
         videos: new VideoService(cid, client, throttler, 'VideoService'),
