@@ -381,7 +381,9 @@ export default class Service {
         try {
             if (limit && page_size && page_size >= limit) {
                 const response = await this.client.searchWithRetry(this.throttler, request)
+                // @ts-ignore This is fine
                 if (response && response.hasOwnProperty('resultsList')) {
+                    // @ts-ignore This is fine
                     return response.resultsList
                 }
                 return []

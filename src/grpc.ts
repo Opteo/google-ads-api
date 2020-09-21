@@ -25,6 +25,12 @@ export interface GoogleAdsNodeOptions {
     logging?: LogOptions
 }
 
+interface SearchResponse {
+    resultsList: any[]
+    nextPageToken: string
+    summaryRow: any
+}
+
 export default class GrpcClient {
     private readonly client: GoogleAdsClient
 
@@ -115,7 +121,7 @@ export default class GrpcClient {
 
         let results: Array<object> = []
 
-        let response = await this.searchWithRetry(throttler, request)
+        let response = (await this.searchWithRetry(throttler, request)) as SearchResponse
         results = results.concat(response.resultsList)
 
         const hasNextPage = (res: any) => res && res.nextPageToken
@@ -124,7 +130,7 @@ export default class GrpcClient {
             const next_page_request = request.clone() as SearchGoogleAdsRequest
             next_page_request.setPageToken(response.nextPageToken)
 
-            response = await this.searchWithRetry(throttler, next_page_request)
+            response = (await this.searchWithRetry(throttler, next_page_request)) as SearchResponse
             results = results.concat(response.resultsList)
 
             // If there is no limit, `limit` will be set to 0.
