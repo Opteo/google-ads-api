@@ -205,7 +205,7 @@ export default class CustomerService extends Service {
             const emailValue = new StringValue()
 
             emailValue.setValue(options.email_address)
-
+            // @ts-ignore Slightly different version of StringValue type is fine here
             request.setEmailAddress(emailValue)
         }
 
