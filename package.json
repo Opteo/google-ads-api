@@ -74,7 +74,7 @@
     },
     "dependencies": {
         "bottleneck": "^2.16.1",
-        "google-ads-node": "2.0.2",
+        "google-ads-node": "2.0.3",
         "lodash": "^4.17.15",
         "redis": "^2.8.0",
         "request": "^2.88.0"
