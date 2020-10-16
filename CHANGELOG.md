@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.3](https://github.com/Opteo/google-ads-api/compare/v4.0.2...v4.0.3) (2020-10-16)
+
+
+### Bug Fixes
+
+* labels.create method + google-ads-node 2.0.4 ([#180](https://github.com/Opteo/google-ads-api/issues/180)) ([6f5304a](https://github.com/Opteo/google-ads-api/commit/6f5304a))
+
+
+
 ## [4.0.2](https://github.com/Opteo/google-ads-api/compare/v4.0.1...v4.0.2) (2020-09-22)
 
 
