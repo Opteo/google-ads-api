@@ -2,7 +2,7 @@ import crypto from 'crypto'
 import request from 'request'
 
 const ADWORDS_AUTH_URL = 'https://accounts.google.com/o/oauth2/token'
-const ADWORDS_AUTH_SERVICE_ACCOUNTURL = 'https://oauth2.googleapis.com/token'
+const ADWORDS_AUTH_SERVICE_ACCOUNT_URL = 'https://oauth2.googleapis.com/token'
 
 import { cached_tokens, unresolved_token_promises } from './token_cache'
 import {KJUR} from "jsrsasign";
@@ -131,7 +131,7 @@ export const getAccessTokenByServiceAccount = async (service_account: ServiceAcc
 
 const requestAccessTokenByServiceAccount = (assertion: string): Promise<TokenReturn> => {
     const options = {
-        url: ADWORDS_AUTH_SERVICE_ACCOUNTURL,
+        url: ADWORDS_AUTH_SERVICE_ACCOUNT_URL,
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',

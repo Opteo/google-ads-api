@@ -8,6 +8,3 @@ describe('AccessTokenTest', () => {
         expect(list)
     })
 })
-
-
-
