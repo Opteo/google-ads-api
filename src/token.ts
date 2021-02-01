@@ -6,7 +6,7 @@ const ADWORDS_AUTH_SERVICE_ACCOUNT_URL = 'https://oauth2.googleapis.com/token'
 
 import { cached_tokens, unresolved_token_promises } from './token_cache'
 import {KJUR} from "jsrsasign";
-import {ServiceAccount} from "./client";
+import {ServiceAccount} from "./types";
 
 interface TokenAuth {
     client_id: string
