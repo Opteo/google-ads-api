@@ -332,5 +332,4 @@ export interface ServiceAccount {
     readonly auth_uri: string
     readonly token_uri: string
     readonly client_email: string
-    readonly sub: string
 }
