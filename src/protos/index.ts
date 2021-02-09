@@ -1,5 +1,5 @@
 import allProtos, { protos } from "google-ads-node";
-import { googleAdsVersion } from "../../package.json";
+import { googleAdsVersion } from "../version";
 
 // "as vN" is required to avoid type issues later on
 export const VERSION = googleAdsVersion as "v6";
