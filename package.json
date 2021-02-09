@@ -3,17 +3,16 @@
   "version": "4.0.4-beta.0",
   "googleAdsVersion": "v6",
   "description": "Google Ads API Client Library for Node.js",
-  "main": "./build/src/index.js",
+  "main": "build/src/index.js",
   "files": [
-    "build/src",
-    "README.md"
+    "build/src"
   ],
   "scripts": {
     "test": "jest",
     "lint": "eslint . --ext .ts",
     "build": "tsc",
-    "debug": "tsc && node build/src/debug.js",
-    "compile": "tsc && node build/scripts/index.js"
+    "compile": "tsc && node build/scripts/index.js",
+    "prepare": "rm -rf build && npm run build && rm build/package.json"
   },
   "author": "Opteo",
   "license": "MIT",
