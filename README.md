@@ -3,11 +3,11 @@
 </p>
 
 <p align="center">
-  Unofficial Google Ads API client library for Node
+  Unofficial Google Ads API client library for Node.js
 </p>
 <p align="center">
   <a href="https://developers.google.com/google-ads/api/docs/release-notes">
-    <img src="https://img.shields.io/badge/google%20ads-v4.0.0-009688.svg?style=flat-square">
+    <img src="https://img.shields.io/badge/google%20ads-v6-009688.svg?style=flat-square">
   </a>
   <a href="https://www.npmjs.com/package/google-ads-api">
     <img src="https://img.shields.io/npm/v/google-ads-api.svg?style=flat-square">
@@ -26,96 +26,255 @@
   </a>
 </p>
 
-# Features 
+# Features
 
--   Simple and easy to use API
--   Uses [gRPC](https://grpc.io/) and [Protocol Buffers](https://developers.google.com/protocol-buffers/) internally (recommended by Google)
--   Typescript definitions for all [Google Ads API resources, enums and errors](https://developers.google.com/google-ads/api/reference/rpc/google.ads.googleads.v4.resources)
+- Simple and easy to use API
+- Uses [gRPC](https://grpc.io/) and [Protocol Buffers](https://developers.google.com/protocol-buffers/) internally (recommended by Google)
+- Typescript definitions for all resources, enums, errors and services
+- Provides all API functionality
 
 > The Google Ads API is the new replacement to the AdWords API. Google will deprecate the AdWords API sometime in 2020.
 
 # Installation
 
 ```bash
-$ yarn add google-ads-api
+npm install google-ads-api
 ```
 
-# Documentation
+# Usage
 
-You can find the [full documentation here](https://opteo.com/dev/google-ads-api).
+- Setup
+  - [Create a client](#create-a-client)
+  - [Create a customer instance](#create-a-customer-instance)
+  - [List accessible customers](#list-accessible-customers)
+- Reporting
+  - [Retrieve Campaigns with metrics](#retrieve-campaigns-with-metrics)
+  - [Retrieve Campaigns using GAQL](#retrieve-campaigns-using-gaql)
+  - [Retrieve Ad Group metrics by date](#retrieve-ad-group-metrics-by-date)
+  - [Retrieve Keywords with streaming](#retrieve-keywords-with-streaming)
+- Mutations
+  - [Create an expanded text ad](#create-an-expanded-text-ad)
+- Misc
+  - [Resource Names](#resource-names)
+  - [Query Hooks](#query-hooks)
 
-The documentation is divided into two main sections:
+## Create a client
 
-- [General concepts](https://opteo.com/dev/google-ads-api) for general usage of this library.
-- [Core resources](https://opteo.com/dev/google-ads-api/#accountbudget) for the specific fields and methods available per resource.
+```ts
+import { GoogleAdsApi } from "google-ads-api";
 
-You can improve the documentation by sending pull requests with edits to [these files](https://github.com/Opteo/google-ads-api/tree/master/docs/content). More instructions [here](https://github.com/Opteo/google-ads-api/tree/master/docs/). All help and feedback welcome!
-
-# Basic Example
-
-```javascript
-import { GoogleAdsApi, types, enums } from 'google-ads-api'
-
-// 1. Create a new client with your credentials
 const client = new GoogleAdsApi({
-    client_id: '<CLIENT_ID>',
-    client_secret: '<CLIENT_SECRET>',
-    developer_token: '<DEVELOPER_TOKEN>',
-})
+  client_id: "<CLIENT-ID>",
+  client_secret: "<CLIENT-SECRET>",
+  developer_token: "<DEVELOPER-TOKEN>",
+});
+```
 
-// 2. Load a customer with a valid CID & authentication
+## Create a customer instance
+
+```ts
 const customer = client.Customer({
-    customer_account_id: '<CUSTOMER_ACCOUNT_ID>',
-    refresh_token: '<REFRESH_TOKEN>',
-})
+  customer_id: "1234567890",
+  refresh_token: "<REFRESH-TOKEN>",
+});
 
-// 3. Use the query method for querying customer data
-const response = await customer.query(`
-    SELECT 
-        ad_group.id,
-        ad_group.name,
-        metrics.clicks,
-        segments.device
-    FROM 
-        ad_group
-    WHERE 
-        metrics.impressions > 10
-        AND segments.date DURING LAST_30_DAYS
-    LIMIT 5
-`)
+// Also supports login & linked customer ids
+const customer = client.Customer({
+  customer_id: "1234567890",
+  login_customer_id: "<LOGIN-CUSTOMER-ID>",
+  linked_customer_id: "<LINKED-CUSTOMER-ID>",
+  refresh_token: "<REFRESH-TOKEN>",
+});
+```
 
-// 4. Inspect the data and benefit from ts definitions
-for (const row of response) {
-    const { ad_group, metrics } = row
-    if (ad_group.status === enums.AdGroupStatus.ENABLED) {
-        console.log(`Ad group "${ad_group.name}" had ${metrics.clicks} clicks.`)
+## List accessible customers
+
+This is a special client method for listing the accessible customers for a given refresh token, and is equivalent to [CustomerService.listAccessibleCustomers](https://developers.google.com/google-ads/api/reference/rpc/v6/CustomerService#listaccessiblecustomers). It returns the resource names of available customer accounts.
+
+```ts
+const client = new GoogleAdsApi({
+  client_id: "<CLIENT-ID>",
+  client_secret: "<CLIENT-SECRET>",
+  developer_token: "<DEVELOPER-TOKEN>",
+});
+
+const refreshToken = "<REFRESH-TOKEN">
+
+const customers = await client.listAccessibleCustomers(refreshToken);
+```
+
+## Retrieve Campaigns with metrics
+
+```ts
+import { enums } from "google-ads-api";
+
+const campaigns = await customer.report({
+  entity: "campaign",
+  attributes: [
+    "campaign.id",
+    "campaign.name",
+    "campaign.bidding_strategy_type",
+    "campaign_budget.amount_micros",
+  ],
+  metrics: [
+    "metrics.cost_micros",
+    "metrics.clicks",
+    "metric.impressions",
+    "metrics.all_conversions",
+  ],
+  constraints: {
+    "campaign.status": enums.CampaignStatus.ENABLED,
+  },
+  limit: 20,
+});
+```
+
+## Retrieve Campaigns using GAQL
+
+If you prefer to use the [Google Ads Query Language](https://developers.google.com/google-ads/api/docs/query/overview) (GAQL) the `query` method is available. Internally `report` uses this function. [More GAQL examples can be found here](https://developers.google.com/google-ads/api/docs/query/cookbook).
+
+```ts
+const campaigns = await customer.query(`
+  SELECT 
+    campaign.id, 
+    campaign.name,
+    campaign.bidding_strategy_type,
+    campaign_budget.amount_micros,
+    metrics.cost_micros,
+    metrics.clicks,
+    metric.impressions,
+    metrics.all_conversions,
+  FROM 
+    campaign
+  WHERE
+    campaign.status = "ENABLED"
+  LIMIT 20
+`);
+```
+
+## Retrieve Ad Group metrics by date
+
+```ts
+import { enums } from "google-ads-api";
+
+const campaigns = await customer.report({
+  entity: "ad_group",
+  metrics: [
+    "metrics.cost_micros",
+    "metrics.clicks",
+    "metric.impressions",
+    "metrics.all_conversions",
+  ],
+  segments: ["segments.date"],
+  from_date: "2021-01-01",
+  to_date: "2021-02-01",
+});
+```
+
+## Retrieve Keywords with streaming
+
+Streaming is useful when you're dealing with >10k rows, as this is the page size for results.
+
+<!-- prettier-ignore-start -->
+
+```ts
+import { enums } from "google-ads-api";
+
+const stream = customer.reportStream({
+  entity: "ad_group_criterion",
+  attributes: [
+    "ad_group_criterion.keyword.text", 
+    "ad_group_criterion.status",
+  ],
+  constraints: {
+    "ad_group_criterion.type": enums.CriterionType.KEYWORD,
+  },
+});
+
+// Pages of rows are streamed in, each with a max size of 10k
+for await (const rows of stream) {
+    // Break the loop to stop streaming
+    if(someLogic) {
+        break
     }
 }
+```
+<!-- prettier-ignore-end -->
 
-// 5. Create a new campaign
-const campaign = {
-    name: 'New Campaign',
-    campaign_budget: 'customers/123/campaignBudgets/123',
-    advertising_channel_type: enums.AdvertisingChannelType.SEARCH,
-    status: enums.CampaignStatus.PAUSED,
-}
+## Create an expanded text ad
 
-const { results } = await customer.campaigns.create(campaign)
+```ts
+import { resources, enums, ResourceNames } from "google-ads-api";
 
-const new_campaign_resource_name = results[0]
+const ad = new resources.Ad({
+  expanded_text_ad: {
+    headline_part1: "Cruise to Mars",
+    headline_part2: "Best Space Cruise Line",
+    description: "Buy your tickets now!",
+    path1: "cruises",
+    path2: "mars",
+  },
+  final_urls: ["https://example.com"],
+  type: enums.AdType.EXPANDED_TEXT_AD,
+});
 
-// 6. ...modify it...
-await customer.campaigns.update({
-    resource_name : new_campaign_resource_name,
-    name : 'New Campaign EDITED' 
-})
+const adGroup = ResourceNames.adGroup(cus.credentials.customerId, "123");
 
-// 7. ...and delete it.
-await customer.campaigns.delete(new_campaign_resource_name)
+const adGroupAd = new resources.AdGroupAd({
+  status: enums.AdGroupAdStatus.PAUSED,
+  ad_group,
+  ad,
+});
+
+// Returns an array of newly created resource names if successful
+const { results } = await cus.adGroupAds.create([adGroupAd]);
 ```
 
-# More examples
+## Resource Names
 
-There are many more examples in the [full documentation](https://opteo.com/dev/google-ads-api).
+The library provides a set of helper methods under the `ResourceNames` export. These are used for compiling resource names from ids. Arguments can be of the type `string`, `number`, or a mix of both. If you have a `client.Customer` instance available, you can get the customer id with `customer.credentials.customerId`.
 
-You can also find a couple ready-to-run examples in the [/examples directory](https://github.com/Opteo/google-ads-api/tree/master/examples).
+```ts
+import { ResourceNames } from "google-ads-api";
+
+const customerId = "1234567890";
+const campaignId = "3218318373";
+
+ResourceNames.campaign(customerId, campaignId);
+// "customers/1234567890/campaigns/3218318373"
+
+ResourceNames.adGroup(123, 123);
+// "customers/123/adGroups/123"
+
+ResourceNames.adGroupAd("1", "2", "3");
+// "customers/1/adGroupAds/2~3"
+
+const amsterdamLocationId = 1010543;
+ResourceNames.geoTargetConstant(amsterdam);
+// "geoTargetConstants/1010543"
+
+ResourceNames.accountBudget(customer.credentials.customer_id, 123);
+// "customers/1234567890/accountBudgets/123"
+```
+
+## Query Hooks
+
+```ts
+const customer = client.Customer({
+  clientOptions,
+  customerOptions,
+  hooks: {
+    onQueryStart({ credentials, query, reportOptions, cancel }) {
+      if (reportOptions.entity === "campaign") {
+        cancel([]); // cancels the query and returns the given argument
+      }
+    },
+    onQueryError({ credentials, query, reportOptions, error }) {
+      throw new Error(error);
+    },
+    onQueryEnd({ credentials, query, reportOptions, response }) {
+      return response.slice(0, 5);
+    },
+  },
+});
+```

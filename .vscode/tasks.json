@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "compile:enums",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "npm: compile:enums",
+			"detail": "node build/scripts/enums.js"
+		}
+	]
+}

@@ -1,16 +1,20 @@
-/* Gads-api Client */
-import GoogleAdsApi from './client'
+// Core library client
+export { Client as GoogleAdsApi } from "./client";
 
-/* Gads-node types (note: these are non-grpc types, purely ts) */
-/* Enums */
-import * as enums from 'google-ads-node/build/lib/enums'
-/* Types */
-import * as types from 'google-ads-node/build/lib/resources'
+// Compiled proto types
+export {
+  common,
+  enums,
+  errors,
+  resources,
+  services,
+  longrunning,
+  protobuf,
+} from "./protos/index";
 
-/* Helpers */
-import { fromMicros, toMicros, getEnumString } from './utils'
-import { CustomerInstance } from './customer'
+// Util functions
+export { fromMicros, toMicros } from "./utils";
+export * as ResourceNames from "./protos/autogen/resourceNames";
 
-import * as LibTypes from './types'
-
-export { GoogleAdsApi, enums, types, LibTypes, fromMicros, toMicros, getEnumString, CustomerInstance }
+// Util types
+export { ReportOptions, MutateOperation } from "./types";

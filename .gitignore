@@ -1,10 +1,3 @@
-.DS_Store
-
-/lib*
-src/config.ts
-src/tests/debug.test.ts
-package-lock.json
-
 # IDEs
 .idea
 
@@ -81,8 +74,9 @@ typings/
 
 # Serverless directories
 .serverless
-.DS_Store
 
-build/
-.env
-.cache
+# Library build folder
+build
+
+# Library test file
+debug.*s
