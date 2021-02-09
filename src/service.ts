@@ -11,7 +11,7 @@ import {
 } from "./protos";
 import { RequestOptions } from "./types";
 import { getFieldMask } from "./utils";
-import { googleAdsVersion } from "../package.json";
+import { googleAdsVersion } from "./version";
 
 // Make sure to update this version number when upgrading
 export const FAILURE_KEY = `google.ads.googleads.${googleAdsVersion}.errors.googleadsfailure-bin`;

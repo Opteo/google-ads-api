@@ -3,7 +3,7 @@ import protos from "google-ads-node/build/protos/protos.json";
 import pluralize from "pluralize";
 import { ServiceName } from "../src/protos";
 import { toCamelCase } from "../src/utils";
-import { googleAdsVersion } from "../package.json";
+import { googleAdsVersion } from "../src/version";
 import { FILES } from "./path";
 
 const VERSION = googleAdsVersion;
@@ -12,7 +12,6 @@ const GOOGLE_ADS_DOCS_URL =
   "https://developers.google.com/google-ads/api/reference";
 
 const allServices =
-  // @ts-expect-error The version number is the correct type
   protos.nested.google.nested.ads.nested.googleads.nested[VERSION].nested
     .services.nested;
 
@@ -212,10 +211,10 @@ function compileMutateMethods(
   const mutateMethods: string[] = [];
 
   const { requestType } = methodDef;
-  const req = allServices[requestType];
+  const req = (allServices as any)[requestType];
 
   const opType = req.fields.operation ?? req.fields.operations;
-  const op = allServices[opType.type];
+  const op = (allServices as any)[opType.type];
 
   const methods = Object.keys(op.fields).filter((o) =>
     ["create", "update", "remove"].includes(o)
