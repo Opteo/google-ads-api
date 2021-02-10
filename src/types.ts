@@ -1,6 +1,18 @@
 import { services } from "./protos";
 import { Resource, Attribute, Metric, Segment } from "./protos/autogen/fields";
 
+export interface CustomerOptions {
+  customer_id: string;
+  refresh_token: string;
+  login_customer_id?: string;
+  linked_customer_id?: string;
+}
+
+export type CustomerCredentials = Pick<
+  CustomerOptions,
+  "customer_id" | "login_customer_id" | "linked_customer_id"
+>;
+
 export interface ReportOptions extends RequestOptions {
   entity: Resource;
   attributes?: Attribute[];

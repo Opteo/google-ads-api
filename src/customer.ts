@@ -1,119 +1,22 @@
 import { ClientOptions } from "./client";
 import ServiceFactory from "./protos/autogen/serviceFactory";
-import { errors, services } from "./protos";
+import { services } from "./protos";
 import { buildQuery } from "./query";
 import {
+  CustomerOptions,
   MutateOperation,
   MutateOptions,
   ReportOptions,
   RequestOptions,
 } from "./types";
-import { getFieldMask, toCamelCase } from "./utils";
+import {
+  Hooks,
+  BaseQueryHookArgs,
+  BaseMutationHookArgs,
+  HookedCancellation,
+  HookedResolution,
+} from "./hooks";
 import { parse } from "./parser";
-
-export type CustomerCredentials = Pick<
-  CustomerOptions,
-  "customer_id" | "login_customer_id" | "linked_customer_id"
->;
-
-type BaseQueryHookArgs = {
-  credentials: CustomerCredentials;
-  query: string;
-  reportOptions?: ReportOptions;
-};
-
-type BaseMutationHookArgs = {
-  credentials: CustomerCredentials;
-  mutations: MutateOperation<any>[];
-};
-
-type PreHookArgs = { cancel: (args?: any) => void };
-type ErrorHookArgs = { error: errors.GoogleAdsFailure | Error };
-type PostHookArgs<
-  T = services.IGoogleAdsRow[] | services.MutateGoogleAdsResponse
-> = { response: T; resolve: (args: any) => void };
-
-type HookArgs = PreHookArgs | ErrorHookArgs | PostHookArgs;
-type QueryHook<H extends HookArgs> = (args: BaseQueryHookArgs & H) => void;
-type MutationHook<H extends HookArgs> = (
-  args: BaseMutationHookArgs & H
-) => void;
-
-export type OnQueryStart = QueryHook<PreHookArgs>;
-export type OnQueryError = QueryHook<ErrorHookArgs>;
-export type OnQueryEnd = QueryHook<PostHookArgs<services.IGoogleAdsRow[]>>;
-
-export type OnMutationStart = MutationHook<PreHookArgs>;
-export type OnMutationError = MutationHook<ErrorHookArgs>;
-export type OnMutationEnd = MutationHook<
-  PostHookArgs<services.MutateGoogleAdsResponse>
->;
-
-export interface Hooks {
-  /**
-   * @description Hook called before execution of a query.
-   * @params `{ credentials, query, reportOptions, cancel }`
-   * @param credentials customer id, login customer id, linked customer id
-   * @param query gaql
-   * @param reportOptions
-   * @param cancel utility function for cancelling the query. if an argument is provided then the query will return this argument
-   */
-  onQueryStart?: OnQueryStart;
-  /**
-   * @description Hook called upon a query throwing an error
-   * @params `{ credentials, query, reportOptions, error }`
-   * @param credentials customer id, login customer id, linked customer id
-   * @param query gaql
-   * @param reportOptions
-   * @param error google ads error
-   */
-  onQueryError?: OnQueryError;
-  /**
-   * @description Hook called after successful execution of a query
-   * @params `{ credentials, query, reportOptions, response, resolve }`
-   * @param credentials customer id, login customer id, linked customer id
-   * @param query gaql
-   * @param reportOptions
-   * @param response results of the query
-   * @param resolve utility function for returning an alternative value from the query. will not work with reportStream
-   */
-  onQueryEnd?: OnQueryEnd;
-  /**
-   * @description Hook called before execution of a mutation.
-   * @params `{ credentials, mutations, cancel }`
-   * @param credentials customer id, login customer id, linked customer id
-   * @param mutations
-   * @param cancel utility function for cancelling the mutation. if an argument is provided then the query/report will return this argument
-   */
-  onMutationStart?: OnMutationStart;
-  /**
-   * @description Hook called upon a mutation throwing an error
-   * @params `{ credentials, mutations error }`
-   * @param credentials customer id, login customer id, linked customer id
-   * @param mutations
-   * @param error google ads error
-   */
-  onMutationError?: OnMutationError;
-  /**
-   * @description Hook called after successful execution of a mutation
-   * @params `{ credentials, mutations, response, resolve }`
-   * @param credentials customer id, login customer id, linked customer id
-   * @mutations
-   * @param response results of the mutation
-   * @param resolve utility function for returning an alternative value from the mutation
-   */
-  onMutationEnd?: OnMutationEnd;
-}
-
-type HookedCancellation = { cancelled: boolean; res?: any };
-type HookedResolution = { resolved: boolean; res?: any };
-
-export interface CustomerOptions {
-  customer_id: string;
-  refresh_token: string;
-  login_customer_id?: string;
-  linked_customer_id?: string;
-}
 
 export class Customer extends ServiceFactory {
   protected readonly hooks: Hooks;
@@ -176,7 +79,8 @@ export class Customer extends ServiceFactory {
         return;
       }
     }
-    const { service, request } = await this.buildSearchRequestAndService(
+
+    const { service, request } = this.buildSearchRequestAndService(
       gaqlQuery,
       requestOptions
     );
@@ -188,7 +92,6 @@ export class Customer extends ServiceFactory {
       );
 
       const result: services.IGoogleAdsRow[] = [];
-
       for await (const row of stream) {
         const [parsedResponse] = this.clientOptions.disable_parsing
           ? [row]
@@ -247,10 +150,12 @@ export class Customer extends ServiceFactory {
         return queryCancellation.res as T;
       }
     }
-    const { service, request } = await this.buildSearchRequestAndService(
+
+    const { service, request } = this.buildSearchRequestAndService(
       gaqlQuery,
       requestOptions
     );
+
     try {
       const [response] = await service.search(request, {
         otherArgs: {
@@ -318,28 +223,11 @@ export class Customer extends ServiceFactory {
       }
     }
 
-    const service = this.loadService<services.GoogleAdsService>(
-      "GoogleAdsServiceClient"
+    const { service, request } = this.buildMutationRequestAndService(
+      mutations,
+      options
     );
-    const mutateOperations = mutations.map((mutation) => {
-      const opKey = `${toCamelCase(mutation.entity)}Operation`;
-      const operation = {
-        [mutation.operation ?? "create"]: mutation.resource,
-      };
-      if (mutation.operation === "update") {
-        // @ts-expect-error Resource operations should have updateMask defined
-        op.updateMask = getFieldMask(mutation.resource);
-      }
-      const mutateOperation = new services.MutateOperation({
-        [opKey]: operation,
-      });
-      return mutateOperation;
-    });
-    const request = new services.MutateGoogleAdsRequest({
-      customer_id: this.customerOptions.customer_id,
-      mutate_operations: mutateOperations,
-      ...options,
-    });
+
     try {
       const response = await service.mutate(request, {
         // @ts-expect-error Field not included in type definitions
@@ -364,12 +252,12 @@ export class Customer extends ServiceFactory {
       }
 
       return response;
-    } catch (error) {
-      const googleAdsError = this.getGoogleAdsError(error);
+    } catch (mutateError) {
+      const googleAdsError = this.getGoogleAdsError(mutateError);
       if (this.hooks.onMutationError) {
         this.hooks.onMutationError({
           ...baseHookArguments,
-          error,
+          error: googleAdsError,
         });
       }
       throw googleAdsError;

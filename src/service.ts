@@ -1,7 +1,6 @@
 import { grpc } from "google-gax";
 import { UserRefreshClient } from "google-auth-library";
 import { ClientOptions } from "./client";
-import { CustomerOptions, CustomerCredentials } from "./customer";
 import {
   AllServices,
   errors,
@@ -9,8 +8,14 @@ import {
   ServiceName,
   services,
 } from "./protos";
-import { RequestOptions } from "./types";
-import { getFieldMask } from "./utils";
+import {
+  CustomerOptions,
+  CustomerCredentials,
+  RequestOptions,
+  MutateOperation,
+  MutateOptions,
+} from "./types";
+import { getFieldMask, toCamelCase } from "./utils";
 import { googleAdsVersion } from "./version";
 
 // Make sure to update this version number when upgrading
@@ -97,14 +102,14 @@ export class Service {
     return googleAdsFailure;
   }
 
-  protected async buildSearchRequestAndService(
+  protected buildSearchRequestAndService(
     gaql: string,
     options?: RequestOptions
-  ): Promise<{
+  ): {
     service: GoogleAdsServiceClient;
     request: services.SearchGoogleAdsRequest;
-  }> {
-    const service: GoogleAdsServiceClient = await this.loadService(
+  } {
+    const service: GoogleAdsServiceClient = this.loadService(
       "GoogleAdsServiceClient"
     );
     const request: services.SearchGoogleAdsRequest = new services.SearchGoogleAdsRequest(
@@ -114,6 +119,43 @@ export class Service {
         ...options,
       }
     );
+    return { service, request };
+  }
+
+  protected buildMutationRequestAndService<T>(
+    mutations: MutateOperation<T>[],
+    options?: MutateOptions
+  ): {
+    service: services.GoogleAdsService;
+    request: services.MutateGoogleAdsRequest;
+  } {
+    const service = this.loadService<services.GoogleAdsService>(
+      "GoogleAdsServiceClient"
+    );
+
+    const mutateOperations = mutations.map(
+      (mutation): services.MutateOperation => {
+        const opKey = `${toCamelCase(mutation.entity)}Operation`;
+        const operation = {
+          [mutation.operation ?? "create"]: mutation.resource,
+        };
+        if (mutation.operation === "update") {
+          // @ts-expect-error Resource operations should have updateMask defined
+          op.updateMask = getFieldMask(mutation.resource);
+        }
+        const mutateOperation = new services.MutateOperation({
+          [opKey]: operation,
+        });
+        return mutateOperation;
+      }
+    );
+
+    const request = new services.MutateGoogleAdsRequest({
+      customer_id: this.customerOptions.customer_id,
+      mutate_operations: mutateOperations,
+      ...options,
+    });
+
     return { service, request };
   }
 

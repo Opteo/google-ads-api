@@ -275,6 +275,9 @@ const customer = client.Customer({
     onQueryEnd({ credentials, query, reportOptions, response }) {
       return response.slice(0, 5);
     },
+    onMutationStart() {}, // TODO:
+    onMutationError() {}, // TODO:
+    onMutationEnd() {}, // TODO:
   },
 });
 ```
