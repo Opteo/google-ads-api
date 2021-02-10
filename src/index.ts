@@ -1,5 +1,5 @@
 // Core library client
-export { Client as GoogleAdsApi } from "./client";
+export { Client as GoogleAdsApi, ClientOptions } from "./client";
 
 // Compiled proto types
 export {
@@ -18,3 +18,4 @@ export * as ResourceNames from "./protos/autogen/resourceNames";
 
 // Util types
 export { ReportOptions, MutateOperation } from "./types";
+export { Customer, CustomerOptions, Hooks } from "./customer";
