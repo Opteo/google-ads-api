@@ -1,6 +1,6 @@
 {
   "name": "google-ads-api",
-  "version": "4.0.4-beta.3",
+  "version": "4.0.4-beta.4",
   "description": "Google Ads API Client Library for Node.js",
   "main": "build/src/index.js",
   "files": [
