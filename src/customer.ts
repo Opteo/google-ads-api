@@ -18,22 +18,20 @@ export type CustomerCredentials = Pick<
 
 type BaseQueryHookArgs = {
   credentials: CustomerCredentials;
-  query: string; // GAQL query
-  reportOptions?: ReportOptions; // Available on report and reportStream
+  query: string;
+  reportOptions?: ReportOptions;
 };
 
 type BaseMutationHookArgs = {
   credentials: CustomerCredentials;
   mutations: MutateOperation<any>[];
-  options?: MutateOptions;
 };
 
-type PreHookArgs = { cancel: (args?: any) => void }; // Utility function for cancelling the request. If args are provided then these will be returned from the query/mutation.
+type PreHookArgs = { cancel: (args?: any) => void };
 type ErrorHookArgs = { error: errors.GoogleAdsFailure | Error };
-type PostHookArgs<T = any> = {
-  response: T; // Results of the query/mutation
-  resolve: (args: any) => void; // Utility function for resolving the request with an alternative value.
-};
+type PostHookArgs<
+  T = services.IGoogleAdsRow[] | services.MutateGoogleAdsResponse
+> = { response: T; resolve: (args: any) => void };
 
 type HookArgs = PreHookArgs | ErrorHookArgs | PostHookArgs;
 type QueryHook<H extends HookArgs> = (args: BaseQueryHookArgs & H) => void;
@@ -58,48 +56,51 @@ export interface Hooks {
    * @param credentials customer id, login customer id, linked customer id
    * @param query gaql
    * @param reportOptions
-   * @param cancel utility function for cancelling the request. if an argument is provided then the query/report will return this argument
+   * @param cancel utility function for cancelling the query. if an argument is provided then the query will return this argument
    */
   onQueryStart?: OnQueryStart;
   /**
-   * @description Hook called upon error from a query.
+   * @description Hook called upon a query throwing an error
    * @params `{ credentials, query, reportOptions, error }`
    * @param credentials customer id, login customer id, linked customer id
    * @param query gaql
    * @param reportOptions
-   * @param error google ads error(s)
+   * @param error google ads error
    */
   onQueryError?: OnQueryError;
   /**
-   * @description Hook called after successful execution of a query.
+   * @description Hook called after successful execution of a query
    * @params `{ credentials, query, reportOptions, response, resolve }`
    * @param credentials customer id, login customer id, linked customer id
    * @param query gaql
    * @param reportOptions
-   * @param response query results
-   * @param resolve utility function for returning an alternative value from the query/report. does not work with reportStream
+   * @param response results of the query
+   * @param resolve utility function for returning an alternative value from the query. will not work with reportStream
    */
   onQueryEnd?: OnQueryEnd;
   /**
    * @description Hook called before execution of a mutation.
-   * @params `{ credentials, cancel }`
+   * @params `{ credentials, mutations, cancel }`
    * @param credentials customer id, login customer id, linked customer id
-   * @param cancel utility function for cancelling the request. if an argument is provided then the query/report will return this argument
+   * @param mutations
+   * @param cancel utility function for cancelling the mutation. if an argument is provided then the query/report will return this argument
    */
   onMutationStart?: OnMutationStart;
   /**
-   * @description Hook called upon error from a mutation.
-   * @params `{ credentials, error }`
+   * @description Hook called upon a mutation throwing an error
+   * @params `{ credentials, mutations error }`
    * @param credentials customer id, login customer id, linked customer id
-   * @param error google ads error(s)
+   * @param mutations
+   * @param error google ads error
    */
   onMutationError?: OnMutationError;
   /**
-   * @description Hook called after successful execution of a mutation.
-   * @params `{ credentials, response, resolve }`
+   * @description Hook called after successful execution of a mutation
+   * @params `{ credentials, mutations, response, resolve }`
    * @param credentials customer id, login customer id, linked customer id
-   * @param response query results
-   * @param resolve utility function for returning an alternative value from the query/report. does not work with reportStream
+   * @mutations
+   * @param response results of the mutation
+   * @param resolve utility function for returning an alternative value from the mutation
    */
   onMutationEnd?: OnMutationEnd;
 }
@@ -301,7 +302,6 @@ export class Customer extends ServiceFactory {
     const baseHookArguments: BaseMutationHookArgs = {
       credentials: this.credentials,
       mutations,
-      options,
     };
 
     if (this.hooks.onMutationStart) {
