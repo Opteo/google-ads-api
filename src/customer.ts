@@ -16,30 +16,44 @@ export type CustomerCredentials = Pick<
   "customer_id" | "login_customer_id" | "linked_customer_id"
 >;
 
-type BaseHookArgs = {
+type BaseQueryHookArgs = {
   credentials: CustomerCredentials;
   query: string; // GAQL query
   reportOptions?: ReportOptions; // Available on report and reportStream
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type PreHookArgs = { cancel: (args?: any) => void }; // Utility function for cancelling the request. If args are provided then these will be returned from the query
+type BaseMutationHookArgs = {
+  credentials: CustomerCredentials;
+  mutations: MutateOperation<any>[];
+  options?: MutateOptions;
+};
+
+type PreHookArgs = { cancel: (args?: any) => void }; // Utility function for cancelling the request. If args are provided then these will be returned from the query/mutation.
 type ErrorHookArgs = { error: errors.GoogleAdsFailure | Error };
-type PostHookArgs = {
-  response: services.IGoogleAdsRow[]; // Results of the query
+type PostHookArgs<T = any> = {
+  response: T; // Results of the query/mutation
   resolve: (args: any) => void; // Utility function for resolving the request with an alternative value.
 };
 
 type HookArgs = PreHookArgs | ErrorHookArgs | PostHookArgs;
-type Hook<H extends HookArgs> = (args: BaseHookArgs & H) => void;
+type QueryHook<H extends HookArgs> = (args: BaseQueryHookArgs & H) => void;
+type MutationHook<H extends HookArgs> = (
+  args: BaseMutationHookArgs & H
+) => void;
 
-export type OnQueryStart = Hook<PreHookArgs>;
-export type OnQueryError = Hook<ErrorHookArgs>;
-export type OnQueryEnd = Hook<PostHookArgs>;
+export type OnQueryStart = QueryHook<PreHookArgs>;
+export type OnQueryError = QueryHook<ErrorHookArgs>;
+export type OnQueryEnd = QueryHook<PostHookArgs<services.IGoogleAdsRow[]>>;
+
+export type OnMutationStart = MutationHook<PreHookArgs>;
+export type OnMutationError = MutationHook<ErrorHookArgs>;
+export type OnMutationEnd = MutationHook<
+  PostHookArgs<services.MutateGoogleAdsResponse>
+>;
 
 export interface Hooks {
   /**
-   * @description Hook called before execution of query.
+   * @description Hook called before execution of a query.
    * @params `{ credentials, query, reportOptions, cancel }`
    * @param credentials customer id, login customer id, linked customer id
    * @param query gaql
@@ -48,7 +62,7 @@ export interface Hooks {
    */
   onQueryStart?: OnQueryStart;
   /**
-   * @description Hook called upon error from query.
+   * @description Hook called upon error from a query.
    * @params `{ credentials, query, reportOptions, error }`
    * @param credentials customer id, login customer id, linked customer id
    * @param query gaql
@@ -57,7 +71,7 @@ export interface Hooks {
    */
   onQueryError?: OnQueryError;
   /**
-   * @description Hook called after successful execution of query.
+   * @description Hook called after successful execution of a query.
    * @params `{ credentials, query, reportOptions, response, resolve }`
    * @param credentials customer id, login customer id, linked customer id
    * @param query gaql
@@ -66,10 +80,32 @@ export interface Hooks {
    * @param resolve utility function for returning an alternative value from the query/report. does not work with reportStream
    */
   onQueryEnd?: OnQueryEnd;
+  /**
+   * @description Hook called before execution of a mutation.
+   * @params `{ credentials, cancel }`
+   * @param credentials customer id, login customer id, linked customer id
+   * @param cancel utility function for cancelling the request. if an argument is provided then the query/report will return this argument
+   */
+  onMutationStart?: OnMutationStart;
+  /**
+   * @description Hook called upon error from a mutation.
+   * @params `{ credentials, error }`
+   * @param credentials customer id, login customer id, linked customer id
+   * @param error google ads error(s)
+   */
+  onMutationError?: OnMutationError;
+  /**
+   * @description Hook called after successful execution of a mutation.
+   * @params `{ credentials, response, resolve }`
+   * @param credentials customer id, login customer id, linked customer id
+   * @param response query results
+   * @param resolve utility function for returning an alternative value from the query/report. does not work with reportStream
+   */
+  onMutationEnd?: OnMutationEnd;
 }
 
-type QueryCancellation = { cancelled: boolean; res?: any };
-type QueryResolution = { resolved: boolean; res?: any };
+type HookedCancellation = { cancelled: boolean; res?: any };
+type HookedResolution = { resolved: boolean; res?: any };
 
 export interface CustomerOptions {
   customer_id: string;
@@ -111,13 +147,13 @@ export class Customer extends ServiceFactory {
   ): AsyncGenerator<T, void, undefined> {
     const { gaqlQuery, requestOptions } = buildQuery(reportOptions);
 
-    const baseHookArguments: BaseHookArgs = {
+    const baseHookArguments: BaseQueryHookArgs = {
       credentials: this.credentials,
       query: gaqlQuery,
       reportOptions,
     };
 
-    const queryStart: QueryCancellation = { cancelled: false };
+    const queryStart: HookedCancellation = { cancelled: false };
     if (this.hooks.onQueryStart) {
       this.hooks.onQueryStart({
         ...baseHookArguments,
@@ -172,7 +208,14 @@ export class Customer extends ServiceFactory {
         });
       }
     } catch (searchError) {
-      throw this.onSearchError(searchError, baseHookArguments);
+      const googleAdsError = this.getGoogleAdsError(searchError);
+      if (this.hooks.onQueryError) {
+        this.hooks.onQueryError({
+          ...baseHookArguments,
+          error: googleAdsError,
+        });
+      }
+      throw googleAdsError;
     }
   }
 
@@ -184,14 +227,14 @@ export class Customer extends ServiceFactory {
     requestOptions?: RequestOptions,
     reportOptions?: ReportOptions
   ): Promise<T> {
-    const baseHookArguments: BaseHookArgs = {
+    const baseHookArguments: BaseQueryHookArgs = {
       credentials: this.credentials,
       query: gaqlQuery,
       reportOptions,
     };
 
     if (this.hooks.onQueryStart) {
-      const queryCancellation: QueryCancellation = { cancelled: false };
+      const queryCancellation: HookedCancellation = { cancelled: false };
       this.hooks.onQueryStart({
         ...baseHookArguments,
         cancel: (res) => {
@@ -221,7 +264,7 @@ export class Customer extends ServiceFactory {
         : parse({ results: response, gaqlString: gaqlQuery });
 
       if (this.hooks.onQueryEnd) {
-        const queryResolution: QueryResolution = { resolved: false };
+        const queryResolution: HookedResolution = { resolved: false };
         this.hooks.onQueryEnd({
           ...baseHookArguments,
           response: parsedResponse,
@@ -237,22 +280,15 @@ export class Customer extends ServiceFactory {
 
       return (parsedResponse as unknown) as T;
     } catch (searchError) {
-      throw this.onSearchError(searchError, baseHookArguments);
+      const googleAdsError = this.getGoogleAdsError(searchError);
+      if (this.hooks.onQueryError) {
+        this.hooks.onQueryError({
+          ...baseHookArguments,
+          error: googleAdsError,
+        });
+      }
+      throw googleAdsError;
     }
-  }
-
-  private onSearchError(
-    searchError: Error,
-    baseHookArguments: BaseHookArgs
-  ): errors.GoogleAdsFailure | Error {
-    const googleAdsError = this.getGoogleAdsError(searchError);
-    if (this.hooks.onQueryError) {
-      this.hooks.onQueryError({
-        ...baseHookArguments,
-        error: googleAdsError,
-      });
-    }
-    return googleAdsError;
   }
 
   /**
@@ -262,6 +298,26 @@ export class Customer extends ServiceFactory {
     mutations: MutateOperation<T>[],
     options?: MutateOptions
   ): Promise<services.MutateGoogleAdsResponse> {
+    const baseHookArguments: BaseMutationHookArgs = {
+      credentials: this.credentials,
+      mutations,
+      options,
+    };
+
+    if (this.hooks.onMutationStart) {
+      const mutationCancellation: HookedCancellation = { cancelled: false };
+      this.hooks.onMutationStart({
+        ...baseHookArguments,
+        cancel: (res) => {
+          mutationCancellation.cancelled = true;
+          mutationCancellation.res = res;
+        },
+      });
+      if (mutationCancellation.cancelled) {
+        return mutationCancellation.res;
+      }
+    }
+
     const service = this.loadService<services.GoogleAdsService>(
       "GoogleAdsServiceClient"
     );
@@ -291,9 +347,32 @@ export class Customer extends ServiceFactory {
           headers: this.callHeaders,
         },
       });
+
+      if (this.hooks.onMutationEnd) {
+        const mutationResolution: HookedResolution = { resolved: false };
+        this.hooks.onMutationEnd({
+          ...baseHookArguments,
+          response,
+          resolve: (res) => {
+            mutationResolution.resolved = true;
+            mutationResolution.res = res;
+          },
+        });
+        if (mutationResolution.resolved) {
+          return mutationResolution.res;
+        }
+      }
+
       return response;
-    } catch (err) {
-      throw this.getGoogleAdsError(err);
+    } catch (error) {
+      const googleAdsError = this.getGoogleAdsError(error);
+      if (this.hooks.onMutationError) {
+        this.hooks.onMutationError({
+          ...baseHookArguments,
+          error,
+        });
+      }
+      throw googleAdsError;
     }
   }
 
