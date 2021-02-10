@@ -33,6 +33,10 @@ type PostHookArgs = {
 type HookArgs = PreHookArgs | ErrorHookArgs | PostHookArgs;
 type Hook<H extends HookArgs> = (args: BaseHookArgs & H) => void;
 
+export type OnQueryStart = Hook<PreHookArgs>;
+export type OnQueryError = Hook<ErrorHookArgs>;
+export type OnQueryEnd = Hook<PostHookArgs>;
+
 export interface Hooks {
   /**
    * @description Hook called before execution of query.
@@ -42,7 +46,7 @@ export interface Hooks {
    * @param reportOptions
    * @param cancel utility function for cancelling the request. if an argument is provided then the query/report will return this argument
    */
-  onQueryStart?: Hook<PreHookArgs>;
+  onQueryStart?: OnQueryStart;
   /**
    * @description Hook called upon error from query.
    * @params `{ credentials, query, reportOptions, error }`
@@ -51,7 +55,7 @@ export interface Hooks {
    * @param reportOptions
    * @param error google ads error(s)
    */
-  onQueryError?: Hook<ErrorHookArgs>;
+  onQueryError?: OnQueryError;
   /**
    * @description Hook called after successful execution of query.
    * @params `{ credentials, query, reportOptions, response, resolve }`
@@ -61,7 +65,7 @@ export interface Hooks {
    * @param response query results
    * @param resolve utility function for returning an alternative value from the query/report. does not work with reportStream
    */
-  onQueryEnd?: Hook<PostHookArgs>;
+  onQueryEnd?: OnQueryEnd;
 }
 
 type QueryCancellation = { cancelled: boolean; res?: any };

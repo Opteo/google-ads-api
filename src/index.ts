@@ -18,4 +18,11 @@ export * as ResourceNames from "./protos/autogen/resourceNames";
 
 // Util types
 export { ReportOptions, MutateOperation } from "./types";
-export { Customer, CustomerOptions, Hooks } from "./customer";
+export {
+  Customer,
+  CustomerOptions,
+  Hooks,
+  OnQueryStart,
+  OnQueryError,
+  OnQueryEnd,
+} from "./customer";
