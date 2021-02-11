@@ -1,4 +1,6 @@
-import { Customer, CustomerOptions, Hooks } from "./customer";
+import { Customer } from "./customer";
+import { CustomerOptions } from "./types";
+import { Hooks } from "./hooks";
 import { services } from "./protos";
 import { Service } from "./service";
 

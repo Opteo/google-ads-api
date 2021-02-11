@@ -257,7 +257,9 @@ ResourceNames.accountBudget(customer.credentials.customer_id, 123);
 // "customers/1234567890/accountBudgets/123"
 ```
 
-## Query Hooks
+## Hooks
+
+The library provides hooks that can be executed before, after or on error of a query or a mutation. Query hooks have access to the gaql query and the reportOptions, while mutation hooks have access to the mutations. Mutation hooks currently only work with `mutateResources` and not the individual service methods such as `create`, `update` and `delete`.
 
 ```ts
 const customer = client.Customer({
@@ -270,10 +272,23 @@ const customer = client.Customer({
       }
     },
     onQueryError({ credentials, query, reportOptions, error }) {
-      throw new Error(error);
+      console.log(error);
     },
-    onQueryEnd({ credentials, query, reportOptions, response }) {
-      return response.slice(0, 5);
+    onQueryEnd({ credentials, query, reportOptions, response, resolve }) {
+      resolve(response.slice(0, 5)); // resolves the query with the given argument
+    },
+    onMutationStart({ credentials, mutations, cancel }) {
+      if (mutations.length === 0) {
+        cancel({}); // cancels the mutation and returns the given argument
+      }
+    },
+    onMutationError({ credentials, mutations, error }) {
+      console.log(error);
+    },
+    onMutationEnd({ credentials, mutations, response, resolve }) {
+      if (reponse.partial_failure_error) {
+        resolve({}); // resolves the mutation with the given argument
+      }
     },
   },
 });

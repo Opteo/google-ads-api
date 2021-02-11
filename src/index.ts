@@ -17,12 +17,14 @@ export { fromMicros, toMicros } from "./utils";
 export * as ResourceNames from "./protos/autogen/resourceNames";
 
 // Util types
-export { ReportOptions, MutateOperation } from "./types";
+export { CustomerOptions, ReportOptions, MutateOperation } from "./types";
 export {
-  Customer,
-  CustomerOptions,
   Hooks,
   OnQueryStart,
   OnQueryError,
   OnQueryEnd,
-} from "./customer";
+  OnMutationStart,
+  OnMutationError,
+  OnMutationEnd,
+} from "./hooks";
+export { Customer } from "./customer";

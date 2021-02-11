@@ -1,4 +1,5 @@
-import { Customer, Hooks } from "./customer";
+import { Customer } from "./customer";
+import { Hooks } from "./hooks";
 import * as parser from "./parser";
 import { GoogleAdsServiceClient, services, errors } from "./protos";
 
@@ -15,7 +16,14 @@ export const mockQueryReturnValue: services.IGoogleAdsRow[] = [
   { campaign: { resource_name: "customers/3/campaigns/33" } },
 ];
 
-export const mockQueryError = {
+export const mockMutationReturnValue: services.MutateGoogleAdsResponse = {
+  mutate_operation_responses: [],
+  toJSON: () => {
+    return {};
+  },
+};
+
+export const mockError = {
   errors: [
     {
       errorCode: {
@@ -27,7 +35,7 @@ export const mockQueryError = {
   ],
 };
 
-export const mockQueryErrorMessage = "mock error message";
+export const mockErrorMessage = "mock error message";
 
 export const mockParseValues = [
   "mock",
@@ -40,30 +48,61 @@ export const mockParseValue = "mock parse value" as services.IGoogleAdsRow;
 export function mockBuildSearchRequestAndService(
   customer: Customer,
   shouldThrow = false
-): void {
+): GoogleAdsServiceClient {
+  const service = ({
+    search: () => {
+      if (shouldThrow) {
+        throw new Error(mockErrorMessage);
+      }
+      return [mockQueryReturnValue];
+    },
+    searchAsync: () => {
+      if (shouldThrow) {
+        throw new Error(mockErrorMessage);
+      }
+      return mockQueryReturnValue;
+    },
+  } as unknown) as GoogleAdsServiceClient;
+
   jest
     // @ts-expect-error protected method
     .spyOn(customer, "buildSearchRequestAndService")
     // @ts-expect-error
     .mockImplementation(() => {
-      return Promise.resolve({
-        service: ({
-          search: () => {
-            if (shouldThrow) {
-              throw new Error(mockQueryErrorMessage);
-            }
-            return [mockQueryReturnValue];
-          },
-          searchAsync: () => {
-            if (shouldThrow) {
-              throw new Error(mockQueryErrorMessage);
-            }
-            return mockQueryReturnValue;
-          },
-        } as unknown) as GoogleAdsServiceClient,
+      return {
+        service,
         request: {} as services.SearchGoogleAdsRequest,
-      });
+      };
     });
+
+  return service;
+}
+
+export function mockBuildMutateRequestAndService(
+  customer: Customer,
+  shouldThrow = false
+): services.GoogleAdsService {
+  const service = ({
+    mutate() {
+      if (shouldThrow) {
+        throw new Error(mockErrorMessage);
+      }
+      return mockMutationReturnValue;
+    },
+  } as unknown) as services.GoogleAdsService;
+
+  jest
+    // @ts-expect-error protected method
+    .spyOn(customer, "buildMutationRequestAndService")
+    // @ts-expect-error
+    .mockImplementation(() => {
+      return {
+        service,
+        request: {} as services.MutateGoogleAdsRequest,
+      };
+    });
+
+  return service;
 }
 
 export function mockGetGoogleAdsError(customer: Customer): jest.SpyInstance {
@@ -72,7 +111,7 @@ export function mockGetGoogleAdsError(customer: Customer): jest.SpyInstance {
       // @ts-expect-error protected method
       .spyOn(customer, "getGoogleAdsError")
       // @ts-expect-error
-      .mockImplementation(() => mockQueryError)
+      .mockImplementation(() => mockError)
   );
 }
 
