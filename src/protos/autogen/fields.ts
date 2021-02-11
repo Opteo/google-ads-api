@@ -25,6 +25,7 @@ export type Resource =
   | "batch_job"
   | "bidding_strategy"
   | "billing_setup"
+  | "call_view"
   | "campaign"
   | "campaign_asset"
   | "campaign_audience_view"
@@ -56,6 +57,7 @@ export type Resource =
   | "customer_manager_link"
   | "customer_negative_criterion"
   | "customer_user_access"
+  | "customer_user_access_invitation"
   | "detail_placement_view"
   | "display_keyword_view"
   | "distance_view"
@@ -527,6 +529,7 @@ export type Attribute =
   | "asset.text_asset.text"
   | "asset.type"
   | "asset.youtube_video_asset.youtube_video_id"
+  | "asset.youtube_video_asset.youtube_video_title"
   | "batch_job.id"
   | "batch_job.long_running_operation"
   | "batch_job.metadata.completion_date_time"
@@ -572,6 +575,15 @@ export type Attribute =
   | "billing_setup.resource_name"
   | "billing_setup.start_date_time"
   | "billing_setup.status"
+  | "call_view.call_duration_seconds"
+  | "call_view.call_status"
+  | "call_view.call_tracking_display_location"
+  | "call_view.caller_area_code"
+  | "call_view.caller_region_code"
+  | "call_view.end_call_date_time"
+  | "call_view.resource_name"
+  | "call_view.start_call_date_time"
+  | "call_view.type"
   | "campaign.ad_serving_optimization_status"
   | "campaign.advertising_channel_sub_type"
   | "campaign.advertising_channel_type"
@@ -783,6 +795,8 @@ export type Attribute =
   | "change_event.change_resource_type"
   | "change_event.changed_fields"
   | "change_event.client_type"
+  | "change_event.feed"
+  | "change_event.feed_item"
   | "change_event.new_resource"
   | "change_event.old_resource"
   | "change_event.resource_change_operation"
@@ -841,6 +855,7 @@ export type Attribute =
   | "conversion_action.status"
   | "conversion_action.tag_snippets"
   | "conversion_action.third_party_app_analytics_settings.event_name"
+  | "conversion_action.third_party_app_analytics_settings.provider_name"
   | "conversion_action.type"
   | "conversion_action.value_settings.always_use_default_value"
   | "conversion_action.value_settings.default_currency_code"
@@ -935,6 +950,12 @@ export type Attribute =
   | "customer_user_access.inviter_user_email_address"
   | "customer_user_access.resource_name"
   | "customer_user_access.user_id"
+  | "customer_user_access_invitation.access_role"
+  | "customer_user_access_invitation.creation_date_time"
+  | "customer_user_access_invitation.email_address"
+  | "customer_user_access_invitation.invitation_id"
+  | "customer_user_access_invitation.invitation_status"
+  | "customer_user_access_invitation.resource_name"
   | "detail_placement_view.display_name"
   | "detail_placement_view.group_placement_target_url"
   | "detail_placement_view.placement"
@@ -1243,6 +1264,7 @@ export type Attribute =
   | "recommendation.move_unused_budget_recommendation"
   | "recommendation.optimize_ad_rotation_recommendation"
   | "recommendation.resource_name"
+  | "recommendation.responsive_search_ad_recommendation"
   | "recommendation.search_partners_opt_in_recommendation"
   | "recommendation.sitelink_extension_recommendation"
   | "recommendation.target_cpa_opt_in_recommendation"
@@ -1350,6 +1372,7 @@ export type Metric =
   | "metrics.active_view_measurable_impressions"
   | "metrics.active_view_viewability"
   | "metrics.all_conversions"
+  | "metrics.all_conversions_by_conversion_date"
   | "metrics.all_conversions_from_click_to_call"
   | "metrics.all_conversions_from_directions"
   | "metrics.all_conversions_from_interactions_rate"
@@ -1360,6 +1383,7 @@ export type Metric =
   | "metrics.all_conversions_from_store_visit"
   | "metrics.all_conversions_from_store_website"
   | "metrics.all_conversions_value"
+  | "metrics.all_conversions_value_by_conversion_date"
   | "metrics.all_conversions_value_per_cost"
   | "metrics.average_cost"
   | "metrics.average_cpc"
@@ -1381,9 +1405,11 @@ export type Metric =
   | "metrics.conversion_last_conversion_date"
   | "metrics.conversion_last_received_request_date_time"
   | "metrics.conversions"
+  | "metrics.conversions_by_conversion_date"
   | "metrics.conversions_from_interactions_rate"
   | "metrics.conversions_from_interactions_value_per_interaction"
   | "metrics.conversions_value"
+  | "metrics.conversions_value_by_conversion_date"
   | "metrics.conversions_value_per_cost"
   | "metrics.cost_micros"
   | "metrics.cost_per_all_conversions"
@@ -1444,7 +1470,9 @@ export type Metric =
   | "metrics.top_impression_percentage"
   | "metrics.valid_accelerated_mobile_pages_clicks_percentage"
   | "metrics.value_per_all_conversions"
+  | "metrics.value_per_all_conversions_by_conversion_date"
   | "metrics.value_per_conversion"
+  | "metrics.value_per_conversions_by_conversion_date"
   | "metrics.value_per_current_model_attributed_conversion"
   | "metrics.video_quartile_p100_rate"
   | "metrics.video_quartile_p25_rate"
@@ -1860,8 +1888,10 @@ export type AdGroupMetric =
   | "metrics.active_view_measurable_impressions"
   | "metrics.active_view_viewability"
   | "metrics.all_conversions"
+  | "metrics.all_conversions_by_conversion_date"
   | "metrics.all_conversions_from_interactions_rate"
   | "metrics.all_conversions_value"
+  | "metrics.all_conversions_value_by_conversion_date"
   | "metrics.average_cost"
   | "metrics.average_cpc"
   | "metrics.average_cpe"
@@ -1874,8 +1904,10 @@ export type AdGroupMetric =
   | "metrics.content_impression_share"
   | "metrics.content_rank_lost_impression_share"
   | "metrics.conversions"
+  | "metrics.conversions_by_conversion_date"
   | "metrics.conversions_from_interactions_rate"
   | "metrics.conversions_value"
+  | "metrics.conversions_value_by_conversion_date"
   | "metrics.cost_micros"
   | "metrics.cost_per_all_conversions"
   | "metrics.cost_per_conversion"
@@ -1909,7 +1941,9 @@ export type AdGroupMetric =
   | "metrics.search_top_impression_share"
   | "metrics.top_impression_percentage"
   | "metrics.value_per_all_conversions"
+  | "metrics.value_per_all_conversions_by_conversion_date"
   | "metrics.value_per_conversion"
+  | "metrics.value_per_conversions_by_conversion_date"
   | "metrics.value_per_current_model_attributed_conversion"
   | "metrics.video_quartile_p100_rate"
   | "metrics.video_quartile_p25_rate"
@@ -2222,8 +2256,10 @@ export type AdGroupAdMetric =
   | "metrics.active_view_measurable_impressions"
   | "metrics.active_view_viewability"
   | "metrics.all_conversions"
+  | "metrics.all_conversions_by_conversion_date"
   | "metrics.all_conversions_from_interactions_rate"
   | "metrics.all_conversions_value"
+  | "metrics.all_conversions_value_by_conversion_date"
   | "metrics.average_cost"
   | "metrics.average_cpc"
   | "metrics.average_cpe"
@@ -2234,8 +2270,10 @@ export type AdGroupAdMetric =
   | "metrics.bounce_rate"
   | "metrics.clicks"
   | "metrics.conversions"
+  | "metrics.conversions_by_conversion_date"
   | "metrics.conversions_from_interactions_rate"
   | "metrics.conversions_value"
+  | "metrics.conversions_value_by_conversion_date"
   | "metrics.cost_micros"
   | "metrics.cost_per_all_conversions"
   | "metrics.cost_per_conversion"
@@ -2256,7 +2294,9 @@ export type AdGroupAdMetric =
   | "metrics.percent_new_visitors"
   | "metrics.top_impression_percentage"
   | "metrics.value_per_all_conversions"
+  | "metrics.value_per_all_conversions_by_conversion_date"
   | "metrics.value_per_conversion"
+  | "metrics.value_per_conversions_by_conversion_date"
   | "metrics.value_per_current_model_attributed_conversion"
   | "metrics.video_quartile_p100_rate"
   | "metrics.video_quartile_p25_rate"
@@ -2506,6 +2546,7 @@ export type AdGroupAdAssetViewField =
   | "asset.text_asset.text"
   | "asset.type"
   | "asset.youtube_video_asset.youtube_video_id"
+  | "asset.youtube_video_asset.youtube_video_title"
   | "campaign.ad_serving_optimization_status"
   | "campaign.advertising_channel_sub_type"
   | "campaign.advertising_channel_type"
@@ -3174,9 +3215,11 @@ export type AdGroupAudienceViewMetric =
   | "metrics.active_view_measurable_impressions"
   | "metrics.active_view_viewability"
   | "metrics.all_conversions"
+  | "metrics.all_conversions_by_conversion_date"
   | "metrics.all_conversions_from_interactions_rate"
   | "metrics.all_conversions_from_interactions_value_per_interaction"
   | "metrics.all_conversions_value"
+  | "metrics.all_conversions_value_by_conversion_date"
   | "metrics.all_conversions_value_per_cost"
   | "metrics.average_cost"
   | "metrics.average_cpc"
@@ -3185,8 +3228,10 @@ export type AdGroupAudienceViewMetric =
   | "metrics.average_cpv"
   | "metrics.clicks"
   | "metrics.conversions"
+  | "metrics.conversions_by_conversion_date"
   | "metrics.conversions_from_interactions_rate"
   | "metrics.conversions_value"
+  | "metrics.conversions_value_by_conversion_date"
   | "metrics.cost_micros"
   | "metrics.cost_per_all_conversions"
   | "metrics.cost_per_conversion"
@@ -3202,7 +3247,9 @@ export type AdGroupAudienceViewMetric =
   | "metrics.interaction_rate"
   | "metrics.interactions"
   | "metrics.value_per_all_conversions"
+  | "metrics.value_per_all_conversions_by_conversion_date"
   | "metrics.value_per_conversion"
+  | "metrics.value_per_conversions_by_conversion_date"
   | "metrics.video_quartile_p100_rate"
   | "metrics.video_quartile_p25_rate"
   | "metrics.video_quartile_p50_rate"
@@ -5289,6 +5336,7 @@ export type AssetField =
   | "asset.text_asset.text"
   | "asset.type"
   | "asset.youtube_video_asset.youtube_video_id"
+  | "asset.youtube_video_asset.youtube_video_title"
   | "customer.auto_tagging_enabled"
   | "customer.call_reporting_setting.call_conversion_action"
   | "customer.call_reporting_setting.call_conversion_reporting_enabled"
@@ -5486,6 +5534,136 @@ export type BillingSetupField =
 export type BillingSetupFields = Array<BillingSetupField>;
 /* --- End of BillingSetup --- */
 
+/* --- Start of CallView --- */
+export type CallViewField =
+  | "ad_group.ad_rotation_mode"
+  | "ad_group.base_ad_group"
+  | "ad_group.campaign"
+  | "ad_group.cpc_bid_micros"
+  | "ad_group.cpm_bid_micros"
+  | "ad_group.cpv_bid_micros"
+  | "ad_group.display_custom_bid_dimension"
+  | "ad_group.effective_target_cpa_micros"
+  | "ad_group.effective_target_cpa_source"
+  | "ad_group.effective_target_roas"
+  | "ad_group.effective_target_roas_source"
+  | "ad_group.explorer_auto_optimizer_setting.opt_in"
+  | "ad_group.final_url_suffix"
+  | "ad_group.id"
+  | "ad_group.labels"
+  | "ad_group.name"
+  | "ad_group.percent_cpc_bid_micros"
+  | "ad_group.resource_name"
+  | "ad_group.status"
+  | "ad_group.target_cpa_micros"
+  | "ad_group.target_cpm_micros"
+  | "ad_group.target_roas"
+  | "ad_group.targeting_setting.target_restrictions"
+  | "ad_group.tracking_url_template"
+  | "ad_group.type"
+  | "ad_group.url_custom_parameters"
+  | "call_view.call_duration_seconds"
+  | "call_view.call_status"
+  | "call_view.call_tracking_display_location"
+  | "call_view.caller_area_code"
+  | "call_view.caller_region_code"
+  | "call_view.end_call_date_time"
+  | "call_view.resource_name"
+  | "call_view.start_call_date_time"
+  | "call_view.type"
+  | "campaign.ad_serving_optimization_status"
+  | "campaign.advertising_channel_sub_type"
+  | "campaign.advertising_channel_type"
+  | "campaign.app_campaign_setting.app_id"
+  | "campaign.app_campaign_setting.app_store"
+  | "campaign.app_campaign_setting.bidding_strategy_goal_type"
+  | "campaign.base_campaign"
+  | "campaign.bidding_strategy"
+  | "campaign.bidding_strategy_type"
+  | "campaign.campaign_budget"
+  | "campaign.commission.commission_rate_micros"
+  | "campaign.dynamic_search_ads_setting.domain_name"
+  | "campaign.dynamic_search_ads_setting.feeds"
+  | "campaign.dynamic_search_ads_setting.language_code"
+  | "campaign.dynamic_search_ads_setting.use_supplied_urls_only"
+  | "campaign.end_date"
+  | "campaign.experiment_type"
+  | "campaign.final_url_suffix"
+  | "campaign.frequency_caps"
+  | "campaign.geo_target_type_setting.negative_geo_target_type"
+  | "campaign.geo_target_type_setting.positive_geo_target_type"
+  | "campaign.hotel_setting.hotel_center_id"
+  | "campaign.id"
+  | "campaign.labels"
+  | "campaign.local_campaign_setting.location_source_type"
+  | "campaign.manual_cpc.enhanced_cpc_enabled"
+  | "campaign.manual_cpm"
+  | "campaign.manual_cpv"
+  | "campaign.maximize_conversion_value.target_roas"
+  | "campaign.maximize_conversions.target_cpa"
+  | "campaign.name"
+  | "campaign.network_settings.target_content_network"
+  | "campaign.network_settings.target_google_search"
+  | "campaign.network_settings.target_partner_search_network"
+  | "campaign.network_settings.target_search_network"
+  | "campaign.optimization_goal_setting.optimization_goal_types"
+  | "campaign.optimization_score"
+  | "campaign.payment_mode"
+  | "campaign.percent_cpc.cpc_bid_ceiling_micros"
+  | "campaign.percent_cpc.enhanced_cpc_enabled"
+  | "campaign.real_time_bidding_setting.opt_in"
+  | "campaign.resource_name"
+  | "campaign.selective_optimization.conversion_actions"
+  | "campaign.serving_status"
+  | "campaign.shopping_setting.campaign_priority"
+  | "campaign.shopping_setting.enable_local"
+  | "campaign.shopping_setting.merchant_id"
+  | "campaign.shopping_setting.sales_country"
+  | "campaign.start_date"
+  | "campaign.status"
+  | "campaign.target_cpa.cpc_bid_ceiling_micros"
+  | "campaign.target_cpa.cpc_bid_floor_micros"
+  | "campaign.target_cpa.target_cpa_micros"
+  | "campaign.target_cpm"
+  | "campaign.target_impression_share.cpc_bid_ceiling_micros"
+  | "campaign.target_impression_share.location"
+  | "campaign.target_impression_share.location_fraction_micros"
+  | "campaign.target_roas.cpc_bid_ceiling_micros"
+  | "campaign.target_roas.cpc_bid_floor_micros"
+  | "campaign.target_roas.target_roas"
+  | "campaign.target_spend.cpc_bid_ceiling_micros"
+  | "campaign.target_spend.target_spend_micros"
+  | "campaign.targeting_setting.target_restrictions"
+  | "campaign.tracking_setting.tracking_url"
+  | "campaign.tracking_url_template"
+  | "campaign.url_custom_parameters"
+  | "campaign.vanity_pharma.vanity_pharma_display_url_mode"
+  | "campaign.vanity_pharma.vanity_pharma_text"
+  | "campaign.video_brand_safety_suitability"
+  | "customer.auto_tagging_enabled"
+  | "customer.call_reporting_setting.call_conversion_action"
+  | "customer.call_reporting_setting.call_conversion_reporting_enabled"
+  | "customer.call_reporting_setting.call_reporting_enabled"
+  | "customer.conversion_tracking_setting.conversion_tracking_id"
+  | "customer.conversion_tracking_setting.cross_account_conversion_tracking_id"
+  | "customer.currency_code"
+  | "customer.descriptive_name"
+  | "customer.final_url_suffix"
+  | "customer.has_partners_badge"
+  | "customer.id"
+  | "customer.manager"
+  | "customer.optimization_score"
+  | "customer.optimization_score_weight"
+  | "customer.pay_per_conversion_eligibility_failure_reasons"
+  | "customer.remarketing_setting.google_global_site_tag"
+  | "customer.resource_name"
+  | "customer.test_account"
+  | "customer.time_zone"
+  | "customer.tracking_url_template";
+
+export type CallViewFields = Array<CallViewField>;
+/* --- End of CallView --- */
+
 /* --- Start of Campaign --- */
 export type CampaignField =
   | "bidding_strategy.campaign_count"
@@ -5629,8 +5807,10 @@ export type CampaignMetric =
   | "metrics.active_view_measurable_impressions"
   | "metrics.active_view_viewability"
   | "metrics.all_conversions"
+  | "metrics.all_conversions_by_conversion_date"
   | "metrics.all_conversions_from_interactions_rate"
   | "metrics.all_conversions_value"
+  | "metrics.all_conversions_value_by_conversion_date"
   | "metrics.average_cost"
   | "metrics.average_cpc"
   | "metrics.average_cpe"
@@ -5644,8 +5824,10 @@ export type CampaignMetric =
   | "metrics.content_impression_share"
   | "metrics.content_rank_lost_impression_share"
   | "metrics.conversions"
+  | "metrics.conversions_by_conversion_date"
   | "metrics.conversions_from_interactions_rate"
   | "metrics.conversions_value"
+  | "metrics.conversions_value_by_conversion_date"
   | "metrics.cost_micros"
   | "metrics.cost_per_all_conversions"
   | "metrics.cost_per_conversion"
@@ -5686,7 +5868,9 @@ export type CampaignMetric =
   | "metrics.search_top_impression_share"
   | "metrics.top_impression_percentage"
   | "metrics.value_per_all_conversions"
+  | "metrics.value_per_all_conversions_by_conversion_date"
   | "metrics.value_per_conversion"
+  | "metrics.value_per_conversions_by_conversion_date"
   | "metrics.value_per_current_model_attributed_conversion"
   | "metrics.video_quartile_p100_rate"
   | "metrics.video_quartile_p25_rate"
@@ -5756,6 +5940,7 @@ export type CampaignAssetField =
   | "asset.text_asset.text"
   | "asset.type"
   | "asset.youtube_video_asset.youtube_video_id"
+  | "asset.youtube_video_asset.youtube_video_title"
   | "campaign.ad_serving_optimization_status"
   | "campaign.advertising_channel_sub_type"
   | "campaign.advertising_channel_type"
@@ -6071,9 +6256,11 @@ export type CampaignAudienceViewMetric =
   | "metrics.active_view_measurable_impressions"
   | "metrics.active_view_viewability"
   | "metrics.all_conversions"
+  | "metrics.all_conversions_by_conversion_date"
   | "metrics.all_conversions_from_interactions_rate"
   | "metrics.all_conversions_from_interactions_value_per_interaction"
   | "metrics.all_conversions_value"
+  | "metrics.all_conversions_value_by_conversion_date"
   | "metrics.all_conversions_value_per_cost"
   | "metrics.average_cost"
   | "metrics.average_cpc"
@@ -6082,8 +6269,10 @@ export type CampaignAudienceViewMetric =
   | "metrics.average_cpv"
   | "metrics.clicks"
   | "metrics.conversions"
+  | "metrics.conversions_by_conversion_date"
   | "metrics.conversions_from_interactions_rate"
   | "metrics.conversions_value"
+  | "metrics.conversions_value_by_conversion_date"
   | "metrics.cost_micros"
   | "metrics.cost_per_all_conversions"
   | "metrics.cost_per_conversion"
@@ -6099,7 +6288,9 @@ export type CampaignAudienceViewMetric =
   | "metrics.interaction_rate"
   | "metrics.interactions"
   | "metrics.value_per_all_conversions"
+  | "metrics.value_per_all_conversions_by_conversion_date"
   | "metrics.value_per_conversion"
+  | "metrics.value_per_conversions_by_conversion_date"
   | "metrics.video_quartile_p100_rate"
   | "metrics.video_quartile_p25_rate"
   | "metrics.video_quartile_p50_rate"
@@ -7539,6 +7730,8 @@ export type ChangeEventField =
   | "change_event.change_resource_type"
   | "change_event.changed_fields"
   | "change_event.client_type"
+  | "change_event.feed"
+  | "change_event.feed_item"
   | "change_event.new_resource"
   | "change_event.old_resource"
   | "change_event.resource_change_operation"
@@ -7563,7 +7756,29 @@ export type ChangeEventField =
   | "customer.resource_name"
   | "customer.test_account"
   | "customer.time_zone"
-  | "customer.tracking_url_template";
+  | "customer.tracking_url_template"
+  | "feed.affiliate_location_feed_data.chain_ids"
+  | "feed.affiliate_location_feed_data.relationship_type"
+  | "feed.attributes"
+  | "feed.id"
+  | "feed.name"
+  | "feed.origin"
+  | "feed.places_location_feed_data.business_name_filter"
+  | "feed.places_location_feed_data.category_filters"
+  | "feed.places_location_feed_data.email_address"
+  | "feed.places_location_feed_data.label_filters"
+  | "feed.resource_name"
+  | "feed.status"
+  | "feed_item.attribute_values"
+  | "feed_item.end_date_time"
+  | "feed_item.feed"
+  | "feed_item.geo_targeting_restriction"
+  | "feed_item.id"
+  | "feed_item.policy_infos"
+  | "feed_item.resource_name"
+  | "feed_item.start_date_time"
+  | "feed_item.status"
+  | "feed_item.url_custom_parameters";
 
 export type ChangeEventFields = Array<ChangeEventField>;
 /* --- End of ChangeEvent --- */
@@ -7929,6 +8144,7 @@ export type ConversionActionField =
   | "conversion_action.status"
   | "conversion_action.tag_snippets"
   | "conversion_action.third_party_app_analytics_settings.event_name"
+  | "conversion_action.third_party_app_analytics_settings.provider_name"
   | "conversion_action.type"
   | "conversion_action.value_settings.always_use_default_value"
   | "conversion_action.value_settings.default_currency_code"
@@ -8075,8 +8291,10 @@ export type CustomerMetric =
   | "metrics.active_view_measurable_impressions"
   | "metrics.active_view_viewability"
   | "metrics.all_conversions"
+  | "metrics.all_conversions_by_conversion_date"
   | "metrics.all_conversions_from_interactions_rate"
   | "metrics.all_conversions_value"
+  | "metrics.all_conversions_value_by_conversion_date"
   | "metrics.average_cost"
   | "metrics.average_cpc"
   | "metrics.average_cpe"
@@ -8087,8 +8305,10 @@ export type CustomerMetric =
   | "metrics.content_impression_share"
   | "metrics.content_rank_lost_impression_share"
   | "metrics.conversions"
+  | "metrics.conversions_by_conversion_date"
   | "metrics.conversions_from_interactions_rate"
   | "metrics.conversions_value"
+  | "metrics.conversions_value_by_conversion_date"
   | "metrics.cost_micros"
   | "metrics.cost_per_all_conversions"
   | "metrics.cost_per_conversion"
@@ -8107,7 +8327,9 @@ export type CustomerMetric =
   | "metrics.search_impression_share"
   | "metrics.search_rank_lost_impression_share"
   | "metrics.value_per_all_conversions"
+  | "metrics.value_per_all_conversions_by_conversion_date"
   | "metrics.value_per_conversion"
+  | "metrics.value_per_conversions_by_conversion_date"
   | "metrics.video_view_rate"
   | "metrics.video_views"
   | "metrics.view_through_conversions";
@@ -8410,6 +8632,38 @@ export type CustomerUserAccessField =
 
 export type CustomerUserAccessFields = Array<CustomerUserAccessField>;
 /* --- End of CustomerUserAccess --- */
+
+/* --- Start of CustomerUserAccessInvitation --- */
+export type CustomerUserAccessInvitationField =
+  | "customer.auto_tagging_enabled"
+  | "customer.call_reporting_setting.call_conversion_action"
+  | "customer.call_reporting_setting.call_conversion_reporting_enabled"
+  | "customer.call_reporting_setting.call_reporting_enabled"
+  | "customer.conversion_tracking_setting.conversion_tracking_id"
+  | "customer.conversion_tracking_setting.cross_account_conversion_tracking_id"
+  | "customer.currency_code"
+  | "customer.descriptive_name"
+  | "customer.final_url_suffix"
+  | "customer.has_partners_badge"
+  | "customer.id"
+  | "customer.manager"
+  | "customer.optimization_score"
+  | "customer.optimization_score_weight"
+  | "customer.pay_per_conversion_eligibility_failure_reasons"
+  | "customer.remarketing_setting.google_global_site_tag"
+  | "customer.resource_name"
+  | "customer.test_account"
+  | "customer.time_zone"
+  | "customer.tracking_url_template"
+  | "customer_user_access_invitation.access_role"
+  | "customer_user_access_invitation.creation_date_time"
+  | "customer_user_access_invitation.email_address"
+  | "customer_user_access_invitation.invitation_id"
+  | "customer_user_access_invitation.invitation_status"
+  | "customer_user_access_invitation.resource_name";
+
+export type CustomerUserAccessInvitationFields = Array<CustomerUserAccessInvitationField>;
+/* --- End of CustomerUserAccessInvitation --- */
 
 /* --- Start of DetailPlacementView --- */
 export type DetailPlacementViewField =
@@ -12557,9 +12811,11 @@ export type KeywordViewMetric =
   | "metrics.active_view_measurable_impressions"
   | "metrics.active_view_viewability"
   | "metrics.all_conversions"
+  | "metrics.all_conversions_by_conversion_date"
   | "metrics.all_conversions_from_interactions_rate"
   | "metrics.all_conversions_from_interactions_value_per_interaction"
   | "metrics.all_conversions_value"
+  | "metrics.all_conversions_value_by_conversion_date"
   | "metrics.all_conversions_value_per_cost"
   | "metrics.average_cost"
   | "metrics.average_cpc"
@@ -12571,8 +12827,10 @@ export type KeywordViewMetric =
   | "metrics.bounce_rate"
   | "metrics.clicks"
   | "metrics.conversions"
+  | "metrics.conversions_by_conversion_date"
   | "metrics.conversions_from_interactions_rate"
   | "metrics.conversions_value"
+  | "metrics.conversions_value_by_conversion_date"
   | "metrics.conversions_value_per_cost"
   | "metrics.cost_micros"
   | "metrics.cost_per_all_conversions"
@@ -12608,7 +12866,9 @@ export type KeywordViewMetric =
   | "metrics.search_top_impression_share"
   | "metrics.top_impression_percentage"
   | "metrics.value_per_all_conversions"
+  | "metrics.value_per_all_conversions_by_conversion_date"
   | "metrics.value_per_conversion"
+  | "metrics.value_per_conversions_by_conversion_date"
   | "metrics.value_per_current_model_attributed_conversion"
   | "metrics.video_quartile_p100_rate"
   | "metrics.video_quartile_p25_rate"
@@ -14368,6 +14628,7 @@ export type RecommendationField =
   | "recommendation.move_unused_budget_recommendation"
   | "recommendation.optimize_ad_rotation_recommendation"
   | "recommendation.resource_name"
+  | "recommendation.responsive_search_ad_recommendation"
   | "recommendation.search_partners_opt_in_recommendation"
   | "recommendation.sitelink_extension_recommendation"
   | "recommendation.target_cpa_opt_in_recommendation"
@@ -16037,6 +16298,7 @@ export const resourceNames = [
   "batch_job.resource_name",
   "bidding_strategy.resource_name",
   "billing_setup.resource_name",
+  "call_view.resource_name",
   "campaign.resource_name",
   "campaign_asset.resource_name",
   "campaign_audience_view.resource_name",
@@ -16068,6 +16330,7 @@ export const resourceNames = [
   "customer_manager_link.resource_name",
   "customer_negative_criterion.resource_name",
   "customer_user_access.resource_name",
+  "customer_user_access_invitation.resource_name",
   "detail_placement_view.resource_name",
   "display_keyword_view.resource_name",
   "distance_view.resource_name",
@@ -16119,4 +16382,314 @@ export const resourceNames = [
   "video.resource_name",
 ];
 
-/*  -- FIN --  */
+/*  -- ENUM FIELDS --  */
+export const enumFields = {
+  "account_budget.adjusted_spending_limit_type": "SpendingLimitType",
+  "account_budget.approved_end_time_type": "TimeType",
+  "account_budget.approved_spending_limit_type": "SpendingLimitType",
+  "account_budget.pending_proposal.end_time_type": "TimeType",
+  "account_budget.pending_proposal.proposal_type": "AccountBudgetProposalType",
+  "account_budget.pending_proposal.spending_limit_type": "SpendingLimitType",
+  "account_budget.proposed_end_time_type": "TimeType",
+  "account_budget.proposed_spending_limit_type": "SpendingLimitType",
+  "account_budget.status": "AccountBudgetStatus",
+  "account_budget_proposal.approved_end_time_type": "TimeType",
+  "account_budget_proposal.approved_spending_limit_type": "SpendingLimitType",
+  "account_budget_proposal.proposal_type": "AccountBudgetProposalType",
+  "account_budget_proposal.proposed_end_time_type": "TimeType",
+  "account_budget_proposal.proposed_spending_limit_type": "SpendingLimitType",
+  "account_budget_proposal.status": "AccountBudgetProposalStatus",
+  "account_link.status": "AccountLinkStatus",
+  "account_link.third_party_app_analytics.app_vendor": "MobileAppVendor",
+  "account_link.type": "LinkedAccountType",
+  "ad_group.ad_rotation_mode": "AdGroupAdRotationMode",
+  "ad_group.display_custom_bid_dimension": "TargetingDimension",
+  "ad_group.effective_target_cpa_source": "BiddingSource",
+  "ad_group.effective_target_roas_source": "BiddingSource",
+  "ad_group.status": "AdGroupStatus",
+  "ad_group.type": "AdGroupType",
+  "ad_group_ad.ad.call_only_ad.conversion_reporting_state":
+    "CallConversionReportingState",
+  "ad_group_ad.ad.device_preference": "Device",
+  "ad_group_ad.ad.display_upload_ad.display_upload_product_type":
+    "DisplayUploadProductType",
+  "ad_group_ad.ad.image_ad.mime_type": "MimeType",
+  "ad_group_ad.ad.legacy_responsive_display_ad.format_setting":
+    "DisplayAdFormatSetting",
+  "ad_group_ad.ad.responsive_display_ad.format_setting":
+    "DisplayAdFormatSetting",
+  "ad_group_ad.ad.system_managed_resource_source":
+    "SystemManagedResourceSource",
+  "ad_group_ad.ad.type": "AdType",
+  "ad_group_ad.ad_strength": "AdStrength",
+  "ad_group_ad.policy_summary.approval_status": "PolicyApprovalStatus",
+  "ad_group_ad.policy_summary.review_status": "PolicyReviewStatus",
+  "ad_group_ad.status": "AdGroupAdStatus",
+  "ad_group_ad_asset_view.field_type": "AssetFieldType",
+  "ad_group_ad_asset_view.performance_label": "AssetPerformanceLabel",
+  "ad_group_bid_modifier.bid_modifier_source": "BidModifierSource",
+  "ad_group_bid_modifier.device.type": "Device",
+  "ad_group_bid_modifier.hotel_check_in_day.day_of_week": "DayOfWeek",
+  "ad_group_bid_modifier.hotel_date_selection_type.type":
+    "HotelDateSelectionType",
+  "ad_group_bid_modifier.preferred_content.type": "PreferredContentType",
+  "ad_group_criterion.age_range.type": "AgeRangeType",
+  "ad_group_criterion.app_payment_model.type": "AppPaymentModelType",
+  "ad_group_criterion.approval_status": "AdGroupCriterionApprovalStatus",
+  "ad_group_criterion.effective_cpc_bid_source": "BiddingSource",
+  "ad_group_criterion.effective_cpm_bid_source": "BiddingSource",
+  "ad_group_criterion.effective_cpv_bid_source": "BiddingSource",
+  "ad_group_criterion.effective_percent_cpc_bid_source": "BiddingSource",
+  "ad_group_criterion.gender.type": "GenderType",
+  "ad_group_criterion.income_range.type": "IncomeRangeType",
+  "ad_group_criterion.keyword.match_type": "KeywordMatchType",
+  "ad_group_criterion.listing_group.case_value.product_bidding_category.level":
+    "ProductBiddingCategoryLevel",
+  "ad_group_criterion.listing_group.case_value.product_channel.channel":
+    "ProductChannel",
+  "ad_group_criterion.listing_group.case_value.product_channel_exclusivity.channel_exclusivity":
+    "ProductChannelExclusivity",
+  "ad_group_criterion.listing_group.case_value.product_condition.condition":
+    "ProductCondition",
+  "ad_group_criterion.listing_group.case_value.product_custom_attribute.index":
+    "ProductCustomAttributeIndex",
+  "ad_group_criterion.listing_group.case_value.product_type.level":
+    "ProductTypeLevel",
+  "ad_group_criterion.listing_group.type": "ListingGroupType",
+  "ad_group_criterion.parental_status.type": "ParentalStatusType",
+  "ad_group_criterion.quality_info.creative_quality_score":
+    "QualityScoreBucket",
+  "ad_group_criterion.quality_info.post_click_quality_score":
+    "QualityScoreBucket",
+  "ad_group_criterion.quality_info.search_predicted_ctr": "QualityScoreBucket",
+  "ad_group_criterion.status": "AdGroupCriterionStatus",
+  "ad_group_criterion.system_serving_status": "CriterionSystemServingStatus",
+  "ad_group_criterion.type": "CriterionType",
+  "ad_group_criterion_simulation.modification_method":
+    "SimulationModificationMethod",
+  "ad_group_criterion_simulation.type": "SimulationType",
+  "ad_group_extension_setting.device": "ExtensionSettingDevice",
+  "ad_group_extension_setting.extension_type": "ExtensionType",
+  "ad_group_feed.matching_function.operator": "MatchingFunctionOperator",
+  "ad_group_feed.placeholder_types": "PlaceholderType",
+  "ad_group_feed.status": "FeedLinkStatus",
+  "ad_group_simulation.modification_method": "SimulationModificationMethod",
+  "ad_group_simulation.type": "SimulationType",
+  "asset.image_asset.mime_type": "MimeType",
+  "asset.lead_form_asset.call_to_action_type": "LeadFormCallToActionType",
+  "asset.lead_form_asset.desired_intent": "LeadFormDesiredIntent",
+  "asset.lead_form_asset.post_submit_call_to_action_type":
+    "LeadFormPostSubmitCallToActionType",
+  "asset.policy_summary.approval_status": "PolicyApprovalStatus",
+  "asset.policy_summary.review_status": "PolicyReviewStatus",
+  "asset.type": "AssetType",
+  "batch_job.status": "BatchJobStatus",
+  "bidding_strategy.status": "BiddingStrategyStatus",
+  "bidding_strategy.target_impression_share.location":
+    "TargetImpressionShareLocation",
+  "bidding_strategy.type": "BiddingStrategyType",
+  "billing_setup.end_time_type": "TimeType",
+  "billing_setup.status": "BillingSetupStatus",
+  "call_view.call_status": "GoogleVoiceCallStatus",
+  "call_view.call_tracking_display_location": "CallTrackingDisplayLocation",
+  "call_view.type": "CallType",
+  "campaign.ad_serving_optimization_status": "AdServingOptimizationStatus",
+  "campaign.advertising_channel_sub_type": "AdvertisingChannelSubType",
+  "campaign.advertising_channel_type": "AdvertisingChannelType",
+  "campaign.app_campaign_setting.app_store": "AppCampaignAppStore",
+  "campaign.app_campaign_setting.bidding_strategy_goal_type":
+    "AppCampaignBiddingStrategyGoalType",
+  "campaign.bidding_strategy_type": "BiddingStrategyType",
+  "campaign.experiment_type": "CampaignExperimentType",
+  "campaign.geo_target_type_setting.negative_geo_target_type":
+    "NegativeGeoTargetType",
+  "campaign.geo_target_type_setting.positive_geo_target_type":
+    "PositiveGeoTargetType",
+  "campaign.local_campaign_setting.location_source_type": "LocationSourceType",
+  "campaign.optimization_goal_setting.optimization_goal_types":
+    "OptimizationGoalType",
+  "campaign.payment_mode": "PaymentMode",
+  "campaign.serving_status": "CampaignServingStatus",
+  "campaign.status": "CampaignStatus",
+  "campaign.target_impression_share.location": "TargetImpressionShareLocation",
+  "campaign.vanity_pharma.vanity_pharma_display_url_mode":
+    "VanityPharmaDisplayUrlMode",
+  "campaign.vanity_pharma.vanity_pharma_text": "VanityPharmaText",
+  "campaign.video_brand_safety_suitability": "BrandSafetySuitability",
+  "campaign_asset.field_type": "AssetFieldType",
+  "campaign_asset.status": "AssetLinkStatus",
+  "campaign_bid_modifier.interaction_type.type": "InteractionType",
+  "campaign_budget.delivery_method": "BudgetDeliveryMethod",
+  "campaign_budget.period": "BudgetPeriod",
+  "campaign_budget.status": "BudgetStatus",
+  "campaign_budget.type": "BudgetType",
+  "campaign_criterion.ad_schedule.day_of_week": "DayOfWeek",
+  "campaign_criterion.ad_schedule.end_minute": "MinuteOfHour",
+  "campaign_criterion.ad_schedule.start_minute": "MinuteOfHour",
+  "campaign_criterion.age_range.type": "AgeRangeType",
+  "campaign_criterion.content_label.type": "ContentLabelType",
+  "campaign_criterion.device.type": "Device",
+  "campaign_criterion.gender.type": "GenderType",
+  "campaign_criterion.income_range.type": "IncomeRangeType",
+  "campaign_criterion.keyword.match_type": "KeywordMatchType",
+  "campaign_criterion.parental_status.type": "ParentalStatusType",
+  "campaign_criterion.proximity.radius_units": "ProximityRadiusUnits",
+  "campaign_criterion.status": "CampaignCriterionStatus",
+  "campaign_criterion.type": "CriterionType",
+  "campaign_criterion_simulation.modification_method":
+    "SimulationModificationMethod",
+  "campaign_criterion_simulation.type": "SimulationType",
+  "campaign_draft.status": "CampaignDraftStatus",
+  "campaign_experiment.status": "CampaignExperimentStatus",
+  "campaign_experiment.traffic_split_type":
+    "CampaignExperimentTrafficSplitType",
+  "campaign_extension_setting.device": "ExtensionSettingDevice",
+  "campaign_extension_setting.extension_type": "ExtensionType",
+  "campaign_feed.matching_function.operator": "MatchingFunctionOperator",
+  "campaign_feed.placeholder_types": "PlaceholderType",
+  "campaign_feed.status": "FeedLinkStatus",
+  "campaign_shared_set.status": "CampaignSharedSetStatus",
+  "change_event.change_resource_type": "ChangeEventResourceType",
+  "change_event.client_type": "ChangeClientType",
+  "change_event.resource_change_operation": "ResourceChangeOperation",
+  "change_status.resource_status": "ChangeStatusOperation",
+  "change_status.resource_type": "ChangeStatusResourceType",
+  "combined_audience.status": "CombinedAudienceStatus",
+  "conversion_action.attribution_model_settings.attribution_model":
+    "AttributionModel",
+  "conversion_action.attribution_model_settings.data_driven_model_status":
+    "DataDrivenModelStatus",
+  "conversion_action.category": "ConversionActionCategory",
+  "conversion_action.counting_type": "ConversionActionCountingType",
+  "conversion_action.mobile_app_vendor": "MobileAppVendor",
+  "conversion_action.status": "ConversionActionStatus",
+  "conversion_action.type": "ConversionActionType",
+  "custom_audience.status": "CustomAudienceStatus",
+  "custom_audience.type": "CustomAudienceType",
+  "custom_interest.status": "CustomInterestStatus",
+  "custom_interest.type": "CustomInterestType",
+  "customer.pay_per_conversion_eligibility_failure_reasons":
+    "CustomerPayPerConversionEligibilityFailureReason",
+  "customer_client_link.status": "ManagerLinkStatus",
+  "customer_extension_setting.device": "ExtensionSettingDevice",
+  "customer_extension_setting.extension_type": "ExtensionType",
+  "customer_feed.matching_function.operator": "MatchingFunctionOperator",
+  "customer_feed.placeholder_types": "PlaceholderType",
+  "customer_feed.status": "FeedLinkStatus",
+  "customer_manager_link.status": "ManagerLinkStatus",
+  "customer_negative_criterion.content_label.type": "ContentLabelType",
+  "customer_negative_criterion.type": "CriterionType",
+  "customer_user_access.access_role": "AccessRole",
+  "customer_user_access_invitation.access_role": "AccessRole",
+  "customer_user_access_invitation.invitation_status": "AccessInvitationStatus",
+  "detail_placement_view.placement_type": "PlacementType",
+  "distance_view.distance_bucket": "DistanceBucket",
+  "extension_feed_item.app_feed_item.app_store": "AppStore",
+  "extension_feed_item.call_feed_item.call_conversion_reporting_state":
+    "CallConversionReportingState",
+  "extension_feed_item.device": "FeedItemTargetDevice",
+  "extension_feed_item.extension_type": "ExtensionType",
+  "extension_feed_item.price_feed_item.price_qualifier":
+    "PriceExtensionPriceQualifier",
+  "extension_feed_item.price_feed_item.type": "PriceExtensionType",
+  "extension_feed_item.promotion_feed_item.discount_modifier":
+    "PromotionExtensionDiscountModifier",
+  "extension_feed_item.promotion_feed_item.occasion":
+    "PromotionExtensionOccasion",
+  "extension_feed_item.status": "FeedItemStatus",
+  "extension_feed_item.targeted_keyword.match_type": "KeywordMatchType",
+  "feed.affiliate_location_feed_data.relationship_type":
+    "AffiliateLocationFeedRelationshipType",
+  "feed.origin": "FeedOrigin",
+  "feed.status": "FeedStatus",
+  "feed_item.geo_targeting_restriction": "GeoTargetingRestriction",
+  "feed_item.status": "FeedItemStatus",
+  "feed_item_set.dynamic_location_set_filter.business_name_filter.filter_type":
+    "FeedItemSetStringFilterType",
+  "feed_item_set.status": "FeedItemSetStatus",
+  "feed_item_target.ad_schedule.day_of_week": "DayOfWeek",
+  "feed_item_target.device": "FeedItemTargetDevice",
+  "feed_item_target.feed_item_target_type": "FeedItemTargetType",
+  "feed_item_target.keyword.match_type": "KeywordMatchType",
+  "feed_item_target.status": "FeedItemTargetStatus",
+  "feed_mapping.criterion_type": "FeedMappingCriterionType",
+  "feed_mapping.placeholder_type": "PlaceholderType",
+  "feed_mapping.status": "FeedMappingStatus",
+  "feed_placeholder_view.placeholder_type": "PlaceholderType",
+  "geo_target_constant.status": "GeoTargetConstantStatus",
+  "geographic_view.location_type": "GeoTargetingType",
+  "group_placement_view.placement_type": "PlacementType",
+  "keyword_plan_ad_group_keyword.match_type": "KeywordMatchType",
+  "keyword_plan_campaign.keyword_plan_network": "KeywordPlanNetwork",
+  "keyword_plan_campaign_keyword.match_type": "KeywordMatchType",
+  "label.status": "LabelStatus",
+  "media_file.mime_type": "MimeType",
+  "media_file.type": "MediaType",
+  "metrics.historical_creative_quality_score": "QualityScoreBucket",
+  "metrics.historical_landing_page_quality_score": "QualityScoreBucket",
+  "metrics.historical_search_predicted_ctr": "QualityScoreBucket",
+  "metrics.interaction_event_types": "InteractionEventType",
+  "mobile_device_constant.type": "MobileDeviceType",
+  "offline_user_data_job.failure_reason": "OfflineUserDataJobFailureReason",
+  "offline_user_data_job.status": "OfflineUserDataJobStatus",
+  "offline_user_data_job.type": "OfflineUserDataJobType",
+  "operating_system_version_constant.operator_type":
+    "OperatingSystemVersionOperatorType",
+  "product_bidding_category_constant.level": "ProductBiddingCategoryLevel",
+  "product_bidding_category_constant.status": "ProductBiddingCategoryStatus",
+  "recommendation.type": "RecommendationType",
+  "search_term_view.status": "SearchTermTargetingStatus",
+  "segments.ad_destination_type": "AdDestinationType",
+  "segments.ad_network_type": "AdNetworkType",
+  "segments.budget_campaign_association_status.status":
+    "BudgetCampaignAssociationStatus",
+  "segments.click_type": "ClickType",
+  "segments.conversion_action_category": "ConversionActionCategory",
+  "segments.conversion_attribution_event_type":
+    "ConversionAttributionEventType",
+  "segments.conversion_lag_bucket": "ConversionLagBucket",
+  "segments.conversion_or_adjustment_lag_bucket":
+    "ConversionOrAdjustmentLagBucket",
+  "segments.day_of_week": "DayOfWeek",
+  "segments.device": "Device",
+  "segments.external_conversion_source": "ExternalConversionSource",
+  "segments.hotel_check_in_day_of_week": "DayOfWeek",
+  "segments.hotel_date_selection_type": "HotelDateSelectionType",
+  "segments.hotel_price_bucket": "HotelPriceBucket",
+  "segments.hotel_rate_type": "HotelRateType",
+  "segments.keyword.info.match_type": "KeywordMatchType",
+  "segments.month_of_year": "MonthOfYear",
+  "segments.placeholder_type": "PlaceholderType",
+  "segments.product_channel": "ProductChannel",
+  "segments.product_channel_exclusivity": "ProductChannelExclusivity",
+  "segments.product_condition": "ProductCondition",
+  "segments.search_engine_results_page_type": "SearchEngineResultsPageType",
+  "segments.search_term_match_type": "SearchTermMatchType",
+  "segments.slot": "Slot",
+  "shared_criterion.keyword.match_type": "KeywordMatchType",
+  "shared_criterion.type": "CriterionType",
+  "shared_set.status": "SharedSetStatus",
+  "shared_set.type": "SharedSetType",
+  "user_interest.taxonomy_type": "UserInterestTaxonomyType",
+  "user_list.access_reason": "AccessReason",
+  "user_list.account_user_list_status": "UserListAccessStatus",
+  "user_list.closing_reason": "UserListClosingReason",
+  "user_list.crm_based_user_list.data_source_type": "UserListCrmDataSourceType",
+  "user_list.crm_based_user_list.upload_key_type": "CustomerMatchUploadKeyType",
+  "user_list.membership_status": "UserListMembershipStatus",
+  "user_list.rule_based_user_list.combined_rule_user_list.left_operand.rule_type":
+    "UserListRuleType",
+  "user_list.rule_based_user_list.combined_rule_user_list.right_operand.rule_type":
+    "UserListRuleType",
+  "user_list.rule_based_user_list.combined_rule_user_list.rule_operator":
+    "UserListCombinedRuleOperator",
+  "user_list.rule_based_user_list.date_specific_rule_user_list.rule.rule_type":
+    "UserListRuleType",
+  "user_list.rule_based_user_list.expression_rule_user_list.rule.rule_type":
+    "UserListRuleType",
+  "user_list.rule_based_user_list.prepopulation_status":
+    "UserListPrepopulationStatus",
+  "user_list.size_range_for_display": "UserListSizeRange",
+  "user_list.size_range_for_search": "UserListSizeRange",
+  "user_list.type": "UserListType",
+};

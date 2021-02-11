@@ -1,4 +1,4 @@
-import { ReportOptions, SortOrder, ConstraintKey, Constraint } from "./types";
+import { ReportOptions, ConstraintKey, Constraint } from "./types";
 import { normaliseQuery } from "./utils";
 import { enums } from "./protos";
 
@@ -6,7 +6,8 @@ import {
   QueryError,
   buildSelectClause,
   buildFromClause,
-  validateConstraintOpAndValue,
+  validateConstraintKeyAndValue,
+  convertNumericEnumToString,
   extractConstraintConditions,
   extractDateConstantConditions,
   extractDateConditions,
@@ -97,7 +98,7 @@ describe("buildFromClause", () => {
   });
 });
 
-describe("validateConstraintOpAndValue", () => {
+describe("validateConstraintKeyAndValue", () => {
   const key = "test_key" as ConstraintKey;
   it("throws for bad constraint value types", () => {
     const constraintValues = [
@@ -111,7 +112,7 @@ describe("validateConstraintOpAndValue", () => {
 
     constraintValues.forEach((val) => {
       // @ts-ignore
-      expect(() => validateConstraintOpAndValue(key, val)).toThrowError(
+      expect(() => validateConstraintKeyAndValue(key, val)).toThrowError(
         // @ts-ignore
         QueryError.INVALID_CONSTRAINT_VALUE(key, val)
       );
@@ -119,9 +120,9 @@ describe("validateConstraintOpAndValue", () => {
   });
 
   it("does not throw for an empty string val", () => {
-    expect(() => validateConstraintOpAndValue(key, "")).not.toThrowError();
+    expect(() => validateConstraintKeyAndValue(key, "")).not.toThrowError();
 
-    const validatedValue = validateConstraintOpAndValue(key, "");
+    const validatedValue = validateConstraintKeyAndValue(key, "");
     expect(validatedValue.op).toEqual("=");
     expect(validatedValue.val).toEqual('""');
   });
@@ -130,7 +131,7 @@ describe("validateConstraintOpAndValue", () => {
     const constraintValues = [15, true, -20, false];
 
     constraintValues.forEach((val) => {
-      const validatedValue = validateConstraintOpAndValue(key, val);
+      const validatedValue = validateConstraintKeyAndValue(key, val);
       expect(validatedValue.op).toEqual("=");
       expect(validatedValue.val).toEqual(val);
     });
@@ -138,33 +139,61 @@ describe("validateConstraintOpAndValue", () => {
 
   it("returns arrays as strings", () => {
     const val1 = [1, 2, 3, 4];
-    const validatedValue1 = validateConstraintOpAndValue(key, val1);
+    const validatedValue1 = validateConstraintKeyAndValue(key, val1);
     expect(validatedValue1.op).toEqual("IN");
     expect(validatedValue1.val).toEqual(`(1, 2, 3, 4)`);
 
     const val2 = ["a", "b", "c", "d"];
-    const validatedValue2 = validateConstraintOpAndValue(key, val2);
+    const validatedValue2 = validateConstraintKeyAndValue(key, val2);
     expect(validatedValue2.op).toEqual("IN");
     expect(validatedValue2.val).toEqual(`("a", "b", "c", "d")`);
   });
 
   it("adds quotation marks to string constraints that do not already have them", () => {
     const val = enums.AdvertisingChannelType.SEARCH;
-    const validatedValue = validateConstraintOpAndValue(key, val);
+    const validatedValue = validateConstraintKeyAndValue(key, val);
     expect(validatedValue.op).toEqual("=");
     expect(validatedValue.val).toEqual(enums.AdvertisingChannelType.SEARCH);
   });
 
   it("returns string constraints that already have quotation marks", () => {
     const val1 = `'SEARCH'`;
-    const validatedValue1 = validateConstraintOpAndValue(key, val1);
+    const validatedValue1 = validateConstraintKeyAndValue(key, val1);
     expect(validatedValue1.op).toEqual("=");
     expect(validatedValue1.val).toEqual(`'SEARCH'`);
 
     const val2 = `"SEARCH"`;
-    const validatedValue2 = validateConstraintOpAndValue(key, val2);
+    const validatedValue2 = validateConstraintKeyAndValue(key, val2);
     expect(validatedValue2.op).toEqual("=");
     expect(validatedValue2.val).toEqual(`"SEARCH"`);
+  });
+});
+
+describe("convertNumericEnumToString", () => {
+  it("returns strings and booleans as they are", () => {
+    const fieldValues = ["string value", true, false];
+
+    fieldValues.forEach((val) => {
+      expect(convertNumericEnumToString("campaign.status", val)).toEqual(val);
+    });
+  });
+
+  it("returns numeric enums as their string counterparts", () => {
+    const val = convertNumericEnumToString(
+      "campaign.status",
+      enums.CampaignStatus.ENABLED
+    ); // 2
+    expect(val).toEqual(`"ENABLED"`);
+  });
+
+  it("returns invalid enums as they are", () => {
+    const val = convertNumericEnumToString("campaign.status", 20);
+    expect(val).toEqual(20);
+  });
+
+  it("returns numberic values for non enum fields as they are", () => {
+    const val = convertNumericEnumToString("campaign.id", 2);
+    expect(val).toEqual(2);
   });
 });
 
@@ -258,7 +287,7 @@ describe("extractConstraintConditions", () => {
 
     expect(constraintConditions).toEqual([
       "campaign.id = 10",
-      "campaign.advertising_channel_type = 2",
+      'campaign.advertising_channel_type = "SEARCH"',
     ]);
   });
 
@@ -581,8 +610,8 @@ describe("buildQuery", () => {
       FROM
         ad_group
       WHERE 
-        ad_group.status = 3
-        AND campaign.advertising_channel_type = 2
+        ad_group.status = "PAUSED"
+        AND campaign.advertising_channel_type = "SEARCH"
         AND metrics.clicks > 10
         AND segments.date DURING LAST_BUSINESS_WEEK
         AND segments.date >= "2020-01-01"
@@ -644,7 +673,7 @@ describe("buildQuery", () => {
           campaign_criterion
         WHERE
           campaign.id IN (11, 15, 21, 4)
-          AND campaign_criterion.type IN (7, 31, 17)`
+          AND campaign_criterion.type IN ("LOCATION", "LOCATION_GROUP", "PROXIMITY")`
       ),
     },
     {
@@ -704,7 +733,7 @@ describe("buildQuery", () => {
         FROM
           keyword_view
         WHERE
-          campaign.status = 2
+          campaign.status = "ENABLED"
           AND metrics.impressions > 0
           AND metrics.historical_quality_score IS NOT NULL
           AND segments.date DURING LAST_30_DAYS
@@ -746,9 +775,9 @@ describe("buildQuery", () => {
         WHERE
           metrics.cost_micros > 0
           AND metrics.clicks > 10
-          AND campaign.status = 2
-          AND campaign.serving_status = 2
-          AND ad_group.status = 2`
+          AND campaign.status = "ENABLED"
+          AND campaign.serving_status = "SERVING"
+          AND ad_group.status = "ENABLED"`
       ),
     },
   ];

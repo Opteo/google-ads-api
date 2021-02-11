@@ -8,7 +8,8 @@ import {
   ConstraintOperation,
   SortOrder,
 } from "./types";
-import { Resource } from "./protos/autogen/fields";
+import { Resource, enumFields } from "./protos/autogen/fields";
+import { enums } from "./protos/autogen/enums";
 
 enum QueryKeywords {
   SELECT = "SELECT",
@@ -87,7 +88,7 @@ export function buildFromClause(entity: ReportOptions["entity"]): FromClause {
   return ` ${QueryKeywords.FROM} ${entity}` as const;
 }
 
-export function validateConstraintOpAndValue(
+export function validateConstraintKeyAndValue(
   key: ConstraintKey,
   val: ConstraintValue
 ): {
@@ -95,7 +96,7 @@ export function validateConstraintOpAndValue(
   val: ParsedConstraintValue;
 } {
   if (typeof val === "number" || typeof val === "boolean") {
-    return { op: "=", val };
+    return { op: "=", val: convertNumericEnumToString(key, val) };
   }
 
   if (typeof val === "string") {
@@ -108,7 +109,11 @@ export function validateConstraintOpAndValue(
   if (Array.isArray(val)) {
     const stringifiedValue = val
       .map((v: number | string) => {
-        return typeof v === "string" ? `"${v}"` : v;
+        if (typeof v === "string") {
+          return `"${v}"`;
+        } else {
+          return convertNumericEnumToString(key, v);
+        }
       })
       .join(`, `);
 
@@ -116,6 +121,23 @@ export function validateConstraintOpAndValue(
   }
 
   throw new Error(QueryError.INVALID_CONSTRAINT_VALUE(key, val));
+}
+
+export function convertNumericEnumToString(
+  key: ConstraintKey,
+  val: ParsedConstraintValue
+): ParsedConstraintValue {
+  // @ts-expect-error key does not always match an enum field
+  if (enumFields[key] && typeof val === "number") {
+    // @ts-expect-error typescript doesn't like accessing items in a namespace with a string
+    const enumStringValue = enums[enumFields[key]][val]; // e.g. enums['CampaignStatus'][2] = "ENABLED"
+
+    if (enumStringValue) {
+      return `"${enumStringValue}"`;
+    }
+  }
+
+  return val;
 }
 
 export function extractConstraintConditions(
@@ -133,13 +155,13 @@ export function extractConstraintConditions(
           if (typeof key !== "string") {
             throw new Error(QueryError.INVALID_CONSTRAINT_KEY);
           }
-          const validatedValue = validateConstraintOpAndValue(key, val);
+          const validatedValue = validateConstraintKeyAndValue(key, val);
           // @ts-ignore
           return `${key} ${op} ${validatedValue.val}` as const;
         } else if (Object.keys(con).length === 1) {
           const [[key, val]] = Object.entries(con);
 
-          const validatedValue = validateConstraintOpAndValue(
+          const validatedValue = validateConstraintKeyAndValue(
             key as ConstraintKey,
             val as ConstraintValue
           );
@@ -156,7 +178,7 @@ export function extractConstraintConditions(
     });
   } else if (typeof constraints === "object" && constraints !== null) {
     return Object.entries(constraints).map(([key, val]) => {
-      const validatedValue = validateConstraintOpAndValue(
+      const validatedValue = validateConstraintKeyAndValue(
         key as ConstraintKey,
         val as ConstraintValue
       );
