@@ -80,3 +80,6 @@ typings/
 
 # Library build folder
 build
+
+# Test file
+debug.ts

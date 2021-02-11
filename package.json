@@ -11,7 +11,8 @@
     "lint": "eslint . --ext .ts",
     "build": "tsc",
     "compile": "tsc && node build/scripts/index.js",
-    "prepare": "rm -rf build && npm run build"
+    "prepare": "rm -rf build && npm run build",
+    "debug": "tsc && node build/src/debug.js"
   },
   "author": "Opteo",
   "license": "MIT",

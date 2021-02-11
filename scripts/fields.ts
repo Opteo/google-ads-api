@@ -27,8 +27,6 @@ const client = new GoogleAdsApi({
   developer_token: DEVELOPER_TOKEN,
 });
 
-const resourceNameRegex = new RegExp(/^.*\.resource_name$/g);
-
 export async function compileFields(): Promise<void> {
   const cus = client.Customer({
     refresh_token: REFRESH_TOKEN,
@@ -50,12 +48,14 @@ export async function compileFields(): Promise<void> {
             filterable,
             data_type,
             metrics,
-            segments
+            segments,
+            type_url
         `,
     })
   );
 
   const resourceConstructs: { [resourceName: string]: Resource } = {};
+  const enumFields: { [fieldName: string]: string } = {};
   const resourceNames: string[] = [];
   const attributes: string[] = [];
   const segments: string[] = [];
@@ -90,13 +90,17 @@ export async function compileFields(): Promise<void> {
       resourceConstructs[field.name] = resource;
     } else if (isAttribute(field) && field.selectable) {
       attributes.push(field.name);
-      if (resourceNameRegex.test(field.name)) {
+      if (isResourceName(field)) {
         resourceNames.push(field.name);
       }
     } else if (isMetric(field) && field.selectable) {
       metrics.push(field.name);
     } else if (isSegment(field) && field.selectable) {
       segments.push(field.name);
+    }
+
+    if (hasEnumDataType(field)) {
+      enumFields[field.name] = getEnumName(field);
     }
   });
 
@@ -136,7 +140,8 @@ export async function compileFields(): Promise<void> {
   stream.write(`\n\n/*  -- RESOURCE NAMES --  */`);
   buildUnionArray(stream, resourceNames, "resourceNames");
 
-  stream.write(`\n\n/*  -- FIN --  */`);
+  stream.write(`\n\n/*  -- ENUM FIELDS --  */`);
+  stream.write(`\nexport const enumFields = ${JSON.stringify(enumFields)}`);
 
   stream.end();
 }
@@ -195,4 +200,18 @@ export function isSegment(field: resources.GoogleAdsField): boolean {
     enums.GoogleAdsFieldCategory[field.category] ===
     enums.GoogleAdsFieldCategory.SEGMENT
   );
+}
+
+const resourceNameRegex = new RegExp(/^.*\.resource_name$/g);
+
+export function isResourceName(field: resources.GoogleAdsField): boolean {
+  return resourceNameRegex.test(field.name);
+}
+
+export function hasEnumDataType(field: resources.GoogleAdsField): boolean {
+  return field.data_type === "ENUM";
+}
+
+export function getEnumName(field: resources.GoogleAdsField): string {
+  return field.type_url.replace(/.*(?=\.)\./g, "");
 }
