@@ -1,6 +1,14 @@
 import { ClientOptions } from "./client";
-import ServiceFactory from "./protos/autogen/serviceFactory";
+import {
+  BaseMutationHookArgs,
+  BaseQueryHookArgs,
+  HookedCancellation,
+  HookedResolution,
+  Hooks,
+} from "./hooks";
+import { parse } from "./parser";
 import { services } from "./protos";
+import ServiceFactory from "./protos/autogen/serviceFactory";
 import { buildQuery } from "./query";
 import {
   CustomerOptions,
@@ -9,14 +17,6 @@ import {
   ReportOptions,
   RequestOptions,
 } from "./types";
-import {
-  Hooks,
-  BaseQueryHookArgs,
-  BaseMutationHookArgs,
-  HookedCancellation,
-  HookedResolution,
-} from "./hooks";
-import { parse } from "./parser";
 
 export class Customer extends ServiceFactory {
   protected readonly hooks: Hooks;
@@ -64,6 +64,12 @@ export class Customer extends ServiceFactory {
         cancel: (res) => {
           queryStart.cancelled = true;
           queryStart.res = res;
+        },
+        editOptions: (options) => {
+          Object.entries(options).forEach(([key, val]) => {
+            // @ts-ignore
+            requestOptions[key] = val;
+          });
         },
       });
 
@@ -128,7 +134,7 @@ export class Customer extends ServiceFactory {
    */
   public async query<T = services.IGoogleAdsRow[]>(
     gaqlQuery: string,
-    requestOptions?: RequestOptions,
+    requestOptions: RequestOptions = {},
     reportOptions?: ReportOptions
   ): Promise<T> {
     const baseHookArguments: BaseQueryHookArgs = {
@@ -144,6 +150,12 @@ export class Customer extends ServiceFactory {
         cancel: (res) => {
           queryCancellation.cancelled = true;
           queryCancellation.res = res;
+        },
+        editOptions: (options) => {
+          Object.entries(options).forEach(([key, val]) => {
+            // @ts-ignore
+            requestOptions[key] = val;
+          });
         },
       });
       if (queryCancellation.cancelled) {
@@ -202,7 +214,7 @@ export class Customer extends ServiceFactory {
    */
   public async mutateResources<T>(
     mutations: MutateOperation<T>[],
-    options?: MutateOptions
+    mutateOptions: MutateOptions = {}
   ): Promise<services.MutateGoogleAdsResponse> {
     const baseHookArguments: BaseMutationHookArgs = {
       credentials: this.credentials,
@@ -217,6 +229,12 @@ export class Customer extends ServiceFactory {
           mutationCancellation.cancelled = true;
           mutationCancellation.res = res;
         },
+        editOptions: (options) => {
+          Object.entries(options).forEach(([key, val]) => {
+            // @ts-ignore
+            mutateOptions[key] = val;
+          });
+        },
       });
       if (mutationCancellation.cancelled) {
         return mutationCancellation.res;
@@ -225,7 +243,7 @@ export class Customer extends ServiceFactory {
 
     const { service, request } = this.buildMutationRequestAndService(
       mutations,
-      options
+      mutateOptions
     );
 
     try {

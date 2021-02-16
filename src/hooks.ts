@@ -1,5 +1,11 @@
 import { errors, services } from "./protos";
-import { CustomerCredentials, MutateOperation, ReportOptions } from "./types";
+import {
+  CustomerCredentials,
+  MutateOperation,
+  ReportOptions,
+  RequestOptions,
+  MutateOptions,
+} from "./types";
 
 export type BaseQueryHookArgs = {
   credentials: CustomerCredentials;
@@ -12,23 +18,35 @@ export type BaseMutationHookArgs = {
   mutations: MutateOperation<any>[];
 };
 
-type PreHookArgs = { cancel: (args?: any) => void };
-type ErrorHookArgs = { error: errors.GoogleAdsFailure | Error };
+type PreHookArgs<T = RequestOptions | MutateOptions> = {
+  cancel: (args?: any) => void;
+  editOptions: (options: Partial<T>) => void;
+};
+
+type ErrorHookArgs = {
+  error: errors.GoogleAdsFailure | Error;
+};
+
 type PostHookArgs<
   T = services.IGoogleAdsRow[] | services.MutateGoogleAdsResponse
-> = { response: T; resolve: (args: any) => void };
+> = {
+  response: T;
+  resolve: (args: any) => void;
+};
 
 type HookArgs = PreHookArgs | ErrorHookArgs | PostHookArgs;
+
 type QueryHook<H extends HookArgs> = (args: BaseQueryHookArgs & H) => void;
+
 type MutationHook<H extends HookArgs> = (
   args: BaseMutationHookArgs & H
 ) => void;
 
-export type OnQueryStart = QueryHook<PreHookArgs>;
+export type OnQueryStart = QueryHook<PreHookArgs<RequestOptions>>;
 export type OnQueryError = QueryHook<ErrorHookArgs>;
 export type OnQueryEnd = QueryHook<PostHookArgs<services.IGoogleAdsRow[]>>;
 
-export type OnMutationStart = MutationHook<PreHookArgs>;
+export type OnMutationStart = MutationHook<PreHookArgs<MutateOptions>>;
 export type OnMutationError = MutationHook<ErrorHookArgs>;
 export type OnMutationEnd = MutationHook<
   PostHookArgs<services.MutateGoogleAdsResponse>
@@ -37,11 +55,12 @@ export type OnMutationEnd = MutationHook<
 export interface Hooks {
   /**
    * @description Hook called before execution of a query.
-   * @params `{ credentials, query, reportOptions, cancel }`
+   * @params `{ credentials, query, reportOptions, cancel, editOptions }`
    * @param credentials customer id, login customer id, linked customer id
    * @param query gaql
    * @param reportOptions
    * @param cancel utility function for cancelling the query. if an argument is provided then the query will return this argument
+   * @param editOptions utility function for editing the request options. any request option keys that are passed will be changed
    */
   onQueryStart?: OnQueryStart;
   /**
@@ -65,10 +84,11 @@ export interface Hooks {
   onQueryEnd?: OnQueryEnd;
   /**
    * @description Hook called before execution of a mutation.
-   * @params `{ credentials, mutations, cancel }`
+   * @params `{ credentials, mutations, cancel, editOptions }`
    * @param credentials customer id, login customer id, linked customer id
    * @param mutations
    * @param cancel utility function for cancelling the mutation. if an argument is provided then the query/report will return this argument
+   * @param editOptions utility function for editing the mutate options. any mutate option keys that are passed will be changed
    */
   onMutationStart?: OnMutationStart;
   /**

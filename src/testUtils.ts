@@ -48,8 +48,8 @@ export const mockParseValue = "mock parse value" as services.IGoogleAdsRow;
 export function mockBuildSearchRequestAndService(
   customer: Customer,
   shouldThrow = false
-): GoogleAdsServiceClient {
-  const service = ({
+): { mockService: GoogleAdsServiceClient; spyBuild: jest.SpyInstance } {
+  const mockService = ({
     search: () => {
       if (shouldThrow) {
         throw new Error(mockErrorMessage);
@@ -64,25 +64,25 @@ export function mockBuildSearchRequestAndService(
     },
   } as unknown) as GoogleAdsServiceClient;
 
-  jest
+  const spyBuild = jest
     // @ts-expect-error protected method
     .spyOn(customer, "buildSearchRequestAndService")
     // @ts-expect-error
     .mockImplementation(() => {
       return {
-        service,
+        service: mockService,
         request: {} as services.SearchGoogleAdsRequest,
       };
     });
 
-  return service;
+  return { mockService, spyBuild };
 }
 
 export function mockBuildMutateRequestAndService(
   customer: Customer,
   shouldThrow = false
-): services.GoogleAdsService {
-  const service = ({
+): { mockService: services.GoogleAdsService; spyBuild: jest.SpyInstance } {
+  const mockService = ({
     mutate() {
       if (shouldThrow) {
         throw new Error(mockErrorMessage);
@@ -91,18 +91,18 @@ export function mockBuildMutateRequestAndService(
     },
   } as unknown) as services.GoogleAdsService;
 
-  jest
+  const spyBuild = jest
     // @ts-expect-error protected method
     .spyOn(customer, "buildMutationRequestAndService")
     // @ts-expect-error
     .mockImplementation(() => {
       return {
-        service,
+        service: mockService,
         request: {} as services.MutateGoogleAdsRequest,
       };
     });
 
-  return service;
+  return { mockService, spyBuild };
 }
 
 export function mockGetGoogleAdsError(customer: Customer): jest.SpyInstance {
