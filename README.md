@@ -266,9 +266,12 @@ const customer = client.Customer({
   clientOptions,
   customerOptions,
   hooks: {
-    onQueryStart({ credentials, query, reportOptions, cancel }) {
+    onQueryStart({ credentials, query, reportOptions, cancel, editOptions }) {
       if (reportOptions.entity === "campaign") {
         cancel([]); // cancels the query and returns the given argument
+      }
+      if (env.mode === "dev") {
+        editOptions({ validate_only: true }); // edits the request options
       }
     },
     onQueryError({ credentials, query, reportOptions, error }) {
@@ -280,6 +283,9 @@ const customer = client.Customer({
     onMutationStart({ credentials, mutations, cancel }) {
       if (mutations.length === 0) {
         cancel({}); // cancels the mutation and returns the given argument
+      }
+      if (env.mode === "dev") {
+        editOptions({ validate_only: true }); // edits the mutate options
       }
     },
     onMutationError({ credentials, mutations, error }) {
