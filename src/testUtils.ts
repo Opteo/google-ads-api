@@ -130,6 +130,16 @@ export function mockParse(
   return jest.spyOn(parser, "parse").mockImplementation(() => mockParseValue);
 }
 
+export function mockMethod(): {
+  method(): void;
+} {
+  return {
+    method() {
+      return;
+    },
+  };
+}
+
 export function failTestIfExecuted(): void {
   expect(true).toBeFalsy();
 }

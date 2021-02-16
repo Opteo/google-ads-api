@@ -59,7 +59,7 @@ export class Customer extends ServiceFactory {
 
     const queryStart: HookedCancellation = { cancelled: false };
     if (this.hooks.onQueryStart) {
-      this.hooks.onQueryStart({
+      await this.hooks.onQueryStart({
         ...baseHookArguments,
         cancel: (res) => {
           queryStart.cancelled = true;
@@ -109,7 +109,7 @@ export class Customer extends ServiceFactory {
       }
 
       if (this.hooks.onQueryEnd) {
-        this.hooks.onQueryEnd({
+        await this.hooks.onQueryEnd({
           ...baseHookArguments,
           response: result,
           resolve: () => {
@@ -120,7 +120,7 @@ export class Customer extends ServiceFactory {
     } catch (searchError) {
       const googleAdsError = this.getGoogleAdsError(searchError);
       if (this.hooks.onQueryError) {
-        this.hooks.onQueryError({
+        await this.hooks.onQueryError({
           ...baseHookArguments,
           error: googleAdsError,
         });
@@ -145,7 +145,7 @@ export class Customer extends ServiceFactory {
 
     if (this.hooks.onQueryStart) {
       const queryCancellation: HookedCancellation = { cancelled: false };
-      this.hooks.onQueryStart({
+      await this.hooks.onQueryStart({
         ...baseHookArguments,
         cancel: (res) => {
           queryCancellation.cancelled = true;
@@ -183,7 +183,7 @@ export class Customer extends ServiceFactory {
 
       if (this.hooks.onQueryEnd) {
         const queryResolution: HookedResolution = { resolved: false };
-        this.hooks.onQueryEnd({
+        await this.hooks.onQueryEnd({
           ...baseHookArguments,
           response: parsedResponse,
           resolve: (res) => {
@@ -200,7 +200,7 @@ export class Customer extends ServiceFactory {
     } catch (searchError) {
       const googleAdsError = this.getGoogleAdsError(searchError);
       if (this.hooks.onQueryError) {
-        this.hooks.onQueryError({
+        await this.hooks.onQueryError({
           ...baseHookArguments,
           error: googleAdsError,
         });
@@ -223,7 +223,7 @@ export class Customer extends ServiceFactory {
 
     if (this.hooks.onMutationStart) {
       const mutationCancellation: HookedCancellation = { cancelled: false };
-      this.hooks.onMutationStart({
+      await this.hooks.onMutationStart({
         ...baseHookArguments,
         cancel: (res) => {
           mutationCancellation.cancelled = true;
@@ -256,7 +256,7 @@ export class Customer extends ServiceFactory {
 
       if (this.hooks.onMutationEnd) {
         const mutationResolution: HookedResolution = { resolved: false };
-        this.hooks.onMutationEnd({
+        await this.hooks.onMutationEnd({
           ...baseHookArguments,
           response,
           resolve: (res) => {
@@ -273,7 +273,7 @@ export class Customer extends ServiceFactory {
     } catch (mutateError) {
       const googleAdsError = this.getGoogleAdsError(mutateError);
       if (this.hooks.onMutationError) {
-        this.hooks.onMutationError({
+        await this.hooks.onMutationError({
           ...baseHookArguments,
           error: googleAdsError,
         });

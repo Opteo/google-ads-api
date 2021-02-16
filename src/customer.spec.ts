@@ -6,6 +6,7 @@ import {
   mockBuildSearchRequestAndService,
   mockError,
   mockGetGoogleAdsError,
+  mockMethod,
   mockMutationReturnValue,
   mockParse,
   mockParseValue,
@@ -36,26 +37,22 @@ describe("query", () => {
 
   it("parses query results by default", async () => {
     const customer = newCustomer({});
-    const { mockService } = mockBuildSearchRequestAndService(customer);
+    mockBuildSearchRequestAndService(customer);
     const mockedParse = mockParse(mockParseValues);
-    const spyMockSearch = jest.spyOn(mockService, "search");
     const res = await customer.query(gaqlQuery);
 
     expect(mockedParse).toHaveBeenCalled();
-    expect(spyMockSearch).toHaveBeenCalled();
     expect(res).toEqual(mockParseValues);
   });
 
   it("skips query parsing if it is disabled in the client options", async () => {
     const disableParsing = true;
     const customer = newCustomer({}, disableParsing);
-    const { mockService } = mockBuildSearchRequestAndService(customer);
+    mockBuildSearchRequestAndService(customer);
     const mockedParse = mockParse(mockParseValues);
-    const spyMockSearch = jest.spyOn(mockService, "search");
     const res = await customer.query(gaqlQuery);
 
     expect(mockedParse).not.toHaveBeenCalled();
-    expect(spyMockSearch).toHaveBeenCalled();
     expect(res).toEqual(mockQueryReturnValue);
   });
 
@@ -66,14 +63,11 @@ describe("query", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { mockService } = mockBuildSearchRequestAndService(customer);
-    const mockedParse = mockParse(mockQueryReturnValue);
-    const spyMockSearch = jest.spyOn(mockService, "search");
+    mockBuildSearchRequestAndService(customer);
+    mockParse(mockQueryReturnValue);
     const spyHook = jest.spyOn(hooks, "onQueryStart");
-    const res = await customer.query(gaqlQuery);
+    await customer.query(gaqlQuery);
 
-    expect(mockedParse).toHaveBeenCalled();
-    expect(spyMockSearch).toHaveBeenCalled();
     expect(spyHook).toHaveBeenCalled();
     expect(spyHook).toHaveBeenCalledWith({
       credentials: expect.any(Object),
@@ -82,7 +76,23 @@ describe("query", () => {
       cancel: expect.any(Function),
       editOptions: expect.any(Function),
     });
-    expect(res).toEqual(mockQueryReturnValue);
+  });
+
+  it("calls onQueryStart asynchronously", async () => {
+    const container = mockMethod();
+    const spyMockMethod = jest.spyOn(container, "method");
+    const hooks: Hooks = {
+      async onQueryStart() {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        container.method();
+      },
+    };
+    const customer = newCustomer(hooks);
+    mockBuildSearchRequestAndService(customer);
+    mockParse(mockQueryReturnValue);
+    await customer.query(gaqlQuery);
+
+    expect(spyMockMethod).toHaveBeenCalled();
   });
 
   it("cancels the query when cancel() is called in onQueryStart", async () => {
@@ -93,21 +103,12 @@ describe("query", () => {
     };
     const customer = newCustomer(hooks);
     const { mockService } = mockBuildSearchRequestAndService(customer);
-    const mockedParse = mockParse(mockQueryReturnValue);
+    mockParse(mockQueryReturnValue);
     const spyMockSearch = jest.spyOn(mockService, "search");
-    const spyHook = jest.spyOn(hooks, "onQueryStart");
+    jest.spyOn(hooks, "onQueryStart");
     const res = await customer.query(gaqlQuery);
 
-    expect(mockedParse).not.toHaveBeenCalled();
     expect(spyMockSearch).not.toHaveBeenCalled();
-    expect(spyHook).toHaveBeenCalled();
-    expect(spyHook).toHaveBeenCalledWith({
-      credentials: expect.any(Object),
-      query: gaqlQuery,
-      reportOptions: undefined,
-      cancel: expect.any(Function),
-      editOptions: expect.any(Function),
-    });
     expect(typeof res).toEqual("undefined");
   });
 
@@ -119,22 +120,10 @@ describe("query", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { mockService } = mockBuildSearchRequestAndService(customer);
-    const mockedParse = mockParse(mockQueryReturnValue);
-    const spyMockSearch = jest.spyOn(mockService, "search");
-    const spyHook = jest.spyOn(hooks, "onQueryStart");
+    mockBuildSearchRequestAndService(customer);
+    mockParse(mockQueryReturnValue);
     const res = await customer.query(gaqlQuery);
 
-    expect(mockedParse).not.toHaveBeenCalled();
-    expect(spyMockSearch).not.toHaveBeenCalled();
-    expect(spyHook).toHaveBeenCalled();
-    expect(spyHook).toHaveBeenCalledWith({
-      credentials: expect.any(Object),
-      query: gaqlQuery,
-      reportOptions: undefined,
-      cancel: expect.any(Function),
-      editOptions: expect.any(Function),
-    });
     expect(res).toEqual(alternativeReturnValue);
   });
 
@@ -145,36 +134,20 @@ describe("query", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { mockService, spyBuild } = mockBuildSearchRequestAndService(
-      customer
-    );
-    const mockedParse = mockParse(mockQueryReturnValue);
-    const spyMockSearch = jest.spyOn(mockService, "search");
-    const spyHook = jest.spyOn(hooks, "onQueryStart");
+    const { spyBuild } = mockBuildSearchRequestAndService(customer);
+    mockParse(mockQueryReturnValue);
     const requestOptions: RequestOptions = {
       validate_only: false,
       page_token: "abcd",
       page_size: 2,
     };
-    const res = await customer.query(gaqlQuery, requestOptions);
+    await customer.query(gaqlQuery, requestOptions);
 
-    expect(mockedParse).toHaveBeenCalled();
-    expect(spyBuild).toHaveBeenCalled();
     expect(spyBuild).toHaveBeenCalledWith(gaqlQuery, {
       validate_only: true, // changed
       page_token: "abcd",
       page_size: 4, // changed
     });
-    expect(spyMockSearch).toHaveBeenCalled();
-    expect(spyHook).toHaveBeenCalled();
-    expect(spyHook).toHaveBeenCalledWith({
-      credentials: expect.any(Object),
-      query: gaqlQuery,
-      reportOptions: undefined,
-      cancel: expect.any(Function),
-      editOptions: expect.any(Function),
-    });
-    expect(res).toEqual(mockQueryReturnValue);
   });
 
   it("calls onQueryError when provided and when the query throws an error", async (done) => {
@@ -189,7 +162,7 @@ describe("query", () => {
       customer,
       shouldThrow
     );
-    const mockedParse = mockParse(mockQueryReturnValue);
+    mockParse(mockQueryReturnValue);
     const mockedError = mockGetGoogleAdsError(customer);
     const spyMockSearch = jest.spyOn(mockService, "search");
     const spyHook = jest.spyOn(hooks, "onQueryError");
@@ -198,10 +171,8 @@ describe("query", () => {
       await customer.query(gaqlQuery);
       failTestIfExecuted(); // should not be called
     } catch (error) {
-      expect(mockedParse).not.toHaveBeenCalled();
-      expect(mockedError).toHaveBeenCalled();
-      expect(spyMockSearch).toHaveBeenCalled();
       expect(spyMockSearch).toThrow();
+      expect(mockedError).toHaveBeenCalled();
       expect(spyHook).toHaveBeenCalled();
       expect(spyHook).toHaveBeenCalledWith({
         credentials: expect.any(Object),
@@ -213,6 +184,30 @@ describe("query", () => {
     }
   });
 
+  it("calls onQueryError asynchronously", async (done) => {
+    const shouldThrow = true;
+    const container = mockMethod();
+    const spyMockMethod = jest.spyOn(container, "method");
+    const hooks: Hooks = {
+      async onQueryError() {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        container.method();
+      },
+    };
+    const customer = newCustomer(hooks);
+    mockBuildSearchRequestAndService(customer, shouldThrow);
+    mockParse(mockQueryReturnValue);
+    mockGetGoogleAdsError(customer);
+
+    try {
+      await customer.query(gaqlQuery);
+      failTestIfExecuted(); // should not be called
+    } catch (err) {
+      expect(spyMockMethod).toHaveBeenCalled();
+      done();
+    }
+  });
+
   it("does not call onQueryError when provided but when the query does not throw an error", async () => {
     const shouldThrow = false;
     const hooks: Hooks = {
@@ -225,15 +220,12 @@ describe("query", () => {
       customer,
       shouldThrow
     );
-    const mockedParse = mockParse(mockQueryReturnValue);
-    const mockedError = mockGetGoogleAdsError(customer);
+    mockParse(mockQueryReturnValue);
+    mockGetGoogleAdsError(customer);
     const spyMockSearch = jest.spyOn(mockService, "search");
     const spyHook = jest.spyOn(hooks, "onQueryError");
     await customer.query(gaqlQuery);
 
-    expect(mockedParse).toHaveBeenCalled();
-    expect(mockedError).not.toHaveBeenCalled();
-    expect(spyMockSearch).toHaveBeenCalled();
     expect(spyMockSearch).not.toThrow();
     expect(spyHook).not.toHaveBeenCalled();
   });
@@ -245,14 +237,11 @@ describe("query", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { mockService } = mockBuildSearchRequestAndService(customer);
-    const mockedParse = mockParse(mockQueryReturnValue);
-    const spyMockSearch = jest.spyOn(mockService, "search");
+    mockBuildSearchRequestAndService(customer);
+    mockParse(mockQueryReturnValue);
     const spyHook = jest.spyOn(hooks, "onQueryEnd");
-    const res = await customer.query(gaqlQuery);
+    await customer.query(gaqlQuery);
 
-    expect(mockedParse).toHaveBeenCalled();
-    expect(spyMockSearch).toHaveBeenCalled();
     expect(spyHook).toHaveBeenCalled();
     expect(spyHook).toHaveBeenCalledWith({
       credentials: expect.any(Object),
@@ -261,7 +250,23 @@ describe("query", () => {
       response: mockQueryReturnValue,
       resolve: expect.any(Function),
     });
-    expect(res).toEqual(mockQueryReturnValue);
+  });
+
+  it("calls onQueryEnd asynchronously", async () => {
+    const container = mockMethod();
+    const spyMockMethod = jest.spyOn(container, "method");
+    const hooks: Hooks = {
+      async onQueryEnd() {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        container.method();
+      },
+    };
+    const customer = newCustomer(hooks);
+    mockBuildSearchRequestAndService(customer);
+    mockParse(mockQueryReturnValue);
+    await customer.query(gaqlQuery);
+
+    expect(spyMockMethod).toHaveBeenCalled();
   });
 
   it("resolves the query with the argument of resolve() in onQueryEnd", async () => {
@@ -272,22 +277,10 @@ describe("query", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { mockService } = mockBuildSearchRequestAndService(customer);
-    const mockedParse = mockParse(mockQueryReturnValue);
-    const spyMockSearch = jest.spyOn(mockService, "search");
-    const spyHook = jest.spyOn(hooks, "onQueryEnd");
+    mockBuildSearchRequestAndService(customer);
+    mockParse(mockQueryReturnValue);
     const res = await customer.query<string>(gaqlQuery);
 
-    expect(mockedParse).toHaveBeenCalled();
-    expect(spyMockSearch).toHaveBeenCalled();
-    expect(spyHook).toHaveBeenCalled();
-    expect(spyHook).toHaveBeenCalledWith({
-      credentials: expect.any(Object),
-      query: gaqlQuery,
-      reportOptions: undefined,
-      response: mockQueryReturnValue,
-      resolve: expect.any(Function),
-    });
     expect(res).toEqual(hookReturnValue);
   });
 });
@@ -297,28 +290,22 @@ describe("reportStream", () => {
 
   it("parses reportStream results by default", async () => {
     const customer = newCustomer({});
-    const { mockService } = mockBuildSearchRequestAndService(customer);
+    mockBuildSearchRequestAndService(customer);
     const mockedParse = mockParse([mockParseValue]);
-    const spyMockSearchAsync = jest.spyOn(mockService, "searchAsync");
     const stream = customer.reportStream(reportOptions);
 
-    let iterations = 0;
     for await (const row of stream) {
       expect(row).toEqual(mockParseValue);
-      iterations += 1;
     }
 
-    expect(iterations).toEqual(3);
     expect(mockedParse).toHaveBeenCalled();
-    expect(spyMockSearchAsync).toHaveBeenCalled();
   });
 
   it("skips reportStream parsing if it is disabled in the client options", async () => {
     const disableParsing = true;
     const customer = newCustomer({}, disableParsing);
-    const { mockService } = mockBuildSearchRequestAndService(customer);
+    mockBuildSearchRequestAndService(customer);
     const mockedParse = mockParse([mockParseValue]);
-    const spyMockSearchAsync = jest.spyOn(mockService, "searchAsync");
     const stream = customer.reportStream(reportOptions);
 
     let iterations = 0;
@@ -327,9 +314,7 @@ describe("reportStream", () => {
       iterations += 1;
     }
 
-    expect(iterations).toEqual(3);
     expect(mockedParse).not.toHaveBeenCalled();
-    expect(spyMockSearchAsync).toHaveBeenCalled();
   });
 
   it("calls onQueryStart when provided", async () => {
@@ -339,21 +324,12 @@ describe("reportStream", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { mockService } = mockBuildSearchRequestAndService(customer);
-    const mockedParse = mockParse([mockParseValue]);
-    const spyMockSearchAsync = jest.spyOn(mockService, "searchAsync");
+    mockBuildSearchRequestAndService(customer);
+    mockParse([mockParseValue]);
     const spyHook = jest.spyOn(hooks, "onQueryStart");
     const stream = customer.reportStream(reportOptions);
+    await stream.next();
 
-    let iterations = 0;
-    for await (const row of stream) {
-      expect(row).toEqual(mockParseValue);
-      iterations += 1;
-    }
-
-    expect(iterations).toEqual(3);
-    expect(mockedParse).toHaveBeenCalled();
-    expect(spyMockSearchAsync).toHaveBeenCalled();
     expect(spyHook).toHaveBeenCalled();
     expect(spyHook).toHaveBeenCalledWith({
       credentials: expect.any(Object),
@@ -362,6 +338,24 @@ describe("reportStream", () => {
       cancel: expect.any(Function),
       editOptions: expect.any(Function),
     });
+  });
+
+  it("calls onQueryStart asynchronously", async () => {
+    const container = mockMethod();
+    const spyMockMethod = jest.spyOn(container, "method");
+    const hooks: Hooks = {
+      async onQueryStart() {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        container.method();
+      },
+    };
+    const customer = newCustomer(hooks);
+    mockBuildSearchRequestAndService(customer);
+    mockParse([mockParseValue]);
+    const stream = customer.reportStream(reportOptions);
+    await stream.next();
+
+    expect(spyMockMethod).toHaveBeenCalled();
   });
 
   it("cancels the query when cancel() is called in onQueryStart", async () => {
@@ -372,9 +366,8 @@ describe("reportStream", () => {
     };
     const customer = newCustomer(hooks);
     const { mockService } = mockBuildSearchRequestAndService(customer);
-    const mockedParse = mockParse([mockParseValue]);
+    mockParse([mockParseValue]);
     const spyMockSearchAsync = jest.spyOn(mockService, "searchAsync");
-    const spyHook = jest.spyOn(hooks, "onQueryStart");
     const stream = customer.reportStream(reportOptions);
 
     let iterations = 0;
@@ -384,16 +377,7 @@ describe("reportStream", () => {
     }
 
     expect(iterations).toEqual(1);
-    expect(mockedParse).not.toHaveBeenCalled();
     expect(spyMockSearchAsync).not.toHaveBeenCalled();
-    expect(spyHook).toHaveBeenCalled();
-    expect(spyHook).toHaveBeenCalledWith({
-      credentials: expect.any(Object),
-      query: expect.any(String),
-      reportOptions,
-      cancel: expect.any(Function),
-      editOptions: expect.any(Function),
-    });
   });
 
   it("returns the argument of cancel() if one is provided in onQueryStart", async () => {
@@ -404,10 +388,8 @@ describe("reportStream", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { mockService } = mockBuildSearchRequestAndService(customer);
-    const mockedParse = mockParse([mockParseValue]);
-    const spyMockSearchAsync = jest.spyOn(mockService, "searchAsync");
-    const spyHook = jest.spyOn(hooks, "onQueryStart");
+    mockBuildSearchRequestAndService(customer);
+    mockParse([mockParseValue]);
     const stream = customer.reportStream(reportOptions);
 
     let iterations = 0;
@@ -417,16 +399,6 @@ describe("reportStream", () => {
     }
 
     expect(iterations).toEqual(1);
-    expect(mockedParse).not.toHaveBeenCalled();
-    expect(spyMockSearchAsync).not.toHaveBeenCalled();
-    expect(spyHook).toHaveBeenCalled();
-    expect(spyHook).toHaveBeenCalledWith({
-      credentials: expect.any(Object),
-      query: expect.any(String),
-      reportOptions,
-      cancel: expect.any(Function),
-      editOptions: expect.any(Function),
-    });
   });
 
   it("iterates over the argument of cancel() if it is an array in onQueryStart", async () => {
@@ -437,10 +409,8 @@ describe("reportStream", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { mockService } = mockBuildSearchRequestAndService(customer);
-    const mockedParse = mockParse([mockParseValue]);
-    const spyMockSearchAsync = jest.spyOn(mockService, "searchAsync");
-    const spyHook = jest.spyOn(hooks, "onQueryStart");
+    mockBuildSearchRequestAndService(customer);
+    mockParse([mockParseValue]);
     const stream = customer.reportStream(reportOptions);
 
     let iterations = 0;
@@ -450,16 +420,6 @@ describe("reportStream", () => {
     }
 
     expect(iterations).toEqual(alternativeReturnValue.length);
-    expect(mockedParse).not.toHaveBeenCalled();
-    expect(spyMockSearchAsync).not.toHaveBeenCalled();
-    expect(spyHook).toHaveBeenCalled();
-    expect(spyHook).toHaveBeenCalledWith({
-      credentials: expect.any(Object),
-      query: expect.any(String),
-      reportOptions,
-      cancel: expect.any(Function),
-      editOptions: expect.any(Function),
-    });
   });
 
   it("edits the requestOptions when editOptions() is called in onQueryStart", async () => {
@@ -469,12 +429,8 @@ describe("reportStream", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { mockService, spyBuild } = mockBuildSearchRequestAndService(
-      customer
-    );
-    const mockedParse = mockParse([mockParseValue]);
-    const spyMockSearchAsync = jest.spyOn(mockService, "searchAsync");
-    const spyHook = jest.spyOn(hooks, "onQueryStart");
+    const { spyBuild } = mockBuildSearchRequestAndService(customer);
+    mockParse([mockParseValue]);
     const requestOptions: RequestOptions = {
       validate_only: false, // changed
       page_token: "abcd",
@@ -484,29 +440,12 @@ describe("reportStream", () => {
       ...reportOptions,
       ...requestOptions,
     });
+    await stream.next();
 
-    let iterations = 0;
-    for await (const row of stream) {
-      expect(row).toEqual(mockParseValue);
-      iterations += 1;
-    }
-
-    expect(iterations).toEqual(3);
-    expect(mockedParse).toHaveBeenCalled();
-    expect(spyBuild).toHaveBeenCalled();
     expect(spyBuild).toHaveBeenCalledWith(gaqlQuery, {
       validate_only: true,
       page_token: "abcd",
       page_size: 4,
-    });
-    expect(spyMockSearchAsync).toHaveBeenCalled();
-    expect(spyHook).toHaveBeenCalled();
-    expect(spyHook).toHaveBeenCalledWith({
-      credentials: expect.any(Object),
-      query: expect.any(String),
-      reportOptions: { ...reportOptions, ...requestOptions },
-      cancel: expect.any(Function),
-      editOptions: expect.any(Function),
     });
   });
 
@@ -523,7 +462,7 @@ describe("reportStream", () => {
       customer,
       shouldThrow
     );
-    const mockedParse = mockParse([mockParseValue]);
+    mockParse([mockParseValue]);
     const mockedError = mockGetGoogleAdsError(customer);
     const spyMockSearchAsync = jest.spyOn(mockService, "searchAsync");
     const spyHook = jest.spyOn(hooks, "onQueryError");
@@ -533,9 +472,8 @@ describe("reportStream", () => {
       await stream.next();
       failTestIfExecuted(); // should not be called
     } catch (error) {
-      expect(mockedParse).not.toHaveBeenCalled();
+      expect(spyMockSearchAsync).toThrow();
       expect(mockedError).toHaveBeenCalled();
-      expect(spyMockSearchAsync).toHaveBeenCalled();
       expect(spyHook).toHaveBeenCalled();
       expect(spyHook).toHaveBeenCalledWith({
         credentials: expect.any(Object),
@@ -543,6 +481,32 @@ describe("reportStream", () => {
         reportOptions: reportOptions,
         error: mockError,
       });
+      done();
+    }
+  });
+
+  it("calls onQueryError asynchronously", async (done) => {
+    const shouldThrow = true;
+    const container = mockMethod();
+    const spyMockMethod = jest.spyOn(container, "method");
+    const hooks: Hooks = {
+      async onQueryError() {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        container.method();
+      },
+    };
+
+    const customer = newCustomer(hooks);
+    mockBuildSearchRequestAndService(customer, shouldThrow);
+    mockParse([mockParseValue]);
+    mockGetGoogleAdsError(customer);
+
+    try {
+      const stream = customer.reportStream(reportOptions);
+      await stream.next();
+      failTestIfExecuted(); // should not be called
+    } catch (error) {
+      expect(spyMockMethod).toHaveBeenCalled();
       done();
     }
   });
@@ -560,22 +524,14 @@ describe("reportStream", () => {
       customer,
       shouldThrow
     );
-    const mockedParse = mockParse([mockParseValue]);
-    const mockedError = mockGetGoogleAdsError(customer);
+    mockParse([mockParseValue]);
+    mockGetGoogleAdsError(customer);
     const spyMockSearchAsync = jest.spyOn(mockService, "searchAsync");
     const spyHook = jest.spyOn(hooks, "onQueryError");
     const stream = customer.reportStream(reportOptions);
+    await stream.next();
 
-    let iterations = 0;
-    for await (const row of stream) {
-      expect(row).toEqual(mockParseValue);
-      iterations += 1;
-    }
-
-    expect(iterations).toEqual(3);
-    expect(mockedParse).toHaveBeenCalled();
-    expect(mockedError).not.toHaveBeenCalled();
-    expect(spyMockSearchAsync).toHaveBeenCalled();
+    expect(spyMockSearchAsync).not.toThrow();
     expect(spyHook).not.toHaveBeenCalled();
   });
 
@@ -586,22 +542,45 @@ describe("reportStream", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { mockService } = mockBuildSearchRequestAndService(customer);
-    const mockedParse = mockParse([mockParseValue]);
-    const spyMockSearchAsync = jest.spyOn(mockService, "searchAsync");
+    mockBuildSearchRequestAndService(customer);
+    mockParse([mockParseValue]);
     const spyHook = jest.spyOn(hooks, "onQueryEnd");
     const stream = customer.reportStream(reportOptions);
 
-    let iterations = 0;
+    const response = [];
     for await (const row of stream) {
-      expect(row).toEqual(mockParseValue);
-      iterations += 1;
+      response.push(row);
     }
 
-    expect(iterations).toEqual(3);
-    expect(mockedParse).toHaveBeenCalled();
-    expect(spyMockSearchAsync).toHaveBeenCalled();
     expect(spyHook).toHaveBeenCalled();
+    expect(spyHook).toHaveBeenCalledWith({
+      credentials: expect.any(Object),
+      query: gaqlQuery,
+      reportOptions,
+      response,
+      resolve: expect.any(Function),
+    });
+  });
+
+  it("calls onQueryEnd asynchronously", async () => {
+    const container = mockMethod();
+    const spyMockMethod = jest.spyOn(container, "method");
+    const hooks: Hooks = {
+      async onQueryEnd() {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        container.method();
+      },
+    };
+    const customer = newCustomer(hooks);
+    mockBuildSearchRequestAndService(customer);
+    mockParse([mockParseValue]);
+    const stream = customer.reportStream(reportOptions);
+
+    for await (const row of stream) {
+      continue;
+    }
+
+    expect(spyMockMethod).toHaveBeenCalled();
   });
 
   it("does NOT return the value of resolve() in onQueryEnd", async () => {
@@ -612,22 +591,13 @@ describe("reportStream", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { mockService } = mockBuildSearchRequestAndService(customer);
-    const mockedParse = mockParse([mockParseValue]);
-    const spyMockSearchAsync = jest.spyOn(mockService, "searchAsync");
-    const spyHook = jest.spyOn(hooks, "onQueryEnd");
+    mockBuildSearchRequestAndService(customer);
+    mockParse([mockParseValue]);
     const stream = customer.reportStream(reportOptions);
 
-    let iterations = 0;
     for await (const row of stream) {
       expect(row).toEqual(mockParseValue);
-      iterations += 1;
     }
-
-    expect(iterations).toEqual(3);
-    expect(mockedParse).toHaveBeenCalled();
-    expect(spyMockSearchAsync).toHaveBeenCalled();
-    expect(spyHook).toHaveBeenCalled();
   });
 });
 
@@ -656,12 +626,10 @@ describe("mutateResources", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { mockService } = mockBuildMutateRequestAndService(customer);
-    const spyMockMutate = jest.spyOn(mockService, "mutate");
+    mockBuildMutateRequestAndService(customer);
     const spyHook = jest.spyOn(hooks, "onMutationStart");
-    const res = await customer.mutateResources(mutations);
+    await customer.mutateResources(mutations);
 
-    expect(spyMockMutate).toHaveBeenCalled();
     expect(spyHook).toHaveBeenCalled();
     expect(spyHook).toHaveBeenCalledWith({
       credentials: expect.any(Object),
@@ -669,7 +637,22 @@ describe("mutateResources", () => {
       cancel: expect.any(Function),
       editOptions: expect.any(Function),
     });
-    expect(res).toEqual(mockMutationReturnValue);
+  });
+
+  it("calls onMutationStart asynchronously", async () => {
+    const container = mockMethod();
+    const spyMockMethod = jest.spyOn(container, "method");
+    const hooks: Hooks = {
+      async onMutationStart() {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        container.method();
+      },
+    };
+    const customer = newCustomer(hooks);
+    mockBuildMutateRequestAndService(customer);
+    await customer.mutateResources(mutations);
+
+    expect(spyMockMethod).toHaveBeenCalled();
   });
 
   it("cancels the query when cancel() is called in onMutationStart", async () => {
@@ -681,17 +664,9 @@ describe("mutateResources", () => {
     const customer = newCustomer(hooks);
     const { mockService } = mockBuildMutateRequestAndService(customer);
     const spyMockMutate = jest.spyOn(mockService, "mutate");
-    const spyHook = jest.spyOn(hooks, "onMutationStart");
     const res = await customer.mutateResources(mutations);
 
     expect(spyMockMutate).not.toHaveBeenCalled();
-    expect(spyHook).toHaveBeenCalled();
-    expect(spyHook).toHaveBeenCalledWith({
-      credentials: expect.any(Object),
-      mutations,
-      cancel: expect.any(Function),
-      editOptions: expect.any(Function),
-    });
     expect(typeof res).toEqual("undefined");
   });
 
@@ -703,19 +678,9 @@ describe("mutateResources", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { mockService } = mockBuildMutateRequestAndService(customer);
-    const spyMockMutate = jest.spyOn(mockService, "mutate");
-    const spyHook = jest.spyOn(hooks, "onMutationStart");
+    mockBuildMutateRequestAndService(customer);
     const res = await customer.mutateResources(mutations);
 
-    expect(spyMockMutate).not.toHaveBeenCalled();
-    expect(spyHook).toHaveBeenCalled();
-    expect(spyHook).toHaveBeenCalledWith({
-      credentials: expect.any(Object),
-      mutations,
-      cancel: expect.any(Function),
-      editOptions: expect.any(Function),
-    });
     expect(res).toEqual(alternativeReturnValue);
   });
 
@@ -729,33 +694,19 @@ describe("mutateResources", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { mockService, spyBuild } = mockBuildMutateRequestAndService(
-      customer
-    );
-    const spyMockMutate = jest.spyOn(mockService, "mutate");
-    const spyHook = jest.spyOn(hooks, "onMutationStart");
+    const { spyBuild } = mockBuildMutateRequestAndService(customer);
     const mutateOptions: MutateOptions = {
       validate_only: false,
       partial_failure: true,
       response_content_type: enums.ResponseContentType.RESOURCE_NAME_ONLY,
     };
-    const res = await customer.mutateResources(mutations, mutateOptions);
+    await customer.mutateResources(mutations, mutateOptions);
 
-    expect(spyMockMutate).toHaveBeenCalled();
-    expect(spyBuild).toHaveBeenCalled();
     expect(spyBuild).toHaveBeenCalledWith(mutations, {
       validate_only: true, // changed
       partial_failure: true,
       response_content_type: enums.ResponseContentType.MUTABLE_RESOURCE, // changed
     });
-    expect(spyHook).toHaveBeenCalled();
-    expect(spyHook).toHaveBeenCalledWith({
-      credentials: expect.any(Object),
-      mutations,
-      cancel: expect.any(Function),
-      editOptions: expect.any(Function),
-    });
-    expect(res).toEqual(mockMutationReturnValue);
   });
 
   it("calls onMutationError when provided and when the query throws an error", async (done) => {
@@ -778,15 +729,37 @@ describe("mutateResources", () => {
       await customer.mutateResources(mutations);
       failTestIfExecuted(); // should not be called
     } catch (error) {
-      expect(mockedError).toHaveBeenCalled();
-      expect(spyMockMutate).toHaveBeenCalled();
       expect(spyMockMutate).toThrow();
+      expect(mockedError).toHaveBeenCalled();
       expect(spyHook).toHaveBeenCalled();
       expect(spyHook).toHaveBeenCalledWith({
         credentials: expect.any(Object),
         mutations,
         error: mockError,
       });
+      done();
+    }
+  });
+
+  it("calls onMutationError asynchronously", async (done) => {
+    const shouldThrow = true;
+    const container = mockMethod();
+    const spyMockMethod = jest.spyOn(container, "method");
+    const hooks: Hooks = {
+      async onMutationError() {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        container.method();
+      },
+    };
+    const customer = newCustomer(hooks);
+    mockBuildMutateRequestAndService(customer, shouldThrow);
+    mockGetGoogleAdsError(customer);
+
+    try {
+      await customer.mutateResources(mutations);
+      failTestIfExecuted(); // should not be called
+    } catch (error) {
+      expect(spyMockMethod).toHaveBeenCalled();
       done();
     }
   });
@@ -803,13 +776,11 @@ describe("mutateResources", () => {
       customer,
       shouldThrow
     );
-    const mockedError = mockGetGoogleAdsError(customer);
+    mockGetGoogleAdsError(customer);
     const spyMockMutate = jest.spyOn(mockService, "mutate");
     const spyHook = jest.spyOn(hooks, "onMutationError");
     await customer.mutateResources(mutations);
 
-    expect(mockedError).not.toHaveBeenCalled();
-    expect(spyMockMutate).toHaveBeenCalled();
     expect(spyMockMutate).not.toThrow();
     expect(spyHook).not.toHaveBeenCalled();
   });
@@ -821,12 +792,10 @@ describe("mutateResources", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { mockService } = mockBuildMutateRequestAndService(customer);
-    const spyMockMutate = jest.spyOn(mockService, "mutate");
+    mockBuildMutateRequestAndService(customer);
     const spyHook = jest.spyOn(hooks, "onMutationEnd");
-    const res = await customer.mutateResources(mutations);
+    await customer.mutateResources(mutations);
 
-    expect(spyMockMutate).toHaveBeenCalled();
     expect(spyHook).toHaveBeenCalled();
     expect(spyHook).toHaveBeenCalledWith({
       credentials: expect.any(Object),
@@ -834,7 +803,22 @@ describe("mutateResources", () => {
       response: mockMutationReturnValue,
       resolve: expect.any(Function),
     });
-    expect(res).toEqual(mockMutationReturnValue);
+  });
+
+  it("calls onMutationEnd asynchronously", async () => {
+    const container = mockMethod();
+    const spyMockMethod = jest.spyOn(container, "method");
+    const hooks: Hooks = {
+      async onMutationEnd() {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        container.method();
+      },
+    };
+    const customer = newCustomer(hooks);
+    mockBuildMutateRequestAndService(customer);
+    await customer.mutateResources(mutations);
+
+    expect(spyMockMethod).toHaveBeenCalled();
   });
 
   it("resolves the query with the argument of resolve() in onMutationEnd", async () => {
@@ -845,19 +829,9 @@ describe("mutateResources", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { mockService } = mockBuildMutateRequestAndService(customer);
-    const spyMockMutate = jest.spyOn(mockService, "mutate");
-    const spyHook = jest.spyOn(hooks, "onMutationEnd");
+    mockBuildMutateRequestAndService(customer);
     const res = await customer.mutateResources(mutations);
 
-    expect(spyMockMutate).toHaveBeenCalled();
-    expect(spyHook).toHaveBeenCalled();
-    expect(spyHook).toHaveBeenCalledWith({
-      credentials: expect.any(Object),
-      mutations,
-      response: mockMutationReturnValue,
-      resolve: expect.any(Function),
-    });
     expect(res).toEqual(hookReturnValue);
   });
 });
