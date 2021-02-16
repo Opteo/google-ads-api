@@ -902,6 +902,7 @@ export namespace enums {
     UNKNOWN = 1, // UNKNOWN
     FEED_ITEM_ID = 2, // FEED_ITEM_ID
     DEVICE_NAME = 3, // DEVICE_NAME
+    FEED_ITEM_SET_ID = 4, // FEED_ITEM_SET_ID
   }
 
   /**
@@ -1222,8 +1223,10 @@ export namespace enums {
   export enum HotelPriceBucket {
     UNSPECIFIED = 0, // UNSPECIFIED
     UNKNOWN = 1, // UNKNOWN
+    LOWEST_UNIQUE = 2, // LOWEST_UNIQUE
     LOWEST_TIED = 3, // LOWEST_TIED
     NOT_LOWEST = 4, // NOT_LOWEST
+    ONLY_PARTNER_SHOWN = 5, // ONLY_PARTNER_SHOWN
   }
 
   /**
@@ -1464,6 +1467,18 @@ export namespace enums {
     NOT_CONTAINS = 7, // NOT_CONTAINS
     NOT_STARTS_WITH = 8, // NOT_STARTS_WITH
     NOT_ENDS_WITH = 9, // NOT_ENDS_WITH
+  }
+
+  /**
+   * @name AccessInvitationStatusEnum.AccessInvitationStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v6/AccessInvitationStatusEnum.AccessInvitationStatus
+   */
+  export enum AccessInvitationStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PENDING = 2, // PENDING
+    DECLINED = 3, // DECLINED
+    EXPIRED = 4, // EXPIRED
   }
 
   /**
@@ -1992,6 +2007,28 @@ export namespace enums {
   }
 
   /**
+   * @name CallTrackingDisplayLocationEnum.CallTrackingDisplayLocation
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v6/CallTrackingDisplayLocationEnum.CallTrackingDisplayLocation
+   */
+  export enum CallTrackingDisplayLocation {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    AD = 2, // AD
+    LANDING_PAGE = 3, // LANDING_PAGE
+  }
+
+  /**
+   * @name CallTypeEnum.CallType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v6/CallTypeEnum.CallType
+   */
+  export enum CallType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    MANUALLY_DIALED = 2, // MANUALLY_DIALED
+    HIGH_END_MOBILE_SEARCH = 3, // HIGH_END_MOBILE_SEARCH
+  }
+
+  /**
    * @name CalloutPlaceholderFieldEnum.CalloutPlaceholderField
    * @link https://developers.google.com/google-ads/api/reference/rpc/v6/CalloutPlaceholderFieldEnum.CalloutPlaceholderField
    */
@@ -2140,6 +2177,11 @@ export namespace enums {
     CAMPAIGN_BUDGET = 6, // CAMPAIGN_BUDGET
     AD_GROUP_BID_MODIFIER = 7, // AD_GROUP_BID_MODIFIER
     CAMPAIGN_CRITERION = 8, // CAMPAIGN_CRITERION
+    FEED = 9, // FEED
+    FEED_ITEM = 10, // FEED_ITEM
+    CAMPAIGN_FEED = 11, // CAMPAIGN_FEED
+    AD_GROUP_FEED = 12, // AD_GROUP_FEED
+    AD_GROUP_AD = 13, // AD_GROUP_AD
   }
 
   /**
@@ -2311,6 +2353,7 @@ export namespace enums {
     CUSTOM_INTENT = 30, // CUSTOM_INTENT
     LOCATION_GROUP = 31, // LOCATION_GROUP
     CUSTOM_AUDIENCE = 32, // CUSTOM_AUDIENCE
+    COMBINED_AUDIENCE = 33, // COMBINED_AUDIENCE
   }
 
   /**
@@ -2821,6 +2864,17 @@ export namespace enums {
   }
 
   /**
+   * @name GoogleVoiceCallStatusEnum.GoogleVoiceCallStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v6/GoogleVoiceCallStatusEnum.GoogleVoiceCallStatus
+   */
+  export enum GoogleVoiceCallStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    MISSED = 2, // MISSED
+    RECEIVED = 3, // RECEIVED
+  }
+
+  /**
    * @name HotelPlaceholderFieldEnum.HotelPlaceholderField
    * @link https://developers.google.com/google-ads/api/reference/rpc/v6/HotelPlaceholderFieldEnum.HotelPlaceholderField
    */
@@ -2847,6 +2901,16 @@ export namespace enums {
     SIMILAR_PROPERTY_IDS = 19, // SIMILAR_PROPERTY_IDS
     IOS_APP_LINK = 20, // IOS_APP_LINK
     IOS_APP_STORE_ID = 21, // IOS_APP_STORE_ID
+  }
+
+  /**
+   * @name ImagePlaceholderFieldEnum.ImagePlaceholderField
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v6/ImagePlaceholderFieldEnum.ImagePlaceholderField
+   */
+  export enum ImagePlaceholderField {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ASSET_ID = 2, // ASSET_ID
   }
 
   /**
@@ -3393,6 +3457,7 @@ export namespace enums {
     MOVE_UNUSED_BUDGET = 15, // MOVE_UNUSED_BUDGET
     FORECASTING_CAMPAIGN_BUDGET = 16, // FORECASTING_CAMPAIGN_BUDGET
     TARGET_ROAS_OPT_IN = 17, // TARGET_ROAS_OPT_IN
+    RESPONSIVE_SEARCH_AD = 18, // RESPONSIVE_SEARCH_AD
   }
 
   /**

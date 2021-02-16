@@ -416,6 +416,21 @@ export function billingSetup(
   return `customers/${customerId}/billingSetups/${billingSetupId}` as const;
 }
 
+/* CallView */
+export type CallViewResourceName = `customers/${StrNum}/callViews/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} callDetailId
+ * @returns `CallViewResourceName`
+ * @example const callView: ResourceNames.CallViewResourceName = ResourceNames.callView(10987417, 21974834)
+ */
+export function callView(
+  customerId: string | number,
+  callDetailId: string | number
+): CallViewResourceName {
+  return `customers/${customerId}/callViews/${callDetailId}` as const;
+}
+
 /* Campaign */
 export type CampaignResourceName = `customers/${StrNum}/campaigns/${StrNum}`;
 /**
@@ -911,6 +926,21 @@ export function customerUserAccess(
   userId: string | number
 ): CustomerUserAccessResourceName {
   return `customers/${customerId}/customerUserAccesses/${userId}` as const;
+}
+
+/* CustomerUserAccessInvitation */
+export type CustomerUserAccessInvitationResourceName = `customers/${StrNum}/customerUserAccessInvitations/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} invitationId
+ * @returns `CustomerUserAccessInvitationResourceName`
+ * @example const customerUserAccessInvitation: ResourceNames.CustomerUserAccessInvitationResourceName = ResourceNames.customerUserAccessInvitation(10987417, 21974834)
+ */
+export function customerUserAccessInvitation(
+  customerId: string | number,
+  invitationId: string | number
+): CustomerUserAccessInvitationResourceName {
+  return `customers/${customerId}/customerUserAccessInvitations/${invitationId}` as const;
 }
 
 /* DetailPlacementView */

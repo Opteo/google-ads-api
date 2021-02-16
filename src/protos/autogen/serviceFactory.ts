@@ -1581,7 +1581,7 @@ export default class ServiceFactory extends Service {
     type MutateOptions = Partial<
       Pick<
         services.IMutateAdParametersRequest,
-        "partial_failure" | "validate_only"
+        "partial_failure" | "validate_only" | "response_content_type"
       >
     >;
     return {
@@ -2319,7 +2319,7 @@ export default class ServiceFactory extends Service {
     type MutateOptions = Partial<
       Pick<
         services.IMutateCampaignBidModifiersRequest,
-        "partial_failure" | "validate_only"
+        "partial_failure" | "validate_only" | "response_content_type"
       >
     >;
     return {
@@ -3651,7 +3651,7 @@ export default class ServiceFactory extends Service {
     type MutateOptions = Partial<
       Pick<
         services.IMutateCampaignSharedSetsRequest,
-        "partial_failure" | "validate_only"
+        "partial_failure" | "validate_only" | "response_content_type"
       >
     >;
     return {
@@ -4282,7 +4282,7 @@ export default class ServiceFactory extends Service {
     type MutateOptions = Partial<
       Pick<
         services.IMutateCustomerNegativeCriteriaRequest,
-        "partial_failure" | "validate_only"
+        "partial_failure" | "validate_only" | "response_content_type"
       >
     >;
     return {
@@ -5121,7 +5121,7 @@ export default class ServiceFactory extends Service {
     type MutateOptions = Partial<
       Pick<
         services.IMutateFeedMappingsRequest,
-        "partial_failure" | "validate_only"
+        "partial_failure" | "validate_only" | "response_content_type"
       >
     >;
     return {
@@ -6469,7 +6469,7 @@ export default class ServiceFactory extends Service {
     type MutateOptions = Partial<
       Pick<
         services.IMutateSharedCriteriaRequest,
-        "partial_failure" | "validate_only"
+        "partial_failure" | "validate_only" | "response_content_type"
       >
     >;
     return {
@@ -7722,6 +7722,113 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          return response;
+        } catch (err) {
+          throw this.getGoogleAdsError(err);
+        }
+      },
+    };
+  }
+
+  /**
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v6/CustomerUserAccessInvitationService
+   */
+  public get customerUserAccessInvitations() {
+    const service = this.loadService<services.CustomerUserAccessInvitationService>(
+      "CustomerUserAccessInvitationServiceClient"
+    );
+    type MutateOptions = never;
+    return {
+      /**
+       * @description Retrieve a resources.CustomerUserAccessInvitation in full detail
+       * @warning Don't use get in production!
+       * @returns resources.CustomerUserAccessInvitation
+       */
+      get: async (
+        resourceName: string
+      ): Promise<resources.CustomerUserAccessInvitation> => {
+        const request = new services.GetCustomerUserAccessInvitationRequest({
+          resource_name: resourceName,
+        });
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.getCustomerUserAccessInvitation(
+            request,
+            {
+              // @ts-expect-error This arg doesn't exist in the type definitions
+              otherArgs: {
+                headers: this.callHeaders,
+              },
+            }
+          );
+          return response;
+        } catch (err) {
+          throw this.getGoogleAdsError(err);
+        }
+      },
+
+      /**
+       * @description create resources of type resources.ICustomerUserAccessInvitation
+       * @returns services.MutateCustomerUserAccessInvitationResponse
+       */
+      create: async (
+        customerUserAccessInvitations: resources.ICustomerUserAccessInvitation[],
+        options?: MutateOptions
+      ): Promise<services.MutateCustomerUserAccessInvitationResponse> => {
+        const ops = this.buildOperations<
+          services.CustomerUserAccessInvitationOperation,
+          resources.ICustomerUserAccessInvitation
+        >("create", customerUserAccessInvitations);
+        const request = this.buildRequest<
+          services.CustomerUserAccessInvitationOperation,
+          services.IMutateCustomerUserAccessInvitationRequest,
+          MutateOptions
+        >(ops, options);
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.mutateCustomerUserAccessInvitation(
+            request,
+            {
+              // @ts-expect-error This arg doesn't exist in the type definitions
+              otherArgs: {
+                headers: this.callHeaders,
+              },
+            }
+          );
+          return response;
+        } catch (err) {
+          throw this.getGoogleAdsError(err);
+        }
+      },
+
+      /**
+       * @description remove resources of type string
+       * @returns services.MutateCustomerUserAccessInvitationResponse
+       */
+      remove: async (
+        customerUserAccessInvitations: string[],
+        options?: MutateOptions
+      ): Promise<services.MutateCustomerUserAccessInvitationResponse> => {
+        const ops = this.buildOperations<
+          services.CustomerUserAccessInvitationOperation,
+          string
+        >("remove", customerUserAccessInvitations);
+        const request = this.buildRequest<
+          services.CustomerUserAccessInvitationOperation,
+          services.IMutateCustomerUserAccessInvitationRequest,
+          MutateOptions
+        >(ops, options);
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.mutateCustomerUserAccessInvitation(
+            request,
+            {
+              // @ts-expect-error This arg doesn't exist in the type definitions
+              otherArgs: {
+                headers: this.callHeaders,
+              },
+            }
+          );
           return response;
         } catch (err) {
           throw this.getGoogleAdsError(err);
