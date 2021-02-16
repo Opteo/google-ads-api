@@ -1,5 +1,10 @@
 import { errors, services } from "./protos";
-import { CustomerCredentials, MutateOperation, ReportOptions } from "./types";
+import {
+  CustomerCredentials,
+  MutateOperation,
+  ReportOptions,
+  RequestOptions,
+} from "./types";
 
 export type BaseQueryHookArgs = {
   credentials: CustomerCredentials;
@@ -12,14 +17,26 @@ export type BaseMutationHookArgs = {
   mutations: MutateOperation<any>[];
 };
 
-type PreHookArgs = { cancel: (args?: any) => void };
-type ErrorHookArgs = { error: errors.GoogleAdsFailure | Error };
+type PreHookArgs = {
+  cancel: (args?: any) => void;
+  editRequestOptions: (options: Partial<RequestOptions>) => void;
+};
+
+type ErrorHookArgs = {
+  error: errors.GoogleAdsFailure | Error;
+};
+
 type PostHookArgs<
   T = services.IGoogleAdsRow[] | services.MutateGoogleAdsResponse
-> = { response: T; resolve: (args: any) => void };
+> = {
+  response: T;
+  resolve: (args: any) => void;
+};
 
 type HookArgs = PreHookArgs | ErrorHookArgs | PostHookArgs;
+
 type QueryHook<H extends HookArgs> = (args: BaseQueryHookArgs & H) => void;
+
 type MutationHook<H extends HookArgs> = (
   args: BaseMutationHookArgs & H
 ) => void;

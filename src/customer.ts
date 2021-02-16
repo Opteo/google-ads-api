@@ -1,6 +1,14 @@
 import { ClientOptions } from "./client";
-import ServiceFactory from "./protos/autogen/serviceFactory";
+import {
+  BaseMutationHookArgs,
+  BaseQueryHookArgs,
+  HookedCancellation,
+  HookedResolution,
+  Hooks,
+} from "./hooks";
+import { parse } from "./parser";
 import { services } from "./protos";
+import ServiceFactory from "./protos/autogen/serviceFactory";
 import { buildQuery } from "./query";
 import {
   CustomerOptions,
@@ -9,14 +17,6 @@ import {
   ReportOptions,
   RequestOptions,
 } from "./types";
-import {
-  Hooks,
-  BaseQueryHookArgs,
-  BaseMutationHookArgs,
-  HookedCancellation,
-  HookedResolution,
-} from "./hooks";
-import { parse } from "./parser";
 
 export class Customer extends ServiceFactory {
   protected readonly hooks: Hooks;
@@ -64,6 +64,12 @@ export class Customer extends ServiceFactory {
         cancel: (res) => {
           queryStart.cancelled = true;
           queryStart.res = res;
+        },
+        editRequestOptions: (options) => {
+          Object.entries(options).forEach(([key, val]) => {
+            // @ts-ignore
+            requestOptions[key] = val;
+          });
         },
       });
 
@@ -145,6 +151,12 @@ export class Customer extends ServiceFactory {
           queryCancellation.cancelled = true;
           queryCancellation.res = res;
         },
+        editRequestOptions: (options) => {
+          Object.entries(options).forEach(([key, val]) => {
+            // @ts-ignore
+            requestOptions[key] = val;
+          });
+        },
       });
       if (queryCancellation.cancelled) {
         return queryCancellation.res as T;
@@ -216,6 +228,12 @@ export class Customer extends ServiceFactory {
         cancel: (res) => {
           mutationCancellation.cancelled = true;
           mutationCancellation.res = res;
+        },
+        editRequestOptions: (options) => {
+          Object.entries(options).forEach(([key, val]) => {
+            // @ts-ignore
+            requestOptions[key] = val;
+          });
         },
       });
       if (mutationCancellation.cancelled) {
