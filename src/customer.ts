@@ -134,7 +134,7 @@ export class Customer extends ServiceFactory {
    */
   public async query<T = services.IGoogleAdsRow[]>(
     gaqlQuery: string,
-    requestOptions?: RequestOptions,
+    requestOptions: RequestOptions = {},
     reportOptions?: ReportOptions
   ): Promise<T> {
     const baseHookArguments: BaseQueryHookArgs = {
@@ -214,7 +214,7 @@ export class Customer extends ServiceFactory {
    */
   public async mutateResources<T>(
     mutations: MutateOperation<T>[],
-    options?: MutateOptions
+    mutateOptions: MutateOptions = {}
   ): Promise<services.MutateGoogleAdsResponse> {
     const baseHookArguments: BaseMutationHookArgs = {
       credentials: this.credentials,
@@ -232,7 +232,7 @@ export class Customer extends ServiceFactory {
         editRequestOptions: (options) => {
           Object.entries(options).forEach(([key, val]) => {
             // @ts-ignore
-            requestOptions[key] = val;
+            mutateOptions[key] = val;
           });
         },
       });
@@ -243,7 +243,7 @@ export class Customer extends ServiceFactory {
 
     const { service, request } = this.buildMutationRequestAndService(
       mutations,
-      options
+      mutateOptions
     );
 
     try {

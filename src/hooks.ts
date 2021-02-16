@@ -4,6 +4,7 @@ import {
   MutateOperation,
   ReportOptions,
   RequestOptions,
+  MutateOptions,
 } from "./types";
 
 export type BaseQueryHookArgs = {
@@ -17,9 +18,9 @@ export type BaseMutationHookArgs = {
   mutations: MutateOperation<any>[];
 };
 
-type PreHookArgs = {
+type PreHookArgs<T = RequestOptions | MutateOptions> = {
   cancel: (args?: any) => void;
-  editRequestOptions: (options: Partial<RequestOptions>) => void;
+  editRequestOptions: (options: Partial<T>) => void;
 };
 
 type ErrorHookArgs = {
@@ -41,11 +42,11 @@ type MutationHook<H extends HookArgs> = (
   args: BaseMutationHookArgs & H
 ) => void;
 
-export type OnQueryStart = QueryHook<PreHookArgs>;
+export type OnQueryStart = QueryHook<PreHookArgs<RequestOptions>>;
 export type OnQueryError = QueryHook<ErrorHookArgs>;
 export type OnQueryEnd = QueryHook<PostHookArgs<services.IGoogleAdsRow[]>>;
 
-export type OnMutationStart = MutationHook<PreHookArgs>;
+export type OnMutationStart = MutationHook<PreHookArgs<MutateOptions>>;
 export type OnMutationError = MutationHook<ErrorHookArgs>;
 export type OnMutationEnd = MutationHook<
   PostHookArgs<services.MutateGoogleAdsResponse>
@@ -54,11 +55,12 @@ export type OnMutationEnd = MutationHook<
 export interface Hooks {
   /**
    * @description Hook called before execution of a query.
-   * @params `{ credentials, query, reportOptions, cancel }`
+   * @params `{ credentials, query, reportOptions, cancel, editRequestOptions }`
    * @param credentials customer id, login customer id, linked customer id
    * @param query gaql
    * @param reportOptions
    * @param cancel utility function for cancelling the query. if an argument is provided then the query will return this argument
+   * @param editRequestOptions utility function for editing the request options. any request options keys that are passed will be changed
    */
   onQueryStart?: OnQueryStart;
   /**
@@ -82,10 +84,11 @@ export interface Hooks {
   onQueryEnd?: OnQueryEnd;
   /**
    * @description Hook called before execution of a mutation.
-   * @params `{ credentials, mutations, cancel }`
+   * @params `{ credentials, mutations, cancel, editRequestOptions }`
    * @param credentials customer id, login customer id, linked customer id
    * @param mutations
    * @param cancel utility function for cancelling the mutation. if an argument is provided then the query/report will return this argument
+   * @param editRequestOptions utility function for editing the request options. any request options keys that are passed will be changed
    */
   onMutationStart?: OnMutationStart;
   /**
