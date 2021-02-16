@@ -161,9 +161,9 @@ describe("query", () => {
     expect(mockedParse).toHaveBeenCalled();
     expect(spyBuild).toHaveBeenCalled();
     expect(spyBuild).toHaveBeenCalledWith(gaqlQuery, {
-      validate_only: true,
+      validate_only: true, // changed
       page_token: "abcd",
-      page_size: 4,
+      page_size: 4, // changed
     });
     expect(spyMockSearch).toHaveBeenCalled();
     expect(spyHook).toHaveBeenCalled();
@@ -476,9 +476,9 @@ describe("reportStream", () => {
     const spyMockSearchAsync = jest.spyOn(mockService, "searchAsync");
     const spyHook = jest.spyOn(hooks, "onQueryStart");
     const requestOptions: RequestOptions = {
-      validate_only: false,
+      validate_only: false, // changed
       page_token: "abcd",
-      page_size: 2,
+      page_size: 2, // changed
     };
     const stream = customer.reportStream({
       ...reportOptions,
@@ -744,9 +744,9 @@ describe("mutateResources", () => {
     expect(spyMockMutate).toHaveBeenCalled();
     expect(spyBuild).toHaveBeenCalled();
     expect(spyBuild).toHaveBeenCalledWith(mutations, {
-      validate_only: true,
+      validate_only: true, // changed
       partial_failure: true,
-      response_content_type: enums.ResponseContentType.MUTABLE_RESOURCE,
+      response_content_type: enums.ResponseContentType.MUTABLE_RESOURCE, // changed
     });
     expect(spyHook).toHaveBeenCalled();
     expect(spyHook).toHaveBeenCalledWith({
