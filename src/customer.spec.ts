@@ -80,7 +80,7 @@ describe("query", () => {
       query: gaqlQuery,
       reportOptions: undefined,
       cancel: expect.any(Function),
-      editRequestOptions: expect.any(Function),
+      editOptions: expect.any(Function),
     });
     expect(res).toEqual(mockQueryReturnValue);
   });
@@ -106,7 +106,7 @@ describe("query", () => {
       query: gaqlQuery,
       reportOptions: undefined,
       cancel: expect.any(Function),
-      editRequestOptions: expect.any(Function),
+      editOptions: expect.any(Function),
     });
     expect(typeof res).toEqual("undefined");
   });
@@ -133,15 +133,15 @@ describe("query", () => {
       query: gaqlQuery,
       reportOptions: undefined,
       cancel: expect.any(Function),
-      editRequestOptions: expect.any(Function),
+      editOptions: expect.any(Function),
     });
     expect(res).toEqual(alternativeReturnValue);
   });
 
-  it("edits the requestOptions when editRequestOptions() is called in onQueryStart", async () => {
+  it("edits the requestOptions when editOptions() is called in onQueryStart", async () => {
     const hooks: Hooks = {
-      onQueryStart({ editRequestOptions }) {
-        editRequestOptions({ validate_only: true, page_size: 4 });
+      onQueryStart({ editOptions }) {
+        editOptions({ validate_only: true, page_size: 4 });
       },
     };
     const customer = newCustomer(hooks);
@@ -172,7 +172,7 @@ describe("query", () => {
       query: gaqlQuery,
       reportOptions: undefined,
       cancel: expect.any(Function),
-      editRequestOptions: expect.any(Function),
+      editOptions: expect.any(Function),
     });
     expect(res).toEqual(mockQueryReturnValue);
   });
@@ -360,7 +360,7 @@ describe("reportStream", () => {
       query: expect.any(String),
       reportOptions,
       cancel: expect.any(Function),
-      editRequestOptions: expect.any(Function),
+      editOptions: expect.any(Function),
     });
   });
 
@@ -392,7 +392,7 @@ describe("reportStream", () => {
       query: expect.any(String),
       reportOptions,
       cancel: expect.any(Function),
-      editRequestOptions: expect.any(Function),
+      editOptions: expect.any(Function),
     });
   });
 
@@ -425,7 +425,7 @@ describe("reportStream", () => {
       query: expect.any(String),
       reportOptions,
       cancel: expect.any(Function),
-      editRequestOptions: expect.any(Function),
+      editOptions: expect.any(Function),
     });
   });
 
@@ -458,14 +458,14 @@ describe("reportStream", () => {
       query: expect.any(String),
       reportOptions,
       cancel: expect.any(Function),
-      editRequestOptions: expect.any(Function),
+      editOptions: expect.any(Function),
     });
   });
 
-  it("edits the requestOptions when editRequestOptions() is called in onQueryStart", async () => {
+  it("edits the requestOptions when editOptions() is called in onQueryStart", async () => {
     const hooks: Hooks = {
-      onQueryStart({ editRequestOptions }) {
-        editRequestOptions({ validate_only: true, page_size: 4 });
+      onQueryStart({ editOptions }) {
+        editOptions({ validate_only: true, page_size: 4 });
       },
     };
     const customer = newCustomer(hooks);
@@ -506,7 +506,7 @@ describe("reportStream", () => {
       query: expect.any(String),
       reportOptions: { ...reportOptions, ...requestOptions },
       cancel: expect.any(Function),
-      editRequestOptions: expect.any(Function),
+      editOptions: expect.any(Function),
     });
   });
 
@@ -667,7 +667,7 @@ describe("mutateResources", () => {
       credentials: expect.any(Object),
       mutations,
       cancel: expect.any(Function),
-      editRequestOptions: expect.any(Function),
+      editOptions: expect.any(Function),
     });
     expect(res).toEqual(mockMutationReturnValue);
   });
@@ -690,7 +690,7 @@ describe("mutateResources", () => {
       credentials: expect.any(Object),
       mutations,
       cancel: expect.any(Function),
-      editRequestOptions: expect.any(Function),
+      editOptions: expect.any(Function),
     });
     expect(typeof res).toEqual("undefined");
   });
@@ -714,15 +714,15 @@ describe("mutateResources", () => {
       credentials: expect.any(Object),
       mutations,
       cancel: expect.any(Function),
-      editRequestOptions: expect.any(Function),
+      editOptions: expect.any(Function),
     });
     expect(res).toEqual(alternativeReturnValue);
   });
 
-  it("edits the mutationOptions when editRequestOptions() is called in onQueryStart", async () => {
+  it("edits the mutationOptions when editOptions() is called in onQueryStart", async () => {
     const hooks: Hooks = {
-      onMutationStart({ editRequestOptions }) {
-        editRequestOptions({
+      onMutationStart({ editOptions }) {
+        editOptions({
           validate_only: true,
           response_content_type: enums.ResponseContentType.MUTABLE_RESOURCE,
         });
@@ -753,7 +753,7 @@ describe("mutateResources", () => {
       credentials: expect.any(Object),
       mutations,
       cancel: expect.any(Function),
-      editRequestOptions: expect.any(Function),
+      editOptions: expect.any(Function),
     });
     expect(res).toEqual(mockMutationReturnValue);
   });

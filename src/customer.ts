@@ -65,7 +65,7 @@ export class Customer extends ServiceFactory {
           queryStart.cancelled = true;
           queryStart.res = res;
         },
-        editRequestOptions: (options) => {
+        editOptions: (options) => {
           Object.entries(options).forEach(([key, val]) => {
             // @ts-ignore
             requestOptions[key] = val;
@@ -151,7 +151,7 @@ export class Customer extends ServiceFactory {
           queryCancellation.cancelled = true;
           queryCancellation.res = res;
         },
-        editRequestOptions: (options) => {
+        editOptions: (options) => {
           Object.entries(options).forEach(([key, val]) => {
             // @ts-ignore
             requestOptions[key] = val;
@@ -229,7 +229,7 @@ export class Customer extends ServiceFactory {
           mutationCancellation.cancelled = true;
           mutationCancellation.res = res;
         },
-        editRequestOptions: (options) => {
+        editOptions: (options) => {
           Object.entries(options).forEach(([key, val]) => {
             // @ts-ignore
             mutateOptions[key] = val;

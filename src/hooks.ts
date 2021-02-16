@@ -20,7 +20,7 @@ export type BaseMutationHookArgs = {
 
 type PreHookArgs<T = RequestOptions | MutateOptions> = {
   cancel: (args?: any) => void;
-  editRequestOptions: (options: Partial<T>) => void;
+  editOptions: (options: Partial<T>) => void;
 };
 
 type ErrorHookArgs = {
@@ -55,12 +55,12 @@ export type OnMutationEnd = MutationHook<
 export interface Hooks {
   /**
    * @description Hook called before execution of a query.
-   * @params `{ credentials, query, reportOptions, cancel, editRequestOptions }`
+   * @params `{ credentials, query, reportOptions, cancel, editOptions }`
    * @param credentials customer id, login customer id, linked customer id
    * @param query gaql
    * @param reportOptions
    * @param cancel utility function for cancelling the query. if an argument is provided then the query will return this argument
-   * @param editRequestOptions utility function for editing the request options. any request options keys that are passed will be changed
+   * @param editOptions utility function for editing the request options. any request option keys that are passed will be changed
    */
   onQueryStart?: OnQueryStart;
   /**
@@ -84,11 +84,11 @@ export interface Hooks {
   onQueryEnd?: OnQueryEnd;
   /**
    * @description Hook called before execution of a mutation.
-   * @params `{ credentials, mutations, cancel, editRequestOptions }`
+   * @params `{ credentials, mutations, cancel, editOptions }`
    * @param credentials customer id, login customer id, linked customer id
    * @param mutations
    * @param cancel utility function for cancelling the mutation. if an argument is provided then the query/report will return this argument
-   * @param editRequestOptions utility function for editing the request options. any request options keys that are passed will be changed
+   * @param editOptions utility function for editing the mutate options. any mutate option keys that are passed will be changed
    */
   onMutationStart?: OnMutationStart;
   /**
