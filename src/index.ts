@@ -17,7 +17,12 @@ export { fromMicros, toMicros } from "./utils";
 export * as ResourceNames from "./protos/autogen/resourceNames";
 
 // Util types
-export { CustomerOptions, ReportOptions, MutateOperation } from "./types";
+export {
+  CustomerOptions,
+  ReportOptions,
+  MutateOperation,
+  Constraints,
+} from "./types";
 export {
   Hooks,
   OnQueryStart,
