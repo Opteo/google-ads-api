@@ -15,7 +15,7 @@ import {
   MutateOperation,
   MutateOptions,
 } from "./types";
-import { getFieldMask, toCamelCase } from "./utils";
+import { getFieldMask, toSnakeCase } from "./utils";
 import { googleAdsVersion } from "./version";
 
 // Make sure to update this version number when upgrading
@@ -135,13 +135,13 @@ export class Service {
 
     const mutateOperations = mutations.map(
       (mutation): services.MutateOperation => {
-        const opKey = `${toCamelCase(mutation.entity)}Operation`;
+        const opKey = toSnakeCase(`${mutation.entity}Operation`);
         const operation = {
           [mutation.operation ?? "create"]: mutation.resource,
         };
         if (mutation.operation === "update") {
           // @ts-expect-error Resource operations should have updateMask defined
-          op.updateMask = getFieldMask(mutation.resource);
+          operation.update_mask = getFieldMask(mutation.resource);
         }
         const mutateOperation = new services.MutateOperation({
           [opKey]: operation,
@@ -171,7 +171,7 @@ export class Service {
       };
       if (type === "update") {
         // @ts-expect-error Field required for updates
-        op.updateMask = getFieldMask(
+        op.update_mask = getFieldMask(
           // @ts-expect-error Message types have a toObject method
           message.toObject(e, {
             defaults: false,
