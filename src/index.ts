@@ -21,8 +21,10 @@ export {
   CustomerOptions,
   ReportOptions,
   MutateOperation,
+  Constraint,
   Constraints,
 } from "./types";
+export { Resource, Attribute, Metric, Segment } from "./protos/autogen/fields";
 export {
   Hooks,
   OnQueryStart,

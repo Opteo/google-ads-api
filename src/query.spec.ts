@@ -160,12 +160,12 @@ describe("validateConstraintKeyAndValue", () => {
     const val1 = `'SEARCH'`;
     const validatedValue1 = validateConstraintKeyAndValue(key, val1);
     expect(validatedValue1.op).toEqual("=");
-    expect(validatedValue1.val).toEqual(`'SEARCH'`);
+    expect(validatedValue1.val).toEqual(val1);
 
     const val2 = `"SEARCH"`;
     const validatedValue2 = validateConstraintKeyAndValue(key, val2);
     expect(validatedValue2.op).toEqual("=");
-    expect(validatedValue2.val).toEqual(`"SEARCH"`);
+    expect(validatedValue2.val).toEqual(val2);
   });
 });
 
