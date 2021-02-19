@@ -1,7 +1,6 @@
 import long from "long";
 import { ReportOptions } from "./types";
-import { services } from "./protos";
-import { resourceNames, Resource } from "./protos/autogen/fields";
+import { services, fields } from "./protos";
 
 export const ParsingError = {
   NO_REPORT_OPTIONS_OR_GAQL_QUERY:
@@ -42,9 +41,9 @@ export function parse({
     ? getReportOptionFields(reportOptions)
     : getGAQLFields(gaqlString!);
 
-  const fields = [...queryFields, ...resourceNames];
+  const allFields = [...queryFields, ...fields.resourceNames];
 
-  return parseRows(results, fields);
+  return parseRows(results, allFields);
 }
 
 // This function assumes that a gaql query is of the format "select * * * from * ...".
@@ -94,7 +93,7 @@ export function parseRows(
 
       // @ts-expect-error These are the best we can do for these types
       const [parent, ...children]: [
-        Resource,
+        fields.Resource,
         ...(keyof services.IGoogleAdsRow)[]
       ] = split;
 
@@ -130,7 +129,7 @@ function parseNestedValues(
       ? new long(rawVal.low, rawVal.high, rawVal.unsigned).toNumber()
       : rawVal;
 
-    row[parentField as Resource] = parsedVal;
+    row[parentField as fields.Resource] = parsedVal;
     return row;
   }
 

@@ -5,6 +5,7 @@ export { Client as GoogleAdsApi, ClientOptions } from "./client";
 export {
   common,
   enums,
+  fields,
   errors,
   resources,
   services,
@@ -24,7 +25,6 @@ export {
   Constraint,
   Constraints,
 } from "./types";
-export { Resource, Attribute, Metric, Segment } from "./protos/autogen/fields";
 export {
   Hooks,
   OnQueryStart,

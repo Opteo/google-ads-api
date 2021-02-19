@@ -8,8 +8,7 @@ import {
   ConstraintOperation,
   SortOrder,
 } from "./types";
-import { Resource, enumFields } from "./protos/autogen/fields";
-import { enums } from "./protos/autogen/enums";
+import { enums, fields } from "./protos";
 
 enum QueryKeywords {
   SELECT = "SELECT",
@@ -25,7 +24,7 @@ type ParsedConstraintValue = string | number | boolean;
 type ConstraintString = `${string} ${ConstraintOperation} ${ParsedConstraintValue}`;
 
 type SelectClause = `${QueryKeywords.SELECT} ${string}`;
-type FromClause = ` ${QueryKeywords.FROM} ${Resource}`;
+type FromClause = ` ${QueryKeywords.FROM} ${fields.Resource}`;
 type WhereClause = ` ${QueryKeywords.WHERE} ${string}` | ``;
 type OrderClause = ` ${QueryKeywords.ORDER_BY} ${string} ${SortOrder}` | ``;
 type LimitClause = ` ${QueryKeywords.LIMIT} ${number}` | ``;

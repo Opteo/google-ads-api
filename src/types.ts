@@ -1,5 +1,4 @@
-import { services } from "./protos";
-import { Resource, Attribute, Metric, Segment } from "./protos/autogen/fields";
+import { services, fields } from "./protos";
 
 export interface CustomerOptions {
   customer_id: string;
@@ -14,10 +13,10 @@ export type CustomerCredentials = Pick<
 >;
 
 export interface ReportOptions extends RequestOptions {
-  entity: Resource;
-  attributes?: Attribute[];
-  metrics?: Metric[];
-  segments?: Segment[];
+  entity: fields.Resource;
+  attributes?: fields.Attributes;
+  metrics?: fields.Metrics;
+  segments?: fields.Segments;
   constraints?: Constraints;
   limit?: number;
   order_by?: ConstraintKey | ConstraintKey[];
@@ -43,7 +42,7 @@ export type DateConstant =
 
 export type SortOrder = "ASC" | "DESC";
 
-export type ConstraintKey = Attribute | Metric | Segment;
+export type ConstraintKey = fields.Attribute | fields.Metric | fields.Segment;
 export type ConstraintValue = number | string | boolean | (number | string)[];
 export type ConstraintOperation =
   | "="
@@ -89,6 +88,6 @@ export type MutateOptions = Omit<
 
 export type MutateOperation<T> = {
   resource: T;
-  entity: Resource;
+  entity: fields.Resource;
   operation?: "create" | "update" | "delete";
 } & Partial<Omit<T, "toJSON">>;

@@ -15,6 +15,7 @@ export import services = protos.google.ads.googleads.v6.services;
 // We compile enums ourselves, the Google ones should be used internally only
 export import internalEnums = protos.google.ads.googleads.v6.enums;
 export { enums } from "./autogen/enums";
+export { fields } from "./autogen/fields";
 
 // Common service used for report/query methods
 export { GoogleAdsServiceClient } from "google-ads-node";
