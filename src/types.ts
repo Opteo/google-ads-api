@@ -53,7 +53,7 @@ export type ConstraintOperation =
   | "<"
   | "<="
   | "IN"
-  | "NOT_IN"
+  | "NOT IN"
   | "LIKE"
   | "NOT LIKE"
   | "CONTAINS ANY"
