@@ -127,9 +127,9 @@ export function convertNumericEnumToString(
   val: ParsedConstraintValue
 ): ParsedConstraintValue {
   // @ts-expect-error key does not always match an enum field
-  if (enumFields[key] && typeof val === "number") {
+  if (fields.enumFields[key] && typeof val === "number") {
     // @ts-expect-error typescript doesn't like accessing items in a namespace with a string
-    const enumStringValue = enums[enumFields[key]][val]; // e.g. enums['CampaignStatus'][2] = "ENABLED"
+    const enumStringValue = enums[fields.enumFields[key]][val]; // e.g. enums['CampaignStatus'][2] = "ENABLED"
 
     if (enumStringValue) {
       return `"${enumStringValue}"`;
