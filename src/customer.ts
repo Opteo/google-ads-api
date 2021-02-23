@@ -19,15 +19,12 @@ import {
 } from "./types";
 
 export class Customer extends ServiceFactory {
-  protected readonly hooks: Hooks;
-
   constructor(
     clientOptions: ClientOptions,
     customerOptions: CustomerOptions,
     hooks?: Hooks
   ) {
-    super(clientOptions, customerOptions);
-    this.hooks = hooks || {};
+    super(clientOptions, customerOptions, hooks ?? {});
   }
 
   /** 
@@ -218,7 +215,9 @@ export class Customer extends ServiceFactory {
   ): Promise<services.MutateGoogleAdsResponse> {
     const baseHookArguments: BaseMutationHookArgs = {
       credentials: this.credentials,
+      method: "GoogleAdsService.mutate",
       mutations,
+      isServiceCall: false,
     };
 
     if (this.hooks.onMutationStart) {
