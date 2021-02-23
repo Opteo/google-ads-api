@@ -17,6 +17,7 @@ import {
 } from "./types";
 import { getFieldMask, toSnakeCase } from "./utils";
 import { googleAdsVersion } from "./version";
+import { Hooks } from "./hooks";
 
 // Make sure to update this version number when upgrading
 export const FAILURE_KEY = `google.ads.googleads.${googleAdsVersion}.errors.googleadsfailure-bin`;
@@ -30,11 +31,17 @@ export interface CallHeaders {
 export class Service {
   protected readonly clientOptions: ClientOptions;
   protected readonly customerOptions: CustomerOptions;
+  protected readonly hooks: Hooks;
   private serviceCache!: Record<ServiceName, AllServices>;
 
-  constructor(clientOptions: ClientOptions, customerOptions: CustomerOptions) {
+  constructor(
+    clientOptions: ClientOptions,
+    customerOptions: CustomerOptions,
+    hooks?: Hooks
+  ) {
     this.clientOptions = clientOptions;
     this.customerOptions = customerOptions;
+    this.hooks = hooks ?? {};
 
     // @ts-expect-error All fields don't need to be set here
     this.serviceCache = {};

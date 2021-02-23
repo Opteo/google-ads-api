@@ -4,10 +4,20 @@ import { ClientOptions } from "../../client";
 import { CustomerOptions } from "../../types";
 import { Service } from "../../service";
 import { resources, services, protobuf, longrunning } from "../index";
+import {
+  BaseMutationHookArgs,
+  HookedCancellation,
+  HookedResolution,
+  Hooks,
+} from "../../hooks";
 
 export default class ServiceFactory extends Service {
-  constructor(clientOptions: ClientOptions, customerOptions: CustomerOptions) {
-    super(clientOptions, customerOptions);
+  constructor(
+    clientOptions: ClientOptions,
+    customerOptions: CustomerOptions,
+    hooks?: Hooks
+  ) {
+    super(clientOptions, customerOptions, hooks ?? {});
   }
 
   /**
@@ -63,6 +73,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAccountBudgetProposalRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AccountBudgetProposalService.mutateAccountBudgetProposal",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAccountBudgetProposal(
@@ -74,9 +109,30 @@ export default class ServiceFactory extends Service {
               },
             }
           );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -97,6 +153,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAccountBudgetProposalRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AccountBudgetProposalService.mutateAccountBudgetProposal",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAccountBudgetProposal(
@@ -108,9 +189,30 @@ export default class ServiceFactory extends Service {
               },
             }
           );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -229,6 +331,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAccountLinkRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AccountLinkService.mutateAccountLink",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAccountLink(request, {
@@ -237,9 +364,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -260,6 +408,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAccountLinkRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AccountLinkService.mutateAccountLink",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAccountLink(request, {
@@ -268,9 +441,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -366,6 +560,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAdGroupAdLabelsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AdGroupAdLabelService.mutateAdGroupAdLabels",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdGroupAdLabels(request, {
@@ -374,9 +593,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -397,6 +637,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAdGroupAdLabelsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AdGroupAdLabelService.mutateAdGroupAdLabels",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdGroupAdLabels(request, {
@@ -405,9 +670,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -467,6 +753,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAdGroupAdsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AdGroupAdService.mutateAdGroupAds",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdGroupAds(request, {
@@ -475,9 +786,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -503,6 +835,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAdGroupAdsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AdGroupAdService.mutateAdGroupAds",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdGroupAds(request, {
@@ -511,9 +868,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -534,6 +912,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAdGroupAdsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AdGroupAdService.mutateAdGroupAds",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdGroupAds(request, {
@@ -542,9 +945,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -642,6 +1066,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAdGroupBidModifiersRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AdGroupBidModifierService.mutateAdGroupBidModifiers",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdGroupBidModifiers(request, {
@@ -650,9 +1099,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -678,6 +1148,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAdGroupBidModifiersRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AdGroupBidModifierService.mutateAdGroupBidModifiers",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdGroupBidModifiers(request, {
@@ -686,9 +1181,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -709,6 +1225,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAdGroupBidModifiersRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AdGroupBidModifierService.mutateAdGroupBidModifiers",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdGroupBidModifiers(request, {
@@ -717,9 +1258,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -781,6 +1343,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAdGroupCriterionLabelsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AdGroupCriterionLabelService.mutateAdGroupCriterionLabels",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdGroupCriterionLabels(
@@ -792,9 +1379,30 @@ export default class ServiceFactory extends Service {
               },
             }
           );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -815,6 +1423,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAdGroupCriterionLabelsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AdGroupCriterionLabelService.mutateAdGroupCriterionLabels",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdGroupCriterionLabels(
@@ -826,9 +1459,30 @@ export default class ServiceFactory extends Service {
               },
             }
           );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -890,6 +1544,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAdGroupCriteriaRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AdGroupCriterionService.mutateAdGroupCriteria",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdGroupCriteria(request, {
@@ -898,9 +1577,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -926,6 +1626,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAdGroupCriteriaRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AdGroupCriterionService.mutateAdGroupCriteria",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdGroupCriteria(request, {
@@ -934,9 +1659,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -957,6 +1703,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAdGroupCriteriaRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AdGroupCriterionService.mutateAdGroupCriteria",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdGroupCriteria(request, {
@@ -965,9 +1736,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -1068,6 +1860,32 @@ export default class ServiceFactory extends Service {
           services.IMutateAdGroupExtensionSettingsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method:
+            "AdGroupExtensionSettingService.mutateAdGroupExtensionSettings",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdGroupExtensionSettings(
@@ -1079,9 +1897,30 @@ export default class ServiceFactory extends Service {
               },
             }
           );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -1107,6 +1946,32 @@ export default class ServiceFactory extends Service {
           services.IMutateAdGroupExtensionSettingsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method:
+            "AdGroupExtensionSettingService.mutateAdGroupExtensionSettings",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdGroupExtensionSettings(
@@ -1118,9 +1983,30 @@ export default class ServiceFactory extends Service {
               },
             }
           );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -1141,6 +2027,32 @@ export default class ServiceFactory extends Service {
           services.IMutateAdGroupExtensionSettingsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method:
+            "AdGroupExtensionSettingService.mutateAdGroupExtensionSettings",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdGroupExtensionSettings(
@@ -1152,9 +2064,30 @@ export default class ServiceFactory extends Service {
               },
             }
           );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -1214,6 +2147,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAdGroupFeedsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AdGroupFeedService.mutateAdGroupFeeds",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdGroupFeeds(request, {
@@ -1222,9 +2180,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -1250,6 +2229,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAdGroupFeedsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AdGroupFeedService.mutateAdGroupFeeds",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdGroupFeeds(request, {
@@ -1258,9 +2262,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -1281,6 +2306,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAdGroupFeedsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AdGroupFeedService.mutateAdGroupFeeds",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdGroupFeeds(request, {
@@ -1289,9 +2339,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -1351,6 +2422,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAdGroupLabelsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AdGroupLabelService.mutateAdGroupLabels",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdGroupLabels(request, {
@@ -1359,9 +2455,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -1382,6 +2499,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAdGroupLabelsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AdGroupLabelService.mutateAdGroupLabels",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdGroupLabels(request, {
@@ -1390,9 +2532,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -1452,6 +2615,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAdGroupsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AdGroupService.mutateAdGroups",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdGroups(request, {
@@ -1460,9 +2648,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -1488,6 +2697,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAdGroupsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AdGroupService.mutateAdGroups",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdGroups(request, {
@@ -1496,9 +2730,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -1519,6 +2774,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAdGroupsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AdGroupService.mutateAdGroups",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdGroups(request, {
@@ -1527,9 +2807,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -1625,6 +2926,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAdParametersRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AdParameterService.mutateAdParameters",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdParameters(request, {
@@ -1633,9 +2959,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -1661,6 +3008,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAdParametersRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AdParameterService.mutateAdParameters",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdParameters(request, {
@@ -1669,9 +3041,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -1692,6 +3085,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAdParametersRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AdParameterService.mutateAdParameters",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAdParameters(request, {
@@ -1700,9 +3118,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -1793,6 +3232,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAdsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AdService.mutateAds",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAds(request, {
@@ -1801,9 +3265,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -1894,6 +3379,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAssetsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AssetService.mutateAssets",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAssets(request, {
@@ -1902,9 +3412,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -1930,6 +3461,31 @@ export default class ServiceFactory extends Service {
           services.IMutateAssetsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "AssetService.mutateAssets",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateAssets(request, {
@@ -1938,9 +3494,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -1972,6 +3549,31 @@ export default class ServiceFactory extends Service {
           services.IMutateBatchJobRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "BatchJobService.mutateBatchJob",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateBatchJob(request, {
@@ -1980,9 +3582,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -2125,6 +3748,31 @@ export default class ServiceFactory extends Service {
           services.IMutateBiddingStrategiesRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "BiddingStrategyService.mutateBiddingStrategies",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateBiddingStrategies(request, {
@@ -2133,9 +3781,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -2161,6 +3830,31 @@ export default class ServiceFactory extends Service {
           services.IMutateBiddingStrategiesRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "BiddingStrategyService.mutateBiddingStrategies",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateBiddingStrategies(request, {
@@ -2169,9 +3863,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -2192,6 +3907,31 @@ export default class ServiceFactory extends Service {
           services.IMutateBiddingStrategiesRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "BiddingStrategyService.mutateBiddingStrategies",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateBiddingStrategies(request, {
@@ -2200,9 +3940,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -2262,6 +4023,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignAssetsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignAssetService.mutateCampaignAssets",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignAssets(request, {
@@ -2270,9 +4056,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -2293,6 +4100,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignAssetsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignAssetService.mutateCampaignAssets",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignAssets(request, {
@@ -2301,9 +4133,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -2365,6 +4218,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignBidModifiersRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignBidModifierService.mutateCampaignBidModifiers",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignBidModifiers(request, {
@@ -2373,9 +4251,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -2401,6 +4300,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignBidModifiersRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignBidModifierService.mutateCampaignBidModifiers",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignBidModifiers(request, {
@@ -2409,9 +4333,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -2432,6 +4377,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignBidModifiersRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignBidModifierService.mutateCampaignBidModifiers",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignBidModifiers(request, {
@@ -2440,9 +4410,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -2502,6 +4493,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignBudgetsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignBudgetService.mutateCampaignBudgets",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignBudgets(request, {
@@ -2510,9 +4526,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -2538,6 +4575,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignBudgetsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignBudgetService.mutateCampaignBudgets",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignBudgets(request, {
@@ -2546,9 +4608,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -2569,6 +4652,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignBudgetsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignBudgetService.mutateCampaignBudgets",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignBudgets(request, {
@@ -2577,9 +4685,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -2641,6 +4770,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignCriteriaRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignCriterionService.mutateCampaignCriteria",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignCriteria(request, {
@@ -2649,9 +4803,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -2677,6 +4852,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignCriteriaRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignCriterionService.mutateCampaignCriteria",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignCriteria(request, {
@@ -2685,9 +4885,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -2708,6 +4929,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignCriteriaRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignCriterionService.mutateCampaignCriteria",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignCriteria(request, {
@@ -2716,9 +4962,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -2778,6 +5045,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignDraftsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignDraftService.mutateCampaignDrafts",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignDrafts(request, {
@@ -2786,9 +5078,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -2814,6 +5127,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignDraftsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignDraftService.mutateCampaignDrafts",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignDrafts(request, {
@@ -2822,9 +5160,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -2845,6 +5204,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignDraftsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignDraftService.mutateCampaignDrafts",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignDrafts(request, {
@@ -2853,9 +5237,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -2985,6 +5390,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignExperimentsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignExperimentService.mutateCampaignExperiments",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignExperiments(request, {
@@ -2993,9 +5423,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -3016,6 +5467,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignExperimentsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignExperimentService.mutateCampaignExperiments",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignExperiments(request, {
@@ -3024,9 +5500,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -3174,6 +5671,32 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignExtensionSettingsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method:
+            "CampaignExtensionSettingService.mutateCampaignExtensionSettings",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignExtensionSettings(
@@ -3185,9 +5708,30 @@ export default class ServiceFactory extends Service {
               },
             }
           );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -3213,6 +5757,32 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignExtensionSettingsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method:
+            "CampaignExtensionSettingService.mutateCampaignExtensionSettings",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignExtensionSettings(
@@ -3224,9 +5794,30 @@ export default class ServiceFactory extends Service {
               },
             }
           );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -3247,6 +5838,32 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignExtensionSettingsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method:
+            "CampaignExtensionSettingService.mutateCampaignExtensionSettings",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignExtensionSettings(
@@ -3258,9 +5875,30 @@ export default class ServiceFactory extends Service {
               },
             }
           );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -3320,6 +5958,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignFeedsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignFeedService.mutateCampaignFeeds",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignFeeds(request, {
@@ -3328,9 +5991,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -3356,6 +6040,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignFeedsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignFeedService.mutateCampaignFeeds",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignFeeds(request, {
@@ -3364,9 +6073,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -3387,6 +6117,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignFeedsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignFeedService.mutateCampaignFeeds",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignFeeds(request, {
@@ -3395,9 +6150,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -3457,6 +6233,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignLabelsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignLabelService.mutateCampaignLabels",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignLabels(request, {
@@ -3465,9 +6266,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -3488,6 +6310,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignLabelsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignLabelService.mutateCampaignLabels",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignLabels(request, {
@@ -3496,9 +6343,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -3558,6 +6426,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignService.mutateCampaigns",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaigns(request, {
@@ -3566,9 +6459,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -3594,6 +6508,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignService.mutateCampaigns",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaigns(request, {
@@ -3602,9 +6541,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -3625,6 +6585,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignService.mutateCampaigns",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaigns(request, {
@@ -3633,9 +6618,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -3697,6 +6703,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignSharedSetsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignSharedSetService.mutateCampaignSharedSets",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignSharedSets(request, {
@@ -3705,9 +6736,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -3728,6 +6780,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCampaignSharedSetsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignSharedSetService.mutateCampaignSharedSets",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCampaignSharedSets(request, {
@@ -3736,9 +6813,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -3800,6 +6898,31 @@ export default class ServiceFactory extends Service {
           services.IMutateConversionActionsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "ConversionActionService.mutateConversionActions",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateConversionActions(request, {
@@ -3808,9 +6931,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -3836,6 +6980,31 @@ export default class ServiceFactory extends Service {
           services.IMutateConversionActionsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "ConversionActionService.mutateConversionActions",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateConversionActions(request, {
@@ -3844,9 +7013,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -3867,6 +7057,31 @@ export default class ServiceFactory extends Service {
           services.IMutateConversionActionsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "ConversionActionService.mutateConversionActions",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateConversionActions(request, {
@@ -3875,9 +7090,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -3942,6 +7178,32 @@ export default class ServiceFactory extends Service {
           services.IMutateCustomerExtensionSettingsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method:
+            "CustomerExtensionSettingService.mutateCustomerExtensionSettings",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCustomerExtensionSettings(
@@ -3953,9 +7215,30 @@ export default class ServiceFactory extends Service {
               },
             }
           );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -3981,6 +7264,32 @@ export default class ServiceFactory extends Service {
           services.IMutateCustomerExtensionSettingsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method:
+            "CustomerExtensionSettingService.mutateCustomerExtensionSettings",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCustomerExtensionSettings(
@@ -3992,9 +7301,30 @@ export default class ServiceFactory extends Service {
               },
             }
           );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -4015,6 +7345,32 @@ export default class ServiceFactory extends Service {
           services.IMutateCustomerExtensionSettingsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method:
+            "CustomerExtensionSettingService.mutateCustomerExtensionSettings",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCustomerExtensionSettings(
@@ -4026,9 +7382,30 @@ export default class ServiceFactory extends Service {
               },
             }
           );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -4088,6 +7465,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCustomerFeedsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CustomerFeedService.mutateCustomerFeeds",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCustomerFeeds(request, {
@@ -4096,9 +7498,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -4124,6 +7547,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCustomerFeedsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CustomerFeedService.mutateCustomerFeeds",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCustomerFeeds(request, {
@@ -4132,9 +7580,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -4155,6 +7624,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCustomerFeedsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CustomerFeedService.mutateCustomerFeeds",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCustomerFeeds(request, {
@@ -4163,9 +7657,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -4225,6 +7740,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCustomerLabelsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CustomerLabelService.mutateCustomerLabels",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCustomerLabels(request, {
@@ -4233,9 +7773,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -4256,6 +7817,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCustomerLabelsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CustomerLabelService.mutateCustomerLabels",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCustomerLabels(request, {
@@ -4264,9 +7850,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -4331,6 +7938,32 @@ export default class ServiceFactory extends Service {
           services.IMutateCustomerNegativeCriteriaRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method:
+            "CustomerNegativeCriterionService.mutateCustomerNegativeCriteria",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCustomerNegativeCriteria(
@@ -4342,9 +7975,30 @@ export default class ServiceFactory extends Service {
               },
             }
           );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -4365,6 +8019,32 @@ export default class ServiceFactory extends Service {
           services.IMutateCustomerNegativeCriteriaRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method:
+            "CustomerNegativeCriterionService.mutateCustomerNegativeCriteria",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCustomerNegativeCriteria(
@@ -4376,9 +8056,30 @@ export default class ServiceFactory extends Service {
               },
             }
           );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -4443,6 +8144,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCustomerRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CustomerService.mutateCustomer",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCustomer(request, {
@@ -4451,9 +8177,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -4555,6 +8302,31 @@ export default class ServiceFactory extends Service {
           services.IMutateExtensionFeedItemsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "ExtensionFeedItemService.mutateExtensionFeedItems",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateExtensionFeedItems(request, {
@@ -4563,9 +8335,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -4591,6 +8384,31 @@ export default class ServiceFactory extends Service {
           services.IMutateExtensionFeedItemsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "ExtensionFeedItemService.mutateExtensionFeedItems",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateExtensionFeedItems(request, {
@@ -4599,9 +8417,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -4622,6 +8461,31 @@ export default class ServiceFactory extends Service {
           services.IMutateExtensionFeedItemsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "ExtensionFeedItemService.mutateExtensionFeedItems",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateExtensionFeedItems(request, {
@@ -4630,9 +8494,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -4692,6 +8577,31 @@ export default class ServiceFactory extends Service {
           services.IMutateFeedItemsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "FeedItemService.mutateFeedItems",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateFeedItems(request, {
@@ -4700,9 +8610,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -4728,6 +8659,31 @@ export default class ServiceFactory extends Service {
           services.IMutateFeedItemsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "FeedItemService.mutateFeedItems",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateFeedItems(request, {
@@ -4736,9 +8692,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -4759,6 +8736,31 @@ export default class ServiceFactory extends Service {
           services.IMutateFeedItemsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "FeedItemService.mutateFeedItems",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateFeedItems(request, {
@@ -4767,9 +8769,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -4829,6 +8852,31 @@ export default class ServiceFactory extends Service {
           services.IMutateFeedItemSetLinksRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "FeedItemSetLinkService.mutateFeedItemSetLinks",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateFeedItemSetLinks(request, {
@@ -4837,9 +8885,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -4860,6 +8929,31 @@ export default class ServiceFactory extends Service {
           services.IMutateFeedItemSetLinksRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "FeedItemSetLinkService.mutateFeedItemSetLinks",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateFeedItemSetLinks(request, {
@@ -4868,9 +8962,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -4930,6 +9045,31 @@ export default class ServiceFactory extends Service {
           services.IMutateFeedItemSetsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "FeedItemSetService.mutateFeedItemSets",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateFeedItemSets(request, {
@@ -4938,9 +9078,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -4966,6 +9127,31 @@ export default class ServiceFactory extends Service {
           services.IMutateFeedItemSetsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "FeedItemSetService.mutateFeedItemSets",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateFeedItemSets(request, {
@@ -4974,9 +9160,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -4997,6 +9204,31 @@ export default class ServiceFactory extends Service {
           services.IMutateFeedItemSetsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "FeedItemSetService.mutateFeedItemSets",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateFeedItemSets(request, {
@@ -5005,9 +9237,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -5064,6 +9317,31 @@ export default class ServiceFactory extends Service {
           services.IMutateFeedItemTargetsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "FeedItemTargetService.mutateFeedItemTargets",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateFeedItemTargets(request, {
@@ -5072,9 +9350,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -5095,6 +9394,31 @@ export default class ServiceFactory extends Service {
           services.IMutateFeedItemTargetsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "FeedItemTargetService.mutateFeedItemTargets",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateFeedItemTargets(request, {
@@ -5103,9 +9427,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -5165,6 +9510,31 @@ export default class ServiceFactory extends Service {
           services.IMutateFeedMappingsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "FeedMappingService.mutateFeedMappings",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateFeedMappings(request, {
@@ -5173,9 +9543,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -5196,6 +9587,31 @@ export default class ServiceFactory extends Service {
           services.IMutateFeedMappingsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "FeedMappingService.mutateFeedMappings",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateFeedMappings(request, {
@@ -5204,9 +9620,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -5264,6 +9701,31 @@ export default class ServiceFactory extends Service {
           services.IMutateFeedsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "FeedService.mutateFeeds",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateFeeds(request, {
@@ -5272,9 +9734,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -5300,6 +9783,31 @@ export default class ServiceFactory extends Service {
           services.IMutateFeedsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "FeedService.mutateFeeds",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateFeeds(request, {
@@ -5308,9 +9816,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -5331,6 +9860,31 @@ export default class ServiceFactory extends Service {
           services.IMutateFeedsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "FeedService.mutateFeeds",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateFeeds(request, {
@@ -5339,9 +9893,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -5406,6 +9981,32 @@ export default class ServiceFactory extends Service {
           services.IMutateKeywordPlanAdGroupKeywordsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method:
+            "KeywordPlanAdGroupKeywordService.mutateKeywordPlanAdGroupKeywords",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateKeywordPlanAdGroupKeywords(
@@ -5417,9 +10018,30 @@ export default class ServiceFactory extends Service {
               },
             }
           );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -5445,6 +10067,32 @@ export default class ServiceFactory extends Service {
           services.IMutateKeywordPlanAdGroupKeywordsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method:
+            "KeywordPlanAdGroupKeywordService.mutateKeywordPlanAdGroupKeywords",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateKeywordPlanAdGroupKeywords(
@@ -5456,9 +10104,30 @@ export default class ServiceFactory extends Service {
               },
             }
           );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -5479,6 +10148,32 @@ export default class ServiceFactory extends Service {
           services.IMutateKeywordPlanAdGroupKeywordsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method:
+            "KeywordPlanAdGroupKeywordService.mutateKeywordPlanAdGroupKeywords",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateKeywordPlanAdGroupKeywords(
@@ -5490,9 +10185,30 @@ export default class ServiceFactory extends Service {
               },
             }
           );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -5554,6 +10270,31 @@ export default class ServiceFactory extends Service {
           services.IMutateKeywordPlanAdGroupsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "KeywordPlanAdGroupService.mutateKeywordPlanAdGroups",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateKeywordPlanAdGroups(request, {
@@ -5562,9 +10303,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -5590,6 +10352,31 @@ export default class ServiceFactory extends Service {
           services.IMutateKeywordPlanAdGroupsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "KeywordPlanAdGroupService.mutateKeywordPlanAdGroups",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateKeywordPlanAdGroups(request, {
@@ -5598,9 +10385,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -5621,6 +10429,31 @@ export default class ServiceFactory extends Service {
           services.IMutateKeywordPlanAdGroupsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "KeywordPlanAdGroupService.mutateKeywordPlanAdGroups",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateKeywordPlanAdGroups(request, {
@@ -5629,9 +10462,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -5696,6 +10550,32 @@ export default class ServiceFactory extends Service {
           services.IMutateKeywordPlanCampaignKeywordsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method:
+            "KeywordPlanCampaignKeywordService.mutateKeywordPlanCampaignKeywords",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateKeywordPlanCampaignKeywords(
@@ -5707,9 +10587,30 @@ export default class ServiceFactory extends Service {
               },
             }
           );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -5735,6 +10636,32 @@ export default class ServiceFactory extends Service {
           services.IMutateKeywordPlanCampaignKeywordsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method:
+            "KeywordPlanCampaignKeywordService.mutateKeywordPlanCampaignKeywords",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateKeywordPlanCampaignKeywords(
@@ -5746,9 +10673,30 @@ export default class ServiceFactory extends Service {
               },
             }
           );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -5769,6 +10717,32 @@ export default class ServiceFactory extends Service {
           services.IMutateKeywordPlanCampaignKeywordsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method:
+            "KeywordPlanCampaignKeywordService.mutateKeywordPlanCampaignKeywords",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateKeywordPlanCampaignKeywords(
@@ -5780,9 +10754,30 @@ export default class ServiceFactory extends Service {
               },
             }
           );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -5844,6 +10839,31 @@ export default class ServiceFactory extends Service {
           services.IMutateKeywordPlanCampaignsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "KeywordPlanCampaignService.mutateKeywordPlanCampaigns",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateKeywordPlanCampaigns(request, {
@@ -5852,9 +10872,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -5880,6 +10921,31 @@ export default class ServiceFactory extends Service {
           services.IMutateKeywordPlanCampaignsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "KeywordPlanCampaignService.mutateKeywordPlanCampaigns",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateKeywordPlanCampaigns(request, {
@@ -5888,9 +10954,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -5911,6 +10998,31 @@ export default class ServiceFactory extends Service {
           services.IMutateKeywordPlanCampaignsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "KeywordPlanCampaignService.mutateKeywordPlanCampaigns",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateKeywordPlanCampaigns(request, {
@@ -5919,9 +11031,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -5981,6 +11114,31 @@ export default class ServiceFactory extends Service {
           services.IMutateKeywordPlansRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "KeywordPlanService.mutateKeywordPlans",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateKeywordPlans(request, {
@@ -5989,9 +11147,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -6017,6 +11196,31 @@ export default class ServiceFactory extends Service {
           services.IMutateKeywordPlansRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "KeywordPlanService.mutateKeywordPlans",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateKeywordPlans(request, {
@@ -6025,9 +11229,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -6048,6 +11273,31 @@ export default class ServiceFactory extends Service {
           services.IMutateKeywordPlansRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "KeywordPlanService.mutateKeywordPlans",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateKeywordPlans(request, {
@@ -6056,9 +11306,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -6198,6 +11469,31 @@ export default class ServiceFactory extends Service {
           services.IMutateLabelsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "LabelService.mutateLabels",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateLabels(request, {
@@ -6206,9 +11502,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -6234,6 +11551,31 @@ export default class ServiceFactory extends Service {
           services.IMutateLabelsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "LabelService.mutateLabels",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateLabels(request, {
@@ -6242,9 +11584,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -6265,6 +11628,31 @@ export default class ServiceFactory extends Service {
           services.IMutateLabelsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "LabelService.mutateLabels",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateLabels(request, {
@@ -6273,9 +11661,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -6335,6 +11744,31 @@ export default class ServiceFactory extends Service {
           services.IMutateMediaFilesRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "MediaFileService.mutateMediaFiles",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateMediaFiles(request, {
@@ -6343,9 +11777,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -6407,6 +11862,31 @@ export default class ServiceFactory extends Service {
           services.IMutateRemarketingActionsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "RemarketingActionService.mutateRemarketingActions",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateRemarketingActions(request, {
@@ -6415,9 +11895,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -6443,6 +11944,31 @@ export default class ServiceFactory extends Service {
           services.IMutateRemarketingActionsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "RemarketingActionService.mutateRemarketingActions",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateRemarketingActions(request, {
@@ -6451,9 +11977,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -6513,6 +12060,31 @@ export default class ServiceFactory extends Service {
           services.IMutateSharedCriteriaRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "SharedCriterionService.mutateSharedCriteria",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateSharedCriteria(request, {
@@ -6521,9 +12093,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -6544,6 +12137,31 @@ export default class ServiceFactory extends Service {
           services.IMutateSharedCriteriaRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "SharedCriterionService.mutateSharedCriteria",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateSharedCriteria(request, {
@@ -6552,9 +12170,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -6614,6 +12253,31 @@ export default class ServiceFactory extends Service {
           services.IMutateSharedSetsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "SharedSetService.mutateSharedSets",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateSharedSets(request, {
@@ -6622,9 +12286,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -6650,6 +12335,31 @@ export default class ServiceFactory extends Service {
           services.IMutateSharedSetsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "SharedSetService.mutateSharedSets",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateSharedSets(request, {
@@ -6658,9 +12368,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -6681,6 +12412,31 @@ export default class ServiceFactory extends Service {
           services.IMutateSharedSetsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "SharedSetService.mutateSharedSets",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateSharedSets(request, {
@@ -6689,9 +12445,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -6751,6 +12528,31 @@ export default class ServiceFactory extends Service {
           services.IMutateUserListsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "UserListService.mutateUserLists",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateUserLists(request, {
@@ -6759,9 +12561,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -6787,6 +12610,31 @@ export default class ServiceFactory extends Service {
           services.IMutateUserListsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "UserListService.mutateUserLists",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateUserLists(request, {
@@ -6795,9 +12643,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -6818,6 +12687,31 @@ export default class ServiceFactory extends Service {
           services.IMutateUserListsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "UserListService.mutateUserLists",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateUserLists(request, {
@@ -6826,9 +12720,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -6883,6 +12798,31 @@ export default class ServiceFactory extends Service {
           services.IMutateBillingSetupRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "BillingSetupService.mutateBillingSetup",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateBillingSetup(request, {
@@ -6891,9 +12831,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -6914,6 +12875,31 @@ export default class ServiceFactory extends Service {
           services.IMutateBillingSetupRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "BillingSetupService.mutateBillingSetup",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateBillingSetup(request, {
@@ -6922,9 +12908,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -7315,6 +13322,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCustomAudiencesRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CustomAudienceService.mutateCustomAudiences",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCustomAudiences(request, {
@@ -7323,9 +13355,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -7351,6 +13404,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCustomAudiencesRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CustomAudienceService.mutateCustomAudiences",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCustomAudiences(request, {
@@ -7359,9 +13437,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -7382,6 +13481,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCustomAudiencesRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CustomAudienceService.mutateCustomAudiences",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCustomAudiences(request, {
@@ -7390,9 +13514,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -7449,6 +13594,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCustomInterestsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CustomInterestService.mutateCustomInterests",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCustomInterests(request, {
@@ -7457,9 +13627,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -7485,6 +13676,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCustomInterestsRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CustomInterestService.mutateCustomInterests",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCustomInterests(request, {
@@ -7493,9 +13709,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -7552,6 +13789,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCustomerClientLinkRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CustomerClientLinkService.mutateCustomerClientLink",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCustomerClientLink(request, {
@@ -7560,9 +13822,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -7588,6 +13871,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCustomerClientLinkRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CustomerClientLinkService.mutateCustomerClientLink",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCustomerClientLink(request, {
@@ -7596,9 +13904,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -7694,6 +14023,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCustomerManagerLinkRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CustomerManagerLinkService.mutateCustomerManagerLink",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCustomerManagerLink(request, {
@@ -7702,9 +14056,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -7784,6 +14159,32 @@ export default class ServiceFactory extends Service {
           services.IMutateCustomerUserAccessInvitationRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method:
+            "CustomerUserAccessInvitationService.mutateCustomerUserAccessInvitation",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCustomerUserAccessInvitation(
@@ -7795,9 +14196,30 @@ export default class ServiceFactory extends Service {
               },
             }
           );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -7818,6 +14240,32 @@ export default class ServiceFactory extends Service {
           services.IMutateCustomerUserAccessInvitationRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method:
+            "CustomerUserAccessInvitationService.mutateCustomerUserAccessInvitation",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCustomerUserAccessInvitation(
@@ -7829,9 +14277,30 @@ export default class ServiceFactory extends Service {
               },
             }
           );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -7893,6 +14362,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCustomerUserAccessRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CustomerUserAccessService.mutateCustomerUserAccess",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCustomerUserAccess(request, {
@@ -7901,9 +14395,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -7924,6 +14439,31 @@ export default class ServiceFactory extends Service {
           services.IMutateCustomerUserAccessRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "CustomerUserAccessService.mutateCustomerUserAccess",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateCustomerUserAccess(request, {
@@ -7932,9 +14472,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
@@ -8767,6 +15328,31 @@ export default class ServiceFactory extends Service {
           services.IMutateMerchantCenterLinkRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "MerchantCenterLinkService.mutateMerchantCenterLink",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateMerchantCenterLink(request, {
@@ -8775,9 +15361,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
 
@@ -8798,6 +15405,31 @@ export default class ServiceFactory extends Service {
           services.IMutateMerchantCenterLinkRequest,
           MutateOptions
         >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "MerchantCenterLinkService.mutateMerchantCenterLink",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateMerchantCenterLink(request, {
@@ -8806,9 +15438,30 @@ export default class ServiceFactory extends Service {
               headers: this.callHeaders,
             },
           });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
         }
       },
     };
