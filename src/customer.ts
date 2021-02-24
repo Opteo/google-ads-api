@@ -16,6 +16,7 @@ import {
   MutateOptions,
   ReportOptions,
   RequestOptions,
+  PageToken,
 } from "./types";
 
 export class Customer extends ServiceFactory {
@@ -129,6 +130,52 @@ export class Customer extends ServiceFactory {
     }
   }
 
+  private async search(
+    gaqlQuery: string,
+    requestOptions: RequestOptions
+  ): Promise<{
+    response: services.IGoogleAdsRow[];
+    nextPageToken: PageToken;
+  }> {
+    const { service, request } = this.buildSearchRequestAndService(
+      gaqlQuery,
+      requestOptions
+    );
+
+    const searchResponse = await service.search(request, {
+      otherArgs: { headers: this.callHeaders },
+      autoPaginate: false, // autoPaginate doesn't work
+    });
+
+    return {
+      response: searchResponse[0],
+      nextPageToken: searchResponse[2].next_page_token,
+    };
+  }
+
+  private async paginatedSearch(
+    gaqlQuery: string,
+    requestOptions: RequestOptions
+  ): Promise<services.IGoogleAdsRow[]> {
+    const response: services.IGoogleAdsRow[] = [];
+    let nextPageToken: PageToken = undefined;
+
+    const initialSearch = await this.search(gaqlQuery, requestOptions);
+    response.push(...initialSearch.response);
+    nextPageToken = initialSearch.nextPageToken;
+
+    while (nextPageToken) {
+      const nextSearch = await this.search(gaqlQuery, {
+        ...requestOptions,
+        page_token: nextPageToken,
+      });
+      response.push(...nextSearch.response);
+      nextPageToken = nextSearch.nextPageToken;
+    }
+
+    return response;
+  }
+
   /**
     @description Single query using a GAQL query
    */
@@ -163,17 +210,8 @@ export class Customer extends ServiceFactory {
       }
     }
 
-    const { service, request } = this.buildSearchRequestAndService(
-      gaqlQuery,
-      requestOptions
-    );
-
     try {
-      const [response] = await service.search(request, {
-        otherArgs: {
-          headers: this.callHeaders,
-        },
-      });
+      const response = await this.paginatedSearch(gaqlQuery, requestOptions);
 
       const parsedResponse = this.clientOptions.disable_parsing
         ? response

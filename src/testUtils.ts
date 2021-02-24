@@ -1,6 +1,7 @@
 import { Customer } from "./customer";
 import { Hooks } from "./hooks";
 import * as parser from "./parser";
+import { PageToken } from "./types";
 import { GoogleAdsServiceClient, services, errors } from "./protos";
 
 export const MOCK_CLIENT_ID = "MOCK CLIENT ID";
@@ -44,6 +45,32 @@ export const mockParseValues = [
 ] as services.IGoogleAdsRow[];
 
 export const mockParseValue = "mock parse value" as services.IGoogleAdsRow;
+
+export function mockPaginatedSearch(customer: Customer): jest.SpyInstance {
+  return (
+    jest
+      // @ts-expect-error private method
+      .spyOn(customer, "paginatedSearch")
+      // @ts-expect-error
+      .mockImplementation(() => mockQueryReturnValue)
+  );
+}
+
+export function mockSearchOnce(
+  customer: Customer,
+  response: {
+    response: any[];
+    nextPageToken: PageToken;
+  }
+): jest.SpyInstance {
+  return (
+    jest
+      // @ts-expect-error private method
+      .spyOn(customer, "search")
+      // @ts-expect-error
+      .mockImplementationOnce(() => response)
+  );
+}
 
 export function mockBuildSearchRequestAndService(
   customer: Customer,

@@ -2,6 +2,8 @@ import { Hooks } from "./hooks";
 import { enums } from "./protos";
 import {
   failTestIfExecuted,
+  mockPaginatedSearch,
+  mockSearchOnce,
   mockBuildMutateRequestAndService,
   mockBuildSearchRequestAndService,
   mockError,
@@ -37,7 +39,7 @@ describe("query", () => {
 
   it("parses query results by default", async () => {
     const customer = newCustomer({});
-    mockBuildSearchRequestAndService(customer);
+    mockPaginatedSearch(customer);
     const mockedParse = mockParse(mockParseValues);
     const res = await customer.query(gaqlQuery);
 
@@ -48,7 +50,7 @@ describe("query", () => {
   it("skips query parsing if it is disabled in the client options", async () => {
     const disableParsing = true;
     const customer = newCustomer({}, disableParsing);
-    mockBuildSearchRequestAndService(customer);
+    mockPaginatedSearch(customer);
     const mockedParse = mockParse(mockParseValues);
     const res = await customer.query(gaqlQuery);
 
@@ -63,7 +65,7 @@ describe("query", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildSearchRequestAndService(customer);
+    mockPaginatedSearch(customer);
     mockParse(mockQueryReturnValue);
     const spyHook = jest.spyOn(hooks, "onQueryStart");
     await customer.query(gaqlQuery);
@@ -88,7 +90,7 @@ describe("query", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildSearchRequestAndService(customer);
+    mockPaginatedSearch(customer);
     mockParse(mockQueryReturnValue);
     await customer.query(gaqlQuery);
 
@@ -120,7 +122,7 @@ describe("query", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildSearchRequestAndService(customer);
+    mockPaginatedSearch(customer);
     mockParse(mockQueryReturnValue);
     const res = await customer.query(gaqlQuery);
 
@@ -134,7 +136,7 @@ describe("query", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { spyBuild } = mockBuildSearchRequestAndService(customer);
+    const spyPaginatedSearch = mockPaginatedSearch(customer);
     mockParse(mockQueryReturnValue);
     const requestOptions: RequestOptions = {
       validate_only: false,
@@ -143,7 +145,7 @@ describe("query", () => {
     };
     await customer.query(gaqlQuery, requestOptions);
 
-    expect(spyBuild).toHaveBeenCalledWith(gaqlQuery, {
+    expect(spyPaginatedSearch).toHaveBeenCalledWith(gaqlQuery, {
       validate_only: true, // changed
       page_token: "abcd",
       page_size: 4, // changed
@@ -209,24 +211,19 @@ describe("query", () => {
   });
 
   it("does not call onQueryError when provided but when the query does not throw an error", async () => {
-    const shouldThrow = false;
     const hooks: Hooks = {
       onQueryError() {
         return;
       },
     };
     const customer = newCustomer(hooks);
-    const { mockService } = mockBuildSearchRequestAndService(
-      customer,
-      shouldThrow
-    );
+    const spyPaginatedSearch = mockPaginatedSearch(customer);
     mockParse(mockQueryReturnValue);
     mockGetGoogleAdsError(customer);
-    const spyMockSearch = jest.spyOn(mockService, "search");
     const spyHook = jest.spyOn(hooks, "onQueryError");
     await customer.query(gaqlQuery);
 
-    expect(spyMockSearch).not.toThrow();
+    expect(spyPaginatedSearch).not.toThrow();
     expect(spyHook).not.toHaveBeenCalled();
   });
 
@@ -237,7 +234,7 @@ describe("query", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildSearchRequestAndService(customer);
+    mockPaginatedSearch(customer);
     mockParse(mockQueryReturnValue);
     const spyHook = jest.spyOn(hooks, "onQueryEnd");
     await customer.query(gaqlQuery);
@@ -262,7 +259,7 @@ describe("query", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildSearchRequestAndService(customer);
+    mockPaginatedSearch(customer);
     mockParse(mockQueryReturnValue);
     await customer.query(gaqlQuery);
 
@@ -277,11 +274,60 @@ describe("query", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildSearchRequestAndService(customer);
+    mockPaginatedSearch(customer);
     mockParse(mockQueryReturnValue);
     const res = await customer.query<string>(gaqlQuery);
 
     expect(res).toEqual(hookReturnValue);
+  });
+});
+
+describe("paginatedSearch", () => {
+  it("returns the response of the initial query if there is no next page token", async () => {
+    const customer = newCustomer({});
+    mockSearchOnce(customer, {
+      response: ["a", "b", "c"],
+      nextPageToken: null,
+    });
+
+    // @ts-expect-error private method
+    const res = await customer.paginatedSearch(gaqlQuery, {});
+
+    expect(res).toEqual(["a", "b", "c"]);
+  });
+
+  it("gets the next response if there is a next page token", async () => {
+    const customer = newCustomer({});
+    mockSearchOnce(customer, {
+      response: ["a", "b", "c"],
+      nextPageToken: "token",
+    });
+    mockSearchOnce(customer, {
+      response: ["d", "e", "f"],
+      nextPageToken: null,
+    });
+
+    // @ts-expect-error private method
+    const res = await customer.paginatedSearch(gaqlQuery, {});
+
+    expect(res).toEqual(["a", "b", "c", "d", "e", "f"]);
+  });
+
+  it("iterates many times until there is no next page token", async () => {
+    const customer = newCustomer({});
+    mockSearchOnce(customer, { response: ["a"], nextPageToken: "token" });
+    mockSearchOnce(customer, { response: ["b"], nextPageToken: "token" });
+    mockSearchOnce(customer, { response: ["c"], nextPageToken: "token" });
+    mockSearchOnce(customer, { response: ["d"], nextPageToken: "token" });
+    mockSearchOnce(customer, { response: ["e"], nextPageToken: "token" });
+    mockSearchOnce(customer, { response: ["f"], nextPageToken: "token" });
+    mockSearchOnce(customer, { response: ["g"], nextPageToken: "token" });
+    mockSearchOnce(customer, { response: ["h"], nextPageToken: null });
+
+    // @ts-expect-error private method
+    const res = await customer.paginatedSearch(gaqlQuery, {});
+
+    expect(res).toEqual(["a", "b", "c", "d", "e", "f", "g", "h"]);
   });
 });
 
