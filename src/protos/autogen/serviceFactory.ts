@@ -51,7 +51,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAccountBudgetProposalResponse
        */
       create: async (
-        accountBudgetProposals: resources.IAccountBudgetProposal[],
+        accountBudgetProposals: (
+          | resources.IAccountBudgetProposal
+          | resources.AccountBudgetProposal
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateAccountBudgetProposalResponse> => {
         const ops = this.buildOperations<
@@ -212,7 +215,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAccountLinkResponse
        */
       update: async (
-        accountLinks: resources.IAccountLink[],
+        accountLinks: (resources.IAccountLink | resources.AccountLink)[],
         options?: MutateOptions
       ): Promise<services.MutateAccountLinkResponse> => {
         const ops = this.buildOperations<
@@ -222,7 +225,7 @@ export default class ServiceFactory extends Service {
           "update",
           accountLinks,
           // @ts-expect-error Static class type here is fine
-          resources.IAccountLink
+          resources.AccountLink
         );
         const request = this.buildRequest<
           services.AccountLinkOperation,
@@ -354,7 +357,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAdGroupAdLabelsResponse
        */
       create: async (
-        adGroupAdLabels: resources.IAdGroupAdLabel[],
+        adGroupAdLabels: (
+          | resources.IAdGroupAdLabel
+          | resources.AdGroupAdLabel
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateAdGroupAdLabelsResponse> => {
         const ops = this.buildOperations<
@@ -455,7 +461,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAdGroupAdsResponse
        */
       create: async (
-        adGroupAds: resources.IAdGroupAd[],
+        adGroupAds: (resources.IAdGroupAd | resources.AdGroupAd)[],
         options?: MutateOptions
       ): Promise<services.MutateAdGroupAdsResponse> => {
         const ops = this.buildOperations<
@@ -486,7 +492,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAdGroupAdsResponse
        */
       update: async (
-        adGroupAds: resources.IAdGroupAd[],
+        adGroupAds: (resources.IAdGroupAd | resources.AdGroupAd)[],
         options?: MutateOptions
       ): Promise<services.MutateAdGroupAdsResponse> => {
         const ops = this.buildOperations<
@@ -496,7 +502,7 @@ export default class ServiceFactory extends Service {
           "update",
           adGroupAds,
           // @ts-expect-error Static class type here is fine
-          resources.IAdGroupAd
+          resources.AdGroupAd
         );
         const request = this.buildRequest<
           services.AdGroupAdOperation,
@@ -630,7 +636,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAdGroupBidModifiersResponse
        */
       create: async (
-        adGroupBidModifiers: resources.IAdGroupBidModifier[],
+        adGroupBidModifiers: (
+          | resources.IAdGroupBidModifier
+          | resources.AdGroupBidModifier
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateAdGroupBidModifiersResponse> => {
         const ops = this.buildOperations<
@@ -661,7 +670,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAdGroupBidModifiersResponse
        */
       update: async (
-        adGroupBidModifiers: resources.IAdGroupBidModifier[],
+        adGroupBidModifiers: (
+          | resources.IAdGroupBidModifier
+          | resources.AdGroupBidModifier
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateAdGroupBidModifiersResponse> => {
         const ops = this.buildOperations<
@@ -671,7 +683,7 @@ export default class ServiceFactory extends Service {
           "update",
           adGroupBidModifiers,
           // @ts-expect-error Static class type here is fine
-          resources.IAdGroupBidModifier
+          resources.AdGroupBidModifier
         );
         const request = this.buildRequest<
           services.AdGroupBidModifierOperation,
@@ -769,7 +781,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAdGroupCriterionLabelsResponse
        */
       create: async (
-        adGroupCriterionLabels: resources.IAdGroupCriterionLabel[],
+        adGroupCriterionLabels: (
+          | resources.IAdGroupCriterionLabel
+          | resources.AdGroupCriterionLabel
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateAdGroupCriterionLabelsResponse> => {
         const ops = this.buildOperations<
@@ -878,7 +893,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAdGroupCriteriaResponse
        */
       create: async (
-        adGroupCriteria: resources.IAdGroupCriterion[],
+        adGroupCriteria: (
+          | resources.IAdGroupCriterion
+          | resources.AdGroupCriterion
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateAdGroupCriteriaResponse> => {
         const ops = this.buildOperations<
@@ -909,7 +927,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAdGroupCriteriaResponse
        */
       update: async (
-        adGroupCriteria: resources.IAdGroupCriterion[],
+        adGroupCriteria: (
+          | resources.IAdGroupCriterion
+          | resources.AdGroupCriterion
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateAdGroupCriteriaResponse> => {
         const ops = this.buildOperations<
@@ -919,7 +940,7 @@ export default class ServiceFactory extends Service {
           "update",
           adGroupCriteria,
           // @ts-expect-error Static class type here is fine
-          resources.IAdGroupCriterion
+          resources.AdGroupCriterion
         );
         const request = this.buildRequest<
           services.AdGroupCriterionOperation,
@@ -1056,7 +1077,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAdGroupExtensionSettingsResponse
        */
       create: async (
-        adGroupExtensionSettings: resources.IAdGroupExtensionSetting[],
+        adGroupExtensionSettings: (
+          | resources.IAdGroupExtensionSetting
+          | resources.AdGroupExtensionSetting
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateAdGroupExtensionSettingsResponse> => {
         const ops = this.buildOperations<
@@ -1090,7 +1114,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAdGroupExtensionSettingsResponse
        */
       update: async (
-        adGroupExtensionSettings: resources.IAdGroupExtensionSetting[],
+        adGroupExtensionSettings: (
+          | resources.IAdGroupExtensionSetting
+          | resources.AdGroupExtensionSetting
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateAdGroupExtensionSettingsResponse> => {
         const ops = this.buildOperations<
@@ -1100,7 +1127,7 @@ export default class ServiceFactory extends Service {
           "update",
           adGroupExtensionSettings,
           // @ts-expect-error Static class type here is fine
-          resources.IAdGroupExtensionSetting
+          resources.AdGroupExtensionSetting
         );
         const request = this.buildRequest<
           services.AdGroupExtensionSettingOperation,
@@ -1202,7 +1229,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAdGroupFeedsResponse
        */
       create: async (
-        adGroupFeeds: resources.IAdGroupFeed[],
+        adGroupFeeds: (resources.IAdGroupFeed | resources.AdGroupFeed)[],
         options?: MutateOptions
       ): Promise<services.MutateAdGroupFeedsResponse> => {
         const ops = this.buildOperations<
@@ -1233,7 +1260,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAdGroupFeedsResponse
        */
       update: async (
-        adGroupFeeds: resources.IAdGroupFeed[],
+        adGroupFeeds: (resources.IAdGroupFeed | resources.AdGroupFeed)[],
         options?: MutateOptions
       ): Promise<services.MutateAdGroupFeedsResponse> => {
         const ops = this.buildOperations<
@@ -1243,7 +1270,7 @@ export default class ServiceFactory extends Service {
           "update",
           adGroupFeeds,
           // @ts-expect-error Static class type here is fine
-          resources.IAdGroupFeed
+          resources.AdGroupFeed
         );
         const request = this.buildRequest<
           services.AdGroupFeedOperation,
@@ -1339,7 +1366,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAdGroupLabelsResponse
        */
       create: async (
-        adGroupLabels: resources.IAdGroupLabel[],
+        adGroupLabels: (resources.IAdGroupLabel | resources.AdGroupLabel)[],
         options?: MutateOptions
       ): Promise<services.MutateAdGroupLabelsResponse> => {
         const ops = this.buildOperations<
@@ -1440,7 +1467,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAdGroupsResponse
        */
       create: async (
-        adGroups: resources.IAdGroup[],
+        adGroups: (resources.IAdGroup | resources.AdGroup)[],
         options?: MutateOptions
       ): Promise<services.MutateAdGroupsResponse> => {
         const ops = this.buildOperations<
@@ -1471,7 +1498,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAdGroupsResponse
        */
       update: async (
-        adGroups: resources.IAdGroup[],
+        adGroups: (resources.IAdGroup | resources.AdGroup)[],
         options?: MutateOptions
       ): Promise<services.MutateAdGroupsResponse> => {
         const ops = this.buildOperations<
@@ -1481,7 +1508,7 @@ export default class ServiceFactory extends Service {
           "update",
           adGroups,
           // @ts-expect-error Static class type here is fine
-          resources.IAdGroup
+          resources.AdGroup
         );
         const request = this.buildRequest<
           services.AdGroupOperation,
@@ -1613,7 +1640,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAdParametersResponse
        */
       create: async (
-        adParameters: resources.IAdParameter[],
+        adParameters: (resources.IAdParameter | resources.AdParameter)[],
         options?: MutateOptions
       ): Promise<services.MutateAdParametersResponse> => {
         const ops = this.buildOperations<
@@ -1644,7 +1671,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAdParametersResponse
        */
       update: async (
-        adParameters: resources.IAdParameter[],
+        adParameters: (resources.IAdParameter | resources.AdParameter)[],
         options?: MutateOptions
       ): Promise<services.MutateAdParametersResponse> => {
         const ops = this.buildOperations<
@@ -1654,7 +1681,7 @@ export default class ServiceFactory extends Service {
           "update",
           adParameters,
           // @ts-expect-error Static class type here is fine
-          resources.IAdParameter
+          resources.AdParameter
         );
         const request = this.buildRequest<
           services.AdParameterOperation,
@@ -1779,14 +1806,14 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAdsResponse
        */
       update: async (
-        ads: resources.IAd[],
+        ads: (resources.IAd | resources.Ad)[],
         options?: MutateOptions
       ): Promise<services.MutateAdsResponse> => {
         const ops = this.buildOperations<services.AdOperation, resources.IAd>(
           "update",
           ads,
           // @ts-expect-error Static class type here is fine
-          resources.IAd
+          resources.Ad
         );
         const request = this.buildRequest<
           services.AdOperation,
@@ -1882,7 +1909,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAssetsResponse
        */
       create: async (
-        assets: resources.IAsset[],
+        assets: (resources.IAsset | resources.Asset)[],
         options?: MutateOptions
       ): Promise<services.MutateAssetsResponse> => {
         const ops = this.buildOperations<
@@ -1913,7 +1940,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAssetsResponse
        */
       update: async (
-        assets: resources.IAsset[],
+        assets: (resources.IAsset | resources.Asset)[],
         options?: MutateOptions
       ): Promise<services.MutateAssetsResponse> => {
         const ops = this.buildOperations<
@@ -1923,7 +1950,7 @@ export default class ServiceFactory extends Service {
           "update",
           assets,
           // @ts-expect-error Static class type here is fine
-          resources.IAsset
+          resources.Asset
         );
         const request = this.buildRequest<
           services.AssetOperation,
@@ -1960,7 +1987,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateBatchJobResponse
        */
       create: async (
-        batchJobs: resources.IBatchJob[],
+        batchJobs: (resources.IBatchJob | resources.BatchJob)[],
         options?: MutateOptions
       ): Promise<services.MutateBatchJobResponse> => {
         const ops = this.buildOperations<
@@ -2113,7 +2140,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateBiddingStrategiesResponse
        */
       create: async (
-        biddingStrategies: resources.IBiddingStrategy[],
+        biddingStrategies: (
+          | resources.IBiddingStrategy
+          | resources.BiddingStrategy
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateBiddingStrategiesResponse> => {
         const ops = this.buildOperations<
@@ -2144,7 +2174,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateBiddingStrategiesResponse
        */
       update: async (
-        biddingStrategies: resources.IBiddingStrategy[],
+        biddingStrategies: (
+          | resources.IBiddingStrategy
+          | resources.BiddingStrategy
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateBiddingStrategiesResponse> => {
         const ops = this.buildOperations<
@@ -2154,7 +2187,7 @@ export default class ServiceFactory extends Service {
           "update",
           biddingStrategies,
           // @ts-expect-error Static class type here is fine
-          resources.IBiddingStrategy
+          resources.BiddingStrategy
         );
         const request = this.buildRequest<
           services.BiddingStrategyOperation,
@@ -2250,7 +2283,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCampaignAssetsResponse
        */
       create: async (
-        campaignAssets: resources.ICampaignAsset[],
+        campaignAssets: (resources.ICampaignAsset | resources.CampaignAsset)[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignAssetsResponse> => {
         const ops = this.buildOperations<
@@ -2353,7 +2386,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCampaignBidModifiersResponse
        */
       create: async (
-        campaignBidModifiers: resources.ICampaignBidModifier[],
+        campaignBidModifiers: (
+          | resources.ICampaignBidModifier
+          | resources.CampaignBidModifier
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignBidModifiersResponse> => {
         const ops = this.buildOperations<
@@ -2384,7 +2420,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCampaignBidModifiersResponse
        */
       update: async (
-        campaignBidModifiers: resources.ICampaignBidModifier[],
+        campaignBidModifiers: (
+          | resources.ICampaignBidModifier
+          | resources.CampaignBidModifier
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignBidModifiersResponse> => {
         const ops = this.buildOperations<
@@ -2394,7 +2433,7 @@ export default class ServiceFactory extends Service {
           "update",
           campaignBidModifiers,
           // @ts-expect-error Static class type here is fine
-          resources.ICampaignBidModifier
+          resources.CampaignBidModifier
         );
         const request = this.buildRequest<
           services.CampaignBidModifierOperation,
@@ -2490,7 +2529,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCampaignBudgetsResponse
        */
       create: async (
-        campaignBudgets: resources.ICampaignBudget[],
+        campaignBudgets: (
+          | resources.ICampaignBudget
+          | resources.CampaignBudget
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignBudgetsResponse> => {
         const ops = this.buildOperations<
@@ -2521,7 +2563,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCampaignBudgetsResponse
        */
       update: async (
-        campaignBudgets: resources.ICampaignBudget[],
+        campaignBudgets: (
+          | resources.ICampaignBudget
+          | resources.CampaignBudget
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignBudgetsResponse> => {
         const ops = this.buildOperations<
@@ -2531,7 +2576,7 @@ export default class ServiceFactory extends Service {
           "update",
           campaignBudgets,
           // @ts-expect-error Static class type here is fine
-          resources.ICampaignBudget
+          resources.CampaignBudget
         );
         const request = this.buildRequest<
           services.CampaignBudgetOperation,
@@ -2629,7 +2674,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCampaignCriteriaResponse
        */
       create: async (
-        campaignCriteria: resources.ICampaignCriterion[],
+        campaignCriteria: (
+          | resources.ICampaignCriterion
+          | resources.CampaignCriterion
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignCriteriaResponse> => {
         const ops = this.buildOperations<
@@ -2660,7 +2708,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCampaignCriteriaResponse
        */
       update: async (
-        campaignCriteria: resources.ICampaignCriterion[],
+        campaignCriteria: (
+          | resources.ICampaignCriterion
+          | resources.CampaignCriterion
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignCriteriaResponse> => {
         const ops = this.buildOperations<
@@ -2670,7 +2721,7 @@ export default class ServiceFactory extends Service {
           "update",
           campaignCriteria,
           // @ts-expect-error Static class type here is fine
-          resources.ICampaignCriterion
+          resources.CampaignCriterion
         );
         const request = this.buildRequest<
           services.CampaignCriterionOperation,
@@ -2766,7 +2817,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCampaignDraftsResponse
        */
       create: async (
-        campaignDrafts: resources.ICampaignDraft[],
+        campaignDrafts: (resources.ICampaignDraft | resources.CampaignDraft)[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignDraftsResponse> => {
         const ops = this.buildOperations<
@@ -2797,7 +2848,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCampaignDraftsResponse
        */
       update: async (
-        campaignDrafts: resources.ICampaignDraft[],
+        campaignDrafts: (resources.ICampaignDraft | resources.CampaignDraft)[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignDraftsResponse> => {
         const ops = this.buildOperations<
@@ -2807,7 +2858,7 @@ export default class ServiceFactory extends Service {
           "update",
           campaignDrafts,
           // @ts-expect-error Static class type here is fine
-          resources.ICampaignDraft
+          resources.CampaignDraft
         );
         const request = this.buildRequest<
           services.CampaignDraftOperation,
@@ -2968,7 +3019,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCampaignExperimentsResponse
        */
       update: async (
-        campaignExperiments: resources.ICampaignExperiment[],
+        campaignExperiments: (
+          | resources.ICampaignExperiment
+          | resources.CampaignExperiment
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignExperimentsResponse> => {
         const ops = this.buildOperations<
@@ -2978,7 +3032,7 @@ export default class ServiceFactory extends Service {
           "update",
           campaignExperiments,
           // @ts-expect-error Static class type here is fine
-          resources.ICampaignExperiment
+          resources.CampaignExperiment
         );
         const request = this.buildRequest<
           services.CampaignExperimentOperation,
@@ -3162,7 +3216,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCampaignExtensionSettingsResponse
        */
       create: async (
-        campaignExtensionSettings: resources.ICampaignExtensionSetting[],
+        campaignExtensionSettings: (
+          | resources.ICampaignExtensionSetting
+          | resources.CampaignExtensionSetting
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignExtensionSettingsResponse> => {
         const ops = this.buildOperations<
@@ -3196,7 +3253,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCampaignExtensionSettingsResponse
        */
       update: async (
-        campaignExtensionSettings: resources.ICampaignExtensionSetting[],
+        campaignExtensionSettings: (
+          | resources.ICampaignExtensionSetting
+          | resources.CampaignExtensionSetting
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignExtensionSettingsResponse> => {
         const ops = this.buildOperations<
@@ -3206,7 +3266,7 @@ export default class ServiceFactory extends Service {
           "update",
           campaignExtensionSettings,
           // @ts-expect-error Static class type here is fine
-          resources.ICampaignExtensionSetting
+          resources.CampaignExtensionSetting
         );
         const request = this.buildRequest<
           services.CampaignExtensionSettingOperation,
@@ -3308,7 +3368,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCampaignFeedsResponse
        */
       create: async (
-        campaignFeeds: resources.ICampaignFeed[],
+        campaignFeeds: (resources.ICampaignFeed | resources.CampaignFeed)[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignFeedsResponse> => {
         const ops = this.buildOperations<
@@ -3339,7 +3399,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCampaignFeedsResponse
        */
       update: async (
-        campaignFeeds: resources.ICampaignFeed[],
+        campaignFeeds: (resources.ICampaignFeed | resources.CampaignFeed)[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignFeedsResponse> => {
         const ops = this.buildOperations<
@@ -3349,7 +3409,7 @@ export default class ServiceFactory extends Service {
           "update",
           campaignFeeds,
           // @ts-expect-error Static class type here is fine
-          resources.ICampaignFeed
+          resources.CampaignFeed
         );
         const request = this.buildRequest<
           services.CampaignFeedOperation,
@@ -3445,7 +3505,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCampaignLabelsResponse
        */
       create: async (
-        campaignLabels: resources.ICampaignLabel[],
+        campaignLabels: (resources.ICampaignLabel | resources.CampaignLabel)[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignLabelsResponse> => {
         const ops = this.buildOperations<
@@ -3546,7 +3606,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCampaignsResponse
        */
       create: async (
-        campaigns: resources.ICampaign[],
+        campaigns: (resources.ICampaign | resources.Campaign)[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignsResponse> => {
         const ops = this.buildOperations<
@@ -3577,7 +3637,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCampaignsResponse
        */
       update: async (
-        campaigns: resources.ICampaign[],
+        campaigns: (resources.ICampaign | resources.Campaign)[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignsResponse> => {
         const ops = this.buildOperations<
@@ -3587,7 +3647,7 @@ export default class ServiceFactory extends Service {
           "update",
           campaigns,
           // @ts-expect-error Static class type here is fine
-          resources.ICampaign
+          resources.Campaign
         );
         const request = this.buildRequest<
           services.CampaignOperation,
@@ -3685,7 +3745,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCampaignSharedSetsResponse
        */
       create: async (
-        campaignSharedSets: resources.ICampaignSharedSet[],
+        campaignSharedSets: (
+          | resources.ICampaignSharedSet
+          | resources.CampaignSharedSet
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignSharedSetsResponse> => {
         const ops = this.buildOperations<
@@ -3788,7 +3851,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateConversionActionsResponse
        */
       create: async (
-        conversionActions: resources.IConversionAction[],
+        conversionActions: (
+          | resources.IConversionAction
+          | resources.ConversionAction
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateConversionActionsResponse> => {
         const ops = this.buildOperations<
@@ -3819,7 +3885,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateConversionActionsResponse
        */
       update: async (
-        conversionActions: resources.IConversionAction[],
+        conversionActions: (
+          | resources.IConversionAction
+          | resources.ConversionAction
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateConversionActionsResponse> => {
         const ops = this.buildOperations<
@@ -3829,7 +3898,7 @@ export default class ServiceFactory extends Service {
           "update",
           conversionActions,
           // @ts-expect-error Static class type here is fine
-          resources.IConversionAction
+          resources.ConversionAction
         );
         const request = this.buildRequest<
           services.ConversionActionOperation,
@@ -3930,7 +3999,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerExtensionSettingsResponse
        */
       create: async (
-        customerExtensionSettings: resources.ICustomerExtensionSetting[],
+        customerExtensionSettings: (
+          | resources.ICustomerExtensionSetting
+          | resources.CustomerExtensionSetting
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomerExtensionSettingsResponse> => {
         const ops = this.buildOperations<
@@ -3964,7 +4036,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerExtensionSettingsResponse
        */
       update: async (
-        customerExtensionSettings: resources.ICustomerExtensionSetting[],
+        customerExtensionSettings: (
+          | resources.ICustomerExtensionSetting
+          | resources.CustomerExtensionSetting
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomerExtensionSettingsResponse> => {
         const ops = this.buildOperations<
@@ -3974,7 +4049,7 @@ export default class ServiceFactory extends Service {
           "update",
           customerExtensionSettings,
           // @ts-expect-error Static class type here is fine
-          resources.ICustomerExtensionSetting
+          resources.CustomerExtensionSetting
         );
         const request = this.buildRequest<
           services.CustomerExtensionSettingOperation,
@@ -4076,7 +4151,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerFeedsResponse
        */
       create: async (
-        customerFeeds: resources.ICustomerFeed[],
+        customerFeeds: (resources.ICustomerFeed | resources.CustomerFeed)[],
         options?: MutateOptions
       ): Promise<services.MutateCustomerFeedsResponse> => {
         const ops = this.buildOperations<
@@ -4107,7 +4182,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerFeedsResponse
        */
       update: async (
-        customerFeeds: resources.ICustomerFeed[],
+        customerFeeds: (resources.ICustomerFeed | resources.CustomerFeed)[],
         options?: MutateOptions
       ): Promise<services.MutateCustomerFeedsResponse> => {
         const ops = this.buildOperations<
@@ -4117,7 +4192,7 @@ export default class ServiceFactory extends Service {
           "update",
           customerFeeds,
           // @ts-expect-error Static class type here is fine
-          resources.ICustomerFeed
+          resources.CustomerFeed
         );
         const request = this.buildRequest<
           services.CustomerFeedOperation,
@@ -4213,7 +4288,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerLabelsResponse
        */
       create: async (
-        customerLabels: resources.ICustomerLabel[],
+        customerLabels: (resources.ICustomerLabel | resources.CustomerLabel)[],
         options?: MutateOptions
       ): Promise<services.MutateCustomerLabelsResponse> => {
         const ops = this.buildOperations<
@@ -4319,7 +4394,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerNegativeCriteriaResponse
        */
       create: async (
-        customerNegativeCriteria: resources.ICustomerNegativeCriterion[],
+        customerNegativeCriteria: (
+          | resources.ICustomerNegativeCriterion
+          | resources.CustomerNegativeCriterion
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomerNegativeCriteriaResponse> => {
         const ops = this.buildOperations<
@@ -4426,7 +4504,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerResponse
        */
       update: async (
-        customers: resources.ICustomer[],
+        customers: (resources.ICustomer | resources.Customer)[],
         options?: MutateOptions
       ): Promise<services.MutateCustomerResponse> => {
         const ops = this.buildOperations<
@@ -4436,7 +4514,7 @@ export default class ServiceFactory extends Service {
           "update",
           customers,
           // @ts-expect-error Static class type here is fine
-          resources.ICustomer
+          resources.Customer
         );
         const request = this.buildRequest<
           services.CustomerOperation,
@@ -4543,7 +4621,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateExtensionFeedItemsResponse
        */
       create: async (
-        extensionFeedItems: resources.IExtensionFeedItem[],
+        extensionFeedItems: (
+          | resources.IExtensionFeedItem
+          | resources.ExtensionFeedItem
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateExtensionFeedItemsResponse> => {
         const ops = this.buildOperations<
@@ -4574,7 +4655,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateExtensionFeedItemsResponse
        */
       update: async (
-        extensionFeedItems: resources.IExtensionFeedItem[],
+        extensionFeedItems: (
+          | resources.IExtensionFeedItem
+          | resources.ExtensionFeedItem
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateExtensionFeedItemsResponse> => {
         const ops = this.buildOperations<
@@ -4584,7 +4668,7 @@ export default class ServiceFactory extends Service {
           "update",
           extensionFeedItems,
           // @ts-expect-error Static class type here is fine
-          resources.IExtensionFeedItem
+          resources.ExtensionFeedItem
         );
         const request = this.buildRequest<
           services.ExtensionFeedItemOperation,
@@ -4680,7 +4764,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateFeedItemsResponse
        */
       create: async (
-        feedItems: resources.IFeedItem[],
+        feedItems: (resources.IFeedItem | resources.FeedItem)[],
         options?: MutateOptions
       ): Promise<services.MutateFeedItemsResponse> => {
         const ops = this.buildOperations<
@@ -4711,7 +4795,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateFeedItemsResponse
        */
       update: async (
-        feedItems: resources.IFeedItem[],
+        feedItems: (resources.IFeedItem | resources.FeedItem)[],
         options?: MutateOptions
       ): Promise<services.MutateFeedItemsResponse> => {
         const ops = this.buildOperations<
@@ -4721,7 +4805,7 @@ export default class ServiceFactory extends Service {
           "update",
           feedItems,
           // @ts-expect-error Static class type here is fine
-          resources.IFeedItem
+          resources.FeedItem
         );
         const request = this.buildRequest<
           services.FeedItemOperation,
@@ -4817,7 +4901,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateFeedItemSetLinksResponse
        */
       create: async (
-        feedItemSetLinks: resources.IFeedItemSetLink[],
+        feedItemSetLinks: (
+          | resources.IFeedItemSetLink
+          | resources.FeedItemSetLink
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateFeedItemSetLinksResponse> => {
         const ops = this.buildOperations<
@@ -4918,7 +5005,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateFeedItemSetsResponse
        */
       create: async (
-        feedItemSets: resources.IFeedItemSet[],
+        feedItemSets: (resources.IFeedItemSet | resources.FeedItemSet)[],
         options?: MutateOptions
       ): Promise<services.MutateFeedItemSetsResponse> => {
         const ops = this.buildOperations<
@@ -4949,7 +5036,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateFeedItemSetsResponse
        */
       update: async (
-        feedItemSets: resources.IFeedItemSet[],
+        feedItemSets: (resources.IFeedItemSet | resources.FeedItemSet)[],
         options?: MutateOptions
       ): Promise<services.MutateFeedItemSetsResponse> => {
         const ops = this.buildOperations<
@@ -4959,7 +5046,7 @@ export default class ServiceFactory extends Service {
           "update",
           feedItemSets,
           // @ts-expect-error Static class type here is fine
-          resources.IFeedItemSet
+          resources.FeedItemSet
         );
         const request = this.buildRequest<
           services.FeedItemSetOperation,
@@ -5052,7 +5139,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateFeedItemTargetsResponse
        */
       create: async (
-        feedItemTargets: resources.IFeedItemTarget[],
+        feedItemTargets: (
+          | resources.IFeedItemTarget
+          | resources.FeedItemTarget
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateFeedItemTargetsResponse> => {
         const ops = this.buildOperations<
@@ -5153,7 +5243,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateFeedMappingsResponse
        */
       create: async (
-        feedMappings: resources.IFeedMapping[],
+        feedMappings: (resources.IFeedMapping | resources.FeedMapping)[],
         options?: MutateOptions
       ): Promise<services.MutateFeedMappingsResponse> => {
         const ops = this.buildOperations<
@@ -5252,7 +5342,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateFeedsResponse
        */
       create: async (
-        feeds: resources.IFeed[],
+        feeds: (resources.IFeed | resources.Feed)[],
         options?: MutateOptions
       ): Promise<services.MutateFeedsResponse> => {
         const ops = this.buildOperations<
@@ -5283,7 +5373,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateFeedsResponse
        */
       update: async (
-        feeds: resources.IFeed[],
+        feeds: (resources.IFeed | resources.Feed)[],
         options?: MutateOptions
       ): Promise<services.MutateFeedsResponse> => {
         const ops = this.buildOperations<
@@ -5293,7 +5383,7 @@ export default class ServiceFactory extends Service {
           "update",
           feeds,
           // @ts-expect-error Static class type here is fine
-          resources.IFeed
+          resources.Feed
         );
         const request = this.buildRequest<
           services.FeedOperation,
@@ -5394,7 +5484,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateKeywordPlanAdGroupKeywordsResponse
        */
       create: async (
-        keywordPlanAdGroupKeywords: resources.IKeywordPlanAdGroupKeyword[],
+        keywordPlanAdGroupKeywords: (
+          | resources.IKeywordPlanAdGroupKeyword
+          | resources.KeywordPlanAdGroupKeyword
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateKeywordPlanAdGroupKeywordsResponse> => {
         const ops = this.buildOperations<
@@ -5428,7 +5521,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateKeywordPlanAdGroupKeywordsResponse
        */
       update: async (
-        keywordPlanAdGroupKeywords: resources.IKeywordPlanAdGroupKeyword[],
+        keywordPlanAdGroupKeywords: (
+          | resources.IKeywordPlanAdGroupKeyword
+          | resources.KeywordPlanAdGroupKeyword
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateKeywordPlanAdGroupKeywordsResponse> => {
         const ops = this.buildOperations<
@@ -5438,7 +5534,7 @@ export default class ServiceFactory extends Service {
           "update",
           keywordPlanAdGroupKeywords,
           // @ts-expect-error Static class type here is fine
-          resources.IKeywordPlanAdGroupKeyword
+          resources.KeywordPlanAdGroupKeyword
         );
         const request = this.buildRequest<
           services.KeywordPlanAdGroupKeywordOperation,
@@ -5542,7 +5638,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateKeywordPlanAdGroupsResponse
        */
       create: async (
-        keywordPlanAdGroups: resources.IKeywordPlanAdGroup[],
+        keywordPlanAdGroups: (
+          | resources.IKeywordPlanAdGroup
+          | resources.KeywordPlanAdGroup
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateKeywordPlanAdGroupsResponse> => {
         const ops = this.buildOperations<
@@ -5573,7 +5672,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateKeywordPlanAdGroupsResponse
        */
       update: async (
-        keywordPlanAdGroups: resources.IKeywordPlanAdGroup[],
+        keywordPlanAdGroups: (
+          | resources.IKeywordPlanAdGroup
+          | resources.KeywordPlanAdGroup
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateKeywordPlanAdGroupsResponse> => {
         const ops = this.buildOperations<
@@ -5583,7 +5685,7 @@ export default class ServiceFactory extends Service {
           "update",
           keywordPlanAdGroups,
           // @ts-expect-error Static class type here is fine
-          resources.IKeywordPlanAdGroup
+          resources.KeywordPlanAdGroup
         );
         const request = this.buildRequest<
           services.KeywordPlanAdGroupOperation,
@@ -5684,7 +5786,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateKeywordPlanCampaignKeywordsResponse
        */
       create: async (
-        keywordPlanCampaignKeywords: resources.IKeywordPlanCampaignKeyword[],
+        keywordPlanCampaignKeywords: (
+          | resources.IKeywordPlanCampaignKeyword
+          | resources.KeywordPlanCampaignKeyword
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateKeywordPlanCampaignKeywordsResponse> => {
         const ops = this.buildOperations<
@@ -5718,7 +5823,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateKeywordPlanCampaignKeywordsResponse
        */
       update: async (
-        keywordPlanCampaignKeywords: resources.IKeywordPlanCampaignKeyword[],
+        keywordPlanCampaignKeywords: (
+          | resources.IKeywordPlanCampaignKeyword
+          | resources.KeywordPlanCampaignKeyword
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateKeywordPlanCampaignKeywordsResponse> => {
         const ops = this.buildOperations<
@@ -5728,7 +5836,7 @@ export default class ServiceFactory extends Service {
           "update",
           keywordPlanCampaignKeywords,
           // @ts-expect-error Static class type here is fine
-          resources.IKeywordPlanCampaignKeyword
+          resources.KeywordPlanCampaignKeyword
         );
         const request = this.buildRequest<
           services.KeywordPlanCampaignKeywordOperation,
@@ -5832,7 +5940,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateKeywordPlanCampaignsResponse
        */
       create: async (
-        keywordPlanCampaigns: resources.IKeywordPlanCampaign[],
+        keywordPlanCampaigns: (
+          | resources.IKeywordPlanCampaign
+          | resources.KeywordPlanCampaign
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateKeywordPlanCampaignsResponse> => {
         const ops = this.buildOperations<
@@ -5863,7 +5974,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateKeywordPlanCampaignsResponse
        */
       update: async (
-        keywordPlanCampaigns: resources.IKeywordPlanCampaign[],
+        keywordPlanCampaigns: (
+          | resources.IKeywordPlanCampaign
+          | resources.KeywordPlanCampaign
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateKeywordPlanCampaignsResponse> => {
         const ops = this.buildOperations<
@@ -5873,7 +5987,7 @@ export default class ServiceFactory extends Service {
           "update",
           keywordPlanCampaigns,
           // @ts-expect-error Static class type here is fine
-          resources.IKeywordPlanCampaign
+          resources.KeywordPlanCampaign
         );
         const request = this.buildRequest<
           services.KeywordPlanCampaignOperation,
@@ -5969,7 +6083,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateKeywordPlansResponse
        */
       create: async (
-        keywordPlans: resources.IKeywordPlan[],
+        keywordPlans: (resources.IKeywordPlan | resources.KeywordPlan)[],
         options?: MutateOptions
       ): Promise<services.MutateKeywordPlansResponse> => {
         const ops = this.buildOperations<
@@ -6000,7 +6114,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateKeywordPlansResponse
        */
       update: async (
-        keywordPlans: resources.IKeywordPlan[],
+        keywordPlans: (resources.IKeywordPlan | resources.KeywordPlan)[],
         options?: MutateOptions
       ): Promise<services.MutateKeywordPlansResponse> => {
         const ops = this.buildOperations<
@@ -6010,7 +6124,7 @@ export default class ServiceFactory extends Service {
           "update",
           keywordPlans,
           // @ts-expect-error Static class type here is fine
-          resources.IKeywordPlan
+          resources.KeywordPlan
         );
         const request = this.buildRequest<
           services.KeywordPlanOperation,
@@ -6186,7 +6300,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateLabelsResponse
        */
       create: async (
-        labels: resources.ILabel[],
+        labels: (resources.ILabel | resources.Label)[],
         options?: MutateOptions
       ): Promise<services.MutateLabelsResponse> => {
         const ops = this.buildOperations<
@@ -6217,7 +6331,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateLabelsResponse
        */
       update: async (
-        labels: resources.ILabel[],
+        labels: (resources.ILabel | resources.Label)[],
         options?: MutateOptions
       ): Promise<services.MutateLabelsResponse> => {
         const ops = this.buildOperations<
@@ -6227,7 +6341,7 @@ export default class ServiceFactory extends Service {
           "update",
           labels,
           // @ts-expect-error Static class type here is fine
-          resources.ILabel
+          resources.Label
         );
         const request = this.buildRequest<
           services.LabelOperation,
@@ -6323,7 +6437,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateMediaFilesResponse
        */
       create: async (
-        mediaFiles: resources.IMediaFile[],
+        mediaFiles: (resources.IMediaFile | resources.MediaFile)[],
         options?: MutateOptions
       ): Promise<services.MutateMediaFilesResponse> => {
         const ops = this.buildOperations<
@@ -6395,7 +6509,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateRemarketingActionsResponse
        */
       create: async (
-        remarketingActions: resources.IRemarketingAction[],
+        remarketingActions: (
+          | resources.IRemarketingAction
+          | resources.RemarketingAction
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateRemarketingActionsResponse> => {
         const ops = this.buildOperations<
@@ -6426,7 +6543,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateRemarketingActionsResponse
        */
       update: async (
-        remarketingActions: resources.IRemarketingAction[],
+        remarketingActions: (
+          | resources.IRemarketingAction
+          | resources.RemarketingAction
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateRemarketingActionsResponse> => {
         const ops = this.buildOperations<
@@ -6436,7 +6556,7 @@ export default class ServiceFactory extends Service {
           "update",
           remarketingActions,
           // @ts-expect-error Static class type here is fine
-          resources.IRemarketingAction
+          resources.RemarketingAction
         );
         const request = this.buildRequest<
           services.RemarketingActionOperation,
@@ -6501,7 +6621,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateSharedCriteriaResponse
        */
       create: async (
-        sharedCriteria: resources.ISharedCriterion[],
+        sharedCriteria: (
+          | resources.ISharedCriterion
+          | resources.SharedCriterion
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateSharedCriteriaResponse> => {
         const ops = this.buildOperations<
@@ -6602,7 +6725,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateSharedSetsResponse
        */
       create: async (
-        sharedSets: resources.ISharedSet[],
+        sharedSets: (resources.ISharedSet | resources.SharedSet)[],
         options?: MutateOptions
       ): Promise<services.MutateSharedSetsResponse> => {
         const ops = this.buildOperations<
@@ -6633,7 +6756,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateSharedSetsResponse
        */
       update: async (
-        sharedSets: resources.ISharedSet[],
+        sharedSets: (resources.ISharedSet | resources.SharedSet)[],
         options?: MutateOptions
       ): Promise<services.MutateSharedSetsResponse> => {
         const ops = this.buildOperations<
@@ -6643,7 +6766,7 @@ export default class ServiceFactory extends Service {
           "update",
           sharedSets,
           // @ts-expect-error Static class type here is fine
-          resources.ISharedSet
+          resources.SharedSet
         );
         const request = this.buildRequest<
           services.SharedSetOperation,
@@ -6739,7 +6862,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateUserListsResponse
        */
       create: async (
-        userLists: resources.IUserList[],
+        userLists: (resources.IUserList | resources.UserList)[],
         options?: MutateOptions
       ): Promise<services.MutateUserListsResponse> => {
         const ops = this.buildOperations<
@@ -6770,7 +6893,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateUserListsResponse
        */
       update: async (
-        userLists: resources.IUserList[],
+        userLists: (resources.IUserList | resources.UserList)[],
         options?: MutateOptions
       ): Promise<services.MutateUserListsResponse> => {
         const ops = this.buildOperations<
@@ -6780,7 +6903,7 @@ export default class ServiceFactory extends Service {
           "update",
           userLists,
           // @ts-expect-error Static class type here is fine
-          resources.IUserList
+          resources.UserList
         );
         const request = this.buildRequest<
           services.UserListOperation,
@@ -6871,7 +6994,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateBillingSetupResponse
        */
       create: async (
-        billingSetups: resources.IBillingSetup[],
+        billingSetups: (resources.IBillingSetup | resources.BillingSetup)[],
         options?: MutateOptions
       ): Promise<services.MutateBillingSetupResponse> => {
         const ops = this.buildOperations<
@@ -7303,7 +7426,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomAudiencesResponse
        */
       create: async (
-        customAudiences: resources.ICustomAudience[],
+        customAudiences: (
+          | resources.ICustomAudience
+          | resources.CustomAudience
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomAudiencesResponse> => {
         const ops = this.buildOperations<
@@ -7334,7 +7460,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomAudiencesResponse
        */
       update: async (
-        customAudiences: resources.ICustomAudience[],
+        customAudiences: (
+          | resources.ICustomAudience
+          | resources.CustomAudience
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomAudiencesResponse> => {
         const ops = this.buildOperations<
@@ -7344,7 +7473,7 @@ export default class ServiceFactory extends Service {
           "update",
           customAudiences,
           // @ts-expect-error Static class type here is fine
-          resources.ICustomAudience
+          resources.CustomAudience
         );
         const request = this.buildRequest<
           services.CustomAudienceOperation,
@@ -7437,7 +7566,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomInterestsResponse
        */
       create: async (
-        customInterests: resources.ICustomInterest[],
+        customInterests: (
+          | resources.ICustomInterest
+          | resources.CustomInterest
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomInterestsResponse> => {
         const ops = this.buildOperations<
@@ -7468,7 +7600,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomInterestsResponse
        */
       update: async (
-        customInterests: resources.ICustomInterest[],
+        customInterests: (
+          | resources.ICustomInterest
+          | resources.CustomInterest
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomInterestsResponse> => {
         const ops = this.buildOperations<
@@ -7478,7 +7613,7 @@ export default class ServiceFactory extends Service {
           "update",
           customInterests,
           // @ts-expect-error Static class type here is fine
-          resources.ICustomInterest
+          resources.CustomInterest
         );
         const request = this.buildRequest<
           services.CustomInterestOperation,
@@ -7540,7 +7675,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerClientLinkResponse
        */
       create: async (
-        customerClientLinks: resources.ICustomerClientLink[],
+        customerClientLinks: (
+          | resources.ICustomerClientLink
+          | resources.CustomerClientLink
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomerClientLinkResponse> => {
         const ops = this.buildOperations<
@@ -7571,7 +7709,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerClientLinkResponse
        */
       update: async (
-        customerClientLinks: resources.ICustomerClientLink[],
+        customerClientLinks: (
+          | resources.ICustomerClientLink
+          | resources.CustomerClientLink
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomerClientLinkResponse> => {
         const ops = this.buildOperations<
@@ -7581,7 +7722,7 @@ export default class ServiceFactory extends Service {
           "update",
           customerClientLinks,
           // @ts-expect-error Static class type here is fine
-          resources.ICustomerClientLink
+          resources.CustomerClientLink
         );
         const request = this.buildRequest<
           services.CustomerClientLinkOperation,
@@ -7677,7 +7818,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerManagerLinkResponse
        */
       update: async (
-        customerManagerLinks: resources.ICustomerManagerLink[],
+        customerManagerLinks: (
+          | resources.ICustomerManagerLink
+          | resources.CustomerManagerLink
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomerManagerLinkResponse> => {
         const ops = this.buildOperations<
@@ -7687,7 +7831,7 @@ export default class ServiceFactory extends Service {
           "update",
           customerManagerLinks,
           // @ts-expect-error Static class type here is fine
-          resources.ICustomerManagerLink
+          resources.CustomerManagerLink
         );
         const request = this.buildRequest<
           services.CustomerManagerLinkOperation,
@@ -7772,7 +7916,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerUserAccessInvitationResponse
        */
       create: async (
-        customerUserAccessInvitations: resources.ICustomerUserAccessInvitation[],
+        customerUserAccessInvitations: (
+          | resources.ICustomerUserAccessInvitation
+          | resources.CustomerUserAccessInvitation
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomerUserAccessInvitationResponse> => {
         const ops = this.buildOperations<
@@ -7876,7 +8023,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerUserAccessResponse
        */
       update: async (
-        customerUserAccesses: resources.ICustomerUserAccess[],
+        customerUserAccesses: (
+          | resources.ICustomerUserAccess
+          | resources.CustomerUserAccess
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomerUserAccessResponse> => {
         const ops = this.buildOperations<
@@ -7886,7 +8036,7 @@ export default class ServiceFactory extends Service {
           "update",
           customerUserAccesses,
           // @ts-expect-error Static class type here is fine
-          resources.ICustomerUserAccess
+          resources.CustomerUserAccess
         );
         const request = this.buildRequest<
           services.CustomerUserAccessOperation,
@@ -8750,7 +8900,10 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateMerchantCenterLinkResponse
        */
       update: async (
-        merchantCenterLinks: resources.IMerchantCenterLink[],
+        merchantCenterLinks: (
+          | resources.IMerchantCenterLink
+          | resources.MerchantCenterLink
+        )[],
         options?: MutateOptions
       ): Promise<services.MutateMerchantCenterLinkResponse> => {
         const ops = this.buildOperations<
@@ -8760,7 +8913,7 @@ export default class ServiceFactory extends Service {
           "update",
           merchantCenterLinks,
           // @ts-expect-error Static class type here is fine
-          resources.IMerchantCenterLink
+          resources.MerchantCenterLink
         );
         const request = this.buildRequest<
           services.MerchantCenterLinkOperation,
