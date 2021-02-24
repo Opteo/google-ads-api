@@ -237,6 +237,7 @@ function compileMutateMethods(
   const types = {
     resource: `resources.I${resourceName}`,
     request: `services.I${methodDef.requestType}`,
+    requestClass: `resources.${resourceName}`,
     operation: `services.${opType.type}`,
     response: `services.${methodDef.responseType}`,
   };
@@ -257,6 +258,7 @@ function compileMutateMethods(
           argName,
           types.resource,
           types.request,
+          types.requestClass,
           types.operation,
           types.response,
           serviceMethod
@@ -274,6 +276,7 @@ function compileMutateMethods(
         argName,
         "string",
         types.request,
+        types.requestClass,
         types.operation,
         types.response,
         serviceMethod
@@ -311,19 +314,24 @@ function buildMutateMethod(
   argName: string,
   resourceType: string,
   requestType: string,
+  requestClass: string,
   operationType: string,
   responseType: string,
   methodName: string
 ): string {
   const isUpdate = mutation === "update";
-  const updateMaskMessageArg = isUpdate ? `, ${resourceType}` : "";
+  const updateMaskMessageArg = isUpdate ? `, ${requestClass}` : "";
   return `
     /**
      * @description ${mutation} resources of type ${resourceType}
      * @returns ${responseType}
      */
     ${mutation}: async (
-      ${argName}: ${resourceType}[],
+      ${argName}: ${
+    mutation === "remove"
+      ? `${resourceType}[]`
+      : `(${resourceType} | ${requestClass})[]`
+  } ,
       options?: MutateOptions
     ): Promise<${responseType} > => {
       const ops = this.buildOperations<
