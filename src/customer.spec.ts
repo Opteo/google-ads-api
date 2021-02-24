@@ -679,6 +679,8 @@ describe("mutateResources", () => {
     expect(spyHook).toHaveBeenCalled();
     expect(spyHook).toHaveBeenCalledWith({
       credentials: expect.any(Object),
+      method: "GoogleAdsService.mutate",
+      isServiceCall: false,
       mutations,
       cancel: expect.any(Function),
       editOptions: expect.any(Function),
@@ -780,6 +782,8 @@ describe("mutateResources", () => {
       expect(spyHook).toHaveBeenCalled();
       expect(spyHook).toHaveBeenCalledWith({
         credentials: expect.any(Object),
+        method: "GoogleAdsService.mutate",
+        isServiceCall: false,
         mutations,
         error: mockError,
       });
@@ -845,6 +849,8 @@ describe("mutateResources", () => {
     expect(spyHook).toHaveBeenCalled();
     expect(spyHook).toHaveBeenCalledWith({
       credentials: expect.any(Object),
+      method: "GoogleAdsService.mutate",
+      isServiceCall: false,
       mutations,
       response: mockMutationReturnValue,
       resolve: expect.any(Function),

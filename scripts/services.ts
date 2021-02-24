@@ -54,10 +54,20 @@ import { ClientOptions } from "../../client";
 import { CustomerOptions } from "../../types";
 import { Service } from "../../service";
 import { resources, services, protobuf, longrunning } from "../index";
+import {
+  BaseMutationHookArgs,
+  HookedCancellation,
+  HookedResolution,
+  Hooks,
+} from "../../hooks";
 
 export default class ServiceFactory extends Service {
-  constructor(clientOptions: ClientOptions, customerOptions: CustomerOptions) {
-    super(clientOptions, customerOptions);
+  constructor(
+    clientOptions: ClientOptions,
+    customerOptions: CustomerOptions,
+    hooks?: Hooks
+  ) {
+    super(clientOptions, customerOptions, hooks ?? {});
   }
 `);
 
@@ -227,6 +237,7 @@ function compileMutateMethods(
   const types = {
     resource: `resources.I${resourceName}`,
     request: `services.I${methodDef.requestType}`,
+    requestClass: `resources.${resourceName}`,
     operation: `services.${opType.type}`,
     response: `services.${methodDef.responseType}`,
   };
@@ -242,10 +253,12 @@ function compileMutateMethods(
     if (["create", "update"].includes(method)) {
       mutateMethods.push(
         buildMutateMethod(
+          serviceName,
           method as MutateMethod,
           argName,
           types.resource,
           types.request,
+          types.requestClass,
           types.operation,
           types.response,
           serviceMethod
@@ -258,10 +271,12 @@ function compileMutateMethods(
   if (methods.includes("remove")) {
     mutateMethods.push(
       buildMutateMethod(
+        serviceName,
         "remove",
         argName,
         "string",
         types.request,
+        types.requestClass,
         types.operation,
         types.response,
         serviceMethod
@@ -294,23 +309,29 @@ function buildMutationOptions(
 }
 
 function buildMutateMethod(
+  serviceName: string,
   mutation: MutateMethod,
   argName: string,
   resourceType: string,
   requestType: string,
+  requestClass: string,
   operationType: string,
   responseType: string,
   methodName: string
 ): string {
   const isUpdate = mutation === "update";
-  const updateMaskMessageArg = isUpdate ? `, ${resourceType}` : "";
+  const updateMaskMessageArg = isUpdate ? `, ${requestClass}` : "";
   return `
     /**
      * @description ${mutation} resources of type ${resourceType}
      * @returns ${responseType}
      */
     ${mutation}: async (
-      ${argName}: ${resourceType}[],
+      ${argName}: ${
+    mutation === "remove"
+      ? `${resourceType}[]`
+      : `(${resourceType} | ${requestClass})[]`
+  } ,
       options?: MutateOptions
     ): Promise<${responseType} > => {
       const ops = this.buildOperations<
@@ -327,6 +348,7 @@ function buildMutateMethod(
         ${requestType},
         MutateOptions
       >(ops, options);
+      ${buildMutateHookStart(serviceName, methodName)}
       try {
         // @ts-expect-error Response is an array type
         const [response] = await service.${methodName}(request, {
@@ -335,10 +357,67 @@ function buildMutateMethod(
             headers: this.callHeaders,
           },
         });
+        ${buildMutateHookEnd()}
         return response;
       } catch (err) {
-        throw this.getGoogleAdsError(err);
+        ${buildMutateHookError()}
       }
     }
   `;
+}
+
+function buildMutateHookStart(serviceName: string, methodName: string): string {
+  return `const baseHookArguments: BaseMutationHookArgs = {
+    credentials: this.credentials,
+    method: "${serviceName}.${methodName}",
+    mutation: request,
+    isServiceCall: true,
+  };
+  if (this.hooks.onMutationStart) {
+    const mutationCancellation: HookedCancellation = { cancelled: false };
+    await this.hooks.onMutationStart({
+      ...baseHookArguments,
+      cancel: (res) => {
+        mutationCancellation.cancelled = true;
+        mutationCancellation.res = res;
+      },
+      editOptions: (options) => {
+        Object.entries(options).forEach(([key, val]) => {
+          // @ts-expect-error Index with key type is fine
+          request[key] = val;
+        });
+      },
+    });
+    if (mutationCancellation.cancelled) {
+      return mutationCancellation.res;
+    }
+  }`;
+}
+
+function buildMutateHookEnd() {
+  return `if (this.hooks.onMutationEnd) {
+    const mutationResolution: HookedResolution = { resolved: false };
+    await this.hooks.onMutationEnd({
+      ...baseHookArguments,
+      response,
+      resolve: (res) => {
+        mutationResolution.resolved = true;
+        mutationResolution.res = res;
+      },
+    });
+    if (mutationResolution.resolved) {
+      return mutationResolution.res;
+    }
+  }`;
+}
+
+function buildMutateHookError() {
+  return `const googleAdsError = this.getGoogleAdsError(err);
+  if (this.hooks.onMutationError) {
+    await this.hooks.onMutationError({
+      ...baseHookArguments,
+      error: googleAdsError,
+    });
+  }
+  throw googleAdsError;`;
 }

@@ -15,8 +15,13 @@ export type BaseQueryHookArgs = {
 
 export type BaseMutationHookArgs = {
   credentials: CustomerCredentials;
-  mutations: MutateOperation<any>[];
-};
+  method: `${keyof typeof services}.${string}`;
+} & (
+  | // Mutation was executed with customer.mutateResources
+  { mutations: MutateOperation<any>[]; isServiceCall: false }
+  // Mutation was executed with a service e.g. customer.campaigns.create
+  | { mutation: any; isServiceCall: true }
+);
 
 type PreHookArgs<T = RequestOptions | MutateOptions> = {
   cancel: (args?: any) => void;
