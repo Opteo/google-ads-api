@@ -38,6 +38,24 @@ export class Customer extends ServiceFactory {
     return this.query<T>(gaqlQuery, requestOptions, options);
   }
 
+  private createNextChunkArrivedPromise() {
+    let res = (): void => {
+      return;
+    };
+
+    let rej = (): void => {
+      return;
+    };
+
+    const newPromise = new Promise((resolve, reject) => {
+      // @ts-ignore
+      res = resolve;
+      rej = reject;
+    });
+
+    return { newPromise, resolve: res, reject: rej };
+  }
+
   /** 
     @description Stream query using ReportOptions. If a generic type is provided, it must be the type of a single row.
     @example
@@ -46,7 +64,7 @@ export class Customer extends ServiceFactory {
   */
   public async *reportStream<T = services.IGoogleAdsRow>(
     reportOptions: ReportOptions
-  ): AsyncGenerator<T, void, undefined> {
+  ): AsyncGenerator<T> {
     const { gaqlQuery, requestOptions } = buildQuery(reportOptions);
 
     const baseHookArguments: BaseQueryHookArgs = {
@@ -84,38 +102,39 @@ export class Customer extends ServiceFactory {
       }
     }
 
-    const { service, request } = this.buildSearchRequestAndService(
+    const { service, request } = this.buildSearchStreamRequestAndService(
       gaqlQuery,
       requestOptions
     );
 
-    try {
-      const stream: AsyncIterable<services.IGoogleAdsRow> = service.searchAsync(
-        request,
-        { otherArgs: { headers: this.callHeaders } }
-      );
+    const stream = service.searchStream(request, {
+      otherArgs: { headers: this.callHeaders },
+    });
 
-      const result: services.IGoogleAdsRow[] = [];
-      for await (const row of stream) {
-        const [parsedResponse] = this.clientOptions.disable_parsing
-          ? [row]
-          : parse({ results: [row], reportOptions });
+    let done = false;
+    const accumulator: T[] = [];
+    const response: T[] = [];
 
-        result.push(parsedResponse);
+    let nextChunk = this.createNextChunkArrivedPromise();
 
-        yield parsedResponse as T;
-      }
+    console.log("stream started");
 
-      if (this.hooks.onQueryEnd) {
-        await this.hooks.onQueryEnd({
-          ...baseHookArguments,
-          response: result,
-          resolve: () => {
-            return;
-          },
-        });
-      }
-    } catch (searchError) {
+    stream.on("data", (chunk: services.SearchGoogleAdsStreamResponse) => {
+      console.log("ON DATA");
+      const parsedResponse = this.clientOptions.disable_parsing
+        ? chunk.results
+        : parse({ results: chunk.results, reportOptions });
+      accumulator.push(...(parsedResponse as T[]));
+      response.push(...(parsedResponse as T[]));
+
+      nextChunk.resolve();
+      nextChunk = this.createNextChunkArrivedPromise();
+    });
+
+    stream.on("error", async (searchError: Error) => {
+      console.log("ON ERROR");
+      nextChunk.reject();
+
       const googleAdsError = this.getGoogleAdsError(searchError);
       if (this.hooks.onQueryError) {
         await this.hooks.onQueryError({
@@ -124,6 +143,38 @@ export class Customer extends ServiceFactory {
         });
       }
       throw googleAdsError;
+    });
+
+    stream.on("end", async () => {
+      console.log("ON END");
+      done = true;
+      nextChunk.resolve();
+
+      if (this.hooks.onQueryEnd) {
+        await this.hooks.onQueryEnd({
+          ...baseHookArguments,
+          response,
+          resolve: () => {
+            return;
+          },
+        });
+      }
+    });
+
+    try {
+      while (!done || accumulator.length) {
+        if (accumulator.length !== 0) {
+          const item = accumulator.shift();
+          if (item === undefined) {
+            throw new Error("UNDEFINED_STREAM_ERROR");
+          }
+          yield item;
+        } else {
+          await nextChunk.newPromise;
+        }
+      }
+    } finally {
+      stream.destroy();
     }
   }
 
