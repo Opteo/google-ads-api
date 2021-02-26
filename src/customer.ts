@@ -117,10 +117,7 @@ export class Customer extends ServiceFactory {
 
     let nextChunk = this.createNextChunkArrivedPromise();
 
-    console.log("stream started");
-
     stream.on("data", (chunk: services.SearchGoogleAdsStreamResponse) => {
-      console.log("ON DATA");
       const parsedResponse = this.clientOptions.disable_parsing
         ? chunk.results
         : parse({ results: chunk.results, reportOptions });
@@ -132,7 +129,6 @@ export class Customer extends ServiceFactory {
     });
 
     stream.on("error", async (searchError: Error) => {
-      console.log("ON ERROR");
       nextChunk.reject();
 
       const googleAdsError = this.getGoogleAdsError(searchError);
@@ -146,7 +142,6 @@ export class Customer extends ServiceFactory {
     });
 
     stream.on("end", async () => {
-      console.log("ON END");
       done = true;
       nextChunk.resolve();
 
