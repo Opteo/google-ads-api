@@ -39,21 +39,21 @@ export class Customer extends ServiceFactory {
   }
 
   private createNextChunkArrivedPromise() {
-    let res = (): void => {
+    let resolvePromise = (): void => {
       return;
     };
 
-    let rej = (): void => {
-      return;
+    let rejectPromise = (error: Error): void => {
+      throw error;
     };
 
     const newPromise = new Promise((resolve, reject) => {
       // @ts-ignore
-      res = resolve;
-      rej = reject;
+      resolvePromise = resolve;
+      rejectPromise = reject;
     });
 
-    return { newPromise, resolve: res, reject: rej };
+    return { newPromise, resolve: resolvePromise, reject: rejectPromise };
   }
 
   /** 
@@ -128,32 +128,13 @@ export class Customer extends ServiceFactory {
       nextChunk = this.createNextChunkArrivedPromise();
     });
 
-    stream.on("error", async (searchError: Error) => {
-      nextChunk.reject();
-
-      const googleAdsError = this.getGoogleAdsError(searchError);
-      if (this.hooks.onQueryError) {
-        await this.hooks.onQueryError({
-          ...baseHookArguments,
-          error: googleAdsError,
-        });
-      }
-      throw googleAdsError;
+    stream.on("error", (searchError: Error) => {
+      nextChunk.reject(searchError);
     });
 
-    stream.on("end", async () => {
+    stream.on("end", () => {
       done = true;
       nextChunk.resolve();
-
-      if (this.hooks.onQueryEnd) {
-        await this.hooks.onQueryEnd({
-          ...baseHookArguments,
-          response,
-          resolve: () => {
-            return;
-          },
-        });
-      }
     });
 
     try {
@@ -168,7 +149,26 @@ export class Customer extends ServiceFactory {
           await nextChunk.newPromise;
         }
       }
+    } catch (searchError) {
+      const googleAdsError = this.getGoogleAdsError(searchError);
+      if (this.hooks.onQueryError) {
+        await this.hooks.onQueryError({
+          ...baseHookArguments,
+          error: googleAdsError,
+        });
+      }
+      throw googleAdsError;
     } finally {
+      if (this.hooks.onQueryEnd) {
+        await this.hooks.onQueryEnd({
+          ...baseHookArguments,
+          response,
+          resolve: () => {
+            return;
+          },
+        });
+      }
+
       stream.destroy();
     }
   }
