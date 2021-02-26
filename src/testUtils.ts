@@ -74,6 +74,8 @@ export function mockSearchOnce(
   );
 }
 
+/* TODO: complete this so that it returns a valid mock stream and methods
+    that will correctly emit events. */
 export function mockBuildSearchStreamRequestAndService(
   customer: Customer
 ): {

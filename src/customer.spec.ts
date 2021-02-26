@@ -332,7 +332,7 @@ describe("paginatedSearch", () => {
   });
 });
 
-/* The tests for reportStream work except for mocking the stream events, which
+/* TODO: The tests for reportStream work except for mocking the stream events, which
 we have not yet been able to accomplish. */
 
 // describe("reportStream", () => {
