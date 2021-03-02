@@ -371,7 +371,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -381,7 +381,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -448,7 +448,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -458,7 +458,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -603,7 +603,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -613,7 +613,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -680,7 +680,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -690,7 +690,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -796,7 +796,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -806,7 +806,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -878,7 +878,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -888,7 +888,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -955,7 +955,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -965,7 +965,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -1112,7 +1112,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -1122,7 +1122,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -1197,7 +1197,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -1207,7 +1207,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -1274,7 +1274,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -1284,7 +1284,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -1398,7 +1398,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -1408,7 +1408,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -1478,7 +1478,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -1488,7 +1488,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -1599,7 +1599,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -1609,7 +1609,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -1684,7 +1684,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -1694,7 +1694,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -1761,7 +1761,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -1771,7 +1771,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -1925,7 +1925,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -1935,7 +1935,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -2014,7 +2014,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -2024,7 +2024,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -2095,7 +2095,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -2105,7 +2105,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -2211,7 +2211,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -2221,7 +2221,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -2293,7 +2293,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -2303,7 +2303,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -2370,7 +2370,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -2380,7 +2380,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -2486,7 +2486,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -2496,7 +2496,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -2563,7 +2563,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -2573,7 +2573,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -2679,7 +2679,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -2689,7 +2689,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -2761,7 +2761,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -2771,7 +2771,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -2838,7 +2838,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -2848,7 +2848,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -2990,7 +2990,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -3000,7 +3000,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -3072,7 +3072,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -3082,7 +3082,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -3149,7 +3149,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -3159,7 +3159,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -3815,7 +3815,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -3825,7 +3825,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -3900,7 +3900,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -3910,7 +3910,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -3977,7 +3977,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -3987,7 +3987,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -4093,7 +4093,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -4103,7 +4103,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -4170,7 +4170,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -4180,7 +4180,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -4291,7 +4291,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -4301,7 +4301,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -4376,7 +4376,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -4386,7 +4386,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -4453,7 +4453,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -4463,7 +4463,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -4572,7 +4572,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -4582,7 +4582,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -4657,7 +4657,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -4667,7 +4667,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -4734,7 +4734,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -4744,7 +4744,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -4855,7 +4855,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -4865,7 +4865,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -4940,7 +4940,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -4950,7 +4950,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -5017,7 +5017,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -5027,7 +5027,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -5133,7 +5133,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -5143,7 +5143,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -5215,7 +5215,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -5225,7 +5225,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -5292,7 +5292,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -5302,7 +5302,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -5481,7 +5481,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -5491,7 +5491,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -5558,7 +5558,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -5568,7 +5568,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -5769,7 +5769,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -5779,7 +5779,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -5858,7 +5858,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -5868,7 +5868,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -5939,7 +5939,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -5949,7 +5949,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -6055,7 +6055,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -6065,7 +6065,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -6137,7 +6137,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -6147,7 +6147,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -6214,7 +6214,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -6224,7 +6224,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -6330,7 +6330,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -6340,7 +6340,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -6407,7 +6407,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -6417,7 +6417,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -6523,7 +6523,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -6533,7 +6533,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -6605,7 +6605,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -6615,7 +6615,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -6682,7 +6682,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -6692,7 +6692,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -6803,7 +6803,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -6813,7 +6813,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -6880,7 +6880,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -6890,7 +6890,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -7001,7 +7001,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -7011,7 +7011,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -7086,7 +7086,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -7096,7 +7096,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -7163,7 +7163,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -7173,7 +7173,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -7291,7 +7291,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -7301,7 +7301,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -7380,7 +7380,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -7390,7 +7390,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -7461,7 +7461,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -7471,7 +7471,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -7577,7 +7577,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -7587,7 +7587,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -7659,7 +7659,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -7669,7 +7669,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -7736,7 +7736,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -7746,7 +7746,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -7852,7 +7852,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -7862,7 +7862,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -7929,7 +7929,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -7939,7 +7939,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -8057,7 +8057,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -8067,7 +8067,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -8138,7 +8138,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -8148,7 +8148,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -8420,7 +8420,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -8430,7 +8430,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -8505,7 +8505,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -8515,7 +8515,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -8582,7 +8582,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -8592,7 +8592,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -8698,7 +8698,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -8708,7 +8708,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -8780,7 +8780,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -8790,7 +8790,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -8857,7 +8857,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -8867,7 +8867,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -8976,7 +8976,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -8986,7 +8986,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -9053,7 +9053,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -9063,7 +9063,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -9169,7 +9169,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -9179,7 +9179,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -9251,7 +9251,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -9261,7 +9261,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -9328,7 +9328,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -9338,7 +9338,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -9637,7 +9637,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -9647,7 +9647,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -9714,7 +9714,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -9724,7 +9724,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -9828,7 +9828,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -9838,7 +9838,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -9910,7 +9910,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -9920,7 +9920,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -9987,7 +9987,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -9997,7 +9997,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -10115,7 +10115,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -10125,7 +10125,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -10204,7 +10204,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -10214,7 +10214,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -10285,7 +10285,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -10295,7 +10295,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -10406,7 +10406,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -10416,7 +10416,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -10491,7 +10491,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -10501,7 +10501,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -10568,7 +10568,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -10578,7 +10578,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -10696,7 +10696,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -10706,7 +10706,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -10785,7 +10785,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -10795,7 +10795,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -10866,7 +10866,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -10876,7 +10876,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -10987,7 +10987,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -10997,7 +10997,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -11072,7 +11072,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -11082,7 +11082,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -11149,7 +11149,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -11159,7 +11159,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -11265,7 +11265,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -11275,7 +11275,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -11347,7 +11347,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -11357,7 +11357,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -11424,7 +11424,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -11434,7 +11434,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -11620,7 +11620,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -11630,7 +11630,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -11702,7 +11702,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -11712,7 +11712,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -11779,7 +11779,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -11789,7 +11789,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -11895,7 +11895,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -11905,7 +11905,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -12016,7 +12016,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -12026,7 +12026,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -12101,7 +12101,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -12111,7 +12111,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -12220,7 +12220,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -12230,7 +12230,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -12297,7 +12297,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -12307,7 +12307,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -12413,7 +12413,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -12423,7 +12423,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -12495,7 +12495,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -12505,7 +12505,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -12572,7 +12572,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -12582,7 +12582,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -12688,7 +12688,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -12698,7 +12698,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -12770,7 +12770,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -12780,7 +12780,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {
@@ -12847,7 +12847,7 @@ export default class ServiceFactory extends Service {
             const mutationResolution: HookedResolution = { resolved: false };
             await this.hooks.onMutationEnd({
               ...baseHookArguments,
-              response,
+              response: this.decodePartialFailureError(response),
               resolve: (res) => {
                 mutationResolution.resolved = true;
                 mutationResolution.res = res;
@@ -12857,7 +12857,7 @@ export default class ServiceFactory extends Service {
               return mutationResolution.res;
             }
           }
-          return response;
+          return this.decodePartialFailureError(response);
         } catch (err) {
           const googleAdsError = this.getGoogleAdsError(err);
           if (this.hooks.onMutationError) {

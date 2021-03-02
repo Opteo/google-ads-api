@@ -1,4 +1,5 @@
 import { GoogleAdsServiceClient } from "google-ads-node";
+import { google } from "google-gax/build/protos/operations";
 import { errors, services } from "./protos";
 import { FAILURE_KEY } from "./service";
 import {
@@ -133,6 +134,70 @@ describe("Service", () => {
         expect(err instanceof Error).toEqual(true);
         expect(err.code).toEqual("401");
       }
+    });
+  });
+
+  describe("decodePartialFailureError", () => {
+    it("should decode a partial failure error buffer if present", () => {
+      // Prepare an error buffer
+      const failureMessage = new errors.GoogleAdsFailure({
+        errors: [
+          {
+            error_code: new errors.ErrorCode({
+              request_error:
+                errors.RequestErrorEnum.RequestError.BAD_RESOURCE_ID,
+            }),
+            message: "error message",
+            location: {
+              field_path_elements: [
+                {
+                  field_name: "fake field",
+                  index: 0,
+                },
+              ],
+            },
+          },
+        ],
+      });
+
+      const failureBuffer = errors.GoogleAdsFailure.encode(
+        failureMessage
+      ).finish();
+
+      const response = new services.MutateGoogleAdsResponse({
+        partial_failure_error: new google.rpc.Status({
+          details: [
+            {
+              type_url: "google.ads.googleads.v6.errors.GoogleAdsFailure",
+              value: failureBuffer,
+            },
+          ],
+        }),
+      });
+
+      const customer = newCustomer();
+      // @ts-expect-error Accessing private method for test purposes
+      const parsedPartialFailureResponse = customer.decodePartialFailureError(
+        response
+      );
+
+      expect(parsedPartialFailureResponse).toEqual({
+        mutate_operation_responses: [],
+        partial_failure_error: failureMessage,
+      });
+    });
+
+    it("should do nothing if no partial failures exist", () => {
+      const customer = newCustomer();
+      // @ts-expect-error Accessing private method for test purposes
+      const parsedPartialFailureResponse = customer.decodePartialFailureError(
+        new services.MutateGoogleAdsResponse({
+          partial_failure_error: undefined,
+        })
+      );
+      expect(parsedPartialFailureResponse).toEqual({
+        mutate_operation_responses: [],
+      });
     });
   });
 

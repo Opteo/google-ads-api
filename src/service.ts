@@ -105,8 +105,35 @@ export class Service {
     }
     // @ts-expect-error No type exists for GA query error
     const [buffer] = error.metadata.internalRepr.get(FAILURE_KEY);
+    return this.decodeGoogleAdsFailureBuffer(buffer);
+  }
+
+  private decodeGoogleAdsFailureBuffer(
+    buffer: Buffer
+  ): errors.GoogleAdsFailure {
     const googleAdsFailure = errors.GoogleAdsFailure.decode(buffer);
     return googleAdsFailure;
+  }
+
+  protected decodePartialFailureError<T>(response: T): T {
+    if (
+      typeof (response as any)?.partial_failure_error === "undefined" ||
+      !(response as any)?.partial_failure_error
+    ) {
+      return response;
+    }
+    const { details } = (response as any).partial_failure_error;
+    const buffer = details?.find((d: { type_url: string; value: Buffer }) =>
+      d.type_url.includes("errors.GoogleAdsFailure")
+    )?.value;
+    if (typeof buffer === "undefined") {
+      return response;
+    }
+    // Update the partial failure field with the decoded error details
+    return {
+      ...response,
+      partial_failure_error: this.decodeGoogleAdsFailureBuffer(buffer),
+    };
   }
 
   protected buildSearchRequestAndService(
