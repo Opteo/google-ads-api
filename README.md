@@ -203,8 +203,8 @@ const stream = customer.reportStream({
   },
 });
 
-// Pages of rows are streamed in, each with a max size of 10k
-for await (const rows of stream) {
+// Rows are streamed in one by one
+for await (const row of stream) {
     // Break the loop to stop streaming
     if(someLogic) {
         break
