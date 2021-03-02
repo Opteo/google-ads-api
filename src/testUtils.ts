@@ -1,7 +1,10 @@
 import { Customer } from "./customer";
 import { Hooks } from "./hooks";
 import * as parser from "./parser";
+import { PageToken } from "./types";
 import { GoogleAdsServiceClient, services, errors } from "./protos";
+
+import { Readable } from "stream";
 
 export const MOCK_CLIENT_ID = "MOCK CLIENT ID";
 export const MOCK_CLIENT_SECRET = "MOCK CLIENT SECRET";
@@ -36,14 +39,82 @@ export const mockError = {
 };
 
 export const mockErrorMessage = "mock error message";
-
-export const mockParseValues = [
-  "mock",
-  "parsed",
-  "values",
-] as services.IGoogleAdsRow[];
-
 export const mockParseValue = "mock parse value" as services.IGoogleAdsRow;
+export const mockParsedValues = [
+  mockParseValue,
+  mockParseValue,
+  mockParseValue,
+];
+
+export function mockPaginatedSearch(customer: Customer): jest.SpyInstance {
+  return (
+    jest
+      // @ts-expect-error private method
+      .spyOn(customer, "paginatedSearch")
+      // @ts-expect-error
+      .mockImplementation(() => mockQueryReturnValue)
+  );
+}
+
+export function mockSearchOnce(
+  customer: Customer,
+  response: {
+    response: any[];
+    nextPageToken: PageToken;
+  }
+): jest.SpyInstance {
+  return (
+    jest
+      // @ts-expect-error private method
+      .spyOn(customer, "search")
+      // @ts-expect-error
+      .mockImplementationOnce(() => response)
+  );
+}
+
+export function mockBuildSearchStreamRequestAndService(
+  customer: Customer
+): {
+  spyBuild: jest.SpyInstance;
+  mockStreamData: (data: services.IGoogleAdsRow[]) => void;
+  mockStreamError: (error: Error) => void;
+  mockStreamEnd: () => void;
+} {
+  const mockStream = new Readable({ objectMode: true });
+
+  const mockStreamData = (results: services.IGoogleAdsRow[]) => {
+    const chunk = { results } as services.SearchGoogleAdsStreamResponse;
+    mockStream.push(chunk);
+  };
+
+  const mockStreamError = (error: Error) => {
+    mockStream.destroy(error);
+  };
+
+  const mockStreamEnd = () => {
+    mockStream.push(null);
+  };
+
+  const spyBuild = jest
+    // @ts-expect-error protected method
+    .spyOn(customer, "buildSearchStreamRequestAndService")
+    // @ts-expect-error
+    .mockImplementation(() => {
+      return {
+        service: {
+          searchStream: () => mockStream,
+        } as GoogleAdsServiceClient,
+        request: {} as services.SearchGoogleAdsStreamRequest,
+      };
+    });
+
+  return {
+    spyBuild,
+    mockStreamData,
+    mockStreamError,
+    mockStreamEnd,
+  };
+}
 
 export function mockBuildSearchRequestAndService(
   customer: Customer,
@@ -125,9 +196,9 @@ export function mockQuery(customer: Customer): jest.SpyInstance {
 }
 
 export function mockParse(
-  mockParseValue: services.IGoogleAdsRow[]
+  mockParsedValues: services.IGoogleAdsRow[]
 ): jest.SpyInstance {
-  return jest.spyOn(parser, "parse").mockImplementation(() => mockParseValue);
+  return jest.spyOn(parser, "parse").mockImplementation(() => mockParsedValues);
 }
 
 export function mockMethod(): {

@@ -91,3 +91,5 @@ export type MutateOperation<T> = {
   entity: fields.Resource;
   operation?: "create" | "update" | "delete";
 } & Partial<Omit<T, "toJSON">>;
+
+export type PageToken = services.ISearchGoogleAdsResponse["next_page_token"];

@@ -1,16 +1,19 @@
 import { Hooks } from "./hooks";
-import { enums } from "./protos";
+import { enums, services } from "./protos";
 import {
   failTestIfExecuted,
+  mockPaginatedSearch,
+  mockSearchOnce,
   mockBuildMutateRequestAndService,
   mockBuildSearchRequestAndService,
+  mockBuildSearchStreamRequestAndService,
   mockError,
   mockGetGoogleAdsError,
   mockMethod,
   mockMutationReturnValue,
   mockParse,
   mockParseValue,
-  mockParseValues,
+  mockParsedValues,
   mockQuery,
   mockQueryReturnValue,
   newCustomer,
@@ -37,19 +40,19 @@ describe("query", () => {
 
   it("parses query results by default", async () => {
     const customer = newCustomer({});
-    mockBuildSearchRequestAndService(customer);
-    const mockedParse = mockParse(mockParseValues);
+    mockPaginatedSearch(customer);
+    const mockedParse = mockParse(mockParsedValues);
     const res = await customer.query(gaqlQuery);
 
     expect(mockedParse).toHaveBeenCalled();
-    expect(res).toEqual(mockParseValues);
+    expect(res).toEqual(mockParsedValues);
   });
 
   it("skips query parsing if it is disabled in the client options", async () => {
     const disableParsing = true;
     const customer = newCustomer({}, disableParsing);
-    mockBuildSearchRequestAndService(customer);
-    const mockedParse = mockParse(mockParseValues);
+    mockPaginatedSearch(customer);
+    const mockedParse = mockParse(mockParsedValues);
     const res = await customer.query(gaqlQuery);
 
     expect(mockedParse).not.toHaveBeenCalled();
@@ -63,7 +66,7 @@ describe("query", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildSearchRequestAndService(customer);
+    mockPaginatedSearch(customer);
     mockParse(mockQueryReturnValue);
     const spyHook = jest.spyOn(hooks, "onQueryStart");
     await customer.query(gaqlQuery);
@@ -88,7 +91,7 @@ describe("query", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildSearchRequestAndService(customer);
+    mockPaginatedSearch(customer);
     mockParse(mockQueryReturnValue);
     await customer.query(gaqlQuery);
 
@@ -120,7 +123,7 @@ describe("query", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildSearchRequestAndService(customer);
+    mockPaginatedSearch(customer);
     mockParse(mockQueryReturnValue);
     const res = await customer.query(gaqlQuery);
 
@@ -134,7 +137,7 @@ describe("query", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { spyBuild } = mockBuildSearchRequestAndService(customer);
+    const spyPaginatedSearch = mockPaginatedSearch(customer);
     mockParse(mockQueryReturnValue);
     const requestOptions: RequestOptions = {
       validate_only: false,
@@ -143,7 +146,7 @@ describe("query", () => {
     };
     await customer.query(gaqlQuery, requestOptions);
 
-    expect(spyBuild).toHaveBeenCalledWith(gaqlQuery, {
+    expect(spyPaginatedSearch).toHaveBeenCalledWith(gaqlQuery, {
       validate_only: true, // changed
       page_token: "abcd",
       page_size: 4, // changed
@@ -209,24 +212,19 @@ describe("query", () => {
   });
 
   it("does not call onQueryError when provided but when the query does not throw an error", async () => {
-    const shouldThrow = false;
     const hooks: Hooks = {
       onQueryError() {
         return;
       },
     };
     const customer = newCustomer(hooks);
-    const { mockService } = mockBuildSearchRequestAndService(
-      customer,
-      shouldThrow
-    );
+    const spyPaginatedSearch = mockPaginatedSearch(customer);
     mockParse(mockQueryReturnValue);
     mockGetGoogleAdsError(customer);
-    const spyMockSearch = jest.spyOn(mockService, "search");
     const spyHook = jest.spyOn(hooks, "onQueryError");
     await customer.query(gaqlQuery);
 
-    expect(spyMockSearch).not.toThrow();
+    expect(spyPaginatedSearch).not.toThrow();
     expect(spyHook).not.toHaveBeenCalled();
   });
 
@@ -237,7 +235,7 @@ describe("query", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildSearchRequestAndService(customer);
+    mockPaginatedSearch(customer);
     mockParse(mockQueryReturnValue);
     const spyHook = jest.spyOn(hooks, "onQueryEnd");
     await customer.query(gaqlQuery);
@@ -262,7 +260,7 @@ describe("query", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildSearchRequestAndService(customer);
+    mockPaginatedSearch(customer);
     mockParse(mockQueryReturnValue);
     await customer.query(gaqlQuery);
 
@@ -277,11 +275,61 @@ describe("query", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildSearchRequestAndService(customer);
+    mockPaginatedSearch(customer);
     mockParse(mockQueryReturnValue);
     const res = await customer.query<string>(gaqlQuery);
 
     expect(res).toEqual(hookReturnValue);
+  });
+});
+
+describe("paginatedSearch", () => {
+  afterEach(() => jest.resetAllMocks());
+  it("returns the response of the initial query if there is no next page token", async () => {
+    const customer = newCustomer({});
+    mockSearchOnce(customer, {
+      response: ["a", "b", "c"],
+      nextPageToken: null,
+    });
+
+    // @ts-expect-error private method
+    const res = await customer.paginatedSearch(gaqlQuery, {});
+
+    expect(res).toEqual(["a", "b", "c"]);
+  });
+
+  it("gets the next response if there is a next page token", async () => {
+    const customer = newCustomer({});
+    mockSearchOnce(customer, {
+      response: ["a", "b", "c"],
+      nextPageToken: "token",
+    });
+    mockSearchOnce(customer, {
+      response: ["d", "e", "f"],
+      nextPageToken: null,
+    });
+
+    // @ts-expect-error private method
+    const res = await customer.paginatedSearch(gaqlQuery, {});
+
+    expect(res).toEqual(["a", "b", "c", "d", "e", "f"]);
+  });
+
+  it("iterates many times until there is no next page token", async () => {
+    const customer = newCustomer({});
+    mockSearchOnce(customer, { response: ["a"], nextPageToken: "token" });
+    mockSearchOnce(customer, { response: ["b"], nextPageToken: "token" });
+    mockSearchOnce(customer, { response: ["c"], nextPageToken: "token" });
+    mockSearchOnce(customer, { response: ["d"], nextPageToken: "token" });
+    mockSearchOnce(customer, { response: ["e"], nextPageToken: "token" });
+    mockSearchOnce(customer, { response: ["f"], nextPageToken: "token" });
+    mockSearchOnce(customer, { response: ["g"], nextPageToken: "token" });
+    mockSearchOnce(customer, { response: ["h"], nextPageToken: null });
+
+    // @ts-expect-error private method
+    const res = await customer.paginatedSearch(gaqlQuery, {});
+
+    expect(res).toEqual(["a", "b", "c", "d", "e", "f", "g", "h"]);
   });
 });
 
@@ -290,9 +338,14 @@ describe("reportStream", () => {
 
   it("parses reportStream results by default", async () => {
     const customer = newCustomer({});
-    mockBuildSearchRequestAndService(customer);
-    const mockedParse = mockParse([mockParseValue]);
+    const {
+      mockStreamData,
+      mockStreamEnd,
+    } = mockBuildSearchStreamRequestAndService(customer);
+    const mockedParse = mockParse(mockParsedValues);
     const stream = customer.reportStream(reportOptions);
+    mockStreamData(mockQueryReturnValue);
+    mockStreamEnd();
 
     for await (const row of stream) {
       expect(row).toEqual(mockParseValue);
@@ -304,17 +357,44 @@ describe("reportStream", () => {
   it("skips reportStream parsing if it is disabled in the client options", async () => {
     const disableParsing = true;
     const customer = newCustomer({}, disableParsing);
-    mockBuildSearchRequestAndService(customer);
-    const mockedParse = mockParse([mockParseValue]);
+    const {
+      mockStreamData,
+      mockStreamEnd,
+    } = mockBuildSearchStreamRequestAndService(customer);
+    const mockedParse = mockParse(mockParsedValues);
     const stream = customer.reportStream(reportOptions);
+    mockStreamData(mockQueryReturnValue);
+    mockStreamEnd();
 
-    let iterations = 0;
+    let i = 0;
     for await (const row of stream) {
-      expect(row).toEqual(mockQueryReturnValue[iterations]);
-      iterations += 1;
+      expect(row).toEqual(mockQueryReturnValue[i]);
+      i++;
     }
 
     expect(mockedParse).not.toHaveBeenCalled();
+  });
+
+  it("handles multiple chunks of data while maintaining their order", async () => {
+    const disableParsing = true;
+    const customer = newCustomer({}, disableParsing);
+    const {
+      mockStreamData,
+      mockStreamEnd,
+    } = mockBuildSearchStreamRequestAndService(customer);
+    mockParse(mockParsedValues);
+    const stream = customer.reportStream(reportOptions);
+    mockStreamData([0, 1, 2, 3, 4, 5] as services.IGoogleAdsRow[]);
+    mockStreamData([6, 7, 8, 9, 10, 11] as services.IGoogleAdsRow[]);
+    mockStreamData([12, 13, 14, 15, 16, 17] as services.IGoogleAdsRow[]);
+    mockStreamData([18, 19, 20, 21, 22, 23] as services.IGoogleAdsRow[]);
+    mockStreamEnd();
+
+    let i = 0;
+    for await (const row of stream) {
+      expect(row).toEqual(i);
+      i++;
+    }
   });
 
   it("calls onQueryStart when provided", async () => {
@@ -324,10 +404,15 @@ describe("reportStream", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildSearchRequestAndService(customer);
-    mockParse([mockParseValue]);
+    const {
+      mockStreamData,
+      mockStreamEnd,
+    } = mockBuildSearchStreamRequestAndService(customer);
+    mockParse(mockParsedValues);
     const spyHook = jest.spyOn(hooks, "onQueryStart");
     const stream = customer.reportStream(reportOptions);
+    mockStreamData(mockQueryReturnValue);
+    mockStreamEnd();
     await stream.next();
 
     expect(spyHook).toHaveBeenCalled();
@@ -350,9 +435,14 @@ describe("reportStream", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildSearchRequestAndService(customer);
-    mockParse([mockParseValue]);
+    const {
+      mockStreamData,
+      mockStreamEnd,
+    } = mockBuildSearchStreamRequestAndService(customer);
+    mockParse(mockParsedValues);
     const stream = customer.reportStream(reportOptions);
+    mockStreamData(mockQueryReturnValue);
+    mockStreamEnd();
     await stream.next();
 
     expect(spyMockMethod).toHaveBeenCalled();
@@ -365,9 +455,8 @@ describe("reportStream", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { mockService } = mockBuildSearchRequestAndService(customer);
-    mockParse([mockParseValue]);
-    const spyMockSearchAsync = jest.spyOn(mockService, "searchAsync");
+    const { spyBuild } = mockBuildSearchStreamRequestAndService(customer);
+    mockParse(mockParsedValues);
     const stream = customer.reportStream(reportOptions);
 
     let iterations = 0;
@@ -377,7 +466,7 @@ describe("reportStream", () => {
     }
 
     expect(iterations).toEqual(1);
-    expect(spyMockSearchAsync).not.toHaveBeenCalled();
+    expect(spyBuild).not.toHaveBeenCalled();
   });
 
   it("returns the argument of cancel() if one is provided in onQueryStart", async () => {
@@ -388,8 +477,8 @@ describe("reportStream", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildSearchRequestAndService(customer);
-    mockParse([mockParseValue]);
+    mockBuildSearchStreamRequestAndService(customer);
+    mockParse(mockParsedValues);
     const stream = customer.reportStream(reportOptions);
 
     let iterations = 0;
@@ -409,8 +498,8 @@ describe("reportStream", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildSearchRequestAndService(customer);
-    mockParse([mockParseValue]);
+    mockBuildSearchStreamRequestAndService(customer);
+    mockParse(mockParsedValues);
     const stream = customer.reportStream(reportOptions);
 
     let iterations = 0;
@@ -429,8 +518,12 @@ describe("reportStream", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { spyBuild } = mockBuildSearchRequestAndService(customer);
-    mockParse([mockParseValue]);
+    const {
+      spyBuild,
+      mockStreamData,
+      mockStreamEnd,
+    } = mockBuildSearchStreamRequestAndService(customer);
+    mockParse(mockParsedValues);
     const requestOptions: RequestOptions = {
       validate_only: false, // changed
       page_token: "abcd",
@@ -440,6 +533,8 @@ describe("reportStream", () => {
       ...reportOptions,
       ...requestOptions,
     });
+    mockStreamData(mockQueryReturnValue);
+    mockStreamEnd();
     await stream.next();
 
     expect(spyBuild).toHaveBeenCalledWith(gaqlQuery, {
@@ -450,7 +545,6 @@ describe("reportStream", () => {
   });
 
   it("calls onQueryError when provided and when the query throws an error", async (done) => {
-    const shouldThrow = true;
     const hooks: Hooks = {
       onQueryError() {
         return;
@@ -458,21 +552,21 @@ describe("reportStream", () => {
     };
 
     const customer = newCustomer(hooks);
-    const { mockService } = mockBuildSearchRequestAndService(
-      customer,
-      shouldThrow
-    );
-    mockParse([mockParseValue]);
+    const {
+      mockStreamData,
+      mockStreamError,
+    } = mockBuildSearchStreamRequestAndService(customer);
+    mockParse(mockParsedValues);
     const mockedError = mockGetGoogleAdsError(customer);
-    const spyMockSearchAsync = jest.spyOn(mockService, "searchAsync");
     const spyHook = jest.spyOn(hooks, "onQueryError");
 
     try {
       const stream = customer.reportStream(reportOptions);
+      mockStreamData(mockQueryReturnValue);
+      mockStreamError(new Error("Original error message"));
       await stream.next();
       failTestIfExecuted(); // should not be called
     } catch (error) {
-      expect(spyMockSearchAsync).toThrow();
       expect(mockedError).toHaveBeenCalled();
       expect(spyHook).toHaveBeenCalled();
       expect(spyHook).toHaveBeenCalledWith({
@@ -486,7 +580,6 @@ describe("reportStream", () => {
   });
 
   it("calls onQueryError asynchronously", async (done) => {
-    const shouldThrow = true;
     const container = mockMethod();
     const spyMockMethod = jest.spyOn(container, "method");
     const hooks: Hooks = {
@@ -497,12 +590,17 @@ describe("reportStream", () => {
     };
 
     const customer = newCustomer(hooks);
-    mockBuildSearchRequestAndService(customer, shouldThrow);
-    mockParse([mockParseValue]);
+    const {
+      mockStreamData,
+      mockStreamError,
+    } = mockBuildSearchStreamRequestAndService(customer);
+    mockParse(mockParsedValues);
     mockGetGoogleAdsError(customer);
 
     try {
       const stream = customer.reportStream(reportOptions);
+      mockStreamData(mockQueryReturnValue);
+      mockStreamError(new Error("Original error message"));
       await stream.next();
       failTestIfExecuted(); // should not be called
     } catch (error) {
@@ -512,26 +610,24 @@ describe("reportStream", () => {
   });
 
   it("does not call onQueryError when provided but when the query does not throw an error", async () => {
-    const shouldThrow = false;
-
     const hooks: Hooks = {
       onQueryError() {
         return;
       },
     };
     const customer = newCustomer(hooks);
-    const { mockService } = mockBuildSearchRequestAndService(
-      customer,
-      shouldThrow
-    );
-    mockParse([mockParseValue]);
+    const {
+      mockStreamData,
+      mockStreamEnd,
+    } = mockBuildSearchStreamRequestAndService(customer);
+    mockParse(mockParsedValues);
     mockGetGoogleAdsError(customer);
-    const spyMockSearchAsync = jest.spyOn(mockService, "searchAsync");
     const spyHook = jest.spyOn(hooks, "onQueryError");
     const stream = customer.reportStream(reportOptions);
+    mockStreamData(mockQueryReturnValue);
+    mockStreamEnd();
     await stream.next();
 
-    expect(spyMockSearchAsync).not.toThrow();
     expect(spyHook).not.toHaveBeenCalled();
   });
 
@@ -542,10 +638,15 @@ describe("reportStream", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildSearchRequestAndService(customer);
-    mockParse([mockParseValue]);
+    const {
+      mockStreamData,
+      mockStreamEnd,
+    } = mockBuildSearchStreamRequestAndService(customer);
+    mockParse(mockParsedValues);
     const spyHook = jest.spyOn(hooks, "onQueryEnd");
     const stream = customer.reportStream(reportOptions);
+    mockStreamData(mockQueryReturnValue);
+    mockStreamEnd();
 
     const response = [];
     for await (const row of stream) {
@@ -572,9 +673,14 @@ describe("reportStream", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildSearchRequestAndService(customer);
-    mockParse([mockParseValue]);
+    const {
+      mockStreamData,
+      mockStreamEnd,
+    } = mockBuildSearchStreamRequestAndService(customer);
+    mockParse(mockParsedValues);
     const stream = customer.reportStream(reportOptions);
+    mockStreamData(mockQueryReturnValue);
+    mockStreamEnd();
 
     for await (const row of stream) {
       continue;
@@ -591,9 +697,14 @@ describe("reportStream", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildSearchRequestAndService(customer);
-    mockParse([mockParseValue]);
+    const {
+      mockStreamData,
+      mockStreamEnd,
+    } = mockBuildSearchStreamRequestAndService(customer);
+    mockParse(mockParsedValues);
     const stream = customer.reportStream(reportOptions);
+    mockStreamData(mockQueryReturnValue);
+    mockStreamEnd();
 
     for await (const row of stream) {
       expect(row).toEqual(mockParseValue);
