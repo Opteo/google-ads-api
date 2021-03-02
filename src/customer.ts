@@ -10,6 +10,7 @@ import { parse } from "./parser";
 import { services } from "./protos";
 import ServiceFactory from "./protos/autogen/serviceFactory";
 import { buildQuery } from "./query";
+import { createNextChunkArrivedPromise } from "./utils";
 import {
   CustomerOptions,
   MutateOperation,
@@ -36,24 +37,6 @@ export class Customer extends ServiceFactory {
   ): Promise<T> {
     const { gaqlQuery, requestOptions } = buildQuery(options);
     return this.query<T>(gaqlQuery, requestOptions, options);
-  }
-
-  private createNextChunkArrivedPromise() {
-    let resolvePromise = (): void => {
-      return;
-    };
-
-    let rejectPromise = (error: Error): void => {
-      throw error;
-    };
-
-    const newPromise = new Promise((resolve, reject) => {
-      // @ts-ignore
-      resolvePromise = resolve;
-      rejectPromise = reject;
-    });
-
-    return { newPromise, resolve: resolvePromise, reject: rejectPromise };
   }
 
   /** 
@@ -115,7 +98,7 @@ export class Customer extends ServiceFactory {
     const accumulator: T[] = [];
     const response: T[] = [];
 
-    let nextChunk = this.createNextChunkArrivedPromise();
+    let nextChunk = createNextChunkArrivedPromise();
 
     stream.on("data", (chunk: services.SearchGoogleAdsStreamResponse) => {
       const parsedResponse = this.clientOptions.disable_parsing
@@ -125,7 +108,7 @@ export class Customer extends ServiceFactory {
       response.push(...(parsedResponse as T[]));
 
       nextChunk.resolve();
-      nextChunk = this.createNextChunkArrivedPromise();
+      nextChunk = createNextChunkArrivedPromise();
     });
 
     stream.on("error", (searchError: Error) => {
