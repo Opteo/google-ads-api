@@ -261,7 +261,8 @@ function compileMutateMethods(
           types.requestClass,
           types.operation,
           types.response,
-          serviceMethod
+          serviceMethod,
+          options
         )
       );
     }
@@ -279,7 +280,8 @@ function compileMutateMethods(
         types.requestClass,
         types.operation,
         types.response,
-        serviceMethod
+        serviceMethod,
+        options
       )
     );
   }
@@ -317,7 +319,8 @@ function buildMutateMethod(
   requestClass: string,
   operationType: string,
   responseType: string,
-  methodName: string
+  methodName: string,
+  mutationOptions: string[]
 ): string {
   const isUpdate = mutation === "update";
   const updateMaskMessageArg = isUpdate ? `, ${requestClass}` : "";
@@ -357,8 +360,16 @@ function buildMutateMethod(
             headers: this.callHeaders,
           },
         });
-        ${buildMutateHookEnd()}
-        return response;
+        ${buildMutateHookEnd(
+          mutationOptions?.includes("partial_failure")
+            ? `response: this.decodePartialFailureError(response)`
+            : "response"
+        )}
+        ${
+          mutationOptions?.includes("partial_failure")
+            ? `return this.decodePartialFailureError(response);`
+            : "return response;"
+        }
       } catch (err) {
         ${buildMutateHookError()}
       }
@@ -394,12 +405,12 @@ function buildMutateHookStart(serviceName: string, methodName: string): string {
   }`;
 }
 
-function buildMutateHookEnd() {
+function buildMutateHookEnd(response: string) {
   return `if (this.hooks.onMutationEnd) {
     const mutationResolution: HookedResolution = { resolved: false };
     await this.hooks.onMutationEnd({
       ...baseHookArguments,
-      response,
+      ${response},
       resolve: (res) => {
         mutationResolution.resolved = true;
         mutationResolution.res = res;

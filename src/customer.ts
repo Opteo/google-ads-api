@@ -320,11 +320,15 @@ export class Customer extends ServiceFactory {
         },
       });
 
+      const parsedResponse = request.partial_failure
+        ? this.decodePartialFailureError(response)
+        : response;
+
       if (this.hooks.onMutationEnd) {
         const mutationResolution: HookedResolution = { resolved: false };
         await this.hooks.onMutationEnd({
           ...baseHookArguments,
-          response,
+          response: parsedResponse,
           resolve: (res) => {
             mutationResolution.resolved = true;
             mutationResolution.res = res;
@@ -335,7 +339,7 @@ export class Customer extends ServiceFactory {
         }
       }
 
-      return response;
+      return parsedResponse;
     } catch (mutateError) {
       const googleAdsError = this.getGoogleAdsError(mutateError);
       if (this.hooks.onMutationError) {
