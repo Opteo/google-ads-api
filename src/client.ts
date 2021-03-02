@@ -1,112 +1,56 @@
-import Bottleneck from 'bottleneck'
-import crypto from 'crypto'
-import { noop } from 'lodash'
+import { Customer } from "./customer";
+import { CustomerOptions } from "./types";
+import { Hooks } from "./hooks";
+import { services } from "./protos";
+import { Service } from "./service";
 
-import Customer, { CustomerInstance } from './customer'
-import GrpcClient, { GoogleAdsNodeOptions } from './grpc'
-import { normaliseCustomerId } from './utils'
-import { ClientOptions, CustomerOptions } from './types'
-import AccessibleCustomersService from './services/accessible_customers'
-
-interface ListAccessibleCustomersOptions extends GoogleAdsNodeOptions {
-    refresh_token: string
+export interface ClientOptions {
+  client_id: string;
+  client_secret: string;
+  developer_token: string;
+  disable_parsing?: boolean;
 }
 
-export default class GoogleAdsApi {
-    private readonly options: ClientOptions
-    private throttler: Bottleneck
+export class Client {
+  private readonly options: ClientOptions;
 
-    constructor(options: ClientOptions) {
-        this.options = options
+  constructor(options: ClientOptions) {
+    this.options = options;
+  }
 
-        const throttler_options = {
-            minTime: 10, // roughly 100 requests per second
-            id:
-                'id' +
-                crypto
-                    .createHash('md5')
-                    .update(this.options.developer_token)
-                    .digest('hex'), // don't want to leak dev token to redis
-            /* Clustering options */
-            datastore: this.options.redis_options ? 'redis' : 'local',
-            clearDatastore: false,
-            clientOptions: this.options.redis_options,
-            timeout: 1000 * 60 * 10,
+  public Customer(customerOptions: CustomerOptions, hooks?: Hooks): Customer {
+    const cus = new Customer(this.options, customerOptions, hooks);
+    return cus;
+  }
+
+  public async listAccessibleCustomers(
+    refreshToken: string
+  ): Promise<services.ListAccessibleCustomersResponse> {
+    const service = new Service(this.options, {
+      customer_id: "",
+      refresh_token: refreshToken,
+    });
+    // @ts-expect-error Protected usage is fine here
+    const customerService = await service.loadService<services.CustomerService>(
+      "CustomerServiceClient"
+    );
+    try {
+      // @ts-expect-error Type definition is incorrect, response is an array
+      const [response] = await customerService.listAccessibleCustomers(
+        {},
+        {
+          // @ts-expect-error Field not included in type definitions
+          otherArgs: {
+            // @ts-expect-error Protected usage is fine here
+            headers: service.callHeaders,
+          },
         }
-
-        this.throttler = new Bottleneck(throttler_options)
-
-        this.throttler.on('error', err => {
-            console.error('Could not connect to redis: ')
-            console.error(err)
-        })
+      );
+      return response;
+    } catch (err) {
+      console.log(err);
+      // @ts-expect-error Protected usage is fine here
+      throw service.getGoogleAdsError(err);
     }
-
-    public Customer({
-        customer_account_id,
-        refresh_token,
-        login_customer_id,
-        linked_customer_id,
-        pre_report_hook,
-        post_report_hook,
-        prevent_mutations,
-        logging,
-    }: CustomerOptions): CustomerInstance {
-        if (!customer_account_id || !refresh_token) {
-            throw new Error('Must specify {customer_account_id, refresh_token}')
-        }
-
-        pre_report_hook = pre_report_hook || noop
-        post_report_hook = post_report_hook || noop
-
-        customer_account_id = normaliseCustomerId(customer_account_id)
-        login_customer_id = normaliseCustomerId(login_customer_id)
-        linked_customer_id = normaliseCustomerId(linked_customer_id)
-
-        const gads_node_options = {
-            prevent_mutations,
-            logging,
-        }
-
-        const client = new GrpcClient(
-            this.options.developer_token,
-            this.options.client_id,
-            this.options.client_secret,
-            refresh_token as string,
-            login_customer_id,
-            linked_customer_id,
-            gads_node_options
-        )
-
-        return Customer(customer_account_id, client, this.throttler, pre_report_hook, post_report_hook)
-    }
-
-    public async listAccessibleCustomers({
-        refresh_token,
-        prevent_mutations,
-        logging,
-    }: ListAccessibleCustomersOptions): Promise<Array<string>> {
-        if (!refresh_token) {
-            throw new Error('Must specify {refresh_token}')
-        }
-
-        const gads_node_options = {
-            prevent_mutations,
-            logging,
-        }
-
-        const client = new GrpcClient(
-            this.options.developer_token,
-            this.options.client_id,
-            this.options.client_secret,
-            refresh_token as string,
-            '', // login-customer-id not needed for this function
-            '', // linked-customer-id not needed for this function
-            gads_node_options
-        )
-
-        const cusService = new AccessibleCustomersService(client, this.throttler, 'CustomerService')
-        const { resource_names } = await cusService.listAccessibleCustomers()
-        return resource_names
-    }
+  }
 }

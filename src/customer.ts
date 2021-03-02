@@ -1,370 +1,372 @@
-/* Services */
-import CampaignService from './services/campaign'
-import CampaignBudgetService from './services/campaign_budget'
-import AdGroupService from './services/ad_group'
-import AccountBudgetProposalService from './services/account_budget_proposal'
-import AccountBudgetService from './services/account_budget'
-import AdService from './services/ad'
-import AdGroupAdLabelService from './services/ad_group_ad_label'
-import AdGroupAdService from './services/ad_group_ad'
-import AdGroupBidModifierService from './services/ad_group_bid_modifier'
-import AdGroupCriterionLabelService from './services/ad_group_criterion_label'
-import AdGroupCriterionService from './services/ad_group_criterion'
-import AdGroupExtensionSettingService from './services/ad_group_extension_setting'
-import AdGroupFeedService from './services/ad_group_feed'
-import AdGroupLabelService from './services/ad_group_label'
-// TODO: Missing protos
-// import AdParameterService from './services/ad_parameter'
-import AssetService from './services/asset'
-import BiddingStrategyService from './services/bidding_strategy'
-import BillingSetupService from './services/billing_setup'
-import CampaignBidModifierService from './services/campaign_bid_modifier'
-import CampaignCriterionService from './services/campaign_criterion'
-import CampaignExtensionSettingService from './services/campaign_extension_setting'
-import CampaignFeedService from './services/campaign_feed'
-import CampaignLabelService from './services/campaign_label'
-import CampaignSharedSetService from './services/campaign_shared_set'
-import CarrierConstantService from './services/carrier_constant'
-import ChangeStatusService from './services/change_status'
-import ConversionActionService from './services/conversion_action'
-import ConversionUploadService from './services/conversion_upload'
-// import ConversionAdjustmentUploadService from './services/conversion_adjustment_upload'
-import CustomInterestService from './services/custom_interest'
-import CustomerClientLinkService from './services/customer_client_link'
-import CustomerClientService from './services/customer_client'
-import CustomerExtensionSettingService from './services/customer_extension_setting'
-import CustomerFeedService from './services/customer_feed'
-import CustomerLabelService from './services/customer_label'
-import CustomerManagerLinkService from './services/customer_manager_link'
-import CustomerNegativeCriterionService from './services/customer_negative_criterion'
-import DomainCategoryService from './services/domain_category'
-import ExtensionFeedItemService from './services/extension_feed_item'
-import FeedItemService from './services/feed_item'
-import FeedItemTargetService from './services/feed_item_target'
-import FeedMappingService from './services/feed_mapping'
-import FeedService from './services/feed'
-import GeoTargetConstantService from './services/geo_target_constant'
-import KeywordPlanAdGroupService from './services/keyword_plan_ad_group'
-import KeywordPlanCampaignService from './services/keyword_plan_campaign'
-// TODO: Missing protos
-// import KeywordPlanIdeaService from './services/keyword_plan_idea'
-import KeywordPlanService from './services/keyword_plan'
-import LabelService from './services/label'
-import LanguageConstantService from './services/language_constant'
-import MediaFileService from './services/media_file'
-// TODO: Missing protos
-// import MerchantCenterLinkService from './services/merchant_center_link'
-import MobileAppCategoryConstantService from './services/mobile_app_category_constant'
-import MobileDeviceConstantService from './services/mobile_device_constant'
-import OperatingSystemVersionConstantService from './services/operating_system_version_constant'
-// TODO: Missing protos
-// import PaymentsAccountService from './services/payments_account'
-import ProductBiddingCategoryConstantService from './services/product_bidding_category_constant'
-import RecommendationService from './services/recommendation'
-import RemarketingActionService from './services/remarketing_action'
-import SharedCriterionService from './services/shared_criterion'
-import SharedSetService from './services/shared_set'
-import TopicConstantService from './services/topic_constant'
-import ThirdPartyAppAnalyticsLinkService from './services/third_party_app_analytics_link'
-import UserInterestService from './services/user_interest'
-import UserListService from './services/user_list'
-import VideoService from './services/video'
-import AdGroupSimulationService from './services/ad_group_simulation'
-import AdGroupCriterionSimulationService from './services/ad_group_criterion_simulation'
-import CampaignCriterionSimulationService from './services/campaign_criterion_simulation'
-
-/* Customer */
-import CustomerService, {
-    ReportResponse,
-    QueryResponse,
-    ListResponse,
-    GetResponse,
-    UpdateResponse,
-    MutateResourcesResponse,
-    CreateCustomerResponse,
-} from './services/customer'
-
-/* gRPC Client */
-import GrpcClient from './grpc'
-
-/* Utils */
-import Bottleneck from 'bottleneck'
-import { Customer } from 'google-ads-node/build/lib/resources'
+import { ClientOptions } from "./client";
 import {
-    ReportOptions,
-    ServiceCreateOptions,
-    PostReportHook,
-    PreReportHook,
-    MutateResourceOperation,
-    ReportStreamOptions,
-    CreateCustomerOptions,
-    CreateCustomerFlowSettings,
-    QueryOptions,
-} from './types'
-import KeywordPlanAdGroupKeywordService from './services/keyword_plan_ad_group_keyword'
-import KeywordPlanCampaignKeywordService from './services/keyword_plan_campaign_keyword'
-import AccountLinkService from './services/account_link'
+  BaseMutationHookArgs,
+  BaseQueryHookArgs,
+  HookedCancellation,
+  HookedResolution,
+  Hooks,
+} from "./hooks";
+import { parse } from "./parser";
+import { services } from "./protos";
+import ServiceFactory from "./protos/autogen/serviceFactory";
+import { buildQuery } from "./query";
+import { createNextChunkArrivedPromise } from "./utils";
+import {
+  CustomerOptions,
+  MutateOperation,
+  MutateOptions,
+  ReportOptions,
+  RequestOptions,
+  PageToken,
+} from "./types";
 
-export interface CustomerInstance {
-    /* Base Customer properties for easy access */
-    readonly cid: string
+export class Customer extends ServiceFactory {
+  constructor(
+    clientOptions: ClientOptions,
+    customerOptions: CustomerOptions,
+    hooks?: Hooks
+  ) {
+    super(clientOptions, customerOptions, hooks ?? {});
+  }
 
-    /* Global customer methods */
-    report: <T = any[]>(options: ReportOptions) => ReportResponse<T>
-    reportStream: <T = any>(options: ReportStreamOptions) => AsyncGenerator<T>
-    query: (qry: string, options?: QueryOptions) => QueryResponse
-    list: () => ListResponse
-    get: (id: number | string) => GetResponse
-    update: (customer: Customer, options?: ServiceCreateOptions) => UpdateResponse
-    mutateResources: (
-        operations: Array<MutateResourceOperation>,
-        options?: ServiceCreateOptions
-    ) => MutateResourcesResponse
-    createCustomerClient: (
-        options: CreateCustomerOptions,
-        flow_settings?: CreateCustomerFlowSettings
-    ) => CreateCustomerResponse
+  /** 
+    @description Single query using ReportOptions
+  */
+  public async report<T = services.IGoogleAdsRow[]>(
+    options: ReportOptions
+  ): Promise<T> {
+    const { gaqlQuery, requestOptions } = buildQuery(options);
+    return this.query<T>(gaqlQuery, requestOptions, options);
+  }
 
-    /* Services */
-    campaigns: CampaignService
-    campaignBudgets: CampaignBudgetService
-    adGroups: AdGroupService
-    accountBudgetProposals: AccountBudgetProposalService
-    accountBudgets: AccountBudgetService
-    accountLinks: AccountLinkService
-    ads: AdService
-    adGroupAdLabels: AdGroupAdLabelService
-    adGroupAds: AdGroupAdService
-    adGroupBidModifiers: AdGroupBidModifierService
-    adGroupCriterionLabels: AdGroupCriterionLabelService
-    adGroupCriteria: AdGroupCriterionService
-    adGroupExtensionSettings: AdGroupExtensionSettingService
-    adGroupFeeds: AdGroupFeedService
-    adGroupLabels: AdGroupLabelService
-    assets: AssetService
-    biddingStrategies: BiddingStrategyService
-    billingSetups: BillingSetupService
-    campaignBidModifiers: CampaignBidModifierService
-    campaignCriteria: CampaignCriterionService
-    campaignExtensionSettings: CampaignExtensionSettingService
-    campaignFeeds: CampaignFeedService
-    campaignLabels: CampaignLabelService
-    campaignSharedSets: CampaignSharedSetService
-    carrierConstants: CarrierConstantService
-    changeStatus: ChangeStatusService
-    conversionActions: ConversionActionService
-    conversionUploads: ConversionUploadService
-    // conversionAdjustmentUploads: ConversionAdjustmentUploadService
-    customInterests: CustomInterestService
-    customerClientLinks: CustomerClientLinkService
-    customerClients: CustomerClientService
-    customerExtensionSettings: CustomerExtensionSettingService
-    customerFeeds: CustomerFeedService
-    customerLabels: CustomerLabelService
-    customerManagerLinks: CustomerManagerLinkService
-    customerNegativeCriteria: CustomerNegativeCriterionService
-    domainCategories: DomainCategoryService
-    extensionFeedItems: ExtensionFeedItemService
-    feedItems: FeedItemService
-    feedItemTargets: FeedItemTargetService
-    feedMappings: FeedMappingService
-    feeds: FeedService
-    geoTargetConstants: GeoTargetConstantService
-    keywordPlanAdGroupKeywords: KeywordPlanAdGroupKeywordService
-    keywordPlanAdGroups: KeywordPlanAdGroupService
-    keywordPlanCampaigns: KeywordPlanCampaignService
-    keywordPlanCampaignKeywords: KeywordPlanCampaignKeywordService
-    keywordPlans: KeywordPlanService
-    labels: LabelService
-    languageConstants: LanguageConstantService
-    mediaFiles: MediaFileService
-    mobileAppCategoryConstants: MobileAppCategoryConstantService
-    mobileDeviceConstants: MobileDeviceConstantService
-    operatingSystemVersionConstants: OperatingSystemVersionConstantService
-    productBiddingCategoryConstants: ProductBiddingCategoryConstantService
-    recommendations: RecommendationService
-    remarketingActions: RemarketingActionService
-    sharedCriteria: SharedCriterionService
-    sharedSets: SharedSetService
-    topicConstants: TopicConstantService
-    thirdPartyAppAnalyticsLinks: ThirdPartyAppAnalyticsLinkService
-    userInterests: UserInterestService
-    userLists: UserListService
-    videos: VideoService
-    adGroupSimulations: AdGroupSimulationService
-    adGroupCriterionSimulations: AdGroupCriterionSimulationService
-    campaignCriterionSimulations: CampaignCriterionSimulationService
-}
+  /** 
+    @description Stream query using ReportOptions. If a generic type is provided, it must be the type of a single row.
+    @example
+    const stream = reportStream<T>(reportOptions)
+    for await (const row of stream) { ... }
+  */
+  public async *reportStream<T = services.IGoogleAdsRow>(
+    reportOptions: ReportOptions
+  ): AsyncGenerator<T> {
+    const { gaqlQuery, requestOptions } = buildQuery(reportOptions);
 
-export default function Customer(
-    cid: string,
-    client: GrpcClient,
-    throttler: Bottleneck,
-    pre_report_hook: PreReportHook,
-    post_report_hook: PostReportHook
-): CustomerInstance {
-    const cusService = new CustomerService(cid, client, throttler, 'CustomerService', pre_report_hook, post_report_hook)
+    const baseHookArguments: BaseQueryHookArgs = {
+      credentials: this.credentials,
+      query: gaqlQuery,
+      reportOptions,
+    };
+
+    const queryStart: HookedCancellation = { cancelled: false };
+    if (this.hooks.onQueryStart) {
+      await this.hooks.onQueryStart({
+        ...baseHookArguments,
+        cancel: (res) => {
+          queryStart.cancelled = true;
+          queryStart.res = res;
+        },
+        editOptions: (options) => {
+          Object.entries(options).forEach(([key, val]) => {
+            // @ts-ignore
+            requestOptions[key] = val;
+          });
+        },
+      });
+
+      if (queryStart.cancelled) {
+        if (Array.isArray(queryStart.res)) {
+          for (const row of queryStart.res) {
+            yield row as T;
+          }
+        } else {
+          yield queryStart.res as T;
+        }
+
+        return;
+      }
+    }
+
+    const { service, request } = this.buildSearchStreamRequestAndService(
+      gaqlQuery,
+      requestOptions
+    );
+
+    const stream = service.searchStream(request, {
+      otherArgs: { headers: this.callHeaders },
+    });
+
+    let done = false;
+    const accumulator: T[] = [];
+    const response: T[] = [];
+
+    let nextChunk = createNextChunkArrivedPromise();
+
+    stream.on("data", (chunk: services.SearchGoogleAdsStreamResponse) => {
+      const parsedResponse = this.clientOptions.disable_parsing
+        ? chunk.results
+        : parse({ results: chunk.results, reportOptions });
+      accumulator.push(...(parsedResponse as T[]));
+      response.push(...(parsedResponse as T[]));
+
+      nextChunk.resolve();
+      nextChunk = createNextChunkArrivedPromise();
+    });
+
+    stream.on("error", (searchError: Error) => {
+      nextChunk.reject(searchError);
+    });
+
+    stream.on("end", () => {
+      done = true;
+      nextChunk.resolve();
+    });
+
+    try {
+      while (!done || accumulator.length) {
+        if (accumulator.length !== 0) {
+          const item = accumulator.shift();
+          if (item === undefined) {
+            throw new Error("UNDEFINED_STREAM_ERROR");
+          }
+          yield item;
+        } else {
+          await nextChunk.newPromise;
+        }
+      }
+    } catch (searchError) {
+      const googleAdsError = this.getGoogleAdsError(searchError);
+      if (this.hooks.onQueryError) {
+        await this.hooks.onQueryError({
+          ...baseHookArguments,
+          error: googleAdsError,
+        });
+      }
+      throw googleAdsError;
+    } finally {
+      if (this.hooks.onQueryEnd) {
+        await this.hooks.onQueryEnd({
+          ...baseHookArguments,
+          response,
+          resolve: () => {
+            return;
+          },
+        });
+      }
+
+      stream.destroy();
+    }
+  }
+
+  private async search(
+    gaqlQuery: string,
+    requestOptions: RequestOptions
+  ): Promise<{
+    response: services.IGoogleAdsRow[];
+    nextPageToken: PageToken;
+  }> {
+    const { service, request } = this.buildSearchRequestAndService(
+      gaqlQuery,
+      requestOptions
+    );
+
+    const searchResponse = await service.search(request, {
+      otherArgs: { headers: this.callHeaders },
+      autoPaginate: false, // autoPaginate doesn't work
+    });
 
     return {
-        /* Base Customer properties for easy access */
-        cid,
+      response: searchResponse[0],
+      nextPageToken: searchResponse[2].next_page_token,
+    };
+  }
 
-        /* Top level customer methods */
-        report: options => cusService.report(options),
-        reportStream: options => cusService.reportStream(options),
-        query: (qry, options) => cusService.query(qry, options),
-        list: () => cusService.list(),
-        get: id => cusService.get(id),
-        update: (customer, options) => cusService.update(customer, options),
-        mutateResources: (operations, options) => cusService.mutateResources(operations, options),
-        createCustomerClient: (options, flow_settings?) => cusService.createCustomerClient(options, flow_settings),
+  private async paginatedSearch(
+    gaqlQuery: string,
+    requestOptions: RequestOptions
+  ): Promise<services.IGoogleAdsRow[]> {
+    const response: services.IGoogleAdsRow[] = [];
+    let nextPageToken: PageToken = undefined;
 
-        /* Services */
-        campaigns: new CampaignService(cid, client, throttler, 'CampaignService'),
-        campaignBudgets: new CampaignBudgetService(cid, client, throttler, 'CampaignBudgetService'),
-        adGroups: new AdGroupService(cid, client, throttler, 'AdGroupService'),
-        accountBudgetProposals: new AccountBudgetProposalService(
-            cid,
-            client,
-            throttler,
-            'AccountBudgetProposalService'
-        ),
-        accountBudgets: new AccountBudgetService(cid, client, throttler, 'AccountBudgetService'),
-        accountLinks: new AccountLinkService(cid, client, throttler, 'AccountLinkService'),
-        ads: new AdService(cid, client, throttler, 'AdService'),
-        adGroupAdLabels: new AdGroupAdLabelService(cid, client, throttler, 'AdGroupAdLabelService'),
-        adGroupAds: new AdGroupAdService(cid, client, throttler, 'AdGroupAdService'),
-        adGroupBidModifiers: new AdGroupBidModifierService(cid, client, throttler, 'AdGroupBidModifierService'),
-        adGroupCriterionLabels: new AdGroupCriterionLabelService(
-            cid,
-            client,
-            throttler,
-            'AdGroupCriterionLabelService'
-        ),
-        adGroupCriteria: new AdGroupCriterionService(cid, client, throttler, 'AdGroupCriterionService'),
-        adGroupExtensionSettings: new AdGroupExtensionSettingService(
-            cid,
-            client,
-            throttler,
-            'AdGroupExtensionSettingService'
-        ),
-        adGroupFeeds: new AdGroupFeedService(cid, client, throttler, 'AdGroupFeedService'),
-        adGroupLabels: new AdGroupLabelService(cid, client, throttler, 'AdGroupLabelService'),
-        assets: new AssetService(cid, client, throttler, 'AssetService'),
-        biddingStrategies: new BiddingStrategyService(cid, client, throttler, 'BiddingStrategyService'),
-        billingSetups: new BillingSetupService(cid, client, throttler, 'BillingSetupService'),
-        campaignBidModifiers: new CampaignBidModifierService(cid, client, throttler, 'CampaignBidModifierService'),
-        campaignCriteria: new CampaignCriterionService(cid, client, throttler, 'CampaignCriterionService'),
-        campaignExtensionSettings: new CampaignExtensionSettingService(
-            cid,
-            client,
-            throttler,
-            'CampaignExtensionSettingService'
-        ),
-        campaignFeeds: new CampaignFeedService(cid, client, throttler, 'CampaignFeedService'),
-        campaignLabels: new CampaignLabelService(cid, client, throttler, 'CampaignLabelService'),
-        campaignSharedSets: new CampaignSharedSetService(cid, client, throttler, 'CampaignSharedSetService'),
-        carrierConstants: new CarrierConstantService(cid, client, throttler, 'CarrierConstantService'),
-        changeStatus: new ChangeStatusService(cid, client, throttler, 'ChangeStatusService'),
-        conversionActions: new ConversionActionService(cid, client, throttler, 'ConversionActionService'),
-        conversionUploads: new ConversionUploadService(cid, client, throttler, 'ConversionUploadService'),
-        // conversionAdjustmentUploads: new ConversionAdjustmentUploadService(
-        //     cid,
-        //     client,
-        //     throttler,
-        //     'ConversionAdjustmentUploadService'
-        // ),
-        customInterests: new CustomInterestService(cid, client, throttler, 'CustomInterestService'),
-        customerClientLinks: new CustomerClientLinkService(cid, client, throttler, 'CustomerClientLinkService'),
-        customerClients: new CustomerClientService(cid, client, throttler, 'CustomerClientService'),
-        customerExtensionSettings: new CustomerExtensionSettingService(
-            cid,
-            client,
-            throttler,
-            'CustomerExtensionSettingService'
-        ),
-        customerFeeds: new CustomerFeedService(cid, client, throttler, 'CustomerFeedService'),
-        customerLabels: new CustomerLabelService(cid, client, throttler, 'CustomerLabelService'),
-        customerManagerLinks: new CustomerManagerLinkService(cid, client, throttler, 'CustomerManagerLinkService'),
-        customerNegativeCriteria: new CustomerNegativeCriterionService(
-            cid,
-            client,
-            throttler,
-            'CustomerNegativeCriterionService'
-        ),
-        domainCategories: new DomainCategoryService(cid, client, throttler, 'DomainCategoryService'),
-        extensionFeedItems: new ExtensionFeedItemService(cid, client, throttler, 'ExtensionFeedItemService'),
-        feedItems: new FeedItemService(cid, client, throttler, 'FeedItemService'),
-        feedItemTargets: new FeedItemTargetService(cid, client, throttler, 'FeedItemTargetService'),
-        feedMappings: new FeedMappingService(cid, client, throttler, 'FeedMappingService'),
-        feeds: new FeedService(cid, client, throttler, 'FeedService'),
-        geoTargetConstants: new GeoTargetConstantService(cid, client, throttler, 'GeoTargetConstantService'),
-        keywordPlanAdGroups: new KeywordPlanAdGroupService(cid, client, throttler, 'KeywordPlanAdGroupService'),
-        keywordPlanAdGroupKeywords: new KeywordPlanAdGroupKeywordService(
-            cid,
-            client,
-            throttler,
-            'KeywordPlanAdGroupKeywordService'
-        ),
-        keywordPlanCampaigns: new KeywordPlanCampaignService(cid, client, throttler, 'KeywordPlanCampaignService'),
-        keywordPlanCampaignKeywords: new KeywordPlanCampaignKeywordService(
-            cid,
-            client,
-            throttler,
-            'KeywordPlanCampaignKeywordService'
-        ),
-        // keywordPlanIdeas: new KeywordPlanIdeaService(cid, client, throttler, 'KeywordPlanIdeaService'),
-        keywordPlans: new KeywordPlanService(cid, client, throttler, 'KeywordPlanService'),
-        labels: new LabelService(cid, client, throttler, 'LabelService'),
-        languageConstants: new LanguageConstantService(cid, client, throttler, 'LanguageConstantService'),
-        mediaFiles: new MediaFileService(cid, client, throttler, 'MediaFileService'),
-        // merchantCenterLinks: new MerchantCenterLinkService(cid, client, throttler, 'MerchantCenterLinkService'),
-        mobileAppCategoryConstants: new MobileAppCategoryConstantService(
-            cid,
-            client,
-            throttler,
-            'MobileAppCategoryConstantService'
-        ),
-        mobileDeviceConstants: new MobileDeviceConstantService(cid, client, throttler, 'MobileDeviceConstantService'),
-        operatingSystemVersionConstants: new OperatingSystemVersionConstantService(
-            cid,
-            client,
-            throttler,
-            'OperatingSystemVersionConstantService'
-        ),
-        // paymentsAccounts: new PaymentsAccountService(cid, client, throttler, 'PaymentsAccountService'),
-        productBiddingCategoryConstants: new ProductBiddingCategoryConstantService(
-            cid,
-            client,
-            throttler,
-            'ProductBiddingCategoryConstantService'
-        ),
-        recommendations: new RecommendationService(cid, client, throttler, 'RecommendationService'),
-        remarketingActions: new RemarketingActionService(cid, client, throttler, 'RemarketingActionService'),
-        sharedCriteria: new SharedCriterionService(cid, client, throttler, 'SharedCriterionService'),
-        sharedSets: new SharedSetService(cid, client, throttler, 'SharedSetService'),
-        topicConstants: new TopicConstantService(cid, client, throttler, 'TopicConstantService'),
-        thirdPartyAppAnalyticsLinks: new ThirdPartyAppAnalyticsLinkService(
-            cid,
-            client,
-            throttler,
-            'ThirdPartyAppAnalyticsLinkService'
-        ),
-        userInterests: new UserInterestService(cid, client, throttler, 'UserInterestService'),
-        userLists: new UserListService(cid, client, throttler, 'UserListService'),
-        videos: new VideoService(cid, client, throttler, 'VideoService'),
-        adGroupSimulations: new AdGroupSimulationService(cid, client, throttler, 'AdGroupSimulationService'),
-        adGroupCriterionSimulations: new AdGroupCriterionSimulationService(
-            cid,
-            client,
-            throttler,
-            'AdGroupCriterionSimulationService'
-        ),
-        campaignCriterionSimulations: new CampaignCriterionSimulationService(
-            cid,
-            client,
-            throttler,
-            'CampaignCriterionSimulationService'
-        ),
+    const initialSearch = await this.search(gaqlQuery, requestOptions);
+    response.push(...initialSearch.response);
+    nextPageToken = initialSearch.nextPageToken;
+
+    while (nextPageToken) {
+      const nextSearch = await this.search(gaqlQuery, {
+        ...requestOptions,
+        page_token: nextPageToken,
+      });
+      response.push(...nextSearch.response);
+      nextPageToken = nextSearch.nextPageToken;
     }
+
+    return response;
+  }
+
+  /**
+    @description Single query using a GAQL query
+   */
+  public async query<T = services.IGoogleAdsRow[]>(
+    gaqlQuery: string,
+    requestOptions: RequestOptions = {},
+    reportOptions?: ReportOptions
+  ): Promise<T> {
+    const baseHookArguments: BaseQueryHookArgs = {
+      credentials: this.credentials,
+      query: gaqlQuery,
+      reportOptions,
+    };
+
+    if (this.hooks.onQueryStart) {
+      const queryCancellation: HookedCancellation = { cancelled: false };
+      await this.hooks.onQueryStart({
+        ...baseHookArguments,
+        cancel: (res) => {
+          queryCancellation.cancelled = true;
+          queryCancellation.res = res;
+        },
+        editOptions: (options) => {
+          Object.entries(options).forEach(([key, val]) => {
+            // @ts-ignore
+            requestOptions[key] = val;
+          });
+        },
+      });
+      if (queryCancellation.cancelled) {
+        return queryCancellation.res as T;
+      }
+    }
+
+    try {
+      const response = await this.paginatedSearch(gaqlQuery, requestOptions);
+
+      const parsedResponse = this.clientOptions.disable_parsing
+        ? response
+        : reportOptions
+        ? parse({ results: response, reportOptions })
+        : parse({ results: response, gaqlString: gaqlQuery });
+
+      if (this.hooks.onQueryEnd) {
+        const queryResolution: HookedResolution = { resolved: false };
+        await this.hooks.onQueryEnd({
+          ...baseHookArguments,
+          response: parsedResponse,
+          resolve: (res) => {
+            queryResolution.resolved = true;
+            queryResolution.res = res;
+          },
+        });
+        if (queryResolution.resolved) {
+          return queryResolution.res as T;
+        }
+      }
+
+      return (parsedResponse as unknown) as T;
+    } catch (searchError) {
+      const googleAdsError = this.getGoogleAdsError(searchError);
+      if (this.hooks.onQueryError) {
+        await this.hooks.onQueryError({
+          ...baseHookArguments,
+          error: googleAdsError,
+        });
+      }
+      throw googleAdsError;
+    }
+  }
+
+  /**
+   * @description Creates, updates, or removes resources. This method supports atomic transactions with multiple types of resources. For example, you can atomically create a campaign and a campaign budget, or perform up to thousands of mutates atomically.
+   */
+  public async mutateResources<T>(
+    mutations: MutateOperation<T>[],
+    mutateOptions: MutateOptions = {}
+  ): Promise<services.MutateGoogleAdsResponse> {
+    const baseHookArguments: BaseMutationHookArgs = {
+      credentials: this.credentials,
+      method: "GoogleAdsService.mutate",
+      mutations,
+      isServiceCall: false,
+    };
+
+    if (this.hooks.onMutationStart) {
+      const mutationCancellation: HookedCancellation = { cancelled: false };
+      await this.hooks.onMutationStart({
+        ...baseHookArguments,
+        cancel: (res) => {
+          mutationCancellation.cancelled = true;
+          mutationCancellation.res = res;
+        },
+        editOptions: (options) => {
+          Object.entries(options).forEach(([key, val]) => {
+            // @ts-ignore
+            mutateOptions[key] = val;
+          });
+        },
+      });
+      if (mutationCancellation.cancelled) {
+        return mutationCancellation.res;
+      }
+    }
+
+    const { service, request } = this.buildMutationRequestAndService(
+      mutations,
+      mutateOptions
+    );
+
+    try {
+      const response = await service.mutate(request, {
+        // @ts-expect-error Field not included in type definitions
+        otherArgs: {
+          headers: this.callHeaders,
+        },
+      });
+
+      const parsedResponse = request.partial_failure
+        ? this.decodePartialFailureError(response)
+        : response;
+
+      if (this.hooks.onMutationEnd) {
+        const mutationResolution: HookedResolution = { resolved: false };
+        await this.hooks.onMutationEnd({
+          ...baseHookArguments,
+          response: parsedResponse,
+          resolve: (res) => {
+            mutationResolution.resolved = true;
+            mutationResolution.res = res;
+          },
+        });
+        if (mutationResolution.resolved) {
+          return mutationResolution.res;
+        }
+      }
+
+      return parsedResponse;
+    } catch (mutateError) {
+      const googleAdsError = this.getGoogleAdsError(mutateError);
+      if (this.hooks.onMutationError) {
+        await this.hooks.onMutationError({
+          ...baseHookArguments,
+          error: googleAdsError,
+        });
+      }
+      throw googleAdsError;
+    }
+  }
+
+  private get googleAdsFields() {
+    return {
+      searchGoogleAdsFields: async (
+        request: services.SearchGoogleAdsFieldsRequest
+      ) => {
+        const service: services.GoogleAdsFieldService = await this.loadService(
+          "GoogleAdsFieldServiceClient"
+        );
+        return service.searchGoogleAdsFields(request, {
+          // @ts-expect-error This method does support call headers
+          otherArgs: {
+            headers: this.callHeaders,
+          },
+        });
+      },
+    };
+  }
 }
