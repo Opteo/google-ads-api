@@ -156,6 +156,26 @@ export class Service {
     return { service, request };
   }
 
+  protected buildSearchStreamRequestAndService(
+    gaql: string,
+    options?: RequestOptions
+  ): {
+    service: GoogleAdsServiceClient;
+    request: services.SearchGoogleAdsStreamRequest;
+  } {
+    const service: GoogleAdsServiceClient = this.loadService(
+      "GoogleAdsServiceClient"
+    );
+    const request: services.SearchGoogleAdsStreamRequest = new services.SearchGoogleAdsStreamRequest(
+      {
+        customer_id: this.customerOptions.customer_id,
+        query: gaql,
+        ...options,
+      }
+    );
+    return { service, request };
+  }
+
   protected buildMutationRequestAndService<T>(
     mutations: MutateOperation<T>[],
     options?: MutateOptions

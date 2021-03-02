@@ -10,12 +10,14 @@ import { parse } from "./parser";
 import { services } from "./protos";
 import ServiceFactory from "./protos/autogen/serviceFactory";
 import { buildQuery } from "./query";
+import { createNextChunkArrivedPromise } from "./utils";
 import {
   CustomerOptions,
   MutateOperation,
   MutateOptions,
   ReportOptions,
   RequestOptions,
+  PageToken,
 } from "./types";
 
 export class Customer extends ServiceFactory {
@@ -45,7 +47,7 @@ export class Customer extends ServiceFactory {
   */
   public async *reportStream<T = services.IGoogleAdsRow>(
     reportOptions: ReportOptions
-  ): AsyncGenerator<T, void, undefined> {
+  ): AsyncGenerator<T> {
     const { gaqlQuery, requestOptions } = buildQuery(reportOptions);
 
     const baseHookArguments: BaseQueryHookArgs = {
@@ -83,36 +85,52 @@ export class Customer extends ServiceFactory {
       }
     }
 
-    const { service, request } = this.buildSearchRequestAndService(
+    const { service, request } = this.buildSearchStreamRequestAndService(
       gaqlQuery,
       requestOptions
     );
 
+    const stream = service.searchStream(request, {
+      otherArgs: { headers: this.callHeaders },
+    });
+
+    let done = false;
+    const accumulator: T[] = [];
+    const response: T[] = [];
+
+    let nextChunk = createNextChunkArrivedPromise();
+
+    stream.on("data", (chunk: services.SearchGoogleAdsStreamResponse) => {
+      const parsedResponse = this.clientOptions.disable_parsing
+        ? chunk.results
+        : parse({ results: chunk.results, reportOptions });
+      accumulator.push(...(parsedResponse as T[]));
+      response.push(...(parsedResponse as T[]));
+
+      nextChunk.resolve();
+      nextChunk = createNextChunkArrivedPromise();
+    });
+
+    stream.on("error", (searchError: Error) => {
+      nextChunk.reject(searchError);
+    });
+
+    stream.on("end", () => {
+      done = true;
+      nextChunk.resolve();
+    });
+
     try {
-      const stream: AsyncIterable<services.IGoogleAdsRow> = service.searchAsync(
-        request,
-        { otherArgs: { headers: this.callHeaders } }
-      );
-
-      const result: services.IGoogleAdsRow[] = [];
-      for await (const row of stream) {
-        const [parsedResponse] = this.clientOptions.disable_parsing
-          ? [row]
-          : parse({ results: [row], reportOptions });
-
-        result.push(parsedResponse);
-
-        yield parsedResponse as T;
-      }
-
-      if (this.hooks.onQueryEnd) {
-        await this.hooks.onQueryEnd({
-          ...baseHookArguments,
-          response: result,
-          resolve: () => {
-            return;
-          },
-        });
+      while (!done || accumulator.length) {
+        if (accumulator.length !== 0) {
+          const item = accumulator.shift();
+          if (item === undefined) {
+            throw new Error("UNDEFINED_STREAM_ERROR");
+          }
+          yield item;
+        } else {
+          await nextChunk.newPromise;
+        }
       }
     } catch (searchError) {
       const googleAdsError = this.getGoogleAdsError(searchError);
@@ -123,7 +141,65 @@ export class Customer extends ServiceFactory {
         });
       }
       throw googleAdsError;
+    } finally {
+      if (this.hooks.onQueryEnd) {
+        await this.hooks.onQueryEnd({
+          ...baseHookArguments,
+          response,
+          resolve: () => {
+            return;
+          },
+        });
+      }
+
+      stream.destroy();
     }
+  }
+
+  private async search(
+    gaqlQuery: string,
+    requestOptions: RequestOptions
+  ): Promise<{
+    response: services.IGoogleAdsRow[];
+    nextPageToken: PageToken;
+  }> {
+    const { service, request } = this.buildSearchRequestAndService(
+      gaqlQuery,
+      requestOptions
+    );
+
+    const searchResponse = await service.search(request, {
+      otherArgs: { headers: this.callHeaders },
+      autoPaginate: false, // autoPaginate doesn't work
+    });
+
+    return {
+      response: searchResponse[0],
+      nextPageToken: searchResponse[2].next_page_token,
+    };
+  }
+
+  private async paginatedSearch(
+    gaqlQuery: string,
+    requestOptions: RequestOptions
+  ): Promise<services.IGoogleAdsRow[]> {
+    const response: services.IGoogleAdsRow[] = [];
+    let nextPageToken: PageToken = undefined;
+
+    const initialSearch = await this.search(gaqlQuery, requestOptions);
+    response.push(...initialSearch.response);
+    nextPageToken = initialSearch.nextPageToken;
+
+    while (nextPageToken) {
+      const nextSearch = await this.search(gaqlQuery, {
+        ...requestOptions,
+        page_token: nextPageToken,
+      });
+      response.push(...nextSearch.response);
+      nextPageToken = nextSearch.nextPageToken;
+    }
+
+    return response;
   }
 
   /**
@@ -160,17 +236,8 @@ export class Customer extends ServiceFactory {
       }
     }
 
-    const { service, request } = this.buildSearchRequestAndService(
-      gaqlQuery,
-      requestOptions
-    );
-
     try {
-      const [response] = await service.search(request, {
-        otherArgs: {
-          headers: this.callHeaders,
-        },
-      });
+      const response = await this.paginatedSearch(gaqlQuery, requestOptions);
 
       const parsedResponse = this.clientOptions.disable_parsing
         ? response
