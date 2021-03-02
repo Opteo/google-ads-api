@@ -1,5 +1,6 @@
+import { google } from "google-gax/build/protos/operations";
 import { Hooks } from "./hooks";
-import { enums, services } from "./protos";
+import { enums, errors, services } from "./protos";
 import {
   failTestIfExecuted,
   mockPaginatedSearch,
@@ -950,5 +951,61 @@ describe("mutateResources", () => {
     const res = await customer.mutateResources(mutations);
 
     expect(res).toEqual(hookReturnValue);
+  });
+
+  it("should decode partial failure errors if present on the response", async () => {
+    // Prepare an error buffer
+    const failureMessage = new errors.GoogleAdsFailure({
+      errors: [
+        {
+          error_code: new errors.ErrorCode({
+            request_error: errors.RequestErrorEnum.RequestError.BAD_RESOURCE_ID,
+          }),
+          message: "error message",
+          location: {
+            field_path_elements: [
+              {
+                field_name: "fake field",
+                index: 0,
+              },
+            ],
+          },
+        },
+      ],
+    });
+
+    const failureBuffer = errors.GoogleAdsFailure.encode(
+      failureMessage
+    ).finish();
+
+    // Mock request and response for mutate call
+    const customer = newCustomer();
+
+    mockBuildMutateRequestAndService(
+      customer,
+      false,
+      new services.MutateGoogleAdsRequest({
+        partial_failure: true,
+      }),
+      new services.MutateGoogleAdsResponse({
+        partial_failure_error: new google.rpc.Status({
+          details: [
+            {
+              type_url: "google.ads.googleads.v6.errors.GoogleAdsFailure",
+              value: failureBuffer,
+            },
+          ],
+        }),
+      })
+    );
+
+    const response = await customer.mutateResources(mutations, {
+      partial_failure: true,
+    });
+
+    expect(
+      response.partial_failure_error instanceof errors.GoogleAdsFailure
+    ).toEqual(true);
+    expect(response.partial_failure_error).toEqual(failureMessage);
   });
 });

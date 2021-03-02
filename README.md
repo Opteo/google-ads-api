@@ -41,6 +41,18 @@
 npm install google-ads-api
 ```
 
+# Documentation
+
+**Note:** Our documentation site is currently outdated (an older version of this library and the Google Ads API) but is still up. We're working on updating these docs soon.
+
+---
+
+### ➡️ [opteo.com/dev/google-ads-api](https://opteo.com/dev/google-ads-api)
+
+---
+
+For now we recommend following the usage examples below.
+
 # Usage
 
 - Setup
@@ -259,7 +271,7 @@ ResourceNames.accountBudget(customer.credentials.customer_id, 123);
 
 ## Hooks
 
-The library provides hooks that can be executed before, after or on error of a query or a mutation. Query hooks have access to the gaql query and the reportOptions, while mutation hooks have access to the mutations. Mutation hooks currently only work with `mutateResources` and not the individual service methods such as `create`, `update` and `delete`.
+The library provides hooks that can be executed before, after or on error of a query or a mutation. Query hooks have access to the gaql query and the reportOptions, while mutation hooks have access to the mutations.
 
 ```ts
 const customer = client.Customer({
