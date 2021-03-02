@@ -80,14 +80,16 @@ export function mockBuildSearchRequestAndService(
 
 export function mockBuildMutateRequestAndService(
   customer: Customer,
-  shouldThrow = false
+  shouldThrow = false,
+  request?: services.MutateGoogleAdsRequest,
+  response?: services.MutateGoogleAdsResponse
 ): { mockService: services.GoogleAdsService; spyBuild: jest.SpyInstance } {
   const mockService = ({
     mutate() {
       if (shouldThrow) {
         throw new Error(mockErrorMessage);
       }
-      return mockMutationReturnValue;
+      return response ?? mockMutationReturnValue;
     },
   } as unknown) as services.GoogleAdsService;
 
@@ -98,7 +100,7 @@ export function mockBuildMutateRequestAndService(
     .mockImplementation(() => {
       return {
         service: mockService,
-        request: {} as services.MutateGoogleAdsRequest,
+        request: request ?? ({} as services.MutateGoogleAdsRequest),
       };
     });
 
