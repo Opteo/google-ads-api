@@ -11,44 +11,33 @@ import {
   mockGetGoogleAdsError,
   mockMethod,
   mockMutationReturnValue,
+  mockMutations,
   mockPaginatedSearch,
   mockParse,
   mockParsedValues,
   mockParseValue,
   mockQuery,
   mockQueryReturnValue,
+  mockReportOptions,
   mockSearchOnce,
   mockSummaryRow,
+  mockTotalResultsCount,
   newCustomer,
 } from "./testUtils";
-import {
-  MutateOperation,
-  MutateOptions,
-  ReportOptions,
-  RequestOptions,
-} from "./types";
+import { MutateOptions, RequestOptions } from "./types";
 
-const gaqlQuery = `SELECT campaign.resource_name FROM campaign LIMIT 1`;
-const reportOptions: ReportOptions = {
-  entity: "campaign",
-  attributes: ["campaign.resource_name"],
-  limit: 1,
-};
-const mutations: MutateOperation<any>[] = [
-  { resource: "abc", entity: "campaign", operation: "create" },
-];
-
-describe("query", () => {
+describe("querier", () => {
   afterEach(() => jest.resetAllMocks());
 
   it("parses query results by default", async () => {
     const customer = newCustomer({});
     mockPaginatedSearch(customer);
     const mockedParse = mockParse(mockParsedValues);
-    const res = await customer.query(gaqlQuery);
+    // @ts-expect-error private method
+    const { response } = await customer.querier(mockGaqlQuery);
 
     expect(mockedParse).toHaveBeenCalled();
-    expect(res).toEqual(mockParsedValues);
+    expect(response).toEqual(mockParsedValues);
   });
 
   it("skips query parsing if it is disabled in the client options", async () => {
@@ -56,10 +45,22 @@ describe("query", () => {
     const customer = newCustomer({}, disableParsing);
     mockPaginatedSearch(customer);
     const mockedParse = mockParse(mockParsedValues);
-    const res = await customer.query(gaqlQuery);
+    // @ts-expect-error private method
+    const { response } = await customer.querier(mockGaqlQuery);
 
     expect(mockedParse).not.toHaveBeenCalled();
-    expect(res).toEqual(mockQueryReturnValue);
+    expect(response).toEqual(mockQueryReturnValue);
+  });
+
+  it("includes the total results count if provided", async () => {
+    const includeTotalResultsCount = true;
+    const customer = newCustomer({});
+    mockPaginatedSearch(customer, includeTotalResultsCount);
+    mockParse(mockParsedValues);
+    // @ts-expect-error private method
+    const { totalResultsCount } = await customer.querier(mockGaqlQuery);
+
+    expect(totalResultsCount).toEqual(mockTotalResultsCount);
   });
 
   it("calls onQueryStart when provided", async () => {
@@ -72,12 +73,13 @@ describe("query", () => {
     mockPaginatedSearch(customer);
     mockParse(mockQueryReturnValue);
     const spyHook = jest.spyOn(hooks, "onQueryStart");
-    await customer.query(gaqlQuery);
+    // @ts-expect-error private method
+    await customer.querier(mockGaqlQuery);
 
     expect(spyHook).toHaveBeenCalled();
     expect(spyHook).toHaveBeenCalledWith({
       credentials: expect.any(Object),
-      query: gaqlQuery,
+      query: mockGaqlQuery,
       reportOptions: undefined,
       cancel: expect.any(Function),
       editOptions: expect.any(Function),
@@ -96,7 +98,8 @@ describe("query", () => {
     const customer = newCustomer(hooks);
     mockPaginatedSearch(customer);
     mockParse(mockQueryReturnValue);
-    await customer.query(gaqlQuery);
+    // @ts-expect-error private method
+    await customer.querier(mockGaqlQuery);
 
     expect(spyMockMethod).toHaveBeenCalled();
   });
@@ -112,10 +115,11 @@ describe("query", () => {
     mockParse(mockQueryReturnValue);
     const spyMockSearch = jest.spyOn(mockService, "search");
     jest.spyOn(hooks, "onQueryStart");
-    const res = await customer.query(gaqlQuery);
+    // @ts-expect-error private method
+    const { response } = await customer.querier(mockGaqlQuery);
 
     expect(spyMockSearch).not.toHaveBeenCalled();
-    expect(typeof res).toEqual("undefined");
+    expect(typeof response).toEqual("undefined");
   });
 
   it("returns the argument of cancel() if one is provided in onQueryStart", async () => {
@@ -128,9 +132,10 @@ describe("query", () => {
     const customer = newCustomer(hooks);
     mockPaginatedSearch(customer);
     mockParse(mockQueryReturnValue);
-    const res = await customer.query(gaqlQuery);
+    // @ts-expect-error private method
+    const { response } = await customer.querier(mockGaqlQuery);
 
-    expect(res).toEqual(alternativeReturnValue);
+    expect(response).toEqual(alternativeReturnValue);
   });
 
   it("edits the requestOptions when editOptions() is called in onQueryStart", async () => {
@@ -147,9 +152,10 @@ describe("query", () => {
       page_token: "abcd",
       page_size: 2,
     };
-    await customer.query(gaqlQuery, requestOptions);
+    // @ts-expect-error private method
+    await customer.querier(mockGaqlQuery, requestOptions);
 
-    expect(spyPaginatedSearch).toHaveBeenCalledWith(gaqlQuery, {
+    expect(spyPaginatedSearch).toHaveBeenCalledWith(mockGaqlQuery, {
       validate_only: true, // changed
       page_token: "abcd",
       page_size: 4, // changed
@@ -174,7 +180,8 @@ describe("query", () => {
     const spyHook = jest.spyOn(hooks, "onQueryError");
 
     try {
-      await customer.query(gaqlQuery);
+      // @ts-expect-error private method
+      await customer.querier(mockGaqlQuery);
       failTestIfExecuted(); // should not be called
     } catch (error) {
       expect(spyMockSearch).toThrow();
@@ -182,7 +189,7 @@ describe("query", () => {
       expect(spyHook).toHaveBeenCalled();
       expect(spyHook).toHaveBeenCalledWith({
         credentials: expect.any(Object),
-        query: gaqlQuery,
+        query: mockGaqlQuery,
         reportOptions: undefined,
         error: mockError,
       });
@@ -206,7 +213,8 @@ describe("query", () => {
     mockGetGoogleAdsError(customer);
 
     try {
-      await customer.query(gaqlQuery);
+      // @ts-expect-error private method
+      await customer.querier(mockGaqlQuery);
       failTestIfExecuted(); // should not be called
     } catch (err) {
       expect(spyMockMethod).toHaveBeenCalled();
@@ -225,7 +233,8 @@ describe("query", () => {
     mockParse(mockQueryReturnValue);
     mockGetGoogleAdsError(customer);
     const spyHook = jest.spyOn(hooks, "onQueryError");
-    await customer.query(gaqlQuery);
+    // @ts-expect-error private method
+    await customer.querier(mockGaqlQuery);
 
     expect(spyPaginatedSearch).not.toThrow();
     expect(spyHook).not.toHaveBeenCalled();
@@ -241,12 +250,13 @@ describe("query", () => {
     mockPaginatedSearch(customer);
     mockParse(mockQueryReturnValue);
     const spyHook = jest.spyOn(hooks, "onQueryEnd");
-    await customer.query(gaqlQuery);
+    // @ts-expect-error private method
+    await customer.querier(mockGaqlQuery);
 
     expect(spyHook).toHaveBeenCalled();
     expect(spyHook).toHaveBeenCalledWith({
       credentials: expect.any(Object),
-      query: gaqlQuery,
+      query: mockGaqlQuery,
       reportOptions: undefined,
       response: mockQueryReturnValue,
       resolve: expect.any(Function),
@@ -265,7 +275,8 @@ describe("query", () => {
     const customer = newCustomer(hooks);
     mockPaginatedSearch(customer);
     mockParse(mockQueryReturnValue);
-    await customer.query(gaqlQuery);
+    // @ts-expect-error private method
+    await customer.querier(mockGaqlQuery);
 
     expect(spyMockMethod).toHaveBeenCalled();
   });
@@ -280,9 +291,10 @@ describe("query", () => {
     const customer = newCustomer(hooks);
     mockPaginatedSearch(customer);
     mockParse(mockQueryReturnValue);
-    const res = await customer.query<string>(gaqlQuery);
+    // @ts-expect-error private method
+    const { response } = await customer.querier<string>(mockGaqlQuery);
 
-    expect(res).toEqual(hookReturnValue);
+    expect(response).toEqual(hookReturnValue);
   });
 });
 
@@ -290,49 +302,69 @@ describe("paginatedSearch", () => {
   afterEach(() => jest.resetAllMocks());
   it("returns the response of the initial query if there is no next page token", async () => {
     const customer = newCustomer({});
-    mockSearchOnce(customer, {
+    mockSearchOnce({
+      customer,
       response: ["a", "b", "c"],
       nextPageToken: null,
     });
 
     // @ts-expect-error private method
-    const res = await customer.paginatedSearch(gaqlQuery, {});
+    const { response } = await customer.paginatedSearch(mockGaqlQuery, {});
 
-    expect(res).toEqual(["a", "b", "c"]);
+    expect(response).toEqual(["a", "b", "c"]);
   });
 
   it("gets the next response if there is a next page token", async () => {
     const customer = newCustomer({});
-    mockSearchOnce(customer, {
+    mockSearchOnce({
+      customer,
       response: ["a", "b", "c"],
       nextPageToken: "token",
     });
-    mockSearchOnce(customer, {
+    mockSearchOnce({
+      customer,
       response: ["d", "e", "f"],
       nextPageToken: null,
     });
 
     // @ts-expect-error private method
-    const res = await customer.paginatedSearch(gaqlQuery, {});
+    const { response } = await customer.paginatedSearch(mockGaqlQuery, {});
 
-    expect(res).toEqual(["a", "b", "c", "d", "e", "f"]);
+    expect(response).toEqual(["a", "b", "c", "d", "e", "f"]);
   });
 
   it("iterates many times until there is no next page token", async () => {
     const customer = newCustomer({});
-    mockSearchOnce(customer, { response: ["a"], nextPageToken: "token" });
-    mockSearchOnce(customer, { response: ["b"], nextPageToken: "token" });
-    mockSearchOnce(customer, { response: ["c"], nextPageToken: "token" });
-    mockSearchOnce(customer, { response: ["d"], nextPageToken: "token" });
-    mockSearchOnce(customer, { response: ["e"], nextPageToken: "token" });
-    mockSearchOnce(customer, { response: ["f"], nextPageToken: "token" });
-    mockSearchOnce(customer, { response: ["g"], nextPageToken: "token" });
-    mockSearchOnce(customer, { response: ["h"], nextPageToken: null });
+    mockSearchOnce({ customer, response: ["a"], nextPageToken: "token" });
+    mockSearchOnce({ customer, response: ["b"], nextPageToken: "token" });
+    mockSearchOnce({ customer, response: ["c"], nextPageToken: "token" });
+    mockSearchOnce({ customer, response: ["d"], nextPageToken: "token" });
+    mockSearchOnce({ customer, response: ["e"], nextPageToken: "token" });
+    mockSearchOnce({ customer, response: ["f"], nextPageToken: "token" });
+    mockSearchOnce({ customer, response: ["g"], nextPageToken: "token" });
+    mockSearchOnce({ customer, response: ["h"], nextPageToken: null });
 
     // @ts-expect-error private method
-    const res = await customer.paginatedSearch(gaqlQuery, {});
+    const { response } = await customer.paginatedSearch(mockGaqlQuery, {});
 
-    expect(res).toEqual(["a", "b", "c", "d", "e", "f", "g", "h"]);
+    expect(response).toEqual(["a", "b", "c", "d", "e", "f", "g", "h"]);
+  });
+
+  it("includes the total results count if provided", async () => {
+    const customer = newCustomer({});
+    mockSearchOnce({
+      customer,
+      response: ["a"],
+      nextPageToken: null,
+      includeTotalResultsCount: true,
+    });
+
+    // @ts-expect-error private method
+    const { totalResultsCount } = await customer.paginatedSearch(
+      mockGaqlQuery,
+      {}
+    );
+    expect(totalResultsCount).toEqual(mockTotalResultsCount);
   });
 });
 
@@ -344,6 +376,17 @@ describe("search", () => {
     // @ts-expect-error private method
     const { response } = await customer.search(mockGaqlQuery);
     expect(response[0]).toEqual(mockSummaryRow);
+  });
+
+  it("includes the total results count if provided", async () => {
+    const customer = newCustomer({});
+    mockBuildSearchRequestAndService({
+      customer,
+      includeTotalResultsCount: true,
+    });
+    // @ts-expect-error private method
+    const { totalResultsCount } = await customer.search(mockGaqlQuery);
+    expect(totalResultsCount).toEqual(mockTotalResultsCount);
   });
 });
 
@@ -357,7 +400,7 @@ describe("reportStream", () => {
       mockStreamEnd,
     } = mockBuildSearchStreamRequestAndService(customer);
     const mockedParse = mockParse(mockParsedValues);
-    const stream = customer.reportStream(reportOptions);
+    const stream = customer.reportStream(mockReportOptions);
     mockStreamData(mockQueryReturnValue);
     mockStreamEnd();
 
@@ -376,7 +419,7 @@ describe("reportStream", () => {
       mockStreamEnd,
     } = mockBuildSearchStreamRequestAndService(customer);
     const mockedParse = mockParse(mockParsedValues);
-    const stream = customer.reportStream(reportOptions);
+    const stream = customer.reportStream(mockReportOptions);
     mockStreamData(mockQueryReturnValue);
     mockStreamEnd();
 
@@ -397,7 +440,7 @@ describe("reportStream", () => {
       mockStreamEnd,
     } = mockBuildSearchStreamRequestAndService(customer);
     mockParse(mockParsedValues);
-    const stream = customer.reportStream(reportOptions);
+    const stream = customer.reportStream(mockReportOptions);
     mockStreamData([0, 1, 2, 3, 4, 5] as services.IGoogleAdsRow[]);
     mockStreamData([6, 7, 8, 9, 10, 11] as services.IGoogleAdsRow[]);
     mockStreamData([12, 13, 14, 15, 16, 17] as services.IGoogleAdsRow[]);
@@ -420,7 +463,7 @@ describe("reportStream", () => {
       mockStreamEnd,
     } = mockBuildSearchStreamRequestAndService(customer);
     mockParse(mockParsedValues);
-    const stream = customer.reportStream(reportOptions);
+    const stream = customer.reportStream(mockReportOptions);
     mockStreamData(mockQueryReturnValue);
     mockStreamSummaryRow();
     mockStreamEnd();
@@ -445,7 +488,7 @@ describe("reportStream", () => {
     } = mockBuildSearchStreamRequestAndService(customer);
     mockParse(mockParsedValues);
     const spyHook = jest.spyOn(hooks, "onQueryStart");
-    const stream = customer.reportStream(reportOptions);
+    const stream = customer.reportStream(mockReportOptions);
     mockStreamData(mockQueryReturnValue);
     mockStreamEnd();
     await stream.next();
@@ -454,7 +497,7 @@ describe("reportStream", () => {
     expect(spyHook).toHaveBeenCalledWith({
       credentials: expect.any(Object),
       query: expect.any(String),
-      reportOptions,
+      reportOptions: mockReportOptions,
       cancel: expect.any(Function),
       editOptions: expect.any(Function),
     });
@@ -475,7 +518,7 @@ describe("reportStream", () => {
       mockStreamEnd,
     } = mockBuildSearchStreamRequestAndService(customer);
     mockParse(mockParsedValues);
-    const stream = customer.reportStream(reportOptions);
+    const stream = customer.reportStream(mockReportOptions);
     mockStreamData(mockQueryReturnValue);
     mockStreamEnd();
     await stream.next();
@@ -492,7 +535,7 @@ describe("reportStream", () => {
     const customer = newCustomer(hooks);
     const { spyBuild } = mockBuildSearchStreamRequestAndService(customer);
     mockParse(mockParsedValues);
-    const stream = customer.reportStream(reportOptions);
+    const stream = customer.reportStream(mockReportOptions);
 
     let iterations = 0;
     for await (const row of stream) {
@@ -514,7 +557,7 @@ describe("reportStream", () => {
     const customer = newCustomer(hooks);
     mockBuildSearchStreamRequestAndService(customer);
     mockParse(mockParsedValues);
-    const stream = customer.reportStream(reportOptions);
+    const stream = customer.reportStream(mockReportOptions);
 
     let iterations = 0;
     for await (const row of stream) {
@@ -535,7 +578,7 @@ describe("reportStream", () => {
     const customer = newCustomer(hooks);
     mockBuildSearchStreamRequestAndService(customer);
     mockParse(mockParsedValues);
-    const stream = customer.reportStream(reportOptions);
+    const stream = customer.reportStream(mockReportOptions);
 
     let iterations = 0;
     for await (const row of stream) {
@@ -565,14 +608,14 @@ describe("reportStream", () => {
       page_size: 2, // changed
     };
     const stream = customer.reportStream({
-      ...reportOptions,
+      ...mockReportOptions,
       ...requestOptions,
     });
     mockStreamData(mockQueryReturnValue);
     mockStreamEnd();
     await stream.next();
 
-    expect(spyBuild).toHaveBeenCalledWith(gaqlQuery, {
+    expect(spyBuild).toHaveBeenCalledWith(mockGaqlQuery, {
       validate_only: true,
       page_token: "abcd",
       page_size: 4,
@@ -596,7 +639,7 @@ describe("reportStream", () => {
     const spyHook = jest.spyOn(hooks, "onQueryError");
 
     try {
-      const stream = customer.reportStream(reportOptions);
+      const stream = customer.reportStream(mockReportOptions);
       mockStreamData(mockQueryReturnValue);
       mockStreamError(new Error("Original error message"));
       await stream.next();
@@ -607,7 +650,7 @@ describe("reportStream", () => {
       expect(spyHook).toHaveBeenCalledWith({
         credentials: expect.any(Object),
         query: expect.any(String),
-        reportOptions: reportOptions,
+        reportOptions: mockReportOptions,
         error: mockError,
       });
       done();
@@ -633,7 +676,7 @@ describe("reportStream", () => {
     mockGetGoogleAdsError(customer);
 
     try {
-      const stream = customer.reportStream(reportOptions);
+      const stream = customer.reportStream(mockReportOptions);
       mockStreamData(mockQueryReturnValue);
       mockStreamError(new Error("Original error message"));
       await stream.next();
@@ -658,7 +701,7 @@ describe("reportStream", () => {
     mockParse(mockParsedValues);
     mockGetGoogleAdsError(customer);
     const spyHook = jest.spyOn(hooks, "onQueryError");
-    const stream = customer.reportStream(reportOptions);
+    const stream = customer.reportStream(mockReportOptions);
     mockStreamData(mockQueryReturnValue);
     mockStreamEnd();
     await stream.next();
@@ -679,7 +722,7 @@ describe("reportStream", () => {
     } = mockBuildSearchStreamRequestAndService(customer);
     mockParse(mockParsedValues);
     const spyHook = jest.spyOn(hooks, "onQueryEnd");
-    const stream = customer.reportStream(reportOptions);
+    const stream = customer.reportStream(mockReportOptions);
     mockStreamData(mockQueryReturnValue);
     mockStreamEnd();
 
@@ -691,8 +734,8 @@ describe("reportStream", () => {
     expect(spyHook).toHaveBeenCalled();
     expect(spyHook).toHaveBeenCalledWith({
       credentials: expect.any(Object),
-      query: gaqlQuery,
-      reportOptions,
+      query: mockGaqlQuery,
+      reportOptions: mockReportOptions,
       response,
       resolve: expect.any(Function),
     });
@@ -713,7 +756,7 @@ describe("reportStream", () => {
       mockStreamEnd,
     } = mockBuildSearchStreamRequestAndService(customer);
     mockParse(mockParsedValues);
-    const stream = customer.reportStream(reportOptions);
+    const stream = customer.reportStream(mockReportOptions);
     mockStreamData(mockQueryReturnValue);
     mockStreamEnd();
 
@@ -737,7 +780,7 @@ describe("reportStream", () => {
       mockStreamEnd,
     } = mockBuildSearchStreamRequestAndService(customer);
     mockParse(mockParsedValues);
-    const stream = customer.reportStream(reportOptions);
+    const stream = customer.reportStream(mockReportOptions);
     mockStreamData(mockQueryReturnValue);
     mockStreamEnd();
 
@@ -747,18 +790,43 @@ describe("reportStream", () => {
   });
 });
 
-describe("report", () => {
-  it("calls query", async () => {
+describe("querier callers", () => {
+  it("query calls querier and returns the response", async () => {
     const customer = newCustomer();
     const mockedQuery = mockQuery(customer);
-    await customer.report(reportOptions);
+    const res = await customer.query(mockGaqlQuery);
+
+    expect(mockedQuery).toHaveBeenCalled();
+    expect(mockedQuery).toHaveBeenCalledWith(mockGaqlQuery, expect.any(Object));
+    expect(res).toEqual(mockQueryReturnValue);
+  });
+
+  it("report calls querier and returns the response", async () => {
+    const customer = newCustomer();
+    const mockedQuery = mockQuery(customer);
+    const res = await customer.report(mockReportOptions);
 
     expect(mockedQuery).toHaveBeenCalled();
     expect(mockedQuery).toHaveBeenCalledWith(
       expect.any(String),
       expect.any(Object),
-      reportOptions
+      mockReportOptions
     );
+    expect(res).toEqual(mockQueryReturnValue);
+  });
+
+  it("reportCount calls querier and returns the total results count", async () => {
+    const customer = newCustomer();
+    const mockedQuery = mockQuery(customer);
+    const res = await customer.reportCount(mockReportOptions);
+
+    expect(mockedQuery).toHaveBeenCalled();
+    expect(mockedQuery).toHaveBeenCalledWith(
+      expect.any(String),
+      expect.any(Object),
+      mockReportOptions
+    );
+    expect(res).toEqual(mockTotalResultsCount);
   });
 });
 
@@ -774,14 +842,14 @@ describe("mutateResources", () => {
     const customer = newCustomer(hooks);
     mockBuildMutateRequestAndService({ customer });
     const spyHook = jest.spyOn(hooks, "onMutationStart");
-    await customer.mutateResources(mutations);
+    await customer.mutateResources(mockMutations);
 
     expect(spyHook).toHaveBeenCalled();
     expect(spyHook).toHaveBeenCalledWith({
       credentials: expect.any(Object),
       method: "GoogleAdsService.mutate",
       isServiceCall: false,
-      mutations,
+      mutations: mockMutations,
       cancel: expect.any(Function),
       editOptions: expect.any(Function),
     });
@@ -798,7 +866,7 @@ describe("mutateResources", () => {
     };
     const customer = newCustomer(hooks);
     mockBuildMutateRequestAndService({ customer });
-    await customer.mutateResources(mutations);
+    await customer.mutateResources(mockMutations);
 
     expect(spyMockMethod).toHaveBeenCalled();
   });
@@ -812,7 +880,7 @@ describe("mutateResources", () => {
     const customer = newCustomer(hooks);
     const { mockService } = mockBuildMutateRequestAndService({ customer });
     const spyMockMutate = jest.spyOn(mockService, "mutate");
-    const res = await customer.mutateResources(mutations);
+    const res = await customer.mutateResources(mockMutations);
 
     expect(spyMockMutate).not.toHaveBeenCalled();
     expect(typeof res).toEqual("undefined");
@@ -827,7 +895,7 @@ describe("mutateResources", () => {
     };
     const customer = newCustomer(hooks);
     mockBuildMutateRequestAndService({ customer });
-    const res = await customer.mutateResources(mutations);
+    const res = await customer.mutateResources(mockMutations);
 
     expect(res).toEqual(alternativeReturnValue);
   });
@@ -848,9 +916,9 @@ describe("mutateResources", () => {
       partial_failure: true,
       response_content_type: enums.ResponseContentType.RESOURCE_NAME_ONLY,
     };
-    await customer.mutateResources(mutations, mutateOptions);
+    await customer.mutateResources(mockMutations, mutateOptions);
 
-    expect(spyBuild).toHaveBeenCalledWith(mutations, {
+    expect(spyBuild).toHaveBeenCalledWith(mockMutations, {
       validate_only: true, // changed
       partial_failure: true,
       response_content_type: enums.ResponseContentType.MUTABLE_RESOURCE, // changed
@@ -874,7 +942,7 @@ describe("mutateResources", () => {
     const spyHook = jest.spyOn(hooks, "onMutationError");
 
     try {
-      await customer.mutateResources(mutations);
+      await customer.mutateResources(mockMutations);
       failTestIfExecuted(); // should not be called
     } catch (error) {
       expect(spyMockMutate).toThrow();
@@ -884,7 +952,7 @@ describe("mutateResources", () => {
         credentials: expect.any(Object),
         method: "GoogleAdsService.mutate",
         isServiceCall: false,
-        mutations,
+        mutations: mockMutations,
         error: mockError,
       });
       done();
@@ -906,7 +974,7 @@ describe("mutateResources", () => {
     mockGetGoogleAdsError(customer);
 
     try {
-      await customer.mutateResources(mutations);
+      await customer.mutateResources(mockMutations);
       failTestIfExecuted(); // should not be called
     } catch (error) {
       expect(spyMockMethod).toHaveBeenCalled();
@@ -929,7 +997,7 @@ describe("mutateResources", () => {
     mockGetGoogleAdsError(customer);
     const spyMockMutate = jest.spyOn(mockService, "mutate");
     const spyHook = jest.spyOn(hooks, "onMutationError");
-    await customer.mutateResources(mutations);
+    await customer.mutateResources(mockMutations);
 
     expect(spyMockMutate).not.toThrow();
     expect(spyHook).not.toHaveBeenCalled();
@@ -944,14 +1012,14 @@ describe("mutateResources", () => {
     const customer = newCustomer(hooks);
     mockBuildMutateRequestAndService({ customer });
     const spyHook = jest.spyOn(hooks, "onMutationEnd");
-    await customer.mutateResources(mutations);
+    await customer.mutateResources(mockMutations);
 
     expect(spyHook).toHaveBeenCalled();
     expect(spyHook).toHaveBeenCalledWith({
       credentials: expect.any(Object),
       method: "GoogleAdsService.mutate",
       isServiceCall: false,
-      mutations,
+      mutations: mockMutations,
       response: mockMutationReturnValue,
       resolve: expect.any(Function),
     });
@@ -968,7 +1036,7 @@ describe("mutateResources", () => {
     };
     const customer = newCustomer(hooks);
     mockBuildMutateRequestAndService({ customer });
-    await customer.mutateResources(mutations);
+    await customer.mutateResources(mockMutations);
 
     expect(spyMockMethod).toHaveBeenCalled();
   });
@@ -982,7 +1050,7 @@ describe("mutateResources", () => {
     };
     const customer = newCustomer(hooks);
     mockBuildMutateRequestAndService({ customer });
-    const res = await customer.mutateResources(mutations);
+    const res = await customer.mutateResources(mockMutations);
 
     expect(res).toEqual(hookReturnValue);
   });
@@ -1032,7 +1100,7 @@ describe("mutateResources", () => {
       }),
     });
 
-    const response = await customer.mutateResources(mutations, {
+    const response = await customer.mutateResources(mockMutations, {
       partial_failure: true,
     });
 

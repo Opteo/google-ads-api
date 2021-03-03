@@ -3,7 +3,7 @@ import { Customer } from "./customer";
 import { Hooks } from "./hooks";
 import * as parser from "./parser";
 import { errors, GoogleAdsServiceClient, services } from "./protos";
-import { PageToken } from "./types";
+import { PageToken, ReportOptions, MutateOperation } from "./types";
 
 export const MOCK_CLIENT_ID = "MOCK CLIENT ID";
 export const MOCK_CLIENT_SECRET = "MOCK CLIENT SECRET";
@@ -12,7 +12,17 @@ export const MOCK_REFRESH_TOKEN = "MOCK REFRESH TOKEN";
 export const MOCK_CID = "MOCK CID";
 export const MOCK_LOGIN_CID = "MOCK LOGIN CID";
 
-export const mockGaqlQuery = "SELECT campaign.id FROM campaign";
+export const mockGaqlQuery = `SELECT campaign.resource_name FROM campaign LIMIT 1`;
+
+export const mockReportOptions: ReportOptions = {
+  entity: "campaign",
+  attributes: ["campaign.resource_name"],
+  limit: 1,
+};
+
+export const mockMutations: MutateOperation<any>[] = [
+  { resource: "abc", entity: "campaign", operation: "create" },
+];
 
 export const mockQueryReturnValue: services.IGoogleAdsRow[] = [
   { campaign: { resource_name: "customers/1/campaigns/11" } },
@@ -23,6 +33,8 @@ export const mockQueryReturnValue: services.IGoogleAdsRow[] = [
 export const mockSummaryRow: services.IGoogleAdsRow = {
   metrics: { clicks: 90, impressions: 153 },
 };
+
+export const mockTotalResultsCount = 23;
 
 export const mockMutationReturnValue: services.MutateGoogleAdsResponse = {
   mutate_operation_responses: [],
@@ -51,29 +63,49 @@ export const mockParsedValues = [
   mockParseValue,
 ];
 
-export function mockPaginatedSearch(customer: Customer): jest.SpyInstance {
+export function mockPaginatedSearch(
+  customer: Customer,
+  includeTotalResultsCount = false
+): jest.SpyInstance {
   return (
     jest
       // @ts-expect-error private method
       .spyOn(customer, "paginatedSearch")
       // @ts-expect-error
-      .mockImplementation(() => mockQueryReturnValue)
+      .mockImplementation(() => {
+        const totalResultsCount = includeTotalResultsCount
+          ? mockTotalResultsCount
+          : undefined;
+        return { response: mockQueryReturnValue, totalResultsCount };
+      })
   );
 }
 
-export function mockSearchOnce(
-  customer: Customer,
-  response: {
-    response: any[];
-    nextPageToken: PageToken;
-  }
-): jest.SpyInstance {
+export function mockSearchOnce({
+  customer,
+  response,
+  nextPageToken,
+  includeTotalResultsCount,
+}: {
+  customer: Customer;
+  response: any[];
+  nextPageToken: PageToken;
+  includeTotalResultsCount?: boolean;
+}): jest.SpyInstance {
   return (
     jest
       // @ts-expect-error private method
       .spyOn(customer, "search")
       // @ts-expect-error
-      .mockImplementationOnce(() => response)
+      .mockImplementationOnce(() => {
+        return {
+          response,
+          nextPageToken,
+          totalResultsCount: includeTotalResultsCount
+            ? mockTotalResultsCount
+            : undefined,
+        };
+      })
   );
 }
 
@@ -134,10 +166,12 @@ export function mockBuildSearchRequestAndService({
   customer,
   shouldThrow = false,
   includeSummaryRow = false,
+  includeTotalResultsCount = false,
 }: {
   customer: Customer;
   shouldThrow?: boolean;
   includeSummaryRow?: boolean;
+  includeTotalResultsCount?: boolean;
 }): { mockService: GoogleAdsServiceClient; spyBuild: jest.SpyInstance } {
   const mockService = ({
     search: (): [
@@ -149,9 +183,12 @@ export function mockBuildSearchRequestAndService({
         throw new Error(mockErrorMessage);
       }
 
-      const searchGoogleAdsResponse = includeSummaryRow
-        ? { summary_row: mockSummaryRow }
-        : {};
+      const searchGoogleAdsResponse: services.ISearchGoogleAdsResponse = {
+        summary_row: includeSummaryRow ? mockSummaryRow : undefined,
+        total_results_count: includeTotalResultsCount
+          ? mockTotalResultsCount
+          : undefined,
+      };
 
       return [mockQueryReturnValue, null, searchGoogleAdsResponse];
     },
@@ -218,9 +255,15 @@ export function mockGetGoogleAdsError(customer: Customer): jest.SpyInstance {
 export function mockQuery(customer: Customer): jest.SpyInstance {
   return (
     jest
-      .spyOn(customer, "query")
+      // @ts-expect-error private method
+      .spyOn(customer, "querier")
       // @ts-expect-error
-      .mockImplementation(() => [])
+      .mockImplementation(() => {
+        return {
+          response: mockQueryReturnValue,
+          totalResultsCount: mockTotalResultsCount,
+        };
+      })
   );
 }
 

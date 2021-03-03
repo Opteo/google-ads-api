@@ -37,7 +37,40 @@ export class Customer extends ServiceFactory {
     options: ReportOptions
   ): Promise<T> {
     const { gaqlQuery, requestOptions } = buildQuery(options);
-    return this.query<T>(gaqlQuery, requestOptions, options);
+    const { response } = await this.querier<T>(
+      gaqlQuery,
+      requestOptions,
+      options
+    );
+    return response;
+  }
+
+  /**
+    @description Single query using a GAQL query
+   */
+  public async query<T = services.IGoogleAdsRow[]>(
+    gaqlQuery: string,
+    requestOptions: RequestOptions = {}
+  ): Promise<T> {
+    const { response } = await this.querier<T>(gaqlQuery, requestOptions);
+    return response;
+  }
+
+  public async reportCount(
+    options: ReportOptions
+  ): Promise<number | undefined> {
+    options.limit = 1; // must get at least one row
+    const { gaqlQuery, requestOptions } = buildQuery(options);
+    // @ts-expect-error we do not allow this field in reportOptions, however it is still a valid request option
+    requestOptions.return_total_results_count = true;
+
+    const { totalResultsCount } = await this.querier(
+      gaqlQuery,
+      requestOptions,
+      options
+    );
+
+    return totalResultsCount;
   }
 
   /** 
@@ -165,6 +198,7 @@ export class Customer extends ServiceFactory {
   ): Promise<{
     response: services.IGoogleAdsRow[];
     nextPageToken: PageToken;
+    totalResultsCount?: number;
   }> {
     const { service, request } = this.buildSearchRequestAndService(
       gaqlQuery,
@@ -179,22 +213,30 @@ export class Customer extends ServiceFactory {
     const response = searchResponse[0];
     const summaryRow = searchResponse[2].summary_row;
     const nextPageToken = searchResponse[2].next_page_token;
+    const totalResultsCount = searchResponse[2].total_results_count
+      ? +searchResponse[2].total_results_count
+      : undefined;
 
     if (summaryRow) {
       response.unshift(summaryRow);
     }
 
-    return { response, nextPageToken };
+    return { response, nextPageToken, totalResultsCount };
   }
 
   private async paginatedSearch(
     gaqlQuery: string,
     requestOptions: RequestOptions
-  ): Promise<services.IGoogleAdsRow[]> {
+  ): Promise<{
+    response: services.IGoogleAdsRow[];
+    totalResultsCount?: number;
+  }> {
     const response: services.IGoogleAdsRow[] = [];
     let nextPageToken: PageToken = undefined;
 
     const initialSearch = await this.search(gaqlQuery, requestOptions);
+    const totalResultsCount = initialSearch.totalResultsCount;
+
     response.push(...initialSearch.response);
     nextPageToken = initialSearch.nextPageToken;
 
@@ -207,17 +249,17 @@ export class Customer extends ServiceFactory {
       nextPageToken = nextSearch.nextPageToken;
     }
 
-    return response;
+    return { response, totalResultsCount };
   }
 
   /**
     @description Single query using a GAQL query
    */
-  public async query<T = services.IGoogleAdsRow[]>(
+  private async querier<T = services.IGoogleAdsRow[]>(
     gaqlQuery: string,
     requestOptions: RequestOptions = {},
     reportOptions?: ReportOptions
-  ): Promise<T> {
+  ): Promise<{ response: T; totalResultsCount?: number }> {
     const baseHookArguments: BaseQueryHookArgs = {
       credentials: this.credentials,
       query: gaqlQuery,
@@ -240,12 +282,15 @@ export class Customer extends ServiceFactory {
         },
       });
       if (queryCancellation.cancelled) {
-        return queryCancellation.res as T;
+        return { response: queryCancellation.res as T };
       }
     }
 
     try {
-      const response = await this.paginatedSearch(gaqlQuery, requestOptions);
+      const { response, totalResultsCount } = await this.paginatedSearch(
+        gaqlQuery,
+        requestOptions
+      );
 
       const parsedResponse = this.clientOptions.disable_parsing
         ? response
@@ -264,11 +309,11 @@ export class Customer extends ServiceFactory {
           },
         });
         if (queryResolution.resolved) {
-          return queryResolution.res as T;
+          return { response: queryResolution.res as T, totalResultsCount };
         }
       }
 
-      return (parsedResponse as unknown) as T;
+      return { response: (parsedResponse as unknown) as T, totalResultsCount };
     } catch (searchError) {
       const googleAdsError = this.getGoogleAdsError(searchError);
       if (this.hooks.onQueryError) {

@@ -326,17 +326,10 @@ export function buildRequestOptions(
     page_size,
     page_token,
     validate_only,
-    return_total_results_count,
     summary_row_setting,
   } = reportOptions;
 
-  return {
-    page_size,
-    page_token,
-    validate_only,
-    return_total_results_count,
-    summary_row_setting,
-  };
+  return { page_size, page_token, validate_only, summary_row_setting };
 }
 
 export function buildQuery(

@@ -78,7 +78,7 @@ export type Constraints = Constraint[] | ConstraintType2;
 // Common request options used for the report/query methods
 export type RequestOptions = Omit<
   services.ISearchGoogleAdsRequest,
-  "customer_id" | "query"
+  "customer_id" | "query" | "return_total_results_count"
 >;
 
 export type MutateOptions = Omit<
