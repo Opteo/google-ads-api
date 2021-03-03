@@ -10,15 +10,15 @@ import { parse } from "./parser";
 import { services } from "./protos";
 import ServiceFactory from "./protos/autogen/serviceFactory";
 import { buildQuery } from "./query";
-import { createNextChunkArrivedPromise } from "./utils";
 import {
   CustomerOptions,
   MutateOperation,
   MutateOptions,
+  PageToken,
   ReportOptions,
   RequestOptions,
-  PageToken,
 } from "./types";
+import { createNextChunkArrivedPromise } from "./utils";
 
 export class Customer extends ServiceFactory {
   constructor(
@@ -30,7 +30,8 @@ export class Customer extends ServiceFactory {
   }
 
   /** 
-    @description Single query using ReportOptions
+    @description Single query using ReportOptions.
+    If a summary row is requested then this will be the first row of the results.
   */
   public async report<T = services.IGoogleAdsRow[]>(
     options: ReportOptions
@@ -41,6 +42,7 @@ export class Customer extends ServiceFactory {
 
   /** 
     @description Stream query using ReportOptions. If a generic type is provided, it must be the type of a single row.
+    If a summary row is requested then this will be the last emitted row of the stream.
     @example
     const stream = reportStream<T>(reportOptions)
     for await (const row of stream) { ... }
@@ -101,9 +103,10 @@ export class Customer extends ServiceFactory {
     let nextChunk = createNextChunkArrivedPromise();
 
     stream.on("data", (chunk: services.SearchGoogleAdsStreamResponse) => {
+      const results = chunk.summary_row ? [chunk.summary_row] : chunk.results;
       const parsedResponse = this.clientOptions.disable_parsing
-        ? chunk.results
-        : parse({ results: chunk.results, reportOptions });
+        ? results
+        : parse({ results, reportOptions });
       accumulator.push(...(parsedResponse as T[]));
       response.push(...(parsedResponse as T[]));
 
@@ -173,10 +176,15 @@ export class Customer extends ServiceFactory {
       autoPaginate: false, // autoPaginate doesn't work
     });
 
-    return {
-      response: searchResponse[0],
-      nextPageToken: searchResponse[2].next_page_token,
-    };
+    const response = searchResponse[0];
+    const summaryRow = searchResponse[2].summary_row;
+    const nextPageToken = searchResponse[2].next_page_token;
+
+    if (summaryRow) {
+      response.unshift(summaryRow);
+    }
+
+    return { response, nextPageToken };
   }
 
   private async paginatedSearch(

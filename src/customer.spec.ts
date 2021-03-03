@@ -3,20 +3,22 @@ import { Hooks } from "./hooks";
 import { enums, errors, services } from "./protos";
 import {
   failTestIfExecuted,
-  mockPaginatedSearch,
-  mockSearchOnce,
   mockBuildMutateRequestAndService,
   mockBuildSearchRequestAndService,
   mockBuildSearchStreamRequestAndService,
   mockError,
+  mockGaqlQuery,
   mockGetGoogleAdsError,
   mockMethod,
   mockMutationReturnValue,
+  mockPaginatedSearch,
   mockParse,
-  mockParseValue,
   mockParsedValues,
+  mockParseValue,
   mockQuery,
   mockQueryReturnValue,
+  mockSearchOnce,
+  mockSummaryRow,
   newCustomer,
 } from "./testUtils";
 import {
@@ -106,7 +108,7 @@ describe("query", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { mockService } = mockBuildSearchRequestAndService(customer);
+    const { mockService } = mockBuildSearchRequestAndService({ customer });
     mockParse(mockQueryReturnValue);
     const spyMockSearch = jest.spyOn(mockService, "search");
     jest.spyOn(hooks, "onQueryStart");
@@ -162,10 +164,10 @@ describe("query", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { mockService } = mockBuildSearchRequestAndService(
+    const { mockService } = mockBuildSearchRequestAndService({
       customer,
-      shouldThrow
-    );
+      shouldThrow,
+    });
     mockParse(mockQueryReturnValue);
     const mockedError = mockGetGoogleAdsError(customer);
     const spyMockSearch = jest.spyOn(mockService, "search");
@@ -199,7 +201,7 @@ describe("query", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildSearchRequestAndService(customer, shouldThrow);
+    mockBuildSearchRequestAndService({ customer, shouldThrow });
     mockParse(mockQueryReturnValue);
     mockGetGoogleAdsError(customer);
 
@@ -334,6 +336,17 @@ describe("paginatedSearch", () => {
   });
 });
 
+describe("search", () => {
+  afterEach(() => jest.resetAllMocks());
+  it("includes the summary row if a summary row is returned", async () => {
+    const customer = newCustomer({});
+    mockBuildSearchRequestAndService({ customer, includeSummaryRow: true });
+    // @ts-expect-error private method
+    const { response } = await customer.search(mockGaqlQuery);
+    expect(response[0]).toEqual(mockSummaryRow);
+  });
+});
+
 describe("reportStream", () => {
   afterEach(() => jest.resetAllMocks());
 
@@ -396,6 +409,27 @@ describe("reportStream", () => {
       expect(row).toEqual(i);
       i++;
     }
+  });
+
+  it("includes the summary row if a summary row is returned", async () => {
+    const disableParsing = true;
+    const customer = newCustomer({}, disableParsing);
+    const {
+      mockStreamData,
+      mockStreamSummaryRow,
+      mockStreamEnd,
+    } = mockBuildSearchStreamRequestAndService(customer);
+    mockParse(mockParsedValues);
+    const stream = customer.reportStream(reportOptions);
+    mockStreamData(mockQueryReturnValue);
+    mockStreamSummaryRow();
+    mockStreamEnd();
+
+    const response = [];
+    for await (const row of stream) {
+      response.push(row);
+    }
+    expect(response).toEqual([...mockQueryReturnValue, mockSummaryRow]);
   });
 
   it("calls onQueryStart when provided", async () => {
@@ -738,7 +772,7 @@ describe("mutateResources", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildMutateRequestAndService(customer);
+    mockBuildMutateRequestAndService({ customer });
     const spyHook = jest.spyOn(hooks, "onMutationStart");
     await customer.mutateResources(mutations);
 
@@ -763,7 +797,7 @@ describe("mutateResources", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildMutateRequestAndService(customer);
+    mockBuildMutateRequestAndService({ customer });
     await customer.mutateResources(mutations);
 
     expect(spyMockMethod).toHaveBeenCalled();
@@ -776,7 +810,7 @@ describe("mutateResources", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { mockService } = mockBuildMutateRequestAndService(customer);
+    const { mockService } = mockBuildMutateRequestAndService({ customer });
     const spyMockMutate = jest.spyOn(mockService, "mutate");
     const res = await customer.mutateResources(mutations);
 
@@ -792,7 +826,7 @@ describe("mutateResources", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildMutateRequestAndService(customer);
+    mockBuildMutateRequestAndService({ customer });
     const res = await customer.mutateResources(mutations);
 
     expect(res).toEqual(alternativeReturnValue);
@@ -808,7 +842,7 @@ describe("mutateResources", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { spyBuild } = mockBuildMutateRequestAndService(customer);
+    const { spyBuild } = mockBuildMutateRequestAndService({ customer });
     const mutateOptions: MutateOptions = {
       validate_only: false,
       partial_failure: true,
@@ -831,10 +865,10 @@ describe("mutateResources", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { mockService } = mockBuildMutateRequestAndService(
+    const { mockService } = mockBuildMutateRequestAndService({
       customer,
-      shouldThrow
-    );
+      shouldThrow,
+    });
     const mockedError = mockGetGoogleAdsError(customer);
     const spyMockMutate = jest.spyOn(mockService, "mutate");
     const spyHook = jest.spyOn(hooks, "onMutationError");
@@ -868,7 +902,7 @@ describe("mutateResources", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildMutateRequestAndService(customer, shouldThrow);
+    mockBuildMutateRequestAndService({ customer, shouldThrow });
     mockGetGoogleAdsError(customer);
 
     try {
@@ -888,10 +922,10 @@ describe("mutateResources", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { mockService } = mockBuildMutateRequestAndService(
+    const { mockService } = mockBuildMutateRequestAndService({
       customer,
-      shouldThrow
-    );
+      shouldThrow,
+    });
     mockGetGoogleAdsError(customer);
     const spyMockMutate = jest.spyOn(mockService, "mutate");
     const spyHook = jest.spyOn(hooks, "onMutationError");
@@ -908,7 +942,7 @@ describe("mutateResources", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildMutateRequestAndService(customer);
+    mockBuildMutateRequestAndService({ customer });
     const spyHook = jest.spyOn(hooks, "onMutationEnd");
     await customer.mutateResources(mutations);
 
@@ -933,7 +967,7 @@ describe("mutateResources", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildMutateRequestAndService(customer);
+    mockBuildMutateRequestAndService({ customer });
     await customer.mutateResources(mutations);
 
     expect(spyMockMethod).toHaveBeenCalled();
@@ -947,7 +981,7 @@ describe("mutateResources", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildMutateRequestAndService(customer);
+    mockBuildMutateRequestAndService({ customer });
     const res = await customer.mutateResources(mutations);
 
     expect(res).toEqual(hookReturnValue);
@@ -981,13 +1015,12 @@ describe("mutateResources", () => {
     // Mock request and response for mutate call
     const customer = newCustomer();
 
-    mockBuildMutateRequestAndService(
+    mockBuildMutateRequestAndService({
       customer,
-      false,
-      new services.MutateGoogleAdsRequest({
+      request: new services.MutateGoogleAdsRequest({
         partial_failure: true,
       }),
-      new services.MutateGoogleAdsResponse({
+      response: new services.MutateGoogleAdsResponse({
         partial_failure_error: new google.rpc.Status({
           details: [
             {
@@ -996,8 +1029,8 @@ describe("mutateResources", () => {
             },
           ],
         }),
-      })
-    );
+      }),
+    });
 
     const response = await customer.mutateResources(mutations, {
       partial_failure: true,
