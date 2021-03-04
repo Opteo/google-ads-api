@@ -121,6 +121,7 @@ function parseNestedValues(
   field: string,
   paths: string[]
 ) {
+  if (!data) return null;
   const [parentField, ...childFields] = paths;
   if (!row) row = {};
   if (childFields.length === 0) {
