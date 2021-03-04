@@ -64,6 +64,8 @@ For now we recommend following the usage examples below.
   - [Retrieve Campaigns using GAQL](#retrieve-campaigns-using-gaql)
   - [Retrieve Ad Group metrics by date](#retrieve-ad-group-metrics-by-date)
   - [Retrieve Keywords with streaming](#retrieve-keywords-with-streaming)
+  - [Summary Row](#summary-row)
+  - [Total Results Count](#total-results-count)
 - Mutations
   - [Create an expanded text ad](#create-an-expanded-text-ad)
 - Misc
@@ -250,6 +252,7 @@ If a summary row is requested in the `report` method, it will be included as the
 const [summaryRow, ...response] = await customer.report({
   entity: "campaign",
   metrics: ["metrics.clicks", "metrics.all_conversions"],
+  summary_row_setting: enums.SummaryRowSetting.SUMMARY_ROW_WITH_RESULTS,
 });
 ```
 
@@ -259,6 +262,7 @@ If a summery row is requested in the `reportStream` method, it will be included 
 const stream = customer.reportStream({
   entity: "campaign",
   metrics: ["metrics.clicks", "metrics.all_conversions"],
+  summary_row_setting: enums.SummaryRowSetting.SUMMARY_ROW_WITH_RESULTS,
 });
 
 const accumulator = [];
@@ -272,6 +276,13 @@ const summaryRow = accumulator.slice(-1)[0];
 ## Total Results Count
 
 The `reportCount` method acts like `report` but returns the total number of rows that the query would have returned (ignoring the limit). This replaces the `return_total_results_count` report option.
+
+```ts
+const totalRows = await customer.reportCount({
+  entity: "search_term_view",
+  attributes: ["search_term_view.resource_name"],
+})
+```
 
 ## Resource Names
 
