@@ -1,10 +1,9 @@
+import { Readable } from "stream";
 import { Customer } from "./customer";
 import { Hooks } from "./hooks";
 import * as parser from "./parser";
-import { PageToken } from "./types";
-import { GoogleAdsServiceClient, services, errors } from "./protos";
-
-import { Readable } from "stream";
+import { errors, GoogleAdsServiceClient, services } from "./protos";
+import { PageToken, ReportOptions, MutateOperation } from "./types";
 
 export const MOCK_CLIENT_ID = "MOCK CLIENT ID";
 export const MOCK_CLIENT_SECRET = "MOCK CLIENT SECRET";
@@ -13,11 +12,29 @@ export const MOCK_REFRESH_TOKEN = "MOCK REFRESH TOKEN";
 export const MOCK_CID = "MOCK CID";
 export const MOCK_LOGIN_CID = "MOCK LOGIN CID";
 
+export const mockGaqlQuery = `SELECT campaign.resource_name FROM campaign LIMIT 1`;
+
+export const mockReportOptions: ReportOptions = {
+  entity: "campaign",
+  attributes: ["campaign.resource_name"],
+  limit: 1,
+};
+
+export const mockMutations: MutateOperation<any>[] = [
+  { resource: "abc", entity: "campaign", operation: "create" },
+];
+
 export const mockQueryReturnValue: services.IGoogleAdsRow[] = [
   { campaign: { resource_name: "customers/1/campaigns/11" } },
   { campaign: { resource_name: "customers/2/campaigns/22" } },
   { campaign: { resource_name: "customers/3/campaigns/33" } },
 ];
+
+export const mockSummaryRow: services.IGoogleAdsRow = {
+  metrics: { clicks: 90, impressions: 153 },
+};
+
+export const mockTotalResultsCount = 23;
 
 export const mockMutationReturnValue: services.MutateGoogleAdsResponse = {
   mutate_operation_responses: [],
@@ -46,29 +63,49 @@ export const mockParsedValues = [
   mockParseValue,
 ];
 
-export function mockPaginatedSearch(customer: Customer): jest.SpyInstance {
+export function mockPaginatedSearch(
+  customer: Customer,
+  includeTotalResultsCount = false
+): jest.SpyInstance {
   return (
     jest
       // @ts-expect-error private method
       .spyOn(customer, "paginatedSearch")
       // @ts-expect-error
-      .mockImplementation(() => mockQueryReturnValue)
+      .mockImplementation(() => {
+        const totalResultsCount = includeTotalResultsCount
+          ? mockTotalResultsCount
+          : undefined;
+        return { response: mockQueryReturnValue, totalResultsCount };
+      })
   );
 }
 
-export function mockSearchOnce(
-  customer: Customer,
-  response: {
-    response: any[];
-    nextPageToken: PageToken;
-  }
-): jest.SpyInstance {
+export function mockSearchOnce({
+  customer,
+  response,
+  nextPageToken,
+  includeTotalResultsCount,
+}: {
+  customer: Customer;
+  response: any[];
+  nextPageToken: PageToken;
+  includeTotalResultsCount?: boolean;
+}): jest.SpyInstance {
   return (
     jest
       // @ts-expect-error private method
       .spyOn(customer, "search")
       // @ts-expect-error
-      .mockImplementationOnce(() => response)
+      .mockImplementationOnce(() => {
+        return {
+          response,
+          nextPageToken,
+          totalResultsCount: includeTotalResultsCount
+            ? mockTotalResultsCount
+            : undefined,
+        };
+      })
   );
 }
 
@@ -77,6 +114,7 @@ export function mockBuildSearchStreamRequestAndService(
 ): {
   spyBuild: jest.SpyInstance;
   mockStreamData: (data: services.IGoogleAdsRow[]) => void;
+  mockStreamSummaryRow: () => void;
   mockStreamError: (error: Error) => void;
   mockStreamEnd: () => void;
 } {
@@ -84,6 +122,13 @@ export function mockBuildSearchStreamRequestAndService(
 
   const mockStreamData = (results: services.IGoogleAdsRow[]) => {
     const chunk = { results } as services.SearchGoogleAdsStreamResponse;
+    mockStream.push(chunk);
+  };
+
+  const mockStreamSummaryRow = () => {
+    const chunk = {
+      summary_row: mockSummaryRow,
+    } as services.SearchGoogleAdsStreamResponse;
     mockStream.push(chunk);
   };
 
@@ -111,27 +156,41 @@ export function mockBuildSearchStreamRequestAndService(
   return {
     spyBuild,
     mockStreamData,
+    mockStreamSummaryRow,
     mockStreamError,
     mockStreamEnd,
   };
 }
 
-export function mockBuildSearchRequestAndService(
-  customer: Customer,
-  shouldThrow = false
-): { mockService: GoogleAdsServiceClient; spyBuild: jest.SpyInstance } {
+export function mockBuildSearchRequestAndService({
+  customer,
+  shouldThrow = false,
+  includeSummaryRow = false,
+  includeTotalResultsCount = false,
+}: {
+  customer: Customer;
+  shouldThrow?: boolean;
+  includeSummaryRow?: boolean;
+  includeTotalResultsCount?: boolean;
+}): { mockService: GoogleAdsServiceClient; spyBuild: jest.SpyInstance } {
   const mockService = ({
-    search: () => {
+    search: (): [
+      services.IGoogleAdsRow[],
+      null,
+      services.ISearchGoogleAdsResponse
+    ] => {
       if (shouldThrow) {
         throw new Error(mockErrorMessage);
       }
-      return [mockQueryReturnValue];
-    },
-    searchAsync: () => {
-      if (shouldThrow) {
-        throw new Error(mockErrorMessage);
-      }
-      return mockQueryReturnValue;
+
+      const searchGoogleAdsResponse: services.ISearchGoogleAdsResponse = {
+        summary_row: includeSummaryRow ? mockSummaryRow : undefined,
+        total_results_count: includeTotalResultsCount
+          ? mockTotalResultsCount
+          : undefined,
+      };
+
+      return [mockQueryReturnValue, null, searchGoogleAdsResponse];
     },
   } as unknown) as GoogleAdsServiceClient;
 
@@ -149,12 +208,17 @@ export function mockBuildSearchRequestAndService(
   return { mockService, spyBuild };
 }
 
-export function mockBuildMutateRequestAndService(
-  customer: Customer,
+export function mockBuildMutateRequestAndService({
+  customer,
   shouldThrow = false,
-  request?: services.MutateGoogleAdsRequest,
-  response?: services.MutateGoogleAdsResponse
-): { mockService: services.GoogleAdsService; spyBuild: jest.SpyInstance } {
+  request,
+  response,
+}: {
+  customer: Customer;
+  shouldThrow?: boolean;
+  request?: services.MutateGoogleAdsRequest;
+  response?: services.MutateGoogleAdsResponse;
+}): { mockService: services.GoogleAdsService; spyBuild: jest.SpyInstance } {
   const mockService = ({
     mutate() {
       if (shouldThrow) {
@@ -191,9 +255,15 @@ export function mockGetGoogleAdsError(customer: Customer): jest.SpyInstance {
 export function mockQuery(customer: Customer): jest.SpyInstance {
   return (
     jest
-      .spyOn(customer, "query")
+      // @ts-expect-error private method
+      .spyOn(customer, "querier")
       // @ts-expect-error
-      .mockImplementation(() => [])
+      .mockImplementation(() => {
+        return {
+          response: mockQueryReturnValue,
+          totalResultsCount: mockTotalResultsCount,
+        };
+      })
   );
 }
 

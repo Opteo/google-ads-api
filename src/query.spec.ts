@@ -44,7 +44,6 @@ const options: ReportOptions = {
   page_size: 5,
   page_token: "A1B2C3D4",
   validate_only: false,
-  return_total_results_count: false,
   summary_row_setting: "NO_SUMMARY_ROW",
 };
 
@@ -588,7 +587,6 @@ const expectedRequestOptions = {
   page_size: 5,
   page_token: "A1B2C3D4",
   validate_only: false,
-  return_total_results_count: false,
   summary_row_setting: "NO_SUMMARY_ROW",
 };
 
