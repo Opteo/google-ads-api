@@ -242,6 +242,37 @@ const adGroupAd = new resources.AdGroupAd({
 const { results } = await cus.adGroupAds.create([adGroupAd]);
 ```
 
+## Summary Row
+
+If a summary row is requested in the `report` method, it will be included as the **first** row of the results.
+
+```ts
+const [summaryRow, ...response] = await customer.report({
+  entity: "campaign",
+  metrics: ["metrics.clicks", "metrics.all_conversions"],
+});
+```
+
+If a summery row is requested in the `reportStream` method, it will be included as the **final** iterated row of the results.
+
+```ts
+const stream = customer.reportStream({
+  entity: "campaign",
+  metrics: ["metrics.clicks", "metrics.all_conversions"],
+});
+
+const accumulator = [];
+for await (const row of stream) {
+  accumulator.push(row);
+}
+
+const summaryRow = accumulator.slice(-1)[0];
+```
+
+## Total Results Count
+
+The `reportCount` method acts like `report` but returns the total number of rows that the query would have returned (ignoring the limit). This replaces the `return_total_results_count` report option.
+
 ## Resource Names
 
 The library provides a set of helper methods under the `ResourceNames` export. These are used for compiling resource names from ids. Arguments can be of the type `string`, `number`, or a mix of both. If you have a `client.Customer` instance available, you can get the customer id with `customer.credentials.customerId`.
