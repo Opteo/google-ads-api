@@ -210,6 +210,30 @@ describe("parseRows", () => {
       },
     ]);
   });
+
+  it("handles missing data", () => {
+    const fields = [
+      "ad_group_criterion.resource_name",
+      "ad_group_criterion.listing_group.case_value.product_type.level",
+    ];
+    const rows: services.IGoogleAdsRow[] = [
+      {
+        ad_group: null,
+        ad_group_criterion: {
+          resource_name: "customers/123/adGroupCriteria/123~123",
+          // Some fields (such as listing_group) are missing if not applicable for the resource
+        },
+      },
+    ];
+    expect(parseRows(rows, fields)).toEqual([
+      {
+        ad_group_criterion: {
+          resource_name: rows[0]?.ad_group_criterion?.resource_name,
+          listing_group: null,
+        },
+      },
+    ]);
+  });
 });
 
 describe("getGAQLFields", () => {
