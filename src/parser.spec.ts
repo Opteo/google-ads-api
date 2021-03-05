@@ -250,6 +250,25 @@ describe("getGAQLFields", () => {
     expect(getGAQLFields(gaqlQuery).sort()).toEqual(fields.sort());
   });
 
+  it("handles multi-line gaql queries", () => {
+    const gaqlQuery = `
+      SELECT
+        campaign.resource_name,
+        campaign.name,
+        metrics.clicks,
+        segments.date
+      FROM
+        campaign`;
+    const fields = [
+      "campaign.resource_name",
+      "campaign.name",
+      "metrics.clicks",
+      "segments.date",
+    ];
+
+    expect(getGAQLFields(gaqlQuery).sort()).toEqual(fields.sort());
+  });
+
   it("throws if the query contains no fields", () => {
     const gaqlQuery = "SELECT FROM campaign";
 

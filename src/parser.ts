@@ -1,6 +1,7 @@
 import long from "long";
 import { ReportOptions } from "./types";
 import { services, fields } from "./protos";
+import { normaliseQuery } from "./utils";
 
 export const ParsingError = {
   NO_REPORT_OPTIONS_OR_GAQL_QUERY:
@@ -49,9 +50,11 @@ export function parse({
 // This function assumes that a gaql query is of the format "select * * * from * ...".
 // Queries that are no in this format should have thrown an error when called.
 export function getGAQLFields(gaqlString: string): string[] {
-  const fields = gaqlString
+  const normalisedQuery = normaliseQuery(gaqlString);
+
+  const fields = normalisedQuery
     .toLowerCase()
-    .replace(/(^select)|(from.*)|(\s+)/g, "")
+    .replace(/(.*select)|(from.*)|(\s+)/g, "")
     .split(",")
     .filter((field) => field.length > 0);
 
