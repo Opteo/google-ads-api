@@ -54,7 +54,7 @@ export function getGAQLFields(gaqlString: string): string[] {
 
   const fields = normalisedQuery
     .toLowerCase()
-    .replace(/(.*select)|(from.*)|(\s+)/g, "")
+    .replace(/(^\s*select)|( from .*)|(\s+)/g, "")
     .split(",")
     .filter((field) => field.length > 0);
 
