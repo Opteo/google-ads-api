@@ -131,7 +131,6 @@ export class Customer extends ServiceFactory {
 
     let done = false;
     const accumulator: T[] = [];
-    const response: T[] = [];
 
     let nextChunk = createNextChunkArrivedPromise();
 
@@ -141,7 +140,6 @@ export class Customer extends ServiceFactory {
         ? results
         : parse({ results, reportOptions });
       accumulator.push(...(parsedResponse as T[]));
-      response.push(...(parsedResponse as T[]));
 
       nextChunk.resolve();
       nextChunk = createNextChunkArrivedPromise();
@@ -181,7 +179,6 @@ export class Customer extends ServiceFactory {
       if (this.hooks.onQueryEnd) {
         await this.hooks.onQueryEnd({
           ...baseHookArguments,
-          response,
           resolve: () => {
             return;
           },

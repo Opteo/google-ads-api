@@ -725,10 +725,9 @@ describe("reportStream", () => {
     const stream = customer.reportStream(mockReportOptions);
     mockStreamData(mockQueryReturnValue);
     mockStreamEnd();
-
-    const response = [];
+    
     for await (const row of stream) {
-      response.push(row);
+      continue;
     }
 
     expect(spyHook).toHaveBeenCalled();
@@ -736,7 +735,6 @@ describe("reportStream", () => {
       credentials: expect.any(Object),
       query: mockGaqlQuery,
       reportOptions: mockReportOptions,
-      response,
       resolve: expect.any(Function),
     });
   });
