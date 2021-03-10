@@ -84,7 +84,6 @@ export function parseRows(
   fields: string[]
 ): services.IGoogleAdsRow[] {
   const newRows = [];
-  let i = true;
   for (let r = 0; r < rows.length; r++) {
     const newRow: services.IGoogleAdsRow = {};
     const originalRow: services.IGoogleAdsRow = services.GoogleAdsRow.fromObject(
@@ -112,16 +111,8 @@ export function parseRows(
         parent,
         children
       );
-
-      if (i) {
-        console.log(field);
-        console.log(parent);
-        console.log((newRow as any)[parent]);
-        console.log("\n=====================================\n");
-      }
     }
     newRows.push(newRow);
-    i = false;
   }
 
   return newRows;
