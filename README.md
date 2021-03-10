@@ -281,7 +281,7 @@ The `reportCount` method acts like `report` but returns the total number of rows
 const totalRows = await customer.reportCount({
   entity: "search_term_view",
   attributes: ["search_term_view.resource_name"],
-})
+});
 ```
 
 ## Resource Names
@@ -332,7 +332,8 @@ const customer = client.Customer({
       console.log(error);
     },
     onQueryEnd({ credentials, query, reportOptions, response, resolve }) {
-      resolve(response.slice(0, 5)); // resolves the query with the given argument
+      const [first] = response; // response will be undefined for reportStream
+      resolve([first]); // resolves the query with the given argument
     },
     onMutationStart({ credentials, mutations, cancel }) {
       if (mutations.length === 0) {
