@@ -302,7 +302,7 @@ const response = await customer.report({
 });
 ```
 
-The other method is to use the `order_by` and `sort_order` keys, however this will be depricated in a future version of the API.
+The other method is to use the `order_by` and `sort_order` keys, however this will be deprecated in a future version of the API.
 
 ```ts
 const response = await customer.report({
