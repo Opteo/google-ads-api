@@ -282,6 +282,38 @@ const totalRows = await customer.reportCount({
   entity: "search_term_view",
   attributes: ["search_term_view.resource_name"],
 });
+
+```
+
+## Report Results Order
+
+There are 2 methods of sorting the results of report. The prefered method is to use the `order` key, which should be an array of objects with a `field` key and an optional `sort_order` key. The order of the items in the array will map to the order of the sorting keys in the GAQL query, and hence the priorities of the sorts.
+
+```ts
+const response = await customer.report({
+  entity: "campaign",
+  attributes: ["campaign.id"],
+  metrics: ["metrics.clicks"],
+  segments: ["segments.date"],
+  order: [
+    { field: "metrics.clicks", sort_order: "DESC" },
+    { field: "segments.date", sort_order: "ASC" },
+    { field: "campaign.id" }, // default sort_order is descending
+  ],
+});
+```
+
+The other method is to use the `order_by` and `sort_order` keys, however this will be deprecated in a future version of the API.
+
+```ts
+const response = await customer.report({
+  entity: "campaign",
+  attributes: ["campaign.id"],
+  metrics: ["metrics.clicks"],
+  segments: ["segments.date"],
+  order_by: "metrics.clicks",
+  sort_order: "DESC",
+});
 ```
 
 ## Resource Names
