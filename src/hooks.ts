@@ -35,7 +35,7 @@ type ErrorHookArgs = {
 type PostHookArgs<
   T = services.IGoogleAdsRow[] | services.MutateGoogleAdsResponse
 > = {
-  response: T;
+  response?: T;
   resolve: (args: any) => void;
 };
 
@@ -83,7 +83,7 @@ export interface Hooks {
    * @param credentials customer id, login customer id, linked customer id
    * @param query gaql
    * @param reportOptions
-   * @param response results of the query
+   * @param response results of the query, not available on reportStream
    * @param resolve utility function for returning an alternative value from the query. will not work with reportStream
    */
   onQueryEnd?: OnQueryEnd;
