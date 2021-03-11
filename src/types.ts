@@ -19,7 +19,14 @@ export interface ReportOptions extends RequestOptions {
   segments?: fields.Segments;
   constraints?: Constraints;
   limit?: number;
+  order?: Order[];
+  /**
+   * @deprecated `order_by` will be removed in a future version. Migration to the `order` report option key is advised.
+   */
   order_by?: ConstraintKey | ConstraintKey[];
+  /**
+   * @deprecated `sort_order` will be removed in a future version. Migration to the `order` report option key is advised.
+   */
   sort_order?: SortOrder;
   date_constant?: DateConstant;
   from_date?: string;
@@ -41,6 +48,11 @@ export type DateConstant =
   | "LAST_WEEK_MON_SUN";
 
 export type SortOrder = "ASC" | "DESC";
+
+export interface Order {
+  field: ConstraintKey;
+  sort_order?: SortOrder;
+}
 
 export type ConstraintKey = fields.Attribute | fields.Metric | fields.Segment;
 export type ConstraintValue = number | string | boolean | (number | string)[];
