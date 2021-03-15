@@ -409,8 +409,6 @@ export function buildQuery(
   );
   const requestOptions: RequestOptions = buildRequestOptions(reportOptions);
 
-  console.log(`${SELECT}${FROM}${WHERE}${ORDER}${LIMIT}`);
-
   return {
     gaqlQuery: `${SELECT}${FROM}${WHERE}${ORDER}${LIMIT}`,
     requestOptions,
