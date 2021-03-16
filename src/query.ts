@@ -5,6 +5,8 @@ import {
   ConstraintOperation,
   ConstraintType1,
   ConstraintValue,
+  DateConstant,
+  dateConstants,
   Order,
   ReportOptions,
   RequestOptions,
@@ -94,6 +96,7 @@ export function buildFromClause(entity: ReportOptions["entity"]): FromClause {
 
 export function validateConstraintKeyAndValue(
   key: ConstraintKey,
+  op: ConstraintOperation,
   val: ConstraintValue
 ): {
   op: ConstraintOperation;
@@ -104,6 +107,10 @@ export function validateConstraintKeyAndValue(
   }
 
   if (typeof val === "string") {
+    if (dateConstants.includes(val as DateConstant)) {
+      return { op, val };
+    }
+
     return {
       op: "=",
       val: new RegExp(/^'.*'$|^".*"$/g).test(val) ? val : `"${val}"`,
@@ -159,7 +166,7 @@ export function extractConstraintConditions(
           if (typeof key !== "string") {
             throw new Error(QueryError.INVALID_CONSTRAINT_KEY);
           }
-          const validatedValue = validateConstraintKeyAndValue(key, val);
+          const validatedValue = validateConstraintKeyAndValue(key, op, val);
           // @ts-ignore
           return `${key} ${op} ${validatedValue.val}` as const;
         } else if (Object.keys(con).length === 1) {
@@ -167,6 +174,7 @@ export function extractConstraintConditions(
 
           const validatedValue = validateConstraintKeyAndValue(
             key as ConstraintKey,
+            "=",
             val as ConstraintValue
           );
 
@@ -184,6 +192,7 @@ export function extractConstraintConditions(
     return Object.entries(constraints).map(([key, val]) => {
       const validatedValue = validateConstraintKeyAndValue(
         key as ConstraintKey,
+        "=",
         val as ConstraintValue
       );
 

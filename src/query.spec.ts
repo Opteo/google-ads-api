@@ -1,4 +1,9 @@
-import { ReportOptions, ConstraintKey, Constraint } from "./types";
+import {
+  ReportOptions,
+  ConstraintKey,
+  ConstraintOperation,
+  Constraint,
+} from "./types";
 import { normaliseQuery } from "./utils";
 import { enums } from "./protos";
 
@@ -112,7 +117,7 @@ describe("validateConstraintKeyAndValue", () => {
 
     constraintValues.forEach((val) => {
       // @ts-ignore
-      expect(() => validateConstraintKeyAndValue(key, val)).toThrowError(
+      expect(() => validateConstraintKeyAndValue(key, "=", val)).toThrowError(
         // @ts-ignore
         QueryError.INVALID_CONSTRAINT_VALUE(key, val)
       );
@@ -120,9 +125,11 @@ describe("validateConstraintKeyAndValue", () => {
   });
 
   it("does not throw for an empty string val", () => {
-    expect(() => validateConstraintKeyAndValue(key, "")).not.toThrowError();
+    expect(() =>
+      validateConstraintKeyAndValue(key, "!=", "")
+    ).not.toThrowError();
 
-    const validatedValue = validateConstraintKeyAndValue(key, "");
+    const validatedValue = validateConstraintKeyAndValue(key, "!=", "");
     expect(validatedValue.op).toEqual("=");
     expect(validatedValue.val).toEqual('""');
   });
@@ -131,7 +138,7 @@ describe("validateConstraintKeyAndValue", () => {
     const constraintValues = [15, true, -20, false];
 
     constraintValues.forEach((val) => {
-      const validatedValue = validateConstraintKeyAndValue(key, val);
+      const validatedValue = validateConstraintKeyAndValue(key, "!=", val);
       expect(validatedValue.op).toEqual("=");
       expect(validatedValue.val).toEqual(val);
     });
@@ -139,32 +146,44 @@ describe("validateConstraintKeyAndValue", () => {
 
   it("returns arrays as strings", () => {
     const val1 = [1, 2, 3, 4];
-    const validatedValue1 = validateConstraintKeyAndValue(key, val1);
+    const validatedValue1 = validateConstraintKeyAndValue(key, "!=", val1);
     expect(validatedValue1.op).toEqual("IN");
     expect(validatedValue1.val).toEqual(`(1, 2, 3, 4)`);
 
     const val2 = ["a", "b", "c", "d"];
-    const validatedValue2 = validateConstraintKeyAndValue(key, val2);
+    const validatedValue2 = validateConstraintKeyAndValue(key, "!=", val2);
     expect(validatedValue2.op).toEqual("IN");
     expect(validatedValue2.val).toEqual(`("a", "b", "c", "d")`);
   });
 
   it("adds quotation marks to string constraints that do not already have them", () => {
     const val = enums.AdvertisingChannelType.SEARCH;
-    const validatedValue = validateConstraintKeyAndValue(key, val);
+    const validatedValue = validateConstraintKeyAndValue(key, "!=", val);
     expect(validatedValue.op).toEqual("=");
     expect(validatedValue.val).toEqual(enums.AdvertisingChannelType.SEARCH);
   });
 
   it("returns string constraints that already have quotation marks", () => {
     const val1 = `'SEARCH'`;
-    const validatedValue1 = validateConstraintKeyAndValue(key, val1);
+    const validatedValue1 = validateConstraintKeyAndValue(key, "!=", val1);
     expect(validatedValue1.op).toEqual("=");
     expect(validatedValue1.val).toEqual(val1);
 
     const val2 = `"SEARCH"`;
-    const validatedValue2 = validateConstraintKeyAndValue(key, val2);
+    const validatedValue2 = validateConstraintKeyAndValue(key, "!=", val2);
     expect(validatedValue2.op).toEqual("=");
+    expect(validatedValue2.val).toEqual(val2);
+  });
+
+  it("returns date constants without quotation marks", () => {
+    const val1 = `LAST_30_DAYS`;
+    const validatedValue1 = validateConstraintKeyAndValue(key, "DURING", val1);
+    expect(validatedValue1.op).toEqual("DURING");
+    expect(validatedValue1.val).toEqual(val1);
+
+    const val2 = `YESTERDAY`;
+    const validatedValue2 = validateConstraintKeyAndValue(key, "DURING", val2);
+    expect(validatedValue2.op).toEqual("DURING");
     expect(validatedValue2.val).toEqual(val2);
   });
 });

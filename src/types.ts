@@ -47,6 +47,21 @@ export type DateConstant =
   | "LAST_WEEK_SUN_SAT"
   | "LAST_WEEK_MON_SUN";
 
+export const dateConstants: DateConstant[] = [
+  "TODAY",
+  "YESTERDAY",
+  "LAST_7_DAYS",
+  "LAST_BUSINESS_WEEK",
+  "THIS_MONTH",
+  "LAST_MONTH",
+  "LAST_14_DAYS",
+  "LAST_30_DAYS",
+  "THIS_WEEK_SUN_TODAY",
+  "THIS_WEEK_MON_TODAY",
+  "LAST_WEEK_SUN_SAT",
+  "LAST_WEEK_MON_SUN",
+];
+
 export type SortOrder = "ASC" | "DESC";
 
 export interface Order {
