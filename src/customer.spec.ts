@@ -548,6 +548,7 @@ describe("reportStream", () => {
     const alternativeReturnValue = "return this instead";
     const hooks: Hooks = {
       onStreamStart({ cancel }) {
+        // @ts-expect-error should not be passing an alternate value to onStreamStart
         cancel(alternativeReturnValue);
       },
     };

@@ -299,7 +299,7 @@ export class Customer extends ServiceFactory {
   }> {
     const response: services.IGoogleAdsRow[] = [];
     let nextPageToken: PageToken = undefined;
-    let i = 1;
+    let i = 1; // TODO: remove logging
     const initialSearch = await this.search(gaqlQuery, requestOptions);
     const totalResultsCount = initialSearch.totalResultsCount;
 

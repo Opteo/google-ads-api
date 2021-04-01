@@ -23,8 +23,10 @@ export type BaseMutationHookArgs = {
   | { mutation: any; isServiceCall: true }
 );
 
-type PreHookArgs<T = RequestOptions | MutateOptions> = {
-  cancel: (args?: any) => void;
+type OneArgFn<A> = A extends void ? () => void : (args?: A) => void;
+
+type PreHookArgs<T = RequestOptions | MutateOptions, A = void> = {
+  cancel: OneArgFn<A>;
   editOptions: (options: Partial<T>) => void;
 };
 
@@ -47,11 +49,15 @@ type MutationHook<H extends HookArgs> = (
   args: BaseMutationHookArgs & H
 ) => void;
 
-export type OnRequestStart = RequestHook<PreHookArgs<RequestOptions>>;
+export type OnRequestStart<A = void> = RequestHook<
+  PreHookArgs<RequestOptions, A | void>
+>;
 export type OnRequestError = RequestHook<ErrorHookArgs>;
 export type OnRequestEnd = RequestHook<PostHookArgs<services.IGoogleAdsRow[]>>;
 
-export type OnMutationStart = MutationHook<PreHookArgs<MutateOptions>>;
+export type OnMutationStart<A = void> = MutationHook<
+  PreHookArgs<MutateOptions, A | void>
+>;
 export type OnMutationError = MutationHook<ErrorHookArgs>;
 export type OnMutationEnd = MutationHook<
   PostHookArgs<services.MutateGoogleAdsResponse>
@@ -64,10 +70,10 @@ export interface Hooks {
    * @param credentials customer id, login customer id, linked customer id
    * @param query gaql
    * @param reportOptions
-   * @param cancel utility function for cancelling the query. if an argument is provided then the query will return this argument
+   * @param cancel utility function for cancelling the query. if an argument is provided then the query will return this argument. however a generic type will need to be passed to `OnRequestStart` to represent the type of the alternative result.
    * @param editOptions utility function for editing the request options. any request option keys that are passed will be changed
    */
-  onQueryStart?: OnRequestStart;
+  onQueryStart?: OnRequestStart<any>;
   /**
    * @description Hook called upon a query throwing an error
    * @params `{ credentials, query, reportOptions, error }`
@@ -96,7 +102,7 @@ export interface Hooks {
    * @param cancel utility function for cancelling the stream
    * @param editOptions utility function for editing the request options. any request option keys that are passed will be changed
    */
-  onStreamStart?: OnRequestStart;
+  onStreamStart?: OnRequestStart<void>;
   /**
    * @description Hook called upon a stream throwing an error
    * @params `{ credentials, query, reportOptions, error }`
@@ -114,7 +120,7 @@ export interface Hooks {
    * @param cancel utility function for cancelling the mutation. if an argument is provided then the query/report will return this argument
    * @param editOptions utility function for editing the mutate options. any mutate option keys that are passed will be changed
    */
-  onMutationStart?: OnMutationStart;
+  onMutationStart?: OnMutationStart<any>;
   /**
    * @description Hook called upon a mutation throwing an error
    * @params `{ credentials, mutations error }`
