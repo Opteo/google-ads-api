@@ -7,7 +7,7 @@ import {
   MutateOptions,
 } from "./types";
 
-export type BaseQueryHookArgs = {
+export type BaseRequestHookArgs = {
   credentials: CustomerCredentials;
   query: string;
   reportOptions?: ReportOptions;
@@ -41,15 +41,15 @@ type PostHookArgs<
 
 type HookArgs = PreHookArgs | ErrorHookArgs | PostHookArgs;
 
-type QueryHook<H extends HookArgs> = (args: BaseQueryHookArgs & H) => void;
+type RequestHook<H extends HookArgs> = (args: BaseRequestHookArgs & H) => void;
 
 type MutationHook<H extends HookArgs> = (
   args: BaseMutationHookArgs & H
 ) => void;
 
-export type OnQueryStart = QueryHook<PreHookArgs<RequestOptions>>;
-export type OnQueryError = QueryHook<ErrorHookArgs>;
-export type OnQueryEnd = QueryHook<PostHookArgs<services.IGoogleAdsRow[]>>;
+export type OnRequestStart = RequestHook<PreHookArgs<RequestOptions>>;
+export type OnRequestError = RequestHook<ErrorHookArgs>;
+export type OnRequestEnd = RequestHook<PostHookArgs<services.IGoogleAdsRow[]>>;
 
 export type OnMutationStart = MutationHook<PreHookArgs<MutateOptions>>;
 export type OnMutationError = MutationHook<ErrorHookArgs>;
@@ -67,7 +67,7 @@ export interface Hooks {
    * @param cancel utility function for cancelling the query. if an argument is provided then the query will return this argument
    * @param editOptions utility function for editing the request options. any request option keys that are passed will be changed
    */
-  onQueryStart?: OnQueryStart;
+  onQueryStart?: OnRequestStart;
   /**
    * @description Hook called upon a query throwing an error
    * @params `{ credentials, query, reportOptions, error }`
@@ -76,7 +76,7 @@ export interface Hooks {
    * @param reportOptions
    * @param error google ads error
    */
-  onQueryError?: OnQueryError;
+  onQueryError?: OnRequestError;
   /**
    * @description Hook called after successful execution of a query
    * @params `{ credentials, query, reportOptions, response, resolve }`
@@ -86,7 +86,26 @@ export interface Hooks {
    * @param response results of the query, not available on reportStream
    * @param resolve utility function for returning an alternative value from the query. will not work with reportStream
    */
-  onQueryEnd?: OnQueryEnd;
+  onQueryEnd?: OnRequestEnd;
+  /**
+   * @description Hook called before execution of a stream.
+   * @params `{ credentials, query, reportOptions, cancel, editOptions }`
+   * @param credentials customer id, login customer id, linked customer id
+   * @param query gaql
+   * @param reportOptions
+   * @param cancel utility function for cancelling the stream
+   * @param editOptions utility function for editing the request options. any request option keys that are passed will be changed
+   */
+  onStreamStart?: OnRequestStart;
+  /**
+   * @description Hook called upon a stream throwing an error
+   * @params `{ credentials, query, reportOptions, error }`
+   * @param credentials customer id, login customer id, linked customer id
+   * @param query gaql
+   * @param reportOptions
+   * @param error google ads error
+   */
+  onStreamError?: OnRequestError;
   /**
    * @description Hook called before execution of a mutation.
    * @params `{ credentials, mutations, cancel, editOptions }`

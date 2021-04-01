@@ -1,7 +1,8 @@
+import { CancellableStream } from "google-gax";
 import { ClientOptions } from "./client";
 import {
   BaseMutationHookArgs,
-  BaseQueryHookArgs,
+  BaseRequestHookArgs,
   HookedCancellation,
   HookedResolution,
   Hooks,
@@ -29,6 +30,17 @@ export class Customer extends ServiceFactory {
     super(clientOptions, customerOptions, hooks ?? {});
   }
 
+  /**
+    @description Single query using a raw GAQL string.
+  */
+  public async query<T = services.IGoogleAdsRow[]>(
+    gaqlQuery: string,
+    requestOptions: RequestOptions = {}
+  ): Promise<T> {
+    const { response } = await this.querier<T>(gaqlQuery, requestOptions);
+    return response;
+  }
+
   /** 
     @description Single query using ReportOptions.
     If a summary row is requested then this will be the first row of the results.
@@ -46,16 +58,8 @@ export class Customer extends ServiceFactory {
   }
 
   /**
-    @description Single query using a GAQL query
-   */
-  public async query<T = services.IGoogleAdsRow[]>(
-    gaqlQuery: string,
-    requestOptions: RequestOptions = {}
-  ): Promise<T> {
-    const { response } = await this.querier<T>(gaqlQuery, requestOptions);
-    return response;
-  }
-
+    @description Get the total row count of a report.
+  */
   public async reportCount(
     options: ReportOptions
   ): Promise<number | undefined> {
@@ -63,11 +67,12 @@ export class Customer extends ServiceFactory {
     const { gaqlQuery, requestOptions } = buildQuery(options);
     // @ts-expect-error we do not allow this field in reportOptions, however it is still a valid request option
     requestOptions.return_total_results_count = true;
-
+    const useHooks = false; // to avoid cacheing conflicts
     const { totalResultsCount } = await this.querier(
       gaqlQuery,
       requestOptions,
-      options
+      options,
+      useHooks
     );
 
     return totalResultsCount;
@@ -85,37 +90,29 @@ export class Customer extends ServiceFactory {
   ): AsyncGenerator<T> {
     const { gaqlQuery, requestOptions } = buildQuery(reportOptions);
 
-    const baseHookArguments: BaseQueryHookArgs = {
+    const baseHookArguments: BaseRequestHookArgs = {
       credentials: this.credentials,
       query: gaqlQuery,
       reportOptions,
     };
 
-    const queryStart: HookedCancellation = { cancelled: false };
-    if (this.hooks.onQueryStart) {
-      await this.hooks.onQueryStart({
+    if (this.hooks.onStreamStart) {
+      const queryStart: HookedCancellation = { cancelled: false };
+
+      await this.hooks.onStreamStart({
         ...baseHookArguments,
-        cancel: (res) => {
+        cancel: () => {
           queryStart.cancelled = true;
-          queryStart.res = res;
         },
         editOptions: (options) => {
           Object.entries(options).forEach(([key, val]) => {
-            // @ts-ignore
+            // @ts-expect-error
             requestOptions[key] = val;
           });
         },
       });
 
       if (queryStart.cancelled) {
-        if (Array.isArray(queryStart.res)) {
-          for (const row of queryStart.res) {
-            yield row as T;
-          }
-        } else {
-          yield queryStart.res as T;
-        }
-
         return;
       }
     }
@@ -129,7 +126,7 @@ export class Customer extends ServiceFactory {
       otherArgs: { headers: this.callHeaders },
     });
 
-    let done = false;
+    let streamFinished = false;
     const accumulator: T[] = [];
 
     let nextChunk = createNextChunkArrivedPromise();
@@ -150,13 +147,13 @@ export class Customer extends ServiceFactory {
     });
 
     stream.on("end", () => {
-      done = true;
+      streamFinished = true;
       nextChunk.resolve();
     });
 
     try {
-      while (!done || accumulator.length) {
-        if (accumulator.length !== 0) {
+      while (!streamFinished || accumulator.length) {
+        if (accumulator.length > 0) {
           const item = accumulator.shift();
           if (item === undefined) {
             throw new Error("UNDEFINED_STREAM_ERROR");
@@ -168,24 +165,96 @@ export class Customer extends ServiceFactory {
       }
     } catch (searchError) {
       const googleAdsError = this.getGoogleAdsError(searchError);
-      if (this.hooks.onQueryError) {
-        await this.hooks.onQueryError({
+      if (this.hooks.onStreamError) {
+        await this.hooks.onStreamError({
           ...baseHookArguments,
           error: googleAdsError,
         });
       }
       throw googleAdsError;
     } finally {
-      if (this.hooks.onQueryEnd) {
-        await this.hooks.onQueryEnd({
-          ...baseHookArguments,
-          resolve: () => {
-            return;
-          },
-        });
-      }
-
       stream.destroy();
+    }
+  }
+
+  /** 
+    @description Retreive the raw stream using ReportOptions.
+    @example
+    const stream = reportStreamRaw(reportOptions)
+    stream.on('data', (chunk) => { ... }) // a chunk contains up to 10,000 un-parsed rows
+    stream.on('error', (error) => { ... })
+    stream.on('end', () => { ... })
+  */
+  public async reportStreamRaw(
+    reportOptions: ReportOptions
+  ): Promise<CancellableStream | void> {
+    const { gaqlQuery, requestOptions } = buildQuery(reportOptions);
+
+    // TODO: re-add hook
+    // const baseHookArguments: BaseRequestHookArgs = {
+    //   credentials: this.credentials,
+    //   query: gaqlQuery,
+    //   reportOptions,
+    // };
+
+    // const queryStart: HookedCancellation = { cancelled: false };
+    // if (this.hooks.onStreamStart) {
+    //   await this.hooks.onStreamStart({
+    //     ...baseHookArguments,
+    //     cancel: () => {
+    //       queryStart.cancelled = true;
+    //     },
+    //     editOptions: (options) => {
+    //       Object.entries(options).forEach(([key, val]) => {
+    //         // @ts-ignore
+    //         requestOptions[key] = val;
+    //       });
+    //     },
+    //   });
+
+    //   if (queryStart.cancelled) {
+    //     return;
+    //   }
+    // }
+
+    const { service, request } = this.buildSearchStreamRequestAndService(
+      gaqlQuery,
+      requestOptions
+    );
+
+    const stream = service.searchStream(request, {
+      otherArgs: { headers: this.callHeaders },
+    });
+
+    const nextChunk = createNextChunkArrivedPromise();
+
+    stream.on("error", (searchError: Error) => {
+      console.log("message");
+      console.log(searchError.message);
+      console.log("name");
+      console.log(searchError.name);
+      console.log("stack");
+      console.log(searchError.stack);
+      nextChunk.reject(searchError);
+    });
+
+    stream.on("end", () => {
+      nextChunk.resolve();
+    });
+
+    try {
+      return stream;
+    } catch (searchError) {
+      console.log("caught in reportStreamRaw");
+      const googleAdsError = this.getGoogleAdsError(searchError);
+      // TODO: re-add hook
+      // if (this.hooks.onStreamError) {
+      //   await this.hooks.onStreamError({
+      //     ...baseHookArguments,
+      //     error: googleAdsError,
+      //   });
+      // }
+      throw googleAdsError;
     }
   }
 
@@ -230,13 +299,13 @@ export class Customer extends ServiceFactory {
   }> {
     const response: services.IGoogleAdsRow[] = [];
     let nextPageToken: PageToken = undefined;
-
+    let i = 1;
     const initialSearch = await this.search(gaqlQuery, requestOptions);
     const totalResultsCount = initialSearch.totalResultsCount;
 
     response.push(...initialSearch.response);
     nextPageToken = initialSearch.nextPageToken;
-
+    console.log("page:", i); // TODO: remove logging
     while (nextPageToken) {
       const nextSearch = await this.search(gaqlQuery, {
         ...requestOptions,
@@ -244,26 +313,26 @@ export class Customer extends ServiceFactory {
       });
       response.push(...nextSearch.response);
       nextPageToken = nextSearch.nextPageToken;
+      i++;
+      console.log("page:", i); // TODO: remove logging
     }
 
     return { response, totalResultsCount };
   }
 
-  /**
-    @description Single query using a GAQL query
-   */
   private async querier<T = services.IGoogleAdsRow[]>(
     gaqlQuery: string,
     requestOptions: RequestOptions = {},
-    reportOptions?: ReportOptions
+    reportOptions?: ReportOptions,
+    useHooks = true
   ): Promise<{ response: T; totalResultsCount?: number }> {
-    const baseHookArguments: BaseQueryHookArgs = {
+    const baseHookArguments: BaseRequestHookArgs = {
       credentials: this.credentials,
       query: gaqlQuery,
       reportOptions,
     };
 
-    if (this.hooks.onQueryStart) {
+    if (this.hooks.onQueryStart && useHooks) {
       const queryCancellation: HookedCancellation = { cancelled: false };
       await this.hooks.onQueryStart({
         ...baseHookArguments,
@@ -295,7 +364,7 @@ export class Customer extends ServiceFactory {
         ? parse({ results: response, reportOptions })
         : parse({ results: response, gaqlString: gaqlQuery });
 
-      if (this.hooks.onQueryEnd) {
+      if (this.hooks.onQueryEnd && useHooks) {
         const queryResolution: HookedResolution = { resolved: false };
         await this.hooks.onQueryEnd({
           ...baseHookArguments,
@@ -313,7 +382,7 @@ export class Customer extends ServiceFactory {
       return { response: (parsedResponse as unknown) as T, totalResultsCount };
     } catch (searchError) {
       const googleAdsError = this.getGoogleAdsError(searchError);
-      if (this.hooks.onQueryError) {
+      if (this.hooks.onQueryError && useHooks) {
         await this.hooks.onQueryError({
           ...baseHookArguments,
           error: googleAdsError,
