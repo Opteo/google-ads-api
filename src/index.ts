@@ -27,9 +27,11 @@ export {
 } from "./types";
 export {
   Hooks,
-  OnRequestStart,
-  OnRequestError,
-  OnRequestEnd,
+  OnQueryStart,
+  OnQueryError,
+  OnQueryEnd,
+  OnStreamStart,
+  OnStreamError,
   OnMutationStart,
   OnMutationError,
   OnMutationEnd,

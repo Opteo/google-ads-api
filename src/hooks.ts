@@ -23,10 +23,8 @@ export type BaseMutationHookArgs = {
   | { mutation: any; isServiceCall: true }
 );
 
-type OneArgFn<A> = A extends void ? () => void : (args?: A) => void;
-
-type PreHookArgs<T = RequestOptions | MutateOptions, A = void> = {
-  cancel: OneArgFn<A>;
+type StartHookArgs<T = RequestOptions | MutateOptions, A = void> = {
+  cancel: A extends void ? () => void : (args?: A) => void;
   editOptions: (options: Partial<T>) => void;
 };
 
@@ -34,67 +32,63 @@ type ErrorHookArgs = {
   error: errors.GoogleAdsFailure | Error;
 };
 
-type PostHookArgs<
+type EndHookArgs<
   T = services.IGoogleAdsRow[] | services.MutateGoogleAdsResponse
 > = {
   response?: T;
   resolve: (args: any) => void;
 };
 
-type HookArgs = PreHookArgs | ErrorHookArgs | PostHookArgs;
+type HookArgs = StartHookArgs | ErrorHookArgs | EndHookArgs;
 
-type RequestHook<H extends HookArgs> = (args: BaseRequestHookArgs & H) => void;
+type RequestHook<H extends HookArgs> = (a: BaseRequestHookArgs & H) => void;
+type MutationHook<H extends HookArgs> = (a: BaseMutationHookArgs & H) => void;
 
-type MutationHook<H extends HookArgs> = (
-  args: BaseMutationHookArgs & H
-) => void;
+export type OnQueryStart = RequestHook<StartHookArgs<RequestOptions, any>>;
+export type OnQueryError = RequestHook<ErrorHookArgs>;
+export type OnQueryEnd = RequestHook<EndHookArgs<services.IGoogleAdsRow[]>>;
 
-export type OnRequestStart<A = void> = RequestHook<
-  PreHookArgs<RequestOptions, A | void>
->;
-export type OnRequestError = RequestHook<ErrorHookArgs>;
-export type OnRequestEnd = RequestHook<PostHookArgs<services.IGoogleAdsRow[]>>;
+export type OnStreamStart = RequestHook<StartHookArgs<RequestOptions, void>>;
+export type OnStreamError = RequestHook<ErrorHookArgs>;
 
-export type OnMutationStart<A = void> = MutationHook<
-  PreHookArgs<MutateOptions, A | void>
->;
+export type OnMutationStart = MutationHook<StartHookArgs<MutateOptions, any>>;
 export type OnMutationError = MutationHook<ErrorHookArgs>;
 export type OnMutationEnd = MutationHook<
-  PostHookArgs<services.MutateGoogleAdsResponse>
+  EndHookArgs<services.MutateGoogleAdsResponse>
 >;
 
 export interface Hooks {
   /**
-   * @description Hook called before execution of a query.
+   * @description Hook called before execution of a query in the `query` and `report` methods
    * @params `{ credentials, query, reportOptions, cancel, editOptions }`
    * @param credentials customer id, login customer id, linked customer id
    * @param query gaql
    * @param reportOptions
-   * @param cancel utility function for cancelling the query. if an argument is provided then the query will return this argument. however a generic type will need to be passed to `OnRequestStart` to represent the type of the alternative result.
+   * @param cancel utility function for cancelling the query. if an argument is provided then the query will return this argument
    * @param editOptions utility function for editing the request options. any request option keys that are passed will be changed
    */
-  onQueryStart?: OnRequestStart<any>;
+  onQueryStart?: OnQueryStart;
   /**
-   * @description Hook called upon a query throwing an error
+   * @description Hook called upon a query throwing an error in the `query` and `report` methods
    * @params `{ credentials, query, reportOptions, error }`
    * @param credentials customer id, login customer id, linked customer id
    * @param query gaql
    * @param reportOptions
    * @param error google ads error
    */
-  onQueryError?: OnRequestError;
+  onQueryError?: OnQueryError;
   /**
-   * @description Hook called after successful execution of a query
+   * @description Hook called after successful execution of a query in the `query` and `report` methods
    * @params `{ credentials, query, reportOptions, response, resolve }`
    * @param credentials customer id, login customer id, linked customer id
    * @param query gaql
    * @param reportOptions
    * @param response results of the query, not available on reportStream
-   * @param resolve utility function for returning an alternative value from the query. will not work with reportStream
+   * @param resolve utility function for returning an alternative value from the query
    */
-  onQueryEnd?: OnRequestEnd;
+  onQueryEnd?: OnQueryEnd;
   /**
-   * @description Hook called before execution of a stream.
+   * @description Hook called before execution of a stream in the `reportStream` and `reportStreamRaw` methods
    * @params `{ credentials, query, reportOptions, cancel, editOptions }`
    * @param credentials customer id, login customer id, linked customer id
    * @param query gaql
@@ -102,25 +96,25 @@ export interface Hooks {
    * @param cancel utility function for cancelling the stream
    * @param editOptions utility function for editing the request options. any request option keys that are passed will be changed
    */
-  onStreamStart?: OnRequestStart<void>;
+  onStreamStart?: OnStreamStart;
   /**
-   * @description Hook called upon a stream throwing an error
+   * @description Hook called upon a stream throwing an error in the `reportStream` and `reportStreamRaw` methods
    * @params `{ credentials, query, reportOptions, error }`
    * @param credentials customer id, login customer id, linked customer id
    * @param query gaql
    * @param reportOptions
    * @param error google ads error
    */
-  onStreamError?: OnRequestError;
+  onStreamError?: OnStreamError;
   /**
-   * @description Hook called before execution of a mutation.
+   * @description Hook called before execution of a mutation
    * @params `{ credentials, mutations, cancel, editOptions }`
    * @param credentials customer id, login customer id, linked customer id
    * @param mutations
    * @param cancel utility function for cancelling the mutation. if an argument is provided then the query/report will return this argument
    * @param editOptions utility function for editing the mutate options. any mutate option keys that are passed will be changed
    */
-  onMutationStart?: OnMutationStart<any>;
+  onMutationStart?: OnMutationStart;
   /**
    * @description Hook called upon a mutation throwing an error
    * @params `{ credentials, mutations error }`
