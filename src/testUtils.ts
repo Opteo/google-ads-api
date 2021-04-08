@@ -72,11 +72,14 @@ export function mockPaginatedSearch(
       // @ts-expect-error private method
       .spyOn(customer, "paginatedSearch")
       // @ts-expect-error
-      .mockImplementation(() => {
+      .mockImplementation((gaqlQuery, requestOptions, _parser) => {
         const totalResultsCount = includeTotalResultsCount
           ? mockTotalResultsCount
           : undefined;
-        return { response: mockQueryReturnValue, totalResultsCount };
+        return {
+          response: _parser(mockQueryReturnValue),
+          totalResultsCount,
+        };
       })
   );
 }

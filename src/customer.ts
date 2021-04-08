@@ -223,7 +223,8 @@ export class Customer extends ServiceFactory {
 
   private async paginatedSearch(
     gaqlQuery: string,
-    requestOptions: RequestOptions
+    requestOptions: RequestOptions,
+    parser: (rows: services.IGoogleAdsRow[]) => services.IGoogleAdsRow[]
   ): Promise<{
     response: services.IGoogleAdsRow[];
     totalResultsCount?: number;
@@ -234,7 +235,7 @@ export class Customer extends ServiceFactory {
     const initialSearch = await this.search(gaqlQuery, requestOptions);
     const totalResultsCount = initialSearch.totalResultsCount;
 
-    response.push(...initialSearch.response);
+    response.push(...parser(initialSearch.response));
     nextPageToken = initialSearch.nextPageToken;
 
     while (nextPageToken) {
@@ -242,7 +243,7 @@ export class Customer extends ServiceFactory {
         ...requestOptions,
         page_token: nextPageToken,
       });
-      response.push(...nextSearch.response);
+      response.push(...parser(nextSearch.response));
       nextPageToken = nextSearch.nextPageToken;
     }
 
@@ -284,22 +285,25 @@ export class Customer extends ServiceFactory {
     }
 
     try {
+      const _parser = (rows: services.IGoogleAdsRow[]) => {
+        return this.clientOptions.disable_parsing
+          ? rows
+          : reportOptions
+          ? parse({ results: rows, reportOptions })
+          : parse({ results: rows, gaqlString: gaqlQuery });
+      };
+
       const { response, totalResultsCount } = await this.paginatedSearch(
         gaqlQuery,
-        requestOptions
+        requestOptions,
+        _parser
       );
-
-      const parsedResponse = this.clientOptions.disable_parsing
-        ? response
-        : reportOptions
-        ? parse({ results: response, reportOptions })
-        : parse({ results: response, gaqlString: gaqlQuery });
 
       if (this.hooks.onQueryEnd) {
         const queryResolution: HookedResolution = { resolved: false };
         await this.hooks.onQueryEnd({
           ...baseHookArguments,
-          response: parsedResponse,
+          response,
           resolve: (res) => {
             queryResolution.resolved = true;
             queryResolution.res = res;
@@ -310,7 +314,7 @@ export class Customer extends ServiceFactory {
         }
       }
 
-      return { response: (parsedResponse as unknown) as T, totalResultsCount };
+      return { response: (response as unknown) as T, totalResultsCount };
     } catch (searchError) {
       const googleAdsError = this.getGoogleAdsError(searchError);
       if (this.hooks.onQueryError) {
