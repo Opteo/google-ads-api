@@ -25,9 +25,10 @@ export class Customer extends ServiceFactory {
   constructor(
     clientOptions: ClientOptions,
     customerOptions: CustomerOptions,
-    hooks?: Hooks
+    hooks?: Hooks,
+    timeout = 3600000 // 1 hour
   ) {
-    super(clientOptions, customerOptions, hooks ?? {});
+    super(clientOptions, customerOptions, hooks ?? {}, timeout);
   }
 
   /**
@@ -124,6 +125,7 @@ export class Customer extends ServiceFactory {
 
     const stream = service.searchStream(request, {
       otherArgs: { headers: this.callHeaders },
+      timeout: this.timeout,
     });
 
     let streamFinished = false;
@@ -190,32 +192,31 @@ export class Customer extends ServiceFactory {
   ): Promise<CancellableStream | void> {
     const { gaqlQuery, requestOptions } = buildQuery(reportOptions);
 
-    // TODO: re-add hook
-    // const baseHookArguments: BaseRequestHookArgs = {
-    //   credentials: this.credentials,
-    //   query: gaqlQuery,
-    //   reportOptions,
-    // };
+    const baseHookArguments: BaseRequestHookArgs = {
+      credentials: this.credentials,
+      query: gaqlQuery,
+      reportOptions,
+    };
 
-    // const queryStart: HookedCancellation = { cancelled: false };
-    // if (this.hooks.onStreamStart) {
-    //   await this.hooks.onStreamStart({
-    //     ...baseHookArguments,
-    //     cancel: () => {
-    //       queryStart.cancelled = true;
-    //     },
-    //     editOptions: (options) => {
-    //       Object.entries(options).forEach(([key, val]) => {
-    //         // @ts-ignore
-    //         requestOptions[key] = val;
-    //       });
-    //     },
-    //   });
+    const queryStart: HookedCancellation = { cancelled: false };
+    if (this.hooks.onStreamStart) {
+      await this.hooks.onStreamStart({
+        ...baseHookArguments,
+        cancel: () => {
+          queryStart.cancelled = true;
+        },
+        editOptions: (options) => {
+          Object.entries(options).forEach(([key, val]) => {
+            // @ts-ignore
+            requestOptions[key] = val;
+          });
+        },
+      });
 
-    //   if (queryStart.cancelled) {
-    //     return;
-    //   }
-    // }
+      if (queryStart.cancelled) {
+        return;
+      }
+    }
 
     const { service, request } = this.buildSearchStreamRequestAndService(
       gaqlQuery,
@@ -224,17 +225,12 @@ export class Customer extends ServiceFactory {
 
     const stream = service.searchStream(request, {
       otherArgs: { headers: this.callHeaders },
+      timeout: this.timeout,
     });
 
     const nextChunk = createNextChunkArrivedPromise();
 
     stream.on("error", (searchError: Error) => {
-      console.log("message");
-      console.log(searchError.message);
-      console.log("name");
-      console.log(searchError.name);
-      console.log("stack");
-      console.log(searchError.stack);
       nextChunk.reject(searchError);
     });
 
@@ -245,15 +241,13 @@ export class Customer extends ServiceFactory {
     try {
       return stream;
     } catch (searchError) {
-      console.log("caught in reportStreamRaw");
       const googleAdsError = this.getGoogleAdsError(searchError);
-      // TODO: re-add hook
-      // if (this.hooks.onStreamError) {
-      //   await this.hooks.onStreamError({
-      //     ...baseHookArguments,
-      //     error: googleAdsError,
-      //   });
-      // }
+      if (this.hooks.onStreamError) {
+        await this.hooks.onStreamError({
+          ...baseHookArguments,
+          error: googleAdsError,
+        });
+      }
       throw googleAdsError;
     }
   }
@@ -273,6 +267,7 @@ export class Customer extends ServiceFactory {
 
     const searchResponse = await service.search(request, {
       otherArgs: { headers: this.callHeaders },
+      timeout: this.timeout,
       autoPaginate: false, // autoPaginate doesn't work
     });
 
@@ -299,13 +294,11 @@ export class Customer extends ServiceFactory {
   }> {
     const response: services.IGoogleAdsRow[] = [];
     let nextPageToken: PageToken = undefined;
-    let i = 1; // TODO: remove logging
     const initialSearch = await this.search(gaqlQuery, requestOptions);
     const totalResultsCount = initialSearch.totalResultsCount;
 
     response.push(...initialSearch.response);
     nextPageToken = initialSearch.nextPageToken;
-    console.log("page:", i); // TODO: remove logging
     while (nextPageToken) {
       const nextSearch = await this.search(gaqlQuery, {
         ...requestOptions,
@@ -313,8 +306,6 @@ export class Customer extends ServiceFactory {
       });
       response.push(...nextSearch.response);
       nextPageToken = nextSearch.nextPageToken;
-      i++;
-      console.log("page:", i); // TODO: remove logging
     }
 
     return { response, totalResultsCount };
@@ -434,9 +425,7 @@ export class Customer extends ServiceFactory {
     try {
       const response = await service.mutate(request, {
         // @ts-expect-error Field not included in type definitions
-        otherArgs: {
-          headers: this.callHeaders,
-        },
+        otherArgs: { headers: this.callHeaders },
       });
 
       const parsedResponse = request.partial_failure
@@ -481,9 +470,7 @@ export class Customer extends ServiceFactory {
         );
         return service.searchGoogleAdsFields(request, {
           // @ts-expect-error This method does support call headers
-          otherArgs: {
-            headers: this.callHeaders,
-          },
+          otherArgs: { headers: this.callHeaders },
         });
       },
     };
