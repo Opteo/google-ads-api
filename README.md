@@ -434,8 +434,8 @@ These hooks also have access to the `method` argument, containing the mutation m
 
 ### Pre-request hooks:
 
-- `onQueryStart`
-- `onStreamStart`
+- `onQueryStart` - `query` and `report`
+- `onStreamStart` - `reportStream` and `reportStreamRaw`
 - `onMutationStart`
 
 These hooks are executed **before** a query/stream/mutation.
@@ -465,11 +465,11 @@ const customer = client.Customer({
 
 ### On error hooks:
 
-- `onQueryError`
-- `onStreamError`
+- `onQueryError` - `query` and `report`
+- `onStreamError` - `reportStream` (but **not** `reportStreamRaw`)
 - `onMutationError`
 
-These hooks are executed when a query/stream/mutation throws an error. If there error is a Google Ads failure then it will be converted to a `GoogleAdsFailure` first. The error can be accessed in these hooks with the `error` argument.
+These hooks are executed when a query/stream/mutation throws an error. If there error is a Google Ads failure then it will be converted to a `GoogleAdsFailure` first. The error can be accessed in these hooks with the `error` argument. Note that the `onStreamError` hook will not work with the `reportStreamRaw` method to avoid blocking the thread.
 
 ```ts
 import { OnQueryError } from "google-ads-api";
@@ -487,7 +487,7 @@ const customer = client.Customer({
 
 ### Post-request hooks:
 
-- `onQueryEnd`
+- `onQueryEnd` - `query` and `report`
 - `onMutationEnd`
 
 These hooks are executed **after** a query or mutation. This library does not contain an `onStreamEnd` hook to avoid accumulating the results of streams, and also so that we don't block the thread by waiting for the end event to be emitted.

@@ -98,7 +98,7 @@ export interface Hooks {
    */
   onStreamStart?: OnStreamStart;
   /**
-   * @description Hook called upon a stream throwing an error in the `reportStream` and `reportStreamRaw` methods
+   * @description Hook called upon a stream throwing an error in the `reportStream` method. Will not be called for an error in `reportStreamRaw`
    * @params `{ credentials, query, reportOptions, error }`
    * @param credentials customer id, login customer id, linked customer id
    * @param query gaql

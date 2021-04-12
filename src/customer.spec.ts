@@ -687,39 +687,109 @@ describe("reportStreamRaw", () => {
   afterEach(() => jest.resetAllMocks());
 
   it("does not parse any results", async () => {
-    // TODO:
+    const customer = newCustomer({});
+    const {
+      mockStreamData,
+      mockStreamEnd,
+    } = mockBuildSearchStreamRequestAndService(customer);
+    const mockedParse = mockParse(mockParsedValues);
+    await customer.reportStreamRaw(mockReportOptions);
+    mockStreamData(mockQueryReturnValue);
+    mockStreamEnd();
+
+    expect(mockedParse).not.toHaveBeenCalled();
   });
 
   it("calls onStreamStart when provided", async () => {
-    // TODO:
+    const hooks: Hooks = {
+      onStreamStart() {
+        return;
+      },
+    };
+    const customer = newCustomer(hooks);
+    const {
+      mockStreamData,
+      mockStreamEnd,
+    } = mockBuildSearchStreamRequestAndService(customer);
+    const spyHook = jest.spyOn(hooks, "onStreamStart");
+    await customer.reportStreamRaw(mockReportOptions);
+    mockStreamData(mockQueryReturnValue);
+    mockStreamEnd();
+
+    expect(spyHook).toHaveBeenCalled();
+    expect(spyHook).toHaveBeenCalledWith({
+      credentials: expect.any(Object),
+      query: expect.any(String),
+      reportOptions: mockReportOptions,
+      cancel: expect.any(Function),
+      editOptions: expect.any(Function),
+    });
   });
 
   it("calls onStreamStart asynchronously", async () => {
-    // TODO:
+    const container = mockMethod();
+    const spyMockMethod = jest.spyOn(container, "method");
+    const hooks: Hooks = {
+      async onStreamStart() {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        container.method();
+      },
+    };
+    const customer = newCustomer(hooks);
+    const {
+      mockStreamData,
+      mockStreamEnd,
+    } = mockBuildSearchStreamRequestAndService(customer);
+    await customer.reportStreamRaw(mockReportOptions);
+    mockStreamData(mockQueryReturnValue);
+    mockStreamEnd();
+
+    expect(spyMockMethod).toHaveBeenCalled();
   });
 
   it("cancels the query when cancel() is called in onStreamStart", async () => {
-    // TODO:
-  });
+    const hooks: Hooks = {
+      onStreamStart({ cancel }) {
+        cancel();
+      },
+    };
+    const customer = newCustomer(hooks);
+    const { spyBuild } = mockBuildSearchStreamRequestAndService(customer);
+    const stream = await customer.reportStreamRaw(mockReportOptions);
 
-  it("does NOT return the argument of cancel() if one is provided in onStreamStart", async () => {
-    // TODO:
+    expect(stream).not.toBeDefined();
+    expect(spyBuild).not.toHaveBeenCalled();
   });
 
   it("edits the requestOptions when editOptions() is called in onStreamStart", async () => {
-    // TODO:
-  });
+    const hooks: Hooks = {
+      onStreamStart({ editOptions }) {
+        editOptions({ validate_only: true, page_size: 4 });
+      },
+    };
+    const customer = newCustomer(hooks);
+    const {
+      spyBuild,
+      mockStreamData,
+      mockStreamEnd,
+    } = mockBuildSearchStreamRequestAndService(customer);
+    const requestOptions: RequestOptions = {
+      validate_only: false, // changed
+      page_token: "abcd",
+      page_size: 2, // changed
+    };
+    await customer.reportStreamRaw({
+      ...mockReportOptions,
+      ...requestOptions,
+    });
+    mockStreamData(mockQueryReturnValue);
+    mockStreamEnd();
 
-  it("calls onStreamError when provided and when the stream throws an error", async () => {
-    // TODO:
-  });
-
-  it("calls onStreamError asynchronously", async () => {
-    // TODO:
-  });
-
-  it("does not call onStreamError when provided but when the query does not throw an error", async () => {
-    // TODO:
+    expect(spyBuild).toHaveBeenCalledWith(mockGaqlQuery, {
+      validate_only: true,
+      page_token: "abcd",
+      page_size: 4,
+    });
   });
 });
 

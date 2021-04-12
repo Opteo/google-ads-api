@@ -33,6 +33,7 @@ export class Customer extends ServiceFactory {
 
   /**
     @description Single query using a raw GAQL string.
+    @hooks onQueryStart, onQueryError, onQueryEnd
   */
   public async query<T = services.IGoogleAdsRow[]>(
     gaqlQuery: string,
@@ -45,6 +46,7 @@ export class Customer extends ServiceFactory {
   /** 
     @description Single query using ReportOptions.
     If a summary row is requested then this will be the first row of the results.
+    @hooks onQueryStart, onQueryError, onQueryEnd
   */
   public async report<T = services.IGoogleAdsRow[]>(
     options: ReportOptions
@@ -60,6 +62,7 @@ export class Customer extends ServiceFactory {
 
   /**
     @description Get the total row count of a report.
+    @hooks none
   */
   public async reportCount(
     options: ReportOptions
@@ -82,6 +85,7 @@ export class Customer extends ServiceFactory {
   /** 
     @description Stream query using ReportOptions. If a generic type is provided, it must be the type of a single row.
     If a summary row is requested then this will be the last emitted row of the stream.
+    @hooks onStreamStart, onStreamError
     @example
     const stream = reportStream<T>(reportOptions)
     for await (const row of stream) { ... }
@@ -181,6 +185,7 @@ export class Customer extends ServiceFactory {
 
   /** 
     @description Retreive the raw stream using ReportOptions.
+    @hooks onStreamStart
     @example
     const stream = reportStreamRaw(reportOptions)
     stream.on('data', (chunk) => { ... }) // a chunk contains up to 10,000 un-parsed rows
@@ -223,33 +228,10 @@ export class Customer extends ServiceFactory {
       requestOptions
     );
 
-    const stream = service.searchStream(request, {
+    return service.searchStream(request, {
       otherArgs: { headers: this.callHeaders },
       timeout: this.timeout,
     });
-
-    const nextChunk = createNextChunkArrivedPromise();
-
-    stream.on("error", (searchError: Error) => {
-      nextChunk.reject(searchError);
-    });
-
-    stream.on("end", () => {
-      nextChunk.resolve();
-    });
-
-    try {
-      return stream;
-    } catch (searchError) {
-      const googleAdsError = this.getGoogleAdsError(searchError);
-      if (this.hooks.onStreamError) {
-        await this.hooks.onStreamError({
-          ...baseHookArguments,
-          error: googleAdsError,
-        });
-      }
-      throw googleAdsError;
-    }
   }
 
   private async search(
@@ -384,7 +366,10 @@ export class Customer extends ServiceFactory {
   }
 
   /**
-   * @description Creates, updates, or removes resources. This method supports atomic transactions with multiple types of resources. For example, you can atomically create a campaign and a campaign budget, or perform up to thousands of mutates atomically.
+   * @description Creates, updates, or removes resources. This method supports atomic transactions
+   * with multiple types of resources. For example, you can atomically create a campaign and a
+   * campaign budget, or perform up to thousands of mutates atomically.
+   * @hooks onMutationStart, onMutationError, onMutationEnd
    */
   public async mutateResources<T>(
     mutations: MutateOperation<T>[],
