@@ -232,7 +232,7 @@ for await (const row of stream) {
 
 ## Retrieve Keywords with a raw stream
 
-Returns the raw stream so that events can be handled manually. This is the recommended method of retrieving data with over 10,000 rows. For more information on Google's stream methods please [consult their docs](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming).
+Returns the raw stream so that events can be handled manually. For more information on Google's stream methods please [consult their docs](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming).
 
 <!-- prettier-ignore-start -->
 
