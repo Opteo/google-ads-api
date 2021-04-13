@@ -492,9 +492,9 @@ describe("reportStream", () => {
     expect(response).toEqual([...mockQueryReturnValue, mockSummaryRow]);
   });
 
-  it("calls onQueryStart when provided", async () => {
+  it("calls onStreamStart when provided", async () => {
     const hooks: Hooks = {
-      onQueryStart() {
+      onStreamStart() {
         return;
       },
     };
@@ -504,7 +504,7 @@ describe("reportStream", () => {
       mockStreamEnd,
     } = mockBuildSearchStreamRequestAndService(customer);
     mockParse(mockParsedValues);
-    const spyHook = jest.spyOn(hooks, "onQueryStart");
+    const spyHook = jest.spyOn(hooks, "onStreamStart");
     const stream = customer.reportStream(mockReportOptions);
     mockStreamData(mockQueryReturnValue);
     mockStreamEnd();
@@ -520,11 +520,11 @@ describe("reportStream", () => {
     });
   });
 
-  it("calls onQueryStart asynchronously", async () => {
+  it("calls onStreamStart asynchronously", async () => {
     const container = mockMethod();
     const spyMockMethod = jest.spyOn(container, "method");
     const hooks: Hooks = {
-      async onQueryStart() {
+      async onStreamStart() {
         await new Promise((resolve) => setTimeout(resolve, 1000));
         container.method();
       },
@@ -543,9 +543,9 @@ describe("reportStream", () => {
     expect(spyMockMethod).toHaveBeenCalled();
   });
 
-  it("cancels the query when cancel() is called in onQueryStart", async () => {
+  it("cancels the query when cancel() is called in onStreamStart", async () => {
     const hooks: Hooks = {
-      onQueryStart({ cancel }) {
+      onStreamStart({ cancel }) {
         cancel();
       },
     };
@@ -554,20 +554,18 @@ describe("reportStream", () => {
     mockParse(mockParsedValues);
     const stream = customer.reportStream(mockReportOptions);
 
-    let iterations = 0;
     for await (const row of stream) {
-      expect(typeof row).toEqual("undefined");
-      iterations += 1;
+      failTestIfExecuted(); // should be no rows in stream
     }
 
-    expect(iterations).toEqual(1);
     expect(spyBuild).not.toHaveBeenCalled();
   });
 
-  it("returns the argument of cancel() if one is provided in onQueryStart", async () => {
+  it("does NOT return the argument of cancel() if one is provided in onStreamStart", async () => {
     const alternativeReturnValue = "return this instead";
     const hooks: Hooks = {
-      onQueryStart({ cancel }) {
+      onStreamStart({ cancel }) {
+        // @ts-expect-error should not be passing an alternate value to onStreamStart
         cancel(alternativeReturnValue);
       },
     };
@@ -576,39 +574,14 @@ describe("reportStream", () => {
     mockParse(mockParsedValues);
     const stream = customer.reportStream(mockReportOptions);
 
-    let iterations = 0;
     for await (const row of stream) {
-      expect(row).toEqual(alternativeReturnValue);
-      iterations += 1;
+      failTestIfExecuted(); // should be no rows in stream
     }
-
-    expect(iterations).toEqual(1);
   });
 
-  it("iterates over the argument of cancel() if it is an array in onQueryStart", async () => {
-    const alternativeReturnValue = ["return", "these", "values", "instead"];
+  it("edits the requestOptions when editOptions() is called in onStreamStart", async () => {
     const hooks: Hooks = {
-      onQueryStart({ cancel }) {
-        cancel(alternativeReturnValue);
-      },
-    };
-    const customer = newCustomer(hooks);
-    mockBuildSearchStreamRequestAndService(customer);
-    mockParse(mockParsedValues);
-    const stream = customer.reportStream(mockReportOptions);
-
-    let iterations = 0;
-    for await (const row of stream) {
-      expect(row).toEqual(alternativeReturnValue[iterations]);
-      iterations += 1;
-    }
-
-    expect(iterations).toEqual(alternativeReturnValue.length);
-  });
-
-  it("edits the requestOptions when editOptions() is called in onQueryStart", async () => {
-    const hooks: Hooks = {
-      onQueryStart({ editOptions }) {
+      onStreamStart({ editOptions }) {
         editOptions({ validate_only: true, page_size: 4 });
       },
     };
@@ -639,9 +612,9 @@ describe("reportStream", () => {
     });
   });
 
-  it("calls onQueryError when provided and when the query throws an error", async (done) => {
+  it("calls onStreamError when provided and when the stream throws an error", async (done) => {
     const hooks: Hooks = {
-      onQueryError() {
+      onStreamError() {
         return;
       },
     };
@@ -653,7 +626,7 @@ describe("reportStream", () => {
     } = mockBuildSearchStreamRequestAndService(customer);
     mockParse(mockParsedValues);
     const mockedError = mockGetGoogleAdsError(customer);
-    const spyHook = jest.spyOn(hooks, "onQueryError");
+    const spyHook = jest.spyOn(hooks, "onStreamError");
 
     try {
       const stream = customer.reportStream(mockReportOptions);
@@ -674,11 +647,11 @@ describe("reportStream", () => {
     }
   });
 
-  it("calls onQueryError asynchronously", async (done) => {
+  it("calls onStreamError asynchronously", async (done) => {
     const container = mockMethod();
     const spyMockMethod = jest.spyOn(container, "method");
     const hooks: Hooks = {
-      async onQueryError() {
+      async onStreamError() {
         await new Promise((resolve) => setTimeout(resolve, 1000));
         container.method();
       },
@@ -704,9 +677,9 @@ describe("reportStream", () => {
     }
   });
 
-  it("does not call onQueryError when provided but when the query does not throw an error", async () => {
+  it("does not call onStreamError when provided but when the query does not throw an error", async () => {
     const hooks: Hooks = {
-      onQueryError() {
+      onStreamError() {
         return;
       },
     };
@@ -717,7 +690,7 @@ describe("reportStream", () => {
     } = mockBuildSearchStreamRequestAndService(customer);
     mockParse(mockParsedValues);
     mockGetGoogleAdsError(customer);
-    const spyHook = jest.spyOn(hooks, "onQueryError");
+    const spyHook = jest.spyOn(hooks, "onStreamError");
     const stream = customer.reportStream(mockReportOptions);
     mockStreamData(mockQueryReturnValue);
     mockStreamEnd();
@@ -725,10 +698,28 @@ describe("reportStream", () => {
 
     expect(spyHook).not.toHaveBeenCalled();
   });
+});
 
-  it("calls onQueryEnd when provided", async () => {
+describe("reportStreamRaw", () => {
+  afterEach(() => jest.resetAllMocks());
+
+  it("does not parse any results", async () => {
+    const customer = newCustomer({});
+    const {
+      mockStreamData,
+      mockStreamEnd,
+    } = mockBuildSearchStreamRequestAndService(customer);
+    const mockedParse = mockParse(mockParsedValues);
+    await customer.reportStreamRaw(mockReportOptions);
+    mockStreamData(mockQueryReturnValue);
+    mockStreamEnd();
+
+    expect(mockedParse).not.toHaveBeenCalled();
+  });
+
+  it("calls onStreamStart when provided", async () => {
     const hooks: Hooks = {
-      onQueryEnd() {
+      onStreamStart() {
         return;
       },
     };
@@ -737,30 +728,26 @@ describe("reportStream", () => {
       mockStreamData,
       mockStreamEnd,
     } = mockBuildSearchStreamRequestAndService(customer);
-    mockParse(mockParsedValues);
-    const spyHook = jest.spyOn(hooks, "onQueryEnd");
-    const stream = customer.reportStream(mockReportOptions);
+    const spyHook = jest.spyOn(hooks, "onStreamStart");
+    await customer.reportStreamRaw(mockReportOptions);
     mockStreamData(mockQueryReturnValue);
     mockStreamEnd();
-
-    for await (const row of stream) {
-      continue;
-    }
 
     expect(spyHook).toHaveBeenCalled();
     expect(spyHook).toHaveBeenCalledWith({
       credentials: expect.any(Object),
-      query: mockGaqlQuery,
+      query: expect.any(String),
       reportOptions: mockReportOptions,
-      resolve: expect.any(Function),
+      cancel: expect.any(Function),
+      editOptions: expect.any(Function),
     });
   });
 
-  it("calls onQueryEnd asynchronously", async () => {
+  it("calls onStreamStart asynchronously", async () => {
     const container = mockMethod();
     const spyMockMethod = jest.spyOn(container, "method");
     const hooks: Hooks = {
-      async onQueryEnd() {
+      async onStreamStart() {
         await new Promise((resolve) => setTimeout(resolve, 1000));
         container.method();
       },
@@ -770,38 +757,56 @@ describe("reportStream", () => {
       mockStreamData,
       mockStreamEnd,
     } = mockBuildSearchStreamRequestAndService(customer);
-    mockParse(mockParsedValues);
-    const stream = customer.reportStream(mockReportOptions);
+    await customer.reportStreamRaw(mockReportOptions);
     mockStreamData(mockQueryReturnValue);
     mockStreamEnd();
-
-    for await (const row of stream) {
-      continue;
-    }
 
     expect(spyMockMethod).toHaveBeenCalled();
   });
 
-  it("does NOT return the value of resolve() in onQueryEnd", async () => {
-    const hookReturnValues = ["various", "hook", "return", "values"];
+  it("cancels the query when cancel() is called in onStreamStart", async () => {
     const hooks: Hooks = {
-      onQueryEnd({ resolve }) {
-        resolve(hookReturnValues);
+      onStreamStart({ cancel }) {
+        cancel();
+      },
+    };
+    const customer = newCustomer(hooks);
+    const { spyBuild } = mockBuildSearchStreamRequestAndService(customer);
+    const stream = await customer.reportStreamRaw(mockReportOptions);
+
+    expect(stream).not.toBeDefined();
+    expect(spyBuild).not.toHaveBeenCalled();
+  });
+
+  it("edits the requestOptions when editOptions() is called in onStreamStart", async () => {
+    const hooks: Hooks = {
+      onStreamStart({ editOptions }) {
+        editOptions({ validate_only: true, page_size: 4 });
       },
     };
     const customer = newCustomer(hooks);
     const {
+      spyBuild,
       mockStreamData,
       mockStreamEnd,
     } = mockBuildSearchStreamRequestAndService(customer);
-    mockParse(mockParsedValues);
-    const stream = customer.reportStream(mockReportOptions);
+    const requestOptions: RequestOptions = {
+      validate_only: false, // changed
+      page_token: "abcd",
+      page_size: 2, // changed
+    };
+    await customer.reportStreamRaw({
+      ...mockReportOptions,
+      ...requestOptions,
+    });
     mockStreamData(mockQueryReturnValue);
     mockStreamEnd();
 
-    for await (const row of stream) {
-      expect(row).toEqual(mockParseValue);
-    }
+    expect(spyBuild).toHaveBeenCalledWith(mockGaqlQuery, {
+      validate_only: true,
+      page_token: "abcd",
+      page_size: 4,
+    });
   });
 });
 
@@ -839,7 +844,8 @@ describe("querier callers", () => {
     expect(mockedQuery).toHaveBeenCalledWith(
       expect.any(String),
       expect.any(Object),
-      mockReportOptions
+      mockReportOptions,
+      false // use hooks should be false for reportCount
     );
     expect(res).toEqual(mockTotalResultsCount);
   });

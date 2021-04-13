@@ -15,9 +15,10 @@ export default class ServiceFactory extends Service {
   constructor(
     clientOptions: ClientOptions,
     customerOptions: CustomerOptions,
-    hooks?: Hooks
+    hooks?: Hooks,
+    timeout = 3600000 // 1 hour
   ) {
-    super(clientOptions, customerOptions, hooks ?? {});
+    super(clientOptions, customerOptions, hooks ?? {}, timeout);
   }
 
   /**
