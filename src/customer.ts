@@ -1,7 +1,8 @@
+import { CancellableStream } from "google-gax";
 import { ClientOptions } from "./client";
 import {
   BaseMutationHookArgs,
-  BaseQueryHookArgs,
+  BaseRequestHookArgs,
   HookedCancellation,
   HookedResolution,
   Hooks,
@@ -24,14 +25,28 @@ export class Customer extends ServiceFactory {
   constructor(
     clientOptions: ClientOptions,
     customerOptions: CustomerOptions,
-    hooks?: Hooks
+    hooks?: Hooks,
+    timeout = 3600000 // 1 hour
   ) {
-    super(clientOptions, customerOptions, hooks ?? {});
+    super(clientOptions, customerOptions, hooks ?? {}, timeout);
+  }
+
+  /**
+    @description Single query using a raw GAQL string.
+    @hooks onQueryStart, onQueryError, onQueryEnd
+  */
+  public async query<T = services.IGoogleAdsRow[]>(
+    gaqlQuery: string,
+    requestOptions: RequestOptions = {}
+  ): Promise<T> {
+    const { response } = await this.querier<T>(gaqlQuery, requestOptions);
+    return response;
   }
 
   /** 
     @description Single query using ReportOptions.
     If a summary row is requested then this will be the first row of the results.
+    @hooks onQueryStart, onQueryError, onQueryEnd
   */
   public async report<T = services.IGoogleAdsRow[]>(
     options: ReportOptions
@@ -46,16 +61,9 @@ export class Customer extends ServiceFactory {
   }
 
   /**
-    @description Single query using a GAQL query
-   */
-  public async query<T = services.IGoogleAdsRow[]>(
-    gaqlQuery: string,
-    requestOptions: RequestOptions = {}
-  ): Promise<T> {
-    const { response } = await this.querier<T>(gaqlQuery, requestOptions);
-    return response;
-  }
-
+    @description Get the total row count of a report.
+    @hooks none
+  */
   public async reportCount(
     options: ReportOptions
   ): Promise<number | undefined> {
@@ -63,11 +71,12 @@ export class Customer extends ServiceFactory {
     const { gaqlQuery, requestOptions } = buildQuery(options);
     // @ts-expect-error we do not allow this field in reportOptions, however it is still a valid request option
     requestOptions.return_total_results_count = true;
-
+    const useHooks = false; // to avoid cacheing conflicts
     const { totalResultsCount } = await this.querier(
       gaqlQuery,
       requestOptions,
-      options
+      options,
+      useHooks
     );
 
     return totalResultsCount;
@@ -76,6 +85,7 @@ export class Customer extends ServiceFactory {
   /** 
     @description Stream query using ReportOptions. If a generic type is provided, it must be the type of a single row.
     If a summary row is requested then this will be the last emitted row of the stream.
+    @hooks onStreamStart, onStreamError
     @example
     const stream = reportStream<T>(reportOptions)
     for await (const row of stream) { ... }
@@ -85,37 +95,29 @@ export class Customer extends ServiceFactory {
   ): AsyncGenerator<T> {
     const { gaqlQuery, requestOptions } = buildQuery(reportOptions);
 
-    const baseHookArguments: BaseQueryHookArgs = {
+    const baseHookArguments: BaseRequestHookArgs = {
       credentials: this.credentials,
       query: gaqlQuery,
       reportOptions,
     };
 
-    const queryStart: HookedCancellation = { cancelled: false };
-    if (this.hooks.onQueryStart) {
-      await this.hooks.onQueryStart({
+    if (this.hooks.onStreamStart) {
+      const queryStart: HookedCancellation = { cancelled: false };
+
+      await this.hooks.onStreamStart({
         ...baseHookArguments,
-        cancel: (res) => {
+        cancel: () => {
           queryStart.cancelled = true;
-          queryStart.res = res;
         },
         editOptions: (options) => {
           Object.entries(options).forEach(([key, val]) => {
-            // @ts-ignore
+            // @ts-expect-error
             requestOptions[key] = val;
           });
         },
       });
 
       if (queryStart.cancelled) {
-        if (Array.isArray(queryStart.res)) {
-          for (const row of queryStart.res) {
-            yield row as T;
-          }
-        } else {
-          yield queryStart.res as T;
-        }
-
         return;
       }
     }
@@ -127,9 +129,10 @@ export class Customer extends ServiceFactory {
 
     const stream = service.searchStream(request, {
       otherArgs: { headers: this.callHeaders },
+      timeout: this.timeout,
     });
 
-    let done = false;
+    let streamFinished = false;
     const accumulator: T[] = [];
 
     let nextChunk = createNextChunkArrivedPromise();
@@ -150,13 +153,13 @@ export class Customer extends ServiceFactory {
     });
 
     stream.on("end", () => {
-      done = true;
+      streamFinished = true;
       nextChunk.resolve();
     });
 
     try {
-      while (!done || accumulator.length) {
-        if (accumulator.length !== 0) {
+      while (!streamFinished || accumulator.length) {
+        if (accumulator.length > 0) {
           const item = accumulator.shift();
           if (item === undefined) {
             throw new Error("UNDEFINED_STREAM_ERROR");
@@ -168,25 +171,67 @@ export class Customer extends ServiceFactory {
       }
     } catch (searchError) {
       const googleAdsError = this.getGoogleAdsError(searchError);
-      if (this.hooks.onQueryError) {
-        await this.hooks.onQueryError({
+      if (this.hooks.onStreamError) {
+        await this.hooks.onStreamError({
           ...baseHookArguments,
           error: googleAdsError,
         });
       }
       throw googleAdsError;
     } finally {
-      if (this.hooks.onQueryEnd) {
-        await this.hooks.onQueryEnd({
-          ...baseHookArguments,
-          resolve: () => {
-            return;
-          },
-        });
-      }
-
       stream.destroy();
     }
+  }
+
+  /** 
+    @description Retreive the raw stream using ReportOptions.
+    @hooks onStreamStart
+    @example
+    const stream = reportStreamRaw(reportOptions)
+    stream.on('data', (chunk) => { ... }) // a chunk contains up to 10,000 un-parsed rows
+    stream.on('error', (error) => { ... })
+    stream.on('end', () => { ... })
+  */
+  public async reportStreamRaw(
+    reportOptions: ReportOptions
+  ): Promise<CancellableStream | void> {
+    const { gaqlQuery, requestOptions } = buildQuery(reportOptions);
+
+    const baseHookArguments: BaseRequestHookArgs = {
+      credentials: this.credentials,
+      query: gaqlQuery,
+      reportOptions,
+    };
+
+    const queryStart: HookedCancellation = { cancelled: false };
+    if (this.hooks.onStreamStart) {
+      await this.hooks.onStreamStart({
+        ...baseHookArguments,
+        cancel: () => {
+          queryStart.cancelled = true;
+        },
+        editOptions: (options) => {
+          Object.entries(options).forEach(([key, val]) => {
+            // @ts-ignore
+            requestOptions[key] = val;
+          });
+        },
+      });
+
+      if (queryStart.cancelled) {
+        return;
+      }
+    }
+
+    const { service, request } = this.buildSearchStreamRequestAndService(
+      gaqlQuery,
+      requestOptions
+    );
+
+    return service.searchStream(request, {
+      otherArgs: { headers: this.callHeaders },
+      timeout: this.timeout,
+    });
   }
 
   private async search(
@@ -204,6 +249,7 @@ export class Customer extends ServiceFactory {
 
     const searchResponse = await service.search(request, {
       otherArgs: { headers: this.callHeaders },
+      timeout: this.timeout,
       autoPaginate: false, // autoPaginate doesn't work
     });
 
@@ -230,13 +276,11 @@ export class Customer extends ServiceFactory {
   }> {
     const response: services.IGoogleAdsRow[] = [];
     let nextPageToken: PageToken = undefined;
-
     const initialSearch = await this.search(gaqlQuery, requestOptions);
     const totalResultsCount = initialSearch.totalResultsCount;
 
     response.push(...initialSearch.response);
     nextPageToken = initialSearch.nextPageToken;
-
     while (nextPageToken) {
       const nextSearch = await this.search(gaqlQuery, {
         ...requestOptions,
@@ -249,21 +293,19 @@ export class Customer extends ServiceFactory {
     return { response, totalResultsCount };
   }
 
-  /**
-    @description Single query using a GAQL query
-   */
   private async querier<T = services.IGoogleAdsRow[]>(
     gaqlQuery: string,
     requestOptions: RequestOptions = {},
-    reportOptions?: ReportOptions
+    reportOptions?: ReportOptions,
+    useHooks = true
   ): Promise<{ response: T; totalResultsCount?: number }> {
-    const baseHookArguments: BaseQueryHookArgs = {
+    const baseHookArguments: BaseRequestHookArgs = {
       credentials: this.credentials,
       query: gaqlQuery,
       reportOptions,
     };
 
-    if (this.hooks.onQueryStart) {
+    if (this.hooks.onQueryStart && useHooks) {
       const queryCancellation: HookedCancellation = { cancelled: false };
       await this.hooks.onQueryStart({
         ...baseHookArguments,
@@ -295,7 +337,7 @@ export class Customer extends ServiceFactory {
         ? parse({ results: response, reportOptions })
         : parse({ results: response, gaqlString: gaqlQuery });
 
-      if (this.hooks.onQueryEnd) {
+      if (this.hooks.onQueryEnd && useHooks) {
         const queryResolution: HookedResolution = { resolved: false };
         await this.hooks.onQueryEnd({
           ...baseHookArguments,
@@ -313,7 +355,7 @@ export class Customer extends ServiceFactory {
       return { response: (parsedResponse as unknown) as T, totalResultsCount };
     } catch (searchError) {
       const googleAdsError = this.getGoogleAdsError(searchError);
-      if (this.hooks.onQueryError) {
+      if (this.hooks.onQueryError && useHooks) {
         await this.hooks.onQueryError({
           ...baseHookArguments,
           error: googleAdsError,
@@ -324,7 +366,10 @@ export class Customer extends ServiceFactory {
   }
 
   /**
-   * @description Creates, updates, or removes resources. This method supports atomic transactions with multiple types of resources. For example, you can atomically create a campaign and a campaign budget, or perform up to thousands of mutates atomically.
+   * @description Creates, updates, or removes resources. This method supports atomic transactions
+   * with multiple types of resources. For example, you can atomically create a campaign and a
+   * campaign budget, or perform up to thousands of mutates atomically.
+   * @hooks onMutationStart, onMutationError, onMutationEnd
    */
   public async mutateResources<T>(
     mutations: MutateOperation<T>[],
@@ -365,9 +410,7 @@ export class Customer extends ServiceFactory {
     try {
       const response = await service.mutate(request, {
         // @ts-expect-error Field not included in type definitions
-        otherArgs: {
-          headers: this.callHeaders,
-        },
+        otherArgs: { headers: this.callHeaders },
       });
 
       const parsedResponse = request.partial_failure
@@ -412,9 +455,7 @@ export class Customer extends ServiceFactory {
         );
         return service.searchGoogleAdsFields(request, {
           // @ts-expect-error This method does support call headers
-          otherArgs: {
-            headers: this.callHeaders,
-          },
+          otherArgs: { headers: this.callHeaders },
         });
       },
     };
