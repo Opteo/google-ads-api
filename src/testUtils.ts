@@ -276,6 +276,12 @@ export function mockParse(
   return jest.spyOn(parser, "parse").mockImplementation(() => mockParsedValues);
 }
 
+export function noopParser(
+  rows: services.IGoogleAdsRow[]
+): services.IGoogleAdsRow[] {
+  return rows;
+}
+
 export function mockMethod(): {
   method(): void;
 } {

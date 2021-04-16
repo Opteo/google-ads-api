@@ -327,7 +327,7 @@ export class Customer extends ServiceFactory {
     }
 
     try {
-      const _parser = (rows: services.IGoogleAdsRow[]) => {
+      const parsingWapper = (rows: services.IGoogleAdsRow[]) => {
         return this.clientOptions.disable_parsing
           ? rows
           : reportOptions
@@ -338,7 +338,7 @@ export class Customer extends ServiceFactory {
       const { response, totalResultsCount } = await this.paginatedSearch(
         gaqlQuery,
         requestOptions,
-        _parser
+        parsingWapper
       );
 
       if (this.hooks.onQueryEnd && useHooks) {

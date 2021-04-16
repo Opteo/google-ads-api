@@ -24,6 +24,7 @@ import {
   mockSummaryRow,
   mockTotalResultsCount,
   newCustomer,
+  noopParser,
 } from "./testUtils";
 import { MutateOptions, RequestOptions } from "./types";
 
@@ -316,7 +317,7 @@ describe("paginatedSearch", () => {
     const { response } = await customer.paginatedSearch(
       mockGaqlQuery,
       {},
-      (row) => row
+      noopParser
     );
 
     expect(response).toEqual(["a", "b", "c"]);
@@ -339,7 +340,7 @@ describe("paginatedSearch", () => {
     const { response } = await customer.paginatedSearch(
       mockGaqlQuery,
       {},
-      (row) => row
+      noopParser
     );
 
     expect(response).toEqual(["a", "b", "c", "d", "e", "f"]);
@@ -360,7 +361,7 @@ describe("paginatedSearch", () => {
     const { response } = await customer.paginatedSearch(
       mockGaqlQuery,
       {},
-      (row) => row
+      noopParser
     );
 
     expect(response).toEqual(["a", "b", "c", "d", "e", "f", "g", "h"]);
@@ -379,7 +380,7 @@ describe("paginatedSearch", () => {
     const { totalResultsCount } = await customer.paginatedSearch(
       mockGaqlQuery,
       {},
-      (row) => row
+      noopParser
     );
     expect(totalResultsCount).toEqual(mockTotalResultsCount);
   });
