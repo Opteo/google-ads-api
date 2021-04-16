@@ -239,7 +239,7 @@ Returns the raw stream so that events can be handled manually. For more informat
 ```ts
 import { enums, parse } from "google-ads-api";
 
-const stream = customer.reportStreamRaw({
+const reportOptions = {
   entity: "ad_group_criterion",
   attributes: [
     "ad_group_criterion.keyword.text", 
@@ -248,20 +248,25 @@ const stream = customer.reportStreamRaw({
   constraints: {
     "ad_group_criterion.type": enums.CriterionType.KEYWORD,
   },
-});
+};
+
+const stream = customer.reportStreamRaw(reportOptions);
 
 // Rows are streamed in 10,000 row chunks
 stream.on("data", (chunk) => {
-  parse(chunk.results)
-})
+  const parsedResults = parse({
+    results: chunk.results,
+    reportOptions,
+  });
+});
 
 stream.on("error", (error) => {
-  throw new Error(error)
-})
+  throw new Error(error);
+});
 
 stream.on("end", () => {
-  console.log("stream has finished")
-})
+  console.log("stream has finished");
+});
 ```
 <!-- prettier-ignore-end -->
 
