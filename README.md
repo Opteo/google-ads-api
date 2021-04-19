@@ -68,6 +68,7 @@ For now we recommend following the usage examples below.
   - [Total Results Count](#total-results-count)
 - Mutations
   - [Create an expanded text ad](#create-an-expanded-text-ad)
+  - [Create a campaign & budget atomically](create-a-campaign-&-budget-atomically)
 - Misc
   - [Resource Names](#resource-names)
   - [Query Hooks](#query-hooks)
@@ -244,6 +245,60 @@ const adGroupAd = new resources.AdGroupAd({
 const { results } = await cus.adGroupAds.create([adGroupAd]);
 ```
 
+## Create a Campaign & Budget atomically
+
+```ts
+import {
+  resources,
+  enums,
+  toMicros,
+  ResourceNames,
+  MutateOperation,
+} from "google-ads-api";
+
+// Create a resource name with a temporary resource id (-1)
+const budgetResourceName = ResourceNames.campaignBudget(
+  cus.credentials.customer_id,
+  "-1"
+);
+
+const operations: MutateOperation<
+  resources.ICampaignBudget | resources.ICampaign
+>[] = [
+  {
+    entity: "campaign_budget",
+    operation: "create",
+    resource: {
+      // Create a budget with the temporary resource id
+      resource_name: budgetResourceName,
+      name: "Planet Express Budget",
+      delivery_method: enums.BudgetDeliveryMethod.STANDARD,
+      amount_micros: toMicros(500),
+    },
+  },
+  {
+    entity: "campaign",
+    operation: "create",
+    resource: {
+      name: "Planet Express",
+      advertising_channel_type: enums.AdvertisingChannelType.SEARCH,
+      status: enums.CampaignStatus.PAUSED,
+      manual_cpc: {
+        enhanced_cpc_enabled: true,
+      },
+      // Use the temporary resource id which will be created in the previous operation
+      campaign_budget: budgetResourceName,
+      network_settings: {
+        target_google_search: true,
+        target_search_network: true,
+      },
+    },
+  },
+];
+
+const result = await cus.mutateResources(operations);
+```
+
 ## Summary Row
 
 If a summary row is requested in the `report` method, it will be included as the **first** row of the results.
@@ -281,7 +336,7 @@ The `reportCount` method acts like `report` but returns the total number of rows
 const totalRows = await customer.reportCount({
   entity: "search_term_view",
   attributes: ["search_term_view.resource_name"],
-})
+});
 ```
 
 ## Resource Names
