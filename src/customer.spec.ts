@@ -1,5 +1,6 @@
 import { google } from "google-gax/build/protos/operations";
 import { Hooks } from "./hooks";
+
 import { enums, errors, services } from "./protos";
 import {
   failTestIfExecuted,
@@ -23,6 +24,7 @@ import {
   mockSummaryRow,
   mockTotalResultsCount,
   newCustomer,
+  noopParser,
 } from "./testUtils";
 import { MutateOptions, RequestOptions } from "./types";
 
@@ -32,11 +34,11 @@ describe("querier", () => {
   it("parses query results by default", async () => {
     const customer = newCustomer({});
     mockPaginatedSearch(customer);
-    const mockedParse = mockParse(mockParsedValues);
+    mockParse(mockParsedValues);
+
     // @ts-expect-error private method
     const { response } = await customer.querier(mockGaqlQuery);
 
-    expect(mockedParse).toHaveBeenCalled();
     expect(response).toEqual(mockParsedValues);
   });
 
@@ -155,11 +157,15 @@ describe("querier", () => {
     // @ts-expect-error private method
     await customer.querier(mockGaqlQuery, requestOptions);
 
-    expect(spyPaginatedSearch).toHaveBeenCalledWith(mockGaqlQuery, {
-      validate_only: true, // changed
-      page_token: "abcd",
-      page_size: 4, // changed
-    });
+    expect(spyPaginatedSearch).toHaveBeenCalledWith(
+      mockGaqlQuery,
+      {
+        validate_only: true, // changed
+        page_token: "abcd",
+        page_size: 4, // changed
+      },
+      expect.any(Function)
+    );
   });
 
   it("calls onQueryError when provided and when the query throws an error", async (done) => {
@@ -229,14 +235,13 @@ describe("querier", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const spyPaginatedSearch = mockPaginatedSearch(customer);
+    mockPaginatedSearch(customer);
     mockParse(mockQueryReturnValue);
     mockGetGoogleAdsError(customer);
     const spyHook = jest.spyOn(hooks, "onQueryError");
     // @ts-expect-error private method
     await customer.querier(mockGaqlQuery);
 
-    expect(spyPaginatedSearch).not.toThrow();
     expect(spyHook).not.toHaveBeenCalled();
   });
 
@@ -309,7 +314,11 @@ describe("paginatedSearch", () => {
     });
 
     // @ts-expect-error private method
-    const { response } = await customer.paginatedSearch(mockGaqlQuery, {});
+    const { response } = await customer.paginatedSearch(
+      mockGaqlQuery,
+      {},
+      noopParser
+    );
 
     expect(response).toEqual(["a", "b", "c"]);
   });
@@ -328,7 +337,11 @@ describe("paginatedSearch", () => {
     });
 
     // @ts-expect-error private method
-    const { response } = await customer.paginatedSearch(mockGaqlQuery, {});
+    const { response } = await customer.paginatedSearch(
+      mockGaqlQuery,
+      {},
+      noopParser
+    );
 
     expect(response).toEqual(["a", "b", "c", "d", "e", "f"]);
   });
@@ -345,7 +358,11 @@ describe("paginatedSearch", () => {
     mockSearchOnce({ customer, response: ["h"], nextPageToken: null });
 
     // @ts-expect-error private method
-    const { response } = await customer.paginatedSearch(mockGaqlQuery, {});
+    const { response } = await customer.paginatedSearch(
+      mockGaqlQuery,
+      {},
+      noopParser
+    );
 
     expect(response).toEqual(["a", "b", "c", "d", "e", "f", "g", "h"]);
   });
@@ -362,7 +379,8 @@ describe("paginatedSearch", () => {
     // @ts-expect-error private method
     const { totalResultsCount } = await customer.paginatedSearch(
       mockGaqlQuery,
-      {}
+      {},
+      noopParser
     );
     expect(totalResultsCount).toEqual(mockTotalResultsCount);
   });

@@ -72,11 +72,14 @@ export function mockPaginatedSearch(
       // @ts-expect-error private method
       .spyOn(customer, "paginatedSearch")
       // @ts-expect-error
-      .mockImplementation(() => {
+      .mockImplementation((gaqlQuery, requestOptions, _parser) => {
         const totalResultsCount = includeTotalResultsCount
           ? mockTotalResultsCount
           : undefined;
-        return { response: mockQueryReturnValue, totalResultsCount };
+        return {
+          response: _parser(mockQueryReturnValue),
+          totalResultsCount,
+        };
       })
   );
 }
@@ -271,6 +274,12 @@ export function mockParse(
   mockParsedValues: services.IGoogleAdsRow[]
 ): jest.SpyInstance {
   return jest.spyOn(parser, "parse").mockImplementation(() => mockParsedValues);
+}
+
+export function noopParser(
+  rows: services.IGoogleAdsRow[]
+): services.IGoogleAdsRow[] {
+  return rows;
 }
 
 export function mockMethod(): {
