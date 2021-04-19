@@ -1,14 +1,17 @@
+import { enums, fields } from "./protos";
 import {
-  ReportOptions,
-  RequestOptions,
-  ConstraintType1,
   Constraint,
   ConstraintKey,
-  ConstraintValue,
   ConstraintOperation,
+  ConstraintType1,
+  ConstraintValue,
+  DateConstant,
+  dateConstants,
+  Order,
+  ReportOptions,
+  RequestOptions,
   SortOrder,
 } from "./types";
-import { enums, fields } from "./protos";
 
 enum QueryKeywords {
   SELECT = "SELECT",
@@ -26,7 +29,10 @@ type ConstraintString = `${string} ${ConstraintOperation} ${ParsedConstraintValu
 type SelectClause = `${QueryKeywords.SELECT} ${string}`;
 type FromClause = ` ${QueryKeywords.FROM} ${fields.Resource}`;
 type WhereClause = ` ${QueryKeywords.WHERE} ${string}` | ``;
-type OrderClause = ` ${QueryKeywords.ORDER_BY} ${string} ${SortOrder}` | ``;
+export type OrderClause =
+  | ` ${QueryKeywords.ORDER_BY} ${string} ${SortOrder}`
+  | ` ${QueryKeywords.ORDER_BY} ${string}`
+  | ``;
 type LimitClause = ` ${QueryKeywords.LIMIT} ${number}` | ``;
 
 type Query = `${SelectClause}${FromClause}${WhereClause}${OrderClause}${LimitClause}`;
@@ -52,6 +58,7 @@ export const QueryError = {
   INVALID_TO_DATE_TYPE: (toDate: ReportOptions["to_date"]): string =>
     `To date must be a string. Here, typeof to date is ${typeof toDate}`,
   INVALID_LIMIT: "Limit must be a positive integer.",
+  INVALID_ORDER: "Order must be an array.",
   INVALID_ORDERLY: "OrderBy arrays must only contain strings.",
   INVALID_ORDERBY: "OrderBy must be a string or an array of strings.",
   INVALID_SORT_ORDER: `Sort order must be "ASC" or "DESC".`,
@@ -89,6 +96,7 @@ export function buildFromClause(entity: ReportOptions["entity"]): FromClause {
 
 export function validateConstraintKeyAndValue(
   key: ConstraintKey,
+  op: ConstraintOperation,
   val: ConstraintValue
 ): {
   op: ConstraintOperation;
@@ -99,6 +107,10 @@ export function validateConstraintKeyAndValue(
   }
 
   if (typeof val === "string") {
+    if (dateConstants.includes(val as DateConstant)) {
+      return { op, val };
+    }
+
     return {
       op: "=",
       val: new RegExp(/^'.*'$|^".*"$/g).test(val) ? val : `"${val}"`,
@@ -154,7 +166,7 @@ export function extractConstraintConditions(
           if (typeof key !== "string") {
             throw new Error(QueryError.INVALID_CONSTRAINT_KEY);
           }
-          const validatedValue = validateConstraintKeyAndValue(key, val);
+          const validatedValue = validateConstraintKeyAndValue(key, op, val);
           // @ts-ignore
           return `${key} ${op} ${validatedValue.val}` as const;
         } else if (Object.keys(con).length === 1) {
@@ -162,6 +174,7 @@ export function extractConstraintConditions(
 
           const validatedValue = validateConstraintKeyAndValue(
             key as ConstraintKey,
+            "=",
             val as ConstraintValue
           );
 
@@ -179,6 +192,7 @@ export function extractConstraintConditions(
     return Object.entries(constraints).map(([key, val]) => {
       const validatedValue = validateConstraintKeyAndValue(
         key as ConstraintKey,
+        "=",
         val as ConstraintValue
       );
 
@@ -284,7 +298,7 @@ export function completeOrderly(
   }
 }
 
-export function buildOrderClause(
+export function buildOrderClauseOld(
   orderBy: ReportOptions["order_by"],
   sortOrder: ReportOptions["sort_order"],
   entity: ReportOptions["entity"]
@@ -316,6 +330,42 @@ export function buildOrderClause(
     )} ${sortOrder}` as const;
   } else {
     throw new Error(QueryError.INVALID_ORDERBY);
+  }
+}
+
+export function buildOrderClauseNew(
+  order: Required<ReportOptions["order"]>,
+  entity: ReportOptions["entity"]
+): OrderClause {
+  if (!order || !Array.isArray(order)) {
+    throw new Error(QueryError.INVALID_ORDER);
+  }
+
+  if (!order.length) {
+    return "";
+  }
+
+  const orders = order
+    .map((o: Order) => {
+      const orderly = completeOrderly(o.field, entity);
+      const sortOrder: SortOrder = o.sort_order ? o.sort_order : "DESC";
+      return `${orderly} ${sortOrder}`;
+    })
+    .join(", ");
+
+  return ` ${QueryKeywords.ORDER_BY} ${orders}` as const;
+}
+
+export function buildOrderClause(
+  order: ReportOptions["order"],
+  orderBy: ReportOptions["order_by"],
+  sortOrder: ReportOptions["sort_order"],
+  entity: ReportOptions["entity"]
+): OrderClause {
+  if (order) {
+    return buildOrderClauseNew(order, entity);
+  } else {
+    return buildOrderClauseOld(orderBy, sortOrder, entity);
   }
 }
 
@@ -352,6 +402,7 @@ export function buildQuery(
   );
   const LIMIT: LimitClause = buildLimitClause(reportOptions.limit);
   const ORDER: OrderClause = buildOrderClause(
+    reportOptions.order,
     reportOptions.order_by,
     reportOptions.sort_order,
     reportOptions.entity

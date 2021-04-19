@@ -15,6 +15,7 @@ export {
 
 // Util functions
 export { fromMicros, toMicros } from "./utils";
+export { parse } from "./parser";
 export * as ResourceNames from "./protos/autogen/resourceNames";
 
 // Util types
@@ -30,6 +31,8 @@ export {
   OnQueryStart,
   OnQueryError,
   OnQueryEnd,
+  OnStreamStart,
+  OnStreamError,
   OnMutationStart,
   OnMutationError,
   OnMutationEnd,

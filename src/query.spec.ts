@@ -1,4 +1,9 @@
-import { ReportOptions, ConstraintKey, Constraint } from "./types";
+import {
+  ReportOptions,
+  ConstraintKey,
+  ConstraintOperation,
+  Constraint,
+} from "./types";
 import { normaliseQuery } from "./utils";
 import { enums } from "./protos";
 
@@ -14,7 +19,8 @@ import {
   buildWhereClause,
   buildLimitClause,
   completeOrderly,
-  buildOrderClause,
+  buildOrderClauseOld,
+  buildOrderClauseNew,
   buildRequestOptions,
   buildQuery,
 } from "./query";
@@ -111,7 +117,7 @@ describe("validateConstraintKeyAndValue", () => {
 
     constraintValues.forEach((val) => {
       // @ts-ignore
-      expect(() => validateConstraintKeyAndValue(key, val)).toThrowError(
+      expect(() => validateConstraintKeyAndValue(key, "=", val)).toThrowError(
         // @ts-ignore
         QueryError.INVALID_CONSTRAINT_VALUE(key, val)
       );
@@ -119,9 +125,11 @@ describe("validateConstraintKeyAndValue", () => {
   });
 
   it("does not throw for an empty string val", () => {
-    expect(() => validateConstraintKeyAndValue(key, "")).not.toThrowError();
+    expect(() =>
+      validateConstraintKeyAndValue(key, "!=", "")
+    ).not.toThrowError();
 
-    const validatedValue = validateConstraintKeyAndValue(key, "");
+    const validatedValue = validateConstraintKeyAndValue(key, "!=", "");
     expect(validatedValue.op).toEqual("=");
     expect(validatedValue.val).toEqual('""');
   });
@@ -130,7 +138,7 @@ describe("validateConstraintKeyAndValue", () => {
     const constraintValues = [15, true, -20, false];
 
     constraintValues.forEach((val) => {
-      const validatedValue = validateConstraintKeyAndValue(key, val);
+      const validatedValue = validateConstraintKeyAndValue(key, "!=", val);
       expect(validatedValue.op).toEqual("=");
       expect(validatedValue.val).toEqual(val);
     });
@@ -138,32 +146,44 @@ describe("validateConstraintKeyAndValue", () => {
 
   it("returns arrays as strings", () => {
     const val1 = [1, 2, 3, 4];
-    const validatedValue1 = validateConstraintKeyAndValue(key, val1);
+    const validatedValue1 = validateConstraintKeyAndValue(key, "!=", val1);
     expect(validatedValue1.op).toEqual("IN");
     expect(validatedValue1.val).toEqual(`(1, 2, 3, 4)`);
 
     const val2 = ["a", "b", "c", "d"];
-    const validatedValue2 = validateConstraintKeyAndValue(key, val2);
+    const validatedValue2 = validateConstraintKeyAndValue(key, "!=", val2);
     expect(validatedValue2.op).toEqual("IN");
     expect(validatedValue2.val).toEqual(`("a", "b", "c", "d")`);
   });
 
   it("adds quotation marks to string constraints that do not already have them", () => {
     const val = enums.AdvertisingChannelType.SEARCH;
-    const validatedValue = validateConstraintKeyAndValue(key, val);
+    const validatedValue = validateConstraintKeyAndValue(key, "!=", val);
     expect(validatedValue.op).toEqual("=");
     expect(validatedValue.val).toEqual(enums.AdvertisingChannelType.SEARCH);
   });
 
   it("returns string constraints that already have quotation marks", () => {
     const val1 = `'SEARCH'`;
-    const validatedValue1 = validateConstraintKeyAndValue(key, val1);
+    const validatedValue1 = validateConstraintKeyAndValue(key, "!=", val1);
     expect(validatedValue1.op).toEqual("=");
     expect(validatedValue1.val).toEqual(val1);
 
     const val2 = `"SEARCH"`;
-    const validatedValue2 = validateConstraintKeyAndValue(key, val2);
+    const validatedValue2 = validateConstraintKeyAndValue(key, "!=", val2);
     expect(validatedValue2.op).toEqual("=");
+    expect(validatedValue2.val).toEqual(val2);
+  });
+
+  it("returns date constants without quotation marks", () => {
+    const val1 = `LAST_30_DAYS`;
+    const validatedValue1 = validateConstraintKeyAndValue(key, "DURING", val1);
+    expect(validatedValue1.op).toEqual("DURING");
+    expect(validatedValue1.val).toEqual(val1);
+
+    const val2 = `YESTERDAY`;
+    const validatedValue2 = validateConstraintKeyAndValue(key, "DURING", val2);
+    expect(validatedValue2.op).toEqual("DURING");
     expect(validatedValue2.val).toEqual(val2);
   });
 });
@@ -479,7 +499,7 @@ describe("completeOrderly", () => {
   });
 });
 
-describe("buildOrderClause", () => {
+describe("buildOrderClauseOld", () => {
   it("throws if the sortOrder is invalid", () => {
     const sortOrders = [
       "asc",
@@ -498,13 +518,13 @@ describe("buildOrderClause", () => {
     sortOrders.forEach((sortOrder) => {
       expect(() =>
         // @ts-ignore
-        buildOrderClause(options.order_by, sortOrder, options.entity)
+        buildOrderClauseOld(options.order_by, sortOrder, options.entity)
       ).toThrowError(QueryError.INVALID_SORT_ORDER);
     });
   });
 
   it("sets the sortOrder to descending if none is provided", () => {
-    const orderClause = buildOrderClause(
+    const orderClause = buildOrderClauseOld(
       options.order_by,
       undefined,
       options.entity
@@ -514,7 +534,7 @@ describe("buildOrderClause", () => {
   });
 
   it("returns an empty string if no orderBy is provided", () => {
-    const orderClause = buildOrderClause(
+    const orderClause = buildOrderClauseOld(
       undefined,
       options.sort_order,
       options.entity
@@ -524,7 +544,7 @@ describe("buildOrderClause", () => {
   });
 
   it("correctly parses orderBy from a string", () => {
-    const orderClause = buildOrderClause(
+    const orderClause = buildOrderClauseOld(
       options.order_by,
       options.sort_order,
       options.entity
@@ -534,7 +554,7 @@ describe("buildOrderClause", () => {
   });
 
   it("correctly parses orderBy from an array", () => {
-    const orderClause = buildOrderClause(
+    const orderClause = buildOrderClauseOld(
       ["metrics.impressions", "campaign.id"],
       options.sort_order,
       options.entity
@@ -559,7 +579,7 @@ describe("buildOrderClause", () => {
     orders.forEach((order) => {
       expect(() =>
         // @ts-ignore
-        buildOrderClause([order], options.sort_order, options.entity)
+        buildOrderClauseOld([order], options.sort_order, options.entity)
       ).toThrowError(QueryError.INVALID_ORDERLY);
     });
   });
@@ -577,9 +597,69 @@ describe("buildOrderClause", () => {
     orderBys.forEach((orderBy) => {
       expect(() =>
         // @ts-ignore
-        buildOrderClause(orderBy, options.sort_order, options.entity)
+        buildOrderClauseOld(orderBy, options.sort_order, options.entity)
       ).toThrowError(QueryError.INVALID_ORDERBY);
     });
+  });
+});
+
+describe("buildOrderClauseNew", () => {
+  it("throws if order is not an array", () => {
+    const orders = [
+      2,
+      "string",
+      {},
+      null,
+      () => {
+        return;
+      },
+    ];
+
+    orders.forEach((order) => {
+      expect(() =>
+        // @ts-ignore
+        buildOrderClauseNew(order, options.entity)
+      ).toThrowError(QueryError.INVALID_ORDER);
+    });
+  });
+
+  it("sets the sortOrder to descending if none is provided", () => {
+    const orderClause = buildOrderClauseNew(
+      [{ field: "metrics.clicks" }],
+      options.entity
+    );
+
+    expect(orderClause.endsWith("DESC")).toBeTruthy();
+  });
+
+  it("returns an empty string if an empty array is provided", () => {
+    const orderClause = buildOrderClauseNew([], options.entity);
+
+    expect(orderClause).toEqual("");
+  });
+
+  it("correctly parses a single order", () => {
+    const orderClause = buildOrderClauseNew(
+      [{ field: "metrics.clicks", sort_order: "ASC" }],
+      options.entity
+    );
+
+    expect(orderClause).toEqual(` ORDER BY metrics.clicks ASC`);
+  });
+
+  it("correctly parses multiple orders", () => {
+    const orderClause = buildOrderClauseNew(
+      [
+        { field: "metrics.clicks", sort_order: "ASC" },
+        { field: "campaign.id", sort_order: "DESC" },
+        { field: "segments.date", sort_order: "ASC" },
+      ],
+      options.entity
+    );
+
+    expect(orderClause).toEqual(
+      ` ORDER BY metrics.clicks ASC, campaign.id DESC, segments.date ASC`
+    );
   });
 });
 
@@ -764,6 +844,11 @@ describe("buildQuery", () => {
           { "campaign.serving_status": enums.CampaignServingStatus.SERVING },
           { "ad_group.status": enums.AdGroupStatus.ENABLED },
         ],
+        order: [
+          { field: "metrics.cost_micros", sort_order: "DESC" },
+          { field: "metrics.clicks", sort_order: "ASC" },
+          { field: "ad_group.id" },
+        ],
       },
       expected: normaliseQuery(
         `SELECT
@@ -775,7 +860,11 @@ describe("buildQuery", () => {
           AND metrics.clicks > 10
           AND campaign.status = "ENABLED"
           AND campaign.serving_status = "SERVING"
-          AND ad_group.status = "ENABLED"`
+          AND ad_group.status = "ENABLED"
+        ORDER BY
+          metrics.cost_micros DESC,
+          metrics.clicks ASC,
+          ad_group.id DESC`
       ),
     },
   ];

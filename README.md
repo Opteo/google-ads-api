@@ -63,7 +63,8 @@ For now we recommend following the usage examples below.
   - [Retrieve Campaigns with metrics](#retrieve-campaigns-with-metrics)
   - [Retrieve Campaigns using GAQL](#retrieve-campaigns-using-gaql)
   - [Retrieve Ad Group metrics by date](#retrieve-ad-group-metrics-by-date)
-  - [Retrieve Keywords with streaming](#retrieve-keywords-with-streaming)
+  - [Retrieve Keywords with an async iterator](#retrieve-keywords-with-an-async-iterator)
+  - [Retrieve Keywords with a raw stream](#retrieve-keywords-with-a-raw-stream)
   - [Summary Row](#summary-row)
   - [Total Results Count](#total-results-count)
 - Mutations
@@ -71,7 +72,7 @@ For now we recommend following the usage examples below.
   - [Create a campaign & budget atomically](create-a-campaign-&-budget-atomically)
 - Misc
   - [Resource Names](#resource-names)
-  - [Query Hooks](#query-hooks)
+  - [Hooks](#hooks)
 
 ## Create a client
 
@@ -84,6 +85,8 @@ const client = new GoogleAdsApi({
   developer_token: "<DEVELOPER-TOKEN>",
 });
 ```
+
+---
 
 ## Create a customer instance
 
@@ -102,6 +105,8 @@ const customer = client.Customer({
 });
 ```
 
+---
+
 ## List accessible customers
 
 This is a special client method for listing the accessible customers for a given refresh token, and is equivalent to [CustomerService.listAccessibleCustomers](https://developers.google.com/google-ads/api/reference/rpc/v6/CustomerService#listaccessiblecustomers). It returns the resource names of available customer accounts.
@@ -117,6 +122,8 @@ const refreshToken = "<REFRESH-TOKEN">
 
 const customers = await client.listAccessibleCustomers(refreshToken);
 ```
+
+---
 
 ## Retrieve Campaigns with metrics
 
@@ -144,6 +151,8 @@ const campaigns = await customer.report({
 });
 ```
 
+---
+
 ## Retrieve Campaigns using GAQL
 
 If you prefer to use the [Google Ads Query Language](https://developers.google.com/google-ads/api/docs/query/overview) (GAQL) the `query` method is available. Internally `report` uses this function. [More GAQL examples can be found here](https://developers.google.com/google-ads/api/docs/query/cookbook).
@@ -167,6 +176,8 @@ const campaigns = await customer.query(`
 `);
 ```
 
+---
+
 ## Retrieve Ad Group metrics by date
 
 ```ts
@@ -186,9 +197,11 @@ const campaigns = await customer.report({
 });
 ```
 
-## Retrieve Keywords with streaming
+---
 
-Streaming is useful when you're dealing with >10k rows, as this is the page size for results.
+## Retrieve Keywords with an async iterator
+
+Calls searchStream internally but returns the rows one by one in an async iterator.
 
 <!-- prettier-ignore-start -->
 
@@ -209,12 +222,56 @@ const stream = customer.reportStream({
 // Rows are streamed in one by one
 for await (const row of stream) {
     // Break the loop to stop streaming
-    if(someLogic) {
+    if (someLogic) {
         break
     }
 }
 ```
 <!-- prettier-ignore-end -->
+
+---
+
+## Retrieve Keywords with a raw stream
+
+Returns the raw stream so that events can be handled manually. For more information on Google's stream methods please [consult their docs](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming).
+
+<!-- prettier-ignore-start -->
+
+```ts
+import { enums, parse } from "google-ads-api";
+
+const reportOptions = {
+  entity: "ad_group_criterion",
+  attributes: [
+    "ad_group_criterion.keyword.text", 
+    "ad_group_criterion.status",
+  ],
+  constraints: {
+    "ad_group_criterion.type": enums.CriterionType.KEYWORD,
+  },
+};
+
+const stream = customer.reportStreamRaw(reportOptions);
+
+// Rows are streamed in 10,000 row chunks
+stream.on("data", (chunk) => {
+  const parsedResults = parse({
+    results: chunk.results,
+    reportOptions,
+  });
+});
+
+stream.on("error", (error) => {
+  throw new Error(error);
+});
+
+stream.on("end", () => {
+  console.log("stream has finished");
+});
+```
+<!-- prettier-ignore-end -->
+
+---
 
 ## Create an expanded text ad
 
@@ -258,7 +315,7 @@ import {
 
 // Create a resource name with a temporary resource id (-1)
 const budgetResourceName = ResourceNames.campaignBudget(
-  cus.credentials.customer_id,
+  customer.credentials.customer_id,
   "-1"
 );
 
@@ -296,7 +353,7 @@ const operations: MutateOperation<
   },
 ];
 
-const result = await cus.mutateResources(operations);
+const result = await customer.mutateResources(operations);
 ```
 
 ## Summary Row
@@ -328,9 +385,11 @@ for await (const row of stream) {
 const summaryRow = accumulator.slice(-1)[0];
 ```
 
+---
+
 ## Total Results Count
 
-The `reportCount` method acts like `report` but returns the total number of rows that the query would have returned (ignoring the limit). This replaces the `return_total_results_count` report option.
+The `reportCount` method acts like `report` but returns the total number of rows that the query would have returned (ignoring the limit). This replaces the `return_total_results_count` report option. No hooks are called in this function to avoid cacheing conflicts.
 
 ```ts
 const totalRows = await customer.reportCount({
@@ -338,6 +397,41 @@ const totalRows = await customer.reportCount({
   attributes: ["search_term_view.resource_name"],
 });
 ```
+
+---
+
+## Report Results Order
+
+There are 2 methods of sorting the results of report. The prefered method is to use the `order` key, which should be an array of objects with a `field` key and an optional `sort_order` key. The order of the items in the array will map to the order of the sorting keys in the GAQL query, and hence the priorities of the sorts.
+
+```ts
+const response = await customer.report({
+  entity: "campaign",
+  attributes: ["campaign.id"],
+  metrics: ["metrics.clicks"],
+  segments: ["segments.date"],
+  order: [
+    { field: "metrics.clicks", sort_order: "DESC" },
+    { field: "segments.date", sort_order: "ASC" },
+    { field: "campaign.id" }, // default sort_order is descending
+  ],
+});
+```
+
+The other method is to use the `order_by` and `sort_order` keys, however this will be deprecated in a future version of the API.
+
+```ts
+const response = await customer.report({
+  entity: "campaign",
+  attributes: ["campaign.id"],
+  metrics: ["metrics.clicks"],
+  segments: ["segments.date"],
+  order_by: "metrics.clicks",
+  sort_order: "DESC",
+});
+```
+
+---
 
 ## Resource Names
 
@@ -359,52 +453,114 @@ ResourceNames.adGroupAd("1", "2", "3");
 // "customers/1/adGroupAds/2~3"
 
 const amsterdamLocationId = 1010543;
-ResourceNames.geoTargetConstant(amsterdam);
+ResourceNames.geoTargetConstant(amsterdamLocationId);
 // "geoTargetConstants/1010543"
 
 ResourceNames.accountBudget(customer.credentials.customer_id, 123);
 // "customers/1234567890/accountBudgets/123"
 ```
 
+---
+
 ## Hooks
 
-The library provides hooks that can be executed before, after or on error of a query or a mutation. Query hooks have access to the gaql query and the reportOptions, while mutation hooks have access to the mutations.
+The library provides hooks that can be executed before, after or on error of a query, stream or a mutation.
+
+### Query/stream hooks:
+
+- `onQueryStart`
+- `onQueryError`
+- `onQueryEnd`
+- `onStreamStart`
+- `onStreamError`
+
+These hooks have access to the `customerCredentials` argument, containing the `customer_id`, `login_customer_id` and `linked_customer_id`.
+
+These hooks also have access to the `query` argument, containing the GAQL query as a string.
+
+These hooks also have access the the `reportOptions` argument. This will be undefined when using the `query` method.
+
+### Mutation hooks:
+
+- `onMutationStart`
+- `onMutationError`
+- `onMutationEnd`
+
+These hooks have access to the `customerCredentials` argument, containing the `customer_id`, `login_customer_id` and `linked_customer_id`.
+
+These hooks also have access to the `method` argument, containing the mutation method as a string.
+
+### Pre-request hooks:
+
+- `onQueryStart` - `query` and `report`
+- `onStreamStart` - `reportStream` and `reportStreamRaw`
+- `onMutationStart`
+
+These hooks are executed **before** a query/stream/mutation.
+
+These hooks have access to the `cancel` method, which can cancel the action before it is done. The query and mutation pre-request hooks allow an optional argument to be passed into the `cancel` method, which will be used as an alternative return value for the query/mutation. A good use case for this method would be to cancel with a cached result.
+
+These hooks also have access to the `editOptions` method which allows the request options to be changed before the request is sent. Keys included in the object passed to `editOptions` will be changed, and the rest will be maintained. A good use case for this method would be to set `validateOnly` as true when not in production.
 
 ```ts
+import { OnQueryStart } from "google-ads-api";
+
+const onQueryStart: OnQueryStart = async ({ cancel, editOptions }) => {
+  if (env.mode === "test") {
+    cancel([]); // Cancels the request. The supplied argument will become the alternative return value in query and mutation hooks
+  }
+  if (env.mode === "dev") {
+    editOptions({ validate_only: true }); // Edits the request options
+  }
+};
+
 const customer = client.Customer({
   clientOptions,
   customerOptions,
-  hooks: {
-    onQueryStart({ credentials, query, reportOptions, cancel, editOptions }) {
-      if (reportOptions.entity === "campaign") {
-        cancel([]); // cancels the query and returns the given argument
-      }
-      if (env.mode === "dev") {
-        editOptions({ validate_only: true }); // edits the request options
-      }
-    },
-    onQueryError({ credentials, query, reportOptions, error }) {
-      console.log(error);
-    },
-    onQueryEnd({ credentials, query, reportOptions, response, resolve }) {
-      resolve(response.slice(0, 5)); // resolves the query with the given argument
-    },
-    onMutationStart({ credentials, mutations, cancel }) {
-      if (mutations.length === 0) {
-        cancel({}); // cancels the mutation and returns the given argument
-      }
-      if (env.mode === "dev") {
-        editOptions({ validate_only: true }); // edits the mutate options
-      }
-    },
-    onMutationError({ credentials, mutations, error }) {
-      console.log(error);
-    },
-    onMutationEnd({ credentials, mutations, response, resolve }) {
-      if (reponse.partial_failure_error) {
-        resolve({}); // resolves the mutation with the given argument
-      }
-    },
-  },
+  hooks: { onQueryStart },
+});
+```
+
+### On error hooks:
+
+- `onQueryError` - `query` and `report`
+- `onStreamError` - `reportStream` (but **not** `reportStreamRaw`)
+- `onMutationError`
+
+These hooks are executed when a query/stream/mutation throws an error. If the error is a Google Ads failure then it will be converted to a `GoogleAdsFailure` first. The error can be accessed in these hooks with the `error` argument. Note that the `onStreamError` hook will not work with the `reportStreamRaw` method to avoid blocking the thread.
+
+```ts
+import { OnQueryError } from "google-ads-api";
+
+const onQueryError: OnQueryError = async ({ error }) => {
+  console.log(error.message); // An Error or a GoogleAdsFailure
+};
+
+const customer = client.Customer({
+  clientOptions,
+  customerOptions,
+  hooks: { onQueryError },
+});
+```
+
+### Post-request hooks:
+
+- `onQueryEnd` - `query` and `report`
+- `onMutationEnd`
+
+These hooks are executed **after** a query or mutation. This library does not contain an `onStreamEnd` hook to avoid accumulating the results of streams, and also so that we don't block the thread by waiting for the end event to be emitted.
+
+```ts
+import { OnQueryEnd } from "google-ads-api";
+
+const onQueryEnd: OnQueryEnd = async ({ response, resolve }) => {
+  const [first] = response; // The results of the query/mutation
+  resolve([first]); // The supplied argument will become the alternative return value
+};
+
+const customer = client.Customer({
+  clientOptions,
+  customerOptions,
+  hooks: { onQueryEnd },
 });
 ```
