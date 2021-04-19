@@ -400,7 +400,7 @@ ResourceNames.adGroupAd("1", "2", "3");
 // "customers/1/adGroupAds/2~3"
 
 const amsterdamLocationId = 1010543;
-ResourceNames.geoTargetConstant(amsterdam);
+ResourceNames.geoTargetConstant(amsterdamLocationId);
 // "geoTargetConstants/1010543"
 
 ResourceNames.accountBudget(customer.credentials.customer_id, 123);
@@ -474,7 +474,7 @@ const customer = client.Customer({
 - `onStreamError` - `reportStream` (but **not** `reportStreamRaw`)
 - `onMutationError`
 
-These hooks are executed when a query/stream/mutation throws an error. If there error is a Google Ads failure then it will be converted to a `GoogleAdsFailure` first. The error can be accessed in these hooks with the `error` argument. Note that the `onStreamError` hook will not work with the `reportStreamRaw` method to avoid blocking the thread.
+These hooks are executed when a query/stream/mutation throws an error. If the error is a Google Ads failure then it will be converted to a `GoogleAdsFailure` first. The error can be accessed in these hooks with the `error` argument. Note that the `onStreamError` hook will not work with the `reportStreamRaw` method to avoid blocking the thread.
 
 ```ts
 import { OnQueryError } from "google-ads-api";
