@@ -69,10 +69,11 @@ For now we recommend following the usage examples below.
   - [Total Results Count](#total-results-count)
 - Mutations
   - [Create an expanded text ad](#create-an-expanded-text-ad)
-  - [Create a campaign & budget atomically](create-a-campaign-&-budget-atomically)
+  - [Create a campaign & budget atomically](#create-a-campaign--budget-atomically)
 - Misc
   - [Resource Names](#resource-names)
   - [Hooks](#hooks)
+  - [Error handling](#error-handling)
 
 ## Create a client
 
