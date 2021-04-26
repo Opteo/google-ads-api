@@ -564,3 +564,34 @@ const customer = client.Customer({
   hooks: { onQueryEnd },
 });
 ```
+
+## Error handling
+
+All errors, apart from GRPC specific cases (such as a connection problem or timeout, [see more here](https://github.com/grpc/grpc/blob/master/doc/statuscodes.md)), are instances of a [GoogleAdsFailure](https://developers.google.com/google-ads/api/reference/rpc/v6/GoogleAdsFailure).
+
+You can find a list of all error types for a specific version in [the official documentation](https://developers.google.com/google-ads/api/reference/rpc/v6/AccessInvitationErrorEnum.AccessInvitationError), as well as more information about [handling errors here](https://developers.google.com/google-ads/api/docs/best-practices/error-types).
+
+```ts
+import { errors } from "google-ads-api";
+
+try {
+  await customer.query(`
+      SELECT campaign.bad_field FROM campaign
+    `);
+} catch (err) {
+  if (err instanceof errors.GoogleAdsFailure) {
+    console.log(err.errors); // Array of errors.GoogleAdsError instances
+
+    // Get the first one and explicitly check for a certain error type
+    const [firstError] = err.errors;
+    if (
+      firstError.error_code ===
+      errors.QueryErrorEnum.QueryError.UNRECOGNIZED_FIELD
+    ) {
+      console.log(
+        `Error: using invalid field "${firstError.trigger}" in query`
+      );
+    }
+  }
+}
+```
