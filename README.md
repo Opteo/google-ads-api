@@ -35,6 +35,9 @@
 
 > The Google Ads API is the new replacement to the AdWords API. Google will deprecate the AdWords API sometime in 2020.
 
+# Hiring
+We're currently hiring full-stack engineers at [Opteo](https://opteo.com)! If you're interested in working on this library and other exciting projects, say hello at [louis@opteo.com](mailto:louis@opteo.com)
+
 # Installation
 
 ```bash
