@@ -62,6 +62,10 @@ export async function compileFields(): Promise<void> {
   const metrics: string[] = [];
 
   fields.forEach((field: resources.GoogleAdsField) => {
+    if (typeof field.name === "undefined" || !field.name) {
+      return;
+    }
+
     if (isResource(field)) {
       const resource: Resource = {
         attributes: [],
@@ -85,7 +89,7 @@ export async function compileFields(): Promise<void> {
           );
           return isAttribute(field) && correctResource && field.selectable;
         })
-        .map((field: resources.GoogleAdsField): string => field.name);
+        .map((field: resources.GoogleAdsField): string => field.name!);
 
       resourceConstructs[field.name] = resource;
     } else if (isAttribute(field) && field.selectable) {
@@ -208,6 +212,9 @@ export function isSegment(field: resources.GoogleAdsField): boolean {
 const resourceNameRegex = new RegExp(/^.*\.resource_name$/g);
 
 export function isResourceName(field: resources.GoogleAdsField): boolean {
+  if (typeof field.name === "undefined" || !field.name) {
+    return false;
+  }
   return resourceNameRegex.test(field.name);
 }
 
@@ -216,5 +223,8 @@ export function hasEnumDataType(field: resources.GoogleAdsField): boolean {
 }
 
 export function getEnumName(field: resources.GoogleAdsField): string {
+  if (typeof field.type_url === "undefined" || !field.type_url) {
+    return "FIELD_HAS_NO_ENUM_NAME";
+  }
   return field.type_url.replace(/.*(?=\.)\./g, "");
 }

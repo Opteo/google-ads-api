@@ -81,14 +81,14 @@ describe("other checkers", () => {
   it("getEnumName", () => {
     const attributeEnumField = new resources.GoogleAdsField({
       type_url:
-        "google.ads.googleads.v6.enums.CampaignStatusEnum.CampaignStatus",
+        "google.ads.googleads.v7.enums.CampaignStatusEnum.CampaignStatus",
     });
     const metricEnumField = new resources.GoogleAdsField({
       type_url:
-        "google.ads.googleads.v6.enums.QualityScoreBucketEnum.QualityScoreBucket",
+        "google.ads.googleads.v7.enums.QualityScoreBucketEnum.QualityScoreBucket",
     });
     const segmentEnumField = new resources.GoogleAdsField({
-      type_url: "google.ads.googleads.v6.enums.DayOfWeekEnum.DayOfWeek",
+      type_url: "google.ads.googleads.v7.enums.DayOfWeekEnum.DayOfWeek",
     });
 
     expect(getEnumName(attributeEnumField)).toEqual("CampaignStatus");

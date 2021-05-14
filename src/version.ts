@@ -1,1 +1,1 @@
-export const googleAdsVersion = "v6";
+export const googleAdsVersion = "v7";

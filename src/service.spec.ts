@@ -83,9 +83,8 @@ describe("Service", () => {
         ],
       });
 
-      const failureBuffer = errors.GoogleAdsFailure.encode(
-        failureMessage
-      ).finish();
+      const failureBuffer =
+        errors.GoogleAdsFailure.encode(failureMessage).finish();
 
       const customer = newCustomer();
       // @ts-expect-error Accessing private method for test purposes
@@ -160,15 +159,14 @@ describe("Service", () => {
         ],
       });
 
-      const failureBuffer = errors.GoogleAdsFailure.encode(
-        failureMessage
-      ).finish();
+      const failureBuffer =
+        errors.GoogleAdsFailure.encode(failureMessage).finish();
 
       const response = new services.MutateGoogleAdsResponse({
         partial_failure_error: new google.rpc.Status({
           details: [
             {
-              type_url: "google.ads.googleads.v6.errors.GoogleAdsFailure",
+              type_url: "google.ads.googleads.v7.errors.GoogleAdsFailure",
               value: failureBuffer,
             },
           ],
@@ -177,9 +175,8 @@ describe("Service", () => {
 
       const customer = newCustomer();
       // @ts-expect-error Accessing private method for test purposes
-      const parsedPartialFailureResponse = customer.decodePartialFailureError(
-        response
-      );
+      const parsedPartialFailureResponse =
+        customer.decodePartialFailureError(response);
 
       expect(parsedPartialFailureResponse).toEqual({
         mutate_operation_responses: [],
