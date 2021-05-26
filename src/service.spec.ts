@@ -131,7 +131,7 @@ describe("Service", () => {
         failTestIfExecuted();
       } catch (err) {
         expect(err instanceof Error).toEqual(true);
-        expect(err.code).toEqual("401");
+        expect(err.code).toEqual(16);
       }
     });
   });
@@ -174,8 +174,9 @@ describe("Service", () => {
       });
 
       const customer = newCustomer();
-      // @ts-expect-error Accessing private method for test purposes
+
       const parsedPartialFailureResponse =
+        // @ts-expect-error Accessing private method for test purposes
         customer.decodePartialFailureError(response);
 
       expect(parsedPartialFailureResponse).toEqual({

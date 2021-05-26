@@ -29,11 +29,12 @@ async function compileAll(): Promise<void> {
     console.log(`compiling only "${onlyRun}"`);
     await scripts[onlyRun]();
   } else {
-    console.log("compiling all scripts");
-    for (const script of Object.values(scripts)) {
-      console.log(script);
+    console.log("compiling all scripts...");
+    for (const [name, script] of Object.entries(scripts)) {
       await script();
+      console.log(`${name} compiled successfully`);
     }
+    console.log("done");
   }
 }
 
