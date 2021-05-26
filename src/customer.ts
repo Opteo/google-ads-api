@@ -25,10 +25,9 @@ export class Customer extends ServiceFactory {
   constructor(
     clientOptions: ClientOptions,
     customerOptions: CustomerOptions,
-    hooks?: Hooks,
-    timeout = 3600000 // 1 hour
+    hooks?: Hooks
   ) {
-    super(clientOptions, customerOptions, hooks ?? {}, timeout);
+    super(clientOptions, customerOptions, hooks ?? {});
   }
 
   /**
@@ -129,7 +128,6 @@ export class Customer extends ServiceFactory {
 
     const stream = service.searchStream(request, {
       otherArgs: { headers: this.callHeaders },
-      timeout: this.timeout,
     });
 
     let streamFinished = false;
@@ -230,7 +228,6 @@ export class Customer extends ServiceFactory {
 
     return service.searchStream(request, {
       otherArgs: { headers: this.callHeaders },
-      timeout: this.timeout,
     });
   }
 
@@ -249,7 +246,6 @@ export class Customer extends ServiceFactory {
 
     const searchResponse = await service.search(request, {
       otherArgs: { headers: this.callHeaders },
-      timeout: this.timeout,
       autoPaginate: false, // autoPaginate doesn't work
     });
 
@@ -356,7 +352,7 @@ export class Customer extends ServiceFactory {
         }
       }
 
-      return { response: (response as unknown) as T, totalResultsCount };
+      return { response: response as unknown as T, totalResultsCount };
     } catch (searchError) {
       const googleAdsError = this.getGoogleAdsError(searchError);
       if (this.hooks.onQueryError && useHooks) {

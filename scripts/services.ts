@@ -24,7 +24,7 @@ interface ProtoDefinition {
     [fieldName: string]: {
       type: string;
       id: number;
-      options?: Record<string, string>;
+      options?: Record<string, string | boolean>;
     };
   };
 }

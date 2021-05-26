@@ -3,7 +3,8 @@
 type StrNum = string | number;
 
 /* AccountBudget */
-export type AccountBudgetResourceName = `customers/${StrNum}/accountBudgets/${StrNum}`;
+export type AccountBudgetResourceName =
+  `customers/${StrNum}/accountBudgets/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} accountBudgetId
@@ -18,7 +19,8 @@ export function accountBudget(
 }
 
 /* AccountBudgetProposal */
-export type AccountBudgetProposalResourceName = `customers/${StrNum}/accountBudgetProposals/${StrNum}`;
+export type AccountBudgetProposalResourceName =
+  `customers/${StrNum}/accountBudgetProposals/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} accountBudgetProposalId
@@ -33,7 +35,8 @@ export function accountBudgetProposal(
 }
 
 /* AccountLink */
-export type AccountLinkResourceName = `customers/${StrNum}/accountLinks/${StrNum}`;
+export type AccountLinkResourceName =
+  `customers/${StrNum}/accountLinks/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} accountLinkId
@@ -78,7 +81,8 @@ export function adGroup(
 }
 
 /* AdGroupAd */
-export type AdGroupAdResourceName = `customers/${StrNum}/adGroupAds/${StrNum}~${StrNum}`;
+export type AdGroupAdResourceName =
+  `customers/${StrNum}/adGroupAds/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adGroupId
@@ -95,7 +99,8 @@ export function adGroupAd(
 }
 
 /* AdGroupAdAssetView */
-export type AdGroupAdAssetViewResourceName = `customers/${StrNum}/adGroupAdAssetViews/${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
+export type AdGroupAdAssetViewResourceName =
+  `customers/${StrNum}/adGroupAdAssetViews/${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adGroupId
@@ -116,7 +121,8 @@ export function adGroupAdAssetView(
 }
 
 /* AdGroupAdLabel */
-export type AdGroupAdLabelResourceName = `customers/${StrNum}/adGroupAdLabels/${StrNum}~${StrNum}~${StrNum}`;
+export type AdGroupAdLabelResourceName =
+  `customers/${StrNum}/adGroupAdLabels/${StrNum}~${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adGroupId
@@ -134,8 +140,29 @@ export function adGroupAdLabel(
   return `customers/${customerId}/adGroupAdLabels/${adGroupId}~${adId}~${labelId}` as const;
 }
 
+/* AdGroupAsset */
+export type AdGroupAssetResourceName =
+  `customers/${StrNum}/adGroupAssets/${StrNum}~${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} adGroupId
+ * @param {string | number} assetId
+ * @param {string | number} fieldType
+ * @returns `AdGroupAssetResourceName`
+ * @example const adGroupAsset: ResourceNames.AdGroupAssetResourceName = ResourceNames.adGroupAsset(10987417, 21974834, 43949668, 87899336)
+ */
+export function adGroupAsset(
+  customerId: string | number,
+  adGroupId: string | number,
+  assetId: string | number,
+  fieldType: string | number
+): AdGroupAssetResourceName {
+  return `customers/${customerId}/adGroupAssets/${adGroupId}~${assetId}~${fieldType}` as const;
+}
+
 /* AdGroupAudienceView */
-export type AdGroupAudienceViewResourceName = `customers/${StrNum}/adGroupAudienceViews/${StrNum}~${StrNum}`;
+export type AdGroupAudienceViewResourceName =
+  `customers/${StrNum}/adGroupAudienceViews/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adGroupId
@@ -152,7 +179,8 @@ export function adGroupAudienceView(
 }
 
 /* AdGroupBidModifier */
-export type AdGroupBidModifierResourceName = `customers/${StrNum}/adGroupBidModifiers/${StrNum}~${StrNum}`;
+export type AdGroupBidModifierResourceName =
+  `customers/${StrNum}/adGroupBidModifiers/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adGroupId
@@ -169,7 +197,8 @@ export function adGroupBidModifier(
 }
 
 /* AdGroupCriterion */
-export type AdGroupCriterionResourceName = `customers/${StrNum}/adGroupCriteria/${StrNum}~${StrNum}`;
+export type AdGroupCriterionResourceName =
+  `customers/${StrNum}/adGroupCriteria/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adGroupId
@@ -186,7 +215,8 @@ export function adGroupCriterion(
 }
 
 /* AdGroupCriterionLabel */
-export type AdGroupCriterionLabelResourceName = `customers/${StrNum}/adGroupCriterionLabels/${StrNum}~${StrNum}~${StrNum}`;
+export type AdGroupCriterionLabelResourceName =
+  `customers/${StrNum}/adGroupCriterionLabels/${StrNum}~${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adGroupId
@@ -205,7 +235,8 @@ export function adGroupCriterionLabel(
 }
 
 /* AdGroupCriterionSimulation */
-export type AdGroupCriterionSimulationResourceName = `customers/${StrNum}/adGroupCriterionSimulations/${StrNum}~${StrNum}~${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
+export type AdGroupCriterionSimulationResourceName =
+  `customers/${StrNum}/adGroupCriterionSimulations/${StrNum}~${StrNum}~${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adGroupId
@@ -230,7 +261,8 @@ export function adGroupCriterionSimulation(
 }
 
 /* AdGroupExtensionSetting */
-export type AdGroupExtensionSettingResourceName = `customers/${StrNum}/adGroupExtensionSettings/${StrNum}~${StrNum}`;
+export type AdGroupExtensionSettingResourceName =
+  `customers/${StrNum}/adGroupExtensionSettings/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adGroupId
@@ -247,7 +279,8 @@ export function adGroupExtensionSetting(
 }
 
 /* AdGroupFeed */
-export type AdGroupFeedResourceName = `customers/${StrNum}/adGroupFeeds/${StrNum}~${StrNum}`;
+export type AdGroupFeedResourceName =
+  `customers/${StrNum}/adGroupFeeds/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adGroupId
@@ -264,7 +297,8 @@ export function adGroupFeed(
 }
 
 /* AdGroupLabel */
-export type AdGroupLabelResourceName = `customers/${StrNum}/adGroupLabels/${StrNum}~${StrNum}`;
+export type AdGroupLabelResourceName =
+  `customers/${StrNum}/adGroupLabels/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adGroupId
@@ -281,7 +315,8 @@ export function adGroupLabel(
 }
 
 /* AdGroupSimulation */
-export type AdGroupSimulationResourceName = `customers/${StrNum}/adGroupSimulations/${StrNum}~${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
+export type AdGroupSimulationResourceName =
+  `customers/${StrNum}/adGroupSimulations/${StrNum}~${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adGroupId
@@ -304,7 +339,8 @@ export function adGroupSimulation(
 }
 
 /* AdParameter */
-export type AdParameterResourceName = `customers/${StrNum}/adParameters/${StrNum}~${StrNum}~${StrNum}`;
+export type AdParameterResourceName =
+  `customers/${StrNum}/adParameters/${StrNum}~${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adGroupId
@@ -323,7 +359,8 @@ export function adParameter(
 }
 
 /* AdScheduleView */
-export type AdScheduleViewResourceName = `customers/${StrNum}/adScheduleViews/${StrNum}~${StrNum}`;
+export type AdScheduleViewResourceName =
+  `customers/${StrNum}/adScheduleViews/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} campaignId
@@ -340,7 +377,8 @@ export function adScheduleView(
 }
 
 /* AgeRangeView */
-export type AgeRangeViewResourceName = `customers/${StrNum}/ageRangeViews/${StrNum}~${StrNum}`;
+export type AgeRangeViewResourceName =
+  `customers/${StrNum}/ageRangeViews/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adGroupId
@@ -387,7 +425,8 @@ export function batchJob(
 }
 
 /* BiddingStrategy */
-export type BiddingStrategyResourceName = `customers/${StrNum}/biddingStrategies/${StrNum}`;
+export type BiddingStrategyResourceName =
+  `customers/${StrNum}/biddingStrategies/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} biddingStrategyId
@@ -401,8 +440,33 @@ export function biddingStrategy(
   return `customers/${customerId}/biddingStrategies/${biddingStrategyId}` as const;
 }
 
+/* BiddingStrategySimulation */
+export type BiddingStrategySimulationResourceName =
+  `customers/${StrNum}/biddingStrategySimulations/${StrNum}~${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} biddingStrategyId
+ * @param {string | number} type
+ * @param {string | number} modificationMethod
+ * @param {string | number} startDate
+ * @param {string | number} endDate
+ * @returns `BiddingStrategySimulationResourceName`
+ * @example const biddingStrategySimulation: ResourceNames.BiddingStrategySimulationResourceName = ResourceNames.biddingStrategySimulation(10987417, 21974834, 43949668, 87899336, 175798672, 351597344)
+ */
+export function biddingStrategySimulation(
+  customerId: string | number,
+  biddingStrategyId: string | number,
+  type: string | number,
+  modificationMethod: string | number,
+  startDate: string | number,
+  endDate: string | number
+): BiddingStrategySimulationResourceName {
+  return `customers/${customerId}/biddingStrategySimulations/${biddingStrategyId}~${type}~${modificationMethod}~${startDate}~${endDate}` as const;
+}
+
 /* BillingSetup */
-export type BillingSetupResourceName = `customers/${StrNum}/billingSetups/${StrNum}`;
+export type BillingSetupResourceName =
+  `customers/${StrNum}/billingSetups/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} billingSetupId
@@ -447,7 +511,8 @@ export function campaign(
 }
 
 /* CampaignAsset */
-export type CampaignAssetResourceName = `customers/${StrNum}/campaignAssets/${StrNum}~${StrNum}~${StrNum}`;
+export type CampaignAssetResourceName =
+  `customers/${StrNum}/campaignAssets/${StrNum}~${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} campaignId
@@ -466,7 +531,8 @@ export function campaignAsset(
 }
 
 /* CampaignAudienceView */
-export type CampaignAudienceViewResourceName = `customers/${StrNum}/campaignAudienceViews/${StrNum}~${StrNum}`;
+export type CampaignAudienceViewResourceName =
+  `customers/${StrNum}/campaignAudienceViews/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} campaignId
@@ -483,7 +549,8 @@ export function campaignAudienceView(
 }
 
 /* CampaignBidModifier */
-export type CampaignBidModifierResourceName = `customers/${StrNum}/campaignBidModifiers/${StrNum}~${StrNum}`;
+export type CampaignBidModifierResourceName =
+  `customers/${StrNum}/campaignBidModifiers/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} campaignId
@@ -500,7 +567,8 @@ export function campaignBidModifier(
 }
 
 /* CampaignBudget */
-export type CampaignBudgetResourceName = `customers/${StrNum}/campaignBudgets/${StrNum}`;
+export type CampaignBudgetResourceName =
+  `customers/${StrNum}/campaignBudgets/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} campaignBudgetId
@@ -515,7 +583,8 @@ export function campaignBudget(
 }
 
 /* CampaignCriterion */
-export type CampaignCriterionResourceName = `customers/${StrNum}/campaignCriteria/${StrNum}~${StrNum}`;
+export type CampaignCriterionResourceName =
+  `customers/${StrNum}/campaignCriteria/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} campaignId
@@ -532,7 +601,8 @@ export function campaignCriterion(
 }
 
 /* CampaignCriterionSimulation */
-export type CampaignCriterionSimulationResourceName = `customers/${StrNum}/campaignCriterionSimulations/${StrNum}~${StrNum}~${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
+export type CampaignCriterionSimulationResourceName =
+  `customers/${StrNum}/campaignCriterionSimulations/${StrNum}~${StrNum}~${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} campaignId
@@ -557,7 +627,8 @@ export function campaignCriterionSimulation(
 }
 
 /* CampaignDraft */
-export type CampaignDraftResourceName = `customers/${StrNum}/campaignDrafts/${StrNum}~${StrNum}`;
+export type CampaignDraftResourceName =
+  `customers/${StrNum}/campaignDrafts/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} baseCampaignId
@@ -574,7 +645,8 @@ export function campaignDraft(
 }
 
 /* CampaignExperiment */
-export type CampaignExperimentResourceName = `customers/${StrNum}/campaignExperiments/${StrNum}`;
+export type CampaignExperimentResourceName =
+  `customers/${StrNum}/campaignExperiments/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} campaignExperimentId
@@ -589,7 +661,8 @@ export function campaignExperiment(
 }
 
 /* CampaignExtensionSetting */
-export type CampaignExtensionSettingResourceName = `customers/${StrNum}/campaignExtensionSettings/${StrNum}~${StrNum}`;
+export type CampaignExtensionSettingResourceName =
+  `customers/${StrNum}/campaignExtensionSettings/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} campaignId
@@ -606,7 +679,8 @@ export function campaignExtensionSetting(
 }
 
 /* CampaignFeed */
-export type CampaignFeedResourceName = `customers/${StrNum}/campaignFeeds/${StrNum}~${StrNum}`;
+export type CampaignFeedResourceName =
+  `customers/${StrNum}/campaignFeeds/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} campaignId
@@ -623,7 +697,8 @@ export function campaignFeed(
 }
 
 /* CampaignLabel */
-export type CampaignLabelResourceName = `customers/${StrNum}/campaignLabels/${StrNum}~${StrNum}`;
+export type CampaignLabelResourceName =
+  `customers/${StrNum}/campaignLabels/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} campaignId
@@ -640,7 +715,8 @@ export function campaignLabel(
 }
 
 /* CampaignSharedSet */
-export type CampaignSharedSetResourceName = `customers/${StrNum}/campaignSharedSets/${StrNum}~${StrNum}`;
+export type CampaignSharedSetResourceName =
+  `customers/${StrNum}/campaignSharedSets/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} campaignId
@@ -654,6 +730,30 @@ export function campaignSharedSet(
   sharedSetId: string | number
 ): CampaignSharedSetResourceName {
   return `customers/${customerId}/campaignSharedSets/${campaignId}~${sharedSetId}` as const;
+}
+
+/* CampaignSimulation */
+export type CampaignSimulationResourceName =
+  `customers/${StrNum}/campaignSimulations/${StrNum}~${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} campaignId
+ * @param {string | number} type
+ * @param {string | number} modificationMethod
+ * @param {string | number} startDate
+ * @param {string | number} endDate
+ * @returns `CampaignSimulationResourceName`
+ * @example const campaignSimulation: ResourceNames.CampaignSimulationResourceName = ResourceNames.campaignSimulation(10987417, 21974834, 43949668, 87899336, 175798672, 351597344)
+ */
+export function campaignSimulation(
+  customerId: string | number,
+  campaignId: string | number,
+  type: string | number,
+  modificationMethod: string | number,
+  startDate: string | number,
+  endDate: string | number
+): CampaignSimulationResourceName {
+  return `customers/${customerId}/campaignSimulations/${campaignId}~${type}~${modificationMethod}~${startDate}~${endDate}` as const;
 }
 
 /* CarrierConstant */
@@ -670,7 +770,8 @@ export function carrierConstant(
 }
 
 /* ChangeEvent */
-export type ChangeEventResourceName = `customers/${StrNum}/changeEvents/${StrNum}~${StrNum}~${StrNum}`;
+export type ChangeEventResourceName =
+  `customers/${StrNum}/changeEvents/${StrNum}~${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} timestampMicros
@@ -689,7 +790,8 @@ export function changeEvent(
 }
 
 /* ChangeStatus */
-export type ChangeStatusResourceName = `customers/${StrNum}/changeStatus/${StrNum}`;
+export type ChangeStatusResourceName =
+  `customers/${StrNum}/changeStatus/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} changeStatusId
@@ -704,7 +806,8 @@ export function changeStatus(
 }
 
 /* ClickView */
-export type ClickViewResourceName = `customers/${StrNum}/clickViews/${StrNum}~${StrNum}`;
+export type ClickViewResourceName =
+  `customers/${StrNum}/clickViews/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} date
@@ -721,7 +824,8 @@ export function clickView(
 }
 
 /* CombinedAudience */
-export type CombinedAudienceResourceName = `customers/${StrNum}/combinedAudiences/${StrNum}`;
+export type CombinedAudienceResourceName =
+  `customers/${StrNum}/combinedAudiences/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} combinedAudienceId
@@ -736,7 +840,8 @@ export function combinedAudience(
 }
 
 /* ConversionAction */
-export type ConversionActionResourceName = `customers/${StrNum}/conversionActions/${StrNum}`;
+export type ConversionActionResourceName =
+  `customers/${StrNum}/conversionActions/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} conversionActionId
@@ -748,6 +853,22 @@ export function conversionAction(
   conversionActionId: string | number
 ): ConversionActionResourceName {
   return `customers/${customerId}/conversionActions/${conversionActionId}` as const;
+}
+
+/* ConversionCustomVariable */
+export type ConversionCustomVariableResourceName =
+  `customers/${StrNum}/conversionCustomVariables/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} conversionCustomVariableId
+ * @returns `ConversionCustomVariableResourceName`
+ * @example const conversionCustomVariable: ResourceNames.ConversionCustomVariableResourceName = ResourceNames.conversionCustomVariable(10987417, 21974834)
+ */
+export function conversionCustomVariable(
+  customerId: string | number,
+  conversionCustomVariableId: string | number
+): ConversionCustomVariableResourceName {
+  return `customers/${customerId}/conversionCustomVariables/${conversionCustomVariableId}` as const;
 }
 
 /* CurrencyConstant */
@@ -764,7 +885,8 @@ export function currencyConstant(
 }
 
 /* CustomAudience */
-export type CustomAudienceResourceName = `customers/${StrNum}/customAudiences/${StrNum}`;
+export type CustomAudienceResourceName =
+  `customers/${StrNum}/customAudiences/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} customAudienceId
@@ -779,7 +901,8 @@ export function customAudience(
 }
 
 /* CustomInterest */
-export type CustomInterestResourceName = `customers/${StrNum}/customInterests/${StrNum}`;
+export type CustomInterestResourceName =
+  `customers/${StrNum}/customInterests/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} customInterestId
@@ -804,8 +927,27 @@ export function customer(customerId: string | number): CustomerResourceName {
   return `customers/${customerId}` as const;
 }
 
+/* CustomerAsset */
+export type CustomerAssetResourceName =
+  `customers/${StrNum}/customerAssets/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} assetId
+ * @param {string | number} fieldType
+ * @returns `CustomerAssetResourceName`
+ * @example const customerAsset: ResourceNames.CustomerAssetResourceName = ResourceNames.customerAsset(10987417, 21974834, 43949668)
+ */
+export function customerAsset(
+  customerId: string | number,
+  assetId: string | number,
+  fieldType: string | number
+): CustomerAssetResourceName {
+  return `customers/${customerId}/customerAssets/${assetId}~${fieldType}` as const;
+}
+
 /* CustomerClient */
-export type CustomerClientResourceName = `customers/${StrNum}/customerClients/${StrNum}`;
+export type CustomerClientResourceName =
+  `customers/${StrNum}/customerClients/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} clientCustomerId
@@ -820,7 +962,8 @@ export function customerClient(
 }
 
 /* CustomerClientLink */
-export type CustomerClientLinkResourceName = `customers/${StrNum}/customerClientLinks/${StrNum}~${StrNum}`;
+export type CustomerClientLinkResourceName =
+  `customers/${StrNum}/customerClientLinks/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} clientCustomerId
@@ -837,7 +980,8 @@ export function customerClientLink(
 }
 
 /* CustomerExtensionSetting */
-export type CustomerExtensionSettingResourceName = `customers/${StrNum}/customerExtensionSettings/${StrNum}`;
+export type CustomerExtensionSettingResourceName =
+  `customers/${StrNum}/customerExtensionSettings/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} extensionType
@@ -852,7 +996,8 @@ export function customerExtensionSetting(
 }
 
 /* CustomerFeed */
-export type CustomerFeedResourceName = `customers/${StrNum}/customerFeeds/${StrNum}`;
+export type CustomerFeedResourceName =
+  `customers/${StrNum}/customerFeeds/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} feedId
@@ -867,7 +1012,8 @@ export function customerFeed(
 }
 
 /* CustomerLabel */
-export type CustomerLabelResourceName = `customers/${StrNum}/customerLabels/${StrNum}`;
+export type CustomerLabelResourceName =
+  `customers/${StrNum}/customerLabels/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} labelId
@@ -882,7 +1028,8 @@ export function customerLabel(
 }
 
 /* CustomerManagerLink */
-export type CustomerManagerLinkResourceName = `customers/${StrNum}/customerManagerLinks/${StrNum}~${StrNum}`;
+export type CustomerManagerLinkResourceName =
+  `customers/${StrNum}/customerManagerLinks/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} managerCustomerId
@@ -899,7 +1046,8 @@ export function customerManagerLink(
 }
 
 /* CustomerNegativeCriterion */
-export type CustomerNegativeCriterionResourceName = `customers/${StrNum}/customerNegativeCriteria/${StrNum}`;
+export type CustomerNegativeCriterionResourceName =
+  `customers/${StrNum}/customerNegativeCriteria/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} criterionId
@@ -914,7 +1062,8 @@ export function customerNegativeCriterion(
 }
 
 /* CustomerUserAccess */
-export type CustomerUserAccessResourceName = `customers/${StrNum}/customerUserAccesses/${StrNum}`;
+export type CustomerUserAccessResourceName =
+  `customers/${StrNum}/customerUserAccesses/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} userId
@@ -929,7 +1078,8 @@ export function customerUserAccess(
 }
 
 /* CustomerUserAccessInvitation */
-export type CustomerUserAccessInvitationResourceName = `customers/${StrNum}/customerUserAccessInvitations/${StrNum}`;
+export type CustomerUserAccessInvitationResourceName =
+  `customers/${StrNum}/customerUserAccessInvitations/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} invitationId
@@ -944,7 +1094,8 @@ export function customerUserAccessInvitation(
 }
 
 /* DetailPlacementView */
-export type DetailPlacementViewResourceName = `customers/${StrNum}/detailPlacementViews/${StrNum}~${StrNum}`;
+export type DetailPlacementViewResourceName =
+  `customers/${StrNum}/detailPlacementViews/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adGroupId
@@ -961,7 +1112,8 @@ export function detailPlacementView(
 }
 
 /* DisplayKeywordView */
-export type DisplayKeywordViewResourceName = `customers/${StrNum}/displayKeywordViews/${StrNum}~${StrNum}`;
+export type DisplayKeywordViewResourceName =
+  `customers/${StrNum}/displayKeywordViews/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adGroupId
@@ -978,7 +1130,8 @@ export function displayKeywordView(
 }
 
 /* DistanceView */
-export type DistanceViewResourceName = `customers/${StrNum}/distanceViews/${StrNum}~${StrNum}`;
+export type DistanceViewResourceName =
+  `customers/${StrNum}/distanceViews/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} placeholderChainId
@@ -995,7 +1148,8 @@ export function distanceView(
 }
 
 /* DomainCategory */
-export type DomainCategoryResourceName = `customers/${StrNum}/domainCategories/${StrNum}~${StrNum}~${StrNum}`;
+export type DomainCategoryResourceName =
+  `customers/${StrNum}/domainCategories/${StrNum}~${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} campaignId
@@ -1014,7 +1168,8 @@ export function domainCategory(
 }
 
 /* DynamicSearchAdsSearchTermView */
-export type DynamicSearchAdsSearchTermViewResourceName = `customers/${StrNum}/dynamicSearchAdsSearchTermViews/${StrNum}~${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
+export type DynamicSearchAdsSearchTermViewResourceName =
+  `customers/${StrNum}/dynamicSearchAdsSearchTermViews/${StrNum}~${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adGroupId
@@ -1037,7 +1192,8 @@ export function dynamicSearchAdsSearchTermView(
 }
 
 /* ExpandedLandingPageView */
-export type ExpandedLandingPageViewResourceName = `customers/${StrNum}/expandedLandingPageViews/${StrNum}`;
+export type ExpandedLandingPageViewResourceName =
+  `customers/${StrNum}/expandedLandingPageViews/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} expandedFinalUrlFingerprint
@@ -1052,7 +1208,8 @@ export function expandedLandingPageView(
 }
 
 /* ExtensionFeedItem */
-export type ExtensionFeedItemResourceName = `customers/${StrNum}/extensionFeedItems/${StrNum}`;
+export type ExtensionFeedItemResourceName =
+  `customers/${StrNum}/extensionFeedItems/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} feedItemId
@@ -1082,7 +1239,8 @@ export function feed(
 }
 
 /* FeedItem */
-export type FeedItemResourceName = `customers/${StrNum}/feedItems/${StrNum}~${StrNum}`;
+export type FeedItemResourceName =
+  `customers/${StrNum}/feedItems/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} feedId
@@ -1099,7 +1257,8 @@ export function feedItem(
 }
 
 /* FeedItemSet */
-export type FeedItemSetResourceName = `customers/${StrNum}/feedItemSets/${StrNum}~${StrNum}`;
+export type FeedItemSetResourceName =
+  `customers/${StrNum}/feedItemSets/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} feedId
@@ -1116,7 +1275,8 @@ export function feedItemSet(
 }
 
 /* FeedItemSetLink */
-export type FeedItemSetLinkResourceName = `customers/${StrNum}/feedItemSetLinks/${StrNum}~${StrNum}~${StrNum}`;
+export type FeedItemSetLinkResourceName =
+  `customers/${StrNum}/feedItemSetLinks/${StrNum}~${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} feedId
@@ -1135,7 +1295,8 @@ export function feedItemSetLink(
 }
 
 /* FeedItemTarget */
-export type FeedItemTargetResourceName = `customers/${StrNum}/feedItemTargets/${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
+export type FeedItemTargetResourceName =
+  `customers/${StrNum}/feedItemTargets/${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} feedId
@@ -1156,7 +1317,8 @@ export function feedItemTarget(
 }
 
 /* FeedMapping */
-export type FeedMappingResourceName = `customers/${StrNum}/feedMappings/${StrNum}~${StrNum}`;
+export type FeedMappingResourceName =
+  `customers/${StrNum}/feedMappings/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} feedId
@@ -1173,7 +1335,8 @@ export function feedMapping(
 }
 
 /* FeedPlaceholderView */
-export type FeedPlaceholderViewResourceName = `customers/${StrNum}/feedPlaceholderViews/${StrNum}`;
+export type FeedPlaceholderViewResourceName =
+  `customers/${StrNum}/feedPlaceholderViews/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} placeholderType
@@ -1188,7 +1351,8 @@ export function feedPlaceholderView(
 }
 
 /* GenderView */
-export type GenderViewResourceName = `customers/${StrNum}/genderViews/${StrNum}~${StrNum}`;
+export type GenderViewResourceName =
+  `customers/${StrNum}/genderViews/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adGroupId
@@ -1218,7 +1382,8 @@ export function geoTargetConstant(
 }
 
 /* GeographicView */
-export type GeographicViewResourceName = `customers/${StrNum}/geographicViews/${StrNum}~${StrNum}`;
+export type GeographicViewResourceName =
+  `customers/${StrNum}/geographicViews/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} countryCriterionId
@@ -1248,7 +1413,8 @@ export function googleAdsField(
 }
 
 /* GroupPlacementView */
-export type GroupPlacementViewResourceName = `customers/${StrNum}/groupPlacementViews/${StrNum}~${StrNum}`;
+export type GroupPlacementViewResourceName =
+  `customers/${StrNum}/groupPlacementViews/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adGroupId
@@ -1265,7 +1431,8 @@ export function groupPlacementView(
 }
 
 /* HotelGroupView */
-export type HotelGroupViewResourceName = `customers/${StrNum}/hotelGroupViews/${StrNum}~${StrNum}`;
+export type HotelGroupViewResourceName =
+  `customers/${StrNum}/hotelGroupViews/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adGroupId
@@ -1282,7 +1449,8 @@ export function hotelGroupView(
 }
 
 /* HotelPerformanceView */
-export type HotelPerformanceViewResourceName = `customers/${StrNum}/hotelPerformanceView`;
+export type HotelPerformanceViewResourceName =
+  `customers/${StrNum}/hotelPerformanceView`;
 /**
  * @param {string | number} customerId
  * @returns `HotelPerformanceViewResourceName`
@@ -1295,7 +1463,8 @@ export function hotelPerformanceView(
 }
 
 /* IncomeRangeView */
-export type IncomeRangeViewResourceName = `customers/${StrNum}/incomeRangeViews/${StrNum}~${StrNum}`;
+export type IncomeRangeViewResourceName =
+  `customers/${StrNum}/incomeRangeViews/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adGroupId
@@ -1327,7 +1496,8 @@ export function invoice(
 }
 
 /* KeywordPlan */
-export type KeywordPlanResourceName = `customers/${StrNum}/keywordPlans/${StrNum}`;
+export type KeywordPlanResourceName =
+  `customers/${StrNum}/keywordPlans/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} keywordPlanId
@@ -1342,7 +1512,8 @@ export function keywordPlan(
 }
 
 /* KeywordPlanAdGroup */
-export type KeywordPlanAdGroupResourceName = `customers/${StrNum}/keywordPlanAdGroups/${StrNum}`;
+export type KeywordPlanAdGroupResourceName =
+  `customers/${StrNum}/keywordPlanAdGroups/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} keywordPlanAdGroupId
@@ -1357,7 +1528,8 @@ export function keywordPlanAdGroup(
 }
 
 /* KeywordPlanAdGroupKeyword */
-export type KeywordPlanAdGroupKeywordResourceName = `customers/${StrNum}/keywordPlanAdGroupKeywords/${StrNum}`;
+export type KeywordPlanAdGroupKeywordResourceName =
+  `customers/${StrNum}/keywordPlanAdGroupKeywords/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} keywordPlanAdGroupKeywordId
@@ -1372,7 +1544,8 @@ export function keywordPlanAdGroupKeyword(
 }
 
 /* KeywordPlanCampaign */
-export type KeywordPlanCampaignResourceName = `customers/${StrNum}/keywordPlanCampaigns/${StrNum}`;
+export type KeywordPlanCampaignResourceName =
+  `customers/${StrNum}/keywordPlanCampaigns/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} keywordPlanCampaignId
@@ -1387,7 +1560,8 @@ export function keywordPlanCampaign(
 }
 
 /* KeywordPlanCampaignKeyword */
-export type KeywordPlanCampaignKeywordResourceName = `customers/${StrNum}/keywordPlanCampaignKeywords/${StrNum}`;
+export type KeywordPlanCampaignKeywordResourceName =
+  `customers/${StrNum}/keywordPlanCampaignKeywords/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} keywordPlanCampaignKeywordId
@@ -1402,7 +1576,8 @@ export function keywordPlanCampaignKeyword(
 }
 
 /* KeywordView */
-export type KeywordViewResourceName = `customers/${StrNum}/keywordViews/${StrNum}~${StrNum}`;
+export type KeywordViewResourceName =
+  `customers/${StrNum}/keywordViews/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adGroupId
@@ -1434,7 +1609,8 @@ export function label(
 }
 
 /* LandingPageView */
-export type LandingPageViewResourceName = `customers/${StrNum}/landingPageViews/${StrNum}`;
+export type LandingPageViewResourceName =
+  `customers/${StrNum}/landingPageViews/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} unexpandedFinalUrlFingerprint
@@ -1461,8 +1637,24 @@ export function languageConstant(
   return `languageConstants/${criterionId}` as const;
 }
 
+/* LifeEvent */
+export type LifeEventResourceName = `customers/${StrNum}/lifeEvents/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} lifeEventId
+ * @returns `LifeEventResourceName`
+ * @example const lifeEvent: ResourceNames.LifeEventResourceName = ResourceNames.lifeEvent(10987417, 21974834)
+ */
+export function lifeEvent(
+  customerId: string | number,
+  lifeEventId: string | number
+): LifeEventResourceName {
+  return `customers/${customerId}/lifeEvents/${lifeEventId}` as const;
+}
+
 /* LocationView */
-export type LocationViewResourceName = `customers/${StrNum}/locationViews/${StrNum}~${StrNum}`;
+export type LocationViewResourceName =
+  `customers/${StrNum}/locationViews/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} campaignId
@@ -1479,7 +1671,8 @@ export function locationView(
 }
 
 /* ManagedPlacementView */
-export type ManagedPlacementViewResourceName = `customers/${StrNum}/managedPlacementViews/${StrNum}~${StrNum}`;
+export type ManagedPlacementViewResourceName =
+  `customers/${StrNum}/managedPlacementViews/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adGroupId
@@ -1511,7 +1704,8 @@ export function mediaFile(
 }
 
 /* MerchantCenterLink */
-export type MerchantCenterLinkResourceName = `customers/${StrNum}/merchantCenterLinks/${StrNum}`;
+export type MerchantCenterLinkResourceName =
+  `customers/${StrNum}/merchantCenterLinks/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} merchantCenterId
@@ -1526,7 +1720,8 @@ export function merchantCenterLink(
 }
 
 /* MobileAppCategoryConstant */
-export type MobileAppCategoryConstantResourceName = `mobileAppCategoryConstants/${StrNum}`;
+export type MobileAppCategoryConstantResourceName =
+  `mobileAppCategoryConstants/${StrNum}`;
 /**
  * @param {string | number} mobileAppCategoryId
  * @returns `MobileAppCategoryConstantResourceName`
@@ -1539,7 +1734,8 @@ export function mobileAppCategoryConstant(
 }
 
 /* MobileDeviceConstant */
-export type MobileDeviceConstantResourceName = `mobileDeviceConstants/${StrNum}`;
+export type MobileDeviceConstantResourceName =
+  `mobileDeviceConstants/${StrNum}`;
 /**
  * @param {string | number} criterionId
  * @returns `MobileDeviceConstantResourceName`
@@ -1552,7 +1748,8 @@ export function mobileDeviceConstant(
 }
 
 /* OfflineUserDataJob */
-export type OfflineUserDataJobResourceName = `customers/${StrNum}/offlineUserDataJobs/${StrNum}`;
+export type OfflineUserDataJobResourceName =
+  `customers/${StrNum}/offlineUserDataJobs/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} offlineUserDataUpdateId
@@ -1567,7 +1764,8 @@ export function offlineUserDataJob(
 }
 
 /* OperatingSystemVersionConstant */
-export type OperatingSystemVersionConstantResourceName = `operatingSystemVersionConstants/${StrNum}`;
+export type OperatingSystemVersionConstantResourceName =
+  `operatingSystemVersionConstants/${StrNum}`;
 /**
  * @param {string | number} criterionId
  * @returns `OperatingSystemVersionConstantResourceName`
@@ -1580,7 +1778,8 @@ export function operatingSystemVersionConstant(
 }
 
 /* PaidOrganicSearchTermView */
-export type PaidOrganicSearchTermViewResourceName = `customers/${StrNum}/paidOrganicSearchTermViews/${StrNum}~${StrNum}~${StrNum}`;
+export type PaidOrganicSearchTermViewResourceName =
+  `customers/${StrNum}/paidOrganicSearchTermViews/${StrNum}~${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} campaignId
@@ -1599,7 +1798,8 @@ export function paidOrganicSearchTermView(
 }
 
 /* ParentalStatusView */
-export type ParentalStatusViewResourceName = `customers/${StrNum}/parentalStatusViews/${StrNum}~${StrNum}`;
+export type ParentalStatusViewResourceName =
+  `customers/${StrNum}/parentalStatusViews/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adGroupId
@@ -1616,7 +1816,8 @@ export function parentalStatusView(
 }
 
 /* PaymentsAccount */
-export type PaymentsAccountResourceName = `customers/${StrNum}/paymentsAccounts/${StrNum}`;
+export type PaymentsAccountResourceName =
+  `customers/${StrNum}/paymentsAccounts/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} paymentsAccountId
@@ -1631,7 +1832,8 @@ export function paymentsAccount(
 }
 
 /* ProductBiddingCategoryConstant */
-export type ProductBiddingCategoryConstantResourceName = `productBiddingCategoryConstants/${StrNum}~${StrNum}~${StrNum}`;
+export type ProductBiddingCategoryConstantResourceName =
+  `productBiddingCategoryConstants/${StrNum}~${StrNum}~${StrNum}`;
 /**
  * @param {string | number} countryCode
  * @param {string | number} level
@@ -1648,7 +1850,8 @@ export function productBiddingCategoryConstant(
 }
 
 /* ProductGroupView */
-export type ProductGroupViewResourceName = `customers/${StrNum}/productGroupViews/${StrNum}~${StrNum}`;
+export type ProductGroupViewResourceName =
+  `customers/${StrNum}/productGroupViews/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adgroupId
@@ -1665,7 +1868,8 @@ export function productGroupView(
 }
 
 /* Recommendation */
-export type RecommendationResourceName = `customers/${StrNum}/recommendations/${StrNum}`;
+export type RecommendationResourceName =
+  `customers/${StrNum}/recommendations/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} recommendationId
@@ -1680,7 +1884,8 @@ export function recommendation(
 }
 
 /* RemarketingAction */
-export type RemarketingActionResourceName = `customers/${StrNum}/remarketingActions/${StrNum}`;
+export type RemarketingActionResourceName =
+  `customers/${StrNum}/remarketingActions/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} remarketingActionId
@@ -1695,7 +1900,8 @@ export function remarketingAction(
 }
 
 /* SearchTermView */
-export type SearchTermViewResourceName = `customers/${StrNum}/searchTermViews/${StrNum}~${StrNum}~${StrNum}`;
+export type SearchTermViewResourceName =
+  `customers/${StrNum}/searchTermViews/${StrNum}~${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} campaignId
@@ -1714,7 +1920,8 @@ export function searchTermView(
 }
 
 /* SharedCriterion */
-export type SharedCriterionResourceName = `customers/${StrNum}/sharedCriteria/${StrNum}~${StrNum}`;
+export type SharedCriterionResourceName =
+  `customers/${StrNum}/sharedCriteria/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} sharedSetId
@@ -1746,7 +1953,8 @@ export function sharedSet(
 }
 
 /* ShoppingPerformanceView */
-export type ShoppingPerformanceViewResourceName = `customers/${StrNum}/shoppingPerformanceView`;
+export type ShoppingPerformanceViewResourceName =
+  `customers/${StrNum}/shoppingPerformanceView`;
 /**
  * @param {string | number} customerId
  * @returns `ShoppingPerformanceViewResourceName`
@@ -1759,7 +1967,8 @@ export function shoppingPerformanceView(
 }
 
 /* ThirdPartyAppAnalyticsLink */
-export type ThirdPartyAppAnalyticsLinkResourceName = `customers/${StrNum}/thirdPartyAppAnalyticsLinks/${StrNum}`;
+export type ThirdPartyAppAnalyticsLinkResourceName =
+  `customers/${StrNum}/thirdPartyAppAnalyticsLinks/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} customerLinkId
@@ -1787,7 +1996,8 @@ export function topicConstant(
 }
 
 /* TopicView */
-export type TopicViewResourceName = `customers/${StrNum}/topicViews/${StrNum}~${StrNum}`;
+export type TopicViewResourceName =
+  `customers/${StrNum}/topicViews/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} adGroupId
@@ -1804,7 +2014,8 @@ export function topicView(
 }
 
 /* UserInterest */
-export type UserInterestResourceName = `customers/${StrNum}/userInterests/${StrNum}`;
+export type UserInterestResourceName =
+  `customers/${StrNum}/userInterests/${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} userInterestId
@@ -1834,7 +2045,8 @@ export function userList(
 }
 
 /* UserLocationView */
-export type UserLocationViewResourceName = `customers/${StrNum}/userLocationViews/${StrNum}~${StrNum}`;
+export type UserLocationViewResourceName =
+  `customers/${StrNum}/userLocationViews/${StrNum}~${StrNum}`;
 /**
  * @param {string | number} customerId
  * @param {string | number} countryCriterionId
@@ -1863,4 +2075,22 @@ export function video(
   videoId: string | number
 ): VideoResourceName {
   return `customers/${customerId}/videos/${videoId}` as const;
+}
+
+/* WebpageView */
+export type WebpageViewResourceName =
+  `customers/${StrNum}/webpageViews/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} adGroupId
+ * @param {string | number} criterionId
+ * @returns `WebpageViewResourceName`
+ * @example const webpageView: ResourceNames.WebpageViewResourceName = ResourceNames.webpageView(10987417, 21974834, 43949668)
+ */
+export function webpageView(
+  customerId: string | number,
+  adGroupId: string | number,
+  criterionId: string | number
+): WebpageViewResourceName {
+  return `customers/${customerId}/webpageViews/${adGroupId}~${criterionId}` as const;
 }

@@ -62,6 +62,12 @@ export async function compileFields(): Promise<void> {
   const metrics: string[] = [];
 
   fields.forEach((field: resources.GoogleAdsField) => {
+    if (!isDefinedAndNotNull(field.name)) {
+      return;
+    }
+
+    const field_name = field.name as string;
+
     if (isResource(field)) {
       const resource: Resource = {
         attributes: [],
@@ -70,7 +76,7 @@ export async function compileFields(): Promise<void> {
       };
 
       const selectableResources: string[] = [
-        field.name,
+        field_name,
         ...field.selectable_with.filter(
           (selectable: string) =>
             !selectable.includes("segments.") &&
@@ -83,24 +89,29 @@ export async function compileFields(): Promise<void> {
           const correctResource = selectableResources.find((resource: string) =>
             field.resource_name.includes(`/${resource}.`)
           );
-          return isAttribute(field) && correctResource && field.selectable;
+          return (
+            isAttribute(field) &&
+            isDefinedAndNotNull(field.name) &&
+            correctResource &&
+            field.selectable
+          );
         })
-        .map((field: resources.GoogleAdsField): string => field.name);
+        .map((field: resources.GoogleAdsField): string => field.name as string);
 
-      resourceConstructs[field.name] = resource;
+      resourceConstructs[field_name] = resource;
     } else if (isAttribute(field) && field.selectable) {
-      attributes.push(field.name);
+      attributes.push(field_name);
       if (isResourceName(field)) {
-        resourceNames.push(field.name);
+        resourceNames.push(field_name);
       }
     } else if (isMetric(field) && field.selectable) {
-      metrics.push(field.name);
+      metrics.push(field_name);
     } else if (isSegment(field) && field.selectable) {
-      segments.push(field.name);
+      segments.push(field_name);
     }
 
     if (hasEnumDataType(field)) {
-      enumFields[field.name] = getEnumName(field);
+      enumFields[field_name] = getEnumName(field);
     }
   });
 
@@ -208,7 +219,11 @@ export function isSegment(field: resources.GoogleAdsField): boolean {
 const resourceNameRegex = new RegExp(/^.*\.resource_name$/g);
 
 export function isResourceName(field: resources.GoogleAdsField): boolean {
-  return resourceNameRegex.test(field.name);
+  if (isDefinedAndNotNull(field.name)) {
+    return resourceNameRegex.test(field.name as string);
+  } else {
+    return false;
+  }
 }
 
 export function hasEnumDataType(field: resources.GoogleAdsField): boolean {
@@ -216,5 +231,13 @@ export function hasEnumDataType(field: resources.GoogleAdsField): boolean {
 }
 
 export function getEnumName(field: resources.GoogleAdsField): string {
-  return field.type_url.replace(/.*(?=\.)\./g, "");
+  if (isDefinedAndNotNull(field.type_url)) {
+    return (field.type_url as string).replace(/.*(?=\.)\./g, "");
+  } else {
+    return "FIELD_HAS_NO_ENUM_NAME";
+  }
+}
+
+function isDefinedAndNotNull(input: string | null | undefined): boolean {
+  return typeof input !== "undefined" && input !== null;
 }

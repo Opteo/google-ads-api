@@ -31,20 +31,17 @@ export interface CallHeaders {
 export class Service {
   protected readonly clientOptions: ClientOptions;
   protected readonly customerOptions: CustomerOptions;
-  protected readonly timeout: number;
   protected readonly hooks: Hooks;
   private serviceCache!: Record<ServiceName, AllServices>;
 
   constructor(
     clientOptions: ClientOptions,
     customerOptions: CustomerOptions,
-    hooks?: Hooks,
-    timeout = 3600000 // 1 hour
+    hooks?: Hooks
   ) {
     this.clientOptions = clientOptions;
     this.customerOptions = customerOptions;
     this.hooks = hooks ?? {};
-    this.timeout = timeout;
 
     // @ts-expect-error All fields don't need to be set here
     this.serviceCache = {};
@@ -87,7 +84,7 @@ export class Service {
 
   protected loadService<T = AllServices>(service: ServiceName): T {
     if (this.serviceCache[service]) {
-      return (this.serviceCache[service] as unknown) as T;
+      return this.serviceCache[service] as unknown as T;
     }
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const { [service]: protoService } = require("google-ads-node");
@@ -98,7 +95,7 @@ export class Service {
       sslCreds: this.getCredentials(),
     });
     this.serviceCache[service] = client;
-    return (client as unknown) as T;
+    return client as unknown as T;
   }
 
   protected getGoogleAdsError(error: Error): errors.GoogleAdsFailure | Error {
@@ -149,13 +146,12 @@ export class Service {
     const service: GoogleAdsServiceClient = this.loadService(
       "GoogleAdsServiceClient"
     );
-    const request: services.SearchGoogleAdsRequest = new services.SearchGoogleAdsRequest(
-      {
+    const request: services.SearchGoogleAdsRequest =
+      new services.SearchGoogleAdsRequest({
         customer_id: this.customerOptions.customer_id,
         query: gaql,
         ...options,
-      }
-    );
+      });
     return { service, request };
   }
 
@@ -169,13 +165,12 @@ export class Service {
     const service: GoogleAdsServiceClient = this.loadService(
       "GoogleAdsServiceClient"
     );
-    const request: services.SearchGoogleAdsStreamRequest = new services.SearchGoogleAdsStreamRequest(
-      {
+    const request: services.SearchGoogleAdsStreamRequest =
+      new services.SearchGoogleAdsStreamRequest({
         customer_id: this.customerOptions.customer_id,
         query: gaql,
         ...options,
-      }
-    );
+      });
     return { service, request };
   }
 
@@ -237,7 +232,7 @@ export class Service {
       }
       return op;
     });
-    return (ops as unknown) as Op[];
+    return ops as unknown as Op[];
   }
 
   protected buildRequest<Op, Req, Options>(
@@ -249,6 +244,6 @@ export class Service {
       operations,
       ...options,
     };
-    return (request as unknown) as Req;
+    return request as unknown as Req;
   }
 }
