@@ -2,3930 +2,3929 @@
 
 // eslint-disable-next-line
 export namespace enums {
-
-/**
-    * @name PolicyTopicEntryTypeEnum.PolicyTopicEntryType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PolicyTopicEntryTypeEnum.PolicyTopicEntryType 
-    */
-export enum PolicyTopicEntryType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-PROHIBITED = 2, // PROHIBITED
-LIMITED = 4, // LIMITED
-FULLY_LIMITED = 8, // FULLY_LIMITED
-DESCRIPTIVE = 5, // DESCRIPTIVE
-BROADENING = 6, // BROADENING
-AREA_OF_INTEREST_ONLY = 7, // AREA_OF_INTEREST_ONLY
-    }
-
-/**
-    * @name PolicyTopicEvidenceDestinationMismatchUrlTypeEnum.PolicyTopicEvidenceDestinationMismatchUrlType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PolicyTopicEvidenceDestinationMismatchUrlTypeEnum.PolicyTopicEvidenceDestinationMismatchUrlType 
-    */
-export enum PolicyTopicEvidenceDestinationMismatchUrlType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-DISPLAY_URL = 2, // DISPLAY_URL
-FINAL_URL = 3, // FINAL_URL
-FINAL_MOBILE_URL = 4, // FINAL_MOBILE_URL
-TRACKING_URL = 5, // TRACKING_URL
-MOBILE_TRACKING_URL = 6, // MOBILE_TRACKING_URL
-    }
-
-/**
-    * @name PolicyTopicEvidenceDestinationNotWorkingDeviceEnum.PolicyTopicEvidenceDestinationNotWorkingDevice
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PolicyTopicEvidenceDestinationNotWorkingDeviceEnum.PolicyTopicEvidenceDestinationNotWorkingDevice 
-    */
-export enum PolicyTopicEvidenceDestinationNotWorkingDevice {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-DESKTOP = 2, // DESKTOP
-ANDROID = 3, // ANDROID
-IOS = 4, // IOS
-    }
-
-/**
-    * @name PolicyTopicEvidenceDestinationNotWorkingDnsErrorTypeEnum.PolicyTopicEvidenceDestinationNotWorkingDnsErrorType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PolicyTopicEvidenceDestinationNotWorkingDnsErrorTypeEnum.PolicyTopicEvidenceDestinationNotWorkingDnsErrorType 
-    */
-export enum PolicyTopicEvidenceDestinationNotWorkingDnsErrorType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-HOSTNAME_NOT_FOUND = 2, // HOSTNAME_NOT_FOUND
-GOOGLE_CRAWLER_DNS_ISSUE = 3, // GOOGLE_CRAWLER_DNS_ISSUE
-    }
-
-/**
-    * @name PolicyApprovalStatusEnum.PolicyApprovalStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PolicyApprovalStatusEnum.PolicyApprovalStatus 
-    */
-export enum PolicyApprovalStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-DISAPPROVED = 2, // DISAPPROVED
-APPROVED_LIMITED = 3, // APPROVED_LIMITED
-APPROVED = 4, // APPROVED
-AREA_OF_INTEREST_ONLY = 5, // AREA_OF_INTEREST_ONLY
-    }
-
-/**
-    * @name PolicyReviewStatusEnum.PolicyReviewStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PolicyReviewStatusEnum.PolicyReviewStatus 
-    */
-export enum PolicyReviewStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-REVIEW_IN_PROGRESS = 2, // REVIEW_IN_PROGRESS
-REVIEWED = 3, // REVIEWED
-UNDER_APPEAL = 4, // UNDER_APPEAL
-ELIGIBLE_MAY_SERVE = 5, // ELIGIBLE_MAY_SERVE
-    }
-
-/**
-    * @name AssetPerformanceLabelEnum.AssetPerformanceLabel
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AssetPerformanceLabelEnum.AssetPerformanceLabel 
-    */
-export enum AssetPerformanceLabel {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-PENDING = 2, // PENDING
-LEARNING = 3, // LEARNING
-LOW = 4, // LOW
-GOOD = 5, // GOOD
-BEST = 6, // BEST
-    }
-
-/**
-    * @name ServedAssetFieldTypeEnum.ServedAssetFieldType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ServedAssetFieldTypeEnum.ServedAssetFieldType 
-    */
-export enum ServedAssetFieldType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-HEADLINE_1 = 2, // HEADLINE_1
-HEADLINE_2 = 3, // HEADLINE_2
-HEADLINE_3 = 4, // HEADLINE_3
-DESCRIPTION_1 = 5, // DESCRIPTION_1
-DESCRIPTION_2 = 6, // DESCRIPTION_2
-    }
-
-/**
-    * @name CallConversionReportingStateEnum.CallConversionReportingState
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CallConversionReportingStateEnum.CallConversionReportingState 
-    */
-export enum CallConversionReportingState {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-DISABLED = 2, // DISABLED
-USE_ACCOUNT_LEVEL_CALL_CONVERSION_ACTION = 3, // USE_ACCOUNT_LEVEL_CALL_CONVERSION_ACTION
-USE_RESOURCE_LEVEL_CALL_CONVERSION_ACTION = 4, // USE_RESOURCE_LEVEL_CALL_CONVERSION_ACTION
-    }
-
-/**
-    * @name DisplayAdFormatSettingEnum.DisplayAdFormatSetting
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/DisplayAdFormatSettingEnum.DisplayAdFormatSetting 
-    */
-export enum DisplayAdFormatSetting {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ALL_FORMATS = 2, // ALL_FORMATS
-NON_NATIVE = 3, // NON_NATIVE
-NATIVE = 4, // NATIVE
-    }
-
-/**
-    * @name DisplayUploadProductTypeEnum.DisplayUploadProductType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/DisplayUploadProductTypeEnum.DisplayUploadProductType 
-    */
-export enum DisplayUploadProductType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-HTML5_UPLOAD_AD = 2, // HTML5_UPLOAD_AD
-DYNAMIC_HTML5_EDUCATION_AD = 3, // DYNAMIC_HTML5_EDUCATION_AD
-DYNAMIC_HTML5_FLIGHT_AD = 4, // DYNAMIC_HTML5_FLIGHT_AD
-DYNAMIC_HTML5_HOTEL_RENTAL_AD = 5, // DYNAMIC_HTML5_HOTEL_RENTAL_AD
-DYNAMIC_HTML5_JOB_AD = 6, // DYNAMIC_HTML5_JOB_AD
-DYNAMIC_HTML5_LOCAL_AD = 7, // DYNAMIC_HTML5_LOCAL_AD
-DYNAMIC_HTML5_REAL_ESTATE_AD = 8, // DYNAMIC_HTML5_REAL_ESTATE_AD
-DYNAMIC_HTML5_CUSTOM_AD = 9, // DYNAMIC_HTML5_CUSTOM_AD
-DYNAMIC_HTML5_TRAVEL_AD = 10, // DYNAMIC_HTML5_TRAVEL_AD
-DYNAMIC_HTML5_HOTEL_AD = 11, // DYNAMIC_HTML5_HOTEL_AD
-    }
-
-/**
-    * @name LegacyAppInstallAdAppStoreEnum.LegacyAppInstallAdAppStore
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/LegacyAppInstallAdAppStoreEnum.LegacyAppInstallAdAppStore 
-    */
-export enum LegacyAppInstallAdAppStore {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-APPLE_APP_STORE = 2, // APPLE_APP_STORE
-GOOGLE_PLAY = 3, // GOOGLE_PLAY
-WINDOWS_STORE = 4, // WINDOWS_STORE
-WINDOWS_PHONE_STORE = 5, // WINDOWS_PHONE_STORE
-CN_APP_STORE = 6, // CN_APP_STORE
-    }
-
-/**
-    * @name MimeTypeEnum.MimeType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/MimeTypeEnum.MimeType 
-    */
-export enum MimeType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-IMAGE_JPEG = 2, // IMAGE_JPEG
-IMAGE_GIF = 3, // IMAGE_GIF
-IMAGE_PNG = 4, // IMAGE_PNG
-FLASH = 5, // FLASH
-TEXT_HTML = 6, // TEXT_HTML
-PDF = 7, // PDF
-MSWORD = 8, // MSWORD
-MSEXCEL = 9, // MSEXCEL
-RTF = 10, // RTF
-AUDIO_WAV = 11, // AUDIO_WAV
-AUDIO_MP3 = 12, // AUDIO_MP3
-HTML5_AD_ZIP = 13, // HTML5_AD_ZIP
-    }
-
-/**
-    * @name AgeRangeTypeEnum.AgeRangeType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AgeRangeTypeEnum.AgeRangeType 
-    */
-export enum AgeRangeType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-AGE_RANGE_18_24 = 503001, // AGE_RANGE_18_24
-AGE_RANGE_25_34 = 503002, // AGE_RANGE_25_34
-AGE_RANGE_35_44 = 503003, // AGE_RANGE_35_44
-AGE_RANGE_45_54 = 503004, // AGE_RANGE_45_54
-AGE_RANGE_55_64 = 503005, // AGE_RANGE_55_64
-AGE_RANGE_65_UP = 503006, // AGE_RANGE_65_UP
-AGE_RANGE_UNDETERMINED = 503999, // AGE_RANGE_UNDETERMINED
-    }
-
-/**
-    * @name AppPaymentModelTypeEnum.AppPaymentModelType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AppPaymentModelTypeEnum.AppPaymentModelType 
-    */
-export enum AppPaymentModelType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-PAID = 30, // PAID
-    }
-
-/**
-    * @name ContentLabelTypeEnum.ContentLabelType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ContentLabelTypeEnum.ContentLabelType 
-    */
-export enum ContentLabelType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-SEXUALLY_SUGGESTIVE = 2, // SEXUALLY_SUGGESTIVE
-BELOW_THE_FOLD = 3, // BELOW_THE_FOLD
-PARKED_DOMAIN = 4, // PARKED_DOMAIN
-JUVENILE = 6, // JUVENILE
-PROFANITY = 7, // PROFANITY
-TRAGEDY = 8, // TRAGEDY
-VIDEO = 9, // VIDEO
-VIDEO_RATING_DV_G = 10, // VIDEO_RATING_DV_G
-VIDEO_RATING_DV_PG = 11, // VIDEO_RATING_DV_PG
-VIDEO_RATING_DV_T = 12, // VIDEO_RATING_DV_T
-VIDEO_RATING_DV_MA = 13, // VIDEO_RATING_DV_MA
-VIDEO_NOT_YET_RATED = 14, // VIDEO_NOT_YET_RATED
-EMBEDDED_VIDEO = 15, // EMBEDDED_VIDEO
-LIVE_STREAMING_VIDEO = 16, // LIVE_STREAMING_VIDEO
-SOCIAL_ISSUES = 17, // SOCIAL_ISSUES
-    }
-
-/**
-    * @name DayOfWeekEnum.DayOfWeek
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/DayOfWeekEnum.DayOfWeek 
-    */
-export enum DayOfWeek {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-MONDAY = 2, // MONDAY
-TUESDAY = 3, // TUESDAY
-WEDNESDAY = 4, // WEDNESDAY
-THURSDAY = 5, // THURSDAY
-FRIDAY = 6, // FRIDAY
-SATURDAY = 7, // SATURDAY
-SUNDAY = 8, // SUNDAY
-    }
-
-/**
-    * @name DeviceEnum.Device
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/DeviceEnum.Device 
-    */
-export enum Device {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-MOBILE = 2, // MOBILE
-TABLET = 3, // TABLET
-DESKTOP = 4, // DESKTOP
-CONNECTED_TV = 6, // CONNECTED_TV
-OTHER = 5, // OTHER
-    }
-
-/**
-    * @name GenderTypeEnum.GenderType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/GenderTypeEnum.GenderType 
-    */
-export enum GenderType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-MALE = 10, // MALE
-FEMALE = 11, // FEMALE
-UNDETERMINED = 20, // UNDETERMINED
-    }
-
-/**
-    * @name HotelDateSelectionTypeEnum.HotelDateSelectionType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/HotelDateSelectionTypeEnum.HotelDateSelectionType 
-    */
-export enum HotelDateSelectionType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-DEFAULT_SELECTION = 50, // DEFAULT_SELECTION
-USER_SELECTED = 51, // USER_SELECTED
-    }
-
-/**
-    * @name IncomeRangeTypeEnum.IncomeRangeType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/IncomeRangeTypeEnum.IncomeRangeType 
-    */
-export enum IncomeRangeType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-INCOME_RANGE_0_50 = 510001, // INCOME_RANGE_0_50
-INCOME_RANGE_50_60 = 510002, // INCOME_RANGE_50_60
-INCOME_RANGE_60_70 = 510003, // INCOME_RANGE_60_70
-INCOME_RANGE_70_80 = 510004, // INCOME_RANGE_70_80
-INCOME_RANGE_80_90 = 510005, // INCOME_RANGE_80_90
-INCOME_RANGE_90_UP = 510006, // INCOME_RANGE_90_UP
-INCOME_RANGE_UNDETERMINED = 510000, // INCOME_RANGE_UNDETERMINED
-    }
-
-/**
-    * @name InteractionTypeEnum.InteractionType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/InteractionTypeEnum.InteractionType 
-    */
-export enum InteractionType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-CALLS = 8000, // CALLS
-    }
-
-/**
-    * @name KeywordMatchTypeEnum.KeywordMatchType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/KeywordMatchTypeEnum.KeywordMatchType 
-    */
-export enum KeywordMatchType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-EXACT = 2, // EXACT
-PHRASE = 3, // PHRASE
-BROAD = 4, // BROAD
-    }
-
-/**
-    * @name ListingGroupTypeEnum.ListingGroupType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ListingGroupTypeEnum.ListingGroupType 
-    */
-export enum ListingGroupType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-SUBDIVISION = 2, // SUBDIVISION
-UNIT = 3, // UNIT
-    }
-
-/**
-    * @name LocationGroupRadiusUnitsEnum.LocationGroupRadiusUnits
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/LocationGroupRadiusUnitsEnum.LocationGroupRadiusUnits 
-    */
-export enum LocationGroupRadiusUnits {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-METERS = 2, // METERS
-MILES = 3, // MILES
-MILLI_MILES = 4, // MILLI_MILES
-    }
-
-/**
-    * @name MinuteOfHourEnum.MinuteOfHour
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/MinuteOfHourEnum.MinuteOfHour 
-    */
-export enum MinuteOfHour {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ZERO = 2, // ZERO
-FIFTEEN = 3, // FIFTEEN
-THIRTY = 4, // THIRTY
-FORTY_FIVE = 5, // FORTY_FIVE
-    }
-
-/**
-    * @name ParentalStatusTypeEnum.ParentalStatusType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ParentalStatusTypeEnum.ParentalStatusType 
-    */
-export enum ParentalStatusType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-PARENT = 300, // PARENT
-NOT_A_PARENT = 301, // NOT_A_PARENT
-UNDETERMINED = 302, // UNDETERMINED
-    }
-
-/**
-    * @name PreferredContentTypeEnum.PreferredContentType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PreferredContentTypeEnum.PreferredContentType 
-    */
-export enum PreferredContentType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-YOUTUBE_TOP_CONTENT = 400, // YOUTUBE_TOP_CONTENT
-    }
-
-/**
-    * @name ProductBiddingCategoryLevelEnum.ProductBiddingCategoryLevel
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ProductBiddingCategoryLevelEnum.ProductBiddingCategoryLevel 
-    */
-export enum ProductBiddingCategoryLevel {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-LEVEL1 = 2, // LEVEL1
-LEVEL2 = 3, // LEVEL2
-LEVEL3 = 4, // LEVEL3
-LEVEL4 = 5, // LEVEL4
-LEVEL5 = 6, // LEVEL5
-    }
-
-/**
-    * @name ProductChannelEnum.ProductChannel
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ProductChannelEnum.ProductChannel 
-    */
-export enum ProductChannel {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ONLINE = 2, // ONLINE
-LOCAL = 3, // LOCAL
-    }
-
-/**
-    * @name ProductChannelExclusivityEnum.ProductChannelExclusivity
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ProductChannelExclusivityEnum.ProductChannelExclusivity 
-    */
-export enum ProductChannelExclusivity {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-SINGLE_CHANNEL = 2, // SINGLE_CHANNEL
-MULTI_CHANNEL = 3, // MULTI_CHANNEL
-    }
-
-/**
-    * @name ProductConditionEnum.ProductCondition
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ProductConditionEnum.ProductCondition 
-    */
-export enum ProductCondition {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-NEW = 3, // NEW
-REFURBISHED = 4, // REFURBISHED
-USED = 5, // USED
-    }
-
-/**
-    * @name ProductCustomAttributeIndexEnum.ProductCustomAttributeIndex
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ProductCustomAttributeIndexEnum.ProductCustomAttributeIndex 
-    */
-export enum ProductCustomAttributeIndex {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-INDEX0 = 7, // INDEX0
-INDEX1 = 8, // INDEX1
-INDEX2 = 9, // INDEX2
-INDEX3 = 10, // INDEX3
-INDEX4 = 11, // INDEX4
-    }
-
-/**
-    * @name ProductTypeLevelEnum.ProductTypeLevel
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ProductTypeLevelEnum.ProductTypeLevel 
-    */
-export enum ProductTypeLevel {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-LEVEL1 = 7, // LEVEL1
-LEVEL2 = 8, // LEVEL2
-LEVEL3 = 9, // LEVEL3
-LEVEL4 = 10, // LEVEL4
-LEVEL5 = 11, // LEVEL5
-    }
-
-/**
-    * @name ProximityRadiusUnitsEnum.ProximityRadiusUnits
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ProximityRadiusUnitsEnum.ProximityRadiusUnits 
-    */
-export enum ProximityRadiusUnits {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-MILES = 2, // MILES
-KILOMETERS = 3, // KILOMETERS
-    }
-
-/**
-    * @name WebpageConditionOperandEnum.WebpageConditionOperand
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/WebpageConditionOperandEnum.WebpageConditionOperand 
-    */
-export enum WebpageConditionOperand {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-URL = 2, // URL
-CATEGORY = 3, // CATEGORY
-PAGE_TITLE = 4, // PAGE_TITLE
-PAGE_CONTENT = 5, // PAGE_CONTENT
-CUSTOM_LABEL = 6, // CUSTOM_LABEL
-    }
-
-/**
-    * @name WebpageConditionOperatorEnum.WebpageConditionOperator
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/WebpageConditionOperatorEnum.WebpageConditionOperator 
-    */
-export enum WebpageConditionOperator {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-EQUALS = 2, // EQUALS
-CONTAINS = 3, // CONTAINS
-    }
-
-/**
-    * @name LeadFormCallToActionTypeEnum.LeadFormCallToActionType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/LeadFormCallToActionTypeEnum.LeadFormCallToActionType 
-    */
-export enum LeadFormCallToActionType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-LEARN_MORE = 2, // LEARN_MORE
-GET_QUOTE = 3, // GET_QUOTE
-APPLY_NOW = 4, // APPLY_NOW
-SIGN_UP = 5, // SIGN_UP
-CONTACT_US = 6, // CONTACT_US
-SUBSCRIBE = 7, // SUBSCRIBE
-DOWNLOAD = 8, // DOWNLOAD
-BOOK_NOW = 9, // BOOK_NOW
-GET_OFFER = 10, // GET_OFFER
-REGISTER = 11, // REGISTER
-GET_INFO = 12, // GET_INFO
-REQUEST_DEMO = 13, // REQUEST_DEMO
-JOIN_NOW = 14, // JOIN_NOW
-GET_STARTED = 15, // GET_STARTED
-    }
-
-/**
-    * @name LeadFormDesiredIntentEnum.LeadFormDesiredIntent
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/LeadFormDesiredIntentEnum.LeadFormDesiredIntent 
-    */
-export enum LeadFormDesiredIntent {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-LOW_INTENT = 2, // LOW_INTENT
-HIGH_INTENT = 3, // HIGH_INTENT
-    }
-
-/**
-    * @name LeadFormFieldUserInputTypeEnum.LeadFormFieldUserInputType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/LeadFormFieldUserInputTypeEnum.LeadFormFieldUserInputType 
-    */
-export enum LeadFormFieldUserInputType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-FULL_NAME = 2, // FULL_NAME
-GIVEN_NAME = 6, // GIVEN_NAME
-FAMILY_NAME = 7, // FAMILY_NAME
-EMAIL = 3, // EMAIL
-PHONE_NUMBER = 4, // PHONE_NUMBER
-POSTAL_CODE = 5, // POSTAL_CODE
-CITY = 9, // CITY
-REGION = 10, // REGION
-COUNTRY = 11, // COUNTRY
-WORK_EMAIL = 12, // WORK_EMAIL
-COMPANY_NAME = 13, // COMPANY_NAME
-WORK_PHONE = 14, // WORK_PHONE
-JOB_TITLE = 15, // JOB_TITLE
-VEHICLE_MODEL = 1001, // VEHICLE_MODEL
-VEHICLE_TYPE = 1002, // VEHICLE_TYPE
-PREFERRED_DEALERSHIP = 1003, // PREFERRED_DEALERSHIP
-VEHICLE_PURCHASE_TIMELINE = 1004, // VEHICLE_PURCHASE_TIMELINE
-VEHICLE_OWNERSHIP = 1005, // VEHICLE_OWNERSHIP
-VEHICLE_PAYMENT_TYPE = 1009, // VEHICLE_PAYMENT_TYPE
-VEHICLE_CONDITION = 1010, // VEHICLE_CONDITION
-COMPANY_SIZE = 1006, // COMPANY_SIZE
-ANNUAL_SALES = 1007, // ANNUAL_SALES
-YEARS_IN_BUSINESS = 1008, // YEARS_IN_BUSINESS
-JOB_DEPARTMENT = 1011, // JOB_DEPARTMENT
-JOB_ROLE = 1012, // JOB_ROLE
-EDUCATION_PROGRAM = 1013, // EDUCATION_PROGRAM
-EDUCATION_COURSE = 1014, // EDUCATION_COURSE
-PRODUCT = 1016, // PRODUCT
-SERVICE = 1017, // SERVICE
-OFFER = 1018, // OFFER
-CATEGORY = 1019, // CATEGORY
-PREFERRED_CONTACT_METHOD = 1020, // PREFERRED_CONTACT_METHOD
-PREFERRED_LOCATION = 1021, // PREFERRED_LOCATION
-PREFERRED_CONTACT_TIME = 1022, // PREFERRED_CONTACT_TIME
-PURCHASE_TIMELINE = 1023, // PURCHASE_TIMELINE
-YEARS_OF_EXPERIENCE = 1048, // YEARS_OF_EXPERIENCE
-JOB_INDUSTRY = 1049, // JOB_INDUSTRY
-LEVEL_OF_EDUCATION = 1050, // LEVEL_OF_EDUCATION
-PROPERTY_TYPE = 1024, // PROPERTY_TYPE
-REALTOR_HELP_GOAL = 1025, // REALTOR_HELP_GOAL
-PROPERTY_COMMUNITY = 1026, // PROPERTY_COMMUNITY
-PRICE_RANGE = 1027, // PRICE_RANGE
-NUMBER_OF_BEDROOMS = 1028, // NUMBER_OF_BEDROOMS
-FURNISHED_PROPERTY = 1029, // FURNISHED_PROPERTY
-PETS_ALLOWED_PROPERTY = 1030, // PETS_ALLOWED_PROPERTY
-NEXT_PLANNED_PURCHASE = 1031, // NEXT_PLANNED_PURCHASE
-EVENT_SIGNUP_INTEREST = 1033, // EVENT_SIGNUP_INTEREST
-PREFERRED_SHOPPING_PLACES = 1034, // PREFERRED_SHOPPING_PLACES
-FAVORITE_BRAND = 1035, // FAVORITE_BRAND
-TRANSPORTATION_COMMERCIAL_LICENSE_TYPE = 1036, // TRANSPORTATION_COMMERCIAL_LICENSE_TYPE
-EVENT_BOOKING_INTEREST = 1038, // EVENT_BOOKING_INTEREST
-DESTINATION_COUNTRY = 1039, // DESTINATION_COUNTRY
-DESTINATION_CITY = 1040, // DESTINATION_CITY
-DEPARTURE_COUNTRY = 1041, // DEPARTURE_COUNTRY
-DEPARTURE_CITY = 1042, // DEPARTURE_CITY
-DEPARTURE_DATE = 1043, // DEPARTURE_DATE
-RETURN_DATE = 1044, // RETURN_DATE
-NUMBER_OF_TRAVELERS = 1045, // NUMBER_OF_TRAVELERS
-TRAVEL_BUDGET = 1046, // TRAVEL_BUDGET
-TRAVEL_ACCOMMODATION = 1047, // TRAVEL_ACCOMMODATION
-    }
-
-/**
-    * @name LeadFormPostSubmitCallToActionTypeEnum.LeadFormPostSubmitCallToActionType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/LeadFormPostSubmitCallToActionTypeEnum.LeadFormPostSubmitCallToActionType 
-    */
-export enum LeadFormPostSubmitCallToActionType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-VISIT_SITE = 2, // VISIT_SITE
-DOWNLOAD = 3, // DOWNLOAD
-LEARN_MORE = 4, // LEARN_MORE
-SHOP_NOW = 5, // SHOP_NOW
-    }
-
-/**
-    * @name PromotionExtensionDiscountModifierEnum.PromotionExtensionDiscountModifier
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PromotionExtensionDiscountModifierEnum.PromotionExtensionDiscountModifier 
-    */
-export enum PromotionExtensionDiscountModifier {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-UP_TO = 2, // UP_TO
-    }
-
-/**
-    * @name PromotionExtensionOccasionEnum.PromotionExtensionOccasion
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PromotionExtensionOccasionEnum.PromotionExtensionOccasion 
-    */
-export enum PromotionExtensionOccasion {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-NEW_YEARS = 2, // NEW_YEARS
-CHINESE_NEW_YEAR = 3, // CHINESE_NEW_YEAR
-VALENTINES_DAY = 4, // VALENTINES_DAY
-EASTER = 5, // EASTER
-MOTHERS_DAY = 6, // MOTHERS_DAY
-FATHERS_DAY = 7, // FATHERS_DAY
-LABOR_DAY = 8, // LABOR_DAY
-BACK_TO_SCHOOL = 9, // BACK_TO_SCHOOL
-HALLOWEEN = 10, // HALLOWEEN
-BLACK_FRIDAY = 11, // BLACK_FRIDAY
-CYBER_MONDAY = 12, // CYBER_MONDAY
-CHRISTMAS = 13, // CHRISTMAS
-BOXING_DAY = 14, // BOXING_DAY
-INDEPENDENCE_DAY = 15, // INDEPENDENCE_DAY
-NATIONAL_DAY = 16, // NATIONAL_DAY
-END_OF_SEASON = 17, // END_OF_SEASON
-WINTER_SALE = 18, // WINTER_SALE
-SUMMER_SALE = 19, // SUMMER_SALE
-FALL_SALE = 20, // FALL_SALE
-SPRING_SALE = 21, // SPRING_SALE
-RAMADAN = 22, // RAMADAN
-EID_AL_FITR = 23, // EID_AL_FITR
-EID_AL_ADHA = 24, // EID_AL_ADHA
-SINGLES_DAY = 25, // SINGLES_DAY
-WOMENS_DAY = 26, // WOMENS_DAY
-HOLI = 27, // HOLI
-PARENTS_DAY = 28, // PARENTS_DAY
-ST_NICHOLAS_DAY = 29, // ST_NICHOLAS_DAY
-CARNIVAL = 30, // CARNIVAL
-EPIPHANY = 31, // EPIPHANY
-ROSH_HASHANAH = 32, // ROSH_HASHANAH
-PASSOVER = 33, // PASSOVER
-HANUKKAH = 34, // HANUKKAH
-DIWALI = 35, // DIWALI
-NAVRATRI = 36, // NAVRATRI
-SONGKRAN = 37, // SONGKRAN
-YEAR_END_GIFT = 38, // YEAR_END_GIFT
-    }
-
-/**
-    * @name TargetImpressionShareLocationEnum.TargetImpressionShareLocation
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/TargetImpressionShareLocationEnum.TargetImpressionShareLocation 
-    */
-export enum TargetImpressionShareLocation {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ANYWHERE_ON_PAGE = 2, // ANYWHERE_ON_PAGE
-TOP_OF_PAGE = 3, // TOP_OF_PAGE
-ABSOLUTE_TOP_OF_PAGE = 4, // ABSOLUTE_TOP_OF_PAGE
-    }
-
-/**
-    * @name AdvertisingChannelSubTypeEnum.AdvertisingChannelSubType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdvertisingChannelSubTypeEnum.AdvertisingChannelSubType 
-    */
-export enum AdvertisingChannelSubType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-SEARCH_MOBILE_APP = 2, // SEARCH_MOBILE_APP
-DISPLAY_MOBILE_APP = 3, // DISPLAY_MOBILE_APP
-SEARCH_EXPRESS = 4, // SEARCH_EXPRESS
-DISPLAY_EXPRESS = 5, // DISPLAY_EXPRESS
-SHOPPING_SMART_ADS = 6, // SHOPPING_SMART_ADS
-DISPLAY_GMAIL_AD = 7, // DISPLAY_GMAIL_AD
-DISPLAY_SMART_CAMPAIGN = 8, // DISPLAY_SMART_CAMPAIGN
-VIDEO_OUTSTREAM = 9, // VIDEO_OUTSTREAM
-VIDEO_ACTION = 10, // VIDEO_ACTION
-VIDEO_NON_SKIPPABLE = 11, // VIDEO_NON_SKIPPABLE
-APP_CAMPAIGN = 12, // APP_CAMPAIGN
-APP_CAMPAIGN_FOR_ENGAGEMENT = 13, // APP_CAMPAIGN_FOR_ENGAGEMENT
-LOCAL_CAMPAIGN = 14, // LOCAL_CAMPAIGN
-SHOPPING_COMPARISON_LISTING_ADS = 15, // SHOPPING_COMPARISON_LISTING_ADS
-SMART_CAMPAIGN = 16, // SMART_CAMPAIGN
-VIDEO_SEQUENCE = 17, // VIDEO_SEQUENCE
-    }
-
-/**
-    * @name AdvertisingChannelTypeEnum.AdvertisingChannelType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdvertisingChannelTypeEnum.AdvertisingChannelType 
-    */
-export enum AdvertisingChannelType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-SEARCH = 2, // SEARCH
-DISPLAY = 3, // DISPLAY
-SHOPPING = 4, // SHOPPING
-HOTEL = 5, // HOTEL
-VIDEO = 6, // VIDEO
-MULTI_CHANNEL = 7, // MULTI_CHANNEL
-LOCAL = 8, // LOCAL
-SMART = 9, // SMART
-    }
-
-/**
-    * @name CriterionCategoryChannelAvailabilityModeEnum.CriterionCategoryChannelAvailabilityMode
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CriterionCategoryChannelAvailabilityModeEnum.CriterionCategoryChannelAvailabilityMode 
-    */
-export enum CriterionCategoryChannelAvailabilityMode {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ALL_CHANNELS = 2, // ALL_CHANNELS
-CHANNEL_TYPE_AND_ALL_SUBTYPES = 3, // CHANNEL_TYPE_AND_ALL_SUBTYPES
-CHANNEL_TYPE_AND_SUBSET_SUBTYPES = 4, // CHANNEL_TYPE_AND_SUBSET_SUBTYPES
-    }
-
-/**
-    * @name CriterionCategoryLocaleAvailabilityModeEnum.CriterionCategoryLocaleAvailabilityMode
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CriterionCategoryLocaleAvailabilityModeEnum.CriterionCategoryLocaleAvailabilityMode 
-    */
-export enum CriterionCategoryLocaleAvailabilityMode {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ALL_LOCALES = 2, // ALL_LOCALES
-COUNTRY_AND_ALL_LANGUAGES = 3, // COUNTRY_AND_ALL_LANGUAGES
-LANGUAGE_AND_ALL_COUNTRIES = 4, // LANGUAGE_AND_ALL_COUNTRIES
-COUNTRY_AND_LANGUAGE = 5, // COUNTRY_AND_LANGUAGE
-    }
-
-/**
-    * @name MonthOfYearEnum.MonthOfYear
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/MonthOfYearEnum.MonthOfYear 
-    */
-export enum MonthOfYear {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-JANUARY = 2, // JANUARY
-FEBRUARY = 3, // FEBRUARY
-MARCH = 4, // MARCH
-APRIL = 5, // APRIL
-MAY = 6, // MAY
-JUNE = 7, // JUNE
-JULY = 8, // JULY
-AUGUST = 9, // AUGUST
-SEPTEMBER = 10, // SEPTEMBER
-OCTOBER = 11, // OCTOBER
-NOVEMBER = 12, // NOVEMBER
-DECEMBER = 13, // DECEMBER
-    }
-
-/**
-    * @name AppStoreEnum.AppStore
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AppStoreEnum.AppStore 
-    */
-export enum AppStore {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-APPLE_ITUNES = 2, // APPLE_ITUNES
-GOOGLE_PLAY = 3, // GOOGLE_PLAY
-    }
-
-/**
-    * @name PriceExtensionPriceQualifierEnum.PriceExtensionPriceQualifier
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PriceExtensionPriceQualifierEnum.PriceExtensionPriceQualifier 
-    */
-export enum PriceExtensionPriceQualifier {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-FROM = 2, // FROM
-UP_TO = 3, // UP_TO
-AVERAGE = 4, // AVERAGE
-    }
-
-/**
-    * @name PriceExtensionPriceUnitEnum.PriceExtensionPriceUnit
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PriceExtensionPriceUnitEnum.PriceExtensionPriceUnit 
-    */
-export enum PriceExtensionPriceUnit {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-PER_HOUR = 2, // PER_HOUR
-PER_DAY = 3, // PER_DAY
-PER_WEEK = 4, // PER_WEEK
-PER_MONTH = 5, // PER_MONTH
-PER_YEAR = 6, // PER_YEAR
-PER_NIGHT = 7, // PER_NIGHT
-    }
-
-/**
-    * @name PriceExtensionTypeEnum.PriceExtensionType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PriceExtensionTypeEnum.PriceExtensionType 
-    */
-export enum PriceExtensionType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-BRANDS = 2, // BRANDS
-EVENTS = 3, // EVENTS
-LOCATIONS = 4, // LOCATIONS
-NEIGHBORHOODS = 5, // NEIGHBORHOODS
-PRODUCT_CATEGORIES = 6, // PRODUCT_CATEGORIES
-PRODUCT_TIERS = 7, // PRODUCT_TIERS
-SERVICES = 8, // SERVICES
-SERVICE_CATEGORIES = 9, // SERVICE_CATEGORIES
-SERVICE_TIERS = 10, // SERVICE_TIERS
-    }
-
-/**
-    * @name FeedItemSetStringFilterTypeEnum.FeedItemSetStringFilterType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedItemSetStringFilterTypeEnum.FeedItemSetStringFilterType 
-    */
-export enum FeedItemSetStringFilterType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-EXACT = 2, // EXACT
-    }
-
-/**
-    * @name AppUrlOperatingSystemTypeEnum.AppUrlOperatingSystemType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AppUrlOperatingSystemTypeEnum.AppUrlOperatingSystemType 
-    */
-export enum AppUrlOperatingSystemType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-IOS = 2, // IOS
-ANDROID = 3, // ANDROID
-    }
-
-/**
-    * @name FrequencyCapEventTypeEnum.FrequencyCapEventType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FrequencyCapEventTypeEnum.FrequencyCapEventType 
-    */
-export enum FrequencyCapEventType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-IMPRESSION = 2, // IMPRESSION
-VIDEO_VIEW = 3, // VIDEO_VIEW
-    }
-
-/**
-    * @name FrequencyCapLevelEnum.FrequencyCapLevel
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FrequencyCapLevelEnum.FrequencyCapLevel 
-    */
-export enum FrequencyCapLevel {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-AD_GROUP_AD = 2, // AD_GROUP_AD
-AD_GROUP = 3, // AD_GROUP
-CAMPAIGN = 4, // CAMPAIGN
-    }
-
-/**
-    * @name FrequencyCapTimeUnitEnum.FrequencyCapTimeUnit
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FrequencyCapTimeUnitEnum.FrequencyCapTimeUnit 
-    */
-export enum FrequencyCapTimeUnit {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-DAY = 2, // DAY
-WEEK = 3, // WEEK
-MONTH = 4, // MONTH
-    }
-
-/**
-    * @name KeywordPlanAggregateMetricTypeEnum.KeywordPlanAggregateMetricType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/KeywordPlanAggregateMetricTypeEnum.KeywordPlanAggregateMetricType 
-    */
-export enum KeywordPlanAggregateMetricType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-DEVICE = 2, // DEVICE
-    }
-
-/**
-    * @name KeywordPlanCompetitionLevelEnum.KeywordPlanCompetitionLevel
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/KeywordPlanCompetitionLevelEnum.KeywordPlanCompetitionLevel 
-    */
-export enum KeywordPlanCompetitionLevel {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-LOW = 2, // LOW
-MEDIUM = 3, // MEDIUM
-HIGH = 4, // HIGH
-    }
-
-/**
-    * @name KeywordPlanConceptGroupTypeEnum.KeywordPlanConceptGroupType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/KeywordPlanConceptGroupTypeEnum.KeywordPlanConceptGroupType 
-    */
-export enum KeywordPlanConceptGroupType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-BRAND = 2, // BRAND
-OTHER_BRANDS = 3, // OTHER_BRANDS
-NON_BRAND = 4, // NON_BRAND
-    }
-
-/**
-    * @name MatchingFunctionContextTypeEnum.MatchingFunctionContextType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/MatchingFunctionContextTypeEnum.MatchingFunctionContextType 
-    */
-export enum MatchingFunctionContextType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-FEED_ITEM_ID = 2, // FEED_ITEM_ID
-DEVICE_NAME = 3, // DEVICE_NAME
-FEED_ITEM_SET_ID = 4, // FEED_ITEM_SET_ID
-    }
-
-/**
-    * @name MatchingFunctionOperatorEnum.MatchingFunctionOperator
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/MatchingFunctionOperatorEnum.MatchingFunctionOperator 
-    */
-export enum MatchingFunctionOperator {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-IN = 2, // IN
-IDENTITY = 3, // IDENTITY
-EQUALS = 4, // EQUALS
-AND = 5, // AND
-CONTAINS_ANY = 6, // CONTAINS_ANY
-    }
-
-/**
-    * @name InteractionEventTypeEnum.InteractionEventType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/InteractionEventTypeEnum.InteractionEventType 
-    */
-export enum InteractionEventType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-CLICK = 2, // CLICK
-ENGAGEMENT = 3, // ENGAGEMENT
-VIDEO_VIEW = 4, // VIDEO_VIEW
-NONE = 5, // NONE
-    }
-
-/**
-    * @name QualityScoreBucketEnum.QualityScoreBucket
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/QualityScoreBucketEnum.QualityScoreBucket 
-    */
-export enum QualityScoreBucket {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-BELOW_AVERAGE = 2, // BELOW_AVERAGE
-AVERAGE = 3, // AVERAGE
-ABOVE_AVERAGE = 4, // ABOVE_AVERAGE
-    }
-
-/**
-    * @name UserIdentifierSourceEnum.UserIdentifierSource
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserIdentifierSourceEnum.UserIdentifierSource 
-    */
-export enum UserIdentifierSource {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-FIRST_PARTY = 2, // FIRST_PARTY
-THIRD_PARTY = 3, // THIRD_PARTY
-    }
-
-/**
-    * @name AdDestinationTypeEnum.AdDestinationType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdDestinationTypeEnum.AdDestinationType 
-    */
-export enum AdDestinationType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-NOT_APPLICABLE = 2, // NOT_APPLICABLE
-WEBSITE = 3, // WEBSITE
-APP_DEEP_LINK = 4, // APP_DEEP_LINK
-APP_STORE = 5, // APP_STORE
-PHONE_CALL = 6, // PHONE_CALL
-MAP_DIRECTIONS = 7, // MAP_DIRECTIONS
-LOCATION_LISTING = 8, // LOCATION_LISTING
-MESSAGE = 9, // MESSAGE
-LEAD_FORM = 10, // LEAD_FORM
-YOUTUBE = 11, // YOUTUBE
-UNMODELED_FOR_CONVERSIONS = 12, // UNMODELED_FOR_CONVERSIONS
-    }
-
-/**
-    * @name AdNetworkTypeEnum.AdNetworkType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdNetworkTypeEnum.AdNetworkType 
-    */
-export enum AdNetworkType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-SEARCH = 2, // SEARCH
-SEARCH_PARTNERS = 3, // SEARCH_PARTNERS
-CONTENT = 4, // CONTENT
-YOUTUBE_SEARCH = 5, // YOUTUBE_SEARCH
-YOUTUBE_WATCH = 6, // YOUTUBE_WATCH
-MIXED = 7, // MIXED
-    }
-
-/**
-    * @name BudgetCampaignAssociationStatusEnum.BudgetCampaignAssociationStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/BudgetCampaignAssociationStatusEnum.BudgetCampaignAssociationStatus 
-    */
-export enum BudgetCampaignAssociationStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-REMOVED = 3, // REMOVED
-    }
-
-/**
-    * @name ClickTypeEnum.ClickType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ClickTypeEnum.ClickType 
-    */
-export enum ClickType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-APP_DEEPLINK = 2, // APP_DEEPLINK
-BREADCRUMBS = 3, // BREADCRUMBS
-BROADBAND_PLAN = 4, // BROADBAND_PLAN
-CALL_TRACKING = 5, // CALL_TRACKING
-CALLS = 6, // CALLS
-CLICK_ON_ENGAGEMENT_AD = 7, // CLICK_ON_ENGAGEMENT_AD
-GET_DIRECTIONS = 8, // GET_DIRECTIONS
-LOCATION_EXPANSION = 9, // LOCATION_EXPANSION
-LOCATION_FORMAT_CALL = 10, // LOCATION_FORMAT_CALL
-LOCATION_FORMAT_DIRECTIONS = 11, // LOCATION_FORMAT_DIRECTIONS
-LOCATION_FORMAT_IMAGE = 12, // LOCATION_FORMAT_IMAGE
-LOCATION_FORMAT_LANDING_PAGE = 13, // LOCATION_FORMAT_LANDING_PAGE
-LOCATION_FORMAT_MAP = 14, // LOCATION_FORMAT_MAP
-LOCATION_FORMAT_STORE_INFO = 15, // LOCATION_FORMAT_STORE_INFO
-LOCATION_FORMAT_TEXT = 16, // LOCATION_FORMAT_TEXT
-MOBILE_CALL_TRACKING = 17, // MOBILE_CALL_TRACKING
-OFFER_PRINTS = 18, // OFFER_PRINTS
-OTHER = 19, // OTHER
-PRODUCT_EXTENSION_CLICKS = 20, // PRODUCT_EXTENSION_CLICKS
-PRODUCT_LISTING_AD_CLICKS = 21, // PRODUCT_LISTING_AD_CLICKS
-SITELINKS = 22, // SITELINKS
-STORE_LOCATOR = 23, // STORE_LOCATOR
-URL_CLICKS = 25, // URL_CLICKS
-VIDEO_APP_STORE_CLICKS = 26, // VIDEO_APP_STORE_CLICKS
-VIDEO_CALL_TO_ACTION_CLICKS = 27, // VIDEO_CALL_TO_ACTION_CLICKS
-VIDEO_CARD_ACTION_HEADLINE_CLICKS = 28, // VIDEO_CARD_ACTION_HEADLINE_CLICKS
-VIDEO_END_CAP_CLICKS = 29, // VIDEO_END_CAP_CLICKS
-VIDEO_WEBSITE_CLICKS = 30, // VIDEO_WEBSITE_CLICKS
-VISUAL_SITELINKS = 31, // VISUAL_SITELINKS
-WIRELESS_PLAN = 32, // WIRELESS_PLAN
-PRODUCT_LISTING_AD_LOCAL = 33, // PRODUCT_LISTING_AD_LOCAL
-PRODUCT_LISTING_AD_MULTICHANNEL_LOCAL = 34, // PRODUCT_LISTING_AD_MULTICHANNEL_LOCAL
-PRODUCT_LISTING_AD_MULTICHANNEL_ONLINE = 35, // PRODUCT_LISTING_AD_MULTICHANNEL_ONLINE
-PRODUCT_LISTING_ADS_COUPON = 36, // PRODUCT_LISTING_ADS_COUPON
-PRODUCT_LISTING_AD_TRANSACTABLE = 37, // PRODUCT_LISTING_AD_TRANSACTABLE
-PRODUCT_AD_APP_DEEPLINK = 38, // PRODUCT_AD_APP_DEEPLINK
-SHOWCASE_AD_CATEGORY_LINK = 39, // SHOWCASE_AD_CATEGORY_LINK
-SHOWCASE_AD_LOCAL_STOREFRONT_LINK = 40, // SHOWCASE_AD_LOCAL_STOREFRONT_LINK
-SHOWCASE_AD_ONLINE_PRODUCT_LINK = 42, // SHOWCASE_AD_ONLINE_PRODUCT_LINK
-SHOWCASE_AD_LOCAL_PRODUCT_LINK = 43, // SHOWCASE_AD_LOCAL_PRODUCT_LINK
-PROMOTION_EXTENSION = 44, // PROMOTION_EXTENSION
-SWIPEABLE_GALLERY_AD_HEADLINE = 45, // SWIPEABLE_GALLERY_AD_HEADLINE
-SWIPEABLE_GALLERY_AD_SWIPES = 46, // SWIPEABLE_GALLERY_AD_SWIPES
-SWIPEABLE_GALLERY_AD_SEE_MORE = 47, // SWIPEABLE_GALLERY_AD_SEE_MORE
-SWIPEABLE_GALLERY_AD_SITELINK_ONE = 48, // SWIPEABLE_GALLERY_AD_SITELINK_ONE
-SWIPEABLE_GALLERY_AD_SITELINK_TWO = 49, // SWIPEABLE_GALLERY_AD_SITELINK_TWO
-SWIPEABLE_GALLERY_AD_SITELINK_THREE = 50, // SWIPEABLE_GALLERY_AD_SITELINK_THREE
-SWIPEABLE_GALLERY_AD_SITELINK_FOUR = 51, // SWIPEABLE_GALLERY_AD_SITELINK_FOUR
-SWIPEABLE_GALLERY_AD_SITELINK_FIVE = 52, // SWIPEABLE_GALLERY_AD_SITELINK_FIVE
-HOTEL_PRICE = 53, // HOTEL_PRICE
-PRICE_EXTENSION = 54, // PRICE_EXTENSION
-HOTEL_BOOK_ON_GOOGLE_ROOM_SELECTION = 55, // HOTEL_BOOK_ON_GOOGLE_ROOM_SELECTION
-SHOPPING_COMPARISON_LISTING = 56, // SHOPPING_COMPARISON_LISTING
-    }
-
-/**
-    * @name ConversionActionCategoryEnum.ConversionActionCategory
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ConversionActionCategoryEnum.ConversionActionCategory 
-    */
-export enum ConversionActionCategory {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-DEFAULT = 2, // DEFAULT
-PAGE_VIEW = 3, // PAGE_VIEW
-PURCHASE = 4, // PURCHASE
-SIGNUP = 5, // SIGNUP
-LEAD = 6, // LEAD
-DOWNLOAD = 7, // DOWNLOAD
-ADD_TO_CART = 8, // ADD_TO_CART
-BEGIN_CHECKOUT = 9, // BEGIN_CHECKOUT
-SUBSCRIBE_PAID = 10, // SUBSCRIBE_PAID
-PHONE_CALL_LEAD = 11, // PHONE_CALL_LEAD
-IMPORTED_LEAD = 12, // IMPORTED_LEAD
-SUBMIT_LEAD_FORM = 13, // SUBMIT_LEAD_FORM
-BOOK_APPOINTMENT = 14, // BOOK_APPOINTMENT
-REQUEST_QUOTE = 15, // REQUEST_QUOTE
-GET_DIRECTIONS = 16, // GET_DIRECTIONS
-OUTBOUND_CLICK = 17, // OUTBOUND_CLICK
-CONTACT = 18, // CONTACT
-ENGAGEMENT = 19, // ENGAGEMENT
-STORE_VISIT = 20, // STORE_VISIT
-STORE_SALE = 21, // STORE_SALE
-    }
-
-/**
-    * @name ConversionAttributionEventTypeEnum.ConversionAttributionEventType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ConversionAttributionEventTypeEnum.ConversionAttributionEventType 
-    */
-export enum ConversionAttributionEventType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-IMPRESSION = 2, // IMPRESSION
-INTERACTION = 3, // INTERACTION
-    }
-
-/**
-    * @name ConversionLagBucketEnum.ConversionLagBucket
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ConversionLagBucketEnum.ConversionLagBucket 
-    */
-export enum ConversionLagBucket {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-LESS_THAN_ONE_DAY = 2, // LESS_THAN_ONE_DAY
-ONE_TO_TWO_DAYS = 3, // ONE_TO_TWO_DAYS
-TWO_TO_THREE_DAYS = 4, // TWO_TO_THREE_DAYS
-THREE_TO_FOUR_DAYS = 5, // THREE_TO_FOUR_DAYS
-FOUR_TO_FIVE_DAYS = 6, // FOUR_TO_FIVE_DAYS
-FIVE_TO_SIX_DAYS = 7, // FIVE_TO_SIX_DAYS
-SIX_TO_SEVEN_DAYS = 8, // SIX_TO_SEVEN_DAYS
-SEVEN_TO_EIGHT_DAYS = 9, // SEVEN_TO_EIGHT_DAYS
-EIGHT_TO_NINE_DAYS = 10, // EIGHT_TO_NINE_DAYS
-NINE_TO_TEN_DAYS = 11, // NINE_TO_TEN_DAYS
-TEN_TO_ELEVEN_DAYS = 12, // TEN_TO_ELEVEN_DAYS
-ELEVEN_TO_TWELVE_DAYS = 13, // ELEVEN_TO_TWELVE_DAYS
-TWELVE_TO_THIRTEEN_DAYS = 14, // TWELVE_TO_THIRTEEN_DAYS
-THIRTEEN_TO_FOURTEEN_DAYS = 15, // THIRTEEN_TO_FOURTEEN_DAYS
-FOURTEEN_TO_TWENTY_ONE_DAYS = 16, // FOURTEEN_TO_TWENTY_ONE_DAYS
-TWENTY_ONE_TO_THIRTY_DAYS = 17, // TWENTY_ONE_TO_THIRTY_DAYS
-THIRTY_TO_FORTY_FIVE_DAYS = 18, // THIRTY_TO_FORTY_FIVE_DAYS
-FORTY_FIVE_TO_SIXTY_DAYS = 19, // FORTY_FIVE_TO_SIXTY_DAYS
-SIXTY_TO_NINETY_DAYS = 20, // SIXTY_TO_NINETY_DAYS
-    }
-
-/**
-    * @name ConversionOrAdjustmentLagBucketEnum.ConversionOrAdjustmentLagBucket
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ConversionOrAdjustmentLagBucketEnum.ConversionOrAdjustmentLagBucket 
-    */
-export enum ConversionOrAdjustmentLagBucket {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-CONVERSION_LESS_THAN_ONE_DAY = 2, // CONVERSION_LESS_THAN_ONE_DAY
-CONVERSION_ONE_TO_TWO_DAYS = 3, // CONVERSION_ONE_TO_TWO_DAYS
-CONVERSION_TWO_TO_THREE_DAYS = 4, // CONVERSION_TWO_TO_THREE_DAYS
-CONVERSION_THREE_TO_FOUR_DAYS = 5, // CONVERSION_THREE_TO_FOUR_DAYS
-CONVERSION_FOUR_TO_FIVE_DAYS = 6, // CONVERSION_FOUR_TO_FIVE_DAYS
-CONVERSION_FIVE_TO_SIX_DAYS = 7, // CONVERSION_FIVE_TO_SIX_DAYS
-CONVERSION_SIX_TO_SEVEN_DAYS = 8, // CONVERSION_SIX_TO_SEVEN_DAYS
-CONVERSION_SEVEN_TO_EIGHT_DAYS = 9, // CONVERSION_SEVEN_TO_EIGHT_DAYS
-CONVERSION_EIGHT_TO_NINE_DAYS = 10, // CONVERSION_EIGHT_TO_NINE_DAYS
-CONVERSION_NINE_TO_TEN_DAYS = 11, // CONVERSION_NINE_TO_TEN_DAYS
-CONVERSION_TEN_TO_ELEVEN_DAYS = 12, // CONVERSION_TEN_TO_ELEVEN_DAYS
-CONVERSION_ELEVEN_TO_TWELVE_DAYS = 13, // CONVERSION_ELEVEN_TO_TWELVE_DAYS
-CONVERSION_TWELVE_TO_THIRTEEN_DAYS = 14, // CONVERSION_TWELVE_TO_THIRTEEN_DAYS
-CONVERSION_THIRTEEN_TO_FOURTEEN_DAYS = 15, // CONVERSION_THIRTEEN_TO_FOURTEEN_DAYS
-CONVERSION_FOURTEEN_TO_TWENTY_ONE_DAYS = 16, // CONVERSION_FOURTEEN_TO_TWENTY_ONE_DAYS
-CONVERSION_TWENTY_ONE_TO_THIRTY_DAYS = 17, // CONVERSION_TWENTY_ONE_TO_THIRTY_DAYS
-CONVERSION_THIRTY_TO_FORTY_FIVE_DAYS = 18, // CONVERSION_THIRTY_TO_FORTY_FIVE_DAYS
-CONVERSION_FORTY_FIVE_TO_SIXTY_DAYS = 19, // CONVERSION_FORTY_FIVE_TO_SIXTY_DAYS
-CONVERSION_SIXTY_TO_NINETY_DAYS = 20, // CONVERSION_SIXTY_TO_NINETY_DAYS
-ADJUSTMENT_LESS_THAN_ONE_DAY = 21, // ADJUSTMENT_LESS_THAN_ONE_DAY
-ADJUSTMENT_ONE_TO_TWO_DAYS = 22, // ADJUSTMENT_ONE_TO_TWO_DAYS
-ADJUSTMENT_TWO_TO_THREE_DAYS = 23, // ADJUSTMENT_TWO_TO_THREE_DAYS
-ADJUSTMENT_THREE_TO_FOUR_DAYS = 24, // ADJUSTMENT_THREE_TO_FOUR_DAYS
-ADJUSTMENT_FOUR_TO_FIVE_DAYS = 25, // ADJUSTMENT_FOUR_TO_FIVE_DAYS
-ADJUSTMENT_FIVE_TO_SIX_DAYS = 26, // ADJUSTMENT_FIVE_TO_SIX_DAYS
-ADJUSTMENT_SIX_TO_SEVEN_DAYS = 27, // ADJUSTMENT_SIX_TO_SEVEN_DAYS
-ADJUSTMENT_SEVEN_TO_EIGHT_DAYS = 28, // ADJUSTMENT_SEVEN_TO_EIGHT_DAYS
-ADJUSTMENT_EIGHT_TO_NINE_DAYS = 29, // ADJUSTMENT_EIGHT_TO_NINE_DAYS
-ADJUSTMENT_NINE_TO_TEN_DAYS = 30, // ADJUSTMENT_NINE_TO_TEN_DAYS
-ADJUSTMENT_TEN_TO_ELEVEN_DAYS = 31, // ADJUSTMENT_TEN_TO_ELEVEN_DAYS
-ADJUSTMENT_ELEVEN_TO_TWELVE_DAYS = 32, // ADJUSTMENT_ELEVEN_TO_TWELVE_DAYS
-ADJUSTMENT_TWELVE_TO_THIRTEEN_DAYS = 33, // ADJUSTMENT_TWELVE_TO_THIRTEEN_DAYS
-ADJUSTMENT_THIRTEEN_TO_FOURTEEN_DAYS = 34, // ADJUSTMENT_THIRTEEN_TO_FOURTEEN_DAYS
-ADJUSTMENT_FOURTEEN_TO_TWENTY_ONE_DAYS = 35, // ADJUSTMENT_FOURTEEN_TO_TWENTY_ONE_DAYS
-ADJUSTMENT_TWENTY_ONE_TO_THIRTY_DAYS = 36, // ADJUSTMENT_TWENTY_ONE_TO_THIRTY_DAYS
-ADJUSTMENT_THIRTY_TO_FORTY_FIVE_DAYS = 37, // ADJUSTMENT_THIRTY_TO_FORTY_FIVE_DAYS
-ADJUSTMENT_FORTY_FIVE_TO_SIXTY_DAYS = 38, // ADJUSTMENT_FORTY_FIVE_TO_SIXTY_DAYS
-ADJUSTMENT_SIXTY_TO_NINETY_DAYS = 39, // ADJUSTMENT_SIXTY_TO_NINETY_DAYS
-ADJUSTMENT_NINETY_TO_ONE_HUNDRED_AND_FORTY_FIVE_DAYS = 40, // ADJUSTMENT_NINETY_TO_ONE_HUNDRED_AND_FORTY_FIVE_DAYS
-CONVERSION_UNKNOWN = 41, // CONVERSION_UNKNOWN
-ADJUSTMENT_UNKNOWN = 42, // ADJUSTMENT_UNKNOWN
-    }
-
-/**
-    * @name ExternalConversionSourceEnum.ExternalConversionSource
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ExternalConversionSourceEnum.ExternalConversionSource 
-    */
-export enum ExternalConversionSource {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-WEBPAGE = 2, // WEBPAGE
-ANALYTICS = 3, // ANALYTICS
-UPLOAD = 4, // UPLOAD
-AD_CALL_METRICS = 5, // AD_CALL_METRICS
-WEBSITE_CALL_METRICS = 6, // WEBSITE_CALL_METRICS
-STORE_VISITS = 7, // STORE_VISITS
-ANDROID_IN_APP = 8, // ANDROID_IN_APP
-IOS_IN_APP = 9, // IOS_IN_APP
-IOS_FIRST_OPEN = 10, // IOS_FIRST_OPEN
-APP_UNSPECIFIED = 11, // APP_UNSPECIFIED
-ANDROID_FIRST_OPEN = 12, // ANDROID_FIRST_OPEN
-UPLOAD_CALLS = 13, // UPLOAD_CALLS
-FIREBASE = 14, // FIREBASE
-CLICK_TO_CALL = 15, // CLICK_TO_CALL
-SALESFORCE = 16, // SALESFORCE
-STORE_SALES_CRM = 17, // STORE_SALES_CRM
-STORE_SALES_PAYMENT_NETWORK = 18, // STORE_SALES_PAYMENT_NETWORK
-GOOGLE_PLAY = 19, // GOOGLE_PLAY
-THIRD_PARTY_APP_ANALYTICS = 20, // THIRD_PARTY_APP_ANALYTICS
-GOOGLE_ATTRIBUTION = 21, // GOOGLE_ATTRIBUTION
-STORE_SALES_DIRECT_UPLOAD = 23, // STORE_SALES_DIRECT_UPLOAD
-STORE_SALES = 24, // STORE_SALES
-SEARCH_ADS_360 = 25, // SEARCH_ADS_360
-GOOGLE_HOSTED = 27, // GOOGLE_HOSTED
-FLOODLIGHT = 29, // FLOODLIGHT
-ANALYTICS_SEARCH_ADS_360 = 31, // ANALYTICS_SEARCH_ADS_360
-FIREBASE_SEARCH_ADS_360 = 33, // FIREBASE_SEARCH_ADS_360
-    }
-
-/**
-    * @name HotelPriceBucketEnum.HotelPriceBucket
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/HotelPriceBucketEnum.HotelPriceBucket 
-    */
-export enum HotelPriceBucket {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-LOWEST_UNIQUE = 2, // LOWEST_UNIQUE
-LOWEST_TIED = 3, // LOWEST_TIED
-NOT_LOWEST = 4, // NOT_LOWEST
-ONLY_PARTNER_SHOWN = 5, // ONLY_PARTNER_SHOWN
-    }
-
-/**
-    * @name HotelRateTypeEnum.HotelRateType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/HotelRateTypeEnum.HotelRateType 
-    */
-export enum HotelRateType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-UNAVAILABLE = 2, // UNAVAILABLE
-PUBLIC_RATE = 3, // PUBLIC_RATE
-QUALIFIED_RATE = 4, // QUALIFIED_RATE
-PRIVATE_RATE = 5, // PRIVATE_RATE
-    }
-
-/**
-    * @name PlaceholderTypeEnum.PlaceholderType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PlaceholderTypeEnum.PlaceholderType 
-    */
-export enum PlaceholderType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-SITELINK = 2, // SITELINK
-CALL = 3, // CALL
-APP = 4, // APP
-LOCATION = 5, // LOCATION
-AFFILIATE_LOCATION = 6, // AFFILIATE_LOCATION
-CALLOUT = 7, // CALLOUT
-STRUCTURED_SNIPPET = 8, // STRUCTURED_SNIPPET
-MESSAGE = 9, // MESSAGE
-PRICE = 10, // PRICE
-PROMOTION = 11, // PROMOTION
-AD_CUSTOMIZER = 12, // AD_CUSTOMIZER
-DYNAMIC_EDUCATION = 13, // DYNAMIC_EDUCATION
-DYNAMIC_FLIGHT = 14, // DYNAMIC_FLIGHT
-DYNAMIC_CUSTOM = 15, // DYNAMIC_CUSTOM
-DYNAMIC_HOTEL = 16, // DYNAMIC_HOTEL
-DYNAMIC_REAL_ESTATE = 17, // DYNAMIC_REAL_ESTATE
-DYNAMIC_TRAVEL = 18, // DYNAMIC_TRAVEL
-DYNAMIC_LOCAL = 19, // DYNAMIC_LOCAL
-DYNAMIC_JOB = 20, // DYNAMIC_JOB
-IMAGE = 21, // IMAGE
-    }
-
-/**
-    * @name SearchEngineResultsPageTypeEnum.SearchEngineResultsPageType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/SearchEngineResultsPageTypeEnum.SearchEngineResultsPageType 
-    */
-export enum SearchEngineResultsPageType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ADS_ONLY = 2, // ADS_ONLY
-ORGANIC_ONLY = 3, // ORGANIC_ONLY
-ADS_AND_ORGANIC = 4, // ADS_AND_ORGANIC
-    }
-
-/**
-    * @name SearchTermMatchTypeEnum.SearchTermMatchType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/SearchTermMatchTypeEnum.SearchTermMatchType 
-    */
-export enum SearchTermMatchType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-BROAD = 2, // BROAD
-EXACT = 3, // EXACT
-PHRASE = 4, // PHRASE
-NEAR_EXACT = 5, // NEAR_EXACT
-NEAR_PHRASE = 6, // NEAR_PHRASE
-    }
-
-/**
-    * @name SlotEnum.Slot
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/SlotEnum.Slot 
-    */
-export enum Slot {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-SEARCH_SIDE = 2, // SEARCH_SIDE
-SEARCH_TOP = 3, // SEARCH_TOP
-SEARCH_OTHER = 4, // SEARCH_OTHER
-CONTENT = 5, // CONTENT
-SEARCH_PARTNER_TOP = 6, // SEARCH_PARTNER_TOP
-SEARCH_PARTNER_OTHER = 7, // SEARCH_PARTNER_OTHER
-MIXED = 8, // MIXED
-    }
-
-/**
-    * @name TrackingCodePageFormatEnum.TrackingCodePageFormat
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/TrackingCodePageFormatEnum.TrackingCodePageFormat 
-    */
-export enum TrackingCodePageFormat {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-HTML = 2, // HTML
-AMP = 3, // AMP
-    }
-
-/**
-    * @name TrackingCodeTypeEnum.TrackingCodeType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/TrackingCodeTypeEnum.TrackingCodeType 
-    */
-export enum TrackingCodeType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-WEBPAGE = 2, // WEBPAGE
-WEBPAGE_ONCLICK = 3, // WEBPAGE_ONCLICK
-CLICK_TO_CALL = 4, // CLICK_TO_CALL
-WEBSITE_CALL = 5, // WEBSITE_CALL
-    }
-
-/**
-    * @name TargetingDimensionEnum.TargetingDimension
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/TargetingDimensionEnum.TargetingDimension 
-    */
-export enum TargetingDimension {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-KEYWORD = 2, // KEYWORD
-AUDIENCE = 3, // AUDIENCE
-TOPIC = 4, // TOPIC
-GENDER = 5, // GENDER
-AGE_RANGE = 6, // AGE_RANGE
-PLACEMENT = 7, // PLACEMENT
-PARENTAL_STATUS = 8, // PARENTAL_STATUS
-INCOME_RANGE = 9, // INCOME_RANGE
-    }
-
-/**
-    * @name CustomerMatchUploadKeyTypeEnum.CustomerMatchUploadKeyType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CustomerMatchUploadKeyTypeEnum.CustomerMatchUploadKeyType 
-    */
-export enum CustomerMatchUploadKeyType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-CONTACT_INFO = 2, // CONTACT_INFO
-CRM_ID = 3, // CRM_ID
-MOBILE_ADVERTISING_ID = 4, // MOBILE_ADVERTISING_ID
-    }
-
-/**
-    * @name UserListCombinedRuleOperatorEnum.UserListCombinedRuleOperator
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListCombinedRuleOperatorEnum.UserListCombinedRuleOperator 
-    */
-export enum UserListCombinedRuleOperator {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-AND = 2, // AND
-AND_NOT = 3, // AND_NOT
-    }
-
-/**
-    * @name UserListCrmDataSourceTypeEnum.UserListCrmDataSourceType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListCrmDataSourceTypeEnum.UserListCrmDataSourceType 
-    */
-export enum UserListCrmDataSourceType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-FIRST_PARTY = 2, // FIRST_PARTY
-THIRD_PARTY_CREDIT_BUREAU = 3, // THIRD_PARTY_CREDIT_BUREAU
-THIRD_PARTY_VOTER_FILE = 4, // THIRD_PARTY_VOTER_FILE
-    }
-
-/**
-    * @name UserListDateRuleItemOperatorEnum.UserListDateRuleItemOperator
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListDateRuleItemOperatorEnum.UserListDateRuleItemOperator 
-    */
-export enum UserListDateRuleItemOperator {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-EQUALS = 2, // EQUALS
-NOT_EQUALS = 3, // NOT_EQUALS
-BEFORE = 4, // BEFORE
-AFTER = 5, // AFTER
-    }
-
-/**
-    * @name UserListLogicalRuleOperatorEnum.UserListLogicalRuleOperator
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListLogicalRuleOperatorEnum.UserListLogicalRuleOperator 
-    */
-export enum UserListLogicalRuleOperator {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ALL = 2, // ALL
-ANY = 3, // ANY
-NONE = 4, // NONE
-    }
-
-/**
-    * @name UserListNumberRuleItemOperatorEnum.UserListNumberRuleItemOperator
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListNumberRuleItemOperatorEnum.UserListNumberRuleItemOperator 
-    */
-export enum UserListNumberRuleItemOperator {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-GREATER_THAN = 2, // GREATER_THAN
-GREATER_THAN_OR_EQUAL = 3, // GREATER_THAN_OR_EQUAL
-EQUALS = 4, // EQUALS
-NOT_EQUALS = 5, // NOT_EQUALS
-LESS_THAN = 6, // LESS_THAN
-LESS_THAN_OR_EQUAL = 7, // LESS_THAN_OR_EQUAL
-    }
-
-/**
-    * @name UserListPrepopulationStatusEnum.UserListPrepopulationStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListPrepopulationStatusEnum.UserListPrepopulationStatus 
-    */
-export enum UserListPrepopulationStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-REQUESTED = 2, // REQUESTED
-FINISHED = 3, // FINISHED
-FAILED = 4, // FAILED
-    }
-
-/**
-    * @name UserListRuleTypeEnum.UserListRuleType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListRuleTypeEnum.UserListRuleType 
-    */
-export enum UserListRuleType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-AND_OF_ORS = 2, // AND_OF_ORS
-OR_OF_ANDS = 3, // OR_OF_ANDS
-    }
-
-/**
-    * @name UserListStringRuleItemOperatorEnum.UserListStringRuleItemOperator
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListStringRuleItemOperatorEnum.UserListStringRuleItemOperator 
-    */
-export enum UserListStringRuleItemOperator {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-CONTAINS = 2, // CONTAINS
-EQUALS = 3, // EQUALS
-STARTS_WITH = 4, // STARTS_WITH
-ENDS_WITH = 5, // ENDS_WITH
-NOT_EQUALS = 6, // NOT_EQUALS
-NOT_CONTAINS = 7, // NOT_CONTAINS
-NOT_STARTS_WITH = 8, // NOT_STARTS_WITH
-NOT_ENDS_WITH = 9, // NOT_ENDS_WITH
-    }
-
-/**
-    * @name AccessInvitationStatusEnum.AccessInvitationStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AccessInvitationStatusEnum.AccessInvitationStatus 
-    */
-export enum AccessInvitationStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-PENDING = 2, // PENDING
-DECLINED = 3, // DECLINED
-EXPIRED = 4, // EXPIRED
-    }
-
-/**
-    * @name AccessReasonEnum.AccessReason
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AccessReasonEnum.AccessReason 
-    */
-export enum AccessReason {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-OWNED = 2, // OWNED
-SHARED = 3, // SHARED
-LICENSED = 4, // LICENSED
-SUBSCRIBED = 5, // SUBSCRIBED
-AFFILIATED = 6, // AFFILIATED
-    }
-
-/**
-    * @name AccessRoleEnum.AccessRole
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AccessRoleEnum.AccessRole 
-    */
-export enum AccessRole {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ADMIN = 2, // ADMIN
-STANDARD = 3, // STANDARD
-READ_ONLY = 4, // READ_ONLY
-EMAIL_ONLY = 5, // EMAIL_ONLY
-    }
-
-/**
-    * @name AccountBudgetProposalStatusEnum.AccountBudgetProposalStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AccountBudgetProposalStatusEnum.AccountBudgetProposalStatus 
-    */
-export enum AccountBudgetProposalStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-PENDING = 2, // PENDING
-APPROVED_HELD = 3, // APPROVED_HELD
-APPROVED = 4, // APPROVED
-CANCELLED = 5, // CANCELLED
-REJECTED = 6, // REJECTED
-    }
-
-/**
-    * @name AccountBudgetProposalTypeEnum.AccountBudgetProposalType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AccountBudgetProposalTypeEnum.AccountBudgetProposalType 
-    */
-export enum AccountBudgetProposalType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-CREATE = 2, // CREATE
-UPDATE = 3, // UPDATE
-END = 4, // END
-REMOVE = 5, // REMOVE
-    }
-
-/**
-    * @name AccountBudgetStatusEnum.AccountBudgetStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AccountBudgetStatusEnum.AccountBudgetStatus 
-    */
-export enum AccountBudgetStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-PENDING = 2, // PENDING
-APPROVED = 3, // APPROVED
-CANCELLED = 4, // CANCELLED
-    }
-
-/**
-    * @name AccountLinkStatusEnum.AccountLinkStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AccountLinkStatusEnum.AccountLinkStatus 
-    */
-export enum AccountLinkStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-REMOVED = 3, // REMOVED
-REQUESTED = 4, // REQUESTED
-PENDING_APPROVAL = 5, // PENDING_APPROVAL
-REJECTED = 6, // REJECTED
-REVOKED = 7, // REVOKED
-    }
-
-/**
-    * @name AdCustomizerPlaceholderFieldEnum.AdCustomizerPlaceholderField
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdCustomizerPlaceholderFieldEnum.AdCustomizerPlaceholderField 
-    */
-export enum AdCustomizerPlaceholderField {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-INTEGER = 2, // INTEGER
-PRICE = 3, // PRICE
-DATE = 4, // DATE
-STRING = 5, // STRING
-    }
-
-/**
-    * @name AdGroupAdRotationModeEnum.AdGroupAdRotationMode
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdGroupAdRotationModeEnum.AdGroupAdRotationMode 
-    */
-export enum AdGroupAdRotationMode {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-OPTIMIZE = 2, // OPTIMIZE
-ROTATE_FOREVER = 3, // ROTATE_FOREVER
-    }
-
-/**
-    * @name AdGroupAdStatusEnum.AdGroupAdStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdGroupAdStatusEnum.AdGroupAdStatus 
-    */
-export enum AdGroupAdStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-PAUSED = 3, // PAUSED
-REMOVED = 4, // REMOVED
-    }
-
-/**
-    * @name AdGroupCriterionApprovalStatusEnum.AdGroupCriterionApprovalStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdGroupCriterionApprovalStatusEnum.AdGroupCriterionApprovalStatus 
-    */
-export enum AdGroupCriterionApprovalStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-APPROVED = 2, // APPROVED
-DISAPPROVED = 3, // DISAPPROVED
-PENDING_REVIEW = 4, // PENDING_REVIEW
-UNDER_REVIEW = 5, // UNDER_REVIEW
-    }
-
-/**
-    * @name AdGroupCriterionStatusEnum.AdGroupCriterionStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdGroupCriterionStatusEnum.AdGroupCriterionStatus 
-    */
-export enum AdGroupCriterionStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-PAUSED = 3, // PAUSED
-REMOVED = 4, // REMOVED
-    }
-
-/**
-    * @name AdGroupStatusEnum.AdGroupStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdGroupStatusEnum.AdGroupStatus 
-    */
-export enum AdGroupStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-PAUSED = 3, // PAUSED
-REMOVED = 4, // REMOVED
-    }
-
-/**
-    * @name AdGroupTypeEnum.AdGroupType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdGroupTypeEnum.AdGroupType 
-    */
-export enum AdGroupType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-SEARCH_STANDARD = 2, // SEARCH_STANDARD
-DISPLAY_STANDARD = 3, // DISPLAY_STANDARD
-SHOPPING_PRODUCT_ADS = 4, // SHOPPING_PRODUCT_ADS
-HOTEL_ADS = 6, // HOTEL_ADS
-SHOPPING_SMART_ADS = 7, // SHOPPING_SMART_ADS
-VIDEO_BUMPER = 8, // VIDEO_BUMPER
-VIDEO_TRUE_VIEW_IN_STREAM = 9, // VIDEO_TRUE_VIEW_IN_STREAM
-VIDEO_TRUE_VIEW_IN_DISPLAY = 10, // VIDEO_TRUE_VIEW_IN_DISPLAY
-VIDEO_NON_SKIPPABLE_IN_STREAM = 11, // VIDEO_NON_SKIPPABLE_IN_STREAM
-VIDEO_OUTSTREAM = 12, // VIDEO_OUTSTREAM
-SEARCH_DYNAMIC_ADS = 13, // SEARCH_DYNAMIC_ADS
-SHOPPING_COMPARISON_LISTING_ADS = 14, // SHOPPING_COMPARISON_LISTING_ADS
-PROMOTED_HOTEL_ADS = 15, // PROMOTED_HOTEL_ADS
-VIDEO_RESPONSIVE = 16, // VIDEO_RESPONSIVE
-VIDEO_EFFICIENT_REACH = 17, // VIDEO_EFFICIENT_REACH
-    }
-
-/**
-    * @name AdServingOptimizationStatusEnum.AdServingOptimizationStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdServingOptimizationStatusEnum.AdServingOptimizationStatus 
-    */
-export enum AdServingOptimizationStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-OPTIMIZE = 2, // OPTIMIZE
-CONVERSION_OPTIMIZE = 3, // CONVERSION_OPTIMIZE
-ROTATE = 4, // ROTATE
-ROTATE_INDEFINITELY = 5, // ROTATE_INDEFINITELY
-UNAVAILABLE = 6, // UNAVAILABLE
-    }
-
-/**
-    * @name AdStrengthEnum.AdStrength
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdStrengthEnum.AdStrength 
-    */
-export enum AdStrength {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-PENDING = 2, // PENDING
-NO_ADS = 3, // NO_ADS
-POOR = 4, // POOR
-AVERAGE = 5, // AVERAGE
-GOOD = 6, // GOOD
-EXCELLENT = 7, // EXCELLENT
-    }
-
-/**
-    * @name AdTypeEnum.AdType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdTypeEnum.AdType 
-    */
-export enum AdType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-TEXT_AD = 2, // TEXT_AD
-EXPANDED_TEXT_AD = 3, // EXPANDED_TEXT_AD
-CALL_ONLY_AD = 6, // CALL_ONLY_AD
-EXPANDED_DYNAMIC_SEARCH_AD = 7, // EXPANDED_DYNAMIC_SEARCH_AD
-HOTEL_AD = 8, // HOTEL_AD
-SHOPPING_SMART_AD = 9, // SHOPPING_SMART_AD
-SHOPPING_PRODUCT_AD = 10, // SHOPPING_PRODUCT_AD
-VIDEO_AD = 12, // VIDEO_AD
-GMAIL_AD = 13, // GMAIL_AD
-IMAGE_AD = 14, // IMAGE_AD
-RESPONSIVE_SEARCH_AD = 15, // RESPONSIVE_SEARCH_AD
-LEGACY_RESPONSIVE_DISPLAY_AD = 16, // LEGACY_RESPONSIVE_DISPLAY_AD
-APP_AD = 17, // APP_AD
-LEGACY_APP_INSTALL_AD = 18, // LEGACY_APP_INSTALL_AD
-RESPONSIVE_DISPLAY_AD = 19, // RESPONSIVE_DISPLAY_AD
-LOCAL_AD = 20, // LOCAL_AD
-HTML5_UPLOAD_AD = 21, // HTML5_UPLOAD_AD
-DYNAMIC_HTML5_AD = 22, // DYNAMIC_HTML5_AD
-APP_ENGAGEMENT_AD = 23, // APP_ENGAGEMENT_AD
-SHOPPING_COMPARISON_LISTING_AD = 24, // SHOPPING_COMPARISON_LISTING_AD
-VIDEO_BUMPER_AD = 25, // VIDEO_BUMPER_AD
-VIDEO_NON_SKIPPABLE_IN_STREAM_AD = 26, // VIDEO_NON_SKIPPABLE_IN_STREAM_AD
-VIDEO_OUTSTREAM_AD = 27, // VIDEO_OUTSTREAM_AD
-VIDEO_TRUEVIEW_DISCOVERY_AD = 28, // VIDEO_TRUEVIEW_DISCOVERY_AD
-VIDEO_TRUEVIEW_IN_STREAM_AD = 29, // VIDEO_TRUEVIEW_IN_STREAM_AD
-VIDEO_RESPONSIVE_AD = 30, // VIDEO_RESPONSIVE_AD
-    }
-
-/**
-    * @name AffiliateLocationFeedRelationshipTypeEnum.AffiliateLocationFeedRelationshipType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AffiliateLocationFeedRelationshipTypeEnum.AffiliateLocationFeedRelationshipType 
-    */
-export enum AffiliateLocationFeedRelationshipType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-GENERAL_RETAILER = 2, // GENERAL_RETAILER
-    }
-
-/**
-    * @name AffiliateLocationPlaceholderFieldEnum.AffiliateLocationPlaceholderField
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AffiliateLocationPlaceholderFieldEnum.AffiliateLocationPlaceholderField 
-    */
-export enum AffiliateLocationPlaceholderField {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-BUSINESS_NAME = 2, // BUSINESS_NAME
-ADDRESS_LINE_1 = 3, // ADDRESS_LINE_1
-ADDRESS_LINE_2 = 4, // ADDRESS_LINE_2
-CITY = 5, // CITY
-PROVINCE = 6, // PROVINCE
-POSTAL_CODE = 7, // POSTAL_CODE
-COUNTRY_CODE = 8, // COUNTRY_CODE
-PHONE_NUMBER = 9, // PHONE_NUMBER
-LANGUAGE_CODE = 10, // LANGUAGE_CODE
-CHAIN_ID = 11, // CHAIN_ID
-CHAIN_NAME = 12, // CHAIN_NAME
-    }
-
-/**
-    * @name AppCampaignAppStoreEnum.AppCampaignAppStore
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AppCampaignAppStoreEnum.AppCampaignAppStore 
-    */
-export enum AppCampaignAppStore {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-APPLE_APP_STORE = 2, // APPLE_APP_STORE
-GOOGLE_APP_STORE = 3, // GOOGLE_APP_STORE
-    }
-
-/**
-    * @name AppCampaignBiddingStrategyGoalTypeEnum.AppCampaignBiddingStrategyGoalType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AppCampaignBiddingStrategyGoalTypeEnum.AppCampaignBiddingStrategyGoalType 
-    */
-export enum AppCampaignBiddingStrategyGoalType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-OPTIMIZE_INSTALLS_TARGET_INSTALL_COST = 2, // OPTIMIZE_INSTALLS_TARGET_INSTALL_COST
-OPTIMIZE_IN_APP_CONVERSIONS_TARGET_INSTALL_COST = 3, // OPTIMIZE_IN_APP_CONVERSIONS_TARGET_INSTALL_COST
-OPTIMIZE_IN_APP_CONVERSIONS_TARGET_CONVERSION_COST = 4, // OPTIMIZE_IN_APP_CONVERSIONS_TARGET_CONVERSION_COST
-OPTIMIZE_RETURN_ON_ADVERTISING_SPEND = 5, // OPTIMIZE_RETURN_ON_ADVERTISING_SPEND
-    }
-
-/**
-    * @name AppPlaceholderFieldEnum.AppPlaceholderField
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AppPlaceholderFieldEnum.AppPlaceholderField 
-    */
-export enum AppPlaceholderField {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-STORE = 2, // STORE
-ID = 3, // ID
-LINK_TEXT = 4, // LINK_TEXT
-URL = 5, // URL
-FINAL_URLS = 6, // FINAL_URLS
-FINAL_MOBILE_URLS = 7, // FINAL_MOBILE_URLS
-TRACKING_URL = 8, // TRACKING_URL
-FINAL_URL_SUFFIX = 9, // FINAL_URL_SUFFIX
-    }
-
-/**
-    * @name AssetFieldTypeEnum.AssetFieldType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AssetFieldTypeEnum.AssetFieldType 
-    */
-export enum AssetFieldType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-HEADLINE = 2, // HEADLINE
-DESCRIPTION = 3, // DESCRIPTION
-MANDATORY_AD_TEXT = 4, // MANDATORY_AD_TEXT
-MARKETING_IMAGE = 5, // MARKETING_IMAGE
-MEDIA_BUNDLE = 6, // MEDIA_BUNDLE
-YOUTUBE_VIDEO = 7, // YOUTUBE_VIDEO
-BOOK_ON_GOOGLE = 8, // BOOK_ON_GOOGLE
-LEAD_FORM = 9, // LEAD_FORM
-PROMOTION = 10, // PROMOTION
-CALLOUT = 11, // CALLOUT
-STRUCTURED_SNIPPET = 12, // STRUCTURED_SNIPPET
-SITELINK = 13, // SITELINK
-    }
-
-/**
-    * @name AssetLinkStatusEnum.AssetLinkStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AssetLinkStatusEnum.AssetLinkStatus 
-    */
-export enum AssetLinkStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-REMOVED = 3, // REMOVED
-PAUSED = 4, // PAUSED
-    }
-
-/**
-    * @name AssetTypeEnum.AssetType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AssetTypeEnum.AssetType 
-    */
-export enum AssetType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-YOUTUBE_VIDEO = 2, // YOUTUBE_VIDEO
-MEDIA_BUNDLE = 3, // MEDIA_BUNDLE
-IMAGE = 4, // IMAGE
-TEXT = 5, // TEXT
-LEAD_FORM = 6, // LEAD_FORM
-BOOK_ON_GOOGLE = 7, // BOOK_ON_GOOGLE
-PROMOTION = 8, // PROMOTION
-CALLOUT = 9, // CALLOUT
-STRUCTURED_SNIPPET = 10, // STRUCTURED_SNIPPET
-SITELINK = 11, // SITELINK
-    }
-
-/**
-    * @name AttributionModelEnum.AttributionModel
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AttributionModelEnum.AttributionModel 
-    */
-export enum AttributionModel {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-EXTERNAL = 100, // EXTERNAL
-GOOGLE_ADS_LAST_CLICK = 101, // GOOGLE_ADS_LAST_CLICK
-GOOGLE_SEARCH_ATTRIBUTION_FIRST_CLICK = 102, // GOOGLE_SEARCH_ATTRIBUTION_FIRST_CLICK
-GOOGLE_SEARCH_ATTRIBUTION_LINEAR = 103, // GOOGLE_SEARCH_ATTRIBUTION_LINEAR
-GOOGLE_SEARCH_ATTRIBUTION_TIME_DECAY = 104, // GOOGLE_SEARCH_ATTRIBUTION_TIME_DECAY
-GOOGLE_SEARCH_ATTRIBUTION_POSITION_BASED = 105, // GOOGLE_SEARCH_ATTRIBUTION_POSITION_BASED
-GOOGLE_SEARCH_ATTRIBUTION_DATA_DRIVEN = 106, // GOOGLE_SEARCH_ATTRIBUTION_DATA_DRIVEN
-    }
-
-/**
-    * @name BatchJobStatusEnum.BatchJobStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/BatchJobStatusEnum.BatchJobStatus 
-    */
-export enum BatchJobStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-PENDING = 2, // PENDING
-RUNNING = 3, // RUNNING
-DONE = 4, // DONE
-    }
-
-/**
-    * @name BidModifierSourceEnum.BidModifierSource
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/BidModifierSourceEnum.BidModifierSource 
-    */
-export enum BidModifierSource {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-CAMPAIGN = 2, // CAMPAIGN
-AD_GROUP = 3, // AD_GROUP
-    }
-
-/**
-    * @name BiddingSourceEnum.BiddingSource
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/BiddingSourceEnum.BiddingSource 
-    */
-export enum BiddingSource {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-CAMPAIGN_BIDDING_STRATEGY = 5, // CAMPAIGN_BIDDING_STRATEGY
-AD_GROUP = 6, // AD_GROUP
-AD_GROUP_CRITERION = 7, // AD_GROUP_CRITERION
-    }
-
-/**
-    * @name BiddingStrategyStatusEnum.BiddingStrategyStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/BiddingStrategyStatusEnum.BiddingStrategyStatus 
-    */
-export enum BiddingStrategyStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-REMOVED = 4, // REMOVED
-    }
-
-/**
-    * @name BiddingStrategyTypeEnum.BiddingStrategyType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/BiddingStrategyTypeEnum.BiddingStrategyType 
-    */
-export enum BiddingStrategyType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-COMMISSION = 16, // COMMISSION
-ENHANCED_CPC = 2, // ENHANCED_CPC
-MANUAL_CPC = 3, // MANUAL_CPC
-MANUAL_CPM = 4, // MANUAL_CPM
-MANUAL_CPV = 13, // MANUAL_CPV
-MAXIMIZE_CONVERSIONS = 10, // MAXIMIZE_CONVERSIONS
-MAXIMIZE_CONVERSION_VALUE = 11, // MAXIMIZE_CONVERSION_VALUE
-PAGE_ONE_PROMOTED = 5, // PAGE_ONE_PROMOTED
-PERCENT_CPC = 12, // PERCENT_CPC
-TARGET_CPA = 6, // TARGET_CPA
-TARGET_CPM = 14, // TARGET_CPM
-TARGET_IMPRESSION_SHARE = 15, // TARGET_IMPRESSION_SHARE
-TARGET_OUTRANK_SHARE = 7, // TARGET_OUTRANK_SHARE
-TARGET_ROAS = 8, // TARGET_ROAS
-TARGET_SPEND = 9, // TARGET_SPEND
-    }
-
-/**
-    * @name BillingSetupStatusEnum.BillingSetupStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/BillingSetupStatusEnum.BillingSetupStatus 
-    */
-export enum BillingSetupStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-PENDING = 2, // PENDING
-APPROVED_HELD = 3, // APPROVED_HELD
-APPROVED = 4, // APPROVED
-CANCELLED = 5, // CANCELLED
-    }
-
-/**
-    * @name BrandSafetySuitabilityEnum.BrandSafetySuitability
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/BrandSafetySuitabilityEnum.BrandSafetySuitability 
-    */
-export enum BrandSafetySuitability {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-EXPANDED_INVENTORY = 2, // EXPANDED_INVENTORY
-STANDARD_INVENTORY = 3, // STANDARD_INVENTORY
-LIMITED_INVENTORY = 4, // LIMITED_INVENTORY
-    }
-
-/**
-    * @name BudgetDeliveryMethodEnum.BudgetDeliveryMethod
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/BudgetDeliveryMethodEnum.BudgetDeliveryMethod 
-    */
-export enum BudgetDeliveryMethod {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-STANDARD = 2, // STANDARD
-ACCELERATED = 3, // ACCELERATED
-    }
-
-/**
-    * @name BudgetPeriodEnum.BudgetPeriod
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/BudgetPeriodEnum.BudgetPeriod 
-    */
-export enum BudgetPeriod {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-DAILY = 2, // DAILY
-CUSTOM_PERIOD = 5, // CUSTOM_PERIOD
-    }
-
-/**
-    * @name BudgetStatusEnum.BudgetStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/BudgetStatusEnum.BudgetStatus 
-    */
-export enum BudgetStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-REMOVED = 3, // REMOVED
-    }
-
-/**
-    * @name BudgetTypeEnum.BudgetType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/BudgetTypeEnum.BudgetType 
-    */
-export enum BudgetType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-STANDARD = 2, // STANDARD
-HOTEL_ADS_COMMISSION = 3, // HOTEL_ADS_COMMISSION
-FIXED_CPA = 4, // FIXED_CPA
-    }
-
-/**
-    * @name CallPlaceholderFieldEnum.CallPlaceholderField
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CallPlaceholderFieldEnum.CallPlaceholderField 
-    */
-export enum CallPlaceholderField {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-PHONE_NUMBER = 2, // PHONE_NUMBER
-COUNTRY_CODE = 3, // COUNTRY_CODE
-TRACKED = 4, // TRACKED
-CONVERSION_TYPE_ID = 5, // CONVERSION_TYPE_ID
-CONVERSION_REPORTING_STATE = 6, // CONVERSION_REPORTING_STATE
-    }
-
-/**
-    * @name CallTrackingDisplayLocationEnum.CallTrackingDisplayLocation
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CallTrackingDisplayLocationEnum.CallTrackingDisplayLocation 
-    */
-export enum CallTrackingDisplayLocation {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-AD = 2, // AD
-LANDING_PAGE = 3, // LANDING_PAGE
-    }
-
-/**
-    * @name CallTypeEnum.CallType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CallTypeEnum.CallType 
-    */
-export enum CallType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-MANUALLY_DIALED = 2, // MANUALLY_DIALED
-HIGH_END_MOBILE_SEARCH = 3, // HIGH_END_MOBILE_SEARCH
-    }
-
-/**
-    * @name CalloutPlaceholderFieldEnum.CalloutPlaceholderField
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CalloutPlaceholderFieldEnum.CalloutPlaceholderField 
-    */
-export enum CalloutPlaceholderField {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-CALLOUT_TEXT = 2, // CALLOUT_TEXT
-    }
-
-/**
-    * @name CampaignCriterionStatusEnum.CampaignCriterionStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CampaignCriterionStatusEnum.CampaignCriterionStatus 
-    */
-export enum CampaignCriterionStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-PAUSED = 3, // PAUSED
-REMOVED = 4, // REMOVED
-    }
-
-/**
-    * @name CampaignDraftStatusEnum.CampaignDraftStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CampaignDraftStatusEnum.CampaignDraftStatus 
-    */
-export enum CampaignDraftStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-PROPOSED = 2, // PROPOSED
-REMOVED = 3, // REMOVED
-PROMOTING = 5, // PROMOTING
-PROMOTED = 4, // PROMOTED
-PROMOTE_FAILED = 6, // PROMOTE_FAILED
-    }
-
-/**
-    * @name CampaignExperimentStatusEnum.CampaignExperimentStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CampaignExperimentStatusEnum.CampaignExperimentStatus 
-    */
-export enum CampaignExperimentStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-INITIALIZING = 2, // INITIALIZING
-INITIALIZATION_FAILED = 8, // INITIALIZATION_FAILED
-ENABLED = 3, // ENABLED
-GRADUATED = 4, // GRADUATED
-REMOVED = 5, // REMOVED
-PROMOTING = 6, // PROMOTING
-PROMOTION_FAILED = 9, // PROMOTION_FAILED
-PROMOTED = 7, // PROMOTED
-ENDED_MANUALLY = 10, // ENDED_MANUALLY
-    }
-
-/**
-    * @name CampaignExperimentTrafficSplitTypeEnum.CampaignExperimentTrafficSplitType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CampaignExperimentTrafficSplitTypeEnum.CampaignExperimentTrafficSplitType 
-    */
-export enum CampaignExperimentTrafficSplitType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-RANDOM_QUERY = 2, // RANDOM_QUERY
-COOKIE = 3, // COOKIE
-    }
-
-/**
-    * @name CampaignExperimentTypeEnum.CampaignExperimentType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CampaignExperimentTypeEnum.CampaignExperimentType 
-    */
-export enum CampaignExperimentType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-BASE = 2, // BASE
-DRAFT = 3, // DRAFT
-EXPERIMENT = 4, // EXPERIMENT
-    }
-
-/**
-    * @name CampaignServingStatusEnum.CampaignServingStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CampaignServingStatusEnum.CampaignServingStatus 
-    */
-export enum CampaignServingStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-SERVING = 2, // SERVING
-NONE = 3, // NONE
-ENDED = 4, // ENDED
-PENDING = 5, // PENDING
-SUSPENDED = 6, // SUSPENDED
-    }
-
-/**
-    * @name CampaignSharedSetStatusEnum.CampaignSharedSetStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CampaignSharedSetStatusEnum.CampaignSharedSetStatus 
-    */
-export enum CampaignSharedSetStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-REMOVED = 3, // REMOVED
-    }
-
-/**
-    * @name CampaignStatusEnum.CampaignStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CampaignStatusEnum.CampaignStatus 
-    */
-export enum CampaignStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-PAUSED = 3, // PAUSED
-REMOVED = 4, // REMOVED
-    }
-
-/**
-    * @name ChangeClientTypeEnum.ChangeClientType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ChangeClientTypeEnum.ChangeClientType 
-    */
-export enum ChangeClientType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-GOOGLE_ADS_WEB_CLIENT = 2, // GOOGLE_ADS_WEB_CLIENT
-GOOGLE_ADS_AUTOMATED_RULE = 3, // GOOGLE_ADS_AUTOMATED_RULE
-GOOGLE_ADS_SCRIPTS = 4, // GOOGLE_ADS_SCRIPTS
-GOOGLE_ADS_BULK_UPLOAD = 5, // GOOGLE_ADS_BULK_UPLOAD
-GOOGLE_ADS_API = 6, // GOOGLE_ADS_API
-GOOGLE_ADS_EDITOR = 7, // GOOGLE_ADS_EDITOR
-GOOGLE_ADS_MOBILE_APP = 8, // GOOGLE_ADS_MOBILE_APP
-GOOGLE_ADS_RECOMMENDATIONS = 9, // GOOGLE_ADS_RECOMMENDATIONS
-SEARCH_ADS_360_SYNC = 10, // SEARCH_ADS_360_SYNC
-SEARCH_ADS_360_POST = 11, // SEARCH_ADS_360_POST
-INTERNAL_TOOL = 12, // INTERNAL_TOOL
-OTHER = 13, // OTHER
-    }
-
-/**
-    * @name ChangeEventResourceTypeEnum.ChangeEventResourceType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ChangeEventResourceTypeEnum.ChangeEventResourceType 
-    */
-export enum ChangeEventResourceType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-AD = 2, // AD
-AD_GROUP = 3, // AD_GROUP
-AD_GROUP_CRITERION = 4, // AD_GROUP_CRITERION
-CAMPAIGN = 5, // CAMPAIGN
-CAMPAIGN_BUDGET = 6, // CAMPAIGN_BUDGET
-AD_GROUP_BID_MODIFIER = 7, // AD_GROUP_BID_MODIFIER
-CAMPAIGN_CRITERION = 8, // CAMPAIGN_CRITERION
-FEED = 9, // FEED
-FEED_ITEM = 10, // FEED_ITEM
-CAMPAIGN_FEED = 11, // CAMPAIGN_FEED
-AD_GROUP_FEED = 12, // AD_GROUP_FEED
-AD_GROUP_AD = 13, // AD_GROUP_AD
-    }
-
-/**
-    * @name ChangeStatusOperationEnum.ChangeStatusOperation
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ChangeStatusOperationEnum.ChangeStatusOperation 
-    */
-export enum ChangeStatusOperation {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ADDED = 2, // ADDED
-CHANGED = 3, // CHANGED
-REMOVED = 4, // REMOVED
-    }
-
-/**
-    * @name ChangeStatusResourceTypeEnum.ChangeStatusResourceType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ChangeStatusResourceTypeEnum.ChangeStatusResourceType 
-    */
-export enum ChangeStatusResourceType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-AD_GROUP = 3, // AD_GROUP
-AD_GROUP_AD = 4, // AD_GROUP_AD
-AD_GROUP_CRITERION = 5, // AD_GROUP_CRITERION
-CAMPAIGN = 6, // CAMPAIGN
-CAMPAIGN_CRITERION = 7, // CAMPAIGN_CRITERION
-FEED = 9, // FEED
-FEED_ITEM = 10, // FEED_ITEM
-AD_GROUP_FEED = 11, // AD_GROUP_FEED
-CAMPAIGN_FEED = 12, // CAMPAIGN_FEED
-AD_GROUP_BID_MODIFIER = 13, // AD_GROUP_BID_MODIFIER
-    }
-
-/**
-    * @name CombinedAudienceStatusEnum.CombinedAudienceStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CombinedAudienceStatusEnum.CombinedAudienceStatus 
-    */
-export enum CombinedAudienceStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-REMOVED = 3, // REMOVED
-    }
-
-/**
-    * @name ConversionActionCountingTypeEnum.ConversionActionCountingType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ConversionActionCountingTypeEnum.ConversionActionCountingType 
-    */
-export enum ConversionActionCountingType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ONE_PER_CLICK = 2, // ONE_PER_CLICK
-MANY_PER_CLICK = 3, // MANY_PER_CLICK
-    }
-
-/**
-    * @name ConversionActionStatusEnum.ConversionActionStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ConversionActionStatusEnum.ConversionActionStatus 
-    */
-export enum ConversionActionStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-REMOVED = 3, // REMOVED
-HIDDEN = 4, // HIDDEN
-    }
-
-/**
-    * @name ConversionActionTypeEnum.ConversionActionType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ConversionActionTypeEnum.ConversionActionType 
-    */
-export enum ConversionActionType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-AD_CALL = 2, // AD_CALL
-CLICK_TO_CALL = 3, // CLICK_TO_CALL
-GOOGLE_PLAY_DOWNLOAD = 4, // GOOGLE_PLAY_DOWNLOAD
-GOOGLE_PLAY_IN_APP_PURCHASE = 5, // GOOGLE_PLAY_IN_APP_PURCHASE
-UPLOAD_CALLS = 6, // UPLOAD_CALLS
-UPLOAD_CLICKS = 7, // UPLOAD_CLICKS
-WEBPAGE = 8, // WEBPAGE
-WEBSITE_CALL = 9, // WEBSITE_CALL
-STORE_SALES_DIRECT_UPLOAD = 10, // STORE_SALES_DIRECT_UPLOAD
-STORE_SALES = 11, // STORE_SALES
-FIREBASE_ANDROID_FIRST_OPEN = 12, // FIREBASE_ANDROID_FIRST_OPEN
-FIREBASE_ANDROID_IN_APP_PURCHASE = 13, // FIREBASE_ANDROID_IN_APP_PURCHASE
-FIREBASE_ANDROID_CUSTOM = 14, // FIREBASE_ANDROID_CUSTOM
-FIREBASE_IOS_FIRST_OPEN = 15, // FIREBASE_IOS_FIRST_OPEN
-FIREBASE_IOS_IN_APP_PURCHASE = 16, // FIREBASE_IOS_IN_APP_PURCHASE
-FIREBASE_IOS_CUSTOM = 17, // FIREBASE_IOS_CUSTOM
-THIRD_PARTY_APP_ANALYTICS_ANDROID_FIRST_OPEN = 18, // THIRD_PARTY_APP_ANALYTICS_ANDROID_FIRST_OPEN
-THIRD_PARTY_APP_ANALYTICS_ANDROID_IN_APP_PURCHASE = 19, // THIRD_PARTY_APP_ANALYTICS_ANDROID_IN_APP_PURCHASE
-THIRD_PARTY_APP_ANALYTICS_ANDROID_CUSTOM = 20, // THIRD_PARTY_APP_ANALYTICS_ANDROID_CUSTOM
-THIRD_PARTY_APP_ANALYTICS_IOS_FIRST_OPEN = 21, // THIRD_PARTY_APP_ANALYTICS_IOS_FIRST_OPEN
-THIRD_PARTY_APP_ANALYTICS_IOS_IN_APP_PURCHASE = 22, // THIRD_PARTY_APP_ANALYTICS_IOS_IN_APP_PURCHASE
-THIRD_PARTY_APP_ANALYTICS_IOS_CUSTOM = 23, // THIRD_PARTY_APP_ANALYTICS_IOS_CUSTOM
-ANDROID_APP_PRE_REGISTRATION = 24, // ANDROID_APP_PRE_REGISTRATION
-ANDROID_INSTALLS_ALL_OTHER_APPS = 25, // ANDROID_INSTALLS_ALL_OTHER_APPS
-FLOODLIGHT_ACTION = 26, // FLOODLIGHT_ACTION
-FLOODLIGHT_TRANSACTION = 27, // FLOODLIGHT_TRANSACTION
-GOOGLE_HOSTED = 28, // GOOGLE_HOSTED
-LEAD_FORM_SUBMIT = 29, // LEAD_FORM_SUBMIT
-SALESFORCE = 30, // SALESFORCE
-SEARCH_ADS_360 = 31, // SEARCH_ADS_360
-SMART_CAMPAIGN_AD_CLICKS_TO_CALL = 32, // SMART_CAMPAIGN_AD_CLICKS_TO_CALL
-SMART_CAMPAIGN_MAP_CLICKS_TO_CALL = 33, // SMART_CAMPAIGN_MAP_CLICKS_TO_CALL
-SMART_CAMPAIGN_MAP_DIRECTIONS = 34, // SMART_CAMPAIGN_MAP_DIRECTIONS
-SMART_CAMPAIGN_TRACKED_CALLS = 35, // SMART_CAMPAIGN_TRACKED_CALLS
-STORE_VISITS = 36, // STORE_VISITS
-    }
-
-/**
-    * @name ConversionAdjustmentTypeEnum.ConversionAdjustmentType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ConversionAdjustmentTypeEnum.ConversionAdjustmentType 
-    */
-export enum ConversionAdjustmentType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-RETRACTION = 2, // RETRACTION
-RESTATEMENT = 3, // RESTATEMENT
-    }
-
-/**
-    * @name ConversionCustomVariableStatusEnum.ConversionCustomVariableStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ConversionCustomVariableStatusEnum.ConversionCustomVariableStatus 
-    */
-export enum ConversionCustomVariableStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ACTIVATION_NEEDED = 2, // ACTIVATION_NEEDED
-ENABLED = 3, // ENABLED
-PAUSED = 4, // PAUSED
-    }
-
-/**
-    * @name CriterionSystemServingStatusEnum.CriterionSystemServingStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CriterionSystemServingStatusEnum.CriterionSystemServingStatus 
-    */
-export enum CriterionSystemServingStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ELIGIBLE = 2, // ELIGIBLE
-RARELY_SERVED = 3, // RARELY_SERVED
-    }
-
-/**
-    * @name CriterionTypeEnum.CriterionType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CriterionTypeEnum.CriterionType 
-    */
-export enum CriterionType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-KEYWORD = 2, // KEYWORD
-PLACEMENT = 3, // PLACEMENT
-MOBILE_APP_CATEGORY = 4, // MOBILE_APP_CATEGORY
-MOBILE_APPLICATION = 5, // MOBILE_APPLICATION
-DEVICE = 6, // DEVICE
-LOCATION = 7, // LOCATION
-LISTING_GROUP = 8, // LISTING_GROUP
-AD_SCHEDULE = 9, // AD_SCHEDULE
-AGE_RANGE = 10, // AGE_RANGE
-GENDER = 11, // GENDER
-INCOME_RANGE = 12, // INCOME_RANGE
-PARENTAL_STATUS = 13, // PARENTAL_STATUS
-YOUTUBE_VIDEO = 14, // YOUTUBE_VIDEO
-YOUTUBE_CHANNEL = 15, // YOUTUBE_CHANNEL
-USER_LIST = 16, // USER_LIST
-PROXIMITY = 17, // PROXIMITY
-TOPIC = 18, // TOPIC
-LISTING_SCOPE = 19, // LISTING_SCOPE
-LANGUAGE = 20, // LANGUAGE
-IP_BLOCK = 21, // IP_BLOCK
-CONTENT_LABEL = 22, // CONTENT_LABEL
-CARRIER = 23, // CARRIER
-USER_INTEREST = 24, // USER_INTEREST
-WEBPAGE = 25, // WEBPAGE
-OPERATING_SYSTEM_VERSION = 26, // OPERATING_SYSTEM_VERSION
-APP_PAYMENT_MODEL = 27, // APP_PAYMENT_MODEL
-MOBILE_DEVICE = 28, // MOBILE_DEVICE
-CUSTOM_AFFINITY = 29, // CUSTOM_AFFINITY
-CUSTOM_INTENT = 30, // CUSTOM_INTENT
-LOCATION_GROUP = 31, // LOCATION_GROUP
-CUSTOM_AUDIENCE = 32, // CUSTOM_AUDIENCE
-COMBINED_AUDIENCE = 33, // COMBINED_AUDIENCE
-    }
-
-/**
-    * @name CustomAudienceMemberTypeEnum.CustomAudienceMemberType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CustomAudienceMemberTypeEnum.CustomAudienceMemberType 
-    */
-export enum CustomAudienceMemberType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-KEYWORD = 2, // KEYWORD
-URL = 3, // URL
-PLACE_CATEGORY = 4, // PLACE_CATEGORY
-APP = 5, // APP
-    }
-
-/**
-    * @name CustomAudienceStatusEnum.CustomAudienceStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CustomAudienceStatusEnum.CustomAudienceStatus 
-    */
-export enum CustomAudienceStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-REMOVED = 3, // REMOVED
-    }
-
-/**
-    * @name CustomAudienceTypeEnum.CustomAudienceType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CustomAudienceTypeEnum.CustomAudienceType 
-    */
-export enum CustomAudienceType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-AUTO = 2, // AUTO
-INTEREST = 3, // INTEREST
-PURCHASE_INTENT = 4, // PURCHASE_INTENT
-SEARCH = 5, // SEARCH
-    }
-
-/**
-    * @name CustomInterestMemberTypeEnum.CustomInterestMemberType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CustomInterestMemberTypeEnum.CustomInterestMemberType 
-    */
-export enum CustomInterestMemberType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-KEYWORD = 2, // KEYWORD
-URL = 3, // URL
-    }
-
-/**
-    * @name CustomInterestStatusEnum.CustomInterestStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CustomInterestStatusEnum.CustomInterestStatus 
-    */
-export enum CustomInterestStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-REMOVED = 3, // REMOVED
-    }
-
-/**
-    * @name CustomInterestTypeEnum.CustomInterestType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CustomInterestTypeEnum.CustomInterestType 
-    */
-export enum CustomInterestType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-CUSTOM_AFFINITY = 2, // CUSTOM_AFFINITY
-CUSTOM_INTENT = 3, // CUSTOM_INTENT
-    }
-
-/**
-    * @name CustomPlaceholderFieldEnum.CustomPlaceholderField
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CustomPlaceholderFieldEnum.CustomPlaceholderField 
-    */
-export enum CustomPlaceholderField {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ID = 2, // ID
-ID2 = 3, // ID2
-ITEM_TITLE = 4, // ITEM_TITLE
-ITEM_SUBTITLE = 5, // ITEM_SUBTITLE
-ITEM_DESCRIPTION = 6, // ITEM_DESCRIPTION
-ITEM_ADDRESS = 7, // ITEM_ADDRESS
-PRICE = 8, // PRICE
-FORMATTED_PRICE = 9, // FORMATTED_PRICE
-SALE_PRICE = 10, // SALE_PRICE
-FORMATTED_SALE_PRICE = 11, // FORMATTED_SALE_PRICE
-IMAGE_URL = 12, // IMAGE_URL
-ITEM_CATEGORY = 13, // ITEM_CATEGORY
-FINAL_URLS = 14, // FINAL_URLS
-FINAL_MOBILE_URLS = 15, // FINAL_MOBILE_URLS
-TRACKING_URL = 16, // TRACKING_URL
-CONTEXTUAL_KEYWORDS = 17, // CONTEXTUAL_KEYWORDS
-ANDROID_APP_LINK = 18, // ANDROID_APP_LINK
-SIMILAR_IDS = 19, // SIMILAR_IDS
-IOS_APP_LINK = 20, // IOS_APP_LINK
-IOS_APP_STORE_ID = 21, // IOS_APP_STORE_ID
-    }
-
-/**
-    * @name CustomerPayPerConversionEligibilityFailureReasonEnum.CustomerPayPerConversionEligibilityFailureReason
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CustomerPayPerConversionEligibilityFailureReasonEnum.CustomerPayPerConversionEligibilityFailureReason 
-    */
-export enum CustomerPayPerConversionEligibilityFailureReason {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-NOT_ENOUGH_CONVERSIONS = 2, // NOT_ENOUGH_CONVERSIONS
-CONVERSION_LAG_TOO_HIGH = 3, // CONVERSION_LAG_TOO_HIGH
-HAS_CAMPAIGN_WITH_SHARED_BUDGET = 4, // HAS_CAMPAIGN_WITH_SHARED_BUDGET
-HAS_UPLOAD_CLICKS_CONVERSION = 5, // HAS_UPLOAD_CLICKS_CONVERSION
-AVERAGE_DAILY_SPEND_TOO_HIGH = 6, // AVERAGE_DAILY_SPEND_TOO_HIGH
-ANALYSIS_NOT_COMPLETE = 7, // ANALYSIS_NOT_COMPLETE
-OTHER = 8, // OTHER
-    }
-
-/**
-    * @name DataDrivenModelStatusEnum.DataDrivenModelStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/DataDrivenModelStatusEnum.DataDrivenModelStatus 
-    */
-export enum DataDrivenModelStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-AVAILABLE = 2, // AVAILABLE
-STALE = 3, // STALE
-EXPIRED = 4, // EXPIRED
-NEVER_GENERATED = 5, // NEVER_GENERATED
-    }
-
-/**
-    * @name DistanceBucketEnum.DistanceBucket
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/DistanceBucketEnum.DistanceBucket 
-    */
-export enum DistanceBucket {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-WITHIN_700M = 2, // WITHIN_700M
-WITHIN_1KM = 3, // WITHIN_1KM
-WITHIN_5KM = 4, // WITHIN_5KM
-WITHIN_10KM = 5, // WITHIN_10KM
-WITHIN_15KM = 6, // WITHIN_15KM
-WITHIN_20KM = 7, // WITHIN_20KM
-WITHIN_25KM = 8, // WITHIN_25KM
-WITHIN_30KM = 9, // WITHIN_30KM
-WITHIN_35KM = 10, // WITHIN_35KM
-WITHIN_40KM = 11, // WITHIN_40KM
-WITHIN_45KM = 12, // WITHIN_45KM
-WITHIN_50KM = 13, // WITHIN_50KM
-WITHIN_55KM = 14, // WITHIN_55KM
-WITHIN_60KM = 15, // WITHIN_60KM
-WITHIN_65KM = 16, // WITHIN_65KM
-BEYOND_65KM = 17, // BEYOND_65KM
-WITHIN_0_7MILES = 18, // WITHIN_0_7MILES
-WITHIN_1MILE = 19, // WITHIN_1MILE
-WITHIN_5MILES = 20, // WITHIN_5MILES
-WITHIN_10MILES = 21, // WITHIN_10MILES
-WITHIN_15MILES = 22, // WITHIN_15MILES
-WITHIN_20MILES = 23, // WITHIN_20MILES
-WITHIN_25MILES = 24, // WITHIN_25MILES
-WITHIN_30MILES = 25, // WITHIN_30MILES
-WITHIN_35MILES = 26, // WITHIN_35MILES
-WITHIN_40MILES = 27, // WITHIN_40MILES
-BEYOND_40MILES = 28, // BEYOND_40MILES
-    }
-
-/**
-    * @name DsaPageFeedCriterionFieldEnum.DsaPageFeedCriterionField
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/DsaPageFeedCriterionFieldEnum.DsaPageFeedCriterionField 
-    */
-export enum DsaPageFeedCriterionField {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-PAGE_URL = 2, // PAGE_URL
-LABEL = 3, // LABEL
-    }
-
-/**
-    * @name EducationPlaceholderFieldEnum.EducationPlaceholderField
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/EducationPlaceholderFieldEnum.EducationPlaceholderField 
-    */
-export enum EducationPlaceholderField {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-PROGRAM_ID = 2, // PROGRAM_ID
-LOCATION_ID = 3, // LOCATION_ID
-PROGRAM_NAME = 4, // PROGRAM_NAME
-AREA_OF_STUDY = 5, // AREA_OF_STUDY
-PROGRAM_DESCRIPTION = 6, // PROGRAM_DESCRIPTION
-SCHOOL_NAME = 7, // SCHOOL_NAME
-ADDRESS = 8, // ADDRESS
-THUMBNAIL_IMAGE_URL = 9, // THUMBNAIL_IMAGE_URL
-ALTERNATIVE_THUMBNAIL_IMAGE_URL = 10, // ALTERNATIVE_THUMBNAIL_IMAGE_URL
-FINAL_URLS = 11, // FINAL_URLS
-FINAL_MOBILE_URLS = 12, // FINAL_MOBILE_URLS
-TRACKING_URL = 13, // TRACKING_URL
-CONTEXTUAL_KEYWORDS = 14, // CONTEXTUAL_KEYWORDS
-ANDROID_APP_LINK = 15, // ANDROID_APP_LINK
-SIMILAR_PROGRAM_IDS = 16, // SIMILAR_PROGRAM_IDS
-IOS_APP_LINK = 17, // IOS_APP_LINK
-IOS_APP_STORE_ID = 18, // IOS_APP_STORE_ID
-    }
-
-/**
-    * @name ExtensionSettingDeviceEnum.ExtensionSettingDevice
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ExtensionSettingDeviceEnum.ExtensionSettingDevice 
-    */
-export enum ExtensionSettingDevice {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-MOBILE = 2, // MOBILE
-DESKTOP = 3, // DESKTOP
-    }
-
-/**
-    * @name ExtensionTypeEnum.ExtensionType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ExtensionTypeEnum.ExtensionType 
-    */
-export enum ExtensionType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-NONE = 2, // NONE
-APP = 3, // APP
-CALL = 4, // CALL
-CALLOUT = 5, // CALLOUT
-MESSAGE = 6, // MESSAGE
-PRICE = 7, // PRICE
-PROMOTION = 8, // PROMOTION
-SITELINK = 10, // SITELINK
-STRUCTURED_SNIPPET = 11, // STRUCTURED_SNIPPET
-LOCATION = 12, // LOCATION
-AFFILIATE_LOCATION = 13, // AFFILIATE_LOCATION
-HOTEL_CALLOUT = 15, // HOTEL_CALLOUT
-IMAGE = 16, // IMAGE
-    }
-
-/**
-    * @name FeedAttributeTypeEnum.FeedAttributeType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedAttributeTypeEnum.FeedAttributeType 
-    */
-export enum FeedAttributeType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-INT64 = 2, // INT64
-DOUBLE = 3, // DOUBLE
-STRING = 4, // STRING
-BOOLEAN = 5, // BOOLEAN
-URL = 6, // URL
-DATE_TIME = 7, // DATE_TIME
-INT64_LIST = 8, // INT64_LIST
-DOUBLE_LIST = 9, // DOUBLE_LIST
-STRING_LIST = 10, // STRING_LIST
-BOOLEAN_LIST = 11, // BOOLEAN_LIST
-URL_LIST = 12, // URL_LIST
-DATE_TIME_LIST = 13, // DATE_TIME_LIST
-PRICE = 14, // PRICE
-    }
-
-/**
-    * @name FeedItemQualityApprovalStatusEnum.FeedItemQualityApprovalStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedItemQualityApprovalStatusEnum.FeedItemQualityApprovalStatus 
-    */
-export enum FeedItemQualityApprovalStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-APPROVED = 2, // APPROVED
-DISAPPROVED = 3, // DISAPPROVED
-    }
-
-/**
-    * @name FeedItemQualityDisapprovalReasonEnum.FeedItemQualityDisapprovalReason
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedItemQualityDisapprovalReasonEnum.FeedItemQualityDisapprovalReason 
-    */
-export enum FeedItemQualityDisapprovalReason {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-PRICE_TABLE_REPETITIVE_HEADERS = 2, // PRICE_TABLE_REPETITIVE_HEADERS
-PRICE_TABLE_REPETITIVE_DESCRIPTION = 3, // PRICE_TABLE_REPETITIVE_DESCRIPTION
-PRICE_TABLE_INCONSISTENT_ROWS = 4, // PRICE_TABLE_INCONSISTENT_ROWS
-PRICE_DESCRIPTION_HAS_PRICE_QUALIFIERS = 5, // PRICE_DESCRIPTION_HAS_PRICE_QUALIFIERS
-PRICE_UNSUPPORTED_LANGUAGE = 6, // PRICE_UNSUPPORTED_LANGUAGE
-PRICE_TABLE_ROW_HEADER_TABLE_TYPE_MISMATCH = 7, // PRICE_TABLE_ROW_HEADER_TABLE_TYPE_MISMATCH
-PRICE_TABLE_ROW_HEADER_HAS_PROMOTIONAL_TEXT = 8, // PRICE_TABLE_ROW_HEADER_HAS_PROMOTIONAL_TEXT
-PRICE_TABLE_ROW_DESCRIPTION_NOT_RELEVANT = 9, // PRICE_TABLE_ROW_DESCRIPTION_NOT_RELEVANT
-PRICE_TABLE_ROW_DESCRIPTION_HAS_PROMOTIONAL_TEXT = 10, // PRICE_TABLE_ROW_DESCRIPTION_HAS_PROMOTIONAL_TEXT
-PRICE_TABLE_ROW_HEADER_DESCRIPTION_REPETITIVE = 11, // PRICE_TABLE_ROW_HEADER_DESCRIPTION_REPETITIVE
-PRICE_TABLE_ROW_UNRATEABLE = 12, // PRICE_TABLE_ROW_UNRATEABLE
-PRICE_TABLE_ROW_PRICE_INVALID = 13, // PRICE_TABLE_ROW_PRICE_INVALID
-PRICE_TABLE_ROW_URL_INVALID = 14, // PRICE_TABLE_ROW_URL_INVALID
-PRICE_HEADER_OR_DESCRIPTION_HAS_PRICE = 15, // PRICE_HEADER_OR_DESCRIPTION_HAS_PRICE
-STRUCTURED_SNIPPETS_HEADER_POLICY_VIOLATED = 16, // STRUCTURED_SNIPPETS_HEADER_POLICY_VIOLATED
-STRUCTURED_SNIPPETS_REPEATED_VALUES = 17, // STRUCTURED_SNIPPETS_REPEATED_VALUES
-STRUCTURED_SNIPPETS_EDITORIAL_GUIDELINES = 18, // STRUCTURED_SNIPPETS_EDITORIAL_GUIDELINES
-STRUCTURED_SNIPPETS_HAS_PROMOTIONAL_TEXT = 19, // STRUCTURED_SNIPPETS_HAS_PROMOTIONAL_TEXT
-    }
-
-/**
-    * @name FeedItemSetStatusEnum.FeedItemSetStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedItemSetStatusEnum.FeedItemSetStatus 
-    */
-export enum FeedItemSetStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-REMOVED = 3, // REMOVED
-    }
-
-/**
-    * @name FeedItemStatusEnum.FeedItemStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedItemStatusEnum.FeedItemStatus 
-    */
-export enum FeedItemStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-REMOVED = 3, // REMOVED
-    }
-
-/**
-    * @name FeedItemTargetDeviceEnum.FeedItemTargetDevice
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedItemTargetDeviceEnum.FeedItemTargetDevice 
-    */
-export enum FeedItemTargetDevice {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-MOBILE = 2, // MOBILE
-    }
-
-/**
-    * @name FeedItemTargetStatusEnum.FeedItemTargetStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedItemTargetStatusEnum.FeedItemTargetStatus 
-    */
-export enum FeedItemTargetStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-REMOVED = 3, // REMOVED
-    }
-
-/**
-    * @name FeedItemTargetTypeEnum.FeedItemTargetType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedItemTargetTypeEnum.FeedItemTargetType 
-    */
-export enum FeedItemTargetType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-CAMPAIGN = 2, // CAMPAIGN
-AD_GROUP = 3, // AD_GROUP
-CRITERION = 4, // CRITERION
-    }
-
-/**
-    * @name FeedItemValidationStatusEnum.FeedItemValidationStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedItemValidationStatusEnum.FeedItemValidationStatus 
-    */
-export enum FeedItemValidationStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-PENDING = 2, // PENDING
-INVALID = 3, // INVALID
-VALID = 4, // VALID
-    }
-
-/**
-    * @name FeedLinkStatusEnum.FeedLinkStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedLinkStatusEnum.FeedLinkStatus 
-    */
-export enum FeedLinkStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-REMOVED = 3, // REMOVED
-    }
-
-/**
-    * @name FeedMappingCriterionTypeEnum.FeedMappingCriterionType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedMappingCriterionTypeEnum.FeedMappingCriterionType 
-    */
-export enum FeedMappingCriterionType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-LOCATION_EXTENSION_TARGETING = 4, // LOCATION_EXTENSION_TARGETING
-DSA_PAGE_FEED = 3, // DSA_PAGE_FEED
-    }
-
-/**
-    * @name FeedMappingStatusEnum.FeedMappingStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedMappingStatusEnum.FeedMappingStatus 
-    */
-export enum FeedMappingStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-REMOVED = 3, // REMOVED
-    }
-
-/**
-    * @name FeedOriginEnum.FeedOrigin
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedOriginEnum.FeedOrigin 
-    */
-export enum FeedOrigin {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-USER = 2, // USER
-GOOGLE = 3, // GOOGLE
-    }
-
-/**
-    * @name FeedStatusEnum.FeedStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedStatusEnum.FeedStatus 
-    */
-export enum FeedStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-REMOVED = 3, // REMOVED
-    }
-
-/**
-    * @name FlightPlaceholderFieldEnum.FlightPlaceholderField
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FlightPlaceholderFieldEnum.FlightPlaceholderField 
-    */
-export enum FlightPlaceholderField {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-DESTINATION_ID = 2, // DESTINATION_ID
-ORIGIN_ID = 3, // ORIGIN_ID
-FLIGHT_DESCRIPTION = 4, // FLIGHT_DESCRIPTION
-ORIGIN_NAME = 5, // ORIGIN_NAME
-DESTINATION_NAME = 6, // DESTINATION_NAME
-FLIGHT_PRICE = 7, // FLIGHT_PRICE
-FORMATTED_PRICE = 8, // FORMATTED_PRICE
-FLIGHT_SALE_PRICE = 9, // FLIGHT_SALE_PRICE
-FORMATTED_SALE_PRICE = 10, // FORMATTED_SALE_PRICE
-IMAGE_URL = 11, // IMAGE_URL
-FINAL_URLS = 12, // FINAL_URLS
-FINAL_MOBILE_URLS = 13, // FINAL_MOBILE_URLS
-TRACKING_URL = 14, // TRACKING_URL
-ANDROID_APP_LINK = 15, // ANDROID_APP_LINK
-SIMILAR_DESTINATION_IDS = 16, // SIMILAR_DESTINATION_IDS
-IOS_APP_LINK = 17, // IOS_APP_LINK
-IOS_APP_STORE_ID = 18, // IOS_APP_STORE_ID
-    }
-
-/**
-    * @name GeoTargetConstantStatusEnum.GeoTargetConstantStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/GeoTargetConstantStatusEnum.GeoTargetConstantStatus 
-    */
-export enum GeoTargetConstantStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-REMOVAL_PLANNED = 3, // REMOVAL_PLANNED
-    }
-
-/**
-    * @name GeoTargetingRestrictionEnum.GeoTargetingRestriction
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/GeoTargetingRestrictionEnum.GeoTargetingRestriction 
-    */
-export enum GeoTargetingRestriction {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-LOCATION_OF_PRESENCE = 2, // LOCATION_OF_PRESENCE
-    }
-
-/**
-    * @name GeoTargetingTypeEnum.GeoTargetingType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/GeoTargetingTypeEnum.GeoTargetingType 
-    */
-export enum GeoTargetingType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-AREA_OF_INTEREST = 2, // AREA_OF_INTEREST
-LOCATION_OF_PRESENCE = 3, // LOCATION_OF_PRESENCE
-    }
-
-/**
-    * @name GoogleAdsFieldCategoryEnum.GoogleAdsFieldCategory
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/GoogleAdsFieldCategoryEnum.GoogleAdsFieldCategory 
-    */
-export enum GoogleAdsFieldCategory {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-RESOURCE = 2, // RESOURCE
-ATTRIBUTE = 3, // ATTRIBUTE
-SEGMENT = 5, // SEGMENT
-METRIC = 6, // METRIC
-    }
-
-/**
-    * @name GoogleAdsFieldDataTypeEnum.GoogleAdsFieldDataType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/GoogleAdsFieldDataTypeEnum.GoogleAdsFieldDataType 
-    */
-export enum GoogleAdsFieldDataType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-BOOLEAN = 2, // BOOLEAN
-DATE = 3, // DATE
-DOUBLE = 4, // DOUBLE
-ENUM = 5, // ENUM
-FLOAT = 6, // FLOAT
-INT32 = 7, // INT32
-INT64 = 8, // INT64
-MESSAGE = 9, // MESSAGE
-RESOURCE_NAME = 10, // RESOURCE_NAME
-STRING = 11, // STRING
-UINT64 = 12, // UINT64
-    }
-
-/**
-    * @name GoogleVoiceCallStatusEnum.GoogleVoiceCallStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/GoogleVoiceCallStatusEnum.GoogleVoiceCallStatus 
-    */
-export enum GoogleVoiceCallStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-MISSED = 2, // MISSED
-RECEIVED = 3, // RECEIVED
-    }
-
-/**
-    * @name HotelPlaceholderFieldEnum.HotelPlaceholderField
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/HotelPlaceholderFieldEnum.HotelPlaceholderField 
-    */
-export enum HotelPlaceholderField {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-PROPERTY_ID = 2, // PROPERTY_ID
-PROPERTY_NAME = 3, // PROPERTY_NAME
-DESTINATION_NAME = 4, // DESTINATION_NAME
-DESCRIPTION = 5, // DESCRIPTION
-ADDRESS = 6, // ADDRESS
-PRICE = 7, // PRICE
-FORMATTED_PRICE = 8, // FORMATTED_PRICE
-SALE_PRICE = 9, // SALE_PRICE
-FORMATTED_SALE_PRICE = 10, // FORMATTED_SALE_PRICE
-IMAGE_URL = 11, // IMAGE_URL
-CATEGORY = 12, // CATEGORY
-STAR_RATING = 13, // STAR_RATING
-CONTEXTUAL_KEYWORDS = 14, // CONTEXTUAL_KEYWORDS
-FINAL_URLS = 15, // FINAL_URLS
-FINAL_MOBILE_URLS = 16, // FINAL_MOBILE_URLS
-TRACKING_URL = 17, // TRACKING_URL
-ANDROID_APP_LINK = 18, // ANDROID_APP_LINK
-SIMILAR_PROPERTY_IDS = 19, // SIMILAR_PROPERTY_IDS
-IOS_APP_LINK = 20, // IOS_APP_LINK
-IOS_APP_STORE_ID = 21, // IOS_APP_STORE_ID
-    }
-
-/**
-    * @name ImagePlaceholderFieldEnum.ImagePlaceholderField
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ImagePlaceholderFieldEnum.ImagePlaceholderField 
-    */
-export enum ImagePlaceholderField {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ASSET_ID = 2, // ASSET_ID
-    }
-
-/**
-    * @name InvoiceTypeEnum.InvoiceType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/InvoiceTypeEnum.InvoiceType 
-    */
-export enum InvoiceType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-CREDIT_MEMO = 2, // CREDIT_MEMO
-INVOICE = 3, // INVOICE
-    }
-
-/**
-    * @name JobPlaceholderFieldEnum.JobPlaceholderField
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/JobPlaceholderFieldEnum.JobPlaceholderField 
-    */
-export enum JobPlaceholderField {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-JOB_ID = 2, // JOB_ID
-LOCATION_ID = 3, // LOCATION_ID
-TITLE = 4, // TITLE
-SUBTITLE = 5, // SUBTITLE
-DESCRIPTION = 6, // DESCRIPTION
-IMAGE_URL = 7, // IMAGE_URL
-CATEGORY = 8, // CATEGORY
-CONTEXTUAL_KEYWORDS = 9, // CONTEXTUAL_KEYWORDS
-ADDRESS = 10, // ADDRESS
-SALARY = 11, // SALARY
-FINAL_URLS = 12, // FINAL_URLS
-FINAL_MOBILE_URLS = 14, // FINAL_MOBILE_URLS
-TRACKING_URL = 15, // TRACKING_URL
-ANDROID_APP_LINK = 16, // ANDROID_APP_LINK
-SIMILAR_JOB_IDS = 17, // SIMILAR_JOB_IDS
-IOS_APP_LINK = 18, // IOS_APP_LINK
-IOS_APP_STORE_ID = 19, // IOS_APP_STORE_ID
-    }
-
-/**
-    * @name KeywordPlanForecastIntervalEnum.KeywordPlanForecastInterval
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/KeywordPlanForecastIntervalEnum.KeywordPlanForecastInterval 
-    */
-export enum KeywordPlanForecastInterval {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-NEXT_WEEK = 3, // NEXT_WEEK
-NEXT_MONTH = 4, // NEXT_MONTH
-NEXT_QUARTER = 5, // NEXT_QUARTER
-    }
-
-/**
-    * @name KeywordPlanKeywordAnnotationEnum.KeywordPlanKeywordAnnotation
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/KeywordPlanKeywordAnnotationEnum.KeywordPlanKeywordAnnotation 
-    */
-export enum KeywordPlanKeywordAnnotation {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-KEYWORD_CONCEPT = 2, // KEYWORD_CONCEPT
-    }
-
-/**
-    * @name KeywordPlanNetworkEnum.KeywordPlanNetwork
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/KeywordPlanNetworkEnum.KeywordPlanNetwork 
-    */
-export enum KeywordPlanNetwork {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-GOOGLE_SEARCH = 2, // GOOGLE_SEARCH
-GOOGLE_SEARCH_AND_PARTNERS = 3, // GOOGLE_SEARCH_AND_PARTNERS
-    }
-
-/**
-    * @name LabelStatusEnum.LabelStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/LabelStatusEnum.LabelStatus 
-    */
-export enum LabelStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-REMOVED = 3, // REMOVED
-    }
-
-/**
-    * @name LinkedAccountTypeEnum.LinkedAccountType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/LinkedAccountTypeEnum.LinkedAccountType 
-    */
-export enum LinkedAccountType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-THIRD_PARTY_APP_ANALYTICS = 2, // THIRD_PARTY_APP_ANALYTICS
-DATA_PARTNER = 3, // DATA_PARTNER
-GOOGLE_ADS = 4, // GOOGLE_ADS
-    }
-
-/**
-    * @name LocalPlaceholderFieldEnum.LocalPlaceholderField
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/LocalPlaceholderFieldEnum.LocalPlaceholderField 
-    */
-export enum LocalPlaceholderField {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-DEAL_ID = 2, // DEAL_ID
-DEAL_NAME = 3, // DEAL_NAME
-SUBTITLE = 4, // SUBTITLE
-DESCRIPTION = 5, // DESCRIPTION
-PRICE = 6, // PRICE
-FORMATTED_PRICE = 7, // FORMATTED_PRICE
-SALE_PRICE = 8, // SALE_PRICE
-FORMATTED_SALE_PRICE = 9, // FORMATTED_SALE_PRICE
-IMAGE_URL = 10, // IMAGE_URL
-ADDRESS = 11, // ADDRESS
-CATEGORY = 12, // CATEGORY
-CONTEXTUAL_KEYWORDS = 13, // CONTEXTUAL_KEYWORDS
-FINAL_URLS = 14, // FINAL_URLS
-FINAL_MOBILE_URLS = 15, // FINAL_MOBILE_URLS
-TRACKING_URL = 16, // TRACKING_URL
-ANDROID_APP_LINK = 17, // ANDROID_APP_LINK
-SIMILAR_DEAL_IDS = 18, // SIMILAR_DEAL_IDS
-IOS_APP_LINK = 19, // IOS_APP_LINK
-IOS_APP_STORE_ID = 20, // IOS_APP_STORE_ID
-    }
-
-/**
-    * @name LocationExtensionTargetingCriterionFieldEnum.LocationExtensionTargetingCriterionField
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/LocationExtensionTargetingCriterionFieldEnum.LocationExtensionTargetingCriterionField 
-    */
-export enum LocationExtensionTargetingCriterionField {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ADDRESS_LINE_1 = 2, // ADDRESS_LINE_1
-ADDRESS_LINE_2 = 3, // ADDRESS_LINE_2
-CITY = 4, // CITY
-PROVINCE = 5, // PROVINCE
-POSTAL_CODE = 6, // POSTAL_CODE
-COUNTRY_CODE = 7, // COUNTRY_CODE
-    }
-
-/**
-    * @name LocationPlaceholderFieldEnum.LocationPlaceholderField
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/LocationPlaceholderFieldEnum.LocationPlaceholderField 
-    */
-export enum LocationPlaceholderField {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-BUSINESS_NAME = 2, // BUSINESS_NAME
-ADDRESS_LINE_1 = 3, // ADDRESS_LINE_1
-ADDRESS_LINE_2 = 4, // ADDRESS_LINE_2
-CITY = 5, // CITY
-PROVINCE = 6, // PROVINCE
-POSTAL_CODE = 7, // POSTAL_CODE
-COUNTRY_CODE = 8, // COUNTRY_CODE
-PHONE_NUMBER = 9, // PHONE_NUMBER
-    }
-
-/**
-    * @name LocationSourceTypeEnum.LocationSourceType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/LocationSourceTypeEnum.LocationSourceType 
-    */
-export enum LocationSourceType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-GOOGLE_MY_BUSINESS = 2, // GOOGLE_MY_BUSINESS
-AFFILIATE = 3, // AFFILIATE
-    }
-
-/**
-    * @name ManagerLinkStatusEnum.ManagerLinkStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ManagerLinkStatusEnum.ManagerLinkStatus 
-    */
-export enum ManagerLinkStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ACTIVE = 2, // ACTIVE
-INACTIVE = 3, // INACTIVE
-PENDING = 4, // PENDING
-REFUSED = 5, // REFUSED
-CANCELED = 6, // CANCELED
-    }
-
-/**
-    * @name MediaTypeEnum.MediaType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/MediaTypeEnum.MediaType 
-    */
-export enum MediaType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-IMAGE = 2, // IMAGE
-ICON = 3, // ICON
-MEDIA_BUNDLE = 4, // MEDIA_BUNDLE
-AUDIO = 5, // AUDIO
-VIDEO = 6, // VIDEO
-DYNAMIC_IMAGE = 7, // DYNAMIC_IMAGE
-    }
-
-/**
-    * @name MerchantCenterLinkStatusEnum.MerchantCenterLinkStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/MerchantCenterLinkStatusEnum.MerchantCenterLinkStatus 
-    */
-export enum MerchantCenterLinkStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-PENDING = 3, // PENDING
-    }
-
-/**
-    * @name MessagePlaceholderFieldEnum.MessagePlaceholderField
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/MessagePlaceholderFieldEnum.MessagePlaceholderField 
-    */
-export enum MessagePlaceholderField {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-BUSINESS_NAME = 2, // BUSINESS_NAME
-COUNTRY_CODE = 3, // COUNTRY_CODE
-PHONE_NUMBER = 4, // PHONE_NUMBER
-MESSAGE_EXTENSION_TEXT = 5, // MESSAGE_EXTENSION_TEXT
-MESSAGE_TEXT = 6, // MESSAGE_TEXT
-    }
-
-/**
-    * @name MobileAppVendorEnum.MobileAppVendor
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/MobileAppVendorEnum.MobileAppVendor 
-    */
-export enum MobileAppVendor {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-APPLE_APP_STORE = 2, // APPLE_APP_STORE
-GOOGLE_APP_STORE = 3, // GOOGLE_APP_STORE
-    }
-
-/**
-    * @name MobileDeviceTypeEnum.MobileDeviceType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/MobileDeviceTypeEnum.MobileDeviceType 
-    */
-export enum MobileDeviceType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-MOBILE = 2, // MOBILE
-TABLET = 3, // TABLET
-    }
-
-/**
-    * @name NegativeGeoTargetTypeEnum.NegativeGeoTargetType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/NegativeGeoTargetTypeEnum.NegativeGeoTargetType 
-    */
-export enum NegativeGeoTargetType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-PRESENCE_OR_INTEREST = 4, // PRESENCE_OR_INTEREST
-PRESENCE = 5, // PRESENCE
-    }
-
-/**
-    * @name OfflineUserDataJobFailureReasonEnum.OfflineUserDataJobFailureReason
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/OfflineUserDataJobFailureReasonEnum.OfflineUserDataJobFailureReason 
-    */
-export enum OfflineUserDataJobFailureReason {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-INSUFFICIENT_MATCHED_TRANSACTIONS = 2, // INSUFFICIENT_MATCHED_TRANSACTIONS
-INSUFFICIENT_TRANSACTIONS = 3, // INSUFFICIENT_TRANSACTIONS
-    }
-
-/**
-    * @name OfflineUserDataJobStatusEnum.OfflineUserDataJobStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/OfflineUserDataJobStatusEnum.OfflineUserDataJobStatus 
-    */
-export enum OfflineUserDataJobStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-PENDING = 2, // PENDING
-RUNNING = 3, // RUNNING
-SUCCESS = 4, // SUCCESS
-FAILED = 5, // FAILED
-    }
-
-/**
-    * @name OfflineUserDataJobTypeEnum.OfflineUserDataJobType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/OfflineUserDataJobTypeEnum.OfflineUserDataJobType 
-    */
-export enum OfflineUserDataJobType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-STORE_SALES_UPLOAD_FIRST_PARTY = 2, // STORE_SALES_UPLOAD_FIRST_PARTY
-STORE_SALES_UPLOAD_THIRD_PARTY = 3, // STORE_SALES_UPLOAD_THIRD_PARTY
-CUSTOMER_MATCH_USER_LIST = 4, // CUSTOMER_MATCH_USER_LIST
-CUSTOMER_MATCH_WITH_ATTRIBUTES = 5, // CUSTOMER_MATCH_WITH_ATTRIBUTES
-    }
-
-/**
-    * @name OperatingSystemVersionOperatorTypeEnum.OperatingSystemVersionOperatorType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/OperatingSystemVersionOperatorTypeEnum.OperatingSystemVersionOperatorType 
-    */
-export enum OperatingSystemVersionOperatorType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-EQUALS_TO = 2, // EQUALS_TO
-GREATER_THAN_EQUALS_TO = 4, // GREATER_THAN_EQUALS_TO
-    }
-
-/**
-    * @name OptimizationGoalTypeEnum.OptimizationGoalType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/OptimizationGoalTypeEnum.OptimizationGoalType 
-    */
-export enum OptimizationGoalType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-CALL_CLICKS = 2, // CALL_CLICKS
-DRIVING_DIRECTIONS = 3, // DRIVING_DIRECTIONS
-    }
-
-/**
-    * @name PaymentModeEnum.PaymentMode
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PaymentModeEnum.PaymentMode 
-    */
-export enum PaymentMode {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-CLICKS = 4, // CLICKS
-CONVERSION_VALUE = 5, // CONVERSION_VALUE
-CONVERSIONS = 6, // CONVERSIONS
-GUEST_STAY = 7, // GUEST_STAY
-    }
-
-/**
-    * @name PlacementTypeEnum.PlacementType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PlacementTypeEnum.PlacementType 
-    */
-export enum PlacementType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-WEBSITE = 2, // WEBSITE
-MOBILE_APP_CATEGORY = 3, // MOBILE_APP_CATEGORY
-MOBILE_APPLICATION = 4, // MOBILE_APPLICATION
-YOUTUBE_VIDEO = 5, // YOUTUBE_VIDEO
-YOUTUBE_CHANNEL = 6, // YOUTUBE_CHANNEL
-    }
-
-/**
-    * @name PositiveGeoTargetTypeEnum.PositiveGeoTargetType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PositiveGeoTargetTypeEnum.PositiveGeoTargetType 
-    */
-export enum PositiveGeoTargetType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-PRESENCE_OR_INTEREST = 5, // PRESENCE_OR_INTEREST
-SEARCH_INTEREST = 6, // SEARCH_INTEREST
-PRESENCE = 7, // PRESENCE
-    }
-
-/**
-    * @name PricePlaceholderFieldEnum.PricePlaceholderField
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PricePlaceholderFieldEnum.PricePlaceholderField 
-    */
-export enum PricePlaceholderField {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-TYPE = 2, // TYPE
-PRICE_QUALIFIER = 3, // PRICE_QUALIFIER
-TRACKING_TEMPLATE = 4, // TRACKING_TEMPLATE
-LANGUAGE = 5, // LANGUAGE
-FINAL_URL_SUFFIX = 6, // FINAL_URL_SUFFIX
-ITEM_1_HEADER = 100, // ITEM_1_HEADER
-ITEM_1_DESCRIPTION = 101, // ITEM_1_DESCRIPTION
-ITEM_1_PRICE = 102, // ITEM_1_PRICE
-ITEM_1_UNIT = 103, // ITEM_1_UNIT
-ITEM_1_FINAL_URLS = 104, // ITEM_1_FINAL_URLS
-ITEM_1_FINAL_MOBILE_URLS = 105, // ITEM_1_FINAL_MOBILE_URLS
-ITEM_2_HEADER = 200, // ITEM_2_HEADER
-ITEM_2_DESCRIPTION = 201, // ITEM_2_DESCRIPTION
-ITEM_2_PRICE = 202, // ITEM_2_PRICE
-ITEM_2_UNIT = 203, // ITEM_2_UNIT
-ITEM_2_FINAL_URLS = 204, // ITEM_2_FINAL_URLS
-ITEM_2_FINAL_MOBILE_URLS = 205, // ITEM_2_FINAL_MOBILE_URLS
-ITEM_3_HEADER = 300, // ITEM_3_HEADER
-ITEM_3_DESCRIPTION = 301, // ITEM_3_DESCRIPTION
-ITEM_3_PRICE = 302, // ITEM_3_PRICE
-ITEM_3_UNIT = 303, // ITEM_3_UNIT
-ITEM_3_FINAL_URLS = 304, // ITEM_3_FINAL_URLS
-ITEM_3_FINAL_MOBILE_URLS = 305, // ITEM_3_FINAL_MOBILE_URLS
-ITEM_4_HEADER = 400, // ITEM_4_HEADER
-ITEM_4_DESCRIPTION = 401, // ITEM_4_DESCRIPTION
-ITEM_4_PRICE = 402, // ITEM_4_PRICE
-ITEM_4_UNIT = 403, // ITEM_4_UNIT
-ITEM_4_FINAL_URLS = 404, // ITEM_4_FINAL_URLS
-ITEM_4_FINAL_MOBILE_URLS = 405, // ITEM_4_FINAL_MOBILE_URLS
-ITEM_5_HEADER = 500, // ITEM_5_HEADER
-ITEM_5_DESCRIPTION = 501, // ITEM_5_DESCRIPTION
-ITEM_5_PRICE = 502, // ITEM_5_PRICE
-ITEM_5_UNIT = 503, // ITEM_5_UNIT
-ITEM_5_FINAL_URLS = 504, // ITEM_5_FINAL_URLS
-ITEM_5_FINAL_MOBILE_URLS = 505, // ITEM_5_FINAL_MOBILE_URLS
-ITEM_6_HEADER = 600, // ITEM_6_HEADER
-ITEM_6_DESCRIPTION = 601, // ITEM_6_DESCRIPTION
-ITEM_6_PRICE = 602, // ITEM_6_PRICE
-ITEM_6_UNIT = 603, // ITEM_6_UNIT
-ITEM_6_FINAL_URLS = 604, // ITEM_6_FINAL_URLS
-ITEM_6_FINAL_MOBILE_URLS = 605, // ITEM_6_FINAL_MOBILE_URLS
-ITEM_7_HEADER = 700, // ITEM_7_HEADER
-ITEM_7_DESCRIPTION = 701, // ITEM_7_DESCRIPTION
-ITEM_7_PRICE = 702, // ITEM_7_PRICE
-ITEM_7_UNIT = 703, // ITEM_7_UNIT
-ITEM_7_FINAL_URLS = 704, // ITEM_7_FINAL_URLS
-ITEM_7_FINAL_MOBILE_URLS = 705, // ITEM_7_FINAL_MOBILE_URLS
-ITEM_8_HEADER = 800, // ITEM_8_HEADER
-ITEM_8_DESCRIPTION = 801, // ITEM_8_DESCRIPTION
-ITEM_8_PRICE = 802, // ITEM_8_PRICE
-ITEM_8_UNIT = 803, // ITEM_8_UNIT
-ITEM_8_FINAL_URLS = 804, // ITEM_8_FINAL_URLS
-ITEM_8_FINAL_MOBILE_URLS = 805, // ITEM_8_FINAL_MOBILE_URLS
-    }
-
-/**
-    * @name ProductBiddingCategoryStatusEnum.ProductBiddingCategoryStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ProductBiddingCategoryStatusEnum.ProductBiddingCategoryStatus 
-    */
-export enum ProductBiddingCategoryStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ACTIVE = 2, // ACTIVE
-OBSOLETE = 3, // OBSOLETE
-    }
-
-/**
-    * @name PromotionPlaceholderFieldEnum.PromotionPlaceholderField
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PromotionPlaceholderFieldEnum.PromotionPlaceholderField 
-    */
-export enum PromotionPlaceholderField {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-PROMOTION_TARGET = 2, // PROMOTION_TARGET
-DISCOUNT_MODIFIER = 3, // DISCOUNT_MODIFIER
-PERCENT_OFF = 4, // PERCENT_OFF
-MONEY_AMOUNT_OFF = 5, // MONEY_AMOUNT_OFF
-PROMOTION_CODE = 6, // PROMOTION_CODE
-ORDERS_OVER_AMOUNT = 7, // ORDERS_OVER_AMOUNT
-PROMOTION_START = 8, // PROMOTION_START
-PROMOTION_END = 9, // PROMOTION_END
-OCCASION = 10, // OCCASION
-FINAL_URLS = 11, // FINAL_URLS
-FINAL_MOBILE_URLS = 12, // FINAL_MOBILE_URLS
-TRACKING_URL = 13, // TRACKING_URL
-LANGUAGE = 14, // LANGUAGE
-FINAL_URL_SUFFIX = 15, // FINAL_URL_SUFFIX
-    }
-
-/**
-    * @name ReachPlanAdLengthEnum.ReachPlanAdLength
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ReachPlanAdLengthEnum.ReachPlanAdLength 
-    */
-export enum ReachPlanAdLength {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-SIX_SECONDS = 2, // SIX_SECONDS
-FIFTEEN_OR_TWENTY_SECONDS = 3, // FIFTEEN_OR_TWENTY_SECONDS
-TWENTY_SECONDS_OR_MORE = 4, // TWENTY_SECONDS_OR_MORE
-    }
-
-/**
-    * @name ReachPlanAgeRangeEnum.ReachPlanAgeRange
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ReachPlanAgeRangeEnum.ReachPlanAgeRange 
-    */
-export enum ReachPlanAgeRange {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-AGE_RANGE_18_24 = 503001, // AGE_RANGE_18_24
-AGE_RANGE_18_34 = 2, // AGE_RANGE_18_34
-AGE_RANGE_18_44 = 3, // AGE_RANGE_18_44
-AGE_RANGE_18_49 = 4, // AGE_RANGE_18_49
-AGE_RANGE_18_54 = 5, // AGE_RANGE_18_54
-AGE_RANGE_18_64 = 6, // AGE_RANGE_18_64
-AGE_RANGE_18_65_UP = 7, // AGE_RANGE_18_65_UP
-AGE_RANGE_21_34 = 8, // AGE_RANGE_21_34
-AGE_RANGE_25_34 = 503002, // AGE_RANGE_25_34
-AGE_RANGE_25_44 = 9, // AGE_RANGE_25_44
-AGE_RANGE_25_49 = 10, // AGE_RANGE_25_49
-AGE_RANGE_25_54 = 11, // AGE_RANGE_25_54
-AGE_RANGE_25_64 = 12, // AGE_RANGE_25_64
-AGE_RANGE_25_65_UP = 13, // AGE_RANGE_25_65_UP
-AGE_RANGE_35_44 = 503003, // AGE_RANGE_35_44
-AGE_RANGE_35_49 = 14, // AGE_RANGE_35_49
-AGE_RANGE_35_54 = 15, // AGE_RANGE_35_54
-AGE_RANGE_35_64 = 16, // AGE_RANGE_35_64
-AGE_RANGE_35_65_UP = 17, // AGE_RANGE_35_65_UP
-AGE_RANGE_45_54 = 503004, // AGE_RANGE_45_54
-AGE_RANGE_45_64 = 18, // AGE_RANGE_45_64
-AGE_RANGE_45_65_UP = 19, // AGE_RANGE_45_65_UP
-AGE_RANGE_50_65_UP = 20, // AGE_RANGE_50_65_UP
-AGE_RANGE_55_64 = 503005, // AGE_RANGE_55_64
-AGE_RANGE_55_65_UP = 21, // AGE_RANGE_55_65_UP
-AGE_RANGE_65_UP = 503006, // AGE_RANGE_65_UP
-    }
-
-/**
-    * @name ReachPlanNetworkEnum.ReachPlanNetwork
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ReachPlanNetworkEnum.ReachPlanNetwork 
-    */
-export enum ReachPlanNetwork {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-YOUTUBE = 2, // YOUTUBE
-GOOGLE_VIDEO_PARTNERS = 3, // GOOGLE_VIDEO_PARTNERS
-YOUTUBE_AND_GOOGLE_VIDEO_PARTNERS = 4, // YOUTUBE_AND_GOOGLE_VIDEO_PARTNERS
-    }
-
-/**
-    * @name RealEstatePlaceholderFieldEnum.RealEstatePlaceholderField
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/RealEstatePlaceholderFieldEnum.RealEstatePlaceholderField 
-    */
-export enum RealEstatePlaceholderField {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-LISTING_ID = 2, // LISTING_ID
-LISTING_NAME = 3, // LISTING_NAME
-CITY_NAME = 4, // CITY_NAME
-DESCRIPTION = 5, // DESCRIPTION
-ADDRESS = 6, // ADDRESS
-PRICE = 7, // PRICE
-FORMATTED_PRICE = 8, // FORMATTED_PRICE
-IMAGE_URL = 9, // IMAGE_URL
-PROPERTY_TYPE = 10, // PROPERTY_TYPE
-LISTING_TYPE = 11, // LISTING_TYPE
-CONTEXTUAL_KEYWORDS = 12, // CONTEXTUAL_KEYWORDS
-FINAL_URLS = 13, // FINAL_URLS
-FINAL_MOBILE_URLS = 14, // FINAL_MOBILE_URLS
-TRACKING_URL = 15, // TRACKING_URL
-ANDROID_APP_LINK = 16, // ANDROID_APP_LINK
-SIMILAR_LISTING_IDS = 17, // SIMILAR_LISTING_IDS
-IOS_APP_LINK = 18, // IOS_APP_LINK
-IOS_APP_STORE_ID = 19, // IOS_APP_STORE_ID
-    }
-
-/**
-    * @name RecommendationTypeEnum.RecommendationType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/RecommendationTypeEnum.RecommendationType 
-    */
-export enum RecommendationType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-CAMPAIGN_BUDGET = 2, // CAMPAIGN_BUDGET
-KEYWORD = 3, // KEYWORD
-TEXT_AD = 4, // TEXT_AD
-TARGET_CPA_OPT_IN = 5, // TARGET_CPA_OPT_IN
-MAXIMIZE_CONVERSIONS_OPT_IN = 6, // MAXIMIZE_CONVERSIONS_OPT_IN
-ENHANCED_CPC_OPT_IN = 7, // ENHANCED_CPC_OPT_IN
-SEARCH_PARTNERS_OPT_IN = 8, // SEARCH_PARTNERS_OPT_IN
-MAXIMIZE_CLICKS_OPT_IN = 9, // MAXIMIZE_CLICKS_OPT_IN
-OPTIMIZE_AD_ROTATION = 10, // OPTIMIZE_AD_ROTATION
-CALLOUT_EXTENSION = 11, // CALLOUT_EXTENSION
-SITELINK_EXTENSION = 12, // SITELINK_EXTENSION
-CALL_EXTENSION = 13, // CALL_EXTENSION
-KEYWORD_MATCH_TYPE = 14, // KEYWORD_MATCH_TYPE
-MOVE_UNUSED_BUDGET = 15, // MOVE_UNUSED_BUDGET
-FORECASTING_CAMPAIGN_BUDGET = 16, // FORECASTING_CAMPAIGN_BUDGET
-TARGET_ROAS_OPT_IN = 17, // TARGET_ROAS_OPT_IN
-RESPONSIVE_SEARCH_AD = 18, // RESPONSIVE_SEARCH_AD
-MARGINAL_ROI_CAMPAIGN_BUDGET = 19, // MARGINAL_ROI_CAMPAIGN_BUDGET
-    }
-
-/**
-    * @name ResourceChangeOperationEnum.ResourceChangeOperation
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ResourceChangeOperationEnum.ResourceChangeOperation 
-    */
-export enum ResourceChangeOperation {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-CREATE = 2, // CREATE
-UPDATE = 3, // UPDATE
-REMOVE = 4, // REMOVE
-    }
-
-/**
-    * @name ResourceLimitTypeEnum.ResourceLimitType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ResourceLimitTypeEnum.ResourceLimitType 
-    */
-export enum ResourceLimitType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-CAMPAIGNS_PER_CUSTOMER = 2, // CAMPAIGNS_PER_CUSTOMER
-BASE_CAMPAIGNS_PER_CUSTOMER = 3, // BASE_CAMPAIGNS_PER_CUSTOMER
-EXPERIMENT_CAMPAIGNS_PER_CUSTOMER = 105, // EXPERIMENT_CAMPAIGNS_PER_CUSTOMER
-HOTEL_CAMPAIGNS_PER_CUSTOMER = 4, // HOTEL_CAMPAIGNS_PER_CUSTOMER
-SMART_SHOPPING_CAMPAIGNS_PER_CUSTOMER = 5, // SMART_SHOPPING_CAMPAIGNS_PER_CUSTOMER
-AD_GROUPS_PER_CAMPAIGN = 6, // AD_GROUPS_PER_CAMPAIGN
-AD_GROUPS_PER_SHOPPING_CAMPAIGN = 8, // AD_GROUPS_PER_SHOPPING_CAMPAIGN
-AD_GROUPS_PER_HOTEL_CAMPAIGN = 9, // AD_GROUPS_PER_HOTEL_CAMPAIGN
-REPORTING_AD_GROUPS_PER_LOCAL_CAMPAIGN = 10, // REPORTING_AD_GROUPS_PER_LOCAL_CAMPAIGN
-REPORTING_AD_GROUPS_PER_APP_CAMPAIGN = 11, // REPORTING_AD_GROUPS_PER_APP_CAMPAIGN
-MANAGED_AD_GROUPS_PER_SMART_CAMPAIGN = 52, // MANAGED_AD_GROUPS_PER_SMART_CAMPAIGN
-AD_GROUP_CRITERIA_PER_CUSTOMER = 12, // AD_GROUP_CRITERIA_PER_CUSTOMER
-BASE_AD_GROUP_CRITERIA_PER_CUSTOMER = 13, // BASE_AD_GROUP_CRITERIA_PER_CUSTOMER
-EXPERIMENT_AD_GROUP_CRITERIA_PER_CUSTOMER = 107, // EXPERIMENT_AD_GROUP_CRITERIA_PER_CUSTOMER
-AD_GROUP_CRITERIA_PER_CAMPAIGN = 14, // AD_GROUP_CRITERIA_PER_CAMPAIGN
-CAMPAIGN_CRITERIA_PER_CUSTOMER = 15, // CAMPAIGN_CRITERIA_PER_CUSTOMER
-BASE_CAMPAIGN_CRITERIA_PER_CUSTOMER = 16, // BASE_CAMPAIGN_CRITERIA_PER_CUSTOMER
-EXPERIMENT_CAMPAIGN_CRITERIA_PER_CUSTOMER = 108, // EXPERIMENT_CAMPAIGN_CRITERIA_PER_CUSTOMER
-WEBPAGE_CRITERIA_PER_CUSTOMER = 17, // WEBPAGE_CRITERIA_PER_CUSTOMER
-BASE_WEBPAGE_CRITERIA_PER_CUSTOMER = 18, // BASE_WEBPAGE_CRITERIA_PER_CUSTOMER
-EXPERIMENT_WEBPAGE_CRITERIA_PER_CUSTOMER = 19, // EXPERIMENT_WEBPAGE_CRITERIA_PER_CUSTOMER
-COMBINED_AUDIENCE_CRITERIA_PER_AD_GROUP = 20, // COMBINED_AUDIENCE_CRITERIA_PER_AD_GROUP
-CUSTOMER_NEGATIVE_PLACEMENT_CRITERIA_PER_CUSTOMER = 21, // CUSTOMER_NEGATIVE_PLACEMENT_CRITERIA_PER_CUSTOMER
-CUSTOMER_NEGATIVE_YOUTUBE_CHANNEL_CRITERIA_PER_CUSTOMER = 22, // CUSTOMER_NEGATIVE_YOUTUBE_CHANNEL_CRITERIA_PER_CUSTOMER
-CRITERIA_PER_AD_GROUP = 23, // CRITERIA_PER_AD_GROUP
-LISTING_GROUPS_PER_AD_GROUP = 24, // LISTING_GROUPS_PER_AD_GROUP
-EXPLICITLY_SHARED_BUDGETS_PER_CUSTOMER = 25, // EXPLICITLY_SHARED_BUDGETS_PER_CUSTOMER
-IMPLICITLY_SHARED_BUDGETS_PER_CUSTOMER = 26, // IMPLICITLY_SHARED_BUDGETS_PER_CUSTOMER
-COMBINED_AUDIENCE_CRITERIA_PER_CAMPAIGN = 27, // COMBINED_AUDIENCE_CRITERIA_PER_CAMPAIGN
-NEGATIVE_KEYWORDS_PER_CAMPAIGN = 28, // NEGATIVE_KEYWORDS_PER_CAMPAIGN
-NEGATIVE_PLACEMENTS_PER_CAMPAIGN = 29, // NEGATIVE_PLACEMENTS_PER_CAMPAIGN
-GEO_TARGETS_PER_CAMPAIGN = 30, // GEO_TARGETS_PER_CAMPAIGN
-NEGATIVE_IP_BLOCKS_PER_CAMPAIGN = 32, // NEGATIVE_IP_BLOCKS_PER_CAMPAIGN
-PROXIMITIES_PER_CAMPAIGN = 33, // PROXIMITIES_PER_CAMPAIGN
-LISTING_SCOPES_PER_SHOPPING_CAMPAIGN = 34, // LISTING_SCOPES_PER_SHOPPING_CAMPAIGN
-LISTING_SCOPES_PER_NON_SHOPPING_CAMPAIGN = 35, // LISTING_SCOPES_PER_NON_SHOPPING_CAMPAIGN
-NEGATIVE_KEYWORDS_PER_SHARED_SET = 36, // NEGATIVE_KEYWORDS_PER_SHARED_SET
-NEGATIVE_PLACEMENTS_PER_SHARED_SET = 37, // NEGATIVE_PLACEMENTS_PER_SHARED_SET
-SHARED_SETS_PER_CUSTOMER_FOR_TYPE_DEFAULT = 40, // SHARED_SETS_PER_CUSTOMER_FOR_TYPE_DEFAULT
-SHARED_SETS_PER_CUSTOMER_FOR_NEGATIVE_PLACEMENT_LIST_LOWER = 41, // SHARED_SETS_PER_CUSTOMER_FOR_NEGATIVE_PLACEMENT_LIST_LOWER
-HOTEL_ADVANCE_BOOKING_WINDOW_BID_MODIFIERS_PER_AD_GROUP = 44, // HOTEL_ADVANCE_BOOKING_WINDOW_BID_MODIFIERS_PER_AD_GROUP
-BIDDING_STRATEGIES_PER_CUSTOMER = 45, // BIDDING_STRATEGIES_PER_CUSTOMER
-BASIC_USER_LISTS_PER_CUSTOMER = 47, // BASIC_USER_LISTS_PER_CUSTOMER
-LOGICAL_USER_LISTS_PER_CUSTOMER = 48, // LOGICAL_USER_LISTS_PER_CUSTOMER
-BASE_AD_GROUP_ADS_PER_CUSTOMER = 53, // BASE_AD_GROUP_ADS_PER_CUSTOMER
-EXPERIMENT_AD_GROUP_ADS_PER_CUSTOMER = 54, // EXPERIMENT_AD_GROUP_ADS_PER_CUSTOMER
-AD_GROUP_ADS_PER_CAMPAIGN = 55, // AD_GROUP_ADS_PER_CAMPAIGN
-TEXT_AND_OTHER_ADS_PER_AD_GROUP = 56, // TEXT_AND_OTHER_ADS_PER_AD_GROUP
-IMAGE_ADS_PER_AD_GROUP = 57, // IMAGE_ADS_PER_AD_GROUP
-SHOPPING_SMART_ADS_PER_AD_GROUP = 58, // SHOPPING_SMART_ADS_PER_AD_GROUP
-RESPONSIVE_SEARCH_ADS_PER_AD_GROUP = 59, // RESPONSIVE_SEARCH_ADS_PER_AD_GROUP
-APP_ADS_PER_AD_GROUP = 60, // APP_ADS_PER_AD_GROUP
-APP_ENGAGEMENT_ADS_PER_AD_GROUP = 61, // APP_ENGAGEMENT_ADS_PER_AD_GROUP
-LOCAL_ADS_PER_AD_GROUP = 62, // LOCAL_ADS_PER_AD_GROUP
-VIDEO_ADS_PER_AD_GROUP = 63, // VIDEO_ADS_PER_AD_GROUP
-LEAD_FORM_ASSET_LINKS_PER_CAMPAIGN = 68, // LEAD_FORM_ASSET_LINKS_PER_CAMPAIGN
-VERSIONS_PER_AD = 82, // VERSIONS_PER_AD
-USER_FEEDS_PER_CUSTOMER = 90, // USER_FEEDS_PER_CUSTOMER
-SYSTEM_FEEDS_PER_CUSTOMER = 91, // SYSTEM_FEEDS_PER_CUSTOMER
-FEED_ATTRIBUTES_PER_FEED = 92, // FEED_ATTRIBUTES_PER_FEED
-FEED_ITEMS_PER_CUSTOMER = 94, // FEED_ITEMS_PER_CUSTOMER
-CAMPAIGN_FEEDS_PER_CUSTOMER = 95, // CAMPAIGN_FEEDS_PER_CUSTOMER
-BASE_CAMPAIGN_FEEDS_PER_CUSTOMER = 96, // BASE_CAMPAIGN_FEEDS_PER_CUSTOMER
-EXPERIMENT_CAMPAIGN_FEEDS_PER_CUSTOMER = 109, // EXPERIMENT_CAMPAIGN_FEEDS_PER_CUSTOMER
-AD_GROUP_FEEDS_PER_CUSTOMER = 97, // AD_GROUP_FEEDS_PER_CUSTOMER
-BASE_AD_GROUP_FEEDS_PER_CUSTOMER = 98, // BASE_AD_GROUP_FEEDS_PER_CUSTOMER
-EXPERIMENT_AD_GROUP_FEEDS_PER_CUSTOMER = 110, // EXPERIMENT_AD_GROUP_FEEDS_PER_CUSTOMER
-AD_GROUP_FEEDS_PER_CAMPAIGN = 99, // AD_GROUP_FEEDS_PER_CAMPAIGN
-FEED_ITEM_SETS_PER_CUSTOMER = 100, // FEED_ITEM_SETS_PER_CUSTOMER
-FEED_ITEMS_PER_FEED_ITEM_SET = 101, // FEED_ITEMS_PER_FEED_ITEM_SET
-CAMPAIGN_EXPERIMENTS_PER_CUSTOMER = 112, // CAMPAIGN_EXPERIMENTS_PER_CUSTOMER
-EXPERIMENT_ARMS_PER_VIDEO_EXPERIMENT = 113, // EXPERIMENT_ARMS_PER_VIDEO_EXPERIMENT
-OWNED_LABELS_PER_CUSTOMER = 115, // OWNED_LABELS_PER_CUSTOMER
-LABELS_PER_CAMPAIGN = 117, // LABELS_PER_CAMPAIGN
-LABELS_PER_AD_GROUP = 118, // LABELS_PER_AD_GROUP
-LABELS_PER_AD_GROUP_AD = 119, // LABELS_PER_AD_GROUP_AD
-LABELS_PER_AD_GROUP_CRITERION = 120, // LABELS_PER_AD_GROUP_CRITERION
-TARGET_CUSTOMERS_PER_LABEL = 121, // TARGET_CUSTOMERS_PER_LABEL
-KEYWORD_PLANS_PER_USER_PER_CUSTOMER = 122, // KEYWORD_PLANS_PER_USER_PER_CUSTOMER
-KEYWORD_PLAN_AD_GROUP_KEYWORDS_PER_KEYWORD_PLAN = 123, // KEYWORD_PLAN_AD_GROUP_KEYWORDS_PER_KEYWORD_PLAN
-KEYWORD_PLAN_AD_GROUPS_PER_KEYWORD_PLAN = 124, // KEYWORD_PLAN_AD_GROUPS_PER_KEYWORD_PLAN
-KEYWORD_PLAN_NEGATIVE_KEYWORDS_PER_KEYWORD_PLAN = 125, // KEYWORD_PLAN_NEGATIVE_KEYWORDS_PER_KEYWORD_PLAN
-KEYWORD_PLAN_CAMPAIGNS_PER_KEYWORD_PLAN = 126, // KEYWORD_PLAN_CAMPAIGNS_PER_KEYWORD_PLAN
-CONVERSION_ACTIONS_PER_CUSTOMER = 128, // CONVERSION_ACTIONS_PER_CUSTOMER
-BATCH_JOB_OPERATIONS_PER_JOB = 130, // BATCH_JOB_OPERATIONS_PER_JOB
-BATCH_JOBS_PER_CUSTOMER = 131, // BATCH_JOBS_PER_CUSTOMER
-HOTEL_CHECK_IN_DATE_RANGE_BID_MODIFIERS_PER_AD_GROUP = 132, // HOTEL_CHECK_IN_DATE_RANGE_BID_MODIFIERS_PER_AD_GROUP
-    }
-
-/**
-    * @name ResponseContentTypeEnum.ResponseContentType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ResponseContentTypeEnum.ResponseContentType 
-    */
-export enum ResponseContentType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-RESOURCE_NAME_ONLY = 1, // RESOURCE_NAME_ONLY
-MUTABLE_RESOURCE = 2, // MUTABLE_RESOURCE
-    }
-
-/**
-    * @name SearchTermTargetingStatusEnum.SearchTermTargetingStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/SearchTermTargetingStatusEnum.SearchTermTargetingStatus 
-    */
-export enum SearchTermTargetingStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ADDED = 2, // ADDED
-EXCLUDED = 3, // EXCLUDED
-ADDED_EXCLUDED = 4, // ADDED_EXCLUDED
-NONE = 5, // NONE
-    }
-
-/**
-    * @name SharedSetStatusEnum.SharedSetStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/SharedSetStatusEnum.SharedSetStatus 
-    */
-export enum SharedSetStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-REMOVED = 3, // REMOVED
-    }
-
-/**
-    * @name SharedSetTypeEnum.SharedSetType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/SharedSetTypeEnum.SharedSetType 
-    */
-export enum SharedSetType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-NEGATIVE_KEYWORDS = 2, // NEGATIVE_KEYWORDS
-NEGATIVE_PLACEMENTS = 3, // NEGATIVE_PLACEMENTS
-    }
-
-/**
-    * @name SimulationModificationMethodEnum.SimulationModificationMethod
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/SimulationModificationMethodEnum.SimulationModificationMethod 
-    */
-export enum SimulationModificationMethod {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-UNIFORM = 2, // UNIFORM
-DEFAULT = 3, // DEFAULT
-SCALING = 4, // SCALING
-    }
-
-/**
-    * @name SimulationTypeEnum.SimulationType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/SimulationTypeEnum.SimulationType 
-    */
-export enum SimulationType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-CPC_BID = 2, // CPC_BID
-CPV_BID = 3, // CPV_BID
-TARGET_CPA = 4, // TARGET_CPA
-BID_MODIFIER = 5, // BID_MODIFIER
-TARGET_ROAS = 6, // TARGET_ROAS
-PERCENT_CPC_BID = 7, // PERCENT_CPC_BID
-TARGET_IMPRESSION_SHARE = 8, // TARGET_IMPRESSION_SHARE
-BUDGET = 9, // BUDGET
-    }
-
-/**
-    * @name SitelinkPlaceholderFieldEnum.SitelinkPlaceholderField
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/SitelinkPlaceholderFieldEnum.SitelinkPlaceholderField 
-    */
-export enum SitelinkPlaceholderField {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-TEXT = 2, // TEXT
-LINE_1 = 3, // LINE_1
-LINE_2 = 4, // LINE_2
-FINAL_URLS = 5, // FINAL_URLS
-FINAL_MOBILE_URLS = 6, // FINAL_MOBILE_URLS
-TRACKING_URL = 7, // TRACKING_URL
-FINAL_URL_SUFFIX = 8, // FINAL_URL_SUFFIX
-    }
-
-/**
-    * @name SpendingLimitTypeEnum.SpendingLimitType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/SpendingLimitTypeEnum.SpendingLimitType 
-    */
-export enum SpendingLimitType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-INFINITE = 2, // INFINITE
-    }
-
-/**
-    * @name StructuredSnippetPlaceholderFieldEnum.StructuredSnippetPlaceholderField
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/StructuredSnippetPlaceholderFieldEnum.StructuredSnippetPlaceholderField 
-    */
-export enum StructuredSnippetPlaceholderField {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-HEADER = 2, // HEADER
-SNIPPETS = 3, // SNIPPETS
-    }
-
-/**
-    * @name SummaryRowSettingEnum.SummaryRowSetting
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/SummaryRowSettingEnum.SummaryRowSetting 
-    */
-export enum SummaryRowSetting {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-NO_SUMMARY_ROW = 2, // NO_SUMMARY_ROW
-SUMMARY_ROW_WITH_RESULTS = 3, // SUMMARY_ROW_WITH_RESULTS
-SUMMARY_ROW_ONLY = 4, // SUMMARY_ROW_ONLY
-    }
-
-/**
-    * @name SystemManagedResourceSourceEnum.SystemManagedResourceSource
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/SystemManagedResourceSourceEnum.SystemManagedResourceSource 
-    */
-export enum SystemManagedResourceSource {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-AD_VARIATIONS = 2, // AD_VARIATIONS
-    }
-
-/**
-    * @name TargetCpaOptInRecommendationGoalEnum.TargetCpaOptInRecommendationGoal
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/TargetCpaOptInRecommendationGoalEnum.TargetCpaOptInRecommendationGoal 
-    */
-export enum TargetCpaOptInRecommendationGoal {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-SAME_COST = 2, // SAME_COST
-SAME_CONVERSIONS = 3, // SAME_CONVERSIONS
-SAME_CPA = 4, // SAME_CPA
-CLOSEST_CPA = 5, // CLOSEST_CPA
-    }
-
-/**
-    * @name TimeTypeEnum.TimeType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/TimeTypeEnum.TimeType 
-    */
-export enum TimeType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-NOW = 2, // NOW
-FOREVER = 3, // FOREVER
-    }
-
-/**
-    * @name TravelPlaceholderFieldEnum.TravelPlaceholderField
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/TravelPlaceholderFieldEnum.TravelPlaceholderField 
-    */
-export enum TravelPlaceholderField {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-DESTINATION_ID = 2, // DESTINATION_ID
-ORIGIN_ID = 3, // ORIGIN_ID
-TITLE = 4, // TITLE
-DESTINATION_NAME = 5, // DESTINATION_NAME
-ORIGIN_NAME = 6, // ORIGIN_NAME
-PRICE = 7, // PRICE
-FORMATTED_PRICE = 8, // FORMATTED_PRICE
-SALE_PRICE = 9, // SALE_PRICE
-FORMATTED_SALE_PRICE = 10, // FORMATTED_SALE_PRICE
-IMAGE_URL = 11, // IMAGE_URL
-CATEGORY = 12, // CATEGORY
-CONTEXTUAL_KEYWORDS = 13, // CONTEXTUAL_KEYWORDS
-DESTINATION_ADDRESS = 14, // DESTINATION_ADDRESS
-FINAL_URL = 15, // FINAL_URL
-FINAL_MOBILE_URLS = 16, // FINAL_MOBILE_URLS
-TRACKING_URL = 17, // TRACKING_URL
-ANDROID_APP_LINK = 18, // ANDROID_APP_LINK
-SIMILAR_DESTINATION_IDS = 19, // SIMILAR_DESTINATION_IDS
-IOS_APP_LINK = 20, // IOS_APP_LINK
-IOS_APP_STORE_ID = 21, // IOS_APP_STORE_ID
-    }
-
-/**
-    * @name UserInterestTaxonomyTypeEnum.UserInterestTaxonomyType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserInterestTaxonomyTypeEnum.UserInterestTaxonomyType 
-    */
-export enum UserInterestTaxonomyType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-AFFINITY = 2, // AFFINITY
-IN_MARKET = 3, // IN_MARKET
-MOBILE_APP_INSTALL_USER = 4, // MOBILE_APP_INSTALL_USER
-VERTICAL_GEO = 5, // VERTICAL_GEO
-NEW_SMART_PHONE_USER = 6, // NEW_SMART_PHONE_USER
-    }
-
-/**
-    * @name UserListAccessStatusEnum.UserListAccessStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListAccessStatusEnum.UserListAccessStatus 
-    */
-export enum UserListAccessStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-ENABLED = 2, // ENABLED
-DISABLED = 3, // DISABLED
-    }
-
-/**
-    * @name UserListClosingReasonEnum.UserListClosingReason
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListClosingReasonEnum.UserListClosingReason 
-    */
-export enum UserListClosingReason {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-UNUSED = 2, // UNUSED
-    }
-
-/**
-    * @name UserListMembershipStatusEnum.UserListMembershipStatus
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListMembershipStatusEnum.UserListMembershipStatus 
-    */
-export enum UserListMembershipStatus {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-OPEN = 2, // OPEN
-CLOSED = 3, // CLOSED
-    }
-
-/**
-    * @name UserListSizeRangeEnum.UserListSizeRange
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListSizeRangeEnum.UserListSizeRange 
-    */
-export enum UserListSizeRange {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-LESS_THAN_FIVE_HUNDRED = 2, // LESS_THAN_FIVE_HUNDRED
-LESS_THAN_ONE_THOUSAND = 3, // LESS_THAN_ONE_THOUSAND
-ONE_THOUSAND_TO_TEN_THOUSAND = 4, // ONE_THOUSAND_TO_TEN_THOUSAND
-TEN_THOUSAND_TO_FIFTY_THOUSAND = 5, // TEN_THOUSAND_TO_FIFTY_THOUSAND
-FIFTY_THOUSAND_TO_ONE_HUNDRED_THOUSAND = 6, // FIFTY_THOUSAND_TO_ONE_HUNDRED_THOUSAND
-ONE_HUNDRED_THOUSAND_TO_THREE_HUNDRED_THOUSAND = 7, // ONE_HUNDRED_THOUSAND_TO_THREE_HUNDRED_THOUSAND
-THREE_HUNDRED_THOUSAND_TO_FIVE_HUNDRED_THOUSAND = 8, // THREE_HUNDRED_THOUSAND_TO_FIVE_HUNDRED_THOUSAND
-FIVE_HUNDRED_THOUSAND_TO_ONE_MILLION = 9, // FIVE_HUNDRED_THOUSAND_TO_ONE_MILLION
-ONE_MILLION_TO_TWO_MILLION = 10, // ONE_MILLION_TO_TWO_MILLION
-TWO_MILLION_TO_THREE_MILLION = 11, // TWO_MILLION_TO_THREE_MILLION
-THREE_MILLION_TO_FIVE_MILLION = 12, // THREE_MILLION_TO_FIVE_MILLION
-FIVE_MILLION_TO_TEN_MILLION = 13, // FIVE_MILLION_TO_TEN_MILLION
-TEN_MILLION_TO_TWENTY_MILLION = 14, // TEN_MILLION_TO_TWENTY_MILLION
-TWENTY_MILLION_TO_THIRTY_MILLION = 15, // TWENTY_MILLION_TO_THIRTY_MILLION
-THIRTY_MILLION_TO_FIFTY_MILLION = 16, // THIRTY_MILLION_TO_FIFTY_MILLION
-OVER_FIFTY_MILLION = 17, // OVER_FIFTY_MILLION
-    }
-
-/**
-    * @name UserListTypeEnum.UserListType
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListTypeEnum.UserListType 
-    */
-export enum UserListType {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-REMARKETING = 2, // REMARKETING
-LOGICAL = 3, // LOGICAL
-EXTERNAL_REMARKETING = 4, // EXTERNAL_REMARKETING
-RULE_BASED = 5, // RULE_BASED
-SIMILAR = 6, // SIMILAR
-CRM_BASED = 7, // CRM_BASED
-    }
-
-/**
-    * @name VanityPharmaDisplayUrlModeEnum.VanityPharmaDisplayUrlMode
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/VanityPharmaDisplayUrlModeEnum.VanityPharmaDisplayUrlMode 
-    */
-export enum VanityPharmaDisplayUrlMode {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-MANUFACTURER_WEBSITE_URL = 2, // MANUFACTURER_WEBSITE_URL
-WEBSITE_DESCRIPTION = 3, // WEBSITE_DESCRIPTION
-    }
-
-/**
-    * @name VanityPharmaTextEnum.VanityPharmaText
-    * @link https://developers.google.com/google-ads/api/reference/rpc/v7/VanityPharmaTextEnum.VanityPharmaText 
-    */
-export enum VanityPharmaText {
-      UNSPECIFIED = 0, // UNSPECIFIED
-UNKNOWN = 1, // UNKNOWN
-PRESCRIPTION_TREATMENT_WEBSITE_EN = 2, // PRESCRIPTION_TREATMENT_WEBSITE_EN
-PRESCRIPTION_TREATMENT_WEBSITE_ES = 3, // PRESCRIPTION_TREATMENT_WEBSITE_ES
-PRESCRIPTION_DEVICE_WEBSITE_EN = 4, // PRESCRIPTION_DEVICE_WEBSITE_EN
-PRESCRIPTION_DEVICE_WEBSITE_ES = 5, // PRESCRIPTION_DEVICE_WEBSITE_ES
-MEDICAL_DEVICE_WEBSITE_EN = 6, // MEDICAL_DEVICE_WEBSITE_EN
-MEDICAL_DEVICE_WEBSITE_ES = 7, // MEDICAL_DEVICE_WEBSITE_ES
-PREVENTATIVE_TREATMENT_WEBSITE_EN = 8, // PREVENTATIVE_TREATMENT_WEBSITE_EN
-PREVENTATIVE_TREATMENT_WEBSITE_ES = 9, // PREVENTATIVE_TREATMENT_WEBSITE_ES
-PRESCRIPTION_CONTRACEPTION_WEBSITE_EN = 10, // PRESCRIPTION_CONTRACEPTION_WEBSITE_EN
-PRESCRIPTION_CONTRACEPTION_WEBSITE_ES = 11, // PRESCRIPTION_CONTRACEPTION_WEBSITE_ES
-PRESCRIPTION_VACCINE_WEBSITE_EN = 12, // PRESCRIPTION_VACCINE_WEBSITE_EN
-PRESCRIPTION_VACCINE_WEBSITE_ES = 13, // PRESCRIPTION_VACCINE_WEBSITE_ES
-    }
+  /**
+   * @name PolicyTopicEntryTypeEnum.PolicyTopicEntryType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PolicyTopicEntryTypeEnum.PolicyTopicEntryType
+   */
+  export enum PolicyTopicEntryType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PROHIBITED = 2, // PROHIBITED
+    LIMITED = 4, // LIMITED
+    FULLY_LIMITED = 8, // FULLY_LIMITED
+    DESCRIPTIVE = 5, // DESCRIPTIVE
+    BROADENING = 6, // BROADENING
+    AREA_OF_INTEREST_ONLY = 7, // AREA_OF_INTEREST_ONLY
+  }
+
+  /**
+   * @name PolicyTopicEvidenceDestinationMismatchUrlTypeEnum.PolicyTopicEvidenceDestinationMismatchUrlType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PolicyTopicEvidenceDestinationMismatchUrlTypeEnum.PolicyTopicEvidenceDestinationMismatchUrlType
+   */
+  export enum PolicyTopicEvidenceDestinationMismatchUrlType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    DISPLAY_URL = 2, // DISPLAY_URL
+    FINAL_URL = 3, // FINAL_URL
+    FINAL_MOBILE_URL = 4, // FINAL_MOBILE_URL
+    TRACKING_URL = 5, // TRACKING_URL
+    MOBILE_TRACKING_URL = 6, // MOBILE_TRACKING_URL
+  }
+
+  /**
+   * @name PolicyTopicEvidenceDestinationNotWorkingDeviceEnum.PolicyTopicEvidenceDestinationNotWorkingDevice
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PolicyTopicEvidenceDestinationNotWorkingDeviceEnum.PolicyTopicEvidenceDestinationNotWorkingDevice
+   */
+  export enum PolicyTopicEvidenceDestinationNotWorkingDevice {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    DESKTOP = 2, // DESKTOP
+    ANDROID = 3, // ANDROID
+    IOS = 4, // IOS
+  }
+
+  /**
+   * @name PolicyTopicEvidenceDestinationNotWorkingDnsErrorTypeEnum.PolicyTopicEvidenceDestinationNotWorkingDnsErrorType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PolicyTopicEvidenceDestinationNotWorkingDnsErrorTypeEnum.PolicyTopicEvidenceDestinationNotWorkingDnsErrorType
+   */
+  export enum PolicyTopicEvidenceDestinationNotWorkingDnsErrorType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    HOSTNAME_NOT_FOUND = 2, // HOSTNAME_NOT_FOUND
+    GOOGLE_CRAWLER_DNS_ISSUE = 3, // GOOGLE_CRAWLER_DNS_ISSUE
+  }
+
+  /**
+   * @name PolicyApprovalStatusEnum.PolicyApprovalStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PolicyApprovalStatusEnum.PolicyApprovalStatus
+   */
+  export enum PolicyApprovalStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    DISAPPROVED = 2, // DISAPPROVED
+    APPROVED_LIMITED = 3, // APPROVED_LIMITED
+    APPROVED = 4, // APPROVED
+    AREA_OF_INTEREST_ONLY = 5, // AREA_OF_INTEREST_ONLY
+  }
+
+  /**
+   * @name PolicyReviewStatusEnum.PolicyReviewStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PolicyReviewStatusEnum.PolicyReviewStatus
+   */
+  export enum PolicyReviewStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    REVIEW_IN_PROGRESS = 2, // REVIEW_IN_PROGRESS
+    REVIEWED = 3, // REVIEWED
+    UNDER_APPEAL = 4, // UNDER_APPEAL
+    ELIGIBLE_MAY_SERVE = 5, // ELIGIBLE_MAY_SERVE
+  }
+
+  /**
+   * @name AssetPerformanceLabelEnum.AssetPerformanceLabel
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AssetPerformanceLabelEnum.AssetPerformanceLabel
+   */
+  export enum AssetPerformanceLabel {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PENDING = 2, // PENDING
+    LEARNING = 3, // LEARNING
+    LOW = 4, // LOW
+    GOOD = 5, // GOOD
+    BEST = 6, // BEST
+  }
+
+  /**
+   * @name ServedAssetFieldTypeEnum.ServedAssetFieldType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ServedAssetFieldTypeEnum.ServedAssetFieldType
+   */
+  export enum ServedAssetFieldType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    HEADLINE_1 = 2, // HEADLINE_1
+    HEADLINE_2 = 3, // HEADLINE_2
+    HEADLINE_3 = 4, // HEADLINE_3
+    DESCRIPTION_1 = 5, // DESCRIPTION_1
+    DESCRIPTION_2 = 6, // DESCRIPTION_2
+  }
+
+  /**
+   * @name CallConversionReportingStateEnum.CallConversionReportingState
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CallConversionReportingStateEnum.CallConversionReportingState
+   */
+  export enum CallConversionReportingState {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    DISABLED = 2, // DISABLED
+    USE_ACCOUNT_LEVEL_CALL_CONVERSION_ACTION = 3, // USE_ACCOUNT_LEVEL_CALL_CONVERSION_ACTION
+    USE_RESOURCE_LEVEL_CALL_CONVERSION_ACTION = 4, // USE_RESOURCE_LEVEL_CALL_CONVERSION_ACTION
+  }
+
+  /**
+   * @name DisplayAdFormatSettingEnum.DisplayAdFormatSetting
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/DisplayAdFormatSettingEnum.DisplayAdFormatSetting
+   */
+  export enum DisplayAdFormatSetting {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ALL_FORMATS = 2, // ALL_FORMATS
+    NON_NATIVE = 3, // NON_NATIVE
+    NATIVE = 4, // NATIVE
+  }
+
+  /**
+   * @name DisplayUploadProductTypeEnum.DisplayUploadProductType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/DisplayUploadProductTypeEnum.DisplayUploadProductType
+   */
+  export enum DisplayUploadProductType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    HTML5_UPLOAD_AD = 2, // HTML5_UPLOAD_AD
+    DYNAMIC_HTML5_EDUCATION_AD = 3, // DYNAMIC_HTML5_EDUCATION_AD
+    DYNAMIC_HTML5_FLIGHT_AD = 4, // DYNAMIC_HTML5_FLIGHT_AD
+    DYNAMIC_HTML5_HOTEL_RENTAL_AD = 5, // DYNAMIC_HTML5_HOTEL_RENTAL_AD
+    DYNAMIC_HTML5_JOB_AD = 6, // DYNAMIC_HTML5_JOB_AD
+    DYNAMIC_HTML5_LOCAL_AD = 7, // DYNAMIC_HTML5_LOCAL_AD
+    DYNAMIC_HTML5_REAL_ESTATE_AD = 8, // DYNAMIC_HTML5_REAL_ESTATE_AD
+    DYNAMIC_HTML5_CUSTOM_AD = 9, // DYNAMIC_HTML5_CUSTOM_AD
+    DYNAMIC_HTML5_TRAVEL_AD = 10, // DYNAMIC_HTML5_TRAVEL_AD
+    DYNAMIC_HTML5_HOTEL_AD = 11, // DYNAMIC_HTML5_HOTEL_AD
+  }
+
+  /**
+   * @name LegacyAppInstallAdAppStoreEnum.LegacyAppInstallAdAppStore
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/LegacyAppInstallAdAppStoreEnum.LegacyAppInstallAdAppStore
+   */
+  export enum LegacyAppInstallAdAppStore {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    APPLE_APP_STORE = 2, // APPLE_APP_STORE
+    GOOGLE_PLAY = 3, // GOOGLE_PLAY
+    WINDOWS_STORE = 4, // WINDOWS_STORE
+    WINDOWS_PHONE_STORE = 5, // WINDOWS_PHONE_STORE
+    CN_APP_STORE = 6, // CN_APP_STORE
+  }
+
+  /**
+   * @name MimeTypeEnum.MimeType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/MimeTypeEnum.MimeType
+   */
+  export enum MimeType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    IMAGE_JPEG = 2, // IMAGE_JPEG
+    IMAGE_GIF = 3, // IMAGE_GIF
+    IMAGE_PNG = 4, // IMAGE_PNG
+    FLASH = 5, // FLASH
+    TEXT_HTML = 6, // TEXT_HTML
+    PDF = 7, // PDF
+    MSWORD = 8, // MSWORD
+    MSEXCEL = 9, // MSEXCEL
+    RTF = 10, // RTF
+    AUDIO_WAV = 11, // AUDIO_WAV
+    AUDIO_MP3 = 12, // AUDIO_MP3
+    HTML5_AD_ZIP = 13, // HTML5_AD_ZIP
+  }
+
+  /**
+   * @name AgeRangeTypeEnum.AgeRangeType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AgeRangeTypeEnum.AgeRangeType
+   */
+  export enum AgeRangeType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    AGE_RANGE_18_24 = 503001, // AGE_RANGE_18_24
+    AGE_RANGE_25_34 = 503002, // AGE_RANGE_25_34
+    AGE_RANGE_35_44 = 503003, // AGE_RANGE_35_44
+    AGE_RANGE_45_54 = 503004, // AGE_RANGE_45_54
+    AGE_RANGE_55_64 = 503005, // AGE_RANGE_55_64
+    AGE_RANGE_65_UP = 503006, // AGE_RANGE_65_UP
+    AGE_RANGE_UNDETERMINED = 503999, // AGE_RANGE_UNDETERMINED
+  }
+
+  /**
+   * @name AppPaymentModelTypeEnum.AppPaymentModelType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AppPaymentModelTypeEnum.AppPaymentModelType
+   */
+  export enum AppPaymentModelType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PAID = 30, // PAID
+  }
+
+  /**
+   * @name ContentLabelTypeEnum.ContentLabelType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ContentLabelTypeEnum.ContentLabelType
+   */
+  export enum ContentLabelType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    SEXUALLY_SUGGESTIVE = 2, // SEXUALLY_SUGGESTIVE
+    BELOW_THE_FOLD = 3, // BELOW_THE_FOLD
+    PARKED_DOMAIN = 4, // PARKED_DOMAIN
+    JUVENILE = 6, // JUVENILE
+    PROFANITY = 7, // PROFANITY
+    TRAGEDY = 8, // TRAGEDY
+    VIDEO = 9, // VIDEO
+    VIDEO_RATING_DV_G = 10, // VIDEO_RATING_DV_G
+    VIDEO_RATING_DV_PG = 11, // VIDEO_RATING_DV_PG
+    VIDEO_RATING_DV_T = 12, // VIDEO_RATING_DV_T
+    VIDEO_RATING_DV_MA = 13, // VIDEO_RATING_DV_MA
+    VIDEO_NOT_YET_RATED = 14, // VIDEO_NOT_YET_RATED
+    EMBEDDED_VIDEO = 15, // EMBEDDED_VIDEO
+    LIVE_STREAMING_VIDEO = 16, // LIVE_STREAMING_VIDEO
+    SOCIAL_ISSUES = 17, // SOCIAL_ISSUES
+  }
+
+  /**
+   * @name DayOfWeekEnum.DayOfWeek
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/DayOfWeekEnum.DayOfWeek
+   */
+  export enum DayOfWeek {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    MONDAY = 2, // MONDAY
+    TUESDAY = 3, // TUESDAY
+    WEDNESDAY = 4, // WEDNESDAY
+    THURSDAY = 5, // THURSDAY
+    FRIDAY = 6, // FRIDAY
+    SATURDAY = 7, // SATURDAY
+    SUNDAY = 8, // SUNDAY
+  }
+
+  /**
+   * @name DeviceEnum.Device
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/DeviceEnum.Device
+   */
+  export enum Device {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    MOBILE = 2, // MOBILE
+    TABLET = 3, // TABLET
+    DESKTOP = 4, // DESKTOP
+    CONNECTED_TV = 6, // CONNECTED_TV
+    OTHER = 5, // OTHER
+  }
+
+  /**
+   * @name GenderTypeEnum.GenderType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/GenderTypeEnum.GenderType
+   */
+  export enum GenderType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    MALE = 10, // MALE
+    FEMALE = 11, // FEMALE
+    UNDETERMINED = 20, // UNDETERMINED
+  }
+
+  /**
+   * @name HotelDateSelectionTypeEnum.HotelDateSelectionType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/HotelDateSelectionTypeEnum.HotelDateSelectionType
+   */
+  export enum HotelDateSelectionType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    DEFAULT_SELECTION = 50, // DEFAULT_SELECTION
+    USER_SELECTED = 51, // USER_SELECTED
+  }
+
+  /**
+   * @name IncomeRangeTypeEnum.IncomeRangeType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/IncomeRangeTypeEnum.IncomeRangeType
+   */
+  export enum IncomeRangeType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    INCOME_RANGE_0_50 = 510001, // INCOME_RANGE_0_50
+    INCOME_RANGE_50_60 = 510002, // INCOME_RANGE_50_60
+    INCOME_RANGE_60_70 = 510003, // INCOME_RANGE_60_70
+    INCOME_RANGE_70_80 = 510004, // INCOME_RANGE_70_80
+    INCOME_RANGE_80_90 = 510005, // INCOME_RANGE_80_90
+    INCOME_RANGE_90_UP = 510006, // INCOME_RANGE_90_UP
+    INCOME_RANGE_UNDETERMINED = 510000, // INCOME_RANGE_UNDETERMINED
+  }
+
+  /**
+   * @name InteractionTypeEnum.InteractionType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/InteractionTypeEnum.InteractionType
+   */
+  export enum InteractionType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    CALLS = 8000, // CALLS
+  }
+
+  /**
+   * @name KeywordMatchTypeEnum.KeywordMatchType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/KeywordMatchTypeEnum.KeywordMatchType
+   */
+  export enum KeywordMatchType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    EXACT = 2, // EXACT
+    PHRASE = 3, // PHRASE
+    BROAD = 4, // BROAD
+  }
+
+  /**
+   * @name ListingGroupTypeEnum.ListingGroupType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ListingGroupTypeEnum.ListingGroupType
+   */
+  export enum ListingGroupType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    SUBDIVISION = 2, // SUBDIVISION
+    UNIT = 3, // UNIT
+  }
+
+  /**
+   * @name LocationGroupRadiusUnitsEnum.LocationGroupRadiusUnits
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/LocationGroupRadiusUnitsEnum.LocationGroupRadiusUnits
+   */
+  export enum LocationGroupRadiusUnits {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    METERS = 2, // METERS
+    MILES = 3, // MILES
+    MILLI_MILES = 4, // MILLI_MILES
+  }
+
+  /**
+   * @name MinuteOfHourEnum.MinuteOfHour
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/MinuteOfHourEnum.MinuteOfHour
+   */
+  export enum MinuteOfHour {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ZERO = 2, // ZERO
+    FIFTEEN = 3, // FIFTEEN
+    THIRTY = 4, // THIRTY
+    FORTY_FIVE = 5, // FORTY_FIVE
+  }
+
+  /**
+   * @name ParentalStatusTypeEnum.ParentalStatusType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ParentalStatusTypeEnum.ParentalStatusType
+   */
+  export enum ParentalStatusType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PARENT = 300, // PARENT
+    NOT_A_PARENT = 301, // NOT_A_PARENT
+    UNDETERMINED = 302, // UNDETERMINED
+  }
+
+  /**
+   * @name PreferredContentTypeEnum.PreferredContentType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PreferredContentTypeEnum.PreferredContentType
+   */
+  export enum PreferredContentType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    YOUTUBE_TOP_CONTENT = 400, // YOUTUBE_TOP_CONTENT
+  }
+
+  /**
+   * @name ProductBiddingCategoryLevelEnum.ProductBiddingCategoryLevel
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ProductBiddingCategoryLevelEnum.ProductBiddingCategoryLevel
+   */
+  export enum ProductBiddingCategoryLevel {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    LEVEL1 = 2, // LEVEL1
+    LEVEL2 = 3, // LEVEL2
+    LEVEL3 = 4, // LEVEL3
+    LEVEL4 = 5, // LEVEL4
+    LEVEL5 = 6, // LEVEL5
+  }
+
+  /**
+   * @name ProductChannelEnum.ProductChannel
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ProductChannelEnum.ProductChannel
+   */
+  export enum ProductChannel {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ONLINE = 2, // ONLINE
+    LOCAL = 3, // LOCAL
+  }
+
+  /**
+   * @name ProductChannelExclusivityEnum.ProductChannelExclusivity
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ProductChannelExclusivityEnum.ProductChannelExclusivity
+   */
+  export enum ProductChannelExclusivity {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    SINGLE_CHANNEL = 2, // SINGLE_CHANNEL
+    MULTI_CHANNEL = 3, // MULTI_CHANNEL
+  }
+
+  /**
+   * @name ProductConditionEnum.ProductCondition
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ProductConditionEnum.ProductCondition
+   */
+  export enum ProductCondition {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    NEW = 3, // NEW
+    REFURBISHED = 4, // REFURBISHED
+    USED = 5, // USED
+  }
+
+  /**
+   * @name ProductCustomAttributeIndexEnum.ProductCustomAttributeIndex
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ProductCustomAttributeIndexEnum.ProductCustomAttributeIndex
+   */
+  export enum ProductCustomAttributeIndex {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    INDEX0 = 7, // INDEX0
+    INDEX1 = 8, // INDEX1
+    INDEX2 = 9, // INDEX2
+    INDEX3 = 10, // INDEX3
+    INDEX4 = 11, // INDEX4
+  }
+
+  /**
+   * @name ProductTypeLevelEnum.ProductTypeLevel
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ProductTypeLevelEnum.ProductTypeLevel
+   */
+  export enum ProductTypeLevel {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    LEVEL1 = 7, // LEVEL1
+    LEVEL2 = 8, // LEVEL2
+    LEVEL3 = 9, // LEVEL3
+    LEVEL4 = 10, // LEVEL4
+    LEVEL5 = 11, // LEVEL5
+  }
+
+  /**
+   * @name ProximityRadiusUnitsEnum.ProximityRadiusUnits
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ProximityRadiusUnitsEnum.ProximityRadiusUnits
+   */
+  export enum ProximityRadiusUnits {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    MILES = 2, // MILES
+    KILOMETERS = 3, // KILOMETERS
+  }
+
+  /**
+   * @name WebpageConditionOperandEnum.WebpageConditionOperand
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/WebpageConditionOperandEnum.WebpageConditionOperand
+   */
+  export enum WebpageConditionOperand {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    URL = 2, // URL
+    CATEGORY = 3, // CATEGORY
+    PAGE_TITLE = 4, // PAGE_TITLE
+    PAGE_CONTENT = 5, // PAGE_CONTENT
+    CUSTOM_LABEL = 6, // CUSTOM_LABEL
+  }
+
+  /**
+   * @name WebpageConditionOperatorEnum.WebpageConditionOperator
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/WebpageConditionOperatorEnum.WebpageConditionOperator
+   */
+  export enum WebpageConditionOperator {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    EQUALS = 2, // EQUALS
+    CONTAINS = 3, // CONTAINS
+  }
+
+  /**
+   * @name LeadFormCallToActionTypeEnum.LeadFormCallToActionType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/LeadFormCallToActionTypeEnum.LeadFormCallToActionType
+   */
+  export enum LeadFormCallToActionType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    LEARN_MORE = 2, // LEARN_MORE
+    GET_QUOTE = 3, // GET_QUOTE
+    APPLY_NOW = 4, // APPLY_NOW
+    SIGN_UP = 5, // SIGN_UP
+    CONTACT_US = 6, // CONTACT_US
+    SUBSCRIBE = 7, // SUBSCRIBE
+    DOWNLOAD = 8, // DOWNLOAD
+    BOOK_NOW = 9, // BOOK_NOW
+    GET_OFFER = 10, // GET_OFFER
+    REGISTER = 11, // REGISTER
+    GET_INFO = 12, // GET_INFO
+    REQUEST_DEMO = 13, // REQUEST_DEMO
+    JOIN_NOW = 14, // JOIN_NOW
+    GET_STARTED = 15, // GET_STARTED
+  }
+
+  /**
+   * @name LeadFormDesiredIntentEnum.LeadFormDesiredIntent
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/LeadFormDesiredIntentEnum.LeadFormDesiredIntent
+   */
+  export enum LeadFormDesiredIntent {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    LOW_INTENT = 2, // LOW_INTENT
+    HIGH_INTENT = 3, // HIGH_INTENT
+  }
+
+  /**
+   * @name LeadFormFieldUserInputTypeEnum.LeadFormFieldUserInputType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/LeadFormFieldUserInputTypeEnum.LeadFormFieldUserInputType
+   */
+  export enum LeadFormFieldUserInputType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    FULL_NAME = 2, // FULL_NAME
+    GIVEN_NAME = 6, // GIVEN_NAME
+    FAMILY_NAME = 7, // FAMILY_NAME
+    EMAIL = 3, // EMAIL
+    PHONE_NUMBER = 4, // PHONE_NUMBER
+    POSTAL_CODE = 5, // POSTAL_CODE
+    CITY = 9, // CITY
+    REGION = 10, // REGION
+    COUNTRY = 11, // COUNTRY
+    WORK_EMAIL = 12, // WORK_EMAIL
+    COMPANY_NAME = 13, // COMPANY_NAME
+    WORK_PHONE = 14, // WORK_PHONE
+    JOB_TITLE = 15, // JOB_TITLE
+    VEHICLE_MODEL = 1001, // VEHICLE_MODEL
+    VEHICLE_TYPE = 1002, // VEHICLE_TYPE
+    PREFERRED_DEALERSHIP = 1003, // PREFERRED_DEALERSHIP
+    VEHICLE_PURCHASE_TIMELINE = 1004, // VEHICLE_PURCHASE_TIMELINE
+    VEHICLE_OWNERSHIP = 1005, // VEHICLE_OWNERSHIP
+    VEHICLE_PAYMENT_TYPE = 1009, // VEHICLE_PAYMENT_TYPE
+    VEHICLE_CONDITION = 1010, // VEHICLE_CONDITION
+    COMPANY_SIZE = 1006, // COMPANY_SIZE
+    ANNUAL_SALES = 1007, // ANNUAL_SALES
+    YEARS_IN_BUSINESS = 1008, // YEARS_IN_BUSINESS
+    JOB_DEPARTMENT = 1011, // JOB_DEPARTMENT
+    JOB_ROLE = 1012, // JOB_ROLE
+    EDUCATION_PROGRAM = 1013, // EDUCATION_PROGRAM
+    EDUCATION_COURSE = 1014, // EDUCATION_COURSE
+    PRODUCT = 1016, // PRODUCT
+    SERVICE = 1017, // SERVICE
+    OFFER = 1018, // OFFER
+    CATEGORY = 1019, // CATEGORY
+    PREFERRED_CONTACT_METHOD = 1020, // PREFERRED_CONTACT_METHOD
+    PREFERRED_LOCATION = 1021, // PREFERRED_LOCATION
+    PREFERRED_CONTACT_TIME = 1022, // PREFERRED_CONTACT_TIME
+    PURCHASE_TIMELINE = 1023, // PURCHASE_TIMELINE
+    YEARS_OF_EXPERIENCE = 1048, // YEARS_OF_EXPERIENCE
+    JOB_INDUSTRY = 1049, // JOB_INDUSTRY
+    LEVEL_OF_EDUCATION = 1050, // LEVEL_OF_EDUCATION
+    PROPERTY_TYPE = 1024, // PROPERTY_TYPE
+    REALTOR_HELP_GOAL = 1025, // REALTOR_HELP_GOAL
+    PROPERTY_COMMUNITY = 1026, // PROPERTY_COMMUNITY
+    PRICE_RANGE = 1027, // PRICE_RANGE
+    NUMBER_OF_BEDROOMS = 1028, // NUMBER_OF_BEDROOMS
+    FURNISHED_PROPERTY = 1029, // FURNISHED_PROPERTY
+    PETS_ALLOWED_PROPERTY = 1030, // PETS_ALLOWED_PROPERTY
+    NEXT_PLANNED_PURCHASE = 1031, // NEXT_PLANNED_PURCHASE
+    EVENT_SIGNUP_INTEREST = 1033, // EVENT_SIGNUP_INTEREST
+    PREFERRED_SHOPPING_PLACES = 1034, // PREFERRED_SHOPPING_PLACES
+    FAVORITE_BRAND = 1035, // FAVORITE_BRAND
+    TRANSPORTATION_COMMERCIAL_LICENSE_TYPE = 1036, // TRANSPORTATION_COMMERCIAL_LICENSE_TYPE
+    EVENT_BOOKING_INTEREST = 1038, // EVENT_BOOKING_INTEREST
+    DESTINATION_COUNTRY = 1039, // DESTINATION_COUNTRY
+    DESTINATION_CITY = 1040, // DESTINATION_CITY
+    DEPARTURE_COUNTRY = 1041, // DEPARTURE_COUNTRY
+    DEPARTURE_CITY = 1042, // DEPARTURE_CITY
+    DEPARTURE_DATE = 1043, // DEPARTURE_DATE
+    RETURN_DATE = 1044, // RETURN_DATE
+    NUMBER_OF_TRAVELERS = 1045, // NUMBER_OF_TRAVELERS
+    TRAVEL_BUDGET = 1046, // TRAVEL_BUDGET
+    TRAVEL_ACCOMMODATION = 1047, // TRAVEL_ACCOMMODATION
+  }
+
+  /**
+   * @name LeadFormPostSubmitCallToActionTypeEnum.LeadFormPostSubmitCallToActionType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/LeadFormPostSubmitCallToActionTypeEnum.LeadFormPostSubmitCallToActionType
+   */
+  export enum LeadFormPostSubmitCallToActionType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    VISIT_SITE = 2, // VISIT_SITE
+    DOWNLOAD = 3, // DOWNLOAD
+    LEARN_MORE = 4, // LEARN_MORE
+    SHOP_NOW = 5, // SHOP_NOW
+  }
+
+  /**
+   * @name PromotionExtensionDiscountModifierEnum.PromotionExtensionDiscountModifier
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PromotionExtensionDiscountModifierEnum.PromotionExtensionDiscountModifier
+   */
+  export enum PromotionExtensionDiscountModifier {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    UP_TO = 2, // UP_TO
+  }
+
+  /**
+   * @name PromotionExtensionOccasionEnum.PromotionExtensionOccasion
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PromotionExtensionOccasionEnum.PromotionExtensionOccasion
+   */
+  export enum PromotionExtensionOccasion {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    NEW_YEARS = 2, // NEW_YEARS
+    CHINESE_NEW_YEAR = 3, // CHINESE_NEW_YEAR
+    VALENTINES_DAY = 4, // VALENTINES_DAY
+    EASTER = 5, // EASTER
+    MOTHERS_DAY = 6, // MOTHERS_DAY
+    FATHERS_DAY = 7, // FATHERS_DAY
+    LABOR_DAY = 8, // LABOR_DAY
+    BACK_TO_SCHOOL = 9, // BACK_TO_SCHOOL
+    HALLOWEEN = 10, // HALLOWEEN
+    BLACK_FRIDAY = 11, // BLACK_FRIDAY
+    CYBER_MONDAY = 12, // CYBER_MONDAY
+    CHRISTMAS = 13, // CHRISTMAS
+    BOXING_DAY = 14, // BOXING_DAY
+    INDEPENDENCE_DAY = 15, // INDEPENDENCE_DAY
+    NATIONAL_DAY = 16, // NATIONAL_DAY
+    END_OF_SEASON = 17, // END_OF_SEASON
+    WINTER_SALE = 18, // WINTER_SALE
+    SUMMER_SALE = 19, // SUMMER_SALE
+    FALL_SALE = 20, // FALL_SALE
+    SPRING_SALE = 21, // SPRING_SALE
+    RAMADAN = 22, // RAMADAN
+    EID_AL_FITR = 23, // EID_AL_FITR
+    EID_AL_ADHA = 24, // EID_AL_ADHA
+    SINGLES_DAY = 25, // SINGLES_DAY
+    WOMENS_DAY = 26, // WOMENS_DAY
+    HOLI = 27, // HOLI
+    PARENTS_DAY = 28, // PARENTS_DAY
+    ST_NICHOLAS_DAY = 29, // ST_NICHOLAS_DAY
+    CARNIVAL = 30, // CARNIVAL
+    EPIPHANY = 31, // EPIPHANY
+    ROSH_HASHANAH = 32, // ROSH_HASHANAH
+    PASSOVER = 33, // PASSOVER
+    HANUKKAH = 34, // HANUKKAH
+    DIWALI = 35, // DIWALI
+    NAVRATRI = 36, // NAVRATRI
+    SONGKRAN = 37, // SONGKRAN
+    YEAR_END_GIFT = 38, // YEAR_END_GIFT
+  }
+
+  /**
+   * @name TargetImpressionShareLocationEnum.TargetImpressionShareLocation
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/TargetImpressionShareLocationEnum.TargetImpressionShareLocation
+   */
+  export enum TargetImpressionShareLocation {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ANYWHERE_ON_PAGE = 2, // ANYWHERE_ON_PAGE
+    TOP_OF_PAGE = 3, // TOP_OF_PAGE
+    ABSOLUTE_TOP_OF_PAGE = 4, // ABSOLUTE_TOP_OF_PAGE
+  }
+
+  /**
+   * @name AdvertisingChannelSubTypeEnum.AdvertisingChannelSubType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdvertisingChannelSubTypeEnum.AdvertisingChannelSubType
+   */
+  export enum AdvertisingChannelSubType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    SEARCH_MOBILE_APP = 2, // SEARCH_MOBILE_APP
+    DISPLAY_MOBILE_APP = 3, // DISPLAY_MOBILE_APP
+    SEARCH_EXPRESS = 4, // SEARCH_EXPRESS
+    DISPLAY_EXPRESS = 5, // DISPLAY_EXPRESS
+    SHOPPING_SMART_ADS = 6, // SHOPPING_SMART_ADS
+    DISPLAY_GMAIL_AD = 7, // DISPLAY_GMAIL_AD
+    DISPLAY_SMART_CAMPAIGN = 8, // DISPLAY_SMART_CAMPAIGN
+    VIDEO_OUTSTREAM = 9, // VIDEO_OUTSTREAM
+    VIDEO_ACTION = 10, // VIDEO_ACTION
+    VIDEO_NON_SKIPPABLE = 11, // VIDEO_NON_SKIPPABLE
+    APP_CAMPAIGN = 12, // APP_CAMPAIGN
+    APP_CAMPAIGN_FOR_ENGAGEMENT = 13, // APP_CAMPAIGN_FOR_ENGAGEMENT
+    LOCAL_CAMPAIGN = 14, // LOCAL_CAMPAIGN
+    SHOPPING_COMPARISON_LISTING_ADS = 15, // SHOPPING_COMPARISON_LISTING_ADS
+    SMART_CAMPAIGN = 16, // SMART_CAMPAIGN
+    VIDEO_SEQUENCE = 17, // VIDEO_SEQUENCE
+  }
+
+  /**
+   * @name AdvertisingChannelTypeEnum.AdvertisingChannelType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdvertisingChannelTypeEnum.AdvertisingChannelType
+   */
+  export enum AdvertisingChannelType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    SEARCH = 2, // SEARCH
+    DISPLAY = 3, // DISPLAY
+    SHOPPING = 4, // SHOPPING
+    HOTEL = 5, // HOTEL
+    VIDEO = 6, // VIDEO
+    MULTI_CHANNEL = 7, // MULTI_CHANNEL
+    LOCAL = 8, // LOCAL
+    SMART = 9, // SMART
+  }
+
+  /**
+   * @name CriterionCategoryChannelAvailabilityModeEnum.CriterionCategoryChannelAvailabilityMode
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CriterionCategoryChannelAvailabilityModeEnum.CriterionCategoryChannelAvailabilityMode
+   */
+  export enum CriterionCategoryChannelAvailabilityMode {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ALL_CHANNELS = 2, // ALL_CHANNELS
+    CHANNEL_TYPE_AND_ALL_SUBTYPES = 3, // CHANNEL_TYPE_AND_ALL_SUBTYPES
+    CHANNEL_TYPE_AND_SUBSET_SUBTYPES = 4, // CHANNEL_TYPE_AND_SUBSET_SUBTYPES
+  }
+
+  /**
+   * @name CriterionCategoryLocaleAvailabilityModeEnum.CriterionCategoryLocaleAvailabilityMode
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CriterionCategoryLocaleAvailabilityModeEnum.CriterionCategoryLocaleAvailabilityMode
+   */
+  export enum CriterionCategoryLocaleAvailabilityMode {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ALL_LOCALES = 2, // ALL_LOCALES
+    COUNTRY_AND_ALL_LANGUAGES = 3, // COUNTRY_AND_ALL_LANGUAGES
+    LANGUAGE_AND_ALL_COUNTRIES = 4, // LANGUAGE_AND_ALL_COUNTRIES
+    COUNTRY_AND_LANGUAGE = 5, // COUNTRY_AND_LANGUAGE
+  }
+
+  /**
+   * @name MonthOfYearEnum.MonthOfYear
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/MonthOfYearEnum.MonthOfYear
+   */
+  export enum MonthOfYear {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    JANUARY = 2, // JANUARY
+    FEBRUARY = 3, // FEBRUARY
+    MARCH = 4, // MARCH
+    APRIL = 5, // APRIL
+    MAY = 6, // MAY
+    JUNE = 7, // JUNE
+    JULY = 8, // JULY
+    AUGUST = 9, // AUGUST
+    SEPTEMBER = 10, // SEPTEMBER
+    OCTOBER = 11, // OCTOBER
+    NOVEMBER = 12, // NOVEMBER
+    DECEMBER = 13, // DECEMBER
+  }
+
+  /**
+   * @name AppStoreEnum.AppStore
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AppStoreEnum.AppStore
+   */
+  export enum AppStore {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    APPLE_ITUNES = 2, // APPLE_ITUNES
+    GOOGLE_PLAY = 3, // GOOGLE_PLAY
+  }
+
+  /**
+   * @name PriceExtensionPriceQualifierEnum.PriceExtensionPriceQualifier
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PriceExtensionPriceQualifierEnum.PriceExtensionPriceQualifier
+   */
+  export enum PriceExtensionPriceQualifier {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    FROM = 2, // FROM
+    UP_TO = 3, // UP_TO
+    AVERAGE = 4, // AVERAGE
+  }
+
+  /**
+   * @name PriceExtensionPriceUnitEnum.PriceExtensionPriceUnit
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PriceExtensionPriceUnitEnum.PriceExtensionPriceUnit
+   */
+  export enum PriceExtensionPriceUnit {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PER_HOUR = 2, // PER_HOUR
+    PER_DAY = 3, // PER_DAY
+    PER_WEEK = 4, // PER_WEEK
+    PER_MONTH = 5, // PER_MONTH
+    PER_YEAR = 6, // PER_YEAR
+    PER_NIGHT = 7, // PER_NIGHT
+  }
+
+  /**
+   * @name PriceExtensionTypeEnum.PriceExtensionType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PriceExtensionTypeEnum.PriceExtensionType
+   */
+  export enum PriceExtensionType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    BRANDS = 2, // BRANDS
+    EVENTS = 3, // EVENTS
+    LOCATIONS = 4, // LOCATIONS
+    NEIGHBORHOODS = 5, // NEIGHBORHOODS
+    PRODUCT_CATEGORIES = 6, // PRODUCT_CATEGORIES
+    PRODUCT_TIERS = 7, // PRODUCT_TIERS
+    SERVICES = 8, // SERVICES
+    SERVICE_CATEGORIES = 9, // SERVICE_CATEGORIES
+    SERVICE_TIERS = 10, // SERVICE_TIERS
+  }
+
+  /**
+   * @name FeedItemSetStringFilterTypeEnum.FeedItemSetStringFilterType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedItemSetStringFilterTypeEnum.FeedItemSetStringFilterType
+   */
+  export enum FeedItemSetStringFilterType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    EXACT = 2, // EXACT
+  }
+
+  /**
+   * @name AppUrlOperatingSystemTypeEnum.AppUrlOperatingSystemType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AppUrlOperatingSystemTypeEnum.AppUrlOperatingSystemType
+   */
+  export enum AppUrlOperatingSystemType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    IOS = 2, // IOS
+    ANDROID = 3, // ANDROID
+  }
+
+  /**
+   * @name FrequencyCapEventTypeEnum.FrequencyCapEventType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FrequencyCapEventTypeEnum.FrequencyCapEventType
+   */
+  export enum FrequencyCapEventType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    IMPRESSION = 2, // IMPRESSION
+    VIDEO_VIEW = 3, // VIDEO_VIEW
+  }
+
+  /**
+   * @name FrequencyCapLevelEnum.FrequencyCapLevel
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FrequencyCapLevelEnum.FrequencyCapLevel
+   */
+  export enum FrequencyCapLevel {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    AD_GROUP_AD = 2, // AD_GROUP_AD
+    AD_GROUP = 3, // AD_GROUP
+    CAMPAIGN = 4, // CAMPAIGN
+  }
+
+  /**
+   * @name FrequencyCapTimeUnitEnum.FrequencyCapTimeUnit
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FrequencyCapTimeUnitEnum.FrequencyCapTimeUnit
+   */
+  export enum FrequencyCapTimeUnit {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    DAY = 2, // DAY
+    WEEK = 3, // WEEK
+    MONTH = 4, // MONTH
+  }
+
+  /**
+   * @name KeywordPlanAggregateMetricTypeEnum.KeywordPlanAggregateMetricType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/KeywordPlanAggregateMetricTypeEnum.KeywordPlanAggregateMetricType
+   */
+  export enum KeywordPlanAggregateMetricType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    DEVICE = 2, // DEVICE
+  }
+
+  /**
+   * @name KeywordPlanCompetitionLevelEnum.KeywordPlanCompetitionLevel
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/KeywordPlanCompetitionLevelEnum.KeywordPlanCompetitionLevel
+   */
+  export enum KeywordPlanCompetitionLevel {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    LOW = 2, // LOW
+    MEDIUM = 3, // MEDIUM
+    HIGH = 4, // HIGH
+  }
+
+  /**
+   * @name KeywordPlanConceptGroupTypeEnum.KeywordPlanConceptGroupType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/KeywordPlanConceptGroupTypeEnum.KeywordPlanConceptGroupType
+   */
+  export enum KeywordPlanConceptGroupType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    BRAND = 2, // BRAND
+    OTHER_BRANDS = 3, // OTHER_BRANDS
+    NON_BRAND = 4, // NON_BRAND
+  }
+
+  /**
+   * @name MatchingFunctionContextTypeEnum.MatchingFunctionContextType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/MatchingFunctionContextTypeEnum.MatchingFunctionContextType
+   */
+  export enum MatchingFunctionContextType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    FEED_ITEM_ID = 2, // FEED_ITEM_ID
+    DEVICE_NAME = 3, // DEVICE_NAME
+    FEED_ITEM_SET_ID = 4, // FEED_ITEM_SET_ID
+  }
+
+  /**
+   * @name MatchingFunctionOperatorEnum.MatchingFunctionOperator
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/MatchingFunctionOperatorEnum.MatchingFunctionOperator
+   */
+  export enum MatchingFunctionOperator {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    IN = 2, // IN
+    IDENTITY = 3, // IDENTITY
+    EQUALS = 4, // EQUALS
+    AND = 5, // AND
+    CONTAINS_ANY = 6, // CONTAINS_ANY
+  }
+
+  /**
+   * @name InteractionEventTypeEnum.InteractionEventType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/InteractionEventTypeEnum.InteractionEventType
+   */
+  export enum InteractionEventType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    CLICK = 2, // CLICK
+    ENGAGEMENT = 3, // ENGAGEMENT
+    VIDEO_VIEW = 4, // VIDEO_VIEW
+    NONE = 5, // NONE
+  }
+
+  /**
+   * @name QualityScoreBucketEnum.QualityScoreBucket
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/QualityScoreBucketEnum.QualityScoreBucket
+   */
+  export enum QualityScoreBucket {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    BELOW_AVERAGE = 2, // BELOW_AVERAGE
+    AVERAGE = 3, // AVERAGE
+    ABOVE_AVERAGE = 4, // ABOVE_AVERAGE
+  }
+
+  /**
+   * @name UserIdentifierSourceEnum.UserIdentifierSource
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserIdentifierSourceEnum.UserIdentifierSource
+   */
+  export enum UserIdentifierSource {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    FIRST_PARTY = 2, // FIRST_PARTY
+    THIRD_PARTY = 3, // THIRD_PARTY
+  }
+
+  /**
+   * @name AdDestinationTypeEnum.AdDestinationType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdDestinationTypeEnum.AdDestinationType
+   */
+  export enum AdDestinationType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    NOT_APPLICABLE = 2, // NOT_APPLICABLE
+    WEBSITE = 3, // WEBSITE
+    APP_DEEP_LINK = 4, // APP_DEEP_LINK
+    APP_STORE = 5, // APP_STORE
+    PHONE_CALL = 6, // PHONE_CALL
+    MAP_DIRECTIONS = 7, // MAP_DIRECTIONS
+    LOCATION_LISTING = 8, // LOCATION_LISTING
+    MESSAGE = 9, // MESSAGE
+    LEAD_FORM = 10, // LEAD_FORM
+    YOUTUBE = 11, // YOUTUBE
+    UNMODELED_FOR_CONVERSIONS = 12, // UNMODELED_FOR_CONVERSIONS
+  }
+
+  /**
+   * @name AdNetworkTypeEnum.AdNetworkType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdNetworkTypeEnum.AdNetworkType
+   */
+  export enum AdNetworkType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    SEARCH = 2, // SEARCH
+    SEARCH_PARTNERS = 3, // SEARCH_PARTNERS
+    CONTENT = 4, // CONTENT
+    YOUTUBE_SEARCH = 5, // YOUTUBE_SEARCH
+    YOUTUBE_WATCH = 6, // YOUTUBE_WATCH
+    MIXED = 7, // MIXED
+  }
+
+  /**
+   * @name BudgetCampaignAssociationStatusEnum.BudgetCampaignAssociationStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/BudgetCampaignAssociationStatusEnum.BudgetCampaignAssociationStatus
+   */
+  export enum BudgetCampaignAssociationStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    REMOVED = 3, // REMOVED
+  }
+
+  /**
+   * @name ClickTypeEnum.ClickType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ClickTypeEnum.ClickType
+   */
+  export enum ClickType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    APP_DEEPLINK = 2, // APP_DEEPLINK
+    BREADCRUMBS = 3, // BREADCRUMBS
+    BROADBAND_PLAN = 4, // BROADBAND_PLAN
+    CALL_TRACKING = 5, // CALL_TRACKING
+    CALLS = 6, // CALLS
+    CLICK_ON_ENGAGEMENT_AD = 7, // CLICK_ON_ENGAGEMENT_AD
+    GET_DIRECTIONS = 8, // GET_DIRECTIONS
+    LOCATION_EXPANSION = 9, // LOCATION_EXPANSION
+    LOCATION_FORMAT_CALL = 10, // LOCATION_FORMAT_CALL
+    LOCATION_FORMAT_DIRECTIONS = 11, // LOCATION_FORMAT_DIRECTIONS
+    LOCATION_FORMAT_IMAGE = 12, // LOCATION_FORMAT_IMAGE
+    LOCATION_FORMAT_LANDING_PAGE = 13, // LOCATION_FORMAT_LANDING_PAGE
+    LOCATION_FORMAT_MAP = 14, // LOCATION_FORMAT_MAP
+    LOCATION_FORMAT_STORE_INFO = 15, // LOCATION_FORMAT_STORE_INFO
+    LOCATION_FORMAT_TEXT = 16, // LOCATION_FORMAT_TEXT
+    MOBILE_CALL_TRACKING = 17, // MOBILE_CALL_TRACKING
+    OFFER_PRINTS = 18, // OFFER_PRINTS
+    OTHER = 19, // OTHER
+    PRODUCT_EXTENSION_CLICKS = 20, // PRODUCT_EXTENSION_CLICKS
+    PRODUCT_LISTING_AD_CLICKS = 21, // PRODUCT_LISTING_AD_CLICKS
+    SITELINKS = 22, // SITELINKS
+    STORE_LOCATOR = 23, // STORE_LOCATOR
+    URL_CLICKS = 25, // URL_CLICKS
+    VIDEO_APP_STORE_CLICKS = 26, // VIDEO_APP_STORE_CLICKS
+    VIDEO_CALL_TO_ACTION_CLICKS = 27, // VIDEO_CALL_TO_ACTION_CLICKS
+    VIDEO_CARD_ACTION_HEADLINE_CLICKS = 28, // VIDEO_CARD_ACTION_HEADLINE_CLICKS
+    VIDEO_END_CAP_CLICKS = 29, // VIDEO_END_CAP_CLICKS
+    VIDEO_WEBSITE_CLICKS = 30, // VIDEO_WEBSITE_CLICKS
+    VISUAL_SITELINKS = 31, // VISUAL_SITELINKS
+    WIRELESS_PLAN = 32, // WIRELESS_PLAN
+    PRODUCT_LISTING_AD_LOCAL = 33, // PRODUCT_LISTING_AD_LOCAL
+    PRODUCT_LISTING_AD_MULTICHANNEL_LOCAL = 34, // PRODUCT_LISTING_AD_MULTICHANNEL_LOCAL
+    PRODUCT_LISTING_AD_MULTICHANNEL_ONLINE = 35, // PRODUCT_LISTING_AD_MULTICHANNEL_ONLINE
+    PRODUCT_LISTING_ADS_COUPON = 36, // PRODUCT_LISTING_ADS_COUPON
+    PRODUCT_LISTING_AD_TRANSACTABLE = 37, // PRODUCT_LISTING_AD_TRANSACTABLE
+    PRODUCT_AD_APP_DEEPLINK = 38, // PRODUCT_AD_APP_DEEPLINK
+    SHOWCASE_AD_CATEGORY_LINK = 39, // SHOWCASE_AD_CATEGORY_LINK
+    SHOWCASE_AD_LOCAL_STOREFRONT_LINK = 40, // SHOWCASE_AD_LOCAL_STOREFRONT_LINK
+    SHOWCASE_AD_ONLINE_PRODUCT_LINK = 42, // SHOWCASE_AD_ONLINE_PRODUCT_LINK
+    SHOWCASE_AD_LOCAL_PRODUCT_LINK = 43, // SHOWCASE_AD_LOCAL_PRODUCT_LINK
+    PROMOTION_EXTENSION = 44, // PROMOTION_EXTENSION
+    SWIPEABLE_GALLERY_AD_HEADLINE = 45, // SWIPEABLE_GALLERY_AD_HEADLINE
+    SWIPEABLE_GALLERY_AD_SWIPES = 46, // SWIPEABLE_GALLERY_AD_SWIPES
+    SWIPEABLE_GALLERY_AD_SEE_MORE = 47, // SWIPEABLE_GALLERY_AD_SEE_MORE
+    SWIPEABLE_GALLERY_AD_SITELINK_ONE = 48, // SWIPEABLE_GALLERY_AD_SITELINK_ONE
+    SWIPEABLE_GALLERY_AD_SITELINK_TWO = 49, // SWIPEABLE_GALLERY_AD_SITELINK_TWO
+    SWIPEABLE_GALLERY_AD_SITELINK_THREE = 50, // SWIPEABLE_GALLERY_AD_SITELINK_THREE
+    SWIPEABLE_GALLERY_AD_SITELINK_FOUR = 51, // SWIPEABLE_GALLERY_AD_SITELINK_FOUR
+    SWIPEABLE_GALLERY_AD_SITELINK_FIVE = 52, // SWIPEABLE_GALLERY_AD_SITELINK_FIVE
+    HOTEL_PRICE = 53, // HOTEL_PRICE
+    PRICE_EXTENSION = 54, // PRICE_EXTENSION
+    HOTEL_BOOK_ON_GOOGLE_ROOM_SELECTION = 55, // HOTEL_BOOK_ON_GOOGLE_ROOM_SELECTION
+    SHOPPING_COMPARISON_LISTING = 56, // SHOPPING_COMPARISON_LISTING
+  }
+
+  /**
+   * @name ConversionActionCategoryEnum.ConversionActionCategory
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ConversionActionCategoryEnum.ConversionActionCategory
+   */
+  export enum ConversionActionCategory {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    DEFAULT = 2, // DEFAULT
+    PAGE_VIEW = 3, // PAGE_VIEW
+    PURCHASE = 4, // PURCHASE
+    SIGNUP = 5, // SIGNUP
+    LEAD = 6, // LEAD
+    DOWNLOAD = 7, // DOWNLOAD
+    ADD_TO_CART = 8, // ADD_TO_CART
+    BEGIN_CHECKOUT = 9, // BEGIN_CHECKOUT
+    SUBSCRIBE_PAID = 10, // SUBSCRIBE_PAID
+    PHONE_CALL_LEAD = 11, // PHONE_CALL_LEAD
+    IMPORTED_LEAD = 12, // IMPORTED_LEAD
+    SUBMIT_LEAD_FORM = 13, // SUBMIT_LEAD_FORM
+    BOOK_APPOINTMENT = 14, // BOOK_APPOINTMENT
+    REQUEST_QUOTE = 15, // REQUEST_QUOTE
+    GET_DIRECTIONS = 16, // GET_DIRECTIONS
+    OUTBOUND_CLICK = 17, // OUTBOUND_CLICK
+    CONTACT = 18, // CONTACT
+    ENGAGEMENT = 19, // ENGAGEMENT
+    STORE_VISIT = 20, // STORE_VISIT
+    STORE_SALE = 21, // STORE_SALE
+  }
+
+  /**
+   * @name ConversionAttributionEventTypeEnum.ConversionAttributionEventType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ConversionAttributionEventTypeEnum.ConversionAttributionEventType
+   */
+  export enum ConversionAttributionEventType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    IMPRESSION = 2, // IMPRESSION
+    INTERACTION = 3, // INTERACTION
+  }
+
+  /**
+   * @name ConversionLagBucketEnum.ConversionLagBucket
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ConversionLagBucketEnum.ConversionLagBucket
+   */
+  export enum ConversionLagBucket {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    LESS_THAN_ONE_DAY = 2, // LESS_THAN_ONE_DAY
+    ONE_TO_TWO_DAYS = 3, // ONE_TO_TWO_DAYS
+    TWO_TO_THREE_DAYS = 4, // TWO_TO_THREE_DAYS
+    THREE_TO_FOUR_DAYS = 5, // THREE_TO_FOUR_DAYS
+    FOUR_TO_FIVE_DAYS = 6, // FOUR_TO_FIVE_DAYS
+    FIVE_TO_SIX_DAYS = 7, // FIVE_TO_SIX_DAYS
+    SIX_TO_SEVEN_DAYS = 8, // SIX_TO_SEVEN_DAYS
+    SEVEN_TO_EIGHT_DAYS = 9, // SEVEN_TO_EIGHT_DAYS
+    EIGHT_TO_NINE_DAYS = 10, // EIGHT_TO_NINE_DAYS
+    NINE_TO_TEN_DAYS = 11, // NINE_TO_TEN_DAYS
+    TEN_TO_ELEVEN_DAYS = 12, // TEN_TO_ELEVEN_DAYS
+    ELEVEN_TO_TWELVE_DAYS = 13, // ELEVEN_TO_TWELVE_DAYS
+    TWELVE_TO_THIRTEEN_DAYS = 14, // TWELVE_TO_THIRTEEN_DAYS
+    THIRTEEN_TO_FOURTEEN_DAYS = 15, // THIRTEEN_TO_FOURTEEN_DAYS
+    FOURTEEN_TO_TWENTY_ONE_DAYS = 16, // FOURTEEN_TO_TWENTY_ONE_DAYS
+    TWENTY_ONE_TO_THIRTY_DAYS = 17, // TWENTY_ONE_TO_THIRTY_DAYS
+    THIRTY_TO_FORTY_FIVE_DAYS = 18, // THIRTY_TO_FORTY_FIVE_DAYS
+    FORTY_FIVE_TO_SIXTY_DAYS = 19, // FORTY_FIVE_TO_SIXTY_DAYS
+    SIXTY_TO_NINETY_DAYS = 20, // SIXTY_TO_NINETY_DAYS
+  }
+
+  /**
+   * @name ConversionOrAdjustmentLagBucketEnum.ConversionOrAdjustmentLagBucket
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ConversionOrAdjustmentLagBucketEnum.ConversionOrAdjustmentLagBucket
+   */
+  export enum ConversionOrAdjustmentLagBucket {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    CONVERSION_LESS_THAN_ONE_DAY = 2, // CONVERSION_LESS_THAN_ONE_DAY
+    CONVERSION_ONE_TO_TWO_DAYS = 3, // CONVERSION_ONE_TO_TWO_DAYS
+    CONVERSION_TWO_TO_THREE_DAYS = 4, // CONVERSION_TWO_TO_THREE_DAYS
+    CONVERSION_THREE_TO_FOUR_DAYS = 5, // CONVERSION_THREE_TO_FOUR_DAYS
+    CONVERSION_FOUR_TO_FIVE_DAYS = 6, // CONVERSION_FOUR_TO_FIVE_DAYS
+    CONVERSION_FIVE_TO_SIX_DAYS = 7, // CONVERSION_FIVE_TO_SIX_DAYS
+    CONVERSION_SIX_TO_SEVEN_DAYS = 8, // CONVERSION_SIX_TO_SEVEN_DAYS
+    CONVERSION_SEVEN_TO_EIGHT_DAYS = 9, // CONVERSION_SEVEN_TO_EIGHT_DAYS
+    CONVERSION_EIGHT_TO_NINE_DAYS = 10, // CONVERSION_EIGHT_TO_NINE_DAYS
+    CONVERSION_NINE_TO_TEN_DAYS = 11, // CONVERSION_NINE_TO_TEN_DAYS
+    CONVERSION_TEN_TO_ELEVEN_DAYS = 12, // CONVERSION_TEN_TO_ELEVEN_DAYS
+    CONVERSION_ELEVEN_TO_TWELVE_DAYS = 13, // CONVERSION_ELEVEN_TO_TWELVE_DAYS
+    CONVERSION_TWELVE_TO_THIRTEEN_DAYS = 14, // CONVERSION_TWELVE_TO_THIRTEEN_DAYS
+    CONVERSION_THIRTEEN_TO_FOURTEEN_DAYS = 15, // CONVERSION_THIRTEEN_TO_FOURTEEN_DAYS
+    CONVERSION_FOURTEEN_TO_TWENTY_ONE_DAYS = 16, // CONVERSION_FOURTEEN_TO_TWENTY_ONE_DAYS
+    CONVERSION_TWENTY_ONE_TO_THIRTY_DAYS = 17, // CONVERSION_TWENTY_ONE_TO_THIRTY_DAYS
+    CONVERSION_THIRTY_TO_FORTY_FIVE_DAYS = 18, // CONVERSION_THIRTY_TO_FORTY_FIVE_DAYS
+    CONVERSION_FORTY_FIVE_TO_SIXTY_DAYS = 19, // CONVERSION_FORTY_FIVE_TO_SIXTY_DAYS
+    CONVERSION_SIXTY_TO_NINETY_DAYS = 20, // CONVERSION_SIXTY_TO_NINETY_DAYS
+    ADJUSTMENT_LESS_THAN_ONE_DAY = 21, // ADJUSTMENT_LESS_THAN_ONE_DAY
+    ADJUSTMENT_ONE_TO_TWO_DAYS = 22, // ADJUSTMENT_ONE_TO_TWO_DAYS
+    ADJUSTMENT_TWO_TO_THREE_DAYS = 23, // ADJUSTMENT_TWO_TO_THREE_DAYS
+    ADJUSTMENT_THREE_TO_FOUR_DAYS = 24, // ADJUSTMENT_THREE_TO_FOUR_DAYS
+    ADJUSTMENT_FOUR_TO_FIVE_DAYS = 25, // ADJUSTMENT_FOUR_TO_FIVE_DAYS
+    ADJUSTMENT_FIVE_TO_SIX_DAYS = 26, // ADJUSTMENT_FIVE_TO_SIX_DAYS
+    ADJUSTMENT_SIX_TO_SEVEN_DAYS = 27, // ADJUSTMENT_SIX_TO_SEVEN_DAYS
+    ADJUSTMENT_SEVEN_TO_EIGHT_DAYS = 28, // ADJUSTMENT_SEVEN_TO_EIGHT_DAYS
+    ADJUSTMENT_EIGHT_TO_NINE_DAYS = 29, // ADJUSTMENT_EIGHT_TO_NINE_DAYS
+    ADJUSTMENT_NINE_TO_TEN_DAYS = 30, // ADJUSTMENT_NINE_TO_TEN_DAYS
+    ADJUSTMENT_TEN_TO_ELEVEN_DAYS = 31, // ADJUSTMENT_TEN_TO_ELEVEN_DAYS
+    ADJUSTMENT_ELEVEN_TO_TWELVE_DAYS = 32, // ADJUSTMENT_ELEVEN_TO_TWELVE_DAYS
+    ADJUSTMENT_TWELVE_TO_THIRTEEN_DAYS = 33, // ADJUSTMENT_TWELVE_TO_THIRTEEN_DAYS
+    ADJUSTMENT_THIRTEEN_TO_FOURTEEN_DAYS = 34, // ADJUSTMENT_THIRTEEN_TO_FOURTEEN_DAYS
+    ADJUSTMENT_FOURTEEN_TO_TWENTY_ONE_DAYS = 35, // ADJUSTMENT_FOURTEEN_TO_TWENTY_ONE_DAYS
+    ADJUSTMENT_TWENTY_ONE_TO_THIRTY_DAYS = 36, // ADJUSTMENT_TWENTY_ONE_TO_THIRTY_DAYS
+    ADJUSTMENT_THIRTY_TO_FORTY_FIVE_DAYS = 37, // ADJUSTMENT_THIRTY_TO_FORTY_FIVE_DAYS
+    ADJUSTMENT_FORTY_FIVE_TO_SIXTY_DAYS = 38, // ADJUSTMENT_FORTY_FIVE_TO_SIXTY_DAYS
+    ADJUSTMENT_SIXTY_TO_NINETY_DAYS = 39, // ADJUSTMENT_SIXTY_TO_NINETY_DAYS
+    ADJUSTMENT_NINETY_TO_ONE_HUNDRED_AND_FORTY_FIVE_DAYS = 40, // ADJUSTMENT_NINETY_TO_ONE_HUNDRED_AND_FORTY_FIVE_DAYS
+    CONVERSION_UNKNOWN = 41, // CONVERSION_UNKNOWN
+    ADJUSTMENT_UNKNOWN = 42, // ADJUSTMENT_UNKNOWN
+  }
+
+  /**
+   * @name ExternalConversionSourceEnum.ExternalConversionSource
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ExternalConversionSourceEnum.ExternalConversionSource
+   */
+  export enum ExternalConversionSource {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    WEBPAGE = 2, // WEBPAGE
+    ANALYTICS = 3, // ANALYTICS
+    UPLOAD = 4, // UPLOAD
+    AD_CALL_METRICS = 5, // AD_CALL_METRICS
+    WEBSITE_CALL_METRICS = 6, // WEBSITE_CALL_METRICS
+    STORE_VISITS = 7, // STORE_VISITS
+    ANDROID_IN_APP = 8, // ANDROID_IN_APP
+    IOS_IN_APP = 9, // IOS_IN_APP
+    IOS_FIRST_OPEN = 10, // IOS_FIRST_OPEN
+    APP_UNSPECIFIED = 11, // APP_UNSPECIFIED
+    ANDROID_FIRST_OPEN = 12, // ANDROID_FIRST_OPEN
+    UPLOAD_CALLS = 13, // UPLOAD_CALLS
+    FIREBASE = 14, // FIREBASE
+    CLICK_TO_CALL = 15, // CLICK_TO_CALL
+    SALESFORCE = 16, // SALESFORCE
+    STORE_SALES_CRM = 17, // STORE_SALES_CRM
+    STORE_SALES_PAYMENT_NETWORK = 18, // STORE_SALES_PAYMENT_NETWORK
+    GOOGLE_PLAY = 19, // GOOGLE_PLAY
+    THIRD_PARTY_APP_ANALYTICS = 20, // THIRD_PARTY_APP_ANALYTICS
+    GOOGLE_ATTRIBUTION = 21, // GOOGLE_ATTRIBUTION
+    STORE_SALES_DIRECT_UPLOAD = 23, // STORE_SALES_DIRECT_UPLOAD
+    STORE_SALES = 24, // STORE_SALES
+    SEARCH_ADS_360 = 25, // SEARCH_ADS_360
+    GOOGLE_HOSTED = 27, // GOOGLE_HOSTED
+    FLOODLIGHT = 29, // FLOODLIGHT
+    ANALYTICS_SEARCH_ADS_360 = 31, // ANALYTICS_SEARCH_ADS_360
+    FIREBASE_SEARCH_ADS_360 = 33, // FIREBASE_SEARCH_ADS_360
+  }
+
+  /**
+   * @name HotelPriceBucketEnum.HotelPriceBucket
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/HotelPriceBucketEnum.HotelPriceBucket
+   */
+  export enum HotelPriceBucket {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    LOWEST_UNIQUE = 2, // LOWEST_UNIQUE
+    LOWEST_TIED = 3, // LOWEST_TIED
+    NOT_LOWEST = 4, // NOT_LOWEST
+    ONLY_PARTNER_SHOWN = 5, // ONLY_PARTNER_SHOWN
+  }
+
+  /**
+   * @name HotelRateTypeEnum.HotelRateType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/HotelRateTypeEnum.HotelRateType
+   */
+  export enum HotelRateType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    UNAVAILABLE = 2, // UNAVAILABLE
+    PUBLIC_RATE = 3, // PUBLIC_RATE
+    QUALIFIED_RATE = 4, // QUALIFIED_RATE
+    PRIVATE_RATE = 5, // PRIVATE_RATE
+  }
+
+  /**
+   * @name PlaceholderTypeEnum.PlaceholderType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PlaceholderTypeEnum.PlaceholderType
+   */
+  export enum PlaceholderType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    SITELINK = 2, // SITELINK
+    CALL = 3, // CALL
+    APP = 4, // APP
+    LOCATION = 5, // LOCATION
+    AFFILIATE_LOCATION = 6, // AFFILIATE_LOCATION
+    CALLOUT = 7, // CALLOUT
+    STRUCTURED_SNIPPET = 8, // STRUCTURED_SNIPPET
+    MESSAGE = 9, // MESSAGE
+    PRICE = 10, // PRICE
+    PROMOTION = 11, // PROMOTION
+    AD_CUSTOMIZER = 12, // AD_CUSTOMIZER
+    DYNAMIC_EDUCATION = 13, // DYNAMIC_EDUCATION
+    DYNAMIC_FLIGHT = 14, // DYNAMIC_FLIGHT
+    DYNAMIC_CUSTOM = 15, // DYNAMIC_CUSTOM
+    DYNAMIC_HOTEL = 16, // DYNAMIC_HOTEL
+    DYNAMIC_REAL_ESTATE = 17, // DYNAMIC_REAL_ESTATE
+    DYNAMIC_TRAVEL = 18, // DYNAMIC_TRAVEL
+    DYNAMIC_LOCAL = 19, // DYNAMIC_LOCAL
+    DYNAMIC_JOB = 20, // DYNAMIC_JOB
+    IMAGE = 21, // IMAGE
+  }
+
+  /**
+   * @name SearchEngineResultsPageTypeEnum.SearchEngineResultsPageType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/SearchEngineResultsPageTypeEnum.SearchEngineResultsPageType
+   */
+  export enum SearchEngineResultsPageType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ADS_ONLY = 2, // ADS_ONLY
+    ORGANIC_ONLY = 3, // ORGANIC_ONLY
+    ADS_AND_ORGANIC = 4, // ADS_AND_ORGANIC
+  }
+
+  /**
+   * @name SearchTermMatchTypeEnum.SearchTermMatchType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/SearchTermMatchTypeEnum.SearchTermMatchType
+   */
+  export enum SearchTermMatchType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    BROAD = 2, // BROAD
+    EXACT = 3, // EXACT
+    PHRASE = 4, // PHRASE
+    NEAR_EXACT = 5, // NEAR_EXACT
+    NEAR_PHRASE = 6, // NEAR_PHRASE
+  }
+
+  /**
+   * @name SlotEnum.Slot
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/SlotEnum.Slot
+   */
+  export enum Slot {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    SEARCH_SIDE = 2, // SEARCH_SIDE
+    SEARCH_TOP = 3, // SEARCH_TOP
+    SEARCH_OTHER = 4, // SEARCH_OTHER
+    CONTENT = 5, // CONTENT
+    SEARCH_PARTNER_TOP = 6, // SEARCH_PARTNER_TOP
+    SEARCH_PARTNER_OTHER = 7, // SEARCH_PARTNER_OTHER
+    MIXED = 8, // MIXED
+  }
+
+  /**
+   * @name TrackingCodePageFormatEnum.TrackingCodePageFormat
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/TrackingCodePageFormatEnum.TrackingCodePageFormat
+   */
+  export enum TrackingCodePageFormat {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    HTML = 2, // HTML
+    AMP = 3, // AMP
+  }
+
+  /**
+   * @name TrackingCodeTypeEnum.TrackingCodeType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/TrackingCodeTypeEnum.TrackingCodeType
+   */
+  export enum TrackingCodeType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    WEBPAGE = 2, // WEBPAGE
+    WEBPAGE_ONCLICK = 3, // WEBPAGE_ONCLICK
+    CLICK_TO_CALL = 4, // CLICK_TO_CALL
+    WEBSITE_CALL = 5, // WEBSITE_CALL
+  }
+
+  /**
+   * @name TargetingDimensionEnum.TargetingDimension
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/TargetingDimensionEnum.TargetingDimension
+   */
+  export enum TargetingDimension {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    KEYWORD = 2, // KEYWORD
+    AUDIENCE = 3, // AUDIENCE
+    TOPIC = 4, // TOPIC
+    GENDER = 5, // GENDER
+    AGE_RANGE = 6, // AGE_RANGE
+    PLACEMENT = 7, // PLACEMENT
+    PARENTAL_STATUS = 8, // PARENTAL_STATUS
+    INCOME_RANGE = 9, // INCOME_RANGE
+  }
+
+  /**
+   * @name CustomerMatchUploadKeyTypeEnum.CustomerMatchUploadKeyType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CustomerMatchUploadKeyTypeEnum.CustomerMatchUploadKeyType
+   */
+  export enum CustomerMatchUploadKeyType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    CONTACT_INFO = 2, // CONTACT_INFO
+    CRM_ID = 3, // CRM_ID
+    MOBILE_ADVERTISING_ID = 4, // MOBILE_ADVERTISING_ID
+  }
+
+  /**
+   * @name UserListCombinedRuleOperatorEnum.UserListCombinedRuleOperator
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListCombinedRuleOperatorEnum.UserListCombinedRuleOperator
+   */
+  export enum UserListCombinedRuleOperator {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    AND = 2, // AND
+    AND_NOT = 3, // AND_NOT
+  }
+
+  /**
+   * @name UserListCrmDataSourceTypeEnum.UserListCrmDataSourceType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListCrmDataSourceTypeEnum.UserListCrmDataSourceType
+   */
+  export enum UserListCrmDataSourceType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    FIRST_PARTY = 2, // FIRST_PARTY
+    THIRD_PARTY_CREDIT_BUREAU = 3, // THIRD_PARTY_CREDIT_BUREAU
+    THIRD_PARTY_VOTER_FILE = 4, // THIRD_PARTY_VOTER_FILE
+  }
+
+  /**
+   * @name UserListDateRuleItemOperatorEnum.UserListDateRuleItemOperator
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListDateRuleItemOperatorEnum.UserListDateRuleItemOperator
+   */
+  export enum UserListDateRuleItemOperator {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    EQUALS = 2, // EQUALS
+    NOT_EQUALS = 3, // NOT_EQUALS
+    BEFORE = 4, // BEFORE
+    AFTER = 5, // AFTER
+  }
+
+  /**
+   * @name UserListLogicalRuleOperatorEnum.UserListLogicalRuleOperator
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListLogicalRuleOperatorEnum.UserListLogicalRuleOperator
+   */
+  export enum UserListLogicalRuleOperator {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ALL = 2, // ALL
+    ANY = 3, // ANY
+    NONE = 4, // NONE
+  }
+
+  /**
+   * @name UserListNumberRuleItemOperatorEnum.UserListNumberRuleItemOperator
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListNumberRuleItemOperatorEnum.UserListNumberRuleItemOperator
+   */
+  export enum UserListNumberRuleItemOperator {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    GREATER_THAN = 2, // GREATER_THAN
+    GREATER_THAN_OR_EQUAL = 3, // GREATER_THAN_OR_EQUAL
+    EQUALS = 4, // EQUALS
+    NOT_EQUALS = 5, // NOT_EQUALS
+    LESS_THAN = 6, // LESS_THAN
+    LESS_THAN_OR_EQUAL = 7, // LESS_THAN_OR_EQUAL
+  }
+
+  /**
+   * @name UserListPrepopulationStatusEnum.UserListPrepopulationStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListPrepopulationStatusEnum.UserListPrepopulationStatus
+   */
+  export enum UserListPrepopulationStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    REQUESTED = 2, // REQUESTED
+    FINISHED = 3, // FINISHED
+    FAILED = 4, // FAILED
+  }
+
+  /**
+   * @name UserListRuleTypeEnum.UserListRuleType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListRuleTypeEnum.UserListRuleType
+   */
+  export enum UserListRuleType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    AND_OF_ORS = 2, // AND_OF_ORS
+    OR_OF_ANDS = 3, // OR_OF_ANDS
+  }
+
+  /**
+   * @name UserListStringRuleItemOperatorEnum.UserListStringRuleItemOperator
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListStringRuleItemOperatorEnum.UserListStringRuleItemOperator
+   */
+  export enum UserListStringRuleItemOperator {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    CONTAINS = 2, // CONTAINS
+    EQUALS = 3, // EQUALS
+    STARTS_WITH = 4, // STARTS_WITH
+    ENDS_WITH = 5, // ENDS_WITH
+    NOT_EQUALS = 6, // NOT_EQUALS
+    NOT_CONTAINS = 7, // NOT_CONTAINS
+    NOT_STARTS_WITH = 8, // NOT_STARTS_WITH
+    NOT_ENDS_WITH = 9, // NOT_ENDS_WITH
+  }
+
+  /**
+   * @name AccessInvitationStatusEnum.AccessInvitationStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AccessInvitationStatusEnum.AccessInvitationStatus
+   */
+  export enum AccessInvitationStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PENDING = 2, // PENDING
+    DECLINED = 3, // DECLINED
+    EXPIRED = 4, // EXPIRED
+  }
+
+  /**
+   * @name AccessReasonEnum.AccessReason
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AccessReasonEnum.AccessReason
+   */
+  export enum AccessReason {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    OWNED = 2, // OWNED
+    SHARED = 3, // SHARED
+    LICENSED = 4, // LICENSED
+    SUBSCRIBED = 5, // SUBSCRIBED
+    AFFILIATED = 6, // AFFILIATED
+  }
+
+  /**
+   * @name AccessRoleEnum.AccessRole
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AccessRoleEnum.AccessRole
+   */
+  export enum AccessRole {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ADMIN = 2, // ADMIN
+    STANDARD = 3, // STANDARD
+    READ_ONLY = 4, // READ_ONLY
+    EMAIL_ONLY = 5, // EMAIL_ONLY
+  }
+
+  /**
+   * @name AccountBudgetProposalStatusEnum.AccountBudgetProposalStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AccountBudgetProposalStatusEnum.AccountBudgetProposalStatus
+   */
+  export enum AccountBudgetProposalStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PENDING = 2, // PENDING
+    APPROVED_HELD = 3, // APPROVED_HELD
+    APPROVED = 4, // APPROVED
+    CANCELLED = 5, // CANCELLED
+    REJECTED = 6, // REJECTED
+  }
+
+  /**
+   * @name AccountBudgetProposalTypeEnum.AccountBudgetProposalType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AccountBudgetProposalTypeEnum.AccountBudgetProposalType
+   */
+  export enum AccountBudgetProposalType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    CREATE = 2, // CREATE
+    UPDATE = 3, // UPDATE
+    END = 4, // END
+    REMOVE = 5, // REMOVE
+  }
+
+  /**
+   * @name AccountBudgetStatusEnum.AccountBudgetStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AccountBudgetStatusEnum.AccountBudgetStatus
+   */
+  export enum AccountBudgetStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PENDING = 2, // PENDING
+    APPROVED = 3, // APPROVED
+    CANCELLED = 4, // CANCELLED
+  }
+
+  /**
+   * @name AccountLinkStatusEnum.AccountLinkStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AccountLinkStatusEnum.AccountLinkStatus
+   */
+  export enum AccountLinkStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    REMOVED = 3, // REMOVED
+    REQUESTED = 4, // REQUESTED
+    PENDING_APPROVAL = 5, // PENDING_APPROVAL
+    REJECTED = 6, // REJECTED
+    REVOKED = 7, // REVOKED
+  }
+
+  /**
+   * @name AdCustomizerPlaceholderFieldEnum.AdCustomizerPlaceholderField
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdCustomizerPlaceholderFieldEnum.AdCustomizerPlaceholderField
+   */
+  export enum AdCustomizerPlaceholderField {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    INTEGER = 2, // INTEGER
+    PRICE = 3, // PRICE
+    DATE = 4, // DATE
+    STRING = 5, // STRING
+  }
+
+  /**
+   * @name AdGroupAdRotationModeEnum.AdGroupAdRotationMode
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdGroupAdRotationModeEnum.AdGroupAdRotationMode
+   */
+  export enum AdGroupAdRotationMode {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    OPTIMIZE = 2, // OPTIMIZE
+    ROTATE_FOREVER = 3, // ROTATE_FOREVER
+  }
+
+  /**
+   * @name AdGroupAdStatusEnum.AdGroupAdStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdGroupAdStatusEnum.AdGroupAdStatus
+   */
+  export enum AdGroupAdStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    PAUSED = 3, // PAUSED
+    REMOVED = 4, // REMOVED
+  }
+
+  /**
+   * @name AdGroupCriterionApprovalStatusEnum.AdGroupCriterionApprovalStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdGroupCriterionApprovalStatusEnum.AdGroupCriterionApprovalStatus
+   */
+  export enum AdGroupCriterionApprovalStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    APPROVED = 2, // APPROVED
+    DISAPPROVED = 3, // DISAPPROVED
+    PENDING_REVIEW = 4, // PENDING_REVIEW
+    UNDER_REVIEW = 5, // UNDER_REVIEW
+  }
+
+  /**
+   * @name AdGroupCriterionStatusEnum.AdGroupCriterionStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdGroupCriterionStatusEnum.AdGroupCriterionStatus
+   */
+  export enum AdGroupCriterionStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    PAUSED = 3, // PAUSED
+    REMOVED = 4, // REMOVED
+  }
+
+  /**
+   * @name AdGroupStatusEnum.AdGroupStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdGroupStatusEnum.AdGroupStatus
+   */
+  export enum AdGroupStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    PAUSED = 3, // PAUSED
+    REMOVED = 4, // REMOVED
+  }
+
+  /**
+   * @name AdGroupTypeEnum.AdGroupType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdGroupTypeEnum.AdGroupType
+   */
+  export enum AdGroupType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    SEARCH_STANDARD = 2, // SEARCH_STANDARD
+    DISPLAY_STANDARD = 3, // DISPLAY_STANDARD
+    SHOPPING_PRODUCT_ADS = 4, // SHOPPING_PRODUCT_ADS
+    HOTEL_ADS = 6, // HOTEL_ADS
+    SHOPPING_SMART_ADS = 7, // SHOPPING_SMART_ADS
+    VIDEO_BUMPER = 8, // VIDEO_BUMPER
+    VIDEO_TRUE_VIEW_IN_STREAM = 9, // VIDEO_TRUE_VIEW_IN_STREAM
+    VIDEO_TRUE_VIEW_IN_DISPLAY = 10, // VIDEO_TRUE_VIEW_IN_DISPLAY
+    VIDEO_NON_SKIPPABLE_IN_STREAM = 11, // VIDEO_NON_SKIPPABLE_IN_STREAM
+    VIDEO_OUTSTREAM = 12, // VIDEO_OUTSTREAM
+    SEARCH_DYNAMIC_ADS = 13, // SEARCH_DYNAMIC_ADS
+    SHOPPING_COMPARISON_LISTING_ADS = 14, // SHOPPING_COMPARISON_LISTING_ADS
+    PROMOTED_HOTEL_ADS = 15, // PROMOTED_HOTEL_ADS
+    VIDEO_RESPONSIVE = 16, // VIDEO_RESPONSIVE
+    VIDEO_EFFICIENT_REACH = 17, // VIDEO_EFFICIENT_REACH
+  }
+
+  /**
+   * @name AdServingOptimizationStatusEnum.AdServingOptimizationStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdServingOptimizationStatusEnum.AdServingOptimizationStatus
+   */
+  export enum AdServingOptimizationStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    OPTIMIZE = 2, // OPTIMIZE
+    CONVERSION_OPTIMIZE = 3, // CONVERSION_OPTIMIZE
+    ROTATE = 4, // ROTATE
+    ROTATE_INDEFINITELY = 5, // ROTATE_INDEFINITELY
+    UNAVAILABLE = 6, // UNAVAILABLE
+  }
+
+  /**
+   * @name AdStrengthEnum.AdStrength
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdStrengthEnum.AdStrength
+   */
+  export enum AdStrength {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PENDING = 2, // PENDING
+    NO_ADS = 3, // NO_ADS
+    POOR = 4, // POOR
+    AVERAGE = 5, // AVERAGE
+    GOOD = 6, // GOOD
+    EXCELLENT = 7, // EXCELLENT
+  }
+
+  /**
+   * @name AdTypeEnum.AdType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AdTypeEnum.AdType
+   */
+  export enum AdType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    TEXT_AD = 2, // TEXT_AD
+    EXPANDED_TEXT_AD = 3, // EXPANDED_TEXT_AD
+    CALL_ONLY_AD = 6, // CALL_ONLY_AD
+    EXPANDED_DYNAMIC_SEARCH_AD = 7, // EXPANDED_DYNAMIC_SEARCH_AD
+    HOTEL_AD = 8, // HOTEL_AD
+    SHOPPING_SMART_AD = 9, // SHOPPING_SMART_AD
+    SHOPPING_PRODUCT_AD = 10, // SHOPPING_PRODUCT_AD
+    VIDEO_AD = 12, // VIDEO_AD
+    GMAIL_AD = 13, // GMAIL_AD
+    IMAGE_AD = 14, // IMAGE_AD
+    RESPONSIVE_SEARCH_AD = 15, // RESPONSIVE_SEARCH_AD
+    LEGACY_RESPONSIVE_DISPLAY_AD = 16, // LEGACY_RESPONSIVE_DISPLAY_AD
+    APP_AD = 17, // APP_AD
+    LEGACY_APP_INSTALL_AD = 18, // LEGACY_APP_INSTALL_AD
+    RESPONSIVE_DISPLAY_AD = 19, // RESPONSIVE_DISPLAY_AD
+    LOCAL_AD = 20, // LOCAL_AD
+    HTML5_UPLOAD_AD = 21, // HTML5_UPLOAD_AD
+    DYNAMIC_HTML5_AD = 22, // DYNAMIC_HTML5_AD
+    APP_ENGAGEMENT_AD = 23, // APP_ENGAGEMENT_AD
+    SHOPPING_COMPARISON_LISTING_AD = 24, // SHOPPING_COMPARISON_LISTING_AD
+    VIDEO_BUMPER_AD = 25, // VIDEO_BUMPER_AD
+    VIDEO_NON_SKIPPABLE_IN_STREAM_AD = 26, // VIDEO_NON_SKIPPABLE_IN_STREAM_AD
+    VIDEO_OUTSTREAM_AD = 27, // VIDEO_OUTSTREAM_AD
+    VIDEO_TRUEVIEW_DISCOVERY_AD = 28, // VIDEO_TRUEVIEW_DISCOVERY_AD
+    VIDEO_TRUEVIEW_IN_STREAM_AD = 29, // VIDEO_TRUEVIEW_IN_STREAM_AD
+    VIDEO_RESPONSIVE_AD = 30, // VIDEO_RESPONSIVE_AD
+  }
+
+  /**
+   * @name AffiliateLocationFeedRelationshipTypeEnum.AffiliateLocationFeedRelationshipType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AffiliateLocationFeedRelationshipTypeEnum.AffiliateLocationFeedRelationshipType
+   */
+  export enum AffiliateLocationFeedRelationshipType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    GENERAL_RETAILER = 2, // GENERAL_RETAILER
+  }
+
+  /**
+   * @name AffiliateLocationPlaceholderFieldEnum.AffiliateLocationPlaceholderField
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AffiliateLocationPlaceholderFieldEnum.AffiliateLocationPlaceholderField
+   */
+  export enum AffiliateLocationPlaceholderField {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    BUSINESS_NAME = 2, // BUSINESS_NAME
+    ADDRESS_LINE_1 = 3, // ADDRESS_LINE_1
+    ADDRESS_LINE_2 = 4, // ADDRESS_LINE_2
+    CITY = 5, // CITY
+    PROVINCE = 6, // PROVINCE
+    POSTAL_CODE = 7, // POSTAL_CODE
+    COUNTRY_CODE = 8, // COUNTRY_CODE
+    PHONE_NUMBER = 9, // PHONE_NUMBER
+    LANGUAGE_CODE = 10, // LANGUAGE_CODE
+    CHAIN_ID = 11, // CHAIN_ID
+    CHAIN_NAME = 12, // CHAIN_NAME
+  }
+
+  /**
+   * @name AppCampaignAppStoreEnum.AppCampaignAppStore
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AppCampaignAppStoreEnum.AppCampaignAppStore
+   */
+  export enum AppCampaignAppStore {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    APPLE_APP_STORE = 2, // APPLE_APP_STORE
+    GOOGLE_APP_STORE = 3, // GOOGLE_APP_STORE
+  }
+
+  /**
+   * @name AppCampaignBiddingStrategyGoalTypeEnum.AppCampaignBiddingStrategyGoalType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AppCampaignBiddingStrategyGoalTypeEnum.AppCampaignBiddingStrategyGoalType
+   */
+  export enum AppCampaignBiddingStrategyGoalType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    OPTIMIZE_INSTALLS_TARGET_INSTALL_COST = 2, // OPTIMIZE_INSTALLS_TARGET_INSTALL_COST
+    OPTIMIZE_IN_APP_CONVERSIONS_TARGET_INSTALL_COST = 3, // OPTIMIZE_IN_APP_CONVERSIONS_TARGET_INSTALL_COST
+    OPTIMIZE_IN_APP_CONVERSIONS_TARGET_CONVERSION_COST = 4, // OPTIMIZE_IN_APP_CONVERSIONS_TARGET_CONVERSION_COST
+    OPTIMIZE_RETURN_ON_ADVERTISING_SPEND = 5, // OPTIMIZE_RETURN_ON_ADVERTISING_SPEND
+  }
+
+  /**
+   * @name AppPlaceholderFieldEnum.AppPlaceholderField
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AppPlaceholderFieldEnum.AppPlaceholderField
+   */
+  export enum AppPlaceholderField {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    STORE = 2, // STORE
+    ID = 3, // ID
+    LINK_TEXT = 4, // LINK_TEXT
+    URL = 5, // URL
+    FINAL_URLS = 6, // FINAL_URLS
+    FINAL_MOBILE_URLS = 7, // FINAL_MOBILE_URLS
+    TRACKING_URL = 8, // TRACKING_URL
+    FINAL_URL_SUFFIX = 9, // FINAL_URL_SUFFIX
+  }
+
+  /**
+   * @name AssetFieldTypeEnum.AssetFieldType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AssetFieldTypeEnum.AssetFieldType
+   */
+  export enum AssetFieldType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    HEADLINE = 2, // HEADLINE
+    DESCRIPTION = 3, // DESCRIPTION
+    MANDATORY_AD_TEXT = 4, // MANDATORY_AD_TEXT
+    MARKETING_IMAGE = 5, // MARKETING_IMAGE
+    MEDIA_BUNDLE = 6, // MEDIA_BUNDLE
+    YOUTUBE_VIDEO = 7, // YOUTUBE_VIDEO
+    BOOK_ON_GOOGLE = 8, // BOOK_ON_GOOGLE
+    LEAD_FORM = 9, // LEAD_FORM
+    PROMOTION = 10, // PROMOTION
+    CALLOUT = 11, // CALLOUT
+    STRUCTURED_SNIPPET = 12, // STRUCTURED_SNIPPET
+    SITELINK = 13, // SITELINK
+  }
+
+  /**
+   * @name AssetLinkStatusEnum.AssetLinkStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AssetLinkStatusEnum.AssetLinkStatus
+   */
+  export enum AssetLinkStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    REMOVED = 3, // REMOVED
+    PAUSED = 4, // PAUSED
+  }
+
+  /**
+   * @name AssetTypeEnum.AssetType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AssetTypeEnum.AssetType
+   */
+  export enum AssetType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    YOUTUBE_VIDEO = 2, // YOUTUBE_VIDEO
+    MEDIA_BUNDLE = 3, // MEDIA_BUNDLE
+    IMAGE = 4, // IMAGE
+    TEXT = 5, // TEXT
+    LEAD_FORM = 6, // LEAD_FORM
+    BOOK_ON_GOOGLE = 7, // BOOK_ON_GOOGLE
+    PROMOTION = 8, // PROMOTION
+    CALLOUT = 9, // CALLOUT
+    STRUCTURED_SNIPPET = 10, // STRUCTURED_SNIPPET
+    SITELINK = 11, // SITELINK
+  }
+
+  /**
+   * @name AttributionModelEnum.AttributionModel
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/AttributionModelEnum.AttributionModel
+   */
+  export enum AttributionModel {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    EXTERNAL = 100, // EXTERNAL
+    GOOGLE_ADS_LAST_CLICK = 101, // GOOGLE_ADS_LAST_CLICK
+    GOOGLE_SEARCH_ATTRIBUTION_FIRST_CLICK = 102, // GOOGLE_SEARCH_ATTRIBUTION_FIRST_CLICK
+    GOOGLE_SEARCH_ATTRIBUTION_LINEAR = 103, // GOOGLE_SEARCH_ATTRIBUTION_LINEAR
+    GOOGLE_SEARCH_ATTRIBUTION_TIME_DECAY = 104, // GOOGLE_SEARCH_ATTRIBUTION_TIME_DECAY
+    GOOGLE_SEARCH_ATTRIBUTION_POSITION_BASED = 105, // GOOGLE_SEARCH_ATTRIBUTION_POSITION_BASED
+    GOOGLE_SEARCH_ATTRIBUTION_DATA_DRIVEN = 106, // GOOGLE_SEARCH_ATTRIBUTION_DATA_DRIVEN
+  }
+
+  /**
+   * @name BatchJobStatusEnum.BatchJobStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/BatchJobStatusEnum.BatchJobStatus
+   */
+  export enum BatchJobStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PENDING = 2, // PENDING
+    RUNNING = 3, // RUNNING
+    DONE = 4, // DONE
+  }
+
+  /**
+   * @name BidModifierSourceEnum.BidModifierSource
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/BidModifierSourceEnum.BidModifierSource
+   */
+  export enum BidModifierSource {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    CAMPAIGN = 2, // CAMPAIGN
+    AD_GROUP = 3, // AD_GROUP
+  }
+
+  /**
+   * @name BiddingSourceEnum.BiddingSource
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/BiddingSourceEnum.BiddingSource
+   */
+  export enum BiddingSource {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    CAMPAIGN_BIDDING_STRATEGY = 5, // CAMPAIGN_BIDDING_STRATEGY
+    AD_GROUP = 6, // AD_GROUP
+    AD_GROUP_CRITERION = 7, // AD_GROUP_CRITERION
+  }
+
+  /**
+   * @name BiddingStrategyStatusEnum.BiddingStrategyStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/BiddingStrategyStatusEnum.BiddingStrategyStatus
+   */
+  export enum BiddingStrategyStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    REMOVED = 4, // REMOVED
+  }
+
+  /**
+   * @name BiddingStrategyTypeEnum.BiddingStrategyType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/BiddingStrategyTypeEnum.BiddingStrategyType
+   */
+  export enum BiddingStrategyType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    COMMISSION = 16, // COMMISSION
+    ENHANCED_CPC = 2, // ENHANCED_CPC
+    MANUAL_CPC = 3, // MANUAL_CPC
+    MANUAL_CPM = 4, // MANUAL_CPM
+    MANUAL_CPV = 13, // MANUAL_CPV
+    MAXIMIZE_CONVERSIONS = 10, // MAXIMIZE_CONVERSIONS
+    MAXIMIZE_CONVERSION_VALUE = 11, // MAXIMIZE_CONVERSION_VALUE
+    PAGE_ONE_PROMOTED = 5, // PAGE_ONE_PROMOTED
+    PERCENT_CPC = 12, // PERCENT_CPC
+    TARGET_CPA = 6, // TARGET_CPA
+    TARGET_CPM = 14, // TARGET_CPM
+    TARGET_IMPRESSION_SHARE = 15, // TARGET_IMPRESSION_SHARE
+    TARGET_OUTRANK_SHARE = 7, // TARGET_OUTRANK_SHARE
+    TARGET_ROAS = 8, // TARGET_ROAS
+    TARGET_SPEND = 9, // TARGET_SPEND
+  }
+
+  /**
+   * @name BillingSetupStatusEnum.BillingSetupStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/BillingSetupStatusEnum.BillingSetupStatus
+   */
+  export enum BillingSetupStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PENDING = 2, // PENDING
+    APPROVED_HELD = 3, // APPROVED_HELD
+    APPROVED = 4, // APPROVED
+    CANCELLED = 5, // CANCELLED
+  }
+
+  /**
+   * @name BrandSafetySuitabilityEnum.BrandSafetySuitability
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/BrandSafetySuitabilityEnum.BrandSafetySuitability
+   */
+  export enum BrandSafetySuitability {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    EXPANDED_INVENTORY = 2, // EXPANDED_INVENTORY
+    STANDARD_INVENTORY = 3, // STANDARD_INVENTORY
+    LIMITED_INVENTORY = 4, // LIMITED_INVENTORY
+  }
+
+  /**
+   * @name BudgetDeliveryMethodEnum.BudgetDeliveryMethod
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/BudgetDeliveryMethodEnum.BudgetDeliveryMethod
+   */
+  export enum BudgetDeliveryMethod {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    STANDARD = 2, // STANDARD
+    ACCELERATED = 3, // ACCELERATED
+  }
+
+  /**
+   * @name BudgetPeriodEnum.BudgetPeriod
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/BudgetPeriodEnum.BudgetPeriod
+   */
+  export enum BudgetPeriod {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    DAILY = 2, // DAILY
+    CUSTOM_PERIOD = 5, // CUSTOM_PERIOD
+  }
+
+  /**
+   * @name BudgetStatusEnum.BudgetStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/BudgetStatusEnum.BudgetStatus
+   */
+  export enum BudgetStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    REMOVED = 3, // REMOVED
+  }
+
+  /**
+   * @name BudgetTypeEnum.BudgetType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/BudgetTypeEnum.BudgetType
+   */
+  export enum BudgetType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    STANDARD = 2, // STANDARD
+    HOTEL_ADS_COMMISSION = 3, // HOTEL_ADS_COMMISSION
+    FIXED_CPA = 4, // FIXED_CPA
+  }
+
+  /**
+   * @name CallPlaceholderFieldEnum.CallPlaceholderField
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CallPlaceholderFieldEnum.CallPlaceholderField
+   */
+  export enum CallPlaceholderField {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PHONE_NUMBER = 2, // PHONE_NUMBER
+    COUNTRY_CODE = 3, // COUNTRY_CODE
+    TRACKED = 4, // TRACKED
+    CONVERSION_TYPE_ID = 5, // CONVERSION_TYPE_ID
+    CONVERSION_REPORTING_STATE = 6, // CONVERSION_REPORTING_STATE
+  }
+
+  /**
+   * @name CallTrackingDisplayLocationEnum.CallTrackingDisplayLocation
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CallTrackingDisplayLocationEnum.CallTrackingDisplayLocation
+   */
+  export enum CallTrackingDisplayLocation {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    AD = 2, // AD
+    LANDING_PAGE = 3, // LANDING_PAGE
+  }
+
+  /**
+   * @name CallTypeEnum.CallType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CallTypeEnum.CallType
+   */
+  export enum CallType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    MANUALLY_DIALED = 2, // MANUALLY_DIALED
+    HIGH_END_MOBILE_SEARCH = 3, // HIGH_END_MOBILE_SEARCH
+  }
+
+  /**
+   * @name CalloutPlaceholderFieldEnum.CalloutPlaceholderField
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CalloutPlaceholderFieldEnum.CalloutPlaceholderField
+   */
+  export enum CalloutPlaceholderField {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    CALLOUT_TEXT = 2, // CALLOUT_TEXT
+  }
+
+  /**
+   * @name CampaignCriterionStatusEnum.CampaignCriterionStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CampaignCriterionStatusEnum.CampaignCriterionStatus
+   */
+  export enum CampaignCriterionStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    PAUSED = 3, // PAUSED
+    REMOVED = 4, // REMOVED
+  }
+
+  /**
+   * @name CampaignDraftStatusEnum.CampaignDraftStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CampaignDraftStatusEnum.CampaignDraftStatus
+   */
+  export enum CampaignDraftStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PROPOSED = 2, // PROPOSED
+    REMOVED = 3, // REMOVED
+    PROMOTING = 5, // PROMOTING
+    PROMOTED = 4, // PROMOTED
+    PROMOTE_FAILED = 6, // PROMOTE_FAILED
+  }
+
+  /**
+   * @name CampaignExperimentStatusEnum.CampaignExperimentStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CampaignExperimentStatusEnum.CampaignExperimentStatus
+   */
+  export enum CampaignExperimentStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    INITIALIZING = 2, // INITIALIZING
+    INITIALIZATION_FAILED = 8, // INITIALIZATION_FAILED
+    ENABLED = 3, // ENABLED
+    GRADUATED = 4, // GRADUATED
+    REMOVED = 5, // REMOVED
+    PROMOTING = 6, // PROMOTING
+    PROMOTION_FAILED = 9, // PROMOTION_FAILED
+    PROMOTED = 7, // PROMOTED
+    ENDED_MANUALLY = 10, // ENDED_MANUALLY
+  }
+
+  /**
+   * @name CampaignExperimentTrafficSplitTypeEnum.CampaignExperimentTrafficSplitType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CampaignExperimentTrafficSplitTypeEnum.CampaignExperimentTrafficSplitType
+   */
+  export enum CampaignExperimentTrafficSplitType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    RANDOM_QUERY = 2, // RANDOM_QUERY
+    COOKIE = 3, // COOKIE
+  }
+
+  /**
+   * @name CampaignExperimentTypeEnum.CampaignExperimentType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CampaignExperimentTypeEnum.CampaignExperimentType
+   */
+  export enum CampaignExperimentType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    BASE = 2, // BASE
+    DRAFT = 3, // DRAFT
+    EXPERIMENT = 4, // EXPERIMENT
+  }
+
+  /**
+   * @name CampaignServingStatusEnum.CampaignServingStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CampaignServingStatusEnum.CampaignServingStatus
+   */
+  export enum CampaignServingStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    SERVING = 2, // SERVING
+    NONE = 3, // NONE
+    ENDED = 4, // ENDED
+    PENDING = 5, // PENDING
+    SUSPENDED = 6, // SUSPENDED
+  }
+
+  /**
+   * @name CampaignSharedSetStatusEnum.CampaignSharedSetStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CampaignSharedSetStatusEnum.CampaignSharedSetStatus
+   */
+  export enum CampaignSharedSetStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    REMOVED = 3, // REMOVED
+  }
+
+  /**
+   * @name CampaignStatusEnum.CampaignStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CampaignStatusEnum.CampaignStatus
+   */
+  export enum CampaignStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    PAUSED = 3, // PAUSED
+    REMOVED = 4, // REMOVED
+  }
+
+  /**
+   * @name ChangeClientTypeEnum.ChangeClientType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ChangeClientTypeEnum.ChangeClientType
+   */
+  export enum ChangeClientType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    GOOGLE_ADS_WEB_CLIENT = 2, // GOOGLE_ADS_WEB_CLIENT
+    GOOGLE_ADS_AUTOMATED_RULE = 3, // GOOGLE_ADS_AUTOMATED_RULE
+    GOOGLE_ADS_SCRIPTS = 4, // GOOGLE_ADS_SCRIPTS
+    GOOGLE_ADS_BULK_UPLOAD = 5, // GOOGLE_ADS_BULK_UPLOAD
+    GOOGLE_ADS_API = 6, // GOOGLE_ADS_API
+    GOOGLE_ADS_EDITOR = 7, // GOOGLE_ADS_EDITOR
+    GOOGLE_ADS_MOBILE_APP = 8, // GOOGLE_ADS_MOBILE_APP
+    GOOGLE_ADS_RECOMMENDATIONS = 9, // GOOGLE_ADS_RECOMMENDATIONS
+    SEARCH_ADS_360_SYNC = 10, // SEARCH_ADS_360_SYNC
+    SEARCH_ADS_360_POST = 11, // SEARCH_ADS_360_POST
+    INTERNAL_TOOL = 12, // INTERNAL_TOOL
+    OTHER = 13, // OTHER
+  }
+
+  /**
+   * @name ChangeEventResourceTypeEnum.ChangeEventResourceType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ChangeEventResourceTypeEnum.ChangeEventResourceType
+   */
+  export enum ChangeEventResourceType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    AD = 2, // AD
+    AD_GROUP = 3, // AD_GROUP
+    AD_GROUP_CRITERION = 4, // AD_GROUP_CRITERION
+    CAMPAIGN = 5, // CAMPAIGN
+    CAMPAIGN_BUDGET = 6, // CAMPAIGN_BUDGET
+    AD_GROUP_BID_MODIFIER = 7, // AD_GROUP_BID_MODIFIER
+    CAMPAIGN_CRITERION = 8, // CAMPAIGN_CRITERION
+    FEED = 9, // FEED
+    FEED_ITEM = 10, // FEED_ITEM
+    CAMPAIGN_FEED = 11, // CAMPAIGN_FEED
+    AD_GROUP_FEED = 12, // AD_GROUP_FEED
+    AD_GROUP_AD = 13, // AD_GROUP_AD
+  }
+
+  /**
+   * @name ChangeStatusOperationEnum.ChangeStatusOperation
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ChangeStatusOperationEnum.ChangeStatusOperation
+   */
+  export enum ChangeStatusOperation {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ADDED = 2, // ADDED
+    CHANGED = 3, // CHANGED
+    REMOVED = 4, // REMOVED
+  }
+
+  /**
+   * @name ChangeStatusResourceTypeEnum.ChangeStatusResourceType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ChangeStatusResourceTypeEnum.ChangeStatusResourceType
+   */
+  export enum ChangeStatusResourceType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    AD_GROUP = 3, // AD_GROUP
+    AD_GROUP_AD = 4, // AD_GROUP_AD
+    AD_GROUP_CRITERION = 5, // AD_GROUP_CRITERION
+    CAMPAIGN = 6, // CAMPAIGN
+    CAMPAIGN_CRITERION = 7, // CAMPAIGN_CRITERION
+    FEED = 9, // FEED
+    FEED_ITEM = 10, // FEED_ITEM
+    AD_GROUP_FEED = 11, // AD_GROUP_FEED
+    CAMPAIGN_FEED = 12, // CAMPAIGN_FEED
+    AD_GROUP_BID_MODIFIER = 13, // AD_GROUP_BID_MODIFIER
+  }
+
+  /**
+   * @name CombinedAudienceStatusEnum.CombinedAudienceStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CombinedAudienceStatusEnum.CombinedAudienceStatus
+   */
+  export enum CombinedAudienceStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    REMOVED = 3, // REMOVED
+  }
+
+  /**
+   * @name ConversionActionCountingTypeEnum.ConversionActionCountingType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ConversionActionCountingTypeEnum.ConversionActionCountingType
+   */
+  export enum ConversionActionCountingType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ONE_PER_CLICK = 2, // ONE_PER_CLICK
+    MANY_PER_CLICK = 3, // MANY_PER_CLICK
+  }
+
+  /**
+   * @name ConversionActionStatusEnum.ConversionActionStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ConversionActionStatusEnum.ConversionActionStatus
+   */
+  export enum ConversionActionStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    REMOVED = 3, // REMOVED
+    HIDDEN = 4, // HIDDEN
+  }
+
+  /**
+   * @name ConversionActionTypeEnum.ConversionActionType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ConversionActionTypeEnum.ConversionActionType
+   */
+  export enum ConversionActionType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    AD_CALL = 2, // AD_CALL
+    CLICK_TO_CALL = 3, // CLICK_TO_CALL
+    GOOGLE_PLAY_DOWNLOAD = 4, // GOOGLE_PLAY_DOWNLOAD
+    GOOGLE_PLAY_IN_APP_PURCHASE = 5, // GOOGLE_PLAY_IN_APP_PURCHASE
+    UPLOAD_CALLS = 6, // UPLOAD_CALLS
+    UPLOAD_CLICKS = 7, // UPLOAD_CLICKS
+    WEBPAGE = 8, // WEBPAGE
+    WEBSITE_CALL = 9, // WEBSITE_CALL
+    STORE_SALES_DIRECT_UPLOAD = 10, // STORE_SALES_DIRECT_UPLOAD
+    STORE_SALES = 11, // STORE_SALES
+    FIREBASE_ANDROID_FIRST_OPEN = 12, // FIREBASE_ANDROID_FIRST_OPEN
+    FIREBASE_ANDROID_IN_APP_PURCHASE = 13, // FIREBASE_ANDROID_IN_APP_PURCHASE
+    FIREBASE_ANDROID_CUSTOM = 14, // FIREBASE_ANDROID_CUSTOM
+    FIREBASE_IOS_FIRST_OPEN = 15, // FIREBASE_IOS_FIRST_OPEN
+    FIREBASE_IOS_IN_APP_PURCHASE = 16, // FIREBASE_IOS_IN_APP_PURCHASE
+    FIREBASE_IOS_CUSTOM = 17, // FIREBASE_IOS_CUSTOM
+    THIRD_PARTY_APP_ANALYTICS_ANDROID_FIRST_OPEN = 18, // THIRD_PARTY_APP_ANALYTICS_ANDROID_FIRST_OPEN
+    THIRD_PARTY_APP_ANALYTICS_ANDROID_IN_APP_PURCHASE = 19, // THIRD_PARTY_APP_ANALYTICS_ANDROID_IN_APP_PURCHASE
+    THIRD_PARTY_APP_ANALYTICS_ANDROID_CUSTOM = 20, // THIRD_PARTY_APP_ANALYTICS_ANDROID_CUSTOM
+    THIRD_PARTY_APP_ANALYTICS_IOS_FIRST_OPEN = 21, // THIRD_PARTY_APP_ANALYTICS_IOS_FIRST_OPEN
+    THIRD_PARTY_APP_ANALYTICS_IOS_IN_APP_PURCHASE = 22, // THIRD_PARTY_APP_ANALYTICS_IOS_IN_APP_PURCHASE
+    THIRD_PARTY_APP_ANALYTICS_IOS_CUSTOM = 23, // THIRD_PARTY_APP_ANALYTICS_IOS_CUSTOM
+    ANDROID_APP_PRE_REGISTRATION = 24, // ANDROID_APP_PRE_REGISTRATION
+    ANDROID_INSTALLS_ALL_OTHER_APPS = 25, // ANDROID_INSTALLS_ALL_OTHER_APPS
+    FLOODLIGHT_ACTION = 26, // FLOODLIGHT_ACTION
+    FLOODLIGHT_TRANSACTION = 27, // FLOODLIGHT_TRANSACTION
+    GOOGLE_HOSTED = 28, // GOOGLE_HOSTED
+    LEAD_FORM_SUBMIT = 29, // LEAD_FORM_SUBMIT
+    SALESFORCE = 30, // SALESFORCE
+    SEARCH_ADS_360 = 31, // SEARCH_ADS_360
+    SMART_CAMPAIGN_AD_CLICKS_TO_CALL = 32, // SMART_CAMPAIGN_AD_CLICKS_TO_CALL
+    SMART_CAMPAIGN_MAP_CLICKS_TO_CALL = 33, // SMART_CAMPAIGN_MAP_CLICKS_TO_CALL
+    SMART_CAMPAIGN_MAP_DIRECTIONS = 34, // SMART_CAMPAIGN_MAP_DIRECTIONS
+    SMART_CAMPAIGN_TRACKED_CALLS = 35, // SMART_CAMPAIGN_TRACKED_CALLS
+    STORE_VISITS = 36, // STORE_VISITS
+  }
+
+  /**
+   * @name ConversionAdjustmentTypeEnum.ConversionAdjustmentType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ConversionAdjustmentTypeEnum.ConversionAdjustmentType
+   */
+  export enum ConversionAdjustmentType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    RETRACTION = 2, // RETRACTION
+    RESTATEMENT = 3, // RESTATEMENT
+  }
+
+  /**
+   * @name ConversionCustomVariableStatusEnum.ConversionCustomVariableStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ConversionCustomVariableStatusEnum.ConversionCustomVariableStatus
+   */
+  export enum ConversionCustomVariableStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ACTIVATION_NEEDED = 2, // ACTIVATION_NEEDED
+    ENABLED = 3, // ENABLED
+    PAUSED = 4, // PAUSED
+  }
+
+  /**
+   * @name CriterionSystemServingStatusEnum.CriterionSystemServingStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CriterionSystemServingStatusEnum.CriterionSystemServingStatus
+   */
+  export enum CriterionSystemServingStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ELIGIBLE = 2, // ELIGIBLE
+    RARELY_SERVED = 3, // RARELY_SERVED
+  }
+
+  /**
+   * @name CriterionTypeEnum.CriterionType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CriterionTypeEnum.CriterionType
+   */
+  export enum CriterionType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    KEYWORD = 2, // KEYWORD
+    PLACEMENT = 3, // PLACEMENT
+    MOBILE_APP_CATEGORY = 4, // MOBILE_APP_CATEGORY
+    MOBILE_APPLICATION = 5, // MOBILE_APPLICATION
+    DEVICE = 6, // DEVICE
+    LOCATION = 7, // LOCATION
+    LISTING_GROUP = 8, // LISTING_GROUP
+    AD_SCHEDULE = 9, // AD_SCHEDULE
+    AGE_RANGE = 10, // AGE_RANGE
+    GENDER = 11, // GENDER
+    INCOME_RANGE = 12, // INCOME_RANGE
+    PARENTAL_STATUS = 13, // PARENTAL_STATUS
+    YOUTUBE_VIDEO = 14, // YOUTUBE_VIDEO
+    YOUTUBE_CHANNEL = 15, // YOUTUBE_CHANNEL
+    USER_LIST = 16, // USER_LIST
+    PROXIMITY = 17, // PROXIMITY
+    TOPIC = 18, // TOPIC
+    LISTING_SCOPE = 19, // LISTING_SCOPE
+    LANGUAGE = 20, // LANGUAGE
+    IP_BLOCK = 21, // IP_BLOCK
+    CONTENT_LABEL = 22, // CONTENT_LABEL
+    CARRIER = 23, // CARRIER
+    USER_INTEREST = 24, // USER_INTEREST
+    WEBPAGE = 25, // WEBPAGE
+    OPERATING_SYSTEM_VERSION = 26, // OPERATING_SYSTEM_VERSION
+    APP_PAYMENT_MODEL = 27, // APP_PAYMENT_MODEL
+    MOBILE_DEVICE = 28, // MOBILE_DEVICE
+    CUSTOM_AFFINITY = 29, // CUSTOM_AFFINITY
+    CUSTOM_INTENT = 30, // CUSTOM_INTENT
+    LOCATION_GROUP = 31, // LOCATION_GROUP
+    CUSTOM_AUDIENCE = 32, // CUSTOM_AUDIENCE
+    COMBINED_AUDIENCE = 33, // COMBINED_AUDIENCE
+  }
+
+  /**
+   * @name CustomAudienceMemberTypeEnum.CustomAudienceMemberType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CustomAudienceMemberTypeEnum.CustomAudienceMemberType
+   */
+  export enum CustomAudienceMemberType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    KEYWORD = 2, // KEYWORD
+    URL = 3, // URL
+    PLACE_CATEGORY = 4, // PLACE_CATEGORY
+    APP = 5, // APP
+  }
+
+  /**
+   * @name CustomAudienceStatusEnum.CustomAudienceStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CustomAudienceStatusEnum.CustomAudienceStatus
+   */
+  export enum CustomAudienceStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    REMOVED = 3, // REMOVED
+  }
+
+  /**
+   * @name CustomAudienceTypeEnum.CustomAudienceType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CustomAudienceTypeEnum.CustomAudienceType
+   */
+  export enum CustomAudienceType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    AUTO = 2, // AUTO
+    INTEREST = 3, // INTEREST
+    PURCHASE_INTENT = 4, // PURCHASE_INTENT
+    SEARCH = 5, // SEARCH
+  }
+
+  /**
+   * @name CustomInterestMemberTypeEnum.CustomInterestMemberType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CustomInterestMemberTypeEnum.CustomInterestMemberType
+   */
+  export enum CustomInterestMemberType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    KEYWORD = 2, // KEYWORD
+    URL = 3, // URL
+  }
+
+  /**
+   * @name CustomInterestStatusEnum.CustomInterestStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CustomInterestStatusEnum.CustomInterestStatus
+   */
+  export enum CustomInterestStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    REMOVED = 3, // REMOVED
+  }
+
+  /**
+   * @name CustomInterestTypeEnum.CustomInterestType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CustomInterestTypeEnum.CustomInterestType
+   */
+  export enum CustomInterestType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    CUSTOM_AFFINITY = 2, // CUSTOM_AFFINITY
+    CUSTOM_INTENT = 3, // CUSTOM_INTENT
+  }
+
+  /**
+   * @name CustomPlaceholderFieldEnum.CustomPlaceholderField
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CustomPlaceholderFieldEnum.CustomPlaceholderField
+   */
+  export enum CustomPlaceholderField {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ID = 2, // ID
+    ID2 = 3, // ID2
+    ITEM_TITLE = 4, // ITEM_TITLE
+    ITEM_SUBTITLE = 5, // ITEM_SUBTITLE
+    ITEM_DESCRIPTION = 6, // ITEM_DESCRIPTION
+    ITEM_ADDRESS = 7, // ITEM_ADDRESS
+    PRICE = 8, // PRICE
+    FORMATTED_PRICE = 9, // FORMATTED_PRICE
+    SALE_PRICE = 10, // SALE_PRICE
+    FORMATTED_SALE_PRICE = 11, // FORMATTED_SALE_PRICE
+    IMAGE_URL = 12, // IMAGE_URL
+    ITEM_CATEGORY = 13, // ITEM_CATEGORY
+    FINAL_URLS = 14, // FINAL_URLS
+    FINAL_MOBILE_URLS = 15, // FINAL_MOBILE_URLS
+    TRACKING_URL = 16, // TRACKING_URL
+    CONTEXTUAL_KEYWORDS = 17, // CONTEXTUAL_KEYWORDS
+    ANDROID_APP_LINK = 18, // ANDROID_APP_LINK
+    SIMILAR_IDS = 19, // SIMILAR_IDS
+    IOS_APP_LINK = 20, // IOS_APP_LINK
+    IOS_APP_STORE_ID = 21, // IOS_APP_STORE_ID
+  }
+
+  /**
+   * @name CustomerPayPerConversionEligibilityFailureReasonEnum.CustomerPayPerConversionEligibilityFailureReason
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/CustomerPayPerConversionEligibilityFailureReasonEnum.CustomerPayPerConversionEligibilityFailureReason
+   */
+  export enum CustomerPayPerConversionEligibilityFailureReason {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    NOT_ENOUGH_CONVERSIONS = 2, // NOT_ENOUGH_CONVERSIONS
+    CONVERSION_LAG_TOO_HIGH = 3, // CONVERSION_LAG_TOO_HIGH
+    HAS_CAMPAIGN_WITH_SHARED_BUDGET = 4, // HAS_CAMPAIGN_WITH_SHARED_BUDGET
+    HAS_UPLOAD_CLICKS_CONVERSION = 5, // HAS_UPLOAD_CLICKS_CONVERSION
+    AVERAGE_DAILY_SPEND_TOO_HIGH = 6, // AVERAGE_DAILY_SPEND_TOO_HIGH
+    ANALYSIS_NOT_COMPLETE = 7, // ANALYSIS_NOT_COMPLETE
+    OTHER = 8, // OTHER
+  }
+
+  /**
+   * @name DataDrivenModelStatusEnum.DataDrivenModelStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/DataDrivenModelStatusEnum.DataDrivenModelStatus
+   */
+  export enum DataDrivenModelStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    AVAILABLE = 2, // AVAILABLE
+    STALE = 3, // STALE
+    EXPIRED = 4, // EXPIRED
+    NEVER_GENERATED = 5, // NEVER_GENERATED
+  }
+
+  /**
+   * @name DistanceBucketEnum.DistanceBucket
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/DistanceBucketEnum.DistanceBucket
+   */
+  export enum DistanceBucket {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    WITHIN_700M = 2, // WITHIN_700M
+    WITHIN_1KM = 3, // WITHIN_1KM
+    WITHIN_5KM = 4, // WITHIN_5KM
+    WITHIN_10KM = 5, // WITHIN_10KM
+    WITHIN_15KM = 6, // WITHIN_15KM
+    WITHIN_20KM = 7, // WITHIN_20KM
+    WITHIN_25KM = 8, // WITHIN_25KM
+    WITHIN_30KM = 9, // WITHIN_30KM
+    WITHIN_35KM = 10, // WITHIN_35KM
+    WITHIN_40KM = 11, // WITHIN_40KM
+    WITHIN_45KM = 12, // WITHIN_45KM
+    WITHIN_50KM = 13, // WITHIN_50KM
+    WITHIN_55KM = 14, // WITHIN_55KM
+    WITHIN_60KM = 15, // WITHIN_60KM
+    WITHIN_65KM = 16, // WITHIN_65KM
+    BEYOND_65KM = 17, // BEYOND_65KM
+    WITHIN_0_7MILES = 18, // WITHIN_0_7MILES
+    WITHIN_1MILE = 19, // WITHIN_1MILE
+    WITHIN_5MILES = 20, // WITHIN_5MILES
+    WITHIN_10MILES = 21, // WITHIN_10MILES
+    WITHIN_15MILES = 22, // WITHIN_15MILES
+    WITHIN_20MILES = 23, // WITHIN_20MILES
+    WITHIN_25MILES = 24, // WITHIN_25MILES
+    WITHIN_30MILES = 25, // WITHIN_30MILES
+    WITHIN_35MILES = 26, // WITHIN_35MILES
+    WITHIN_40MILES = 27, // WITHIN_40MILES
+    BEYOND_40MILES = 28, // BEYOND_40MILES
+  }
+
+  /**
+   * @name DsaPageFeedCriterionFieldEnum.DsaPageFeedCriterionField
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/DsaPageFeedCriterionFieldEnum.DsaPageFeedCriterionField
+   */
+  export enum DsaPageFeedCriterionField {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PAGE_URL = 2, // PAGE_URL
+    LABEL = 3, // LABEL
+  }
+
+  /**
+   * @name EducationPlaceholderFieldEnum.EducationPlaceholderField
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/EducationPlaceholderFieldEnum.EducationPlaceholderField
+   */
+  export enum EducationPlaceholderField {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PROGRAM_ID = 2, // PROGRAM_ID
+    LOCATION_ID = 3, // LOCATION_ID
+    PROGRAM_NAME = 4, // PROGRAM_NAME
+    AREA_OF_STUDY = 5, // AREA_OF_STUDY
+    PROGRAM_DESCRIPTION = 6, // PROGRAM_DESCRIPTION
+    SCHOOL_NAME = 7, // SCHOOL_NAME
+    ADDRESS = 8, // ADDRESS
+    THUMBNAIL_IMAGE_URL = 9, // THUMBNAIL_IMAGE_URL
+    ALTERNATIVE_THUMBNAIL_IMAGE_URL = 10, // ALTERNATIVE_THUMBNAIL_IMAGE_URL
+    FINAL_URLS = 11, // FINAL_URLS
+    FINAL_MOBILE_URLS = 12, // FINAL_MOBILE_URLS
+    TRACKING_URL = 13, // TRACKING_URL
+    CONTEXTUAL_KEYWORDS = 14, // CONTEXTUAL_KEYWORDS
+    ANDROID_APP_LINK = 15, // ANDROID_APP_LINK
+    SIMILAR_PROGRAM_IDS = 16, // SIMILAR_PROGRAM_IDS
+    IOS_APP_LINK = 17, // IOS_APP_LINK
+    IOS_APP_STORE_ID = 18, // IOS_APP_STORE_ID
+  }
+
+  /**
+   * @name ExtensionSettingDeviceEnum.ExtensionSettingDevice
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ExtensionSettingDeviceEnum.ExtensionSettingDevice
+   */
+  export enum ExtensionSettingDevice {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    MOBILE = 2, // MOBILE
+    DESKTOP = 3, // DESKTOP
+  }
+
+  /**
+   * @name ExtensionTypeEnum.ExtensionType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ExtensionTypeEnum.ExtensionType
+   */
+  export enum ExtensionType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    NONE = 2, // NONE
+    APP = 3, // APP
+    CALL = 4, // CALL
+    CALLOUT = 5, // CALLOUT
+    MESSAGE = 6, // MESSAGE
+    PRICE = 7, // PRICE
+    PROMOTION = 8, // PROMOTION
+    SITELINK = 10, // SITELINK
+    STRUCTURED_SNIPPET = 11, // STRUCTURED_SNIPPET
+    LOCATION = 12, // LOCATION
+    AFFILIATE_LOCATION = 13, // AFFILIATE_LOCATION
+    HOTEL_CALLOUT = 15, // HOTEL_CALLOUT
+    IMAGE = 16, // IMAGE
+  }
+
+  /**
+   * @name FeedAttributeTypeEnum.FeedAttributeType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedAttributeTypeEnum.FeedAttributeType
+   */
+  export enum FeedAttributeType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    INT64 = 2, // INT64
+    DOUBLE = 3, // DOUBLE
+    STRING = 4, // STRING
+    BOOLEAN = 5, // BOOLEAN
+    URL = 6, // URL
+    DATE_TIME = 7, // DATE_TIME
+    INT64_LIST = 8, // INT64_LIST
+    DOUBLE_LIST = 9, // DOUBLE_LIST
+    STRING_LIST = 10, // STRING_LIST
+    BOOLEAN_LIST = 11, // BOOLEAN_LIST
+    URL_LIST = 12, // URL_LIST
+    DATE_TIME_LIST = 13, // DATE_TIME_LIST
+    PRICE = 14, // PRICE
+  }
+
+  /**
+   * @name FeedItemQualityApprovalStatusEnum.FeedItemQualityApprovalStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedItemQualityApprovalStatusEnum.FeedItemQualityApprovalStatus
+   */
+  export enum FeedItemQualityApprovalStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    APPROVED = 2, // APPROVED
+    DISAPPROVED = 3, // DISAPPROVED
+  }
+
+  /**
+   * @name FeedItemQualityDisapprovalReasonEnum.FeedItemQualityDisapprovalReason
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedItemQualityDisapprovalReasonEnum.FeedItemQualityDisapprovalReason
+   */
+  export enum FeedItemQualityDisapprovalReason {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PRICE_TABLE_REPETITIVE_HEADERS = 2, // PRICE_TABLE_REPETITIVE_HEADERS
+    PRICE_TABLE_REPETITIVE_DESCRIPTION = 3, // PRICE_TABLE_REPETITIVE_DESCRIPTION
+    PRICE_TABLE_INCONSISTENT_ROWS = 4, // PRICE_TABLE_INCONSISTENT_ROWS
+    PRICE_DESCRIPTION_HAS_PRICE_QUALIFIERS = 5, // PRICE_DESCRIPTION_HAS_PRICE_QUALIFIERS
+    PRICE_UNSUPPORTED_LANGUAGE = 6, // PRICE_UNSUPPORTED_LANGUAGE
+    PRICE_TABLE_ROW_HEADER_TABLE_TYPE_MISMATCH = 7, // PRICE_TABLE_ROW_HEADER_TABLE_TYPE_MISMATCH
+    PRICE_TABLE_ROW_HEADER_HAS_PROMOTIONAL_TEXT = 8, // PRICE_TABLE_ROW_HEADER_HAS_PROMOTIONAL_TEXT
+    PRICE_TABLE_ROW_DESCRIPTION_NOT_RELEVANT = 9, // PRICE_TABLE_ROW_DESCRIPTION_NOT_RELEVANT
+    PRICE_TABLE_ROW_DESCRIPTION_HAS_PROMOTIONAL_TEXT = 10, // PRICE_TABLE_ROW_DESCRIPTION_HAS_PROMOTIONAL_TEXT
+    PRICE_TABLE_ROW_HEADER_DESCRIPTION_REPETITIVE = 11, // PRICE_TABLE_ROW_HEADER_DESCRIPTION_REPETITIVE
+    PRICE_TABLE_ROW_UNRATEABLE = 12, // PRICE_TABLE_ROW_UNRATEABLE
+    PRICE_TABLE_ROW_PRICE_INVALID = 13, // PRICE_TABLE_ROW_PRICE_INVALID
+    PRICE_TABLE_ROW_URL_INVALID = 14, // PRICE_TABLE_ROW_URL_INVALID
+    PRICE_HEADER_OR_DESCRIPTION_HAS_PRICE = 15, // PRICE_HEADER_OR_DESCRIPTION_HAS_PRICE
+    STRUCTURED_SNIPPETS_HEADER_POLICY_VIOLATED = 16, // STRUCTURED_SNIPPETS_HEADER_POLICY_VIOLATED
+    STRUCTURED_SNIPPETS_REPEATED_VALUES = 17, // STRUCTURED_SNIPPETS_REPEATED_VALUES
+    STRUCTURED_SNIPPETS_EDITORIAL_GUIDELINES = 18, // STRUCTURED_SNIPPETS_EDITORIAL_GUIDELINES
+    STRUCTURED_SNIPPETS_HAS_PROMOTIONAL_TEXT = 19, // STRUCTURED_SNIPPETS_HAS_PROMOTIONAL_TEXT
+  }
+
+  /**
+   * @name FeedItemSetStatusEnum.FeedItemSetStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedItemSetStatusEnum.FeedItemSetStatus
+   */
+  export enum FeedItemSetStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    REMOVED = 3, // REMOVED
+  }
+
+  /**
+   * @name FeedItemStatusEnum.FeedItemStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedItemStatusEnum.FeedItemStatus
+   */
+  export enum FeedItemStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    REMOVED = 3, // REMOVED
+  }
+
+  /**
+   * @name FeedItemTargetDeviceEnum.FeedItemTargetDevice
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedItemTargetDeviceEnum.FeedItemTargetDevice
+   */
+  export enum FeedItemTargetDevice {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    MOBILE = 2, // MOBILE
+  }
+
+  /**
+   * @name FeedItemTargetStatusEnum.FeedItemTargetStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedItemTargetStatusEnum.FeedItemTargetStatus
+   */
+  export enum FeedItemTargetStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    REMOVED = 3, // REMOVED
+  }
+
+  /**
+   * @name FeedItemTargetTypeEnum.FeedItemTargetType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedItemTargetTypeEnum.FeedItemTargetType
+   */
+  export enum FeedItemTargetType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    CAMPAIGN = 2, // CAMPAIGN
+    AD_GROUP = 3, // AD_GROUP
+    CRITERION = 4, // CRITERION
+  }
+
+  /**
+   * @name FeedItemValidationStatusEnum.FeedItemValidationStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedItemValidationStatusEnum.FeedItemValidationStatus
+   */
+  export enum FeedItemValidationStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PENDING = 2, // PENDING
+    INVALID = 3, // INVALID
+    VALID = 4, // VALID
+  }
+
+  /**
+   * @name FeedLinkStatusEnum.FeedLinkStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedLinkStatusEnum.FeedLinkStatus
+   */
+  export enum FeedLinkStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    REMOVED = 3, // REMOVED
+  }
+
+  /**
+   * @name FeedMappingCriterionTypeEnum.FeedMappingCriterionType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedMappingCriterionTypeEnum.FeedMappingCriterionType
+   */
+  export enum FeedMappingCriterionType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    LOCATION_EXTENSION_TARGETING = 4, // LOCATION_EXTENSION_TARGETING
+    DSA_PAGE_FEED = 3, // DSA_PAGE_FEED
+  }
+
+  /**
+   * @name FeedMappingStatusEnum.FeedMappingStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedMappingStatusEnum.FeedMappingStatus
+   */
+  export enum FeedMappingStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    REMOVED = 3, // REMOVED
+  }
+
+  /**
+   * @name FeedOriginEnum.FeedOrigin
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedOriginEnum.FeedOrigin
+   */
+  export enum FeedOrigin {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    USER = 2, // USER
+    GOOGLE = 3, // GOOGLE
+  }
+
+  /**
+   * @name FeedStatusEnum.FeedStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FeedStatusEnum.FeedStatus
+   */
+  export enum FeedStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    REMOVED = 3, // REMOVED
+  }
+
+  /**
+   * @name FlightPlaceholderFieldEnum.FlightPlaceholderField
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/FlightPlaceholderFieldEnum.FlightPlaceholderField
+   */
+  export enum FlightPlaceholderField {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    DESTINATION_ID = 2, // DESTINATION_ID
+    ORIGIN_ID = 3, // ORIGIN_ID
+    FLIGHT_DESCRIPTION = 4, // FLIGHT_DESCRIPTION
+    ORIGIN_NAME = 5, // ORIGIN_NAME
+    DESTINATION_NAME = 6, // DESTINATION_NAME
+    FLIGHT_PRICE = 7, // FLIGHT_PRICE
+    FORMATTED_PRICE = 8, // FORMATTED_PRICE
+    FLIGHT_SALE_PRICE = 9, // FLIGHT_SALE_PRICE
+    FORMATTED_SALE_PRICE = 10, // FORMATTED_SALE_PRICE
+    IMAGE_URL = 11, // IMAGE_URL
+    FINAL_URLS = 12, // FINAL_URLS
+    FINAL_MOBILE_URLS = 13, // FINAL_MOBILE_URLS
+    TRACKING_URL = 14, // TRACKING_URL
+    ANDROID_APP_LINK = 15, // ANDROID_APP_LINK
+    SIMILAR_DESTINATION_IDS = 16, // SIMILAR_DESTINATION_IDS
+    IOS_APP_LINK = 17, // IOS_APP_LINK
+    IOS_APP_STORE_ID = 18, // IOS_APP_STORE_ID
+  }
+
+  /**
+   * @name GeoTargetConstantStatusEnum.GeoTargetConstantStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/GeoTargetConstantStatusEnum.GeoTargetConstantStatus
+   */
+  export enum GeoTargetConstantStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    REMOVAL_PLANNED = 3, // REMOVAL_PLANNED
+  }
+
+  /**
+   * @name GeoTargetingRestrictionEnum.GeoTargetingRestriction
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/GeoTargetingRestrictionEnum.GeoTargetingRestriction
+   */
+  export enum GeoTargetingRestriction {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    LOCATION_OF_PRESENCE = 2, // LOCATION_OF_PRESENCE
+  }
+
+  /**
+   * @name GeoTargetingTypeEnum.GeoTargetingType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/GeoTargetingTypeEnum.GeoTargetingType
+   */
+  export enum GeoTargetingType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    AREA_OF_INTEREST = 2, // AREA_OF_INTEREST
+    LOCATION_OF_PRESENCE = 3, // LOCATION_OF_PRESENCE
+  }
+
+  /**
+   * @name GoogleAdsFieldCategoryEnum.GoogleAdsFieldCategory
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/GoogleAdsFieldCategoryEnum.GoogleAdsFieldCategory
+   */
+  export enum GoogleAdsFieldCategory {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    RESOURCE = 2, // RESOURCE
+    ATTRIBUTE = 3, // ATTRIBUTE
+    SEGMENT = 5, // SEGMENT
+    METRIC = 6, // METRIC
+  }
+
+  /**
+   * @name GoogleAdsFieldDataTypeEnum.GoogleAdsFieldDataType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/GoogleAdsFieldDataTypeEnum.GoogleAdsFieldDataType
+   */
+  export enum GoogleAdsFieldDataType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    BOOLEAN = 2, // BOOLEAN
+    DATE = 3, // DATE
+    DOUBLE = 4, // DOUBLE
+    ENUM = 5, // ENUM
+    FLOAT = 6, // FLOAT
+    INT32 = 7, // INT32
+    INT64 = 8, // INT64
+    MESSAGE = 9, // MESSAGE
+    RESOURCE_NAME = 10, // RESOURCE_NAME
+    STRING = 11, // STRING
+    UINT64 = 12, // UINT64
+  }
+
+  /**
+   * @name GoogleVoiceCallStatusEnum.GoogleVoiceCallStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/GoogleVoiceCallStatusEnum.GoogleVoiceCallStatus
+   */
+  export enum GoogleVoiceCallStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    MISSED = 2, // MISSED
+    RECEIVED = 3, // RECEIVED
+  }
+
+  /**
+   * @name HotelPlaceholderFieldEnum.HotelPlaceholderField
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/HotelPlaceholderFieldEnum.HotelPlaceholderField
+   */
+  export enum HotelPlaceholderField {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PROPERTY_ID = 2, // PROPERTY_ID
+    PROPERTY_NAME = 3, // PROPERTY_NAME
+    DESTINATION_NAME = 4, // DESTINATION_NAME
+    DESCRIPTION = 5, // DESCRIPTION
+    ADDRESS = 6, // ADDRESS
+    PRICE = 7, // PRICE
+    FORMATTED_PRICE = 8, // FORMATTED_PRICE
+    SALE_PRICE = 9, // SALE_PRICE
+    FORMATTED_SALE_PRICE = 10, // FORMATTED_SALE_PRICE
+    IMAGE_URL = 11, // IMAGE_URL
+    CATEGORY = 12, // CATEGORY
+    STAR_RATING = 13, // STAR_RATING
+    CONTEXTUAL_KEYWORDS = 14, // CONTEXTUAL_KEYWORDS
+    FINAL_URLS = 15, // FINAL_URLS
+    FINAL_MOBILE_URLS = 16, // FINAL_MOBILE_URLS
+    TRACKING_URL = 17, // TRACKING_URL
+    ANDROID_APP_LINK = 18, // ANDROID_APP_LINK
+    SIMILAR_PROPERTY_IDS = 19, // SIMILAR_PROPERTY_IDS
+    IOS_APP_LINK = 20, // IOS_APP_LINK
+    IOS_APP_STORE_ID = 21, // IOS_APP_STORE_ID
+  }
+
+  /**
+   * @name ImagePlaceholderFieldEnum.ImagePlaceholderField
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ImagePlaceholderFieldEnum.ImagePlaceholderField
+   */
+  export enum ImagePlaceholderField {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ASSET_ID = 2, // ASSET_ID
+  }
+
+  /**
+   * @name InvoiceTypeEnum.InvoiceType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/InvoiceTypeEnum.InvoiceType
+   */
+  export enum InvoiceType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    CREDIT_MEMO = 2, // CREDIT_MEMO
+    INVOICE = 3, // INVOICE
+  }
+
+  /**
+   * @name JobPlaceholderFieldEnum.JobPlaceholderField
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/JobPlaceholderFieldEnum.JobPlaceholderField
+   */
+  export enum JobPlaceholderField {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    JOB_ID = 2, // JOB_ID
+    LOCATION_ID = 3, // LOCATION_ID
+    TITLE = 4, // TITLE
+    SUBTITLE = 5, // SUBTITLE
+    DESCRIPTION = 6, // DESCRIPTION
+    IMAGE_URL = 7, // IMAGE_URL
+    CATEGORY = 8, // CATEGORY
+    CONTEXTUAL_KEYWORDS = 9, // CONTEXTUAL_KEYWORDS
+    ADDRESS = 10, // ADDRESS
+    SALARY = 11, // SALARY
+    FINAL_URLS = 12, // FINAL_URLS
+    FINAL_MOBILE_URLS = 14, // FINAL_MOBILE_URLS
+    TRACKING_URL = 15, // TRACKING_URL
+    ANDROID_APP_LINK = 16, // ANDROID_APP_LINK
+    SIMILAR_JOB_IDS = 17, // SIMILAR_JOB_IDS
+    IOS_APP_LINK = 18, // IOS_APP_LINK
+    IOS_APP_STORE_ID = 19, // IOS_APP_STORE_ID
+  }
+
+  /**
+   * @name KeywordPlanForecastIntervalEnum.KeywordPlanForecastInterval
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/KeywordPlanForecastIntervalEnum.KeywordPlanForecastInterval
+   */
+  export enum KeywordPlanForecastInterval {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    NEXT_WEEK = 3, // NEXT_WEEK
+    NEXT_MONTH = 4, // NEXT_MONTH
+    NEXT_QUARTER = 5, // NEXT_QUARTER
+  }
+
+  /**
+   * @name KeywordPlanKeywordAnnotationEnum.KeywordPlanKeywordAnnotation
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/KeywordPlanKeywordAnnotationEnum.KeywordPlanKeywordAnnotation
+   */
+  export enum KeywordPlanKeywordAnnotation {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    KEYWORD_CONCEPT = 2, // KEYWORD_CONCEPT
+  }
+
+  /**
+   * @name KeywordPlanNetworkEnum.KeywordPlanNetwork
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/KeywordPlanNetworkEnum.KeywordPlanNetwork
+   */
+  export enum KeywordPlanNetwork {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    GOOGLE_SEARCH = 2, // GOOGLE_SEARCH
+    GOOGLE_SEARCH_AND_PARTNERS = 3, // GOOGLE_SEARCH_AND_PARTNERS
+  }
+
+  /**
+   * @name LabelStatusEnum.LabelStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/LabelStatusEnum.LabelStatus
+   */
+  export enum LabelStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    REMOVED = 3, // REMOVED
+  }
+
+  /**
+   * @name LinkedAccountTypeEnum.LinkedAccountType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/LinkedAccountTypeEnum.LinkedAccountType
+   */
+  export enum LinkedAccountType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    THIRD_PARTY_APP_ANALYTICS = 2, // THIRD_PARTY_APP_ANALYTICS
+    DATA_PARTNER = 3, // DATA_PARTNER
+    GOOGLE_ADS = 4, // GOOGLE_ADS
+  }
+
+  /**
+   * @name LocalPlaceholderFieldEnum.LocalPlaceholderField
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/LocalPlaceholderFieldEnum.LocalPlaceholderField
+   */
+  export enum LocalPlaceholderField {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    DEAL_ID = 2, // DEAL_ID
+    DEAL_NAME = 3, // DEAL_NAME
+    SUBTITLE = 4, // SUBTITLE
+    DESCRIPTION = 5, // DESCRIPTION
+    PRICE = 6, // PRICE
+    FORMATTED_PRICE = 7, // FORMATTED_PRICE
+    SALE_PRICE = 8, // SALE_PRICE
+    FORMATTED_SALE_PRICE = 9, // FORMATTED_SALE_PRICE
+    IMAGE_URL = 10, // IMAGE_URL
+    ADDRESS = 11, // ADDRESS
+    CATEGORY = 12, // CATEGORY
+    CONTEXTUAL_KEYWORDS = 13, // CONTEXTUAL_KEYWORDS
+    FINAL_URLS = 14, // FINAL_URLS
+    FINAL_MOBILE_URLS = 15, // FINAL_MOBILE_URLS
+    TRACKING_URL = 16, // TRACKING_URL
+    ANDROID_APP_LINK = 17, // ANDROID_APP_LINK
+    SIMILAR_DEAL_IDS = 18, // SIMILAR_DEAL_IDS
+    IOS_APP_LINK = 19, // IOS_APP_LINK
+    IOS_APP_STORE_ID = 20, // IOS_APP_STORE_ID
+  }
+
+  /**
+   * @name LocationExtensionTargetingCriterionFieldEnum.LocationExtensionTargetingCriterionField
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/LocationExtensionTargetingCriterionFieldEnum.LocationExtensionTargetingCriterionField
+   */
+  export enum LocationExtensionTargetingCriterionField {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ADDRESS_LINE_1 = 2, // ADDRESS_LINE_1
+    ADDRESS_LINE_2 = 3, // ADDRESS_LINE_2
+    CITY = 4, // CITY
+    PROVINCE = 5, // PROVINCE
+    POSTAL_CODE = 6, // POSTAL_CODE
+    COUNTRY_CODE = 7, // COUNTRY_CODE
+  }
+
+  /**
+   * @name LocationPlaceholderFieldEnum.LocationPlaceholderField
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/LocationPlaceholderFieldEnum.LocationPlaceholderField
+   */
+  export enum LocationPlaceholderField {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    BUSINESS_NAME = 2, // BUSINESS_NAME
+    ADDRESS_LINE_1 = 3, // ADDRESS_LINE_1
+    ADDRESS_LINE_2 = 4, // ADDRESS_LINE_2
+    CITY = 5, // CITY
+    PROVINCE = 6, // PROVINCE
+    POSTAL_CODE = 7, // POSTAL_CODE
+    COUNTRY_CODE = 8, // COUNTRY_CODE
+    PHONE_NUMBER = 9, // PHONE_NUMBER
+  }
+
+  /**
+   * @name LocationSourceTypeEnum.LocationSourceType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/LocationSourceTypeEnum.LocationSourceType
+   */
+  export enum LocationSourceType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    GOOGLE_MY_BUSINESS = 2, // GOOGLE_MY_BUSINESS
+    AFFILIATE = 3, // AFFILIATE
+  }
+
+  /**
+   * @name ManagerLinkStatusEnum.ManagerLinkStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ManagerLinkStatusEnum.ManagerLinkStatus
+   */
+  export enum ManagerLinkStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ACTIVE = 2, // ACTIVE
+    INACTIVE = 3, // INACTIVE
+    PENDING = 4, // PENDING
+    REFUSED = 5, // REFUSED
+    CANCELED = 6, // CANCELED
+  }
+
+  /**
+   * @name MediaTypeEnum.MediaType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/MediaTypeEnum.MediaType
+   */
+  export enum MediaType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    IMAGE = 2, // IMAGE
+    ICON = 3, // ICON
+    MEDIA_BUNDLE = 4, // MEDIA_BUNDLE
+    AUDIO = 5, // AUDIO
+    VIDEO = 6, // VIDEO
+    DYNAMIC_IMAGE = 7, // DYNAMIC_IMAGE
+  }
+
+  /**
+   * @name MerchantCenterLinkStatusEnum.MerchantCenterLinkStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/MerchantCenterLinkStatusEnum.MerchantCenterLinkStatus
+   */
+  export enum MerchantCenterLinkStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    PENDING = 3, // PENDING
+  }
+
+  /**
+   * @name MessagePlaceholderFieldEnum.MessagePlaceholderField
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/MessagePlaceholderFieldEnum.MessagePlaceholderField
+   */
+  export enum MessagePlaceholderField {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    BUSINESS_NAME = 2, // BUSINESS_NAME
+    COUNTRY_CODE = 3, // COUNTRY_CODE
+    PHONE_NUMBER = 4, // PHONE_NUMBER
+    MESSAGE_EXTENSION_TEXT = 5, // MESSAGE_EXTENSION_TEXT
+    MESSAGE_TEXT = 6, // MESSAGE_TEXT
+  }
+
+  /**
+   * @name MobileAppVendorEnum.MobileAppVendor
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/MobileAppVendorEnum.MobileAppVendor
+   */
+  export enum MobileAppVendor {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    APPLE_APP_STORE = 2, // APPLE_APP_STORE
+    GOOGLE_APP_STORE = 3, // GOOGLE_APP_STORE
+  }
+
+  /**
+   * @name MobileDeviceTypeEnum.MobileDeviceType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/MobileDeviceTypeEnum.MobileDeviceType
+   */
+  export enum MobileDeviceType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    MOBILE = 2, // MOBILE
+    TABLET = 3, // TABLET
+  }
+
+  /**
+   * @name NegativeGeoTargetTypeEnum.NegativeGeoTargetType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/NegativeGeoTargetTypeEnum.NegativeGeoTargetType
+   */
+  export enum NegativeGeoTargetType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PRESENCE_OR_INTEREST = 4, // PRESENCE_OR_INTEREST
+    PRESENCE = 5, // PRESENCE
+  }
+
+  /**
+   * @name OfflineUserDataJobFailureReasonEnum.OfflineUserDataJobFailureReason
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/OfflineUserDataJobFailureReasonEnum.OfflineUserDataJobFailureReason
+   */
+  export enum OfflineUserDataJobFailureReason {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    INSUFFICIENT_MATCHED_TRANSACTIONS = 2, // INSUFFICIENT_MATCHED_TRANSACTIONS
+    INSUFFICIENT_TRANSACTIONS = 3, // INSUFFICIENT_TRANSACTIONS
+  }
+
+  /**
+   * @name OfflineUserDataJobStatusEnum.OfflineUserDataJobStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/OfflineUserDataJobStatusEnum.OfflineUserDataJobStatus
+   */
+  export enum OfflineUserDataJobStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PENDING = 2, // PENDING
+    RUNNING = 3, // RUNNING
+    SUCCESS = 4, // SUCCESS
+    FAILED = 5, // FAILED
+  }
+
+  /**
+   * @name OfflineUserDataJobTypeEnum.OfflineUserDataJobType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/OfflineUserDataJobTypeEnum.OfflineUserDataJobType
+   */
+  export enum OfflineUserDataJobType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    STORE_SALES_UPLOAD_FIRST_PARTY = 2, // STORE_SALES_UPLOAD_FIRST_PARTY
+    STORE_SALES_UPLOAD_THIRD_PARTY = 3, // STORE_SALES_UPLOAD_THIRD_PARTY
+    CUSTOMER_MATCH_USER_LIST = 4, // CUSTOMER_MATCH_USER_LIST
+    CUSTOMER_MATCH_WITH_ATTRIBUTES = 5, // CUSTOMER_MATCH_WITH_ATTRIBUTES
+  }
+
+  /**
+   * @name OperatingSystemVersionOperatorTypeEnum.OperatingSystemVersionOperatorType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/OperatingSystemVersionOperatorTypeEnum.OperatingSystemVersionOperatorType
+   */
+  export enum OperatingSystemVersionOperatorType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    EQUALS_TO = 2, // EQUALS_TO
+    GREATER_THAN_EQUALS_TO = 4, // GREATER_THAN_EQUALS_TO
+  }
+
+  /**
+   * @name OptimizationGoalTypeEnum.OptimizationGoalType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/OptimizationGoalTypeEnum.OptimizationGoalType
+   */
+  export enum OptimizationGoalType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    CALL_CLICKS = 2, // CALL_CLICKS
+    DRIVING_DIRECTIONS = 3, // DRIVING_DIRECTIONS
+  }
+
+  /**
+   * @name PaymentModeEnum.PaymentMode
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PaymentModeEnum.PaymentMode
+   */
+  export enum PaymentMode {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    CLICKS = 4, // CLICKS
+    CONVERSION_VALUE = 5, // CONVERSION_VALUE
+    CONVERSIONS = 6, // CONVERSIONS
+    GUEST_STAY = 7, // GUEST_STAY
+  }
+
+  /**
+   * @name PlacementTypeEnum.PlacementType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PlacementTypeEnum.PlacementType
+   */
+  export enum PlacementType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    WEBSITE = 2, // WEBSITE
+    MOBILE_APP_CATEGORY = 3, // MOBILE_APP_CATEGORY
+    MOBILE_APPLICATION = 4, // MOBILE_APPLICATION
+    YOUTUBE_VIDEO = 5, // YOUTUBE_VIDEO
+    YOUTUBE_CHANNEL = 6, // YOUTUBE_CHANNEL
+  }
+
+  /**
+   * @name PositiveGeoTargetTypeEnum.PositiveGeoTargetType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PositiveGeoTargetTypeEnum.PositiveGeoTargetType
+   */
+  export enum PositiveGeoTargetType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PRESENCE_OR_INTEREST = 5, // PRESENCE_OR_INTEREST
+    SEARCH_INTEREST = 6, // SEARCH_INTEREST
+    PRESENCE = 7, // PRESENCE
+  }
+
+  /**
+   * @name PricePlaceholderFieldEnum.PricePlaceholderField
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PricePlaceholderFieldEnum.PricePlaceholderField
+   */
+  export enum PricePlaceholderField {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    TYPE = 2, // TYPE
+    PRICE_QUALIFIER = 3, // PRICE_QUALIFIER
+    TRACKING_TEMPLATE = 4, // TRACKING_TEMPLATE
+    LANGUAGE = 5, // LANGUAGE
+    FINAL_URL_SUFFIX = 6, // FINAL_URL_SUFFIX
+    ITEM_1_HEADER = 100, // ITEM_1_HEADER
+    ITEM_1_DESCRIPTION = 101, // ITEM_1_DESCRIPTION
+    ITEM_1_PRICE = 102, // ITEM_1_PRICE
+    ITEM_1_UNIT = 103, // ITEM_1_UNIT
+    ITEM_1_FINAL_URLS = 104, // ITEM_1_FINAL_URLS
+    ITEM_1_FINAL_MOBILE_URLS = 105, // ITEM_1_FINAL_MOBILE_URLS
+    ITEM_2_HEADER = 200, // ITEM_2_HEADER
+    ITEM_2_DESCRIPTION = 201, // ITEM_2_DESCRIPTION
+    ITEM_2_PRICE = 202, // ITEM_2_PRICE
+    ITEM_2_UNIT = 203, // ITEM_2_UNIT
+    ITEM_2_FINAL_URLS = 204, // ITEM_2_FINAL_URLS
+    ITEM_2_FINAL_MOBILE_URLS = 205, // ITEM_2_FINAL_MOBILE_URLS
+    ITEM_3_HEADER = 300, // ITEM_3_HEADER
+    ITEM_3_DESCRIPTION = 301, // ITEM_3_DESCRIPTION
+    ITEM_3_PRICE = 302, // ITEM_3_PRICE
+    ITEM_3_UNIT = 303, // ITEM_3_UNIT
+    ITEM_3_FINAL_URLS = 304, // ITEM_3_FINAL_URLS
+    ITEM_3_FINAL_MOBILE_URLS = 305, // ITEM_3_FINAL_MOBILE_URLS
+    ITEM_4_HEADER = 400, // ITEM_4_HEADER
+    ITEM_4_DESCRIPTION = 401, // ITEM_4_DESCRIPTION
+    ITEM_4_PRICE = 402, // ITEM_4_PRICE
+    ITEM_4_UNIT = 403, // ITEM_4_UNIT
+    ITEM_4_FINAL_URLS = 404, // ITEM_4_FINAL_URLS
+    ITEM_4_FINAL_MOBILE_URLS = 405, // ITEM_4_FINAL_MOBILE_URLS
+    ITEM_5_HEADER = 500, // ITEM_5_HEADER
+    ITEM_5_DESCRIPTION = 501, // ITEM_5_DESCRIPTION
+    ITEM_5_PRICE = 502, // ITEM_5_PRICE
+    ITEM_5_UNIT = 503, // ITEM_5_UNIT
+    ITEM_5_FINAL_URLS = 504, // ITEM_5_FINAL_URLS
+    ITEM_5_FINAL_MOBILE_URLS = 505, // ITEM_5_FINAL_MOBILE_URLS
+    ITEM_6_HEADER = 600, // ITEM_6_HEADER
+    ITEM_6_DESCRIPTION = 601, // ITEM_6_DESCRIPTION
+    ITEM_6_PRICE = 602, // ITEM_6_PRICE
+    ITEM_6_UNIT = 603, // ITEM_6_UNIT
+    ITEM_6_FINAL_URLS = 604, // ITEM_6_FINAL_URLS
+    ITEM_6_FINAL_MOBILE_URLS = 605, // ITEM_6_FINAL_MOBILE_URLS
+    ITEM_7_HEADER = 700, // ITEM_7_HEADER
+    ITEM_7_DESCRIPTION = 701, // ITEM_7_DESCRIPTION
+    ITEM_7_PRICE = 702, // ITEM_7_PRICE
+    ITEM_7_UNIT = 703, // ITEM_7_UNIT
+    ITEM_7_FINAL_URLS = 704, // ITEM_7_FINAL_URLS
+    ITEM_7_FINAL_MOBILE_URLS = 705, // ITEM_7_FINAL_MOBILE_URLS
+    ITEM_8_HEADER = 800, // ITEM_8_HEADER
+    ITEM_8_DESCRIPTION = 801, // ITEM_8_DESCRIPTION
+    ITEM_8_PRICE = 802, // ITEM_8_PRICE
+    ITEM_8_UNIT = 803, // ITEM_8_UNIT
+    ITEM_8_FINAL_URLS = 804, // ITEM_8_FINAL_URLS
+    ITEM_8_FINAL_MOBILE_URLS = 805, // ITEM_8_FINAL_MOBILE_URLS
+  }
+
+  /**
+   * @name ProductBiddingCategoryStatusEnum.ProductBiddingCategoryStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ProductBiddingCategoryStatusEnum.ProductBiddingCategoryStatus
+   */
+  export enum ProductBiddingCategoryStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ACTIVE = 2, // ACTIVE
+    OBSOLETE = 3, // OBSOLETE
+  }
+
+  /**
+   * @name PromotionPlaceholderFieldEnum.PromotionPlaceholderField
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/PromotionPlaceholderFieldEnum.PromotionPlaceholderField
+   */
+  export enum PromotionPlaceholderField {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PROMOTION_TARGET = 2, // PROMOTION_TARGET
+    DISCOUNT_MODIFIER = 3, // DISCOUNT_MODIFIER
+    PERCENT_OFF = 4, // PERCENT_OFF
+    MONEY_AMOUNT_OFF = 5, // MONEY_AMOUNT_OFF
+    PROMOTION_CODE = 6, // PROMOTION_CODE
+    ORDERS_OVER_AMOUNT = 7, // ORDERS_OVER_AMOUNT
+    PROMOTION_START = 8, // PROMOTION_START
+    PROMOTION_END = 9, // PROMOTION_END
+    OCCASION = 10, // OCCASION
+    FINAL_URLS = 11, // FINAL_URLS
+    FINAL_MOBILE_URLS = 12, // FINAL_MOBILE_URLS
+    TRACKING_URL = 13, // TRACKING_URL
+    LANGUAGE = 14, // LANGUAGE
+    FINAL_URL_SUFFIX = 15, // FINAL_URL_SUFFIX
+  }
+
+  /**
+   * @name ReachPlanAdLengthEnum.ReachPlanAdLength
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ReachPlanAdLengthEnum.ReachPlanAdLength
+   */
+  export enum ReachPlanAdLength {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    SIX_SECONDS = 2, // SIX_SECONDS
+    FIFTEEN_OR_TWENTY_SECONDS = 3, // FIFTEEN_OR_TWENTY_SECONDS
+    TWENTY_SECONDS_OR_MORE = 4, // TWENTY_SECONDS_OR_MORE
+  }
+
+  /**
+   * @name ReachPlanAgeRangeEnum.ReachPlanAgeRange
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ReachPlanAgeRangeEnum.ReachPlanAgeRange
+   */
+  export enum ReachPlanAgeRange {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    AGE_RANGE_18_24 = 503001, // AGE_RANGE_18_24
+    AGE_RANGE_18_34 = 2, // AGE_RANGE_18_34
+    AGE_RANGE_18_44 = 3, // AGE_RANGE_18_44
+    AGE_RANGE_18_49 = 4, // AGE_RANGE_18_49
+    AGE_RANGE_18_54 = 5, // AGE_RANGE_18_54
+    AGE_RANGE_18_64 = 6, // AGE_RANGE_18_64
+    AGE_RANGE_18_65_UP = 7, // AGE_RANGE_18_65_UP
+    AGE_RANGE_21_34 = 8, // AGE_RANGE_21_34
+    AGE_RANGE_25_34 = 503002, // AGE_RANGE_25_34
+    AGE_RANGE_25_44 = 9, // AGE_RANGE_25_44
+    AGE_RANGE_25_49 = 10, // AGE_RANGE_25_49
+    AGE_RANGE_25_54 = 11, // AGE_RANGE_25_54
+    AGE_RANGE_25_64 = 12, // AGE_RANGE_25_64
+    AGE_RANGE_25_65_UP = 13, // AGE_RANGE_25_65_UP
+    AGE_RANGE_35_44 = 503003, // AGE_RANGE_35_44
+    AGE_RANGE_35_49 = 14, // AGE_RANGE_35_49
+    AGE_RANGE_35_54 = 15, // AGE_RANGE_35_54
+    AGE_RANGE_35_64 = 16, // AGE_RANGE_35_64
+    AGE_RANGE_35_65_UP = 17, // AGE_RANGE_35_65_UP
+    AGE_RANGE_45_54 = 503004, // AGE_RANGE_45_54
+    AGE_RANGE_45_64 = 18, // AGE_RANGE_45_64
+    AGE_RANGE_45_65_UP = 19, // AGE_RANGE_45_65_UP
+    AGE_RANGE_50_65_UP = 20, // AGE_RANGE_50_65_UP
+    AGE_RANGE_55_64 = 503005, // AGE_RANGE_55_64
+    AGE_RANGE_55_65_UP = 21, // AGE_RANGE_55_65_UP
+    AGE_RANGE_65_UP = 503006, // AGE_RANGE_65_UP
+  }
+
+  /**
+   * @name ReachPlanNetworkEnum.ReachPlanNetwork
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ReachPlanNetworkEnum.ReachPlanNetwork
+   */
+  export enum ReachPlanNetwork {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    YOUTUBE = 2, // YOUTUBE
+    GOOGLE_VIDEO_PARTNERS = 3, // GOOGLE_VIDEO_PARTNERS
+    YOUTUBE_AND_GOOGLE_VIDEO_PARTNERS = 4, // YOUTUBE_AND_GOOGLE_VIDEO_PARTNERS
+  }
+
+  /**
+   * @name RealEstatePlaceholderFieldEnum.RealEstatePlaceholderField
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/RealEstatePlaceholderFieldEnum.RealEstatePlaceholderField
+   */
+  export enum RealEstatePlaceholderField {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    LISTING_ID = 2, // LISTING_ID
+    LISTING_NAME = 3, // LISTING_NAME
+    CITY_NAME = 4, // CITY_NAME
+    DESCRIPTION = 5, // DESCRIPTION
+    ADDRESS = 6, // ADDRESS
+    PRICE = 7, // PRICE
+    FORMATTED_PRICE = 8, // FORMATTED_PRICE
+    IMAGE_URL = 9, // IMAGE_URL
+    PROPERTY_TYPE = 10, // PROPERTY_TYPE
+    LISTING_TYPE = 11, // LISTING_TYPE
+    CONTEXTUAL_KEYWORDS = 12, // CONTEXTUAL_KEYWORDS
+    FINAL_URLS = 13, // FINAL_URLS
+    FINAL_MOBILE_URLS = 14, // FINAL_MOBILE_URLS
+    TRACKING_URL = 15, // TRACKING_URL
+    ANDROID_APP_LINK = 16, // ANDROID_APP_LINK
+    SIMILAR_LISTING_IDS = 17, // SIMILAR_LISTING_IDS
+    IOS_APP_LINK = 18, // IOS_APP_LINK
+    IOS_APP_STORE_ID = 19, // IOS_APP_STORE_ID
+  }
+
+  /**
+   * @name RecommendationTypeEnum.RecommendationType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/RecommendationTypeEnum.RecommendationType
+   */
+  export enum RecommendationType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    CAMPAIGN_BUDGET = 2, // CAMPAIGN_BUDGET
+    KEYWORD = 3, // KEYWORD
+    TEXT_AD = 4, // TEXT_AD
+    TARGET_CPA_OPT_IN = 5, // TARGET_CPA_OPT_IN
+    MAXIMIZE_CONVERSIONS_OPT_IN = 6, // MAXIMIZE_CONVERSIONS_OPT_IN
+    ENHANCED_CPC_OPT_IN = 7, // ENHANCED_CPC_OPT_IN
+    SEARCH_PARTNERS_OPT_IN = 8, // SEARCH_PARTNERS_OPT_IN
+    MAXIMIZE_CLICKS_OPT_IN = 9, // MAXIMIZE_CLICKS_OPT_IN
+    OPTIMIZE_AD_ROTATION = 10, // OPTIMIZE_AD_ROTATION
+    CALLOUT_EXTENSION = 11, // CALLOUT_EXTENSION
+    SITELINK_EXTENSION = 12, // SITELINK_EXTENSION
+    CALL_EXTENSION = 13, // CALL_EXTENSION
+    KEYWORD_MATCH_TYPE = 14, // KEYWORD_MATCH_TYPE
+    MOVE_UNUSED_BUDGET = 15, // MOVE_UNUSED_BUDGET
+    FORECASTING_CAMPAIGN_BUDGET = 16, // FORECASTING_CAMPAIGN_BUDGET
+    TARGET_ROAS_OPT_IN = 17, // TARGET_ROAS_OPT_IN
+    RESPONSIVE_SEARCH_AD = 18, // RESPONSIVE_SEARCH_AD
+    MARGINAL_ROI_CAMPAIGN_BUDGET = 19, // MARGINAL_ROI_CAMPAIGN_BUDGET
+  }
+
+  /**
+   * @name ResourceChangeOperationEnum.ResourceChangeOperation
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ResourceChangeOperationEnum.ResourceChangeOperation
+   */
+  export enum ResourceChangeOperation {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    CREATE = 2, // CREATE
+    UPDATE = 3, // UPDATE
+    REMOVE = 4, // REMOVE
+  }
+
+  /**
+   * @name ResourceLimitTypeEnum.ResourceLimitType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ResourceLimitTypeEnum.ResourceLimitType
+   */
+  export enum ResourceLimitType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    CAMPAIGNS_PER_CUSTOMER = 2, // CAMPAIGNS_PER_CUSTOMER
+    BASE_CAMPAIGNS_PER_CUSTOMER = 3, // BASE_CAMPAIGNS_PER_CUSTOMER
+    EXPERIMENT_CAMPAIGNS_PER_CUSTOMER = 105, // EXPERIMENT_CAMPAIGNS_PER_CUSTOMER
+    HOTEL_CAMPAIGNS_PER_CUSTOMER = 4, // HOTEL_CAMPAIGNS_PER_CUSTOMER
+    SMART_SHOPPING_CAMPAIGNS_PER_CUSTOMER = 5, // SMART_SHOPPING_CAMPAIGNS_PER_CUSTOMER
+    AD_GROUPS_PER_CAMPAIGN = 6, // AD_GROUPS_PER_CAMPAIGN
+    AD_GROUPS_PER_SHOPPING_CAMPAIGN = 8, // AD_GROUPS_PER_SHOPPING_CAMPAIGN
+    AD_GROUPS_PER_HOTEL_CAMPAIGN = 9, // AD_GROUPS_PER_HOTEL_CAMPAIGN
+    REPORTING_AD_GROUPS_PER_LOCAL_CAMPAIGN = 10, // REPORTING_AD_GROUPS_PER_LOCAL_CAMPAIGN
+    REPORTING_AD_GROUPS_PER_APP_CAMPAIGN = 11, // REPORTING_AD_GROUPS_PER_APP_CAMPAIGN
+    MANAGED_AD_GROUPS_PER_SMART_CAMPAIGN = 52, // MANAGED_AD_GROUPS_PER_SMART_CAMPAIGN
+    AD_GROUP_CRITERIA_PER_CUSTOMER = 12, // AD_GROUP_CRITERIA_PER_CUSTOMER
+    BASE_AD_GROUP_CRITERIA_PER_CUSTOMER = 13, // BASE_AD_GROUP_CRITERIA_PER_CUSTOMER
+    EXPERIMENT_AD_GROUP_CRITERIA_PER_CUSTOMER = 107, // EXPERIMENT_AD_GROUP_CRITERIA_PER_CUSTOMER
+    AD_GROUP_CRITERIA_PER_CAMPAIGN = 14, // AD_GROUP_CRITERIA_PER_CAMPAIGN
+    CAMPAIGN_CRITERIA_PER_CUSTOMER = 15, // CAMPAIGN_CRITERIA_PER_CUSTOMER
+    BASE_CAMPAIGN_CRITERIA_PER_CUSTOMER = 16, // BASE_CAMPAIGN_CRITERIA_PER_CUSTOMER
+    EXPERIMENT_CAMPAIGN_CRITERIA_PER_CUSTOMER = 108, // EXPERIMENT_CAMPAIGN_CRITERIA_PER_CUSTOMER
+    WEBPAGE_CRITERIA_PER_CUSTOMER = 17, // WEBPAGE_CRITERIA_PER_CUSTOMER
+    BASE_WEBPAGE_CRITERIA_PER_CUSTOMER = 18, // BASE_WEBPAGE_CRITERIA_PER_CUSTOMER
+    EXPERIMENT_WEBPAGE_CRITERIA_PER_CUSTOMER = 19, // EXPERIMENT_WEBPAGE_CRITERIA_PER_CUSTOMER
+    COMBINED_AUDIENCE_CRITERIA_PER_AD_GROUP = 20, // COMBINED_AUDIENCE_CRITERIA_PER_AD_GROUP
+    CUSTOMER_NEGATIVE_PLACEMENT_CRITERIA_PER_CUSTOMER = 21, // CUSTOMER_NEGATIVE_PLACEMENT_CRITERIA_PER_CUSTOMER
+    CUSTOMER_NEGATIVE_YOUTUBE_CHANNEL_CRITERIA_PER_CUSTOMER = 22, // CUSTOMER_NEGATIVE_YOUTUBE_CHANNEL_CRITERIA_PER_CUSTOMER
+    CRITERIA_PER_AD_GROUP = 23, // CRITERIA_PER_AD_GROUP
+    LISTING_GROUPS_PER_AD_GROUP = 24, // LISTING_GROUPS_PER_AD_GROUP
+    EXPLICITLY_SHARED_BUDGETS_PER_CUSTOMER = 25, // EXPLICITLY_SHARED_BUDGETS_PER_CUSTOMER
+    IMPLICITLY_SHARED_BUDGETS_PER_CUSTOMER = 26, // IMPLICITLY_SHARED_BUDGETS_PER_CUSTOMER
+    COMBINED_AUDIENCE_CRITERIA_PER_CAMPAIGN = 27, // COMBINED_AUDIENCE_CRITERIA_PER_CAMPAIGN
+    NEGATIVE_KEYWORDS_PER_CAMPAIGN = 28, // NEGATIVE_KEYWORDS_PER_CAMPAIGN
+    NEGATIVE_PLACEMENTS_PER_CAMPAIGN = 29, // NEGATIVE_PLACEMENTS_PER_CAMPAIGN
+    GEO_TARGETS_PER_CAMPAIGN = 30, // GEO_TARGETS_PER_CAMPAIGN
+    NEGATIVE_IP_BLOCKS_PER_CAMPAIGN = 32, // NEGATIVE_IP_BLOCKS_PER_CAMPAIGN
+    PROXIMITIES_PER_CAMPAIGN = 33, // PROXIMITIES_PER_CAMPAIGN
+    LISTING_SCOPES_PER_SHOPPING_CAMPAIGN = 34, // LISTING_SCOPES_PER_SHOPPING_CAMPAIGN
+    LISTING_SCOPES_PER_NON_SHOPPING_CAMPAIGN = 35, // LISTING_SCOPES_PER_NON_SHOPPING_CAMPAIGN
+    NEGATIVE_KEYWORDS_PER_SHARED_SET = 36, // NEGATIVE_KEYWORDS_PER_SHARED_SET
+    NEGATIVE_PLACEMENTS_PER_SHARED_SET = 37, // NEGATIVE_PLACEMENTS_PER_SHARED_SET
+    SHARED_SETS_PER_CUSTOMER_FOR_TYPE_DEFAULT = 40, // SHARED_SETS_PER_CUSTOMER_FOR_TYPE_DEFAULT
+    SHARED_SETS_PER_CUSTOMER_FOR_NEGATIVE_PLACEMENT_LIST_LOWER = 41, // SHARED_SETS_PER_CUSTOMER_FOR_NEGATIVE_PLACEMENT_LIST_LOWER
+    HOTEL_ADVANCE_BOOKING_WINDOW_BID_MODIFIERS_PER_AD_GROUP = 44, // HOTEL_ADVANCE_BOOKING_WINDOW_BID_MODIFIERS_PER_AD_GROUP
+    BIDDING_STRATEGIES_PER_CUSTOMER = 45, // BIDDING_STRATEGIES_PER_CUSTOMER
+    BASIC_USER_LISTS_PER_CUSTOMER = 47, // BASIC_USER_LISTS_PER_CUSTOMER
+    LOGICAL_USER_LISTS_PER_CUSTOMER = 48, // LOGICAL_USER_LISTS_PER_CUSTOMER
+    BASE_AD_GROUP_ADS_PER_CUSTOMER = 53, // BASE_AD_GROUP_ADS_PER_CUSTOMER
+    EXPERIMENT_AD_GROUP_ADS_PER_CUSTOMER = 54, // EXPERIMENT_AD_GROUP_ADS_PER_CUSTOMER
+    AD_GROUP_ADS_PER_CAMPAIGN = 55, // AD_GROUP_ADS_PER_CAMPAIGN
+    TEXT_AND_OTHER_ADS_PER_AD_GROUP = 56, // TEXT_AND_OTHER_ADS_PER_AD_GROUP
+    IMAGE_ADS_PER_AD_GROUP = 57, // IMAGE_ADS_PER_AD_GROUP
+    SHOPPING_SMART_ADS_PER_AD_GROUP = 58, // SHOPPING_SMART_ADS_PER_AD_GROUP
+    RESPONSIVE_SEARCH_ADS_PER_AD_GROUP = 59, // RESPONSIVE_SEARCH_ADS_PER_AD_GROUP
+    APP_ADS_PER_AD_GROUP = 60, // APP_ADS_PER_AD_GROUP
+    APP_ENGAGEMENT_ADS_PER_AD_GROUP = 61, // APP_ENGAGEMENT_ADS_PER_AD_GROUP
+    LOCAL_ADS_PER_AD_GROUP = 62, // LOCAL_ADS_PER_AD_GROUP
+    VIDEO_ADS_PER_AD_GROUP = 63, // VIDEO_ADS_PER_AD_GROUP
+    LEAD_FORM_ASSET_LINKS_PER_CAMPAIGN = 68, // LEAD_FORM_ASSET_LINKS_PER_CAMPAIGN
+    VERSIONS_PER_AD = 82, // VERSIONS_PER_AD
+    USER_FEEDS_PER_CUSTOMER = 90, // USER_FEEDS_PER_CUSTOMER
+    SYSTEM_FEEDS_PER_CUSTOMER = 91, // SYSTEM_FEEDS_PER_CUSTOMER
+    FEED_ATTRIBUTES_PER_FEED = 92, // FEED_ATTRIBUTES_PER_FEED
+    FEED_ITEMS_PER_CUSTOMER = 94, // FEED_ITEMS_PER_CUSTOMER
+    CAMPAIGN_FEEDS_PER_CUSTOMER = 95, // CAMPAIGN_FEEDS_PER_CUSTOMER
+    BASE_CAMPAIGN_FEEDS_PER_CUSTOMER = 96, // BASE_CAMPAIGN_FEEDS_PER_CUSTOMER
+    EXPERIMENT_CAMPAIGN_FEEDS_PER_CUSTOMER = 109, // EXPERIMENT_CAMPAIGN_FEEDS_PER_CUSTOMER
+    AD_GROUP_FEEDS_PER_CUSTOMER = 97, // AD_GROUP_FEEDS_PER_CUSTOMER
+    BASE_AD_GROUP_FEEDS_PER_CUSTOMER = 98, // BASE_AD_GROUP_FEEDS_PER_CUSTOMER
+    EXPERIMENT_AD_GROUP_FEEDS_PER_CUSTOMER = 110, // EXPERIMENT_AD_GROUP_FEEDS_PER_CUSTOMER
+    AD_GROUP_FEEDS_PER_CAMPAIGN = 99, // AD_GROUP_FEEDS_PER_CAMPAIGN
+    FEED_ITEM_SETS_PER_CUSTOMER = 100, // FEED_ITEM_SETS_PER_CUSTOMER
+    FEED_ITEMS_PER_FEED_ITEM_SET = 101, // FEED_ITEMS_PER_FEED_ITEM_SET
+    CAMPAIGN_EXPERIMENTS_PER_CUSTOMER = 112, // CAMPAIGN_EXPERIMENTS_PER_CUSTOMER
+    EXPERIMENT_ARMS_PER_VIDEO_EXPERIMENT = 113, // EXPERIMENT_ARMS_PER_VIDEO_EXPERIMENT
+    OWNED_LABELS_PER_CUSTOMER = 115, // OWNED_LABELS_PER_CUSTOMER
+    LABELS_PER_CAMPAIGN = 117, // LABELS_PER_CAMPAIGN
+    LABELS_PER_AD_GROUP = 118, // LABELS_PER_AD_GROUP
+    LABELS_PER_AD_GROUP_AD = 119, // LABELS_PER_AD_GROUP_AD
+    LABELS_PER_AD_GROUP_CRITERION = 120, // LABELS_PER_AD_GROUP_CRITERION
+    TARGET_CUSTOMERS_PER_LABEL = 121, // TARGET_CUSTOMERS_PER_LABEL
+    KEYWORD_PLANS_PER_USER_PER_CUSTOMER = 122, // KEYWORD_PLANS_PER_USER_PER_CUSTOMER
+    KEYWORD_PLAN_AD_GROUP_KEYWORDS_PER_KEYWORD_PLAN = 123, // KEYWORD_PLAN_AD_GROUP_KEYWORDS_PER_KEYWORD_PLAN
+    KEYWORD_PLAN_AD_GROUPS_PER_KEYWORD_PLAN = 124, // KEYWORD_PLAN_AD_GROUPS_PER_KEYWORD_PLAN
+    KEYWORD_PLAN_NEGATIVE_KEYWORDS_PER_KEYWORD_PLAN = 125, // KEYWORD_PLAN_NEGATIVE_KEYWORDS_PER_KEYWORD_PLAN
+    KEYWORD_PLAN_CAMPAIGNS_PER_KEYWORD_PLAN = 126, // KEYWORD_PLAN_CAMPAIGNS_PER_KEYWORD_PLAN
+    CONVERSION_ACTIONS_PER_CUSTOMER = 128, // CONVERSION_ACTIONS_PER_CUSTOMER
+    BATCH_JOB_OPERATIONS_PER_JOB = 130, // BATCH_JOB_OPERATIONS_PER_JOB
+    BATCH_JOBS_PER_CUSTOMER = 131, // BATCH_JOBS_PER_CUSTOMER
+    HOTEL_CHECK_IN_DATE_RANGE_BID_MODIFIERS_PER_AD_GROUP = 132, // HOTEL_CHECK_IN_DATE_RANGE_BID_MODIFIERS_PER_AD_GROUP
+  }
+
+  /**
+   * @name ResponseContentTypeEnum.ResponseContentType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/ResponseContentTypeEnum.ResponseContentType
+   */
+  export enum ResponseContentType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    RESOURCE_NAME_ONLY = 1, // RESOURCE_NAME_ONLY
+    MUTABLE_RESOURCE = 2, // MUTABLE_RESOURCE
+  }
+
+  /**
+   * @name SearchTermTargetingStatusEnum.SearchTermTargetingStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/SearchTermTargetingStatusEnum.SearchTermTargetingStatus
+   */
+  export enum SearchTermTargetingStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ADDED = 2, // ADDED
+    EXCLUDED = 3, // EXCLUDED
+    ADDED_EXCLUDED = 4, // ADDED_EXCLUDED
+    NONE = 5, // NONE
+  }
+
+  /**
+   * @name SharedSetStatusEnum.SharedSetStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/SharedSetStatusEnum.SharedSetStatus
+   */
+  export enum SharedSetStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    REMOVED = 3, // REMOVED
+  }
+
+  /**
+   * @name SharedSetTypeEnum.SharedSetType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/SharedSetTypeEnum.SharedSetType
+   */
+  export enum SharedSetType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    NEGATIVE_KEYWORDS = 2, // NEGATIVE_KEYWORDS
+    NEGATIVE_PLACEMENTS = 3, // NEGATIVE_PLACEMENTS
+  }
+
+  /**
+   * @name SimulationModificationMethodEnum.SimulationModificationMethod
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/SimulationModificationMethodEnum.SimulationModificationMethod
+   */
+  export enum SimulationModificationMethod {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    UNIFORM = 2, // UNIFORM
+    DEFAULT = 3, // DEFAULT
+    SCALING = 4, // SCALING
+  }
+
+  /**
+   * @name SimulationTypeEnum.SimulationType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/SimulationTypeEnum.SimulationType
+   */
+  export enum SimulationType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    CPC_BID = 2, // CPC_BID
+    CPV_BID = 3, // CPV_BID
+    TARGET_CPA = 4, // TARGET_CPA
+    BID_MODIFIER = 5, // BID_MODIFIER
+    TARGET_ROAS = 6, // TARGET_ROAS
+    PERCENT_CPC_BID = 7, // PERCENT_CPC_BID
+    TARGET_IMPRESSION_SHARE = 8, // TARGET_IMPRESSION_SHARE
+    BUDGET = 9, // BUDGET
+  }
+
+  /**
+   * @name SitelinkPlaceholderFieldEnum.SitelinkPlaceholderField
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/SitelinkPlaceholderFieldEnum.SitelinkPlaceholderField
+   */
+  export enum SitelinkPlaceholderField {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    TEXT = 2, // TEXT
+    LINE_1 = 3, // LINE_1
+    LINE_2 = 4, // LINE_2
+    FINAL_URLS = 5, // FINAL_URLS
+    FINAL_MOBILE_URLS = 6, // FINAL_MOBILE_URLS
+    TRACKING_URL = 7, // TRACKING_URL
+    FINAL_URL_SUFFIX = 8, // FINAL_URL_SUFFIX
+  }
+
+  /**
+   * @name SpendingLimitTypeEnum.SpendingLimitType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/SpendingLimitTypeEnum.SpendingLimitType
+   */
+  export enum SpendingLimitType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    INFINITE = 2, // INFINITE
+  }
+
+  /**
+   * @name StructuredSnippetPlaceholderFieldEnum.StructuredSnippetPlaceholderField
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/StructuredSnippetPlaceholderFieldEnum.StructuredSnippetPlaceholderField
+   */
+  export enum StructuredSnippetPlaceholderField {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    HEADER = 2, // HEADER
+    SNIPPETS = 3, // SNIPPETS
+  }
+
+  /**
+   * @name SummaryRowSettingEnum.SummaryRowSetting
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/SummaryRowSettingEnum.SummaryRowSetting
+   */
+  export enum SummaryRowSetting {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    NO_SUMMARY_ROW = 2, // NO_SUMMARY_ROW
+    SUMMARY_ROW_WITH_RESULTS = 3, // SUMMARY_ROW_WITH_RESULTS
+    SUMMARY_ROW_ONLY = 4, // SUMMARY_ROW_ONLY
+  }
+
+  /**
+   * @name SystemManagedResourceSourceEnum.SystemManagedResourceSource
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/SystemManagedResourceSourceEnum.SystemManagedResourceSource
+   */
+  export enum SystemManagedResourceSource {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    AD_VARIATIONS = 2, // AD_VARIATIONS
+  }
+
+  /**
+   * @name TargetCpaOptInRecommendationGoalEnum.TargetCpaOptInRecommendationGoal
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/TargetCpaOptInRecommendationGoalEnum.TargetCpaOptInRecommendationGoal
+   */
+  export enum TargetCpaOptInRecommendationGoal {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    SAME_COST = 2, // SAME_COST
+    SAME_CONVERSIONS = 3, // SAME_CONVERSIONS
+    SAME_CPA = 4, // SAME_CPA
+    CLOSEST_CPA = 5, // CLOSEST_CPA
+  }
+
+  /**
+   * @name TimeTypeEnum.TimeType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/TimeTypeEnum.TimeType
+   */
+  export enum TimeType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    NOW = 2, // NOW
+    FOREVER = 3, // FOREVER
+  }
+
+  /**
+   * @name TravelPlaceholderFieldEnum.TravelPlaceholderField
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/TravelPlaceholderFieldEnum.TravelPlaceholderField
+   */
+  export enum TravelPlaceholderField {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    DESTINATION_ID = 2, // DESTINATION_ID
+    ORIGIN_ID = 3, // ORIGIN_ID
+    TITLE = 4, // TITLE
+    DESTINATION_NAME = 5, // DESTINATION_NAME
+    ORIGIN_NAME = 6, // ORIGIN_NAME
+    PRICE = 7, // PRICE
+    FORMATTED_PRICE = 8, // FORMATTED_PRICE
+    SALE_PRICE = 9, // SALE_PRICE
+    FORMATTED_SALE_PRICE = 10, // FORMATTED_SALE_PRICE
+    IMAGE_URL = 11, // IMAGE_URL
+    CATEGORY = 12, // CATEGORY
+    CONTEXTUAL_KEYWORDS = 13, // CONTEXTUAL_KEYWORDS
+    DESTINATION_ADDRESS = 14, // DESTINATION_ADDRESS
+    FINAL_URL = 15, // FINAL_URL
+    FINAL_MOBILE_URLS = 16, // FINAL_MOBILE_URLS
+    TRACKING_URL = 17, // TRACKING_URL
+    ANDROID_APP_LINK = 18, // ANDROID_APP_LINK
+    SIMILAR_DESTINATION_IDS = 19, // SIMILAR_DESTINATION_IDS
+    IOS_APP_LINK = 20, // IOS_APP_LINK
+    IOS_APP_STORE_ID = 21, // IOS_APP_STORE_ID
+  }
+
+  /**
+   * @name UserInterestTaxonomyTypeEnum.UserInterestTaxonomyType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserInterestTaxonomyTypeEnum.UserInterestTaxonomyType
+   */
+  export enum UserInterestTaxonomyType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    AFFINITY = 2, // AFFINITY
+    IN_MARKET = 3, // IN_MARKET
+    MOBILE_APP_INSTALL_USER = 4, // MOBILE_APP_INSTALL_USER
+    VERTICAL_GEO = 5, // VERTICAL_GEO
+    NEW_SMART_PHONE_USER = 6, // NEW_SMART_PHONE_USER
+  }
+
+  /**
+   * @name UserListAccessStatusEnum.UserListAccessStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListAccessStatusEnum.UserListAccessStatus
+   */
+  export enum UserListAccessStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    DISABLED = 3, // DISABLED
+  }
+
+  /**
+   * @name UserListClosingReasonEnum.UserListClosingReason
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListClosingReasonEnum.UserListClosingReason
+   */
+  export enum UserListClosingReason {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    UNUSED = 2, // UNUSED
+  }
+
+  /**
+   * @name UserListMembershipStatusEnum.UserListMembershipStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListMembershipStatusEnum.UserListMembershipStatus
+   */
+  export enum UserListMembershipStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    OPEN = 2, // OPEN
+    CLOSED = 3, // CLOSED
+  }
+
+  /**
+   * @name UserListSizeRangeEnum.UserListSizeRange
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListSizeRangeEnum.UserListSizeRange
+   */
+  export enum UserListSizeRange {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    LESS_THAN_FIVE_HUNDRED = 2, // LESS_THAN_FIVE_HUNDRED
+    LESS_THAN_ONE_THOUSAND = 3, // LESS_THAN_ONE_THOUSAND
+    ONE_THOUSAND_TO_TEN_THOUSAND = 4, // ONE_THOUSAND_TO_TEN_THOUSAND
+    TEN_THOUSAND_TO_FIFTY_THOUSAND = 5, // TEN_THOUSAND_TO_FIFTY_THOUSAND
+    FIFTY_THOUSAND_TO_ONE_HUNDRED_THOUSAND = 6, // FIFTY_THOUSAND_TO_ONE_HUNDRED_THOUSAND
+    ONE_HUNDRED_THOUSAND_TO_THREE_HUNDRED_THOUSAND = 7, // ONE_HUNDRED_THOUSAND_TO_THREE_HUNDRED_THOUSAND
+    THREE_HUNDRED_THOUSAND_TO_FIVE_HUNDRED_THOUSAND = 8, // THREE_HUNDRED_THOUSAND_TO_FIVE_HUNDRED_THOUSAND
+    FIVE_HUNDRED_THOUSAND_TO_ONE_MILLION = 9, // FIVE_HUNDRED_THOUSAND_TO_ONE_MILLION
+    ONE_MILLION_TO_TWO_MILLION = 10, // ONE_MILLION_TO_TWO_MILLION
+    TWO_MILLION_TO_THREE_MILLION = 11, // TWO_MILLION_TO_THREE_MILLION
+    THREE_MILLION_TO_FIVE_MILLION = 12, // THREE_MILLION_TO_FIVE_MILLION
+    FIVE_MILLION_TO_TEN_MILLION = 13, // FIVE_MILLION_TO_TEN_MILLION
+    TEN_MILLION_TO_TWENTY_MILLION = 14, // TEN_MILLION_TO_TWENTY_MILLION
+    TWENTY_MILLION_TO_THIRTY_MILLION = 15, // TWENTY_MILLION_TO_THIRTY_MILLION
+    THIRTY_MILLION_TO_FIFTY_MILLION = 16, // THIRTY_MILLION_TO_FIFTY_MILLION
+    OVER_FIFTY_MILLION = 17, // OVER_FIFTY_MILLION
+  }
+
+  /**
+   * @name UserListTypeEnum.UserListType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/UserListTypeEnum.UserListType
+   */
+  export enum UserListType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    REMARKETING = 2, // REMARKETING
+    LOGICAL = 3, // LOGICAL
+    EXTERNAL_REMARKETING = 4, // EXTERNAL_REMARKETING
+    RULE_BASED = 5, // RULE_BASED
+    SIMILAR = 6, // SIMILAR
+    CRM_BASED = 7, // CRM_BASED
+  }
+
+  /**
+   * @name VanityPharmaDisplayUrlModeEnum.VanityPharmaDisplayUrlMode
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/VanityPharmaDisplayUrlModeEnum.VanityPharmaDisplayUrlMode
+   */
+  export enum VanityPharmaDisplayUrlMode {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    MANUFACTURER_WEBSITE_URL = 2, // MANUFACTURER_WEBSITE_URL
+    WEBSITE_DESCRIPTION = 3, // WEBSITE_DESCRIPTION
+  }
+
+  /**
+   * @name VanityPharmaTextEnum.VanityPharmaText
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v7/VanityPharmaTextEnum.VanityPharmaText
+   */
+  export enum VanityPharmaText {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PRESCRIPTION_TREATMENT_WEBSITE_EN = 2, // PRESCRIPTION_TREATMENT_WEBSITE_EN
+    PRESCRIPTION_TREATMENT_WEBSITE_ES = 3, // PRESCRIPTION_TREATMENT_WEBSITE_ES
+    PRESCRIPTION_DEVICE_WEBSITE_EN = 4, // PRESCRIPTION_DEVICE_WEBSITE_EN
+    PRESCRIPTION_DEVICE_WEBSITE_ES = 5, // PRESCRIPTION_DEVICE_WEBSITE_ES
+    MEDICAL_DEVICE_WEBSITE_EN = 6, // MEDICAL_DEVICE_WEBSITE_EN
+    MEDICAL_DEVICE_WEBSITE_ES = 7, // MEDICAL_DEVICE_WEBSITE_ES
+    PREVENTATIVE_TREATMENT_WEBSITE_EN = 8, // PREVENTATIVE_TREATMENT_WEBSITE_EN
+    PREVENTATIVE_TREATMENT_WEBSITE_ES = 9, // PREVENTATIVE_TREATMENT_WEBSITE_ES
+    PRESCRIPTION_CONTRACEPTION_WEBSITE_EN = 10, // PRESCRIPTION_CONTRACEPTION_WEBSITE_EN
+    PRESCRIPTION_CONTRACEPTION_WEBSITE_ES = 11, // PRESCRIPTION_CONTRACEPTION_WEBSITE_ES
+    PRESCRIPTION_VACCINE_WEBSITE_EN = 12, // PRESCRIPTION_VACCINE_WEBSITE_EN
+    PRESCRIPTION_VACCINE_WEBSITE_ES = 13, // PRESCRIPTION_VACCINE_WEBSITE_ES
+  }
 }
