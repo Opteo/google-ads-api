@@ -128,7 +128,6 @@ export class Customer extends ServiceFactory {
 
     const stream = service.searchStream(request, {
       otherArgs: { headers: this.callHeaders },
-      timeout: this.timeout,
     });
 
     let streamFinished = false;
@@ -229,7 +228,6 @@ export class Customer extends ServiceFactory {
 
     return service.searchStream(request, {
       otherArgs: { headers: this.callHeaders },
-      timeout: this.timeout,
     });
   }
 
@@ -248,7 +246,6 @@ export class Customer extends ServiceFactory {
 
     const searchResponse = await service.search(request, {
       otherArgs: { headers: this.callHeaders },
-      timeout: this.timeout,
       autoPaginate: false, // autoPaginate doesn't work
     });
 

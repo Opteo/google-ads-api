@@ -31,20 +31,17 @@ export interface CallHeaders {
 export class Service {
   protected readonly clientOptions: ClientOptions;
   protected readonly customerOptions: CustomerOptions;
-  protected readonly timeout: number;
   protected readonly hooks: Hooks;
   private serviceCache!: Record<ServiceName, AllServices>;
 
   constructor(
     clientOptions: ClientOptions,
     customerOptions: CustomerOptions,
-    hooks?: Hooks,
-    timeout = 3600000 // 1 hour
+    hooks?: Hooks
   ) {
     this.clientOptions = clientOptions;
     this.customerOptions = customerOptions;
     this.hooks = hooks ?? {};
-    this.timeout = timeout;
 
     // @ts-expect-error All fields don't need to be set here
     this.serviceCache = {};
