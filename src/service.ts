@@ -178,10 +178,10 @@ export class Service {
     mutations: MutateOperation<T>[],
     options?: MutateOptions
   ): {
-    service: services.GoogleAdsService;
+    service: GoogleAdsServiceClient;
     request: services.MutateGoogleAdsRequest;
   } {
-    const service = this.loadService<services.GoogleAdsService>(
+    const service: GoogleAdsServiceClient = this.loadService(
       "GoogleAdsServiceClient"
     );
 
