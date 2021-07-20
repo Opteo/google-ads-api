@@ -112,9 +112,7 @@ export function mockSearchOnce({
   );
 }
 
-export function mockBuildSearchStreamRequestAndService(
-  customer: Customer
-): {
+export function mockBuildSearchStreamRequestAndService(customer: Customer): {
   spyBuild: jest.SpyInstance;
   mockStreamData: (data: services.IGoogleAdsRow[]) => void;
   mockStreamSummaryRow: () => void;
@@ -176,7 +174,7 @@ export function mockBuildSearchRequestAndService({
   includeSummaryRow?: boolean;
   includeTotalResultsCount?: boolean;
 }): { mockService: GoogleAdsServiceClient; spyBuild: jest.SpyInstance } {
-  const mockService = ({
+  const mockService = {
     search: (): [
       services.IGoogleAdsRow[],
       null,
@@ -195,7 +193,7 @@ export function mockBuildSearchRequestAndService({
 
       return [mockQueryReturnValue, null, searchGoogleAdsResponse];
     },
-  } as unknown) as GoogleAdsServiceClient;
+  } as unknown as GoogleAdsServiceClient;
 
   const spyBuild = jest
     // @ts-expect-error protected method
@@ -221,15 +219,17 @@ export function mockBuildMutateRequestAndService({
   shouldThrow?: boolean;
   request?: services.MutateGoogleAdsRequest;
   response?: services.MutateGoogleAdsResponse;
-}): { mockService: services.GoogleAdsService; spyBuild: jest.SpyInstance } {
-  const mockService = ({
-    mutate() {
+}): { mockService: GoogleAdsServiceClient; spyBuild: jest.SpyInstance } {
+  const mockService = {
+    mutate(): [services.MutateGoogleAdsResponse] {
       if (shouldThrow) {
         throw new Error(mockErrorMessage);
       }
-      return response ?? mockMutationReturnValue;
+      return [response ?? mockMutationReturnValue] as unknown as [
+        services.MutateGoogleAdsResponse
+      ];
     },
-  } as unknown) as services.GoogleAdsService;
+  } as unknown as GoogleAdsServiceClient;
 
   const spyBuild = jest
     // @ts-expect-error protected method
