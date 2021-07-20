@@ -27,6 +27,7 @@ import {
   noopParser,
 } from "./testUtils";
 import { MutateOptions, RequestOptions } from "./types";
+import { googleAdsVersion } from "../src/version";
 
 describe("querier", () => {
   afterEach(() => jest.resetAllMocks());
@@ -1082,7 +1083,7 @@ describe("mutateResources", () => {
         partial_failure_error: new google.rpc.Status({
           details: [
             {
-              type_url: "google.ads.googleads.v7.errors.GoogleAdsFailure",
+              type_url: `google.ads.googleads.${googleAdsVersion}.errors.GoogleAdsFailure`,
               value: failureBuffer,
             },
           ],

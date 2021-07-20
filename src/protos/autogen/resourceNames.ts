@@ -2,6 +2,22 @@
 
 type StrNum = string | number;
 
+/* AccessibleBiddingStrategy */
+export type AccessibleBiddingStrategyResourceName =
+  `customers/${StrNum}/accessibleBiddingStrategies/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} biddingStrategyId
+ * @returns `AccessibleBiddingStrategyResourceName`
+ * @example const accessibleBiddingStrategy: ResourceNames.AccessibleBiddingStrategyResourceName = ResourceNames.accessibleBiddingStrategy(10987417, 21974834)
+ */
+export function accessibleBiddingStrategy(
+  customerId: string | number,
+  biddingStrategyId: string | number
+): AccessibleBiddingStrategyResourceName {
+  return `customers/${customerId}/accessibleBiddingStrategies/${biddingStrategyId}` as const;
+}
+
 /* AccountBudget */
 export type AccountBudgetResourceName =
   `customers/${StrNum}/accountBudgets/${StrNum}`;
@@ -407,6 +423,22 @@ export function asset(
   assetId: string | number
 ): AssetResourceName {
   return `customers/${customerId}/assets/${assetId}` as const;
+}
+
+/* AssetFieldTypeView */
+export type AssetFieldTypeViewResourceName =
+  `customers/${StrNum}/assetFieldTypeViews/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} fieldType
+ * @returns `AssetFieldTypeViewResourceName`
+ * @example const assetFieldTypeView: ResourceNames.AssetFieldTypeViewResourceName = ResourceNames.assetFieldTypeView(10987417, 21974834)
+ */
+export function assetFieldTypeView(
+  customerId: string | number,
+  fieldType: string | number
+): AssetFieldTypeViewResourceName {
+  return `customers/${customerId}/assetFieldTypeViews/${fieldType}` as const;
 }
 
 /* BatchJob */
@@ -1111,6 +1143,22 @@ export function detailPlacementView(
   return `customers/${customerId}/detailPlacementViews/${adGroupId}~${base64Placement}` as const;
 }
 
+/* DetailedDemographic */
+export type DetailedDemographicResourceName =
+  `customers/${StrNum}/detailedDemographics/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} detailedDemographicId
+ * @returns `DetailedDemographicResourceName`
+ * @example const detailedDemographic: ResourceNames.DetailedDemographicResourceName = ResourceNames.detailedDemographic(10987417, 21974834)
+ */
+export function detailedDemographic(
+  customerId: string | number,
+  detailedDemographicId: string | number
+): DetailedDemographicResourceName {
+  return `customers/${customerId}/detailedDemographics/${detailedDemographicId}` as const;
+}
+
 /* DisplayKeywordView */
 export type DisplayKeywordViewResourceName =
   `customers/${StrNum}/displayKeywordViews/${StrNum}~${StrNum}`;
@@ -1575,6 +1623,22 @@ export function keywordPlanCampaignKeyword(
   return `customers/${customerId}/keywordPlanCampaignKeywords/${keywordPlanCampaignKeywordId}` as const;
 }
 
+/* KeywordThemeConstant */
+export type KeywordThemeConstantResourceName =
+  `keywordThemeConstants/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} expressCategoryId
+ * @param {string | number} expressSubCategoryId
+ * @returns `KeywordThemeConstantResourceName`
+ * @example const keywordThemeConstant: ResourceNames.KeywordThemeConstantResourceName = ResourceNames.keywordThemeConstant(10987417, 21974834)
+ */
+export function keywordThemeConstant(
+  expressCategoryId: string | number,
+  expressSubCategoryId: string | number
+): KeywordThemeConstantResourceName {
+  return `keywordThemeConstants/${expressCategoryId}~${expressSubCategoryId}` as const;
+}
+
 /* KeywordView */
 export type KeywordViewResourceName =
   `customers/${StrNum}/keywordViews/${StrNum}~${StrNum}`;
@@ -1964,6 +2028,40 @@ export function shoppingPerformanceView(
   customerId: string | number
 ): ShoppingPerformanceViewResourceName {
   return `customers/${customerId}/shoppingPerformanceView` as const;
+}
+
+/* SmartCampaignSearchTermView */
+export type SmartCampaignSearchTermViewResourceName =
+  `customers/${StrNum}/smartCampaignSearchTermViews/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} campaignId
+ * @param {string | number} query
+ * @returns `SmartCampaignSearchTermViewResourceName`
+ * @example const smartCampaignSearchTermView: ResourceNames.SmartCampaignSearchTermViewResourceName = ResourceNames.smartCampaignSearchTermView(10987417, 21974834, 43949668)
+ */
+export function smartCampaignSearchTermView(
+  customerId: string | number,
+  campaignId: string | number,
+  query: string | number
+): SmartCampaignSearchTermViewResourceName {
+  return `customers/${customerId}/smartCampaignSearchTermViews/${campaignId}~${query}` as const;
+}
+
+/* SmartCampaignSetting */
+export type SmartCampaignSettingResourceName =
+  `customers/${StrNum}/smartCampaignSettings/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} campaignId
+ * @returns `SmartCampaignSettingResourceName`
+ * @example const smartCampaignSetting: ResourceNames.SmartCampaignSettingResourceName = ResourceNames.smartCampaignSetting(10987417, 21974834)
+ */
+export function smartCampaignSetting(
+  customerId: string | number,
+  campaignId: string | number
+): SmartCampaignSettingResourceName {
+  return `customers/${customerId}/smartCampaignSettings/${campaignId}` as const;
 }
 
 /* ThirdPartyAppAnalyticsLink */
