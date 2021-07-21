@@ -24,7 +24,8 @@ enum QueryKeywords {
 }
 
 type ParsedConstraintValue = string | number | boolean;
-type ConstraintString = `${string} ${ConstraintOperation} ${ParsedConstraintValue}`;
+type ConstraintString =
+  `${string} ${ConstraintOperation} ${ParsedConstraintValue}`;
 
 type SelectClause = `${QueryKeywords.SELECT} ${string}`;
 type FromClause = ` ${QueryKeywords.FROM} ${fields.Resource}`;
@@ -35,7 +36,8 @@ export type OrderClause =
   | ``;
 type LimitClause = ` ${QueryKeywords.LIMIT} ${number}` | ``;
 
-type Query = `${SelectClause}${FromClause}${WhereClause}${OrderClause}${LimitClause}`;
+type Query =
+  `${SelectClause}${FromClause}${WhereClause}${OrderClause}${LimitClause}`;
 
 export const QueryError = {
   INVALID_CONSTRAINTS_FORMAT:
@@ -287,10 +289,10 @@ export function completeOrderly(
 ): string {
   if (!orderly.length) {
     throw new Error(QueryError.INVALID_ORDERLY);
-  } else if (new RegExp(/^.[^.]+\..[^.]+$/g).test(orderly)) {
-    // text before and after a full stop (e.g. campaign.resource_name)
+  } else if (new RegExp(/^[^.\s]+(\.[^.\s]+)+$/g).test(orderly)) {
+    // text containing full stops
     return orderly;
-  } else if (new RegExp(/^.[^.]+$/g).test(orderly)) {
+  } else if (new RegExp(/^[^.\s]+$/g).test(orderly)) {
     // text without a full stop (e.g. resource_name)
     return `${entity}.${orderly}`;
   } else {
@@ -372,19 +374,13 @@ export function buildOrderClause(
 export function buildRequestOptions(
   reportOptions: ReportOptions
 ): RequestOptions {
-  const {
-    page_size,
-    page_token,
-    validate_only,
-    summary_row_setting,
-  } = reportOptions;
+  const { page_size, page_token, validate_only, summary_row_setting } =
+    reportOptions;
 
   return { page_size, page_token, validate_only, summary_row_setting };
 }
 
-export function buildQuery(
-  reportOptions: ReportOptions
-): {
+export function buildQuery(reportOptions: ReportOptions): {
   gaqlQuery: Query;
   requestOptions: RequestOptions;
 } {

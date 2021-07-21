@@ -9,6 +9,8 @@ import {
   getEnumName,
 } from "./fields";
 
+import { googleAdsVersion } from "../src/version";
+
 describe("category checkers", () => {
   const resourceField = new resources.GoogleAdsField({
     category: "RESOURCE",
@@ -81,14 +83,14 @@ describe("other checkers", () => {
   it("getEnumName", () => {
     const attributeEnumField = new resources.GoogleAdsField({
       type_url:
-        "google.ads.googleads.v7.enums.CampaignStatusEnum.CampaignStatus",
+        `google.ads.googleads.${googleAdsVersion}.enums.CampaignStatusEnum.CampaignStatus`,
     });
     const metricEnumField = new resources.GoogleAdsField({
       type_url:
-        "google.ads.googleads.v7.enums.QualityScoreBucketEnum.QualityScoreBucket",
+        `google.ads.googleads.${googleAdsVersion}.enums.QualityScoreBucketEnum.QualityScoreBucket`,
     });
     const segmentEnumField = new resources.GoogleAdsField({
-      type_url: "google.ads.googleads.v7.enums.DayOfWeekEnum.DayOfWeek",
+      type_url: `google.ads.googleads.${googleAdsVersion}.enums.DayOfWeekEnum.DayOfWeek`,
     });
 
     expect(getEnumName(attributeEnumField)).toEqual("CampaignStatus");

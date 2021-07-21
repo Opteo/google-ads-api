@@ -9,6 +9,7 @@ import {
   MOCK_LOGIN_CID,
   MOCK_DEVELOPER_TOKEN,
 } from "./testUtils";
+import { googleAdsVersion } from "../src/version";
 
 beforeAll(() => {
   // Timeout required as the first service load can take a while
@@ -166,7 +167,7 @@ describe("Service", () => {
         partial_failure_error: new google.rpc.Status({
           details: [
             {
-              type_url: "google.ads.googleads.v7.errors.GoogleAdsFailure",
+              type_url: `google.ads.googleads.${googleAdsVersion}.errors.GoogleAdsFailure`,
               value: failureBuffer,
             },
           ],

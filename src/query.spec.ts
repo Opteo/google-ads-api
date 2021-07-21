@@ -1,9 +1,4 @@
-import {
-  ReportOptions,
-  ConstraintKey,
-  ConstraintOperation,
-  Constraint,
-} from "./types";
+import { ReportOptions, ConstraintKey, Constraint } from "./types";
 import { normaliseQuery } from "./utils";
 import { enums } from "./protos";
 
@@ -487,15 +482,19 @@ describe("completeOrderly", () => {
   });
 
   it("returns orderlies that already have their entity", () => {
-    const orderly = completeOrderly("campaign.resource_name", options.entity);
+    const orderly1 = completeOrderly("campaign.resource_name", options.entity);
+    const orderly2 = completeOrderly(
+      "ad_group_criterion.keyword.match_type",
+      options.entity
+    );
+    const orderly3 = completeOrderly(
+      "ad_group_ad.ad.gmail_ad.teaser.logo_image",
+      options.entity
+    );
 
-    expect(orderly).toEqual("campaign.resource_name");
-  });
-
-  it("throws invalid orderlies", () => {
-    expect(() =>
-      completeOrderly("campaign.id.resource_name", options.entity)
-    ).toThrowError(QueryError.INVALID_ORDERLY);
+    expect(orderly1).toEqual("campaign.resource_name");
+    expect(orderly2).toEqual("ad_group_criterion.keyword.match_type");
+    expect(orderly3).toEqual("ad_group_ad.ad.gmail_ad.teaser.logo_image");
   });
 });
 
