@@ -167,7 +167,7 @@ export class Customer extends ServiceFactory {
           await nextChunk.newPromise;
         }
       }
-    } catch (searchError) {
+    } catch (searchError: any) {
       const googleAdsError = this.getGoogleAdsError(searchError);
       if (this.hooks.onStreamError) {
         await this.hooks.onStreamError({
@@ -353,7 +353,7 @@ export class Customer extends ServiceFactory {
       }
 
       return { response: response as unknown as T, totalResultsCount };
-    } catch (searchError) {
+    } catch (searchError: any) {
       const googleAdsError = this.getGoogleAdsError(searchError);
       if (this.hooks.onQueryError && useHooks) {
         await this.hooks.onQueryError({
@@ -408,10 +408,11 @@ export class Customer extends ServiceFactory {
     );
 
     try {
-      const response = await service.mutate(request, {
-        // @ts-expect-error Field not included in type definitions
-        otherArgs: { headers: this.callHeaders },
-      });
+      const response = (
+        await service.mutate(request, {
+          otherArgs: { headers: this.callHeaders },
+        })
+      )[0] as services.MutateGoogleAdsResponse;
 
       const parsedResponse = request.partial_failure
         ? this.decodePartialFailureError(response)
@@ -433,7 +434,7 @@ export class Customer extends ServiceFactory {
       }
 
       return parsedResponse;
-    } catch (mutateError) {
+    } catch (mutateError: any) {
       const googleAdsError = this.getGoogleAdsError(mutateError);
       if (this.hooks.onMutationError) {
         await this.hooks.onMutationError({

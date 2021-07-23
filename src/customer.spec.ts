@@ -27,6 +27,7 @@ import {
   noopParser,
 } from "./testUtils";
 import { MutateOptions, RequestOptions } from "./types";
+import { googleAdsVersion } from "../src/version";
 
 describe("querier", () => {
   afterEach(() => jest.resetAllMocks());
@@ -413,10 +414,8 @@ describe("reportStream", () => {
 
   it("parses reportStream results by default", async () => {
     const customer = newCustomer({});
-    const {
-      mockStreamData,
-      mockStreamEnd,
-    } = mockBuildSearchStreamRequestAndService(customer);
+    const { mockStreamData, mockStreamEnd } =
+      mockBuildSearchStreamRequestAndService(customer);
     const mockedParse = mockParse(mockParsedValues);
     const stream = customer.reportStream(mockReportOptions);
     mockStreamData(mockQueryReturnValue);
@@ -432,10 +431,8 @@ describe("reportStream", () => {
   it("skips reportStream parsing if it is disabled in the client options", async () => {
     const disableParsing = true;
     const customer = newCustomer({}, disableParsing);
-    const {
-      mockStreamData,
-      mockStreamEnd,
-    } = mockBuildSearchStreamRequestAndService(customer);
+    const { mockStreamData, mockStreamEnd } =
+      mockBuildSearchStreamRequestAndService(customer);
     const mockedParse = mockParse(mockParsedValues);
     const stream = customer.reportStream(mockReportOptions);
     mockStreamData(mockQueryReturnValue);
@@ -453,10 +450,8 @@ describe("reportStream", () => {
   it("handles multiple chunks of data while maintaining their order", async () => {
     const disableParsing = true;
     const customer = newCustomer({}, disableParsing);
-    const {
-      mockStreamData,
-      mockStreamEnd,
-    } = mockBuildSearchStreamRequestAndService(customer);
+    const { mockStreamData, mockStreamEnd } =
+      mockBuildSearchStreamRequestAndService(customer);
     mockParse(mockParsedValues);
     const stream = customer.reportStream(mockReportOptions);
     mockStreamData([0, 1, 2, 3, 4, 5] as services.IGoogleAdsRow[]);
@@ -475,11 +470,8 @@ describe("reportStream", () => {
   it("includes the summary row if a summary row is returned", async () => {
     const disableParsing = true;
     const customer = newCustomer({}, disableParsing);
-    const {
-      mockStreamData,
-      mockStreamSummaryRow,
-      mockStreamEnd,
-    } = mockBuildSearchStreamRequestAndService(customer);
+    const { mockStreamData, mockStreamSummaryRow, mockStreamEnd } =
+      mockBuildSearchStreamRequestAndService(customer);
     mockParse(mockParsedValues);
     const stream = customer.reportStream(mockReportOptions);
     mockStreamData(mockQueryReturnValue);
@@ -500,10 +492,8 @@ describe("reportStream", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const {
-      mockStreamData,
-      mockStreamEnd,
-    } = mockBuildSearchStreamRequestAndService(customer);
+    const { mockStreamData, mockStreamEnd } =
+      mockBuildSearchStreamRequestAndService(customer);
     mockParse(mockParsedValues);
     const spyHook = jest.spyOn(hooks, "onStreamStart");
     const stream = customer.reportStream(mockReportOptions);
@@ -531,10 +521,8 @@ describe("reportStream", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const {
-      mockStreamData,
-      mockStreamEnd,
-    } = mockBuildSearchStreamRequestAndService(customer);
+    const { mockStreamData, mockStreamEnd } =
+      mockBuildSearchStreamRequestAndService(customer);
     mockParse(mockParsedValues);
     const stream = customer.reportStream(mockReportOptions);
     mockStreamData(mockQueryReturnValue);
@@ -587,11 +575,8 @@ describe("reportStream", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const {
-      spyBuild,
-      mockStreamData,
-      mockStreamEnd,
-    } = mockBuildSearchStreamRequestAndService(customer);
+    const { spyBuild, mockStreamData, mockStreamEnd } =
+      mockBuildSearchStreamRequestAndService(customer);
     mockParse(mockParsedValues);
     const requestOptions: RequestOptions = {
       validate_only: false, // changed
@@ -621,10 +606,8 @@ describe("reportStream", () => {
     };
 
     const customer = newCustomer(hooks);
-    const {
-      mockStreamData,
-      mockStreamError,
-    } = mockBuildSearchStreamRequestAndService(customer);
+    const { mockStreamData, mockStreamError } =
+      mockBuildSearchStreamRequestAndService(customer);
     mockParse(mockParsedValues);
     const mockedError = mockGetGoogleAdsError(customer);
     const spyHook = jest.spyOn(hooks, "onStreamError");
@@ -659,10 +642,8 @@ describe("reportStream", () => {
     };
 
     const customer = newCustomer(hooks);
-    const {
-      mockStreamData,
-      mockStreamError,
-    } = mockBuildSearchStreamRequestAndService(customer);
+    const { mockStreamData, mockStreamError } =
+      mockBuildSearchStreamRequestAndService(customer);
     mockParse(mockParsedValues);
     mockGetGoogleAdsError(customer);
 
@@ -685,10 +666,8 @@ describe("reportStream", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const {
-      mockStreamData,
-      mockStreamEnd,
-    } = mockBuildSearchStreamRequestAndService(customer);
+    const { mockStreamData, mockStreamEnd } =
+      mockBuildSearchStreamRequestAndService(customer);
     mockParse(mockParsedValues);
     mockGetGoogleAdsError(customer);
     const spyHook = jest.spyOn(hooks, "onStreamError");
@@ -706,10 +685,8 @@ describe("reportStreamRaw", () => {
 
   it("does not parse any results", async () => {
     const customer = newCustomer({});
-    const {
-      mockStreamData,
-      mockStreamEnd,
-    } = mockBuildSearchStreamRequestAndService(customer);
+    const { mockStreamData, mockStreamEnd } =
+      mockBuildSearchStreamRequestAndService(customer);
     const mockedParse = mockParse(mockParsedValues);
     await customer.reportStreamRaw(mockReportOptions);
     mockStreamData(mockQueryReturnValue);
@@ -725,10 +702,8 @@ describe("reportStreamRaw", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const {
-      mockStreamData,
-      mockStreamEnd,
-    } = mockBuildSearchStreamRequestAndService(customer);
+    const { mockStreamData, mockStreamEnd } =
+      mockBuildSearchStreamRequestAndService(customer);
     const spyHook = jest.spyOn(hooks, "onStreamStart");
     await customer.reportStreamRaw(mockReportOptions);
     mockStreamData(mockQueryReturnValue);
@@ -754,10 +729,8 @@ describe("reportStreamRaw", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const {
-      mockStreamData,
-      mockStreamEnd,
-    } = mockBuildSearchStreamRequestAndService(customer);
+    const { mockStreamData, mockStreamEnd } =
+      mockBuildSearchStreamRequestAndService(customer);
     await customer.reportStreamRaw(mockReportOptions);
     mockStreamData(mockQueryReturnValue);
     mockStreamEnd();
@@ -786,11 +759,8 @@ describe("reportStreamRaw", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const {
-      spyBuild,
-      mockStreamData,
-      mockStreamEnd,
-    } = mockBuildSearchStreamRequestAndService(customer);
+    const { spyBuild, mockStreamData, mockStreamEnd } =
+      mockBuildSearchStreamRequestAndService(customer);
     const requestOptions: RequestOptions = {
       validate_only: false, // changed
       page_token: "abcd",
@@ -1098,9 +1068,8 @@ describe("mutateResources", () => {
       ],
     });
 
-    const failureBuffer = errors.GoogleAdsFailure.encode(
-      failureMessage
-    ).finish();
+    const failureBuffer =
+      errors.GoogleAdsFailure.encode(failureMessage).finish();
 
     // Mock request and response for mutate call
     const customer = newCustomer();
@@ -1114,7 +1083,7 @@ describe("mutateResources", () => {
         partial_failure_error: new google.rpc.Status({
           details: [
             {
-              type_url: "google.ads.googleads.v7.errors.GoogleAdsFailure",
+              type_url: `google.ads.googleads.${googleAdsVersion}.errors.GoogleAdsFailure`,
               value: failureBuffer,
             },
           ],
