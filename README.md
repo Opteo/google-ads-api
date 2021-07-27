@@ -33,7 +33,7 @@
 - Typescript definitions for all resources, enums, errors and services
 - Provides all API functionality
 
-> The Google Ads API is the new replacement to the AdWords API. Google will deprecate the AdWords API sometime in 2020.
+> The Google Ads API is the new replacement to the AdWords API. Google will deprecate the AdWords API on the 27th of April, 2022.
 
 # Hiring
 
@@ -44,18 +44,6 @@ We're currently hiring full-stack engineers at [Opteo](https://opteo.com)! If yo
 ```bash
 npm install google-ads-api
 ```
-
-# Documentation
-
-**Note:** Our documentation site is currently outdated (an older version of this library and the Google Ads API) but is still up. We're working on updating these docs soon.
-
----
-
-### ➡️ [opteo.com/dev/google-ads-api](https://opteo.com/dev/google-ads-api)
-
----
-
-For now we recommend following the usage examples below.
 
 # Usage
 
@@ -307,6 +295,8 @@ const adGroupAd = new resources.AdGroupAd({
 const { results } = await cus.adGroupAds.create([adGroupAd]);
 ```
 
+---
+
 ## Create a Campaign & Budget atomically
 
 ```ts
@@ -361,6 +351,8 @@ const operations: MutateOperation<
 const result = await customer.mutateResources(operations);
 ```
 
+---
+
 ## Summary Row
 
 If a summary row is requested in the `report` method, it will be included as the **first** row of the results.
@@ -394,7 +386,7 @@ const summaryRow = accumulator.slice(-1)[0];
 
 ## Total Results Count
 
-The `reportCount` method acts like `report` but returns the total number of rows that the query would have returned (ignoring the limit). This replaces the `return_total_results_count` report option. No hooks are called in this function to avoid cacheing conflicts.
+The `reportCount` method acts like `report` but returns the total number of rows that the query would have returned (ignoring the limit). This replaces the `return_total_results_count` report option. Hooks are **not** called in this function to avoid cacheing conflicts.
 
 ```ts
 const totalRows = await customer.reportCount({
@@ -569,6 +561,8 @@ const customer = client.Customer({
   hooks: { onQueryEnd },
 });
 ```
+
+---
 
 ## Error handling
 
