@@ -28,6 +28,8 @@ export namespace fields {
     | "asset"
     | "asset_field_type_view"
     | "batch_job"
+    | "bidding_data_exclusion"
+    | "bidding_seasonality_adjustment"
     | "bidding_strategy"
     | "bidding_strategy_simulation"
     | "billing_setup"
@@ -53,6 +55,8 @@ export namespace fields {
     | "combined_audience"
     | "conversion_action"
     | "conversion_custom_variable"
+    | "conversion_value_rule"
+    | "conversion_value_rule_set"
     | "currency_constant"
     | "custom_audience"
     | "custom_interest"
@@ -236,6 +240,7 @@ export namespace fields {
     | "ad_group.tracking_url_template"
     | "ad_group.type"
     | "ad_group.url_custom_parameters"
+    | "ad_group_ad.action_items"
     | "ad_group_ad.ad.added_by_google_ads"
     | "ad_group_ad.ad.app_ad.descriptions"
     | "ad_group_ad.ad.app_ad.headlines"
@@ -621,6 +626,29 @@ export namespace fields {
     | "batch_job.next_add_sequence_token"
     | "batch_job.resource_name"
     | "batch_job.status"
+    | "bidding_data_exclusion.advertising_channel_types"
+    | "bidding_data_exclusion.campaigns"
+    | "bidding_data_exclusion.data_exclusion_id"
+    | "bidding_data_exclusion.description"
+    | "bidding_data_exclusion.devices"
+    | "bidding_data_exclusion.end_date_time"
+    | "bidding_data_exclusion.name"
+    | "bidding_data_exclusion.resource_name"
+    | "bidding_data_exclusion.scope"
+    | "bidding_data_exclusion.start_date_time"
+    | "bidding_data_exclusion.status"
+    | "bidding_seasonality_adjustment.advertising_channel_types"
+    | "bidding_seasonality_adjustment.campaigns"
+    | "bidding_seasonality_adjustment.conversion_rate_modifier"
+    | "bidding_seasonality_adjustment.description"
+    | "bidding_seasonality_adjustment.devices"
+    | "bidding_seasonality_adjustment.end_date_time"
+    | "bidding_seasonality_adjustment.name"
+    | "bidding_seasonality_adjustment.resource_name"
+    | "bidding_seasonality_adjustment.scope"
+    | "bidding_seasonality_adjustment.seasonality_adjustment_id"
+    | "bidding_seasonality_adjustment.start_date_time"
+    | "bidding_seasonality_adjustment.status"
     | "bidding_strategy.campaign_count"
     | "bidding_strategy.currency_code"
     | "bidding_strategy.effective_currency_code"
@@ -896,6 +924,7 @@ export namespace fields {
     | "carrier_constant.name"
     | "carrier_constant.resource_name"
     | "change_event.ad_group"
+    | "change_event.asset"
     | "change_event.campaign"
     | "change_event.change_date_time"
     | "change_event.change_resource_name"
@@ -911,18 +940,24 @@ export namespace fields {
     | "change_event.user_email"
     | "change_status.ad_group"
     | "change_status.ad_group_ad"
+    | "change_status.ad_group_asset"
     | "change_status.ad_group_bid_modifier"
     | "change_status.ad_group_criterion"
     | "change_status.ad_group_feed"
+    | "change_status.asset"
     | "change_status.campaign"
+    | "change_status.campaign_asset"
     | "change_status.campaign_criterion"
     | "change_status.campaign_feed"
+    | "change_status.campaign_shared_set"
+    | "change_status.customer_asset"
     | "change_status.feed"
     | "change_status.feed_item"
     | "change_status.last_change_date_time"
     | "change_status.resource_name"
     | "change_status.resource_status"
     | "change_status.resource_type"
+    | "change_status.shared_set"
     | "click_view.ad_group_ad"
     | "click_view.area_of_interest.city"
     | "click_view.area_of_interest.country"
@@ -977,6 +1012,27 @@ export namespace fields {
     | "conversion_custom_variable.resource_name"
     | "conversion_custom_variable.status"
     | "conversion_custom_variable.tag"
+    | "conversion_value_rule.action.operation"
+    | "conversion_value_rule.action.value"
+    | "conversion_value_rule.audience_condition.user_interests"
+    | "conversion_value_rule.audience_condition.user_lists"
+    | "conversion_value_rule.device_condition.device_types"
+    | "conversion_value_rule.geo_location_condition.excluded_geo_match_type"
+    | "conversion_value_rule.geo_location_condition.excluded_geo_target_constants"
+    | "conversion_value_rule.geo_location_condition.geo_match_type"
+    | "conversion_value_rule.geo_location_condition.geo_target_constants"
+    | "conversion_value_rule.id"
+    | "conversion_value_rule.owner_customer"
+    | "conversion_value_rule.resource_name"
+    | "conversion_value_rule.status"
+    | "conversion_value_rule_set.attachment_type"
+    | "conversion_value_rule_set.campaign"
+    | "conversion_value_rule_set.conversion_value_rules"
+    | "conversion_value_rule_set.dimensions"
+    | "conversion_value_rule_set.id"
+    | "conversion_value_rule_set.owner_customer"
+    | "conversion_value_rule_set.resource_name"
+    | "conversion_value_rule_set.status"
     | "currency_constant.billable_unit_micros"
     | "currency_constant.code"
     | "currency_constant.name"
@@ -1653,6 +1709,7 @@ export namespace fields {
     | "segments.conversion_attribution_event_type"
     | "segments.conversion_lag_bucket"
     | "segments.conversion_or_adjustment_lag_bucket"
+    | "segments.conversion_value_rule_primary_dimension"
     | "segments.date"
     | "segments.day_of_week"
     | "segments.device"
@@ -1755,6 +1812,8 @@ export namespace fields {
     "asset.resource_name",
     "asset_field_type_view.resource_name",
     "batch_job.resource_name",
+    "bidding_data_exclusion.resource_name",
+    "bidding_seasonality_adjustment.resource_name",
     "bidding_strategy.resource_name",
     "bidding_strategy_simulation.resource_name",
     "billing_setup.resource_name",
@@ -1780,6 +1839,8 @@ export namespace fields {
     "combined_audience.resource_name",
     "conversion_action.resource_name",
     "conversion_custom_variable.resource_name",
+    "conversion_value_rule.resource_name",
+    "conversion_value_rule_set.resource_name",
     "currency_constant.resource_name",
     "custom_audience.resource_name",
     "custom_interest.resource_name",
@@ -1963,6 +2024,16 @@ export namespace fields {
     "asset.type": "AssetType",
     "asset_field_type_view.field_type": "AssetFieldType",
     "batch_job.status": "BatchJobStatus",
+    "bidding_data_exclusion.advertising_channel_types":
+      "AdvertisingChannelType",
+    "bidding_data_exclusion.devices": "Device",
+    "bidding_data_exclusion.scope": "SeasonalityEventScope",
+    "bidding_data_exclusion.status": "SeasonalityEventStatus",
+    "bidding_seasonality_adjustment.advertising_channel_types":
+      "AdvertisingChannelType",
+    "bidding_seasonality_adjustment.devices": "Device",
+    "bidding_seasonality_adjustment.scope": "SeasonalityEventScope",
+    "bidding_seasonality_adjustment.status": "SeasonalityEventStatus",
     "bidding_strategy.status": "BiddingStrategyStatus",
     "bidding_strategy.target_impression_share.location":
       "TargetImpressionShareLocation",
@@ -2053,6 +2124,17 @@ export namespace fields {
     "conversion_action.status": "ConversionActionStatus",
     "conversion_action.type": "ConversionActionType",
     "conversion_custom_variable.status": "ConversionCustomVariableStatus",
+    "conversion_value_rule.action.operation": "ValueRuleOperation",
+    "conversion_value_rule.device_condition.device_types":
+      "ValueRuleDeviceType",
+    "conversion_value_rule.geo_location_condition.excluded_geo_match_type":
+      "ValueRuleGeoLocationMatchType",
+    "conversion_value_rule.geo_location_condition.geo_match_type":
+      "ValueRuleGeoLocationMatchType",
+    "conversion_value_rule.status": "ConversionValueRuleStatus",
+    "conversion_value_rule_set.attachment_type": "ValueRuleSetAttachmentType",
+    "conversion_value_rule_set.dimensions": "ValueRuleSetDimension",
+    "conversion_value_rule_set.status": "ConversionValueRuleSetStatus",
     "custom_audience.status": "CustomAudienceStatus",
     "custom_audience.type": "CustomAudienceType",
     "custom_interest.status": "CustomInterestStatus",
@@ -2142,6 +2224,8 @@ export namespace fields {
     "segments.conversion_lag_bucket": "ConversionLagBucket",
     "segments.conversion_or_adjustment_lag_bucket":
       "ConversionOrAdjustmentLagBucket",
+    "segments.conversion_value_rule_primary_dimension":
+      "ConversionValueRulePrimaryDimension",
     "segments.day_of_week": "DayOfWeek",
     "segments.device": "Device",
     "segments.external_conversion_source": "ExternalConversionSource",
@@ -2687,6 +2771,7 @@ export namespace fields {
     | "ad_group.tracking_url_template"
     | "ad_group.type"
     | "ad_group.url_custom_parameters"
+    | "ad_group_ad.action_items"
     | "ad_group_ad.ad.added_by_google_ads"
     | "ad_group_ad.ad.app_ad.descriptions"
     | "ad_group_ad.ad.app_ad.headlines"
@@ -3050,6 +3135,7 @@ export namespace fields {
     | "ad_group.tracking_url_template"
     | "ad_group.type"
     | "ad_group.url_custom_parameters"
+    | "ad_group_ad.action_items"
     | "ad_group_ad.ad.added_by_google_ads"
     | "ad_group_ad.ad.app_ad.descriptions"
     | "ad_group_ad.ad.app_ad.headlines"
@@ -3426,6 +3512,7 @@ export namespace fields {
     | "ad_group.tracking_url_template"
     | "ad_group.type"
     | "ad_group.url_custom_parameters"
+    | "ad_group_ad.action_items"
     | "ad_group_ad.ad.added_by_google_ads"
     | "ad_group_ad.ad.app_ad.descriptions"
     | "ad_group_ad.ad.app_ad.headlines"
@@ -6685,6 +6772,82 @@ export namespace fields {
   export type BatchJobFields = Array<BatchJobField>;
   /* --- End of BatchJob --- */
 
+  /* --- Start of BiddingDataExclusion --- */
+  export type BiddingDataExclusionField =
+    | "bidding_data_exclusion.advertising_channel_types"
+    | "bidding_data_exclusion.campaigns"
+    | "bidding_data_exclusion.data_exclusion_id"
+    | "bidding_data_exclusion.description"
+    | "bidding_data_exclusion.devices"
+    | "bidding_data_exclusion.end_date_time"
+    | "bidding_data_exclusion.name"
+    | "bidding_data_exclusion.resource_name"
+    | "bidding_data_exclusion.scope"
+    | "bidding_data_exclusion.start_date_time"
+    | "bidding_data_exclusion.status"
+    | "customer.auto_tagging_enabled"
+    | "customer.call_reporting_setting.call_conversion_action"
+    | "customer.call_reporting_setting.call_conversion_reporting_enabled"
+    | "customer.call_reporting_setting.call_reporting_enabled"
+    | "customer.conversion_tracking_setting.conversion_tracking_id"
+    | "customer.conversion_tracking_setting.cross_account_conversion_tracking_id"
+    | "customer.currency_code"
+    | "customer.descriptive_name"
+    | "customer.final_url_suffix"
+    | "customer.has_partners_badge"
+    | "customer.id"
+    | "customer.manager"
+    | "customer.optimization_score"
+    | "customer.optimization_score_weight"
+    | "customer.pay_per_conversion_eligibility_failure_reasons"
+    | "customer.remarketing_setting.google_global_site_tag"
+    | "customer.resource_name"
+    | "customer.test_account"
+    | "customer.time_zone"
+    | "customer.tracking_url_template";
+
+  export type BiddingDataExclusionFields = Array<BiddingDataExclusionField>;
+  /* --- End of BiddingDataExclusion --- */
+
+  /* --- Start of BiddingSeasonalityAdjustment --- */
+  export type BiddingSeasonalityAdjustmentField =
+    | "bidding_seasonality_adjustment.advertising_channel_types"
+    | "bidding_seasonality_adjustment.campaigns"
+    | "bidding_seasonality_adjustment.conversion_rate_modifier"
+    | "bidding_seasonality_adjustment.description"
+    | "bidding_seasonality_adjustment.devices"
+    | "bidding_seasonality_adjustment.end_date_time"
+    | "bidding_seasonality_adjustment.name"
+    | "bidding_seasonality_adjustment.resource_name"
+    | "bidding_seasonality_adjustment.scope"
+    | "bidding_seasonality_adjustment.seasonality_adjustment_id"
+    | "bidding_seasonality_adjustment.start_date_time"
+    | "bidding_seasonality_adjustment.status"
+    | "customer.auto_tagging_enabled"
+    | "customer.call_reporting_setting.call_conversion_action"
+    | "customer.call_reporting_setting.call_conversion_reporting_enabled"
+    | "customer.call_reporting_setting.call_reporting_enabled"
+    | "customer.conversion_tracking_setting.conversion_tracking_id"
+    | "customer.conversion_tracking_setting.cross_account_conversion_tracking_id"
+    | "customer.currency_code"
+    | "customer.descriptive_name"
+    | "customer.final_url_suffix"
+    | "customer.has_partners_badge"
+    | "customer.id"
+    | "customer.manager"
+    | "customer.optimization_score"
+    | "customer.optimization_score_weight"
+    | "customer.pay_per_conversion_eligibility_failure_reasons"
+    | "customer.remarketing_setting.google_global_site_tag"
+    | "customer.resource_name"
+    | "customer.test_account"
+    | "customer.time_zone"
+    | "customer.tracking_url_template";
+
+  export type BiddingSeasonalityAdjustmentFields =
+    Array<BiddingSeasonalityAdjustmentField>;
+  /* --- End of BiddingSeasonalityAdjustment --- */
+
   /* --- Start of BiddingStrategy --- */
   export type BiddingStrategyField =
     | "bidding_strategy.campaign_count"
@@ -7252,6 +7415,7 @@ export namespace fields {
     | "segments.conversion_attribution_event_type"
     | "segments.conversion_lag_bucket"
     | "segments.conversion_or_adjustment_lag_bucket"
+    | "segments.conversion_value_rule_primary_dimension"
     | "segments.date"
     | "segments.day_of_week"
     | "segments.device"
@@ -9286,6 +9450,68 @@ export namespace fields {
     | "ad_group.tracking_url_template"
     | "ad_group.type"
     | "ad_group.url_custom_parameters"
+    | "asset.book_on_google_asset"
+    | "asset.callout_asset.ad_schedule_targets"
+    | "asset.callout_asset.callout_text"
+    | "asset.callout_asset.end_date"
+    | "asset.callout_asset.start_date"
+    | "asset.final_mobile_urls"
+    | "asset.final_url_suffix"
+    | "asset.final_urls"
+    | "asset.id"
+    | "asset.image_asset.file_size"
+    | "asset.image_asset.full_size.height_pixels"
+    | "asset.image_asset.full_size.url"
+    | "asset.image_asset.full_size.width_pixels"
+    | "asset.image_asset.mime_type"
+    | "asset.lead_form_asset.background_image_asset"
+    | "asset.lead_form_asset.business_name"
+    | "asset.lead_form_asset.call_to_action_description"
+    | "asset.lead_form_asset.call_to_action_type"
+    | "asset.lead_form_asset.custom_disclosure"
+    | "asset.lead_form_asset.delivery_methods"
+    | "asset.lead_form_asset.description"
+    | "asset.lead_form_asset.desired_intent"
+    | "asset.lead_form_asset.fields"
+    | "asset.lead_form_asset.headline"
+    | "asset.lead_form_asset.post_submit_call_to_action_type"
+    | "asset.lead_form_asset.post_submit_description"
+    | "asset.lead_form_asset.post_submit_headline"
+    | "asset.lead_form_asset.privacy_policy_url"
+    | "asset.name"
+    | "asset.policy_summary.approval_status"
+    | "asset.policy_summary.policy_topic_entries"
+    | "asset.policy_summary.review_status"
+    | "asset.promotion_asset.ad_schedule_targets"
+    | "asset.promotion_asset.discount_modifier"
+    | "asset.promotion_asset.end_date"
+    | "asset.promotion_asset.language_code"
+    | "asset.promotion_asset.money_amount_off.amount_micros"
+    | "asset.promotion_asset.money_amount_off.currency_code"
+    | "asset.promotion_asset.occasion"
+    | "asset.promotion_asset.orders_over_amount.amount_micros"
+    | "asset.promotion_asset.orders_over_amount.currency_code"
+    | "asset.promotion_asset.percent_off"
+    | "asset.promotion_asset.promotion_code"
+    | "asset.promotion_asset.promotion_target"
+    | "asset.promotion_asset.redemption_end_date"
+    | "asset.promotion_asset.redemption_start_date"
+    | "asset.promotion_asset.start_date"
+    | "asset.resource_name"
+    | "asset.sitelink_asset.ad_schedule_targets"
+    | "asset.sitelink_asset.description1"
+    | "asset.sitelink_asset.description2"
+    | "asset.sitelink_asset.end_date"
+    | "asset.sitelink_asset.link_text"
+    | "asset.sitelink_asset.start_date"
+    | "asset.structured_snippet_asset.header"
+    | "asset.structured_snippet_asset.values"
+    | "asset.text_asset.text"
+    | "asset.tracking_url_template"
+    | "asset.type"
+    | "asset.url_custom_parameters"
+    | "asset.youtube_video_asset.youtube_video_id"
+    | "asset.youtube_video_asset.youtube_video_title"
     | "campaign.accessible_bidding_strategy"
     | "campaign.ad_serving_optimization_status"
     | "campaign.advertising_channel_sub_type"
@@ -9358,6 +9584,7 @@ export namespace fields {
     | "campaign.vanity_pharma.vanity_pharma_text"
     | "campaign.video_brand_safety_suitability"
     | "change_event.ad_group"
+    | "change_event.asset"
     | "change_event.campaign"
     | "change_event.change_date_time"
     | "change_event.change_resource_name"
@@ -9446,6 +9673,68 @@ export namespace fields {
     | "ad_group.tracking_url_template"
     | "ad_group.type"
     | "ad_group.url_custom_parameters"
+    | "asset.book_on_google_asset"
+    | "asset.callout_asset.ad_schedule_targets"
+    | "asset.callout_asset.callout_text"
+    | "asset.callout_asset.end_date"
+    | "asset.callout_asset.start_date"
+    | "asset.final_mobile_urls"
+    | "asset.final_url_suffix"
+    | "asset.final_urls"
+    | "asset.id"
+    | "asset.image_asset.file_size"
+    | "asset.image_asset.full_size.height_pixels"
+    | "asset.image_asset.full_size.url"
+    | "asset.image_asset.full_size.width_pixels"
+    | "asset.image_asset.mime_type"
+    | "asset.lead_form_asset.background_image_asset"
+    | "asset.lead_form_asset.business_name"
+    | "asset.lead_form_asset.call_to_action_description"
+    | "asset.lead_form_asset.call_to_action_type"
+    | "asset.lead_form_asset.custom_disclosure"
+    | "asset.lead_form_asset.delivery_methods"
+    | "asset.lead_form_asset.description"
+    | "asset.lead_form_asset.desired_intent"
+    | "asset.lead_form_asset.fields"
+    | "asset.lead_form_asset.headline"
+    | "asset.lead_form_asset.post_submit_call_to_action_type"
+    | "asset.lead_form_asset.post_submit_description"
+    | "asset.lead_form_asset.post_submit_headline"
+    | "asset.lead_form_asset.privacy_policy_url"
+    | "asset.name"
+    | "asset.policy_summary.approval_status"
+    | "asset.policy_summary.policy_topic_entries"
+    | "asset.policy_summary.review_status"
+    | "asset.promotion_asset.ad_schedule_targets"
+    | "asset.promotion_asset.discount_modifier"
+    | "asset.promotion_asset.end_date"
+    | "asset.promotion_asset.language_code"
+    | "asset.promotion_asset.money_amount_off.amount_micros"
+    | "asset.promotion_asset.money_amount_off.currency_code"
+    | "asset.promotion_asset.occasion"
+    | "asset.promotion_asset.orders_over_amount.amount_micros"
+    | "asset.promotion_asset.orders_over_amount.currency_code"
+    | "asset.promotion_asset.percent_off"
+    | "asset.promotion_asset.promotion_code"
+    | "asset.promotion_asset.promotion_target"
+    | "asset.promotion_asset.redemption_end_date"
+    | "asset.promotion_asset.redemption_start_date"
+    | "asset.promotion_asset.start_date"
+    | "asset.resource_name"
+    | "asset.sitelink_asset.ad_schedule_targets"
+    | "asset.sitelink_asset.description1"
+    | "asset.sitelink_asset.description2"
+    | "asset.sitelink_asset.end_date"
+    | "asset.sitelink_asset.link_text"
+    | "asset.sitelink_asset.start_date"
+    | "asset.structured_snippet_asset.header"
+    | "asset.structured_snippet_asset.values"
+    | "asset.text_asset.text"
+    | "asset.tracking_url_template"
+    | "asset.type"
+    | "asset.url_custom_parameters"
+    | "asset.youtube_video_asset.youtube_video_id"
+    | "asset.youtube_video_asset.youtube_video_title"
     | "campaign.accessible_bidding_strategy"
     | "campaign.ad_serving_optimization_status"
     | "campaign.advertising_channel_sub_type"
@@ -9519,18 +9808,24 @@ export namespace fields {
     | "campaign.video_brand_safety_suitability"
     | "change_status.ad_group"
     | "change_status.ad_group_ad"
+    | "change_status.ad_group_asset"
     | "change_status.ad_group_bid_modifier"
     | "change_status.ad_group_criterion"
     | "change_status.ad_group_feed"
+    | "change_status.asset"
     | "change_status.campaign"
+    | "change_status.campaign_asset"
     | "change_status.campaign_criterion"
     | "change_status.campaign_feed"
+    | "change_status.campaign_shared_set"
+    | "change_status.customer_asset"
     | "change_status.feed"
     | "change_status.feed_item"
     | "change_status.last_change_date_time"
     | "change_status.resource_name"
     | "change_status.resource_status"
     | "change_status.resource_type"
+    | "change_status.shared_set"
     | "customer.auto_tagging_enabled"
     | "customer.call_reporting_setting.call_conversion_action"
     | "customer.call_reporting_setting.call_conversion_reporting_enabled"
@@ -9572,7 +9867,14 @@ export namespace fields {
     | "feed_item.resource_name"
     | "feed_item.start_date_time"
     | "feed_item.status"
-    | "feed_item.url_custom_parameters";
+    | "feed_item.url_custom_parameters"
+    | "shared_set.id"
+    | "shared_set.member_count"
+    | "shared_set.name"
+    | "shared_set.reference_count"
+    | "shared_set.resource_name"
+    | "shared_set.status"
+    | "shared_set.type";
 
   export type ChangeStatusFields = Array<ChangeStatusField>;
   /* --- End of ChangeStatus --- */
@@ -9856,6 +10158,79 @@ export namespace fields {
     Array<ConversionCustomVariableField>;
   /* --- End of ConversionCustomVariable --- */
 
+  /* --- Start of ConversionValueRule --- */
+  export type ConversionValueRuleField =
+    | "conversion_value_rule.action.operation"
+    | "conversion_value_rule.action.value"
+    | "conversion_value_rule.audience_condition.user_interests"
+    | "conversion_value_rule.audience_condition.user_lists"
+    | "conversion_value_rule.device_condition.device_types"
+    | "conversion_value_rule.geo_location_condition.excluded_geo_match_type"
+    | "conversion_value_rule.geo_location_condition.excluded_geo_target_constants"
+    | "conversion_value_rule.geo_location_condition.geo_match_type"
+    | "conversion_value_rule.geo_location_condition.geo_target_constants"
+    | "conversion_value_rule.id"
+    | "conversion_value_rule.owner_customer"
+    | "conversion_value_rule.resource_name"
+    | "conversion_value_rule.status"
+    | "customer.auto_tagging_enabled"
+    | "customer.call_reporting_setting.call_conversion_action"
+    | "customer.call_reporting_setting.call_conversion_reporting_enabled"
+    | "customer.call_reporting_setting.call_reporting_enabled"
+    | "customer.conversion_tracking_setting.conversion_tracking_id"
+    | "customer.conversion_tracking_setting.cross_account_conversion_tracking_id"
+    | "customer.currency_code"
+    | "customer.descriptive_name"
+    | "customer.final_url_suffix"
+    | "customer.has_partners_badge"
+    | "customer.id"
+    | "customer.manager"
+    | "customer.optimization_score"
+    | "customer.optimization_score_weight"
+    | "customer.pay_per_conversion_eligibility_failure_reasons"
+    | "customer.remarketing_setting.google_global_site_tag"
+    | "customer.resource_name"
+    | "customer.test_account"
+    | "customer.time_zone"
+    | "customer.tracking_url_template";
+
+  export type ConversionValueRuleFields = Array<ConversionValueRuleField>;
+  /* --- End of ConversionValueRule --- */
+
+  /* --- Start of ConversionValueRuleSet --- */
+  export type ConversionValueRuleSetField =
+    | "conversion_value_rule_set.attachment_type"
+    | "conversion_value_rule_set.campaign"
+    | "conversion_value_rule_set.conversion_value_rules"
+    | "conversion_value_rule_set.dimensions"
+    | "conversion_value_rule_set.id"
+    | "conversion_value_rule_set.owner_customer"
+    | "conversion_value_rule_set.resource_name"
+    | "conversion_value_rule_set.status"
+    | "customer.auto_tagging_enabled"
+    | "customer.call_reporting_setting.call_conversion_action"
+    | "customer.call_reporting_setting.call_conversion_reporting_enabled"
+    | "customer.call_reporting_setting.call_reporting_enabled"
+    | "customer.conversion_tracking_setting.conversion_tracking_id"
+    | "customer.conversion_tracking_setting.cross_account_conversion_tracking_id"
+    | "customer.currency_code"
+    | "customer.descriptive_name"
+    | "customer.final_url_suffix"
+    | "customer.has_partners_badge"
+    | "customer.id"
+    | "customer.manager"
+    | "customer.optimization_score"
+    | "customer.optimization_score_weight"
+    | "customer.pay_per_conversion_eligibility_failure_reasons"
+    | "customer.remarketing_setting.google_global_site_tag"
+    | "customer.resource_name"
+    | "customer.test_account"
+    | "customer.time_zone"
+    | "customer.tracking_url_template";
+
+  export type ConversionValueRuleSetFields = Array<ConversionValueRuleSetField>;
+  /* --- End of ConversionValueRuleSet --- */
+
   /* --- Start of CurrencyConstant --- */
   export type CurrencyConstantField =
     | "currency_constant.billable_unit_micros"
@@ -10024,6 +10399,7 @@ export namespace fields {
     | "segments.conversion_adjustment"
     | "segments.conversion_lag_bucket"
     | "segments.conversion_or_adjustment_lag_bucket"
+    | "segments.conversion_value_rule_primary_dimension"
     | "segments.date"
     | "segments.day_of_week"
     | "segments.device"
@@ -12066,6 +12442,7 @@ export namespace fields {
     | "ad_group.tracking_url_template"
     | "ad_group.type"
     | "ad_group.url_custom_parameters"
+    | "ad_group_ad.action_items"
     | "ad_group_ad.ad.added_by_google_ads"
     | "ad_group_ad.ad.app_ad.descriptions"
     | "ad_group_ad.ad.app_ad.headlines"
@@ -12730,6 +13107,7 @@ export namespace fields {
     | "ad_group.tracking_url_template"
     | "ad_group.type"
     | "ad_group.url_custom_parameters"
+    | "ad_group_ad.action_items"
     | "ad_group_ad.ad.added_by_google_ads"
     | "ad_group_ad.ad.app_ad.descriptions"
     | "ad_group_ad.ad.app_ad.headlines"
@@ -16849,6 +17227,7 @@ export namespace fields {
     | "ad_group.tracking_url_template"
     | "ad_group.type"
     | "ad_group.url_custom_parameters"
+    | "ad_group_ad.action_items"
     | "ad_group_ad.ad.added_by_google_ads"
     | "ad_group_ad.ad.app_ad.descriptions"
     | "ad_group_ad.ad.app_ad.headlines"
@@ -18381,6 +18760,7 @@ export namespace fields {
     | "ad_group.tracking_url_template"
     | "ad_group.type"
     | "ad_group.url_custom_parameters"
+    | "ad_group_ad.action_items"
     | "ad_group_ad.ad.added_by_google_ads"
     | "ad_group_ad.ad.app_ad.descriptions"
     | "ad_group_ad.ad.app_ad.headlines"

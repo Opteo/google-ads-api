@@ -1204,6 +1204,22 @@ export namespace enums {
   }
 
   /**
+   * @name ConversionValueRulePrimaryDimensionEnum.ConversionValueRulePrimaryDimension
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v8/ConversionValueRulePrimaryDimensionEnum.ConversionValueRulePrimaryDimension
+   */
+  export enum ConversionValueRulePrimaryDimension {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    NO_RULE_APPLIED = 2, // NO_RULE_APPLIED
+    ORIGINAL = 3, // ORIGINAL
+    NEW_VS_RETURNING_USER = 4, // NEW_VS_RETURNING_USER
+    GEO_LOCATION = 5, // GEO_LOCATION
+    DEVICE = 6, // DEVICE
+    AUDIENCE = 7, // AUDIENCE
+    MULTIPLE = 8, // MULTIPLE
+  }
+
+  /**
    * @name ExternalConversionSourceEnum.ExternalConversionSource
    * @link https://developers.google.com/google-ads/api/reference/rpc/v8/ExternalConversionSourceEnum.ExternalConversionSource
    */
@@ -1969,6 +1985,7 @@ export namespace enums {
     UNKNOWN = 1, // UNKNOWN
     COMMISSION = 16, // COMMISSION
     ENHANCED_CPC = 2, // ENHANCED_CPC
+    INVALID = 17, // INVALID
     MANUAL_CPC = 3, // MANUAL_CPC
     MANUAL_CPM = 4, // MANUAL_CPM
     MANUAL_CPV = 13, // MANUAL_CPV
@@ -2245,6 +2262,10 @@ export namespace enums {
     CAMPAIGN_FEED = 11, // CAMPAIGN_FEED
     AD_GROUP_FEED = 12, // AD_GROUP_FEED
     AD_GROUP_AD = 13, // AD_GROUP_AD
+    ASSET = 14, // ASSET
+    CUSTOMER_ASSET = 15, // CUSTOMER_ASSET
+    CAMPAIGN_ASSET = 16, // CAMPAIGN_ASSET
+    AD_GROUP_ASSET = 17, // AD_GROUP_ASSET
   }
 
   /**
@@ -2276,6 +2297,12 @@ export namespace enums {
     AD_GROUP_FEED = 11, // AD_GROUP_FEED
     CAMPAIGN_FEED = 12, // CAMPAIGN_FEED
     AD_GROUP_BID_MODIFIER = 13, // AD_GROUP_BID_MODIFIER
+    SHARED_SET = 14, // SHARED_SET
+    CAMPAIGN_SHARED_SET = 15, // CAMPAIGN_SHARED_SET
+    ASSET = 16, // ASSET
+    CUSTOMER_ASSET = 17, // CUSTOMER_ASSET
+    CAMPAIGN_ASSET = 18, // CAMPAIGN_ASSET
+    AD_GROUP_ASSET = 19, // AD_GROUP_ASSET
   }
 
   /**
@@ -2365,6 +2392,7 @@ export namespace enums {
     UNKNOWN = 1, // UNKNOWN
     RETRACTION = 2, // RETRACTION
     RESTATEMENT = 3, // RESTATEMENT
+    ENHANCEMENT = 4, // ENHANCEMENT
   }
 
   /**
@@ -2376,6 +2404,30 @@ export namespace enums {
     UNKNOWN = 1, // UNKNOWN
     ACTIVATION_NEEDED = 2, // ACTIVATION_NEEDED
     ENABLED = 3, // ENABLED
+    PAUSED = 4, // PAUSED
+  }
+
+  /**
+   * @name ConversionValueRuleSetStatusEnum.ConversionValueRuleSetStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v8/ConversionValueRuleSetStatusEnum.ConversionValueRuleSetStatus
+   */
+  export enum ConversionValueRuleSetStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    REMOVED = 3, // REMOVED
+    PAUSED = 4, // PAUSED
+  }
+
+  /**
+   * @name ConversionValueRuleStatusEnum.ConversionValueRuleStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v8/ConversionValueRuleStatusEnum.ConversionValueRuleStatus
+   */
+  export enum ConversionValueRuleStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    REMOVED = 3, // REMOVED
     PAUSED = 4, // PAUSED
   }
 
@@ -3652,6 +3704,29 @@ export namespace enums {
   }
 
   /**
+   * @name SeasonalityEventScopeEnum.SeasonalityEventScope
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v8/SeasonalityEventScopeEnum.SeasonalityEventScope
+   */
+  export enum SeasonalityEventScope {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    CUSTOMER = 2, // CUSTOMER
+    CAMPAIGN = 4, // CAMPAIGN
+    CHANNEL = 5, // CHANNEL
+  }
+
+  /**
+   * @name SeasonalityEventStatusEnum.SeasonalityEventStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v8/SeasonalityEventStatusEnum.SeasonalityEventStatus
+   */
+  export enum SeasonalityEventStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ENABLED = 2, // ENABLED
+    REMOVED = 4, // REMOVED
+  }
+
+  /**
    * @name SharedSetStatusEnum.SharedSetStatus
    * @link https://developers.google.com/google-ads/api/reference/rpc/v8/SharedSetStatusEnum.SharedSetStatus
    */
@@ -3898,6 +3973,64 @@ export namespace enums {
     RULE_BASED = 5, // RULE_BASED
     SIMILAR = 6, // SIMILAR
     CRM_BASED = 7, // CRM_BASED
+  }
+
+  /**
+   * @name ValueRuleDeviceTypeEnum.ValueRuleDeviceType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v8/ValueRuleDeviceTypeEnum.ValueRuleDeviceType
+   */
+  export enum ValueRuleDeviceType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    MOBILE = 2, // MOBILE
+    DESKTOP = 3, // DESKTOP
+    TABLET = 4, // TABLET
+  }
+
+  /**
+   * @name ValueRuleGeoLocationMatchTypeEnum.ValueRuleGeoLocationMatchType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v8/ValueRuleGeoLocationMatchTypeEnum.ValueRuleGeoLocationMatchType
+   */
+  export enum ValueRuleGeoLocationMatchType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ANY = 2, // ANY
+    LOCATION_OF_PRESENCE = 3, // LOCATION_OF_PRESENCE
+  }
+
+  /**
+   * @name ValueRuleOperationEnum.ValueRuleOperation
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v8/ValueRuleOperationEnum.ValueRuleOperation
+   */
+  export enum ValueRuleOperation {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ADD = 2, // ADD
+    MULTIPLY = 3, // MULTIPLY
+    SET = 4, // SET
+  }
+
+  /**
+   * @name ValueRuleSetAttachmentTypeEnum.ValueRuleSetAttachmentType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v8/ValueRuleSetAttachmentTypeEnum.ValueRuleSetAttachmentType
+   */
+  export enum ValueRuleSetAttachmentType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    CUSTOMER = 2, // CUSTOMER
+    CAMPAIGN = 3, // CAMPAIGN
+  }
+
+  /**
+   * @name ValueRuleSetDimensionEnum.ValueRuleSetDimension
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v8/ValueRuleSetDimensionEnum.ValueRuleSetDimension
+   */
+  export enum ValueRuleSetDimension {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    GEO_LOCATION = 2, // GEO_LOCATION
+    DEVICE = 3, // DEVICE
+    AUDIENCE = 4, // AUDIENCE
   }
 
   /**
