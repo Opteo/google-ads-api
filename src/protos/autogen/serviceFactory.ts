@@ -4078,6 +4078,597 @@ export default class ServiceFactory extends Service {
   }
 
   /**
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v8/BiddingDataExclusionService
+   */
+  public get biddingDataExclusions() {
+    const service = this.loadService<services.BiddingDataExclusionService>(
+      "BiddingDataExclusionServiceClient"
+    );
+    type MutateOptions = Partial<
+      Pick<
+        services.IMutateBiddingDataExclusionsRequest,
+        "partial_failure" | "validate_only" | "response_content_type"
+      >
+    >;
+    return {
+      /**
+       * @description Retrieve a resources.BiddingDataExclusion in full detail
+       * @warning Don't use get in production!
+       * @returns resources.BiddingDataExclusion
+       */
+      get: async (
+        resourceName: string
+      ): Promise<resources.BiddingDataExclusion> => {
+        const request = new services.GetBiddingDataExclusionRequest({
+          resource_name: resourceName,
+        });
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.getBiddingDataExclusion(request, {
+            // @ts-expect-error This arg doesn't exist in the type definitions
+            otherArgs: {
+              headers: this.callHeaders,
+            },
+          });
+          return response;
+        } catch (err) {
+          throw this.getGoogleAdsError(err);
+        }
+      },
+
+      /**
+       * @description create resources of type resources.IBiddingDataExclusion
+       * @returns services.MutateBiddingDataExclusionsResponse
+       */
+      create: async (
+        biddingDataExclusions: (
+          | resources.IBiddingDataExclusion
+          | resources.BiddingDataExclusion
+        )[],
+        options?: MutateOptions
+      ): Promise<services.MutateBiddingDataExclusionsResponse> => {
+        const ops = this.buildOperations<
+          services.BiddingDataExclusionOperation,
+          resources.IBiddingDataExclusion
+        >("create", biddingDataExclusions);
+        const request = this.buildRequest<
+          services.BiddingDataExclusionOperation,
+          services.IMutateBiddingDataExclusionsRequest,
+          MutateOptions
+        >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "BiddingDataExclusionService.mutateBiddingDataExclusions",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.mutateBiddingDataExclusions(
+            request,
+            {
+              // @ts-expect-error This arg doesn't exist in the type definitions
+              otherArgs: {
+                headers: this.callHeaders,
+              },
+            }
+          );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response: this.decodePartialFailureError(response),
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
+          return this.decodePartialFailureError(response);
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
+
+      /**
+       * @description update resources of type resources.IBiddingDataExclusion
+       * @returns services.MutateBiddingDataExclusionsResponse
+       */
+      update: async (
+        biddingDataExclusions: (
+          | resources.IBiddingDataExclusion
+          | resources.BiddingDataExclusion
+        )[],
+        options?: MutateOptions
+      ): Promise<services.MutateBiddingDataExclusionsResponse> => {
+        const ops = this.buildOperations<
+          services.BiddingDataExclusionOperation,
+          resources.IBiddingDataExclusion
+        >(
+          "update",
+          biddingDataExclusions,
+          // @ts-expect-error Static class type here is fine
+          resources.BiddingDataExclusion
+        );
+        const request = this.buildRequest<
+          services.BiddingDataExclusionOperation,
+          services.IMutateBiddingDataExclusionsRequest,
+          MutateOptions
+        >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "BiddingDataExclusionService.mutateBiddingDataExclusions",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.mutateBiddingDataExclusions(
+            request,
+            {
+              // @ts-expect-error This arg doesn't exist in the type definitions
+              otherArgs: {
+                headers: this.callHeaders,
+              },
+            }
+          );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response: this.decodePartialFailureError(response),
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
+          return this.decodePartialFailureError(response);
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
+
+      /**
+       * @description remove resources of type string
+       * @returns services.MutateBiddingDataExclusionsResponse
+       */
+      remove: async (
+        biddingDataExclusions: string[],
+        options?: MutateOptions
+      ): Promise<services.MutateBiddingDataExclusionsResponse> => {
+        const ops = this.buildOperations<
+          services.BiddingDataExclusionOperation,
+          string
+        >("remove", biddingDataExclusions);
+        const request = this.buildRequest<
+          services.BiddingDataExclusionOperation,
+          services.IMutateBiddingDataExclusionsRequest,
+          MutateOptions
+        >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "BiddingDataExclusionService.mutateBiddingDataExclusions",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.mutateBiddingDataExclusions(
+            request,
+            {
+              // @ts-expect-error This arg doesn't exist in the type definitions
+              otherArgs: {
+                headers: this.callHeaders,
+              },
+            }
+          );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response: this.decodePartialFailureError(response),
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
+          return this.decodePartialFailureError(response);
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
+    };
+  }
+
+  /**
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v8/BiddingSeasonalityAdjustmentService
+   */
+  public get biddingSeasonalityAdjustments() {
+    const service =
+      this.loadService<services.BiddingSeasonalityAdjustmentService>(
+        "BiddingSeasonalityAdjustmentServiceClient"
+      );
+    type MutateOptions = Partial<
+      Pick<
+        services.IMutateBiddingSeasonalityAdjustmentsRequest,
+        "partial_failure" | "validate_only" | "response_content_type"
+      >
+    >;
+    return {
+      /**
+       * @description Retrieve a resources.BiddingSeasonalityAdjustment in full detail
+       * @warning Don't use get in production!
+       * @returns resources.BiddingSeasonalityAdjustment
+       */
+      get: async (
+        resourceName: string
+      ): Promise<resources.BiddingSeasonalityAdjustment> => {
+        const request = new services.GetBiddingSeasonalityAdjustmentRequest({
+          resource_name: resourceName,
+        });
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.getBiddingSeasonalityAdjustment(
+            request,
+            {
+              // @ts-expect-error This arg doesn't exist in the type definitions
+              otherArgs: {
+                headers: this.callHeaders,
+              },
+            }
+          );
+          return response;
+        } catch (err) {
+          throw this.getGoogleAdsError(err);
+        }
+      },
+
+      /**
+       * @description create resources of type resources.IBiddingSeasonalityAdjustment
+       * @returns services.MutateBiddingSeasonalityAdjustmentsResponse
+       */
+      create: async (
+        biddingSeasonalityAdjustments: (
+          | resources.IBiddingSeasonalityAdjustment
+          | resources.BiddingSeasonalityAdjustment
+        )[],
+        options?: MutateOptions
+      ): Promise<services.MutateBiddingSeasonalityAdjustmentsResponse> => {
+        const ops = this.buildOperations<
+          services.BiddingSeasonalityAdjustmentOperation,
+          resources.IBiddingSeasonalityAdjustment
+        >("create", biddingSeasonalityAdjustments);
+        const request = this.buildRequest<
+          services.BiddingSeasonalityAdjustmentOperation,
+          services.IMutateBiddingSeasonalityAdjustmentsRequest,
+          MutateOptions
+        >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method:
+            "BiddingSeasonalityAdjustmentService.mutateBiddingSeasonalityAdjustments",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.mutateBiddingSeasonalityAdjustments(
+            request,
+            {
+              // @ts-expect-error This arg doesn't exist in the type definitions
+              otherArgs: {
+                headers: this.callHeaders,
+              },
+            }
+          );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response: this.decodePartialFailureError(response),
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
+          return this.decodePartialFailureError(response);
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
+
+      /**
+       * @description update resources of type resources.IBiddingSeasonalityAdjustment
+       * @returns services.MutateBiddingSeasonalityAdjustmentsResponse
+       */
+      update: async (
+        biddingSeasonalityAdjustments: (
+          | resources.IBiddingSeasonalityAdjustment
+          | resources.BiddingSeasonalityAdjustment
+        )[],
+        options?: MutateOptions
+      ): Promise<services.MutateBiddingSeasonalityAdjustmentsResponse> => {
+        const ops = this.buildOperations<
+          services.BiddingSeasonalityAdjustmentOperation,
+          resources.IBiddingSeasonalityAdjustment
+        >(
+          "update",
+          biddingSeasonalityAdjustments,
+          // @ts-expect-error Static class type here is fine
+          resources.BiddingSeasonalityAdjustment
+        );
+        const request = this.buildRequest<
+          services.BiddingSeasonalityAdjustmentOperation,
+          services.IMutateBiddingSeasonalityAdjustmentsRequest,
+          MutateOptions
+        >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method:
+            "BiddingSeasonalityAdjustmentService.mutateBiddingSeasonalityAdjustments",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.mutateBiddingSeasonalityAdjustments(
+            request,
+            {
+              // @ts-expect-error This arg doesn't exist in the type definitions
+              otherArgs: {
+                headers: this.callHeaders,
+              },
+            }
+          );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response: this.decodePartialFailureError(response),
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
+          return this.decodePartialFailureError(response);
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
+
+      /**
+       * @description remove resources of type string
+       * @returns services.MutateBiddingSeasonalityAdjustmentsResponse
+       */
+      remove: async (
+        biddingSeasonalityAdjustments: string[],
+        options?: MutateOptions
+      ): Promise<services.MutateBiddingSeasonalityAdjustmentsResponse> => {
+        const ops = this.buildOperations<
+          services.BiddingSeasonalityAdjustmentOperation,
+          string
+        >("remove", biddingSeasonalityAdjustments);
+        const request = this.buildRequest<
+          services.BiddingSeasonalityAdjustmentOperation,
+          services.IMutateBiddingSeasonalityAdjustmentsRequest,
+          MutateOptions
+        >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method:
+            "BiddingSeasonalityAdjustmentService.mutateBiddingSeasonalityAdjustments",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.mutateBiddingSeasonalityAdjustments(
+            request,
+            {
+              // @ts-expect-error This arg doesn't exist in the type definitions
+              otherArgs: {
+                headers: this.callHeaders,
+              },
+            }
+          );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response: this.decodePartialFailureError(response),
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
+          return this.decodePartialFailureError(response);
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
+    };
+  }
+
+  /**
    * @link https://developers.google.com/google-ads/api/reference/rpc/v8/BiddingStrategyService
    */
   public get biddingStrategies() {
@@ -7806,6 +8397,581 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.mutateConversionCustomVariables(
+            request,
+            {
+              // @ts-expect-error This arg doesn't exist in the type definitions
+              otherArgs: {
+                headers: this.callHeaders,
+              },
+            }
+          );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response: this.decodePartialFailureError(response),
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
+          return this.decodePartialFailureError(response);
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
+    };
+  }
+
+  /**
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v8/ConversionValueRuleService
+   */
+  public get conversionValueRules() {
+    const service = this.loadService<services.ConversionValueRuleService>(
+      "ConversionValueRuleServiceClient"
+    );
+    type MutateOptions = Partial<
+      Pick<
+        services.IMutateConversionValueRulesRequest,
+        "partial_failure" | "validate_only" | "response_content_type"
+      >
+    >;
+    return {
+      /**
+       * @description Retrieve a resources.ConversionValueRule in full detail
+       * @warning Don't use get in production!
+       * @returns resources.ConversionValueRule
+       */
+      get: async (
+        resourceName: string
+      ): Promise<resources.ConversionValueRule> => {
+        const request = new services.GetConversionValueRuleRequest({
+          resource_name: resourceName,
+        });
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.getConversionValueRule(request, {
+            // @ts-expect-error This arg doesn't exist in the type definitions
+            otherArgs: {
+              headers: this.callHeaders,
+            },
+          });
+          return response;
+        } catch (err) {
+          throw this.getGoogleAdsError(err);
+        }
+      },
+
+      /**
+       * @description create resources of type resources.IConversionValueRule
+       * @returns services.MutateConversionValueRulesResponse
+       */
+      create: async (
+        conversionValueRules: (
+          | resources.IConversionValueRule
+          | resources.ConversionValueRule
+        )[],
+        options?: MutateOptions
+      ): Promise<services.MutateConversionValueRulesResponse> => {
+        const ops = this.buildOperations<
+          services.ConversionValueRuleOperation,
+          resources.IConversionValueRule
+        >("create", conversionValueRules);
+        const request = this.buildRequest<
+          services.ConversionValueRuleOperation,
+          services.IMutateConversionValueRulesRequest,
+          MutateOptions
+        >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "ConversionValueRuleService.mutateConversionValueRules",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.mutateConversionValueRules(request, {
+            // @ts-expect-error This arg doesn't exist in the type definitions
+            otherArgs: {
+              headers: this.callHeaders,
+            },
+          });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response: this.decodePartialFailureError(response),
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
+          return this.decodePartialFailureError(response);
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
+
+      /**
+       * @description update resources of type resources.IConversionValueRule
+       * @returns services.MutateConversionValueRulesResponse
+       */
+      update: async (
+        conversionValueRules: (
+          | resources.IConversionValueRule
+          | resources.ConversionValueRule
+        )[],
+        options?: MutateOptions
+      ): Promise<services.MutateConversionValueRulesResponse> => {
+        const ops = this.buildOperations<
+          services.ConversionValueRuleOperation,
+          resources.IConversionValueRule
+        >(
+          "update",
+          conversionValueRules,
+          // @ts-expect-error Static class type here is fine
+          resources.ConversionValueRule
+        );
+        const request = this.buildRequest<
+          services.ConversionValueRuleOperation,
+          services.IMutateConversionValueRulesRequest,
+          MutateOptions
+        >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "ConversionValueRuleService.mutateConversionValueRules",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.mutateConversionValueRules(request, {
+            // @ts-expect-error This arg doesn't exist in the type definitions
+            otherArgs: {
+              headers: this.callHeaders,
+            },
+          });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response: this.decodePartialFailureError(response),
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
+          return this.decodePartialFailureError(response);
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
+
+      /**
+       * @description remove resources of type string
+       * @returns services.MutateConversionValueRulesResponse
+       */
+      remove: async (
+        conversionValueRules: string[],
+        options?: MutateOptions
+      ): Promise<services.MutateConversionValueRulesResponse> => {
+        const ops = this.buildOperations<
+          services.ConversionValueRuleOperation,
+          string
+        >("remove", conversionValueRules);
+        const request = this.buildRequest<
+          services.ConversionValueRuleOperation,
+          services.IMutateConversionValueRulesRequest,
+          MutateOptions
+        >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "ConversionValueRuleService.mutateConversionValueRules",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.mutateConversionValueRules(request, {
+            // @ts-expect-error This arg doesn't exist in the type definitions
+            otherArgs: {
+              headers: this.callHeaders,
+            },
+          });
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response: this.decodePartialFailureError(response),
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
+          return this.decodePartialFailureError(response);
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
+    };
+  }
+
+  /**
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v8/ConversionValueRuleSetService
+   */
+  public get conversionValueRuleSets() {
+    const service = this.loadService<services.ConversionValueRuleSetService>(
+      "ConversionValueRuleSetServiceClient"
+    );
+    type MutateOptions = Partial<
+      Pick<
+        services.IMutateConversionValueRuleSetsRequest,
+        "partial_failure" | "validate_only" | "response_content_type"
+      >
+    >;
+    return {
+      /**
+       * @description Retrieve a resources.ConversionValueRuleSet in full detail
+       * @warning Don't use get in production!
+       * @returns resources.ConversionValueRuleSet
+       */
+      get: async (
+        resourceName: string
+      ): Promise<resources.ConversionValueRuleSet> => {
+        const request = new services.GetConversionValueRuleSetRequest({
+          resource_name: resourceName,
+        });
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.getConversionValueRuleSet(request, {
+            // @ts-expect-error This arg doesn't exist in the type definitions
+            otherArgs: {
+              headers: this.callHeaders,
+            },
+          });
+          return response;
+        } catch (err) {
+          throw this.getGoogleAdsError(err);
+        }
+      },
+
+      /**
+       * @description create resources of type resources.IConversionValueRuleSet
+       * @returns services.MutateConversionValueRuleSetsResponse
+       */
+      create: async (
+        conversionValueRuleSets: (
+          | resources.IConversionValueRuleSet
+          | resources.ConversionValueRuleSet
+        )[],
+        options?: MutateOptions
+      ): Promise<services.MutateConversionValueRuleSetsResponse> => {
+        const ops = this.buildOperations<
+          services.ConversionValueRuleSetOperation,
+          resources.IConversionValueRuleSet
+        >("create", conversionValueRuleSets);
+        const request = this.buildRequest<
+          services.ConversionValueRuleSetOperation,
+          services.IMutateConversionValueRuleSetsRequest,
+          MutateOptions
+        >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "ConversionValueRuleSetService.mutateConversionValueRuleSets",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.mutateConversionValueRuleSets(
+            request,
+            {
+              // @ts-expect-error This arg doesn't exist in the type definitions
+              otherArgs: {
+                headers: this.callHeaders,
+              },
+            }
+          );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response: this.decodePartialFailureError(response),
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
+          return this.decodePartialFailureError(response);
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
+
+      /**
+       * @description update resources of type resources.IConversionValueRuleSet
+       * @returns services.MutateConversionValueRuleSetsResponse
+       */
+      update: async (
+        conversionValueRuleSets: (
+          | resources.IConversionValueRuleSet
+          | resources.ConversionValueRuleSet
+        )[],
+        options?: MutateOptions
+      ): Promise<services.MutateConversionValueRuleSetsResponse> => {
+        const ops = this.buildOperations<
+          services.ConversionValueRuleSetOperation,
+          resources.IConversionValueRuleSet
+        >(
+          "update",
+          conversionValueRuleSets,
+          // @ts-expect-error Static class type here is fine
+          resources.ConversionValueRuleSet
+        );
+        const request = this.buildRequest<
+          services.ConversionValueRuleSetOperation,
+          services.IMutateConversionValueRuleSetsRequest,
+          MutateOptions
+        >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "ConversionValueRuleSetService.mutateConversionValueRuleSets",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.mutateConversionValueRuleSets(
+            request,
+            {
+              // @ts-expect-error This arg doesn't exist in the type definitions
+              otherArgs: {
+                headers: this.callHeaders,
+              },
+            }
+          );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response: this.decodePartialFailureError(response),
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
+          return this.decodePartialFailureError(response);
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
+
+      /**
+       * @description remove resources of type string
+       * @returns services.MutateConversionValueRuleSetsResponse
+       */
+      remove: async (
+        conversionValueRuleSets: string[],
+        options?: MutateOptions
+      ): Promise<services.MutateConversionValueRuleSetsResponse> => {
+        const ops = this.buildOperations<
+          services.ConversionValueRuleSetOperation,
+          string
+        >("remove", conversionValueRuleSets);
+        const request = this.buildRequest<
+          services.ConversionValueRuleSetOperation,
+          services.IMutateConversionValueRuleSetsRequest,
+          MutateOptions
+        >(ops, options);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method: "ConversionValueRuleSetService.mutateConversionValueRuleSets",
+          mutation: request,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.mutateConversionValueRuleSets(
             request,
             {
               // @ts-expect-error This arg doesn't exist in the type definitions
@@ -17593,6 +18759,26 @@ export default class ServiceFactory extends Service {
               },
             }
           );
+          return response;
+        } catch (err) {
+          throw this.getGoogleAdsError(err);
+        }
+      },
+
+      /**
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v8/SmartCampaignSuggestService#suggestsmartcampaignad
+       */
+      suggestSmartCampaignAd: async (
+        request: services.SuggestSmartCampaignAdRequest
+      ): Promise<services.SuggestSmartCampaignAdResponse> => {
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.suggestSmartCampaignAd(request, {
+            // @ts-expect-error This arg doesn't exist in the type definitions
+            otherArgs: {
+              headers: this.callHeaders,
+            },
+          });
           return response;
         } catch (err) {
           throw this.getGoogleAdsError(err);

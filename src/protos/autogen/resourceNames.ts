@@ -456,6 +456,38 @@ export function batchJob(
   return `customers/${customerId}/batchJobs/${batchJobId}` as const;
 }
 
+/* BiddingDataExclusion */
+export type BiddingDataExclusionResourceName =
+  `customers/${StrNum}/biddingDataExclusions/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} seasonalityEventId
+ * @returns `BiddingDataExclusionResourceName`
+ * @example const biddingDataExclusion: ResourceNames.BiddingDataExclusionResourceName = ResourceNames.biddingDataExclusion(10987417, 21974834)
+ */
+export function biddingDataExclusion(
+  customerId: string | number,
+  seasonalityEventId: string | number
+): BiddingDataExclusionResourceName {
+  return `customers/${customerId}/biddingDataExclusions/${seasonalityEventId}` as const;
+}
+
+/* BiddingSeasonalityAdjustment */
+export type BiddingSeasonalityAdjustmentResourceName =
+  `customers/${StrNum}/biddingSeasonalityAdjustments/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} seasonalityEventId
+ * @returns `BiddingSeasonalityAdjustmentResourceName`
+ * @example const biddingSeasonalityAdjustment: ResourceNames.BiddingSeasonalityAdjustmentResourceName = ResourceNames.biddingSeasonalityAdjustment(10987417, 21974834)
+ */
+export function biddingSeasonalityAdjustment(
+  customerId: string | number,
+  seasonalityEventId: string | number
+): BiddingSeasonalityAdjustmentResourceName {
+  return `customers/${customerId}/biddingSeasonalityAdjustments/${seasonalityEventId}` as const;
+}
+
 /* BiddingStrategy */
 export type BiddingStrategyResourceName =
   `customers/${StrNum}/biddingStrategies/${StrNum}`;
@@ -901,6 +933,38 @@ export function conversionCustomVariable(
   conversionCustomVariableId: string | number
 ): ConversionCustomVariableResourceName {
   return `customers/${customerId}/conversionCustomVariables/${conversionCustomVariableId}` as const;
+}
+
+/* ConversionValueRule */
+export type ConversionValueRuleResourceName =
+  `customers/${StrNum}/conversionValueRules/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} conversionValueRuleId
+ * @returns `ConversionValueRuleResourceName`
+ * @example const conversionValueRule: ResourceNames.ConversionValueRuleResourceName = ResourceNames.conversionValueRule(10987417, 21974834)
+ */
+export function conversionValueRule(
+  customerId: string | number,
+  conversionValueRuleId: string | number
+): ConversionValueRuleResourceName {
+  return `customers/${customerId}/conversionValueRules/${conversionValueRuleId}` as const;
+}
+
+/* ConversionValueRuleSet */
+export type ConversionValueRuleSetResourceName =
+  `customers/${StrNum}/conversionValueRuleSets/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} conversionValueRuleSetId
+ * @returns `ConversionValueRuleSetResourceName`
+ * @example const conversionValueRuleSet: ResourceNames.ConversionValueRuleSetResourceName = ResourceNames.conversionValueRuleSet(10987417, 21974834)
+ */
+export function conversionValueRuleSet(
+  customerId: string | number,
+  conversionValueRuleSetId: string | number
+): ConversionValueRuleSetResourceName {
+  return `customers/${customerId}/conversionValueRuleSets/${conversionValueRuleSetId}` as const;
 }
 
 /* CurrencyConstant */
