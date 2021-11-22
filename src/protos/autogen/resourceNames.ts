@@ -230,6 +230,26 @@ export function adGroupCriterion(
   return `customers/${customerId}/adGroupCriteria/${adGroupId}~${criterionId}` as const;
 }
 
+/* AdGroupCriterionCustomizer */
+export type AdGroupCriterionCustomizerResourceName =
+  `customers/${StrNum}/adGroupCriterionCustomizers/${StrNum}~${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} adGroupId
+ * @param {string | number} criterionId
+ * @param {string | number} customizerAttributeId
+ * @returns `AdGroupCriterionCustomizerResourceName`
+ * @example const adGroupCriterionCustomizer: ResourceNames.AdGroupCriterionCustomizerResourceName = ResourceNames.adGroupCriterionCustomizer(10987417, 21974834, 43949668, 87899336)
+ */
+export function adGroupCriterionCustomizer(
+  customerId: string | number,
+  adGroupId: string | number,
+  criterionId: string | number,
+  customizerAttributeId: string | number
+): AdGroupCriterionCustomizerResourceName {
+  return `customers/${customerId}/adGroupCriterionCustomizers/${adGroupId}~${criterionId}~${customizerAttributeId}` as const;
+}
+
 /* AdGroupCriterionLabel */
 export type AdGroupCriterionLabelResourceName =
   `customers/${StrNum}/adGroupCriterionLabels/${StrNum}~${StrNum}~${StrNum}`;
@@ -274,6 +294,24 @@ export function adGroupCriterionSimulation(
   endDate: string | number
 ): AdGroupCriterionSimulationResourceName {
   return `customers/${customerId}/adGroupCriterionSimulations/${adGroupId}~${criterionId}~${type}~${modificationMethod}~${startDate}~${endDate}` as const;
+}
+
+/* AdGroupCustomizer */
+export type AdGroupCustomizerResourceName =
+  `customers/${StrNum}/adGroupCustomizers/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} adGroupId
+ * @param {string | number} customizerAttributeId
+ * @returns `AdGroupCustomizerResourceName`
+ * @example const adGroupCustomizer: ResourceNames.AdGroupCustomizerResourceName = ResourceNames.adGroupCustomizer(10987417, 21974834, 43949668)
+ */
+export function adGroupCustomizer(
+  customerId: string | number,
+  adGroupId: string | number,
+  customizerAttributeId: string | number
+): AdGroupCustomizerResourceName {
+  return `customers/${customerId}/adGroupCustomizers/${adGroupId}~${customizerAttributeId}` as const;
 }
 
 /* AdGroupExtensionSetting */
@@ -441,6 +479,111 @@ export function assetFieldTypeView(
   return `customers/${customerId}/assetFieldTypeViews/${fieldType}` as const;
 }
 
+/* AssetGroup */
+export type AssetGroupResourceName =
+  `customers/${StrNum}/assetGroups/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} assetGroupId
+ * @returns `AssetGroupResourceName`
+ * @example const assetGroup: ResourceNames.AssetGroupResourceName = ResourceNames.assetGroup(10987417, 21974834)
+ */
+export function assetGroup(
+  customerId: string | number,
+  assetGroupId: string | number
+): AssetGroupResourceName {
+  return `customers/${customerId}/assetGroups/${assetGroupId}` as const;
+}
+
+/* AssetGroupAsset */
+export type AssetGroupAssetResourceName =
+  `customers/${StrNum}/assetGroupAssets/${StrNum}~${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} assetGroupId
+ * @param {string | number} assetId
+ * @param {string | number} fieldType
+ * @returns `AssetGroupAssetResourceName`
+ * @example const assetGroupAsset: ResourceNames.AssetGroupAssetResourceName = ResourceNames.assetGroupAsset(10987417, 21974834, 43949668, 87899336)
+ */
+export function assetGroupAsset(
+  customerId: string | number,
+  assetGroupId: string | number,
+  assetId: string | number,
+  fieldType: string | number
+): AssetGroupAssetResourceName {
+  return `customers/${customerId}/assetGroupAssets/${assetGroupId}~${assetId}~${fieldType}` as const;
+}
+
+/* AssetGroupListingGroupFilter */
+export type AssetGroupListingGroupFilterResourceName =
+  `customers/${StrNum}/assetGroupListingGroupFilters/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} assetGroupId
+ * @param {string | number} listingGroupFilterId
+ * @returns `AssetGroupListingGroupFilterResourceName`
+ * @example const assetGroupListingGroupFilter: ResourceNames.AssetGroupListingGroupFilterResourceName = ResourceNames.assetGroupListingGroupFilter(10987417, 21974834, 43949668)
+ */
+export function assetGroupListingGroupFilter(
+  customerId: string | number,
+  assetGroupId: string | number,
+  listingGroupFilterId: string | number
+): AssetGroupListingGroupFilterResourceName {
+  return `customers/${customerId}/assetGroupListingGroupFilters/${assetGroupId}~${listingGroupFilterId}` as const;
+}
+
+/* AssetGroupProductGroupView */
+export type AssetGroupProductGroupViewResourceName =
+  `customers/${StrNum}/assetGroupProductGroupViews/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} assetGroupId
+ * @param {string | number} listingGroupFilterId
+ * @returns `AssetGroupProductGroupViewResourceName`
+ * @example const assetGroupProductGroupView: ResourceNames.AssetGroupProductGroupViewResourceName = ResourceNames.assetGroupProductGroupView(10987417, 21974834, 43949668)
+ */
+export function assetGroupProductGroupView(
+  customerId: string | number,
+  assetGroupId: string | number,
+  listingGroupFilterId: string | number
+): AssetGroupProductGroupViewResourceName {
+  return `customers/${customerId}/assetGroupProductGroupViews/${assetGroupId}~${listingGroupFilterId}` as const;
+}
+
+/* AssetSet */
+export type AssetSetResourceName = `customers/${StrNum}/assetSets/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} assetSetId
+ * @returns `AssetSetResourceName`
+ * @example const assetSet: ResourceNames.AssetSetResourceName = ResourceNames.assetSet(10987417, 21974834)
+ */
+export function assetSet(
+  customerId: string | number,
+  assetSetId: string | number
+): AssetSetResourceName {
+  return `customers/${customerId}/assetSets/${assetSetId}` as const;
+}
+
+/* AssetSetAsset */
+export type AssetSetAssetResourceName =
+  `customers/${StrNum}/assetSetAssets/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} assetSetId
+ * @param {string | number} assetId
+ * @returns `AssetSetAssetResourceName`
+ * @example const assetSetAsset: ResourceNames.AssetSetAssetResourceName = ResourceNames.assetSetAsset(10987417, 21974834, 43949668)
+ */
+export function assetSetAsset(
+  customerId: string | number,
+  assetSetId: string | number,
+  assetId: string | number
+): AssetSetAssetResourceName {
+  return `customers/${customerId}/assetSetAssets/${assetSetId}~${assetId}` as const;
+}
+
 /* BatchJob */
 export type BatchJobResourceName = `customers/${StrNum}/batchJobs/${StrNum}`;
 /**
@@ -594,6 +737,24 @@ export function campaignAsset(
   return `customers/${customerId}/campaignAssets/${campaignId}~${assetId}~${fieldType}` as const;
 }
 
+/* CampaignAssetSet */
+export type CampaignAssetSetResourceName =
+  `customers/${StrNum}/campaignAssetSets/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} campaignId
+ * @param {string | number} assetSetId
+ * @returns `CampaignAssetSetResourceName`
+ * @example const campaignAssetSet: ResourceNames.CampaignAssetSetResourceName = ResourceNames.campaignAssetSet(10987417, 21974834, 43949668)
+ */
+export function campaignAssetSet(
+  customerId: string | number,
+  campaignId: string | number,
+  assetSetId: string | number
+): CampaignAssetSetResourceName {
+  return `customers/${customerId}/campaignAssetSets/${campaignId}~${assetSetId}` as const;
+}
+
 /* CampaignAudienceView */
 export type CampaignAudienceViewResourceName =
   `customers/${StrNum}/campaignAudienceViews/${StrNum}~${StrNum}`;
@@ -646,6 +807,26 @@ export function campaignBudget(
   return `customers/${customerId}/campaignBudgets/${campaignBudgetId}` as const;
 }
 
+/* CampaignConversionGoal */
+export type CampaignConversionGoalResourceName =
+  `customers/${StrNum}/campaignConversionGoals/${StrNum}~${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} campaignId
+ * @param {string | number} category
+ * @param {string | number} source
+ * @returns `CampaignConversionGoalResourceName`
+ * @example const campaignConversionGoal: ResourceNames.CampaignConversionGoalResourceName = ResourceNames.campaignConversionGoal(10987417, 21974834, 43949668, 87899336)
+ */
+export function campaignConversionGoal(
+  customerId: string | number,
+  campaignId: string | number,
+  category: string | number,
+  source: string | number
+): CampaignConversionGoalResourceName {
+  return `customers/${customerId}/campaignConversionGoals/${campaignId}~${category}~${source}` as const;
+}
+
 /* CampaignCriterion */
 export type CampaignCriterionResourceName =
   `customers/${StrNum}/campaignCriteria/${StrNum}~${StrNum}`;
@@ -688,6 +869,24 @@ export function campaignCriterionSimulation(
   endDate: string | number
 ): CampaignCriterionSimulationResourceName {
   return `customers/${customerId}/campaignCriterionSimulations/${campaignId}~${criterionId}~${type}~${modificationMethod}~${startDate}~${endDate}` as const;
+}
+
+/* CampaignCustomizer */
+export type CampaignCustomizerResourceName =
+  `customers/${StrNum}/campaignCustomizers/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} campaignId
+ * @param {string | number} customizerAttributeId
+ * @returns `CampaignCustomizerResourceName`
+ * @example const campaignCustomizer: ResourceNames.CampaignCustomizerResourceName = ResourceNames.campaignCustomizer(10987417, 21974834, 43949668)
+ */
+export function campaignCustomizer(
+  customerId: string | number,
+  campaignId: string | number,
+  customizerAttributeId: string | number
+): CampaignCustomizerResourceName {
+  return `customers/${customerId}/campaignCustomizers/${campaignId}~${customizerAttributeId}` as const;
 }
 
 /* CampaignDraft */
@@ -935,6 +1134,22 @@ export function conversionCustomVariable(
   return `customers/${customerId}/conversionCustomVariables/${conversionCustomVariableId}` as const;
 }
 
+/* ConversionGoalCampaignConfig */
+export type ConversionGoalCampaignConfigResourceName =
+  `customers/${StrNum}/conversionGoalCampaignConfigs/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} campaignId
+ * @returns `ConversionGoalCampaignConfigResourceName`
+ * @example const conversionGoalCampaignConfig: ResourceNames.ConversionGoalCampaignConfigResourceName = ResourceNames.conversionGoalCampaignConfig(10987417, 21974834)
+ */
+export function conversionGoalCampaignConfig(
+  customerId: string | number,
+  campaignId: string | number
+): ConversionGoalCampaignConfigResourceName {
+  return `customers/${customerId}/conversionGoalCampaignConfigs/${campaignId}` as const;
+}
+
 /* ConversionValueRule */
 export type ConversionValueRuleResourceName =
   `customers/${StrNum}/conversionValueRules/${StrNum}`;
@@ -994,6 +1209,22 @@ export function customAudience(
   customAudienceId: string | number
 ): CustomAudienceResourceName {
   return `customers/${customerId}/customAudiences/${customAudienceId}` as const;
+}
+
+/* CustomConversionGoal */
+export type CustomConversionGoalResourceName =
+  `customers/${StrNum}/customConversionGoals/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} goalId
+ * @returns `CustomConversionGoalResourceName`
+ * @example const customConversionGoal: ResourceNames.CustomConversionGoalResourceName = ResourceNames.customConversionGoal(10987417, 21974834)
+ */
+export function customConversionGoal(
+  customerId: string | number,
+  goalId: string | number
+): CustomConversionGoalResourceName {
+  return `customers/${customerId}/customConversionGoals/${goalId}` as const;
 }
 
 /* CustomInterest */
@@ -1073,6 +1304,40 @@ export function customerClientLink(
   managerLinkId: string | number
 ): CustomerClientLinkResourceName {
   return `customers/${customerId}/customerClientLinks/${clientCustomerId}~${managerLinkId}` as const;
+}
+
+/* CustomerConversionGoal */
+export type CustomerConversionGoalResourceName =
+  `customers/${StrNum}/customerConversionGoals/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} category
+ * @param {string | number} source
+ * @returns `CustomerConversionGoalResourceName`
+ * @example const customerConversionGoal: ResourceNames.CustomerConversionGoalResourceName = ResourceNames.customerConversionGoal(10987417, 21974834, 43949668)
+ */
+export function customerConversionGoal(
+  customerId: string | number,
+  category: string | number,
+  source: string | number
+): CustomerConversionGoalResourceName {
+  return `customers/${customerId}/customerConversionGoals/${category}~${source}` as const;
+}
+
+/* CustomerCustomizer */
+export type CustomerCustomizerResourceName =
+  `customers/${StrNum}/customerCustomizers/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} customizerAttributeId
+ * @returns `CustomerCustomizerResourceName`
+ * @example const customerCustomizer: ResourceNames.CustomerCustomizerResourceName = ResourceNames.customerCustomizer(10987417, 21974834)
+ */
+export function customerCustomizer(
+  customerId: string | number,
+  customizerAttributeId: string | number
+): CustomerCustomizerResourceName {
+  return `customers/${customerId}/customerCustomizers/${customizerAttributeId}` as const;
 }
 
 /* CustomerExtensionSetting */
@@ -1187,6 +1452,22 @@ export function customerUserAccessInvitation(
   invitationId: string | number
 ): CustomerUserAccessInvitationResourceName {
   return `customers/${customerId}/customerUserAccessInvitations/${invitationId}` as const;
+}
+
+/* CustomizerAttribute */
+export type CustomizerAttributeResourceName =
+  `customers/${StrNum}/customizerAttributes/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} customizerAttributeId
+ * @returns `CustomizerAttributeResourceName`
+ * @example const customizerAttribute: ResourceNames.CustomizerAttributeResourceName = ResourceNames.customizerAttribute(10987417, 21974834)
+ */
+export function customizerAttribute(
+  customerId: string | number,
+  customizerAttributeId: string | number
+): CustomizerAttributeResourceName {
+  return `customers/${customerId}/customizerAttributes/${customizerAttributeId}` as const;
 }
 
 /* DetailPlacementView */
@@ -1572,6 +1853,22 @@ export function hotelPerformanceView(
   customerId: string | number
 ): HotelPerformanceViewResourceName {
   return `customers/${customerId}/hotelPerformanceView` as const;
+}
+
+/* HotelReconciliation */
+export type HotelReconciliationResourceName =
+  `customers/${StrNum}/hotelReconciliations/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} commissionId
+ * @returns `HotelReconciliationResourceName`
+ * @example const hotelReconciliation: ResourceNames.HotelReconciliationResourceName = ResourceNames.hotelReconciliation(10987417, 21974834)
+ */
+export function hotelReconciliation(
+  customerId: string | number,
+  commissionId: string | number
+): HotelReconciliationResourceName {
+  return `customers/${customerId}/hotelReconciliations/${commissionId}` as const;
 }
 
 /* IncomeRangeView */
