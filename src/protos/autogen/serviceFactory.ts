@@ -22,71 +22,13 @@ export default class ServiceFactory extends Service {
   }
 
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AccessibleBiddingStrategyService
-     */
-    public get accessibleBiddingStrategies() {
-      const service = this.loadService<services.AccessibleBiddingStrategyService>("AccessibleBiddingStrategyServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.AccessibleBiddingStrategy in full detail
-     * @warning Don't use get in production!
-     * @returns resources.AccessibleBiddingStrategy
-     */
-    get: async (resourceName: string): Promise<resources.AccessibleBiddingStrategy> => {
-      const request = new services.GetAccessibleBiddingStrategyRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getAccessibleBiddingStrategy(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AccountBudgetProposalService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AccountBudgetProposalService
      */
     public get accountBudgetProposals() {
       const service = this.loadService<services.AccountBudgetProposalService>("AccountBudgetProposalServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateAccountBudgetProposalRequest, "validate_only">>
       return {
         
-    /**
-     * @description Retrieve a resources.AccountBudgetProposal in full detail
-     * @warning Don't use get in production!
-     * @returns resources.AccountBudgetProposal
-     */
-    get: async (resourceName: string): Promise<resources.AccountBudgetProposal> => {
-      const request = new services.GetAccountBudgetProposalRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getAccountBudgetProposal(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IAccountBudgetProposal
      * @returns services.MutateAccountBudgetProposalResponse
@@ -256,41 +198,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AccountBudgetService
-     */
-    public get accountBudgets() {
-      const service = this.loadService<services.AccountBudgetService>("AccountBudgetServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.AccountBudget in full detail
-     * @warning Don't use get in production!
-     * @returns resources.AccountBudget
-     */
-    get: async (resourceName: string): Promise<resources.AccountBudget> => {
-      const request = new services.GetAccountBudgetRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getAccountBudget(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AccountLinkService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AccountLinkService
      */
     public get accountLinks() {
       const service = this.loadService<services.AccountLinkService>("AccountLinkServiceClient")
@@ -298,31 +206,7 @@ export default class ServiceFactory extends Service {
       return {
         
     /**
-     * @description Retrieve a resources.AccountLink in full detail
-     * @warning Don't use get in production!
-     * @returns resources.AccountLink
-     */
-    get: async (resourceName: string): Promise<resources.AccountLink> => {
-      const request = new services.GetAccountLinkRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getAccountLink(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AccountLinkService#createaccountlink
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AccountLinkService#createaccountlink
      */
     createAccountLink: async (request: services.CreateAccountLinkRequest): Promise<services.CreateAccountLinkResponse> => {
       try {
@@ -509,71 +393,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AdGroupAdAssetViewService
-     */
-    public get adGroupAdAssetViews() {
-      const service = this.loadService<services.AdGroupAdAssetViewService>("AdGroupAdAssetViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.AdGroupAdAssetView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.AdGroupAdAssetView
-     */
-    get: async (resourceName: string): Promise<resources.AdGroupAdAssetView> => {
-      const request = new services.GetAdGroupAdAssetViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getAdGroupAdAssetView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AdGroupAdLabelService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AdGroupAdLabelService
      */
     public get adGroupAdLabels() {
       const service = this.loadService<services.AdGroupAdLabelService>("AdGroupAdLabelServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateAdGroupAdLabelsRequest, "partial_failure"|"validate_only">>
       return {
         
-    /**
-     * @description Retrieve a resources.AdGroupAdLabel in full detail
-     * @warning Don't use get in production!
-     * @returns resources.AdGroupAdLabel
-     */
-    get: async (resourceName: string): Promise<resources.AdGroupAdLabel> => {
-      const request = new services.GetAdGroupAdLabelRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getAdGroupAdLabel(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IAdGroupAdLabel
      * @returns services.MutateAdGroupAdLabelsResponse
@@ -743,37 +569,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AdGroupAdService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AdGroupAdService
      */
     public get adGroupAds() {
       const service = this.loadService<services.AdGroupAdService>("AdGroupAdServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateAdGroupAdsRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.AdGroupAd in full detail
-     * @warning Don't use get in production!
-     * @returns resources.AdGroupAd
-     */
-    get: async (resourceName: string): Promise<resources.AdGroupAd> => {
-      const request = new services.GetAdGroupAdRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getAdGroupAd(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IAdGroupAd
      * @returns services.MutateAdGroupAdsResponse
@@ -1026,37 +828,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AdGroupAssetService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AdGroupAssetService
      */
     public get adGroupAssets() {
       const service = this.loadService<services.AdGroupAssetService>("AdGroupAssetServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateAdGroupAssetsRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.AdGroupAsset in full detail
-     * @warning Don't use get in production!
-     * @returns resources.AdGroupAsset
-     */
-    get: async (resourceName: string): Promise<resources.AdGroupAsset> => {
-      const request = new services.GetAdGroupAssetRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getAdGroupAsset(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IAdGroupAsset
      * @returns services.MutateAdGroupAssetsResponse
@@ -1309,71 +1087,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AdGroupAudienceViewService
-     */
-    public get adGroupAudienceViews() {
-      const service = this.loadService<services.AdGroupAudienceViewService>("AdGroupAudienceViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.AdGroupAudienceView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.AdGroupAudienceView
-     */
-    get: async (resourceName: string): Promise<resources.AdGroupAudienceView> => {
-      const request = new services.GetAdGroupAudienceViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getAdGroupAudienceView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AdGroupBidModifierService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AdGroupBidModifierService
      */
     public get adGroupBidModifiers() {
       const service = this.loadService<services.AdGroupBidModifierService>("AdGroupBidModifierServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateAdGroupBidModifiersRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.AdGroupBidModifier in full detail
-     * @warning Don't use get in production!
-     * @returns resources.AdGroupBidModifier
-     */
-    get: async (resourceName: string): Promise<resources.AdGroupBidModifier> => {
-      const request = new services.GetAdGroupBidModifierRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getAdGroupBidModifier(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IAdGroupBidModifier
      * @returns services.MutateAdGroupBidModifiersResponse
@@ -1626,7 +1346,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AdGroupCriterionCustomizerService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AdGroupCriterionCustomizerService
      */
     public get adGroupCriterionCustomizers() {
       const service = this.loadService<services.AdGroupCriterionCustomizerService>("AdGroupCriterionCustomizerServiceClient")
@@ -1802,37 +1522,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AdGroupCriterionLabelService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AdGroupCriterionLabelService
      */
     public get adGroupCriterionLabels() {
       const service = this.loadService<services.AdGroupCriterionLabelService>("AdGroupCriterionLabelServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateAdGroupCriterionLabelsRequest, "partial_failure"|"validate_only">>
       return {
         
-    /**
-     * @description Retrieve a resources.AdGroupCriterionLabel in full detail
-     * @warning Don't use get in production!
-     * @returns resources.AdGroupCriterionLabel
-     */
-    get: async (resourceName: string): Promise<resources.AdGroupCriterionLabel> => {
-      const request = new services.GetAdGroupCriterionLabelRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getAdGroupCriterionLabel(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IAdGroupCriterionLabel
      * @returns services.MutateAdGroupCriterionLabelsResponse
@@ -2002,37 +1698,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AdGroupCriterionService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AdGroupCriterionService
      */
     public get adGroupCriteria() {
       const service = this.loadService<services.AdGroupCriterionService>("AdGroupCriterionServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateAdGroupCriteriaRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.AdGroupCriterion in full detail
-     * @warning Don't use get in production!
-     * @returns resources.AdGroupCriterion
-     */
-    get: async (resourceName: string): Promise<resources.AdGroupCriterion> => {
-      const request = new services.GetAdGroupCriterionRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getAdGroupCriterion(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IAdGroupCriterion
      * @returns services.MutateAdGroupCriteriaResponse
@@ -2285,41 +1957,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AdGroupCriterionSimulationService
-     */
-    public get adGroupCriterionSimulations() {
-      const service = this.loadService<services.AdGroupCriterionSimulationService>("AdGroupCriterionSimulationServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.AdGroupCriterionSimulation in full detail
-     * @warning Don't use get in production!
-     * @returns resources.AdGroupCriterionSimulation
-     */
-    get: async (resourceName: string): Promise<resources.AdGroupCriterionSimulation> => {
-      const request = new services.GetAdGroupCriterionSimulationRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getAdGroupCriterionSimulation(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AdGroupCustomizerService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AdGroupCustomizerService
      */
     public get adGroupCustomizers() {
       const service = this.loadService<services.AdGroupCustomizerService>("AdGroupCustomizerServiceClient")
@@ -2495,37 +2133,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AdGroupExtensionSettingService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AdGroupExtensionSettingService
      */
     public get adGroupExtensionSettings() {
       const service = this.loadService<services.AdGroupExtensionSettingService>("AdGroupExtensionSettingServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateAdGroupExtensionSettingsRequest, "partial_failure"|"validate_only">>
       return {
         
-    /**
-     * @description Retrieve a resources.AdGroupExtensionSetting in full detail
-     * @warning Don't use get in production!
-     * @returns resources.AdGroupExtensionSetting
-     */
-    get: async (resourceName: string): Promise<resources.AdGroupExtensionSetting> => {
-      const request = new services.GetAdGroupExtensionSettingRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getAdGroupExtensionSetting(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IAdGroupExtensionSetting
      * @returns services.MutateAdGroupExtensionSettingsResponse
@@ -2778,37 +2392,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AdGroupFeedService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AdGroupFeedService
      */
     public get adGroupFeeds() {
       const service = this.loadService<services.AdGroupFeedService>("AdGroupFeedServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateAdGroupFeedsRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.AdGroupFeed in full detail
-     * @warning Don't use get in production!
-     * @returns resources.AdGroupFeed
-     */
-    get: async (resourceName: string): Promise<resources.AdGroupFeed> => {
-      const request = new services.GetAdGroupFeedRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getAdGroupFeed(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IAdGroupFeed
      * @returns services.MutateAdGroupFeedsResponse
@@ -3061,37 +2651,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AdGroupLabelService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AdGroupLabelService
      */
     public get adGroupLabels() {
       const service = this.loadService<services.AdGroupLabelService>("AdGroupLabelServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateAdGroupLabelsRequest, "partial_failure"|"validate_only">>
       return {
         
-    /**
-     * @description Retrieve a resources.AdGroupLabel in full detail
-     * @warning Don't use get in production!
-     * @returns resources.AdGroupLabel
-     */
-    get: async (resourceName: string): Promise<resources.AdGroupLabel> => {
-      const request = new services.GetAdGroupLabelRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getAdGroupLabel(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IAdGroupLabel
      * @returns services.MutateAdGroupLabelsResponse
@@ -3261,37 +2827,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AdGroupService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AdGroupService
      */
     public get adGroups() {
       const service = this.loadService<services.AdGroupService>("AdGroupServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateAdGroupsRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.AdGroup in full detail
-     * @warning Don't use get in production!
-     * @returns resources.AdGroup
-     */
-    get: async (resourceName: string): Promise<resources.AdGroup> => {
-      const request = new services.GetAdGroupRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getAdGroup(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IAdGroup
      * @returns services.MutateAdGroupsResponse
@@ -3544,71 +3086,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AdGroupSimulationService
-     */
-    public get adGroupSimulations() {
-      const service = this.loadService<services.AdGroupSimulationService>("AdGroupSimulationServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.AdGroupSimulation in full detail
-     * @warning Don't use get in production!
-     * @returns resources.AdGroupSimulation
-     */
-    get: async (resourceName: string): Promise<resources.AdGroupSimulation> => {
-      const request = new services.GetAdGroupSimulationRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getAdGroupSimulation(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AdParameterService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AdParameterService
      */
     public get adParameters() {
       const service = this.loadService<services.AdParameterService>("AdParameterServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateAdParametersRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.AdParameter in full detail
-     * @warning Don't use get in production!
-     * @returns resources.AdParameter
-     */
-    get: async (resourceName: string): Promise<resources.AdParameter> => {
-      const request = new services.GetAdParameterRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getAdParameter(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IAdParameter
      * @returns services.MutateAdParametersResponse
@@ -3861,41 +3345,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AdScheduleViewService
-     */
-    public get adScheduleViews() {
-      const service = this.loadService<services.AdScheduleViewService>("AdScheduleViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.AdScheduleView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.AdScheduleView
-     */
-    get: async (resourceName: string): Promise<resources.AdScheduleView> => {
-      const request = new services.GetAdScheduleViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getAdScheduleView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AdService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AdService
      */
     public get ads() {
       const service = this.loadService<services.AdService>("AdServiceClient")
@@ -3903,14 +3353,9 @@ export default class ServiceFactory extends Service {
       return {
         
     /**
-     * @description Retrieve a resources.Ad in full detail
-     * @warning Don't use get in production!
-     * @returns resources.Ad
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AdService#getad
      */
-    get: async (resourceName: string): Promise<resources.Ad> => {
-      const request = new services.GetAdRequest({
-        resource_name: resourceName,
-      });
+    getAd: async (request: services.GetAdRequest): Promise<resources.Ad> => {
       try {
         // @ts-expect-error Response is an array type
         const [response] = await service.getAd(request, {
@@ -4012,105 +3457,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AgeRangeViewService
-     */
-    public get ageRangeViews() {
-      const service = this.loadService<services.AgeRangeViewService>("AgeRangeViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.AgeRangeView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.AgeRangeView
-     */
-    get: async (resourceName: string): Promise<resources.AgeRangeView> => {
-      const request = new services.GetAgeRangeViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getAgeRangeView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AssetFieldTypeViewService
-     */
-    public get assetFieldTypeViews() {
-      const service = this.loadService<services.AssetFieldTypeViewService>("AssetFieldTypeViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.AssetFieldTypeView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.AssetFieldTypeView
-     */
-    get: async (resourceName: string): Promise<resources.AssetFieldTypeView> => {
-      const request = new services.GetAssetFieldTypeViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getAssetFieldTypeView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AssetGroupAssetService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AssetGroupAssetService
      */
     public get assetGroupAssets() {
       const service = this.loadService<services.AssetGroupAssetService>("AssetGroupAssetServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateAssetGroupAssetsRequest, "partial_failure"|"validate_only">>
       return {
         
-    /**
-     * @description Retrieve a resources.AssetGroupAsset in full detail
-     * @warning Don't use get in production!
-     * @returns resources.AssetGroupAsset
-     */
-    get: async (resourceName: string): Promise<resources.AssetGroupAsset> => {
-      const request = new services.GetAssetGroupAssetRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getAssetGroupAsset(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IAssetGroupAsset
      * @returns services.MutateAssetGroupAssetsResponse
@@ -4363,7 +3716,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AssetGroupListingGroupFilterService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AssetGroupListingGroupFilterService
      */
     public get assetGroupListingGroupFilters() {
       const service = this.loadService<services.AssetGroupListingGroupFilterService>("AssetGroupListingGroupFilterServiceClient")
@@ -4622,37 +3975,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AssetGroupService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AssetGroupService
      */
     public get assetGroups() {
       const service = this.loadService<services.AssetGroupService>("AssetGroupServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateAssetGroupsRequest, "validate_only">>
       return {
         
-    /**
-     * @description Retrieve a resources.AssetGroup in full detail
-     * @warning Don't use get in production!
-     * @returns resources.AssetGroup
-     */
-    get: async (resourceName: string): Promise<resources.AssetGroup> => {
-      const request = new services.GetAssetGroupRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getAssetGroup(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IAssetGroup
      * @returns services.MutateAssetGroupsResponse
@@ -4905,37 +4234,189 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AssetService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AssetGroupSignalService
+     */
+    public get assetGroupSignals() {
+      const service = this.loadService<services.AssetGroupSignalService>("AssetGroupSignalServiceClient")
+      type MutateOptions = Partial<Pick<services.IMutateAssetGroupSignalsRequest, "partial_failure"|"validate_only"|"response_content_type">>
+      return {
+        
+    /**
+     * @description create resources of type resources.IAssetGroupSignal
+     * @returns services.MutateAssetGroupSignalsResponse
+     */
+    create: async (
+      assetGroupSignals: (resources.IAssetGroupSignal | resources.AssetGroupSignal)[] ,
+      options?: MutateOptions
+    ): Promise<services.MutateAssetGroupSignalsResponse > => {
+      const ops = this.buildOperations<
+        services.AssetGroupSignalOperation,
+        resources.IAssetGroupSignal
+      >(
+        "create", 
+        assetGroupSignals
+        
+        
+      );
+      const request = this.buildRequest<
+        services.AssetGroupSignalOperation,
+        services.IMutateAssetGroupSignalsRequest,
+        MutateOptions
+      >(ops, options);
+      const baseHookArguments: BaseMutationHookArgs = {
+    credentials: this.credentials,
+    method: "AssetGroupSignalService.mutateAssetGroupSignals",
+    mutation: request,
+    isServiceCall: true,
+  };
+  if (this.hooks.onMutationStart) {
+    const mutationCancellation: HookedCancellation = { cancelled: false };
+    await this.hooks.onMutationStart({
+      ...baseHookArguments,
+      cancel: (res) => {
+        mutationCancellation.cancelled = true;
+        mutationCancellation.res = res;
+      },
+      editOptions: (options) => {
+        Object.entries(options).forEach(([key, val]) => {
+          // @ts-expect-error Index with key type is fine
+          request[key] = val;
+        });
+      },
+    });
+    if (mutationCancellation.cancelled) {
+      return mutationCancellation.res;
+    }
+  }
+      try {
+        // @ts-expect-error Response is an array type
+        const [response] = await service.mutateAssetGroupSignals(request, {
+          // @ts-expect-error This arg doesn't exist in the type definitions
+          otherArgs: {
+            headers: this.callHeaders,
+          },
+        });
+        if (this.hooks.onMutationEnd) {
+    const mutationResolution: HookedResolution = { resolved: false };
+    await this.hooks.onMutationEnd({
+      ...baseHookArguments,
+      response: this.decodePartialFailureError(response),
+      resolve: (res) => {
+        mutationResolution.resolved = true;
+        mutationResolution.res = res;
+      },
+    });
+    if (mutationResolution.resolved) {
+      return mutationResolution.res;
+    }
+  }
+        return this.decodePartialFailureError(response);
+      } catch (err) {
+        const googleAdsError = this.getGoogleAdsError(err);
+  if (this.hooks.onMutationError) {
+    await this.hooks.onMutationError({
+      ...baseHookArguments,
+      error: googleAdsError,
+    });
+  }
+  throw googleAdsError;
+      }
+    }
+  
+,
+    /**
+     * @description remove resources of type string
+     * @returns services.MutateAssetGroupSignalsResponse
+     */
+    remove: async (
+      assetGroupSignals: string[] ,
+      options?: MutateOptions
+    ): Promise<services.MutateAssetGroupSignalsResponse > => {
+      const ops = this.buildOperations<
+        services.AssetGroupSignalOperation,
+        string
+      >(
+        "remove", 
+        assetGroupSignals
+        
+        
+      );
+      const request = this.buildRequest<
+        services.AssetGroupSignalOperation,
+        services.IMutateAssetGroupSignalsRequest,
+        MutateOptions
+      >(ops, options);
+      const baseHookArguments: BaseMutationHookArgs = {
+    credentials: this.credentials,
+    method: "AssetGroupSignalService.mutateAssetGroupSignals",
+    mutation: request,
+    isServiceCall: true,
+  };
+  if (this.hooks.onMutationStart) {
+    const mutationCancellation: HookedCancellation = { cancelled: false };
+    await this.hooks.onMutationStart({
+      ...baseHookArguments,
+      cancel: (res) => {
+        mutationCancellation.cancelled = true;
+        mutationCancellation.res = res;
+      },
+      editOptions: (options) => {
+        Object.entries(options).forEach(([key, val]) => {
+          // @ts-expect-error Index with key type is fine
+          request[key] = val;
+        });
+      },
+    });
+    if (mutationCancellation.cancelled) {
+      return mutationCancellation.res;
+    }
+  }
+      try {
+        // @ts-expect-error Response is an array type
+        const [response] = await service.mutateAssetGroupSignals(request, {
+          // @ts-expect-error This arg doesn't exist in the type definitions
+          otherArgs: {
+            headers: this.callHeaders,
+          },
+        });
+        if (this.hooks.onMutationEnd) {
+    const mutationResolution: HookedResolution = { resolved: false };
+    await this.hooks.onMutationEnd({
+      ...baseHookArguments,
+      response: this.decodePartialFailureError(response),
+      resolve: (res) => {
+        mutationResolution.resolved = true;
+        mutationResolution.res = res;
+      },
+    });
+    if (mutationResolution.resolved) {
+      return mutationResolution.res;
+    }
+  }
+        return this.decodePartialFailureError(response);
+      } catch (err) {
+        const googleAdsError = this.getGoogleAdsError(err);
+  if (this.hooks.onMutationError) {
+    await this.hooks.onMutationError({
+      ...baseHookArguments,
+      error: googleAdsError,
+    });
+  }
+  throw googleAdsError;
+      }
+    }
+  
+      }
+    }
+  
+    /**
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AssetService
      */
     public get assets() {
       const service = this.loadService<services.AssetService>("AssetServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateAssetsRequest, "partial_failure"|"response_content_type"|"validate_only">>
       return {
         
-    /**
-     * @description Retrieve a resources.Asset in full detail
-     * @warning Don't use get in production!
-     * @returns resources.Asset
-     */
-    get: async (resourceName: string): Promise<resources.Asset> => {
-      const request = new services.GetAssetRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getAsset(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IAsset
      * @returns services.MutateAssetsResponse
@@ -5105,7 +4586,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AssetSetAssetService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AssetSetAssetService
      */
     public get assetSetAssets() {
       const service = this.loadService<services.AssetSetAssetService>("AssetSetAssetServiceClient")
@@ -5281,7 +4762,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/AssetSetService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AssetSetService
      */
     public get assetSets() {
       const service = this.loadService<services.AssetSetService>("AssetSetServiceClient")
@@ -5540,7 +5021,183 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/BatchJobService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/AudienceService
+     */
+    public get audiences() {
+      const service = this.loadService<services.AudienceService>("AudienceServiceClient")
+      type MutateOptions = Partial<Pick<services.IMutateAudiencesRequest, "partial_failure"|"validate_only"|"response_content_type">>
+      return {
+        
+    /**
+     * @description create resources of type resources.IAudience
+     * @returns services.MutateAudiencesResponse
+     */
+    create: async (
+      audiences: (resources.IAudience | resources.Audience)[] ,
+      options?: MutateOptions
+    ): Promise<services.MutateAudiencesResponse > => {
+      const ops = this.buildOperations<
+        services.AudienceOperation,
+        resources.IAudience
+      >(
+        "create", 
+        audiences
+        
+        
+      );
+      const request = this.buildRequest<
+        services.AudienceOperation,
+        services.IMutateAudiencesRequest,
+        MutateOptions
+      >(ops, options);
+      const baseHookArguments: BaseMutationHookArgs = {
+    credentials: this.credentials,
+    method: "AudienceService.mutateAudiences",
+    mutation: request,
+    isServiceCall: true,
+  };
+  if (this.hooks.onMutationStart) {
+    const mutationCancellation: HookedCancellation = { cancelled: false };
+    await this.hooks.onMutationStart({
+      ...baseHookArguments,
+      cancel: (res) => {
+        mutationCancellation.cancelled = true;
+        mutationCancellation.res = res;
+      },
+      editOptions: (options) => {
+        Object.entries(options).forEach(([key, val]) => {
+          // @ts-expect-error Index with key type is fine
+          request[key] = val;
+        });
+      },
+    });
+    if (mutationCancellation.cancelled) {
+      return mutationCancellation.res;
+    }
+  }
+      try {
+        // @ts-expect-error Response is an array type
+        const [response] = await service.mutateAudiences(request, {
+          // @ts-expect-error This arg doesn't exist in the type definitions
+          otherArgs: {
+            headers: this.callHeaders,
+          },
+        });
+        if (this.hooks.onMutationEnd) {
+    const mutationResolution: HookedResolution = { resolved: false };
+    await this.hooks.onMutationEnd({
+      ...baseHookArguments,
+      response: this.decodePartialFailureError(response),
+      resolve: (res) => {
+        mutationResolution.resolved = true;
+        mutationResolution.res = res;
+      },
+    });
+    if (mutationResolution.resolved) {
+      return mutationResolution.res;
+    }
+  }
+        return this.decodePartialFailureError(response);
+      } catch (err) {
+        const googleAdsError = this.getGoogleAdsError(err);
+  if (this.hooks.onMutationError) {
+    await this.hooks.onMutationError({
+      ...baseHookArguments,
+      error: googleAdsError,
+    });
+  }
+  throw googleAdsError;
+      }
+    }
+  
+,
+    /**
+     * @description update resources of type resources.IAudience
+     * @returns services.MutateAudiencesResponse
+     */
+    update: async (
+      audiences: (resources.IAudience | resources.Audience)[] ,
+      options?: MutateOptions
+    ): Promise<services.MutateAudiencesResponse > => {
+      const ops = this.buildOperations<
+        services.AudienceOperation,
+        resources.IAudience
+      >(
+        "update", 
+        audiences
+        // @ts-expect-error Static class type here is fine
+        , resources.Audience
+      );
+      const request = this.buildRequest<
+        services.AudienceOperation,
+        services.IMutateAudiencesRequest,
+        MutateOptions
+      >(ops, options);
+      const baseHookArguments: BaseMutationHookArgs = {
+    credentials: this.credentials,
+    method: "AudienceService.mutateAudiences",
+    mutation: request,
+    isServiceCall: true,
+  };
+  if (this.hooks.onMutationStart) {
+    const mutationCancellation: HookedCancellation = { cancelled: false };
+    await this.hooks.onMutationStart({
+      ...baseHookArguments,
+      cancel: (res) => {
+        mutationCancellation.cancelled = true;
+        mutationCancellation.res = res;
+      },
+      editOptions: (options) => {
+        Object.entries(options).forEach(([key, val]) => {
+          // @ts-expect-error Index with key type is fine
+          request[key] = val;
+        });
+      },
+    });
+    if (mutationCancellation.cancelled) {
+      return mutationCancellation.res;
+    }
+  }
+      try {
+        // @ts-expect-error Response is an array type
+        const [response] = await service.mutateAudiences(request, {
+          // @ts-expect-error This arg doesn't exist in the type definitions
+          otherArgs: {
+            headers: this.callHeaders,
+          },
+        });
+        if (this.hooks.onMutationEnd) {
+    const mutationResolution: HookedResolution = { resolved: false };
+    await this.hooks.onMutationEnd({
+      ...baseHookArguments,
+      response: this.decodePartialFailureError(response),
+      resolve: (res) => {
+        mutationResolution.resolved = true;
+        mutationResolution.res = res;
+      },
+    });
+    if (mutationResolution.resolved) {
+      return mutationResolution.res;
+    }
+  }
+        return this.decodePartialFailureError(response);
+      } catch (err) {
+        const googleAdsError = this.getGoogleAdsError(err);
+  if (this.hooks.onMutationError) {
+    await this.hooks.onMutationError({
+      ...baseHookArguments,
+      error: googleAdsError,
+    });
+  }
+  throw googleAdsError;
+      }
+    }
+  
+      }
+    }
+  
+    /**
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/BatchJobService
      */
     public get batchJobs() {
       const service = this.loadService<services.BatchJobService>("BatchJobServiceClient")
@@ -5631,31 +5288,7 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @description Retrieve a resources.BatchJob in full detail
-     * @warning Don't use get in production!
-     * @returns resources.BatchJob
-     */
-    get: async (resourceName: string): Promise<resources.BatchJob> => {
-      const request = new services.GetBatchJobRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getBatchJob(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/BatchJobService#listbatchjobresults
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/BatchJobService#listbatchjobresults
      */
     listBatchJobResults: async (request: services.ListBatchJobResultsRequest): Promise<services.ListBatchJobResultsResponse> => {
       try {
@@ -5674,7 +5307,7 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/BatchJobService#runbatchjob
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/BatchJobService#runbatchjob
      */
     runBatchJob: async (request: services.RunBatchJobRequest): Promise<longrunning.Operation> => {
       try {
@@ -5693,7 +5326,7 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/BatchJobService#addbatchjoboperations
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/BatchJobService#addbatchjoboperations
      */
     addBatchJobOperations: async (request: services.AddBatchJobOperationsRequest): Promise<services.AddBatchJobOperationsResponse> => {
       try {
@@ -5714,37 +5347,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/BiddingDataExclusionService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/BiddingDataExclusionService
      */
     public get biddingDataExclusions() {
       const service = this.loadService<services.BiddingDataExclusionService>("BiddingDataExclusionServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateBiddingDataExclusionsRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.BiddingDataExclusion in full detail
-     * @warning Don't use get in production!
-     * @returns resources.BiddingDataExclusion
-     */
-    get: async (resourceName: string): Promise<resources.BiddingDataExclusion> => {
-      const request = new services.GetBiddingDataExclusionRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getBiddingDataExclusion(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IBiddingDataExclusion
      * @returns services.MutateBiddingDataExclusionsResponse
@@ -5997,37 +5606,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/BiddingSeasonalityAdjustmentService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/BiddingSeasonalityAdjustmentService
      */
     public get biddingSeasonalityAdjustments() {
       const service = this.loadService<services.BiddingSeasonalityAdjustmentService>("BiddingSeasonalityAdjustmentServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateBiddingSeasonalityAdjustmentsRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.BiddingSeasonalityAdjustment in full detail
-     * @warning Don't use get in production!
-     * @returns resources.BiddingSeasonalityAdjustment
-     */
-    get: async (resourceName: string): Promise<resources.BiddingSeasonalityAdjustment> => {
-      const request = new services.GetBiddingSeasonalityAdjustmentRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getBiddingSeasonalityAdjustment(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IBiddingSeasonalityAdjustment
      * @returns services.MutateBiddingSeasonalityAdjustmentsResponse
@@ -6280,37 +5865,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/BiddingStrategyService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/BiddingStrategyService
      */
     public get biddingStrategies() {
       const service = this.loadService<services.BiddingStrategyService>("BiddingStrategyServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateBiddingStrategiesRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.BiddingStrategy in full detail
-     * @warning Don't use get in production!
-     * @returns resources.BiddingStrategy
-     */
-    get: async (resourceName: string): Promise<resources.BiddingStrategy> => {
-      const request = new services.GetBiddingStrategyRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getBiddingStrategy(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IBiddingStrategy
      * @returns services.MutateBiddingStrategiesResponse
@@ -6563,37 +6124,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CampaignAssetService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CampaignAssetService
      */
     public get campaignAssets() {
       const service = this.loadService<services.CampaignAssetService>("CampaignAssetServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateCampaignAssetsRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.CampaignAsset in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CampaignAsset
-     */
-    get: async (resourceName: string): Promise<resources.CampaignAsset> => {
-      const request = new services.GetCampaignAssetRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCampaignAsset(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.ICampaignAsset
      * @returns services.MutateCampaignAssetsResponse
@@ -6846,7 +6383,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CampaignAssetSetService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CampaignAssetSetService
      */
     public get campaignAssetSets() {
       const service = this.loadService<services.CampaignAssetSetService>("CampaignAssetSetServiceClient")
@@ -7022,37 +6559,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CampaignBidModifierService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CampaignBidModifierService
      */
     public get campaignBidModifiers() {
       const service = this.loadService<services.CampaignBidModifierService>("CampaignBidModifierServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateCampaignBidModifiersRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.CampaignBidModifier in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CampaignBidModifier
-     */
-    get: async (resourceName: string): Promise<resources.CampaignBidModifier> => {
-      const request = new services.GetCampaignBidModifierRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCampaignBidModifier(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.ICampaignBidModifier
      * @returns services.MutateCampaignBidModifiersResponse
@@ -7305,37 +6818,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CampaignBudgetService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CampaignBudgetService
      */
     public get campaignBudgets() {
       const service = this.loadService<services.CampaignBudgetService>("CampaignBudgetServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateCampaignBudgetsRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.CampaignBudget in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CampaignBudget
-     */
-    get: async (resourceName: string): Promise<resources.CampaignBudget> => {
-      const request = new services.GetCampaignBudgetRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCampaignBudget(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.ICampaignBudget
      * @returns services.MutateCampaignBudgetsResponse
@@ -7588,7 +7077,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CampaignConversionGoalService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CampaignConversionGoalService
      */
     public get campaignConversionGoals() {
       const service = this.loadService<services.CampaignConversionGoalService>("CampaignConversionGoalServiceClient")
@@ -7681,37 +7170,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CampaignCriterionService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CampaignCriterionService
      */
     public get campaignCriteria() {
       const service = this.loadService<services.CampaignCriterionService>("CampaignCriterionServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateCampaignCriteriaRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.CampaignCriterion in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CampaignCriterion
-     */
-    get: async (resourceName: string): Promise<resources.CampaignCriterion> => {
-      const request = new services.GetCampaignCriterionRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCampaignCriterion(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.ICampaignCriterion
      * @returns services.MutateCampaignCriteriaResponse
@@ -7964,7 +7429,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CampaignCustomizerService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CampaignCustomizerService
      */
     public get campaignCustomizers() {
       const service = this.loadService<services.CampaignCustomizerService>("CampaignCustomizerServiceClient")
@@ -8140,37 +7605,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CampaignDraftService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CampaignDraftService
      */
     public get campaignDrafts() {
       const service = this.loadService<services.CampaignDraftService>("CampaignDraftServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateCampaignDraftsRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.CampaignDraft in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CampaignDraft
-     */
-    get: async (resourceName: string): Promise<resources.CampaignDraft> => {
-      const request = new services.GetCampaignDraftRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCampaignDraft(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.ICampaignDraft
      * @returns services.MutateCampaignDraftsResponse
@@ -8421,7 +7862,7 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CampaignDraftService#promotecampaigndraft
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CampaignDraftService#promotecampaigndraft
      */
     promoteCampaignDraft: async (request: services.PromoteCampaignDraftRequest): Promise<longrunning.Operation> => {
       try {
@@ -8440,7 +7881,7 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CampaignDraftService#listcampaigndraftasyncerrors
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CampaignDraftService#listcampaigndraftasyncerrors
      */
     listCampaignDraftAsyncErrors: async (request: services.ListCampaignDraftAsyncErrorsRequest): Promise<services.ListCampaignDraftAsyncErrorsResponse> => {
       try {
@@ -8461,7 +7902,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CampaignExperimentService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CampaignExperimentService
      */
     public get campaignExperiments() {
       const service = this.loadService<services.CampaignExperimentService>("CampaignExperimentServiceClient")
@@ -8469,31 +7910,7 @@ export default class ServiceFactory extends Service {
       return {
         
     /**
-     * @description Retrieve a resources.CampaignExperiment in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CampaignExperiment
-     */
-    get: async (resourceName: string): Promise<resources.CampaignExperiment> => {
-      const request = new services.GetCampaignExperimentRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCampaignExperiment(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CampaignExperimentService#createcampaignexperiment
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CampaignExperimentService#createcampaignexperiment
      */
     createCampaignExperiment: async (request: services.CreateCampaignExperimentRequest): Promise<longrunning.Operation> => {
       try {
@@ -8678,7 +8095,7 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CampaignExperimentService#graduatecampaignexperiment
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CampaignExperimentService#graduatecampaignexperiment
      */
     graduateCampaignExperiment: async (request: services.GraduateCampaignExperimentRequest): Promise<services.GraduateCampaignExperimentResponse> => {
       try {
@@ -8697,7 +8114,7 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CampaignExperimentService#promotecampaignexperiment
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CampaignExperimentService#promotecampaignexperiment
      */
     promoteCampaignExperiment: async (request: services.PromoteCampaignExperimentRequest): Promise<longrunning.Operation> => {
       try {
@@ -8716,7 +8133,7 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CampaignExperimentService#endcampaignexperiment
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CampaignExperimentService#endcampaignexperiment
      */
     endCampaignExperiment: async (request: services.EndCampaignExperimentRequest): Promise<protobuf.Empty> => {
       try {
@@ -8735,7 +8152,7 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CampaignExperimentService#listcampaignexperimentasyncerrors
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CampaignExperimentService#listcampaignexperimentasyncerrors
      */
     listCampaignExperimentAsyncErrors: async (request: services.ListCampaignExperimentAsyncErrorsRequest): Promise<services.ListCampaignExperimentAsyncErrorsResponse> => {
       try {
@@ -8756,37 +8173,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CampaignExtensionSettingService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CampaignExtensionSettingService
      */
     public get campaignExtensionSettings() {
       const service = this.loadService<services.CampaignExtensionSettingService>("CampaignExtensionSettingServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateCampaignExtensionSettingsRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.CampaignExtensionSetting in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CampaignExtensionSetting
-     */
-    get: async (resourceName: string): Promise<resources.CampaignExtensionSetting> => {
-      const request = new services.GetCampaignExtensionSettingRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCampaignExtensionSetting(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.ICampaignExtensionSetting
      * @returns services.MutateCampaignExtensionSettingsResponse
@@ -9039,37 +8432,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CampaignFeedService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CampaignFeedService
      */
     public get campaignFeeds() {
       const service = this.loadService<services.CampaignFeedService>("CampaignFeedServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateCampaignFeedsRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.CampaignFeed in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CampaignFeed
-     */
-    get: async (resourceName: string): Promise<resources.CampaignFeed> => {
-      const request = new services.GetCampaignFeedRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCampaignFeed(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.ICampaignFeed
      * @returns services.MutateCampaignFeedsResponse
@@ -9322,37 +8691,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CampaignLabelService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CampaignLabelService
      */
     public get campaignLabels() {
       const service = this.loadService<services.CampaignLabelService>("CampaignLabelServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateCampaignLabelsRequest, "partial_failure"|"validate_only">>
       return {
         
-    /**
-     * @description Retrieve a resources.CampaignLabel in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CampaignLabel
-     */
-    get: async (resourceName: string): Promise<resources.CampaignLabel> => {
-      const request = new services.GetCampaignLabelRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCampaignLabel(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.ICampaignLabel
      * @returns services.MutateCampaignLabelsResponse
@@ -9522,37 +8867,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CampaignService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CampaignService
      */
     public get campaigns() {
       const service = this.loadService<services.CampaignService>("CampaignServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateCampaignsRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.Campaign in full detail
-     * @warning Don't use get in production!
-     * @returns resources.Campaign
-     */
-    get: async (resourceName: string): Promise<resources.Campaign> => {
-      const request = new services.GetCampaignRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCampaign(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.ICampaign
      * @returns services.MutateCampaignsResponse
@@ -9805,37 +9126,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CampaignSharedSetService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CampaignSharedSetService
      */
     public get campaignSharedSets() {
       const service = this.loadService<services.CampaignSharedSetService>("CampaignSharedSetServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateCampaignSharedSetsRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.CampaignSharedSet in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CampaignSharedSet
-     */
-    get: async (resourceName: string): Promise<resources.CampaignSharedSet> => {
-      const request = new services.GetCampaignSharedSetRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCampaignSharedSet(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.ICampaignSharedSet
      * @returns services.MutateCampaignSharedSetsResponse
@@ -10005,37 +9302,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ConversionActionService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/ConversionActionService
      */
     public get conversionActions() {
       const service = this.loadService<services.ConversionActionService>("ConversionActionServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateConversionActionsRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.ConversionAction in full detail
-     * @warning Don't use get in production!
-     * @returns resources.ConversionAction
-     */
-    get: async (resourceName: string): Promise<resources.ConversionAction> => {
-      const request = new services.GetConversionActionRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getConversionAction(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IConversionAction
      * @returns services.MutateConversionActionsResponse
@@ -10288,37 +9561,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ConversionCustomVariableService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/ConversionCustomVariableService
      */
     public get conversionCustomVariables() {
       const service = this.loadService<services.ConversionCustomVariableService>("ConversionCustomVariableServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateConversionCustomVariablesRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.ConversionCustomVariable in full detail
-     * @warning Don't use get in production!
-     * @returns resources.ConversionCustomVariable
-     */
-    get: async (resourceName: string): Promise<resources.ConversionCustomVariable> => {
-      const request = new services.GetConversionCustomVariableRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getConversionCustomVariable(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IConversionCustomVariable
      * @returns services.MutateConversionCustomVariablesResponse
@@ -10488,7 +9737,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ConversionGoalCampaignConfigService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/ConversionGoalCampaignConfigService
      */
     public get conversionGoalCampaignConfigs() {
       const service = this.loadService<services.ConversionGoalCampaignConfigService>("ConversionGoalCampaignConfigServiceClient")
@@ -10581,37 +9830,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ConversionValueRuleService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/ConversionValueRuleService
      */
     public get conversionValueRules() {
       const service = this.loadService<services.ConversionValueRuleService>("ConversionValueRuleServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateConversionValueRulesRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.ConversionValueRule in full detail
-     * @warning Don't use get in production!
-     * @returns resources.ConversionValueRule
-     */
-    get: async (resourceName: string): Promise<resources.ConversionValueRule> => {
-      const request = new services.GetConversionValueRuleRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getConversionValueRule(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IConversionValueRule
      * @returns services.MutateConversionValueRulesResponse
@@ -10864,37 +10089,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ConversionValueRuleSetService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/ConversionValueRuleSetService
      */
     public get conversionValueRuleSets() {
       const service = this.loadService<services.ConversionValueRuleSetService>("ConversionValueRuleSetServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateConversionValueRuleSetsRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.ConversionValueRuleSet in full detail
-     * @warning Don't use get in production!
-     * @returns resources.ConversionValueRuleSet
-     */
-    get: async (resourceName: string): Promise<resources.ConversionValueRuleSet> => {
-      const request = new services.GetConversionValueRuleSetRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getConversionValueRuleSet(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IConversionValueRuleSet
      * @returns services.MutateConversionValueRuleSetsResponse
@@ -11147,7 +10348,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CustomConversionGoalService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CustomConversionGoalService
      */
     public get customConversionGoals() {
       const service = this.loadService<services.CustomConversionGoalService>("CustomConversionGoalServiceClient")
@@ -11406,37 +10607,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CustomerAssetService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CustomerAssetService
      */
     public get customerAssets() {
       const service = this.loadService<services.CustomerAssetService>("CustomerAssetServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateCustomerAssetsRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.CustomerAsset in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CustomerAsset
-     */
-    get: async (resourceName: string): Promise<resources.CustomerAsset> => {
-      const request = new services.GetCustomerAssetRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCustomerAsset(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.ICustomerAsset
      * @returns services.MutateCustomerAssetsResponse
@@ -11689,7 +10866,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CustomerConversionGoalService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CustomerConversionGoalService
      */
     public get customerConversionGoals() {
       const service = this.loadService<services.CustomerConversionGoalService>("CustomerConversionGoalServiceClient")
@@ -11782,7 +10959,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CustomerCustomizerService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CustomerCustomizerService
      */
     public get customerCustomizers() {
       const service = this.loadService<services.CustomerCustomizerService>("CustomerCustomizerServiceClient")
@@ -11958,37 +11135,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CustomerExtensionSettingService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CustomerExtensionSettingService
      */
     public get customerExtensionSettings() {
       const service = this.loadService<services.CustomerExtensionSettingService>("CustomerExtensionSettingServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateCustomerExtensionSettingsRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.CustomerExtensionSetting in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CustomerExtensionSetting
-     */
-    get: async (resourceName: string): Promise<resources.CustomerExtensionSetting> => {
-      const request = new services.GetCustomerExtensionSettingRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCustomerExtensionSetting(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.ICustomerExtensionSetting
      * @returns services.MutateCustomerExtensionSettingsResponse
@@ -12241,37 +11394,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CustomerFeedService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CustomerFeedService
      */
     public get customerFeeds() {
       const service = this.loadService<services.CustomerFeedService>("CustomerFeedServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateCustomerFeedsRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.CustomerFeed in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CustomerFeed
-     */
-    get: async (resourceName: string): Promise<resources.CustomerFeed> => {
-      const request = new services.GetCustomerFeedRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCustomerFeed(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.ICustomerFeed
      * @returns services.MutateCustomerFeedsResponse
@@ -12524,37 +11653,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CustomerLabelService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CustomerLabelService
      */
     public get customerLabels() {
       const service = this.loadService<services.CustomerLabelService>("CustomerLabelServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateCustomerLabelsRequest, "partial_failure"|"validate_only">>
       return {
         
-    /**
-     * @description Retrieve a resources.CustomerLabel in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CustomerLabel
-     */
-    get: async (resourceName: string): Promise<resources.CustomerLabel> => {
-      const request = new services.GetCustomerLabelRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCustomerLabel(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.ICustomerLabel
      * @returns services.MutateCustomerLabelsResponse
@@ -12724,37 +11829,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CustomerNegativeCriterionService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CustomerNegativeCriterionService
      */
     public get customerNegativeCriteria() {
       const service = this.loadService<services.CustomerNegativeCriterionService>("CustomerNegativeCriterionServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateCustomerNegativeCriteriaRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.CustomerNegativeCriterion in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CustomerNegativeCriterion
-     */
-    get: async (resourceName: string): Promise<resources.CustomerNegativeCriterion> => {
-      const request = new services.GetCustomerNegativeCriterionRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCustomerNegativeCriterion(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.ICustomerNegativeCriterion
      * @returns services.MutateCustomerNegativeCriteriaResponse
@@ -12924,37 +12005,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CustomerService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CustomerService
      */
     public get customers() {
       const service = this.loadService<services.CustomerService>("CustomerServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateCustomerRequest, "validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.Customer in full detail
-     * @warning Don't use get in production!
-     * @returns resources.Customer
-     */
-    get: async (resourceName: string): Promise<resources.Customer> => {
-      const request = new services.GetCustomerRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCustomer(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description update resources of type resources.ICustomer
      * @returns services.MutateCustomerResponse
@@ -13039,7 +12096,7 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CustomerService#listaccessiblecustomers
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CustomerService#listaccessiblecustomers
      */
     listAccessibleCustomers: async (request: services.ListAccessibleCustomersRequest): Promise<services.ListAccessibleCustomersResponse> => {
       try {
@@ -13058,7 +12115,7 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CustomerService#createcustomerclient
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CustomerService#createcustomerclient
      */
     createCustomerClient: async (request: services.CreateCustomerClientRequest): Promise<services.CreateCustomerClientResponse> => {
       try {
@@ -13079,7 +12136,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CustomizerAttributeService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CustomizerAttributeService
      */
     public get customizerAttributes() {
       const service = this.loadService<services.CustomizerAttributeService>("CustomizerAttributeServiceClient")
@@ -13255,25 +12312,528 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ExtensionFeedItemService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/ExperimentArmService
      */
-    public get extensionFeedItems() {
-      const service = this.loadService<services.ExtensionFeedItemService>("ExtensionFeedItemServiceClient")
-      type MutateOptions = Partial<Pick<services.IMutateExtensionFeedItemsRequest, "partial_failure"|"validate_only"|"response_content_type">>
+    public get experimentArms() {
+      const service = this.loadService<services.ExperimentArmService>("ExperimentArmServiceClient")
+      type MutateOptions = Partial<Pick<services.IMutateExperimentArmsRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
     /**
-     * @description Retrieve a resources.ExtensionFeedItem in full detail
-     * @warning Don't use get in production!
-     * @returns resources.ExtensionFeedItem
+     * @description create resources of type resources.IExperimentArm
+     * @returns services.MutateExperimentArmsResponse
      */
-    get: async (resourceName: string): Promise<resources.ExtensionFeedItem> => {
-      const request = new services.GetExtensionFeedItemRequest({
-        resource_name: resourceName,
-      });
+    create: async (
+      experimentArms: (resources.IExperimentArm | resources.ExperimentArm)[] ,
+      options?: MutateOptions
+    ): Promise<services.MutateExperimentArmsResponse > => {
+      const ops = this.buildOperations<
+        services.ExperimentArmOperation,
+        resources.IExperimentArm
+      >(
+        "create", 
+        experimentArms
+        
+        
+      );
+      const request = this.buildRequest<
+        services.ExperimentArmOperation,
+        services.IMutateExperimentArmsRequest,
+        MutateOptions
+      >(ops, options);
+      const baseHookArguments: BaseMutationHookArgs = {
+    credentials: this.credentials,
+    method: "ExperimentArmService.mutateExperimentArms",
+    mutation: request,
+    isServiceCall: true,
+  };
+  if (this.hooks.onMutationStart) {
+    const mutationCancellation: HookedCancellation = { cancelled: false };
+    await this.hooks.onMutationStart({
+      ...baseHookArguments,
+      cancel: (res) => {
+        mutationCancellation.cancelled = true;
+        mutationCancellation.res = res;
+      },
+      editOptions: (options) => {
+        Object.entries(options).forEach(([key, val]) => {
+          // @ts-expect-error Index with key type is fine
+          request[key] = val;
+        });
+      },
+    });
+    if (mutationCancellation.cancelled) {
+      return mutationCancellation.res;
+    }
+  }
       try {
         // @ts-expect-error Response is an array type
-        const [response] = await service.getExtensionFeedItem(request, {
+        const [response] = await service.mutateExperimentArms(request, {
+          // @ts-expect-error This arg doesn't exist in the type definitions
+          otherArgs: {
+            headers: this.callHeaders,
+          },
+        });
+        if (this.hooks.onMutationEnd) {
+    const mutationResolution: HookedResolution = { resolved: false };
+    await this.hooks.onMutationEnd({
+      ...baseHookArguments,
+      response: this.decodePartialFailureError(response),
+      resolve: (res) => {
+        mutationResolution.resolved = true;
+        mutationResolution.res = res;
+      },
+    });
+    if (mutationResolution.resolved) {
+      return mutationResolution.res;
+    }
+  }
+        return this.decodePartialFailureError(response);
+      } catch (err) {
+        const googleAdsError = this.getGoogleAdsError(err);
+  if (this.hooks.onMutationError) {
+    await this.hooks.onMutationError({
+      ...baseHookArguments,
+      error: googleAdsError,
+    });
+  }
+  throw googleAdsError;
+      }
+    }
+  
+,
+    /**
+     * @description update resources of type resources.IExperimentArm
+     * @returns services.MutateExperimentArmsResponse
+     */
+    update: async (
+      experimentArms: (resources.IExperimentArm | resources.ExperimentArm)[] ,
+      options?: MutateOptions
+    ): Promise<services.MutateExperimentArmsResponse > => {
+      const ops = this.buildOperations<
+        services.ExperimentArmOperation,
+        resources.IExperimentArm
+      >(
+        "update", 
+        experimentArms
+        // @ts-expect-error Static class type here is fine
+        , resources.ExperimentArm
+      );
+      const request = this.buildRequest<
+        services.ExperimentArmOperation,
+        services.IMutateExperimentArmsRequest,
+        MutateOptions
+      >(ops, options);
+      const baseHookArguments: BaseMutationHookArgs = {
+    credentials: this.credentials,
+    method: "ExperimentArmService.mutateExperimentArms",
+    mutation: request,
+    isServiceCall: true,
+  };
+  if (this.hooks.onMutationStart) {
+    const mutationCancellation: HookedCancellation = { cancelled: false };
+    await this.hooks.onMutationStart({
+      ...baseHookArguments,
+      cancel: (res) => {
+        mutationCancellation.cancelled = true;
+        mutationCancellation.res = res;
+      },
+      editOptions: (options) => {
+        Object.entries(options).forEach(([key, val]) => {
+          // @ts-expect-error Index with key type is fine
+          request[key] = val;
+        });
+      },
+    });
+    if (mutationCancellation.cancelled) {
+      return mutationCancellation.res;
+    }
+  }
+      try {
+        // @ts-expect-error Response is an array type
+        const [response] = await service.mutateExperimentArms(request, {
+          // @ts-expect-error This arg doesn't exist in the type definitions
+          otherArgs: {
+            headers: this.callHeaders,
+          },
+        });
+        if (this.hooks.onMutationEnd) {
+    const mutationResolution: HookedResolution = { resolved: false };
+    await this.hooks.onMutationEnd({
+      ...baseHookArguments,
+      response: this.decodePartialFailureError(response),
+      resolve: (res) => {
+        mutationResolution.resolved = true;
+        mutationResolution.res = res;
+      },
+    });
+    if (mutationResolution.resolved) {
+      return mutationResolution.res;
+    }
+  }
+        return this.decodePartialFailureError(response);
+      } catch (err) {
+        const googleAdsError = this.getGoogleAdsError(err);
+  if (this.hooks.onMutationError) {
+    await this.hooks.onMutationError({
+      ...baseHookArguments,
+      error: googleAdsError,
+    });
+  }
+  throw googleAdsError;
+      }
+    }
+  
+,
+    /**
+     * @description remove resources of type string
+     * @returns services.MutateExperimentArmsResponse
+     */
+    remove: async (
+      experimentArms: string[] ,
+      options?: MutateOptions
+    ): Promise<services.MutateExperimentArmsResponse > => {
+      const ops = this.buildOperations<
+        services.ExperimentArmOperation,
+        string
+      >(
+        "remove", 
+        experimentArms
+        
+        
+      );
+      const request = this.buildRequest<
+        services.ExperimentArmOperation,
+        services.IMutateExperimentArmsRequest,
+        MutateOptions
+      >(ops, options);
+      const baseHookArguments: BaseMutationHookArgs = {
+    credentials: this.credentials,
+    method: "ExperimentArmService.mutateExperimentArms",
+    mutation: request,
+    isServiceCall: true,
+  };
+  if (this.hooks.onMutationStart) {
+    const mutationCancellation: HookedCancellation = { cancelled: false };
+    await this.hooks.onMutationStart({
+      ...baseHookArguments,
+      cancel: (res) => {
+        mutationCancellation.cancelled = true;
+        mutationCancellation.res = res;
+      },
+      editOptions: (options) => {
+        Object.entries(options).forEach(([key, val]) => {
+          // @ts-expect-error Index with key type is fine
+          request[key] = val;
+        });
+      },
+    });
+    if (mutationCancellation.cancelled) {
+      return mutationCancellation.res;
+    }
+  }
+      try {
+        // @ts-expect-error Response is an array type
+        const [response] = await service.mutateExperimentArms(request, {
+          // @ts-expect-error This arg doesn't exist in the type definitions
+          otherArgs: {
+            headers: this.callHeaders,
+          },
+        });
+        if (this.hooks.onMutationEnd) {
+    const mutationResolution: HookedResolution = { resolved: false };
+    await this.hooks.onMutationEnd({
+      ...baseHookArguments,
+      response: this.decodePartialFailureError(response),
+      resolve: (res) => {
+        mutationResolution.resolved = true;
+        mutationResolution.res = res;
+      },
+    });
+    if (mutationResolution.resolved) {
+      return mutationResolution.res;
+    }
+  }
+        return this.decodePartialFailureError(response);
+      } catch (err) {
+        const googleAdsError = this.getGoogleAdsError(err);
+  if (this.hooks.onMutationError) {
+    await this.hooks.onMutationError({
+      ...baseHookArguments,
+      error: googleAdsError,
+    });
+  }
+  throw googleAdsError;
+      }
+    }
+  
+      }
+    }
+  
+    /**
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/ExperimentService
+     */
+    public get experiments() {
+      const service = this.loadService<services.ExperimentService>("ExperimentServiceClient")
+      type MutateOptions = Partial<Pick<services.IMutateExperimentsRequest, "partial_failure"|"validate_only">>
+      return {
+        
+    /**
+     * @description create resources of type resources.IExperiment
+     * @returns services.MutateExperimentsResponse
+     */
+    create: async (
+      experiments: (resources.IExperiment | resources.Experiment)[] ,
+      options?: MutateOptions
+    ): Promise<services.MutateExperimentsResponse > => {
+      const ops = this.buildOperations<
+        services.ExperimentOperation,
+        resources.IExperiment
+      >(
+        "create", 
+        experiments
+        
+        
+      );
+      const request = this.buildRequest<
+        services.ExperimentOperation,
+        services.IMutateExperimentsRequest,
+        MutateOptions
+      >(ops, options);
+      const baseHookArguments: BaseMutationHookArgs = {
+    credentials: this.credentials,
+    method: "ExperimentService.mutateExperiments",
+    mutation: request,
+    isServiceCall: true,
+  };
+  if (this.hooks.onMutationStart) {
+    const mutationCancellation: HookedCancellation = { cancelled: false };
+    await this.hooks.onMutationStart({
+      ...baseHookArguments,
+      cancel: (res) => {
+        mutationCancellation.cancelled = true;
+        mutationCancellation.res = res;
+      },
+      editOptions: (options) => {
+        Object.entries(options).forEach(([key, val]) => {
+          // @ts-expect-error Index with key type is fine
+          request[key] = val;
+        });
+      },
+    });
+    if (mutationCancellation.cancelled) {
+      return mutationCancellation.res;
+    }
+  }
+      try {
+        // @ts-expect-error Response is an array type
+        const [response] = await service.mutateExperiments(request, {
+          // @ts-expect-error This arg doesn't exist in the type definitions
+          otherArgs: {
+            headers: this.callHeaders,
+          },
+        });
+        if (this.hooks.onMutationEnd) {
+    const mutationResolution: HookedResolution = { resolved: false };
+    await this.hooks.onMutationEnd({
+      ...baseHookArguments,
+      response: this.decodePartialFailureError(response),
+      resolve: (res) => {
+        mutationResolution.resolved = true;
+        mutationResolution.res = res;
+      },
+    });
+    if (mutationResolution.resolved) {
+      return mutationResolution.res;
+    }
+  }
+        return this.decodePartialFailureError(response);
+      } catch (err) {
+        const googleAdsError = this.getGoogleAdsError(err);
+  if (this.hooks.onMutationError) {
+    await this.hooks.onMutationError({
+      ...baseHookArguments,
+      error: googleAdsError,
+    });
+  }
+  throw googleAdsError;
+      }
+    }
+  
+,
+    /**
+     * @description update resources of type resources.IExperiment
+     * @returns services.MutateExperimentsResponse
+     */
+    update: async (
+      experiments: (resources.IExperiment | resources.Experiment)[] ,
+      options?: MutateOptions
+    ): Promise<services.MutateExperimentsResponse > => {
+      const ops = this.buildOperations<
+        services.ExperimentOperation,
+        resources.IExperiment
+      >(
+        "update", 
+        experiments
+        // @ts-expect-error Static class type here is fine
+        , resources.Experiment
+      );
+      const request = this.buildRequest<
+        services.ExperimentOperation,
+        services.IMutateExperimentsRequest,
+        MutateOptions
+      >(ops, options);
+      const baseHookArguments: BaseMutationHookArgs = {
+    credentials: this.credentials,
+    method: "ExperimentService.mutateExperiments",
+    mutation: request,
+    isServiceCall: true,
+  };
+  if (this.hooks.onMutationStart) {
+    const mutationCancellation: HookedCancellation = { cancelled: false };
+    await this.hooks.onMutationStart({
+      ...baseHookArguments,
+      cancel: (res) => {
+        mutationCancellation.cancelled = true;
+        mutationCancellation.res = res;
+      },
+      editOptions: (options) => {
+        Object.entries(options).forEach(([key, val]) => {
+          // @ts-expect-error Index with key type is fine
+          request[key] = val;
+        });
+      },
+    });
+    if (mutationCancellation.cancelled) {
+      return mutationCancellation.res;
+    }
+  }
+      try {
+        // @ts-expect-error Response is an array type
+        const [response] = await service.mutateExperiments(request, {
+          // @ts-expect-error This arg doesn't exist in the type definitions
+          otherArgs: {
+            headers: this.callHeaders,
+          },
+        });
+        if (this.hooks.onMutationEnd) {
+    const mutationResolution: HookedResolution = { resolved: false };
+    await this.hooks.onMutationEnd({
+      ...baseHookArguments,
+      response: this.decodePartialFailureError(response),
+      resolve: (res) => {
+        mutationResolution.resolved = true;
+        mutationResolution.res = res;
+      },
+    });
+    if (mutationResolution.resolved) {
+      return mutationResolution.res;
+    }
+  }
+        return this.decodePartialFailureError(response);
+      } catch (err) {
+        const googleAdsError = this.getGoogleAdsError(err);
+  if (this.hooks.onMutationError) {
+    await this.hooks.onMutationError({
+      ...baseHookArguments,
+      error: googleAdsError,
+    });
+  }
+  throw googleAdsError;
+      }
+    }
+  
+,
+    /**
+     * @description remove resources of type string
+     * @returns services.MutateExperimentsResponse
+     */
+    remove: async (
+      experiments: string[] ,
+      options?: MutateOptions
+    ): Promise<services.MutateExperimentsResponse > => {
+      const ops = this.buildOperations<
+        services.ExperimentOperation,
+        string
+      >(
+        "remove", 
+        experiments
+        
+        
+      );
+      const request = this.buildRequest<
+        services.ExperimentOperation,
+        services.IMutateExperimentsRequest,
+        MutateOptions
+      >(ops, options);
+      const baseHookArguments: BaseMutationHookArgs = {
+    credentials: this.credentials,
+    method: "ExperimentService.mutateExperiments",
+    mutation: request,
+    isServiceCall: true,
+  };
+  if (this.hooks.onMutationStart) {
+    const mutationCancellation: HookedCancellation = { cancelled: false };
+    await this.hooks.onMutationStart({
+      ...baseHookArguments,
+      cancel: (res) => {
+        mutationCancellation.cancelled = true;
+        mutationCancellation.res = res;
+      },
+      editOptions: (options) => {
+        Object.entries(options).forEach(([key, val]) => {
+          // @ts-expect-error Index with key type is fine
+          request[key] = val;
+        });
+      },
+    });
+    if (mutationCancellation.cancelled) {
+      return mutationCancellation.res;
+    }
+  }
+      try {
+        // @ts-expect-error Response is an array type
+        const [response] = await service.mutateExperiments(request, {
+          // @ts-expect-error This arg doesn't exist in the type definitions
+          otherArgs: {
+            headers: this.callHeaders,
+          },
+        });
+        if (this.hooks.onMutationEnd) {
+    const mutationResolution: HookedResolution = { resolved: false };
+    await this.hooks.onMutationEnd({
+      ...baseHookArguments,
+      response: this.decodePartialFailureError(response),
+      resolve: (res) => {
+        mutationResolution.resolved = true;
+        mutationResolution.res = res;
+      },
+    });
+    if (mutationResolution.resolved) {
+      return mutationResolution.res;
+    }
+  }
+        return this.decodePartialFailureError(response);
+      } catch (err) {
+        const googleAdsError = this.getGoogleAdsError(err);
+  if (this.hooks.onMutationError) {
+    await this.hooks.onMutationError({
+      ...baseHookArguments,
+      error: googleAdsError,
+    });
+  }
+  throw googleAdsError;
+      }
+    }
+  
+,
+    /**
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/ExperimentService#endexperiment
+     */
+    endExperiment: async (request: services.EndExperimentRequest): Promise<protobuf.Empty> => {
+      try {
+        // @ts-expect-error Response is an array type
+        const [response] = await service.endExperiment(request, {
           // @ts-expect-error This arg doesn't exist in the type definitions
           otherArgs: {
             headers: this.callHeaders,
@@ -13286,6 +12846,92 @@ export default class ServiceFactory extends Service {
     }
   
 ,
+    /**
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/ExperimentService#listexperimentasyncerrors
+     */
+    listExperimentAsyncErrors: async (request: services.ListExperimentAsyncErrorsRequest): Promise<services.ListExperimentAsyncErrorsResponse> => {
+      try {
+        // @ts-expect-error Response is an array type
+        const [response] = await service.listExperimentAsyncErrors(request, {
+          // @ts-expect-error This arg doesn't exist in the type definitions
+          otherArgs: {
+            headers: this.callHeaders,
+          },
+        });
+        return response;
+      } catch (err) {
+        throw this.getGoogleAdsError(err);
+      }
+    }
+  
+,
+    /**
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/ExperimentService#graduateexperiment
+     */
+    graduateExperiment: async (request: services.GraduateExperimentRequest): Promise<protobuf.Empty> => {
+      try {
+        // @ts-expect-error Response is an array type
+        const [response] = await service.graduateExperiment(request, {
+          // @ts-expect-error This arg doesn't exist in the type definitions
+          otherArgs: {
+            headers: this.callHeaders,
+          },
+        });
+        return response;
+      } catch (err) {
+        throw this.getGoogleAdsError(err);
+      }
+    }
+  
+,
+    /**
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/ExperimentService#scheduleexperiment
+     */
+    scheduleExperiment: async (request: services.ScheduleExperimentRequest): Promise<longrunning.Operation> => {
+      try {
+        // @ts-expect-error Response is an array type
+        const [response] = await service.scheduleExperiment(request, {
+          // @ts-expect-error This arg doesn't exist in the type definitions
+          otherArgs: {
+            headers: this.callHeaders,
+          },
+        });
+        return response;
+      } catch (err) {
+        throw this.getGoogleAdsError(err);
+      }
+    }
+  
+,
+    /**
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/ExperimentService#promoteexperiment
+     */
+    promoteExperiment: async (request: services.PromoteExperimentRequest): Promise<longrunning.Operation> => {
+      try {
+        // @ts-expect-error Response is an array type
+        const [response] = await service.promoteExperiment(request, {
+          // @ts-expect-error This arg doesn't exist in the type definitions
+          otherArgs: {
+            headers: this.callHeaders,
+          },
+        });
+        return response;
+      } catch (err) {
+        throw this.getGoogleAdsError(err);
+      }
+    }
+  
+      }
+    }
+  
+    /**
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/ExtensionFeedItemService
+     */
+    public get extensionFeedItems() {
+      const service = this.loadService<services.ExtensionFeedItemService>("ExtensionFeedItemServiceClient")
+      type MutateOptions = Partial<Pick<services.IMutateExtensionFeedItemsRequest, "partial_failure"|"validate_only"|"response_content_type">>
+      return {
+        
     /**
      * @description create resources of type resources.IExtensionFeedItem
      * @returns services.MutateExtensionFeedItemsResponse
@@ -13538,37 +13184,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/FeedItemService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/FeedItemService
      */
     public get feedItems() {
       const service = this.loadService<services.FeedItemService>("FeedItemServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateFeedItemsRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.FeedItem in full detail
-     * @warning Don't use get in production!
-     * @returns resources.FeedItem
-     */
-    get: async (resourceName: string): Promise<resources.FeedItem> => {
-      const request = new services.GetFeedItemRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getFeedItem(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IFeedItem
      * @returns services.MutateFeedItemsResponse
@@ -13821,37 +13443,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/FeedItemSetLinkService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/FeedItemSetLinkService
      */
     public get feedItemSetLinks() {
       const service = this.loadService<services.FeedItemSetLinkService>("FeedItemSetLinkServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateFeedItemSetLinksRequest, "partial_failure"|"validate_only">>
       return {
         
-    /**
-     * @description Retrieve a resources.FeedItemSetLink in full detail
-     * @warning Don't use get in production!
-     * @returns resources.FeedItemSetLink
-     */
-    get: async (resourceName: string): Promise<resources.FeedItemSetLink> => {
-      const request = new services.GetFeedItemSetLinkRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getFeedItemSetLink(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IFeedItemSetLink
      * @returns services.MutateFeedItemSetLinksResponse
@@ -14021,37 +13619,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/FeedItemSetService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/FeedItemSetService
      */
     public get feedItemSets() {
       const service = this.loadService<services.FeedItemSetService>("FeedItemSetServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateFeedItemSetsRequest, "partial_failure"|"validate_only">>
       return {
         
-    /**
-     * @description Retrieve a resources.FeedItemSet in full detail
-     * @warning Don't use get in production!
-     * @returns resources.FeedItemSet
-     */
-    get: async (resourceName: string): Promise<resources.FeedItemSet> => {
-      const request = new services.GetFeedItemSetRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getFeedItemSet(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IFeedItemSet
      * @returns services.MutateFeedItemSetsResponse
@@ -14304,37 +13878,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/FeedItemTargetService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/FeedItemTargetService
      */
     public get feedItemTargets() {
       const service = this.loadService<services.FeedItemTargetService>("FeedItemTargetServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateFeedItemTargetsRequest, "partial_failure"|"response_content_type"|"validate_only">>
       return {
         
-    /**
-     * @description Retrieve a resources.FeedItemTarget in full detail
-     * @warning Don't use get in production!
-     * @returns resources.FeedItemTarget
-     */
-    get: async (resourceName: string): Promise<resources.FeedItemTarget> => {
-      const request = new services.GetFeedItemTargetRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getFeedItemTarget(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IFeedItemTarget
      * @returns services.MutateFeedItemTargetsResponse
@@ -14504,37 +14054,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/FeedMappingService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/FeedMappingService
      */
     public get feedMappings() {
       const service = this.loadService<services.FeedMappingService>("FeedMappingServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateFeedMappingsRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.FeedMapping in full detail
-     * @warning Don't use get in production!
-     * @returns resources.FeedMapping
-     */
-    get: async (resourceName: string): Promise<resources.FeedMapping> => {
-      const request = new services.GetFeedMappingRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getFeedMapping(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IFeedMapping
      * @returns services.MutateFeedMappingsResponse
@@ -14704,37 +14230,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/FeedService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/FeedService
      */
     public get feeds() {
       const service = this.loadService<services.FeedService>("FeedServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateFeedsRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.Feed in full detail
-     * @warning Don't use get in production!
-     * @returns resources.Feed
-     */
-    get: async (resourceName: string): Promise<resources.Feed> => {
-      const request = new services.GetFeedRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getFeed(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IFeed
      * @returns services.MutateFeedsResponse
@@ -14987,37 +14489,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/KeywordPlanAdGroupKeywordService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/KeywordPlanAdGroupKeywordService
      */
     public get keywordPlanAdGroupKeywords() {
       const service = this.loadService<services.KeywordPlanAdGroupKeywordService>("KeywordPlanAdGroupKeywordServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateKeywordPlanAdGroupKeywordsRequest, "partial_failure"|"validate_only">>
       return {
         
-    /**
-     * @description Retrieve a resources.KeywordPlanAdGroupKeyword in full detail
-     * @warning Don't use get in production!
-     * @returns resources.KeywordPlanAdGroupKeyword
-     */
-    get: async (resourceName: string): Promise<resources.KeywordPlanAdGroupKeyword> => {
-      const request = new services.GetKeywordPlanAdGroupKeywordRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getKeywordPlanAdGroupKeyword(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IKeywordPlanAdGroupKeyword
      * @returns services.MutateKeywordPlanAdGroupKeywordsResponse
@@ -15270,37 +14748,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/KeywordPlanAdGroupService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/KeywordPlanAdGroupService
      */
     public get keywordPlanAdGroups() {
       const service = this.loadService<services.KeywordPlanAdGroupService>("KeywordPlanAdGroupServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateKeywordPlanAdGroupsRequest, "partial_failure"|"validate_only">>
       return {
         
-    /**
-     * @description Retrieve a resources.KeywordPlanAdGroup in full detail
-     * @warning Don't use get in production!
-     * @returns resources.KeywordPlanAdGroup
-     */
-    get: async (resourceName: string): Promise<resources.KeywordPlanAdGroup> => {
-      const request = new services.GetKeywordPlanAdGroupRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getKeywordPlanAdGroup(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IKeywordPlanAdGroup
      * @returns services.MutateKeywordPlanAdGroupsResponse
@@ -15553,37 +15007,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/KeywordPlanCampaignKeywordService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/KeywordPlanCampaignKeywordService
      */
     public get keywordPlanCampaignKeywords() {
       const service = this.loadService<services.KeywordPlanCampaignKeywordService>("KeywordPlanCampaignKeywordServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateKeywordPlanCampaignKeywordsRequest, "partial_failure"|"validate_only">>
       return {
         
-    /**
-     * @description Retrieve a resources.KeywordPlanCampaignKeyword in full detail
-     * @warning Don't use get in production!
-     * @returns resources.KeywordPlanCampaignKeyword
-     */
-    get: async (resourceName: string): Promise<resources.KeywordPlanCampaignKeyword> => {
-      const request = new services.GetKeywordPlanCampaignKeywordRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getKeywordPlanCampaignKeyword(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IKeywordPlanCampaignKeyword
      * @returns services.MutateKeywordPlanCampaignKeywordsResponse
@@ -15836,37 +15266,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/KeywordPlanCampaignService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/KeywordPlanCampaignService
      */
     public get keywordPlanCampaigns() {
       const service = this.loadService<services.KeywordPlanCampaignService>("KeywordPlanCampaignServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateKeywordPlanCampaignsRequest, "partial_failure"|"validate_only">>
       return {
         
-    /**
-     * @description Retrieve a resources.KeywordPlanCampaign in full detail
-     * @warning Don't use get in production!
-     * @returns resources.KeywordPlanCampaign
-     */
-    get: async (resourceName: string): Promise<resources.KeywordPlanCampaign> => {
-      const request = new services.GetKeywordPlanCampaignRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getKeywordPlanCampaign(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IKeywordPlanCampaign
      * @returns services.MutateKeywordPlanCampaignsResponse
@@ -16119,37 +15525,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/KeywordPlanService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/KeywordPlanService
      */
     public get keywordPlans() {
       const service = this.loadService<services.KeywordPlanService>("KeywordPlanServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateKeywordPlansRequest, "partial_failure"|"validate_only">>
       return {
         
-    /**
-     * @description Retrieve a resources.KeywordPlan in full detail
-     * @warning Don't use get in production!
-     * @returns resources.KeywordPlan
-     */
-    get: async (resourceName: string): Promise<resources.KeywordPlan> => {
-      const request = new services.GetKeywordPlanRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getKeywordPlan(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IKeywordPlan
      * @returns services.MutateKeywordPlansResponse
@@ -16400,7 +15782,7 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/KeywordPlanService#generateforecastcurve
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/KeywordPlanService#generateforecastcurve
      */
     generateForecastCurve: async (request: services.GenerateForecastCurveRequest): Promise<services.GenerateForecastCurveResponse> => {
       try {
@@ -16419,7 +15801,7 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/KeywordPlanService#generateforecasttimeseries
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/KeywordPlanService#generateforecasttimeseries
      */
     generateForecastTimeSeries: async (request: services.GenerateForecastTimeSeriesRequest): Promise<services.GenerateForecastTimeSeriesResponse> => {
       try {
@@ -16438,7 +15820,7 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/KeywordPlanService#generateforecastmetrics
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/KeywordPlanService#generateforecastmetrics
      */
     generateForecastMetrics: async (request: services.GenerateForecastMetricsRequest): Promise<services.GenerateForecastMetricsResponse> => {
       try {
@@ -16457,7 +15839,7 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/KeywordPlanService#generatehistoricalmetrics
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/KeywordPlanService#generatehistoricalmetrics
      */
     generateHistoricalMetrics: async (request: services.GenerateHistoricalMetricsRequest): Promise<services.GenerateHistoricalMetricsResponse> => {
       try {
@@ -16478,37 +15860,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/LabelService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/LabelService
      */
     public get labels() {
       const service = this.loadService<services.LabelService>("LabelServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateLabelsRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.Label in full detail
-     * @warning Don't use get in production!
-     * @returns resources.Label
-     */
-    get: async (resourceName: string): Promise<resources.Label> => {
-      const request = new services.GetLabelRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getLabel(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.ILabel
      * @returns services.MutateLabelsResponse
@@ -16761,37 +16119,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/MediaFileService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/MediaFileService
      */
     public get mediaFiles() {
       const service = this.loadService<services.MediaFileService>("MediaFileServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateMediaFilesRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.MediaFile in full detail
-     * @warning Don't use get in production!
-     * @returns resources.MediaFile
-     */
-    get: async (resourceName: string): Promise<resources.MediaFile> => {
-      const request = new services.GetMediaFileRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getMediaFile(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IMediaFile
      * @returns services.MutateMediaFilesResponse
@@ -16878,37 +16212,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/RemarketingActionService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/RemarketingActionService
      */
     public get remarketingActions() {
       const service = this.loadService<services.RemarketingActionService>("RemarketingActionServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateRemarketingActionsRequest, "partial_failure"|"validate_only">>
       return {
         
-    /**
-     * @description Retrieve a resources.RemarketingAction in full detail
-     * @warning Don't use get in production!
-     * @returns resources.RemarketingAction
-     */
-    get: async (resourceName: string): Promise<resources.RemarketingAction> => {
-      const request = new services.GetRemarketingActionRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getRemarketingAction(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IRemarketingAction
      * @returns services.MutateRemarketingActionsResponse
@@ -17078,37 +16388,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/SharedCriterionService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/SharedCriterionService
      */
     public get sharedCriteria() {
       const service = this.loadService<services.SharedCriterionService>("SharedCriterionServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateSharedCriteriaRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.SharedCriterion in full detail
-     * @warning Don't use get in production!
-     * @returns resources.SharedCriterion
-     */
-    get: async (resourceName: string): Promise<resources.SharedCriterion> => {
-      const request = new services.GetSharedCriterionRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getSharedCriterion(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.ISharedCriterion
      * @returns services.MutateSharedCriteriaResponse
@@ -17278,37 +16564,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/SharedSetService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/SharedSetService
      */
     public get sharedSets() {
       const service = this.loadService<services.SharedSetService>("SharedSetServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateSharedSetsRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.SharedSet in full detail
-     * @warning Don't use get in production!
-     * @returns resources.SharedSet
-     */
-    get: async (resourceName: string): Promise<resources.SharedSet> => {
-      const request = new services.GetSharedSetRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getSharedSet(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.ISharedSet
      * @returns services.MutateSharedSetsResponse
@@ -17561,37 +16823,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/SmartCampaignSettingService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/SmartCampaignSettingService
      */
     public get smartCampaignSettings() {
       const service = this.loadService<services.SmartCampaignSettingService>("SmartCampaignSettingServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateSmartCampaignSettingsRequest, "partial_failure"|"validate_only"|"response_content_type">>
       return {
         
-    /**
-     * @description Retrieve a resources.SmartCampaignSetting in full detail
-     * @warning Don't use get in production!
-     * @returns resources.SmartCampaignSetting
-     */
-    get: async (resourceName: string): Promise<resources.SmartCampaignSetting> => {
-      const request = new services.GetSmartCampaignSettingRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getSmartCampaignSetting(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description update resources of type resources.ISmartCampaignSetting
      * @returns services.MutateSmartCampaignSettingsResponse
@@ -17678,37 +16916,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/UserListService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/UserListService
      */
     public get userLists() {
       const service = this.loadService<services.UserListService>("UserListServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateUserListsRequest, "partial_failure"|"validate_only">>
       return {
         
-    /**
-     * @description Retrieve a resources.UserList in full detail
-     * @warning Don't use get in production!
-     * @returns resources.UserList
-     */
-    get: async (resourceName: string): Promise<resources.UserList> => {
-      const request = new services.GetUserListRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getUserList(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IUserList
      * @returns services.MutateUserListsResponse
@@ -17961,71 +17175,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/BiddingStrategySimulationService
-     */
-    public get biddingStrategySimulations() {
-      const service = this.loadService<services.BiddingStrategySimulationService>("BiddingStrategySimulationServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.BiddingStrategySimulation in full detail
-     * @warning Don't use get in production!
-     * @returns resources.BiddingStrategySimulation
-     */
-    get: async (resourceName: string): Promise<resources.BiddingStrategySimulation> => {
-      const request = new services.GetBiddingStrategySimulationRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getBiddingStrategySimulation(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/BillingSetupService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/BillingSetupService
      */
     public get billingSetups() {
       const service = this.loadService<services.BillingSetupService>("BillingSetupServiceClient")
       type MutateOptions = never
       return {
         
-    /**
-     * @description Retrieve a resources.BillingSetup in full detail
-     * @warning Don't use get in production!
-     * @returns resources.BillingSetup
-     */
-    get: async (resourceName: string): Promise<resources.BillingSetup> => {
-      const request = new services.GetBillingSetupRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getBillingSetup(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.IBillingSetup
      * @returns services.MutateBillingSetupResponse
@@ -18195,245 +17351,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CampaignAudienceViewService
-     */
-    public get campaignAudienceViews() {
-      const service = this.loadService<services.CampaignAudienceViewService>("CampaignAudienceViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.CampaignAudienceView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CampaignAudienceView
-     */
-    get: async (resourceName: string): Promise<resources.CampaignAudienceView> => {
-      const request = new services.GetCampaignAudienceViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCampaignAudienceView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CampaignCriterionSimulationService
-     */
-    public get campaignCriterionSimulations() {
-      const service = this.loadService<services.CampaignCriterionSimulationService>("CampaignCriterionSimulationServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.CampaignCriterionSimulation in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CampaignCriterionSimulation
-     */
-    get: async (resourceName: string): Promise<resources.CampaignCriterionSimulation> => {
-      const request = new services.GetCampaignCriterionSimulationRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCampaignCriterionSimulation(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CampaignSimulationService
-     */
-    public get campaignSimulations() {
-      const service = this.loadService<services.CampaignSimulationService>("CampaignSimulationServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.CampaignSimulation in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CampaignSimulation
-     */
-    get: async (resourceName: string): Promise<resources.CampaignSimulation> => {
-      const request = new services.GetCampaignSimulationRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCampaignSimulation(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CarrierConstantService
-     */
-    public get carrierConstants() {
-      const service = this.loadService<services.CarrierConstantService>("CarrierConstantServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.CarrierConstant in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CarrierConstant
-     */
-    get: async (resourceName: string): Promise<resources.CarrierConstant> => {
-      const request = new services.GetCarrierConstantRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCarrierConstant(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ChangeStatusService
-     */
-    public get changeStatuses() {
-      const service = this.loadService<services.ChangeStatusService>("ChangeStatusServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.ChangeStatus in full detail
-     * @warning Don't use get in production!
-     * @returns resources.ChangeStatus
-     */
-    get: async (resourceName: string): Promise<resources.ChangeStatus> => {
-      const request = new services.GetChangeStatusRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getChangeStatus(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ClickViewService
-     */
-    public get clickViews() {
-      const service = this.loadService<services.ClickViewService>("ClickViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.ClickView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.ClickView
-     */
-    get: async (resourceName: string): Promise<resources.ClickView> => {
-      const request = new services.GetClickViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getClickView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CombinedAudienceService
-     */
-    public get combinedAudiences() {
-      const service = this.loadService<services.CombinedAudienceService>("CombinedAudienceServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.CombinedAudience in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CombinedAudience
-     */
-    get: async (resourceName: string): Promise<resources.CombinedAudience> => {
-      const request = new services.GetCombinedAudienceRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCombinedAudience(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ConversionAdjustmentUploadService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/ConversionAdjustmentUploadService
      */
     public get conversionAdjustmentUploads() {
       const service = this.loadService<services.ConversionAdjustmentUploadService>("ConversionAdjustmentUploadServiceClient")
@@ -18441,7 +17359,7 @@ export default class ServiceFactory extends Service {
       return {
         
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ConversionAdjustmentUploadService#uploadconversionadjustments
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/ConversionAdjustmentUploadService#uploadconversionadjustments
      */
     uploadConversionAdjustments: async (request: services.UploadConversionAdjustmentsRequest): Promise<services.UploadConversionAdjustmentsResponse> => {
       try {
@@ -18462,7 +17380,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ConversionUploadService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/ConversionUploadService
      */
     public get conversionUploads() {
       const service = this.loadService<services.ConversionUploadService>("ConversionUploadServiceClient")
@@ -18470,7 +17388,7 @@ export default class ServiceFactory extends Service {
       return {
         
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ConversionUploadService#uploadclickconversions
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/ConversionUploadService#uploadclickconversions
      */
     uploadClickConversions: async (request: services.UploadClickConversionsRequest): Promise<services.UploadClickConversionsResponse> => {
       try {
@@ -18489,7 +17407,7 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ConversionUploadService#uploadcallconversions
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/ConversionUploadService#uploadcallconversions
      */
     uploadCallConversions: async (request: services.UploadCallConversionsRequest): Promise<services.UploadCallConversionsResponse> => {
       try {
@@ -18510,71 +17428,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CurrencyConstantService
-     */
-    public get currencyConstants() {
-      const service = this.loadService<services.CurrencyConstantService>("CurrencyConstantServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.CurrencyConstant in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CurrencyConstant
-     */
-    get: async (resourceName: string): Promise<resources.CurrencyConstant> => {
-      const request = new services.GetCurrencyConstantRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCurrencyConstant(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CustomAudienceService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CustomAudienceService
      */
     public get customAudiences() {
       const service = this.loadService<services.CustomAudienceService>("CustomAudienceServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateCustomAudiencesRequest, "validate_only">>
       return {
         
-    /**
-     * @description Retrieve a resources.CustomAudience in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CustomAudience
-     */
-    get: async (resourceName: string): Promise<resources.CustomAudience> => {
-      const request = new services.GetCustomAudienceRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCustomAudience(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.ICustomAudience
      * @returns services.MutateCustomAudiencesResponse
@@ -18827,37 +17687,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CustomInterestService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CustomInterestService
      */
     public get customInterests() {
       const service = this.loadService<services.CustomInterestService>("CustomInterestServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateCustomInterestsRequest, "validate_only">>
       return {
         
-    /**
-     * @description Retrieve a resources.CustomInterest in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CustomInterest
-     */
-    get: async (resourceName: string): Promise<resources.CustomInterest> => {
-      const request = new services.GetCustomInterestRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCustomInterest(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.ICustomInterest
      * @returns services.MutateCustomInterestsResponse
@@ -19027,37 +17863,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CustomerClientLinkService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CustomerClientLinkService
      */
     public get customerClientLinks() {
       const service = this.loadService<services.CustomerClientLinkService>("CustomerClientLinkServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateCustomerClientLinkRequest, "validate_only">>
       return {
         
-    /**
-     * @description Retrieve a resources.CustomerClientLink in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CustomerClientLink
-     */
-    get: async (resourceName: string): Promise<resources.CustomerClientLink> => {
-      const request = new services.GetCustomerClientLinkRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCustomerClientLink(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.ICustomerClientLink
      * @returns services.MutateCustomerClientLinkResponse
@@ -19227,71 +18039,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CustomerClientService
-     */
-    public get customerClients() {
-      const service = this.loadService<services.CustomerClientService>("CustomerClientServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.CustomerClient in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CustomerClient
-     */
-    get: async (resourceName: string): Promise<resources.CustomerClient> => {
-      const request = new services.GetCustomerClientRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCustomerClient(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CustomerManagerLinkService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CustomerManagerLinkService
      */
     public get customerManagerLinks() {
       const service = this.loadService<services.CustomerManagerLinkService>("CustomerManagerLinkServiceClient")
       type MutateOptions = Partial<Pick<services.IMutateCustomerManagerLinkRequest, "validate_only">>
       return {
         
-    /**
-     * @description Retrieve a resources.CustomerManagerLink in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CustomerManagerLink
-     */
-    get: async (resourceName: string): Promise<resources.CustomerManagerLink> => {
-      const request = new services.GetCustomerManagerLinkRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCustomerManagerLink(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description update resources of type resources.ICustomerManagerLink
      * @returns services.MutateCustomerManagerLinkResponse
@@ -19376,7 +18130,7 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CustomerManagerLinkService#movemanagerlink
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CustomerManagerLinkService#movemanagerlink
      */
     moveManagerLink: async (request: services.MoveManagerLinkRequest): Promise<services.MoveManagerLinkResponse> => {
       try {
@@ -19397,37 +18151,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CustomerUserAccessInvitationService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CustomerUserAccessInvitationService
      */
     public get customerUserAccessInvitations() {
       const service = this.loadService<services.CustomerUserAccessInvitationService>("CustomerUserAccessInvitationServiceClient")
       type MutateOptions = never
       return {
         
-    /**
-     * @description Retrieve a resources.CustomerUserAccessInvitation in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CustomerUserAccessInvitation
-     */
-    get: async (resourceName: string): Promise<resources.CustomerUserAccessInvitation> => {
-      const request = new services.GetCustomerUserAccessInvitationRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCustomerUserAccessInvitation(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description create resources of type resources.ICustomerUserAccessInvitation
      * @returns services.MutateCustomerUserAccessInvitationResponse
@@ -19597,37 +18327,13 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/CustomerUserAccessService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/CustomerUserAccessService
      */
     public get customerUserAccesses() {
       const service = this.loadService<services.CustomerUserAccessService>("CustomerUserAccessServiceClient")
       type MutateOptions = never
       return {
         
-    /**
-     * @description Retrieve a resources.CustomerUserAccess in full detail
-     * @warning Don't use get in production!
-     * @returns resources.CustomerUserAccess
-     */
-    get: async (resourceName: string): Promise<resources.CustomerUserAccess> => {
-      const request = new services.GetCustomerUserAccessRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getCustomerUserAccess(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
     /**
      * @description update resources of type resources.ICustomerUserAccess
      * @returns services.MutateCustomerUserAccessResponse
@@ -19797,313 +18503,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/DetailPlacementViewService
-     */
-    public get detailPlacementViews() {
-      const service = this.loadService<services.DetailPlacementViewService>("DetailPlacementViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.DetailPlacementView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.DetailPlacementView
-     */
-    get: async (resourceName: string): Promise<resources.DetailPlacementView> => {
-      const request = new services.GetDetailPlacementViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getDetailPlacementView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/DetailedDemographicService
-     */
-    public get detailedDemographics() {
-      const service = this.loadService<services.DetailedDemographicService>("DetailedDemographicServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.DetailedDemographic in full detail
-     * @warning Don't use get in production!
-     * @returns resources.DetailedDemographic
-     */
-    get: async (resourceName: string): Promise<resources.DetailedDemographic> => {
-      const request = new services.GetDetailedDemographicRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getDetailedDemographic(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/DisplayKeywordViewService
-     */
-    public get displayKeywordViews() {
-      const service = this.loadService<services.DisplayKeywordViewService>("DisplayKeywordViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.DisplayKeywordView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.DisplayKeywordView
-     */
-    get: async (resourceName: string): Promise<resources.DisplayKeywordView> => {
-      const request = new services.GetDisplayKeywordViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getDisplayKeywordView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/DistanceViewService
-     */
-    public get distanceViews() {
-      const service = this.loadService<services.DistanceViewService>("DistanceViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.DistanceView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.DistanceView
-     */
-    get: async (resourceName: string): Promise<resources.DistanceView> => {
-      const request = new services.GetDistanceViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getDistanceView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/DomainCategoryService
-     */
-    public get domainCategories() {
-      const service = this.loadService<services.DomainCategoryService>("DomainCategoryServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.DomainCategory in full detail
-     * @warning Don't use get in production!
-     * @returns resources.DomainCategory
-     */
-    get: async (resourceName: string): Promise<resources.DomainCategory> => {
-      const request = new services.GetDomainCategoryRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getDomainCategory(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/DynamicSearchAdsSearchTermViewService
-     */
-    public get dynamicSearchAdsSearchTermViews() {
-      const service = this.loadService<services.DynamicSearchAdsSearchTermViewService>("DynamicSearchAdsSearchTermViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.DynamicSearchAdsSearchTermView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.DynamicSearchAdsSearchTermView
-     */
-    get: async (resourceName: string): Promise<resources.DynamicSearchAdsSearchTermView> => {
-      const request = new services.GetDynamicSearchAdsSearchTermViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getDynamicSearchAdsSearchTermView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ExpandedLandingPageViewService
-     */
-    public get expandedLandingPageViews() {
-      const service = this.loadService<services.ExpandedLandingPageViewService>("ExpandedLandingPageViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.ExpandedLandingPageView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.ExpandedLandingPageView
-     */
-    get: async (resourceName: string): Promise<resources.ExpandedLandingPageView> => {
-      const request = new services.GetExpandedLandingPageViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getExpandedLandingPageView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/FeedPlaceholderViewService
-     */
-    public get feedPlaceholderViews() {
-      const service = this.loadService<services.FeedPlaceholderViewService>("FeedPlaceholderViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.FeedPlaceholderView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.FeedPlaceholderView
-     */
-    get: async (resourceName: string): Promise<resources.FeedPlaceholderView> => {
-      const request = new services.GetFeedPlaceholderViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getFeedPlaceholderView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/GenderViewService
-     */
-    public get genderViews() {
-      const service = this.loadService<services.GenderViewService>("GenderViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.GenderView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.GenderView
-     */
-    get: async (resourceName: string): Promise<resources.GenderView> => {
-      const request = new services.GetGenderViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getGenderView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/GeoTargetConstantService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/GeoTargetConstantService
      */
     public get geoTargetConstants() {
       const service = this.loadService<services.GeoTargetConstantService>("GeoTargetConstantServiceClient")
@@ -20111,31 +18511,7 @@ export default class ServiceFactory extends Service {
       return {
         
     /**
-     * @description Retrieve a resources.GeoTargetConstant in full detail
-     * @warning Don't use get in production!
-     * @returns resources.GeoTargetConstant
-     */
-    get: async (resourceName: string): Promise<resources.GeoTargetConstant> => {
-      const request = new services.GetGeoTargetConstantRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getGeoTargetConstant(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/GeoTargetConstantService#suggestgeotargetconstants
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/GeoTargetConstantService#suggestgeotargetconstants
      */
     suggestGeoTargetConstants: async (request: services.SuggestGeoTargetConstantsRequest): Promise<services.SuggestGeoTargetConstantsResponse> => {
       try {
@@ -20156,177 +18532,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/GeographicViewService
-     */
-    public get geographicViews() {
-      const service = this.loadService<services.GeographicViewService>("GeographicViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.GeographicView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.GeographicView
-     */
-    get: async (resourceName: string): Promise<resources.GeographicView> => {
-      const request = new services.GetGeographicViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getGeographicView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/GroupPlacementViewService
-     */
-    public get groupPlacementViews() {
-      const service = this.loadService<services.GroupPlacementViewService>("GroupPlacementViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.GroupPlacementView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.GroupPlacementView
-     */
-    get: async (resourceName: string): Promise<resources.GroupPlacementView> => {
-      const request = new services.GetGroupPlacementViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getGroupPlacementView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/HotelGroupViewService
-     */
-    public get hotelGroupViews() {
-      const service = this.loadService<services.HotelGroupViewService>("HotelGroupViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.HotelGroupView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.HotelGroupView
-     */
-    get: async (resourceName: string): Promise<resources.HotelGroupView> => {
-      const request = new services.GetHotelGroupViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getHotelGroupView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/HotelPerformanceViewService
-     */
-    public get hotelPerformanceViews() {
-      const service = this.loadService<services.HotelPerformanceViewService>("HotelPerformanceViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.HotelPerformanceView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.HotelPerformanceView
-     */
-    get: async (resourceName: string): Promise<resources.HotelPerformanceView> => {
-      const request = new services.GetHotelPerformanceViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getHotelPerformanceView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/IncomeRangeViewService
-     */
-    public get incomeRangeViews() {
-      const service = this.loadService<services.IncomeRangeViewService>("IncomeRangeViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.IncomeRangeView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.IncomeRangeView
-     */
-    get: async (resourceName: string): Promise<resources.IncomeRangeView> => {
-      const request = new services.GetIncomeRangeViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getIncomeRangeView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/InvoiceService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/InvoiceService
      */
     public get invoices() {
       const service = this.loadService<services.InvoiceService>("InvoiceServiceClient")
@@ -20334,7 +18540,7 @@ export default class ServiceFactory extends Service {
       return {
         
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/InvoiceService#listinvoices
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/InvoiceService#listinvoices
      */
     listInvoices: async (request: services.ListInvoicesRequest): Promise<services.ListInvoicesResponse> => {
       try {
@@ -20355,7 +18561,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/KeywordPlanIdeaService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/KeywordPlanIdeaService
      */
     public get keywordPlanIdeas() {
       const service = this.loadService<services.KeywordPlanIdeaService>("KeywordPlanIdeaServiceClient")
@@ -20363,7 +18569,7 @@ export default class ServiceFactory extends Service {
       return {
         
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/KeywordPlanIdeaService#generatekeywordideas
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/KeywordPlanIdeaService#generatekeywordideas
      */
     generateKeywordIdeas: async (request: services.GenerateKeywordIdeasRequest): Promise<services.GenerateKeywordIdeaResponse> => {
       try {
@@ -20384,7 +18590,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/KeywordThemeConstantService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/KeywordThemeConstantService
      */
     public get keywordThemeConstants() {
       const service = this.loadService<services.KeywordThemeConstantService>("KeywordThemeConstantServiceClient")
@@ -20392,31 +18598,7 @@ export default class ServiceFactory extends Service {
       return {
         
     /**
-     * @description Retrieve a resources.KeywordThemeConstant in full detail
-     * @warning Don't use get in production!
-     * @returns resources.KeywordThemeConstant
-     */
-    get: async (resourceName: string): Promise<resources.KeywordThemeConstant> => {
-      const request = new services.GetKeywordThemeConstantRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getKeywordThemeConstant(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/KeywordThemeConstantService#suggestkeywordthemeconstants
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/KeywordThemeConstantService#suggestkeywordthemeconstants
      */
     suggestKeywordThemeConstants: async (request: services.SuggestKeywordThemeConstantsRequest): Promise<services.SuggestKeywordThemeConstantsResponse> => {
       try {
@@ -20437,211 +18619,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/KeywordViewService
-     */
-    public get keywordViews() {
-      const service = this.loadService<services.KeywordViewService>("KeywordViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.KeywordView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.KeywordView
-     */
-    get: async (resourceName: string): Promise<resources.KeywordView> => {
-      const request = new services.GetKeywordViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getKeywordView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/LandingPageViewService
-     */
-    public get landingPageViews() {
-      const service = this.loadService<services.LandingPageViewService>("LandingPageViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.LandingPageView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.LandingPageView
-     */
-    get: async (resourceName: string): Promise<resources.LandingPageView> => {
-      const request = new services.GetLandingPageViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getLandingPageView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/LanguageConstantService
-     */
-    public get languageConstants() {
-      const service = this.loadService<services.LanguageConstantService>("LanguageConstantServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.LanguageConstant in full detail
-     * @warning Don't use get in production!
-     * @returns resources.LanguageConstant
-     */
-    get: async (resourceName: string): Promise<resources.LanguageConstant> => {
-      const request = new services.GetLanguageConstantRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getLanguageConstant(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/LifeEventService
-     */
-    public get lifeEvents() {
-      const service = this.loadService<services.LifeEventService>("LifeEventServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.LifeEvent in full detail
-     * @warning Don't use get in production!
-     * @returns resources.LifeEvent
-     */
-    get: async (resourceName: string): Promise<resources.LifeEvent> => {
-      const request = new services.GetLifeEventRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getLifeEvent(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/LocationViewService
-     */
-    public get locationViews() {
-      const service = this.loadService<services.LocationViewService>("LocationViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.LocationView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.LocationView
-     */
-    get: async (resourceName: string): Promise<resources.LocationView> => {
-      const request = new services.GetLocationViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getLocationView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ManagedPlacementViewService
-     */
-    public get managedPlacementViews() {
-      const service = this.loadService<services.ManagedPlacementViewService>("ManagedPlacementViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.ManagedPlacementView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.ManagedPlacementView
-     */
-    get: async (resourceName: string): Promise<resources.ManagedPlacementView> => {
-      const request = new services.GetManagedPlacementViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getManagedPlacementView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/MerchantCenterLinkService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/MerchantCenterLinkService
      */
     public get merchantCenterLinks() {
       const service = this.loadService<services.MerchantCenterLinkService>("MerchantCenterLinkServiceClient")
@@ -20649,7 +18627,7 @@ export default class ServiceFactory extends Service {
       return {
         
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/MerchantCenterLinkService#listmerchantcenterlinks
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/MerchantCenterLinkService#listmerchantcenterlinks
      */
     listMerchantCenterLinks: async (request: services.ListMerchantCenterLinksRequest): Promise<services.ListMerchantCenterLinksResponse> => {
       try {
@@ -20668,14 +18646,9 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @description Retrieve a resources.MerchantCenterLink in full detail
-     * @warning Don't use get in production!
-     * @returns resources.MerchantCenterLink
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/MerchantCenterLinkService#getmerchantcenterlink
      */
-    get: async (resourceName: string): Promise<resources.MerchantCenterLink> => {
-      const request = new services.GetMerchantCenterLinkRequest({
-        resource_name: resourceName,
-      });
+    getMerchantCenterLink: async (request: services.GetMerchantCenterLinkRequest): Promise<resources.MerchantCenterLink> => {
       try {
         // @ts-expect-error Response is an array type
         const [response] = await service.getMerchantCenterLink(request, {
@@ -20860,75 +18833,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/MobileAppCategoryConstantService
-     */
-    public get mobileAppCategoryConstants() {
-      const service = this.loadService<services.MobileAppCategoryConstantService>("MobileAppCategoryConstantServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.MobileAppCategoryConstant in full detail
-     * @warning Don't use get in production!
-     * @returns resources.MobileAppCategoryConstant
-     */
-    get: async (resourceName: string): Promise<resources.MobileAppCategoryConstant> => {
-      const request = new services.GetMobileAppCategoryConstantRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getMobileAppCategoryConstant(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/MobileDeviceConstantService
-     */
-    public get mobileDeviceConstants() {
-      const service = this.loadService<services.MobileDeviceConstantService>("MobileDeviceConstantServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.MobileDeviceConstant in full detail
-     * @warning Don't use get in production!
-     * @returns resources.MobileDeviceConstant
-     */
-    get: async (resourceName: string): Promise<resources.MobileDeviceConstant> => {
-      const request = new services.GetMobileDeviceConstantRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getMobileDeviceConstant(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/OfflineUserDataJobService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/OfflineUserDataJobService
      */
     public get offlineUserDataJobs() {
       const service = this.loadService<services.OfflineUserDataJobService>("OfflineUserDataJobServiceClient")
@@ -20936,7 +18841,7 @@ export default class ServiceFactory extends Service {
       return {
         
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/OfflineUserDataJobService#createofflineuserdatajob
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/OfflineUserDataJobService#createofflineuserdatajob
      */
     createOfflineUserDataJob: async (request: services.CreateOfflineUserDataJobRequest): Promise<services.CreateOfflineUserDataJobResponse> => {
       try {
@@ -20955,31 +18860,7 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @description Retrieve a resources.OfflineUserDataJob in full detail
-     * @warning Don't use get in production!
-     * @returns resources.OfflineUserDataJob
-     */
-    get: async (resourceName: string): Promise<resources.OfflineUserDataJob> => {
-      const request = new services.GetOfflineUserDataJobRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getOfflineUserDataJob(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/OfflineUserDataJobService#addofflineuserdatajoboperations
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/OfflineUserDataJobService#addofflineuserdatajoboperations
      */
     addOfflineUserDataJobOperations: async (request: services.AddOfflineUserDataJobOperationsRequest): Promise<services.AddOfflineUserDataJobOperationsResponse> => {
       try {
@@ -20998,7 +18879,7 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/OfflineUserDataJobService#runofflineuserdatajob
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/OfflineUserDataJobService#runofflineuserdatajob
      */
     runOfflineUserDataJob: async (request: services.RunOfflineUserDataJobRequest): Promise<longrunning.Operation> => {
       try {
@@ -21019,109 +18900,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/OperatingSystemVersionConstantService
-     */
-    public get operatingSystemVersionConstants() {
-      const service = this.loadService<services.OperatingSystemVersionConstantService>("OperatingSystemVersionConstantServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.OperatingSystemVersionConstant in full detail
-     * @warning Don't use get in production!
-     * @returns resources.OperatingSystemVersionConstant
-     */
-    get: async (resourceName: string): Promise<resources.OperatingSystemVersionConstant> => {
-      const request = new services.GetOperatingSystemVersionConstantRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getOperatingSystemVersionConstant(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/PaidOrganicSearchTermViewService
-     */
-    public get paidOrganicSearchTermViews() {
-      const service = this.loadService<services.PaidOrganicSearchTermViewService>("PaidOrganicSearchTermViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.PaidOrganicSearchTermView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.PaidOrganicSearchTermView
-     */
-    get: async (resourceName: string): Promise<resources.PaidOrganicSearchTermView> => {
-      const request = new services.GetPaidOrganicSearchTermViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getPaidOrganicSearchTermView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ParentalStatusViewService
-     */
-    public get parentalStatusViews() {
-      const service = this.loadService<services.ParentalStatusViewService>("ParentalStatusViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.ParentalStatusView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.ParentalStatusView
-     */
-    get: async (resourceName: string): Promise<resources.ParentalStatusView> => {
-      const request = new services.GetParentalStatusViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getParentalStatusView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/PaymentsAccountService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/PaymentsAccountService
      */
     public get paymentsAccounts() {
       const service = this.loadService<services.PaymentsAccountService>("PaymentsAccountServiceClient")
@@ -21129,7 +18908,7 @@ export default class ServiceFactory extends Service {
       return {
         
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/PaymentsAccountService#listpaymentsaccounts
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/PaymentsAccountService#listpaymentsaccounts
      */
     listPaymentsAccounts: async (request: services.ListPaymentsAccountsRequest): Promise<services.ListPaymentsAccountsResponse> => {
       try {
@@ -21150,75 +18929,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ProductBiddingCategoryConstantService
-     */
-    public get productBiddingCategoryConstants() {
-      const service = this.loadService<services.ProductBiddingCategoryConstantService>("ProductBiddingCategoryConstantServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.ProductBiddingCategoryConstant in full detail
-     * @warning Don't use get in production!
-     * @returns resources.ProductBiddingCategoryConstant
-     */
-    get: async (resourceName: string): Promise<resources.ProductBiddingCategoryConstant> => {
-      const request = new services.GetProductBiddingCategoryConstantRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getProductBiddingCategoryConstant(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ProductGroupViewService
-     */
-    public get productGroupViews() {
-      const service = this.loadService<services.ProductGroupViewService>("ProductGroupViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.ProductGroupView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.ProductGroupView
-     */
-    get: async (resourceName: string): Promise<resources.ProductGroupView> => {
-      const request = new services.GetProductGroupViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getProductGroupView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ReachPlanService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/ReachPlanService
      */
     public get reachPlans() {
       const service = this.loadService<services.ReachPlanService>("ReachPlanServiceClient")
@@ -21226,7 +18937,7 @@ export default class ServiceFactory extends Service {
       return {
         
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ReachPlanService#listplannablelocations
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/ReachPlanService#listplannablelocations
      */
     listPlannableLocations: async (request: services.ListPlannableLocationsRequest): Promise<services.ListPlannableLocationsResponse> => {
       try {
@@ -21245,7 +18956,7 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ReachPlanService#listplannableproducts
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/ReachPlanService#listplannableproducts
      */
     listPlannableProducts: async (request: services.ListPlannableProductsRequest): Promise<services.ListPlannableProductsResponse> => {
       try {
@@ -21264,7 +18975,7 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ReachPlanService#generateproductmixideas
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/ReachPlanService#generateproductmixideas
      */
     generateProductMixIdeas: async (request: services.GenerateProductMixIdeasRequest): Promise<services.GenerateProductMixIdeasResponse> => {
       try {
@@ -21283,7 +18994,7 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ReachPlanService#generatereachforecast
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/ReachPlanService#generatereachforecast
      */
     generateReachForecast: async (request: services.GenerateReachForecastRequest): Promise<services.GenerateReachForecastResponse> => {
       try {
@@ -21304,7 +19015,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/RecommendationService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/RecommendationService
      */
     public get recommendations() {
       const service = this.loadService<services.RecommendationService>("RecommendationServiceClient")
@@ -21312,31 +19023,7 @@ export default class ServiceFactory extends Service {
       return {
         
     /**
-     * @description Retrieve a resources.Recommendation in full detail
-     * @warning Don't use get in production!
-     * @returns resources.Recommendation
-     */
-    get: async (resourceName: string): Promise<resources.Recommendation> => {
-      const request = new services.GetRecommendationRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getRecommendation(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/RecommendationService#applyrecommendation
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/RecommendationService#applyrecommendation
      */
     applyRecommendation: async (request: services.ApplyRecommendationRequest): Promise<services.ApplyRecommendationResponse> => {
       try {
@@ -21355,7 +19042,7 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/RecommendationService#dismissrecommendation
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/RecommendationService#dismissrecommendation
      */
     dismissRecommendation: async (request: services.DismissRecommendationRequest): Promise<services.DismissRecommendationResponse> => {
       try {
@@ -21376,109 +19063,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/SearchTermViewService
-     */
-    public get searchTermViews() {
-      const service = this.loadService<services.SearchTermViewService>("SearchTermViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.SearchTermView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.SearchTermView
-     */
-    get: async (resourceName: string): Promise<resources.SearchTermView> => {
-      const request = new services.GetSearchTermViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getSearchTermView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ShoppingPerformanceViewService
-     */
-    public get shoppingPerformanceViews() {
-      const service = this.loadService<services.ShoppingPerformanceViewService>("ShoppingPerformanceViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.ShoppingPerformanceView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.ShoppingPerformanceView
-     */
-    get: async (resourceName: string): Promise<resources.ShoppingPerformanceView> => {
-      const request = new services.GetShoppingPerformanceViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getShoppingPerformanceView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/SmartCampaignSearchTermViewService
-     */
-    public get smartCampaignSearchTermViews() {
-      const service = this.loadService<services.SmartCampaignSearchTermViewService>("SmartCampaignSearchTermViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.SmartCampaignSearchTermView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.SmartCampaignSearchTermView
-     */
-    get: async (resourceName: string): Promise<resources.SmartCampaignSearchTermView> => {
-      const request = new services.GetSmartCampaignSearchTermViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getSmartCampaignSearchTermView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/SmartCampaignSuggestService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/SmartCampaignSuggestService
      */
     public get smartCampaignSuggests() {
       const service = this.loadService<services.SmartCampaignSuggestService>("SmartCampaignSuggestServiceClient")
@@ -21486,7 +19071,7 @@ export default class ServiceFactory extends Service {
       return {
         
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/SmartCampaignSuggestService#suggestsmartcampaignbudgetoptions
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/SmartCampaignSuggestService#suggestsmartcampaignbudgetoptions
      */
     suggestSmartCampaignBudgetOptions: async (request: services.SuggestSmartCampaignBudgetOptionsRequest): Promise<services.SuggestSmartCampaignBudgetOptionsResponse> => {
       try {
@@ -21505,7 +19090,7 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/SmartCampaignSuggestService#suggestsmartcampaignad
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/SmartCampaignSuggestService#suggestsmartcampaignad
      */
     suggestSmartCampaignAd: async (request: services.SuggestSmartCampaignAdRequest): Promise<services.SuggestSmartCampaignAdResponse> => {
       try {
@@ -21524,7 +19109,7 @@ export default class ServiceFactory extends Service {
   
 ,
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/SmartCampaignSuggestService#suggestkeywordthemes
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/SmartCampaignSuggestService#suggestkeywordthemes
      */
     suggestKeywordThemes: async (request: services.SuggestKeywordThemesRequest): Promise<services.SuggestKeywordThemesResponse> => {
       try {
@@ -21545,7 +19130,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ThirdPartyAppAnalyticsLinkService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/ThirdPartyAppAnalyticsLinkService
      */
     public get thirdPartyAppAnalyticsLinks() {
       const service = this.loadService<services.ThirdPartyAppAnalyticsLinkService>("ThirdPartyAppAnalyticsLinkServiceClient")
@@ -21553,31 +19138,7 @@ export default class ServiceFactory extends Service {
       return {
         
     /**
-     * @description Retrieve a resources.ThirdPartyAppAnalyticsLink in full detail
-     * @warning Don't use get in production!
-     * @returns resources.ThirdPartyAppAnalyticsLink
-     */
-    get: async (resourceName: string): Promise<resources.ThirdPartyAppAnalyticsLink> => {
-      const request = new services.GetThirdPartyAppAnalyticsLinkRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getThirdPartyAppAnalyticsLink(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-,
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/ThirdPartyAppAnalyticsLinkService#regenerateshareablelinkid
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/ThirdPartyAppAnalyticsLinkService#regenerateshareablelinkid
      */
     regenerateShareableLinkId: async (request: services.RegenerateShareableLinkIdRequest): Promise<services.RegenerateShareableLinkIdResponse> => {
       try {
@@ -21598,75 +19159,7 @@ export default class ServiceFactory extends Service {
     }
   
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/TopicConstantService
-     */
-    public get topicConstants() {
-      const service = this.loadService<services.TopicConstantService>("TopicConstantServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.TopicConstant in full detail
-     * @warning Don't use get in production!
-     * @returns resources.TopicConstant
-     */
-    get: async (resourceName: string): Promise<resources.TopicConstant> => {
-      const request = new services.GetTopicConstantRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getTopicConstant(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/TopicViewService
-     */
-    public get topicViews() {
-      const service = this.loadService<services.TopicViewService>("TopicViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.TopicView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.TopicView
-     */
-    get: async (resourceName: string): Promise<resources.TopicView> => {
-      const request = new services.GetTopicViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getTopicView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/UserDataService
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/UserDataService
      */
     public get userData() {
       const service = this.loadService<services.UserDataService>("UserDataServiceClient")
@@ -21674,148 +19167,12 @@ export default class ServiceFactory extends Service {
       return {
         
     /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/UserDataService#uploaduserdata
+     * @link https://developers.google.com/google-ads/api/reference/rpc/v10/UserDataService#uploaduserdata
      */
     uploadUserData: async (request: services.UploadUserDataRequest): Promise<services.UploadUserDataResponse> => {
       try {
         // @ts-expect-error Response is an array type
         const [response] = await service.uploadUserData(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/UserInterestService
-     */
-    public get userInterests() {
-      const service = this.loadService<services.UserInterestService>("UserInterestServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.UserInterest in full detail
-     * @warning Don't use get in production!
-     * @returns resources.UserInterest
-     */
-    get: async (resourceName: string): Promise<resources.UserInterest> => {
-      const request = new services.GetUserInterestRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getUserInterest(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/UserLocationViewService
-     */
-    public get userLocationViews() {
-      const service = this.loadService<services.UserLocationViewService>("UserLocationViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.UserLocationView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.UserLocationView
-     */
-    get: async (resourceName: string): Promise<resources.UserLocationView> => {
-      const request = new services.GetUserLocationViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getUserLocationView(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/VideoService
-     */
-    public get videos() {
-      const service = this.loadService<services.VideoService>("VideoServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.Video in full detail
-     * @warning Don't use get in production!
-     * @returns resources.Video
-     */
-    get: async (resourceName: string): Promise<resources.Video> => {
-      const request = new services.GetVideoRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getVideo(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  
-      }
-    }
-  
-    /**
-     * @link https://developers.google.com/google-ads/api/reference/rpc/v9/WebpageViewService
-     */
-    public get webpageViews() {
-      const service = this.loadService<services.WebpageViewService>("WebpageViewServiceClient")
-      
-      return {
-        
-    /**
-     * @description Retrieve a resources.WebpageView in full detail
-     * @warning Don't use get in production!
-     * @returns resources.WebpageView
-     */
-    get: async (resourceName: string): Promise<resources.WebpageView> => {
-      const request = new services.GetWebpageViewRequest({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.getWebpageView(request, {
           // @ts-expect-error This arg doesn't exist in the type definitions
           otherArgs: {
             headers: this.callHeaders,
