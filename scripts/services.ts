@@ -174,7 +174,7 @@ function compileSpecialMethod(
         });
         return response;
       } catch (err) {
-        throw this.getGoogleAdsError(err);
+        throw this.getGoogleAdsError(err as Error);
       }
     }
   `;
@@ -390,7 +390,7 @@ function buildMutateHookEnd(response: string) {
 }
 
 function buildMutateHookError() {
-  return `const googleAdsError = this.getGoogleAdsError(err);
+  return `const googleAdsError = this.getGoogleAdsError(err as Error);
   if (this.hooks.onMutationError) {
     await this.hooks.onMutationError({
       ...baseHookArguments,

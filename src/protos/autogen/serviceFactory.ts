@@ -103,7 +103,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -183,7 +183,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -226,7 +226,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -301,7 +301,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -378,7 +378,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -474,7 +474,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -551,7 +551,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -644,7 +644,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -726,7 +726,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -803,7 +803,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -896,7 +896,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -978,7 +978,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -1055,7 +1055,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -1151,7 +1151,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -1236,7 +1236,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -1313,7 +1313,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -1414,7 +1414,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -1495,7 +1495,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -1594,7 +1594,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -1674,7 +1674,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -1770,7 +1770,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -1855,7 +1855,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -1932,7 +1932,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -2028,7 +2028,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -2105,7 +2105,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -2205,7 +2205,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -2294,7 +2294,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -2375,7 +2375,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -2468,7 +2468,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -2550,7 +2550,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -2627,7 +2627,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -2720,7 +2720,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -2797,7 +2797,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -2890,7 +2890,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -2972,7 +2972,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -3049,7 +3049,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -3142,7 +3142,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -3224,7 +3224,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -3301,7 +3301,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -3340,7 +3340,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -3412,7 +3412,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -3508,7 +3508,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -3593,7 +3593,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -3670,7 +3670,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -3771,7 +3771,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -3860,7 +3860,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -3941,7 +3941,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -4031,7 +4031,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -4113,7 +4113,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -4190,7 +4190,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -4286,7 +4286,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -4363,7 +4363,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -4455,7 +4455,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -4537,7 +4537,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -4630,7 +4630,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -4707,7 +4707,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -4800,7 +4800,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -4882,7 +4882,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -4959,7 +4959,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -5052,7 +5052,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -5134,7 +5134,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -5222,7 +5222,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -5249,7 +5249,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -5269,7 +5269,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -5289,7 +5289,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
     };
@@ -5381,7 +5381,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -5469,7 +5469,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -5549,7 +5549,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -5650,7 +5650,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -5739,7 +5739,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -5820,7 +5820,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -5916,7 +5916,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -6001,7 +6001,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -6078,7 +6078,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -6171,7 +6171,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -6253,7 +6253,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -6330,7 +6330,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -6426,7 +6426,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -6503,7 +6503,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -6599,7 +6599,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -6684,7 +6684,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -6761,7 +6761,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -6857,7 +6857,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -6942,7 +6942,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -7019,7 +7019,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -7120,7 +7120,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -7216,7 +7216,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -7301,7 +7301,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -7378,7 +7378,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -7474,7 +7474,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -7551,7 +7551,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -7644,7 +7644,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -7726,7 +7726,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -7803,7 +7803,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -7830,7 +7830,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -7853,7 +7853,7 @@ export default class ServiceFactory extends Service {
           );
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
     };
@@ -7889,7 +7889,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -7967,7 +7967,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -8044,7 +8044,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -8071,7 +8071,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -8091,7 +8091,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -8111,7 +8111,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -8134,7 +8134,7 @@ export default class ServiceFactory extends Service {
           );
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
     };
@@ -8227,7 +8227,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -8316,7 +8316,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -8397,7 +8397,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -8490,7 +8490,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -8572,7 +8572,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -8649,7 +8649,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -8742,7 +8742,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -8819,7 +8819,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -8912,7 +8912,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -8994,7 +8994,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -9071,7 +9071,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -9167,7 +9167,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -9244,7 +9244,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -9340,7 +9340,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -9425,7 +9425,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -9502,7 +9502,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -9602,7 +9602,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -9691,7 +9691,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -9797,7 +9797,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -9893,7 +9893,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -9978,7 +9978,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -10055,7 +10055,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -10154,7 +10154,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -10242,7 +10242,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -10322,7 +10322,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -10421,7 +10421,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -10509,7 +10509,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -10589,7 +10589,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -10682,7 +10682,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -10764,7 +10764,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -10841,7 +10841,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -10942,7 +10942,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -11038,7 +11038,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -11115,7 +11115,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -11215,7 +11215,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -11304,7 +11304,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -11385,7 +11385,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -11478,7 +11478,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -11560,7 +11560,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -11637,7 +11637,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -11730,7 +11730,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -11807,7 +11807,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -11907,7 +11907,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -11988,7 +11988,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -12086,7 +12086,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -12113,7 +12113,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -12133,7 +12133,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
     };
@@ -12222,7 +12222,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -12299,7 +12299,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -12392,7 +12392,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -12474,7 +12474,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -12551,7 +12551,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -12644,7 +12644,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -12726,7 +12726,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -12803,7 +12803,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -12830,7 +12830,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -12850,7 +12850,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -12870,7 +12870,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -12890,7 +12890,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -12910,7 +12910,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
     };
@@ -12999,7 +12999,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -13084,7 +13084,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -13161,7 +13161,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -13254,7 +13254,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -13336,7 +13336,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -13413,7 +13413,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -13509,7 +13509,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -13586,7 +13586,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -13679,7 +13679,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -13761,7 +13761,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -13838,7 +13838,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -13934,7 +13934,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -14011,7 +14011,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -14104,7 +14104,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -14181,7 +14181,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -14272,7 +14272,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -14354,7 +14354,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -14431,7 +14431,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -14531,7 +14531,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -14620,7 +14620,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -14701,7 +14701,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -14797,7 +14797,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -14882,7 +14882,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -14959,7 +14959,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -15060,7 +15060,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -15149,7 +15149,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -15230,7 +15230,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -15326,7 +15326,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -15411,7 +15411,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -15488,7 +15488,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -15581,7 +15581,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -15663,7 +15663,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -15740,7 +15740,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -15767,7 +15767,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -15787,7 +15787,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -15807,7 +15807,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -15827,7 +15827,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
     };
@@ -15912,7 +15912,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -15994,7 +15994,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -16071,7 +16071,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -16164,7 +16164,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -16260,7 +16260,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -16345,7 +16345,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -16441,7 +16441,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -16518,7 +16518,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -16611,7 +16611,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -16693,7 +16693,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -16770,7 +16770,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -16874,7 +16874,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -16967,7 +16967,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -17049,7 +17049,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -17126,7 +17126,7 @@ export default class ServiceFactory extends Service {
           }
           return this.decodePartialFailureError(response);
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -17214,7 +17214,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -17291,7 +17291,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -17333,7 +17333,7 @@ export default class ServiceFactory extends Service {
           );
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
     };
@@ -17364,7 +17364,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -17384,7 +17384,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
     };
@@ -17470,7 +17470,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -17555,7 +17555,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -17632,7 +17632,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -17725,7 +17725,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -17810,7 +17810,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -17903,7 +17903,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -17988,7 +17988,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -18086,7 +18086,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -18113,7 +18113,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
     };
@@ -18202,7 +18202,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -18283,7 +18283,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -18379,7 +18379,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -18456,7 +18456,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -18494,7 +18494,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
     };
@@ -18525,7 +18525,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
     };
@@ -18556,7 +18556,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
     };
@@ -18590,7 +18590,7 @@ export default class ServiceFactory extends Service {
           );
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
     };
@@ -18623,7 +18623,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -18643,7 +18643,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -18721,7 +18721,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -18798,7 +18798,7 @@ export default class ServiceFactory extends Service {
           }
           return response;
         } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err);
+          const googleAdsError = this.getGoogleAdsError(err as Error);
           if (this.hooks.onMutationError) {
             await this.hooks.onMutationError({
               ...baseHookArguments,
@@ -18836,7 +18836,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -18859,7 +18859,7 @@ export default class ServiceFactory extends Service {
           );
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -18879,7 +18879,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
     };
@@ -18910,7 +18910,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
     };
@@ -18941,7 +18941,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -18961,7 +18961,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -18981,7 +18981,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -19001,7 +19001,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
     };
@@ -19032,7 +19032,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -19052,7 +19052,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
     };
@@ -19086,7 +19086,7 @@ export default class ServiceFactory extends Service {
           );
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -19106,7 +19106,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
 
@@ -19126,7 +19126,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
     };
@@ -19158,7 +19158,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
     };
@@ -19189,7 +19189,7 @@ export default class ServiceFactory extends Service {
           });
           return response;
         } catch (err) {
-          throw this.getGoogleAdsError(err);
+          throw this.getGoogleAdsError(err as Error);
         }
       },
     };
