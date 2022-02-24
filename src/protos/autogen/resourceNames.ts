@@ -114,6 +114,28 @@ export function adGroupAd(
   return `customers/${customerId}/adGroupAds/${adGroupId}~${adId}` as const;
 }
 
+/* AdGroupAdAssetCombinationView */
+export type AdGroupAdAssetCombinationViewResourceName =
+  `customers/${StrNum}/adGroupAdAssetCombinationViews/${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} adGroupId
+ * @param {string | number} adId
+ * @param {string | number} assetCombinationIdLow
+ * @param {string | number} assetCombinationIdHigh
+ * @returns `AdGroupAdAssetCombinationViewResourceName`
+ * @example const adGroupAdAssetCombinationView: ResourceNames.AdGroupAdAssetCombinationViewResourceName = ResourceNames.adGroupAdAssetCombinationView(10987417, 21974834, 43949668, 87899336, 175798672)
+ */
+export function adGroupAdAssetCombinationView(
+  customerId: string | number,
+  adGroupId: string | number,
+  adId: string | number,
+  assetCombinationIdLow: string | number,
+  assetCombinationIdHigh: string | number
+): AdGroupAdAssetCombinationViewResourceName {
+  return `customers/${customerId}/adGroupAdAssetCombinationViews/${adGroupId}~${adId}~${assetCombinationIdLow}~${assetCombinationIdHigh}` as const;
+}
+
 /* AdGroupAdAssetView */
 export type AdGroupAdAssetViewResourceName =
   `customers/${StrNum}/adGroupAdAssetViews/${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
@@ -551,6 +573,24 @@ export function assetGroupProductGroupView(
   return `customers/${customerId}/assetGroupProductGroupViews/${assetGroupId}~${listingGroupFilterId}` as const;
 }
 
+/* AssetGroupSignal */
+export type AssetGroupSignalResourceName =
+  `customers/${StrNum}/assetGroupSignals/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} assetGroupId
+ * @param {string | number} criterionId
+ * @returns `AssetGroupSignalResourceName`
+ * @example const assetGroupSignal: ResourceNames.AssetGroupSignalResourceName = ResourceNames.assetGroupSignal(10987417, 21974834, 43949668)
+ */
+export function assetGroupSignal(
+  customerId: string | number,
+  assetGroupId: string | number,
+  criterionId: string | number
+): AssetGroupSignalResourceName {
+  return `customers/${customerId}/assetGroupSignals/${assetGroupId}~${criterionId}` as const;
+}
+
 /* AssetSet */
 export type AssetSetResourceName = `customers/${StrNum}/assetSets/${StrNum}`;
 /**
@@ -582,6 +622,21 @@ export function assetSetAsset(
   assetId: string | number
 ): AssetSetAssetResourceName {
   return `customers/${customerId}/assetSetAssets/${assetSetId}~${assetId}` as const;
+}
+
+/* Audience */
+export type AudienceResourceName = `customers/${StrNum}/audiences/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} audienceId
+ * @returns `AudienceResourceName`
+ * @example const audience: ResourceNames.AudienceResourceName = ResourceNames.audience(10987417, 21974834)
+ */
+export function audience(
+  customerId: string | number,
+  audienceId: string | number
+): AudienceResourceName {
+  return `customers/${customerId}/audiences/${audienceId}` as const;
 }
 
 /* BatchJob */
@@ -1598,6 +1653,40 @@ export function expandedLandingPageView(
   expandedFinalUrlFingerprint: string | number
 ): ExpandedLandingPageViewResourceName {
   return `customers/${customerId}/expandedLandingPageViews/${expandedFinalUrlFingerprint}` as const;
+}
+
+/* Experiment */
+export type ExperimentResourceName =
+  `customers/${StrNum}/experiments/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} trialId
+ * @returns `ExperimentResourceName`
+ * @example const experiment: ResourceNames.ExperimentResourceName = ResourceNames.experiment(10987417, 21974834)
+ */
+export function experiment(
+  customerId: string | number,
+  trialId: string | number
+): ExperimentResourceName {
+  return `customers/${customerId}/experiments/${trialId}` as const;
+}
+
+/* ExperimentArm */
+export type ExperimentArmResourceName =
+  `customers/${StrNum}/experimentArms/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} trialId
+ * @param {string | number} trialArmId
+ * @returns `ExperimentArmResourceName`
+ * @example const experimentArm: ResourceNames.ExperimentArmResourceName = ResourceNames.experimentArm(10987417, 21974834, 43949668)
+ */
+export function experimentArm(
+  customerId: string | number,
+  trialId: string | number,
+  trialArmId: string | number
+): ExperimentArmResourceName {
+  return `customers/${customerId}/experimentArms/${trialId}~${trialArmId}` as const;
 }
 
 /* ExtensionFeedItem */

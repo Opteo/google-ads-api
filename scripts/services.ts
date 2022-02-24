@@ -90,11 +90,6 @@ export default class ServiceFactory extends Service {
     for (const [methodName, methodDef] of Object.entries<MethodDefinition>(
       service.methods
     )) {
-      if (methodName.startsWith("Get")) {
-        const getMethod = compileGetMethod(methodName, methodDef);
-        compiledMethods.push(getMethod);
-        continue;
-      }
       if (methodName.startsWith("Mutate")) {
         const { mutateMethods, mutateOptions } = compileMutateMethods(
           name,
@@ -154,9 +149,15 @@ function compileSpecialMethod(
   const requestType = `services.${methodDef.requestType}`;
 
   // Some special methods use types such as google.longrunning.Operation
-  const responseType = methodDef.responseType.includes("google.")
+  let responseType = methodDef.responseType.includes("google.")
     ? methodDef.responseType.split("google.")[1]
     : `services.${methodDef.responseType}`;
+
+  if (methodDef.responseType.includes(`.googleads.${googleAdsVersion}`)) {
+    [, responseType] = methodDef.responseType.split(
+      `.googleads.${googleAdsVersion}.`
+    );
+  }
 
   return `
     /**
@@ -173,41 +174,7 @@ function compileSpecialMethod(
         });
         return response;
       } catch (err) {
-        throw this.getGoogleAdsError(err);
-      }
-    }
-  `;
-}
-
-function compileGetMethod(
-  methodName: string,
-  methodDef: MethodDefinition
-): string {
-  const serviceMethod = toCamelCase(methodName);
-  const requestType = `services.${methodDef.requestType}`;
-  const responseType = methodDef.responseType.split(`${VERSION}.`)[1];
-
-  return `
-    /**
-     * @description Retrieve a ${responseType} in full detail
-     * @warning Don't use get in production!
-     * @returns ${responseType}
-     */
-    get: async (resourceName: string): Promise<${responseType}> => {
-      const request = new ${requestType}({
-        resource_name: resourceName,
-      });
-      try {
-        // @ts-expect-error Response is an array type
-        const [response] = await service.${serviceMethod}(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
-        return response;
-      } catch (err) {
-        throw this.getGoogleAdsError(err);
+        throw this.getGoogleAdsError(err as Error);
       }
     }
   `;
@@ -423,7 +390,7 @@ function buildMutateHookEnd(response: string) {
 }
 
 function buildMutateHookError() {
-  return `const googleAdsError = this.getGoogleAdsError(err);
+  return `const googleAdsError = this.getGoogleAdsError(err as Error);
   if (this.hooks.onMutationError) {
     await this.hooks.onMutationError({
       ...baseHookArguments,
