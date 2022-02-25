@@ -28,7 +28,7 @@ export interface CallHeaders {
   "linked-customer-id"?: string;
 }
 
-const  serviceCache :Record<ServiceName, AllServices> = {};
+const  serviceCache :Record<string, AllServices> = {};
 export class Service {
   protected readonly clientOptions: ClientOptions;
   protected readonly customerOptions: CustomerOptions;
@@ -84,9 +84,9 @@ export class Service {
   }
 
   protected loadService<T = AllServices>(service: ServiceName): T {
-    console.log('loadService', service);
+    // console.log('loadService', service);
     if (serviceCache[service]) {
-      console.log('got from cache')
+      // console.log('got from cache')
       return serviceCache[service] as unknown as T;
     }
     // eslint-disable-next-line @typescript-eslint/no-var-requires
