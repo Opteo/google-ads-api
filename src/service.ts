@@ -28,12 +28,11 @@ export interface CallHeaders {
   "linked-customer-id"?: string;
 }
 
-export const serviceCache: Record<string, AllServices> = {};
-
 export class Service {
   protected readonly clientOptions: ClientOptions;
   protected readonly customerOptions: CustomerOptions;
   protected readonly hooks: Hooks;
+  private serviceCache!: Record<ServiceName, AllServices>;
 
   constructor(
     clientOptions: ClientOptions,
@@ -84,8 +83,8 @@ export class Service {
   }
 
   protected loadService<T = AllServices>(service: ServiceName): T {
-    if (serviceCache[service]) {
-      return serviceCache[service] as unknown as T;
+    if (this.serviceCache[service]) {
+      return this.serviceCache[service] as unknown as T;
     }
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const { [service]: protoService } = require("google-ads-node");
@@ -95,7 +94,7 @@ export class Service {
     const client = new protoService({
       sslCreds: this.getCredentials(),
     });
-    serviceCache[service] = client;
+    this.serviceCache[service] = client;
     return client as unknown as T;
   }
 
