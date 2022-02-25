@@ -84,9 +84,7 @@ export class Service {
   }
 
   protected loadService<T = AllServices>(service: ServiceName): T {
-    // console.log('loadService', service);
     if (serviceCache[service]) {
-      // console.log('got from cache')
       return serviceCache[service] as unknown as T;
     }
     // eslint-disable-next-line @typescript-eslint/no-var-requires
