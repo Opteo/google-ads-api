@@ -43,13 +43,13 @@ export function parse({
     : getGAQLFields(gaqlString!);
 
   // Add in all relevant resource_name fields, which are always returned by API
-  const entities = queryFields.map(field => field.split('.')[0]);
-  const resourceNameFields = fields.resourceNames.filter(resourceNameField => {
-    return entities.includes(resourceNameField.split('.')[0]);
-  })
+  const entities = queryFields.map((field) => field.split(".")[0]);
+  const resourceNameFields = fields.resourceNames.filter((resourceNameField) =>
+    entities.includes(resourceNameField.split(".")[0])
+  );
 
   const allFields = [...queryFields, ...resourceNameFields];
-  
+
   return parseRows(results, allFields);
 }
 
@@ -87,22 +87,20 @@ export function getReportOptionFields(reportOptions: ReportOptions): string[] {
 
 export function parseRows(
   rows: services.IGoogleAdsRow[],
-  fields: string[],
+  fields: string[]
 ): services.IGoogleAdsRow[] {
+  const fieldsPreSplit: Record<string, string[]> = {};
 
-  const fieldsPreSplit:Record<string, string[]> = {}
-
-  // pre-split all the field strings for performance reasons (increases speed by ~5x)
-  fields.forEach(field => {
-    fieldsPreSplit[field] = field.split('.')
-  })
+  // pre-split all the field strings for performance reasons (increases speed by ~5x for large number of rows)
+  for (const field of fields) {
+    fieldsPreSplit[field] = field.split(".");
+  }
 
   const newRows = [];
   for (let r = 0; r < rows.length; r++) {
     const newRow: services.IGoogleAdsRow = {};
-    const originalRow: services.IGoogleAdsRow = services.GoogleAdsRow.fromObject(
-      rows[r]
-    );
+    const originalRow: services.IGoogleAdsRow =
+      services.GoogleAdsRow.fromObject(rows[r]);
 
     for (const split in fieldsPreSplit) {
       // @ts-expect-error These are the best we can do for these types

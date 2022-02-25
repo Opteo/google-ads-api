@@ -1,4 +1,7 @@
-import { GoogleAdsServiceClient, AdGroupAdServiceClient } from "google-ads-node";
+import {
+  GoogleAdsServiceClient,
+  AdGroupAdServiceClient,
+} from "google-ads-node";
 import { google } from "google-gax/build/protos/operations";
 import { errors, services } from "./protos";
 import { FAILURE_KEY, serviceCache } from "./service";
