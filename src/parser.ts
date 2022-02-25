@@ -27,7 +27,6 @@ export function parse({
   reportOptions?: ReportOptions;
   gaqlString?: string;
 }): services.IGoogleAdsRow[] {
-  console.time('parse')
   if (results.length === 0) {
     return results;
   }
@@ -44,16 +43,14 @@ export function parse({
     : getGAQLFields(gaqlString!);
 
   // Add in all relevant resource_name fields, which are always returned by API
-  const resourceNameFields = fields.resourceNames.filter(resourceName => {
-    const entities = queryFields.map(field => field.split('.')[0]);
-    return entities.includes(resourceName.split('.')[0]);
+  const entities = queryFields.map(field => field.split('.')[0]);
+  const resourceNameFields = fields.resourceNames.filter(resourceNameField => {
+    return entities.includes(resourceNameField.split('.')[0]);
   })
 
   const allFields = [...queryFields, ...resourceNameFields];
   
-  const r =  parseRows(results, allFields);
-  console.timeEnd('parse')
-  return r
+  return parseRows(results, allFields);
 }
 
 // This function assumes that a gaql query is of the format "select * * * from * ...".
@@ -112,7 +109,7 @@ export function parseRows(
       const [parent, ...children]: [
         fields.Resource,
         ...(keyof services.IGoogleAdsRow)[]
-      ] = split;
+      ] = fieldsPreSplit[split];
 
       // Ignore null fields (unspecified resource names)
       if (!originalRow[parent]) {

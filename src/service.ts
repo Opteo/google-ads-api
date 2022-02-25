@@ -28,7 +28,8 @@ export interface CallHeaders {
   "linked-customer-id"?: string;
 }
 
-const  serviceCache :Record<string, AllServices> = {};
+export const serviceCache :Record<string, AllServices> = {};
+
 export class Service {
   protected readonly clientOptions: ClientOptions;
   protected readonly customerOptions: CustomerOptions;
