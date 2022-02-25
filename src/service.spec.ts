@@ -1,10 +1,7 @@
-import {
-  GoogleAdsServiceClient,
-  AdGroupAdServiceClient,
-} from "google-ads-node";
+import { GoogleAdsServiceClient } from "google-ads-node";
 import { google } from "google-gax/build/protos/operations";
 import { errors, services } from "./protos";
-import { FAILURE_KEY, serviceCache } from "./service";
+import { FAILURE_KEY } from "./service";
 import {
   failTestIfExecuted,
   newCustomer,
@@ -30,12 +27,14 @@ describe("Service", () => {
 
     it("should load the service from cache after the initial call", () => {
       const customer = newCustomer();
-      expect(serviceCache["AdGroupAdServiceClient"]).toBeUndefined();
+      // @ts-expect-error Accessing private property for test purposes
+      expect(customer.serviceCache?.["GoogleAdsServiceClient"]).toBeUndefined();
       // @ts-expect-error Accessing private method for test purposes
-      customer.loadService("AdGroupAdServiceClient");
+      customer.loadService("GoogleAdsServiceClient");
       // The service should now be cached on the customer instance
-      expect(serviceCache["AdGroupAdServiceClient"]).toBeInstanceOf(
-        AdGroupAdServiceClient
+      // @ts-expect-error Accessing private property for test purposes
+      expect(customer.serviceCache?.["GoogleAdsServiceClient"]).toBeInstanceOf(
+        GoogleAdsServiceClient
       );
     });
 
