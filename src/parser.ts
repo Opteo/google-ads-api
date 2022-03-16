@@ -42,13 +42,19 @@ export function parse({
     ? getReportOptionFields(reportOptions)
     : getGAQLFields(gaqlString!);
 
-  const allFields = [...queryFields, ...fields.resourceNames];
+  // Add in all relevant resource_name fields, which are always returned by API
+  const entities = queryFields.map((field) => field.split(".")[0]);
+  const resourceNameFields = fields.resourceNames.filter((resourceNameField) =>
+    entities.includes(resourceNameField.split(".")[0])
+  );
+
+  const allFields = [...queryFields, ...resourceNameFields];
 
   return parseRows(results, allFields);
 }
 
 // This function assumes that a gaql query is of the format "select * * * from * ...".
-// Queries that are no in this format should have thrown an error when called.
+// Queries that are not in this format should have thrown an error when called.
 export function getGAQLFields(gaqlString: string): string[] {
   const normalisedQuery = normaliseQuery(gaqlString);
 
@@ -83,22 +89,25 @@ export function parseRows(
   rows: services.IGoogleAdsRow[],
   fields: string[]
 ): services.IGoogleAdsRow[] {
+  const fieldsPreSplit: Record<string, string[]> = {};
+
+  // pre-split all the field strings for performance reasons (increases speed by ~5x for large number of rows)
+  for (const field of fields) {
+    fieldsPreSplit[field] = field.split(".");
+  }
+
   const newRows = [];
   for (let r = 0; r < rows.length; r++) {
     const newRow: services.IGoogleAdsRow = {};
-    const originalRow: services.IGoogleAdsRow = services.GoogleAdsRow.fromObject(
-      rows[r]
-    );
+    const originalRow: services.IGoogleAdsRow =
+      services.GoogleAdsRow.fromObject(rows[r]);
 
-    for (let f = 0; f < fields.length; f++) {
-      const field = fields[f];
-      const split = field.split(".");
-
+    for (const split in fieldsPreSplit) {
       // @ts-expect-error These are the best we can do for these types
       const [parent, ...children]: [
         fields.Resource,
         ...(keyof services.IGoogleAdsRow)[]
-      ] = split;
+      ] = fieldsPreSplit[split];
 
       // Ignore null fields (unspecified resource names)
       if (!originalRow[parent]) {
