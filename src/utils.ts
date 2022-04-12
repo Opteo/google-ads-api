@@ -17,7 +17,7 @@ export function fromMicros(micros: number): number {
  * const costMicros = toMicros(12.5) // 12,500,000
  */
 export function toMicros(value: number): number {
-  return value * 1000000;
+  return Math.round(value * 1000000);
 }
 
 /**

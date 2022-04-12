@@ -29,6 +29,7 @@ describe("toMicros", () => {
       [1, 1_000_000],
       [12.5, 12_500_000],
       [57742.187913, 57_742_187_913],
+      [2.05, 2_050_000],
     ];
     for (const [input, expected] of tests) {
       expect(toMicros(input)).toEqual(expected);
