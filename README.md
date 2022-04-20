@@ -111,7 +111,7 @@ const client = new GoogleAdsApi({
   developer_token: "<DEVELOPER-TOKEN>",
 });
 
-const refreshToken = "<REFRESH-TOKEN">
+const refreshToken = "<REFRESH-TOKEN>";
 
 const customers = await client.listAccessibleCustomers(refreshToken);
 ```
