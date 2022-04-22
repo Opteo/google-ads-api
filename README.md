@@ -15,14 +15,11 @@
   <a>
     <img src="https://img.shields.io/npm/dm/google-ads-api.svg?style=flat-square">
     </a>
-  <a>
-    <img src="https://img.shields.io/david/opteo/google-ads-api.svg?style=flat-square">
-  </a>
 </p>
 
 <p align="center">
   <a href="https://opteo.com">
-    <img src="https://app.opteo.com/icons/logo.svg">
+    <img src="https://app.opteo.com/img/opteo-icon-120.png">
   </a>
 </p>
 
