@@ -69,6 +69,7 @@ export class Service {
   }
 
   private getCredentials(): grpc.ChannelCredentials {
+    console.log("getCredentials");
     const sslCreds = grpc.credentials.createSsl();
     const authClient = new UserRefreshClient(
       this.clientOptions.client_id,
