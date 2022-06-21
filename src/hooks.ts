@@ -29,8 +29,7 @@ export type BaseServiceHookArgs = {
   requestOptions: any;
 };
 
-// TODO: add options for services
-type StartHookArgs<T = RequestOptions | MutateOptions, A = void> = {
+type StartHookArgs<T = RequestOptions | MutateOptions | any, A = void> = {
   cancel: A extends void ? () => void : (args?: A) => void;
   editOptions: (options: Partial<T>) => void;
 };
@@ -65,10 +64,8 @@ export type OnMutationEnd = MutationHook<
   EndHookArgs<services.MutateGoogleAdsResponse>
 >;
 
-// TODO: add type instead of any
 export type OnServiceStart = ServiceHook<StartHookArgs<any, any>>;
 export type OnServiceError = ServiceHook<ErrorHookArgs>;
-// TODO: add type instead of any
 export type OnServiceEnd = ServiceHook<EndHookArgs<any>>;
 
 export interface Hooks {
@@ -131,7 +128,7 @@ export interface Hooks {
   onMutationStart?: OnMutationStart;
   /**
    * @description Hook called upon a mutation throwing an error
-   * @params `{ credentials, mutations error }`
+   * @params `{ credentials, mutations, error }`
    * @param credentials customer id, login customer id, linked customer id
    * @param mutations
    * @param error google ads error
@@ -141,13 +138,36 @@ export interface Hooks {
    * @description Hook called after successful execution of a mutation
    * @params `{ credentials, mutations, response, resolve }`
    * @param credentials customer id, login customer id, linked customer id
-   * @mutations
+   * @param mutations
    * @param response results of the mutation
    * @param resolve utility function for returning an alternative value from the mutation
    */
   onMutationEnd?: OnMutationEnd;
+  /**
+   * @description Hook called before execution of a service
+   * @params `{ credentials, method, requestOptions }`
+   * @param credentials customer id, login customer id, linked customer id
+   * @param method
+   * @param cancel utility function for cancelling the service. if an argument is provided then the service will return this argument
+   * @param editOptions utility function for editing the service options. any service option keys that are passed will be changed
+   */
   onServiceStart?: OnServiceStart;
+  /**
+   * @description Hook called upon a service throwing an error
+   * @params `{ credentials, method, error }`
+   * @param credentials customer id, login customer id, linked customer id
+   * @param method
+   * @param error google ads error
+   */
   onServiceError?: OnServiceError;
+  /**
+   * @description Hook called after successful execution of a service
+   * @params `{ credentials, method, response, resolve }`
+   * @param credentials customer id, login customer id, linked customer id
+   * @param method
+   * @param response results of the service
+   * @param resolve utility function for returning an alternative value from the service
+   */
   onServiceEnd?: OnServiceEnd;
 }
 

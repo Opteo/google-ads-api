@@ -528,13 +528,24 @@ These hooks have access to the `customerCredentials` argument, containing the `c
 
 These hooks also have access to the `method` argument, containing the mutation method as a string.
 
+### Service hooks:
+
+- `onServiceStart`
+- `onServiceError`
+- `onServiceEnd`
+
+These hooks have access to the `customerCredentials` argument, containing the `customer_id`, `login_customer_id` and `linked_customer_id`.
+
+These hooks also have access to the `method` argument, containing the mutation method as a string.
+
 ### Pre-request hooks:
 
 - `onQueryStart` - `query` and `report`
 - `onStreamStart` - `reportStream` and `reportStreamRaw`
 - `onMutationStart`
+- `onServiceStart`
 
-These hooks are executed **before** a query/stream/mutation.
+These hooks are executed **before** a query/stream/mutation/service.
 
 These hooks have access to the `cancel` method, which can cancel the action before it is done. The query and mutation pre-request hooks allow an optional argument to be passed into the `cancel` method, which will be used as an alternative return value for the query/mutation. A good use case for this method would be to cancel with a cached result.
 
@@ -564,8 +575,9 @@ const customer = client.Customer({
 - `onQueryError` - `query` and `report`
 - `onStreamError` - `reportStream` (but **not** `reportStreamRaw`)
 - `onMutationError`
+- `onServiceStart`
 
-These hooks are executed when a query/stream/mutation throws an error. If the error is a Google Ads failure then it will be converted to a `GoogleAdsFailure` first. The error can be accessed in these hooks with the `error` argument. Note that the `onStreamError` hook will not work with the `reportStreamRaw` method to avoid blocking the thread.
+These hooks are executed when a query/stream/mutation/service throws an error. If the error is a Google Ads failure then it will be converted to a `GoogleAdsFailure` first. The error can be accessed in these hooks with the `error` argument. Note that the `onStreamError` hook will not work with the `reportStreamRaw` method to avoid blocking the thread.
 
 ```ts
 import { OnQueryError } from "google-ads-api";
@@ -585,8 +597,9 @@ const customer = client.Customer({
 
 - `onQueryEnd` - `query` and `report`
 - `onMutationEnd`
+- `onServiceEnd`
 
-These hooks are executed **after** a query or mutation. This library does not contain an `onStreamEnd` hook to avoid accumulating the results of streams, and also so that we don't block the thread by waiting for the end event to be emitted.
+These hooks are executed **after** a query, mutation or service. This library does not contain an `onStreamEnd` hook to avoid accumulating the results of streams, and also so that we don't block the thread by waiting for the end event to be emitted.
 
 ```ts
 import { OnQueryEnd } from "google-ads-api";
