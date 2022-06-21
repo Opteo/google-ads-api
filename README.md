@@ -194,7 +194,6 @@ const campaigns = await customer.report({
 Calls searchStream internally but returns the rows one by one in an async iterator.
 
 <!-- prettier-ignore-start -->
-
 ```ts
 import { enums } from "google-ads-api";
 
@@ -208,6 +207,30 @@ const stream = customer.reportStream({
     "ad_group_criterion.type": enums.CriterionType.KEYWORD,
   },
 });
+
+// Rows are streamed in one by one
+for await (const row of stream) {
+    // Break the loop to stop streaming
+    if (someLogic) {
+        break
+    }
+}
+```
+<!-- prettier-ignore-end -->
+
+Or use a GAQL query.
+
+<!-- prettier-ignore-start -->
+```ts
+const stream = customer.queryStream(`
+  SELECT
+    ad_group_criterion.keyword.text,
+    ad_group_criterion.status
+  FROM
+    ad_group_criterion
+  WHERE
+    ad_group_criterion.type = "KEYWORD"
+`);
 
 // Rows are streamed in one by one
 for await (const row of stream) {
