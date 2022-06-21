@@ -56,6 +56,7 @@ import { Service } from "../../service";
 import { resources, services, protobuf, longrunning } from "../index";
 import {
   BaseMutationHookArgs,
+  BaseServiceHookArgs,
   HookedCancellation,
   HookedResolution,
   Hooks,
@@ -164,6 +165,7 @@ function compileSpecialMethod(
      * @link ${GOOGLE_ADS_DOCS_URL}/rpc/${VERSION}/${serviceName}#${methodName.toLowerCase()}
      */
     ${serviceMethod}: async (request: ${requestType}): Promise<${responseType}> => {
+      ${buildServiceHookStart(serviceName, methodName)}
       try {
         // @ts-expect-error Response is an array type
         const [response] = await service.${serviceMethod}(request, {
@@ -172,12 +174,71 @@ function compileSpecialMethod(
             headers: this.callHeaders,
           },
         });
+        ${buildServiceHookEnd()}
         return response;
       } catch (err) {
-        throw this.getGoogleAdsError(err as Error);
+        ${buildServiceHookError()}
       }
     }
   `;
+}
+
+function buildServiceHookStart(
+  serviceName: string,
+  methodName: string
+): string {
+  return `const baseHookArguments: BaseServiceHookArgs = {
+    credentials: this.credentials,
+    method: "${serviceName}.${methodName}",
+    requestOptions: request,
+  };
+  if (this.hooks.onServiceStart) {
+    const serviceCancellation: HookedCancellation = { cancelled: false };
+    await this.hooks.onServiceStart({
+      ...baseHookArguments,
+      cancel: (res) => {
+        serviceCancellation.cancelled = true;
+        serviceCancellation.res = res;
+      },
+      editOptions: (options) => {
+        Object.entries(options).forEach(([key, val]) => {
+          // @ts-expect-error Index with key type is fine
+          request[key] = val;
+        });
+      },
+    });
+    if (serviceCancellation.cancelled) {
+      return serviceCancellation.res;
+    }
+  }`;
+}
+
+function buildServiceHookEnd() {
+  return `if (this.hooks.onServiceEnd) {
+    const serviceResolution: HookedResolution = { resolved: false };
+    await this.hooks.onServiceEnd({
+      ...baseHookArguments,
+      response,
+      resolve: (res) => {
+        serviceResolution.resolved = true;
+        serviceResolution.res = res;
+      },
+    });
+    if (serviceResolution.resolved) {
+      return serviceResolution.res;
+    }
+  }`;
+}
+
+function buildServiceHookError() {
+  return `const googleAdsError = this.getGoogleAdsError(err as Error);
+  if (this.hooks.onServiceError) {
+    await this.hooks.onServiceError({
+      ...baseHookArguments,
+      error: googleAdsError,
+    });
+  }
+  throw googleAdsError;`;
 }
 
 function compileMutateMethods(

@@ -23,6 +23,13 @@ export type BaseMutationHookArgs = {
   | { mutation: any; isServiceCall: true }
 );
 
+export type BaseServiceHookArgs = {
+  credentials: CustomerCredentials;
+  method: `${keyof typeof services}.${string}`;
+  requestOptions: any;
+};
+
+// TODO: add options for services
 type StartHookArgs<T = RequestOptions | MutateOptions, A = void> = {
   cancel: A extends void ? () => void : (args?: A) => void;
   editOptions: (options: Partial<T>) => void;
@@ -43,6 +50,7 @@ type HookArgs = StartHookArgs | ErrorHookArgs | EndHookArgs;
 
 type RequestHook<H extends HookArgs> = (a: BaseRequestHookArgs & H) => void;
 type MutationHook<H extends HookArgs> = (a: BaseMutationHookArgs & H) => void;
+type ServiceHook<H extends HookArgs> = (a: BaseServiceHookArgs & H) => void;
 
 export type OnQueryStart = RequestHook<StartHookArgs<RequestOptions, any>>;
 export type OnQueryError = RequestHook<ErrorHookArgs>;
@@ -56,6 +64,12 @@ export type OnMutationError = MutationHook<ErrorHookArgs>;
 export type OnMutationEnd = MutationHook<
   EndHookArgs<services.MutateGoogleAdsResponse>
 >;
+
+// TODO: add type instead of any
+export type OnServiceStart = ServiceHook<StartHookArgs<any, any>>;
+export type OnServiceError = ServiceHook<ErrorHookArgs>;
+// TODO: add type instead of any
+export type OnServiceEnd = ServiceHook<EndHookArgs<any>>;
 
 export interface Hooks {
   /**
@@ -132,6 +146,9 @@ export interface Hooks {
    * @param resolve utility function for returning an alternative value from the mutation
    */
   onMutationEnd?: OnMutationEnd;
+  onServiceStart?: OnServiceStart;
+  onServiceError?: OnServiceError;
+  onServiceEnd?: OnServiceEnd;
 }
 
 export type HookedCancellation = { cancelled: boolean; res?: any };
