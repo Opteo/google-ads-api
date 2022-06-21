@@ -373,6 +373,27 @@ const result = await customer.mutateResources(operations);
 
 ---
 
+## Uploading Click Conversions
+
+```ts
+const clickConversion = {
+  gclid: "<GOOGLE-CLICK-ID>",
+  conversion_action: "customers/1234567890/conversionActions/111222333",
+  conversion_date_time: "2022-01-11 00:00:00",
+  conversion_value: 123,
+  currency_code: "GBP",
+};
+
+const request = new services.UploadClickConversionsRequest({
+  customer_id: customerId,
+  conversions: [clickConversion],
+});
+
+await customer.conversionUploads.uploadClickConversions(request);
+```
+
+---
+
 ## Summary Row
 
 If a summary row is requested in the `report` method, it will be included as the **first** row of the results.
