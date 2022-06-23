@@ -1014,6 +1014,22 @@ export function campaignFeed(
   return `customers/${customerId}/campaignFeeds/${campaignId}~${feedId}` as const;
 }
 
+/* CampaignGroup */
+export type CampaignGroupResourceName =
+  `customers/${StrNum}/campaignGroups/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} campaignGroupId
+ * @returns `CampaignGroupResourceName`
+ * @example const campaignGroup: ResourceNames.CampaignGroupResourceName = ResourceNames.campaignGroup(10987417, 21974834)
+ */
+export function campaignGroup(
+  customerId: string | number,
+  campaignGroupId: string | number
+): CampaignGroupResourceName {
+  return `customers/${customerId}/campaignGroups/${campaignGroupId}` as const;
+}
+
 /* CampaignLabel */
 export type CampaignLabelResourceName =
   `customers/${StrNum}/campaignLabels/${StrNum}~${StrNum}`;
@@ -2149,6 +2165,22 @@ export function languageConstant(
   criterionId: string | number
 ): LanguageConstantResourceName {
   return `languageConstants/${criterionId}` as const;
+}
+
+/* LeadFormSubmissionData */
+export type LeadFormSubmissionDataResourceName =
+  `customers/${StrNum}/leadFormSubmissionData/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} leadFormUserSubmissionId
+ * @returns `LeadFormSubmissionDataResourceName`
+ * @example const leadFormSubmissionData: ResourceNames.LeadFormSubmissionDataResourceName = ResourceNames.leadFormSubmissionData(10987417, 21974834)
+ */
+export function leadFormSubmissionData(
+  customerId: string | number,
+  leadFormUserSubmissionId: string | number
+): LeadFormSubmissionDataResourceName {
+  return `customers/${customerId}/leadFormSubmissionData/${leadFormUserSubmissionId}` as const;
 }
 
 /* LifeEvent */
