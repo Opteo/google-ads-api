@@ -157,7 +157,7 @@ const campaigns = await customer.query(`
     metrics.cost_micros,
     metrics.clicks,
     metrics.impressions,
-    metrics.all_conversions,
+    metrics.all_conversions
   FROM 
     campaign
   WHERE
