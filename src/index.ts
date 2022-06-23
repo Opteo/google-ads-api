@@ -36,5 +36,8 @@ export {
   OnMutationStart,
   OnMutationError,
   OnMutationEnd,
+  OnServiceStart,
+  OnServiceError,
+  OnServiceEnd,
 } from "./hooks";
 export { Customer } from "./customer";

@@ -7,7 +7,7 @@
 </p>
 <p align="center">
   <a href="https://developers.google.com/google-ads/api/docs/release-notes">
-    <img src="https://img.shields.io/badge/google%20ads-v10.0.0-009688.svg?style=flat-square">
+    <img src="https://img.shields.io/badge/google%20ads-v11.0.0-009688.svg?style=flat-square">
   </a>
   <a href="https://www.npmjs.com/package/google-ads-api">
     <img src="https://img.shields.io/npm/v/google-ads-api.svg?style=flat-square">
@@ -99,7 +99,7 @@ const customer = client.Customer({
 
 ## List accessible customers
 
-This is a special client method for listing the accessible customers for a given refresh token, and is equivalent to [CustomerService.listAccessibleCustomers](https://developers.google.com/google-ads/api/reference/rpc/v10/CustomerService#listaccessiblecustomers). It returns the resource names of available customer accounts.
+This is a special client method for listing the accessible customers for a given refresh token, and is equivalent to [CustomerService.listAccessibleCustomers](https://developers.google.com/google-ads/api/reference/rpc/v11/CustomerService#listaccessiblecustomers). It returns the resource names of available customer accounts.
 
 ```ts
 const client = new GoogleAdsApi({
@@ -108,7 +108,7 @@ const client = new GoogleAdsApi({
   developer_token: "<DEVELOPER-TOKEN>",
 });
 
-const refreshToken = "<REFRESH-TOKEN">
+const refreshToken = "<REFRESH-TOKEN>";
 
 const customers = await client.listAccessibleCustomers(refreshToken);
 ```
@@ -194,7 +194,6 @@ const campaigns = await customer.report({
 Calls searchStream internally but returns the rows one by one in an async iterator.
 
 <!-- prettier-ignore-start -->
-
 ```ts
 import { enums } from "google-ads-api";
 
@@ -208,6 +207,30 @@ const stream = customer.reportStream({
     "ad_group_criterion.type": enums.CriterionType.KEYWORD,
   },
 });
+
+// Rows are streamed in one by one
+for await (const row of stream) {
+    // Break the loop to stop streaming
+    if (someLogic) {
+        break
+    }
+}
+```
+<!-- prettier-ignore-end -->
+
+Or use a GAQL query.
+
+<!-- prettier-ignore-start -->
+```ts
+const stream = customer.queryStream(`
+  SELECT
+    ad_group_criterion.keyword.text,
+    ad_group_criterion.status
+  FROM
+    ad_group_criterion
+  WHERE
+    ad_group_criterion.type = "KEYWORD"
+`);
 
 // Rows are streamed in one by one
 for await (const row of stream) {
@@ -350,6 +373,27 @@ const result = await customer.mutateResources(operations);
 
 ---
 
+## Uploading Click Conversions
+
+```ts
+const clickConversion = {
+  gclid: "<GOOGLE-CLICK-ID>",
+  conversion_action: "customers/1234567890/conversionActions/111222333",
+  conversion_date_time: "2022-01-11 00:00:00",
+  conversion_value: 123,
+  currency_code: "GBP",
+};
+
+const request = new services.UploadClickConversionsRequest({
+  customer_id: customerId,
+  conversions: [clickConversion],
+});
+
+await customer.conversionUploads.uploadClickConversions(request);
+```
+
+---
+
 ## Summary Row
 
 If a summary row is requested in the `report` method, it will be included as the **first** row of the results.
@@ -484,13 +528,24 @@ These hooks have access to the `customerCredentials` argument, containing the `c
 
 These hooks also have access to the `method` argument, containing the mutation method as a string.
 
+### Service hooks:
+
+- `onServiceStart`
+- `onServiceError`
+- `onServiceEnd`
+
+These hooks have access to the `customerCredentials` argument, containing the `customer_id`, `login_customer_id` and `linked_customer_id`.
+
+These hooks also have access to the `method` argument, containing the mutation method as a string.
+
 ### Pre-request hooks:
 
 - `onQueryStart` - `query` and `report`
 - `onStreamStart` - `reportStream` and `reportStreamRaw`
 - `onMutationStart`
+- `onServiceStart`
 
-These hooks are executed **before** a query/stream/mutation.
+These hooks are executed **before** a query/stream/mutation/service.
 
 These hooks have access to the `cancel` method, which can cancel the action before it is done. The query and mutation pre-request hooks allow an optional argument to be passed into the `cancel` method, which will be used as an alternative return value for the query/mutation. A good use case for this method would be to cancel with a cached result.
 
@@ -520,8 +575,9 @@ const customer = client.Customer({
 - `onQueryError` - `query` and `report`
 - `onStreamError` - `reportStream` (but **not** `reportStreamRaw`)
 - `onMutationError`
+- `onServiceStart`
 
-These hooks are executed when a query/stream/mutation throws an error. If the error is a Google Ads failure then it will be converted to a `GoogleAdsFailure` first. The error can be accessed in these hooks with the `error` argument. Note that the `onStreamError` hook will not work with the `reportStreamRaw` method to avoid blocking the thread.
+These hooks are executed when a query/stream/mutation/service throws an error. If the error is a Google Ads failure then it will be converted to a `GoogleAdsFailure` first. The error can be accessed in these hooks with the `error` argument. Note that the `onStreamError` hook will not work with the `reportStreamRaw` method to avoid blocking the thread.
 
 ```ts
 import { OnQueryError } from "google-ads-api";
@@ -541,8 +597,9 @@ const customer = client.Customer({
 
 - `onQueryEnd` - `query` and `report`
 - `onMutationEnd`
+- `onServiceEnd`
 
-These hooks are executed **after** a query or mutation. This library does not contain an `onStreamEnd` hook to avoid accumulating the results of streams, and also so that we don't block the thread by waiting for the end event to be emitted.
+These hooks are executed **after** a query, mutation or service. This library does not contain an `onStreamEnd` hook to avoid accumulating the results of streams, and also so that we don't block the thread by waiting for the end event to be emitted.
 
 ```ts
 import { OnQueryEnd } from "google-ads-api";
@@ -563,9 +620,9 @@ const customer = client.Customer({
 
 ## Error handling
 
-All errors, apart from GRPC specific cases (such as a connection problem or timeout, [see more here](https://github.com/grpc/grpc/blob/master/doc/statuscodes.md)), are instances of a [GoogleAdsFailure](https://developers.google.com/google-ads/api/reference/rpc/v10/GoogleAdsFailure).
+All errors, apart from GRPC specific cases (such as a connection problem or timeout, [see more here](https://github.com/grpc/grpc/blob/master/doc/statuscodes.md)), are instances of a [GoogleAdsFailure](https://developers.google.com/google-ads/api/reference/rpc/v11/GoogleAdsFailure).
 
-You can find a list of all error types for a specific version in [the official documentation](https://developers.google.com/google-ads/api/reference/rpc/v10/AccessInvitationErrorEnum.AccessInvitationError), as well as more information about [handling errors here](https://developers.google.com/google-ads/api/docs/best-practices/error-types).
+You can find a list of all error types for a specific version in [the official documentation](https://developers.google.com/google-ads/api/reference/rpc/v11/AccessInvitationErrorEnum.AccessInvitationError), as well as more information about [handling errors here](https://developers.google.com/google-ads/api/docs/best-practices/error-types).
 
 ```ts
 import { errors } from "google-ads-api";

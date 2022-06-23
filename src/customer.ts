@@ -43,6 +43,24 @@ export class Customer extends ServiceFactory {
   }
 
   /** 
+    @description Stream query using a raw GAQL string. If a generic type is provided, it must be the type of a single row.
+    If a summary row is requested then this will be the last emitted row of the stream.
+    @hooks onStreamStart, onStreamError
+    @example
+    const stream = queryStream<T>(gaqlQuery)
+    for await (const row of stream) { ... }
+  */
+  public async *queryStream<T = services.IGoogleAdsRow>(
+    gaqlQuery: string,
+    requestOptions: RequestOptions = {}
+  ): AsyncGenerator<T> {
+    const stream = this.streamer<T>(gaqlQuery, requestOptions);
+    for await (const row of stream) {
+      yield row;
+    }
+  }
+
+  /** 
     @description Single query using ReportOptions.
     If a summary row is requested then this will be the first row of the results.
     @hooks onQueryStart, onQueryError, onQueryEnd
@@ -93,91 +111,9 @@ export class Customer extends ServiceFactory {
     reportOptions: ReportOptions
   ): AsyncGenerator<T> {
     const { gaqlQuery, requestOptions } = buildQuery(reportOptions);
-
-    const baseHookArguments: BaseRequestHookArgs = {
-      credentials: this.credentials,
-      query: gaqlQuery,
-      reportOptions,
-    };
-
-    if (this.hooks.onStreamStart) {
-      const queryStart: HookedCancellation = { cancelled: false };
-
-      await this.hooks.onStreamStart({
-        ...baseHookArguments,
-        cancel: () => {
-          queryStart.cancelled = true;
-        },
-        editOptions: (options) => {
-          Object.entries(options).forEach(([key, val]) => {
-            // @ts-expect-error
-            requestOptions[key] = val;
-          });
-        },
-      });
-
-      if (queryStart.cancelled) {
-        return;
-      }
-    }
-
-    const { service, request } = this.buildSearchStreamRequestAndService(
-      gaqlQuery,
-      requestOptions
-    );
-
-    const stream = service.searchStream(request, {
-      otherArgs: { headers: this.callHeaders },
-    });
-
-    let streamFinished = false;
-    const accumulator: T[] = [];
-
-    let nextChunk = createNextChunkArrivedPromise();
-
-    stream.on("data", (chunk: services.SearchGoogleAdsStreamResponse) => {
-      const results = chunk.summary_row ? [chunk.summary_row] : chunk.results;
-      const parsedResponse = this.clientOptions.disable_parsing
-        ? results
-        : parse({ results, reportOptions });
-      accumulator.push(...(parsedResponse as T[]));
-
-      nextChunk.resolve();
-      nextChunk = createNextChunkArrivedPromise();
-    });
-
-    stream.on("error", (searchError: Error) => {
-      nextChunk.reject(searchError);
-    });
-
-    stream.on("end", () => {
-      streamFinished = true;
-      nextChunk.resolve();
-    });
-
-    try {
-      while (!streamFinished || accumulator.length) {
-        if (accumulator.length > 0) {
-          const item = accumulator.shift();
-          if (item === undefined) {
-            throw new Error("UNDEFINED_STREAM_ERROR");
-          }
-          yield item;
-        } else {
-          await nextChunk.newPromise;
-        }
-      }
-    } catch (searchError: any) {
-      const googleAdsError = this.getGoogleAdsError(searchError);
-      if (this.hooks.onStreamError) {
-        await this.hooks.onStreamError({
-          ...baseHookArguments,
-          error: googleAdsError,
-        });
-      }
-      throw googleAdsError;
-    } finally {
-      stream.destroy();
+    const stream = this.streamer<T>(gaqlQuery, requestOptions, reportOptions);
+    for await (const row of stream) {
+      yield row;
     }
   }
 
@@ -362,6 +298,100 @@ export class Customer extends ServiceFactory {
         });
       }
       throw googleAdsError;
+    }
+  }
+
+  private async *streamer<T = services.IGoogleAdsRow>(
+    gaqlQuery: string,
+    requestOptions: RequestOptions = {},
+    reportOptions?: ReportOptions
+  ): AsyncGenerator<T> {
+    const baseHookArguments: BaseRequestHookArgs = {
+      credentials: this.credentials,
+      query: gaqlQuery,
+      reportOptions,
+    };
+
+    if (this.hooks.onStreamStart) {
+      const queryStart: HookedCancellation = { cancelled: false };
+
+      await this.hooks.onStreamStart({
+        ...baseHookArguments,
+        cancel: () => {
+          queryStart.cancelled = true;
+        },
+        editOptions: (options) => {
+          Object.entries(options).forEach(([key, val]) => {
+            // @ts-expect-error
+            requestOptions[key] = val;
+          });
+        },
+      });
+
+      if (queryStart.cancelled) {
+        return;
+      }
+    }
+
+    const { service, request } = this.buildSearchStreamRequestAndService(
+      gaqlQuery,
+      requestOptions
+    );
+
+    const stream = service.searchStream(request, {
+      otherArgs: { headers: this.callHeaders },
+    });
+
+    let streamFinished = false;
+    const accumulator: T[] = [];
+
+    let nextChunk = createNextChunkArrivedPromise();
+
+    stream.on("data", (chunk: services.SearchGoogleAdsStreamResponse) => {
+      const results = chunk.summary_row ? [chunk.summary_row] : chunk.results;
+      const parsedResponse = this.clientOptions.disable_parsing
+        ? results
+        : reportOptions
+        ? parse({ results, reportOptions })
+        : parse({ results, gaqlString: gaqlQuery });
+      accumulator.push(...(parsedResponse as T[]));
+
+      nextChunk.resolve();
+      nextChunk = createNextChunkArrivedPromise();
+    });
+
+    stream.on("error", (searchError: Error) => {
+      nextChunk.reject(searchError);
+    });
+
+    stream.on("end", () => {
+      streamFinished = true;
+      nextChunk.resolve();
+    });
+
+    try {
+      while (!streamFinished || accumulator.length) {
+        if (accumulator.length > 0) {
+          const item = accumulator.shift();
+          if (item === undefined) {
+            throw new Error("UNDEFINED_STREAM_ERROR");
+          }
+          yield item;
+        } else {
+          await nextChunk.newPromise;
+        }
+      }
+    } catch (searchError: any) {
+      const googleAdsError = this.getGoogleAdsError(searchError);
+      if (this.hooks.onStreamError) {
+        await this.hooks.onStreamError({
+          ...baseHookArguments,
+          error: googleAdsError,
+        });
+      }
+      throw googleAdsError;
+    } finally {
+      stream.destroy();
     }
   }
 

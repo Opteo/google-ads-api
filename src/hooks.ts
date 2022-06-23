@@ -23,7 +23,13 @@ export type BaseMutationHookArgs = {
   | { mutation: any; isServiceCall: true }
 );
 
-type StartHookArgs<T = RequestOptions | MutateOptions, A = void> = {
+export type BaseServiceHookArgs = {
+  credentials: CustomerCredentials;
+  method: `${keyof typeof services}.${string}`;
+  requestOptions: any;
+};
+
+type StartHookArgs<T = RequestOptions | MutateOptions | any, A = void> = {
   cancel: A extends void ? () => void : (args?: A) => void;
   editOptions: (options: Partial<T>) => void;
 };
@@ -43,6 +49,7 @@ type HookArgs = StartHookArgs | ErrorHookArgs | EndHookArgs;
 
 type RequestHook<H extends HookArgs> = (a: BaseRequestHookArgs & H) => void;
 type MutationHook<H extends HookArgs> = (a: BaseMutationHookArgs & H) => void;
+type ServiceHook<H extends HookArgs> = (a: BaseServiceHookArgs & H) => void;
 
 export type OnQueryStart = RequestHook<StartHookArgs<RequestOptions, any>>;
 export type OnQueryError = RequestHook<ErrorHookArgs>;
@@ -56,6 +63,10 @@ export type OnMutationError = MutationHook<ErrorHookArgs>;
 export type OnMutationEnd = MutationHook<
   EndHookArgs<services.MutateGoogleAdsResponse>
 >;
+
+export type OnServiceStart = ServiceHook<StartHookArgs<any, any>>;
+export type OnServiceError = ServiceHook<ErrorHookArgs>;
+export type OnServiceEnd = ServiceHook<EndHookArgs<any>>;
 
 export interface Hooks {
   /**
@@ -117,7 +128,7 @@ export interface Hooks {
   onMutationStart?: OnMutationStart;
   /**
    * @description Hook called upon a mutation throwing an error
-   * @params `{ credentials, mutations error }`
+   * @params `{ credentials, mutations, error }`
    * @param credentials customer id, login customer id, linked customer id
    * @param mutations
    * @param error google ads error
@@ -127,11 +138,37 @@ export interface Hooks {
    * @description Hook called after successful execution of a mutation
    * @params `{ credentials, mutations, response, resolve }`
    * @param credentials customer id, login customer id, linked customer id
-   * @mutations
+   * @param mutations
    * @param response results of the mutation
    * @param resolve utility function for returning an alternative value from the mutation
    */
   onMutationEnd?: OnMutationEnd;
+  /**
+   * @description Hook called before execution of a service
+   * @params `{ credentials, method, requestOptions }`
+   * @param credentials customer id, login customer id, linked customer id
+   * @param method
+   * @param cancel utility function for cancelling the service. if an argument is provided then the service will return this argument
+   * @param editOptions utility function for editing the service options. any service option keys that are passed will be changed
+   */
+  onServiceStart?: OnServiceStart;
+  /**
+   * @description Hook called upon a service throwing an error
+   * @params `{ credentials, method, error }`
+   * @param credentials customer id, login customer id, linked customer id
+   * @param method
+   * @param error google ads error
+   */
+  onServiceError?: OnServiceError;
+  /**
+   * @description Hook called after successful execution of a service
+   * @params `{ credentials, method, response, resolve }`
+   * @param credentials customer id, login customer id, linked customer id
+   * @param method
+   * @param response results of the service
+   * @param resolve utility function for returning an alternative value from the service
+   */
+  onServiceEnd?: OnServiceEnd;
 }
 
 export type HookedCancellation = { cancelled: boolean; res?: any };
