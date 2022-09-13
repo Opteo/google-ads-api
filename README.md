@@ -565,9 +565,10 @@ const onQueryStart: OnQueryStart = async ({ cancel, editOptions }) => {
 
 const customer = client.Customer({
   clientOptions,
-  customerOptions,
-  hooks: { onQueryStart },
-});
+  customerOptions
+},
+  { onQueryStart }
+);
 ```
 
 ### On error hooks:
@@ -588,9 +589,10 @@ const onQueryError: OnQueryError = async ({ error }) => {
 
 const customer = client.Customer({
   clientOptions,
-  customerOptions,
-  hooks: { onQueryError },
-});
+  customerOptions
+},
+  { onQueryError }
+);
 ```
 
 ### Post-request hooks:
@@ -611,9 +613,10 @@ const onQueryEnd: OnQueryEnd = async ({ response, resolve }) => {
 
 const customer = client.Customer({
   clientOptions,
-  customerOptions,
-  hooks: { onQueryEnd },
-});
+  customerOptions
+},
+  { onQueryEnd }
+);
 ```
 
 ---
