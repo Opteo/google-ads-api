@@ -45,7 +45,11 @@ describe("Service", () => {
         customer.loadService("BadServiceClient");
         failTestIfExecuted(); // should not be called
       } catch (err) {
-        expect(err.message.includes("could not be found")).toEqual(true);
+        if (err instanceof Error) {
+          expect(err.message.includes("could not be found")).toEqual(true);
+        } else {
+          throw new Error("error should be an instance of an Error");
+        }
       }
     });
   });
@@ -98,7 +102,12 @@ describe("Service", () => {
         await service.search({});
         failTestIfExecuted();
       } catch (err) {
-        err.metadata.internalRepr.set(FAILURE_KEY, [failureBuffer]);
+        if (err instanceof Error) {
+          // @ts-expect-error Accessing private property for test purposes
+          err.metadata.internalRepr.set(FAILURE_KEY, [failureBuffer]);
+        } else {
+          throw new Error("error should be an instance of an Error");
+        }
 
         // @ts-expect-error Accessing private property for test purposes
         const error = customer.getGoogleAdsError(err);
@@ -131,8 +140,13 @@ describe("Service", () => {
         await service.search({});
         failTestIfExecuted();
       } catch (err) {
-        expect(err instanceof Error).toEqual(true);
-        expect(err.code).toEqual(16);
+        if (err instanceof Error) {
+          expect(err instanceof Error).toEqual(true);
+          // @ts-expect-error This field exists
+          expect(err.code).toEqual(16);
+        } else {
+          throw new Error("err should be an instance of an Error");
+        }
       }
     });
   });

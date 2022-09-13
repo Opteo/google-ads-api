@@ -169,7 +169,7 @@ describe("querier", () => {
     );
   });
 
-  it("calls onQueryError when provided and when the query throws an error", async (done) => {
+  it("calls onQueryError when provided and when the query throws an error", async () => {
     const shouldThrow = true;
     const hooks: Hooks = {
       onQueryError() {
@@ -200,11 +200,10 @@ describe("querier", () => {
         reportOptions: undefined,
         error: mockError,
       });
-      done();
     }
   });
 
-  it("calls onQueryError asynchronously", async (done) => {
+  it("calls onQueryError asynchronously", async () => {
     const shouldThrow = true;
     const container = mockMethod();
     const spyMockMethod = jest.spyOn(container, "method");
@@ -225,7 +224,6 @@ describe("querier", () => {
       failTestIfExecuted(); // should not be called
     } catch (err) {
       expect(spyMockMethod).toHaveBeenCalled();
-      done();
     }
   });
 
@@ -598,7 +596,7 @@ describe("reportStream", () => {
     });
   });
 
-  it("calls onStreamError when provided and when the stream throws an error", async (done) => {
+  it("calls onStreamError when provided and when the stream throws an error", async () => {
     const hooks: Hooks = {
       onStreamError() {
         return;
@@ -627,11 +625,10 @@ describe("reportStream", () => {
         reportOptions: mockReportOptions,
         error: mockError,
       });
-      done();
     }
   });
 
-  it("calls onStreamError asynchronously", async (done) => {
+  it("calls onStreamError asynchronously", async () => {
     const container = mockMethod();
     const spyMockMethod = jest.spyOn(container, "method");
     const hooks: Hooks = {
@@ -655,7 +652,6 @@ describe("reportStream", () => {
       failTestIfExecuted(); // should not be called
     } catch (error) {
       expect(spyMockMethod).toHaveBeenCalled();
-      done();
     }
   });
 
@@ -917,7 +913,7 @@ describe("mutateResources", () => {
     });
   });
 
-  it("calls onMutationError when provided and when the query throws an error", async (done) => {
+  it("calls onMutationError when provided and when the query throws an error", async () => {
     const shouldThrow = true;
     const hooks: Hooks = {
       onMutationError() {
@@ -947,11 +943,10 @@ describe("mutateResources", () => {
         mutations: mockMutations,
         error: mockError,
       });
-      done();
     }
   });
 
-  it("calls onMutationError asynchronously", async (done) => {
+  it("calls onMutationError asynchronously", async () => {
     const shouldThrow = true;
     const container = mockMethod();
     const spyMockMethod = jest.spyOn(container, "method");
@@ -970,7 +965,6 @@ describe("mutateResources", () => {
       failTestIfExecuted(); // should not be called
     } catch (error) {
       expect(spyMockMethod).toHaveBeenCalled();
-      done();
     }
   });
 
