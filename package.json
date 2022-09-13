@@ -23,6 +23,7 @@
     "long": "^4.0.0"
   },
   "devDependencies": {
+    "@types/jest": "^29.0.1",
     "@types/pluralize": "^0.0.29",
     "@typescript-eslint/eslint-plugin": "^4.8.2",
     "@typescript-eslint/parser": "^4.8.2",
