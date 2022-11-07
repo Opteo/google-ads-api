@@ -1793,12 +1793,12 @@ globby@^11.0.3:
     merge2 "^1.4.1"
     slash "^3.0.0"
 
-google-ads-node@^9.1.0:
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/google-ads-node/-/google-ads-node-9.1.0.tgz#bf0bbd72059e30aa2e3ebb3c67620248b85c937a"
-  integrity sha512-akRFyegFrGh3Pa6HI9Psf0iRUohe8KPI7dlYCoqcDxi3jpIVe9e7yS7jnDn97nmxhDo7xMRjr97H1OtKemJjMA==
+google-ads-node@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/google-ads-node/-/google-ads-node-10.0.0.tgz#748dd47b712d243199779dbc46edf9bb0f966eee"
+  integrity sha512-Li9lcG56/PXf0vhsNQMsRsjwKDY4evTLJIwQYjv3yrFhnH/TrrEeL3cKmVE3tycIjmd4Yb4AGr40MyyXR9SupA==
   dependencies:
-    google-gax "^3.5.1"
+    google-gax "^3.5.2"
 
 google-auth-library@^7.1.0:
   version "7.14.1"
@@ -1830,10 +1830,10 @@ google-auth-library@^8.0.2:
     jws "^4.0.0"
     lru-cache "^6.0.0"
 
-google-gax@^3.5.1:
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/google-gax/-/google-gax-3.5.1.tgz#97959e431804e42aa54374a0aa477de84afbdfb2"
-  integrity sha512-lFw8StOfu3lqADD7BDLcM+XNnHWTCr1XsMZiaNxq/51eb74p3ZZ2faXqHn3PdWDVTv4bLQ7GT+vd0ocgoH+apQ==
+google-gax@^3.5.2:
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/google-gax/-/google-gax-3.5.2.tgz#7c3ad61dbf366a55527b803caead276668b160d8"
+  integrity sha512-AyP53w0gHcWlzxm+jSgqCR3Xu4Ld7EpSjhtNBnNhzwwWaIUyphH9kBGNIEH+i4UGkTUXOY29K/Re8EiAvkBRGw==
   dependencies:
     "@grpc/grpc-js" "~1.7.0"
     "@grpc/proto-loader" "^0.7.0"
@@ -1846,7 +1846,7 @@ google-gax@^3.5.1:
     node-fetch "^2.6.1"
     object-hash "^3.0.0"
     proto3-json-serializer "^1.0.0"
-    protobufjs "7.1.1"
+    protobufjs "7.1.2"
     protobufjs-cli "1.0.2"
     retry-request "^5.0.0"
 
@@ -2939,7 +2939,25 @@ protobufjs-cli@1.0.2:
     tmp "^0.2.1"
     uglify-js "^3.7.7"
 
-protobufjs@7.1.1, protobufjs@^7.0.0:
+protobufjs@7.1.2:
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/protobufjs/-/protobufjs-7.1.2.tgz#a0cf6aeaf82f5625bffcf5a38b7cd2a7de05890c"
+  integrity sha512-4ZPTPkXCdel3+L81yw3dG6+Kq3umdWKh7Dc7GW/CpNk4SX3hK58iPCWeCyhVTDrbkNeKrYNZ7EojM5WDaEWTLQ==
+  dependencies:
+    "@protobufjs/aspromise" "^1.1.2"
+    "@protobufjs/base64" "^1.1.2"
+    "@protobufjs/codegen" "^2.0.4"
+    "@protobufjs/eventemitter" "^1.1.0"
+    "@protobufjs/fetch" "^1.1.0"
+    "@protobufjs/float" "^1.0.2"
+    "@protobufjs/inquire" "^1.1.0"
+    "@protobufjs/path" "^1.1.2"
+    "@protobufjs/pool" "^1.1.0"
+    "@protobufjs/utf8" "^1.1.0"
+    "@types/node" ">=13.7.0"
+    long "^5.0.0"
+
+protobufjs@^7.0.0:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/protobufjs/-/protobufjs-7.1.1.tgz#0117befb4b0f5a49d028e93f2ca62c3c1f5e7c65"
   integrity sha512-d0nMQqS/aT3lfV8bKi9Gbg73vPd2LcDdTDOu6RE/M+h9DY8g1EmDzk3ADPccthEWfTBjkR2oxNdx9Gs8YubT+g==

@@ -198,6 +198,24 @@ export function adGroupAsset(
   return `customers/${customerId}/adGroupAssets/${adGroupId}~${assetId}~${fieldType}` as const;
 }
 
+/* AdGroupAssetSet */
+export type AdGroupAssetSetResourceName =
+  `customers/${StrNum}/adGroupAssetSets/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} adGroupId
+ * @param {string | number} assetSetId
+ * @returns `AdGroupAssetSetResourceName`
+ * @example const adGroupAssetSet: ResourceNames.AdGroupAssetSetResourceName = ResourceNames.adGroupAssetSet(10987417, 21974834, 43949668)
+ */
+export function adGroupAssetSet(
+  customerId: string | number,
+  adGroupId: string | number,
+  assetSetId: string | number
+): AdGroupAssetSetResourceName {
+  return `customers/${customerId}/adGroupAssetSets/${adGroupId}~${assetSetId}` as const;
+}
+
 /* AdGroupAudienceView */
 export type AdGroupAudienceViewResourceName =
   `customers/${StrNum}/adGroupAudienceViews/${StrNum}~${StrNum}`;
@@ -624,6 +642,22 @@ export function assetSetAsset(
   return `customers/${customerId}/assetSetAssets/${assetSetId}~${assetId}` as const;
 }
 
+/* AssetSetTypeView */
+export type AssetSetTypeViewResourceName =
+  `customers/${StrNum}/assetSetTypeViews/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} assetSetType
+ * @returns `AssetSetTypeViewResourceName`
+ * @example const assetSetTypeView: ResourceNames.AssetSetTypeViewResourceName = ResourceNames.assetSetTypeView(10987417, 21974834)
+ */
+export function assetSetTypeView(
+  customerId: string | number,
+  assetSetType: string | number
+): AssetSetTypeViewResourceName {
+  return `customers/${customerId}/assetSetTypeViews/${assetSetType}` as const;
+}
+
 /* Audience */
 export type AudienceResourceName = `customers/${StrNum}/audiences/${StrNum}`;
 /**
@@ -960,22 +994,6 @@ export function campaignDraft(
   draftId: string | number
 ): CampaignDraftResourceName {
   return `customers/${customerId}/campaignDrafts/${baseCampaignId}~${draftId}` as const;
-}
-
-/* CampaignExperiment */
-export type CampaignExperimentResourceName =
-  `customers/${StrNum}/campaignExperiments/${StrNum}`;
-/**
- * @param {string | number} customerId
- * @param {string | number} campaignExperimentId
- * @returns `CampaignExperimentResourceName`
- * @example const campaignExperiment: ResourceNames.CampaignExperimentResourceName = ResourceNames.campaignExperiment(10987417, 21974834)
- */
-export function campaignExperiment(
-  customerId: string | number,
-  campaignExperimentId: string | number
-): CampaignExperimentResourceName {
-  return `customers/${customerId}/campaignExperiments/${campaignExperimentId}` as const;
 }
 
 /* CampaignExtensionSetting */
@@ -1341,6 +1359,22 @@ export function customerAsset(
   fieldType: string | number
 ): CustomerAssetResourceName {
   return `customers/${customerId}/customerAssets/${assetId}~${fieldType}` as const;
+}
+
+/* CustomerAssetSet */
+export type CustomerAssetSetResourceName =
+  `customers/${StrNum}/customerAssetSets/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} assetSetId
+ * @returns `CustomerAssetSetResourceName`
+ * @example const customerAssetSet: ResourceNames.CustomerAssetSetResourceName = ResourceNames.customerAssetSet(10987417, 21974834)
+ */
+export function customerAssetSet(
+  customerId: string | number,
+  assetSetId: string | number
+): CustomerAssetSetResourceName {
+  return `customers/${customerId}/customerAssetSets/${assetSetId}` as const;
 }
 
 /* CustomerClient */
@@ -2375,6 +2409,22 @@ export function paymentsAccount(
   paymentsAccountId: string | number
 ): PaymentsAccountResourceName {
   return `customers/${customerId}/paymentsAccounts/${paymentsAccountId}` as const;
+}
+
+/* PerStoreView */
+export type PerStoreViewResourceName =
+  `customers/${StrNum}/perStoreViews/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} placeId
+ * @returns `PerStoreViewResourceName`
+ * @example const perStoreView: ResourceNames.PerStoreViewResourceName = ResourceNames.perStoreView(10987417, 21974834)
+ */
+export function perStoreView(
+  customerId: string | number,
+  placeId: string | number
+): PerStoreViewResourceName {
+  return `customers/${customerId}/perStoreViews/${placeId}` as const;
 }
 
 /* ProductBiddingCategoryConstant */
