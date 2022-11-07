@@ -18,6 +18,7 @@ export interface ReportOptions extends RequestOptions {
   metrics?: fields.Metrics;
   segments?: fields.Segments;
   constraints?: Constraints;
+  parameters?: string;
   limit?: number;
   order?: Order[];
   /**
