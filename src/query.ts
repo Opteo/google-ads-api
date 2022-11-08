@@ -62,7 +62,7 @@ export const QueryError = {
   INVALID_TO_DATE_TYPE: (toDate: ReportOptions["to_date"]): string =>
     `To date must be a string. Here, typeof to date is ${typeof toDate}`,
   INVALID_LIMIT: "Limit must be a positive integer.",
-  INVALID_PARAMETERS: "Parametes must be a string.",
+  INVALID_PARAMETERS: "Parameters must be a string.",
   INVALID_ORDER: "Order must be an array.",
   INVALID_ORDERLY: "OrderBy arrays must only contain strings.",
   INVALID_ORDERBY: "OrderBy must be a string or an array of strings.",
