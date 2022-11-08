@@ -19,6 +19,7 @@ enum QueryKeywords {
   WHERE = "WHERE",
   ORDER_BY = "ORDER BY",
   LIMIT = "LIMIT",
+  PARAMETERS = "PARAMETERS",
   AND = "AND",
   OR = "OR",
 }
@@ -35,9 +36,10 @@ export type OrderClause =
   | ` ${QueryKeywords.ORDER_BY} ${string}`
   | ``;
 type LimitClause = ` ${QueryKeywords.LIMIT} ${number}` | ``;
+type ParametersClause = ` ${QueryKeywords.PARAMETERS} ${string}` | ``;
 
 type Query =
-  `${SelectClause}${FromClause}${WhereClause}${OrderClause}${LimitClause}`;
+  `${SelectClause}${FromClause}${WhereClause}${OrderClause}${LimitClause}${ParametersClause}`;
 
 export const QueryError = {
   INVALID_CONSTRAINTS_FORMAT:
@@ -60,6 +62,7 @@ export const QueryError = {
   INVALID_TO_DATE_TYPE: (toDate: ReportOptions["to_date"]): string =>
     `To date must be a string. Here, typeof to date is ${typeof toDate}`,
   INVALID_LIMIT: "Limit must be a positive integer.",
+  INVALID_PARAMETERS: "Parameters must be a string.",
   INVALID_ORDER: "Order must be an array.",
   INVALID_ORDERLY: "OrderBy arrays must only contain strings.",
   INVALID_ORDERBY: "OrderBy must be a string or an array of strings.",
@@ -283,6 +286,20 @@ export function buildLimitClause(limit: ReportOptions["limit"]): LimitClause {
   return ` ${QueryKeywords.LIMIT} ${limit}` as const;
 }
 
+export function buildParametersClause(
+  parameters: ReportOptions["parameters"]
+): ParametersClause {
+  if (typeof parameters === "undefined") {
+    return ``;
+  }
+
+  if (typeof parameters !== "string") {
+    throw new Error(QueryError.INVALID_PARAMETERS);
+  }
+
+  return ` ${QueryKeywords.PARAMETERS} ${parameters}` as const;
+}
+
 export function completeOrderly(
   orderly: string,
   entity: ReportOptions["entity"]
@@ -396,17 +413,21 @@ export function buildQuery(reportOptions: ReportOptions): {
     reportOptions.from_date,
     reportOptions.to_date
   );
-  const LIMIT: LimitClause = buildLimitClause(reportOptions.limit);
   const ORDER: OrderClause = buildOrderClause(
     reportOptions.order,
     reportOptions.order_by,
     reportOptions.sort_order,
     reportOptions.entity
   );
+  const LIMIT: LimitClause = buildLimitClause(reportOptions.limit);
+  const PARAMETERS: ParametersClause = buildParametersClause(
+    reportOptions.parameters
+  );
+
   const requestOptions: RequestOptions = buildRequestOptions(reportOptions);
 
   return {
-    gaqlQuery: `${SELECT}${FROM}${WHERE}${ORDER}${LIMIT}`,
+    gaqlQuery: `${SELECT}${FROM}${WHERE}${ORDER}${LIMIT}${PARAMETERS}`,
     requestOptions,
   } as const;
 }

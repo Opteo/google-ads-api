@@ -13,6 +13,7 @@ import {
   extractDateConditions,
   buildWhereClause,
   buildLimitClause,
+  buildParametersClause,
   completeOrderly,
   buildOrderClauseOld,
   buildOrderClauseNew,
@@ -466,6 +467,37 @@ describe("buildLimitClause", () => {
   it("returns an empty string if no limit is provided", () => {
     const limitClause = buildLimitClause(undefined);
     expect(limitClause).toEqual(``);
+  });
+});
+
+describe("buildParametersClause", () => {
+  it("throws if the parameter is not a string", () => {
+    const parameters = [
+      2,
+      {},
+      [],
+      null,
+      () => {
+        return;
+      },
+    ];
+
+    parameters.forEach((parameter) => {
+      // @ts-ignore
+      expect(() => buildParametersClause(parameter)).toThrowError(
+        QueryError.INVALID_PARAMETERS
+      );
+    });
+  });
+
+  it("correctly parses parameters", () => {
+    const parameterClause = buildParametersClause("include_drafts=true");
+    expect(parameterClause).toEqual(` PARAMETERS include_drafts=true`);
+  });
+
+  it("returns an empty string if no parameters are provided", () => {
+    const parameterClause = buildParametersClause(undefined);
+    expect(parameterClause).toEqual(``);
   });
 });
 
