@@ -17,9 +17,9 @@
   "author": "Opteo",
   "license": "MIT",
   "dependencies": {
-    "google-ads-node": "^10.0.0",
+    "google-ads-node": "^11.0.0",
     "google-auth-library": "^7.1.0",
-    "google-gax": "^3.5.2",
+    "google-gax": "^3.6.0",
     "long": "^4.0.0"
   },
   "devDependencies": {

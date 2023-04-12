@@ -35,10 +35,11 @@ export async function compileFields(): Promise<void> {
   });
 
   // @ts-ignore
-  const [fields]: // @ts-expect-error Protected usage is fine here
-  resources.GoogleAdsField[][] = await cus.googleAdsFields.searchGoogleAdsFields(
-    new services.SearchGoogleAdsFieldsRequest({
-      query: `
+  const [fields]: resources.GoogleAdsField[][] =
+    // @ts-expect-error Protected usage is fine here
+    await cus.googleAdsFields.searchGoogleAdsFields(
+      new services.SearchGoogleAdsFieldsRequest({
+        query: `
           SELECT
             name,
             category,
@@ -51,8 +52,8 @@ export async function compileFields(): Promise<void> {
             segments,
             type_url
         `,
-    })
-  );
+      })
+    );
 
   const resourceConstructs: { [resourceName: string]: Resource } = {};
   const enumFields: { [fieldName: string]: string } = {};
