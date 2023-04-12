@@ -143,7 +143,7 @@ describe("Service", () => {
         if (err instanceof Error) {
           expect(err instanceof Error).toEqual(true);
           // @ts-expect-error This field exists
-          expect(err.code).toEqual(16);
+          expect(err.code).toEqual(2);
         } else {
           throw new Error("err should be an instance of an Error");
         }

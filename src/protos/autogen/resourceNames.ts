@@ -2463,6 +2463,35 @@ export function productGroupView(
   return `customers/${customerId}/productGroupViews/${adgroupId}~${criterionId}` as const;
 }
 
+/* ProductLink */
+export type ProductLinkResourceName =
+  `customers/${StrNum}/productLinks/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} productLinkId
+ * @returns `ProductLinkResourceName`
+ * @example const productLink: ResourceNames.ProductLinkResourceName = ResourceNames.productLink(10987417, 21974834)
+ */
+export function productLink(
+  customerId: string | number,
+  productLinkId: string | number
+): ProductLinkResourceName {
+  return `customers/${customerId}/productLinks/${productLinkId}` as const;
+}
+
+/* QualifyingQuestion */
+export type QualifyingQuestionResourceName = `qualifyingQuestions/${StrNum}`;
+/**
+ * @param {string | number} qualifyingQuestionId
+ * @returns `QualifyingQuestionResourceName`
+ * @example const qualifyingQuestion: ResourceNames.QualifyingQuestionResourceName = ResourceNames.qualifyingQuestion(10987417)
+ */
+export function qualifyingQuestion(
+  qualifyingQuestionId: string | number
+): QualifyingQuestionResourceName {
+  return `qualifyingQuestions/${qualifyingQuestionId}` as const;
+}
+
 /* Recommendation */
 export type RecommendationResourceName =
   `customers/${StrNum}/recommendations/${StrNum}`;
@@ -2641,6 +2670,38 @@ export function topicView(
   criterionId: string | number
 ): TopicViewResourceName {
   return `customers/${customerId}/topicViews/${adGroupId}~${criterionId}` as const;
+}
+
+/* TravelActivityGroupView */
+export type TravelActivityGroupViewResourceName =
+  `customers/${StrNum}/travelActivityGroupViews/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} adGroupId
+ * @param {string | number} criterionId
+ * @returns `TravelActivityGroupViewResourceName`
+ * @example const travelActivityGroupView: ResourceNames.TravelActivityGroupViewResourceName = ResourceNames.travelActivityGroupView(10987417, 21974834, 43949668)
+ */
+export function travelActivityGroupView(
+  customerId: string | number,
+  adGroupId: string | number,
+  criterionId: string | number
+): TravelActivityGroupViewResourceName {
+  return `customers/${customerId}/travelActivityGroupViews/${adGroupId}~${criterionId}` as const;
+}
+
+/* TravelActivityPerformanceView */
+export type TravelActivityPerformanceViewResourceName =
+  `customers/${StrNum}/travelActivityPerformanceViews`;
+/**
+ * @param {string | number} customerId
+ * @returns `TravelActivityPerformanceViewResourceName`
+ * @example const travelActivityPerformanceView: ResourceNames.TravelActivityPerformanceViewResourceName = ResourceNames.travelActivityPerformanceView(10987417)
+ */
+export function travelActivityPerformanceView(
+  customerId: string | number
+): TravelActivityPerformanceViewResourceName {
+  return `customers/${customerId}/travelActivityPerformanceViews` as const;
 }
 
 /* UserInterest */

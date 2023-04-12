@@ -22,7 +22,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AccountBudgetProposalService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AccountBudgetProposalService
    */
   public get accountBudgetProposals() {
     const service = this.loadService<services.AccountBudgetProposalService>(
@@ -198,7 +198,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AccountLinkService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AccountLinkService
    */
   public get accountLinks() {
     const service = this.loadService<services.AccountLinkService>(
@@ -212,7 +212,7 @@ export default class ServiceFactory extends Service {
     >;
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AccountLinkService#createaccountlink
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AccountLinkService#createaccountlink
        */
       createAccountLink: async (
         request: services.CreateAccountLinkRequest
@@ -438,7 +438,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AdGroupAdLabelService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AdGroupAdLabelService
    */
   public get adGroupAdLabels() {
     const service = this.loadService<services.AdGroupAdLabelService>(
@@ -611,7 +611,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AdGroupAdService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AdGroupAdService
    */
   public get adGroupAds() {
     const service = this.loadService<services.AdGroupAdService>(
@@ -863,7 +863,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AdGroupAssetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AdGroupAssetService
    */
   public get adGroupAssets() {
     const service = this.loadService<services.AdGroupAssetService>(
@@ -1115,7 +1115,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AdGroupAssetSetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AdGroupAssetSetService
    */
   public get adGroupAssetSets() {
     const service = this.loadService<services.AdGroupAssetSetService>(
@@ -1288,7 +1288,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AdGroupBidModifierService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AdGroupBidModifierService
    */
   public get adGroupBidModifiers() {
     const service = this.loadService<services.AdGroupBidModifierService>(
@@ -1546,7 +1546,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AdGroupCriterionCustomizerService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AdGroupCriterionCustomizerService
    */
   public get adGroupCriterionCustomizers() {
     const service =
@@ -1728,7 +1728,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AdGroupCriterionLabelService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AdGroupCriterionLabelService
    */
   public get adGroupCriterionLabels() {
     const service = this.loadService<services.AdGroupCriterionLabelService>(
@@ -1907,7 +1907,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AdGroupCriterionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AdGroupCriterionService
    */
   public get adGroupCriteria() {
     const service = this.loadService<services.AdGroupCriterionService>(
@@ -2165,7 +2165,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AdGroupCustomizerService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AdGroupCustomizerService
    */
   public get adGroupCustomizers() {
     const service = this.loadService<services.AdGroupCustomizerService>(
@@ -2338,7 +2338,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AdGroupExtensionSettingService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AdGroupExtensionSettingService
    */
   public get adGroupExtensionSettings() {
     const service = this.loadService<services.AdGroupExtensionSettingService>(
@@ -2608,7 +2608,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AdGroupFeedService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AdGroupFeedService
    */
   public get adGroupFeeds() {
     const service = this.loadService<services.AdGroupFeedService>(
@@ -2860,7 +2860,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AdGroupLabelService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AdGroupLabelService
    */
   public get adGroupLabels() {
     const service = this.loadService<services.AdGroupLabelService>(
@@ -3030,7 +3030,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AdGroupService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AdGroupService
    */
   public get adGroups() {
     const service = this.loadService<services.AdGroupService>(
@@ -3282,7 +3282,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AdParameterService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AdParameterService
    */
   public get adParameters() {
     const service = this.loadService<services.AdParameterService>(
@@ -3534,7 +3534,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AdService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AdService
    */
   public get ads() {
     const service = this.loadService<services.AdService>("AdServiceClient");
@@ -3546,7 +3546,7 @@ export default class ServiceFactory extends Service {
     >;
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AdService#getad
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AdService#getad
        */
       getAd: async (request: services.GetAdRequest): Promise<resources.Ad> => {
         const baseHookArguments: BaseServiceHookArgs = {
@@ -3690,7 +3690,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AssetGroupAssetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AssetGroupAssetService
    */
   public get assetGroupAssets() {
     const service = this.loadService<services.AssetGroupAssetService>(
@@ -3948,7 +3948,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AssetGroupListingGroupFilterService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AssetGroupListingGroupFilterService
    */
   public get assetGroupListingGroupFilters() {
     const service =
@@ -4219,7 +4219,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AssetGroupService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AssetGroupService
    */
   public get assetGroups() {
     const service = this.loadService<services.AssetGroupService>(
@@ -4468,7 +4468,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AssetGroupSignalService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AssetGroupSignalService
    */
   public get assetGroupSignals() {
     const service = this.loadService<services.AssetGroupSignalService>(
@@ -4641,7 +4641,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AssetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AssetService
    */
   public get assets() {
     const service =
@@ -4815,7 +4815,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AssetSetAssetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AssetSetAssetService
    */
   public get assetSetAssets() {
     const service = this.loadService<services.AssetSetAssetService>(
@@ -4985,7 +4985,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AssetSetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AssetSetService
    */
   public get assetSets() {
     const service = this.loadService<services.AssetSetService>(
@@ -5237,7 +5237,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AudienceInsightsService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AudienceInsightsService
    */
   public get audienceInsights() {
     const service = this.loadService<services.AudienceInsightsService>(
@@ -5246,7 +5246,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AudienceInsightsService#generateinsightsfinderreport
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AudienceInsightsService#generateinsightsfinderreport
        */
       generateInsightsFinderReport: async (
         request: services.GenerateInsightsFinderReportRequest
@@ -5314,7 +5314,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AudienceInsightsService#listaudienceinsightsattributes
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AudienceInsightsService#listaudienceinsightsattributes
        */
       listAudienceInsightsAttributes: async (
         request: services.ListAudienceInsightsAttributesRequest
@@ -5382,7 +5382,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AudienceInsightsService#listinsightseligibledates
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AudienceInsightsService#listinsightseligibledates
        */
       listInsightsEligibleDates: async (
         request: services.ListInsightsEligibleDatesRequest
@@ -5447,7 +5447,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AudienceInsightsService#generateaudiencecompositioninsights
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AudienceInsightsService#generateaudiencecompositioninsights
        */
       generateAudienceCompositionInsights: async (
         request: services.GenerateAudienceCompositionInsightsRequest
@@ -5517,7 +5517,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/AudienceService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/AudienceService
    */
   public get audiences() {
     const service = this.loadService<services.AudienceService>(
@@ -5692,7 +5692,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/BatchJobService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/BatchJobService
    */
   public get batchJobs() {
     const service = this.loadService<services.BatchJobService>(
@@ -5855,7 +5855,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/BatchJobService#listbatchjobresults
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/BatchJobService#listbatchjobresults
        */
       listBatchJobResults: async (
         request: services.ListBatchJobResultsRequest
@@ -5920,7 +5920,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/BatchJobService#runbatchjob
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/BatchJobService#runbatchjob
        */
       runBatchJob: async (
         request: services.RunBatchJobRequest
@@ -5985,7 +5985,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/BatchJobService#addbatchjoboperations
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/BatchJobService#addbatchjoboperations
        */
       addBatchJobOperations: async (
         request: services.AddBatchJobOperationsRequest
@@ -6052,7 +6052,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/BiddingDataExclusionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/BiddingDataExclusionService
    */
   public get biddingDataExclusions() {
     const service = this.loadService<services.BiddingDataExclusionService>(
@@ -6319,7 +6319,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/BiddingSeasonalityAdjustmentService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/BiddingSeasonalityAdjustmentService
    */
   public get biddingSeasonalityAdjustments() {
     const service =
@@ -6590,7 +6590,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/BiddingStrategyService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/BiddingStrategyService
    */
   public get biddingStrategies() {
     const service = this.loadService<services.BiddingStrategyService>(
@@ -6848,7 +6848,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CampaignAssetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CampaignAssetService
    */
   public get campaignAssets() {
     const service = this.loadService<services.CampaignAssetService>(
@@ -7100,7 +7100,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CampaignAssetSetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CampaignAssetSetService
    */
   public get campaignAssetSets() {
     const service = this.loadService<services.CampaignAssetSetService>(
@@ -7273,7 +7273,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CampaignBidModifierService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CampaignBidModifierService
    */
   public get campaignBidModifiers() {
     const service = this.loadService<services.CampaignBidModifierService>(
@@ -7531,7 +7531,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CampaignBudgetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CampaignBudgetService
    */
   public get campaignBudgets() {
     const service = this.loadService<services.CampaignBudgetService>(
@@ -7789,7 +7789,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CampaignConversionGoalService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CampaignConversionGoalService
    */
   public get campaignConversionGoals() {
     const service = this.loadService<services.CampaignConversionGoalService>(
@@ -7890,7 +7890,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CampaignCriterionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CampaignCriterionService
    */
   public get campaignCriteria() {
     const service = this.loadService<services.CampaignCriterionService>(
@@ -8148,7 +8148,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CampaignCustomizerService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CampaignCustomizerService
    */
   public get campaignCustomizers() {
     const service = this.loadService<services.CampaignCustomizerService>(
@@ -8321,7 +8321,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CampaignDraftService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CampaignDraftService
    */
   public get campaignDrafts() {
     const service = this.loadService<services.CampaignDraftService>(
@@ -8571,7 +8571,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CampaignDraftService#promotecampaigndraft
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CampaignDraftService#promotecampaigndraft
        */
       promoteCampaignDraft: async (
         request: services.PromoteCampaignDraftRequest
@@ -8636,7 +8636,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CampaignDraftService#listcampaigndraftasyncerrors
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CampaignDraftService#listcampaigndraftasyncerrors
        */
       listCampaignDraftAsyncErrors: async (
         request: services.ListCampaignDraftAsyncErrorsRequest
@@ -8706,7 +8706,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CampaignExtensionSettingService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CampaignExtensionSettingService
    */
   public get campaignExtensionSettings() {
     const service = this.loadService<services.CampaignExtensionSettingService>(
@@ -8976,7 +8976,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CampaignFeedService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CampaignFeedService
    */
   public get campaignFeeds() {
     const service = this.loadService<services.CampaignFeedService>(
@@ -9228,7 +9228,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CampaignGroupService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CampaignGroupService
    */
   public get campaignGroups() {
     const service = this.loadService<services.CampaignGroupService>(
@@ -9480,7 +9480,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CampaignLabelService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CampaignLabelService
    */
   public get campaignLabels() {
     const service = this.loadService<services.CampaignLabelService>(
@@ -9650,7 +9650,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CampaignService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CampaignService
    */
   public get campaigns() {
     const service = this.loadService<services.CampaignService>(
@@ -9902,7 +9902,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CampaignSharedSetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CampaignSharedSetService
    */
   public get campaignSharedSets() {
     const service = this.loadService<services.CampaignSharedSetService>(
@@ -10075,7 +10075,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/ConversionActionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ConversionActionService
    */
   public get conversionActions() {
     const service = this.loadService<services.ConversionActionService>(
@@ -10333,7 +10333,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/ConversionCustomVariableService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ConversionCustomVariableService
    */
   public get conversionCustomVariables() {
     const service = this.loadService<services.ConversionCustomVariableService>(
@@ -10522,7 +10522,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/ConversionGoalCampaignConfigService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ConversionGoalCampaignConfigService
    */
   public get conversionGoalCampaignConfigs() {
     const service =
@@ -10628,7 +10628,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/ConversionValueRuleService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ConversionValueRuleService
    */
   public get conversionValueRules() {
     const service = this.loadService<services.ConversionValueRuleService>(
@@ -10886,7 +10886,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/ConversionValueRuleSetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ConversionValueRuleSetService
    */
   public get conversionValueRuleSets() {
     const service = this.loadService<services.ConversionValueRuleSetService>(
@@ -11153,7 +11153,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CustomConversionGoalService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CustomConversionGoalService
    */
   public get customConversionGoals() {
     const service = this.loadService<services.CustomConversionGoalService>(
@@ -11420,7 +11420,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CustomerAssetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CustomerAssetService
    */
   public get customerAssets() {
     const service = this.loadService<services.CustomerAssetService>(
@@ -11672,7 +11672,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CustomerConversionGoalService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CustomerConversionGoalService
    */
   public get customerConversionGoals() {
     const service = this.loadService<services.CustomerConversionGoalService>(
@@ -11773,7 +11773,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CustomerCustomizerService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CustomerCustomizerService
    */
   public get customerCustomizers() {
     const service = this.loadService<services.CustomerCustomizerService>(
@@ -11946,7 +11946,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CustomerExtensionSettingService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CustomerExtensionSettingService
    */
   public get customerExtensionSettings() {
     const service = this.loadService<services.CustomerExtensionSettingService>(
@@ -12216,7 +12216,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CustomerFeedService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CustomerFeedService
    */
   public get customerFeeds() {
     const service = this.loadService<services.CustomerFeedService>(
@@ -12468,7 +12468,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CustomerLabelService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CustomerLabelService
    */
   public get customerLabels() {
     const service = this.loadService<services.CustomerLabelService>(
@@ -12638,7 +12638,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CustomerNegativeCriterionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CustomerNegativeCriterionService
    */
   public get customerNegativeCriteria() {
     const service = this.loadService<services.CustomerNegativeCriterionService>(
@@ -12819,7 +12819,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CustomerService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CustomerService
    */
   public get customers() {
     const service = this.loadService<services.CustomerService>(
@@ -12915,7 +12915,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CustomerService#listaccessiblecustomers
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CustomerService#listaccessiblecustomers
        */
       listAccessibleCustomers: async (
         request: services.ListAccessibleCustomersRequest
@@ -12980,7 +12980,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CustomerService#createcustomerclient
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CustomerService#createcustomerclient
        */
       createCustomerClient: async (
         request: services.CreateCustomerClientRequest
@@ -13047,7 +13047,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CustomizerAttributeService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CustomizerAttributeService
    */
   public get customizerAttributes() {
     const service = this.loadService<services.CustomizerAttributeService>(
@@ -13220,7 +13220,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/ExperimentArmService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ExperimentArmService
    */
   public get experimentArms() {
     const service = this.loadService<services.ExperimentArmService>(
@@ -13472,7 +13472,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/ExperimentService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ExperimentService
    */
   public get experiments() {
     const service = this.loadService<services.ExperimentService>(
@@ -13722,7 +13722,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/ExperimentService#endexperiment
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ExperimentService#endexperiment
        */
       endExperiment: async (
         request: services.EndExperimentRequest
@@ -13787,7 +13787,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/ExperimentService#listexperimentasyncerrors
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ExperimentService#listexperimentasyncerrors
        */
       listExperimentAsyncErrors: async (
         request: services.ListExperimentAsyncErrorsRequest
@@ -13852,7 +13852,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/ExperimentService#graduateexperiment
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ExperimentService#graduateexperiment
        */
       graduateExperiment: async (
         request: services.GraduateExperimentRequest
@@ -13917,7 +13917,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/ExperimentService#scheduleexperiment
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ExperimentService#scheduleexperiment
        */
       scheduleExperiment: async (
         request: services.ScheduleExperimentRequest
@@ -13982,7 +13982,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/ExperimentService#promoteexperiment
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ExperimentService#promoteexperiment
        */
       promoteExperiment: async (
         request: services.PromoteExperimentRequest
@@ -14049,7 +14049,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/ExtensionFeedItemService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ExtensionFeedItemService
    */
   public get extensionFeedItems() {
     const service = this.loadService<services.ExtensionFeedItemService>(
@@ -14307,7 +14307,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/FeedItemService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/FeedItemService
    */
   public get feedItems() {
     const service = this.loadService<services.FeedItemService>(
@@ -14559,7 +14559,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/FeedItemSetLinkService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/FeedItemSetLinkService
    */
   public get feedItemSetLinks() {
     const service = this.loadService<services.FeedItemSetLinkService>(
@@ -14732,7 +14732,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/FeedItemSetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/FeedItemSetService
    */
   public get feedItemSets() {
     const service = this.loadService<services.FeedItemSetService>(
@@ -14984,7 +14984,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/FeedItemTargetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/FeedItemTargetService
    */
   public get feedItemTargets() {
     const service = this.loadService<services.FeedItemTargetService>(
@@ -15157,7 +15157,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/FeedMappingService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/FeedMappingService
    */
   public get feedMappings() {
     const service = this.loadService<services.FeedMappingService>(
@@ -15327,7 +15327,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/FeedService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/FeedService
    */
   public get feeds() {
     const service = this.loadService<services.FeedService>("FeedServiceClient");
@@ -15577,7 +15577,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/KeywordPlanAdGroupKeywordService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/KeywordPlanAdGroupKeywordService
    */
   public get keywordPlanAdGroupKeywords() {
     const service = this.loadService<services.KeywordPlanAdGroupKeywordService>(
@@ -15847,7 +15847,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/KeywordPlanAdGroupService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/KeywordPlanAdGroupService
    */
   public get keywordPlanAdGroups() {
     const service = this.loadService<services.KeywordPlanAdGroupService>(
@@ -16105,7 +16105,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/KeywordPlanCampaignKeywordService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/KeywordPlanCampaignKeywordService
    */
   public get keywordPlanCampaignKeywords() {
     const service =
@@ -16376,7 +16376,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/KeywordPlanCampaignService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/KeywordPlanCampaignService
    */
   public get keywordPlanCampaigns() {
     const service = this.loadService<services.KeywordPlanCampaignService>(
@@ -16634,7 +16634,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/KeywordPlanService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/KeywordPlanService
    */
   public get keywordPlans() {
     const service = this.loadService<services.KeywordPlanService>(
@@ -16884,7 +16884,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/KeywordPlanService#generateforecastcurve
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/KeywordPlanService#generateforecastcurve
        */
       generateForecastCurve: async (
         request: services.GenerateForecastCurveRequest
@@ -16949,7 +16949,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/KeywordPlanService#generateforecasttimeseries
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/KeywordPlanService#generateforecasttimeseries
        */
       generateForecastTimeSeries: async (
         request: services.GenerateForecastTimeSeriesRequest
@@ -17014,7 +17014,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/KeywordPlanService#generateforecastmetrics
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/KeywordPlanService#generateforecastmetrics
        */
       generateForecastMetrics: async (
         request: services.GenerateForecastMetricsRequest
@@ -17079,7 +17079,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/KeywordPlanService#generatehistoricalmetrics
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/KeywordPlanService#generatehistoricalmetrics
        */
       generateHistoricalMetrics: async (
         request: services.GenerateHistoricalMetricsRequest
@@ -17146,7 +17146,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/LabelService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/LabelService
    */
   public get labels() {
     const service =
@@ -17397,7 +17397,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/MediaFileService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/MediaFileService
    */
   public get mediaFiles() {
     const service = this.loadService<services.MediaFileService>(
@@ -17490,7 +17490,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/RemarketingActionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/RemarketingActionService
    */
   public get remarketingActions() {
     const service = this.loadService<services.RemarketingActionService>(
@@ -17671,7 +17671,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/SharedCriterionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/SharedCriterionService
    */
   public get sharedCriteria() {
     const service = this.loadService<services.SharedCriterionService>(
@@ -17844,7 +17844,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/SharedSetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/SharedSetService
    */
   public get sharedSets() {
     const service = this.loadService<services.SharedSetService>(
@@ -18096,7 +18096,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/SmartCampaignSettingService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/SmartCampaignSettingService
    */
   public get smartCampaignSettings() {
     const service = this.loadService<services.SmartCampaignSettingService>(
@@ -18109,6 +18109,71 @@ export default class ServiceFactory extends Service {
       >
     >;
     return {
+      /**
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/SmartCampaignSettingService#getsmartcampaignstatus
+       */
+      getSmartCampaignStatus: async (
+        request: services.GetSmartCampaignStatusRequest
+      ): Promise<services.GetSmartCampaignStatusResponse> => {
+        const baseHookArguments: BaseServiceHookArgs = {
+          credentials: this.credentials,
+          method: "SmartCampaignSettingService.GetSmartCampaignStatus",
+          requestOptions: request,
+        };
+        if (this.hooks.onServiceStart) {
+          const serviceCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onServiceStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              serviceCancellation.cancelled = true;
+              serviceCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (serviceCancellation.cancelled) {
+            return serviceCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.getSmartCampaignStatus(request, {
+            // @ts-expect-error This arg doesn't exist in the type definitions
+            otherArgs: {
+              headers: this.callHeaders,
+            },
+          });
+          if (this.hooks.onServiceEnd) {
+            const serviceResolution: HookedResolution = { resolved: false };
+            await this.hooks.onServiceEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                serviceResolution.resolved = true;
+                serviceResolution.res = res;
+              },
+            });
+            if (serviceResolution.resolved) {
+              return serviceResolution.res;
+            }
+          }
+          return response;
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err as Error);
+          if (this.hooks.onServiceError) {
+            await this.hooks.onServiceError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
+
       /**
        * @description update resources of type resources.ISmartCampaignSetting
        * @returns services.MutateSmartCampaignSettingsResponse
@@ -18200,7 +18265,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/UserListService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/UserListService
    */
   public get userLists() {
     const service = this.loadService<services.UserListService>(
@@ -18452,7 +18517,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/BillingSetupService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/BillingSetupService
    */
   public get billingSetups() {
     const service = this.loadService<services.BillingSetupService>(
@@ -18617,7 +18682,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/ConversionAdjustmentUploadService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ConversionAdjustmentUploadService
    */
   public get conversionAdjustmentUploads() {
     const service =
@@ -18627,7 +18692,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/ConversionAdjustmentUploadService#uploadconversionadjustments
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ConversionAdjustmentUploadService#uploadconversionadjustments
        */
       uploadConversionAdjustments: async (
         request: services.UploadConversionAdjustmentsRequest
@@ -18698,7 +18763,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/ConversionUploadService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ConversionUploadService
    */
   public get conversionUploads() {
     const service = this.loadService<services.ConversionUploadService>(
@@ -18707,7 +18772,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/ConversionUploadService#uploadclickconversions
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ConversionUploadService#uploadclickconversions
        */
       uploadClickConversions: async (
         request: services.UploadClickConversionsRequest
@@ -18772,7 +18837,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/ConversionUploadService#uploadcallconversions
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ConversionUploadService#uploadcallconversions
        */
       uploadCallConversions: async (
         request: services.UploadCallConversionsRequest
@@ -18839,7 +18904,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CustomAudienceService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CustomAudienceService
    */
   public get customAudiences() {
     const service = this.loadService<services.CustomAudienceService>(
@@ -19094,7 +19159,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CustomInterestService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CustomInterestService
    */
   public get customInterests() {
     const service = this.loadService<services.CustomInterestService>(
@@ -19272,7 +19337,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CustomerAssetSetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CustomerAssetSetService
    */
   public get customerAssetSets() {
     const service = this.loadService<services.CustomerAssetSetService>(
@@ -19445,7 +19510,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CustomerClientLinkService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CustomerClientLinkService
    */
   public get customerClientLinks() {
     const service = this.loadService<services.CustomerClientLinkService>(
@@ -19623,7 +19688,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CustomerManagerLinkService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CustomerManagerLinkService
    */
   public get customerManagerLinks() {
     const service = this.loadService<services.CustomerManagerLinkService>(
@@ -19719,7 +19784,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CustomerManagerLinkService#movemanagerlink
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CustomerManagerLinkService#movemanagerlink
        */
       moveManagerLink: async (
         request: services.MoveManagerLinkRequest
@@ -19786,7 +19851,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CustomerUserAccessInvitationService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CustomerUserAccessInvitationService
    */
   public get customerUserAccessInvitations() {
     const service =
@@ -19963,7 +20028,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/CustomerUserAccessService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/CustomerUserAccessService
    */
   public get customerUserAccesses() {
     const service = this.loadService<services.CustomerUserAccessService>(
@@ -20136,7 +20201,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/GeoTargetConstantService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/GeoTargetConstantService
    */
   public get geoTargetConstants() {
     const service = this.loadService<services.GeoTargetConstantService>(
@@ -20145,7 +20210,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/GeoTargetConstantService#suggestgeotargetconstants
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/GeoTargetConstantService#suggestgeotargetconstants
        */
       suggestGeoTargetConstants: async (
         request: services.SuggestGeoTargetConstantsRequest
@@ -20212,7 +20277,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/InvoiceService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/InvoiceService
    */
   public get invoices() {
     const service = this.loadService<services.InvoiceService>(
@@ -20221,7 +20286,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/InvoiceService#listinvoices
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/InvoiceService#listinvoices
        */
       listInvoices: async (
         request: services.ListInvoicesRequest
@@ -20288,7 +20353,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/KeywordPlanIdeaService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/KeywordPlanIdeaService
    */
   public get keywordPlanIdeas() {
     const service = this.loadService<services.KeywordPlanIdeaService>(
@@ -20297,7 +20362,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/KeywordPlanIdeaService#generatekeywordideas
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/KeywordPlanIdeaService#generatekeywordideas
        */
       generateKeywordIdeas: async (
         request: services.GenerateKeywordIdeasRequest
@@ -20362,7 +20427,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/KeywordPlanIdeaService#generatekeywordhistoricalmetrics
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/KeywordPlanIdeaService#generatekeywordhistoricalmetrics
        */
       generateKeywordHistoricalMetrics: async (
         request: services.GenerateKeywordHistoricalMetricsRequest
@@ -20430,7 +20495,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/KeywordPlanIdeaService#generateadgroupthemes
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/KeywordPlanIdeaService#generateadgroupthemes
        */
       generateAdGroupThemes: async (
         request: services.GenerateAdGroupThemesRequest
@@ -20497,7 +20562,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/KeywordThemeConstantService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/KeywordThemeConstantService
    */
   public get keywordThemeConstants() {
     const service = this.loadService<services.KeywordThemeConstantService>(
@@ -20506,7 +20571,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/KeywordThemeConstantService#suggestkeywordthemeconstants
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/KeywordThemeConstantService#suggestkeywordthemeconstants
        */
       suggestKeywordThemeConstants: async (
         request: services.SuggestKeywordThemeConstantsRequest
@@ -20576,7 +20641,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/MerchantCenterLinkService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/MerchantCenterLinkService
    */
   public get merchantCenterLinks() {
     const service = this.loadService<services.MerchantCenterLinkService>(
@@ -20587,7 +20652,7 @@ export default class ServiceFactory extends Service {
     >;
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/MerchantCenterLinkService#listmerchantcenterlinks
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/MerchantCenterLinkService#listmerchantcenterlinks
        */
       listMerchantCenterLinks: async (
         request: services.ListMerchantCenterLinksRequest
@@ -20652,7 +20717,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/MerchantCenterLinkService#getmerchantcenterlink
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/MerchantCenterLinkService#getmerchantcenterlink
        */
       getMerchantCenterLink: async (
         request: services.GetMerchantCenterLinkRequest
@@ -20881,7 +20946,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/OfflineUserDataJobService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/OfflineUserDataJobService
    */
   public get offlineUserDataJobs() {
     const service = this.loadService<services.OfflineUserDataJobService>(
@@ -20890,7 +20955,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/OfflineUserDataJobService#createofflineuserdatajob
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/OfflineUserDataJobService#createofflineuserdatajob
        */
       createOfflineUserDataJob: async (
         request: services.CreateOfflineUserDataJobRequest
@@ -20955,7 +21020,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/OfflineUserDataJobService#addofflineuserdatajoboperations
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/OfflineUserDataJobService#addofflineuserdatajoboperations
        */
       addOfflineUserDataJobOperations: async (
         request: services.AddOfflineUserDataJobOperationsRequest
@@ -21023,7 +21088,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/OfflineUserDataJobService#runofflineuserdatajob
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/OfflineUserDataJobService#runofflineuserdatajob
        */
       runOfflineUserDataJob: async (
         request: services.RunOfflineUserDataJobRequest
@@ -21090,7 +21155,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/PaymentsAccountService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/PaymentsAccountService
    */
   public get paymentsAccounts() {
     const service = this.loadService<services.PaymentsAccountService>(
@@ -21099,7 +21164,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/PaymentsAccountService#listpaymentsaccounts
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/PaymentsAccountService#listpaymentsaccounts
        */
       listPaymentsAccounts: async (
         request: services.ListPaymentsAccountsRequest
@@ -21166,7 +21231,148 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/ReachPlanService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ProductLinkService
+   */
+  public get productLinks() {
+    const service = this.loadService<services.ProductLinkService>(
+      "ProductLinkServiceClient"
+    );
+
+    return {
+      /**
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ProductLinkService#createproductlink
+       */
+      createProductLink: async (
+        request: services.CreateProductLinkRequest
+      ): Promise<services.CreateProductLinkResponse> => {
+        const baseHookArguments: BaseServiceHookArgs = {
+          credentials: this.credentials,
+          method: "ProductLinkService.CreateProductLink",
+          requestOptions: request,
+        };
+        if (this.hooks.onServiceStart) {
+          const serviceCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onServiceStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              serviceCancellation.cancelled = true;
+              serviceCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (serviceCancellation.cancelled) {
+            return serviceCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.createProductLink(request, {
+            // @ts-expect-error This arg doesn't exist in the type definitions
+            otherArgs: {
+              headers: this.callHeaders,
+            },
+          });
+          if (this.hooks.onServiceEnd) {
+            const serviceResolution: HookedResolution = { resolved: false };
+            await this.hooks.onServiceEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                serviceResolution.resolved = true;
+                serviceResolution.res = res;
+              },
+            });
+            if (serviceResolution.resolved) {
+              return serviceResolution.res;
+            }
+          }
+          return response;
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err as Error);
+          if (this.hooks.onServiceError) {
+            await this.hooks.onServiceError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
+
+      /**
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ProductLinkService#removeproductlink
+       */
+      removeProductLink: async (
+        request: services.RemoveProductLinkRequest
+      ): Promise<services.RemoveProductLinkResponse> => {
+        const baseHookArguments: BaseServiceHookArgs = {
+          credentials: this.credentials,
+          method: "ProductLinkService.RemoveProductLink",
+          requestOptions: request,
+        };
+        if (this.hooks.onServiceStart) {
+          const serviceCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onServiceStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              serviceCancellation.cancelled = true;
+              serviceCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (serviceCancellation.cancelled) {
+            return serviceCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.removeProductLink(request, {
+            // @ts-expect-error This arg doesn't exist in the type definitions
+            otherArgs: {
+              headers: this.callHeaders,
+            },
+          });
+          if (this.hooks.onServiceEnd) {
+            const serviceResolution: HookedResolution = { resolved: false };
+            await this.hooks.onServiceEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                serviceResolution.resolved = true;
+                serviceResolution.res = res;
+              },
+            });
+            if (serviceResolution.resolved) {
+              return serviceResolution.res;
+            }
+          }
+          return response;
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err as Error);
+          if (this.hooks.onServiceError) {
+            await this.hooks.onServiceError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
+    };
+  }
+
+  /**
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ReachPlanService
    */
   public get reachPlans() {
     const service = this.loadService<services.ReachPlanService>(
@@ -21175,7 +21381,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/ReachPlanService#listplannablelocations
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ReachPlanService#listplannablelocations
        */
       listPlannableLocations: async (
         request: services.ListPlannableLocationsRequest
@@ -21240,7 +21446,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/ReachPlanService#listplannableproducts
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ReachPlanService#listplannableproducts
        */
       listPlannableProducts: async (
         request: services.ListPlannableProductsRequest
@@ -21305,7 +21511,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/ReachPlanService#generatereachforecast
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ReachPlanService#generatereachforecast
        */
       generateReachForecast: async (
         request: services.GenerateReachForecastRequest
@@ -21372,7 +21578,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/RecommendationService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/RecommendationService
    */
   public get recommendations() {
     const service = this.loadService<services.RecommendationService>(
@@ -21381,7 +21587,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/RecommendationService#applyrecommendation
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/RecommendationService#applyrecommendation
        */
       applyRecommendation: async (
         request: services.ApplyRecommendationRequest
@@ -21446,7 +21652,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/RecommendationService#dismissrecommendation
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/RecommendationService#dismissrecommendation
        */
       dismissRecommendation: async (
         request: services.DismissRecommendationRequest
@@ -21513,7 +21719,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/SmartCampaignSuggestService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/SmartCampaignSuggestService
    */
   public get smartCampaignSuggests() {
     const service = this.loadService<services.SmartCampaignSuggestService>(
@@ -21522,7 +21728,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/SmartCampaignSuggestService#suggestsmartcampaignbudgetoptions
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/SmartCampaignSuggestService#suggestsmartcampaignbudgetoptions
        */
       suggestSmartCampaignBudgetOptions: async (
         request: services.SuggestSmartCampaignBudgetOptionsRequest
@@ -21591,7 +21797,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/SmartCampaignSuggestService#suggestsmartcampaignad
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/SmartCampaignSuggestService#suggestsmartcampaignad
        */
       suggestSmartCampaignAd: async (
         request: services.SuggestSmartCampaignAdRequest
@@ -21656,7 +21862,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/SmartCampaignSuggestService#suggestkeywordthemes
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/SmartCampaignSuggestService#suggestkeywordthemes
        */
       suggestKeywordThemes: async (
         request: services.SuggestKeywordThemesRequest
@@ -21723,7 +21929,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/ThirdPartyAppAnalyticsLinkService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ThirdPartyAppAnalyticsLinkService
    */
   public get thirdPartyAppAnalyticsLinks() {
     const service =
@@ -21733,7 +21939,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/ThirdPartyAppAnalyticsLinkService#regenerateshareablelinkid
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/ThirdPartyAppAnalyticsLinkService#regenerateshareablelinkid
        */
       regenerateShareableLinkId: async (
         request: services.RegenerateShareableLinkIdRequest
@@ -21800,7 +22006,83 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v12/UserDataService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/TravelAssetSuggestionService
+   */
+  public get travelAssetSuggestions() {
+    const service = this.loadService<services.TravelAssetSuggestionService>(
+      "TravelAssetSuggestionServiceClient"
+    );
+
+    return {
+      /**
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/TravelAssetSuggestionService#suggesttravelassets
+       */
+      suggestTravelAssets: async (
+        request: services.SuggestTravelAssetsRequest
+      ): Promise<services.SuggestTravelAssetsResponse> => {
+        const baseHookArguments: BaseServiceHookArgs = {
+          credentials: this.credentials,
+          method: "TravelAssetSuggestionService.SuggestTravelAssets",
+          requestOptions: request,
+        };
+        if (this.hooks.onServiceStart) {
+          const serviceCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onServiceStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              serviceCancellation.cancelled = true;
+              serviceCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (serviceCancellation.cancelled) {
+            return serviceCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.suggestTravelAssets(request, {
+            // @ts-expect-error This arg doesn't exist in the type definitions
+            otherArgs: {
+              headers: this.callHeaders,
+            },
+          });
+          if (this.hooks.onServiceEnd) {
+            const serviceResolution: HookedResolution = { resolved: false };
+            await this.hooks.onServiceEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                serviceResolution.resolved = true;
+                serviceResolution.res = res;
+              },
+            });
+            if (serviceResolution.resolved) {
+              return serviceResolution.res;
+            }
+          }
+          return response;
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err as Error);
+          if (this.hooks.onServiceError) {
+            await this.hooks.onServiceError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
+    };
+  }
+
+  /**
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v13/UserDataService
    */
   public get userData() {
     const service = this.loadService<services.UserDataService>(
@@ -21809,7 +22091,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v12/UserDataService#uploaduserdata
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v13/UserDataService#uploaduserdata
        */
       uploadUserData: async (
         request: services.UploadUserDataRequest
