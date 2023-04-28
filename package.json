@@ -17,6 +17,7 @@
   "author": "Opteo",
   "license": "MIT",
   "dependencies": {
+    "@isaacs/ttlcache": "^1.2.2",
     "google-ads-node": "^11.0.0",
     "google-auth-library": "^7.1.0",
     "google-gax": "^3.6.0",

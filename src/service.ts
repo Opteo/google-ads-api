@@ -18,6 +18,7 @@ import {
 import { getFieldMask, toSnakeCase } from "./utils";
 import { googleAdsVersion } from "./version";
 import { Hooks } from "./hooks";
+import TTLCache from "@isaacs/ttlcache";
 
 // Make sure to update this version number when upgrading
 export const FAILURE_KEY = `google.ads.googleads.${googleAdsVersion}.errors.googleadsfailure-bin`;
@@ -28,11 +29,19 @@ export interface CallHeaders {
   "linked-customer-id"?: string;
 }
 
+const cache = new TTLCache({
+  max: 1000,
+  ttl: 10 * 60 * 1000, // 10 minutes
+  dispose: async (service: any) => {
+    // Close connections when they are removed from the cache
+    await service.close();
+  },
+});
+
 export class Service {
   protected readonly clientOptions: ClientOptions;
   protected readonly customerOptions: CustomerOptions;
   protected readonly hooks: Hooks;
-  private serviceCache!: Record<ServiceName, AllServices>;
 
   constructor(
     clientOptions: ClientOptions,
@@ -83,18 +92,23 @@ export class Service {
   }
 
   protected loadService<T = AllServices>(service: ServiceName): T {
-    if (this.serviceCache[service]) {
-      return this.serviceCache[service] as unknown as T;
+    const serviceCacheKey = `${service}_${this.customerOptions.refresh_token}`;
+
+    if (cache.has(serviceCacheKey)) {
+      return cache.get(serviceCacheKey) as unknown as T;
     }
+
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const { [service]: protoService } = require("google-ads-node");
     if (typeof protoService === "undefined") {
       throw new Error(`Service "${service}" could not be found`);
     }
+
     const client = new protoService({
       sslCreds: this.getCredentials(),
     });
-    this.serviceCache[service] = client;
+
+    cache.set(serviceCacheKey, client);
     return client as unknown as T;
   }
 
