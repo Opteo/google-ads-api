@@ -29,11 +29,12 @@ export interface CallHeaders {
   "linked-customer-id"?: string;
 }
 
-const cache = new TTLCache({
+// A global service cache to avoid re-initialising services
+const serviceCache = new TTLCache({
   max: 1000,
   ttl: 10 * 60 * 1000, // 10 minutes
   dispose: async (service: any) => {
-    // Close connections when they are removed from the cache
+    // Close connections when services are removed from the cache
     await service.close();
   },
 });
@@ -94,8 +95,8 @@ export class Service {
   protected loadService<T = AllServices>(service: ServiceName): T {
     const serviceCacheKey = `${service}_${this.customerOptions.refresh_token}`;
 
-    if (cache.has(serviceCacheKey)) {
-      return cache.get(serviceCacheKey) as unknown as T;
+    if (serviceCache.has(serviceCacheKey)) {
+      return serviceCache.get(serviceCacheKey) as unknown as T;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -104,11 +105,12 @@ export class Service {
       throw new Error(`Service "${service}" could not be found`);
     }
 
+    // Initialising services can take a few ms, so we cache when possible.
     const client = new protoService({
       sslCreds: this.getCredentials(),
     });
 
-    cache.set(serviceCacheKey, client);
+    serviceCache.set(serviceCacheKey, client);
     return client as unknown as T;
   }
 
