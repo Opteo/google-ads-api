@@ -157,7 +157,7 @@ export function convertNumericEnumToString(
 }
 
 export function extractConstraintConditions(
-  constraints: ReportOptions["constraints"]
+  constraints: Readonly<ReportOptions["constraints"]>
 ): ConstraintString[] {
   if (typeof constraints === "undefined") {
     return [];
@@ -254,10 +254,10 @@ export function extractDateConditions(
 }
 
 export function buildWhereClause(
-  constraints: ReportOptions["constraints"],
-  dateConstant: ReportOptions["date_constant"],
-  fromDate: ReportOptions["from_date"],
-  toDate: ReportOptions["to_date"]
+  constraints: Readonly<ReportOptions["constraints"]>,
+  dateConstant: Readonly<ReportOptions["date_constant"]>,
+  fromDate: Readonly<ReportOptions["from_date"]>,
+  toDate: Readonly<ReportOptions["to_date"]>
 ): WhereClause {
   const constraintClauses = extractConstraintConditions(constraints);
   const dateConstantClauses = extractDateConstantConditions(dateConstant);
@@ -287,7 +287,7 @@ export function buildLimitClause(limit: ReportOptions["limit"]): LimitClause {
 }
 
 export function buildParametersClause(
-  parameters: ReportOptions["parameters"]
+  parameters: Readonly<ReportOptions["parameters"]>
 ): ParametersClause {
   if (typeof parameters === "undefined") {
     return ``;
@@ -318,9 +318,9 @@ export function completeOrderly(
 }
 
 export function buildOrderClauseOld(
-  orderBy: ReportOptions["order_by"],
-  sortOrder: ReportOptions["sort_order"],
-  entity: ReportOptions["entity"]
+  orderBy: Readonly<ReportOptions["order_by"]>,
+  sortOrder: Readonly<ReportOptions["sort_order"]>,
+  entity: Readonly<ReportOptions["entity"]>
 ): OrderClause {
   if (typeof orderBy === "undefined") {
     return ``;
@@ -353,8 +353,8 @@ export function buildOrderClauseOld(
 }
 
 export function buildOrderClauseNew(
-  order: Required<ReportOptions["order"]>,
-  entity: ReportOptions["entity"]
+  order: Readonly<Required<ReportOptions["order"]>>,
+  entity: Readonly<ReportOptions["entity"]>
 ): OrderClause {
   if (!order || !Array.isArray(order)) {
     throw new Error(QueryError.INVALID_ORDER);
@@ -376,10 +376,10 @@ export function buildOrderClauseNew(
 }
 
 export function buildOrderClause(
-  order: ReportOptions["order"],
-  orderBy: ReportOptions["order_by"],
-  sortOrder: ReportOptions["sort_order"],
-  entity: ReportOptions["entity"]
+  order: Readonly<ReportOptions["order"]>,
+  orderBy: Readonly<ReportOptions["order_by"]>,
+  sortOrder: Readonly<ReportOptions["sort_order"]>,
+  entity: Readonly<ReportOptions["entity"]>
 ): OrderClause {
   if (order) {
     return buildOrderClauseNew(order, entity);
@@ -389,7 +389,7 @@ export function buildOrderClause(
 }
 
 export function buildRequestOptions(
-  reportOptions: ReportOptions
+  reportOptions: Readonly<ReportOptions>
 ): RequestOptions {
   const { page_size, page_token, validate_only, summary_row_setting } =
     reportOptions;
@@ -397,7 +397,7 @@ export function buildRequestOptions(
   return { page_size, page_token, validate_only, summary_row_setting };
 }
 
-export function buildQuery(reportOptions: ReportOptions): {
+export function buildQuery(reportOptions: Readonly<ReportOptions>): {
   gaqlQuery: Query;
   requestOptions: RequestOptions;
 } {

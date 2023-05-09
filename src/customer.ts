@@ -36,7 +36,7 @@ export class Customer extends ServiceFactory {
   */
   public async query<T = services.IGoogleAdsRow[]>(
     gaqlQuery: string,
-    requestOptions: RequestOptions = {}
+    requestOptions: Readonly<RequestOptions> = {}
   ): Promise<T> {
     const { response } = await this.querier<T>(gaqlQuery, requestOptions);
     return response;
@@ -52,7 +52,7 @@ export class Customer extends ServiceFactory {
   */
   public async *queryStream<T = services.IGoogleAdsRow>(
     gaqlQuery: string,
-    requestOptions: RequestOptions = {}
+    requestOptions: Readonly<RequestOptions> = {}
   ): AsyncGenerator<T> {
     const stream = this.streamer<T>(gaqlQuery, requestOptions);
     for await (const row of stream) {
@@ -66,7 +66,7 @@ export class Customer extends ServiceFactory {
     @hooks onQueryStart, onQueryError, onQueryEnd
   */
   public async report<T = services.IGoogleAdsRow[]>(
-    options: ReportOptions
+    options: Readonly<ReportOptions>
   ): Promise<T> {
     const { gaqlQuery, requestOptions } = buildQuery(options);
     const { response } = await this.querier<T>(
@@ -82,10 +82,9 @@ export class Customer extends ServiceFactory {
     @hooks none
   */
   public async reportCount(
-    options: ReportOptions
+    options: Readonly<ReportOptions>
   ): Promise<number | undefined> {
-    options.limit = 1; // must get at least one row
-    const { gaqlQuery, requestOptions } = buildQuery(options);
+    const { gaqlQuery, requestOptions } = buildQuery({ ...options, limit: 1 }); // must get at least one row
     // @ts-expect-error we do not allow this field in reportOptions, however it is still a valid request option
     requestOptions.return_total_results_count = true;
     const useHooks = false; // to avoid cacheing conflicts
@@ -108,7 +107,7 @@ export class Customer extends ServiceFactory {
     for await (const row of stream) { ... }
   */
   public async *reportStream<T = services.IGoogleAdsRow>(
-    reportOptions: ReportOptions
+    reportOptions: Readonly<ReportOptions>
   ): AsyncGenerator<T> {
     const { gaqlQuery, requestOptions } = buildQuery(reportOptions);
     const stream = this.streamer<T>(gaqlQuery, requestOptions, reportOptions);
@@ -127,7 +126,7 @@ export class Customer extends ServiceFactory {
     stream.on('end', () => { ... })
   */
   public async reportStreamRaw(
-    reportOptions: ReportOptions
+    reportOptions: Readonly<ReportOptions>
   ): Promise<CancellableStream | void> {
     const { gaqlQuery, requestOptions } = buildQuery(reportOptions);
 
@@ -169,7 +168,7 @@ export class Customer extends ServiceFactory {
 
   private async search(
     gaqlQuery: string,
-    requestOptions: RequestOptions
+    requestOptions: Readonly<RequestOptions>
   ): Promise<{
     response: services.IGoogleAdsRow[];
     nextPageToken: PageToken;
@@ -201,7 +200,7 @@ export class Customer extends ServiceFactory {
 
   private async paginatedSearch(
     gaqlQuery: string,
-    requestOptions: RequestOptions,
+    requestOptions: Readonly<RequestOptions>,
     parser: (rows: services.IGoogleAdsRow[]) => services.IGoogleAdsRow[]
   ): Promise<{
     response: services.IGoogleAdsRow[];
@@ -229,7 +228,7 @@ export class Customer extends ServiceFactory {
   private async querier<T = services.IGoogleAdsRow[]>(
     gaqlQuery: string,
     requestOptions: RequestOptions = {},
-    reportOptions?: ReportOptions,
+    reportOptions?: Readonly<ReportOptions>,
     useHooks = true
   ): Promise<{ response: T; totalResultsCount?: number }> {
     const baseHookArguments: BaseRequestHookArgs = {
@@ -304,7 +303,7 @@ export class Customer extends ServiceFactory {
   private async *streamer<T = services.IGoogleAdsRow>(
     gaqlQuery: string,
     requestOptions: RequestOptions = {},
-    reportOptions?: ReportOptions
+    reportOptions?: Readonly<ReportOptions>
   ): AsyncGenerator<T> {
     const baseHookArguments: BaseRequestHookArgs = {
       credentials: this.credentials,
