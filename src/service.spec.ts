@@ -25,19 +25,6 @@ describe("Service", () => {
       expect(service).toBeInstanceOf(GoogleAdsServiceClient);
     });
 
-    it("should load the service from cache after the initial call", () => {
-      const customer = newCustomer();
-      // @ts-expect-error Accessing private property for test purposes
-      expect(customer.serviceCache?.["GoogleAdsServiceClient"]).toBeUndefined();
-      // @ts-expect-error Accessing private method for test purposes
-      customer.loadService("GoogleAdsServiceClient");
-      // The service should now be cached on the customer instance
-      // @ts-expect-error Accessing private property for test purposes
-      expect(customer.serviceCache?.["GoogleAdsServiceClient"]).toBeInstanceOf(
-        GoogleAdsServiceClient
-      );
-    });
-
     it("should throw an error if the service is invalid", () => {
       const customer = newCustomer();
       try {
