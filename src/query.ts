@@ -47,7 +47,7 @@ export const QueryError = {
   INVALID_CONSTRAINT_KEY: "A constraint key must have a string value.",
   INVALID_CONSTRAINT_VALUE: (
     key: ConstraintKey,
-    val: ConstraintValue
+    val: ConstraintValue | undefined
   ): string =>
     // @ts-ignore
     `The value of the constraint ${key} must be a string, number, boolean, or an array of these types. Here, typeof ${key} is ${typeof val}.`,
@@ -174,12 +174,12 @@ export function extractConstraintConditions(
       if (typeof con === "object" && !Array.isArray(con) && con !== null) {
         // @ts-ignore
         if (con.key && con.op) {
-          const { key, op }: ConstraintType1 = con as ConstraintType1;
+          const { key, op, val }: ConstraintType1 = con as ConstraintType1;
 
           if (typeof key !== "string") {
             throw new Error(QueryError.INVALID_CONSTRAINT_KEY);
           }
-          const validatedValue = validateConstraintKeyAndValue(key, op, con.val);
+          const validatedValue = validateConstraintKeyAndValue(key, op, val);
           // @ts-ignore
           return `${key} ${op} ${validatedValue.val}` as const;
         } else if (Object.keys(con).length === 1) {
