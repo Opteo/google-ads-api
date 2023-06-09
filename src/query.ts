@@ -102,11 +102,19 @@ export function buildFromClause(entity: ReportOptions["entity"]): FromClause {
 export function validateConstraintKeyAndValue(
   key: ConstraintKey,
   op: ConstraintOperation,
-  val: ConstraintValue
+  val: ConstraintValue | undefined
 ): {
   op: ConstraintOperation;
   val: ParsedConstraintValue;
 } {
+  if (val === undefined) {
+    if (op === "IS NULL" || op === "IS NOT NULL") {
+        return { op, val: "" }; // no value needed
+    }
+
+    throw new Error(QueryError.INVALID_CONSTRAINT_VALUE(key, val));
+  }
+
   if (typeof val === "number" || typeof val === "boolean") {
     return { op: "=", val: convertNumericEnumToString(key, val) };
   }
@@ -165,13 +173,13 @@ export function extractConstraintConditions(
     return constraints.map((con: Constraint) => {
       if (typeof con === "object" && !Array.isArray(con) && con !== null) {
         // @ts-ignore
-        if (con.key && con.op && typeof con.val !== "undefined") {
-          const { key, op, val }: ConstraintType1 = con as ConstraintType1;
+        if (con.key && con.op) {
+          const { key, op }: ConstraintType1 = con as ConstraintType1;
 
           if (typeof key !== "string") {
             throw new Error(QueryError.INVALID_CONSTRAINT_KEY);
           }
-          const validatedValue = validateConstraintKeyAndValue(key, op, val);
+          const validatedValue = validateConstraintKeyAndValue(key, op, con.val);
           // @ts-ignore
           return `${key} ${op} ${validatedValue.val}` as const;
         } else if (Object.keys(con).length === 1) {

@@ -96,7 +96,7 @@ export type ConstraintOperation =
 export type ConstraintType1 = {
   key: ConstraintKey;
   op: ConstraintOperation;
-  val: ConstraintValue;
+  val?: ConstraintValue;
 };
 export type ConstraintType2 = { [C in ConstraintKey]?: ConstraintValue };
 
