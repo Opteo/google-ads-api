@@ -88,8 +88,16 @@ describe("parseRows", () => {
   it("translates long (int64) proto values into number types", () => {
     const rows: services.IGoogleAdsRow[] = [
       {
-        campaign: { id: "1234567890" },
-        metrics: { clicks: "1234567890", cost_micros: "1234567890" },
+        campaign: {
+          // @ts-expect-error Simulating proto response
+          id: "1234567890",
+        },
+        metrics: {
+          // @ts-expect-error Simulating proto response
+          clicks: "1234567890",
+          // @ts-expect-error Simulating proto response
+          cost_micros: "1234567890",
+        },
       },
     ];
     const parsedResults = parseRows(rows, [
