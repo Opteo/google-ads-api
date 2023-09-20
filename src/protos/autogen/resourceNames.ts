@@ -934,32 +934,6 @@ export function campaignCriterion(
   return `customers/${customerId}/campaignCriteria/${campaignId}~${criterionId}` as const;
 }
 
-/* CampaignCriterionSimulation */
-export type CampaignCriterionSimulationResourceName =
-  `customers/${StrNum}/campaignCriterionSimulations/${StrNum}~${StrNum}~${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
-/**
- * @param {string | number} customerId
- * @param {string | number} campaignId
- * @param {string | number} criterionId
- * @param {string | number} type
- * @param {string | number} modificationMethod
- * @param {string | number} startDate
- * @param {string | number} endDate
- * @returns `CampaignCriterionSimulationResourceName`
- * @example const campaignCriterionSimulation: ResourceNames.CampaignCriterionSimulationResourceName = ResourceNames.campaignCriterionSimulation(10987417, 21974834, 43949668, 87899336, 175798672, 351597344, 703194688)
- */
-export function campaignCriterionSimulation(
-  customerId: string | number,
-  campaignId: string | number,
-  criterionId: string | number,
-  type: string | number,
-  modificationMethod: string | number,
-  startDate: string | number,
-  endDate: string | number
-): CampaignCriterionSimulationResourceName {
-  return `customers/${customerId}/campaignCriterionSimulations/${campaignId}~${criterionId}~${type}~${modificationMethod}~${startDate}~${endDate}` as const;
-}
-
 /* CampaignCustomizer */
 export type CampaignCustomizerResourceName =
   `customers/${StrNum}/campaignCustomizers/${StrNum}~${StrNum}`;
@@ -1064,6 +1038,24 @@ export function campaignLabel(
   labelId: string | number
 ): CampaignLabelResourceName {
   return `customers/${customerId}/campaignLabels/${campaignId}~${labelId}` as const;
+}
+
+/* CampaignSearchTermInsight */
+export type CampaignSearchTermInsightResourceName =
+  `customers/${StrNum}/campaignSearchTermInsights/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} campaignId
+ * @param {string | number} clusterId
+ * @returns `CampaignSearchTermInsightResourceName`
+ * @example const campaignSearchTermInsight: ResourceNames.CampaignSearchTermInsightResourceName = ResourceNames.campaignSearchTermInsight(10987417, 21974834, 43949668)
+ */
+export function campaignSearchTermInsight(
+  customerId: string | number,
+  campaignId: string | number,
+  clusterId: string | number
+): CampaignSearchTermInsightResourceName {
+  return `customers/${customerId}/campaignSearchTermInsights/${campaignId}~${clusterId}` as const;
 }
 
 /* CampaignSharedSet */
@@ -1525,6 +1517,38 @@ export function customerNegativeCriterion(
   criterionId: string | number
 ): CustomerNegativeCriterionResourceName {
   return `customers/${customerId}/customerNegativeCriteria/${criterionId}` as const;
+}
+
+/* CustomerSearchTermInsight */
+export type CustomerSearchTermInsightResourceName =
+  `customers/${StrNum}/customerSearchTermInsights/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} clusterId
+ * @returns `CustomerSearchTermInsightResourceName`
+ * @example const customerSearchTermInsight: ResourceNames.CustomerSearchTermInsightResourceName = ResourceNames.customerSearchTermInsight(10987417, 21974834)
+ */
+export function customerSearchTermInsight(
+  customerId: string | number,
+  clusterId: string | number
+): CustomerSearchTermInsightResourceName {
+  return `customers/${customerId}/customerSearchTermInsights/${clusterId}` as const;
+}
+
+/* CustomerSkAdNetworkConversionValueSchema */
+export type CustomerSkAdNetworkConversionValueSchemaResourceName =
+  `customers/${StrNum}/customerSkAdNetworkConversionValueSchemas/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} accountLinkId
+ * @returns `CustomerSkAdNetworkConversionValueSchemaResourceName`
+ * @example const customerSkAdNetworkConversionValueSchema: ResourceNames.CustomerSkAdNetworkConversionValueSchemaResourceName = ResourceNames.customerSkAdNetworkConversionValueSchema(10987417, 21974834)
+ */
+export function customerSkAdNetworkConversionValueSchema(
+  customerId: string | number,
+  accountLinkId: string | number
+): CustomerSkAdNetworkConversionValueSchemaResourceName {
+  return `customers/${customerId}/customerSkAdNetworkConversionValueSchemas/${accountLinkId}` as const;
 }
 
 /* CustomerUserAccess */
