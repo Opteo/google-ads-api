@@ -12,7 +12,14 @@ export async function compileEnums(): Promise<void> {
 
   for (const [fullName, def] of Object.entries(internalEnums)) {
     const [name] = fullName.split("Enum");
-    const values = (def as any)[name];
+    const values = Object.entries(def).find(
+      ([, val]) => typeof val !== "function" // Get the object field which isn't a function, which happens to be the enum values
+    )?.[1];
+
+    if (!values) {
+      throw new Error("Could not find values for enum " + fullName);
+    }
+
     const pairs = Object.keys(values).map((key) => {
       const protoVal = values[key];
       return `${key} = ${protoVal}, // ${key}`;
