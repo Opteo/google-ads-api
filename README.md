@@ -52,7 +52,7 @@ npm install google-ads-api
   - [Total Results Count](#total-results-count)
 - Mutations
   - [Create an expanded text ad](#create-an-expanded-text-ad)
-  - [Create a campaign & budget atomically](#create-a-campaign--budget-atomically)
+  - [Create a campaign & budget automatically](#create-a-campaign--budget-automatically)
 - Misc
   - [Resource Names](#resource-names)
   - [Hooks](#hooks)
@@ -311,7 +311,7 @@ const { results } = await cus.adGroupAds.create([adGroupAd]);
 
 ---
 
-## Create a Campaign & Budget atomically
+## Create a Campaign & Budget automatically
 
 ```ts
 import {
