@@ -207,7 +207,15 @@ export class Service {
         const operation = {
           [mutation.operation ?? "create"]: mutation.resource,
         };
-        if (mutation.operation === "update") {
+        if (
+          mutation.operation === "create" &&
+          //@ts-ignore
+          mutation?.exempt_policy_violation_keys?.length
+        ) {
+          operation.exempt_policy_violation_keys =
+            // @ts-expect-error Field required for policy violation exemptions
+            mutation.exempt_policy_violation_keys;
+        } else if (mutation.operation === "update") {
           // @ts-expect-error Resource operations should have updateMask defined
           operation.update_mask = getFieldMask(mutation.resource);
         }
@@ -237,7 +245,13 @@ export class Service {
         [type]: e,
         operation: type,
       };
-      if (type === "update") {
+      //@ts-ignore
+      if (type === "create" && e?.exempt_policy_violation_keys?.length) {
+        // @ts-expect-error Field required for policy violation exemptions
+        op.exempt_policy_violation_keys = e.exempt_policy_violation_keys;
+        //@ts-ignore
+        delete e.exempt_policy_violation_keys;
+      } else if (type === "update") {
         // @ts-expect-error Field required for updates
         op.update_mask = getFieldMask(
           // @ts-expect-error Message types have a toObject method
