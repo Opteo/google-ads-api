@@ -212,8 +212,8 @@ export class Service {
           //@ts-ignore
           mutation?.exempt_policy_violation_keys?.length
         ) {
+          //@ts-ignore
           operation.exempt_policy_violation_keys =
-            // @ts-expect-error Field required for policy violation exemptions
             mutation.exempt_policy_violation_keys;
         } else if (mutation.operation === "update") {
           // @ts-expect-error Resource operations should have updateMask defined

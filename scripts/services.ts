@@ -353,7 +353,10 @@ function buildMutateMethod(
   const isUpdate = mutation === "update";
   const updateMaskMessageArg = isUpdate ? `, ${requestClass}` : "";
 
-  const policyViolationArgType = argName!=='adGroupCriteria'?`(${resourceType} | ${requestClass})[]`:`((${resourceType} & {exempt_policy_violation_keys?: services.AdGroupCriterionOperation['exempt_policy_violation_keys'] } ) | (${requestClass} & {exempt_policy_violation_keys?: services.AdGroupCriterionOperation['exempt_policy_violation_keys'] }))[]`
+  const policyViolationArgType =
+    argName !== "adGroupCriteria"
+      ? `(${resourceType} | ${requestClass})[]`
+      : `((${resourceType} & {exempt_policy_violation_keys?: services.AdGroupCriterionOperation['exempt_policy_violation_keys'] } ) | (${requestClass} & {exempt_policy_violation_keys?: services.AdGroupCriterionOperation['exempt_policy_violation_keys'] }))[]`;
   return `
     /**
      * @description ${mutation} resources of type ${resourceType}
@@ -361,9 +364,7 @@ function buildMutateMethod(
      */
     ${mutation}: async (
       ${argName}: ${
-    mutation === "remove"
-      ? `${resourceType}[]`
-      :`${policyViolationArgType}`
+    mutation === "remove" ? `${resourceType}[]` : `${policyViolationArgType}`
   } ,
       options?: MutateOptions
     ): Promise<${responseType} > => {

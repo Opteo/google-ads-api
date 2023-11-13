@@ -118,6 +118,7 @@ export type MutateOperation<T> = {
   resource: T;
   entity: fields.Resource;
   operation?: "create" | "update" | "remove";
+  exempt_policy_violation_keys?: services.AdGroupCriterionOperation["exempt_policy_violation_keys"];
 } & Partial<Omit<T, "toJSON">>;
 
 export type PageToken = services.ISearchGoogleAdsResponse["next_page_token"];
