@@ -367,6 +367,51 @@ const result = await customer.mutateResources(operations);
 
 ---
 
+## Add Policy Exemption Rules
+
+```ts
+import {
+  resources,
+  enums,
+  toMicros,
+  ResourceNames,
+  MutateOperation,
+} from "google-ads-api";
+
+// Ad Group to which you want to add the keyword
+const adGroupResourceName = 'customers/123/adGroups/456'
+
+const keyword = '24 hour locksmith harlem'
+
+const operations: MutateOperation<
+  resources.IAdGroupCriterion & { exempt_policy_violation_keys?: google.ads.googleads.v14.common.IPolicyViolationKey[]}
+>[] = [
+  {
+    entity: 'ad_group_criterion',
+    operation: "create",
+    resource: {
+      // Keyword with policy violation exemptions
+        ad_group: adGroupResourceName,
+        keyword: {
+            text: '24 hour locksmith harlem',
+            match_type: enums.KeywordMatchType.PHRASE,
+        },
+        status: enums.AdGroupStatus.ENABLED ,
+    },
+    exempt_policy_violation_keys: [
+        {
+            policy_name: 'LOCAL_SERVICES',
+            violating_text: keyword,
+        },
+    ],
+  }
+];
+
+const result = await customer.mutateResources(operations);
+```
+
+---
+
 ## Uploading Click Conversions
 
 ```ts

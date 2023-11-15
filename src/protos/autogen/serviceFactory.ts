@@ -1926,8 +1926,12 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         adGroupCriteria: (
-          | resources.IAdGroupCriterion
-          | resources.AdGroupCriterion
+          | (resources.IAdGroupCriterion & {
+              exempt_policy_violation_keys?: services.AdGroupCriterionOperation["exempt_policy_violation_keys"];
+            })
+          | (resources.AdGroupCriterion & {
+              exempt_policy_violation_keys?: services.AdGroupCriterionOperation["exempt_policy_violation_keys"];
+            })
         )[],
         options?: MutateOptions
       ): Promise<services.MutateAdGroupCriteriaResponse> => {
@@ -2006,8 +2010,12 @@ export default class ServiceFactory extends Service {
        */
       update: async (
         adGroupCriteria: (
-          | resources.IAdGroupCriterion
-          | resources.AdGroupCriterion
+          | (resources.IAdGroupCriterion & {
+              exempt_policy_violation_keys?: services.AdGroupCriterionOperation["exempt_policy_violation_keys"];
+            })
+          | (resources.AdGroupCriterion & {
+              exempt_policy_violation_keys?: services.AdGroupCriterionOperation["exempt_policy_violation_keys"];
+            })
         )[],
         options?: MutateOptions
       ): Promise<services.MutateAdGroupCriteriaResponse> => {
