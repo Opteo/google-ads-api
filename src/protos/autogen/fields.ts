@@ -2215,6 +2215,7 @@ export namespace fields {
     | "metrics.view_through_conversions_from_location_asset_website";
 
   export type Metrics = Array<Metric>;
+
   /*  -- SEGMENTS --  */
   export type Segment =
     | "segments.activity_account_id"
