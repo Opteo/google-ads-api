@@ -1,4 +1,9 @@
 import { CancellableStream } from "google-gax";
+import axios from "axios";
+import { chain } from "stream-chain";
+import { parser } from "stream-json";
+import { streamArray } from "stream-json/streamers/StreamArray";
+
 import { ClientOptions } from "./client";
 import {
   BaseMutationHookArgs,
@@ -8,7 +13,8 @@ import {
   Hooks,
 } from "./hooks";
 import { parse } from "./parser";
-import { services } from "./protos";
+import { decamelizeKeys } from "./parserRest";
+import { services, errors } from "./protos";
 import ServiceFactory from "./protos/autogen/serviceFactory";
 import { buildQuery } from "./query";
 import {
@@ -69,7 +75,7 @@ export class Customer extends ServiceFactory {
     options: Readonly<ReportOptions>
   ): Promise<T> {
     const { gaqlQuery, requestOptions } = buildQuery(options);
-    const { response } = await this.querier<T>(
+    const { response } = await this.querierRest<T>(
       gaqlQuery,
       requestOptions,
       options
@@ -223,6 +229,99 @@ export class Customer extends ServiceFactory {
     }
 
     return { response, totalResultsCount };
+  }
+
+  private async querierRest<T = services.IGoogleAdsRow[]>(
+    gaqlQuery: string,
+    requestOptions: RequestOptions = {},
+    reportOptions?: Readonly<ReportOptions>,
+    useHooks = true
+  ): Promise<{ response: T; totalResultsCount?: number }> {
+    const accessToken = await this.getAccessToken();
+    const args = {
+      method: "POST",
+      url: `https://googleads.googleapis.com/v14/customers/${this.customerOptions.customer_id}/googleAds:searchStream`,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "developer-token": this.clientOptions.developer_token ?? "",
+        "login-customer-id": this.credentials.login_customer_id ?? "",
+      },
+      responseType: "stream",
+      data: {
+        query: gaqlQuery,
+        // summary_row_setting: "SUMMARY_ROW_ONLY",
+      },
+    };
+
+    console.time("request");
+    try {
+      // @ts-ignore
+      const response = await axios(args);
+
+      const stream = response.data as any;
+      let waste = 0;
+
+      let rows: any = [];
+
+      const pipeline = chain([stream, parser(), streamArray()]);
+
+      stream.once("data", () => {
+        console.timeEnd("request");
+        console.time("parsing");
+      });
+
+      pipeline.on("data", (data) => {
+        console.log(data.value.results);
+        const now = Date.now();
+        const parsed = data.value.results.map((row: any) => {
+          return decamelizeKeys(row);
+        });
+        rows = [...rows, ...parsed];
+        waste += Date.now() - now;
+      });
+
+      await new Promise<void>((resolve, reject) => {
+        pipeline.on("end", () => resolve());
+        pipeline.on("error", (err) => reject(err));
+      });
+
+      console.timeEnd("parsing");
+      console.log({ waste });
+
+      return { response: rows as T };
+    } catch (e: any) {
+      // console.log("ERROR INCOMING");
+      // console.log(e.toJSON());
+      const stream = e.response.data as any;
+
+      const pipeline = chain([stream, parser(), streamArray()]);
+
+      stream.once("data", () => {
+        console.timeEnd("request");
+        console.time("parsing");
+      });
+
+      let googleAdsFailure: errors.GoogleAdsFailure | undefined;
+      pipeline.on("data", (data) => {
+        // console.log(data);
+
+        googleAdsFailure = new errors.GoogleAdsFailure(
+          decamelizeKeys(data.value.error.details[0])
+        );
+
+        // console.log(e);
+        // console.dir(data.value, { depth: null });
+        // new Error(data.error.message);
+      });
+
+      await new Promise<void>((resolve, reject) => {
+        pipeline.on("end", () => reject(googleAdsFailure));
+        pipeline.on("error", (err) => reject(err));
+      });
+      // console.log("AFTER ERROR");
+    }
+
+    return { response: [] as T };
   }
 
   private async querier<T = services.IGoogleAdsRow[]>(

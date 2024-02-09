@@ -1,5 +1,5 @@
 import { grpc } from "google-gax";
-import { UserRefreshClient } from "google-auth-library";
+import { UserRefreshClient, OAuth2Client } from "google-auth-library";
 import { ClientOptions } from "./client";
 import {
   AllServices,
@@ -90,6 +90,25 @@ export class Service {
       grpc.credentials.createFromGoogleCredential(authClient)
     );
     return credentials;
+  }
+
+  public async getAccessToken(): Promise<string> {
+    console.time("getAccessToken");
+    const oAuth2Client = new OAuth2Client(
+      this.clientOptions.client_id,
+      this.clientOptions.client_secret
+    );
+    oAuth2Client.setCredentials({
+      refresh_token: this.customerOptions.refresh_token,
+    });
+    const { token } = await oAuth2Client.getAccessToken();
+
+    if (typeof token !== "string") {
+      throw new Error("Failed to retrieve access token");
+    }
+    console.timeEnd("getAccessToken");
+
+    return token;
   }
 
   protected loadService<T = AllServices>(service: ServiceName): T {
