@@ -196,6 +196,7 @@ export class Customer extends ServiceFactory {
     response: services.IGoogleAdsRow[];
     nextPageToken: PageToken;
     totalResultsCount?: number;
+    summaryRow?: services.IGoogleAdsRow;
   }> {
     const accessToken = await this.getAccessToken();
 
@@ -212,11 +213,11 @@ export class Customer extends ServiceFactory {
       const searchResponse = rawResponse.data as any;
 
       const results = searchResponse.results ?? [];
-      console.time("parsing");
-      const response = this.clientOptions.disable_parsing
+      // console.time("parsing");
+      const response: any[] = this.clientOptions.disable_parsing
         ? results
         : results.map((row: any) => decamelizeKeys(row));
-      console.timeEnd("parsing");
+      // console.timeEnd("parsing");
 
       const summaryRow = decamelizeKeys(searchResponse.summaryRow);
       const nextPageToken = searchResponse.nextPageToken;
@@ -224,11 +225,7 @@ export class Customer extends ServiceFactory {
         ? +searchResponse.totalResultsCount
         : undefined;
 
-      if (summaryRow) {
-        response.unshift(summaryRow);
-      }
-
-      return { response, nextPageToken, totalResultsCount };
+      return { response, nextPageToken, totalResultsCount, summaryRow };
     } catch (e: any) {
       console.dir({ e: e.response.data }, { depth: null });
       if (e.response.data.error.details[0]) {
@@ -251,9 +248,11 @@ export class Customer extends ServiceFactory {
     let nextPageToken: PageToken = undefined;
     const initialSearch = await this.search(gaqlQuery, requestOptions);
     const totalResultsCount = initialSearch.totalResultsCount;
+    let summaryRow = initialSearch.summaryRow;
 
     response.push(...initialSearch.response);
     nextPageToken = initialSearch.nextPageToken;
+
     while (nextPageToken) {
       const nextSearch = await this.search(gaqlQuery, {
         ...requestOptions,
@@ -261,6 +260,13 @@ export class Customer extends ServiceFactory {
       });
       response.push(...initialSearch.response);
       nextPageToken = nextSearch.nextPageToken;
+      if (nextSearch.summaryRow) {
+        summaryRow = nextSearch.summaryRow;
+      }
+    }
+
+    if (summaryRow) {
+      response.unshift(summaryRow);
     }
 
     return { response, totalResultsCount };
@@ -366,7 +372,7 @@ export class Customer extends ServiceFactory {
 
     const accessToken = await this.getAccessToken();
 
-    console.time("request");
+    // console.time("request");
 
     let streamFinished = false;
     const accumulator: T[] = [];
@@ -393,12 +399,11 @@ export class Customer extends ServiceFactory {
       const pipeline = chain([stream, parser(), streamArray()]);
 
       stream.once("data", () => {
-        console.timeEnd("request");
+        // console.timeEnd("request");
       });
 
       pipeline.on("data", (data) => {
-        console.log("got chunk:", data);
-        console.time("chunk parsing");
+        // console.time("chunk parsing");
 
         const results = data.value.results ?? [data.value.summaryRow];
 
@@ -406,7 +411,7 @@ export class Customer extends ServiceFactory {
           ? results
           : results.map((row: any) => decamelizeKeys(row));
 
-        console.timeEnd("chunk parsing");
+        // console.timeEnd("chunk parsing");
 
         accumulator.push(...(parsed as T[]));
 
