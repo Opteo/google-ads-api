@@ -12,7 +12,7 @@ import {
   HookedResolution,
   Hooks,
 } from "./hooks";
-import { parse } from "./parser";
+
 import { decamelizeKeys } from "./parserRest";
 import { services, errors } from "./protos";
 import ServiceFactory from "./protos/autogen/serviceFactory";
@@ -26,7 +26,24 @@ import {
   RequestOptions,
 } from "./types";
 import { createNextChunkArrivedPromise } from "./utils";
+import { googleAdsVersion } from "./version";
 
+/**
+ * TODO:
+ *  - rename querierRest to streamRest. Add hooks support to it. OK
+ *  - write querierRest, using pagination. OK
+ *  - make sure return_total_results_count works
+ *  - make sure SUMMARY_ROW_SETTING works
+ *  - adapt query()
+ *  - adapt queryStream
+ *  - adapt report()
+ *  - adapt reportCount()
+ *  - adapt reportStream()
+ *  - reportStreamRaw() ?
+ *  - bonus: use queryStream when the params allow it
+ *  - bonus: make it possible to cancel a stream or pagination when row count exceeds specified max
+ *
+ */
 export class Customer extends ServiceFactory {
   constructor(
     clientOptions: ClientOptions,
@@ -75,7 +92,7 @@ export class Customer extends ServiceFactory {
     options: Readonly<ReportOptions>
   ): Promise<T> {
     const { gaqlQuery, requestOptions } = buildQuery(options);
-    const { response } = await this.querierRest<T>(
+    const { response } = await this.querier<T>(
       gaqlQuery,
       requestOptions,
       options
@@ -180,34 +197,52 @@ export class Customer extends ServiceFactory {
     nextPageToken: PageToken;
     totalResultsCount?: number;
   }> {
-    const { service, request } = this.buildSearchRequestAndService(
-      gaqlQuery,
-      requestOptions
-    );
+    const accessToken = await this.getAccessToken();
 
-    const searchResponse = await service.search(request, {
-      otherArgs: { headers: this.callHeaders },
-      autoPaginate: false, // autoPaginate doesn't work
-    });
+    try {
+      const rawResponse = await axios(
+        this.prepareGoogleAdsServicePostRequestArgs("search", accessToken, {
+          data: {
+            query: gaqlQuery,
+            ...requestOptions,
+          },
+        })
+      );
 
-    const response = searchResponse[0];
-    const summaryRow = searchResponse[2].summary_row;
-    const nextPageToken = searchResponse[2].next_page_token;
-    const totalResultsCount = searchResponse[2].total_results_count
-      ? +searchResponse[2].total_results_count
-      : undefined;
+      const searchResponse = rawResponse.data as any;
 
-    if (summaryRow) {
-      response.unshift(summaryRow);
+      const results = searchResponse.results ?? [];
+      console.time("parsing");
+      const response = this.clientOptions.disable_parsing
+        ? results
+        : results.map((row: any) => decamelizeKeys(row));
+      console.timeEnd("parsing");
+
+      const summaryRow = decamelizeKeys(searchResponse.summaryRow);
+      const nextPageToken = searchResponse.nextPageToken;
+      const totalResultsCount = searchResponse.totalResultsCount
+        ? +searchResponse.totalResultsCount
+        : undefined;
+
+      if (summaryRow) {
+        response.unshift(summaryRow);
+      }
+
+      return { response, nextPageToken, totalResultsCount };
+    } catch (e: any) {
+      console.dir({ e: e.response.data }, { depth: null });
+      if (e.response.data.error.details[0]) {
+        throw new errors.GoogleAdsFailure(
+          decamelizeKeys(e.response.data.error.details[0])
+        );
+      }
+      throw "bag";
     }
-
-    return { response, nextPageToken, totalResultsCount };
   }
 
   private async paginatedSearch(
     gaqlQuery: string,
-    requestOptions: Readonly<RequestOptions>,
-    parser: (rows: services.IGoogleAdsRow[]) => services.IGoogleAdsRow[]
+    requestOptions: Readonly<RequestOptions>
   ): Promise<{
     response: services.IGoogleAdsRow[];
     totalResultsCount?: number;
@@ -217,111 +252,18 @@ export class Customer extends ServiceFactory {
     const initialSearch = await this.search(gaqlQuery, requestOptions);
     const totalResultsCount = initialSearch.totalResultsCount;
 
-    response.push(...parser(initialSearch.response));
+    response.push(...initialSearch.response);
     nextPageToken = initialSearch.nextPageToken;
     while (nextPageToken) {
       const nextSearch = await this.search(gaqlQuery, {
         ...requestOptions,
         page_token: nextPageToken,
       });
-      response.push(...parser(nextSearch.response));
+      response.push(...initialSearch.response);
       nextPageToken = nextSearch.nextPageToken;
     }
 
     return { response, totalResultsCount };
-  }
-
-  private async querierRest<T = services.IGoogleAdsRow[]>(
-    gaqlQuery: string,
-    requestOptions: RequestOptions = {},
-    reportOptions?: Readonly<ReportOptions>,
-    useHooks = true
-  ): Promise<{ response: T; totalResultsCount?: number }> {
-    const accessToken = await this.getAccessToken();
-    const args = {
-      method: "POST",
-      url: `https://googleads.googleapis.com/v14/customers/${this.customerOptions.customer_id}/googleAds:searchStream`,
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "developer-token": this.clientOptions.developer_token ?? "",
-        "login-customer-id": this.credentials.login_customer_id ?? "",
-      },
-      responseType: "stream",
-      data: {
-        query: gaqlQuery,
-        // summary_row_setting: "SUMMARY_ROW_ONLY",
-      },
-    };
-
-    console.time("request");
-    try {
-      // @ts-ignore
-      const response = await axios(args);
-
-      const stream = response.data as any;
-      let waste = 0;
-
-      let rows: any = [];
-
-      const pipeline = chain([stream, parser(), streamArray()]);
-
-      stream.once("data", () => {
-        console.timeEnd("request");
-        console.time("parsing");
-      });
-
-      pipeline.on("data", (data) => {
-        console.log(data.value.results);
-        const now = Date.now();
-        const parsed = data.value.results.map((row: any) => {
-          return decamelizeKeys(row);
-        });
-        rows = [...rows, ...parsed];
-        waste += Date.now() - now;
-      });
-
-      await new Promise<void>((resolve, reject) => {
-        pipeline.on("end", () => resolve());
-        pipeline.on("error", (err) => reject(err));
-      });
-
-      console.timeEnd("parsing");
-      console.log({ waste });
-
-      return { response: rows as T };
-    } catch (e: any) {
-      // console.log("ERROR INCOMING");
-      // console.log(e.toJSON());
-      const stream = e.response.data as any;
-
-      const pipeline = chain([stream, parser(), streamArray()]);
-
-      stream.once("data", () => {
-        console.timeEnd("request");
-        console.time("parsing");
-      });
-
-      let googleAdsFailure: errors.GoogleAdsFailure | undefined;
-      pipeline.on("data", (data) => {
-        // console.log(data);
-
-        googleAdsFailure = new errors.GoogleAdsFailure(
-          decamelizeKeys(data.value.error.details[0])
-        );
-
-        // console.log(e);
-        // console.dir(data.value, { depth: null });
-        // new Error(data.error.message);
-      });
-
-      await new Promise<void>((resolve, reject) => {
-        pipeline.on("end", () => reject(googleAdsFailure));
-        pipeline.on("error", (err) => reject(err));
-      });
-      // console.log("AFTER ERROR");
-    }
-
-    return { response: [] as T };
   }
 
   private async querier<T = services.IGoogleAdsRow[]>(
@@ -357,18 +299,9 @@ export class Customer extends ServiceFactory {
     }
 
     try {
-      const parsingWapper = (rows: services.IGoogleAdsRow[]) => {
-        return this.clientOptions.disable_parsing
-          ? rows
-          : reportOptions
-          ? parse({ results: rows, reportOptions })
-          : parse({ results: rows, gaqlString: gaqlQuery });
-      };
-
       const { response, totalResultsCount } = await this.paginatedSearch(
         gaqlQuery,
-        requestOptions,
-        parsingWapper
+        requestOptions
       );
 
       if (this.hooks.onQueryEnd && useHooks) {
@@ -399,7 +332,7 @@ export class Customer extends ServiceFactory {
     }
   }
 
-  private async *streamer<T = services.IGoogleAdsRow>(
+  private async *streamer<T = services.IGoogleAdsRow[]>(
     gaqlQuery: string,
     requestOptions: RequestOptions = {},
     reportOptions?: Readonly<ReportOptions>
@@ -431,43 +364,65 @@ export class Customer extends ServiceFactory {
       }
     }
 
-    const { service, request } = this.buildSearchStreamRequestAndService(
-      gaqlQuery,
-      requestOptions
-    );
+    const accessToken = await this.getAccessToken();
 
-    const stream = service.searchStream(request, {
-      otherArgs: { headers: this.callHeaders },
-    });
+    console.time("request");
 
     let streamFinished = false;
     const accumulator: T[] = [];
 
     let nextChunk = createNextChunkArrivedPromise();
 
-    stream.on("data", (chunk: services.SearchGoogleAdsStreamResponse) => {
-      const results = chunk.summary_row ? [chunk.summary_row] : chunk.results;
-      const parsedResponse = this.clientOptions.disable_parsing
-        ? results
-        : reportOptions
-        ? parse({ results, reportOptions })
-        : parse({ results, gaqlString: gaqlQuery });
-      accumulator.push(...(parsedResponse as T[]));
-
-      nextChunk.resolve();
-      nextChunk = createNextChunkArrivedPromise();
-    });
-
-    stream.on("error", (searchError: Error) => {
-      nextChunk.reject(searchError);
-    });
-
-    stream.on("end", () => {
-      streamFinished = true;
-      nextChunk.resolve();
-    });
-
     try {
+      const args = this.prepareGoogleAdsServicePostRequestArgs(
+        "searchStream",
+        accessToken,
+        {
+          responseType: "stream",
+          data: {
+            query: gaqlQuery,
+            ...requestOptions,
+          },
+        }
+      );
+
+      const response = await axios(args);
+
+      const stream = response.data as any;
+
+      const pipeline = chain([stream, parser(), streamArray()]);
+
+      stream.once("data", () => {
+        console.timeEnd("request");
+      });
+
+      pipeline.on("data", (data) => {
+        console.log("got chunk:", data);
+        console.time("chunk parsing");
+
+        const results = data.value.results ?? [data.value.summaryRow];
+
+        const parsed = this.clientOptions.disable_parsing
+          ? results
+          : results.map((row: any) => decamelizeKeys(row));
+
+        console.timeEnd("chunk parsing");
+
+        accumulator.push(...(parsed as T[]));
+
+        nextChunk.resolve();
+        nextChunk = createNextChunkArrivedPromise();
+      });
+
+      pipeline.on("error", (searchError: Error) => {
+        nextChunk.reject(searchError);
+      });
+
+      stream.on("end", () => {
+        streamFinished = true;
+        nextChunk.resolve();
+      });
+
       while (!streamFinished || accumulator.length) {
         if (accumulator.length > 0) {
           const item = accumulator.shift();
@@ -479,17 +434,31 @@ export class Customer extends ServiceFactory {
           await nextChunk.newPromise;
         }
       }
-    } catch (searchError: any) {
-      const googleAdsError = this.getGoogleAdsError(searchError);
-      if (this.hooks.onStreamError) {
-        await this.hooks.onStreamError({
-          ...baseHookArguments,
-          error: googleAdsError,
-        });
-      }
-      throw googleAdsError;
-    } finally {
-      stream.destroy();
+    } catch (e: any) {
+      // The error is also a stream, so some effort is required to parse it.
+      const stream = e.response.data as any;
+
+      const pipeline = chain([stream, parser(), streamArray()]);
+
+      stream.once("data", () => {
+        console.timeEnd("request");
+        console.time("parsing");
+      });
+
+      let googleAdsFailure: errors.GoogleAdsFailure | undefined;
+
+      // Only throw the first error.
+      pipeline.once("data", (data) => {
+        googleAdsFailure = new errors.GoogleAdsFailure(
+          decamelizeKeys(data.value.error.details[0])
+        );
+      });
+
+      // Must always reject.
+      await new Promise<void>((_, reject) => {
+        pipeline.on("end", () => reject(googleAdsFailure));
+        pipeline.on("error", (err) => reject(err));
+      });
     }
   }
 
@@ -587,6 +556,24 @@ export class Customer extends ServiceFactory {
           otherArgs: { headers: this.callHeaders },
         });
       },
+    };
+  }
+
+  private prepareGoogleAdsServicePostRequestArgs(
+    functionName: string,
+    accessToken: string,
+    extra: Record<string, any>
+  ) {
+    return {
+      method: "POST",
+      url: `https://googleads.googleapis.com/${googleAdsVersion}/customers/${this.customerOptions.customer_id}/googleAds:${functionName}`,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        ...this.callHeaders,
+        "developer-token": this.clientOptions.developer_token ?? "",
+        "login-customer-id": this.credentials.login_customer_id ?? "",
+      },
+      ...extra,
     };
   }
 }

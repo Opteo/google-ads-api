@@ -29332,7 +29332,7 @@ export namespace fields {
   export type WebpageViewSegments = Array<WebpageViewSegment>;
   /* --- End of WebpageView --- */
 }
-console.time("Map init");
+
 /*  -- Field types (used in parsing) --  */
 export const fieldDataTypes = new Map([
   ["accessible_bidding_strategy", "MESSAGE"],
@@ -32087,4 +32087,3 @@ export const fieldDataTypes = new Map([
   ["webpage_view", "MESSAGE"],
   ["webpage_view.resource_name", "RESOURCE_NAME"],
 ]);
-console.timeEnd("Map init");

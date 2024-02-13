@@ -159,7 +159,7 @@ export async function compileFields(): Promise<void> {
 
   stream.write(`}`);
 
-  stream.write(`\n\n/*  -- Field types (used in parsing) --  */`);
+  stream.write(`\n\n/*  -- Field types (used in REST parsing) --  */`);
   stream.write(`\nexport const fieldDataTypes = new Map([ `);
 
   for (const field of fields) {

@@ -3,48 +3,49 @@
  */
 
 import mapObject from "map-obj";
-import decamelize from "decamelize";
+// import decamelize from "decamelize";
 
 import { enums, fields, fieldDataTypes } from "./protos";
+import { capitaliseFirstLetter, toCamelCase, toSnakeCase } from "./utils";
 
-const cache = new Map<string, string>();
+const decamelizeCache = new Map<string, string>();
 
 const isObject = (value: unknown) =>
   typeof value === "object" && value !== null;
 
-const decamelcaseConvert = (input: any) => {
+export const decamelizeKeys = (input: any) => {
   if (!isObject(input)) {
     return input;
   }
 
-  //   const stopPathsSet = new Set(stopPaths);
-
   const makeMapper = (parentPath?: string) => (key: string, value: any) => {
+    key = cachedDecamelize(key);
+
     if (isObject(value)) {
       const path = parentPath === undefined ? key : `${parentPath}.${key}`;
 
       // @ts-ignore
       value = mapObject(value, makeMapper(path));
+    } else {
+      value = cachedValueParser(key, parentPath, value);
     }
-
-    key = cachedDecamelize(key);
-    value = cachedValueParser(key, parentPath, value);
 
     return [key, value];
   };
 
   // @ts-ignore
-  return mapObject(input, makeMapper(undefined));
+  return mapObject(input, makeMapper());
 };
 
 const cachedDecamelize = (key: string) => {
-  if (cache.has(key)) {
-    return cache.get(key) as string;
+  const cachedResult = decamelizeCache.get(key) as string | undefined;
+  if (cachedResult) {
+    return cachedResult;
   }
 
-  const newKey = decamelize(key);
+  const newKey = toSnakeCase(key);
 
-  cache.set(key, newKey);
+  decamelizeCache.set(key, newKey);
 
   return newKey;
 };
@@ -56,24 +57,23 @@ const cachedValueParser = (
 ) => {
   let newValue = value;
 
-  const fullPath = cachedDecamelize(
+  const fullPath = (
     parentPath ? `${parentPath}.${key}` : key
   ) as keyof typeof fields.enumFields;
+
+  if (parentPath === "errors.error_code") {
+    // @ts-expect-error typescript doesn't like accessing items in a namespace with a string
+    return enums[capitaliseFirstLetter(toCamelCase(key))][value];
+  }
 
   const dataType = fieldDataTypes.get(fullPath);
 
   if (dataType === "INT64") {
     newValue = Number(value);
-  }
-
-  if (dataType === "ENUM") {
+  } else if (dataType === "ENUM") {
     // @ts-expect-error typescript doesn't like accessing items in a namespace with a string
     newValue = enums[fields.enumFields[fullPath]][value]; // e.g. enums['CampaignStatus'][ENABLED] = "2"
   }
 
   return newValue;
-};
-
-export const decamelizeKeys = (input: Record<string, any>) => {
-  return decamelcaseConvert(input);
 };

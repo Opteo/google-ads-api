@@ -31,12 +31,18 @@ export interface CallHeaders {
 
 // A global service cache to avoid re-initialising services
 const serviceCache = new TTLCache({
-  max: 1000,
+  max: 1_000,
   ttl: 10 * 60 * 1000, // 10 minutes
   dispose: async (service: any) => {
     // Close connections when services are removed from the cache
     await service.close();
   },
+});
+
+// A global access token cache used by REST calls. Issued tokens expire after 1 hour.
+const accessTokenCache = new TTLCache<string, string>({
+  max: 100_000,
+  ttl: 50 * 60 * 1000, // 50 minutes
 });
 
 export class Service {
@@ -78,6 +84,7 @@ export class Service {
     return headers;
   }
 
+  // Used only by gRPC calls
   private getCredentials(): grpc.ChannelCredentials {
     const sslCreds = grpc.credentials.createSsl();
     const authClient = new UserRefreshClient(
@@ -92,21 +99,31 @@ export class Service {
     return credentials;
   }
 
+  // Used only by REST calls
   public async getAccessToken(): Promise<string> {
-    console.time("getAccessToken");
+    const cachedToken = accessTokenCache.get(
+      this.customerOptions.refresh_token
+    );
+    if (cachedToken) {
+      return cachedToken;
+    }
+
     const oAuth2Client = new OAuth2Client(
       this.clientOptions.client_id,
       this.clientOptions.client_secret
     );
+
     oAuth2Client.setCredentials({
       refresh_token: this.customerOptions.refresh_token,
     });
+
     const { token } = await oAuth2Client.getAccessToken();
 
     if (typeof token !== "string") {
       throw new Error("Failed to retrieve access token");
     }
-    console.timeEnd("getAccessToken");
+
+    accessTokenCache.set(this.customerOptions.refresh_token, token);
 
     return token;
   }
