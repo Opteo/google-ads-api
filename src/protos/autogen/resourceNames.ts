@@ -488,6 +488,72 @@ export function ageRangeView(
   return `customers/${customerId}/ageRangeViews/${adGroupId}~${criterionId}` as const;
 }
 
+/* AndroidPrivacySharedKeyGoogleAdGroup */
+export type AndroidPrivacySharedKeyGoogleAdGroupResourceName =
+  `customers/${StrNum}/androidPrivacySharedKeyGoogleAdGroups/${StrNum}~${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} campaignId
+ * @param {string | number} adGroupId
+ * @param {string | number} androidPrivacyInteractionType
+ * @param {string | number} androidPrivacyNetworkType
+ * @param {string | number} androidPrivacyInteractionDate
+ * @returns `AndroidPrivacySharedKeyGoogleAdGroupResourceName`
+ * @example const androidPrivacySharedKeyGoogleAdGroup: ResourceNames.AndroidPrivacySharedKeyGoogleAdGroupResourceName = ResourceNames.androidPrivacySharedKeyGoogleAdGroup(10987417, 21974834, 43949668, 87899336, 175798672, 351597344)
+ */
+export function androidPrivacySharedKeyGoogleAdGroup(
+  customerId: string | number,
+  campaignId: string | number,
+  adGroupId: string | number,
+  androidPrivacyInteractionType: string | number,
+  androidPrivacyNetworkType: string | number,
+  androidPrivacyInteractionDate: string | number
+): AndroidPrivacySharedKeyGoogleAdGroupResourceName {
+  return `customers/${customerId}/androidPrivacySharedKeyGoogleAdGroups/${campaignId}~${adGroupId}~${androidPrivacyInteractionType}~${androidPrivacyNetworkType}~${androidPrivacyInteractionDate}` as const;
+}
+
+/* AndroidPrivacySharedKeyGoogleCampaign */
+export type AndroidPrivacySharedKeyGoogleCampaignResourceName =
+  `customers/${StrNum}/androidPrivacySharedKeyGoogleCampaigns/${StrNum}~${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} campaignId
+ * @param {string | number} androidPrivacyInteractionType
+ * @param {string | number} androidPrivacyInteractionDate
+ * @returns `AndroidPrivacySharedKeyGoogleCampaignResourceName`
+ * @example const androidPrivacySharedKeyGoogleCampaign: ResourceNames.AndroidPrivacySharedKeyGoogleCampaignResourceName = ResourceNames.androidPrivacySharedKeyGoogleCampaign(10987417, 21974834, 43949668, 87899336)
+ */
+export function androidPrivacySharedKeyGoogleCampaign(
+  customerId: string | number,
+  campaignId: string | number,
+  androidPrivacyInteractionType: string | number,
+  androidPrivacyInteractionDate: string | number
+): AndroidPrivacySharedKeyGoogleCampaignResourceName {
+  return `customers/${customerId}/androidPrivacySharedKeyGoogleCampaigns/${campaignId}~${androidPrivacyInteractionType}~${androidPrivacyInteractionDate}` as const;
+}
+
+/* AndroidPrivacySharedKeyGoogleNetworkType */
+export type AndroidPrivacySharedKeyGoogleNetworkTypeResourceName =
+  `customers/${StrNum}/androidPrivacySharedKeyGoogleNetworkTypes/${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} campaignId
+ * @param {string | number} androidPrivacyInteractionType
+ * @param {string | number} androidPrivacyNetworkType
+ * @param {string | number} androidPrivacyInteractionDate
+ * @returns `AndroidPrivacySharedKeyGoogleNetworkTypeResourceName`
+ * @example const androidPrivacySharedKeyGoogleNetworkType: ResourceNames.AndroidPrivacySharedKeyGoogleNetworkTypeResourceName = ResourceNames.androidPrivacySharedKeyGoogleNetworkType(10987417, 21974834, 43949668, 87899336, 175798672)
+ */
+export function androidPrivacySharedKeyGoogleNetworkType(
+  customerId: string | number,
+  campaignId: string | number,
+  androidPrivacyInteractionType: string | number,
+  androidPrivacyNetworkType: string | number,
+  androidPrivacyInteractionDate: string | number
+): AndroidPrivacySharedKeyGoogleNetworkTypeResourceName {
+  return `customers/${customerId}/androidPrivacySharedKeyGoogleNetworkTypes/${campaignId}~${androidPrivacyInteractionType}~${androidPrivacyNetworkType}~${androidPrivacyInteractionDate}` as const;
+}
+
 /* Asset */
 export type AssetResourceName = `customers/${StrNum}/assets/${StrNum}`;
 /**
@@ -607,6 +673,24 @@ export function assetGroupSignal(
   criterionId: string | number
 ): AssetGroupSignalResourceName {
   return `customers/${customerId}/assetGroupSignals/${assetGroupId}~${criterionId}` as const;
+}
+
+/* AssetGroupTopCombinationView */
+export type AssetGroupTopCombinationViewResourceName =
+  `customers/${StrNum}/assetGroupTopCombinationViews/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} assetGroupId
+ * @param {string | number} assetCombinationCategory
+ * @returns `AssetGroupTopCombinationViewResourceName`
+ * @example const assetGroupTopCombinationView: ResourceNames.AssetGroupTopCombinationViewResourceName = ResourceNames.assetGroupTopCombinationView(10987417, 21974834, 43949668)
+ */
+export function assetGroupTopCombinationView(
+  customerId: string | number,
+  assetGroupId: string | number,
+  assetCombinationCategory: string | number
+): AssetGroupTopCombinationViewResourceName {
+  return `customers/${customerId}/assetGroupTopCombinationViews/${assetGroupId}~${assetCombinationCategory}` as const;
 }
 
 /* AssetSet */
@@ -1038,6 +1122,22 @@ export function campaignLabel(
   labelId: string | number
 ): CampaignLabelResourceName {
   return `customers/${customerId}/campaignLabels/${campaignId}~${labelId}` as const;
+}
+
+/* CampaignLifecycleGoal */
+export type CampaignLifecycleGoalResourceName =
+  `customers/${StrNum}/campaignLifecycleGoals/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} campaignId
+ * @returns `CampaignLifecycleGoalResourceName`
+ * @example const campaignLifecycleGoal: ResourceNames.CampaignLifecycleGoalResourceName = ResourceNames.campaignLifecycleGoal(10987417, 21974834)
+ */
+export function campaignLifecycleGoal(
+  customerId: string | number,
+  campaignId: string | number
+): CampaignLifecycleGoalResourceName {
+  return `customers/${customerId}/campaignLifecycleGoals/${campaignId}` as const;
 }
 
 /* CampaignSearchTermInsight */
@@ -1483,6 +1583,20 @@ export function customerLabel(
   labelId: string | number
 ): CustomerLabelResourceName {
   return `customers/${customerId}/customerLabels/${labelId}` as const;
+}
+
+/* CustomerLifecycleGoal */
+export type CustomerLifecycleGoalResourceName =
+  `customers/${StrNum}/customerLifecycleGoals`;
+/**
+ * @param {string | number} customerId
+ * @returns `CustomerLifecycleGoalResourceName`
+ * @example const customerLifecycleGoal: ResourceNames.CustomerLifecycleGoalResourceName = ResourceNames.customerLifecycleGoal(10987417)
+ */
+export function customerLifecycleGoal(
+  customerId: string | number
+): CustomerLifecycleGoalResourceName {
+  return `customers/${customerId}/customerLifecycleGoals` as const;
 }
 
 /* CustomerManagerLink */
@@ -2256,6 +2370,70 @@ export function lifeEvent(
   return `customers/${customerId}/lifeEvents/${lifeEventId}` as const;
 }
 
+/* LocalServicesEmployee */
+export type LocalServicesEmployeeResourceName =
+  `customers/${StrNum}/localServicesEmployees/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} glsEmployeeId
+ * @returns `LocalServicesEmployeeResourceName`
+ * @example const localServicesEmployee: ResourceNames.LocalServicesEmployeeResourceName = ResourceNames.localServicesEmployee(10987417, 21974834)
+ */
+export function localServicesEmployee(
+  customerId: string | number,
+  glsEmployeeId: string | number
+): LocalServicesEmployeeResourceName {
+  return `customers/${customerId}/localServicesEmployees/${glsEmployeeId}` as const;
+}
+
+/* LocalServicesLead */
+export type LocalServicesLeadResourceName =
+  `customers/${StrNum}/localServicesLeads/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} localServicesLeadId
+ * @returns `LocalServicesLeadResourceName`
+ * @example const localServicesLead: ResourceNames.LocalServicesLeadResourceName = ResourceNames.localServicesLead(10987417, 21974834)
+ */
+export function localServicesLead(
+  customerId: string | number,
+  localServicesLeadId: string | number
+): LocalServicesLeadResourceName {
+  return `customers/${customerId}/localServicesLeads/${localServicesLeadId}` as const;
+}
+
+/* LocalServicesLeadConversation */
+export type LocalServicesLeadConversationResourceName =
+  `customers/${StrNum}/localServicesLeadConversations/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} localServicesLeadConversationId
+ * @returns `LocalServicesLeadConversationResourceName`
+ * @example const localServicesLeadConversation: ResourceNames.LocalServicesLeadConversationResourceName = ResourceNames.localServicesLeadConversation(10987417, 21974834)
+ */
+export function localServicesLeadConversation(
+  customerId: string | number,
+  localServicesLeadConversationId: string | number
+): LocalServicesLeadConversationResourceName {
+  return `customers/${customerId}/localServicesLeadConversations/${localServicesLeadConversationId}` as const;
+}
+
+/* LocalServicesVerificationArtifact */
+export type LocalServicesVerificationArtifactResourceName =
+  `customers/${StrNum}/localServicesVerificationArtifacts/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} glsVerificationArtifactId
+ * @returns `LocalServicesVerificationArtifactResourceName`
+ * @example const localServicesVerificationArtifact: ResourceNames.LocalServicesVerificationArtifactResourceName = ResourceNames.localServicesVerificationArtifact(10987417, 21974834)
+ */
+export function localServicesVerificationArtifact(
+  customerId: string | number,
+  glsVerificationArtifactId: string | number
+): LocalServicesVerificationArtifactResourceName {
+  return `customers/${customerId}/localServicesVerificationArtifacts/${glsVerificationArtifactId}` as const;
+}
+
 /* LocationView */
 export type LocationViewResourceName =
   `customers/${StrNum}/locationViews/${StrNum}~${StrNum}`;
@@ -2307,22 +2485,6 @@ export function mediaFile(
   return `customers/${customerId}/mediaFiles/${mediaFileId}` as const;
 }
 
-/* MerchantCenterLink */
-export type MerchantCenterLinkResourceName =
-  `customers/${StrNum}/merchantCenterLinks/${StrNum}`;
-/**
- * @param {string | number} customerId
- * @param {string | number} merchantCenterId
- * @returns `MerchantCenterLinkResourceName`
- * @example const merchantCenterLink: ResourceNames.MerchantCenterLinkResourceName = ResourceNames.merchantCenterLink(10987417, 21974834)
- */
-export function merchantCenterLink(
-  customerId: string | number,
-  merchantCenterId: string | number
-): MerchantCenterLinkResourceName {
-  return `customers/${customerId}/merchantCenterLinks/${merchantCenterId}` as const;
-}
-
 /* MobileAppCategoryConstant */
 export type MobileAppCategoryConstantResourceName =
   `mobileAppCategoryConstants/${StrNum}`;
@@ -2349,6 +2511,22 @@ export function mobileDeviceConstant(
   criterionId: string | number
 ): MobileDeviceConstantResourceName {
   return `mobileDeviceConstants/${criterionId}` as const;
+}
+
+/* OfflineConversionUploadClientSummary */
+export type OfflineConversionUploadClientSummaryResourceName =
+  `customers/${StrNum}/offlineConversionUploadClientSummaries/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} client
+ * @returns `OfflineConversionUploadClientSummaryResourceName`
+ * @example const offlineConversionUploadClientSummary: ResourceNames.OfflineConversionUploadClientSummaryResourceName = ResourceNames.offlineConversionUploadClientSummary(10987417, 21974834)
+ */
+export function offlineConversionUploadClientSummary(
+  customerId: string | number,
+  client: string | number
+): OfflineConversionUploadClientSummaryResourceName {
+  return `customers/${customerId}/offlineConversionUploadClientSummaries/${client}` as const;
 }
 
 /* OfflineUserDataJob */
@@ -2451,22 +2629,20 @@ export function perStoreView(
   return `customers/${customerId}/perStoreViews/${placeId}` as const;
 }
 
-/* ProductBiddingCategoryConstant */
-export type ProductBiddingCategoryConstantResourceName =
-  `productBiddingCategoryConstants/${StrNum}~${StrNum}~${StrNum}`;
+/* ProductCategoryConstant */
+export type ProductCategoryConstantResourceName =
+  `productCategoryConstants/${StrNum}~${StrNum}`;
 /**
- * @param {string | number} countryCode
  * @param {string | number} level
- * @param {string | number} id
- * @returns `ProductBiddingCategoryConstantResourceName`
- * @example const productBiddingCategoryConstant: ResourceNames.ProductBiddingCategoryConstantResourceName = ResourceNames.productBiddingCategoryConstant(10987417, 21974834, 43949668)
+ * @param {string | number} categoryId
+ * @returns `ProductCategoryConstantResourceName`
+ * @example const productCategoryConstant: ResourceNames.ProductCategoryConstantResourceName = ResourceNames.productCategoryConstant(10987417, 21974834)
  */
-export function productBiddingCategoryConstant(
-  countryCode: string | number,
+export function productCategoryConstant(
   level: string | number,
-  id: string | number
-): ProductBiddingCategoryConstantResourceName {
-  return `productBiddingCategoryConstants/${countryCode}~${level}~${id}` as const;
+  categoryId: string | number
+): ProductCategoryConstantResourceName {
+  return `productCategoryConstants/${level}~${categoryId}` as const;
 }
 
 /* ProductGroupView */
@@ -2503,6 +2679,22 @@ export function productLink(
   return `customers/${customerId}/productLinks/${productLinkId}` as const;
 }
 
+/* ProductLinkInvitation */
+export type ProductLinkInvitationResourceName =
+  `customers/${StrNum}/productLinkInvitations/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} customerInvitationId
+ * @returns `ProductLinkInvitationResourceName`
+ * @example const productLinkInvitation: ResourceNames.ProductLinkInvitationResourceName = ResourceNames.productLinkInvitation(10987417, 21974834)
+ */
+export function productLinkInvitation(
+  customerId: string | number,
+  customerInvitationId: string | number
+): ProductLinkInvitationResourceName {
+  return `customers/${customerId}/productLinkInvitations/${customerInvitationId}` as const;
+}
+
 /* QualifyingQuestion */
 export type QualifyingQuestionResourceName = `qualifyingQuestions/${StrNum}`;
 /**
@@ -2530,6 +2722,22 @@ export function recommendation(
   recommendationId: string | number
 ): RecommendationResourceName {
   return `customers/${customerId}/recommendations/${recommendationId}` as const;
+}
+
+/* RecommendationSubscription */
+export type RecommendationSubscriptionResourceName =
+  `customers/${StrNum}/recommendationSubscriptions/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} recommendationType
+ * @returns `RecommendationSubscriptionResourceName`
+ * @example const recommendationSubscription: ResourceNames.RecommendationSubscriptionResourceName = ResourceNames.recommendationSubscription(10987417, 21974834)
+ */
+export function recommendationSubscription(
+  customerId: string | number,
+  recommendationType: string | number
+): RecommendationSubscriptionResourceName {
+  return `customers/${customerId}/recommendationSubscriptions/${recommendationType}` as const;
 }
 
 /* RemarketingAction */
