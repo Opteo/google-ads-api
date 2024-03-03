@@ -78,7 +78,6 @@ describe("decamelizeKeys", () => {
           policySummary: {
             policyTopicEntries: [
               {
-                asdf: enums.PolicyTopicEntryType.LIMITED,
                 type: "LIMITED",
                 evidences: [{ textList: { texts: ["ads"] } }],
                 constraints: [
@@ -110,7 +109,7 @@ describe("decamelizeKeys", () => {
         policy_summary: {
           policy_topic_entries: [
             {
-              type: "LIMITED",
+              type: enums.PolicyTopicEntryType.LIMITED,
               evidences: [{ text_list: { texts: ["ads"] } }],
               constraints: [
                 {

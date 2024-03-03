@@ -3,12 +3,15 @@
  */
 
 import mapObject from "map-obj";
-// import decamelize from "decamelize";
+import { parse } from "circ-json";
 
-import { enums, fields, fieldDataTypes } from "./protos";
-import { capitaliseFirstLetter, toCamelCase, toSnakeCase } from "./utils";
+import { toSnakeCase } from "./utils";
+import { fieldDataTypes as fieldDataTypesString } from "./protos/autogen/fields";
+
+const fieldDataTypes = parse(fieldDataTypesString);
 
 const decamelizeCache = new Map<string, string>();
+const fieldTypeCache = new Map<string, string>();
 
 const isObject = (value: unknown) =>
   typeof value === "object" && value !== null;
@@ -57,23 +60,43 @@ const cachedValueParser = (
 ) => {
   let newValue = value;
 
-  const fullPath = (
-    parentPath ? `${parentPath}.${key}` : key
-  ) as keyof typeof fields.enumFields;
+  const fullPath = parentPath ? `${parentPath}.${key}` : key;
 
-  if (parentPath === "errors.error_code") {
-    // @ts-expect-error typescript doesn't like accessing items in a namespace with a string
-    return enums[capitaliseFirstLetter(toCamelCase(key))][value];
-  }
+  const megaDataType = getTypeFromPath(fullPath);
 
-  const dataType = fieldDataTypes.get(fullPath);
-
-  if (dataType === "INT64") {
+  if (megaDataType === undefined && !fullPath.startsWith("@")) {
+    console.warn(`No data type found for ${fullPath}`);
+  } else if (typeof megaDataType === "object") {
+    newValue = megaDataType[value];
+  } else if (megaDataType === "INT64") {
     newValue = Number(value);
-  } else if (dataType === "ENUM") {
-    // @ts-expect-error typescript doesn't like accessing items in a namespace with a string
-    newValue = enums[fields.enumFields[fullPath]][value]; // e.g. enums['CampaignStatus'][ENABLED] = "2"
   }
 
   return newValue;
+};
+
+const getTypeFromPath = (path: string) => {
+  const cachedResult = fieldTypeCache.get(path) as string | undefined;
+  if (cachedResult) {
+    return cachedResult;
+  }
+
+  const t = get(fieldDataTypes, path);
+
+  fieldTypeCache.set(path, t);
+
+  return t;
+};
+
+const get = (obj: any, path: string) => {
+  // If path is not defined or it has false value
+  if (!path) return undefined;
+  // Check if path is string or array. Regex : ensure that we do not have '.' and brackets.
+  // Regex explained: https://regexr.com/58j0k
+  const pathArray = path.match(/([^[.\]])+/g);
+
+  if (!pathArray) return undefined;
+
+  // Find value
+  return pathArray.reduce((prevObj, key) => prevObj && prevObj[key], obj);
 };

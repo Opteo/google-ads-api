@@ -1,9 +1,25 @@
 import fs from "fs";
 import { FILES } from "./path";
-import { GoogleAdsApi, services, resources, enums } from "../src";
+import { GoogleAdsApi, resources, enums } from "../src";
 import { capitaliseFirstLetter, toCamelCase } from "../src/utils";
-import axios from "axios";
+import _ from "lodash";
+import protosJson from "google-ads-node/build/protos/protos.json";
+import { stringify } from "circ-json";
 
+import protobuf from "protobufjs";
+const root = protobuf.Root.fromJSON(protosJson);
+
+const primitiveTypes = [
+  "string",
+  "number",
+  "bool",
+  "int64",
+  "int32",
+  "double",
+  "float",
+  "bytes",
+  // "Operand",
+];
 // Types
 interface Resource {
   attributes: string[];
@@ -29,90 +45,6 @@ const client = new GoogleAdsApi({
 });
 
 export async function compileFields(): Promise<void> {
-  const _discovery = await axios.get(
-    `https://googleads.googleapis.com/$discovery/rest?version=v14`
-  );
-
-  const discovery = _discovery.data as unknown as any;
-  // console.log({ discovery });
-  // const file = fs.readFileSync(__dirname + "/discovery.json");
-  // const discovery = JSON.parse(file.toString());
-  // console.log(discovery);
-  // console.dir(discovery.schemas.GoogleAdsGoogleadsV15Common__PolicyTopicEntry, {
-  //   depth: null,
-  // });
-  // console.log("-----------------------------------");
-  // console.log("-----------------------------------");
-
-  function extractPaths(schemaKey: string) {
-    const paths: Record<string, string> = {};
-
-    function extract(obj: any, parentPath?: string) {
-      if ((parentPath ?? "").split(".").length > 10) {
-        return;
-      }
-      for (const key in obj) {
-        const property = obj[key];
-
-        const fullPath = parentPath ? `${parentPath}.${key}` : key;
-        if (property.enum || property.items?.type === "enum") {
-          paths[fullPath] = "ENUM";
-        } else if (
-          property.type === "string" ||
-          property.items?.type === "string"
-        ) {
-          paths[fullPath] = "STRING";
-        } else if (
-          property.type === "integer" ||
-          property.type === "number" ||
-          property.items?.type === "integer" ||
-          property.items?.type === "number"
-        ) {
-          paths[fullPath] = "NUMBER";
-        } else if (
-          property.type === "boolean" ||
-          property.items?.type === "boolean"
-        ) {
-          paths[fullPath] = "BOOLEAN";
-        } else {
-          // console.log({ property });
-          // console.log("extracting...", property.items?.$ref ?? property.$ref);
-          // console.log(
-          // "which is ",
-          // discovery.schemas[property.items?.$ref ?? property.$ref]
-          // );
-          const nextToExtract =
-            discovery.schemas[property.items?.$ref ?? property.$ref];
-          if (!nextToExtract?.properties) {
-            // console.log({ property });
-            throw new Error(
-              "No properties found for " + property.items?.$ref ?? property.$ref
-            );
-          }
-
-          paths[fullPath] = "MESSAGE";
-          // console.log(nextToExtract.properties);
-          extract(nextToExtract.properties, fullPath);
-        }
-      }
-    }
-
-    const base = schemaKey.split("__")[1];
-    // if (!discovery.schemas[schemaKey]) {
-    //   console.log({ schemaKey });
-    // }
-    extract(discovery.schemas[schemaKey].properties);
-    return paths;
-  }
-
-  const newPaths = extractPaths(
-    "GoogleAdsGoogleadsV14Common__PolicyTopicEntry"
-  );
-
-  // console.log({ newPaths });
-
-  // return;
-
   const cus = client.Customer({
     refresh_token: REFRESH_TOKEN,
     customer_id: CUSTOMER_ID,
@@ -120,25 +52,31 @@ export async function compileFields(): Promise<void> {
   });
 
   // @ts-ignore
-  const [fields]: resources.GoogleAdsField[][] =
-    // @ts-expect-error Protected usage is fine here
-    await cus.googleAdsFields.searchGoogleAdsFields(
-      new services.SearchGoogleAdsFieldsRequest({
-        query: `
-          SELECT
-            name,
-            category,
-            selectable,
-            selectable_with,
-            attribute_resources,
-            filterable,
-            data_type,
-            metrics,
-            segments,
-            type_url
-        `,
-      })
-    );
+  // const [fields]: resources.GoogleAdsField[][] =
+  //   // @ts-expect-error Protected usage is fine here
+  //   await cus.googleAdsFields.searchGoogleAdsFields(
+  //     new services.SearchGoogleAdsFieldsRequest({
+  //       query: `
+  //         SELECT
+  //           name,
+  //           category,
+  //           selectable,
+  //           selectable_with,
+  //           attribute_resources,
+  //           filterable,
+  //           data_type,
+  //           metrics,
+  //           segments,
+  //           type_url
+  //       `,
+  //     })
+  //   );
+
+  // fs.writeFileSync("fields.json", JSON.stringify(fields));
+
+  const fields: resources.GoogleAdsField[] = JSON.parse(
+    fs.readFileSync("fields.json").toString()
+  );
 
   const resourceConstructs: { [resourceName: string]: Resource } = {};
   const enumFields: { [fieldName: string]: string } = {};
@@ -244,117 +182,88 @@ export async function compileFields(): Promise<void> {
 
   stream.write(`}`);
 
-  stream.write(`\n\n/*  -- Field types (used in REST parsing) --  */`);
-  stream.write(`\nexport const fieldDataTypes = new Map([ `);
+  stream.write(
+    `\n\n/*  -- Field types (represented as circular JSON, used in REST parsing) --  */`
+  );
+  stream.write(`\nexport const fieldDataTypes = \``);
 
-  for (const field of fields) {
-    if (field.data_type === "MESSAGE") {
-      stream.write(`\n['${field.name}','${field.type_url}'], `);
-    } else {
-      stream.write(`\n['${field.name}','${field.data_type}'], `);
+  /**
+   * Ideal object shape:
+   * {
+   *  PolicyTopicEntry : {
+   *    topic: "STRING",
+   *    evidences: <ref to PolicyTopicEvidence>
+   *    constraints: "MESSAGE",
+   *   },
+   *   PolicyTopicEvidence: {
+   *     textList: {
+   *      texts: "STRING"
+   *    },
+   * }
+   */
+
+  let mega: any = {};
+
+  function assembleMega(typeForLookup: string) {
+    if (typeForLookup.startsWith("com.")) {
+      typeForLookup = typeForLookup.replace("com.", "");
     }
+    const foundMessage = root.lookupTypeOrEnum(typeForLookup);
+
+    if (mega[foundMessage.name]) {
+      return mega[foundMessage.name];
+    }
+
+    // @ts-ignore
+    if (foundMessage.valuesById) {
+      // @ts-ignore
+
+      return foundMessage.values;
+    }
+    const fields = foundMessage.fields;
+
+    const o: any = {};
+    mega[foundMessage.name] = o;
+    for (const fieldKey in fields) {
+      const fieldKeyType = fields[fieldKey].type;
+      if (primitiveTypes.includes(fieldKeyType)) {
+        o[fieldKey] = fieldKeyType.toUpperCase();
+        continue;
+      }
+
+      const parsedRef = assembleMega(fields[fieldKey].type);
+      o[fieldKey] = parsedRef;
+    }
+
+    mega[foundMessage.name] = o;
+
+    return o;
   }
 
-  const messageFieldsWritten = new Set<string>();
+  assembleMega("GoogleAdsFailure");
 
-  /*
-    For every field that is a message
-    - Find it in $discovery
-    - for each field in the message:
-      - if it's a message, add to the map as a ref and recurse
-      - if it's a primitive, add it to the map
+  mega = {
+    ...mega,
+    ...mega.GoogleAdsFailure,
+  };
 
-      ideal:
-
-      export const fieldDataTypes = new Map([
-        ['ad_grpup_ad.ad.policy_info','google.ads.googleads.v14.resources.PolicyInfo'],
-        ['google.ads.googleads.v14.resources.PolicyInfo.blah','NUMBER'],
-        ['google.ads.googleads.v14.resources.PolicyInfo.entryMessages','google.ads.googleads.v14.resources.entryMessages'],
-        ['google.ads.googleads.v14.resources.entryMessages.msg','STRING'],
-      ])
-
-  */
+  delete mega.GoogleAdsFailure;
 
   for (const field of fields.filter((field) => field.data_type === "MESSAGE")) {
-    // stream.write(`\n\n/*  -- MESSAGE TYPE (used in REST parsing) --  */`);
-    // stream.write(`\nexport const fieldDataTypes = new Map([ `);
-
-    // console.log(field);
-
-    // 'google.ads.googleads.v14.resources.Campaign.CategoryBid',
-
-    const splitTypeUrl =
-      field.type_url?.split(".").filter((i) => i !== "com") ?? [];
-    // console.log(splitTypeUrl.length);
-    let type = "";
-    if (splitTypeUrl.length === 6) {
-      const endField = splitTypeUrl.pop() ?? "";
-      const precategory = "";
-      const category = splitTypeUrl.pop() ?? "";
-
-      type =
-        "GoogleAdsGoogleadsV14" +
-        capitaliseFirstLetter(category) +
-        "_" +
-        precategory +
-        "_" +
-        endField;
-    } else if (splitTypeUrl.length === 7) {
-      //      'google.ads.googleads.v14.resources.Campaign.CategoryBid',
-      //  'com.google.ads.googleads.v14.resources.AccessibleBiddingStrategy',
-      const endField = splitTypeUrl.pop() ?? "";
-      const precategory = splitTypeUrl.pop() ?? "";
-      const category = splitTypeUrl.pop() ?? "";
-
-      type =
-        "GoogleAdsGoogleadsV14" +
-        capitaliseFirstLetter(category) +
-        "_" +
-        precategory +
-        "_" +
-        endField;
-    } else if (splitTypeUrl.length === 8) {
-      const endField = splitTypeUrl.pop() ?? "";
-      const precategory = splitTypeUrl.pop() ?? "";
-      const category = splitTypeUrl.pop() ?? "";
-      type =
-        "GoogleAdsGoogleadsV14" +
-        capitaliseFirstLetter(category) +
-        "_" +
-        precategory +
-        "_" +
-        endField;
-    }
-
-    // const category =
-    //   field.type_url?.split(".")[field.type_url?.split(".").length - 2] ??
-    //   "UNKNOWN";
-
-    // const type =
-    //   "GoogleAdsGoogleadsV15" +
-    //   capitaliseFirstLetter(category) +
-    //   "__" +
-    //   field.type_url?.split(".").pop();
-
-    // console.log({ type });
-    if (!type) {
-      console.warn("No type found for ", field);
-    } else {
-      const paths = extractPaths(type as string);
-      // console.log({ paths });
-      for (const pathKey in paths) {
-        if (messageFieldsWritten.has(pathKey)) {
-          continue;
-        }
-        stream.write(
-          `\n['${field.type_url}.${pathKey}','${paths[pathKey]}'], `
-        );
-        messageFieldsWritten.add(pathKey);
-      }
+    _.set(mega, field.name!, assembleMega(field.type_url as string));
+  }
+  for (const field of fields.filter((field) => field.data_type !== "MESSAGE")) {
+    if (!_.get(mega, field.name!)) {
+      _.set(
+        mega,
+        field.name!,
+        (field.data_type as string).toUpperCase() as string
+      );
     }
   }
 
-  stream.write(`\n])`);
+  stream.write(stringify(mega));
+  stream.write(`\``);
   stream.end();
 }
 
