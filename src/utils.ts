@@ -80,7 +80,7 @@ export function recursiveFieldMaskSearch(data: Record<string, any>): string[] {
     }
     const fieldKey = toSnakeCase(key);
     const value = data[key];
-    if (typeof value === "object" && !Array.isArray(value)) {
+    if (typeof value === "object" && !Array.isArray(value) && value !== null) {
       const children = recursiveFieldMaskSearch(value);
       for (const child of children) {
         paths.push(`${fieldKey}.${child}`);
