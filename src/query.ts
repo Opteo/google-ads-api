@@ -47,7 +47,7 @@ export const QueryError = {
   INVALID_CONSTRAINT_KEY: "A constraint key must have a string value.",
   INVALID_CONSTRAINT_VALUE: (
     key: ConstraintKey,
-    val: ConstraintValue
+    val: ConstraintValue | undefined
   ): string =>
     // @ts-ignore
     `The value of the constraint ${key} must be a string, number, boolean, or an array of these types. Here, typeof ${key} is ${typeof val}.`,
@@ -102,11 +102,19 @@ export function buildFromClause(entity: ReportOptions["entity"]): FromClause {
 export function validateConstraintKeyAndValue(
   key: ConstraintKey,
   op: ConstraintOperation,
-  val: ConstraintValue
+  val: ConstraintValue | undefined
 ): {
   op: ConstraintOperation;
   val: ParsedConstraintValue;
 } {
+  if (val === undefined) {
+    if (op === "IS NULL" || op === "IS NOT NULL") {
+        return { op, val: "" }; // no value needed
+    }
+
+    throw new Error(QueryError.INVALID_CONSTRAINT_VALUE(key, val));
+  }
+
   if (typeof val === "number" || typeof val === "boolean") {
     return { op: "=", val: convertNumericEnumToString(key, val) };
   }
@@ -165,7 +173,7 @@ export function extractConstraintConditions(
     return constraints.map((con: Constraint) => {
       if (typeof con === "object" && !Array.isArray(con) && con !== null) {
         // @ts-ignore
-        if (con.key && con.op && typeof con.val !== "undefined") {
+        if (con.key && con.op) {
           const { key, op, val }: ConstraintType1 = con as ConstraintType1;
 
           if (typeof key !== "string") {
