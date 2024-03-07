@@ -277,7 +277,7 @@ export class Customer extends ServiceFactory {
         ...requestOptions,
         page_token: nextPageToken,
       });
-      response.push(...initialSearch.response);
+      response.push(...nextSearch.response);
       nextPageToken = nextSearch.nextPageToken;
       if (nextSearch.summaryRow) {
         summaryRow = nextSearch.summaryRow;
@@ -470,9 +470,9 @@ export class Customer extends ServiceFactory {
       }
     }
 
-    const accessToken = await this.getAccessToken();
-
     try {
+      const accessToken = await this.getAccessToken();
+
       const args = this.prepareGoogleAdsServicePostRequestArgs(
         "searchStream",
         accessToken,
@@ -521,7 +521,17 @@ export class Customer extends ServiceFactory {
 
       return;
     } catch (e: any) {
-      await this.handleStreamError(e);
+      try {
+        await this.handleStreamError(e);
+      } catch (_e: any) {
+        if (this.hooks.onStreamError) {
+          await this.hooks.onStreamError({
+            ...baseHookArguments,
+            error: _e,
+          });
+        }
+        throw _e;
+      }
     }
   }
 

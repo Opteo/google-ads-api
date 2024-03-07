@@ -1,5 +1,5 @@
 import fs from "fs";
-import { internalEnums, VERSION, errors } from "../src/protos/index";
+import { internalEnums, VERSION } from "../src/protos/index";
 import { FILES } from "./path";
 
 export async function compileEnums(): Promise<void> {
@@ -10,7 +10,6 @@ export async function compileEnums(): Promise<void> {
   stream.write("\n// eslint-disable-next-line\n");
   stream.write("export namespace enums {\n");
 
-  // Add all regular enums
   for (const [fullName, def] of Object.entries(internalEnums)) {
     const [name] = fullName.split("Enum");
     const values = Object.entries(def).find(
@@ -19,42 +18,6 @@ export async function compileEnums(): Promise<void> {
 
     if (!values) {
       throw new Error("Could not find values for enum " + fullName);
-    }
-
-    const pairs = Object.keys(values).map((key) => {
-      const protoVal = values[key];
-      return `${key} = ${protoVal}, // ${key}`;
-    });
-    const enumStr = `export enum ${name} {
-      ${pairs.join("\n")}
-    }`;
-
-    const docsLink = buildEnumLink(VERSION, fullName, name);
-
-    stream.write(`\n/**
-    * @name ${fullName}.${name}
-    * @link ${docsLink}
-    */`);
-    stream.write(`\n${enumStr}\n`);
-  }
-
-  // Add all error enums
-  for (const [fullName, def] of Object.entries(errors)) {
-    const [name] = fullName.split("Enum");
-    const values = Object.entries(def).find(
-      ([, val]) => typeof val !== "function" // Get the object field which isn't a function, which happens to be the enum values
-    )?.[1];
-    console.log(name, values);
-    console.log(def);
-
-    if (!values) {
-      console.warn("Could not find values for enum " + fullName);
-      continue;
-    }
-
-    if (!name) {
-      console.warn("Could not find name for enum " + fullName);
-      continue;
     }
 
     const pairs = Object.keys(values).map((key) => {

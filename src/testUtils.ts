@@ -2,8 +2,10 @@ import { Readable } from "stream";
 import { Customer } from "./customer";
 import { Hooks } from "./hooks";
 import * as parser from "./parser";
+import * as parserRest from "./parserRest";
 import { errors, GoogleAdsServiceClient, services } from "./protos";
 import { PageToken, ReportOptions, MutateOperation } from "./types";
+import _ from "lodash";
 
 export const MOCK_CLIENT_ID = "MOCK CLIENT ID";
 export const MOCK_CLIENT_SECRET = "MOCK CLIENT SECRET";
@@ -24,10 +26,48 @@ export const mockMutations: MutateOperation<any>[] = [
   { resource: "abc", entity: "campaign", operation: "create" },
 ];
 
+export const mockSearchRawResult = [
+  {
+    totalResultsCount: 23,
+    results: [
+      { campaign: { resourceName: "customers/1/campaigns/11" } },
+      { campaign: { resourceName: "customers/2/campaigns/22" } },
+      { campaign: { resourceName: "customers/3/campaigns/33" } },
+    ],
+  },
+];
+
+export const mockSearchRawResultWithSummaryRow = [
+  {
+    totalResultsCount: 23,
+    results: [
+      { campaign: { resourceName: "customers/1/campaigns/11" } },
+      { campaign: { resourceName: "customers/2/campaigns/22" } },
+      { campaign: { resourceName: "customers/3/campaigns/33" } },
+    ],
+  },
+  {
+    summaryRow: { metrics: { clicks: 90, impressions: 153 } },
+  },
+];
+
 export const mockQueryReturnValue: services.IGoogleAdsRow[] = [
   { campaign: { resource_name: "customers/1/campaigns/11" } },
   { campaign: { resource_name: "customers/2/campaigns/22" } },
   { campaign: { resource_name: "customers/3/campaigns/33" } },
+];
+
+export const mockQueryReturnValueWithSummaryRow: services.IGoogleAdsRow[] = [
+  { campaign: { resource_name: "customers/1/campaigns/11" } },
+  { campaign: { resource_name: "customers/2/campaigns/22" } },
+  { campaign: { resource_name: "customers/3/campaigns/33" } },
+  { metrics: { clicks: 90, impressions: 153 } },
+];
+
+export const mockQueryReturnValueUnparsed = [
+  { campaign: { resourceName: "customers/1/campaigns/11" } },
+  { campaign: { resourceName: "customers/2/campaigns/22" } },
+  { campaign: { resourceName: "customers/3/campaigns/33" } },
 ];
 
 export const mockSummaryRow: services.IGoogleAdsRow = {
@@ -63,6 +103,34 @@ export const mockParsedValues = [
   mockParseValue,
 ];
 
+// Returns a stream that emits the provided values
+export const mockStream = function (data: any = mockSearchRawResult) {
+  const chunks = _.chunk(JSON.stringify(data), 10).map((c) => c.join("")); // random splits
+  const stream = new Readable({ objectMode: true });
+  chunks.forEach((value) => stream.push(new Buffer(value)));
+  stream.push(null);
+  return stream;
+};
+
+export function mockGetAccessToken(customer: Customer): jest.SpyInstance {
+  return (
+    jest
+      .spyOn(customer, "getAccessToken")
+      // ts-expect-error
+      .mockImplementation(async () => {
+        return "mockedAccessTokenHere";
+      })
+  );
+}
+
+export const mockStreamWithSummaryRow = function () {
+  return mockStream(mockSearchRawResultWithSummaryRow);
+};
+
+export const mockStreamWithBadData = function () {
+  return mockStream({ results: 66 });
+};
+
 export function mockPaginatedSearch(
   customer: Customer,
   includeTotalResultsCount = false
@@ -72,12 +140,12 @@ export function mockPaginatedSearch(
       // @ts-expect-error private method
       .spyOn(customer, "paginatedSearch")
       // @ts-expect-error
-      .mockImplementation((gaqlQuery, requestOptions, _parser) => {
+      .mockImplementation((gaqlQuery, requestOptions) => {
         const totalResultsCount = includeTotalResultsCount
           ? mockTotalResultsCount
           : undefined;
         return {
-          response: _parser(mockQueryReturnValue),
+          response: mockQueryReturnValue,
           totalResultsCount,
         };
       })
@@ -274,6 +342,14 @@ export function mockParse(
   mockParsedValues: services.IGoogleAdsRow[]
 ): jest.SpyInstance {
   return jest.spyOn(parser, "parse").mockImplementation(() => mockParsedValues);
+}
+
+export function mockParseRest(
+  mockParsedValues: services.IGoogleAdsRow[]
+): jest.SpyInstance {
+  return jest
+    .spyOn(parserRest, "decamelizeKeys")
+    .mockImplementation(() => mockParsedValues);
 }
 
 export function noopParser(
