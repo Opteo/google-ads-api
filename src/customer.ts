@@ -45,7 +45,6 @@ const ROWS_PER_STREAMED_CHUNK = 10_000; // From experience, this is what can be 
  *  - reportStreamRaw() ?
  *  - bonus: use queryStream when the params allow it. Note: do it with native async generator to make it as fast as possible.
  *  - bonus: make it possible to cancel a stream or pagination when row count exceeds specified max
- *
  */
 export class Customer extends ServiceFactory {
   constructor(
@@ -229,13 +228,12 @@ export class Customer extends ServiceFactory {
 
       return { response, nextPageToken, totalResultsCount, summaryRow };
     } catch (e: any) {
-      console.dir({ e: e.response.data }, { depth: null });
-      if (e.response.data.error.details[0]) {
+      if (e.response?.data.error.details[0]) {
         throw new errors.GoogleAdsFailure(
           this.decamelizeKeysIfNeeded(e.response.data.error.details[0])
         );
       }
-      throw "bag";
+      throw e;
     }
   }
 
@@ -328,7 +326,7 @@ export class Customer extends ServiceFactory {
           this.clientOptions.max_reporting_rows &&
           !this.gaqlQueryStringIncludesLimit(gaqlQuery)
         ) {
-          // this is a quick-and-dirty way to count rows, but it's good enough for our purposes.
+          // This is a quick-and-dirty way to count rows, but it's good enough for our purposes.
           // We want to avoid using a proper JSON streamer here for performance reasons.
           if (data.toString("utf-8").includes(`results":`)) {
             rowCount += ROWS_PER_STREAMED_CHUNK;
@@ -484,9 +482,8 @@ export class Customer extends ServiceFactory {
           },
         }
       );
-      const abortController = new AbortController();
 
-      const response = await axios({ ...args, signal: abortController.signal });
+      const response = await axios(args);
 
       const stream = response.data as any;
 
@@ -672,7 +669,6 @@ export class Customer extends ServiceFactory {
         "login-customer-id": this.credentials.login_customer_id ?? "",
       },
       ...extra,
-      maxContentLength: 2000,
     };
   }
 
