@@ -683,7 +683,7 @@ try {
     // Get the first one and explicitly check for a certain error type
     const [firstError] = err.errors;
     if (
-      firstError.error_code ===
+      firstError.error_code.query_error ===
       errors.QueryErrorEnum.QueryError.UNRECOGNIZED_FIELD
     ) {
       console.log(
