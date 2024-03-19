@@ -6,7 +6,11 @@ import mapObject from "map-obj";
 import { parse } from "circ-json";
 
 import { toSnakeCase } from "./utils";
-import { fieldDataTypes as fieldDataTypesString } from "./protos/autogen/fields";
+import {
+  fieldDataTypes as fieldDataTypesString,
+  fields,
+} from "./protos/autogen/fields";
+import { enums } from "./protos/autogen/enums";
 
 const fieldDataTypes = parse(fieldDataTypesString);
 
@@ -70,6 +74,10 @@ const cachedValueParser = (
     newValue = megaDataType[value];
   } else if (megaDataType === "INT64") {
     newValue = Number(value);
+  } else if (megaDataType === "ENUM") {
+    // Some enums aren't embedded in megaDataType, so we need this fallback.
+    // @ts-expect-error typescript doesn't like accessing items in a namespace with a string
+    newValue = enums[fields.enumFields[fullPath]][value]; // e.g. enums['CampaignStatus'][ENABLED] = "2"
   }
 
   return newValue;
@@ -88,9 +96,10 @@ const getTypeFromPath = (path: string) => {
   return t;
 };
 
+// Copied from youmightnotneed.com
 const get = (obj: any, path: string) => {
-  // If path is not defined or it has false value
   if (!path) return undefined;
+
   // Check if path is string or array. Regex : ensure that we do not have '.' and brackets.
   // Regex explained: https://regexr.com/58j0k
   const pathArray = path.match(/([^[.\]])+/g);
