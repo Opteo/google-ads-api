@@ -1,6 +1,6 @@
 import fs from "fs";
 import { FILES } from "./path";
-import { GoogleAdsApi, resources, enums } from "../src";
+import { GoogleAdsApi, resources, enums, services } from "../src";
 import { capitaliseFirstLetter, toCamelCase } from "../src/utils";
 import _ from "lodash";
 import protosJson from "google-ads-node/build/protos/protos.json";
@@ -18,7 +18,6 @@ const primitiveTypes = [
   "double",
   "float",
   "bytes",
-  // "Operand",
 ];
 // Types
 interface Resource {
@@ -51,32 +50,32 @@ export async function compileFields(): Promise<void> {
     login_customer_id: LOGIN_CUSTOMER_ID,
   });
 
-  // @ts-ignore
-  // const [fields]: resources.GoogleAdsField[][] =
-  //   // @ts-expect-error Protected usage is fine here
-  //   await cus.googleAdsFields.searchGoogleAdsFields(
-  //     new services.SearchGoogleAdsFieldsRequest({
-  //       query: `
-  //         SELECT
-  //           name,
-  //           category,
-  //           selectable,
-  //           selectable_with,
-  //           attribute_resources,
-  //           filterable,
-  //           data_type,
-  //           metrics,
-  //           segments,
-  //           type_url
-  //       `,
-  //     })
-  //   );
+  //@ts-ignore
+  const [fields]: resources.GoogleAdsField[][] =
+    // @ts-expect-error Protected usage is fine here
+    await cus.googleAdsFields.searchGoogleAdsFields(
+      new services.SearchGoogleAdsFieldsRequest({
+        query: `
+          SELECT
+            name,
+            category,
+            selectable,
+            selectable_with,
+            attribute_resources,
+            filterable,
+            data_type,
+            metrics,
+            segments,
+            type_url
+        `,
+      })
+    );
 
   // fs.writeFileSync("fields.json", JSON.stringify(fields));
 
-  const fields: resources.GoogleAdsField[] = JSON.parse(
-    fs.readFileSync("fields.json").toString()
-  );
+  // const fields: resources.GoogleAdsField[] = JSON.parse(
+  //   fs.readFileSync("fields.json").toString()
+  // );
 
   const resourceConstructs: { [resourceName: string]: Resource } = {};
   const enumFields: { [fieldName: string]: string } = {};
@@ -187,23 +186,15 @@ export async function compileFields(): Promise<void> {
   );
   stream.write(`\nexport const fieldDataTypes = \``);
 
-  /**
-   * Ideal object shape:
-   * {
-   *  PolicyTopicEntry : {
-   *    topic: "STRING",
-   *    evidences: <ref to PolicyTopicEvidence>
-   *    constraints: "MESSAGE",
-   *   },
-   *   PolicyTopicEvidence: {
-   *     textList: {
-   *      texts: "STRING"
-   *    },
-   * }
-   */
+  /*
+      Assemble a mega object that represents all the fields and their types,
+      recursively. This is used in the REST parsing to determine the type of
+      each field. This is a circular object, so it can't be stringified
+      normally. We'll use the circ-json package to stringify it.
 
+      See fieldDataTypes in autogen/fields.ts for an idea of the final product.
+  */
   let mega: any = {};
-
   function assembleMega(typeForLookup: string) {
     if (typeForLookup.startsWith("com.")) {
       typeForLookup = typeForLookup.replace("com.", "");
@@ -217,7 +208,6 @@ export async function compileFields(): Promise<void> {
     // @ts-ignore
     if (foundMessage.valuesById) {
       // @ts-ignore
-
       return foundMessage.values;
     }
     const fields = foundMessage.fields;
@@ -240,6 +230,8 @@ export async function compileFields(): Promise<void> {
     return o;
   }
 
+  // Start by adding GoogleAdsFailure to the mega object. It's a special case that
+  // Doesn't exist the same way as other fields.
   assembleMega("GoogleAdsFailure");
 
   mega = {
@@ -249,6 +241,9 @@ export async function compileFields(): Promise<void> {
 
   delete mega.GoogleAdsFailure;
 
+  // Now, loop through all the reporting fields and add them to the mega object
+  // Messages are the main challenge here, as they can contain other messages,
+  // Sometimes with infite recursion.
   for (const field of fields.filter((field) => field.data_type === "MESSAGE")) {
     _.set(mega, field.name!, assembleMega(field.type_url as string));
   }
