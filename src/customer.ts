@@ -344,24 +344,22 @@ export class Customer extends ServiceFactory {
 
       const accumulator: services.IGoogleAdsRow[] = [];
       let foundSummaryRow: services.IGoogleAdsRow | undefined;
-      console.time("total parsing");
+
       for (const { results, summaryRow } of JSON.parse(asString)) {
         if (summaryRow) {
           foundSummaryRow = this.decamelizeKeysIfNeeded(summaryRow);
         }
-        console.time("parsing");
+
         accumulator.push(
           ...(results ?? []).map((row: any) => {
             return this.decamelizeKeysIfNeeded(row);
           })
         );
-        console.timeEnd("parsing");
 
         if (foundSummaryRow) {
           accumulator.unshift(foundSummaryRow);
         }
       }
-      console.timeEnd("total parsing");
 
       return { response: accumulator };
     } catch (e: any) {
