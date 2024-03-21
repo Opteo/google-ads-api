@@ -674,8 +674,6 @@ export class Customer extends ServiceFactory {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         ...this.callHeaders,
-        "developer-token": this.clientOptions.developer_token ?? "",
-        "login-customer-id": this.credentials.login_customer_id ?? "",
       },
       ...extra,
     };

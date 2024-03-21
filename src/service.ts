@@ -39,7 +39,7 @@ const serviceCache = new TTLCache({
   },
 });
 
-// A global access token cache used by REST calls. Issued tokens expire after 1 hour.
+// A global access token cache used by REST calls. Issued tokens expire after 1 hour, so we cache them for 50 minutes.
 const accessTokenCache = new TTLCache<string, string>({
   max: 100_000,
   ttl: 50 * 60 * 1000, // 50 minutes
