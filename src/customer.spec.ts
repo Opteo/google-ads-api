@@ -337,7 +337,6 @@ describe("paginatedSearch", () => {
 
     // @ts-expect-error private method
     const { response } = await customer.paginatedSearch(mockGaqlQuery, {
-      // @ts-expect-error
       return_total_results_count: false,
       page_size: 1000,
     });
@@ -360,7 +359,6 @@ describe("paginatedSearch", () => {
 
     // @ts-expect-error private method
     const { response } = await customer.paginatedSearch(mockGaqlQuery, {
-      // @ts-expect-error
       return_total_results_count: false,
       page_size: 1000,
     });
@@ -381,7 +379,6 @@ describe("paginatedSearch", () => {
 
     // @ts-expect-error private method
     const { response } = await customer.paginatedSearch(mockGaqlQuery, {
-      // @ts-expect-error
       return_total_results_count: false,
       page_size: 1000,
     });
@@ -402,7 +399,6 @@ describe("paginatedSearch", () => {
     const { totalResultsCount } = await customer.paginatedSearch(
       mockGaqlQuery,
       {
-        // @ts-expect-error
         return_total_results_count: true,
         page_size: 1000,
       }
