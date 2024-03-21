@@ -539,13 +539,24 @@ export class Customer extends ServiceFactory {
 
     const pipeline = chain([stream, parser(), streamArray()]);
 
-    let googleAdsFailure: errors.GoogleAdsFailure | undefined;
+    const defaultErrorMessage = "Unknown GoogleAdsFailure";
+
+    let googleAdsFailure: errors.GoogleAdsFailure | Error = new Error(
+      defaultErrorMessage
+    );
 
     // Only throw the first error.
     pipeline.once("data", (data) => {
-      googleAdsFailure = new errors.GoogleAdsFailure(
-        this.decamelizeKeysIfNeeded(data.value.error.details[0])
-      );
+      if (data?.value?.error?.details?.[0]) {
+        googleAdsFailure = new errors.GoogleAdsFailure(
+          this.decamelizeKeysIfNeeded(data.value.error.details[0])
+        );
+      } else {
+        googleAdsFailure = new Error(
+          data?.value?.error?.message ?? defaultErrorMessage,
+          { cause: data?.value?.error ?? data?.value }
+        );
+      }
     });
 
     // Must always reject.
