@@ -239,7 +239,9 @@ export class Customer extends ServiceFactory {
 
   private async paginatedSearch(
     gaqlQuery: string,
-    requestOptions: Readonly<RequestOptions>
+    requestOptions: Readonly<
+      RequestOptions & { return_total_results_count?: boolean } // We do not allow return_total_results_count in reportOptions, however it is still a valid request option
+    >
   ): Promise<{
     response: services.IGoogleAdsRow[];
     totalResultsCount?: number;
@@ -249,7 +251,6 @@ export class Customer extends ServiceFactory {
     */
     if (
       requestOptions.page_size === undefined &&
-      // @ts-expect-error we do not allow this field in reportOptions, however it is still a valid request option
       requestOptions.return_total_results_count === undefined
     ) {
       // If no pagination or summary options are set, we can use the non-paginated search method.
@@ -264,7 +265,17 @@ export class Customer extends ServiceFactory {
     const response: services.IGoogleAdsRow[] = [];
     let nextPageToken: PageToken = undefined;
     const initialSearch = await this.search(gaqlQuery, requestOptions);
-    const totalResultsCount = initialSearch.totalResultsCount;
+
+    let totalResultsCount = initialSearch.totalResultsCount;
+    // Sometimes (when no results?) the totalResultsCount field is not included in the response.
+    // In this case, we set it to 0.
+    if (
+      requestOptions.return_total_results_count &&
+      initialSearch.totalResultsCount === undefined
+    ) {
+      totalResultsCount = 0;
+    }
+
     let summaryRow = initialSearch.summaryRow;
 
     response.push(...initialSearch.response);
