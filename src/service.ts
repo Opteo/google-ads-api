@@ -102,7 +102,7 @@ export class Service {
     return credentials;
   }
 
-  protected loadService<T = AllServices>(service: ServiceName): T {
+  protected async loadService<T = AllServices>(service: ServiceName): Promise<T> {
     const serviceCacheKey = `${service}_${this.customerOptions.refresh_token}`;
 
     if (serviceCache.has(serviceCacheKey)) {
@@ -117,7 +117,7 @@ export class Service {
 
     // Initialising services can take a few ms, so we cache when possible.
     const client = new protoService({
-      sslCreds: this.getCredentials(),
+      sslCreds: await this.getCredentials(),
     });
 
     serviceCache.set(serviceCacheKey, client);
@@ -162,14 +162,14 @@ export class Service {
     };
   }
 
-  protected buildSearchRequestAndService(
+  protected async buildSearchRequestAndService(
     gaql: string,
     options?: RequestOptions
-  ): {
+  ): Promise<{
     service: GoogleAdsServiceClient;
     request: services.SearchGoogleAdsRequest;
-  } {
-    const service: GoogleAdsServiceClient = this.loadService(
+  }> {
+    const service: GoogleAdsServiceClient = await this.loadService(
       "GoogleAdsServiceClient"
     );
     const request: services.SearchGoogleAdsRequest =
@@ -181,14 +181,14 @@ export class Service {
     return { service, request };
   }
 
-  protected buildSearchStreamRequestAndService(
+  protected async buildSearchStreamRequestAndService(
     gaql: string,
     options?: RequestOptions
-  ): {
+  ): Promise<{
     service: GoogleAdsServiceClient;
     request: services.SearchGoogleAdsStreamRequest;
-  } {
-    const service: GoogleAdsServiceClient = this.loadService(
+  }> {
+    const service: GoogleAdsServiceClient = await this.loadService(
       "GoogleAdsServiceClient"
     );
     const request: services.SearchGoogleAdsStreamRequest =
@@ -200,14 +200,14 @@ export class Service {
     return { service, request };
   }
 
-  protected buildMutationRequestAndService<T>(
+  protected async buildMutationRequestAndService<T>(
     mutations: MutateOperation<T>[],
     options?: MutateOptions
-  ): {
+  ): Promise<{
     service: GoogleAdsServiceClient;
     request: services.MutateGoogleAdsRequest;
-  } {
-    const service: GoogleAdsServiceClient = this.loadService(
+  }> {
+    const service: GoogleAdsServiceClient = await this.loadService(
       "GoogleAdsServiceClient"
     );
 
