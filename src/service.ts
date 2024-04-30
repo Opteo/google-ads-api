@@ -1,5 +1,5 @@
 import { grpc } from "google-gax";
-import { UserRefreshClient } from "google-auth-library";
+import { UserRefreshClient, JWT } from "google-auth-library";
 import { ClientOptions } from "./client";
 import {
   AllServices,
@@ -78,17 +78,27 @@ export class Service {
     return headers;
   }
 
-  private getCredentials(): grpc.ChannelCredentials {
+  private async getCredentials(): Promise<grpc.ChannelCredentials> {
+    let authClient;
     const sslCreds = grpc.credentials.createSsl();
-    const authClient = new UserRefreshClient(
-      this.clientOptions.client_id,
-      this.clientOptions.client_secret,
-      this.customerOptions.refresh_token
-    );
-    const credentials = grpc.credentials.combineChannelCredentials(
-      sslCreds,
-      grpc.credentials.createFromGoogleCredential(authClient)
-    );
+
+    let keyFile;
+    if (this.clientOptions.service_account_key_file) {
+      keyFile = await import(this.clientOptions.service_account_key_file);
+      authClient = new JWT({
+        email: keyFile.client_email,
+        key: keyFile.private_key,
+        scopes: ['https://www.googleapis.com/auth/adwords'],
+      });
+    } else {
+      authClient = new UserRefreshClient(
+        this.clientOptions.client_id,
+        this.clientOptions.client_secret,
+        this.customerOptions.refresh_token
+      );
+    }
+
+    const credentials = grpc.credentials.combineChannelCredentials(sslCreds, grpc.credentials.createFromGoogleCredential(authClient));
     return credentials;
   }
 

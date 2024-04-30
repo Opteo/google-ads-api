@@ -42,11 +42,10 @@ describe("Service", () => {
   });
 
   describe("getCredentials", () => {
-    it("should create grpc channel credentials with customer auth", () => {
+    it("should create grpc channel credentials with customer auth", async () => {
       const customer = newCustomer();
       // @ts-expect-error Accessing private method for test purposes
-      const creds = customer.getCredentials();
-      // This could be better
+      const creds = await customer.getCredentials();
       expect(creds._isSecure()).toEqual(true);
     });
   });

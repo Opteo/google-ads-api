@@ -9,6 +9,7 @@ export interface ClientOptions {
   client_secret: string;
   developer_token: string;
   disable_parsing?: boolean;
+  service_account_key_file?: string;
 }
 
 export class Client {
