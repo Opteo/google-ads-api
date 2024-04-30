@@ -33,7 +33,7 @@ export interface CallHeaders {
 const serviceCache = new TTLCache({
   max: 1000,
   ttl: 10 * 60 * 1000, // 10 minutes
-  dispose: async (service: any) => {
+  dispose: async (service: GoogleAdsServiceClient) => {
     // Close connections when services are removed from the cache
     await service.close();
   },
@@ -43,6 +43,7 @@ export class Service {
   protected readonly clientOptions: ClientOptions;
   protected readonly customerOptions: CustomerOptions;
   protected readonly hooks: Hooks;
+  private serviceAccountKey: { client_email: string; private_key: string; };
 
   constructor(
     clientOptions: ClientOptions,
@@ -53,8 +54,10 @@ export class Service {
     this.customerOptions = customerOptions;
     this.hooks = hooks ?? {};
 
-    // @ts-expect-error All fields don't need to be set here
-    this.serviceCache = {};
+    // Load the service account key file synchronously if provided
+    this.serviceAccountKey = this.clientOptions.service_account_key_file
+      ? require(this.clientOptions.service_account_key_file)
+      : { client_email: '', private_key: '' };
   }
 
   public get credentials(): CustomerCredentials {
@@ -78,16 +81,14 @@ export class Service {
     return headers;
   }
 
-  private async getCredentials(): Promise<grpc.ChannelCredentials> {
+  private getCredentials(): grpc.ChannelCredentials {
     let authClient;
     const sslCreds = grpc.credentials.createSsl();
 
-    let keyFile;
-    if (this.clientOptions.service_account_key_file) {
-      keyFile = await import(this.clientOptions.service_account_key_file);
+    if (this.serviceAccountKey) {
       authClient = new JWT({
-        email: keyFile.client_email,
-        key: keyFile.private_key,
+        email: this.serviceAccountKey.client_email,
+        key: this.serviceAccountKey.private_key,
         scopes: ['https://www.googleapis.com/auth/adwords'],
       });
     } else {
@@ -102,7 +103,7 @@ export class Service {
     return credentials;
   }
 
-  protected async loadService<T = AllServices>(service: ServiceName): Promise<T> {
+  protected loadService<T = AllServices>(service: ServiceName): T {
     const serviceCacheKey = `${service}_${this.customerOptions.refresh_token}`;
 
     if (serviceCache.has(serviceCacheKey)) {
@@ -117,7 +118,7 @@ export class Service {
 
     // Initialising services can take a few ms, so we cache when possible.
     const client = new protoService({
-      sslCreds: await this.getCredentials(),
+      sslCreds: this.getCredentials(),
     });
 
     serviceCache.set(serviceCacheKey, client);
@@ -141,14 +142,11 @@ export class Service {
     return googleAdsFailure;
   }
 
-  protected decodePartialFailureError<T>(response: T): T {
-    if (
-      typeof (response as any)?.partial_failure_error === "undefined" ||
-      !(response as any)?.partial_failure_error
-    ) {
+  protected decodePartialFailureError<T extends { partial_failure_error?: { details: Array<{ type_url: string; value: Buffer }> } }>(response: T): T {
+    if (!response.partial_failure_error) {
       return response;
     }
-    const { details } = (response as any).partial_failure_error;
+    const { details } = response.partial_failure_error;
     const buffer = details?.find((d: { type_url: string; value: Buffer }) =>
       d.type_url.includes("errors.GoogleAdsFailure")
     )?.value;
@@ -162,14 +160,14 @@ export class Service {
     };
   }
 
-  protected async buildSearchRequestAndService(
+  protected buildSearchRequestAndService(
     gaql: string,
     options?: RequestOptions
-  ): Promise<{
+  ): {
     service: GoogleAdsServiceClient;
     request: services.SearchGoogleAdsRequest;
-  }> {
-    const service: GoogleAdsServiceClient = await this.loadService(
+  } {
+    const service: GoogleAdsServiceClient = this.loadService(
       "GoogleAdsServiceClient"
     );
     const request: services.SearchGoogleAdsRequest =
@@ -181,14 +179,14 @@ export class Service {
     return { service, request };
   }
 
-  protected async buildSearchStreamRequestAndService(
+  protected buildSearchStreamRequestAndService(
     gaql: string,
     options?: RequestOptions
-  ): Promise<{
+  ): {
     service: GoogleAdsServiceClient;
     request: services.SearchGoogleAdsStreamRequest;
-  }> {
-    const service: GoogleAdsServiceClient = await this.loadService(
+  } {
+    const service: GoogleAdsServiceClient = this.loadService(
       "GoogleAdsServiceClient"
     );
     const request: services.SearchGoogleAdsStreamRequest =
@@ -200,14 +198,14 @@ export class Service {
     return { service, request };
   }
 
-  protected async buildMutationRequestAndService<T>(
+  protected buildMutationRequestAndService<T>(
     mutations: MutateOperation<T>[],
     options?: MutateOptions
-  ): Promise<{
+  ): {
     service: GoogleAdsServiceClient;
     request: services.MutateGoogleAdsRequest;
-  }> {
-    const service: GoogleAdsServiceClient = await this.loadService(
+  } {
+    const service: GoogleAdsServiceClient = this.loadService(
       "GoogleAdsServiceClient"
     );
 
