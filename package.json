@@ -1,6 +1,6 @@
 {
   "name": "google-ads-api",
-  "version": "17.0.0-beta.5",
+  "version": "17.1.0",
   "description": "Google Ads API Client Library for Node.js",
   "repository": "https://github.com/Opteo/google-ads-api",
   "main": "build/src/index.js",
