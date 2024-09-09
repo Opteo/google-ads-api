@@ -7,7 +7,7 @@
 </p>
 <p align="center">
   <a href="https://developers.google.com/google-ads/api/docs/release-notes">
-    <img src="https://img.shields.io/badge/google%20ads-v16.1.0-009688.svg?style=flat-square">
+    <img src="https://img.shields.io/badge/google%20ads-v17.1.0-009688.svg?style=flat-square">
   </a>
   <a href="https://www.npmjs.com/package/google-ads-api">
     <img src="https://img.shields.io/npm/v/google-ads-api.svg?style=flat-square">
@@ -385,7 +385,7 @@ const keyword = "24 hour locksmith harlem";
 
 const operations: MutateOperation<
   resources.IAdGroupCriterion & {
-    exempt_policy_violation_keys?: google.ads.googleads.v16.common.IPolicyViolationKey[];
+    exempt_policy_violation_keys?: google.ads.googleads.v17.common.IPolicyViolationKey[];
   }
 >[] = [
   {
@@ -701,15 +701,11 @@ try {
 1. Update google-ads-node & publish to NPM. Check that package for instructions.
 2. Update google-ads-node & google-gax in package.json. google-gax must be the same version as google-ads-node,
    Otherwise you are likely to get a `TypeError: Channel credentials must be a ChannelCredentials object` error.
-3. Update the version in this file
-4. Update the versions in src/protos/index.ts
-5. Run `yarn compile` to update the generated files.
-   The `tsc` command might fail -- if so, temporarily add @ts-nocheck
-   to the top of problematic files so that the compile script can continue.
-   After the compile script has run, those @ts-nocheck lines should no longer be required.
-   The compile step depends on some environment variables being set (see scripts/fields.ts), so make sure to set those.
+3. Update the version in `version.ts`.
+4. Update the versions in `src/protos/index.ts`.
+5. Run `yarn compile` to update the generated files. The `tsc` command might fail -- if so, temporarily add @ts-nocheck to the top of problematic files so that the compile script can continue. After the compile script has run, those @ts-nocheck lines should no longer be required. The compile step depends on some environment variables being set (see scripts/fields.ts), so make sure to set those.
 6. Prettify the generated files so the the diffs are easier to read.
 7. Check that the diffs are expected and that the generated files are correct. New Gads versions will often add new services, fields, and enums.
-8. Test with `yarn test`
+8. Test with `yarn test`.
 9. Test by linking to a real project and making some real requests.
 10. Once confident, bump the major version & publish to NPM.
