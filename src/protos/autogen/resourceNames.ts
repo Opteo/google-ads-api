@@ -890,6 +890,28 @@ export function campaign(
   return `customers/${customerId}/campaigns/${campaignId}` as const;
 }
 
+/* CampaignAggregateAssetView */
+export type CampaignAggregateAssetViewResourceName =
+  `customers/${StrNum}/campaignAggregateAssetViews/${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} campaignId
+ * @param {string | number} assetId
+ * @param {string | number} assetLinkSource
+ * @param {string | number} fieldType
+ * @returns `CampaignAggregateAssetViewResourceName`
+ * @example const campaignAggregateAssetView: ResourceNames.CampaignAggregateAssetViewResourceName = ResourceNames.campaignAggregateAssetView(10987417, 21974834, 43949668, 87899336, 175798672)
+ */
+export function campaignAggregateAssetView(
+  customerId: string | number,
+  campaignId: string | number,
+  assetId: string | number,
+  assetLinkSource: string | number,
+  fieldType: string | number
+): CampaignAggregateAssetViewResourceName {
+  return `customers/${customerId}/campaignAggregateAssetViews/${campaignId}~${assetId}~${assetLinkSource}~${fieldType}` as const;
+}
+
 /* CampaignAsset */
 export type CampaignAssetResourceName =
   `customers/${StrNum}/campaignAssets/${StrNum}~${StrNum}~${StrNum}`;
@@ -1247,6 +1269,28 @@ export function changeStatus(
   changeStatusId: string | number
 ): ChangeStatusResourceName {
   return `customers/${customerId}/changeStatus/${changeStatusId}` as const;
+}
+
+/* ChannelAggregateAssetView */
+export type ChannelAggregateAssetViewResourceName =
+  `customers/${StrNum}/channelAggregateAssetViews/${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} advertisingChannelType
+ * @param {string | number} assetId
+ * @param {string | number} assetSource
+ * @param {string | number} fieldType
+ * @returns `ChannelAggregateAssetViewResourceName`
+ * @example const channelAggregateAssetView: ResourceNames.ChannelAggregateAssetViewResourceName = ResourceNames.channelAggregateAssetView(10987417, 21974834, 43949668, 87899336, 175798672)
+ */
+export function channelAggregateAssetView(
+  customerId: string | number,
+  advertisingChannelType: string | number,
+  assetId: string | number,
+  assetSource: string | number,
+  fieldType: string | number
+): ChannelAggregateAssetViewResourceName {
+  return `customers/${customerId}/channelAggregateAssetViews/${advertisingChannelType}~${assetId}~${assetSource}~${fieldType}` as const;
 }
 
 /* ClickView */
@@ -2529,6 +2573,24 @@ export function offlineConversionUploadClientSummary(
   return `customers/${customerId}/offlineConversionUploadClientSummaries/${client}` as const;
 }
 
+/* OfflineConversionUploadConversionActionSummary */
+export type OfflineConversionUploadConversionActionSummaryResourceName =
+  `customers/${StrNum}/offlineConversionUploadConversionActionSummaries/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} conversionTypeId
+ * @param {string | number} client
+ * @returns `OfflineConversionUploadConversionActionSummaryResourceName`
+ * @example const offlineConversionUploadConversionActionSummary: ResourceNames.OfflineConversionUploadConversionActionSummaryResourceName = ResourceNames.offlineConversionUploadConversionActionSummary(10987417, 21974834, 43949668)
+ */
+export function offlineConversionUploadConversionActionSummary(
+  customerId: string | number,
+  conversionTypeId: string | number,
+  client: string | number
+): OfflineConversionUploadConversionActionSummaryResourceName {
+  return `customers/${customerId}/offlineConversionUploadConversionActionSummaries/${conversionTypeId}~${client}` as const;
+}
+
 /* OfflineUserDataJob */
 export type OfflineUserDataJobResourceName =
   `customers/${StrNum}/offlineUserDataJobs/${StrNum}`;
@@ -2823,6 +2885,30 @@ export function shoppingPerformanceView(
   return `customers/${customerId}/shoppingPerformanceView` as const;
 }
 
+/* ShoppingProduct */
+export type ShoppingProductResourceName =
+  `customers/${StrNum}/shoppingProducts/${StrNum}~${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} merchantCenterId
+ * @param {string | number} channel
+ * @param {string | number} languageCode
+ * @param {string | number} feedLabel
+ * @param {string | number} itemId
+ * @returns `ShoppingProductResourceName`
+ * @example const shoppingProduct: ResourceNames.ShoppingProductResourceName = ResourceNames.shoppingProduct(10987417, 21974834, 43949668, 87899336, 175798672, 351597344)
+ */
+export function shoppingProduct(
+  customerId: string | number,
+  merchantCenterId: string | number,
+  channel: string | number,
+  languageCode: string | number,
+  feedLabel: string | number,
+  itemId: string | number
+): ShoppingProductResourceName {
+  return `customers/${customerId}/shoppingProducts/${merchantCenterId}~${channel}~${languageCode}~${feedLabel}~${itemId}` as const;
+}
+
 /* SmartCampaignSearchTermView */
 export type SmartCampaignSearchTermViewResourceName =
   `customers/${StrNum}/smartCampaignSearchTermViews/${StrNum}~${StrNum}`;
@@ -2965,6 +3051,24 @@ export function userList(
   userListId: string | number
 ): UserListResourceName {
   return `customers/${customerId}/userLists/${userListId}` as const;
+}
+
+/* UserListCustomerType */
+export type UserListCustomerTypeResourceName =
+  `customers/${StrNum}/userListCustomerTypes/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} userListId
+ * @param {string | number} semanticLabel
+ * @returns `UserListCustomerTypeResourceName`
+ * @example const userListCustomerType: ResourceNames.UserListCustomerTypeResourceName = ResourceNames.userListCustomerType(10987417, 21974834, 43949668)
+ */
+export function userListCustomerType(
+  customerId: string | number,
+  userListId: string | number,
+  semanticLabel: string | number
+): UserListCustomerTypeResourceName {
+  return `customers/${customerId}/userListCustomerTypes/${userListId}~${semanticLabel}` as const;
 }
 
 /* UserLocationView */
