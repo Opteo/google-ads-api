@@ -1,6 +1,6 @@
 {
   "name": "google-ads-api",
-  "version": "16.0.0-rest-beta3",
+  "version": "17.1.0-rest-beta",
   "description": "Google Ads API Client Library for Node.js",
   "repository": "https://github.com/Opteo/google-ads-api",
   "main": "build/src/index.js",
@@ -20,9 +20,9 @@
     "@isaacs/ttlcache": "^1.2.2",
     "axios": "^1.6.7",
     "circ-json": "^1.0.4",
-    "google-ads-node": "^13.0.0",
+    "google-ads-node": "14.0.0",
     "google-auth-library": "^7.1.0",
-    "google-gax": "^4.3.1",
+    "google-gax": "^4.4.1",
     "long": "^4.0.0",
     "map-obj": "^4.0.0",
     "stream-json": "^1.8.0"
@@ -30,7 +30,7 @@
   "devDependencies": {
     "@types/jest": "^29.0.1",
     "@types/lodash": "^4.14.202",
-    "@types/node": "^20.11.30",
+    "@types/node": "^22.5.4",
     "@types/pluralize": "^0.0.29",
     "@types/stream-json": "^1.7.7",
     "@typescript-eslint/eslint-plugin": "^4.8.2",
@@ -43,7 +43,7 @@
     "pluralize": "^8.0.0",
     "protobufjs": "^7.2.6",
     "ts-jest": "^29.1.2",
-    "typescript": "^5.4.3"
+    "typescript": "^5.5.4"
   },
   "keywords": [
     "google ads",

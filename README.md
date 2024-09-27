@@ -7,7 +7,7 @@
 </p>
 <p align="center">
   <a href="https://developers.google.com/google-ads/api/docs/release-notes">
-    <img src="https://img.shields.io/badge/google%20ads-v16.1.0-009688.svg?style=flat-square">
+    <img src="https://img.shields.io/badge/google%20ads-v17.1.0-009688.svg?style=flat-square">
   </a>
   <a href="https://www.npmjs.com/package/google-ads-api">
     <img src="https://img.shields.io/npm/v/google-ads-api.svg?style=flat-square">
@@ -379,32 +379,34 @@ import {
 } from "google-ads-api";
 
 // Ad Group to which you want to add the keyword
-const adGroupResourceName = 'customers/123/adGroups/456'
+const adGroupResourceName = "customers/123/adGroups/456";
 
-const keyword = '24 hour locksmith harlem'
+const keyword = "24 hour locksmith harlem";
 
 const operations: MutateOperation<
-  resources.IAdGroupCriterion & { exempt_policy_violation_keys?: google.ads.googleads.v16.common.IPolicyViolationKey[]}
+  resources.IAdGroupCriterion & {
+    exempt_policy_violation_keys?: google.ads.googleads.v17.common.IPolicyViolationKey[];
+  }
 >[] = [
   {
-    entity: 'ad_group_criterion',
+    entity: "ad_group_criterion",
     operation: "create",
     resource: {
       // Keyword with policy violation exemptions
-        ad_group: adGroupResourceName,
-        keyword: {
-            text: '24 hour locksmith harlem',
-            match_type: enums.KeywordMatchType.PHRASE,
-        },
-        status: enums.AdGroupStatus.ENABLED ,
+      ad_group: adGroupResourceName,
+      keyword: {
+        text: "24 hour locksmith harlem",
+        match_type: enums.KeywordMatchType.PHRASE,
+      },
+      status: enums.AdGroupStatus.ENABLED,
     },
     exempt_policy_violation_keys: [
-        {
-            policy_name: 'LOCAL_SERVICES',
-            violating_text: keyword,
-        },
+      {
+        policy_name: "LOCAL_SERVICES",
+        violating_text: keyword,
+      },
     ],
-  }
+  },
 ];
 
 const result = await customer.mutateResources(operations);
@@ -683,7 +685,7 @@ try {
     // Get the first one and explicitly check for a certain error type
     const [firstError] = err.errors;
     if (
-      firstError.error_code ===
+      firstError.error_code.query_error ===
       errors.QueryErrorEnum.QueryError.UNRECOGNIZED_FIELD
     ) {
       console.log(
@@ -693,3 +695,17 @@ try {
   }
 }
 ```
+
+# Updating this library to the latest Google Ads API version
+
+1. Update google-ads-node & publish to NPM. Check that package for instructions.
+2. Update google-ads-node & google-gax in package.json. google-gax must be the same version as google-ads-node,
+   Otherwise you are likely to get a `TypeError: Channel credentials must be a ChannelCredentials object` error.
+3. Update the version in `version.ts`.
+4. Update the versions in `src/protos/index.ts`.
+5. Run `yarn compile` to update the generated files. The `tsc` command might fail -- if so, temporarily add @ts-nocheck to the top of problematic files so that the compile script can continue. After the compile script has run, those @ts-nocheck lines should no longer be required. The compile step depends on some environment variables being set (see scripts/fields.ts), so make sure to set those.
+6. Prettify the generated files so the the diffs are easier to read.
+7. Check that the diffs are expected and that the generated files are correct. New Gads versions will often add new services, fields, and enums.
+8. Test with `yarn test`.
+9. Test by linking to a real project and making some real requests.
+10. Once confident, bump the major version & publish to NPM.
