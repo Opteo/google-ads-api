@@ -1797,10 +1797,10 @@ globby@^11.0.3:
     merge2 "^1.4.1"
     slash "^3.0.0"
 
-google-ads-node@14.0.0:
-  version "14.0.0"
-  resolved "https://registry.yarnpkg.com/google-ads-node/-/google-ads-node-14.0.0.tgz#84057dee92b1ec76694b40309126e768a490ae91"
-  integrity sha512-rbgZkcaRSCQKnwRki4Jl2GY6Csd12a3ouX45xcK1ttFbJqtKrm8GPkctAIVnwAx0yVi8VMgpFWaEls8/i0SGJg==
+google-ads-node@15.0.0-beta0:
+  version "15.0.0-beta0"
+  resolved "https://registry.yarnpkg.com/google-ads-node/-/google-ads-node-15.0.0-beta0.tgz#fd1957f5b84c09ccd03a5b20db9f44e776293d72"
+  integrity sha512-TK4GYniAUKabgMk/9JQp+A2mlXDqPrtIBVWDYThrSg9bu379VqPMMx4UxsT4c0YhSi0eedx4yX+8nuv1DJRoiQ==
   dependencies:
     google-gax "^4.4.1"
     lru-cache "^10.2.0"

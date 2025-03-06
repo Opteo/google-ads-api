@@ -22,7 +22,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AccountBudgetProposalService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AccountBudgetProposalService
    */
   public get accountBudgetProposals() {
     const service = this.loadService<services.AccountBudgetProposalService>(
@@ -198,7 +198,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AccountLinkService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AccountLinkService
    */
   public get accountLinks() {
     const service = this.loadService<services.AccountLinkService>(
@@ -212,7 +212,7 @@ export default class ServiceFactory extends Service {
     >;
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AccountLinkService#createaccountlink
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AccountLinkService#createaccountlink
        */
       createAccountLink: async (
         request: services.CreateAccountLinkRequest
@@ -438,7 +438,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AdGroupAdLabelService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AdGroupAdLabelService
    */
   public get adGroupAdLabels() {
     const service = this.loadService<services.AdGroupAdLabelService>(
@@ -611,7 +611,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AdGroupAdService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AdGroupAdService
    */
   public get adGroupAds() {
     const service = this.loadService<services.AdGroupAdService>(
@@ -861,7 +861,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AdGroupAdService#removeautomaticallycreatedassets
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AdGroupAdService#removeautomaticallycreatedassets
        */
       removeAutomaticallyCreatedAssets: async (
         request: services.RemoveAutomaticallyCreatedAssetsRequest
@@ -931,7 +931,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AdGroupAssetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AdGroupAssetService
    */
   public get adGroupAssets() {
     const service = this.loadService<services.AdGroupAssetService>(
@@ -1183,7 +1183,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AdGroupAssetSetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AdGroupAssetSetService
    */
   public get adGroupAssetSets() {
     const service = this.loadService<services.AdGroupAssetSetService>(
@@ -1356,7 +1356,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AdGroupBidModifierService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AdGroupBidModifierService
    */
   public get adGroupBidModifiers() {
     const service = this.loadService<services.AdGroupBidModifierService>(
@@ -1614,7 +1614,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AdGroupCriterionCustomizerService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AdGroupCriterionCustomizerService
    */
   public get adGroupCriterionCustomizers() {
     const service =
@@ -1796,7 +1796,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AdGroupCriterionLabelService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AdGroupCriterionLabelService
    */
   public get adGroupCriterionLabels() {
     const service = this.loadService<services.AdGroupCriterionLabelService>(
@@ -1975,7 +1975,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AdGroupCriterionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AdGroupCriterionService
    */
   public get adGroupCriteria() {
     const service = this.loadService<services.AdGroupCriterionService>(
@@ -2241,7 +2241,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AdGroupCustomizerService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AdGroupCustomizerService
    */
   public get adGroupCustomizers() {
     const service = this.loadService<services.AdGroupCustomizerService>(
@@ -2414,529 +2414,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AdGroupExtensionSettingService
-   */
-  public get adGroupExtensionSettings() {
-    const service = this.loadService<services.AdGroupExtensionSettingService>(
-      "AdGroupExtensionSettingServiceClient"
-    );
-    type MutateOptions = Partial<
-      Pick<
-        services.IMutateAdGroupExtensionSettingsRequest,
-        "partial_failure" | "validate_only"
-      >
-    >;
-    return {
-      /**
-       * @description create resources of type resources.IAdGroupExtensionSetting
-       * @returns services.MutateAdGroupExtensionSettingsResponse
-       */
-      create: async (
-        adGroupExtensionSettings: (
-          | resources.IAdGroupExtensionSetting
-          | resources.AdGroupExtensionSetting
-        )[],
-        options?: MutateOptions
-      ): Promise<services.MutateAdGroupExtensionSettingsResponse> => {
-        const ops = this.buildOperations<
-          services.AdGroupExtensionSettingOperation,
-          resources.IAdGroupExtensionSetting
-        >("create", adGroupExtensionSettings);
-        const request = this.buildRequest<
-          services.AdGroupExtensionSettingOperation,
-          services.IMutateAdGroupExtensionSettingsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method:
-            "AdGroupExtensionSettingService.mutateAdGroupExtensionSettings",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateAdGroupExtensionSettings(
-            request,
-            {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
-          );
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-
-      /**
-       * @description update resources of type resources.IAdGroupExtensionSetting
-       * @returns services.MutateAdGroupExtensionSettingsResponse
-       */
-      update: async (
-        adGroupExtensionSettings: (
-          | resources.IAdGroupExtensionSetting
-          | resources.AdGroupExtensionSetting
-        )[],
-        options?: MutateOptions
-      ): Promise<services.MutateAdGroupExtensionSettingsResponse> => {
-        const ops = this.buildOperations<
-          services.AdGroupExtensionSettingOperation,
-          resources.IAdGroupExtensionSetting
-        >(
-          "update",
-          adGroupExtensionSettings,
-          // @ts-expect-error Static class type here is fine
-          resources.AdGroupExtensionSetting
-        );
-        const request = this.buildRequest<
-          services.AdGroupExtensionSettingOperation,
-          services.IMutateAdGroupExtensionSettingsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method:
-            "AdGroupExtensionSettingService.mutateAdGroupExtensionSettings",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateAdGroupExtensionSettings(
-            request,
-            {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
-          );
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-
-      /**
-       * @description remove resources of type string
-       * @returns services.MutateAdGroupExtensionSettingsResponse
-       */
-      remove: async (
-        adGroupExtensionSettings: string[],
-        options?: MutateOptions
-      ): Promise<services.MutateAdGroupExtensionSettingsResponse> => {
-        const ops = this.buildOperations<
-          services.AdGroupExtensionSettingOperation,
-          string
-        >("remove", adGroupExtensionSettings);
-        const request = this.buildRequest<
-          services.AdGroupExtensionSettingOperation,
-          services.IMutateAdGroupExtensionSettingsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method:
-            "AdGroupExtensionSettingService.mutateAdGroupExtensionSettings",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateAdGroupExtensionSettings(
-            request,
-            {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
-          );
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-    };
-  }
-
-  /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AdGroupFeedService
-   */
-  public get adGroupFeeds() {
-    const service = this.loadService<services.AdGroupFeedService>(
-      "AdGroupFeedServiceClient"
-    );
-    type MutateOptions = Partial<
-      Pick<
-        services.IMutateAdGroupFeedsRequest,
-        "partial_failure" | "validate_only" | "response_content_type"
-      >
-    >;
-    return {
-      /**
-       * @description create resources of type resources.IAdGroupFeed
-       * @returns services.MutateAdGroupFeedsResponse
-       */
-      create: async (
-        adGroupFeeds: (resources.IAdGroupFeed | resources.AdGroupFeed)[],
-        options?: MutateOptions
-      ): Promise<services.MutateAdGroupFeedsResponse> => {
-        const ops = this.buildOperations<
-          services.AdGroupFeedOperation,
-          resources.IAdGroupFeed
-        >("create", adGroupFeeds);
-        const request = this.buildRequest<
-          services.AdGroupFeedOperation,
-          services.IMutateAdGroupFeedsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "AdGroupFeedService.mutateAdGroupFeeds",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateAdGroupFeeds(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-
-      /**
-       * @description update resources of type resources.IAdGroupFeed
-       * @returns services.MutateAdGroupFeedsResponse
-       */
-      update: async (
-        adGroupFeeds: (resources.IAdGroupFeed | resources.AdGroupFeed)[],
-        options?: MutateOptions
-      ): Promise<services.MutateAdGroupFeedsResponse> => {
-        const ops = this.buildOperations<
-          services.AdGroupFeedOperation,
-          resources.IAdGroupFeed
-        >(
-          "update",
-          adGroupFeeds,
-          // @ts-expect-error Static class type here is fine
-          resources.AdGroupFeed
-        );
-        const request = this.buildRequest<
-          services.AdGroupFeedOperation,
-          services.IMutateAdGroupFeedsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "AdGroupFeedService.mutateAdGroupFeeds",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateAdGroupFeeds(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-
-      /**
-       * @description remove resources of type string
-       * @returns services.MutateAdGroupFeedsResponse
-       */
-      remove: async (
-        adGroupFeeds: string[],
-        options?: MutateOptions
-      ): Promise<services.MutateAdGroupFeedsResponse> => {
-        const ops = this.buildOperations<services.AdGroupFeedOperation, string>(
-          "remove",
-          adGroupFeeds
-        );
-        const request = this.buildRequest<
-          services.AdGroupFeedOperation,
-          services.IMutateAdGroupFeedsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "AdGroupFeedService.mutateAdGroupFeeds",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateAdGroupFeeds(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-    };
-  }
-
-  /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AdGroupLabelService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AdGroupLabelService
    */
   public get adGroupLabels() {
     const service = this.loadService<services.AdGroupLabelService>(
@@ -3106,7 +2584,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AdGroupService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AdGroupService
    */
   public get adGroups() {
     const service = this.loadService<services.AdGroupService>(
@@ -3358,7 +2836,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AdParameterService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AdParameterService
    */
   public get adParameters() {
     const service = this.loadService<services.AdParameterService>(
@@ -3610,7 +3088,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AdService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AdService
    */
   public get ads() {
     const service = this.loadService<services.AdService>("AdServiceClient");
@@ -3703,7 +3181,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AssetGroupAssetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AssetGroupAssetService
    */
   public get assetGroupAssets() {
     const service = this.loadService<services.AssetGroupAssetService>(
@@ -3961,7 +3439,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AssetGroupListingGroupFilterService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AssetGroupListingGroupFilterService
    */
   public get assetGroupListingGroupFilters() {
     const service =
@@ -4232,7 +3710,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AssetGroupService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AssetGroupService
    */
   public get assetGroups() {
     const service = this.loadService<services.AssetGroupService>(
@@ -4481,7 +3959,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AssetGroupSignalService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AssetGroupSignalService
    */
   public get assetGroupSignals() {
     const service = this.loadService<services.AssetGroupSignalService>(
@@ -4654,7 +4132,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AssetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AssetService
    */
   public get assets() {
     const service =
@@ -4828,7 +4306,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AssetSetAssetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AssetSetAssetService
    */
   public get assetSetAssets() {
     const service = this.loadService<services.AssetSetAssetService>(
@@ -4998,7 +4476,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AssetSetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AssetSetService
    */
   public get assetSets() {
     const service = this.loadService<services.AssetSetService>(
@@ -5250,7 +4728,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AudienceInsightsService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AudienceInsightsService
    */
   public get audienceInsights() {
     const service = this.loadService<services.AudienceInsightsService>(
@@ -5259,7 +4737,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AudienceInsightsService#generateinsightsfinderreport
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AudienceInsightsService#generateinsightsfinderreport
        */
       generateInsightsFinderReport: async (
         request: services.GenerateInsightsFinderReportRequest
@@ -5327,7 +4805,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AudienceInsightsService#listaudienceinsightsattributes
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AudienceInsightsService#listaudienceinsightsattributes
        */
       listAudienceInsightsAttributes: async (
         request: services.ListAudienceInsightsAttributesRequest
@@ -5395,7 +4873,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AudienceInsightsService#listinsightseligibledates
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AudienceInsightsService#listinsightseligibledates
        */
       listInsightsEligibleDates: async (
         request: services.ListInsightsEligibleDatesRequest
@@ -5460,7 +4938,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AudienceInsightsService#generateaudiencecompositioninsights
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AudienceInsightsService#generateaudiencecompositioninsights
        */
       generateAudienceCompositionInsights: async (
         request: services.GenerateAudienceCompositionInsightsRequest
@@ -5528,7 +5006,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AudienceInsightsService#generatesuggestedtargetinginsights
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AudienceInsightsService#generatesuggestedtargetinginsights
        */
       generateSuggestedTargetingInsights: async (
         request: services.GenerateSuggestedTargetingInsightsRequest
@@ -5596,7 +5074,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AudienceInsightsService#generateaudienceoverlapinsights
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AudienceInsightsService#generateaudienceoverlapinsights
        */
       generateAudienceOverlapInsights: async (
         request: services.GenerateAudienceOverlapInsightsRequest
@@ -5662,11 +5140,79 @@ export default class ServiceFactory extends Service {
           throw googleAdsError;
         }
       },
+
+      /**
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AudienceInsightsService#generatetargetingsuggestionmetrics
+       */
+      generateTargetingSuggestionMetrics: async (
+        request: services.GenerateTargetingSuggestionMetricsRequest
+      ): Promise<services.GenerateTargetingSuggestionMetricsResponse> => {
+        const baseHookArguments: BaseServiceHookArgs = {
+          credentials: this.credentials,
+          method: "AudienceInsightsService.GenerateTargetingSuggestionMetrics",
+          requestOptions: request,
+        };
+        if (this.hooks.onServiceStart) {
+          const serviceCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onServiceStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              serviceCancellation.cancelled = true;
+              serviceCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (serviceCancellation.cancelled) {
+            return serviceCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.generateTargetingSuggestionMetrics(
+            request,
+            {
+              // @ts-expect-error This arg doesn't exist in the type definitions
+              otherArgs: {
+                headers: this.callHeaders,
+              },
+            }
+          );
+          if (this.hooks.onServiceEnd) {
+            const serviceResolution: HookedResolution = { resolved: false };
+            await this.hooks.onServiceEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                serviceResolution.resolved = true;
+                serviceResolution.res = res;
+              },
+            });
+            if (serviceResolution.resolved) {
+              return serviceResolution.res;
+            }
+          }
+          return response;
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err as Error);
+          if (this.hooks.onServiceError) {
+            await this.hooks.onServiceError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
     };
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/AudienceService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AudienceService
    */
   public get audiences() {
     const service = this.loadService<services.AudienceService>(
@@ -5841,7 +5387,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/BatchJobService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/BatchJobService
    */
   public get batchJobs() {
     const service = this.loadService<services.BatchJobService>(
@@ -6004,7 +5550,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/BatchJobService#listbatchjobresults
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/BatchJobService#listbatchjobresults
        */
       listBatchJobResults: async (
         request: services.ListBatchJobResultsRequest
@@ -6069,7 +5615,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/BatchJobService#runbatchjob
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/BatchJobService#runbatchjob
        */
       runBatchJob: async (
         request: services.RunBatchJobRequest
@@ -6134,7 +5680,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/BatchJobService#addbatchjoboperations
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/BatchJobService#addbatchjoboperations
        */
       addBatchJobOperations: async (
         request: services.AddBatchJobOperationsRequest
@@ -6201,7 +5747,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/BiddingDataExclusionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/BiddingDataExclusionService
    */
   public get biddingDataExclusions() {
     const service = this.loadService<services.BiddingDataExclusionService>(
@@ -6468,7 +6014,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/BiddingSeasonalityAdjustmentService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/BiddingSeasonalityAdjustmentService
    */
   public get biddingSeasonalityAdjustments() {
     const service =
@@ -6739,7 +6285,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/BiddingStrategyService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/BiddingStrategyService
    */
   public get biddingStrategies() {
     const service = this.loadService<services.BiddingStrategyService>(
@@ -6997,7 +6543,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CampaignAssetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CampaignAssetService
    */
   public get campaignAssets() {
     const service = this.loadService<services.CampaignAssetService>(
@@ -7249,7 +6795,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CampaignAssetSetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CampaignAssetSetService
    */
   public get campaignAssetSets() {
     const service = this.loadService<services.CampaignAssetSetService>(
@@ -7422,7 +6968,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CampaignBidModifierService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CampaignBidModifierService
    */
   public get campaignBidModifiers() {
     const service = this.loadService<services.CampaignBidModifierService>(
@@ -7680,7 +7226,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CampaignBudgetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CampaignBudgetService
    */
   public get campaignBudgets() {
     const service = this.loadService<services.CampaignBudgetService>(
@@ -7938,7 +7484,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CampaignConversionGoalService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CampaignConversionGoalService
    */
   public get campaignConversionGoals() {
     const service = this.loadService<services.CampaignConversionGoalService>(
@@ -8039,7 +7585,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CampaignCriterionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CampaignCriterionService
    */
   public get campaignCriteria() {
     const service = this.loadService<services.CampaignCriterionService>(
@@ -8297,7 +7843,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CampaignCustomizerService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CampaignCustomizerService
    */
   public get campaignCustomizers() {
     const service = this.loadService<services.CampaignCustomizerService>(
@@ -8470,7 +8016,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CampaignDraftService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CampaignDraftService
    */
   public get campaignDrafts() {
     const service = this.loadService<services.CampaignDraftService>(
@@ -8720,7 +8266,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CampaignDraftService#promotecampaigndraft
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CampaignDraftService#promotecampaigndraft
        */
       promoteCampaignDraft: async (
         request: services.PromoteCampaignDraftRequest
@@ -8785,7 +8331,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CampaignDraftService#listcampaigndraftasyncerrors
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CampaignDraftService#listcampaigndraftasyncerrors
        */
       listCampaignDraftAsyncErrors: async (
         request: services.ListCampaignDraftAsyncErrorsRequest
@@ -8855,529 +8401,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CampaignExtensionSettingService
-   */
-  public get campaignExtensionSettings() {
-    const service = this.loadService<services.CampaignExtensionSettingService>(
-      "CampaignExtensionSettingServiceClient"
-    );
-    type MutateOptions = Partial<
-      Pick<
-        services.IMutateCampaignExtensionSettingsRequest,
-        "partial_failure" | "validate_only" | "response_content_type"
-      >
-    >;
-    return {
-      /**
-       * @description create resources of type resources.ICampaignExtensionSetting
-       * @returns services.MutateCampaignExtensionSettingsResponse
-       */
-      create: async (
-        campaignExtensionSettings: (
-          | resources.ICampaignExtensionSetting
-          | resources.CampaignExtensionSetting
-        )[],
-        options?: MutateOptions
-      ): Promise<services.MutateCampaignExtensionSettingsResponse> => {
-        const ops = this.buildOperations<
-          services.CampaignExtensionSettingOperation,
-          resources.ICampaignExtensionSetting
-        >("create", campaignExtensionSettings);
-        const request = this.buildRequest<
-          services.CampaignExtensionSettingOperation,
-          services.IMutateCampaignExtensionSettingsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method:
-            "CampaignExtensionSettingService.mutateCampaignExtensionSettings",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateCampaignExtensionSettings(
-            request,
-            {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
-          );
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-
-      /**
-       * @description update resources of type resources.ICampaignExtensionSetting
-       * @returns services.MutateCampaignExtensionSettingsResponse
-       */
-      update: async (
-        campaignExtensionSettings: (
-          | resources.ICampaignExtensionSetting
-          | resources.CampaignExtensionSetting
-        )[],
-        options?: MutateOptions
-      ): Promise<services.MutateCampaignExtensionSettingsResponse> => {
-        const ops = this.buildOperations<
-          services.CampaignExtensionSettingOperation,
-          resources.ICampaignExtensionSetting
-        >(
-          "update",
-          campaignExtensionSettings,
-          // @ts-expect-error Static class type here is fine
-          resources.CampaignExtensionSetting
-        );
-        const request = this.buildRequest<
-          services.CampaignExtensionSettingOperation,
-          services.IMutateCampaignExtensionSettingsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method:
-            "CampaignExtensionSettingService.mutateCampaignExtensionSettings",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateCampaignExtensionSettings(
-            request,
-            {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
-          );
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-
-      /**
-       * @description remove resources of type string
-       * @returns services.MutateCampaignExtensionSettingsResponse
-       */
-      remove: async (
-        campaignExtensionSettings: string[],
-        options?: MutateOptions
-      ): Promise<services.MutateCampaignExtensionSettingsResponse> => {
-        const ops = this.buildOperations<
-          services.CampaignExtensionSettingOperation,
-          string
-        >("remove", campaignExtensionSettings);
-        const request = this.buildRequest<
-          services.CampaignExtensionSettingOperation,
-          services.IMutateCampaignExtensionSettingsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method:
-            "CampaignExtensionSettingService.mutateCampaignExtensionSettings",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateCampaignExtensionSettings(
-            request,
-            {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
-          );
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-    };
-  }
-
-  /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CampaignFeedService
-   */
-  public get campaignFeeds() {
-    const service = this.loadService<services.CampaignFeedService>(
-      "CampaignFeedServiceClient"
-    );
-    type MutateOptions = Partial<
-      Pick<
-        services.IMutateCampaignFeedsRequest,
-        "partial_failure" | "validate_only" | "response_content_type"
-      >
-    >;
-    return {
-      /**
-       * @description create resources of type resources.ICampaignFeed
-       * @returns services.MutateCampaignFeedsResponse
-       */
-      create: async (
-        campaignFeeds: (resources.ICampaignFeed | resources.CampaignFeed)[],
-        options?: MutateOptions
-      ): Promise<services.MutateCampaignFeedsResponse> => {
-        const ops = this.buildOperations<
-          services.CampaignFeedOperation,
-          resources.ICampaignFeed
-        >("create", campaignFeeds);
-        const request = this.buildRequest<
-          services.CampaignFeedOperation,
-          services.IMutateCampaignFeedsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "CampaignFeedService.mutateCampaignFeeds",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateCampaignFeeds(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-
-      /**
-       * @description update resources of type resources.ICampaignFeed
-       * @returns services.MutateCampaignFeedsResponse
-       */
-      update: async (
-        campaignFeeds: (resources.ICampaignFeed | resources.CampaignFeed)[],
-        options?: MutateOptions
-      ): Promise<services.MutateCampaignFeedsResponse> => {
-        const ops = this.buildOperations<
-          services.CampaignFeedOperation,
-          resources.ICampaignFeed
-        >(
-          "update",
-          campaignFeeds,
-          // @ts-expect-error Static class type here is fine
-          resources.CampaignFeed
-        );
-        const request = this.buildRequest<
-          services.CampaignFeedOperation,
-          services.IMutateCampaignFeedsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "CampaignFeedService.mutateCampaignFeeds",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateCampaignFeeds(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-
-      /**
-       * @description remove resources of type string
-       * @returns services.MutateCampaignFeedsResponse
-       */
-      remove: async (
-        campaignFeeds: string[],
-        options?: MutateOptions
-      ): Promise<services.MutateCampaignFeedsResponse> => {
-        const ops = this.buildOperations<
-          services.CampaignFeedOperation,
-          string
-        >("remove", campaignFeeds);
-        const request = this.buildRequest<
-          services.CampaignFeedOperation,
-          services.IMutateCampaignFeedsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "CampaignFeedService.mutateCampaignFeeds",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateCampaignFeeds(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-    };
-  }
-
-  /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CampaignGroupService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CampaignGroupService
    */
   public get campaignGroups() {
     const service = this.loadService<services.CampaignGroupService>(
@@ -9629,7 +8653,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CampaignLabelService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CampaignLabelService
    */
   public get campaignLabels() {
     const service = this.loadService<services.CampaignLabelService>(
@@ -9799,7 +8823,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CampaignService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CampaignService
    */
   public get campaigns() {
     const service = this.loadService<services.CampaignService>(
@@ -10047,11 +9071,76 @@ export default class ServiceFactory extends Service {
           throw googleAdsError;
         }
       },
+
+      /**
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CampaignService#enablepmaxbrandguidelines
+       */
+      enablePMaxBrandGuidelines: async (
+        request: services.EnablePMaxBrandGuidelinesRequest
+      ): Promise<services.EnablePMaxBrandGuidelinesResponse> => {
+        const baseHookArguments: BaseServiceHookArgs = {
+          credentials: this.credentials,
+          method: "CampaignService.EnablePMaxBrandGuidelines",
+          requestOptions: request,
+        };
+        if (this.hooks.onServiceStart) {
+          const serviceCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onServiceStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              serviceCancellation.cancelled = true;
+              serviceCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (serviceCancellation.cancelled) {
+            return serviceCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.enablePMaxBrandGuidelines(request, {
+            // @ts-expect-error This arg doesn't exist in the type definitions
+            otherArgs: {
+              headers: this.callHeaders,
+            },
+          });
+          if (this.hooks.onServiceEnd) {
+            const serviceResolution: HookedResolution = { resolved: false };
+            await this.hooks.onServiceEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                serviceResolution.resolved = true;
+                serviceResolution.res = res;
+              },
+            });
+            if (serviceResolution.resolved) {
+              return serviceResolution.res;
+            }
+          }
+          return response;
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err as Error);
+          if (this.hooks.onServiceError) {
+            await this.hooks.onServiceError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
     };
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CampaignSharedSetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CampaignSharedSetService
    */
   public get campaignSharedSets() {
     const service = this.loadService<services.CampaignSharedSetService>(
@@ -10224,7 +9313,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ConversionActionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ConversionActionService
    */
   public get conversionActions() {
     const service = this.loadService<services.ConversionActionService>(
@@ -10482,7 +9571,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ConversionCustomVariableService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ConversionCustomVariableService
    */
   public get conversionCustomVariables() {
     const service = this.loadService<services.ConversionCustomVariableService>(
@@ -10671,7 +9760,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ConversionGoalCampaignConfigService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ConversionGoalCampaignConfigService
    */
   public get conversionGoalCampaignConfigs() {
     const service =
@@ -10777,7 +9866,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ConversionValueRuleService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ConversionValueRuleService
    */
   public get conversionValueRules() {
     const service = this.loadService<services.ConversionValueRuleService>(
@@ -11035,7 +10124,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ConversionValueRuleSetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ConversionValueRuleSetService
    */
   public get conversionValueRuleSets() {
     const service = this.loadService<services.ConversionValueRuleSetService>(
@@ -11302,7 +10391,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CustomConversionGoalService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CustomConversionGoalService
    */
   public get customConversionGoals() {
     const service = this.loadService<services.CustomConversionGoalService>(
@@ -11569,7 +10658,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CustomerAssetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CustomerAssetService
    */
   public get customerAssets() {
     const service = this.loadService<services.CustomerAssetService>(
@@ -11821,7 +10910,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CustomerConversionGoalService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CustomerConversionGoalService
    */
   public get customerConversionGoals() {
     const service = this.loadService<services.CustomerConversionGoalService>(
@@ -11922,7 +11011,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CustomerCustomizerService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CustomerCustomizerService
    */
   public get customerCustomizers() {
     const service = this.loadService<services.CustomerCustomizerService>(
@@ -12095,529 +11184,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CustomerExtensionSettingService
-   */
-  public get customerExtensionSettings() {
-    const service = this.loadService<services.CustomerExtensionSettingService>(
-      "CustomerExtensionSettingServiceClient"
-    );
-    type MutateOptions = Partial<
-      Pick<
-        services.IMutateCustomerExtensionSettingsRequest,
-        "partial_failure" | "validate_only" | "response_content_type"
-      >
-    >;
-    return {
-      /**
-       * @description create resources of type resources.ICustomerExtensionSetting
-       * @returns services.MutateCustomerExtensionSettingsResponse
-       */
-      create: async (
-        customerExtensionSettings: (
-          | resources.ICustomerExtensionSetting
-          | resources.CustomerExtensionSetting
-        )[],
-        options?: MutateOptions
-      ): Promise<services.MutateCustomerExtensionSettingsResponse> => {
-        const ops = this.buildOperations<
-          services.CustomerExtensionSettingOperation,
-          resources.ICustomerExtensionSetting
-        >("create", customerExtensionSettings);
-        const request = this.buildRequest<
-          services.CustomerExtensionSettingOperation,
-          services.IMutateCustomerExtensionSettingsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method:
-            "CustomerExtensionSettingService.mutateCustomerExtensionSettings",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateCustomerExtensionSettings(
-            request,
-            {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
-          );
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-
-      /**
-       * @description update resources of type resources.ICustomerExtensionSetting
-       * @returns services.MutateCustomerExtensionSettingsResponse
-       */
-      update: async (
-        customerExtensionSettings: (
-          | resources.ICustomerExtensionSetting
-          | resources.CustomerExtensionSetting
-        )[],
-        options?: MutateOptions
-      ): Promise<services.MutateCustomerExtensionSettingsResponse> => {
-        const ops = this.buildOperations<
-          services.CustomerExtensionSettingOperation,
-          resources.ICustomerExtensionSetting
-        >(
-          "update",
-          customerExtensionSettings,
-          // @ts-expect-error Static class type here is fine
-          resources.CustomerExtensionSetting
-        );
-        const request = this.buildRequest<
-          services.CustomerExtensionSettingOperation,
-          services.IMutateCustomerExtensionSettingsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method:
-            "CustomerExtensionSettingService.mutateCustomerExtensionSettings",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateCustomerExtensionSettings(
-            request,
-            {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
-          );
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-
-      /**
-       * @description remove resources of type string
-       * @returns services.MutateCustomerExtensionSettingsResponse
-       */
-      remove: async (
-        customerExtensionSettings: string[],
-        options?: MutateOptions
-      ): Promise<services.MutateCustomerExtensionSettingsResponse> => {
-        const ops = this.buildOperations<
-          services.CustomerExtensionSettingOperation,
-          string
-        >("remove", customerExtensionSettings);
-        const request = this.buildRequest<
-          services.CustomerExtensionSettingOperation,
-          services.IMutateCustomerExtensionSettingsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method:
-            "CustomerExtensionSettingService.mutateCustomerExtensionSettings",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateCustomerExtensionSettings(
-            request,
-            {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
-          );
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-    };
-  }
-
-  /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CustomerFeedService
-   */
-  public get customerFeeds() {
-    const service = this.loadService<services.CustomerFeedService>(
-      "CustomerFeedServiceClient"
-    );
-    type MutateOptions = Partial<
-      Pick<
-        services.IMutateCustomerFeedsRequest,
-        "partial_failure" | "validate_only" | "response_content_type"
-      >
-    >;
-    return {
-      /**
-       * @description create resources of type resources.ICustomerFeed
-       * @returns services.MutateCustomerFeedsResponse
-       */
-      create: async (
-        customerFeeds: (resources.ICustomerFeed | resources.CustomerFeed)[],
-        options?: MutateOptions
-      ): Promise<services.MutateCustomerFeedsResponse> => {
-        const ops = this.buildOperations<
-          services.CustomerFeedOperation,
-          resources.ICustomerFeed
-        >("create", customerFeeds);
-        const request = this.buildRequest<
-          services.CustomerFeedOperation,
-          services.IMutateCustomerFeedsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "CustomerFeedService.mutateCustomerFeeds",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateCustomerFeeds(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-
-      /**
-       * @description update resources of type resources.ICustomerFeed
-       * @returns services.MutateCustomerFeedsResponse
-       */
-      update: async (
-        customerFeeds: (resources.ICustomerFeed | resources.CustomerFeed)[],
-        options?: MutateOptions
-      ): Promise<services.MutateCustomerFeedsResponse> => {
-        const ops = this.buildOperations<
-          services.CustomerFeedOperation,
-          resources.ICustomerFeed
-        >(
-          "update",
-          customerFeeds,
-          // @ts-expect-error Static class type here is fine
-          resources.CustomerFeed
-        );
-        const request = this.buildRequest<
-          services.CustomerFeedOperation,
-          services.IMutateCustomerFeedsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "CustomerFeedService.mutateCustomerFeeds",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateCustomerFeeds(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-
-      /**
-       * @description remove resources of type string
-       * @returns services.MutateCustomerFeedsResponse
-       */
-      remove: async (
-        customerFeeds: string[],
-        options?: MutateOptions
-      ): Promise<services.MutateCustomerFeedsResponse> => {
-        const ops = this.buildOperations<
-          services.CustomerFeedOperation,
-          string
-        >("remove", customerFeeds);
-        const request = this.buildRequest<
-          services.CustomerFeedOperation,
-          services.IMutateCustomerFeedsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "CustomerFeedService.mutateCustomerFeeds",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateCustomerFeeds(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-    };
-  }
-
-  /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CustomerLabelService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CustomerLabelService
    */
   public get customerLabels() {
     const service = this.loadService<services.CustomerLabelService>(
@@ -12787,7 +11354,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CustomerNegativeCriterionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CustomerNegativeCriterionService
    */
   public get customerNegativeCriteria() {
     const service = this.loadService<services.CustomerNegativeCriterionService>(
@@ -12968,7 +11535,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CustomerService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CustomerService
    */
   public get customers() {
     const service = this.loadService<services.CustomerService>(
@@ -13064,7 +11631,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CustomerService#listaccessiblecustomers
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CustomerService#listaccessiblecustomers
        */
       listAccessibleCustomers: async (
         request: services.ListAccessibleCustomersRequest
@@ -13129,7 +11696,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CustomerService#createcustomerclient
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CustomerService#createcustomerclient
        */
       createCustomerClient: async (
         request: services.CreateCustomerClientRequest
@@ -13196,7 +11763,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CustomizerAttributeService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CustomizerAttributeService
    */
   public get customizerAttributes() {
     const service = this.loadService<services.CustomizerAttributeService>(
@@ -13369,7 +11936,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ExperimentArmService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ExperimentArmService
    */
   public get experimentArms() {
     const service = this.loadService<services.ExperimentArmService>(
@@ -13621,7 +12188,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ExperimentService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ExperimentService
    */
   public get experiments() {
     const service = this.loadService<services.ExperimentService>(
@@ -13871,7 +12438,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ExperimentService#endexperiment
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ExperimentService#endexperiment
        */
       endExperiment: async (
         request: services.EndExperimentRequest
@@ -13936,7 +12503,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ExperimentService#listexperimentasyncerrors
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ExperimentService#listexperimentasyncerrors
        */
       listExperimentAsyncErrors: async (
         request: services.ListExperimentAsyncErrorsRequest
@@ -14001,7 +12568,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ExperimentService#graduateexperiment
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ExperimentService#graduateexperiment
        */
       graduateExperiment: async (
         request: services.GraduateExperimentRequest
@@ -14066,7 +12633,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ExperimentService#scheduleexperiment
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ExperimentService#scheduleexperiment
        */
       scheduleExperiment: async (
         request: services.ScheduleExperimentRequest
@@ -14131,7 +12698,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ExperimentService#promoteexperiment
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ExperimentService#promoteexperiment
        */
       promoteExperiment: async (
         request: services.PromoteExperimentRequest
@@ -14198,1535 +12765,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ExtensionFeedItemService
-   */
-  public get extensionFeedItems() {
-    const service = this.loadService<services.ExtensionFeedItemService>(
-      "ExtensionFeedItemServiceClient"
-    );
-    type MutateOptions = Partial<
-      Pick<
-        services.IMutateExtensionFeedItemsRequest,
-        "partial_failure" | "validate_only" | "response_content_type"
-      >
-    >;
-    return {
-      /**
-       * @description create resources of type resources.IExtensionFeedItem
-       * @returns services.MutateExtensionFeedItemsResponse
-       */
-      create: async (
-        extensionFeedItems: (
-          | resources.IExtensionFeedItem
-          | resources.ExtensionFeedItem
-        )[],
-        options?: MutateOptions
-      ): Promise<services.MutateExtensionFeedItemsResponse> => {
-        const ops = this.buildOperations<
-          services.ExtensionFeedItemOperation,
-          resources.IExtensionFeedItem
-        >("create", extensionFeedItems);
-        const request = this.buildRequest<
-          services.ExtensionFeedItemOperation,
-          services.IMutateExtensionFeedItemsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "ExtensionFeedItemService.mutateExtensionFeedItems",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateExtensionFeedItems(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-
-      /**
-       * @description update resources of type resources.IExtensionFeedItem
-       * @returns services.MutateExtensionFeedItemsResponse
-       */
-      update: async (
-        extensionFeedItems: (
-          | resources.IExtensionFeedItem
-          | resources.ExtensionFeedItem
-        )[],
-        options?: MutateOptions
-      ): Promise<services.MutateExtensionFeedItemsResponse> => {
-        const ops = this.buildOperations<
-          services.ExtensionFeedItemOperation,
-          resources.IExtensionFeedItem
-        >(
-          "update",
-          extensionFeedItems,
-          // @ts-expect-error Static class type here is fine
-          resources.ExtensionFeedItem
-        );
-        const request = this.buildRequest<
-          services.ExtensionFeedItemOperation,
-          services.IMutateExtensionFeedItemsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "ExtensionFeedItemService.mutateExtensionFeedItems",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateExtensionFeedItems(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-
-      /**
-       * @description remove resources of type string
-       * @returns services.MutateExtensionFeedItemsResponse
-       */
-      remove: async (
-        extensionFeedItems: string[],
-        options?: MutateOptions
-      ): Promise<services.MutateExtensionFeedItemsResponse> => {
-        const ops = this.buildOperations<
-          services.ExtensionFeedItemOperation,
-          string
-        >("remove", extensionFeedItems);
-        const request = this.buildRequest<
-          services.ExtensionFeedItemOperation,
-          services.IMutateExtensionFeedItemsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "ExtensionFeedItemService.mutateExtensionFeedItems",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateExtensionFeedItems(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-    };
-  }
-
-  /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/FeedItemService
-   */
-  public get feedItems() {
-    const service = this.loadService<services.FeedItemService>(
-      "FeedItemServiceClient"
-    );
-    type MutateOptions = Partial<
-      Pick<
-        services.IMutateFeedItemsRequest,
-        "partial_failure" | "validate_only" | "response_content_type"
-      >
-    >;
-    return {
-      /**
-       * @description create resources of type resources.IFeedItem
-       * @returns services.MutateFeedItemsResponse
-       */
-      create: async (
-        feedItems: (resources.IFeedItem | resources.FeedItem)[],
-        options?: MutateOptions
-      ): Promise<services.MutateFeedItemsResponse> => {
-        const ops = this.buildOperations<
-          services.FeedItemOperation,
-          resources.IFeedItem
-        >("create", feedItems);
-        const request = this.buildRequest<
-          services.FeedItemOperation,
-          services.IMutateFeedItemsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "FeedItemService.mutateFeedItems",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateFeedItems(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-
-      /**
-       * @description update resources of type resources.IFeedItem
-       * @returns services.MutateFeedItemsResponse
-       */
-      update: async (
-        feedItems: (resources.IFeedItem | resources.FeedItem)[],
-        options?: MutateOptions
-      ): Promise<services.MutateFeedItemsResponse> => {
-        const ops = this.buildOperations<
-          services.FeedItemOperation,
-          resources.IFeedItem
-        >(
-          "update",
-          feedItems,
-          // @ts-expect-error Static class type here is fine
-          resources.FeedItem
-        );
-        const request = this.buildRequest<
-          services.FeedItemOperation,
-          services.IMutateFeedItemsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "FeedItemService.mutateFeedItems",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateFeedItems(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-
-      /**
-       * @description remove resources of type string
-       * @returns services.MutateFeedItemsResponse
-       */
-      remove: async (
-        feedItems: string[],
-        options?: MutateOptions
-      ): Promise<services.MutateFeedItemsResponse> => {
-        const ops = this.buildOperations<services.FeedItemOperation, string>(
-          "remove",
-          feedItems
-        );
-        const request = this.buildRequest<
-          services.FeedItemOperation,
-          services.IMutateFeedItemsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "FeedItemService.mutateFeedItems",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateFeedItems(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-    };
-  }
-
-  /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/FeedItemSetLinkService
-   */
-  public get feedItemSetLinks() {
-    const service = this.loadService<services.FeedItemSetLinkService>(
-      "FeedItemSetLinkServiceClient"
-    );
-    type MutateOptions = Partial<
-      Pick<
-        services.IMutateFeedItemSetLinksRequest,
-        "partial_failure" | "validate_only"
-      >
-    >;
-    return {
-      /**
-       * @description create resources of type resources.IFeedItemSetLink
-       * @returns services.MutateFeedItemSetLinksResponse
-       */
-      create: async (
-        feedItemSetLinks: (
-          | resources.IFeedItemSetLink
-          | resources.FeedItemSetLink
-        )[],
-        options?: MutateOptions
-      ): Promise<services.MutateFeedItemSetLinksResponse> => {
-        const ops = this.buildOperations<
-          services.FeedItemSetLinkOperation,
-          resources.IFeedItemSetLink
-        >("create", feedItemSetLinks);
-        const request = this.buildRequest<
-          services.FeedItemSetLinkOperation,
-          services.IMutateFeedItemSetLinksRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "FeedItemSetLinkService.mutateFeedItemSetLinks",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateFeedItemSetLinks(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-
-      /**
-       * @description remove resources of type string
-       * @returns services.MutateFeedItemSetLinksResponse
-       */
-      remove: async (
-        feedItemSetLinks: string[],
-        options?: MutateOptions
-      ): Promise<services.MutateFeedItemSetLinksResponse> => {
-        const ops = this.buildOperations<
-          services.FeedItemSetLinkOperation,
-          string
-        >("remove", feedItemSetLinks);
-        const request = this.buildRequest<
-          services.FeedItemSetLinkOperation,
-          services.IMutateFeedItemSetLinksRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "FeedItemSetLinkService.mutateFeedItemSetLinks",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateFeedItemSetLinks(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-    };
-  }
-
-  /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/FeedItemSetService
-   */
-  public get feedItemSets() {
-    const service = this.loadService<services.FeedItemSetService>(
-      "FeedItemSetServiceClient"
-    );
-    type MutateOptions = Partial<
-      Pick<
-        services.IMutateFeedItemSetsRequest,
-        "partial_failure" | "validate_only"
-      >
-    >;
-    return {
-      /**
-       * @description create resources of type resources.IFeedItemSet
-       * @returns services.MutateFeedItemSetsResponse
-       */
-      create: async (
-        feedItemSets: (resources.IFeedItemSet | resources.FeedItemSet)[],
-        options?: MutateOptions
-      ): Promise<services.MutateFeedItemSetsResponse> => {
-        const ops = this.buildOperations<
-          services.FeedItemSetOperation,
-          resources.IFeedItemSet
-        >("create", feedItemSets);
-        const request = this.buildRequest<
-          services.FeedItemSetOperation,
-          services.IMutateFeedItemSetsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "FeedItemSetService.mutateFeedItemSets",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateFeedItemSets(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-
-      /**
-       * @description update resources of type resources.IFeedItemSet
-       * @returns services.MutateFeedItemSetsResponse
-       */
-      update: async (
-        feedItemSets: (resources.IFeedItemSet | resources.FeedItemSet)[],
-        options?: MutateOptions
-      ): Promise<services.MutateFeedItemSetsResponse> => {
-        const ops = this.buildOperations<
-          services.FeedItemSetOperation,
-          resources.IFeedItemSet
-        >(
-          "update",
-          feedItemSets,
-          // @ts-expect-error Static class type here is fine
-          resources.FeedItemSet
-        );
-        const request = this.buildRequest<
-          services.FeedItemSetOperation,
-          services.IMutateFeedItemSetsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "FeedItemSetService.mutateFeedItemSets",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateFeedItemSets(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-
-      /**
-       * @description remove resources of type string
-       * @returns services.MutateFeedItemSetsResponse
-       */
-      remove: async (
-        feedItemSets: string[],
-        options?: MutateOptions
-      ): Promise<services.MutateFeedItemSetsResponse> => {
-        const ops = this.buildOperations<services.FeedItemSetOperation, string>(
-          "remove",
-          feedItemSets
-        );
-        const request = this.buildRequest<
-          services.FeedItemSetOperation,
-          services.IMutateFeedItemSetsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "FeedItemSetService.mutateFeedItemSets",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateFeedItemSets(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-    };
-  }
-
-  /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/FeedItemTargetService
-   */
-  public get feedItemTargets() {
-    const service = this.loadService<services.FeedItemTargetService>(
-      "FeedItemTargetServiceClient"
-    );
-    type MutateOptions = Partial<
-      Pick<
-        services.IMutateFeedItemTargetsRequest,
-        "partial_failure" | "response_content_type" | "validate_only"
-      >
-    >;
-    return {
-      /**
-       * @description create resources of type resources.IFeedItemTarget
-       * @returns services.MutateFeedItemTargetsResponse
-       */
-      create: async (
-        feedItemTargets: (
-          | resources.IFeedItemTarget
-          | resources.FeedItemTarget
-        )[],
-        options?: MutateOptions
-      ): Promise<services.MutateFeedItemTargetsResponse> => {
-        const ops = this.buildOperations<
-          services.FeedItemTargetOperation,
-          resources.IFeedItemTarget
-        >("create", feedItemTargets);
-        const request = this.buildRequest<
-          services.FeedItemTargetOperation,
-          services.IMutateFeedItemTargetsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "FeedItemTargetService.mutateFeedItemTargets",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateFeedItemTargets(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-
-      /**
-       * @description remove resources of type string
-       * @returns services.MutateFeedItemTargetsResponse
-       */
-      remove: async (
-        feedItemTargets: string[],
-        options?: MutateOptions
-      ): Promise<services.MutateFeedItemTargetsResponse> => {
-        const ops = this.buildOperations<
-          services.FeedItemTargetOperation,
-          string
-        >("remove", feedItemTargets);
-        const request = this.buildRequest<
-          services.FeedItemTargetOperation,
-          services.IMutateFeedItemTargetsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "FeedItemTargetService.mutateFeedItemTargets",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateFeedItemTargets(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-    };
-  }
-
-  /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/FeedMappingService
-   */
-  public get feedMappings() {
-    const service = this.loadService<services.FeedMappingService>(
-      "FeedMappingServiceClient"
-    );
-    type MutateOptions = Partial<
-      Pick<
-        services.IMutateFeedMappingsRequest,
-        "partial_failure" | "validate_only" | "response_content_type"
-      >
-    >;
-    return {
-      /**
-       * @description create resources of type resources.IFeedMapping
-       * @returns services.MutateFeedMappingsResponse
-       */
-      create: async (
-        feedMappings: (resources.IFeedMapping | resources.FeedMapping)[],
-        options?: MutateOptions
-      ): Promise<services.MutateFeedMappingsResponse> => {
-        const ops = this.buildOperations<
-          services.FeedMappingOperation,
-          resources.IFeedMapping
-        >("create", feedMappings);
-        const request = this.buildRequest<
-          services.FeedMappingOperation,
-          services.IMutateFeedMappingsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "FeedMappingService.mutateFeedMappings",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateFeedMappings(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-
-      /**
-       * @description remove resources of type string
-       * @returns services.MutateFeedMappingsResponse
-       */
-      remove: async (
-        feedMappings: string[],
-        options?: MutateOptions
-      ): Promise<services.MutateFeedMappingsResponse> => {
-        const ops = this.buildOperations<services.FeedMappingOperation, string>(
-          "remove",
-          feedMappings
-        );
-        const request = this.buildRequest<
-          services.FeedMappingOperation,
-          services.IMutateFeedMappingsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "FeedMappingService.mutateFeedMappings",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateFeedMappings(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-    };
-  }
-
-  /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/FeedService
-   */
-  public get feeds() {
-    const service = this.loadService<services.FeedService>("FeedServiceClient");
-    type MutateOptions = Partial<
-      Pick<
-        services.IMutateFeedsRequest,
-        "partial_failure" | "validate_only" | "response_content_type"
-      >
-    >;
-    return {
-      /**
-       * @description create resources of type resources.IFeed
-       * @returns services.MutateFeedsResponse
-       */
-      create: async (
-        feeds: (resources.IFeed | resources.Feed)[],
-        options?: MutateOptions
-      ): Promise<services.MutateFeedsResponse> => {
-        const ops = this.buildOperations<
-          services.FeedOperation,
-          resources.IFeed
-        >("create", feeds);
-        const request = this.buildRequest<
-          services.FeedOperation,
-          services.IMutateFeedsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "FeedService.mutateFeeds",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateFeeds(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-
-      /**
-       * @description update resources of type resources.IFeed
-       * @returns services.MutateFeedsResponse
-       */
-      update: async (
-        feeds: (resources.IFeed | resources.Feed)[],
-        options?: MutateOptions
-      ): Promise<services.MutateFeedsResponse> => {
-        const ops = this.buildOperations<
-          services.FeedOperation,
-          resources.IFeed
-        >(
-          "update",
-          feeds,
-          // @ts-expect-error Static class type here is fine
-          resources.Feed
-        );
-        const request = this.buildRequest<
-          services.FeedOperation,
-          services.IMutateFeedsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "FeedService.mutateFeeds",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateFeeds(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-
-      /**
-       * @description remove resources of type string
-       * @returns services.MutateFeedsResponse
-       */
-      remove: async (
-        feeds: string[],
-        options?: MutateOptions
-      ): Promise<services.MutateFeedsResponse> => {
-        const ops = this.buildOperations<services.FeedOperation, string>(
-          "remove",
-          feeds
-        );
-        const request = this.buildRequest<
-          services.FeedOperation,
-          services.IMutateFeedsRequest,
-          MutateOptions
-        >(ops, options);
-        const baseHookArguments: BaseMutationHookArgs = {
-          credentials: this.credentials,
-          method: "FeedService.mutateFeeds",
-          mutation: request,
-          isServiceCall: true,
-        };
-        if (this.hooks.onMutationStart) {
-          const mutationCancellation: HookedCancellation = { cancelled: false };
-          await this.hooks.onMutationStart({
-            ...baseHookArguments,
-            cancel: (res) => {
-              mutationCancellation.cancelled = true;
-              mutationCancellation.res = res;
-            },
-            editOptions: (options) => {
-              Object.entries(options).forEach(([key, val]) => {
-                // @ts-expect-error Index with key type is fine
-                request[key] = val;
-              });
-            },
-          });
-          if (mutationCancellation.cancelled) {
-            return mutationCancellation.res;
-          }
-        }
-        try {
-          // @ts-expect-error Response is an array type
-          const [response] = await service.mutateFeeds(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
-          if (this.hooks.onMutationEnd) {
-            const mutationResolution: HookedResolution = { resolved: false };
-            await this.hooks.onMutationEnd({
-              ...baseHookArguments,
-              response: this.decodePartialFailureError(response),
-              resolve: (res) => {
-                mutationResolution.resolved = true;
-                mutationResolution.res = res;
-              },
-            });
-            if (mutationResolution.resolved) {
-              return mutationResolution.res;
-            }
-          }
-          return this.decodePartialFailureError(response);
-        } catch (err) {
-          const googleAdsError = this.getGoogleAdsError(err as Error);
-          if (this.hooks.onMutationError) {
-            await this.hooks.onMutationError({
-              ...baseHookArguments,
-              error: googleAdsError,
-            });
-          }
-          throw googleAdsError;
-        }
-      },
-    };
-  }
-
-  /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/KeywordPlanAdGroupKeywordService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/KeywordPlanAdGroupKeywordService
    */
   public get keywordPlanAdGroupKeywords() {
     const service = this.loadService<services.KeywordPlanAdGroupKeywordService>(
@@ -15996,7 +13035,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/KeywordPlanAdGroupService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/KeywordPlanAdGroupService
    */
   public get keywordPlanAdGroups() {
     const service = this.loadService<services.KeywordPlanAdGroupService>(
@@ -16254,7 +13293,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/KeywordPlanCampaignKeywordService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/KeywordPlanCampaignKeywordService
    */
   public get keywordPlanCampaignKeywords() {
     const service =
@@ -16525,7 +13564,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/KeywordPlanCampaignService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/KeywordPlanCampaignService
    */
   public get keywordPlanCampaigns() {
     const service = this.loadService<services.KeywordPlanCampaignService>(
@@ -16783,7 +13822,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/KeywordPlanService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/KeywordPlanService
    */
   public get keywordPlans() {
     const service = this.loadService<services.KeywordPlanService>(
@@ -17035,7 +14074,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/LabelService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/LabelService
    */
   public get labels() {
     const service =
@@ -17286,7 +14325,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/RecommendationSubscriptionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/RecommendationSubscriptionService
    */
   public get recommendationSubscriptions() {
     const service =
@@ -17476,7 +14515,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/RemarketingActionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/RemarketingActionService
    */
   public get remarketingActions() {
     const service = this.loadService<services.RemarketingActionService>(
@@ -17657,7 +14696,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/SharedCriterionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/SharedCriterionService
    */
   public get sharedCriteria() {
     const service = this.loadService<services.SharedCriterionService>(
@@ -17830,7 +14869,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/SharedSetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/SharedSetService
    */
   public get sharedSets() {
     const service = this.loadService<services.SharedSetService>(
@@ -18082,7 +15121,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/SmartCampaignSettingService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/SmartCampaignSettingService
    */
   public get smartCampaignSettings() {
     const service = this.loadService<services.SmartCampaignSettingService>(
@@ -18096,7 +15135,7 @@ export default class ServiceFactory extends Service {
     >;
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/SmartCampaignSettingService#getsmartcampaignstatus
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/SmartCampaignSettingService#getsmartcampaignstatus
        */
       getSmartCampaignStatus: async (
         request: services.GetSmartCampaignStatusRequest
@@ -18251,7 +15290,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/UserListService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/UserListService
    */
   public get userLists() {
     const service = this.loadService<services.UserListService>(
@@ -18503,7 +15542,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/BillingSetupService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/BillingSetupService
    */
   public get billingSetups() {
     const service = this.loadService<services.BillingSetupService>(
@@ -18668,7 +15707,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/BrandSuggestionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/BrandSuggestionService
    */
   public get brandSuggestions() {
     const service = this.loadService<services.BrandSuggestionService>(
@@ -18677,7 +15716,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/BrandSuggestionService#suggestbrands
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/BrandSuggestionService#suggestbrands
        */
       suggestBrands: async (
         request: services.SuggestBrandsRequest
@@ -18744,7 +15783,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CampaignLifecycleGoalService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CampaignLifecycleGoalService
    */
   public get campaignLifecycleGoals() {
     const service = this.loadService<services.CampaignLifecycleGoalService>(
@@ -18753,7 +15792,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CampaignLifecycleGoalService#configurecampaignlifecyclegoals
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CampaignLifecycleGoalService#configurecampaignlifecyclegoals
        */
       configureCampaignLifecycleGoals: async (
         request: services.ConfigureCampaignLifecycleGoalsRequest
@@ -18824,7 +15863,148 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ConversionAdjustmentUploadService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ContentCreatorInsightsService
+   */
+  public get contentCreatorInsights() {
+    const service = this.loadService<services.ContentCreatorInsightsService>(
+      "ContentCreatorInsightsServiceClient"
+    );
+
+    return {
+      /**
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ContentCreatorInsightsService#generatecreatorinsights
+       */
+      generateCreatorInsights: async (
+        request: services.GenerateCreatorInsightsRequest
+      ): Promise<services.GenerateCreatorInsightsResponse> => {
+        const baseHookArguments: BaseServiceHookArgs = {
+          credentials: this.credentials,
+          method: "ContentCreatorInsightsService.GenerateCreatorInsights",
+          requestOptions: request,
+        };
+        if (this.hooks.onServiceStart) {
+          const serviceCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onServiceStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              serviceCancellation.cancelled = true;
+              serviceCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (serviceCancellation.cancelled) {
+            return serviceCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.generateCreatorInsights(request, {
+            // @ts-expect-error This arg doesn't exist in the type definitions
+            otherArgs: {
+              headers: this.callHeaders,
+            },
+          });
+          if (this.hooks.onServiceEnd) {
+            const serviceResolution: HookedResolution = { resolved: false };
+            await this.hooks.onServiceEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                serviceResolution.resolved = true;
+                serviceResolution.res = res;
+              },
+            });
+            if (serviceResolution.resolved) {
+              return serviceResolution.res;
+            }
+          }
+          return response;
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err as Error);
+          if (this.hooks.onServiceError) {
+            await this.hooks.onServiceError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
+
+      /**
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ContentCreatorInsightsService#generatetrendinginsights
+       */
+      generateTrendingInsights: async (
+        request: services.GenerateTrendingInsightsRequest
+      ): Promise<services.GenerateTrendingInsightsResponse> => {
+        const baseHookArguments: BaseServiceHookArgs = {
+          credentials: this.credentials,
+          method: "ContentCreatorInsightsService.GenerateTrendingInsights",
+          requestOptions: request,
+        };
+        if (this.hooks.onServiceStart) {
+          const serviceCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onServiceStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              serviceCancellation.cancelled = true;
+              serviceCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (serviceCancellation.cancelled) {
+            return serviceCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.generateTrendingInsights(request, {
+            // @ts-expect-error This arg doesn't exist in the type definitions
+            otherArgs: {
+              headers: this.callHeaders,
+            },
+          });
+          if (this.hooks.onServiceEnd) {
+            const serviceResolution: HookedResolution = { resolved: false };
+            await this.hooks.onServiceEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                serviceResolution.resolved = true;
+                serviceResolution.res = res;
+              },
+            });
+            if (serviceResolution.resolved) {
+              return serviceResolution.res;
+            }
+          }
+          return response;
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err as Error);
+          if (this.hooks.onServiceError) {
+            await this.hooks.onServiceError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
+    };
+  }
+
+  /**
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ConversionAdjustmentUploadService
    */
   public get conversionAdjustmentUploads() {
     const service =
@@ -18834,7 +16014,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ConversionAdjustmentUploadService#uploadconversionadjustments
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ConversionAdjustmentUploadService#uploadconversionadjustments
        */
       uploadConversionAdjustments: async (
         request: services.UploadConversionAdjustmentsRequest
@@ -18905,7 +16085,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ConversionUploadService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ConversionUploadService
    */
   public get conversionUploads() {
     const service = this.loadService<services.ConversionUploadService>(
@@ -18914,7 +16094,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ConversionUploadService#uploadclickconversions
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ConversionUploadService#uploadclickconversions
        */
       uploadClickConversions: async (
         request: services.UploadClickConversionsRequest
@@ -18979,7 +16159,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ConversionUploadService#uploadcallconversions
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ConversionUploadService#uploadcallconversions
        */
       uploadCallConversions: async (
         request: services.UploadCallConversionsRequest
@@ -19046,7 +16226,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CustomAudienceService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CustomAudienceService
    */
   public get customAudiences() {
     const service = this.loadService<services.CustomAudienceService>(
@@ -19301,7 +16481,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CustomInterestService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CustomInterestService
    */
   public get customInterests() {
     const service = this.loadService<services.CustomInterestService>(
@@ -19479,7 +16659,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CustomerAssetSetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CustomerAssetSetService
    */
   public get customerAssetSets() {
     const service = this.loadService<services.CustomerAssetSetService>(
@@ -19652,7 +16832,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CustomerClientLinkService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CustomerClientLinkService
    */
   public get customerClientLinks() {
     const service = this.loadService<services.CustomerClientLinkService>(
@@ -19830,7 +17010,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CustomerLifecycleGoalService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CustomerLifecycleGoalService
    */
   public get customerLifecycleGoals() {
     const service = this.loadService<services.CustomerLifecycleGoalService>(
@@ -19839,7 +17019,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CustomerLifecycleGoalService#configurecustomerlifecyclegoals
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CustomerLifecycleGoalService#configurecustomerlifecyclegoals
        */
       configureCustomerLifecycleGoals: async (
         request: services.ConfigureCustomerLifecycleGoalsRequest
@@ -19910,7 +17090,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CustomerManagerLinkService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CustomerManagerLinkService
    */
   public get customerManagerLinks() {
     const service = this.loadService<services.CustomerManagerLinkService>(
@@ -20006,7 +17186,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CustomerManagerLinkService#movemanagerlink
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CustomerManagerLinkService#movemanagerlink
        */
       moveManagerLink: async (
         request: services.MoveManagerLinkRequest
@@ -20073,7 +17253,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CustomerSkAdNetworkConversionValueSchemaService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CustomerSkAdNetworkConversionValueSchemaService
    */
   public get customerSkAdNetworkConversionValueSchemas() {
     const service =
@@ -20180,7 +17360,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CustomerUserAccessInvitationService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CustomerUserAccessInvitationService
    */
   public get customerUserAccessInvitations() {
     const service =
@@ -20357,7 +17537,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/CustomerUserAccessService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/CustomerUserAccessService
    */
   public get customerUserAccesses() {
     const service = this.loadService<services.CustomerUserAccessService>(
@@ -20530,7 +17710,213 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/GeoTargetConstantService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/DataLinkService
+   */
+  public get dataLinks() {
+    const service = this.loadService<services.DataLinkService>(
+      "DataLinkServiceClient"
+    );
+
+    return {
+      /**
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/DataLinkService#createdatalink
+       */
+      createDataLink: async (
+        request: services.CreateDataLinkRequest
+      ): Promise<services.CreateDataLinkResponse> => {
+        const baseHookArguments: BaseServiceHookArgs = {
+          credentials: this.credentials,
+          method: "DataLinkService.CreateDataLink",
+          requestOptions: request,
+        };
+        if (this.hooks.onServiceStart) {
+          const serviceCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onServiceStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              serviceCancellation.cancelled = true;
+              serviceCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (serviceCancellation.cancelled) {
+            return serviceCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.createDataLink(request, {
+            // @ts-expect-error This arg doesn't exist in the type definitions
+            otherArgs: {
+              headers: this.callHeaders,
+            },
+          });
+          if (this.hooks.onServiceEnd) {
+            const serviceResolution: HookedResolution = { resolved: false };
+            await this.hooks.onServiceEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                serviceResolution.resolved = true;
+                serviceResolution.res = res;
+              },
+            });
+            if (serviceResolution.resolved) {
+              return serviceResolution.res;
+            }
+          }
+          return response;
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err as Error);
+          if (this.hooks.onServiceError) {
+            await this.hooks.onServiceError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
+
+      /**
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/DataLinkService#removedatalink
+       */
+      removeDataLink: async (
+        request: services.RemoveDataLinkRequest
+      ): Promise<services.RemoveDataLinkResponse> => {
+        const baseHookArguments: BaseServiceHookArgs = {
+          credentials: this.credentials,
+          method: "DataLinkService.RemoveDataLink",
+          requestOptions: request,
+        };
+        if (this.hooks.onServiceStart) {
+          const serviceCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onServiceStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              serviceCancellation.cancelled = true;
+              serviceCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (serviceCancellation.cancelled) {
+            return serviceCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.removeDataLink(request, {
+            // @ts-expect-error This arg doesn't exist in the type definitions
+            otherArgs: {
+              headers: this.callHeaders,
+            },
+          });
+          if (this.hooks.onServiceEnd) {
+            const serviceResolution: HookedResolution = { resolved: false };
+            await this.hooks.onServiceEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                serviceResolution.resolved = true;
+                serviceResolution.res = res;
+              },
+            });
+            if (serviceResolution.resolved) {
+              return serviceResolution.res;
+            }
+          }
+          return response;
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err as Error);
+          if (this.hooks.onServiceError) {
+            await this.hooks.onServiceError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
+
+      /**
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/DataLinkService#updatedatalink
+       */
+      updateDataLink: async (
+        request: services.UpdateDataLinkRequest
+      ): Promise<services.UpdateDataLinkResponse> => {
+        const baseHookArguments: BaseServiceHookArgs = {
+          credentials: this.credentials,
+          method: "DataLinkService.UpdateDataLink",
+          requestOptions: request,
+        };
+        if (this.hooks.onServiceStart) {
+          const serviceCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onServiceStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              serviceCancellation.cancelled = true;
+              serviceCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (serviceCancellation.cancelled) {
+            return serviceCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.updateDataLink(request, {
+            // @ts-expect-error This arg doesn't exist in the type definitions
+            otherArgs: {
+              headers: this.callHeaders,
+            },
+          });
+          if (this.hooks.onServiceEnd) {
+            const serviceResolution: HookedResolution = { resolved: false };
+            await this.hooks.onServiceEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                serviceResolution.resolved = true;
+                serviceResolution.res = res;
+              },
+            });
+            if (serviceResolution.resolved) {
+              return serviceResolution.res;
+            }
+          }
+          return response;
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err as Error);
+          if (this.hooks.onServiceError) {
+            await this.hooks.onServiceError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
+    };
+  }
+
+  /**
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/GeoTargetConstantService
    */
   public get geoTargetConstants() {
     const service = this.loadService<services.GeoTargetConstantService>(
@@ -20539,7 +17925,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/GeoTargetConstantService#suggestgeotargetconstants
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/GeoTargetConstantService#suggestgeotargetconstants
        */
       suggestGeoTargetConstants: async (
         request: services.SuggestGeoTargetConstantsRequest
@@ -20606,7 +17992,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/IdentityVerificationService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/IdentityVerificationService
    */
   public get identityVerifications() {
     const service = this.loadService<services.IdentityVerificationService>(
@@ -20615,7 +18001,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/IdentityVerificationService#startidentityverification
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/IdentityVerificationService#startidentityverification
        */
       startIdentityVerification: async (
         request: services.StartIdentityVerificationRequest
@@ -20680,7 +18066,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/IdentityVerificationService#getidentityverification
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/IdentityVerificationService#getidentityverification
        */
       getIdentityVerification: async (
         request: services.GetIdentityVerificationRequest
@@ -20747,7 +18133,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/InvoiceService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/InvoiceService
    */
   public get invoices() {
     const service = this.loadService<services.InvoiceService>(
@@ -20756,7 +18142,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/InvoiceService#listinvoices
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/InvoiceService#listinvoices
        */
       listInvoices: async (
         request: services.ListInvoicesRequest
@@ -20823,7 +18209,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/KeywordPlanIdeaService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/KeywordPlanIdeaService
    */
   public get keywordPlanIdeas() {
     const service = this.loadService<services.KeywordPlanIdeaService>(
@@ -20832,7 +18218,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/KeywordPlanIdeaService#generatekeywordideas
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/KeywordPlanIdeaService#generatekeywordideas
        */
       generateKeywordIdeas: async (
         request: services.GenerateKeywordIdeasRequest
@@ -20897,7 +18283,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/KeywordPlanIdeaService#generatekeywordhistoricalmetrics
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/KeywordPlanIdeaService#generatekeywordhistoricalmetrics
        */
       generateKeywordHistoricalMetrics: async (
         request: services.GenerateKeywordHistoricalMetricsRequest
@@ -20965,7 +18351,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/KeywordPlanIdeaService#generateadgroupthemes
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/KeywordPlanIdeaService#generateadgroupthemes
        */
       generateAdGroupThemes: async (
         request: services.GenerateAdGroupThemesRequest
@@ -21030,7 +18416,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/KeywordPlanIdeaService#generatekeywordforecastmetrics
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/KeywordPlanIdeaService#generatekeywordforecastmetrics
        */
       generateKeywordForecastMetrics: async (
         request: services.GenerateKeywordForecastMetricsRequest
@@ -21100,7 +18486,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/KeywordThemeConstantService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/KeywordThemeConstantService
    */
   public get keywordThemeConstants() {
     const service = this.loadService<services.KeywordThemeConstantService>(
@@ -21109,7 +18495,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/KeywordThemeConstantService#suggestkeywordthemeconstants
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/KeywordThemeConstantService#suggestkeywordthemeconstants
        */
       suggestKeywordThemeConstants: async (
         request: services.SuggestKeywordThemeConstantsRequest
@@ -21179,7 +18565,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/LocalServicesLeadService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/LocalServicesLeadService
    */
   public get localsLeadServices() {
     const service = this.loadService<services.LocalServicesLeadService>(
@@ -21188,7 +18574,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/LocalServicesLeadService#appendleadconversation
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/LocalServicesLeadService#appendleadconversation
        */
       appendLeadConversation: async (
         request: services.AppendLeadConversationRequest
@@ -21255,7 +18641,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/OfflineUserDataJobService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/OfflineUserDataJobService
    */
   public get offlineUserDataJobs() {
     const service = this.loadService<services.OfflineUserDataJobService>(
@@ -21264,7 +18650,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/OfflineUserDataJobService#createofflineuserdatajob
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/OfflineUserDataJobService#createofflineuserdatajob
        */
       createOfflineUserDataJob: async (
         request: services.CreateOfflineUserDataJobRequest
@@ -21329,7 +18715,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/OfflineUserDataJobService#addofflineuserdatajoboperations
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/OfflineUserDataJobService#addofflineuserdatajoboperations
        */
       addOfflineUserDataJobOperations: async (
         request: services.AddOfflineUserDataJobOperationsRequest
@@ -21397,7 +18783,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/OfflineUserDataJobService#runofflineuserdatajob
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/OfflineUserDataJobService#runofflineuserdatajob
        */
       runOfflineUserDataJob: async (
         request: services.RunOfflineUserDataJobRequest
@@ -21464,7 +18850,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/PaymentsAccountService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/PaymentsAccountService
    */
   public get paymentsAccounts() {
     const service = this.loadService<services.PaymentsAccountService>(
@@ -21473,7 +18859,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/PaymentsAccountService#listpaymentsaccounts
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/PaymentsAccountService#listpaymentsaccounts
        */
       listPaymentsAccounts: async (
         request: services.ListPaymentsAccountsRequest
@@ -21540,7 +18926,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ProductLinkInvitationService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ProductLinkInvitationService
    */
   public get productLinkInvitations() {
     const service = this.loadService<services.ProductLinkInvitationService>(
@@ -21549,7 +18935,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ProductLinkInvitationService#createproductlinkinvitation
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ProductLinkInvitationService#createproductlinkinvitation
        */
       createProductLinkInvitation: async (
         request: services.CreateProductLinkInvitationRequest
@@ -21617,7 +19003,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ProductLinkInvitationService#updateproductlinkinvitation
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ProductLinkInvitationService#updateproductlinkinvitation
        */
       updateProductLinkInvitation: async (
         request: services.UpdateProductLinkInvitationRequest
@@ -21685,7 +19071,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ProductLinkInvitationService#removeproductlinkinvitation
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ProductLinkInvitationService#removeproductlinkinvitation
        */
       removeProductLinkInvitation: async (
         request: services.RemoveProductLinkInvitationRequest
@@ -21755,7 +19141,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ProductLinkService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ProductLinkService
    */
   public get productLinks() {
     const service = this.loadService<services.ProductLinkService>(
@@ -21764,7 +19150,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ProductLinkService#createproductlink
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ProductLinkService#createproductlink
        */
       createProductLink: async (
         request: services.CreateProductLinkRequest
@@ -21829,7 +19215,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ProductLinkService#removeproductlink
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ProductLinkService#removeproductlink
        */
       removeProductLink: async (
         request: services.RemoveProductLinkRequest
@@ -21896,7 +19282,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ReachPlanService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ReachPlanService
    */
   public get reachPlans() {
     const service = this.loadService<services.ReachPlanService>(
@@ -21905,7 +19291,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ReachPlanService#listplannablelocations
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ReachPlanService#listplannablelocations
        */
       listPlannableLocations: async (
         request: services.ListPlannableLocationsRequest
@@ -21970,7 +19356,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ReachPlanService#listplannableproducts
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ReachPlanService#listplannableproducts
        */
       listPlannableProducts: async (
         request: services.ListPlannableProductsRequest
@@ -22035,7 +19421,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ReachPlanService#generatereachforecast
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ReachPlanService#generatereachforecast
        */
       generateReachForecast: async (
         request: services.GenerateReachForecastRequest
@@ -22102,7 +19488,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/RecommendationService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/RecommendationService
    */
   public get recommendations() {
     const service = this.loadService<services.RecommendationService>(
@@ -22111,7 +19497,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/RecommendationService#applyrecommendation
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/RecommendationService#applyrecommendation
        */
       applyRecommendation: async (
         request: services.ApplyRecommendationRequest
@@ -22176,7 +19562,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/RecommendationService#dismissrecommendation
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/RecommendationService#dismissrecommendation
        */
       dismissRecommendation: async (
         request: services.DismissRecommendationRequest
@@ -22241,7 +19627,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/RecommendationService#generaterecommendations
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/RecommendationService#generaterecommendations
        */
       generateRecommendations: async (
         request: services.GenerateRecommendationsRequest
@@ -22308,7 +19694,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ShareablePreviewService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ShareablePreviewService
    */
   public get shareablePreviews() {
     const service = this.loadService<services.ShareablePreviewService>(
@@ -22317,7 +19703,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ShareablePreviewService#generateshareablepreviews
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ShareablePreviewService#generateshareablepreviews
        */
       generateShareablePreviews: async (
         request: services.GenerateShareablePreviewsRequest
@@ -22384,7 +19770,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/SmartCampaignSuggestService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/SmartCampaignSuggestService
    */
   public get smartCampaignSuggests() {
     const service = this.loadService<services.SmartCampaignSuggestService>(
@@ -22393,7 +19779,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/SmartCampaignSuggestService#suggestsmartcampaignbudgetoptions
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/SmartCampaignSuggestService#suggestsmartcampaignbudgetoptions
        */
       suggestSmartCampaignBudgetOptions: async (
         request: services.SuggestSmartCampaignBudgetOptionsRequest
@@ -22462,7 +19848,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/SmartCampaignSuggestService#suggestsmartcampaignad
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/SmartCampaignSuggestService#suggestsmartcampaignad
        */
       suggestSmartCampaignAd: async (
         request: services.SuggestSmartCampaignAdRequest
@@ -22527,7 +19913,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/SmartCampaignSuggestService#suggestkeywordthemes
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/SmartCampaignSuggestService#suggestkeywordthemes
        */
       suggestKeywordThemes: async (
         request: services.SuggestKeywordThemesRequest
@@ -22594,7 +19980,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ThirdPartyAppAnalyticsLinkService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ThirdPartyAppAnalyticsLinkService
    */
   public get thirdPartyAppAnalyticsLinks() {
     const service =
@@ -22604,7 +19990,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/ThirdPartyAppAnalyticsLinkService#regenerateshareablelinkid
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ThirdPartyAppAnalyticsLinkService#regenerateshareablelinkid
        */
       regenerateShareableLinkId: async (
         request: services.RegenerateShareableLinkIdRequest
@@ -22671,7 +20057,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/TravelAssetSuggestionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/TravelAssetSuggestionService
    */
   public get travelAssetSuggestions() {
     const service = this.loadService<services.TravelAssetSuggestionService>(
@@ -22680,7 +20066,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/TravelAssetSuggestionService#suggesttravelassets
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/TravelAssetSuggestionService#suggesttravelassets
        */
       suggestTravelAssets: async (
         request: services.SuggestTravelAssetsRequest
@@ -22747,7 +20133,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/UserDataService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/UserDataService
    */
   public get userData() {
     const service = this.loadService<services.UserDataService>(
@@ -22756,7 +20142,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v17/UserDataService#uploaduserdata
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v19/UserDataService#uploaduserdata
        */
       uploadUserData: async (
         request: services.UploadUserDataRequest
@@ -22823,7 +20209,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v17/UserListCustomerTypeService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/UserListCustomerTypeService
    */
   public get userListCustomerTypes() {
     const service = this.loadService<services.UserListCustomerTypeService>(

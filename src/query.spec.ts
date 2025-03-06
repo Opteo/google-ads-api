@@ -900,6 +900,25 @@ describe("buildQuery", () => {
     },
   ];
 
+  enum blah {
+    a = 1,
+    b = 2,
+    c = 3,
+  }
+
+  const blah_c = {
+    a: "a",
+    b: "b",
+    c: "c",
+  } as const;
+
+  const blah_s: "a" | "b" | "c" = "a";
+
+  blah.a;
+
+  blah[1]; // a
+  blah.a; // 1
+
   it("buildQuery", () => {
     sampleQueries.forEach((sample) => {
       const builtQuery = buildQuery(sample.options);
