@@ -95,8 +95,8 @@ export class Customer extends ServiceFactory {
     options: Readonly<ReportOptions>
   ): Promise<number | undefined> {
     const { gaqlQuery, requestOptions } = buildQuery({ ...options, limit: 1 }); // must get at least one row
-    // @ts-expect-error we do not allow this field in reportOptions, however it is still a valid request option
-    requestOptions.return_total_results_count = true;
+    // We do not allow this field in reportOptions, however it is still a valid request option
+    requestOptions.search_settings = { return_total_results_count: true };
     const useHooks = false; // to avoid cacheing conflicts
     const { totalResultsCount } = await this.querier(
       gaqlQuery,
@@ -225,7 +225,9 @@ export class Customer extends ServiceFactory {
   private async paginatedSearch(
     gaqlQuery: string,
     requestOptions: Readonly<
-      RequestOptions & { return_total_results_count?: boolean } // We do not allow return_total_results_count in reportOptions, however it is still a valid request option
+      RequestOptions & {
+        search_settings?: { return_total_results_count?: boolean }; // We do not allow return_total_results_count in reportOptions, however it is still a valid request option
+      }
     >
   ): Promise<{
     response: services.IGoogleAdsRow[];
@@ -236,7 +238,7 @@ export class Customer extends ServiceFactory {
     */
     if (
       requestOptions.page_size === undefined &&
-      requestOptions.return_total_results_count === undefined
+      requestOptions.search_settings?.return_total_results_count === undefined
     ) {
       // If no pagination or summary options are set, we can use the non-paginated search method.
       const { response } = await this.useStreamToImitateRegularSearch(
@@ -255,7 +257,7 @@ export class Customer extends ServiceFactory {
     // Sometimes (when no results?) the totalResultsCount field is not included in the response.
     // In this case, we set it to 0.
     if (
-      requestOptions.return_total_results_count &&
+      requestOptions.search_settings?.return_total_results_count &&
       initialSearch.totalResultsCount === undefined
     ) {
       totalResultsCount = 0;
