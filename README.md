@@ -350,7 +350,7 @@ const operations: MutateOperation<
       advertising_channel_type: enums.AdvertisingChannelType.SEARCH,
       status: enums.CampaignStatus.PAUSED,
       manual_cpc: {
-        enhanced_cpc_enabled: false,
+        enhanced_cpc_enabled: true,
       },
       // Use the temporary resource id which will be created in the previous operation
       campaign_budget: budgetResourceName,
