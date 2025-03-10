@@ -46,7 +46,9 @@ const options: ReportOptions = {
   page_size: 5,
   page_token: "A1B2C3D4",
   validate_only: false,
-  summary_row_setting: "NO_SUMMARY_ROW",
+  search_settings: {
+    return_summary_row: "NO_SUMMARY_ROW",
+  },
 };
 
 describe("buildSelectClause", () => {
@@ -698,7 +700,9 @@ const expectedRequestOptions = {
   page_size: 5,
   page_token: "A1B2C3D4",
   validate_only: false,
-  summary_row_setting: "NO_SUMMARY_ROW",
+  search_settings: {
+    return_summary_row: "NO_SUMMARY_ROW",
+  },
 };
 
 describe("buildRequestOptions", () => {
@@ -899,6 +903,25 @@ describe("buildQuery", () => {
       ),
     },
   ];
+
+  enum blah {
+    a = 1,
+    b = 2,
+    c = 3,
+  }
+
+  const blah_c = {
+    a: "a",
+    b: "b",
+    c: "c",
+  } as const;
+
+  const blah_s: "a" | "b" | "c" = "a";
+
+  blah.a;
+
+  blah[1]; // a
+  blah.a; // 1
 
   it("buildQuery", () => {
     sampleQueries.forEach((sample) => {

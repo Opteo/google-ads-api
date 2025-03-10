@@ -350,7 +350,7 @@ const operations: MutateOperation<
       advertising_channel_type: enums.AdvertisingChannelType.SEARCH,
       status: enums.CampaignStatus.PAUSED,
       manual_cpc: {
-        enhanced_cpc_enabled: true,
+        enhanced_cpc_enabled: false,
       },
       // Use the temporary resource id which will be created in the previous operation
       campaign_budget: budgetResourceName,
@@ -443,7 +443,9 @@ If a summary row is requested in the `report` method, it will be included as the
 const [summaryRow, ...response] = await customer.report({
   entity: "campaign",
   metrics: ["metrics.clicks", "metrics.all_conversions"],
-  summary_row_setting: enums.SummaryRowSetting.SUMMARY_ROW_WITH_RESULTS,
+  search_settings: {
+    return_summary_row: enums.SummaryRowSetting.SUMMARY_ROW_WITH_RESULTS,
+  },
 });
 ```
 
@@ -453,7 +455,9 @@ If a summery row is requested in the `reportStream` method, it will be included 
 const stream = customer.reportStream({
   entity: "campaign",
   metrics: ["metrics.clicks", "metrics.all_conversions"],
-  summary_row_setting: enums.SummaryRowSetting.SUMMARY_ROW_WITH_RESULTS,
+  search_settings: {
+    return_summary_row: enums.SummaryRowSetting.SUMMARY_ROW_WITH_RESULTS,
+  },
 });
 
 const accumulator = [];
