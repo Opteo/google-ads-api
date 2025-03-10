@@ -391,10 +391,10 @@ export function buildOrderClause(
 export function buildRequestOptions(
   reportOptions: Readonly<ReportOptions>
 ): RequestOptions {
-  const { page_size, page_token, validate_only, summary_row_setting } =
+  const { page_size, page_token, validate_only, search_settings } =
     reportOptions;
 
-  return { page_size, page_token, validate_only, summary_row_setting };
+  return { page_size, page_token, validate_only, search_settings };
 }
 
 export function buildQuery(reportOptions: Readonly<ReportOptions>): {

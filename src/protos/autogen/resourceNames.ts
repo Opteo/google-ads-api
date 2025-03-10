@@ -354,42 +354,6 @@ export function adGroupCustomizer(
   return `customers/${customerId}/adGroupCustomizers/${adGroupId}~${customizerAttributeId}` as const;
 }
 
-/* AdGroupExtensionSetting */
-export type AdGroupExtensionSettingResourceName =
-  `customers/${StrNum}/adGroupExtensionSettings/${StrNum}~${StrNum}`;
-/**
- * @param {string | number} customerId
- * @param {string | number} adGroupId
- * @param {string | number} extensionType
- * @returns `AdGroupExtensionSettingResourceName`
- * @example const adGroupExtensionSetting: ResourceNames.AdGroupExtensionSettingResourceName = ResourceNames.adGroupExtensionSetting(10987417, 21974834, 43949668)
- */
-export function adGroupExtensionSetting(
-  customerId: string | number,
-  adGroupId: string | number,
-  extensionType: string | number
-): AdGroupExtensionSettingResourceName {
-  return `customers/${customerId}/adGroupExtensionSettings/${adGroupId}~${extensionType}` as const;
-}
-
-/* AdGroupFeed */
-export type AdGroupFeedResourceName =
-  `customers/${StrNum}/adGroupFeeds/${StrNum}~${StrNum}`;
-/**
- * @param {string | number} customerId
- * @param {string | number} adGroupId
- * @param {string | number} feedId
- * @returns `AdGroupFeedResourceName`
- * @example const adGroupFeed: ResourceNames.AdGroupFeedResourceName = ResourceNames.adGroupFeed(10987417, 21974834, 43949668)
- */
-export function adGroupFeed(
-  customerId: string | number,
-  adGroupId: string | number,
-  feedId: string | number
-): AdGroupFeedResourceName {
-  return `customers/${customerId}/adGroupFeeds/${adGroupId}~${feedId}` as const;
-}
-
 /* AdGroupLabel */
 export type AdGroupLabelResourceName =
   `customers/${StrNum}/adGroupLabels/${StrNum}~${StrNum}`;
@@ -1076,42 +1040,6 @@ export function campaignDraft(
   return `customers/${customerId}/campaignDrafts/${baseCampaignId}~${draftId}` as const;
 }
 
-/* CampaignExtensionSetting */
-export type CampaignExtensionSettingResourceName =
-  `customers/${StrNum}/campaignExtensionSettings/${StrNum}~${StrNum}`;
-/**
- * @param {string | number} customerId
- * @param {string | number} campaignId
- * @param {string | number} extensionType
- * @returns `CampaignExtensionSettingResourceName`
- * @example const campaignExtensionSetting: ResourceNames.CampaignExtensionSettingResourceName = ResourceNames.campaignExtensionSetting(10987417, 21974834, 43949668)
- */
-export function campaignExtensionSetting(
-  customerId: string | number,
-  campaignId: string | number,
-  extensionType: string | number
-): CampaignExtensionSettingResourceName {
-  return `customers/${customerId}/campaignExtensionSettings/${campaignId}~${extensionType}` as const;
-}
-
-/* CampaignFeed */
-export type CampaignFeedResourceName =
-  `customers/${StrNum}/campaignFeeds/${StrNum}~${StrNum}`;
-/**
- * @param {string | number} customerId
- * @param {string | number} campaignId
- * @param {string | number} feedId
- * @returns `CampaignFeedResourceName`
- * @example const campaignFeed: ResourceNames.CampaignFeedResourceName = ResourceNames.campaignFeed(10987417, 21974834, 43949668)
- */
-export function campaignFeed(
-  customerId: string | number,
-  campaignId: string | number,
-  feedId: string | number
-): CampaignFeedResourceName {
-  return `customers/${customerId}/campaignFeeds/${campaignId}~${feedId}` as const;
-}
-
 /* CampaignGroup */
 export type CampaignGroupResourceName =
   `customers/${StrNum}/campaignGroups/${StrNum}`;
@@ -1325,6 +1253,24 @@ export function combinedAudience(
   combinedAudienceId: string | number
 ): CombinedAudienceResourceName {
   return `customers/${customerId}/combinedAudiences/${combinedAudienceId}` as const;
+}
+
+/* ContentCriterionView */
+export type ContentCriterionViewResourceName =
+  `customers/${StrNum}/contentCriterionViews/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} adGroupId
+ * @param {string | number} criterionId
+ * @returns `ContentCriterionViewResourceName`
+ * @example const contentCriterionView: ResourceNames.ContentCriterionViewResourceName = ResourceNames.contentCriterionView(10987417, 21974834, 43949668)
+ */
+export function contentCriterionView(
+  customerId: string | number,
+  adGroupId: string | number,
+  criterionId: string | number
+): ContentCriterionViewResourceName {
+  return `customers/${customerId}/contentCriterionViews/${adGroupId}~${criterionId}` as const;
 }
 
 /* ConversionAction */
@@ -1581,38 +1527,6 @@ export function customerCustomizer(
   return `customers/${customerId}/customerCustomizers/${customizerAttributeId}` as const;
 }
 
-/* CustomerExtensionSetting */
-export type CustomerExtensionSettingResourceName =
-  `customers/${StrNum}/customerExtensionSettings/${StrNum}`;
-/**
- * @param {string | number} customerId
- * @param {string | number} extensionType
- * @returns `CustomerExtensionSettingResourceName`
- * @example const customerExtensionSetting: ResourceNames.CustomerExtensionSettingResourceName = ResourceNames.customerExtensionSetting(10987417, 21974834)
- */
-export function customerExtensionSetting(
-  customerId: string | number,
-  extensionType: string | number
-): CustomerExtensionSettingResourceName {
-  return `customers/${customerId}/customerExtensionSettings/${extensionType}` as const;
-}
-
-/* CustomerFeed */
-export type CustomerFeedResourceName =
-  `customers/${StrNum}/customerFeeds/${StrNum}`;
-/**
- * @param {string | number} customerId
- * @param {string | number} feedId
- * @returns `CustomerFeedResourceName`
- * @example const customerFeed: ResourceNames.CustomerFeedResourceName = ResourceNames.customerFeed(10987417, 21974834)
- */
-export function customerFeed(
-  customerId: string | number,
-  feedId: string | number
-): CustomerFeedResourceName {
-  return `customers/${customerId}/customerFeeds/${feedId}` as const;
-}
-
 /* CustomerLabel */
 export type CustomerLabelResourceName =
   `customers/${StrNum}/customerLabels/${StrNum}`;
@@ -1755,6 +1669,24 @@ export function customizerAttribute(
   customizerAttributeId: string | number
 ): CustomizerAttributeResourceName {
   return `customers/${customerId}/customizerAttributes/${customizerAttributeId}` as const;
+}
+
+/* DataLink */
+export type DataLinkResourceName =
+  `customers/${StrNum}/dataLinks/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} productLinkId
+ * @param {string | number} dataLinkId
+ * @returns `DataLinkResourceName`
+ * @example const dataLink: ResourceNames.DataLinkResourceName = ResourceNames.dataLink(10987417, 21974834, 43949668)
+ */
+export function dataLink(
+  customerId: string | number,
+  productLinkId: string | number,
+  dataLinkId: string | number
+): DataLinkResourceName {
+  return `customers/${customerId}/dataLinks/${productLinkId}~${dataLinkId}` as const;
 }
 
 /* DetailPlacementView */
@@ -1919,149 +1851,6 @@ export function experimentArm(
   trialArmId: string | number
 ): ExperimentArmResourceName {
   return `customers/${customerId}/experimentArms/${trialId}~${trialArmId}` as const;
-}
-
-/* ExtensionFeedItem */
-export type ExtensionFeedItemResourceName =
-  `customers/${StrNum}/extensionFeedItems/${StrNum}`;
-/**
- * @param {string | number} customerId
- * @param {string | number} feedItemId
- * @returns `ExtensionFeedItemResourceName`
- * @example const extensionFeedItem: ResourceNames.ExtensionFeedItemResourceName = ResourceNames.extensionFeedItem(10987417, 21974834)
- */
-export function extensionFeedItem(
-  customerId: string | number,
-  feedItemId: string | number
-): ExtensionFeedItemResourceName {
-  return `customers/${customerId}/extensionFeedItems/${feedItemId}` as const;
-}
-
-/* Feed */
-export type FeedResourceName = `customers/${StrNum}/feeds/${StrNum}`;
-/**
- * @param {string | number} customerId
- * @param {string | number} feedId
- * @returns `FeedResourceName`
- * @example const feed: ResourceNames.FeedResourceName = ResourceNames.feed(10987417, 21974834)
- */
-export function feed(
-  customerId: string | number,
-  feedId: string | number
-): FeedResourceName {
-  return `customers/${customerId}/feeds/${feedId}` as const;
-}
-
-/* FeedItem */
-export type FeedItemResourceName =
-  `customers/${StrNum}/feedItems/${StrNum}~${StrNum}`;
-/**
- * @param {string | number} customerId
- * @param {string | number} feedId
- * @param {string | number} feedItemId
- * @returns `FeedItemResourceName`
- * @example const feedItem: ResourceNames.FeedItemResourceName = ResourceNames.feedItem(10987417, 21974834, 43949668)
- */
-export function feedItem(
-  customerId: string | number,
-  feedId: string | number,
-  feedItemId: string | number
-): FeedItemResourceName {
-  return `customers/${customerId}/feedItems/${feedId}~${feedItemId}` as const;
-}
-
-/* FeedItemSet */
-export type FeedItemSetResourceName =
-  `customers/${StrNum}/feedItemSets/${StrNum}~${StrNum}`;
-/**
- * @param {string | number} customerId
- * @param {string | number} feedId
- * @param {string | number} feedItemSetId
- * @returns `FeedItemSetResourceName`
- * @example const feedItemSet: ResourceNames.FeedItemSetResourceName = ResourceNames.feedItemSet(10987417, 21974834, 43949668)
- */
-export function feedItemSet(
-  customerId: string | number,
-  feedId: string | number,
-  feedItemSetId: string | number
-): FeedItemSetResourceName {
-  return `customers/${customerId}/feedItemSets/${feedId}~${feedItemSetId}` as const;
-}
-
-/* FeedItemSetLink */
-export type FeedItemSetLinkResourceName =
-  `customers/${StrNum}/feedItemSetLinks/${StrNum}~${StrNum}~${StrNum}`;
-/**
- * @param {string | number} customerId
- * @param {string | number} feedId
- * @param {string | number} feedItemSetId
- * @param {string | number} feedItemId
- * @returns `FeedItemSetLinkResourceName`
- * @example const feedItemSetLink: ResourceNames.FeedItemSetLinkResourceName = ResourceNames.feedItemSetLink(10987417, 21974834, 43949668, 87899336)
- */
-export function feedItemSetLink(
-  customerId: string | number,
-  feedId: string | number,
-  feedItemSetId: string | number,
-  feedItemId: string | number
-): FeedItemSetLinkResourceName {
-  return `customers/${customerId}/feedItemSetLinks/${feedId}~${feedItemSetId}~${feedItemId}` as const;
-}
-
-/* FeedItemTarget */
-export type FeedItemTargetResourceName =
-  `customers/${StrNum}/feedItemTargets/${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
-/**
- * @param {string | number} customerId
- * @param {string | number} feedId
- * @param {string | number} feedItemId
- * @param {string | number} feedItemTargetType
- * @param {string | number} feedItemTargetId
- * @returns `FeedItemTargetResourceName`
- * @example const feedItemTarget: ResourceNames.FeedItemTargetResourceName = ResourceNames.feedItemTarget(10987417, 21974834, 43949668, 87899336, 175798672)
- */
-export function feedItemTarget(
-  customerId: string | number,
-  feedId: string | number,
-  feedItemId: string | number,
-  feedItemTargetType: string | number,
-  feedItemTargetId: string | number
-): FeedItemTargetResourceName {
-  return `customers/${customerId}/feedItemTargets/${feedId}~${feedItemId}~${feedItemTargetType}~${feedItemTargetId}` as const;
-}
-
-/* FeedMapping */
-export type FeedMappingResourceName =
-  `customers/${StrNum}/feedMappings/${StrNum}~${StrNum}`;
-/**
- * @param {string | number} customerId
- * @param {string | number} feedId
- * @param {string | number} feedMappingId
- * @returns `FeedMappingResourceName`
- * @example const feedMapping: ResourceNames.FeedMappingResourceName = ResourceNames.feedMapping(10987417, 21974834, 43949668)
- */
-export function feedMapping(
-  customerId: string | number,
-  feedId: string | number,
-  feedMappingId: string | number
-): FeedMappingResourceName {
-  return `customers/${customerId}/feedMappings/${feedId}~${feedMappingId}` as const;
-}
-
-/* FeedPlaceholderView */
-export type FeedPlaceholderViewResourceName =
-  `customers/${StrNum}/feedPlaceholderViews/${StrNum}`;
-/**
- * @param {string | number} customerId
- * @param {string | number} placeholderType
- * @returns `FeedPlaceholderViewResourceName`
- * @example const feedPlaceholderView: ResourceNames.FeedPlaceholderViewResourceName = ResourceNames.feedPlaceholderView(10987417, 21974834)
- */
-export function feedPlaceholderView(
-  customerId: string | number,
-  placeholderType: string | number
-): FeedPlaceholderViewResourceName {
-  return `customers/${customerId}/feedPlaceholderViews/${placeholderType}` as const;
 }
 
 /* GenderView */
@@ -2689,6 +2478,22 @@ export function perStoreView(
   placeId: string | number
 ): PerStoreViewResourceName {
   return `customers/${customerId}/perStoreViews/${placeId}` as const;
+}
+
+/* PerformanceMaxPlacementView */
+export type PerformanceMaxPlacementViewResourceName =
+  `customers/${StrNum}/performanceMaxPlacementViews/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} base_64Placement
+ * @returns `PerformanceMaxPlacementViewResourceName`
+ * @example const performanceMaxPlacementView: ResourceNames.PerformanceMaxPlacementViewResourceName = ResourceNames.performanceMaxPlacementView(10987417, 21974834)
+ */
+export function performanceMaxPlacementView(
+  customerId: string | number,
+  base_64Placement: string | number
+): PerformanceMaxPlacementViewResourceName {
+  return `customers/${customerId}/performanceMaxPlacementViews/${base_64Placement}` as const;
 }
 
 /* ProductCategoryConstant */
