@@ -31,21 +31,6 @@ import { googleAdsVersion } from "./version";
 
 const ROWS_PER_STREAMED_CHUNK = 10_000; // From experience, this is what can be expected from the API.
 
-/**
- * TODO:
- *  - rename querierRest to streamRest. Add hooks support to it. OK
- *  - write querierRest, using pagination. OK
- *  - make sure return_total_results_count works
- *  - make sure SUMMARY_ROW_SETTING works
- *  - adapt query()
- *  - adapt queryStream
- *  - adapt report()
- *  - adapt reportCount()
- *  - adapt reportStream()
- *  - reportStreamRaw() ?
- *  - bonus: use queryStream when the params allow it. Note: do it with native async generator to make it as fast as possible.
- *  - bonus: make it possible to cancel a stream or pagination when row count exceeds specified max
- */
 export class Customer extends ServiceFactory {
   constructor(
     clientOptions: ClientOptions,
