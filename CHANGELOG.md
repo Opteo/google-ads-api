@@ -27,10 +27,14 @@ export type RequestOptions = Omit<
   "customer_id" | "query" | "search_settings"
 > & {
   search_settings?: Omit<
-    services.SearchGoogleAdsRequest["search_settings"],
+    services.ISearchSettings,
     "return_total_results_count"
   >;
 };
 ```
 
 For more information please see the `SearchSettings` reference on the Google document [here](https://developers.google.com/google-ads/api/reference/rpc/v19/SearchSettings).
+
+## 19.0.1
+
+- Fix issue with type interface for search_settings not showing any valid fields.
