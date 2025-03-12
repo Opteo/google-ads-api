@@ -52,7 +52,7 @@ export class Customer extends ServiceFactory {
     return response;
   }
 
-  /** 
+  /**
     @description Stream query using a raw GAQL string. If a generic type is provided, it must be the type of a single row.
     If a summary row is requested then this will be the last emitted row of the stream.
     @hooks onStreamStart, onStreamError
@@ -70,7 +70,7 @@ export class Customer extends ServiceFactory {
     }
   }
 
-  /** 
+  /**
     @description Single query using ReportOptions.
     If a summary row is requested then this will be the first row of the results.
     @hooks onQueryStart, onQueryError, onQueryEnd
@@ -108,7 +108,7 @@ export class Customer extends ServiceFactory {
     return totalResultsCount;
   }
 
-  /** 
+  /**
     @description Stream query using ReportOptions. If a generic type is provided, it must be the type of a single row.
     If a summary row is requested then this will be the last emitted row of the stream.
     @hooks onStreamStart, onStreamError
@@ -126,7 +126,7 @@ export class Customer extends ServiceFactory {
     }
   }
 
-  /** 
+  /**
     @description Retreive the raw stream using ReportOptions.
     @hooks onStreamStart
     @example
@@ -226,7 +226,11 @@ export class Customer extends ServiceFactory {
     gaqlQuery: string,
     requestOptions: Readonly<
       RequestOptions & {
-        search_settings?: { return_total_results_count?: boolean }; // We do not allow return_total_results_count in reportOptions, however it is still a valid request option
+        search_settings?: {
+          // We do not allow return_total_results_count in reportOptions, however it is still a valid request option
+          return_total_results_count?: boolean;
+          return_summary_row?: boolean;
+        };
       }
     >
   ): Promise<{
@@ -238,7 +242,7 @@ export class Customer extends ServiceFactory {
     */
     if (
       requestOptions.page_size === undefined &&
-      requestOptions.search_settings?.return_total_results_count === undefined
+      !requestOptions.search_settings?.return_summary_row
     ) {
       // If no pagination or summary options are set, we can use the non-paginated search method.
       const { response } = await this.useStreamToImitateRegularSearch(
