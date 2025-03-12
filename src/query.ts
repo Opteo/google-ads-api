@@ -10,6 +10,7 @@ import {
   Order,
   ReportOptions,
   RequestOptions,
+  RequestOptionsWithTotalResults,
   SortOrder,
 } from "./types";
 
@@ -399,7 +400,7 @@ export function buildRequestOptions(
 
 export function buildQuery(reportOptions: Readonly<ReportOptions>): {
   gaqlQuery: Query;
-  requestOptions: RequestOptions;
+  requestOptions: RequestOptionsWithTotalResults;
 } {
   const SELECT: SelectClause = buildSelectClause(
     reportOptions.attributes,
