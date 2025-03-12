@@ -11,6 +11,10 @@ While these changes are inconvenient, the performance of the REST api is signifi
 
 To prepare for this change, we recommend you use the install the `19.0.0-rest-beta` version of this library and test your application with it.
 
+## 19.0.1
+
+- Fix issue with type interface for search_settings not showing any valid fields.
+
 ## 19.0.0
 
 ### Version Upgrade
@@ -34,7 +38,3 @@ export type RequestOptions = Omit<
 ```
 
 For more information please see the `SearchSettings` reference on the Google document [here](https://developers.google.com/google-ads/api/reference/rpc/v19/SearchSettings).
-
-## 19.0.1
-
-- Fix issue with type interface for search_settings not showing any valid fields.
