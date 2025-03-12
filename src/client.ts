@@ -9,6 +9,7 @@ export interface ClientOptions {
   client_secret: string;
   developer_token: string;
   disable_parsing?: boolean;
+  max_reporting_rows?: number;
 }
 
 export class Client {

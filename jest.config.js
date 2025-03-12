@@ -3,7 +3,7 @@ module.exports = {
   preset: "ts-jest",
   testEnvironment: "node",
   clearMocks: true,
-  collectCoverage: true,
+  //collectCoverage: true,
   coveragePathIgnorePatterns: ["/node_modules/", "jest.config.js"],
   resetMocks: true,
   testMatch: [

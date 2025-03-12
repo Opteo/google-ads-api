@@ -80,3 +80,6 @@ typings/
 
 # Library build folder
 build
+
+# Temporary compilation files
+fields.json

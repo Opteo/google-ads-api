@@ -99,25 +99,3 @@ export function getFieldMask(data: Record<string, any>): protobuf.FieldMask {
     paths,
   });
 }
-
-export function createNextChunkArrivedPromise(): {
-  newPromise: Promise<unknown>;
-  resolve: () => void;
-  reject: (error: Error) => void;
-} {
-  let resolvePromise = (): void => {
-    return;
-  };
-
-  let rejectPromise = (error: Error): void => {
-    throw error;
-  };
-
-  const newPromise = new Promise((resolve, reject) => {
-    // @ts-ignore
-    resolvePromise = resolve;
-    rejectPromise = reject;
-  });
-
-  return { newPromise, resolve: resolvePromise, reject: rejectPromise };
-}

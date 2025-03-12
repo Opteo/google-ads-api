@@ -444,7 +444,7 @@ const [summaryRow, ...response] = await customer.report({
   entity: "campaign",
   metrics: ["metrics.clicks", "metrics.all_conversions"],
   search_settings: {
-    return_summary_row: enums.SummaryRowSetting.SUMMARY_ROW_WITH_RESULTS,
+    return_summary_row: true,
   },
 });
 ```
@@ -456,7 +456,7 @@ const stream = customer.reportStream({
   entity: "campaign",
   metrics: ["metrics.clicks", "metrics.all_conversions"],
   search_settings: {
-    return_summary_row: enums.SummaryRowSetting.SUMMARY_ROW_WITH_RESULTS,
+    return_summary_row: true,
   },
 });
 
