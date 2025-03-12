@@ -47,7 +47,7 @@ const options: ReportOptions = {
   page_token: "A1B2C3D4",
   validate_only: false,
   search_settings: {
-    return_summary_row: "NO_SUMMARY_ROW",
+    return_summary_row: false,
   },
 };
 
@@ -696,12 +696,15 @@ describe("buildOrderClauseNew", () => {
   });
 });
 
-const expectedRequestOptions = {
+const expectedRequestOptions: Pick<
+  ReportOptions,
+  "page_size" | "page_token" | "validate_only" | "search_settings"
+> = {
   page_size: 5,
   page_token: "A1B2C3D4",
   validate_only: false,
   search_settings: {
-    return_summary_row: "NO_SUMMARY_ROW",
+    return_summary_row: false,
   },
 };
 
@@ -722,7 +725,7 @@ describe("buildQuery", () => {
         ad_group.name, ad_group.id, metrics.impressions, metrics.cost_micros, segments.date
       FROM
         ad_group
-      WHERE 
+      WHERE
         ad_group.status = "PAUSED"
         AND campaign.advertising_channel_type = "SEARCH"
         AND metrics.clicks > 10

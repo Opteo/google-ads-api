@@ -109,7 +109,7 @@ export type RequestOptions = Omit<
   "customer_id" | "query" | "search_settings"
 > & {
   search_settings?: Omit<
-    services.SearchGoogleAdsRequest["search_settings"],
+    services.ISearchSettings,
     "return_total_results_count"
   >;
 };
