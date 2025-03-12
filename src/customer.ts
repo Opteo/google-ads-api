@@ -96,7 +96,7 @@ export class Customer extends ServiceFactory {
   ): Promise<number | undefined> {
     const { gaqlQuery, requestOptions } = buildQuery({ ...options, limit: 1 }); // must get at least one row
     // We do not allow this field in reportOptions, however it is still a valid request option
-    requestOptions.search_settings = { return_total_results_count: true };
+    requestOptions.search_settings = { return_summary_row: true };
     const useHooks = false; // to avoid cacheing conflicts
     const { totalResultsCount } = await this.querier(
       gaqlQuery,
@@ -226,11 +226,11 @@ export class Customer extends ServiceFactory {
     gaqlQuery: string,
     requestOptions: Readonly<
       RequestOptions & {
-        search_settings?: {
-          // We do not allow return_total_results_count in reportOptions, however it is still a valid request option
-          return_total_results_count?: boolean;
-          return_summary_row?: boolean;
-        };
+        // We do not allow return_total_results_count in reportOptions, however it is still a valid request option
+        search_settings?: Pick<
+          services.ISearchSettings,
+          "return_summary_row" | "return_total_results_count"
+        >;
       }
     >
   ): Promise<{
