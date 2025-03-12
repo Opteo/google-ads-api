@@ -24,7 +24,9 @@ import {
   MutateOptions,
   PageToken,
   ReportOptions,
+  ReportOptionsWithTotalResults,
   RequestOptions,
+  RequestOptionsWithTotalResults,
 } from "./types";
 
 import { googleAdsVersion } from "./version";
@@ -92,11 +94,14 @@ export class Customer extends ServiceFactory {
     @hooks none
   */
   public async reportCount(
-    options: Readonly<ReportOptions>
+    options: Readonly<ReportOptionsWithTotalResults>
   ): Promise<number | undefined> {
-    const { gaqlQuery, requestOptions } = buildQuery({ ...options, limit: 1 }); // must get at least one row
+    // must get at least one row
+    const { gaqlQuery, requestOptions } = buildQuery({ ...options, limit: 1 });
+
     // We do not allow this field in reportOptions, however it is still a valid request option
-    requestOptions.search_settings = { return_summary_row: true };
+    requestOptions.search_settings = { return_total_results_count: true };
+
     const useHooks = false; // to avoid cacheing conflicts
     const { totalResultsCount } = await this.querier(
       gaqlQuery,
@@ -224,15 +229,7 @@ export class Customer extends ServiceFactory {
 
   private async paginatedSearch(
     gaqlQuery: string,
-    requestOptions: Readonly<
-      RequestOptions & {
-        // We do not allow return_total_results_count in reportOptions, however it is still a valid request option
-        search_settings?: Pick<
-          services.ISearchSettings,
-          "return_summary_row" | "return_total_results_count"
-        >;
-      }
-    >
+    requestOptions: Readonly<RequestOptionsWithTotalResults>
   ): Promise<{
     response: services.IGoogleAdsRow[];
     totalResultsCount?: number;
