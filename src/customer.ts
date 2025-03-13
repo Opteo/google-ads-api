@@ -17,7 +17,9 @@ import {
   MutateOptions,
   PageToken,
   ReportOptions,
+  ReportOptionsWithTotalResults,
   RequestOptions,
+  RequestOptionsWithTotalResults,
 } from "./types";
 import { createNextChunkArrivedPromise } from "./utils";
 
@@ -82,11 +84,14 @@ export class Customer extends ServiceFactory {
     @hooks none
   */
   public async reportCount(
-    options: Readonly<ReportOptions>
+    options: Readonly<ReportOptionsWithTotalResults>
   ): Promise<number | undefined> {
-    const { gaqlQuery, requestOptions } = buildQuery({ ...options, limit: 1 }); // must get at least one row
-    // @ts-expect-error we do not allow this field in reportOptions, however it is still a valid request option
-    requestOptions.return_total_results_count = true;
+    // must get at least one row
+    const { gaqlQuery, requestOptions } = buildQuery({ ...options, limit: 1 });
+
+    // We do not allow this field in reportOptions, however it is still a valid request option
+    requestOptions.search_settings = { return_total_results_count: true };
+
     const useHooks = false; // to avoid cacheing conflicts
     const { totalResultsCount } = await this.querier(
       gaqlQuery,
@@ -200,7 +205,7 @@ export class Customer extends ServiceFactory {
 
   private async paginatedSearch(
     gaqlQuery: string,
-    requestOptions: Readonly<RequestOptions>,
+    requestOptions: Readonly<RequestOptionsWithTotalResults>,
     parser: (rows: services.IGoogleAdsRow[]) => services.IGoogleAdsRow[]
   ): Promise<{
     response: services.IGoogleAdsRow[];

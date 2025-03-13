@@ -34,6 +34,34 @@ export interface ReportOptions extends RequestOptions {
   to_date?: string;
 }
 
+/**
+ * Add back optional return_total_results_count as it is still a valid request option
+ */
+type SearchSettingsWithOptionalTotalCount = {
+  search_settings?: Pick<
+    services.ISearchSettings,
+    "return_total_results_count" | "return_summary_row"
+  >;
+};
+
+/**
+ * Request Options with optional total count in search_settings
+ */
+export type RequestOptionsWithTotalResults = Omit<
+  RequestOptions,
+  "search_settings"
+> &
+  SearchSettingsWithOptionalTotalCount;
+
+/**
+ * Report Options with optional total count in search_settings
+ */
+export type ReportOptionsWithTotalResults = Omit<
+  ReportOptions,
+  "search_settings"
+> &
+  SearchSettingsWithOptionalTotalCount;
+
 export type DateConstant =
   | "TODAY"
   | "YESTERDAY"
