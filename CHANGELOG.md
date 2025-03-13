@@ -11,6 +11,10 @@ While these changes are inconvenient, the performance of the REST api is signifi
 
 To prepare for this change, we recommend you use the install the `19.0.0-rest-beta` version of this library and test your application with it.
 
+### 19.0.2
+
+- Fix issue with reportCount() not giving the correct total results count.
+
 ## 19.0.1
 
 - Fix issue with type interface for search_settings not showing any valid fields.
