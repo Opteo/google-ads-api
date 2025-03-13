@@ -205,7 +205,8 @@ export class Customer extends ServiceFactory {
 
   private async paginatedSearch(
     gaqlQuery: string,
-    requestOptions: Readonly<RequestOptionsWithTotalResults>
+    requestOptions: Readonly<RequestOptionsWithTotalResults>,
+    parser: (rows: services.IGoogleAdsRow[]) => services.IGoogleAdsRow[]
   ): Promise<{
     response: services.IGoogleAdsRow[];
     totalResultsCount?: number;
