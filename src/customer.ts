@@ -239,7 +239,7 @@ export class Customer extends ServiceFactory {
     */
     if (
       requestOptions.page_size === undefined &&
-      !requestOptions.search_settings?.return_summary_row
+      requestOptions.search_settings === undefined // If search_settings is set, we can't use searchStream.
     ) {
       // If no pagination or summary options are set, we can use the non-paginated search method.
       const { response } = await this.useStreamToImitateRegularSearch(
