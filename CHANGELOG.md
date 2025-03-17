@@ -9,7 +9,7 @@ From v20 onwards this library will use the REST api for report, reportStream, se
 
 While these changes are inconvenient, the performance of the REST api is significantly better than the gRPC api, particularly for responses with many rows.
 
-To prepare for this change, we recommend you use the install the `19.0.0-rest-beta` version of this library and test your application with it.
+To prepare for this change, we recommend you use the install the `19.0.2-rest-beta` version of this library and test your application with it.
 
 ### 19.0.2
 
