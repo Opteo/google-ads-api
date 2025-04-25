@@ -100,7 +100,7 @@ export function buildFromClause(entity: ReportOptions["entity"]): FromClause {
   return ` ${QueryKeywords.FROM} ${entity}` as const;
 }
 
-function quoteGaqlString(val: string): string {
+function formatGaqlString(val: string): string {
   const len = val.length;
   const startsWithSingle = val.startsWith("'");
   const endsWithSingle = val.endsWith("'");
@@ -117,26 +117,13 @@ function quoteGaqlString(val: string): string {
     }
   }
 
-  const hasDoubleQuote = val.includes('"');
-  const hasSingleQuote = val.includes("'");
-
-  if (hasDoubleQuote && !hasSingleQuote) {
-    // Contains only double quotes, use single quotes
-    return `'${val}'`;
-  } else if (hasSingleQuote && !hasDoubleQuote) {
-    // Contains only single quotes, use double quotes
-    return `"${val}"`;
+  // Always use double quotes and escape internal double quotes and backslashes
+  if (val.includes('"') || val.includes("\\")) {
+    const escapedVal = val.replace(/\\/g, "\\\\").replace(/"/g, '\\"'); // Escape backslashes first, then double quotes
+    return `"${escapedVal}"`;
   } else {
-    // Contains both, neither, or is incorrectly quoted.
-    // Check if escaping is actually needed for this block (which defaults to single quotes)
-    if (val.includes("'") || val.includes("\\")) {
-      // Default to using single quotes and escape internal single quotes AND BACKSLASHES.
-      const escapedVal = val.replace(/\\/g, "\\\\").replace(/'/g, "\\'"); // Escape backslashes first, then single quotes
-      return `'${escapedVal}'`;
-    } else {
-      // No escaping needed, just wrap in single quotes
-      return `'${val}'`;
-    }
+    // No escaping needed, just wrap in double quotes
+    return `"${val}"`;
   }
 }
 
@@ -156,14 +143,14 @@ export function validateConstraintKeyAndValue(
     if (dateConstants.includes(val as DateConstant)) {
       return { op, val };
     }
-    return { op: op, val: quoteGaqlString(val) };
+    return { op: "=", val: formatGaqlString(val) };
   }
 
   if (Array.isArray(val)) {
     const stringifiedValue = val
       .map((v: number | string) => {
         if (typeof v === "string") {
-          return quoteGaqlString(v);
+          return formatGaqlString(v);
         } else {
           return convertNumericEnumToString(key, v);
         }
@@ -186,7 +173,7 @@ export function convertNumericEnumToString(
     const enumStringValue = enums[fields.enumFields[key]][val]; // e.g. enums['CampaignStatus'][2] = "ENABLED"
 
     if (enumStringValue) {
-      return `'${enumStringValue}'`;
+      return `"${enumStringValue}"`;
     }
   }
 
