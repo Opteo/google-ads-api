@@ -496,7 +496,10 @@ export class Customer extends ServiceFactory {
       let count = 0;
 
       for await (const data of pipeline) {
-        const results = data.value.results ?? [data.value.summaryRow];
+        const results =
+          data.value.results ??
+          (data.value.summaryRow ? [data.value.summaryRow] : undefined) ??
+          [];
 
         count += results.length;
         if (
