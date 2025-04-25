@@ -100,6 +100,46 @@ export function buildFromClause(entity: ReportOptions["entity"]): FromClause {
   return ` ${QueryKeywords.FROM} ${entity}` as const;
 }
 
+function quoteGaqlString(val: string): string {
+  const len = val.length;
+  const startsWithSingle = val.startsWith("'");
+  const endsWithSingle = val.endsWith("'");
+  const startsWithDouble = val.startsWith('"');
+  const endsWithDouble = val.endsWith('"');
+
+  // Returns the original string if it seems correctly quoted already.
+  if (len >= 2) {
+    if (startsWithSingle && endsWithSingle && !val.slice(1, -1).includes("'")) {
+      return val;
+    }
+    if (startsWithDouble && endsWithDouble && !val.slice(1, -1).includes('"')) {
+      return val;
+    }
+  }
+
+  const hasDoubleQuote = val.includes('"');
+  const hasSingleQuote = val.includes("'");
+
+  if (hasDoubleQuote && !hasSingleQuote) {
+    // Contains only double quotes, use single quotes
+    return `'${val}'`;
+  } else if (hasSingleQuote && !hasDoubleQuote) {
+    // Contains only single quotes, use double quotes
+    return `"${val}"`;
+  } else {
+    // Contains both, neither, or is incorrectly quoted.
+    // Check if escaping is actually needed for this block (which defaults to single quotes)
+    if (val.includes("'") || val.includes("\\")) {
+      // Default to using single quotes and escape internal single quotes AND BACKSLASHES.
+      const escapedVal = val.replace(/\\/g, "\\\\").replace(/'/g, "\\'"); // Escape backslashes first, then single quotes
+      return `'${escapedVal}'`;
+    } else {
+      // No escaping needed, just wrap in single quotes
+      return `'${val}'`;
+    }
+  }
+}
+
 export function validateConstraintKeyAndValue(
   key: ConstraintKey,
   op: ConstraintOperation,
@@ -116,18 +156,14 @@ export function validateConstraintKeyAndValue(
     if (dateConstants.includes(val as DateConstant)) {
       return { op, val };
     }
-
-    return {
-      op: "=",
-      val: new RegExp(/^'.*'$|^".*"$/g).test(val) ? val : `"${val}"`,
-    }; // must start and end in either single or double quotation marks
+    return { op: op, val: quoteGaqlString(val) };
   }
 
   if (Array.isArray(val)) {
     const stringifiedValue = val
       .map((v: number | string) => {
         if (typeof v === "string") {
-          return `"${v}"`;
+          return quoteGaqlString(v);
         } else {
           return convertNumericEnumToString(key, v);
         }
@@ -150,7 +186,7 @@ export function convertNumericEnumToString(
     const enumStringValue = enums[fields.enumFields[key]][val]; // e.g. enums['CampaignStatus'][2] = "ENABLED"
 
     if (enumStringValue) {
-      return `"${enumStringValue}"`;
+      return `'${enumStringValue}'`;
     }
   }
 
