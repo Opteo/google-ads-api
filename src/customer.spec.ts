@@ -1,4 +1,4 @@
-import { google } from "google-gax/build/protos/operations";
+import { operationsProtos } from "google-gax";
 import { Hooks } from "./hooks";
 
 import { enums, errors, services } from "./protos";
@@ -28,6 +28,8 @@ import {
 } from "./testUtils";
 import { MutateOptions, RequestOptions } from "./types";
 import { googleAdsVersion } from "../src/version";
+type google = typeof operationsProtos.google;
+const google = operationsProtos.google;
 
 describe("querier", () => {
   afterEach(() => jest.resetAllMocks());
@@ -476,7 +478,7 @@ describe("reportStream", () => {
     mockStreamSummaryRow();
     mockStreamEnd();
 
-    const response = [];
+    const response: services.IGoogleAdsRow[] = [];
     for await (const row of stream) {
       response.push(row);
     }

@@ -1039,6 +1039,7 @@ export namespace enums {
     UNSPECIFIED = 0, // UNSPECIFIED
     UNKNOWN = 1, // UNKNOWN
     WEEKLY = 2, // WEEKLY
+    MONTHLY = 3, // MONTHLY
   }
 
   /**
@@ -1089,6 +1090,7 @@ export namespace enums {
     APP_CAMPAIGN_FOR_PRE_REGISTRATION = 18, // APP_CAMPAIGN_FOR_PRE_REGISTRATION
     VIDEO_REACH_TARGET_FREQUENCY = 19, // VIDEO_REACH_TARGET_FREQUENCY
     TRAVEL_ACTIVITIES = 20, // TRAVEL_ACTIVITIES
+    YOUTUBE_AUDIO = 22, // YOUTUBE_AUDIO
   }
 
   /**
@@ -2296,6 +2298,7 @@ export namespace enums {
     VIDEO_EFFICIENT_REACH = 17, // VIDEO_EFFICIENT_REACH
     SMART_CAMPAIGN_ADS = 18, // SMART_CAMPAIGN_ADS
     TRAVEL_ADS = 19, // TRAVEL_ADS
+    YOUTUBE_AUDIO = 20, // YOUTUBE_AUDIO
   }
 
   /**
@@ -2325,6 +2328,16 @@ export namespace enums {
     AVERAGE = 5, // AVERAGE
     GOOD = 6, // GOOD
     EXCELLENT = 7, // EXCELLENT
+  }
+
+  /**
+   * @name AdStrengthActionItemTypeEnum.AdStrengthActionItemType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AdStrengthActionItemTypeEnum.AdStrengthActionItemType
+   */
+  export enum AdStrengthActionItemType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ADD_ASSET = 2, // ADD_ASSET
   }
 
   /**
@@ -2365,6 +2378,7 @@ export namespace enums {
     TRAVEL_AD = 37, // TRAVEL_AD
     DEMAND_GEN_VIDEO_RESPONSIVE_AD = 42, // DEMAND_GEN_VIDEO_RESPONSIVE_AD
     DEMAND_GEN_PRODUCT_AD = 39, // DEMAND_GEN_PRODUCT_AD
+    YOUTUBE_AUDIO_AD = 44, // YOUTUBE_AUDIO_AD
   }
 
   /**
@@ -2459,6 +2473,18 @@ export namespace enums {
   }
 
   /**
+   * @name AssetCoverageVideoAspectRatioRequirementEnum.AssetCoverageVideoAspectRatioRequirement
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AssetCoverageVideoAspectRatioRequirementEnum.AssetCoverageVideoAspectRatioRequirement
+   */
+  export enum AssetCoverageVideoAspectRatioRequirement {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    HORIZONTAL = 2, // HORIZONTAL
+    SQUARE = 3, // SQUARE
+    VERTICAL = 4, // VERTICAL
+  }
+
+  /**
    * @name AssetFieldTypeEnum.AssetFieldType
    * @link https://developers.google.com/google-ads/api/reference/rpc/v19/AssetFieldTypeEnum.AssetFieldType
    */
@@ -2494,6 +2520,7 @@ export namespace enums {
     HOTEL_PROPERTY = 28, // HOTEL_PROPERTY
     DEMAND_GEN_CAROUSEL_CARD = 30, // DEMAND_GEN_CAROUSEL_CARD
     BUSINESS_MESSAGE = 31, // BUSINESS_MESSAGE
+    TALL_PORTRAIT_MARKETING_IMAGE = 32, // TALL_PORTRAIT_MARKETING_IMAGE
   }
 
   /**
@@ -3171,6 +3198,7 @@ export namespace enums {
     AD_GROUP_CRITERION = 5, // AD_GROUP_CRITERION
     CAMPAIGN = 6, // CAMPAIGN
     CAMPAIGN_CRITERION = 7, // CAMPAIGN_CRITERION
+    CAMPAIGN_BUDGET = 8, // CAMPAIGN_BUDGET
     FEED = 9, // FEED
     FEED_ITEM = 10, // FEED_ITEM
     AD_GROUP_FEED = 11, // AD_GROUP_FEED
@@ -3184,6 +3212,8 @@ export namespace enums {
     AD_GROUP_ASSET = 19, // AD_GROUP_ASSET
     COMBINED_AUDIENCE = 20, // COMBINED_AUDIENCE
     ASSET_GROUP = 21, // ASSET_GROUP
+    ASSET_SET = 22, // ASSET_SET
+    CAMPAIGN_ASSET_SET = 23, // CAMPAIGN_ASSET_SET
   }
 
   /**
@@ -3291,6 +3321,17 @@ export namespace enums {
     ACTIVATION_NEEDED = 2, // ACTIVATION_NEEDED
     ENABLED = 3, // ENABLED
     PAUSED = 4, // PAUSED
+  }
+
+  /**
+   * @name ConversionCustomerTypeEnum.ConversionCustomerType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ConversionCustomerTypeEnum.ConversionCustomerType
+   */
+  export enum ConversionCustomerType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    NEW = 2, // NEW
+    RETURNING = 3, // RETURNING
   }
 
   /**
@@ -3596,6 +3637,28 @@ export namespace enums {
     UNSPECIFIED = 0, // UNSPECIFIED
     UNKNOWN = 1, // UNKNOWN
     VIDEO = 2, // VIDEO
+  }
+
+  /**
+   * @name DemandGenChannelConfigEnum.DemandGenChannelConfig
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/DemandGenChannelConfigEnum.DemandGenChannelConfig
+   */
+  export enum DemandGenChannelConfig {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    CHANNEL_STRATEGY = 2, // CHANNEL_STRATEGY
+    SELECTED_CHANNELS = 3, // SELECTED_CHANNELS
+  }
+
+  /**
+   * @name DemandGenChannelStrategyEnum.DemandGenChannelStrategy
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/DemandGenChannelStrategyEnum.DemandGenChannelStrategy
+   */
+  export enum DemandGenChannelStrategy {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ALL_CHANNELS = 2, // ALL_CHANNELS
+    ALL_OWNED_AND_OPERATED_CHANNELS = 3, // ALL_OWNED_AND_OPERATED_CHANNELS
   }
 
   /**
@@ -4075,6 +4138,19 @@ export namespace enums {
   }
 
   /**
+   * @name LocalServicesLeadCreditIssuanceDecisionEnum.LocalServicesLeadCreditIssuanceDecision
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/LocalServicesLeadCreditIssuanceDecisionEnum.LocalServicesLeadCreditIssuanceDecision
+   */
+  export enum LocalServicesLeadCreditIssuanceDecision {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    SUCCESS_NOT_REACHED_THRESHOLD = 2, // SUCCESS_NOT_REACHED_THRESHOLD
+    SUCCESS_REACHED_THRESHOLD = 3, // SUCCESS_REACHED_THRESHOLD
+    FAIL_OVER_THRESHOLD = 4, // FAIL_OVER_THRESHOLD
+    FAIL_NOT_ELIGIBLE = 5, // FAIL_NOT_ELIGIBLE
+  }
+
+  /**
    * @name LocalServicesCreditStateEnum.LocalServicesCreditState
    * @link https://developers.google.com/google-ads/api/reference/rpc/v19/LocalServicesCreditStateEnum.LocalServicesCreditState
    */
@@ -4100,6 +4176,50 @@ export namespace enums {
     DISABLED = 7, // DISABLED
     CONSUMER_DECLINED = 8, // CONSUMER_DECLINED
     WIPED_OUT = 9, // WIPED_OUT
+  }
+
+  /**
+   * @name LocalServicesLeadSurveyAnswerEnum.LocalServicesLeadSurveyAnswer
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/LocalServicesLeadSurveyAnswerEnum.LocalServicesLeadSurveyAnswer
+   */
+  export enum LocalServicesLeadSurveyAnswer {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    VERY_SATISFIED = 2, // VERY_SATISFIED
+    SATISFIED = 3, // SATISFIED
+    NEUTRAL = 4, // NEUTRAL
+    DISSATISFIED = 5, // DISSATISFIED
+    VERY_DISSATISFIED = 6, // VERY_DISSATISFIED
+  }
+
+  /**
+   * @name LocalServicesLeadSurveyDissatisfiedReasonEnum.LocalServicesLeadSurveyDissatisfiedReason
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/LocalServicesLeadSurveyDissatisfiedReasonEnum.LocalServicesLeadSurveyDissatisfiedReason
+   */
+  export enum LocalServicesLeadSurveyDissatisfiedReason {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    OTHER_DISSATISFIED_REASON = 2, // OTHER_DISSATISFIED_REASON
+    GEO_MISMATCH = 3, // GEO_MISMATCH
+    JOB_TYPE_MISMATCH = 4, // JOB_TYPE_MISMATCH
+    NOT_READY_TO_BOOK = 5, // NOT_READY_TO_BOOK
+    SPAM = 6, // SPAM
+    DUPLICATE = 7, // DUPLICATE
+    SOLICITATION = 8, // SOLICITATION
+  }
+
+  /**
+   * @name LocalServicesLeadSurveySatisfiedReasonEnum.LocalServicesLeadSurveySatisfiedReason
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/LocalServicesLeadSurveySatisfiedReasonEnum.LocalServicesLeadSurveySatisfiedReason
+   */
+  export enum LocalServicesLeadSurveySatisfiedReason {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    OTHER_SATISFIED_REASON = 2, // OTHER_SATISFIED_REASON
+    BOOKED_CUSTOMER = 3, // BOOKED_CUSTOMER
+    LIKELY_BOOKED_CUSTOMER = 4, // LIKELY_BOOKED_CUSTOMER
+    SERVICE_RELATED = 5, // SERVICE_RELATED
+    HIGH_VALUE_SERVICE = 6, // HIGH_VALUE_SERVICE
   }
 
   /**
@@ -4502,6 +4622,19 @@ export namespace enums {
   }
 
   /**
+   * @name ReachPlanConversionRateModelEnum.ReachPlanConversionRateModel
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ReachPlanConversionRateModelEnum.ReachPlanConversionRateModel
+   */
+  export enum ReachPlanConversionRateModel {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    CUSTOMER_HISTORY = 2, // CUSTOMER_HISTORY
+    INVENTORY_AGGRESSIVE = 3, // INVENTORY_AGGRESSIVE
+    INVENTORY_CONSERVATIVE = 4, // INVENTORY_CONSERVATIVE
+    INVENTORY_MEDIAN = 5, // INVENTORY_MEDIAN
+  }
+
+  /**
    * @name ReachPlanNetworkEnum.ReachPlanNetwork
    * @link https://developers.google.com/google-ads/api/reference/rpc/v19/ReachPlanNetworkEnum.ReachPlanNetwork
    */
@@ -4520,6 +4653,8 @@ export namespace enums {
   export enum ReachPlanSurface {
     UNSPECIFIED = 0, // UNSPECIFIED
     UNKNOWN = 1, // UNKNOWN
+    DISCOVER_FEED = 7, // DISCOVER_FEED
+    GMAIL = 8, // GMAIL
     IN_FEED = 2, // IN_FEED
     IN_STREAM_BUMPER = 3, // IN_STREAM_BUMPER
     IN_STREAM_NON_SKIPPABLE = 4, // IN_STREAM_NON_SKIPPABLE
