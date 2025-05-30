@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@types/jest": "^29.0.1",
-    "@types/long": "^5.0.0",
+    "@types/long": "^4.0.0",
     "@types/node": "^22.5.4",
     "@types/pluralize": "^0.0.29",
     "@typescript-eslint/eslint-plugin": "^4.8.2",
