@@ -2023,12 +2023,12 @@ globby@^11.0.3:
     merge2 "^1.4.1"
     slash "^3.0.0"
 
-google-ads-node@16.0.0:
-  version "16.0.0"
-  resolved "https://registry.yarnpkg.com/google-ads-node/-/google-ads-node-16.0.0.tgz#0265f7ce150c4c2aa707865be15944f0caad4b0a"
-  integrity sha512-cRaEyf/ulHflBfzao9rqmVIz634wAKDqZQ3M/vX/qpIPvMk2+VACHmIJi1KfgNaplLjgX5r/XCgjElhY+hLIzA==
+google-ads-node@17.0.0:
+  version "17.0.0"
+  resolved "https://registry.yarnpkg.com/google-ads-node/-/google-ads-node-17.0.0.tgz#78be0c6615a1f450e9e4bf0bc0201fec4f0b9a77"
+  integrity sha512-1lVbIQCl9jy6FLJ7DPzGxvO8/+FqhSTgA+19NRh5Zz3mT4CJq+6VsomLBsujqR33BfXXQLI15q5McDMTnMNYOw==
   dependencies:
-    google-gax "5.1.0-rc.1"
+    google-gax "^5.1.1-rc.1"
     lru-cache "^10.2.0"
 
 google-auth-library@^10.0.0-rc.1, google-auth-library@^9.15.1:
@@ -2043,10 +2043,10 @@ google-auth-library@^10.0.0-rc.1, google-auth-library@^9.15.1:
     gtoken "^7.0.0"
     jws "^4.0.0"
 
-google-gax@5.1.0-rc.1, google-gax@^5.1.0-rc.1:
-  version "5.1.0-rc.1"
-  resolved "https://registry.yarnpkg.com/google-gax/-/google-gax-5.1.0-rc.1.tgz#da572d5371894d8203e89195301ce4ea86b8b955"
-  integrity sha512-+XLPXNLAh5TKcUhDm4k0znlPvQoWkVeXMJr7neRPYC6NwKh2d3cC9FqcjoChhJIUC695eAtDj5Cf8ICXMxt3Qw==
+google-gax@^5.1.1-rc.1:
+  version "5.1.1-rc.1"
+  resolved "https://registry.yarnpkg.com/google-gax/-/google-gax-5.1.1-rc.1.tgz#ab7eeafc9ecde6264f9e6afe84614e028ad464f9"
+  integrity sha512-HSHw7NytSxiyTp3WgWQXu4Cnl49VH2qRcAU047fmShUbbxkGwYX3MlipxhDkWIWMRl7Dktyq2gRvwQVP6ILgUA==
   dependencies:
     "@grpc/grpc-js" "^1.12.6"
     "@grpc/proto-loader" "^0.7.13"
