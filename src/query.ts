@@ -100,6 +100,33 @@ export function buildFromClause(entity: ReportOptions["entity"]): FromClause {
   return ` ${QueryKeywords.FROM} ${entity}` as const;
 }
 
+function formatGaqlString(val: string): string {
+  const len = val.length;
+  const startsWithSingle = val.startsWith("'");
+  const endsWithSingle = val.endsWith("'");
+  const startsWithDouble = val.startsWith('"');
+  const endsWithDouble = val.endsWith('"');
+
+  // Returns the original string if it seems correctly quoted already.
+  if (len >= 2) {
+    if (startsWithSingle && endsWithSingle && !val.slice(1, -1).includes("'")) {
+      return val;
+    }
+    if (startsWithDouble && endsWithDouble && !val.slice(1, -1).includes('"')) {
+      return val;
+    }
+  }
+
+  // Always use double quotes and escape internal double quotes and backslashes
+  if (val.includes('"') || val.includes("\\")) {
+    const escapedVal = val.replace(/\\/g, "\\\\").replace(/"/g, '\\"'); // Escape backslashes first, then double quotes
+    return `"${escapedVal}"`;
+  } else {
+    // No escaping needed, just wrap in double quotes
+    return `"${val}"`;
+  }
+}
+
 export function validateConstraintKeyAndValue(
   key: ConstraintKey,
   op: ConstraintOperation,
@@ -116,18 +143,14 @@ export function validateConstraintKeyAndValue(
     if (dateConstants.includes(val as DateConstant)) {
       return { op, val };
     }
-
-    return {
-      op: "=",
-      val: new RegExp(/^'.*'$|^".*"$/g).test(val) ? val : `"${val}"`,
-    }; // must start and end in either single or double quotation marks
+    return { op: "=", val: formatGaqlString(val) };
   }
 
   if (Array.isArray(val)) {
     const stringifiedValue = val
       .map((v: number | string) => {
         if (typeof v === "string") {
-          return `"${v}"`;
+          return formatGaqlString(v);
         } else {
           return convertNumericEnumToString(key, v);
         }

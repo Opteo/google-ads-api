@@ -1,5 +1,5 @@
 import { GoogleAdsServiceClient } from "google-ads-node";
-import { google } from "google-gax/build/protos/operations";
+import { operationsProtos } from "google-gax";
 import { errors, services } from "./protos";
 import { FAILURE_KEY } from "./service";
 import {
@@ -10,6 +10,8 @@ import {
   MOCK_DEVELOPER_TOKEN,
 } from "./testUtils";
 import { googleAdsVersion } from "../src/version";
+type google = typeof operationsProtos.google;
+const google = operationsProtos.google;
 
 beforeAll(() => {
   // Timeout required as the first service load can take a while
