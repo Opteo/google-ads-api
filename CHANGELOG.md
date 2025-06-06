@@ -1,6 +1,6 @@
 # Changelog
 
-### 20.0.0
+### 20.0.1
 
 ### Version Upgrade
 
@@ -20,7 +20,6 @@ While these changes are inconvenient, the performance of the REST api is signifi
 ### Version Upgrade
 
 - Upgraded google-ads-api version to v19.1. Refer to Google ads release notes [here](https://developers.google.com/google-ads/api/docs/release-notes) for changes.
-
 
 ### 19.0.2
 

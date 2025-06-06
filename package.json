@@ -1,6 +1,6 @@
 {
   "name": "google-ads-api",
-  "version": "20.0.0",
+  "version": "20.0.1",
   "description": "Google Ads API Client Library for Node.js",
   "repository": "https://github.com/Opteo/google-ads-api",
   "main": "build/src/index.js",
@@ -21,7 +21,7 @@
     "@isaacs/ttlcache": "^1.2.2",
     "axios": "^1.6.7",
     "circ-json": "^1.0.4",
-    "google-ads-node": "17.0.0",
+    "google-ads-node": "17.0.1",
     "google-auth-library": "^9.15.1",
     "google-gax": "^5.1.1-rc.1",
     "long": "^4.0.0",
