@@ -1,22 +1,25 @@
 # Changelog
 
-### Upcoming Breaking Changes
+### 20.0.1
 
-From v20 onwards this library will use the REST api for report, reportStream, search and searchStream. This will result in minor breaking changes to reporting calls:
+### Version Upgrade
+
+- Upgraded google-ads-api version to v20. Refer to Google ads release notes [here](https://developers.google.com/google-ads/api/docs/release-notes) for changes.
+
+### REST API
+
+- This library now uses the REST API for report, reportStream, search and searchStream. This will result in minor breaking changes to reporting calls:
 
 - Fields with the enum value `0` will now be `undefined` instead
 - Array-fields (such as `final_urls`) with the value `[]` will now be `undefined` instead
 
 While these changes are inconvenient, the performance of the REST api is significantly better than the gRPC api, particularly for responses with many rows.
 
-To prepare for this change, we recommend you use the install the `19.0.0-rest-beta` version of this library and test your application with it.
-
 ### 19.1.0
 
 ### Version Upgrade
 
 - Upgraded google-ads-api version to v19.1. Refer to Google ads release notes [here](https://developers.google.com/google-ads/api/docs/release-notes) for changes.
-
 
 ### 19.0.2
 

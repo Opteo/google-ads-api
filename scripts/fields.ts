@@ -1,8 +1,24 @@
 import fs from "fs";
 import { FILES } from "./path";
-import { GoogleAdsApi, services, resources, enums } from "../src";
+import { GoogleAdsApi, resources, enums, services } from "../src";
 import { capitaliseFirstLetter, toCamelCase } from "../src/utils";
+import _ from "lodash";
+import protosJson from "google-ads-node/build/protos/protos.json";
+import { stringify } from "circ-json";
 
+import protobuf from "protobufjs";
+const root = protobuf.Root.fromJSON(protosJson);
+
+const primitiveTypes = [
+  "string",
+  "number",
+  "bool",
+  "int64",
+  "int32",
+  "double",
+  "float",
+  "bytes",
+];
 // Types
 interface Resource {
   attributes: string[];
@@ -34,7 +50,7 @@ export async function compileFields(): Promise<void> {
     login_customer_id: LOGIN_CUSTOMER_ID,
   });
 
-  // @ts-ignore
+  //@ts-ignore
   const [fields]: resources.GoogleAdsField[][] =
     // @ts-expect-error Protected usage is fine here
     await cus.googleAdsFields.searchGoogleAdsFields(
@@ -54,6 +70,12 @@ export async function compileFields(): Promise<void> {
         `,
       })
     );
+
+  // fs.writeFileSync("fields.json", JSON.stringify(fields));
+
+  // const fields: resources.GoogleAdsField[] = JSON.parse(
+  //   fs.readFileSync("fields.json").toString()
+  // );
 
   const resourceConstructs: { [resourceName: string]: Resource } = {};
   const enumFields: { [fieldName: string]: string } = {};
@@ -158,6 +180,85 @@ export async function compileFields(): Promise<void> {
   });
 
   stream.write(`}`);
+
+  stream.write(
+    `\n\n/*  -- Field types (represented as circular JSON, used in REST parsing) --  */`
+  );
+  stream.write(`\nexport const fieldDataTypes = \``);
+
+  /*
+      Assemble a mega object that represents all the fields and their types,
+      recursively. This is used in the REST parsing to determine the type of
+      each field. This is a circular object, so it can't be stringified
+      normally. We'll use the circ-json package to stringify it.
+
+      See fieldDataTypes in autogen/fields.ts for an idea of the final product.
+  */
+  let mega: any = {};
+  function assembleMega(typeForLookup: string) {
+    if (typeForLookup.startsWith("com.")) {
+      typeForLookup = typeForLookup.replace("com.", "");
+    }
+    const foundMessage = root.lookupTypeOrEnum(typeForLookup);
+
+    if (mega[foundMessage.name]) {
+      return mega[foundMessage.name];
+    }
+
+    // @ts-ignore
+    if (foundMessage.valuesById) {
+      // @ts-ignore
+      return foundMessage.values;
+    }
+    const fields = foundMessage.fields;
+
+    const o: any = {};
+    mega[foundMessage.name] = o;
+    for (const fieldKey in fields) {
+      const fieldKeyType = fields[fieldKey].type;
+      if (primitiveTypes.includes(fieldKeyType)) {
+        o[fieldKey] = fieldKeyType.toUpperCase();
+        continue;
+      }
+
+      const parsedRef = assembleMega(fields[fieldKey].type);
+      o[fieldKey] = parsedRef;
+    }
+
+    mega[foundMessage.name] = o;
+
+    return o;
+  }
+
+  // Start by adding GoogleAdsFailure to the mega object. It's a special case that
+  // Doesn't exist the same way as other fields.
+  assembleMega("GoogleAdsFailure");
+
+  mega = {
+    ...mega,
+    ...mega.GoogleAdsFailure,
+  };
+
+  delete mega.GoogleAdsFailure;
+
+  // Now, loop through all the reporting fields and add them to the mega object
+  // Messages are the main challenge here, as they can contain other messages,
+  // Sometimes with infite recursion.
+  for (const field of fields.filter((field) => field.data_type === "MESSAGE")) {
+    _.set(mega, field.name!, assembleMega(field.type_url as string));
+  }
+  for (const field of fields.filter((field) => field.data_type !== "MESSAGE")) {
+    if (!_.get(mega, field.name!)) {
+      _.set(
+        mega,
+        field.name!,
+        (field.data_type as string).toUpperCase() as string
+      );
+    }
+  }
+
+  stream.write(stringify(mega));
+  stream.write(`\``);
   stream.end();
 }
 

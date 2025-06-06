@@ -1,5 +1,7 @@
 import { operationsProtos } from "google-gax";
 import { Hooks } from "./hooks";
+import axios from "axios";
+import MockAdapter from "axios-mock-adapter";
 
 import { enums, errors, services } from "./protos";
 import {
@@ -9,6 +11,8 @@ import {
   mockBuildSearchStreamRequestAndService,
   mockError,
   mockGaqlQuery,
+  // mockGenerator,
+  mockGetAccessToken,
   mockGetGoogleAdsError,
   mockMethod,
   mockMutationReturnValue,
@@ -16,54 +20,76 @@ import {
   mockPaginatedSearch,
   mockParse,
   mockParsedValues,
+  mockParseRest,
   mockParseValue,
   mockQuery,
   mockQueryReturnValue,
+  mockQueryReturnValueUnparsed,
+  mockQueryReturnValueWithSummaryRow,
   mockReportOptions,
   mockSearchOnce,
+  mockSearchRawResult,
+  mockSearchRawResultWithSummaryRow,
+  mockStream,
+  mockStreamWithBadData,
+  mockStreamWithSummaryRow,
   mockSummaryRow,
   mockTotalResultsCount,
   newCustomer,
-  noopParser,
 } from "./testUtils";
 import { MutateOptions, RequestOptions } from "./types";
 import { googleAdsVersion } from "../src/version";
 type google = typeof operationsProtos.google;
 const google = operationsProtos.google;
 
+const axiosMock = new MockAdapter(axios);
+
 describe("querier", () => {
-  afterEach(() => jest.resetAllMocks());
+  afterEach(() => {
+    jest.resetAllMocks();
+    axiosMock.reset();
+  });
 
   it("parses query results by default", async () => {
     const customer = newCustomer({});
-    mockPaginatedSearch(customer);
-    mockParse(mockParsedValues);
+
+    axiosMock.onPost().reply(200, mockStream());
+
+    mockGetAccessToken(customer);
 
     // @ts-expect-error private method
     const { response } = await customer.querier(mockGaqlQuery);
 
-    expect(response).toEqual(mockParsedValues);
-  });
-
-  it("skips query parsing if it is disabled in the client options", async () => {
-    const disableParsing = true;
-    const customer = newCustomer({}, disableParsing);
-    mockPaginatedSearch(customer);
-    const mockedParse = mockParse(mockParsedValues);
-    // @ts-expect-error private method
-    const { response } = await customer.querier(mockGaqlQuery);
-
-    expect(mockedParse).not.toHaveBeenCalled();
     expect(response).toEqual(mockQueryReturnValue);
   });
 
-  it("includes the total results count if provided", async () => {
-    const includeTotalResultsCount = true;
-    const customer = newCustomer({});
-    mockPaginatedSearch(customer, includeTotalResultsCount);
-    mockParse(mockParsedValues);
+  it("skips query parsing if it is disabled in the client options", async () => {
+    const customer = newCustomer({}, true);
+
+    axiosMock.onPost().reply(200, mockStream());
+
+    mockGetAccessToken(customer);
+
     // @ts-expect-error private method
-    const { totalResultsCount } = await customer.querier(mockGaqlQuery);
+    const { response } = await customer.querier(mockGaqlQuery);
+
+    expect(response).toEqual(mockQueryReturnValueUnparsed);
+  });
+
+  it("includes the total results count if provided", async () => {
+    const customer = newCustomer({});
+
+    axiosMock.onPost().reply(200, mockSearchRawResult[0]);
+
+    mockGetAccessToken(customer);
+    //@ts-expect-error private method
+    const { totalResultsCount } = await customer.querier(mockGaqlQuery, {
+      search_settings: {
+        return_summary_row: true,
+      },
+    });
+
+    console.log(totalResultsCount);
 
     expect(totalResultsCount).toEqual(mockTotalResultsCount);
   });
@@ -160,15 +186,11 @@ describe("querier", () => {
     // @ts-expect-error private method
     await customer.querier(mockGaqlQuery, requestOptions);
 
-    expect(spyPaginatedSearch).toHaveBeenCalledWith(
-      mockGaqlQuery,
-      {
-        validate_only: true, // changed
-        page_token: "abcd",
-        page_size: 4, // changed
-      },
-      expect.any(Function)
-    );
+    expect(spyPaginatedSearch).toHaveBeenCalledWith(mockGaqlQuery, {
+      validate_only: true, // changed
+      page_token: "abcd",
+      page_size: 4, // changed
+    });
   });
 
   it("calls onQueryError when provided and when the query throws an error", async () => {
@@ -305,7 +327,11 @@ describe("querier", () => {
 });
 
 describe("paginatedSearch", () => {
-  afterEach(() => jest.resetAllMocks());
+  afterEach(() => {
+    jest.resetAllMocks();
+    axiosMock.reset();
+  });
+
   it("returns the response of the initial query if there is no next page token", async () => {
     const customer = newCustomer({});
     mockSearchOnce({
@@ -315,11 +341,9 @@ describe("paginatedSearch", () => {
     });
 
     // @ts-expect-error private method
-    const { response } = await customer.paginatedSearch(
-      mockGaqlQuery,
-      {},
-      noopParser
-    );
+    const { response } = await customer.paginatedSearch(mockGaqlQuery, {
+      page_size: 1000,
+    });
 
     expect(response).toEqual(["a", "b", "c"]);
   });
@@ -338,11 +362,9 @@ describe("paginatedSearch", () => {
     });
 
     // @ts-expect-error private method
-    const { response } = await customer.paginatedSearch(
-      mockGaqlQuery,
-      {},
-      noopParser
-    );
+    const { response } = await customer.paginatedSearch(mockGaqlQuery, {
+      page_size: 1000,
+    });
 
     expect(response).toEqual(["a", "b", "c", "d", "e", "f"]);
   });
@@ -359,11 +381,9 @@ describe("paginatedSearch", () => {
     mockSearchOnce({ customer, response: ["h"], nextPageToken: null });
 
     // @ts-expect-error private method
-    const { response } = await customer.paginatedSearch(
-      mockGaqlQuery,
-      {},
-      noopParser
-    );
+    const { response } = await customer.paginatedSearch(mockGaqlQuery, {
+      page_size: 1000,
+    });
 
     expect(response).toEqual(["a", "b", "c", "d", "e", "f", "g", "h"]);
   });
@@ -380,29 +400,36 @@ describe("paginatedSearch", () => {
     // @ts-expect-error private method
     const { totalResultsCount } = await customer.paginatedSearch(
       mockGaqlQuery,
-      {},
-      noopParser
+      {
+        page_size: 1000,
+      }
     );
     expect(totalResultsCount).toEqual(mockTotalResultsCount);
   });
 });
 
 describe("search", () => {
-  afterEach(() => jest.resetAllMocks());
+  afterEach(() => {
+    jest.resetAllMocks();
+    axiosMock.reset();
+  });
+
   it("includes the summary row if a summary row is returned", async () => {
     const customer = newCustomer({});
-    mockBuildSearchRequestAndService({ customer, includeSummaryRow: true });
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(200, mockSearchRawResultWithSummaryRow[1]);
+
     // @ts-expect-error private method
-    const { response } = await customer.search(mockGaqlQuery);
-    expect(response[0]).toEqual(mockSummaryRow);
+    const { summaryRow } = await customer.search(mockGaqlQuery);
+
+    expect(summaryRow).toEqual(mockSummaryRow);
   });
 
   it("includes the total results count if provided", async () => {
     const customer = newCustomer({});
-    mockBuildSearchRequestAndService({
-      customer,
-      includeTotalResultsCount: true,
-    });
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(200, mockSearchRawResult[0]);
+
     // @ts-expect-error private method
     const { totalResultsCount } = await customer.search(mockGaqlQuery);
     expect(totalResultsCount).toEqual(mockTotalResultsCount);
@@ -410,79 +437,57 @@ describe("search", () => {
 });
 
 describe("reportStream", () => {
-  afterEach(() => jest.resetAllMocks());
+  afterEach(() => {
+    jest.resetAllMocks();
+    axiosMock.reset();
+  });
 
   it("parses reportStream results by default", async () => {
     const customer = newCustomer({});
-    const { mockStreamData, mockStreamEnd } =
-      mockBuildSearchStreamRequestAndService(customer);
-    const mockedParse = mockParse(mockParsedValues);
-    const stream = customer.reportStream(mockReportOptions);
-    mockStreamData(mockQueryReturnValue);
-    mockStreamEnd();
 
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(200, mockStream());
+
+    const stream = customer.reportStream(mockReportOptions);
+
+    const acc: any[] = [];
     for await (const row of stream) {
-      expect(row).toEqual(mockParseValue);
+      acc.push(row);
     }
 
-    expect(mockedParse).toHaveBeenCalled();
+    expect(acc).toEqual(mockQueryReturnValue);
   });
 
   it("skips reportStream parsing if it is disabled in the client options", async () => {
     const disableParsing = true;
     const customer = newCustomer({}, disableParsing);
-    const { mockStreamData, mockStreamEnd } =
-      mockBuildSearchStreamRequestAndService(customer);
-    const mockedParse = mockParse(mockParsedValues);
-    const stream = customer.reportStream(mockReportOptions);
-    mockStreamData(mockQueryReturnValue);
-    mockStreamEnd();
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(200, mockStream());
 
-    let i = 0;
+    const stream = customer.reportStream(mockReportOptions);
+
+    const acc: any[] = [];
     for await (const row of stream) {
-      expect(row).toEqual(mockQueryReturnValue[i]);
-      i++;
+      acc.push(row);
     }
 
-    expect(mockedParse).not.toHaveBeenCalled();
-  });
-
-  it("handles multiple chunks of data while maintaining their order", async () => {
-    const disableParsing = true;
-    const customer = newCustomer({}, disableParsing);
-    const { mockStreamData, mockStreamEnd } =
-      mockBuildSearchStreamRequestAndService(customer);
-    mockParse(mockParsedValues);
-    const stream = customer.reportStream(mockReportOptions);
-    mockStreamData([0, 1, 2, 3, 4, 5] as services.IGoogleAdsRow[]);
-    mockStreamData([6, 7, 8, 9, 10, 11] as services.IGoogleAdsRow[]);
-    mockStreamData([12, 13, 14, 15, 16, 17] as services.IGoogleAdsRow[]);
-    mockStreamData([18, 19, 20, 21, 22, 23] as services.IGoogleAdsRow[]);
-    mockStreamEnd();
-
-    let i = 0;
-    for await (const row of stream) {
-      expect(row).toEqual(i);
-      i++;
-    }
+    expect(acc).toEqual(mockQueryReturnValueUnparsed);
   });
 
   it("includes the summary row if a summary row is returned", async () => {
-    const disableParsing = true;
-    const customer = newCustomer({}, disableParsing);
-    const { mockStreamData, mockStreamSummaryRow, mockStreamEnd } =
-      mockBuildSearchStreamRequestAndService(customer);
-    mockParse(mockParsedValues);
-    const stream = customer.reportStream(mockReportOptions);
-    mockStreamData(mockQueryReturnValue);
-    mockStreamSummaryRow();
-    mockStreamEnd();
+    const customer = newCustomer({});
 
-    const response: services.IGoogleAdsRow[] = [];
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(200, mockStreamWithSummaryRow());
+
+    const stream = customer.reportStream(mockReportOptions);
+
+    const acc: any[] = [];
     for await (const row of stream) {
-      response.push(row);
+      acc.push(row);
     }
-    expect(response).toEqual([...mockQueryReturnValue, mockSummaryRow]);
+
+    expect(acc).toEqual(mockQueryReturnValueWithSummaryRow);
   });
 
   it("calls onStreamStart when provided", async () => {
@@ -492,14 +497,19 @@ describe("reportStream", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { mockStreamData, mockStreamEnd } =
-      mockBuildSearchStreamRequestAndService(customer);
-    mockParse(mockParsedValues);
+
     const spyHook = jest.spyOn(hooks, "onStreamStart");
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(200, mockStream());
+
     const stream = customer.reportStream(mockReportOptions);
-    mockStreamData(mockQueryReturnValue);
-    mockStreamEnd();
-    await stream.next();
+
+    const acc: any[] = [];
+    for await (const row of stream) {
+      acc.push(row);
+    }
+
+    expect(acc).toEqual(mockQueryReturnValue);
 
     expect(spyHook).toHaveBeenCalled();
     expect(spyHook).toHaveBeenCalledWith({
@@ -521,13 +531,15 @@ describe("reportStream", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { mockStreamData, mockStreamEnd } =
-      mockBuildSearchStreamRequestAndService(customer);
-    mockParse(mockParsedValues);
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(200, mockStream());
+
     const stream = customer.reportStream(mockReportOptions);
-    mockStreamData(mockQueryReturnValue);
-    mockStreamEnd();
-    await stream.next();
+
+    const acc: any[] = [];
+    for await (const row of stream) {
+      acc.push(row);
+    }
 
     expect(spyMockMethod).toHaveBeenCalled();
   });
@@ -538,16 +550,16 @@ describe("reportStream", () => {
         cancel();
       },
     };
+
     const customer = newCustomer(hooks);
-    const { spyBuild } = mockBuildSearchStreamRequestAndService(customer);
-    mockParse(mockParsedValues);
+
     const stream = customer.reportStream(mockReportOptions);
 
     for await (const row of stream) {
       failTestIfExecuted(); // should be no rows in stream
     }
 
-    expect(spyBuild).not.toHaveBeenCalled();
+    // This will fail if not cancelled correctly because the unmocked fns will be called
   });
 
   it("does NOT return the argument of cancel() if one is provided in onStreamStart", async () => {
@@ -559,8 +571,7 @@ describe("reportStream", () => {
       },
     };
     const customer = newCustomer(hooks);
-    mockBuildSearchStreamRequestAndService(customer);
-    mockParse(mockParsedValues);
+
     const stream = customer.reportStream(mockReportOptions);
 
     for await (const row of stream) {
@@ -575,27 +586,44 @@ describe("reportStream", () => {
       },
     };
     const customer = newCustomer(hooks);
-    const { spyBuild, mockStreamData, mockStreamEnd } =
-      mockBuildSearchStreamRequestAndService(customer);
-    mockParse(mockParsedValues);
+
+    const spyAxiosArgsBuilder = jest.spyOn(
+      customer,
+      // @ts-expect-error private method
+      "prepareGoogleAdsServicePostRequestArgs"
+    );
+
     const requestOptions: RequestOptions = {
       validate_only: false, // changed
       page_token: "abcd",
       page_size: 2, // changed
     };
+
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(200, mockStream());
+
     const stream = customer.reportStream({
       ...mockReportOptions,
       ...requestOptions,
     });
-    mockStreamData(mockQueryReturnValue);
-    mockStreamEnd();
-    await stream.next();
 
-    expect(spyBuild).toHaveBeenCalledWith(mockGaqlQuery, {
-      validate_only: true,
-      page_token: "abcd",
-      page_size: 4,
-    });
+    for await (const row of stream) {
+      // don't care
+    }
+
+    expect(spyAxiosArgsBuilder).toHaveBeenCalledWith(
+      "searchStream",
+      "mockedAccessTokenHere",
+      {
+        data: {
+          query: expect.any(String),
+          validate_only: true,
+          page_token: "abcd",
+          page_size: 4,
+        },
+        responseType: "stream",
+      }
+    );
   });
 
   it("calls onStreamError when provided and when the stream throws an error", async () => {
@@ -604,28 +632,31 @@ describe("reportStream", () => {
         return;
       },
     };
-
-    const customer = newCustomer(hooks);
-    const { mockStreamData, mockStreamError } =
-      mockBuildSearchStreamRequestAndService(customer);
-    mockParse(mockParsedValues);
-    const mockedError = mockGetGoogleAdsError(customer);
     const spyHook = jest.spyOn(hooks, "onStreamError");
 
+    const customer = newCustomer(hooks);
+
+    mockGetAccessToken(customer);
+
     try {
-      const stream = customer.reportStream(mockReportOptions);
-      mockStreamData(mockQueryReturnValue);
-      mockStreamError(new Error("Original error message"));
-      await stream.next();
+      axiosMock.onPost().networkError();
+
+      const stream = customer.reportStream({
+        ...mockReportOptions,
+      });
+
+      for await (const row of stream) {
+        failTestIfExecuted(); // should not be called
+      }
+
       failTestIfExecuted(); // should not be called
     } catch (error) {
-      expect(mockedError).toHaveBeenCalled();
       expect(spyHook).toHaveBeenCalled();
       expect(spyHook).toHaveBeenCalledWith({
         credentials: expect.any(Object),
         query: expect.any(String),
         reportOptions: mockReportOptions,
-        error: mockError,
+        error: expect.any(Error),
       });
     }
   });
@@ -641,16 +672,20 @@ describe("reportStream", () => {
     };
 
     const customer = newCustomer(hooks);
-    const { mockStreamData, mockStreamError } =
-      mockBuildSearchStreamRequestAndService(customer);
-    mockParse(mockParsedValues);
-    mockGetGoogleAdsError(customer);
+
+    mockGetAccessToken(customer);
 
     try {
-      const stream = customer.reportStream(mockReportOptions);
-      mockStreamData(mockQueryReturnValue);
-      mockStreamError(new Error("Original error message"));
-      await stream.next();
+      axiosMock.onPost().networkError();
+
+      const stream = customer.reportStream({
+        ...mockReportOptions,
+      });
+
+      for await (const row of stream) {
+        failTestIfExecuted(); // should not be called
+      }
+
       failTestIfExecuted(); // should not be called
     } catch (error) {
       expect(spyMockMethod).toHaveBeenCalled();
@@ -663,16 +698,21 @@ describe("reportStream", () => {
         return;
       },
     };
-    const customer = newCustomer(hooks);
-    const { mockStreamData, mockStreamEnd } =
-      mockBuildSearchStreamRequestAndService(customer);
-    mockParse(mockParsedValues);
-    mockGetGoogleAdsError(customer);
     const spyHook = jest.spyOn(hooks, "onStreamError");
-    const stream = customer.reportStream(mockReportOptions);
-    mockStreamData(mockQueryReturnValue);
-    mockStreamEnd();
-    await stream.next();
+
+    const customer = newCustomer(hooks);
+
+    mockGetAccessToken(customer);
+
+    axiosMock.onPost().reply(200, mockStream());
+
+    const stream = customer.reportStream({
+      ...mockReportOptions,
+    });
+
+    for await (const row of stream) {
+      // don't care
+    }
 
     expect(spyHook).not.toHaveBeenCalled();
   });
