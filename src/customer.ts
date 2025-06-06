@@ -94,7 +94,7 @@ export class Customer extends ServiceFactory {
     @hooks none
   */
   public async reportCount(
-    options: Readonly<ReportOptionsWithTotalResults>
+    options: Readonly<ReportOptions>
   ): Promise<number | undefined> {
     // must get at least one row
     const { gaqlQuery, requestOptions } = buildQuery({ ...options, limit: 1 });

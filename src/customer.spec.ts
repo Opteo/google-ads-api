@@ -1,4 +1,4 @@
-import { google } from "google-gax/build/protos/operations";
+import { operationsProtos } from "google-gax";
 import { Hooks } from "./hooks";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
@@ -39,6 +39,8 @@ import {
 } from "./testUtils";
 import { MutateOptions, RequestOptions } from "./types";
 import { googleAdsVersion } from "../src/version";
+type google = typeof operationsProtos.google;
+const google = operationsProtos.google;
 
 const axiosMock = new MockAdapter(axios);
 
