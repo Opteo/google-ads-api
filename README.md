@@ -26,7 +26,7 @@
 # Features
 
 - Simple and easy to use API
-- Uses [gRPC](https://grpc.io/) and [Protocol Buffers](https://developers.google.com/protocol-buffers/) internally (recommended by Google)
+- Uses [REST](https://developers.google.com/google-ads/api/rest/design/overview) and [Protocol Buffers](https://developers.google.com/protocol-buffers/) internally
 - Typescript definitions for all resources, enums, errors and services
 - Provides all API functionality
 
@@ -93,7 +93,7 @@ const customer = client.Customer({
 
 ## List accessible customers
 
-This is a special client method for listing the accessible customers for a given refresh token, and is equivalent to [CustomerService.listAccessibleCustomers](https://developers.google.com/google-ads/api/reference/rpc/v13/CustomerService#listaccessiblecustomers). It returns the resource names of available customer accounts.
+This is a special client method for listing the accessible customers for a given refresh token, and is equivalent to [CustomerService.listAccessibleCustomers](https://developers.google.com/google-ads/api/reference/rpc/v20/CustomerService#listaccessiblecustomers). It returns the resource names of available customer accounts.
 
 ```ts
 const client = new GoogleAdsApi({
@@ -671,9 +671,9 @@ const customer = client.Customer(
 
 ## Error handling
 
-All errors, apart from GRPC specific cases (such as a connection problem or timeout, [see more here](https://github.com/grpc/grpc/blob/master/doc/statuscodes.md)), are instances of a [GoogleAdsFailure](https://developers.google.com/google-ads/api/reference/rpc/v13/GoogleAdsFailure).
+All errors, apart from GRPC specific cases (such as a connection problem or timeout, [see more here](https://github.com/grpc/grpc/blob/master/doc/statuscodes.md)), are instances of a [GoogleAdsFailure](https://developers.google.com/google-ads/api/reference/rpc/v20/GoogleAdsFailure).
 
-You can find a list of all error types for a specific version in [the official documentation](https://developers.google.com/google-ads/api/reference/rpc/v13/AccessInvitationErrorEnum.AccessInvitationError), as well as more information about [handling errors here](https://developers.google.com/google-ads/api/docs/best-practices/error-types).
+You can find a list of all error types for a specific version in [the official documentation](https://developers.google.com/google-ads/api/reference/rpc/v20/AccessInvitationErrorEnum.AccessInvitationError), as well as more information about [handling errors here](https://developers.google.com/google-ads/api/docs/best-practices/error-types).
 
 ```ts
 import { errors } from "google-ads-api";
