@@ -31,7 +31,7 @@ export function toMicros(value: number): number {
  * const normalisedQuery = normaliseQuery(gaqlQuery) // "SELECT campaign.name FROM campaign LIMIT 10"
  */
 export function normaliseQuery(query: string): string {
-  return `${query.replace(/\s{2,}/g, " ")}`;
+  return query.replace(/\s+/g, " ").trim();
 }
 
 /**
