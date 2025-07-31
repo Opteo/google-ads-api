@@ -129,7 +129,7 @@ export class Service {
   }
 
   protected loadService<T = AllServices>(service: ServiceName): T {
-    const serviceCacheKey = `${String(service)}_${this.customerOptions.refresh_token}`;
+    const serviceCacheKey = `${service}_${this.clientOptions.client_id}_${this.customerOptions.refresh_token}`;
 
     if (serviceCache.has(serviceCacheKey)) {
       return serviceCache.get(serviceCacheKey) as unknown as T;
