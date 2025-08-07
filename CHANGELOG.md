@@ -1,5 +1,28 @@
 # Changelog
 
+### 21.0.0-
+
+### Version Upgrade
+
+- Upgraded google-ads-api version to v21. Refer to Google ads release notes [here](https://developers.google.com/google-ads/api/docs/release-notes) for changes.
+- Upgraded google-ads-node dependency to v18.0.0
+
+### Bug Fixes
+
+- Fixed parsing of FieldMask fields (like `changed_fields`) in REST API responses ([#519](https://github.com/Opteo/google-ads-api/issues/519))
+  - REST API returns FieldMask fields as comma-separated strings (e.g., `"field1,field2"`) which were not being properly parsed
+  - Now correctly converts them to objects with a `paths` array format: `{ paths: ["field1", "field2"] }`
+  - Handles case conversion from camelCase to snake_case to maintain consistency with the rest of the library
+  - Properly processes nested paths (e.g., `"ipBlock.ipAddress"` → `"ip_block.ip_address"`)
+  - The `changed_fields` field now works correctly and follows the same naming conventions as the rest of the library
+
+### Library Changes
+
+- Updated enum definitions to support Google Ads API v21 changes
+- Enhanced parser test coverage with additional test cases for change events and FieldMask fields
+- Added `skipLibCheck` to TypeScript configuration for faster compilation
+- Added prettier configuration for consistent code formatting
+
 ### 20.0.1
 
 ### Version Upgrade
