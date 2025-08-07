@@ -234,6 +234,192 @@ describe("parseRows", () => {
       },
     ]);
   });
+
+  it("handles FieldMask fields like changed_fields", () => {
+    const fields = [
+      "change_event.resource_name",
+      "change_event.changed_fields",
+    ];
+    const rows: services.IGoogleAdsRow[] = [
+      {
+        change_event: {
+          resource_name:
+            "customers/4517895542/changeEvents/1750751693628134~0~0",
+          change_date_time: "2025-06-24 08:54:53.628134",
+          change_resource_name: "customers/4517895542/campaigns/21930728598",
+          changed_fields: {
+            paths: ["campaign.target_roas.target_roas"],
+          },
+          old_resource: { campaign: { target_roas: { target_roas: 3 } } },
+          new_resource: { campaign: { target_roas: { target_roas: 3.25 } } },
+        },
+      },
+    ];
+    const result = parseRows(rows, fields);
+    expect(result).toHaveLength(1);
+    expect(result[0].change_event?.resource_name).toBe(
+      "customers/4517895542/changeEvents/1750751693628134~0~0"
+    );
+    expect(result[0].change_event?.changed_fields).toEqual({
+      paths: ["campaign.target_roas.target_roas"],
+    });
+  });
+
+  it("handles old_resource and new_resource fields in change events", () => {
+    const fields = [
+      "change_event.resource_name",
+      "change_event.old_resource",
+      "change_event.new_resource",
+    ];
+    const rows: services.IGoogleAdsRow[] = [
+      {
+        change_event: {
+          resource_name:
+            "customers/4517895542/changeEvents/1750751693628134~0~0",
+          change_date_time: "2025-06-24 08:54:53.628134",
+          change_resource_name: "customers/4517895542/campaigns/21930728598",
+          changed_fields: {
+            paths: ["campaign.target_roas.target_roas"],
+          },
+          old_resource: { campaign: { target_roas: { target_roas: 3 } } },
+          new_resource: { campaign: { target_roas: { target_roas: 3.25 } } },
+        },
+      },
+    ];
+    const result = parseRows(rows, fields);
+    expect(result).toHaveLength(1);
+    expect(result[0].change_event?.resource_name).toBe(
+      "customers/4517895542/changeEvents/1750751693628134~0~0"
+    );
+    expect(
+      result[0].change_event?.old_resource?.campaign?.target_roas?.target_roas
+    ).toBe(3);
+    expect(
+      result[0].change_event?.new_resource?.campaign?.target_roas?.target_roas
+    ).toBe(3.25);
+  });
+
+  it("handles complex nested structures in old_resource and new_resource", () => {
+    const fields = [
+      "change_event.resource_name",
+      "change_event.old_resource",
+      "change_event.new_resource",
+    ];
+    const rows: services.IGoogleAdsRow[] = [
+      {
+        change_event: {
+          resource_name:
+            "customers/4517895542/changeEvents/1750751666945610~0~0",
+          change_date_time: "2025-06-24 08:54:26.94561",
+          change_resource_name: "customers/4517895542/campaigns/17049405489",
+          changed_fields: {
+            paths: ["maximize_conversion_value.target_roas"],
+          },
+          old_resource: {
+            campaign: {
+              maximize_conversion_value: {
+                target_roas: 8,
+              },
+            },
+          },
+          new_resource: {
+            campaign: {
+              maximize_conversion_value: {
+                target_roas: 8.5,
+              },
+            },
+          },
+        },
+      },
+    ];
+    const result = parseRows(rows, fields);
+    expect(result).toHaveLength(1);
+    expect(
+      result[0].change_event?.old_resource?.campaign?.maximize_conversion_value
+        ?.target_roas
+    ).toBe(8);
+    expect(
+      result[0].change_event?.new_resource?.campaign?.maximize_conversion_value
+        ?.target_roas
+    ).toBe(8.5);
+  });
+
+  it("handles campaign criterion deletion in old_resource and new_resource", () => {
+    const fields = [
+      "change_event.resource_name",
+      "change_event.old_resource",
+      "change_event.new_resource",
+    ];
+    const rows: services.IGoogleAdsRow[] = [
+      {
+        change_event: {
+          resource_name:
+            "customers/4517895542/changeEvents/1750693690782591~0~0",
+          change_date_time: "2025-06-23 16:48:10.782591",
+          change_resource_name:
+            "customers/4517895542/campaignCriteria/21890334919~23340370",
+          changed_fields: {
+            paths: [
+              "campaign",
+              "criterion_id",
+              "keyword.match_type",
+              "keyword.text",
+              "negative",
+              "resource_name",
+              "status",
+            ],
+          },
+          old_resource: {
+            campaign_criterion: {
+              resource_name:
+                "customers/4517895542/campaignCriteria/21890334919~23340370",
+              keyword: {
+                match_type: "BROAD",
+                text: "crackle",
+              },
+              status: "ENABLED",
+              campaign: "customers/4517895542/campaigns/21890334919",
+              criterion_id: 23340370,
+              negative: true,
+            },
+          },
+          new_resource: {
+            campaign_criterion: {},
+          },
+        },
+      },
+    ];
+    const result = parseRows(rows, fields);
+    expect(result).toHaveLength(1);
+    expect(
+      result[0].change_event?.old_resource?.campaign_criterion?.resource_name
+    ).toBe("customers/4517895542/campaignCriteria/21890334919~23340370");
+    expect(
+      result[0].change_event?.old_resource?.campaign_criterion?.keyword
+        ?.match_type
+    ).toBe(4);
+    expect(
+      result[0].change_event?.old_resource?.campaign_criterion?.keyword?.text
+    ).toBe("crackle");
+    expect(
+      result[0].change_event?.old_resource?.campaign_criterion?.status
+    ).toBe(2);
+    expect(
+      result[0].change_event?.old_resource?.campaign_criterion?.campaign
+    ).toBe("customers/4517895542/campaigns/21890334919");
+    expect(
+      (
+        result[0].change_event?.old_resource?.campaign_criterion
+          ?.criterion_id as any
+      )?.low
+    ).toBe(23340370);
+    expect(
+      result[0].change_event?.old_resource?.campaign_criterion?.negative
+    ).toBe(true);
+    expect(
+      result[0].change_event?.new_resource?.campaign_criterion
+    ).toBeDefined();
+  });
 });
 
 describe("getGAQLFields", () => {

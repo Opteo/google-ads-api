@@ -106,7 +106,7 @@ export function parseRows(
       // @ts-expect-error These are the best we can do for these types
       const [parent, ...children]: [
         fields.Resource,
-        ...(keyof services.IGoogleAdsRow)[]
+        ...(keyof services.IGoogleAdsRow)[],
       ] = fieldsPreSplit[split];
 
       // Ignore null fields (unspecified resource names)

@@ -2,18 +2,18 @@ import allProtos, { protos } from "google-ads-node";
 import { googleAdsVersion } from "../version";
 
 // "as vN" is required to avoid type issues later on
-export const VERSION = googleAdsVersion as "v20";
+export const VERSION = googleAdsVersion as "v21";
 
 // -- Expose the googleads generated types --
 
 // The namespace path is shortened for ease of use
-export import common = protos.google.ads.googleads.v20.common;
-export import errors = protos.google.ads.googleads.v20.errors;
-export import resources = protos.google.ads.googleads.v20.resources;
-export import services = protos.google.ads.googleads.v20.services;
+export import common = protos.google.ads.googleads.v21.common;
+export import errors = protos.google.ads.googleads.v21.errors;
+export import resources = protos.google.ads.googleads.v21.resources;
+export import services = protos.google.ads.googleads.v21.services;
 
 // We compile enums ourselves, the Google ones should be used internally only
-export import internalEnums = protos.google.ads.googleads.v20.enums;
+export import internalEnums = protos.google.ads.googleads.v21.enums;
 export { enums } from "./autogen/enums";
 export { fields, fieldDataTypes } from "./autogen/fields";
 

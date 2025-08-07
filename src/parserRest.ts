@@ -71,7 +71,24 @@ const cachedValueParser = (
   if (megaDataType === undefined && !fullPath.startsWith("@")) {
     console.warn(`No data type found for ${fullPath}`);
   } else if (typeof megaDataType === "object") {
-    newValue = megaDataType[value];
+    // Special handling for FieldMask types - REST API returns them as comma-separated strings
+    if (megaDataType.paths === "STRING" && typeof value === "string") {
+      // This is a FieldMask field, convert the comma-separated string to the expected format
+      // Also convert each path from camelCase to snake_case
+      newValue = {
+        paths: value.split(",").map((p) => {
+          // Handle nested paths like "ipBlock.ipAddress"
+          return p
+            .trim()
+            .split(".")
+            .map((segment) => toSnakeCase(segment))
+            .join(".");
+        }),
+      };
+    } else {
+      // Normal enum handling
+      newValue = megaDataType[value];
+    }
   } else if (megaDataType === "INT64") {
     newValue = Number(value);
   } else if (megaDataType === "ENUM") {

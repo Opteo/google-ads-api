@@ -37,9 +37,10 @@ export interface Text {
   function: string; // "export function accountBudget(customerId: string | number, accountBudgetId: string | number): AccountBudgetResourceName { return `customers/${customerId}/accountBudgets/${accountBudgetId}` as const }"
 }
 
-export function generateTextParts(
-  pathTemplate: PathTemplate
-): { parts: Parts; comments: Comments } {
+export function generateTextParts(pathTemplate: PathTemplate): {
+  parts: Parts;
+  comments: Comments;
+} {
   const resource = pathTemplate.path.replace(/PathTemplate/g, "");
 
   const parts: Parts = {
@@ -101,13 +102,27 @@ function buildResourceNameBuilder(stream: fs.WriteStream, text: Text): void {
 export async function compileResourceNameFunctions(): Promise<void> {
   const service = new CampaignServiceClient();
 
-  // @ts-expect-error
-  const pathTemplatesRaw: { [path: string]: Omit<PathTemplate, "path"> } =
-    service.pathTemplates;
+  const pathTemplatesRaw = service.pathTemplates;
 
   const pathTemplates = Object.entries(pathTemplatesRaw).map(
-    ([path, template]: [string, Omit<PathTemplate, "path">]) => {
-      return { path, ...template };
+    ([path, template]) => {
+      // Extract bindings from segments (public property)
+      const bindings: { [key: string]: string } = {};
+      template.segments.forEach((segment) => {
+        const match = segment.match(/\{([^=}]+)(?:=([^}]+))?\}/);
+        if (match) {
+          bindings[match[1]] = match[2] || "*";
+        }
+      });
+
+      // Use inspect() to get the template string
+      const data = template.inspect();
+
+      return {
+        path,
+        bindings,
+        data,
+      };
     }
   );
 

@@ -62,7 +62,8 @@
 
     /* Advanced Options */
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "skipLibCheck": true /* Skip type checking of declaration files. */
   },
   "include": ["src/**/*", "scripts/*"],
   "exclude": ["src/**/*.spec.ts"]
