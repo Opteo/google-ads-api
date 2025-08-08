@@ -129,7 +129,7 @@ export class Service {
   }
 
   protected loadService<T = AllServices>(service: ServiceName): T {
-    const serviceCacheKey = `${service}_${this.customerOptions.refresh_token}`;
+    const serviceCacheKey = `${service}_${this.clientOptions.client_id}_${this.customerOptions.refresh_token}`;
 
     if (serviceCache.has(serviceCacheKey)) {
       return serviceCache.get(serviceCacheKey) as unknown as T;
@@ -138,7 +138,7 @@ export class Service {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const { [service]: protoService } = require("google-ads-node");
     if (typeof protoService === "undefined") {
-      throw new Error(`Service "${service}" could not be found`);
+      throw new Error(`Service "${String(service)}" could not be found`);
     }
 
     // Initialising services can take a few ms, so we cache when possible.

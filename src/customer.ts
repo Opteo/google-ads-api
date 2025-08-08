@@ -100,7 +100,10 @@ export class Customer extends ServiceFactory {
     const { gaqlQuery, requestOptions } = buildQuery({ ...options, limit: 1 });
 
     // We do not allow this field in reportOptions, however it is still a valid request option
-    requestOptions.search_settings = { return_total_results_count: true };
+    requestOptions.search_settings = {
+      return_total_results_count: true,
+      return_summary_row: false,
+    };
 
     const useHooks = false; // to avoid cacheing conflicts
     const { totalResultsCount } = await this.querier(
@@ -369,7 +372,7 @@ export class Customer extends ServiceFactory {
 
   private async querier<T = services.IGoogleAdsRow[]>(
     gaqlQuery: string,
-    requestOptions: RequestOptions = {},
+    requestOptions: RequestOptionsWithTotalResults = {},
     reportOptions?: Readonly<ReportOptions>,
     useHooks = true
   ): Promise<{ response: T; totalResultsCount?: number }> {

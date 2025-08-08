@@ -39,7 +39,7 @@ type ErrorHookArgs = {
 };
 
 type EndHookArgs<
-  T = services.IGoogleAdsRow[] | services.MutateGoogleAdsResponse
+  T = services.IGoogleAdsRow[] | services.MutateGoogleAdsResponse,
 > = {
   response?: T;
   resolve: (args: any) => void;

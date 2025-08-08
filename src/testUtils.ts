@@ -246,7 +246,7 @@ export function mockBuildSearchRequestAndService({
     search: (): [
       services.IGoogleAdsRow[],
       null,
-      services.ISearchGoogleAdsResponse
+      services.ISearchGoogleAdsResponse,
     ] => {
       if (shouldThrow) {
         throw new Error(mockErrorMessage);
@@ -294,7 +294,7 @@ export function mockBuildMutateRequestAndService({
         throw new Error(mockErrorMessage);
       }
       return [response ?? mockMutationReturnValue] as unknown as [
-        services.MutateGoogleAdsResponse
+        services.MutateGoogleAdsResponse,
       ];
     },
   } as unknown as GoogleAdsServiceClient;
