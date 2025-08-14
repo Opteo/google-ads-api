@@ -102,27 +102,13 @@ function buildResourceNameBuilder(stream: fs.WriteStream, text: Text): void {
 export async function compileResourceNameFunctions(): Promise<void> {
   const service = new CampaignServiceClient();
 
-  const pathTemplatesRaw = service.pathTemplates;
+  // @ts-expect-error
+  const pathTemplatesRaw: { [path: string]: Omit<PathTemplate, "path"> } =
+    service.pathTemplates;
 
   const pathTemplates = Object.entries(pathTemplatesRaw).map(
-    ([path, template]) => {
-      // Extract bindings from segments (public property)
-      const bindings: { [key: string]: string } = {};
-      template.segments.forEach((segment) => {
-        const match = segment.match(/\{([^=}]+)(?:=([^}]+))?\}/);
-        if (match) {
-          bindings[match[1]] = match[2] || "*";
-        }
-      });
-
-      // Use inspect() to get the template string
-      const data = template.inspect();
-
-      return {
-        path,
-        bindings,
-        data,
-      };
+    ([path, template]: [string, Omit<PathTemplate, "path">]) => {
+      return { path, ...template };
     }
   );
 

@@ -1,6 +1,10 @@
 # Changelog
 
-### 21.0.0-
+### 21.0.1
+
+- Fixed issue with new v21 resources & fields not being correctly parsed.
+
+### 21.0.0
 
 ### Version Upgrade
 
