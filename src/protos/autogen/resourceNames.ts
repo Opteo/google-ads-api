@@ -452,6 +452,28 @@ export function ageRangeView(
   return `customers/${customerId}/ageRangeViews/${adGroupId}~${criterionId}` as const;
 }
 
+/* AiMaxSearchTermAdCombinationView */
+export type AiMaxSearchTermAdCombinationViewResourceName =
+  `customers/${StrNum}/aiMaxSearchTermAdCombinationViews/${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} adGroupId
+ * @param {string | number} searchTerm
+ * @param {string | number} landingPage
+ * @param {string | number} headline
+ * @returns `AiMaxSearchTermAdCombinationViewResourceName`
+ * @example const aiMaxSearchTermAdCombinationView: ResourceNames.AiMaxSearchTermAdCombinationViewResourceName = ResourceNames.aiMaxSearchTermAdCombinationView(10987417, 21974834, 43949668, 87899336, 175798672)
+ */
+export function aiMaxSearchTermAdCombinationView(
+  customerId: string | number,
+  adGroupId: string | number,
+  searchTerm: string | number,
+  landingPage: string | number,
+  headline: string | number
+): AiMaxSearchTermAdCombinationViewResourceName {
+  return `customers/${customerId}/aiMaxSearchTermAdCombinationViews/${adGroupId}~${searchTerm}~${landingPage}~${headline}` as const;
+}
+
 /* AndroidPrivacySharedKeyGoogleAdGroup */
 export type AndroidPrivacySharedKeyGoogleAdGroupResourceName =
   `customers/${StrNum}/androidPrivacySharedKeyGoogleAdGroups/${StrNum}~${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
@@ -1108,6 +1130,24 @@ export function campaignSearchTermInsight(
   return `customers/${customerId}/campaignSearchTermInsights/${campaignId}~${clusterId}` as const;
 }
 
+/* CampaignSearchTermView */
+export type CampaignSearchTermViewResourceName =
+  `customers/${StrNum}/campaignSearchTermViews/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} campaignId
+ * @param {string | number} query
+ * @returns `CampaignSearchTermViewResourceName`
+ * @example const campaignSearchTermView: ResourceNames.CampaignSearchTermViewResourceName = ResourceNames.campaignSearchTermView(10987417, 21974834, 43949668)
+ */
+export function campaignSearchTermView(
+  customerId: string | number,
+  campaignId: string | number,
+  query: string | number
+): CampaignSearchTermViewResourceName {
+  return `customers/${customerId}/campaignSearchTermViews/${campaignId}~${query}` as const;
+}
+
 /* CampaignSharedSet */
 export type CampaignSharedSetResourceName =
   `customers/${StrNum}/campaignSharedSets/${StrNum}~${StrNum}`;
@@ -1689,6 +1729,22 @@ export function dataLink(
   return `customers/${customerId}/dataLinks/${productLinkId}~${dataLinkId}` as const;
 }
 
+/* DetailContentSuitabilityPlacementView */
+export type DetailContentSuitabilityPlacementViewResourceName =
+  `customers/${StrNum}/detailContentSuitabilityPlacementViews/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} placementFingerprint
+ * @returns `DetailContentSuitabilityPlacementViewResourceName`
+ * @example const detailContentSuitabilityPlacementView: ResourceNames.DetailContentSuitabilityPlacementViewResourceName = ResourceNames.detailContentSuitabilityPlacementView(10987417, 21974834)
+ */
+export function detailContentSuitabilityPlacementView(
+  customerId: string | number,
+  placementFingerprint: string | number
+): DetailContentSuitabilityPlacementViewResourceName {
+  return `customers/${customerId}/detailContentSuitabilityPlacementViews/${placementFingerprint}` as const;
+}
+
 /* DetailPlacementView */
 export type DetailPlacementViewResourceName =
   `customers/${StrNum}/detailPlacementViews/${StrNum}~${StrNum}`;
@@ -1853,6 +1909,28 @@ export function experimentArm(
   return `customers/${customerId}/experimentArms/${trialId}~${trialArmId}` as const;
 }
 
+/* FinalUrlExpansionAssetView */
+export type FinalUrlExpansionAssetViewResourceName =
+  `customers/${StrNum}/finalUrlExpansionAssetViews/${StrNum}~${StrNum}~${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} campaignId
+ * @param {string | number} assetId
+ * @param {string | number} fieldType
+ * @param {string | number} urlFp
+ * @returns `FinalUrlExpansionAssetViewResourceName`
+ * @example const finalUrlExpansionAssetView: ResourceNames.FinalUrlExpansionAssetViewResourceName = ResourceNames.finalUrlExpansionAssetView(10987417, 21974834, 43949668, 87899336, 175798672)
+ */
+export function finalUrlExpansionAssetView(
+  customerId: string | number,
+  campaignId: string | number,
+  assetId: string | number,
+  fieldType: string | number,
+  urlFp: string | number
+): FinalUrlExpansionAssetViewResourceName {
+  return `customers/${customerId}/finalUrlExpansionAssetViews/${campaignId}~${assetId}~${fieldType}~${urlFp}` as const;
+}
+
 /* GenderView */
 export type GenderViewResourceName =
   `customers/${StrNum}/genderViews/${StrNum}~${StrNum}`;
@@ -1913,6 +1991,22 @@ export function googleAdsField(
   googleAdsField: string | number
 ): GoogleAdsFieldResourceName {
   return `googleAdsFields/${googleAdsField}` as const;
+}
+
+/* GroupContentSuitabilityPlacementView */
+export type GroupContentSuitabilityPlacementViewResourceName =
+  `customers/${StrNum}/groupContentSuitabilityPlacementViews/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} placementFingerprint
+ * @returns `GroupContentSuitabilityPlacementViewResourceName`
+ * @example const groupContentSuitabilityPlacementView: ResourceNames.GroupContentSuitabilityPlacementViewResourceName = ResourceNames.groupContentSuitabilityPlacementView(10987417, 21974834)
+ */
+export function groupContentSuitabilityPlacementView(
+  customerId: string | number,
+  placementFingerprint: string | number
+): GroupContentSuitabilityPlacementViewResourceName {
+  return `customers/${customerId}/groupContentSuitabilityPlacementViews/${placementFingerprint}` as const;
 }
 
 /* GroupPlacementView */
@@ -2265,6 +2359,26 @@ export function localServicesVerificationArtifact(
   glsVerificationArtifactId: string | number
 ): LocalServicesVerificationArtifactResourceName {
   return `customers/${customerId}/localServicesVerificationArtifacts/${glsVerificationArtifactId}` as const;
+}
+
+/* LocationInterestView */
+export type LocationInterestViewResourceName =
+  `customers/${StrNum}/locationInterestViews/${StrNum}~${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} campaignId
+ * @param {string | number} adGroupId
+ * @param {string | number} criterionId
+ * @returns `LocationInterestViewResourceName`
+ * @example const locationInterestView: ResourceNames.LocationInterestViewResourceName = ResourceNames.locationInterestView(10987417, 21974834, 43949668, 87899336)
+ */
+export function locationInterestView(
+  customerId: string | number,
+  campaignId: string | number,
+  adGroupId: string | number,
+  criterionId: string | number
+): LocationInterestViewResourceName {
+  return `customers/${customerId}/locationInterestViews/${campaignId}~${adGroupId}~${criterionId}` as const;
 }
 
 /* LocationView */
