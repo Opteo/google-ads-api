@@ -47,6 +47,21 @@ describe("normaliseQuery", () => {
       "SELECT campaign.name FROM campaign LIMIT 10"
     );
   });
+
+  it("will properly handle multiline query statements", () => {
+    const query = `
+      SELECT
+        asset_group.id,
+        metrics.conversions_value,
+        metrics.conversions
+      FROM asset_group_asset
+      WHERE campaign.advertising_channel_type = 'PERFORMANCE_MAX';
+    `;
+
+    expect(normaliseQuery(query)).toEqual(
+      "SELECT asset_group.id, metrics.conversions_value, metrics.conversions FROM asset_group_asset WHERE campaign.advertising_channel_type = 'PERFORMANCE_MAX';"
+    );
+  });
 });
 
 describe("capitaliseFirstLetter", () => {
