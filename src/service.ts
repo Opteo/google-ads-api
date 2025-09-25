@@ -102,7 +102,7 @@ export class Service {
   // Used only by REST calls
   public async getAccessToken(): Promise<string> {
     const cachedToken = accessTokenCache.get(
-      this.customerOptions.refresh_token
+      this.customerOptions.refresh_token ?? ""
     );
     if (cachedToken) {
       return cachedToken;
@@ -123,7 +123,7 @@ export class Service {
       throw new Error("Failed to retrieve access token");
     }
 
-    accessTokenCache.set(this.customerOptions.refresh_token, token);
+    accessTokenCache.set(this.customerOptions.refresh_token ?? "", token);
 
     return token;
   }
