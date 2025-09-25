@@ -42,6 +42,7 @@ npm install google-ads-api
   - [Create a client](#create-a-client)
   - [Create a customer instance](#create-a-customer-instance)
   - [List accessible customers](#list-accessible-customers)
+  - [Service Account Support](#service-account-support)
 - Reporting
   - [Retrieve Campaigns with metrics](#retrieve-campaigns-with-metrics)
   - [Retrieve Campaigns using GAQL](#retrieve-campaigns-using-gaql)
@@ -86,6 +87,28 @@ const customer = client.Customer({
   login_customer_id: "<LOGIN-CUSTOMER-ID>",
   linked_customer_id: "<LINKED-CUSTOMER-ID>",
   refresh_token: "<REFRESH-TOKEN>",
+});
+```
+
+---
+
+## Service Account Support
+
+Instead of OAuth2, you can use the Google Ads API with service account authentication. See [SERVICE_ACCOUNT_AUTH.md](SERVICE_ACCOUNT_AUTH.md) for more information.
+
+```ts
+// Create GoogleAdsApi client with service account auth
+const client = new GoogleAdsApi({
+  auth_client: authClient as ServiceAccountAuth,
+  developer_token: "<DEVELOPER-TOKEN>",
+  // no client_id or client_secret needed
+});
+
+// Create a customer instance (no refresh_token needed)
+const customer = client.Customer({
+  customer_id: "1234567890",
+  login_customer_id: "<LOGIN-CUSTOMER-ID>",
+  // no refresh_token needed
 });
 ```
 
@@ -549,7 +572,7 @@ ResourceNames.accountBudget(customer.credentials.customer_id, 123);
 
 The library provides hooks that can be executed before, after or on error of a query, stream or a mutation.
 
-### Query/stream hooks:
+### Query/stream hooks
 
 - `onQueryStart`
 - `onQueryError`
@@ -563,7 +586,7 @@ These hooks also have access to the `query` argument, containing the GAQL query 
 
 These hooks also have access the the `reportOptions` argument. This will be undefined when using the `query` method.
 
-### Mutation hooks:
+### Mutation hooks
 
 - `onMutationStart`
 - `onMutationError`
@@ -573,7 +596,7 @@ These hooks have access to the `customerCredentials` argument, containing the `c
 
 These hooks also have access to the `method` argument, containing the mutation method as a string.
 
-### Service hooks:
+### Service hooks
 
 - `onServiceStart`
 - `onServiceError`
@@ -583,7 +606,7 @@ These hooks have access to the `customerCredentials` argument, containing the `c
 
 These hooks also have access to the `method` argument, containing the mutation method as a string.
 
-### Pre-request hooks:
+### Pre-request hooks
 
 - `onQueryStart` - `query` and `report`
 - `onStreamStart` - `reportStream` and `reportStreamRaw`
@@ -617,7 +640,7 @@ const customer = client.Customer(
 );
 ```
 
-### On error hooks:
+### On error hooks
 
 - `onQueryError` - `query` and `report`
 - `onStreamError` - `reportStream` (but **not** `reportStreamRaw`)
@@ -642,7 +665,7 @@ const customer = client.Customer(
 );
 ```
 
-### Post-request hooks:
+### Post-request hooks
 
 - `onQueryEnd` - `query` and `report`
 - `onMutationEnd`
