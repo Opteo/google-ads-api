@@ -494,29 +494,42 @@ export class Customer extends ServiceFactory {
         packValues: true,
         packKeys: true,
       });
+      const streamArrayInstance = streamArray();
 
-      const pipeline = chain([stream, parser, streamArray()]);
+      const pipeline = chain([stream, parser, streamArrayInstance]);
       let count = 0;
 
-      for await (const data of pipeline) {
-        const results =
-          data.value.results ??
-          (data.value.summaryRow ? [data.value.summaryRow] : undefined) ??
-          [];
+      try {
+        for await (const data of pipeline) {
+          const results =
+            data.value.results ??
+            (data.value.summaryRow ? [data.value.summaryRow] : undefined) ??
+            [];
 
-        count += results.length;
-        if (
-          this.clientOptions.max_reporting_rows &&
-          count > this.clientOptions.max_reporting_rows &&
-          !this.gaqlQueryStringIncludesLimit(gaqlQuery)
-        ) {
-          throw this.generateTooManyRowsError();
-        }
+          count += results.length;
+          if (
+            this.clientOptions.max_reporting_rows &&
+            count > this.clientOptions.max_reporting_rows &&
+            !this.gaqlQueryStringIncludesLimit(gaqlQuery)
+          ) {
+            throw this.generateTooManyRowsError();
+          }
 
-        for (const row of results) {
-          const parsed = this.decamelizeKeysIfNeeded(row);
-          yield parsed as T;
+          for (const row of results) {
+            const parsed = this.decamelizeKeysIfNeeded(row);
+            yield parsed as T;
+          }
+
+          // Clear references to help GC
+          data.value = null;
+          data.key = null;
         }
+      } finally {
+        // Always destroy all components to prevent memory leaks
+        pipeline.destroy();
+        parser.destroy();
+        streamArrayInstance.destroy();
+        stream.destroy();
       }
 
       return;
