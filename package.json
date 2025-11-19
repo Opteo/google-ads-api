@@ -3,23 +3,14 @@
   "version": "21.0.1",
   "description": "Google Ads API Client Library for Node.js",
   "repository": "https://github.com/Opteo/google-ads-api",
-  "main": "build/cjs/src/index.js",
-  "module": "build/esm/src/index.js",
-  "exports": {
-    ".": {
-      "import": "./build/esm/src/index.js",
-      "require": "./build/cjs/src/index.js"
-    }
-  },
+  "main": "build/src/index.js",
   "files": [
-    "build/src",
-    "build/cjs",
-    "build/esm"
+    "build/src"
   ],
   "scripts": {
     "test": "jest",
     "lint": "eslint . --ext .ts",
-    "build": "tsc && tsc -p tsconfig.esm.json && tsx scripts/fix-esm.ts",
+    "build": "tsc",
     "compile": "esbuild --bundle --platform=node ./scripts/index.ts --outfile=./build/scripts/index.js && node ./build/scripts/index.js",
     "prepare": "rm -rf build && npm run build",
     "node": "tsx"
