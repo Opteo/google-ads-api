@@ -1,4 +1,5 @@
 import TTLCache from "@isaacs/ttlcache";
+import * as googleAdsNode from "google-ads-node";
 import { OAuth2Client, UserRefreshClient } from "google-auth-library";
 import { grpc } from "google-gax";
 import {
@@ -92,13 +93,11 @@ export class Service {
   private getCredentials(): grpc.ChannelCredentials {
     const sslCreds = grpc.credentials.createSsl();
 
-    let authClient: OAuth2Client | UserRefreshClient;
+    let authClient: { getAccessToken: () => Promise<{ token?: string | null }> };
 
     if (isServiceAccountOptions(this.clientOptions)) {
-      // Use the provided service account auth client - cast it as OAuth2Client for grpc compatibility
-      authClient = this.clientOptions.auth_client as any;
+      authClient = this.clientOptions.auth_client;
     } else if (isOAuth2Options(this.clientOptions)) {
-      // Use OAuth2 with refresh token
       authClient = new UserRefreshClient(
         this.clientOptions.client_id,
         this.clientOptions.client_secret,
@@ -108,9 +107,29 @@ export class Service {
       throw new Error("Invalid client options provided");
     }
 
+    const metadataGenerator = (
+      _params: any,
+      callback: (error: Error | null, metadata?: any) => void
+    ) => {
+      authClient
+        .getAccessToken()
+        .then((credentials) => {
+          const token = credentials.token;
+          if (!token) {
+            return callback(new Error("Failed to generate access token"));
+          }
+          const metadata = new grpc.Metadata();
+          metadata.add("Authorization", `Bearer ${token}`);
+          callback(null, metadata);
+        })
+        .catch((err) => {
+          callback(err);
+        });
+    };
+
     const credentials = grpc.credentials.combineChannelCredentials(
       sslCreds,
-      grpc.credentials.createFromGoogleCredential(authClient as any)
+      grpc.credentials.createFromMetadataGenerator(metadataGenerator)
     );
     return credentials;
   }
@@ -173,7 +192,7 @@ export class Service {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const { [service]: protoService } = require("google-ads-node");
+    const protoService = (googleAdsNode as any)[service];
     if (typeof protoService === "undefined") {
       throw new Error(`Service "${String(service)}" could not be found`);
     }
