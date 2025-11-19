@@ -1,6 +1,13 @@
+import TTLCache from "@isaacs/ttlcache";
+import * as googleAdsNode from "google-ads-node";
+import { OAuth2Client, UserRefreshClient } from "google-auth-library";
 import { grpc } from "google-gax";
-import { UserRefreshClient, OAuth2Client } from "google-auth-library";
-import { ClientOptions } from "./client";
+import {
+  ClientOptions,
+  isOAuth2Options,
+  isServiceAccountOptions,
+} from "./client";
+import { Hooks } from "./hooks";
 import {
   AllServices,
   errors,
@@ -9,16 +16,14 @@ import {
   services,
 } from "./protos";
 import {
-  CustomerOptions,
   CustomerCredentials,
-  RequestOptions,
+  CustomerOptions,
   MutateOperation,
   MutateOptions,
+  RequestOptions,
 } from "./types";
 import { getFieldMask, toSnakeCase } from "./utils";
 import { googleAdsVersion } from "./version";
-import { Hooks } from "./hooks";
-import TTLCache from "@isaacs/ttlcache";
 
 // Make sure to update this version number when upgrading
 export const FAILURE_KEY = `google.ads.googleads.${googleAdsVersion}.errors.googleadsfailure-bin`;
@@ -87,22 +92,65 @@ export class Service {
   // Used only by gRPC calls
   private getCredentials(): grpc.ChannelCredentials {
     const sslCreds = grpc.credentials.createSsl();
-    const authClient = new UserRefreshClient(
-      this.clientOptions.client_id,
-      this.clientOptions.client_secret,
-      this.customerOptions.refresh_token
-    );
+
+    let authClient: { getAccessToken: () => Promise<{ token?: string | null }> };
+
+    if (isServiceAccountOptions(this.clientOptions)) {
+      authClient = this.clientOptions.auth_client;
+    } else if (isOAuth2Options(this.clientOptions)) {
+      authClient = new UserRefreshClient(
+        this.clientOptions.client_id,
+        this.clientOptions.client_secret,
+        this.customerOptions.refresh_token
+      );
+    } else {
+      throw new Error("Invalid client options provided");
+    }
+
+    const metadataGenerator = (
+      _params: any,
+      callback: (error: Error | null, metadata?: any) => void
+    ) => {
+      authClient
+        .getAccessToken()
+        .then((credentials) => {
+          const token = credentials.token;
+          if (!token) {
+            return callback(new Error("Failed to generate access token"));
+          }
+          const metadata = new grpc.Metadata();
+          metadata.add("Authorization", `Bearer ${token}`);
+          callback(null, metadata);
+        })
+        .catch((err) => {
+          callback(err);
+        });
+    };
+
     const credentials = grpc.credentials.combineChannelCredentials(
       sslCreds,
-      grpc.credentials.createFromGoogleCredential(authClient)
+      grpc.credentials.createFromMetadataGenerator(metadataGenerator)
     );
     return credentials;
   }
 
   // Used only by REST calls
   public async getAccessToken(): Promise<string> {
+    if (isServiceAccountOptions(this.clientOptions)) {
+      // For service accounts, get access token directly from the auth client
+      const credentials = await this.clientOptions.auth_client.getAccessToken();
+      if (!credentials.token) {
+        throw new Error("Failed to retrieve access token from service account");
+      }
+      return credentials.token;
+    }
+
+    if (!isOAuth2Options(this.clientOptions)) {
+      throw new Error("Invalid client options for OAuth2 authentication");
+    }
+
     const cachedToken = accessTokenCache.get(
-      this.customerOptions.refresh_token
+      this.customerOptions.refresh_token ?? ""
     );
     if (cachedToken) {
       return cachedToken;
@@ -123,20 +171,28 @@ export class Service {
       throw new Error("Failed to retrieve access token");
     }
 
-    accessTokenCache.set(this.customerOptions.refresh_token, token);
+    accessTokenCache.set(this.customerOptions.refresh_token ?? "", token);
 
     return token;
   }
 
   protected loadService<T = AllServices>(service: ServiceName): T {
-    const serviceCacheKey = `${service}_${this.clientOptions.client_id}_${this.customerOptions.refresh_token}`;
+    // Create a unique cache key based on the authentication method
+    const clientIdentifier = isServiceAccountOptions(this.clientOptions)
+      ? "service_account"
+      : this.clientOptions.client_id;
+    const authIdentifier = isServiceAccountOptions(this.clientOptions)
+      ? "service_account_auth"
+      : this.customerOptions.refresh_token;
+
+    const serviceCacheKey = `${service}_${clientIdentifier}_${authIdentifier}`;
 
     if (serviceCache.has(serviceCacheKey)) {
       return serviceCache.get(serviceCacheKey) as unknown as T;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const { [service]: protoService } = require("google-ads-node");
+    const protoService = (googleAdsNode as any)[service];
     if (typeof protoService === "undefined") {
       throw new Error(`Service "${String(service)}" could not be found`);
     }

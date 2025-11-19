@@ -1,15 +1,41 @@
 import { Customer } from "./customer";
-import { CustomerOptions } from "./types";
 import { Hooks } from "./hooks";
 import { services } from "./protos";
 import { Service } from "./service";
+import { CustomerOptions } from "./types";
 
-export interface ClientOptions {
+// Minimal interface for service account auth, to allow to get access token
+export interface ServiceAccountAuth {
+  getAccessToken(): Promise<{ token?: string | null }>;
+}
+
+export interface OAuth2ClientOptions {
   client_id: string;
   client_secret: string;
   developer_token: string;
   disable_parsing?: boolean;
   max_reporting_rows?: number;
+}
+
+export interface ServiceAccountClientOptions {
+  auth_client: ServiceAccountAuth;
+  developer_token: string;
+  disable_parsing?: boolean;
+  max_reporting_rows?: number;
+}
+
+export type ClientOptions = OAuth2ClientOptions | ServiceAccountClientOptions;
+
+export function isServiceAccountOptions(
+  options: ClientOptions
+): options is ServiceAccountClientOptions {
+  return "auth_client" in options;
+}
+
+export function isOAuth2Options(
+  options: ClientOptions
+): options is OAuth2ClientOptions {
+  return "client_id" in options && "client_secret" in options;
 }
 
 export class Client {
@@ -25,12 +51,27 @@ export class Client {
   }
 
   public async listAccessibleCustomers(
-    refreshToken: string
+    refreshToken?: string
   ): Promise<services.ListAccessibleCustomersResponse> {
-    const service = new Service(this.options, {
-      customer_id: "",
-      refresh_token: refreshToken,
-    });
+    let service: Service;
+
+    if (isServiceAccountOptions(this.options)) {
+      // For service accounts, we don't need a refresh token
+      service = new Service(this.options, {
+        customer_id: "",
+      });
+    } else if (isOAuth2Options(this.options)) {
+      // For OAuth2, we need the refresh token
+      if (!refreshToken) {
+        throw new Error("refresh_token is required for OAuth2 authentication");
+      }
+      service = new Service(this.options, {
+        customer_id: "",
+        refresh_token: refreshToken,
+      });
+    } else {
+      throw new Error("Invalid client options");
+    }
     // @ts-expect-error Protected usage is fine here
     const customerService = await service.loadService<services.CustomerService>(
       "CustomerServiceClient"

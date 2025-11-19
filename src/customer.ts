@@ -1,9 +1,12 @@
-import { CancellableStream } from "google-gax";
 import axios from "axios";
-import { chain } from "stream-chain";
-import { parser, Parser } from "stream-json";
+import { CancellableStream } from "google-gax";
+import Chain from "stream-chain";
+import StreamJson from "stream-json";
+const { chain } = Chain;
+const { parser, Parser } = StreamJson;
 
-import { streamArray } from "stream-json/streamers/StreamArray";
+import StreamArray from "stream-json/streamers/StreamArray";
+const { streamArray } = StreamArray;
 
 import { ClientOptions } from "./client";
 import {
@@ -15,7 +18,7 @@ import {
 } from "./hooks";
 
 import { decamelizeKeys } from "./parserRest";
-import { services, errors } from "./protos";
+import { errors, services } from "./protos";
 import ServiceFactory from "./protos/autogen/serviceFactory";
 import { buildQuery } from "./query";
 import {
@@ -24,9 +27,8 @@ import {
   MutateOptions,
   PageToken,
   ReportOptions,
-  ReportOptionsWithTotalResults,
   RequestOptions,
-  RequestOptionsWithTotalResults,
+  RequestOptionsWithTotalResults
 } from "./types";
 
 import { googleAdsVersion } from "./version";
