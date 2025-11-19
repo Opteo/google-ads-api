@@ -2,5 +2,6 @@
   "prettier.semi": true,
   "prettier.tabWidth": 2,
   "prettier.singleQuote": false,
-  "prettier.trailingComma": "es5"
+  "prettier.trailingComma": "es5",
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
