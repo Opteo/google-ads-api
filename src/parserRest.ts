@@ -1,8 +1,3 @@
-/**
- * JSON Rest parsing
- */
-
-import mapObject from "map-obj";
 import { parse } from "circ-json";
 
 import { toSnakeCase } from "./utils";
@@ -25,23 +20,46 @@ export const decamelizeKeys = (input: any) => {
     return input;
   }
 
-  const makeMapper = (parentPath?: string) => (key: string, value: any) => {
-    key = cachedDecamelize(key);
+  return transform(input);
 
-    if (isObject(value)) {
-      const path = parentPath === undefined ? key : `${parentPath}.${key}`;
-
-      // @ts-ignore
-      value = mapObject(value, makeMapper(path));
-    } else {
-      value = cachedValueParser(key, parentPath, value);
+  function transform(value: any, parentPath?: string): any {
+    if (!isObject(value)) {
+      return value;
     }
 
-    return [key, value];
-  };
+    if (Array.isArray(value)) {
+      const length = value.length;
+      const result = new Array(length);
 
-  // @ts-ignore
-  return mapObject(input, makeMapper());
+      for (let i = 0; i < length; i += 1) {
+        const item = value[i];
+        result[i] = isObject(item) ? transformObject(item, parentPath) : item;
+      }
+
+      return result;
+    }
+
+    return transformObject(value, parentPath);
+  }
+
+  function transformObject(obj: Record<string, any>, parentPath?: string) {
+    const output: Record<string, any> = {};
+
+    for (const key of Object.keys(obj)) {
+      const rawValue = obj[key];
+      const newKey = cachedDecamelize(key);
+
+      if (isObject(rawValue)) {
+        const nextParentPath =
+          parentPath === undefined ? newKey : `${parentPath}.${newKey}`;
+        output[newKey] = transform(rawValue, nextParentPath);
+      } else {
+        output[newKey] = cachedValueParser(newKey, parentPath, rawValue);
+      }
+    }
+
+    return output;
+  }
 };
 
 const cachedDecamelize = (key: string) => {
