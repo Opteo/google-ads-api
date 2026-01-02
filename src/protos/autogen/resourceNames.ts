@@ -1062,6 +1062,24 @@ export function campaignDraft(
   return `customers/${customerId}/campaignDrafts/${baseCampaignId}~${draftId}` as const;
 }
 
+/* CampaignGoalConfig */
+export type CampaignGoalConfigResourceName =
+  `customers/${StrNum}/campaignGoalConfigs/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} campaignId
+ * @param {string | number} unifiedGoalId
+ * @returns `CampaignGoalConfigResourceName`
+ * @example const campaignGoalConfig: ResourceNames.CampaignGoalConfigResourceName = ResourceNames.campaignGoalConfig(10987417, 21974834, 43949668)
+ */
+export function campaignGoalConfig(
+  customerId: string | number,
+  campaignId: string | number,
+  unifiedGoalId: string | number
+): CampaignGoalConfigResourceName {
+  return `customers/${customerId}/campaignGoalConfigs/${campaignId}~${unifiedGoalId}` as const;
+}
+
 /* CampaignGroup */
 export type CampaignGroupResourceName =
   `customers/${StrNum}/campaignGroups/${StrNum}`;
@@ -1980,6 +1998,21 @@ export function geographicView(
   return `customers/${customerId}/geographicViews/${countryCriterionId}~${locationType}` as const;
 }
 
+/* Goal */
+export type GoalResourceName = `customers/${StrNum}/goals/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} unifiedGoalId
+ * @returns `GoalResourceName`
+ * @example const goal: ResourceNames.GoalResourceName = ResourceNames.goal(10987417, 21974834)
+ */
+export function goal(
+  customerId: string | number,
+  unifiedGoalId: string | number
+): GoalResourceName {
+  return `customers/${customerId}/goals/${unifiedGoalId}` as const;
+}
+
 /* GoogleAdsField */
 export type GoogleAdsFieldResourceName = `googleAdsFields/${StrNum}`;
 /**
@@ -2860,6 +2893,24 @@ export function smartCampaignSetting(
   campaignId: string | number
 ): SmartCampaignSettingResourceName {
   return `customers/${customerId}/smartCampaignSettings/${campaignId}` as const;
+}
+
+/* TargetingExpansionView */
+export type TargetingExpansionViewResourceName =
+  `customers/${StrNum}/targetingExpansionViews/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} campaignId
+ * @param {string | number} targetingExpansionType
+ * @returns `TargetingExpansionViewResourceName`
+ * @example const targetingExpansionView: ResourceNames.TargetingExpansionViewResourceName = ResourceNames.targetingExpansionView(10987417, 21974834, 43949668)
+ */
+export function targetingExpansionView(
+  customerId: string | number,
+  campaignId: string | number,
+  targetingExpansionType: string | number
+): TargetingExpansionViewResourceName {
+  return `customers/${customerId}/targetingExpansionViews/${campaignId}~${targetingExpansionType}` as const;
 }
 
 /* ThirdPartyAppAnalyticsLink */
