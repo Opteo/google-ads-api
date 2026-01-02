@@ -18,6 +18,10 @@
 
 - Removed field: `asset_group_asset.performance_label`
 
+### Performance
+
+- Optimised `decamelizeKeys` in REST response parsing, removed `map-obj` dependency
+
 ### 21.0.1
 
 - Fixed issue with new v21 resources & fields not being correctly parsed.
