@@ -1,5 +1,27 @@
 # Changelog
 
+### 22.0.0
+
+### Version Upgrade
+
+- Upgraded google-ads-api version to v22. Refer to Google Ads release notes [here](https://developers.google.com/google-ads/api/docs/release-notes) for changes.
+- Upgraded google-ads-node dependency to v19.0.0
+- Upgraded google-gax dependency to v5.0.6
+
+### New Features
+
+- New service: `AssetGenerationService` with `generateText` method
+- New resource names: `CampaignGoalConfig`, `Goal`, `TargetingExpansionView`
+- New enums: `YouTubeVideoProperty`, `CustomerLifecycleOptimizationMode`, `GoalOptimizationEligibility`, `GoalType`
+
+### Breaking Changes
+
+- Removed field: `asset_group_asset.performance_label`
+
+### Performance
+
+- Optimised `decamelizeKeys` in REST response parsing, removed `map-obj` dependency
+
 ### 21.0.1
 
 - Fixed issue with new v21 resources & fields not being correctly parsed.
