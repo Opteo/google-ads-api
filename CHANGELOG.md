@@ -1,5 +1,12 @@
 # Changelog
 
+### 23.0.0
+
+### Version Upgrade
+
+- Upgraded google-ads-api version to v23. Refer to Google Ads release notes [here](https://developers.google.com/google-ads/api/docs/release-notes) for changes.
+- Upgraded google-ads-node dependency to v20.0.0
+
 ### 22.0.0
 
 ### Version Upgrade
