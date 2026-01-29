@@ -2022,10 +2022,10 @@ globby@^11.0.3:
     merge2 "^1.4.1"
     slash "^3.0.0"
 
-google-ads-node@20.0.0-beta.0:
-  version "20.0.0-beta.0"
-  resolved "https://registry.npmjs.org/google-ads-node/-/google-ads-node-20.0.0-beta.0.tgz"
-  integrity sha512-Tzp8Cu8QHqDyx4Q6OsyF9ZNodwcxV8Ql2g9KDixb5N18U0cd7tcfvu4bSTTa6KYFDswIlGExTvp1b4nFNa+rbg==
+google-ads-node@23.0.0-beta.0:
+  version "23.0.0-beta.0"
+  resolved "https://registry.npmjs.org/google-ads-node/-/google-ads-node-23.0.0-beta.0.tgz"
+  integrity sha512-XEX1thgbJFGtQGF8Smyeh3N95EcuthF8Ore/Plsd6YmDKjokibqilVgJDteviKQyx04y2qFhQJY9s1hoYV56cw==
   dependencies:
     google-gax "^5.0.6"
     lru-cache "^10.2.0"
