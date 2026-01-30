@@ -540,6 +540,22 @@ export function androidPrivacySharedKeyGoogleNetworkType(
   return `customers/${customerId}/androidPrivacySharedKeyGoogleNetworkTypes/${campaignId}~${androidPrivacyInteractionType}~${androidPrivacyNetworkType}~${androidPrivacyInteractionDate}` as const;
 }
 
+/* AppliedIncentive */
+export type AppliedIncentiveResourceName =
+  `customers/${StrNum}/appliedIncentives/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} couponCode
+ * @returns `AppliedIncentiveResourceName`
+ * @example const appliedIncentive: ResourceNames.AppliedIncentiveResourceName = ResourceNames.appliedIncentive(10987417, 21974834)
+ */
+export function appliedIncentive(
+  customerId: string | number,
+  couponCode: string | number
+): AppliedIncentiveResourceName {
+  return `customers/${customerId}/appliedIncentives/${couponCode}` as const;
+}
+
 /* Asset */
 export type AssetResourceName = `customers/${StrNum}/assets/${StrNum}`;
 /**
@@ -2448,6 +2464,22 @@ export function managedPlacementView(
   criterionId: string | number
 ): ManagedPlacementViewResourceName {
   return `customers/${customerId}/managedPlacementViews/${adGroupId}~${criterionId}` as const;
+}
+
+/* MatchedLocationInterestView */
+export type MatchedLocationInterestViewResourceName =
+  `customers/${StrNum}/matchedLocationInterestViews/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} countryCriterionId
+ * @returns `MatchedLocationInterestViewResourceName`
+ * @example const matchedLocationInterestView: ResourceNames.MatchedLocationInterestViewResourceName = ResourceNames.matchedLocationInterestView(10987417, 21974834)
+ */
+export function matchedLocationInterestView(
+  customerId: string | number,
+  countryCriterionId: string | number
+): MatchedLocationInterestViewResourceName {
+  return `customers/${customerId}/matchedLocationInterestViews/${countryCriterionId}` as const;
 }
 
 /* MediaFile */
