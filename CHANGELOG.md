@@ -1,5 +1,11 @@
 # Changelog
 
+### 23.0.1
+
+### Bug Fixes
+
+- Fixed `recursiveFieldMaskSearch` to include fields that are empty objects (leaves), enabling fields that are empty objects to be set in the mask
+
 ### 23.0.0
 
 ### Version Upgrade
