@@ -20,7 +20,7 @@
 
 - `parse()` now returns plain objects for message-typed leaves (e.g. `change_event.old_resource`) instead of protobuf message instances, and converts all nested int64 values from Long objects to JavaScript numbers. Code reading `.low`/`.high` from nested values, or relying on protobuf prototypes, must use the plain values instead. Note that int64 values above `Number.MAX_SAFE_INTEGER` (2^53 - 1) lose precision when converted, consistent with the existing behaviour for directly-selected fields.
 - `resource_name` attributes for ten view resources (including `keyword_view` and `paid_organic_search_term_view`) were previously missing from parsed results due to a code generation bug; they are now included.
-- `getFieldMask()` throws a descriptive `Error` on objects containing circular references (previously a `RangeError` stack overflow) and treats typed arrays (`Buffer`, `Uint8Array`) as leaf values instead of recursing into them.
+- `getFieldMask()` throws a descriptive `Error` on objects containing circular references (previously a `RangeError` stack overflow) and treats typed arrays (`Buffer`, `Uint8Array`) and `Long` values as leaf values instead of recursing into them. Update masks built from payloads containing `Long` values previously included invalid `.low`/`.high`/`.unsigned` paths, which the API rejected.
 
 ### Fixes
 

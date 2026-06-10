@@ -1,3 +1,4 @@
+import long from "long";
 import { protobuf } from "./protos";
 
 /**
@@ -94,6 +95,7 @@ export function recursiveFieldMaskSearch(
       typeof value === "object" &&
       !Array.isArray(value) &&
       !ArrayBuffer.isView(value) &&
+      !long.isLong(value) &&
       value !== null
     ) {
       if (Object.keys(value).length === 0) {

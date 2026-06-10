@@ -1,3 +1,4 @@
+import long from "long";
 import {
   fromMicros,
   toMicros,
@@ -149,6 +150,18 @@ describe("recursiveFieldMaskSearch", () => {
     };
 
     expect(recursiveFieldMaskSearch(input)).toEqual(["ad.data", "ad.image"]);
+  });
+
+  it("treats Long values as leaf values", () => {
+    const input = {
+      id: long.fromNumber(42),
+      targetCpa: { targetCpaMicros: long.fromNumber(1500000) },
+    };
+
+    expect(recursiveFieldMaskSearch(input)).toEqual([
+      "id",
+      "target_cpa.target_cpa_micros",
+    ]);
   });
 
   it("throws on circular references instead of overflowing the stack", () => {
