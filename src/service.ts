@@ -29,14 +29,19 @@ export interface CallHeaders {
   "linked-customer-id"?: string;
 }
 
+// Close connections when services are removed from the cache
+export function disposeService(service: { close: () => Promise<void> }): void {
+  Promise.resolve()
+    .then(() => service.close())
+    .catch(() => null);
+}
+
 // A global service cache to avoid re-initialising services
-const serviceCache = new TTLCache({
+export const serviceCache = new TTLCache({
   max: 1_000,
   ttl: 10 * 60 * 1000, // 10 minutes
-  dispose: async (service: any) => {
-    // Close connections when services are removed from the cache
-    await service.close();
-  },
+  checkAgeOnGet: true,
+  dispose: disposeService,
 });
 
 // A global access token cache used by REST calls. Issued tokens expire after 1 hour, so we cache them for 50 minutes.

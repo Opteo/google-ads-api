@@ -1,7 +1,7 @@
 import { GoogleAdsServiceClient } from "google-ads-node";
 import { operationsProtos } from "google-gax";
 import { errors, services } from "./protos";
-import { FAILURE_KEY } from "./service";
+import { disposeService, FAILURE_KEY, serviceCache } from "./service";
 import {
   failTestIfExecuted,
   newCustomer,
@@ -222,6 +222,38 @@ describe("Service", () => {
         "developer-token": MOCK_DEVELOPER_TOKEN,
         "login-customer-id": MOCK_LOGIN_CID,
       });
+    });
+  });
+
+  describe("serviceCache disposal", () => {
+    it("closes services removed from the cache", async () => {
+      const close = jest.fn().mockResolvedValue(undefined);
+      serviceCache.set("disposal_test_key", { close });
+      serviceCache.delete("disposal_test_key");
+
+      await new Promise((resolve) => setImmediate(resolve));
+      expect(close).toHaveBeenCalledTimes(1);
+    });
+
+    it("disposeService survives a rejected close()", async () => {
+      const close = jest.fn().mockRejectedValue(new Error("channel down"));
+
+      expect(() => disposeService({ close })).not.toThrow();
+
+      await new Promise((resolve) => setImmediate(resolve));
+      expect(close).toHaveBeenCalledTimes(1);
+    });
+
+    it("disposeService survives a synchronously throwing close()", () => {
+      const close = jest.fn(() => {
+        throw new Error("already destroyed");
+      });
+
+      expect(() => disposeService({ close })).not.toThrow();
+    });
+
+    it("does not return stale entries from the cache", () => {
+      expect(serviceCache.checkAgeOnGet).toBe(true);
     });
   });
 });
