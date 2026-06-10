@@ -155,9 +155,7 @@ describe("recursiveFieldMaskSearch", () => {
     const input: Record<string, any> = { campaign: { name: "x" } };
     input.campaign.self = input;
 
-    expect(() => recursiveFieldMaskSearch(input)).toThrow(
-      "circular reference"
-    );
+    expect(() => recursiveFieldMaskSearch(input)).toThrow("circular reference");
   });
 
   it("allows the same object to appear in multiple branches", () => {

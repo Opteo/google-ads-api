@@ -464,7 +464,7 @@ describe("reportStream", () => {
     mockGetAccessToken(customer);
 
     const json = JSON.stringify(mockSearchRawResult);
-    const sourceStream = new Readable({ read() {} });
+    const sourceStream = new Readable({ read: jest.fn() });
     sourceStream.push(json.slice(0, -1));
 
     axiosMock.onPost().reply(200, sourceStream);

@@ -98,12 +98,10 @@ describe("other checkers", () => {
 
   it("getEnumName", () => {
     const attributeEnumField = new resources.GoogleAdsField({
-      type_url:
-        `google.ads.googleads.${googleAdsVersion}.enums.CampaignStatusEnum.CampaignStatus`,
+      type_url: `google.ads.googleads.${googleAdsVersion}.enums.CampaignStatusEnum.CampaignStatus`,
     });
     const metricEnumField = new resources.GoogleAdsField({
-      type_url:
-        `google.ads.googleads.${googleAdsVersion}.enums.QualityScoreBucketEnum.QualityScoreBucket`,
+      type_url: `google.ads.googleads.${googleAdsVersion}.enums.QualityScoreBucketEnum.QualityScoreBucket`,
     });
     const segmentEnumField = new resources.GoogleAdsField({
       type_url: `google.ads.googleads.${googleAdsVersion}.enums.DayOfWeekEnum.DayOfWeek`,

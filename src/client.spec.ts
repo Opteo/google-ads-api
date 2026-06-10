@@ -38,7 +38,9 @@ describe("listAccessibleCustomers", () => {
     const close = jest.fn().mockResolvedValue(undefined);
 
     jest.spyOn(Service.prototype as any, "loadService").mockReturnValue({
-      listAccessibleCustomers: jest.fn().mockRejectedValue(new Error("rpc failed")),
+      listAccessibleCustomers: jest
+        .fn()
+        .mockRejectedValue(new Error("rpc failed")),
       close,
     });
     jest.spyOn(console, "log").mockImplementation(() => undefined);

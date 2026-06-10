@@ -74,6 +74,7 @@ export function toSnakeCase(str: string): string {
 
 export function recursiveFieldMaskSearch(
   data: Record<string, any>,
+  // eslint-disable-next-line @typescript-eslint/ban-types
   ancestors: Set<object> = new Set()
 ): string[] {
   if (ancestors.has(data)) {
