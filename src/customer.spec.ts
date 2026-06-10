@@ -1,4 +1,5 @@
 import { operationsProtos } from "google-gax";
+import { Readable } from "stream";
 import { Hooks } from "./hooks";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
@@ -456,6 +457,26 @@ describe("reportStream", () => {
     }
 
     expect(acc).toEqual(mockQueryReturnValue);
+  });
+
+  it("destroys the response stream when the consumer exits early", async () => {
+    const customer = newCustomer({});
+    mockGetAccessToken(customer);
+
+    const json = JSON.stringify(mockSearchRawResult);
+    const sourceStream = new Readable({ read() {} });
+    sourceStream.push(json.slice(0, -1));
+
+    axiosMock.onPost().reply(200, sourceStream);
+
+    const stream = customer.reportStream(mockReportOptions);
+
+    for await (const row of stream) {
+      void row;
+      break;
+    }
+
+    expect(sourceStream.destroyed).toBe(true);
   });
 
   it("skips reportStream parsing if it is disabled in the client options", async () => {
