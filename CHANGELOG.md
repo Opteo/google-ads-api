@@ -1,5 +1,34 @@
 # Changelog
 
+### 24.1.0
+
+### Version Upgrade
+
+- Upgraded google-ads-api version to v24.1. Refer to Google Ads release notes [here](https://developers.google.com/google-ads/api/docs/release-notes) for changes.
+- Upgraded google-ads-node dependency to v24.1.0
+- Upgraded google-gax dependency to v5.0.7
+- @isaacs/ttlcache now requires ^1.4.0
+
+### New Features
+
+- New services: `ReservationService`, `YouTubeVideoUploadService`
+- New resource names: `AppTopCombinationView`, `CartDataSalesView`, `VideoEnhancement`, `YouTubeVideoUpload`
+- New enums include `ReservationRequestType`, `PreviewType`, and new `ExperimentType` values (`ADOPT_AI_MAX`, `ADOPT_BROAD_MATCH_KEYWORDS`, `OPTIMIZE_ASSETS`, `PMAX_REPLACEMENT_SHOPPING`)
+- New v24.1 fields such as `segments.mobile_device_platform` and `customer_user_access.passkey_enabled`
+
+### Breaking Changes
+
+- `parse()` now returns plain objects for message-typed leaves (e.g. `change_event.old_resource`) instead of protobuf message instances, and converts all nested int64 values from Long objects to JavaScript numbers. Code reading `.low`/`.high` from nested values, or relying on protobuf prototypes, must use the plain values instead. Note that int64 values above `Number.MAX_SAFE_INTEGER` (2^53 - 1) lose precision when converted, consistent with the existing behaviour for directly-selected fields.
+- `resource_name` attributes for ten view resources (including `keyword_view` and `paid_organic_search_term_view`) were previously missing from parsed results due to a code generation bug; they are now included.
+- `getFieldMask()` throws a descriptive `Error` on objects containing circular references (previously a `RangeError` stack overflow) and treats typed arrays (`Buffer`, `Uint8Array`) as leaf values instead of recursing into them.
+
+### Fixes
+
+- Report streams now destroy their underlying response stream and JSON parser when consumers exit iteration early
+- Evicted gRPC service clients are closed safely; rejected `close()` calls no longer leak channels
+- Cached gRPC service clients past their TTL are no longer returned, and expired entries awaiting purge no longer resolve to `undefined`
+- `listAccessibleCustomers()` closes its one-shot `CustomerServiceClient` after the call instead of caching it
+
 ### 23.0.0
 
 ### Version Upgrade
