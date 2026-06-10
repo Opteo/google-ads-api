@@ -133,10 +133,13 @@ export class Service {
     return token;
   }
 
-  protected loadService<T = AllServices>(service: ServiceName): T {
+  protected loadService<T = AllServices>(
+    service: ServiceName,
+    options?: { skipCache?: boolean }
+  ): T {
     const serviceCacheKey = `${service}_${this.clientOptions.client_id}_${this.customerOptions.refresh_token}`;
 
-    if (serviceCache.has(serviceCacheKey)) {
+    if (!options?.skipCache && serviceCache.has(serviceCacheKey)) {
       return serviceCache.get(serviceCacheKey) as unknown as T;
     }
 
@@ -151,7 +154,9 @@ export class Service {
       sslCreds: this.getCredentials(),
     });
 
-    serviceCache.set(serviceCacheKey, client);
+    if (!options?.skipCache) {
+      serviceCache.set(serviceCacheKey, client);
+    }
     return client as unknown as T;
   }
 

@@ -27,6 +27,22 @@ describe("Service", () => {
       expect(service).toBeInstanceOf(GoogleAdsServiceClient);
     });
 
+    it("does not cache the service when skipCache is set", () => {
+      const customer = newCustomer();
+      // @ts-expect-error Accessing private method for test purposes
+      const service = customer.loadService("CustomerServiceClient", {
+        skipCache: true,
+      });
+      expect(service).toBeDefined();
+
+      const cachedKeys = [...serviceCache.keys()];
+      expect(
+        cachedKeys.some((key) =>
+          String(key).startsWith("CustomerServiceClient")
+        )
+      ).toBe(false);
+    });
+
     it("should throw an error if the service is invalid", () => {
       const customer = newCustomer();
       try {
