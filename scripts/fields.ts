@@ -318,7 +318,7 @@ export function isSegment(field: resources.GoogleAdsField): boolean {
   );
 }
 
-const resourceNameRegex = new RegExp(/^.*\.resource_name$/g);
+const resourceNameRegex = /^.*\.resource_name$/;
 
 export function isResourceName(field: resources.GoogleAdsField): boolean {
   if (isDefinedAndNotNull(field.name)) {

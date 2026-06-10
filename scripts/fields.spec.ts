@@ -67,6 +67,22 @@ describe("other checkers", () => {
     expect(isResourceName(nonResourceNameField)).toBeFalsy();
   });
 
+  it("isResourceName matches consecutive resource_name fields", () => {
+    // Regression: a stateful /g regex carried lastIndex between calls,
+    // silently dropping resource_name fields tested back-to-back
+    const fields = [
+      "keyword_theme_constant.resource_name",
+      "keyword_view.resource_name",
+      "label.resource_name",
+    ].map((name) => new resources.GoogleAdsField({ name }));
+
+    expect(fields.map((field) => isResourceName(field))).toEqual([
+      true,
+      true,
+      true,
+    ]);
+  });
+
   it("hasEnumDataType", () => {
     const doesHaveEnumDataType = new resources.GoogleAdsField({
       data_type: "ENUM",
