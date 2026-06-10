@@ -139,8 +139,11 @@ export class Service {
   ): T {
     const serviceCacheKey = `${service}_${this.clientOptions.client_id}_${this.customerOptions.refresh_token}`;
 
-    if (!options?.skipCache && serviceCache.has(serviceCacheKey)) {
-      return serviceCache.get(serviceCacheKey) as unknown as T;
+    if (!options?.skipCache) {
+      const cachedService = serviceCache.get(serviceCacheKey);
+      if (cachedService) {
+        return cachedService as unknown as T;
+      }
     }
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires

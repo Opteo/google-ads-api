@@ -1,4 +1,8 @@
-import { GoogleAdsServiceClient, protos } from "google-ads-node";
+import {
+  CustomerServiceClient,
+  GoogleAdsServiceClient,
+  protos,
+} from "google-ads-node";
 import { operationsProtos } from "google-gax";
 import { errors, services } from "./protos";
 import { disposeService, FAILURE_KEY, serviceCache } from "./service";
@@ -280,8 +284,26 @@ describe("Service", () => {
       expect(() => disposeService({ close })).not.toThrow();
     });
 
-    it("does not return stale entries from the cache", () => {
-      expect(serviceCache.checkAgeOnGet).toBe(true);
+    it("creates a fresh service when the cached one has expired but is not yet purged", () => {
+      const customer = newCustomer();
+      // @ts-expect-error Accessing private method for test purposes
+      const original = customer.loadService<CustomerServiceClient>(
+        "CustomerServiceClient"
+      );
+      const key = [...serviceCache.keys()].find((cacheKey) =>
+        String(cacheKey).startsWith("CustomerServiceClient")
+      ) as string;
+      expect(key).toBeDefined();
+
+      serviceCache.set(key, original, { ttl: 1 });
+      const start = Date.now();
+      while (Date.now() - start < 10) {
+        void 0;
+      }
+
+      // @ts-expect-error Accessing private method for test purposes
+      const reloaded = customer.loadService("CustomerServiceClient");
+      expect(reloaded).toBeInstanceOf(CustomerServiceClient);
     });
   });
 });
