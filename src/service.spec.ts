@@ -23,6 +23,12 @@ beforeAll(() => {
 });
 
 describe("Service", () => {
+  afterEach(() => {
+    // Tests share the module-level cache; clear it so no test depends on
+    // entries cached by another
+    serviceCache.clear();
+  });
+
   describe("loadService", () => {
     it("should load a valid service", () => {
       const customer = newCustomer();
