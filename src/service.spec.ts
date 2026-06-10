@@ -1,4 +1,4 @@
-import { GoogleAdsServiceClient } from "google-ads-node";
+import { GoogleAdsServiceClient, protos } from "google-ads-node";
 import { operationsProtos } from "google-gax";
 import { errors, services } from "./protos";
 import { disposeService, FAILURE_KEY, serviceCache } from "./service";
@@ -238,6 +238,18 @@ describe("Service", () => {
         "developer-token": MOCK_DEVELOPER_TOKEN,
         "login-customer-id": MOCK_LOGIN_CID,
       });
+    });
+  });
+
+  describe("FAILURE_KEY", () => {
+    it("matches the API version of the installed google-ads-node package", () => {
+      const installedVersions = Object.keys(
+        (protos.google.ads as any).googleads
+      );
+      expect(installedVersions).toContain(googleAdsVersion);
+      expect(FAILURE_KEY).toBe(
+        `google.ads.googleads.${googleAdsVersion}.errors.googleadsfailure-bin`
+      );
     });
   });
 
