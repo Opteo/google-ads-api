@@ -3,8 +3,30 @@
 // eslint-disable-next-line
 export namespace enums {
   /**
+   * @name ReservationRequestTypeEnum.ReservationRequestType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ReservationRequestTypeEnum.ReservationRequestType
+   */
+  export enum ReservationRequestType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    BOOK = 2, // BOOK
+    HOLD = 3, // HOLD
+  }
+
+  /**
+   * @name PreviewTypeEnum.PreviewType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/PreviewTypeEnum.PreviewType
+   */
+  export enum PreviewType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    UI_PREVIEW = 2, // UI_PREVIEW
+    YOUTUBE_LIVE_PREVIEW = 3, // YOUTUBE_LIVE_PREVIEW
+  }
+
+  /**
    * @name PolicyTopicEntryTypeEnum.PolicyTopicEntryType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/PolicyTopicEntryTypeEnum.PolicyTopicEntryType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/PolicyTopicEntryTypeEnum.PolicyTopicEntryType
    */
   export enum PolicyTopicEntryType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -19,7 +41,7 @@ export namespace enums {
 
   /**
    * @name PolicyTopicEvidenceDestinationMismatchUrlTypeEnum.PolicyTopicEvidenceDestinationMismatchUrlType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/PolicyTopicEvidenceDestinationMismatchUrlTypeEnum.PolicyTopicEvidenceDestinationMismatchUrlType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/PolicyTopicEvidenceDestinationMismatchUrlTypeEnum.PolicyTopicEvidenceDestinationMismatchUrlType
    */
   export enum PolicyTopicEvidenceDestinationMismatchUrlType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -33,7 +55,7 @@ export namespace enums {
 
   /**
    * @name PolicyTopicEvidenceDestinationNotWorkingDeviceEnum.PolicyTopicEvidenceDestinationNotWorkingDevice
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/PolicyTopicEvidenceDestinationNotWorkingDeviceEnum.PolicyTopicEvidenceDestinationNotWorkingDevice
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/PolicyTopicEvidenceDestinationNotWorkingDeviceEnum.PolicyTopicEvidenceDestinationNotWorkingDevice
    */
   export enum PolicyTopicEvidenceDestinationNotWorkingDevice {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -45,7 +67,7 @@ export namespace enums {
 
   /**
    * @name PolicyTopicEvidenceDestinationNotWorkingDnsErrorTypeEnum.PolicyTopicEvidenceDestinationNotWorkingDnsErrorType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/PolicyTopicEvidenceDestinationNotWorkingDnsErrorTypeEnum.PolicyTopicEvidenceDestinationNotWorkingDnsErrorType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/PolicyTopicEvidenceDestinationNotWorkingDnsErrorTypeEnum.PolicyTopicEvidenceDestinationNotWorkingDnsErrorType
    */
   export enum PolicyTopicEvidenceDestinationNotWorkingDnsErrorType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -56,7 +78,7 @@ export namespace enums {
 
   /**
    * @name AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus
    */
   export enum AssetLinkPrimaryStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -71,7 +93,7 @@ export namespace enums {
 
   /**
    * @name AssetLinkPrimaryStatusReasonEnum.AssetLinkPrimaryStatusReason
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AssetLinkPrimaryStatusReasonEnum.AssetLinkPrimaryStatusReason
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AssetLinkPrimaryStatusReasonEnum.AssetLinkPrimaryStatusReason
    */
   export enum AssetLinkPrimaryStatusReason {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -85,7 +107,7 @@ export namespace enums {
 
   /**
    * @name AssetOfflineEvaluationErrorReasonsEnum.AssetOfflineEvaluationErrorReasons
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AssetOfflineEvaluationErrorReasonsEnum.AssetOfflineEvaluationErrorReasons
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AssetOfflineEvaluationErrorReasonsEnum.AssetOfflineEvaluationErrorReasons
    */
   export enum AssetOfflineEvaluationErrorReasons {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -101,7 +123,7 @@ export namespace enums {
 
   /**
    * @name PolicyApprovalStatusEnum.PolicyApprovalStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/PolicyApprovalStatusEnum.PolicyApprovalStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/PolicyApprovalStatusEnum.PolicyApprovalStatus
    */
   export enum PolicyApprovalStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -114,7 +136,7 @@ export namespace enums {
 
   /**
    * @name PolicyReviewStatusEnum.PolicyReviewStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/PolicyReviewStatusEnum.PolicyReviewStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/PolicyReviewStatusEnum.PolicyReviewStatus
    */
   export enum PolicyReviewStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -127,7 +149,7 @@ export namespace enums {
 
   /**
    * @name AssetPerformanceLabelEnum.AssetPerformanceLabel
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AssetPerformanceLabelEnum.AssetPerformanceLabel
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AssetPerformanceLabelEnum.AssetPerformanceLabel
    */
   export enum AssetPerformanceLabel {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -142,7 +164,7 @@ export namespace enums {
 
   /**
    * @name ServedAssetFieldTypeEnum.ServedAssetFieldType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ServedAssetFieldTypeEnum.ServedAssetFieldType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ServedAssetFieldTypeEnum.ServedAssetFieldType
    */
   export enum ServedAssetFieldType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -186,7 +208,7 @@ export namespace enums {
 
   /**
    * @name DisplayAdFormatSettingEnum.DisplayAdFormatSetting
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/DisplayAdFormatSettingEnum.DisplayAdFormatSetting
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/DisplayAdFormatSettingEnum.DisplayAdFormatSetting
    */
   export enum DisplayAdFormatSetting {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -198,7 +220,7 @@ export namespace enums {
 
   /**
    * @name DisplayUploadProductTypeEnum.DisplayUploadProductType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/DisplayUploadProductTypeEnum.DisplayUploadProductType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/DisplayUploadProductTypeEnum.DisplayUploadProductType
    */
   export enum DisplayUploadProductType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -217,7 +239,7 @@ export namespace enums {
 
   /**
    * @name LegacyAppInstallAdAppStoreEnum.LegacyAppInstallAdAppStore
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LegacyAppInstallAdAppStoreEnum.LegacyAppInstallAdAppStore
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LegacyAppInstallAdAppStoreEnum.LegacyAppInstallAdAppStore
    */
   export enum LegacyAppInstallAdAppStore {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -231,7 +253,7 @@ export namespace enums {
 
   /**
    * @name MimeTypeEnum.MimeType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/MimeTypeEnum.MimeType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/MimeTypeEnum.MimeType
    */
   export enum MimeType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -252,7 +274,7 @@ export namespace enums {
 
   /**
    * @name VideoThumbnailEnum.VideoThumbnail
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/VideoThumbnailEnum.VideoThumbnail
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/VideoThumbnailEnum.VideoThumbnail
    */
   export enum VideoThumbnail {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -265,7 +287,7 @@ export namespace enums {
 
   /**
    * @name ApplicationInstanceEnum.ApplicationInstance
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ApplicationInstanceEnum.ApplicationInstance
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ApplicationInstanceEnum.ApplicationInstance
    */
   export enum ApplicationInstance {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -276,7 +298,7 @@ export namespace enums {
 
   /**
    * @name ChainRelationshipTypeEnum.ChainRelationshipType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ChainRelationshipTypeEnum.ChainRelationshipType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ChainRelationshipTypeEnum.ChainRelationshipType
    */
   export enum ChainRelationshipType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -287,7 +309,7 @@ export namespace enums {
 
   /**
    * @name LocationOwnershipTypeEnum.LocationOwnershipType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LocationOwnershipTypeEnum.LocationOwnershipType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LocationOwnershipTypeEnum.LocationOwnershipType
    */
   export enum LocationOwnershipType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -298,7 +320,7 @@ export namespace enums {
 
   /**
    * @name LocationStringFilterTypeEnum.LocationStringFilterType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LocationStringFilterTypeEnum.LocationStringFilterType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LocationStringFilterTypeEnum.LocationStringFilterType
    */
   export enum LocationStringFilterType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -308,7 +330,7 @@ export namespace enums {
 
   /**
    * @name AgeRangeTypeEnum.AgeRangeType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AgeRangeTypeEnum.AgeRangeType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AgeRangeTypeEnum.AgeRangeType
    */
   export enum AgeRangeType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -324,7 +346,7 @@ export namespace enums {
 
   /**
    * @name AppPaymentModelTypeEnum.AppPaymentModelType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AppPaymentModelTypeEnum.AppPaymentModelType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AppPaymentModelTypeEnum.AppPaymentModelType
    */
   export enum AppPaymentModelType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -334,7 +356,7 @@ export namespace enums {
 
   /**
    * @name BrandRequestRejectionReasonEnum.BrandRequestRejectionReason
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/BrandRequestRejectionReasonEnum.BrandRequestRejectionReason
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/BrandRequestRejectionReasonEnum.BrandRequestRejectionReason
    */
   export enum BrandRequestRejectionReason {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -347,7 +369,7 @@ export namespace enums {
 
   /**
    * @name BrandStateEnum.BrandState
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/BrandStateEnum.BrandState
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/BrandStateEnum.BrandState
    */
   export enum BrandState {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -362,7 +384,7 @@ export namespace enums {
 
   /**
    * @name ContentLabelTypeEnum.ContentLabelType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ContentLabelTypeEnum.ContentLabelType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ContentLabelTypeEnum.ContentLabelType
    */
   export enum ContentLabelType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -396,7 +418,7 @@ export namespace enums {
 
   /**
    * @name DayOfWeekEnum.DayOfWeek
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/DayOfWeekEnum.DayOfWeek
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/DayOfWeekEnum.DayOfWeek
    */
   export enum DayOfWeek {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -412,7 +434,7 @@ export namespace enums {
 
   /**
    * @name DeviceEnum.Device
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/DeviceEnum.Device
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/DeviceEnum.Device
    */
   export enum Device {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -426,7 +448,7 @@ export namespace enums {
 
   /**
    * @name GenderTypeEnum.GenderType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/GenderTypeEnum.GenderType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/GenderTypeEnum.GenderType
    */
   export enum GenderType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -438,7 +460,7 @@ export namespace enums {
 
   /**
    * @name HotelDateSelectionTypeEnum.HotelDateSelectionType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/HotelDateSelectionTypeEnum.HotelDateSelectionType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/HotelDateSelectionTypeEnum.HotelDateSelectionType
    */
   export enum HotelDateSelectionType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -449,7 +471,7 @@ export namespace enums {
 
   /**
    * @name IncomeRangeTypeEnum.IncomeRangeType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/IncomeRangeTypeEnum.IncomeRangeType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/IncomeRangeTypeEnum.IncomeRangeType
    */
   export enum IncomeRangeType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -465,7 +487,7 @@ export namespace enums {
 
   /**
    * @name InteractionTypeEnum.InteractionType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/InteractionTypeEnum.InteractionType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/InteractionTypeEnum.InteractionType
    */
   export enum InteractionType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -475,7 +497,7 @@ export namespace enums {
 
   /**
    * @name KeywordMatchTypeEnum.KeywordMatchType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/KeywordMatchTypeEnum.KeywordMatchType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/KeywordMatchTypeEnum.KeywordMatchType
    */
   export enum KeywordMatchType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -487,7 +509,7 @@ export namespace enums {
 
   /**
    * @name ListingGroupTypeEnum.ListingGroupType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ListingGroupTypeEnum.ListingGroupType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ListingGroupTypeEnum.ListingGroupType
    */
   export enum ListingGroupType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -498,7 +520,7 @@ export namespace enums {
 
   /**
    * @name LocationGroupRadiusUnitsEnum.LocationGroupRadiusUnits
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LocationGroupRadiusUnitsEnum.LocationGroupRadiusUnits
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LocationGroupRadiusUnitsEnum.LocationGroupRadiusUnits
    */
   export enum LocationGroupRadiusUnits {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -510,7 +532,7 @@ export namespace enums {
 
   /**
    * @name MinuteOfHourEnum.MinuteOfHour
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/MinuteOfHourEnum.MinuteOfHour
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/MinuteOfHourEnum.MinuteOfHour
    */
   export enum MinuteOfHour {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -523,7 +545,7 @@ export namespace enums {
 
   /**
    * @name ParentalStatusTypeEnum.ParentalStatusType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ParentalStatusTypeEnum.ParentalStatusType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ParentalStatusTypeEnum.ParentalStatusType
    */
   export enum ParentalStatusType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -535,7 +557,7 @@ export namespace enums {
 
   /**
    * @name ProductCategoryLevelEnum.ProductCategoryLevel
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ProductCategoryLevelEnum.ProductCategoryLevel
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ProductCategoryLevelEnum.ProductCategoryLevel
    */
   export enum ProductCategoryLevel {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -549,7 +571,7 @@ export namespace enums {
 
   /**
    * @name ProductChannelEnum.ProductChannel
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ProductChannelEnum.ProductChannel
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ProductChannelEnum.ProductChannel
    */
   export enum ProductChannel {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -560,7 +582,7 @@ export namespace enums {
 
   /**
    * @name ProductChannelExclusivityEnum.ProductChannelExclusivity
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ProductChannelExclusivityEnum.ProductChannelExclusivity
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ProductChannelExclusivityEnum.ProductChannelExclusivity
    */
   export enum ProductChannelExclusivity {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -571,7 +593,7 @@ export namespace enums {
 
   /**
    * @name ProductConditionEnum.ProductCondition
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ProductConditionEnum.ProductCondition
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ProductConditionEnum.ProductCondition
    */
   export enum ProductCondition {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -583,7 +605,7 @@ export namespace enums {
 
   /**
    * @name ProductCustomAttributeIndexEnum.ProductCustomAttributeIndex
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ProductCustomAttributeIndexEnum.ProductCustomAttributeIndex
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ProductCustomAttributeIndexEnum.ProductCustomAttributeIndex
    */
   export enum ProductCustomAttributeIndex {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -597,7 +619,7 @@ export namespace enums {
 
   /**
    * @name ProductTypeLevelEnum.ProductTypeLevel
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ProductTypeLevelEnum.ProductTypeLevel
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ProductTypeLevelEnum.ProductTypeLevel
    */
   export enum ProductTypeLevel {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -611,7 +633,7 @@ export namespace enums {
 
   /**
    * @name ProximityRadiusUnitsEnum.ProximityRadiusUnits
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ProximityRadiusUnitsEnum.ProximityRadiusUnits
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ProximityRadiusUnitsEnum.ProximityRadiusUnits
    */
   export enum ProximityRadiusUnits {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -622,7 +644,7 @@ export namespace enums {
 
   /**
    * @name WebpageConditionOperandEnum.WebpageConditionOperand
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/WebpageConditionOperandEnum.WebpageConditionOperand
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/WebpageConditionOperandEnum.WebpageConditionOperand
    */
   export enum WebpageConditionOperand {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -636,7 +658,7 @@ export namespace enums {
 
   /**
    * @name WebpageConditionOperatorEnum.WebpageConditionOperator
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/WebpageConditionOperatorEnum.WebpageConditionOperator
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/WebpageConditionOperatorEnum.WebpageConditionOperator
    */
   export enum WebpageConditionOperator {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -647,7 +669,7 @@ export namespace enums {
 
   /**
    * @name BusinessMessageCallToActionTypeEnum.BusinessMessageCallToActionType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/BusinessMessageCallToActionTypeEnum.BusinessMessageCallToActionType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/BusinessMessageCallToActionTypeEnum.BusinessMessageCallToActionType
    */
   export enum BusinessMessageCallToActionType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -664,7 +686,7 @@ export namespace enums {
 
   /**
    * @name BusinessMessageProviderEnum.BusinessMessageProvider
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/BusinessMessageProviderEnum.BusinessMessageProvider
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/BusinessMessageProviderEnum.BusinessMessageProvider
    */
   export enum BusinessMessageProvider {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -676,7 +698,7 @@ export namespace enums {
 
   /**
    * @name CallConversionReportingStateEnum.CallConversionReportingState
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CallConversionReportingStateEnum.CallConversionReportingState
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CallConversionReportingStateEnum.CallConversionReportingState
    */
   export enum CallConversionReportingState {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -688,7 +710,7 @@ export namespace enums {
 
   /**
    * @name CallToActionTypeEnum.CallToActionType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CallToActionTypeEnum.CallToActionType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CallToActionTypeEnum.CallToActionType
    */
   export enum CallToActionType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -714,7 +736,7 @@ export namespace enums {
 
   /**
    * @name LeadFormCallToActionTypeEnum.LeadFormCallToActionType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LeadFormCallToActionTypeEnum.LeadFormCallToActionType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LeadFormCallToActionTypeEnum.LeadFormCallToActionType
    */
   export enum LeadFormCallToActionType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -737,7 +759,7 @@ export namespace enums {
 
   /**
    * @name LeadFormDesiredIntentEnum.LeadFormDesiredIntent
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LeadFormDesiredIntentEnum.LeadFormDesiredIntent
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LeadFormDesiredIntentEnum.LeadFormDesiredIntent
    */
   export enum LeadFormDesiredIntent {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -748,7 +770,7 @@ export namespace enums {
 
   /**
    * @name LeadFormFieldUserInputTypeEnum.LeadFormFieldUserInputType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LeadFormFieldUserInputTypeEnum.LeadFormFieldUserInputType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LeadFormFieldUserInputTypeEnum.LeadFormFieldUserInputType
    */
   export enum LeadFormFieldUserInputType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -873,7 +895,7 @@ export namespace enums {
 
   /**
    * @name LeadFormPostSubmitCallToActionTypeEnum.LeadFormPostSubmitCallToActionType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LeadFormPostSubmitCallToActionTypeEnum.LeadFormPostSubmitCallToActionType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LeadFormPostSubmitCallToActionTypeEnum.LeadFormPostSubmitCallToActionType
    */
   export enum LeadFormPostSubmitCallToActionType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -886,7 +908,7 @@ export namespace enums {
 
   /**
    * @name MobileAppVendorEnum.MobileAppVendor
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/MobileAppVendorEnum.MobileAppVendor
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/MobileAppVendorEnum.MobileAppVendor
    */
   export enum MobileAppVendor {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -897,7 +919,7 @@ export namespace enums {
 
   /**
    * @name PriceExtensionPriceQualifierEnum.PriceExtensionPriceQualifier
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/PriceExtensionPriceQualifierEnum.PriceExtensionPriceQualifier
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/PriceExtensionPriceQualifierEnum.PriceExtensionPriceQualifier
    */
   export enum PriceExtensionPriceQualifier {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -909,7 +931,7 @@ export namespace enums {
 
   /**
    * @name PriceExtensionPriceUnitEnum.PriceExtensionPriceUnit
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/PriceExtensionPriceUnitEnum.PriceExtensionPriceUnit
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/PriceExtensionPriceUnitEnum.PriceExtensionPriceUnit
    */
   export enum PriceExtensionPriceUnit {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -924,7 +946,7 @@ export namespace enums {
 
   /**
    * @name PriceExtensionTypeEnum.PriceExtensionType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/PriceExtensionTypeEnum.PriceExtensionType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/PriceExtensionTypeEnum.PriceExtensionType
    */
   export enum PriceExtensionType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -942,7 +964,7 @@ export namespace enums {
 
   /**
    * @name PromotionBarcodeTypeEnum.PromotionBarcodeType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/PromotionBarcodeTypeEnum.PromotionBarcodeType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/PromotionBarcodeTypeEnum.PromotionBarcodeType
    */
   export enum PromotionBarcodeType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -961,7 +983,7 @@ export namespace enums {
 
   /**
    * @name PromotionExtensionDiscountModifierEnum.PromotionExtensionDiscountModifier
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/PromotionExtensionDiscountModifierEnum.PromotionExtensionDiscountModifier
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/PromotionExtensionDiscountModifierEnum.PromotionExtensionDiscountModifier
    */
   export enum PromotionExtensionDiscountModifier {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -971,7 +993,7 @@ export namespace enums {
 
   /**
    * @name PromotionExtensionOccasionEnum.PromotionExtensionOccasion
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/PromotionExtensionOccasionEnum.PromotionExtensionOccasion
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/PromotionExtensionOccasionEnum.PromotionExtensionOccasion
    */
   export enum PromotionExtensionOccasion {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1017,7 +1039,7 @@ export namespace enums {
 
   /**
    * @name AudienceInsightsDimensionEnum.AudienceInsightsDimension
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AudienceInsightsDimensionEnum.AudienceInsightsDimension
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AudienceInsightsDimensionEnum.AudienceInsightsDimension
    */
   export enum AudienceInsightsDimension {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1042,7 +1064,7 @@ export namespace enums {
 
   /**
    * @name InsightsKnowledgeGraphEntityCapabilitiesEnum.InsightsKnowledgeGraphEntityCapabilities
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/InsightsKnowledgeGraphEntityCapabilitiesEnum.InsightsKnowledgeGraphEntityCapabilities
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/InsightsKnowledgeGraphEntityCapabilitiesEnum.InsightsKnowledgeGraphEntityCapabilities
    */
   export enum InsightsKnowledgeGraphEntityCapabilities {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1053,7 +1075,7 @@ export namespace enums {
 
   /**
    * @name UserListTypeEnum.UserListType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/UserListTypeEnum.UserListType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/UserListTypeEnum.UserListType
    */
   export enum UserListType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1069,7 +1091,7 @@ export namespace enums {
 
   /**
    * @name YouTubeVideoPropertyEnum.YouTubeVideoProperty
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/YouTubeVideoPropertyEnum.YouTubeVideoProperty
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/YouTubeVideoPropertyEnum.YouTubeVideoProperty
    */
   export enum YouTubeVideoProperty {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1080,7 +1102,7 @@ export namespace enums {
 
   /**
    * @name FixedCpmGoalEnum.FixedCpmGoal
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/FixedCpmGoalEnum.FixedCpmGoal
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/FixedCpmGoalEnum.FixedCpmGoal
    */
   export enum FixedCpmGoal {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1091,7 +1113,7 @@ export namespace enums {
 
   /**
    * @name FixedCpmTargetFrequencyTimeUnitEnum.FixedCpmTargetFrequencyTimeUnit
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/FixedCpmTargetFrequencyTimeUnitEnum.FixedCpmTargetFrequencyTimeUnit
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/FixedCpmTargetFrequencyTimeUnitEnum.FixedCpmTargetFrequencyTimeUnit
    */
   export enum FixedCpmTargetFrequencyTimeUnit {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1101,7 +1123,7 @@ export namespace enums {
 
   /**
    * @name TargetFrequencyTimeUnitEnum.TargetFrequencyTimeUnit
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/TargetFrequencyTimeUnitEnum.TargetFrequencyTimeUnit
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/TargetFrequencyTimeUnitEnum.TargetFrequencyTimeUnit
    */
   export enum TargetFrequencyTimeUnit {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1112,7 +1134,7 @@ export namespace enums {
 
   /**
    * @name TargetImpressionShareLocationEnum.TargetImpressionShareLocation
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/TargetImpressionShareLocationEnum.TargetImpressionShareLocation
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/TargetImpressionShareLocationEnum.TargetImpressionShareLocation
    */
   export enum TargetImpressionShareLocation {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1124,7 +1146,7 @@ export namespace enums {
 
   /**
    * @name CustomerLifecycleOptimizationModeEnum.CustomerLifecycleOptimizationMode
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CustomerLifecycleOptimizationModeEnum.CustomerLifecycleOptimizationMode
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CustomerLifecycleOptimizationModeEnum.CustomerLifecycleOptimizationMode
    */
   export enum CustomerLifecycleOptimizationMode {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1135,7 +1157,7 @@ export namespace enums {
 
   /**
    * @name ConsentStatusEnum.ConsentStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ConsentStatusEnum.ConsentStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ConsentStatusEnum.ConsentStatus
    */
   export enum ConsentStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1146,7 +1168,7 @@ export namespace enums {
 
   /**
    * @name AdvertisingChannelSubTypeEnum.AdvertisingChannelSubType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AdvertisingChannelSubTypeEnum.AdvertisingChannelSubType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AdvertisingChannelSubTypeEnum.AdvertisingChannelSubType
    */
   export enum AdvertisingChannelSubType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1174,7 +1196,7 @@ export namespace enums {
 
   /**
    * @name AdvertisingChannelTypeEnum.AdvertisingChannelType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AdvertisingChannelTypeEnum.AdvertisingChannelType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AdvertisingChannelTypeEnum.AdvertisingChannelType
    */
   export enum AdvertisingChannelType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1195,7 +1217,7 @@ export namespace enums {
 
   /**
    * @name CriterionCategoryChannelAvailabilityModeEnum.CriterionCategoryChannelAvailabilityMode
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CriterionCategoryChannelAvailabilityModeEnum.CriterionCategoryChannelAvailabilityMode
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CriterionCategoryChannelAvailabilityModeEnum.CriterionCategoryChannelAvailabilityMode
    */
   export enum CriterionCategoryChannelAvailabilityMode {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1207,7 +1229,7 @@ export namespace enums {
 
   /**
    * @name CriterionCategoryLocaleAvailabilityModeEnum.CriterionCategoryLocaleAvailabilityMode
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CriterionCategoryLocaleAvailabilityModeEnum.CriterionCategoryLocaleAvailabilityMode
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CriterionCategoryLocaleAvailabilityModeEnum.CriterionCategoryLocaleAvailabilityMode
    */
   export enum CriterionCategoryLocaleAvailabilityMode {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1220,7 +1242,7 @@ export namespace enums {
 
   /**
    * @name CustomizerAttributeTypeEnum.CustomizerAttributeType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CustomizerAttributeTypeEnum.CustomizerAttributeType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CustomizerAttributeTypeEnum.CustomizerAttributeType
    */
   export enum CustomizerAttributeType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1233,7 +1255,7 @@ export namespace enums {
 
   /**
    * @name MonthOfYearEnum.MonthOfYear
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/MonthOfYearEnum.MonthOfYear
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/MonthOfYearEnum.MonthOfYear
    */
   export enum MonthOfYear {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1253,8 +1275,32 @@ export namespace enums {
   }
 
   /**
+   * @name OptimizeAssetsExperimentSubtypeEnum.OptimizeAssetsExperimentSubtype
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/OptimizeAssetsExperimentSubtypeEnum.OptimizeAssetsExperimentSubtype
+   */
+  export enum OptimizeAssetsExperimentSubtype {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ADD_ASSETS_TO_ASSETLESS_RETAIL = 2, // ADD_ASSETS_TO_ASSETLESS_RETAIL
+    ADD_VIDEO_ASSETS_TO_VIDEOLESS = 3, // ADD_VIDEO_ASSETS_TO_VIDEOLESS
+    COMPARE_ASSETS = 4, // COMPARE_ASSETS
+  }
+
+  /**
+   * @name VideoExperimentSubtypeEnum.VideoExperimentSubtype
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/VideoExperimentSubtypeEnum.VideoExperimentSubtype
+   */
+  export enum VideoExperimentSubtype {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    DEMAND_GEN_ASSET = 2, // DEMAND_GEN_ASSET
+    ASSET = 3, // ASSET
+    ASSET_UPLIFT = 4, // ASSET_UPLIFT
+  }
+
+  /**
    * @name AppUrlOperatingSystemTypeEnum.AppUrlOperatingSystemType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AppUrlOperatingSystemTypeEnum.AppUrlOperatingSystemType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AppUrlOperatingSystemTypeEnum.AppUrlOperatingSystemType
    */
   export enum AppUrlOperatingSystemType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1265,7 +1311,7 @@ export namespace enums {
 
   /**
    * @name FrequencyCapEventTypeEnum.FrequencyCapEventType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/FrequencyCapEventTypeEnum.FrequencyCapEventType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/FrequencyCapEventTypeEnum.FrequencyCapEventType
    */
   export enum FrequencyCapEventType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1276,7 +1322,7 @@ export namespace enums {
 
   /**
    * @name FrequencyCapLevelEnum.FrequencyCapLevel
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/FrequencyCapLevelEnum.FrequencyCapLevel
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/FrequencyCapLevelEnum.FrequencyCapLevel
    */
   export enum FrequencyCapLevel {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1288,7 +1334,7 @@ export namespace enums {
 
   /**
    * @name FrequencyCapTimeUnitEnum.FrequencyCapTimeUnit
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/FrequencyCapTimeUnitEnum.FrequencyCapTimeUnit
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/FrequencyCapTimeUnitEnum.FrequencyCapTimeUnit
    */
   export enum FrequencyCapTimeUnit {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1300,7 +1346,7 @@ export namespace enums {
 
   /**
    * @name KeywordPlanAggregateMetricTypeEnum.KeywordPlanAggregateMetricType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/KeywordPlanAggregateMetricTypeEnum.KeywordPlanAggregateMetricType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/KeywordPlanAggregateMetricTypeEnum.KeywordPlanAggregateMetricType
    */
   export enum KeywordPlanAggregateMetricType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1310,7 +1356,7 @@ export namespace enums {
 
   /**
    * @name KeywordPlanCompetitionLevelEnum.KeywordPlanCompetitionLevel
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/KeywordPlanCompetitionLevelEnum.KeywordPlanCompetitionLevel
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/KeywordPlanCompetitionLevelEnum.KeywordPlanCompetitionLevel
    */
   export enum KeywordPlanCompetitionLevel {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1322,7 +1368,7 @@ export namespace enums {
 
   /**
    * @name KeywordPlanConceptGroupTypeEnum.KeywordPlanConceptGroupType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/KeywordPlanConceptGroupTypeEnum.KeywordPlanConceptGroupType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/KeywordPlanConceptGroupTypeEnum.KeywordPlanConceptGroupType
    */
   export enum KeywordPlanConceptGroupType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1334,7 +1380,7 @@ export namespace enums {
 
   /**
    * @name ExperimentMetricEnum.ExperimentMetric
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ExperimentMetricEnum.ExperimentMetric
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ExperimentMetricEnum.ExperimentMetric
    */
   export enum ExperimentMetric {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1356,7 +1402,7 @@ export namespace enums {
 
   /**
    * @name ExperimentMetricDirectionEnum.ExperimentMetricDirection
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ExperimentMetricDirectionEnum.ExperimentMetricDirection
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ExperimentMetricDirectionEnum.ExperimentMetricDirection
    */
   export enum ExperimentMetricDirection {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1370,7 +1416,7 @@ export namespace enums {
 
   /**
    * @name InteractionEventTypeEnum.InteractionEventType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/InteractionEventTypeEnum.InteractionEventType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/InteractionEventTypeEnum.InteractionEventType
    */
   export enum InteractionEventType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1383,7 +1429,7 @@ export namespace enums {
 
   /**
    * @name QualityScoreBucketEnum.QualityScoreBucket
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/QualityScoreBucketEnum.QualityScoreBucket
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/QualityScoreBucketEnum.QualityScoreBucket
    */
   export enum QualityScoreBucket {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1395,7 +1441,7 @@ export namespace enums {
 
   /**
    * @name UserIdentifierSourceEnum.UserIdentifierSource
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/UserIdentifierSourceEnum.UserIdentifierSource
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/UserIdentifierSourceEnum.UserIdentifierSource
    */
   export enum UserIdentifierSource {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1406,7 +1452,7 @@ export namespace enums {
 
   /**
    * @name AdDestinationTypeEnum.AdDestinationType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AdDestinationTypeEnum.AdDestinationType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AdDestinationTypeEnum.AdDestinationType
    */
   export enum AdDestinationType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1426,7 +1472,7 @@ export namespace enums {
 
   /**
    * @name AdFormatTypeEnum.AdFormatType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AdFormatTypeEnum.AdFormatType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AdFormatTypeEnum.AdFormatType
    */
   export enum AdFormatType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1449,7 +1495,7 @@ export namespace enums {
 
   /**
    * @name AdNetworkTypeEnum.AdNetworkType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AdNetworkTypeEnum.AdNetworkType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AdNetworkTypeEnum.AdNetworkType
    */
   export enum AdNetworkType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1468,7 +1514,7 @@ export namespace enums {
 
   /**
    * @name AdSubNetworkTypeEnum.AdSubNetworkType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AdSubNetworkTypeEnum.AdSubNetworkType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AdSubNetworkTypeEnum.AdSubNetworkType
    */
   export enum AdSubNetworkType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1481,7 +1527,7 @@ export namespace enums {
 
   /**
    * @name BudgetCampaignAssociationStatusEnum.BudgetCampaignAssociationStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/BudgetCampaignAssociationStatusEnum.BudgetCampaignAssociationStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/BudgetCampaignAssociationStatusEnum.BudgetCampaignAssociationStatus
    */
   export enum BudgetCampaignAssociationStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1492,7 +1538,7 @@ export namespace enums {
 
   /**
    * @name ClickTypeEnum.ClickType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ClickTypeEnum.ClickType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ClickTypeEnum.ClickType
    */
   export enum ClickType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1563,7 +1609,7 @@ export namespace enums {
 
   /**
    * @name ConversionActionCategoryEnum.ConversionActionCategory
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ConversionActionCategoryEnum.ConversionActionCategory
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ConversionActionCategoryEnum.ConversionActionCategory
    */
   export enum ConversionActionCategory {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1589,11 +1635,12 @@ export namespace enums {
     STORE_SALE = 21, // STORE_SALE
     QUALIFIED_LEAD = 22, // QUALIFIED_LEAD
     CONVERTED_LEAD = 23, // CONVERTED_LEAD
+    YOUTUBE_FOLLOW_ON_VIEWS = 24, // YOUTUBE_FOLLOW_ON_VIEWS
   }
 
   /**
    * @name ConversionAttributionEventTypeEnum.ConversionAttributionEventType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ConversionAttributionEventTypeEnum.ConversionAttributionEventType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ConversionAttributionEventTypeEnum.ConversionAttributionEventType
    */
   export enum ConversionAttributionEventType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1605,7 +1652,7 @@ export namespace enums {
 
   /**
    * @name ConversionLagBucketEnum.ConversionLagBucket
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ConversionLagBucketEnum.ConversionLagBucket
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ConversionLagBucketEnum.ConversionLagBucket
    */
   export enum ConversionLagBucket {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1633,7 +1680,7 @@ export namespace enums {
 
   /**
    * @name ConversionOrAdjustmentLagBucketEnum.ConversionOrAdjustmentLagBucket
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ConversionOrAdjustmentLagBucketEnum.ConversionOrAdjustmentLagBucket
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ConversionOrAdjustmentLagBucketEnum.ConversionOrAdjustmentLagBucket
    */
   export enum ConversionOrAdjustmentLagBucket {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1683,7 +1730,7 @@ export namespace enums {
 
   /**
    * @name ConversionValueRulePrimaryDimensionEnum.ConversionValueRulePrimaryDimension
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ConversionValueRulePrimaryDimensionEnum.ConversionValueRulePrimaryDimension
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ConversionValueRulePrimaryDimensionEnum.ConversionValueRulePrimaryDimension
    */
   export enum ConversionValueRulePrimaryDimension {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1700,7 +1747,7 @@ export namespace enums {
 
   /**
    * @name ConvertingUserPriorEngagementTypeAndLtvBucketEnum.ConvertingUserPriorEngagementTypeAndLtvBucket
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ConvertingUserPriorEngagementTypeAndLtvBucketEnum.ConvertingUserPriorEngagementTypeAndLtvBucket
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ConvertingUserPriorEngagementTypeAndLtvBucketEnum.ConvertingUserPriorEngagementTypeAndLtvBucket
    */
   export enum ConvertingUserPriorEngagementTypeAndLtvBucket {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1712,7 +1759,7 @@ export namespace enums {
 
   /**
    * @name ExternalConversionSourceEnum.ExternalConversionSource
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ExternalConversionSourceEnum.ExternalConversionSource
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ExternalConversionSourceEnum.ExternalConversionSource
    */
   export enum ExternalConversionSource {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1749,7 +1796,7 @@ export namespace enums {
 
   /**
    * @name HotelPriceBucketEnum.HotelPriceBucket
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/HotelPriceBucketEnum.HotelPriceBucket
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/HotelPriceBucketEnum.HotelPriceBucket
    */
   export enum HotelPriceBucket {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1762,7 +1809,7 @@ export namespace enums {
 
   /**
    * @name HotelRateTypeEnum.HotelRateType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/HotelRateTypeEnum.HotelRateType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/HotelRateTypeEnum.HotelRateType
    */
   export enum HotelRateType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1775,7 +1822,7 @@ export namespace enums {
 
   /**
    * @name LandingPageSourceEnum.LandingPageSource
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LandingPageSourceEnum.LandingPageSource
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LandingPageSourceEnum.LandingPageSource
    */
   export enum LandingPageSource {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1786,7 +1833,7 @@ export namespace enums {
 
   /**
    * @name MatchTypeEnum.MatchType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/MatchTypeEnum.MatchType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/MatchTypeEnum.MatchType
    */
   export enum MatchType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1798,8 +1845,21 @@ export namespace enums {
   }
 
   /**
+   * @name MobileDevicePlatformEnum.MobileDevicePlatform
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/MobileDevicePlatformEnum.MobileDevicePlatform
+   */
+  export enum MobileDevicePlatform {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ANDROID = 2, // ANDROID
+    IOS = 3, // IOS
+    OTHER_MOBILE = 4, // OTHER_MOBILE
+    DESKTOP = 5, // DESKTOP
+  }
+
+  /**
    * @name RecommendationTypeEnum.RecommendationType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/RecommendationTypeEnum.RecommendationType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/RecommendationTypeEnum.RecommendationType
    */
   export enum RecommendationType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1862,7 +1922,7 @@ export namespace enums {
 
   /**
    * @name SearchEngineResultsPageTypeEnum.SearchEngineResultsPageType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/SearchEngineResultsPageTypeEnum.SearchEngineResultsPageType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/SearchEngineResultsPageTypeEnum.SearchEngineResultsPageType
    */
   export enum SearchEngineResultsPageType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1874,7 +1934,7 @@ export namespace enums {
 
   /**
    * @name SearchTermMatchSourceEnum.SearchTermMatchSource
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/SearchTermMatchSourceEnum.SearchTermMatchSource
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/SearchTermMatchSourceEnum.SearchTermMatchSource
    */
   export enum SearchTermMatchSource {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1884,11 +1944,12 @@ export namespace enums {
     AI_MAX_BROAD_MATCH = 4, // AI_MAX_BROAD_MATCH
     DYNAMIC_SEARCH_ADS = 5, // DYNAMIC_SEARCH_ADS
     PERFORMANCE_MAX = 6, // PERFORMANCE_MAX
+    VERTICAL_ADS_DATA_FEED = 7, // VERTICAL_ADS_DATA_FEED
   }
 
   /**
    * @name SearchTermMatchTypeEnum.SearchTermMatchType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/SearchTermMatchTypeEnum.SearchTermMatchType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/SearchTermMatchTypeEnum.SearchTermMatchType
    */
   export enum SearchTermMatchType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1904,7 +1965,7 @@ export namespace enums {
 
   /**
    * @name SearchTermTargetingStatusEnum.SearchTermTargetingStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/SearchTermTargetingStatusEnum.SearchTermTargetingStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/SearchTermTargetingStatusEnum.SearchTermTargetingStatus
    */
   export enum SearchTermTargetingStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1917,7 +1978,7 @@ export namespace enums {
 
   /**
    * @name SkAdNetworkAdEventTypeEnum.SkAdNetworkAdEventType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/SkAdNetworkAdEventTypeEnum.SkAdNetworkAdEventType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/SkAdNetworkAdEventTypeEnum.SkAdNetworkAdEventType
    */
   export enum SkAdNetworkAdEventType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1929,7 +1990,7 @@ export namespace enums {
 
   /**
    * @name SkAdNetworkAttributionCreditEnum.SkAdNetworkAttributionCredit
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/SkAdNetworkAttributionCreditEnum.SkAdNetworkAttributionCredit
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/SkAdNetworkAttributionCreditEnum.SkAdNetworkAttributionCredit
    */
   export enum SkAdNetworkAttributionCredit {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1941,7 +2002,7 @@ export namespace enums {
 
   /**
    * @name SkAdNetworkCoarseConversionValueEnum.SkAdNetworkCoarseConversionValue
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/SkAdNetworkCoarseConversionValueEnum.SkAdNetworkCoarseConversionValue
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/SkAdNetworkCoarseConversionValueEnum.SkAdNetworkCoarseConversionValue
    */
   export enum SkAdNetworkCoarseConversionValue {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1955,7 +2016,7 @@ export namespace enums {
 
   /**
    * @name SkAdNetworkSourceTypeEnum.SkAdNetworkSourceType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/SkAdNetworkSourceTypeEnum.SkAdNetworkSourceType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/SkAdNetworkSourceTypeEnum.SkAdNetworkSourceType
    */
   export enum SkAdNetworkSourceType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1967,7 +2028,7 @@ export namespace enums {
 
   /**
    * @name SkAdNetworkUserTypeEnum.SkAdNetworkUserType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/SkAdNetworkUserTypeEnum.SkAdNetworkUserType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/SkAdNetworkUserTypeEnum.SkAdNetworkUserType
    */
   export enum SkAdNetworkUserType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1979,7 +2040,7 @@ export namespace enums {
 
   /**
    * @name SlotEnum.Slot
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/SlotEnum.Slot
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/SlotEnum.Slot
    */
   export enum Slot {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -1995,7 +2056,7 @@ export namespace enums {
 
   /**
    * @name VerticalAdsItemVerticalTypeEnum.VerticalAdsItemVerticalType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/VerticalAdsItemVerticalTypeEnum.VerticalAdsItemVerticalType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/VerticalAdsItemVerticalTypeEnum.VerticalAdsItemVerticalType
    */
   export enum VerticalAdsItemVerticalType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2010,7 +2071,7 @@ export namespace enums {
 
   /**
    * @name TrackingCodePageFormatEnum.TrackingCodePageFormat
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/TrackingCodePageFormatEnum.TrackingCodePageFormat
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/TrackingCodePageFormatEnum.TrackingCodePageFormat
    */
   export enum TrackingCodePageFormat {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2021,7 +2082,7 @@ export namespace enums {
 
   /**
    * @name TrackingCodeTypeEnum.TrackingCodeType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/TrackingCodeTypeEnum.TrackingCodeType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/TrackingCodeTypeEnum.TrackingCodeType
    */
   export enum TrackingCodeType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2034,7 +2095,7 @@ export namespace enums {
 
   /**
    * @name TargetingDimensionEnum.TargetingDimension
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/TargetingDimensionEnum.TargetingDimension
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/TargetingDimensionEnum.TargetingDimension
    */
   export enum TargetingDimension {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2051,7 +2112,7 @@ export namespace enums {
 
   /**
    * @name ThirdPartyBrandLiftIntegrationPartnerEnum.ThirdPartyBrandLiftIntegrationPartner
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ThirdPartyBrandLiftIntegrationPartnerEnum.ThirdPartyBrandLiftIntegrationPartner
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ThirdPartyBrandLiftIntegrationPartnerEnum.ThirdPartyBrandLiftIntegrationPartner
    */
   export enum ThirdPartyBrandLiftIntegrationPartner {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2064,7 +2125,7 @@ export namespace enums {
 
   /**
    * @name ThirdPartyBrandSafetyIntegrationPartnerEnum.ThirdPartyBrandSafetyIntegrationPartner
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ThirdPartyBrandSafetyIntegrationPartnerEnum.ThirdPartyBrandSafetyIntegrationPartner
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ThirdPartyBrandSafetyIntegrationPartnerEnum.ThirdPartyBrandSafetyIntegrationPartner
    */
   export enum ThirdPartyBrandSafetyIntegrationPartner {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2076,7 +2137,7 @@ export namespace enums {
 
   /**
    * @name ThirdPartyReachIntegrationPartnerEnum.ThirdPartyReachIntegrationPartner
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ThirdPartyReachIntegrationPartnerEnum.ThirdPartyReachIntegrationPartner
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ThirdPartyReachIntegrationPartnerEnum.ThirdPartyReachIntegrationPartner
    */
   export enum ThirdPartyReachIntegrationPartner {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2094,18 +2155,19 @@ export namespace enums {
 
   /**
    * @name ThirdPartyViewabilityIntegrationPartnerEnum.ThirdPartyViewabilityIntegrationPartner
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ThirdPartyViewabilityIntegrationPartnerEnum.ThirdPartyViewabilityIntegrationPartner
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ThirdPartyViewabilityIntegrationPartnerEnum.ThirdPartyViewabilityIntegrationPartner
    */
   export enum ThirdPartyViewabilityIntegrationPartner {
     UNSPECIFIED = 0, // UNSPECIFIED
     UNKNOWN = 1, // UNKNOWN
     DOUBLE_VERIFY = 2, // DOUBLE_VERIFY
     INTEGRAL_AD_SCIENCE = 3, // INTEGRAL_AD_SCIENCE
+    ZEFR = 4, // ZEFR
   }
 
   /**
    * @name CustomerMatchUploadKeyTypeEnum.CustomerMatchUploadKeyType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CustomerMatchUploadKeyTypeEnum.CustomerMatchUploadKeyType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CustomerMatchUploadKeyTypeEnum.CustomerMatchUploadKeyType
    */
   export enum CustomerMatchUploadKeyType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2117,7 +2179,7 @@ export namespace enums {
 
   /**
    * @name LookalikeExpansionLevelEnum.LookalikeExpansionLevel
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LookalikeExpansionLevelEnum.LookalikeExpansionLevel
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LookalikeExpansionLevelEnum.LookalikeExpansionLevel
    */
   export enum LookalikeExpansionLevel {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2129,7 +2191,7 @@ export namespace enums {
 
   /**
    * @name UserListCrmDataSourceTypeEnum.UserListCrmDataSourceType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/UserListCrmDataSourceTypeEnum.UserListCrmDataSourceType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/UserListCrmDataSourceTypeEnum.UserListCrmDataSourceType
    */
   export enum UserListCrmDataSourceType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2142,7 +2204,7 @@ export namespace enums {
 
   /**
    * @name UserListDateRuleItemOperatorEnum.UserListDateRuleItemOperator
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/UserListDateRuleItemOperatorEnum.UserListDateRuleItemOperator
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/UserListDateRuleItemOperatorEnum.UserListDateRuleItemOperator
    */
   export enum UserListDateRuleItemOperator {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2155,7 +2217,7 @@ export namespace enums {
 
   /**
    * @name UserListFlexibleRuleOperatorEnum.UserListFlexibleRuleOperator
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/UserListFlexibleRuleOperatorEnum.UserListFlexibleRuleOperator
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/UserListFlexibleRuleOperatorEnum.UserListFlexibleRuleOperator
    */
   export enum UserListFlexibleRuleOperator {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2166,7 +2228,7 @@ export namespace enums {
 
   /**
    * @name UserListLogicalRuleOperatorEnum.UserListLogicalRuleOperator
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/UserListLogicalRuleOperatorEnum.UserListLogicalRuleOperator
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/UserListLogicalRuleOperatorEnum.UserListLogicalRuleOperator
    */
   export enum UserListLogicalRuleOperator {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2178,7 +2240,7 @@ export namespace enums {
 
   /**
    * @name UserListNumberRuleItemOperatorEnum.UserListNumberRuleItemOperator
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/UserListNumberRuleItemOperatorEnum.UserListNumberRuleItemOperator
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/UserListNumberRuleItemOperatorEnum.UserListNumberRuleItemOperator
    */
   export enum UserListNumberRuleItemOperator {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2193,7 +2255,7 @@ export namespace enums {
 
   /**
    * @name UserListPrepopulationStatusEnum.UserListPrepopulationStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/UserListPrepopulationStatusEnum.UserListPrepopulationStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/UserListPrepopulationStatusEnum.UserListPrepopulationStatus
    */
   export enum UserListPrepopulationStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2205,7 +2267,7 @@ export namespace enums {
 
   /**
    * @name UserListRuleTypeEnum.UserListRuleType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/UserListRuleTypeEnum.UserListRuleType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/UserListRuleTypeEnum.UserListRuleType
    */
   export enum UserListRuleType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2216,7 +2278,7 @@ export namespace enums {
 
   /**
    * @name UserListStringRuleItemOperatorEnum.UserListStringRuleItemOperator
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/UserListStringRuleItemOperatorEnum.UserListStringRuleItemOperator
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/UserListStringRuleItemOperatorEnum.UserListStringRuleItemOperator
    */
   export enum UserListStringRuleItemOperator {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2233,7 +2295,7 @@ export namespace enums {
 
   /**
    * @name AccessInvitationStatusEnum.AccessInvitationStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AccessInvitationStatusEnum.AccessInvitationStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AccessInvitationStatusEnum.AccessInvitationStatus
    */
   export enum AccessInvitationStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2245,7 +2307,7 @@ export namespace enums {
 
   /**
    * @name AccessReasonEnum.AccessReason
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AccessReasonEnum.AccessReason
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AccessReasonEnum.AccessReason
    */
   export enum AccessReason {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2259,7 +2321,7 @@ export namespace enums {
 
   /**
    * @name AccessRoleEnum.AccessRole
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AccessRoleEnum.AccessRole
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AccessRoleEnum.AccessRole
    */
   export enum AccessRole {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2272,7 +2334,7 @@ export namespace enums {
 
   /**
    * @name AccountBudgetProposalStatusEnum.AccountBudgetProposalStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AccountBudgetProposalStatusEnum.AccountBudgetProposalStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AccountBudgetProposalStatusEnum.AccountBudgetProposalStatus
    */
   export enum AccountBudgetProposalStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2286,7 +2348,7 @@ export namespace enums {
 
   /**
    * @name AccountBudgetProposalTypeEnum.AccountBudgetProposalType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AccountBudgetProposalTypeEnum.AccountBudgetProposalType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AccountBudgetProposalTypeEnum.AccountBudgetProposalType
    */
   export enum AccountBudgetProposalType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2299,7 +2361,7 @@ export namespace enums {
 
   /**
    * @name AccountBudgetStatusEnum.AccountBudgetStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AccountBudgetStatusEnum.AccountBudgetStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AccountBudgetStatusEnum.AccountBudgetStatus
    */
   export enum AccountBudgetStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2311,7 +2373,7 @@ export namespace enums {
 
   /**
    * @name AccountLinkStatusEnum.AccountLinkStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AccountLinkStatusEnum.AccountLinkStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AccountLinkStatusEnum.AccountLinkStatus
    */
   export enum AccountLinkStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2326,7 +2388,7 @@ export namespace enums {
 
   /**
    * @name AdGroupAdPrimaryStatusEnum.AdGroupAdPrimaryStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AdGroupAdPrimaryStatusEnum.AdGroupAdPrimaryStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AdGroupAdPrimaryStatusEnum.AdGroupAdPrimaryStatus
    */
   export enum AdGroupAdPrimaryStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2341,7 +2403,7 @@ export namespace enums {
 
   /**
    * @name AdGroupAdPrimaryStatusReasonEnum.AdGroupAdPrimaryStatusReason
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AdGroupAdPrimaryStatusReasonEnum.AdGroupAdPrimaryStatusReason
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AdGroupAdPrimaryStatusReasonEnum.AdGroupAdPrimaryStatusReason
    */
   export enum AdGroupAdPrimaryStatusReason {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2365,7 +2427,7 @@ export namespace enums {
 
   /**
    * @name AdGroupAdRotationModeEnum.AdGroupAdRotationMode
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AdGroupAdRotationModeEnum.AdGroupAdRotationMode
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AdGroupAdRotationModeEnum.AdGroupAdRotationMode
    */
   export enum AdGroupAdRotationMode {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2376,7 +2438,7 @@ export namespace enums {
 
   /**
    * @name AdGroupAdStatusEnum.AdGroupAdStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AdGroupAdStatusEnum.AdGroupAdStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AdGroupAdStatusEnum.AdGroupAdStatus
    */
   export enum AdGroupAdStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2388,7 +2450,7 @@ export namespace enums {
 
   /**
    * @name AdGroupCriterionApprovalStatusEnum.AdGroupCriterionApprovalStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AdGroupCriterionApprovalStatusEnum.AdGroupCriterionApprovalStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AdGroupCriterionApprovalStatusEnum.AdGroupCriterionApprovalStatus
    */
   export enum AdGroupCriterionApprovalStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2401,7 +2463,7 @@ export namespace enums {
 
   /**
    * @name AdGroupCriterionPrimaryStatusEnum.AdGroupCriterionPrimaryStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AdGroupCriterionPrimaryStatusEnum.AdGroupCriterionPrimaryStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AdGroupCriterionPrimaryStatusEnum.AdGroupCriterionPrimaryStatus
    */
   export enum AdGroupCriterionPrimaryStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2415,7 +2477,7 @@ export namespace enums {
 
   /**
    * @name AdGroupCriterionPrimaryStatusReasonEnum.AdGroupCriterionPrimaryStatusReason
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AdGroupCriterionPrimaryStatusReasonEnum.AdGroupCriterionPrimaryStatusReason
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AdGroupCriterionPrimaryStatusReasonEnum.AdGroupCriterionPrimaryStatusReason
    */
   export enum AdGroupCriterionPrimaryStatusReason {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2442,7 +2504,7 @@ export namespace enums {
 
   /**
    * @name AdGroupCriterionStatusEnum.AdGroupCriterionStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AdGroupCriterionStatusEnum.AdGroupCriterionStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AdGroupCriterionStatusEnum.AdGroupCriterionStatus
    */
   export enum AdGroupCriterionStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2454,7 +2516,7 @@ export namespace enums {
 
   /**
    * @name AdGroupPrimaryStatusEnum.AdGroupPrimaryStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AdGroupPrimaryStatusEnum.AdGroupPrimaryStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AdGroupPrimaryStatusEnum.AdGroupPrimaryStatus
    */
   export enum AdGroupPrimaryStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2469,7 +2531,7 @@ export namespace enums {
 
   /**
    * @name AdGroupPrimaryStatusReasonEnum.AdGroupPrimaryStatusReason
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AdGroupPrimaryStatusReasonEnum.AdGroupPrimaryStatusReason
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AdGroupPrimaryStatusReasonEnum.AdGroupPrimaryStatusReason
    */
   export enum AdGroupPrimaryStatusReason {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2494,7 +2556,7 @@ export namespace enums {
 
   /**
    * @name AdGroupStatusEnum.AdGroupStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AdGroupStatusEnum.AdGroupStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AdGroupStatusEnum.AdGroupStatus
    */
   export enum AdGroupStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2506,7 +2568,7 @@ export namespace enums {
 
   /**
    * @name AdGroupTypeEnum.AdGroupType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AdGroupTypeEnum.AdGroupType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AdGroupTypeEnum.AdGroupType
    */
   export enum AdGroupType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2532,7 +2594,7 @@ export namespace enums {
 
   /**
    * @name AdServingOptimizationStatusEnum.AdServingOptimizationStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AdServingOptimizationStatusEnum.AdServingOptimizationStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AdServingOptimizationStatusEnum.AdServingOptimizationStatus
    */
   export enum AdServingOptimizationStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2546,7 +2608,7 @@ export namespace enums {
 
   /**
    * @name AdStrengthEnum.AdStrength
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AdStrengthEnum.AdStrength
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AdStrengthEnum.AdStrength
    */
   export enum AdStrength {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2561,7 +2623,7 @@ export namespace enums {
 
   /**
    * @name AdStrengthActionItemTypeEnum.AdStrengthActionItemType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AdStrengthActionItemTypeEnum.AdStrengthActionItemType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AdStrengthActionItemTypeEnum.AdStrengthActionItemType
    */
   export enum AdStrengthActionItemType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2571,7 +2633,7 @@ export namespace enums {
 
   /**
    * @name AdTypeEnum.AdType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AdTypeEnum.AdType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AdTypeEnum.AdType
    */
   export enum AdType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2612,7 +2674,7 @@ export namespace enums {
 
   /**
    * @name AndroidPrivacyInteractionTypeEnum.AndroidPrivacyInteractionType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AndroidPrivacyInteractionTypeEnum.AndroidPrivacyInteractionType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AndroidPrivacyInteractionTypeEnum.AndroidPrivacyInteractionType
    */
   export enum AndroidPrivacyInteractionType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2624,7 +2686,7 @@ export namespace enums {
 
   /**
    * @name AndroidPrivacyNetworkTypeEnum.AndroidPrivacyNetworkType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AndroidPrivacyNetworkTypeEnum.AndroidPrivacyNetworkType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AndroidPrivacyNetworkTypeEnum.AndroidPrivacyNetworkType
    */
   export enum AndroidPrivacyNetworkType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2636,7 +2698,7 @@ export namespace enums {
 
   /**
    * @name AppBiddingGoalEnum.AppBiddingGoal
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AppBiddingGoalEnum.AppBiddingGoal
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AppBiddingGoalEnum.AppBiddingGoal
    */
   export enum AppBiddingGoal {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2652,7 +2714,7 @@ export namespace enums {
 
   /**
    * @name AppCampaignAppStoreEnum.AppCampaignAppStore
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AppCampaignAppStoreEnum.AppCampaignAppStore
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AppCampaignAppStoreEnum.AppCampaignAppStore
    */
   export enum AppCampaignAppStore {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2663,7 +2725,7 @@ export namespace enums {
 
   /**
    * @name AppCampaignBiddingStrategyGoalTypeEnum.AppCampaignBiddingStrategyGoalType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AppCampaignBiddingStrategyGoalTypeEnum.AppCampaignBiddingStrategyGoalType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AppCampaignBiddingStrategyGoalTypeEnum.AppCampaignBiddingStrategyGoalType
    */
   export enum AppCampaignBiddingStrategyGoalType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2680,7 +2742,7 @@ export namespace enums {
 
   /**
    * @name AssetAutomationStatusEnum.AssetAutomationStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AssetAutomationStatusEnum.AssetAutomationStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AssetAutomationStatusEnum.AssetAutomationStatus
    */
   export enum AssetAutomationStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2691,7 +2753,7 @@ export namespace enums {
 
   /**
    * @name AssetAutomationTypeEnum.AssetAutomationType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AssetAutomationTypeEnum.AssetAutomationType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AssetAutomationTypeEnum.AssetAutomationType
    */
   export enum AssetAutomationType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2710,7 +2772,7 @@ export namespace enums {
 
   /**
    * @name AssetCoverageVideoAspectRatioRequirementEnum.AssetCoverageVideoAspectRatioRequirement
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AssetCoverageVideoAspectRatioRequirementEnum.AssetCoverageVideoAspectRatioRequirement
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AssetCoverageVideoAspectRatioRequirementEnum.AssetCoverageVideoAspectRatioRequirement
    */
   export enum AssetCoverageVideoAspectRatioRequirement {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2722,7 +2784,7 @@ export namespace enums {
 
   /**
    * @name AssetFieldTypeEnum.AssetFieldType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AssetFieldTypeEnum.AssetFieldType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AssetFieldTypeEnum.AssetFieldType
    */
   export enum AssetFieldType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2761,11 +2823,12 @@ export namespace enums {
     LANDING_PAGE_PREVIEW = 38, // LANDING_PAGE_PREVIEW
     LONG_DESCRIPTION = 39, // LONG_DESCRIPTION
     CALL_TO_ACTION = 40, // CALL_TO_ACTION
+    CLASSIC_DISPLAY_IMAGE = 47, // CLASSIC_DISPLAY_IMAGE
   }
 
   /**
    * @name AssetGroupPrimaryStatusEnum.AssetGroupPrimaryStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AssetGroupPrimaryStatusEnum.AssetGroupPrimaryStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AssetGroupPrimaryStatusEnum.AssetGroupPrimaryStatus
    */
   export enum AssetGroupPrimaryStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2780,7 +2843,7 @@ export namespace enums {
 
   /**
    * @name AssetGroupPrimaryStatusReasonEnum.AssetGroupPrimaryStatusReason
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AssetGroupPrimaryStatusReasonEnum.AssetGroupPrimaryStatusReason
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AssetGroupPrimaryStatusReasonEnum.AssetGroupPrimaryStatusReason
    */
   export enum AssetGroupPrimaryStatusReason {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2798,7 +2861,7 @@ export namespace enums {
 
   /**
    * @name AssetGroupSignalApprovalStatusEnum.AssetGroupSignalApprovalStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AssetGroupSignalApprovalStatusEnum.AssetGroupSignalApprovalStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AssetGroupSignalApprovalStatusEnum.AssetGroupSignalApprovalStatus
    */
   export enum AssetGroupSignalApprovalStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2811,7 +2874,7 @@ export namespace enums {
 
   /**
    * @name AssetGroupStatusEnum.AssetGroupStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AssetGroupStatusEnum.AssetGroupStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AssetGroupStatusEnum.AssetGroupStatus
    */
   export enum AssetGroupStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2823,7 +2886,7 @@ export namespace enums {
 
   /**
    * @name AssetLinkStatusEnum.AssetLinkStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AssetLinkStatusEnum.AssetLinkStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AssetLinkStatusEnum.AssetLinkStatus
    */
   export enum AssetLinkStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2835,7 +2898,7 @@ export namespace enums {
 
   /**
    * @name AssetOrientationEnum.AssetOrientation
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AssetOrientationEnum.AssetOrientation
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AssetOrientationEnum.AssetOrientation
    */
   export enum AssetOrientation {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2847,7 +2910,7 @@ export namespace enums {
 
   /**
    * @name AssetSetAssetStatusEnum.AssetSetAssetStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AssetSetAssetStatusEnum.AssetSetAssetStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AssetSetAssetStatusEnum.AssetSetAssetStatus
    */
   export enum AssetSetAssetStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2858,7 +2921,7 @@ export namespace enums {
 
   /**
    * @name AssetSetLinkStatusEnum.AssetSetLinkStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AssetSetLinkStatusEnum.AssetSetLinkStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AssetSetLinkStatusEnum.AssetSetLinkStatus
    */
   export enum AssetSetLinkStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2869,7 +2932,7 @@ export namespace enums {
 
   /**
    * @name AssetSetStatusEnum.AssetSetStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AssetSetStatusEnum.AssetSetStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AssetSetStatusEnum.AssetSetStatus
    */
   export enum AssetSetStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2880,7 +2943,7 @@ export namespace enums {
 
   /**
    * @name AssetSetTypeEnum.AssetSetType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AssetSetTypeEnum.AssetSetType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AssetSetTypeEnum.AssetSetType
    */
   export enum AssetSetType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2905,7 +2968,7 @@ export namespace enums {
 
   /**
    * @name AssetSourceEnum.AssetSource
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AssetSourceEnum.AssetSource
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AssetSourceEnum.AssetSource
    */
   export enum AssetSource {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2916,7 +2979,7 @@ export namespace enums {
 
   /**
    * @name AssetTypeEnum.AssetType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AssetTypeEnum.AssetType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AssetTypeEnum.AssetType
    */
   export enum AssetType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2955,7 +3018,7 @@ export namespace enums {
 
   /**
    * @name AsyncActionStatusEnum.AsyncActionStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AsyncActionStatusEnum.AsyncActionStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AsyncActionStatusEnum.AsyncActionStatus
    */
   export enum AsyncActionStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2969,7 +3032,7 @@ export namespace enums {
 
   /**
    * @name AttributionModelEnum.AttributionModel
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AttributionModelEnum.AttributionModel
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AttributionModelEnum.AttributionModel
    */
   export enum AttributionModel {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2985,7 +3048,7 @@ export namespace enums {
 
   /**
    * @name AudienceInsightsMarketingObjectiveEnum.AudienceInsightsMarketingObjective
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AudienceInsightsMarketingObjectiveEnum.AudienceInsightsMarketingObjective
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AudienceInsightsMarketingObjectiveEnum.AudienceInsightsMarketingObjective
    */
   export enum AudienceInsightsMarketingObjective {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -2997,7 +3060,7 @@ export namespace enums {
 
   /**
    * @name AudienceScopeEnum.AudienceScope
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AudienceScopeEnum.AudienceScope
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AudienceScopeEnum.AudienceScope
    */
   export enum AudienceScope {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3008,7 +3071,7 @@ export namespace enums {
 
   /**
    * @name AudienceStatusEnum.AudienceStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/AudienceStatusEnum.AudienceStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/AudienceStatusEnum.AudienceStatus
    */
   export enum AudienceStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3019,7 +3082,7 @@ export namespace enums {
 
   /**
    * @name BatchJobStatusEnum.BatchJobStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/BatchJobStatusEnum.BatchJobStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/BatchJobStatusEnum.BatchJobStatus
    */
   export enum BatchJobStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3031,7 +3094,7 @@ export namespace enums {
 
   /**
    * @name BenchmarksMarketingObjectiveEnum.BenchmarksMarketingObjective
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/BenchmarksMarketingObjectiveEnum.BenchmarksMarketingObjective
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/BenchmarksMarketingObjectiveEnum.BenchmarksMarketingObjective
    */
   export enum BenchmarksMarketingObjective {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3043,7 +3106,7 @@ export namespace enums {
 
   /**
    * @name BenchmarksSourceTypeEnum.BenchmarksSourceType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/BenchmarksSourceTypeEnum.BenchmarksSourceType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/BenchmarksSourceTypeEnum.BenchmarksSourceType
    */
   export enum BenchmarksSourceType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3052,8 +3115,20 @@ export namespace enums {
   }
 
   /**
+   * @name BenchmarksTimeGranularityEnum.BenchmarksTimeGranularity
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/BenchmarksTimeGranularityEnum.BenchmarksTimeGranularity
+   */
+  export enum BenchmarksTimeGranularity {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    WEEK = 2, // WEEK
+    MONTH = 3, // MONTH
+    QUARTER = 4, // QUARTER
+  }
+
+  /**
    * @name BidModifierSourceEnum.BidModifierSource
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/BidModifierSourceEnum.BidModifierSource
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/BidModifierSourceEnum.BidModifierSource
    */
   export enum BidModifierSource {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3064,7 +3139,7 @@ export namespace enums {
 
   /**
    * @name BiddingSourceEnum.BiddingSource
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/BiddingSourceEnum.BiddingSource
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/BiddingSourceEnum.BiddingSource
    */
   export enum BiddingSource {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3076,7 +3151,7 @@ export namespace enums {
 
   /**
    * @name BiddingStrategyStatusEnum.BiddingStrategyStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/BiddingStrategyStatusEnum.BiddingStrategyStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/BiddingStrategyStatusEnum.BiddingStrategyStatus
    */
   export enum BiddingStrategyStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3087,7 +3162,7 @@ export namespace enums {
 
   /**
    * @name BiddingStrategySystemStatusEnum.BiddingStrategySystemStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/BiddingStrategySystemStatusEnum.BiddingStrategySystemStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/BiddingStrategySystemStatusEnum.BiddingStrategySystemStatus
    */
   export enum BiddingStrategySystemStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3121,7 +3196,7 @@ export namespace enums {
 
   /**
    * @name BiddingStrategyTypeEnum.BiddingStrategyType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/BiddingStrategyTypeEnum.BiddingStrategyType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/BiddingStrategyTypeEnum.BiddingStrategyType
    */
   export enum BiddingStrategyType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3151,7 +3226,7 @@ export namespace enums {
 
   /**
    * @name BillingSetupStatusEnum.BillingSetupStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/BillingSetupStatusEnum.BillingSetupStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/BillingSetupStatusEnum.BillingSetupStatus
    */
   export enum BillingSetupStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3163,8 +3238,22 @@ export namespace enums {
   }
 
   /**
+   * @name BookingStatusEnum.BookingStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/BookingStatusEnum.BookingStatus
+   */
+  export enum BookingStatus {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    BOOKED = 2, // BOOKED
+    HELD = 3, // HELD
+    CAMPAIGN_ENDED = 4, // CAMPAIGN_ENDED
+    HOLD_EXPIRED = 5, // HOLD_EXPIRED
+    BOOKING_CANCELLED = 6, // BOOKING_CANCELLED
+  }
+
+  /**
    * @name BrandSafetySuitabilityEnum.BrandSafetySuitability
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/BrandSafetySuitabilityEnum.BrandSafetySuitability
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/BrandSafetySuitabilityEnum.BrandSafetySuitability
    */
   export enum BrandSafetySuitability {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3176,7 +3265,7 @@ export namespace enums {
 
   /**
    * @name BudgetDeliveryMethodEnum.BudgetDeliveryMethod
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/BudgetDeliveryMethodEnum.BudgetDeliveryMethod
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/BudgetDeliveryMethodEnum.BudgetDeliveryMethod
    */
   export enum BudgetDeliveryMethod {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3187,7 +3276,7 @@ export namespace enums {
 
   /**
    * @name BudgetPeriodEnum.BudgetPeriod
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/BudgetPeriodEnum.BudgetPeriod
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/BudgetPeriodEnum.BudgetPeriod
    */
   export enum BudgetPeriod {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3198,7 +3287,7 @@ export namespace enums {
 
   /**
    * @name BudgetStatusEnum.BudgetStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/BudgetStatusEnum.BudgetStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/BudgetStatusEnum.BudgetStatus
    */
   export enum BudgetStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3209,7 +3298,7 @@ export namespace enums {
 
   /**
    * @name BudgetTypeEnum.BudgetType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/BudgetTypeEnum.BudgetType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/BudgetTypeEnum.BudgetType
    */
   export enum BudgetType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3222,7 +3311,7 @@ export namespace enums {
 
   /**
    * @name CallTrackingDisplayLocationEnum.CallTrackingDisplayLocation
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CallTrackingDisplayLocationEnum.CallTrackingDisplayLocation
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CallTrackingDisplayLocationEnum.CallTrackingDisplayLocation
    */
   export enum CallTrackingDisplayLocation {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3233,7 +3322,7 @@ export namespace enums {
 
   /**
    * @name CallTypeEnum.CallType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CallTypeEnum.CallType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CallTypeEnum.CallType
    */
   export enum CallType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3244,7 +3333,7 @@ export namespace enums {
 
   /**
    * @name CampaignCriterionStatusEnum.CampaignCriterionStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CampaignCriterionStatusEnum.CampaignCriterionStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CampaignCriterionStatusEnum.CampaignCriterionStatus
    */
   export enum CampaignCriterionStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3256,7 +3345,7 @@ export namespace enums {
 
   /**
    * @name CampaignDraftStatusEnum.CampaignDraftStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CampaignDraftStatusEnum.CampaignDraftStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CampaignDraftStatusEnum.CampaignDraftStatus
    */
   export enum CampaignDraftStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3270,7 +3359,7 @@ export namespace enums {
 
   /**
    * @name CampaignExperimentTypeEnum.CampaignExperimentType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CampaignExperimentTypeEnum.CampaignExperimentType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CampaignExperimentTypeEnum.CampaignExperimentType
    */
   export enum CampaignExperimentType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3282,7 +3371,7 @@ export namespace enums {
 
   /**
    * @name CampaignGroupStatusEnum.CampaignGroupStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CampaignGroupStatusEnum.CampaignGroupStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CampaignGroupStatusEnum.CampaignGroupStatus
    */
   export enum CampaignGroupStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3293,7 +3382,7 @@ export namespace enums {
 
   /**
    * @name CampaignKeywordMatchTypeEnum.CampaignKeywordMatchType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CampaignKeywordMatchTypeEnum.CampaignKeywordMatchType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CampaignKeywordMatchTypeEnum.CampaignKeywordMatchType
    */
   export enum CampaignKeywordMatchType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3303,7 +3392,7 @@ export namespace enums {
 
   /**
    * @name CampaignPrimaryStatusEnum.CampaignPrimaryStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CampaignPrimaryStatusEnum.CampaignPrimaryStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CampaignPrimaryStatusEnum.CampaignPrimaryStatus
    */
   export enum CampaignPrimaryStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3321,7 +3410,7 @@ export namespace enums {
 
   /**
    * @name CampaignPrimaryStatusReasonEnum.CampaignPrimaryStatusReason
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CampaignPrimaryStatusReasonEnum.CampaignPrimaryStatusReason
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CampaignPrimaryStatusReasonEnum.CampaignPrimaryStatusReason
    */
   export enum CampaignPrimaryStatusReason {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3364,11 +3453,15 @@ export namespace enums {
     NO_ASSET_GROUPS = 37, // NO_ASSET_GROUPS
     ASSET_GROUPS_PAUSED = 38, // ASSET_GROUPS_PAUSED
     MISSING_LOCATION_TARGETING = 39, // MISSING_LOCATION_TARGETING
+    CAMPAIGN_NOT_BOOKED = 40, // CAMPAIGN_NOT_BOOKED
+    BOOKING_HOLD_EXPIRING = 41, // BOOKING_HOLD_EXPIRING
+    BOOKING_HOLD_EXPIRED = 42, // BOOKING_HOLD_EXPIRED
+    BOOKING_CANCELLED = 43, // BOOKING_CANCELLED
   }
 
   /**
    * @name CampaignServingStatusEnum.CampaignServingStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CampaignServingStatusEnum.CampaignServingStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CampaignServingStatusEnum.CampaignServingStatus
    */
   export enum CampaignServingStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3382,7 +3475,7 @@ export namespace enums {
 
   /**
    * @name CampaignSharedSetStatusEnum.CampaignSharedSetStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CampaignSharedSetStatusEnum.CampaignSharedSetStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CampaignSharedSetStatusEnum.CampaignSharedSetStatus
    */
   export enum CampaignSharedSetStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3393,7 +3486,7 @@ export namespace enums {
 
   /**
    * @name CampaignStatusEnum.CampaignStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CampaignStatusEnum.CampaignStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CampaignStatusEnum.CampaignStatus
    */
   export enum CampaignStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3405,7 +3498,7 @@ export namespace enums {
 
   /**
    * @name ChangeClientTypeEnum.ChangeClientType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ChangeClientTypeEnum.ChangeClientType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ChangeClientTypeEnum.ChangeClientType
    */
   export enum ChangeClientType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3427,7 +3520,7 @@ export namespace enums {
 
   /**
    * @name ChangeEventResourceTypeEnum.ChangeEventResourceType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ChangeEventResourceTypeEnum.ChangeEventResourceType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ChangeEventResourceTypeEnum.ChangeEventResourceType
    */
   export enum ChangeEventResourceType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3455,7 +3548,7 @@ export namespace enums {
 
   /**
    * @name ChangeStatusOperationEnum.ChangeStatusOperation
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ChangeStatusOperationEnum.ChangeStatusOperation
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ChangeStatusOperationEnum.ChangeStatusOperation
    */
   export enum ChangeStatusOperation {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3467,7 +3560,7 @@ export namespace enums {
 
   /**
    * @name ChangeStatusResourceTypeEnum.ChangeStatusResourceType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ChangeStatusResourceTypeEnum.ChangeStatusResourceType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ChangeStatusResourceTypeEnum.ChangeStatusResourceType
    */
   export enum ChangeStatusResourceType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3497,7 +3590,7 @@ export namespace enums {
 
   /**
    * @name CombinedAudienceStatusEnum.CombinedAudienceStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CombinedAudienceStatusEnum.CombinedAudienceStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CombinedAudienceStatusEnum.CombinedAudienceStatus
    */
   export enum CombinedAudienceStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3508,7 +3601,7 @@ export namespace enums {
 
   /**
    * @name ConversionActionCountingTypeEnum.ConversionActionCountingType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ConversionActionCountingTypeEnum.ConversionActionCountingType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ConversionActionCountingTypeEnum.ConversionActionCountingType
    */
   export enum ConversionActionCountingType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3519,7 +3612,7 @@ export namespace enums {
 
   /**
    * @name ConversionActionStatusEnum.ConversionActionStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ConversionActionStatusEnum.ConversionActionStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ConversionActionStatusEnum.ConversionActionStatus
    */
   export enum ConversionActionStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3531,7 +3624,7 @@ export namespace enums {
 
   /**
    * @name ConversionActionTypeEnum.ConversionActionType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ConversionActionTypeEnum.ConversionActionType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ConversionActionTypeEnum.ConversionActionType
    */
   export enum ConversionActionType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3576,11 +3669,20 @@ export namespace enums {
     UNIVERSAL_ANALYTICS_TRANSACTION = 39, // UNIVERSAL_ANALYTICS_TRANSACTION
     GOOGLE_ANALYTICS_4_CUSTOM = 40, // GOOGLE_ANALYTICS_4_CUSTOM
     GOOGLE_ANALYTICS_4_PURCHASE = 41, // GOOGLE_ANALYTICS_4_PURCHASE
+    GOOGLE_ANALYTICS_4_GENERATE_LEAD = 42, // GOOGLE_ANALYTICS_4_GENERATE_LEAD
+    GOOGLE_ANALYTICS_4_QUALIFY_LEAD = 43, // GOOGLE_ANALYTICS_4_QUALIFY_LEAD
+    GOOGLE_ANALYTICS_4_CLOSE_CONVERT_LEAD = 44, // GOOGLE_ANALYTICS_4_CLOSE_CONVERT_LEAD
+    FIREBASE_ANDROID_GENERATE_LEAD = 45, // FIREBASE_ANDROID_GENERATE_LEAD
+    FIREBASE_ANDROID_QUALIFY_LEAD = 46, // FIREBASE_ANDROID_QUALIFY_LEAD
+    FIREBASE_ANDROID_CLOSE_CONVERT_LEAD = 47, // FIREBASE_ANDROID_CLOSE_CONVERT_LEAD
+    FIREBASE_IOS_GENERATE_LEAD = 48, // FIREBASE_IOS_GENERATE_LEAD
+    FIREBASE_IOS_QUALIFY_LEAD = 49, // FIREBASE_IOS_QUALIFY_LEAD
+    FIREBASE_IOS_CLOSE_CONVERT_LEAD = 50, // FIREBASE_IOS_CLOSE_CONVERT_LEAD
   }
 
   /**
    * @name ConversionAdjustmentTypeEnum.ConversionAdjustmentType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ConversionAdjustmentTypeEnum.ConversionAdjustmentType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ConversionAdjustmentTypeEnum.ConversionAdjustmentType
    */
   export enum ConversionAdjustmentType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3592,7 +3694,7 @@ export namespace enums {
 
   /**
    * @name ConversionCustomVariableStatusEnum.ConversionCustomVariableStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ConversionCustomVariableStatusEnum.ConversionCustomVariableStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ConversionCustomVariableStatusEnum.ConversionCustomVariableStatus
    */
   export enum ConversionCustomVariableStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3604,7 +3706,7 @@ export namespace enums {
 
   /**
    * @name ConversionCustomerTypeEnum.ConversionCustomerType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ConversionCustomerTypeEnum.ConversionCustomerType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ConversionCustomerTypeEnum.ConversionCustomerType
    */
   export enum ConversionCustomerType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3615,7 +3717,7 @@ export namespace enums {
 
   /**
    * @name ConversionEnvironmentEnum.ConversionEnvironment
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ConversionEnvironmentEnum.ConversionEnvironment
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ConversionEnvironmentEnum.ConversionEnvironment
    */
   export enum ConversionEnvironment {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3626,7 +3728,7 @@ export namespace enums {
 
   /**
    * @name ConversionOriginEnum.ConversionOrigin
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ConversionOriginEnum.ConversionOrigin
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ConversionOriginEnum.ConversionOrigin
    */
   export enum ConversionOrigin {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3641,7 +3743,7 @@ export namespace enums {
 
   /**
    * @name ConversionTrackingStatusEnum.ConversionTrackingStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ConversionTrackingStatusEnum.ConversionTrackingStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ConversionTrackingStatusEnum.ConversionTrackingStatus
    */
   export enum ConversionTrackingStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3654,7 +3756,7 @@ export namespace enums {
 
   /**
    * @name ConversionValueRuleSetStatusEnum.ConversionValueRuleSetStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ConversionValueRuleSetStatusEnum.ConversionValueRuleSetStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ConversionValueRuleSetStatusEnum.ConversionValueRuleSetStatus
    */
   export enum ConversionValueRuleSetStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3666,7 +3768,7 @@ export namespace enums {
 
   /**
    * @name ConversionValueRuleStatusEnum.ConversionValueRuleStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ConversionValueRuleStatusEnum.ConversionValueRuleStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ConversionValueRuleStatusEnum.ConversionValueRuleStatus
    */
   export enum ConversionValueRuleStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3678,7 +3780,7 @@ export namespace enums {
 
   /**
    * @name CriterionSystemServingStatusEnum.CriterionSystemServingStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CriterionSystemServingStatusEnum.CriterionSystemServingStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CriterionSystemServingStatusEnum.CriterionSystemServingStatus
    */
   export enum CriterionSystemServingStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3689,7 +3791,7 @@ export namespace enums {
 
   /**
    * @name CriterionTypeEnum.CriterionType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CriterionTypeEnum.CriterionType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CriterionTypeEnum.CriterionType
    */
   export enum CriterionType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3739,11 +3841,13 @@ export namespace enums {
     PLACEMENT_LIST = 44, // PLACEMENT_LIST
     VERTICAL_ADS_ITEM_GROUP_RULE_LIST = 45, // VERTICAL_ADS_ITEM_GROUP_RULE_LIST
     VERTICAL_ADS_ITEM_GROUP_RULE = 46, // VERTICAL_ADS_ITEM_GROUP_RULE
+    RETAIL_FILTER_BUNDLE = 180, // RETAIL_FILTER_BUNDLE
+    RETAIL_FILTER = 181, // RETAIL_FILTER
   }
 
   /**
    * @name CustomAudienceMemberTypeEnum.CustomAudienceMemberType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CustomAudienceMemberTypeEnum.CustomAudienceMemberType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CustomAudienceMemberTypeEnum.CustomAudienceMemberType
    */
   export enum CustomAudienceMemberType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3756,7 +3860,7 @@ export namespace enums {
 
   /**
    * @name CustomAudienceStatusEnum.CustomAudienceStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CustomAudienceStatusEnum.CustomAudienceStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CustomAudienceStatusEnum.CustomAudienceStatus
    */
   export enum CustomAudienceStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3767,7 +3871,7 @@ export namespace enums {
 
   /**
    * @name CustomAudienceTypeEnum.CustomAudienceType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CustomAudienceTypeEnum.CustomAudienceType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CustomAudienceTypeEnum.CustomAudienceType
    */
   export enum CustomAudienceType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3780,7 +3884,7 @@ export namespace enums {
 
   /**
    * @name CustomConversionGoalStatusEnum.CustomConversionGoalStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CustomConversionGoalStatusEnum.CustomConversionGoalStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CustomConversionGoalStatusEnum.CustomConversionGoalStatus
    */
   export enum CustomConversionGoalStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3791,7 +3895,7 @@ export namespace enums {
 
   /**
    * @name CustomInterestMemberTypeEnum.CustomInterestMemberType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CustomInterestMemberTypeEnum.CustomInterestMemberType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CustomInterestMemberTypeEnum.CustomInterestMemberType
    */
   export enum CustomInterestMemberType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3802,7 +3906,7 @@ export namespace enums {
 
   /**
    * @name CustomInterestStatusEnum.CustomInterestStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CustomInterestStatusEnum.CustomInterestStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CustomInterestStatusEnum.CustomInterestStatus
    */
   export enum CustomInterestStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3813,7 +3917,7 @@ export namespace enums {
 
   /**
    * @name CustomInterestTypeEnum.CustomInterestType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CustomInterestTypeEnum.CustomInterestType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CustomInterestTypeEnum.CustomInterestType
    */
   export enum CustomInterestType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3824,7 +3928,7 @@ export namespace enums {
 
   /**
    * @name CustomerAcquisitionOptimizationModeEnum.CustomerAcquisitionOptimizationMode
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CustomerAcquisitionOptimizationModeEnum.CustomerAcquisitionOptimizationMode
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CustomerAcquisitionOptimizationModeEnum.CustomerAcquisitionOptimizationMode
    */
   export enum CustomerAcquisitionOptimizationMode {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3836,7 +3940,7 @@ export namespace enums {
 
   /**
    * @name CustomerPayPerConversionEligibilityFailureReasonEnum.CustomerPayPerConversionEligibilityFailureReason
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CustomerPayPerConversionEligibilityFailureReasonEnum.CustomerPayPerConversionEligibilityFailureReason
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CustomerPayPerConversionEligibilityFailureReasonEnum.CustomerPayPerConversionEligibilityFailureReason
    */
   export enum CustomerPayPerConversionEligibilityFailureReason {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3852,7 +3956,7 @@ export namespace enums {
 
   /**
    * @name CustomerStatusEnum.CustomerStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CustomerStatusEnum.CustomerStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CustomerStatusEnum.CustomerStatus
    */
   export enum CustomerStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3865,7 +3969,7 @@ export namespace enums {
 
   /**
    * @name CustomizerAttributeStatusEnum.CustomizerAttributeStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CustomizerAttributeStatusEnum.CustomizerAttributeStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CustomizerAttributeStatusEnum.CustomizerAttributeStatus
    */
   export enum CustomizerAttributeStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3876,7 +3980,7 @@ export namespace enums {
 
   /**
    * @name CustomizerValueStatusEnum.CustomizerValueStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/CustomizerValueStatusEnum.CustomizerValueStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/CustomizerValueStatusEnum.CustomizerValueStatus
    */
   export enum CustomizerValueStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3887,7 +3991,7 @@ export namespace enums {
 
   /**
    * @name DataDrivenModelStatusEnum.DataDrivenModelStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/DataDrivenModelStatusEnum.DataDrivenModelStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/DataDrivenModelStatusEnum.DataDrivenModelStatus
    */
   export enum DataDrivenModelStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3900,7 +4004,7 @@ export namespace enums {
 
   /**
    * @name DataLinkStatusEnum.DataLinkStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/DataLinkStatusEnum.DataLinkStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/DataLinkStatusEnum.DataLinkStatus
    */
   export enum DataLinkStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3915,7 +4019,7 @@ export namespace enums {
 
   /**
    * @name DataLinkTypeEnum.DataLinkType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/DataLinkTypeEnum.DataLinkType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/DataLinkTypeEnum.DataLinkType
    */
   export enum DataLinkType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3925,7 +4029,7 @@ export namespace enums {
 
   /**
    * @name DemandGenChannelConfigEnum.DemandGenChannelConfig
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/DemandGenChannelConfigEnum.DemandGenChannelConfig
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/DemandGenChannelConfigEnum.DemandGenChannelConfig
    */
   export enum DemandGenChannelConfig {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3936,7 +4040,7 @@ export namespace enums {
 
   /**
    * @name DemandGenChannelStrategyEnum.DemandGenChannelStrategy
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/DemandGenChannelStrategyEnum.DemandGenChannelStrategy
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/DemandGenChannelStrategyEnum.DemandGenChannelStrategy
    */
   export enum DemandGenChannelStrategy {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3947,7 +4051,7 @@ export namespace enums {
 
   /**
    * @name DistanceBucketEnum.DistanceBucket
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/DistanceBucketEnum.DistanceBucket
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/DistanceBucketEnum.DistanceBucket
    */
   export enum DistanceBucket {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3983,7 +4087,7 @@ export namespace enums {
 
   /**
    * @name EuPoliticalAdvertisingStatusEnum.EuPoliticalAdvertisingStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/EuPoliticalAdvertisingStatusEnum.EuPoliticalAdvertisingStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/EuPoliticalAdvertisingStatusEnum.EuPoliticalAdvertisingStatus
    */
   export enum EuPoliticalAdvertisingStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -3993,8 +4097,19 @@ export namespace enums {
   }
 
   /**
+   * @name ExperimentAssetDetailOperationEnum.ExperimentAssetDetailOperation
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ExperimentAssetDetailOperationEnum.ExperimentAssetDetailOperation
+   */
+  export enum ExperimentAssetDetailOperation {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ADD = 2, // ADD
+    REMOVE = 3, // REMOVE
+  }
+
+  /**
    * @name ExperimentStatusEnum.ExperimentStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ExperimentStatusEnum.ExperimentStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ExperimentStatusEnum.ExperimentStatus
    */
   export enum ExperimentStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4010,7 +4125,7 @@ export namespace enums {
 
   /**
    * @name ExperimentTypeEnum.ExperimentType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ExperimentTypeEnum.ExperimentType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ExperimentTypeEnum.ExperimentType
    */
   export enum ExperimentType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4025,11 +4140,15 @@ export namespace enums {
     SHOPPING_AUTOMATED_BIDDING_STRATEGY = 10, // SHOPPING_AUTOMATED_BIDDING_STRATEGY
     SMART_MATCHING = 11, // SMART_MATCHING
     HOTEL_CUSTOM = 12, // HOTEL_CUSTOM
+    OPTIMIZE_ASSETS = 13, // OPTIMIZE_ASSETS
+    ADOPT_AI_MAX = 14, // ADOPT_AI_MAX
+    ADOPT_BROAD_MATCH_KEYWORDS = 15, // ADOPT_BROAD_MATCH_KEYWORDS
+    PMAX_REPLACEMENT_SHOPPING = 16, // PMAX_REPLACEMENT_SHOPPING
   }
 
   /**
    * @name GeoTargetConstantStatusEnum.GeoTargetConstantStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/GeoTargetConstantStatusEnum.GeoTargetConstantStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/GeoTargetConstantStatusEnum.GeoTargetConstantStatus
    */
   export enum GeoTargetConstantStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4040,7 +4159,7 @@ export namespace enums {
 
   /**
    * @name GeoTargetingTypeEnum.GeoTargetingType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/GeoTargetingTypeEnum.GeoTargetingType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/GeoTargetingTypeEnum.GeoTargetingType
    */
   export enum GeoTargetingType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4051,7 +4170,7 @@ export namespace enums {
 
   /**
    * @name GoalConfigLevelEnum.GoalConfigLevel
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/GoalConfigLevelEnum.GoalConfigLevel
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/GoalConfigLevelEnum.GoalConfigLevel
    */
   export enum GoalConfigLevel {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4062,7 +4181,7 @@ export namespace enums {
 
   /**
    * @name GoalOptimizationEligibilityEnum.GoalOptimizationEligibility
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/GoalOptimizationEligibilityEnum.GoalOptimizationEligibility
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/GoalOptimizationEligibilityEnum.GoalOptimizationEligibility
    */
   export enum GoalOptimizationEligibility {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4073,7 +4192,7 @@ export namespace enums {
 
   /**
    * @name GoalTypeEnum.GoalType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/GoalTypeEnum.GoalType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/GoalTypeEnum.GoalType
    */
   export enum GoalType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4083,7 +4202,7 @@ export namespace enums {
 
   /**
    * @name GoogleAdsFieldCategoryEnum.GoogleAdsFieldCategory
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/GoogleAdsFieldCategoryEnum.GoogleAdsFieldCategory
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/GoogleAdsFieldCategoryEnum.GoogleAdsFieldCategory
    */
   export enum GoogleAdsFieldCategory {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4096,7 +4215,7 @@ export namespace enums {
 
   /**
    * @name GoogleAdsFieldDataTypeEnum.GoogleAdsFieldDataType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/GoogleAdsFieldDataTypeEnum.GoogleAdsFieldDataType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/GoogleAdsFieldDataTypeEnum.GoogleAdsFieldDataType
    */
   export enum GoogleAdsFieldDataType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4116,7 +4235,7 @@ export namespace enums {
 
   /**
    * @name GoogleVoiceCallStatusEnum.GoogleVoiceCallStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/GoogleVoiceCallStatusEnum.GoogleVoiceCallStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/GoogleVoiceCallStatusEnum.GoogleVoiceCallStatus
    */
   export enum GoogleVoiceCallStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4127,7 +4246,7 @@ export namespace enums {
 
   /**
    * @name HotelAssetSuggestionStatusEnum.HotelAssetSuggestionStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/HotelAssetSuggestionStatusEnum.HotelAssetSuggestionStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/HotelAssetSuggestionStatusEnum.HotelAssetSuggestionStatus
    */
   export enum HotelAssetSuggestionStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4139,7 +4258,7 @@ export namespace enums {
 
   /**
    * @name HotelReconciliationStatusEnum.HotelReconciliationStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/HotelReconciliationStatusEnum.HotelReconciliationStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/HotelReconciliationStatusEnum.HotelReconciliationStatus
    */
   export enum HotelReconciliationStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4152,7 +4271,7 @@ export namespace enums {
 
   /**
    * @name IdentityVerificationProgramEnum.IdentityVerificationProgram
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/IdentityVerificationProgramEnum.IdentityVerificationProgram
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/IdentityVerificationProgramEnum.IdentityVerificationProgram
    */
   export enum IdentityVerificationProgram {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4162,7 +4281,7 @@ export namespace enums {
 
   /**
    * @name IdentityVerificationProgramStatusEnum.IdentityVerificationProgramStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/IdentityVerificationProgramStatusEnum.IdentityVerificationProgramStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/IdentityVerificationProgramStatusEnum.IdentityVerificationProgramStatus
    */
   export enum IdentityVerificationProgramStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4175,7 +4294,7 @@ export namespace enums {
 
   /**
    * @name IncentiveStateEnum.IncentiveState
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/IncentiveStateEnum.IncentiveState
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/IncentiveStateEnum.IncentiveState
    */
   export enum IncentiveState {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4191,7 +4310,7 @@ export namespace enums {
 
   /**
    * @name InsightsTrendEnum.InsightsTrend
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/InsightsTrendEnum.InsightsTrend
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/InsightsTrendEnum.InsightsTrend
    */
   export enum InsightsTrend {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4204,7 +4323,7 @@ export namespace enums {
 
   /**
    * @name InvoiceTypeEnum.InvoiceType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/InvoiceTypeEnum.InvoiceType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/InvoiceTypeEnum.InvoiceType
    */
   export enum InvoiceType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4215,7 +4334,7 @@ export namespace enums {
 
   /**
    * @name KeywordPlanForecastIntervalEnum.KeywordPlanForecastInterval
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/KeywordPlanForecastIntervalEnum.KeywordPlanForecastInterval
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/KeywordPlanForecastIntervalEnum.KeywordPlanForecastInterval
    */
   export enum KeywordPlanForecastInterval {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4227,7 +4346,7 @@ export namespace enums {
 
   /**
    * @name KeywordPlanKeywordAnnotationEnum.KeywordPlanKeywordAnnotation
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/KeywordPlanKeywordAnnotationEnum.KeywordPlanKeywordAnnotation
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/KeywordPlanKeywordAnnotationEnum.KeywordPlanKeywordAnnotation
    */
   export enum KeywordPlanKeywordAnnotation {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4237,7 +4356,7 @@ export namespace enums {
 
   /**
    * @name KeywordPlanNetworkEnum.KeywordPlanNetwork
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/KeywordPlanNetworkEnum.KeywordPlanNetwork
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/KeywordPlanNetworkEnum.KeywordPlanNetwork
    */
   export enum KeywordPlanNetwork {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4248,7 +4367,7 @@ export namespace enums {
 
   /**
    * @name LabelStatusEnum.LabelStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LabelStatusEnum.LabelStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LabelStatusEnum.LabelStatus
    */
   export enum LabelStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4259,7 +4378,7 @@ export namespace enums {
 
   /**
    * @name LinkedAccountTypeEnum.LinkedAccountType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LinkedAccountTypeEnum.LinkedAccountType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LinkedAccountTypeEnum.LinkedAccountType
    */
   export enum LinkedAccountType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4269,7 +4388,7 @@ export namespace enums {
 
   /**
    * @name LinkedProductTypeEnum.LinkedProductType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LinkedProductTypeEnum.LinkedProductType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LinkedProductTypeEnum.LinkedProductType
    */
   export enum LinkedProductType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4283,7 +4402,7 @@ export namespace enums {
 
   /**
    * @name ListingGroupFilterCustomAttributeIndexEnum.ListingGroupFilterCustomAttributeIndex
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ListingGroupFilterCustomAttributeIndexEnum.ListingGroupFilterCustomAttributeIndex
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ListingGroupFilterCustomAttributeIndexEnum.ListingGroupFilterCustomAttributeIndex
    */
   export enum ListingGroupFilterCustomAttributeIndex {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4297,18 +4416,19 @@ export namespace enums {
 
   /**
    * @name ListingGroupFilterListingSourceEnum.ListingGroupFilterListingSource
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ListingGroupFilterListingSourceEnum.ListingGroupFilterListingSource
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ListingGroupFilterListingSourceEnum.ListingGroupFilterListingSource
    */
   export enum ListingGroupFilterListingSource {
     UNSPECIFIED = 0, // UNSPECIFIED
     UNKNOWN = 1, // UNKNOWN
     SHOPPING = 2, // SHOPPING
     WEBPAGE = 3, // WEBPAGE
+    RETAIL = 4, // RETAIL
   }
 
   /**
    * @name ListingGroupFilterProductCategoryLevelEnum.ListingGroupFilterProductCategoryLevel
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ListingGroupFilterProductCategoryLevelEnum.ListingGroupFilterProductCategoryLevel
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ListingGroupFilterProductCategoryLevelEnum.ListingGroupFilterProductCategoryLevel
    */
   export enum ListingGroupFilterProductCategoryLevel {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4322,7 +4442,7 @@ export namespace enums {
 
   /**
    * @name ListingGroupFilterProductChannelEnum.ListingGroupFilterProductChannel
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ListingGroupFilterProductChannelEnum.ListingGroupFilterProductChannel
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ListingGroupFilterProductChannelEnum.ListingGroupFilterProductChannel
    */
   export enum ListingGroupFilterProductChannel {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4333,7 +4453,7 @@ export namespace enums {
 
   /**
    * @name ListingGroupFilterProductConditionEnum.ListingGroupFilterProductCondition
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ListingGroupFilterProductConditionEnum.ListingGroupFilterProductCondition
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ListingGroupFilterProductConditionEnum.ListingGroupFilterProductCondition
    */
   export enum ListingGroupFilterProductCondition {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4345,7 +4465,7 @@ export namespace enums {
 
   /**
    * @name ListingGroupFilterProductTypeLevelEnum.ListingGroupFilterProductTypeLevel
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ListingGroupFilterProductTypeLevelEnum.ListingGroupFilterProductTypeLevel
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ListingGroupFilterProductTypeLevelEnum.ListingGroupFilterProductTypeLevel
    */
   export enum ListingGroupFilterProductTypeLevel {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4359,7 +4479,7 @@ export namespace enums {
 
   /**
    * @name ListingGroupFilterTypeEnum.ListingGroupFilterType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ListingGroupFilterTypeEnum.ListingGroupFilterType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ListingGroupFilterTypeEnum.ListingGroupFilterType
    */
   export enum ListingGroupFilterType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4371,7 +4491,7 @@ export namespace enums {
 
   /**
    * @name ListingTypeEnum.ListingType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ListingTypeEnum.ListingType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ListingTypeEnum.ListingType
    */
   export enum ListingType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4381,7 +4501,7 @@ export namespace enums {
 
   /**
    * @name LocalServicesBusinessRegistrationCheckRejectionReasonEnum.LocalServicesBusinessRegistrationCheckRejectionReason
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LocalServicesBusinessRegistrationCheckRejectionReasonEnum.LocalServicesBusinessRegistrationCheckRejectionReason
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LocalServicesBusinessRegistrationCheckRejectionReasonEnum.LocalServicesBusinessRegistrationCheckRejectionReason
    */
   export enum LocalServicesBusinessRegistrationCheckRejectionReason {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4399,7 +4519,7 @@ export namespace enums {
 
   /**
    * @name LocalServicesBusinessRegistrationTypeEnum.LocalServicesBusinessRegistrationType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LocalServicesBusinessRegistrationTypeEnum.LocalServicesBusinessRegistrationType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LocalServicesBusinessRegistrationTypeEnum.LocalServicesBusinessRegistrationType
    */
   export enum LocalServicesBusinessRegistrationType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4410,7 +4530,7 @@ export namespace enums {
 
   /**
    * @name LocalServicesLeadConversationTypeEnum.LocalServicesLeadConversationType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LocalServicesLeadConversationTypeEnum.LocalServicesLeadConversationType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LocalServicesLeadConversationTypeEnum.LocalServicesLeadConversationType
    */
   export enum LocalServicesLeadConversationType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4426,7 +4546,7 @@ export namespace enums {
 
   /**
    * @name LocalServicesEmployeeStatusEnum.LocalServicesEmployeeStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LocalServicesEmployeeStatusEnum.LocalServicesEmployeeStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LocalServicesEmployeeStatusEnum.LocalServicesEmployeeStatus
    */
   export enum LocalServicesEmployeeStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4437,7 +4557,7 @@ export namespace enums {
 
   /**
    * @name LocalServicesEmployeeTypeEnum.LocalServicesEmployeeType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LocalServicesEmployeeTypeEnum.LocalServicesEmployeeType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LocalServicesEmployeeTypeEnum.LocalServicesEmployeeType
    */
   export enum LocalServicesEmployeeType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4448,7 +4568,7 @@ export namespace enums {
 
   /**
    * @name LocalServicesInsuranceRejectionReasonEnum.LocalServicesInsuranceRejectionReason
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LocalServicesInsuranceRejectionReasonEnum.LocalServicesInsuranceRejectionReason
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LocalServicesInsuranceRejectionReasonEnum.LocalServicesInsuranceRejectionReason
    */
   export enum LocalServicesInsuranceRejectionReason {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4471,7 +4591,7 @@ export namespace enums {
 
   /**
    * @name LocalServicesLeadCreditIssuanceDecisionEnum.LocalServicesLeadCreditIssuanceDecision
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LocalServicesLeadCreditIssuanceDecisionEnum.LocalServicesLeadCreditIssuanceDecision
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LocalServicesLeadCreditIssuanceDecisionEnum.LocalServicesLeadCreditIssuanceDecision
    */
   export enum LocalServicesLeadCreditIssuanceDecision {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4484,7 +4604,7 @@ export namespace enums {
 
   /**
    * @name LocalServicesCreditStateEnum.LocalServicesCreditState
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LocalServicesCreditStateEnum.LocalServicesCreditState
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LocalServicesCreditStateEnum.LocalServicesCreditState
    */
   export enum LocalServicesCreditState {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4495,7 +4615,7 @@ export namespace enums {
 
   /**
    * @name LocalServicesLeadStatusEnum.LocalServicesLeadStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LocalServicesLeadStatusEnum.LocalServicesLeadStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LocalServicesLeadStatusEnum.LocalServicesLeadStatus
    */
   export enum LocalServicesLeadStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4512,7 +4632,7 @@ export namespace enums {
 
   /**
    * @name LocalServicesLeadSurveyAnswerEnum.LocalServicesLeadSurveyAnswer
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LocalServicesLeadSurveyAnswerEnum.LocalServicesLeadSurveyAnswer
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LocalServicesLeadSurveyAnswerEnum.LocalServicesLeadSurveyAnswer
    */
   export enum LocalServicesLeadSurveyAnswer {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4526,7 +4646,7 @@ export namespace enums {
 
   /**
    * @name LocalServicesLeadSurveyDissatisfiedReasonEnum.LocalServicesLeadSurveyDissatisfiedReason
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LocalServicesLeadSurveyDissatisfiedReasonEnum.LocalServicesLeadSurveyDissatisfiedReason
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LocalServicesLeadSurveyDissatisfiedReasonEnum.LocalServicesLeadSurveyDissatisfiedReason
    */
   export enum LocalServicesLeadSurveyDissatisfiedReason {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4542,7 +4662,7 @@ export namespace enums {
 
   /**
    * @name LocalServicesLeadSurveySatisfiedReasonEnum.LocalServicesLeadSurveySatisfiedReason
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LocalServicesLeadSurveySatisfiedReasonEnum.LocalServicesLeadSurveySatisfiedReason
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LocalServicesLeadSurveySatisfiedReasonEnum.LocalServicesLeadSurveySatisfiedReason
    */
   export enum LocalServicesLeadSurveySatisfiedReason {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4556,7 +4676,7 @@ export namespace enums {
 
   /**
    * @name LocalServicesLeadTypeEnum.LocalServicesLeadType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LocalServicesLeadTypeEnum.LocalServicesLeadType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LocalServicesLeadTypeEnum.LocalServicesLeadType
    */
   export enum LocalServicesLeadType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4568,7 +4688,7 @@ export namespace enums {
 
   /**
    * @name LocalServicesLicenseRejectionReasonEnum.LocalServicesLicenseRejectionReason
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LocalServicesLicenseRejectionReasonEnum.LocalServicesLicenseRejectionReason
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LocalServicesLicenseRejectionReasonEnum.LocalServicesLicenseRejectionReason
    */
   export enum LocalServicesLicenseRejectionReason {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4584,7 +4704,7 @@ export namespace enums {
 
   /**
    * @name LocalServicesParticipantTypeEnum.LocalServicesParticipantType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LocalServicesParticipantTypeEnum.LocalServicesParticipantType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LocalServicesParticipantTypeEnum.LocalServicesParticipantType
    */
   export enum LocalServicesParticipantType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4595,7 +4715,7 @@ export namespace enums {
 
   /**
    * @name LocalServicesVerificationArtifactStatusEnum.LocalServicesVerificationArtifactStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LocalServicesVerificationArtifactStatusEnum.LocalServicesVerificationArtifactStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LocalServicesVerificationArtifactStatusEnum.LocalServicesVerificationArtifactStatus
    */
   export enum LocalServicesVerificationArtifactStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4609,7 +4729,7 @@ export namespace enums {
 
   /**
    * @name LocalServicesVerificationArtifactTypeEnum.LocalServicesVerificationArtifactType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LocalServicesVerificationArtifactTypeEnum.LocalServicesVerificationArtifactType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LocalServicesVerificationArtifactTypeEnum.LocalServicesVerificationArtifactType
    */
   export enum LocalServicesVerificationArtifactType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4622,7 +4742,7 @@ export namespace enums {
 
   /**
    * @name LocalServicesVerificationStatusEnum.LocalServicesVerificationStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LocalServicesVerificationStatusEnum.LocalServicesVerificationStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LocalServicesVerificationStatusEnum.LocalServicesVerificationStatus
    */
   export enum LocalServicesVerificationStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4638,7 +4758,7 @@ export namespace enums {
 
   /**
    * @name LocationSourceTypeEnum.LocationSourceType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/LocationSourceTypeEnum.LocationSourceType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/LocationSourceTypeEnum.LocationSourceType
    */
   export enum LocationSourceType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4649,7 +4769,7 @@ export namespace enums {
 
   /**
    * @name ManagerLinkStatusEnum.ManagerLinkStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ManagerLinkStatusEnum.ManagerLinkStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ManagerLinkStatusEnum.ManagerLinkStatus
    */
   export enum ManagerLinkStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4663,7 +4783,7 @@ export namespace enums {
 
   /**
    * @name MediaTypeEnum.MediaType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/MediaTypeEnum.MediaType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/MediaTypeEnum.MediaType
    */
   export enum MediaType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4677,8 +4797,18 @@ export namespace enums {
   }
 
   /**
+   * @name MessagingRestrictionTypeEnum.MessagingRestrictionType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/MessagingRestrictionTypeEnum.MessagingRestrictionType
+   */
+  export enum MessagingRestrictionType {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    RESTRICTION_BASED_EXCLUSION = 2, // RESTRICTION_BASED_EXCLUSION
+  }
+
+  /**
    * @name MobileDeviceTypeEnum.MobileDeviceType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/MobileDeviceTypeEnum.MobileDeviceType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/MobileDeviceTypeEnum.MobileDeviceType
    */
   export enum MobileDeviceType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4689,7 +4819,7 @@ export namespace enums {
 
   /**
    * @name NegativeGeoTargetTypeEnum.NegativeGeoTargetType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/NegativeGeoTargetTypeEnum.NegativeGeoTargetType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/NegativeGeoTargetTypeEnum.NegativeGeoTargetType
    */
   export enum NegativeGeoTargetType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4700,7 +4830,7 @@ export namespace enums {
 
   /**
    * @name NonSkippableMaxDurationEnum.NonSkippableMaxDuration
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/NonSkippableMaxDurationEnum.NonSkippableMaxDuration
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/NonSkippableMaxDurationEnum.NonSkippableMaxDuration
    */
   export enum NonSkippableMaxDuration {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4712,7 +4842,7 @@ export namespace enums {
 
   /**
    * @name NonSkippableMinDurationEnum.NonSkippableMinDuration
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/NonSkippableMinDurationEnum.NonSkippableMinDuration
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/NonSkippableMinDurationEnum.NonSkippableMinDuration
    */
   export enum NonSkippableMinDuration {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4725,7 +4855,7 @@ export namespace enums {
 
   /**
    * @name OfflineConversionDiagnosticStatusEnum.OfflineConversionDiagnosticStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/OfflineConversionDiagnosticStatusEnum.OfflineConversionDiagnosticStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/OfflineConversionDiagnosticStatusEnum.OfflineConversionDiagnosticStatus
    */
   export enum OfflineConversionDiagnosticStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4738,7 +4868,7 @@ export namespace enums {
 
   /**
    * @name OfflineEventUploadClientEnum.OfflineEventUploadClient
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/OfflineEventUploadClientEnum.OfflineEventUploadClient
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/OfflineEventUploadClientEnum.OfflineEventUploadClient
    */
   export enum OfflineEventUploadClient {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4750,7 +4880,7 @@ export namespace enums {
 
   /**
    * @name OfflineUserDataJobFailureReasonEnum.OfflineUserDataJobFailureReason
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/OfflineUserDataJobFailureReasonEnum.OfflineUserDataJobFailureReason
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/OfflineUserDataJobFailureReasonEnum.OfflineUserDataJobFailureReason
    */
   export enum OfflineUserDataJobFailureReason {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4764,7 +4894,7 @@ export namespace enums {
 
   /**
    * @name OfflineUserDataJobMatchRateRangeEnum.OfflineUserDataJobMatchRateRange
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/OfflineUserDataJobMatchRateRangeEnum.OfflineUserDataJobMatchRateRange
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/OfflineUserDataJobMatchRateRangeEnum.OfflineUserDataJobMatchRateRange
    */
   export enum OfflineUserDataJobMatchRateRange {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4782,7 +4912,7 @@ export namespace enums {
 
   /**
    * @name OfflineUserDataJobStatusEnum.OfflineUserDataJobStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/OfflineUserDataJobStatusEnum.OfflineUserDataJobStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/OfflineUserDataJobStatusEnum.OfflineUserDataJobStatus
    */
   export enum OfflineUserDataJobStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4795,7 +4925,7 @@ export namespace enums {
 
   /**
    * @name OfflineUserDataJobTypeEnum.OfflineUserDataJobType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/OfflineUserDataJobTypeEnum.OfflineUserDataJobType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/OfflineUserDataJobTypeEnum.OfflineUserDataJobType
    */
   export enum OfflineUserDataJobType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4808,7 +4938,7 @@ export namespace enums {
 
   /**
    * @name OperatingSystemVersionOperatorTypeEnum.OperatingSystemVersionOperatorType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/OperatingSystemVersionOperatorTypeEnum.OperatingSystemVersionOperatorType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/OperatingSystemVersionOperatorTypeEnum.OperatingSystemVersionOperatorType
    */
   export enum OperatingSystemVersionOperatorType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4819,7 +4949,7 @@ export namespace enums {
 
   /**
    * @name OptimizationGoalTypeEnum.OptimizationGoalType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/OptimizationGoalTypeEnum.OptimizationGoalType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/OptimizationGoalTypeEnum.OptimizationGoalType
    */
   export enum OptimizationGoalType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4830,8 +4960,21 @@ export namespace enums {
   }
 
   /**
+   * @name PartnershipOpportunityEnum.PartnershipOpportunity
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/PartnershipOpportunityEnum.PartnershipOpportunity
+   */
+  export enum PartnershipOpportunity {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    CREATOR_PARTNERSHIPS = 2, // CREATOR_PARTNERSHIPS
+    CREATOR_TAKEOVER = 3, // CREATOR_TAKEOVER
+    PARTNERSHIP_ADS = 4, // PARTNERSHIP_ADS
+    YOUTUBE_SELECT_LINEUPS = 5, // YOUTUBE_SELECT_LINEUPS
+  }
+
+  /**
    * @name PaymentModeEnum.PaymentMode
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/PaymentModeEnum.PaymentMode
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/PaymentModeEnum.PaymentMode
    */
   export enum PaymentMode {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4844,7 +4987,7 @@ export namespace enums {
 
   /**
    * @name PerformanceMaxUpgradeStatusEnum.PerformanceMaxUpgradeStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/PerformanceMaxUpgradeStatusEnum.PerformanceMaxUpgradeStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/PerformanceMaxUpgradeStatusEnum.PerformanceMaxUpgradeStatus
    */
   export enum PerformanceMaxUpgradeStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4857,7 +5000,7 @@ export namespace enums {
 
   /**
    * @name PlacementTypeEnum.PlacementType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/PlacementTypeEnum.PlacementType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/PlacementTypeEnum.PlacementType
    */
   export enum PlacementType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4872,7 +5015,7 @@ export namespace enums {
 
   /**
    * @name PositiveGeoTargetTypeEnum.PositiveGeoTargetType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/PositiveGeoTargetTypeEnum.PositiveGeoTargetType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/PositiveGeoTargetTypeEnum.PositiveGeoTargetType
    */
   export enum PositiveGeoTargetType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4884,7 +5027,7 @@ export namespace enums {
 
   /**
    * @name ProductAvailabilityEnum.ProductAvailability
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ProductAvailabilityEnum.ProductAvailability
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ProductAvailabilityEnum.ProductAvailability
    */
   export enum ProductAvailability {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4896,7 +5039,7 @@ export namespace enums {
 
   /**
    * @name ProductCategoryStateEnum.ProductCategoryState
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ProductCategoryStateEnum.ProductCategoryState
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ProductCategoryStateEnum.ProductCategoryState
    */
   export enum ProductCategoryState {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4907,7 +5050,7 @@ export namespace enums {
 
   /**
    * @name ProductIssueSeverityEnum.ProductIssueSeverity
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ProductIssueSeverityEnum.ProductIssueSeverity
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ProductIssueSeverityEnum.ProductIssueSeverity
    */
   export enum ProductIssueSeverity {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4918,7 +5061,7 @@ export namespace enums {
 
   /**
    * @name ProductLinkInvitationStatusEnum.ProductLinkInvitationStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ProductLinkInvitationStatusEnum.ProductLinkInvitationStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ProductLinkInvitationStatusEnum.ProductLinkInvitationStatus
    */
   export enum ProductLinkInvitationStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4933,7 +5076,7 @@ export namespace enums {
 
   /**
    * @name ProductStatusEnum.ProductStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ProductStatusEnum.ProductStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ProductStatusEnum.ProductStatus
    */
   export enum ProductStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4945,7 +5088,7 @@ export namespace enums {
 
   /**
    * @name ReachPlanAgeRangeEnum.ReachPlanAgeRange
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ReachPlanAgeRangeEnum.ReachPlanAgeRange
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ReachPlanAgeRangeEnum.ReachPlanAgeRange
    */
   export enum ReachPlanAgeRange {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4958,6 +5101,11 @@ export namespace enums {
     AGE_RANGE_18_64 = 6, // AGE_RANGE_18_64
     AGE_RANGE_18_65_UP = 7, // AGE_RANGE_18_65_UP
     AGE_RANGE_21_34 = 8, // AGE_RANGE_21_34
+    AGE_RANGE_21_44 = 22, // AGE_RANGE_21_44
+    AGE_RANGE_21_49 = 23, // AGE_RANGE_21_49
+    AGE_RANGE_21_54 = 24, // AGE_RANGE_21_54
+    AGE_RANGE_21_64 = 25, // AGE_RANGE_21_64
+    AGE_RANGE_21_65_UP = 26, // AGE_RANGE_21_65_UP
     AGE_RANGE_25_34 = 503002, // AGE_RANGE_25_34
     AGE_RANGE_25_44 = 9, // AGE_RANGE_25_44
     AGE_RANGE_25_49 = 10, // AGE_RANGE_25_49
@@ -4979,8 +5127,19 @@ export namespace enums {
   }
 
   /**
+   * @name ReachPlanBuyingMethodEnum.ReachPlanBuyingMethod
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ReachPlanBuyingMethodEnum.ReachPlanBuyingMethod
+   */
+  export enum ReachPlanBuyingMethod {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    AUCTION = 2, // AUCTION
+    RESERVATION = 3, // RESERVATION
+  }
+
+  /**
    * @name ReachPlanConversionRateModelEnum.ReachPlanConversionRateModel
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ReachPlanConversionRateModelEnum.ReachPlanConversionRateModel
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ReachPlanConversionRateModelEnum.ReachPlanConversionRateModel
    */
   export enum ReachPlanConversionRateModel {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -4992,8 +5151,33 @@ export namespace enums {
   }
 
   /**
+   * @name ReachPlanCostModelEnum.ReachPlanCostModel
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ReachPlanCostModelEnum.ReachPlanCostModel
+   */
+  export enum ReachPlanCostModel {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    CPM = 2, // CPM
+    CPV = 3, // CPV
+    CPC = 4, // CPC
+    CPA = 5, // CPA
+  }
+
+  /**
+   * @name ReachPlanMarketingObjectiveEnum.ReachPlanMarketingObjective
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ReachPlanMarketingObjectiveEnum.ReachPlanMarketingObjective
+   */
+  export enum ReachPlanMarketingObjective {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    AWARENESS = 2, // AWARENESS
+    CONSIDERATION = 3, // CONSIDERATION
+    ACTION = 4, // ACTION
+  }
+
+  /**
    * @name ReachPlanNetworkEnum.ReachPlanNetwork
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ReachPlanNetworkEnum.ReachPlanNetwork
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ReachPlanNetworkEnum.ReachPlanNetwork
    */
   export enum ReachPlanNetwork {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5005,7 +5189,7 @@ export namespace enums {
 
   /**
    * @name ReachPlanPlannableUserListStatusEnum.ReachPlanPlannableUserListStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ReachPlanPlannableUserListStatusEnum.ReachPlanPlannableUserListStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ReachPlanPlannableUserListStatusEnum.ReachPlanPlannableUserListStatus
    */
   export enum ReachPlanPlannableUserListStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5016,7 +5200,7 @@ export namespace enums {
 
   /**
    * @name ReachPlanSurfaceEnum.ReachPlanSurface
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ReachPlanSurfaceEnum.ReachPlanSurface
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ReachPlanSurfaceEnum.ReachPlanSurface
    */
   export enum ReachPlanSurface {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5028,11 +5212,13 @@ export namespace enums {
     IN_STREAM_NON_SKIPPABLE = 4, // IN_STREAM_NON_SKIPPABLE
     IN_STREAM_SKIPPABLE = 5, // IN_STREAM_SKIPPABLE
     SHORTS = 6, // SHORTS
+    GOOGLE_DISPLAY_NETWORK = 9, // GOOGLE_DISPLAY_NETWORK
+    IN_STREAM_NON_SKIPPABLE_THIRTY_SECONDS = 10, // IN_STREAM_NON_SKIPPABLE_THIRTY_SECONDS
   }
 
   /**
    * @name RecommendationSubscriptionStatusEnum.RecommendationSubscriptionStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/RecommendationSubscriptionStatusEnum.RecommendationSubscriptionStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/RecommendationSubscriptionStatusEnum.RecommendationSubscriptionStatus
    */
   export enum RecommendationSubscriptionStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5043,7 +5229,7 @@ export namespace enums {
 
   /**
    * @name RegulatoryFeeTypeEnum.RegulatoryFeeType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/RegulatoryFeeTypeEnum.RegulatoryFeeType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/RegulatoryFeeTypeEnum.RegulatoryFeeType
    */
   export enum RegulatoryFeeType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5062,7 +5248,7 @@ export namespace enums {
 
   /**
    * @name ResourceChangeOperationEnum.ResourceChangeOperation
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ResourceChangeOperationEnum.ResourceChangeOperation
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ResourceChangeOperationEnum.ResourceChangeOperation
    */
   export enum ResourceChangeOperation {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5074,7 +5260,7 @@ export namespace enums {
 
   /**
    * @name ResourceLimitTypeEnum.ResourceLimitType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ResourceLimitTypeEnum.ResourceLimitType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ResourceLimitTypeEnum.ResourceLimitType
    */
   export enum ResourceLimitType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5230,7 +5416,7 @@ export namespace enums {
 
   /**
    * @name ResponseContentTypeEnum.ResponseContentType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ResponseContentTypeEnum.ResponseContentType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ResponseContentTypeEnum.ResponseContentType
    */
   export enum ResponseContentType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5240,7 +5426,7 @@ export namespace enums {
 
   /**
    * @name SeasonalityEventScopeEnum.SeasonalityEventScope
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/SeasonalityEventScopeEnum.SeasonalityEventScope
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/SeasonalityEventScopeEnum.SeasonalityEventScope
    */
   export enum SeasonalityEventScope {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5252,7 +5438,7 @@ export namespace enums {
 
   /**
    * @name SeasonalityEventStatusEnum.SeasonalityEventStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/SeasonalityEventStatusEnum.SeasonalityEventStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/SeasonalityEventStatusEnum.SeasonalityEventStatus
    */
   export enum SeasonalityEventStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5263,7 +5449,7 @@ export namespace enums {
 
   /**
    * @name SharedSetStatusEnum.SharedSetStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/SharedSetStatusEnum.SharedSetStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/SharedSetStatusEnum.SharedSetStatus
    */
   export enum SharedSetStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5274,7 +5460,7 @@ export namespace enums {
 
   /**
    * @name SharedSetTypeEnum.SharedSetType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/SharedSetTypeEnum.SharedSetType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/SharedSetTypeEnum.SharedSetType
    */
   export enum SharedSetType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5285,11 +5471,12 @@ export namespace enums {
     BRANDS = 5, // BRANDS
     WEBPAGES = 6, // WEBPAGES
     VERTICAL_ADS_ITEM_GROUP_RULE_LIST = 7, // VERTICAL_ADS_ITEM_GROUP_RULE_LIST
+    RETAIL_FILTER = 32, // RETAIL_FILTER
   }
 
   /**
    * @name ShoppingAddProductsToCampaignRecommendationEnum.ShoppingAddProductsToCampaignRecommendation
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ShoppingAddProductsToCampaignRecommendationEnum.ShoppingAddProductsToCampaignRecommendation
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ShoppingAddProductsToCampaignRecommendationEnum.ShoppingAddProductsToCampaignRecommendation
    */
   export enum ShoppingAddProductsToCampaignRecommendation {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5302,7 +5489,7 @@ export namespace enums {
 
   /**
    * @name SimulationModificationMethodEnum.SimulationModificationMethod
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/SimulationModificationMethodEnum.SimulationModificationMethod
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/SimulationModificationMethodEnum.SimulationModificationMethod
    */
   export enum SimulationModificationMethod {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5314,7 +5501,7 @@ export namespace enums {
 
   /**
    * @name SimulationTypeEnum.SimulationType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/SimulationTypeEnum.SimulationType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/SimulationTypeEnum.SimulationType
    */
   export enum SimulationType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5331,7 +5518,7 @@ export namespace enums {
 
   /**
    * @name SmartCampaignNotEligibleReasonEnum.SmartCampaignNotEligibleReason
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/SmartCampaignNotEligibleReasonEnum.SmartCampaignNotEligibleReason
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/SmartCampaignNotEligibleReasonEnum.SmartCampaignNotEligibleReason
    */
   export enum SmartCampaignNotEligibleReason {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5344,7 +5531,7 @@ export namespace enums {
 
   /**
    * @name SmartCampaignStatusEnum.SmartCampaignStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/SmartCampaignStatusEnum.SmartCampaignStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/SmartCampaignStatusEnum.SmartCampaignStatus
    */
   export enum SmartCampaignStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5359,7 +5546,7 @@ export namespace enums {
 
   /**
    * @name SpendingLimitTypeEnum.SpendingLimitType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/SpendingLimitTypeEnum.SpendingLimitType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/SpendingLimitTypeEnum.SpendingLimitType
    */
   export enum SpendingLimitType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5369,7 +5556,7 @@ export namespace enums {
 
   /**
    * @name SummaryRowSettingEnum.SummaryRowSetting
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/SummaryRowSettingEnum.SummaryRowSetting
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/SummaryRowSettingEnum.SummaryRowSetting
    */
   export enum SummaryRowSetting {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5381,7 +5568,7 @@ export namespace enums {
 
   /**
    * @name SystemManagedResourceSourceEnum.SystemManagedResourceSource
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/SystemManagedResourceSourceEnum.SystemManagedResourceSource
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/SystemManagedResourceSourceEnum.SystemManagedResourceSource
    */
   export enum SystemManagedResourceSource {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5391,7 +5578,7 @@ export namespace enums {
 
   /**
    * @name TargetCpaOptInRecommendationGoalEnum.TargetCpaOptInRecommendationGoal
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/TargetCpaOptInRecommendationGoalEnum.TargetCpaOptInRecommendationGoal
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/TargetCpaOptInRecommendationGoalEnum.TargetCpaOptInRecommendationGoal
    */
   export enum TargetCpaOptInRecommendationGoal {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5404,7 +5591,7 @@ export namespace enums {
 
   /**
    * @name TimeTypeEnum.TimeType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/TimeTypeEnum.TimeType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/TimeTypeEnum.TimeType
    */
   export enum TimeType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5415,7 +5602,7 @@ export namespace enums {
 
   /**
    * @name UnitOfMeasureEnum.UnitOfMeasure
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/UnitOfMeasureEnum.UnitOfMeasure
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/UnitOfMeasureEnum.UnitOfMeasure
    */
   export enum UnitOfMeasure {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5436,7 +5623,7 @@ export namespace enums {
 
   /**
    * @name UserInterestTaxonomyTypeEnum.UserInterestTaxonomyType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/UserInterestTaxonomyTypeEnum.UserInterestTaxonomyType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/UserInterestTaxonomyTypeEnum.UserInterestTaxonomyType
    */
   export enum UserInterestTaxonomyType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5450,7 +5637,7 @@ export namespace enums {
 
   /**
    * @name UserListAccessStatusEnum.UserListAccessStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/UserListAccessStatusEnum.UserListAccessStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/UserListAccessStatusEnum.UserListAccessStatus
    */
   export enum UserListAccessStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5461,7 +5648,7 @@ export namespace enums {
 
   /**
    * @name UserListClosingReasonEnum.UserListClosingReason
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/UserListClosingReasonEnum.UserListClosingReason
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/UserListClosingReasonEnum.UserListClosingReason
    */
   export enum UserListClosingReason {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5471,7 +5658,7 @@ export namespace enums {
 
   /**
    * @name UserListCustomerTypeCategoryEnum.UserListCustomerTypeCategory
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/UserListCustomerTypeCategoryEnum.UserListCustomerTypeCategory
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/UserListCustomerTypeCategoryEnum.UserListCustomerTypeCategory
    */
   export enum UserListCustomerTypeCategory {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5483,7 +5670,6 @@ export namespace enums {
     QUALIFIED_LEADS = 6, // QUALIFIED_LEADS
     CONVERTED_LEADS = 7, // CONVERTED_LEADS
     PAID_SUBSCRIBERS = 8, // PAID_SUBSCRIBERS
-    LOYALTY_SIGN_UPS = 9, // LOYALTY_SIGN_UPS
     CART_ABANDONERS = 10, // CART_ABANDONERS
     LOYALTY_TIER_1_MEMBERS = 11, // LOYALTY_TIER_1_MEMBERS
     LOYALTY_TIER_2_MEMBERS = 12, // LOYALTY_TIER_2_MEMBERS
@@ -5496,7 +5682,7 @@ export namespace enums {
 
   /**
    * @name UserListMembershipStatusEnum.UserListMembershipStatus
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/UserListMembershipStatusEnum.UserListMembershipStatus
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/UserListMembershipStatusEnum.UserListMembershipStatus
    */
   export enum UserListMembershipStatus {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5507,7 +5693,7 @@ export namespace enums {
 
   /**
    * @name UserListSizeRangeEnum.UserListSizeRange
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/UserListSizeRangeEnum.UserListSizeRange
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/UserListSizeRangeEnum.UserListSizeRange
    */
   export enum UserListSizeRange {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5532,7 +5718,7 @@ export namespace enums {
 
   /**
    * @name ValueRuleDeviceTypeEnum.ValueRuleDeviceType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ValueRuleDeviceTypeEnum.ValueRuleDeviceType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ValueRuleDeviceTypeEnum.ValueRuleDeviceType
    */
   export enum ValueRuleDeviceType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5544,7 +5730,7 @@ export namespace enums {
 
   /**
    * @name ValueRuleGeoLocationMatchTypeEnum.ValueRuleGeoLocationMatchType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ValueRuleGeoLocationMatchTypeEnum.ValueRuleGeoLocationMatchType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ValueRuleGeoLocationMatchTypeEnum.ValueRuleGeoLocationMatchType
    */
   export enum ValueRuleGeoLocationMatchType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5555,7 +5741,7 @@ export namespace enums {
 
   /**
    * @name ValueRuleOperationEnum.ValueRuleOperation
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ValueRuleOperationEnum.ValueRuleOperation
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ValueRuleOperationEnum.ValueRuleOperation
    */
   export enum ValueRuleOperation {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5567,7 +5753,7 @@ export namespace enums {
 
   /**
    * @name ValueRuleSetAttachmentTypeEnum.ValueRuleSetAttachmentType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ValueRuleSetAttachmentTypeEnum.ValueRuleSetAttachmentType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ValueRuleSetAttachmentTypeEnum.ValueRuleSetAttachmentType
    */
   export enum ValueRuleSetAttachmentType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5578,7 +5764,7 @@ export namespace enums {
 
   /**
    * @name ValueRuleSetDimensionEnum.ValueRuleSetDimension
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/ValueRuleSetDimensionEnum.ValueRuleSetDimension
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/ValueRuleSetDimensionEnum.ValueRuleSetDimension
    */
   export enum ValueRuleSetDimension {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5592,7 +5778,7 @@ export namespace enums {
 
   /**
    * @name VanityPharmaDisplayUrlModeEnum.VanityPharmaDisplayUrlMode
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/VanityPharmaDisplayUrlModeEnum.VanityPharmaDisplayUrlMode
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/VanityPharmaDisplayUrlModeEnum.VanityPharmaDisplayUrlMode
    */
   export enum VanityPharmaDisplayUrlMode {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5603,7 +5789,7 @@ export namespace enums {
 
   /**
    * @name VanityPharmaTextEnum.VanityPharmaText
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/VanityPharmaTextEnum.VanityPharmaText
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/VanityPharmaTextEnum.VanityPharmaText
    */
   export enum VanityPharmaText {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5624,7 +5810,7 @@ export namespace enums {
 
   /**
    * @name VideoAdFormatRestrictionEnum.VideoAdFormatRestriction
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/VideoAdFormatRestrictionEnum.VideoAdFormatRestriction
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/VideoAdFormatRestrictionEnum.VideoAdFormatRestriction
    */
   export enum VideoAdFormatRestriction {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5634,7 +5820,7 @@ export namespace enums {
 
   /**
    * @name VideoAdSequenceInteractionTypeEnum.VideoAdSequenceInteractionType
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/VideoAdSequenceInteractionTypeEnum.VideoAdSequenceInteractionType
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/VideoAdSequenceInteractionTypeEnum.VideoAdSequenceInteractionType
    */
   export enum VideoAdSequenceInteractionType {
     UNSPECIFIED = 0, // UNSPECIFIED
@@ -5647,12 +5833,49 @@ export namespace enums {
 
   /**
    * @name VideoAdSequenceMinimumDurationEnum.VideoAdSequenceMinimumDuration
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v23/VideoAdSequenceMinimumDurationEnum.VideoAdSequenceMinimumDuration
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/VideoAdSequenceMinimumDurationEnum.VideoAdSequenceMinimumDuration
    */
   export enum VideoAdSequenceMinimumDuration {
     UNSPECIFIED = 0, // UNSPECIFIED
     UNKNOWN = 1, // UNKNOWN
     WEEK = 2, // WEEK
     MONTH = 3, // MONTH
+  }
+
+  /**
+   * @name VideoEnhancementSourceEnum.VideoEnhancementSource
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/VideoEnhancementSourceEnum.VideoEnhancementSource
+   */
+  export enum VideoEnhancementSource {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    ADVERTISER = 2, // ADVERTISER
+    ENHANCED_BY_GOOGLE_ADS = 3, // ENHANCED_BY_GOOGLE_ADS
+  }
+
+  /**
+   * @name YouTubeVideoPrivacyEnum.YouTubeVideoPrivacy
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/YouTubeVideoPrivacyEnum.YouTubeVideoPrivacy
+   */
+  export enum YouTubeVideoPrivacy {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PUBLIC = 2, // PUBLIC
+    UNLISTED = 3, // UNLISTED
+  }
+
+  /**
+   * @name YouTubeVideoUploadStateEnum.YouTubeVideoUploadState
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v24/YouTubeVideoUploadStateEnum.YouTubeVideoUploadState
+   */
+  export enum YouTubeVideoUploadState {
+    UNSPECIFIED = 0, // UNSPECIFIED
+    UNKNOWN = 1, // UNKNOWN
+    PENDING = 2, // PENDING
+    UPLOADED = 3, // UPLOADED
+    PROCESSED = 4, // PROCESSED
+    FAILED = 5, // FAILED
+    REJECTED = 6, // REJECTED
+    UNAVAILABLE = 7, // UNAVAILABLE
   }
 }

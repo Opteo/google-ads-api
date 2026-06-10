@@ -540,6 +540,26 @@ export function androidPrivacySharedKeyGoogleNetworkType(
   return `customers/${customerId}/androidPrivacySharedKeyGoogleNetworkTypes/${campaignId}~${androidPrivacyInteractionType}~${androidPrivacyNetworkType}~${androidPrivacyInteractionDate}` as const;
 }
 
+/* AppTopCombinationView */
+export type AppTopCombinationViewResourceName =
+  `customers/${StrNum}/appTopCombinationViews/${StrNum}~${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} adGroupId
+ * @param {string | number} adId
+ * @param {string | number} assetCombinationCategory
+ * @returns `AppTopCombinationViewResourceName`
+ * @example const appTopCombinationView: ResourceNames.AppTopCombinationViewResourceName = ResourceNames.appTopCombinationView(10987417, 21974834, 43949668, 87899336)
+ */
+export function appTopCombinationView(
+  customerId: string | number,
+  adGroupId: string | number,
+  adId: string | number,
+  assetCombinationCategory: string | number
+): AppTopCombinationViewResourceName {
+  return `customers/${customerId}/appTopCombinationViews/${adGroupId}~${adId}~${assetCombinationCategory}` as const;
+}
+
 /* AppliedIncentive */
 export type AppliedIncentiveResourceName =
   `customers/${StrNum}/appliedIncentives/${StrNum}`;
@@ -1235,6 +1255,20 @@ export function carrierConstant(
   criterionId: string | number
 ): CarrierConstantResourceName {
   return `carrierConstants/${criterionId}` as const;
+}
+
+/* CartDataSalesView */
+export type CartDataSalesViewResourceName =
+  `customers/${StrNum}/cartDataSalesView`;
+/**
+ * @param {string | number} customerId
+ * @returns `CartDataSalesViewResourceName`
+ * @example const cartDataSalesView: ResourceNames.CartDataSalesViewResourceName = ResourceNames.cartDataSalesView(10987417)
+ */
+export function cartDataSalesView(
+  customerId: string | number
+): CartDataSalesViewResourceName {
+  return `customers/${customerId}/cartDataSalesView` as const;
 }
 
 /* ChangeEvent */
@@ -3106,6 +3140,22 @@ export function video(
   return `customers/${customerId}/videos/${videoId}` as const;
 }
 
+/* VideoEnhancement */
+export type VideoEnhancementResourceName =
+  `customers/${StrNum}/videoEnhancements/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} videoEnhancement
+ * @returns `VideoEnhancementResourceName`
+ * @example const videoEnhancement: ResourceNames.VideoEnhancementResourceName = ResourceNames.videoEnhancement(10987417, 21974834)
+ */
+export function videoEnhancement(
+  customerId: string | number,
+  videoEnhancement: string | number
+): VideoEnhancementResourceName {
+  return `customers/${customerId}/videoEnhancements/${videoEnhancement}` as const;
+}
+
 /* WebpageView */
 export type WebpageViewResourceName =
   `customers/${StrNum}/webpageViews/${StrNum}~${StrNum}`;
@@ -3122,4 +3172,20 @@ export function webpageView(
   criterionId: string | number
 ): WebpageViewResourceName {
   return `customers/${customerId}/webpageViews/${adGroupId}~${criterionId}` as const;
+}
+
+/* YouTubeVideoUpload */
+export type YouTubeVideoUploadResourceName =
+  `customers/${StrNum}/youTubeVideoUploads/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} videoUploadId
+ * @returns `YouTubeVideoUploadResourceName`
+ * @example const youTubeVideoUpload: ResourceNames.YouTubeVideoUploadResourceName = ResourceNames.youTubeVideoUpload(10987417, 21974834)
+ */
+export function youTubeVideoUpload(
+  customerId: string | number,
+  videoUploadId: string | number
+): YouTubeVideoUploadResourceName {
+  return `customers/${customerId}/youTubeVideoUploads/${videoUploadId}` as const;
 }
