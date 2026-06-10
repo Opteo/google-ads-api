@@ -142,4 +142,31 @@ describe("recursiveFieldMaskSearch", () => {
       "key.third_child_key.second_grand_child_key",
     ]);
   });
+
+  it("treats typed arrays as leaf values", () => {
+    const input = {
+      ad: { data: new Uint8Array(8), image: Buffer.from("hello") },
+    };
+
+    expect(recursiveFieldMaskSearch(input)).toEqual(["ad.data", "ad.image"]);
+  });
+
+  it("throws on circular references instead of overflowing the stack", () => {
+    const input: Record<string, any> = { campaign: { name: "x" } };
+    input.campaign.self = input;
+
+    expect(() => recursiveFieldMaskSearch(input)).toThrow(
+      "circular reference"
+    );
+  });
+
+  it("allows the same object to appear in multiple branches", () => {
+    const shared = { sharedKey: true };
+    const input = { first: shared, second: shared };
+
+    expect(recursiveFieldMaskSearch(input)).toEqual([
+      "first.shared_key",
+      "second.shared_key",
+    ]);
+  });
 });

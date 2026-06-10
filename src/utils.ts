@@ -72,7 +72,16 @@ export function toSnakeCase(str: string): string {
     .toLowerCase();
 }
 
-export function recursiveFieldMaskSearch(data: Record<string, any>): string[] {
+export function recursiveFieldMaskSearch(
+  data: Record<string, any>,
+  ancestors: Set<object> = new Set()
+): string[] {
+  if (ancestors.has(data)) {
+    throw new Error(
+      "Cannot build a field mask from an object containing a circular reference"
+    );
+  }
+  ancestors.add(data);
   const paths: string[] = [];
   for (const key of Object.keys(data)) {
     if (key === "resourceName") {
@@ -80,11 +89,16 @@ export function recursiveFieldMaskSearch(data: Record<string, any>): string[] {
     }
     const fieldKey = toSnakeCase(key);
     const value = data[key];
-    if (typeof value === "object" && !Array.isArray(value) && value !== null) {
+    if (
+      typeof value === "object" &&
+      !Array.isArray(value) &&
+      !ArrayBuffer.isView(value) &&
+      value !== null
+    ) {
       if (Object.keys(value).length === 0) {
         paths.push(fieldKey);
       } else {
-        const children = recursiveFieldMaskSearch(value);
+        const children = recursiveFieldMaskSearch(value, ancestors);
         for (const child of children) {
           paths.push(`${fieldKey}.${child}`);
         }
@@ -93,6 +107,7 @@ export function recursiveFieldMaskSearch(data: Record<string, any>): string[] {
     }
     paths.push(fieldKey);
   }
+  ancestors.delete(data);
   return paths;
 }
 
