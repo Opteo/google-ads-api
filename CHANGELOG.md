@@ -19,11 +19,11 @@
 ### Breaking Changes
 
 - `parse()` now returns plain objects for message-typed leaves (e.g. `change_event.old_resource`) instead of protobuf message instances, and converts all nested int64 values from Long objects to JavaScript numbers. Code reading `.low`/`.high` from nested values, or relying on protobuf prototypes, must use the plain values instead. Note that int64 values above `Number.MAX_SAFE_INTEGER` (2^53 - 1) lose precision when converted, consistent with the existing behaviour for directly-selected fields.
-- `resource_name` attributes for ten view resources (including `keyword_view` and `paid_organic_search_term_view`) were previously missing from parsed results due to a code generation bug; they are now included.
-- `getFieldMask()` throws a descriptive `Error` on objects containing circular references (previously a `RangeError` stack overflow) and treats typed arrays (`Buffer`, `Uint8Array`) and `Long` values as leaf values instead of recursing into them. Update masks built from payloads containing `Long` values previously included invalid `.low`/`.high`/`.unsigned` paths, which the API rejected.
 
 ### Fixes
 
+- `resource_name` attributes for nine view resources (including `keyword_view` and `paid_organic_search_term_view`) were missing from parsed results due to a code generation bug; they are now included.
+- `getFieldMask()` now throws a descriptive `Error` on objects containing circular references instead of overflowing the stack, and treats typed arrays (`Buffer`, `Uint8Array`) and `Long` values as leaf values. Previously, update masks built from payloads containing `Long` values included invalid `.low`/`.high`/`.unsigned` paths that the API rejected.
 - Report streams now destroy their underlying response stream and JSON parser when consumers exit iteration early
 - Evicted gRPC service clients are closed safely; rejected `close()` calls no longer leak channels
 - Cached gRPC service clients past their TTL are no longer returned, and expired entries awaiting purge no longer resolve to `undefined`
