@@ -408,11 +408,12 @@ describe("parseRows", () => {
       result[0].change_event?.old_resource?.campaign_criterion?.campaign
     ).toBe("customers/4517895542/campaigns/21890334919");
     expect(
-      (
-        result[0].change_event?.old_resource?.campaign_criterion
-          ?.criterion_id as any
-      )?.low
+      result[0].change_event?.old_resource?.campaign_criterion?.criterion_id
     ).toBe(23340370);
+    expect(
+      typeof result[0].change_event?.old_resource?.campaign_criterion
+        ?.criterion_id
+    ).toBe("number");
     expect(
       result[0].change_event?.old_resource?.campaign_criterion?.negative
     ).toBe(true);

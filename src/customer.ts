@@ -498,25 +498,31 @@ export class Customer extends ServiceFactory {
       const pipeline = chain([stream, parser, streamArray()]);
       let count = 0;
 
-      for await (const data of pipeline) {
-        const results =
-          data.value.results ??
-          (data.value.summaryRow ? [data.value.summaryRow] : undefined) ??
-          [];
+      try {
+        for await (const data of pipeline) {
+          const results =
+            data.value.results ??
+            (data.value.summaryRow ? [data.value.summaryRow] : undefined) ??
+            [];
 
-        count += results.length;
-        if (
-          this.clientOptions.max_reporting_rows &&
-          count > this.clientOptions.max_reporting_rows &&
-          !this.gaqlQueryStringIncludesLimit(gaqlQuery)
-        ) {
-          throw this.generateTooManyRowsError();
-        }
+          count += results.length;
+          if (
+            this.clientOptions.max_reporting_rows &&
+            count > this.clientOptions.max_reporting_rows &&
+            !this.gaqlQueryStringIncludesLimit(gaqlQuery)
+          ) {
+            throw this.generateTooManyRowsError();
+          }
 
-        for (const row of results) {
-          const parsed = this.decamelizeKeysIfNeeded(row);
-          yield parsed as T;
+          for (const row of results) {
+            const parsed = this.decamelizeKeysIfNeeded(row);
+            yield parsed as T;
+          }
         }
+      } finally {
+        pipeline.destroy();
+        parser.destroy();
+        stream.destroy();
       }
 
       return;

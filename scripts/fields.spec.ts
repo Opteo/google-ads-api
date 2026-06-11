@@ -67,6 +67,22 @@ describe("other checkers", () => {
     expect(isResourceName(nonResourceNameField)).toBeFalsy();
   });
 
+  it("isResourceName matches consecutive resource_name fields", () => {
+    // Regression: a stateful /g regex carried lastIndex between calls,
+    // silently dropping resource_name fields tested back-to-back
+    const fields = [
+      "keyword_theme_constant.resource_name",
+      "keyword_view.resource_name",
+      "label.resource_name",
+    ].map((name) => new resources.GoogleAdsField({ name }));
+
+    expect(fields.map((field) => isResourceName(field))).toEqual([
+      true,
+      true,
+      true,
+    ]);
+  });
+
   it("hasEnumDataType", () => {
     const doesHaveEnumDataType = new resources.GoogleAdsField({
       data_type: "ENUM",
@@ -82,12 +98,10 @@ describe("other checkers", () => {
 
   it("getEnumName", () => {
     const attributeEnumField = new resources.GoogleAdsField({
-      type_url:
-        `google.ads.googleads.${googleAdsVersion}.enums.CampaignStatusEnum.CampaignStatus`,
+      type_url: `google.ads.googleads.${googleAdsVersion}.enums.CampaignStatusEnum.CampaignStatus`,
     });
     const metricEnumField = new resources.GoogleAdsField({
-      type_url:
-        `google.ads.googleads.${googleAdsVersion}.enums.QualityScoreBucketEnum.QualityScoreBucket`,
+      type_url: `google.ads.googleads.${googleAdsVersion}.enums.QualityScoreBucketEnum.QualityScoreBucket`,
     });
     const segmentEnumField = new resources.GoogleAdsField({
       type_url: `google.ads.googleads.${googleAdsVersion}.enums.DayOfWeekEnum.DayOfWeek`,

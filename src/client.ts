@@ -32,8 +32,9 @@ export class Client {
       refresh_token: refreshToken,
     });
     // @ts-expect-error Protected usage is fine here
-    const customerService = await service.loadService<services.CustomerService>(
-      "CustomerServiceClient"
+    const customerService = service.loadService<services.CustomerService>(
+      "CustomerServiceClient",
+      { skipCache: true }
     );
     try {
       // @ts-expect-error Type definition is incorrect, response is an array
@@ -52,6 +53,9 @@ export class Client {
       console.log(err);
       // @ts-expect-error Protected usage is fine here
       throw service.getGoogleAdsError(err);
+    } finally {
+      // @ts-expect-error close() exists on the gax client but not on the proto type
+      await customerService.close().catch(() => null);
     }
   }
 }

@@ -1,7 +1,11 @@
-import { GoogleAdsServiceClient } from "google-ads-node";
+import {
+  CustomerServiceClient,
+  GoogleAdsServiceClient,
+  protos,
+} from "google-ads-node";
 import { operationsProtos } from "google-gax";
 import { errors, services } from "./protos";
-import { FAILURE_KEY } from "./service";
+import { disposeService, FAILURE_KEY, serviceCache } from "./service";
 import {
   failTestIfExecuted,
   newCustomer,
@@ -19,12 +23,34 @@ beforeAll(() => {
 });
 
 describe("Service", () => {
+  afterEach(() => {
+    // Tests share the module-level cache; clear it so no test depends on
+    // entries cached by another
+    serviceCache.clear();
+  });
+
   describe("loadService", () => {
     it("should load a valid service", () => {
       const customer = newCustomer();
       // @ts-expect-error Accessing private method for test purposes
       const service = customer.loadService("GoogleAdsServiceClient");
       expect(service).toBeInstanceOf(GoogleAdsServiceClient);
+    });
+
+    it("does not cache the service when skipCache is set", () => {
+      const customer = newCustomer();
+      // @ts-expect-error Accessing private method for test purposes
+      const service = customer.loadService("CustomerServiceClient", {
+        skipCache: true,
+      });
+      expect(service).toBeDefined();
+
+      const cachedKeys = [...serviceCache.keys()];
+      expect(
+        cachedKeys.some((key) =>
+          String(key).startsWith("CustomerServiceClient")
+        )
+      ).toBe(false);
     });
 
     it("should throw an error if the service is invalid", () => {
@@ -222,6 +248,68 @@ describe("Service", () => {
         "developer-token": MOCK_DEVELOPER_TOKEN,
         "login-customer-id": MOCK_LOGIN_CID,
       });
+    });
+  });
+
+  describe("FAILURE_KEY", () => {
+    it("matches the API version of the installed google-ads-node package", () => {
+      const installedVersions = Object.keys(
+        (protos.google.ads as any).googleads
+      );
+      expect(installedVersions).toContain(googleAdsVersion);
+      expect(FAILURE_KEY).toBe(
+        `google.ads.googleads.${googleAdsVersion}.errors.googleadsfailure-bin`
+      );
+    });
+  });
+
+  describe("serviceCache disposal", () => {
+    it("closes services removed from the cache", async () => {
+      const close = jest.fn().mockResolvedValue(undefined);
+      serviceCache.set("disposal_test_key", { close });
+      serviceCache.delete("disposal_test_key");
+
+      await new Promise((resolve) => setImmediate(resolve));
+      expect(close).toHaveBeenCalledTimes(1);
+    });
+
+    it("disposeService survives a rejected close()", async () => {
+      const close = jest.fn().mockRejectedValue(new Error("channel down"));
+
+      expect(() => disposeService({ close })).not.toThrow();
+
+      await new Promise((resolve) => setImmediate(resolve));
+      expect(close).toHaveBeenCalledTimes(1);
+    });
+
+    it("disposeService survives a synchronously throwing close()", () => {
+      const close = jest.fn(() => {
+        throw new Error("already destroyed");
+      });
+
+      expect(() => disposeService({ close })).not.toThrow();
+    });
+
+    it("creates a fresh service when the cached one has expired but is not yet purged", () => {
+      const customer = newCustomer();
+      // @ts-expect-error Accessing private method for test purposes
+      const original = customer.loadService<CustomerServiceClient>(
+        "CustomerServiceClient"
+      );
+      const key = [...serviceCache.keys()].find((cacheKey) =>
+        String(cacheKey).startsWith("CustomerServiceClient")
+      ) as string;
+      expect(key).toBeDefined();
+
+      serviceCache.set(key, original, { ttl: 1 });
+      const start = Date.now();
+      while (Date.now() - start < 10) {
+        void 0;
+      }
+
+      // @ts-expect-error Accessing private method for test purposes
+      const reloaded = customer.loadService("CustomerServiceClient");
+      expect(reloaded).toBeInstanceOf(CustomerServiceClient);
     });
   });
 });

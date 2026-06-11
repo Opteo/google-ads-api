@@ -1,3 +1,4 @@
+import long from "long";
 import {
   fromMicros,
   toMicros,
@@ -140,6 +141,43 @@ describe("recursiveFieldMaskSearch", () => {
       "key.child_key.grand_child_key.second_great_grand_child_key.great_great_grand_child_key",
       "key.second_child_key",
       "key.third_child_key.second_grand_child_key",
+    ]);
+  });
+
+  it("treats typed arrays as leaf values", () => {
+    const input = {
+      ad: { data: new Uint8Array(8), image: Buffer.from("hello") },
+    };
+
+    expect(recursiveFieldMaskSearch(input)).toEqual(["ad.data", "ad.image"]);
+  });
+
+  it("treats Long values as leaf values", () => {
+    const input = {
+      id: long.fromNumber(42),
+      targetCpa: { targetCpaMicros: long.fromNumber(1500000) },
+    };
+
+    expect(recursiveFieldMaskSearch(input)).toEqual([
+      "id",
+      "target_cpa.target_cpa_micros",
+    ]);
+  });
+
+  it("throws on circular references instead of overflowing the stack", () => {
+    const input: Record<string, any> = { campaign: { name: "x" } };
+    input.campaign.self = input;
+
+    expect(() => recursiveFieldMaskSearch(input)).toThrow("circular reference");
+  });
+
+  it("allows the same object to appear in multiple branches", () => {
+    const shared = { sharedKey: true };
+    const input = { first: shared, second: shared };
+
+    expect(recursiveFieldMaskSearch(input)).toEqual([
+      "first.shared_key",
+      "second.shared_key",
     ]);
   });
 });

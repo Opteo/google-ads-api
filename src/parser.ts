@@ -127,6 +127,32 @@ export function parseRows(
   return newRows;
 }
 
+function convertLongsToNumbers(value: any): any {
+  const isPrimitive = value === null || typeof value !== "object";
+  if (isPrimitive) {
+    return value;
+  }
+
+  if (long.isLong(value)) {
+    return value.toNumber();
+  }
+
+  if (Array.isArray(value)) {
+    return value.map(convertLongsToNumbers);
+  }
+
+  const isBytesField = ArrayBuffer.isView(value);
+  if (isBytesField) {
+    return value;
+  }
+
+  const converted: Record<string, any> = {};
+  for (const [key, nestedValue] of Object.entries(value)) {
+    converted[key] = convertLongsToNumbers(nestedValue);
+  }
+  return converted;
+}
+
 function parseNestedValues(
   row: services.IGoogleAdsRow,
   data: any,
@@ -137,12 +163,9 @@ function parseNestedValues(
   const [parentField, ...childFields] = paths;
   if (!row) row = {};
   if (childFields.length === 0) {
-    const rawVal = data[parentField];
-    const parsedVal = long.isLong(rawVal)
-      ? new long(rawVal.low, rawVal.high, rawVal.unsigned).toNumber()
-      : rawVal;
-
-    row[parentField as fields.Resource] = parsedVal;
+    row[parentField as fields.Resource] = convertLongsToNumbers(
+      data[parentField]
+    );
     return row;
   }
 
