@@ -24522,10 +24522,7 @@ export namespace fields {
   export type ConversionActionMetrics = Array<ConversionActionMetric>;
 
   export type ConversionActionSegment =
-    | "segments.date"
-    | "segments.month"
-    | "segments.quarter"
-    | "segments.week";
+    "segments.date" | "segments.month" | "segments.quarter" | "segments.week";
 
   export type ConversionActionSegments = Array<ConversionActionSegment>;
   /* --- End of ConversionAction --- */
@@ -26816,9 +26813,7 @@ export namespace fields {
     Array<DetailContentSuitabilityPlacementViewMetric>;
 
   export type DetailContentSuitabilityPlacementViewSegment =
-    | "ad_group"
-    | "campaign"
-    | "segments.date";
+    "ad_group" | "campaign" | "segments.date";
 
   export type DetailContentSuitabilityPlacementViewSegments =
     Array<DetailContentSuitabilityPlacementViewSegment>;
@@ -30402,9 +30397,7 @@ export namespace fields {
     Array<GroupContentSuitabilityPlacementViewMetric>;
 
   export type GroupContentSuitabilityPlacementViewSegment =
-    | "ad_group"
-    | "campaign"
-    | "segments.date";
+    "ad_group" | "campaign" | "segments.date";
 
   export type GroupContentSuitabilityPlacementViewSegments =
     Array<GroupContentSuitabilityPlacementViewSegment>;
@@ -33965,8 +33958,7 @@ export namespace fields {
     Array<LiftMeasurementAgeRangeMetric>;
 
   export type LiftMeasurementAgeRangeSegment =
-    | "segments.brand_lift_measurement_type"
-    | "segments.date";
+    "segments.brand_lift_measurement_type" | "segments.date";
 
   export type LiftMeasurementAgeRangeSegments =
     Array<LiftMeasurementAgeRangeSegment>;
@@ -34057,8 +34049,7 @@ export namespace fields {
     Array<LiftMeasurementCampaignMetric>;
 
   export type LiftMeasurementCampaignSegment =
-    | "segments.brand_lift_measurement_type"
-    | "segments.date";
+    "segments.brand_lift_measurement_type" | "segments.date";
 
   export type LiftMeasurementCampaignSegments =
     Array<LiftMeasurementCampaignSegment>;
@@ -34287,8 +34278,7 @@ export namespace fields {
   export type LiftMeasurementDeviceMetrics = Array<LiftMeasurementDeviceMetric>;
 
   export type LiftMeasurementDeviceSegment =
-    | "segments.brand_lift_measurement_type"
-    | "segments.date";
+    "segments.brand_lift_measurement_type" | "segments.date";
 
   export type LiftMeasurementDeviceSegments =
     Array<LiftMeasurementDeviceSegment>;
@@ -34435,8 +34425,7 @@ export namespace fields {
   export type LiftMeasurementGenderMetrics = Array<LiftMeasurementGenderMetric>;
 
   export type LiftMeasurementGenderSegment =
-    | "segments.brand_lift_measurement_type"
-    | "segments.date";
+    "segments.brand_lift_measurement_type" | "segments.date";
 
   export type LiftMeasurementGenderSegments =
     Array<LiftMeasurementGenderSegment>;
@@ -34526,8 +34515,7 @@ export namespace fields {
   export type LiftMeasurementVideoMetrics = Array<LiftMeasurementVideoMetric>;
 
   export type LiftMeasurementVideoSegment =
-    | "segments.brand_lift_measurement_type"
-    | "segments.date";
+    "segments.brand_lift_measurement_type" | "segments.date";
 
   export type LiftMeasurementVideoSegments = Array<LiftMeasurementVideoSegment>;
   /* --- End of LiftMeasurementVideo --- */
@@ -37725,9 +37713,7 @@ export namespace fields {
     Array<PerformanceMaxPlacementViewMetric>;
 
   export type PerformanceMaxPlacementViewSegment =
-    | "campaign"
-    | "segments.ad_network_type"
-    | "segments.date";
+    "campaign" | "segments.ad_network_type" | "segments.date";
 
   export type PerformanceMaxPlacementViewSegments =
     Array<PerformanceMaxPlacementViewSegment>;
@@ -40367,9 +40353,7 @@ export namespace fields {
     Array<SmartCampaignSearchTermViewField>;
 
   export type SmartCampaignSearchTermViewMetric =
-    | "metrics.clicks"
-    | "metrics.cost_micros"
-    | "metrics.impressions";
+    "metrics.clicks" | "metrics.cost_micros" | "metrics.impressions";
 
   export type SmartCampaignSearchTermViewMetrics =
     Array<SmartCampaignSearchTermViewMetric>;

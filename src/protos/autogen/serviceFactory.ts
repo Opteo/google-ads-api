@@ -38,8 +38,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         accountBudgetProposals: (
-          | resources.IAccountBudgetProposal
-          | resources.AccountBudgetProposal
+          resources.IAccountBudgetProposal | resources.AccountBudgetProposal
         )[],
         options?: MutateOptions
       ): Promise<services.MutateAccountBudgetProposalResponse> => {
@@ -457,8 +456,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         adGroupAdLabels: (
-          | resources.IAdGroupAdLabel
-          | resources.AdGroupAdLabel
+          resources.IAdGroupAdLabel | resources.AdGroupAdLabel
         )[],
         options?: MutateOptions
       ): Promise<services.MutateAdGroupAdLabelsResponse> => {
@@ -1202,8 +1200,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         adGroupAssetSets: (
-          | resources.IAdGroupAssetSet
-          | resources.AdGroupAssetSet
+          resources.IAdGroupAssetSet | resources.AdGroupAssetSet
         )[],
         options?: MutateOptions
       ): Promise<services.MutateAdGroupAssetSetsResponse> => {
@@ -1375,8 +1372,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         adGroupBidModifiers: (
-          | resources.IAdGroupBidModifier
-          | resources.AdGroupBidModifier
+          resources.IAdGroupBidModifier | resources.AdGroupBidModifier
         )[],
         options?: MutateOptions
       ): Promise<services.MutateAdGroupBidModifiersResponse> => {
@@ -1455,8 +1451,7 @@ export default class ServiceFactory extends Service {
        */
       update: async (
         adGroupBidModifiers: (
-          | resources.IAdGroupBidModifier
-          | resources.AdGroupBidModifier
+          resources.IAdGroupBidModifier | resources.AdGroupBidModifier
         )[],
         options?: MutateOptions
       ): Promise<services.MutateAdGroupBidModifiersResponse> => {
@@ -1815,8 +1810,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         adGroupCriterionLabels: (
-          | resources.IAdGroupCriterionLabel
-          | resources.AdGroupCriterionLabel
+          resources.IAdGroupCriterionLabel | resources.AdGroupCriterionLabel
         )[],
         options?: MutateOptions
       ): Promise<services.MutateAdGroupCriterionLabelsResponse> => {
@@ -2260,8 +2254,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         adGroupCustomizers: (
-          | resources.IAdGroupCustomizer
-          | resources.AdGroupCustomizer
+          resources.IAdGroupCustomizer | resources.AdGroupCustomizer
         )[],
         options?: MutateOptions
       ): Promise<services.MutateAdGroupCustomizersResponse> => {
@@ -3341,8 +3334,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         assetGroupAssets: (
-          | resources.IAssetGroupAsset
-          | resources.AssetGroupAsset
+          resources.IAssetGroupAsset | resources.AssetGroupAsset
         )[],
         options?: MutateOptions
       ): Promise<services.MutateAssetGroupAssetsResponse> => {
@@ -3421,8 +3413,7 @@ export default class ServiceFactory extends Service {
        */
       update: async (
         assetGroupAssets: (
-          | resources.IAssetGroupAsset
-          | resources.AssetGroupAsset
+          resources.IAssetGroupAsset | resources.AssetGroupAsset
         )[],
         options?: MutateOptions
       ): Promise<services.MutateAssetGroupAssetsResponse> => {
@@ -4119,8 +4110,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         assetGroupSignals: (
-          | resources.IAssetGroupSignal
-          | resources.AssetGroupSignal
+          resources.IAssetGroupSignal | resources.AssetGroupSignal
         )[],
         options?: MutateOptions
       ): Promise<services.MutateAssetGroupSignalsResponse> => {
@@ -6051,8 +6041,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         biddingDataExclusions: (
-          | resources.IBiddingDataExclusion
-          | resources.BiddingDataExclusion
+          resources.IBiddingDataExclusion | resources.BiddingDataExclusion
         )[],
         options?: MutateOptions
       ): Promise<services.MutateBiddingDataExclusionsResponse> => {
@@ -6134,8 +6123,7 @@ export default class ServiceFactory extends Service {
        */
       update: async (
         biddingDataExclusions: (
-          | resources.IBiddingDataExclusion
-          | resources.BiddingDataExclusion
+          resources.IBiddingDataExclusion | resources.BiddingDataExclusion
         )[],
         options?: MutateOptions
       ): Promise<services.MutateBiddingDataExclusionsResponse> => {
@@ -6589,8 +6577,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         biddingStrategies: (
-          | resources.IBiddingStrategy
-          | resources.BiddingStrategy
+          resources.IBiddingStrategy | resources.BiddingStrategy
         )[],
         options?: MutateOptions
       ): Promise<services.MutateBiddingStrategiesResponse> => {
@@ -6669,8 +6656,7 @@ export default class ServiceFactory extends Service {
        */
       update: async (
         biddingStrategies: (
-          | resources.IBiddingStrategy
-          | resources.BiddingStrategy
+          resources.IBiddingStrategy | resources.BiddingStrategy
         )[],
         options?: MutateOptions
       ): Promise<services.MutateBiddingStrategiesResponse> => {
@@ -7099,8 +7085,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         campaignAssetSets: (
-          | resources.ICampaignAssetSet
-          | resources.CampaignAssetSet
+          resources.ICampaignAssetSet | resources.CampaignAssetSet
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignAssetSetsResponse> => {
@@ -7272,8 +7257,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         campaignBidModifiers: (
-          | resources.ICampaignBidModifier
-          | resources.CampaignBidModifier
+          resources.ICampaignBidModifier | resources.CampaignBidModifier
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignBidModifiersResponse> => {
@@ -7352,8 +7336,7 @@ export default class ServiceFactory extends Service {
        */
       update: async (
         campaignBidModifiers: (
-          | resources.ICampaignBidModifier
-          | resources.CampaignBidModifier
+          resources.ICampaignBidModifier | resources.CampaignBidModifier
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignBidModifiersResponse> => {
@@ -7530,8 +7513,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         campaignBudgets: (
-          | resources.ICampaignBudget
-          | resources.CampaignBudget
+          resources.ICampaignBudget | resources.CampaignBudget
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignBudgetsResponse> => {
@@ -7610,8 +7592,7 @@ export default class ServiceFactory extends Service {
        */
       update: async (
         campaignBudgets: (
-          | resources.ICampaignBudget
-          | resources.CampaignBudget
+          resources.ICampaignBudget | resources.CampaignBudget
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignBudgetsResponse> => {
@@ -7785,8 +7766,7 @@ export default class ServiceFactory extends Service {
        */
       update: async (
         campaignConversionGoals: (
-          | resources.ICampaignConversionGoal
-          | resources.CampaignConversionGoal
+          resources.ICampaignConversionGoal | resources.CampaignConversionGoal
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignConversionGoalsResponse> => {
@@ -7889,8 +7869,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         campaignCriteria: (
-          | resources.ICampaignCriterion
-          | resources.CampaignCriterion
+          resources.ICampaignCriterion | resources.CampaignCriterion
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignCriteriaResponse> => {
@@ -7969,8 +7948,7 @@ export default class ServiceFactory extends Service {
        */
       update: async (
         campaignCriteria: (
-          | resources.ICampaignCriterion
-          | resources.CampaignCriterion
+          resources.ICampaignCriterion | resources.CampaignCriterion
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignCriteriaResponse> => {
@@ -8147,8 +8125,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         campaignCustomizers: (
-          | resources.ICampaignCustomizer
-          | resources.CampaignCustomizer
+          resources.ICampaignCustomizer | resources.CampaignCustomizer
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignCustomizersResponse> => {
@@ -9444,8 +9421,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         campaignSharedSets: (
-          | resources.ICampaignSharedSet
-          | resources.CampaignSharedSet
+          resources.ICampaignSharedSet | resources.CampaignSharedSet
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignSharedSetsResponse> => {
@@ -9617,8 +9593,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         conversionActions: (
-          | resources.IConversionAction
-          | resources.ConversionAction
+          resources.IConversionAction | resources.ConversionAction
         )[],
         options?: MutateOptions
       ): Promise<services.MutateConversionActionsResponse> => {
@@ -9697,8 +9672,7 @@ export default class ServiceFactory extends Service {
        */
       update: async (
         conversionActions: (
-          | resources.IConversionAction
-          | resources.ConversionAction
+          resources.IConversionAction | resources.ConversionAction
         )[],
         options?: MutateOptions
       ): Promise<services.MutateConversionActionsResponse> => {
@@ -10170,8 +10144,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         conversionValueRules: (
-          | resources.IConversionValueRule
-          | resources.ConversionValueRule
+          resources.IConversionValueRule | resources.ConversionValueRule
         )[],
         options?: MutateOptions
       ): Promise<services.MutateConversionValueRulesResponse> => {
@@ -10250,8 +10223,7 @@ export default class ServiceFactory extends Service {
        */
       update: async (
         conversionValueRules: (
-          | resources.IConversionValueRule
-          | resources.ConversionValueRule
+          resources.IConversionValueRule | resources.ConversionValueRule
         )[],
         options?: MutateOptions
       ): Promise<services.MutateConversionValueRulesResponse> => {
@@ -10428,8 +10400,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         conversionValueRuleSets: (
-          | resources.IConversionValueRuleSet
-          | resources.ConversionValueRuleSet
+          resources.IConversionValueRuleSet | resources.ConversionValueRuleSet
         )[],
         options?: MutateOptions
       ): Promise<services.MutateConversionValueRuleSetsResponse> => {
@@ -10511,8 +10482,7 @@ export default class ServiceFactory extends Service {
        */
       update: async (
         conversionValueRuleSets: (
-          | resources.IConversionValueRuleSet
-          | resources.ConversionValueRuleSet
+          resources.IConversionValueRuleSet | resources.ConversionValueRuleSet
         )[],
         options?: MutateOptions
       ): Promise<services.MutateConversionValueRuleSetsResponse> => {
@@ -10695,8 +10665,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         customConversionGoals: (
-          | resources.ICustomConversionGoal
-          | resources.CustomConversionGoal
+          resources.ICustomConversionGoal | resources.CustomConversionGoal
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomConversionGoalsResponse> => {
@@ -10778,8 +10747,7 @@ export default class ServiceFactory extends Service {
        */
       update: async (
         customConversionGoals: (
-          | resources.ICustomConversionGoal
-          | resources.CustomConversionGoal
+          resources.ICustomConversionGoal | resources.CustomConversionGoal
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomConversionGoalsResponse> => {
@@ -11211,8 +11179,7 @@ export default class ServiceFactory extends Service {
        */
       update: async (
         customerConversionGoals: (
-          | resources.ICustomerConversionGoal
-          | resources.CustomerConversionGoal
+          resources.ICustomerConversionGoal | resources.CustomerConversionGoal
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomerConversionGoalsResponse> => {
@@ -11315,8 +11282,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         customerCustomizers: (
-          | resources.ICustomerCustomizer
-          | resources.CustomerCustomizer
+          resources.ICustomerCustomizer | resources.CustomerCustomizer
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomerCustomizersResponse> => {
@@ -12067,8 +12033,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         customizerAttributes: (
-          | resources.ICustomizerAttribute
-          | resources.CustomizerAttribute
+          resources.ICustomizerAttribute | resources.CustomizerAttribute
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomizerAttributesResponse> => {
@@ -13339,8 +13304,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         keywordPlanAdGroups: (
-          | resources.IKeywordPlanAdGroup
-          | resources.KeywordPlanAdGroup
+          resources.IKeywordPlanAdGroup | resources.KeywordPlanAdGroup
         )[],
         options?: MutateOptions
       ): Promise<services.MutateKeywordPlanAdGroupsResponse> => {
@@ -13419,8 +13383,7 @@ export default class ServiceFactory extends Service {
        */
       update: async (
         keywordPlanAdGroups: (
-          | resources.IKeywordPlanAdGroup
-          | resources.KeywordPlanAdGroup
+          resources.IKeywordPlanAdGroup | resources.KeywordPlanAdGroup
         )[],
         options?: MutateOptions
       ): Promise<services.MutateKeywordPlanAdGroupsResponse> => {
@@ -13868,8 +13831,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         keywordPlanCampaigns: (
-          | resources.IKeywordPlanCampaign
-          | resources.KeywordPlanCampaign
+          resources.IKeywordPlanCampaign | resources.KeywordPlanCampaign
         )[],
         options?: MutateOptions
       ): Promise<services.MutateKeywordPlanCampaignsResponse> => {
@@ -13948,8 +13910,7 @@ export default class ServiceFactory extends Service {
        */
       update: async (
         keywordPlanCampaigns: (
-          | resources.IKeywordPlanCampaign
-          | resources.KeywordPlanCampaign
+          resources.IKeywordPlanCampaign | resources.KeywordPlanCampaign
         )[],
         options?: MutateOptions
       ): Promise<services.MutateKeywordPlanCampaignsResponse> => {
@@ -14819,8 +14780,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         remarketingActions: (
-          | resources.IRemarketingAction
-          | resources.RemarketingAction
+          resources.IRemarketingAction | resources.RemarketingAction
         )[],
         options?: MutateOptions
       ): Promise<services.MutateRemarketingActionsResponse> => {
@@ -14899,8 +14859,7 @@ export default class ServiceFactory extends Service {
        */
       update: async (
         remarketingActions: (
-          | resources.IRemarketingAction
-          | resources.RemarketingAction
+          resources.IRemarketingAction | resources.RemarketingAction
         )[],
         options?: MutateOptions
       ): Promise<services.MutateRemarketingActionsResponse> => {
@@ -15000,8 +14959,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         sharedCriteria: (
-          | resources.ISharedCriterion
-          | resources.SharedCriterion
+          resources.ISharedCriterion | resources.SharedCriterion
         )[],
         options?: MutateOptions
       ): Promise<services.MutateSharedCriteriaResponse> => {
@@ -15490,8 +15448,7 @@ export default class ServiceFactory extends Service {
        */
       update: async (
         smartCampaignSettings: (
-          | resources.ISmartCampaignSetting
-          | resources.SmartCampaignSetting
+          resources.ISmartCampaignSetting | resources.SmartCampaignSetting
         )[],
         options?: MutateOptions
       ): Promise<services.MutateSmartCampaignSettingsResponse> => {
@@ -16426,8 +16383,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         campaignGoalConfigs: (
-          | resources.ICampaignGoalConfig
-          | resources.CampaignGoalConfig
+          resources.ICampaignGoalConfig | resources.CampaignGoalConfig
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignGoalConfigsResponse> => {
@@ -16506,8 +16462,7 @@ export default class ServiceFactory extends Service {
        */
       update: async (
         campaignGoalConfigs: (
-          | resources.ICampaignGoalConfig
-          | resources.CampaignGoalConfig
+          resources.ICampaignGoalConfig | resources.CampaignGoalConfig
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCampaignGoalConfigsResponse> => {
@@ -17044,8 +16999,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         customAudiences: (
-          | resources.ICustomAudience
-          | resources.CustomAudience
+          resources.ICustomAudience | resources.CustomAudience
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomAudiencesResponse> => {
@@ -17124,8 +17078,7 @@ export default class ServiceFactory extends Service {
        */
       update: async (
         customAudiences: (
-          | resources.ICustomAudience
-          | resources.CustomAudience
+          resources.ICustomAudience | resources.CustomAudience
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomAudiencesResponse> => {
@@ -17299,8 +17252,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         customInterests: (
-          | resources.ICustomInterest
-          | resources.CustomInterest
+          resources.ICustomInterest | resources.CustomInterest
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomInterestsResponse> => {
@@ -17379,8 +17331,7 @@ export default class ServiceFactory extends Service {
        */
       update: async (
         customInterests: (
-          | resources.ICustomInterest
-          | resources.CustomInterest
+          resources.ICustomInterest | resources.CustomInterest
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomInterestsResponse> => {
@@ -17480,8 +17431,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         customerAssetSets: (
-          | resources.ICustomerAssetSet
-          | resources.CustomerAssetSet
+          resources.ICustomerAssetSet | resources.CustomerAssetSet
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomerAssetSetsResponse> => {
@@ -17650,8 +17600,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         customerClientLinks: (
-          | resources.ICustomerClientLink
-          | resources.CustomerClientLink
+          resources.ICustomerClientLink | resources.CustomerClientLink
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomerClientLinkResponse> => {
@@ -17730,8 +17679,7 @@ export default class ServiceFactory extends Service {
        */
       update: async (
         customerClientLinks: (
-          | resources.ICustomerClientLink
-          | resources.CustomerClientLink
+          resources.ICustomerClientLink | resources.CustomerClientLink
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomerClientLinkResponse> => {
@@ -17828,8 +17776,7 @@ export default class ServiceFactory extends Service {
        */
       update: async (
         customerManagerLinks: (
-          | resources.ICustomerManagerLink
-          | resources.CustomerManagerLink
+          resources.ICustomerManagerLink | resources.CustomerManagerLink
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomerManagerLinkResponse> => {
@@ -18273,8 +18220,7 @@ export default class ServiceFactory extends Service {
        */
       update: async (
         customerUserAccesses: (
-          | resources.ICustomerUserAccess
-          | resources.CustomerUserAccess
+          resources.ICustomerUserAccess | resources.CustomerUserAccess
         )[],
         options?: MutateOptions
       ): Promise<services.MutateCustomerUserAccessResponse> => {
@@ -21741,8 +21687,7 @@ export default class ServiceFactory extends Service {
        */
       create: async (
         userListCustomerTypes: (
-          | resources.IUserListCustomerType
-          | resources.UserListCustomerType
+          resources.IUserListCustomerType | resources.UserListCustomerType
         )[],
         options?: MutateOptions
       ): Promise<services.MutateUserListCustomerTypesResponse> => {
