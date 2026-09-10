@@ -92,14 +92,17 @@ export class Service {
   // Used only by gRPC calls
   private getCredentials(): grpc.ChannelCredentials {
     const sslCreds = grpc.credentials.createSsl();
-    const authClient = new UserRefreshClient(
-      this.clientOptions.client_id,
-      this.clientOptions.client_secret,
-      this.customerOptions.refresh_token
-    );
+    const authClient = new UserRefreshClient({
+      clientId: this.clientOptions.client_id,
+      clientSecret: this.clientOptions.client_secret,
+      refreshToken: this.customerOptions.refresh_token,
+    });
     const credentials = grpc.credentials.combineChannelCredentials(
       sslCreds,
-      grpc.credentials.createFromGoogleCredential(authClient)
+      grpc.credentials.createFromGoogleCredential({
+        getRequestHeaders: async (url?: string) =>
+          Object.fromEntries(await authClient.getRequestHeaders(url)),
+      })
     );
     return credentials;
   }
@@ -113,10 +116,10 @@ export class Service {
       return cachedToken;
     }
 
-    const oAuth2Client = new OAuth2Client(
-      this.clientOptions.client_id,
-      this.clientOptions.client_secret
-    );
+    const oAuth2Client = new OAuth2Client({
+      clientId: this.clientOptions.client_id,
+      clientSecret: this.clientOptions.client_secret,
+    });
 
     oAuth2Client.setCredentials({
       refresh_token: this.customerOptions.refresh_token,
