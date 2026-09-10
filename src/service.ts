@@ -1,23 +1,23 @@
 import { grpc } from "google-gax";
 import { UserRefreshClient, OAuth2Client } from "google-auth-library";
-import { ClientOptions } from "./client";
+import { ClientOptions } from "./client.js";
 import {
   AllServices,
   errors,
   GoogleAdsServiceClient,
   ServiceName,
   services,
-} from "./protos";
+} from "./protos/index.js";
 import {
   CustomerOptions,
   CustomerCredentials,
   RequestOptions,
   MutateOperation,
   MutateOptions,
-} from "./types";
-import { getFieldMask, toSnakeCase } from "./utils";
-import { googleAdsVersion } from "./version";
-import { Hooks } from "./hooks";
+} from "./types.js";
+import { getFieldMask, toSnakeCase } from "./utils.js";
+import { googleAdsVersion } from "./version.js";
+import { Hooks } from "./hooks.js";
 import TTLCache from "@isaacs/ttlcache";
 
 // Make sure to update this version number when upgrading

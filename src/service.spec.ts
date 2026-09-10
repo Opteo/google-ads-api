@@ -4,16 +4,16 @@ import {
   protos,
 } from "google-ads-node";
 import { operationsProtos } from "google-gax";
-import { errors, services } from "./protos";
-import { disposeService, FAILURE_KEY, serviceCache } from "./service";
+import { errors, services } from "./protos/index.js";
+import { disposeService, FAILURE_KEY, serviceCache } from "./service.js";
 import {
   failTestIfExecuted,
   newCustomer,
   MOCK_CID,
   MOCK_LOGIN_CID,
   MOCK_DEVELOPER_TOKEN,
-} from "./testUtils";
-import { googleAdsVersion } from "../src/version";
+} from "./testUtils.js";
+import { googleAdsVersion } from "../src/version.js";
 type google = typeof operationsProtos.google;
 const google = operationsProtos.google;
 

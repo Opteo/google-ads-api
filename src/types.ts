@@ -1,4 +1,4 @@
-import { services, fields } from "./protos";
+import { services, fields } from "./protos/index.js";
 
 export interface CustomerOptions {
   customer_id: string;

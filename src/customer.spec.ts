@@ -1,10 +1,10 @@
 import { operationsProtos } from "google-gax";
 import { Readable } from "stream";
-import { Hooks } from "./hooks";
+import { Hooks } from "./hooks.js";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 
-import { enums, errors, services } from "./protos";
+import { enums, errors, services } from "./protos/index.js";
 import {
   failTestIfExecuted,
   mockBuildMutateRequestAndService,
@@ -37,9 +37,9 @@ import {
   mockSummaryRow,
   mockTotalResultsCount,
   newCustomer,
-} from "./testUtils";
-import { MutateOptions, RequestOptions } from "./types";
-import { googleAdsVersion } from "../src/version";
+} from "./testUtils.js";
+import { MutateOptions, RequestOptions } from "./types.js";
+import { googleAdsVersion } from "../src/version.js";
 type google = typeof operationsProtos.google;
 const google = operationsProtos.google;
 

@@ -7,7 +7,7 @@ import {
   toCamelCase,
   toSnakeCase,
   recursiveFieldMaskSearch,
-} from "./utils";
+} from "./utils.js";
 
 describe("fromMicros", () => {
   it("should convert micro amounts to a normal money value", () => {

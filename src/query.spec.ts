@@ -1,6 +1,6 @@
-import { ReportOptions, ConstraintKey, Constraint } from "./types";
-import { normaliseQuery } from "./utils";
-import { enums } from "./protos";
+import { ReportOptions, ConstraintKey, Constraint } from "./types.js";
+import { normaliseQuery } from "./utils.js";
+import { enums } from "./protos/index.js";
 
 import {
   QueryError,
@@ -19,7 +19,7 @@ import {
   buildOrderClauseNew,
   buildRequestOptions,
   buildQuery,
-} from "./query";
+} from "./query.js";
 
 const options: ReportOptions = {
   entity: "ad_group",

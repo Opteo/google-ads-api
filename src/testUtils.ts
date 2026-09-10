@@ -1,10 +1,10 @@
 import { Readable } from "stream";
-import { Customer } from "./customer";
-import { Hooks } from "./hooks";
-import * as parser from "./parser";
-import * as parserRest from "./parserRest";
-import { errors, GoogleAdsServiceClient, services } from "./protos";
-import { PageToken, ReportOptions, MutateOperation } from "./types";
+import { Customer } from "./customer.js";
+import { Hooks } from "./hooks.js";
+import * as parser from "./parser.js";
+import * as parserRest from "./parserRest.js";
+import { errors, GoogleAdsServiceClient, services } from "./protos/index.js";
+import { PageToken, ReportOptions, MutateOperation } from "./types.js";
 import _ from "lodash";
 
 export const MOCK_CLIENT_ID = "MOCK CLIENT ID";

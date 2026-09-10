@@ -1,5 +1,5 @@
 import allProtos, { protos } from "google-ads-node";
-import { googleAdsVersion } from "../version";
+import { googleAdsVersion } from "../version.js";
 
 // "as vN" is required to avoid type issues later on
 export const VERSION = googleAdsVersion as "v25";
@@ -14,8 +14,8 @@ export import services = protos.google.ads.googleads.v25.services;
 
 // We compile enums ourselves, the Google ones should be used internally only
 export import internalEnums = protos.google.ads.googleads.v25.enums;
-export { enums } from "./autogen/enums";
-export { fields, fieldDataTypes } from "./autogen/fields";
+export { enums } from "./autogen/enums.js";
+export { fields, fieldDataTypes } from "./autogen/fields.js";
 
 // Common service used for report/query methods
 export { GoogleAdsServiceClient } from "google-ads-node";

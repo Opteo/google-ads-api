@@ -1,8 +1,8 @@
-import { Customer } from "./customer";
-import { CustomerOptions } from "./types";
-import { Hooks } from "./hooks";
-import { services } from "./protos";
-import { Service } from "./service";
+import { Customer } from "./customer.js";
+import { CustomerOptions } from "./types.js";
+import { Hooks } from "./hooks.js";
+import { services } from "./protos/index.js";
+import { Service } from "./service.js";
 
 export interface ClientOptions {
   client_id: string;

@@ -1,5 +1,5 @@
-import { Client } from "./client";
-import { Service } from "./service";
+import { Client } from "./client.js";
+import { Service } from "./service.js";
 
 describe("listAccessibleCustomers", () => {
   afterEach(() => {
