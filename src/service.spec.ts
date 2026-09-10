@@ -4,6 +4,7 @@ import {
   protos,
 } from "google-ads-node";
 import { operationsProtos } from "google-gax";
+import { UserRefreshClient } from "google-auth-library";
 import { errors, services } from "./protos/index.js";
 import { disposeService, FAILURE_KEY, serviceCache } from "./service.js";
 import { Customer } from "./customer.js";
@@ -427,5 +428,27 @@ describe("service cache partitioning", () => {
     );
     expect(service._opts.universeDomain).toBe("googleapis.com");
     expect(service._opts.sslCreds).not.toBe("nope");
+  });
+});
+
+describe("gRPC call credentials", () => {
+  it("forwards the auth client's headers as call metadata", async () => {
+    jest
+      .spyOn(UserRefreshClient.prototype, "getRequestHeaders")
+      .mockResolvedValue(new Headers({ authorization: "Bearer test-token" }));
+    const customer = newCustomer();
+    // @ts-expect-error Accessing private method for test purposes
+    const credentials = customer.getCredentials();
+    const { callCredentials } = credentials as unknown as {
+      callCredentials: {
+        generateMetadata(options: {
+          service_url: string;
+        }): Promise<{ get(key: string): unknown[] }>;
+      };
+    };
+    const metadata = await callCredentials.generateMetadata({
+      service_url: "https://googleads.googleapis.com",
+    });
+    expect(metadata.get("authorization")).toEqual(["Bearer test-token"]);
   });
 });
