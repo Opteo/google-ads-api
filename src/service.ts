@@ -167,6 +167,7 @@ export class Service {
     // Initialising services can take a few ms, so we cache when possible.
     const client = new protoService({
       sslCreds: this.getCredentials(),
+      universeDomain: "googleapis.com",
     });
 
     if (!options?.skipCache) {

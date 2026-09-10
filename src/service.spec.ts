@@ -313,3 +313,15 @@ describe("Service", () => {
     });
   });
 });
+
+describe("universe domain", () => {
+  it("pins service clients to googleapis.com so no credential probe runs", () => {
+    const customer = newCustomer();
+    // @ts-expect-error Accessing protected method for test purposes
+    const service = customer.loadService<{ _opts: Record<string, unknown> }>(
+      "CustomerServiceClient",
+      { skipCache: true }
+    );
+    expect(service._opts.universeDomain).toBe("googleapis.com");
+  });
+});
