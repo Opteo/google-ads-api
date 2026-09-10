@@ -177,13 +177,15 @@ export class Service {
   }
 
   protected getGoogleAdsError(error: Error): errors.GoogleAdsFailure | Error {
-    // @ts-expect-error No type exists for GA query error
-    if (typeof error?.metadata?.internalRepr.get(FAILURE_KEY) === "undefined") {
+    const trailer = (
+      error as
+        | { metadata?: { internalRepr?: Map<string, Buffer[]> } }
+        | undefined
+    )?.metadata?.internalRepr?.get?.(FAILURE_KEY);
+    if (typeof trailer?.[0] === "undefined") {
       return error;
     }
-    // @ts-expect-error No type exists for GA query error
-    const [buffer] = error.metadata.internalRepr.get(FAILURE_KEY);
-    return this.decodeGoogleAdsFailureBuffer(buffer);
+    return this.decodeGoogleAdsFailureBuffer(trailer[0]);
   }
 
   private decodeGoogleAdsFailureBuffer(

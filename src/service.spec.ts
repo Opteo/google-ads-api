@@ -325,3 +325,21 @@ describe("universe domain", () => {
     expect(service._opts.universeDomain).toBe("googleapis.com");
   });
 });
+
+describe("getGoogleAdsError without a GoogleAdsFailure trailer", () => {
+  it("returns the original error when metadata has no internalRepr", () => {
+    const customer = newCustomer();
+    const err = Object.assign(new Error("SERVICE_DISABLED"), { metadata: {} });
+    // @ts-expect-error Accessing protected method for test purposes
+    expect(customer.getGoogleAdsError(err)).toBe(err);
+  });
+
+  it("returns the original error when the trailer key is absent", () => {
+    const customer = newCustomer();
+    const err = Object.assign(new Error("UNAVAILABLE"), {
+      metadata: { internalRepr: new Map() },
+    });
+    // @ts-expect-error Accessing protected method for test purposes
+    expect(customer.getGoogleAdsError(err)).toBe(err);
+  });
+});
