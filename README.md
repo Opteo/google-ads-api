@@ -70,6 +70,12 @@ const client = new GoogleAdsApi({
 });
 ```
 
+Optional client settings:
+
+- `grpc_channel_options`: [gRPC channel options](https://github.com/grpc/grpc-node/tree/master/packages/grpc-js#supported-channel-options) applied to every service client this instance creates, for example `{ "grpc.keepalive_time_ms": 30000, "grpc.keepalive_timeout_ms": 10000 }`. Service clients are cached per client id and refresh token, so use one `GoogleAdsApi` instance per set of options.
+- `max_reporting_rows`: throw once a report or query returns more rows than this.
+- `disable_parsing`: return raw API responses instead of parsed rows.
+
 ---
 
 ## Create a customer instance

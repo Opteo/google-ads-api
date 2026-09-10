@@ -1,3 +1,4 @@
+import type { grpc } from "google-gax";
 import { Customer } from "./customer.js";
 import { CustomerOptions } from "./types.js";
 import { Hooks } from "./hooks.js";
@@ -10,6 +11,7 @@ export interface ClientOptions {
   developer_token: string;
   disable_parsing?: boolean;
   max_reporting_rows?: number;
+  grpc_channel_options?: grpc.ChannelOptions;
 }
 
 export class Client {

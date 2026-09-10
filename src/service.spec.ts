@@ -6,12 +6,16 @@ import {
 import { operationsProtos } from "google-gax";
 import { errors, services } from "./protos/index.js";
 import { disposeService, FAILURE_KEY, serviceCache } from "./service.js";
+import { Customer } from "./customer.js";
 import {
   failTestIfExecuted,
   newCustomer,
   MOCK_CID,
+  MOCK_CLIENT_ID,
+  MOCK_CLIENT_SECRET,
   MOCK_LOGIN_CID,
   MOCK_DEVELOPER_TOKEN,
+  MOCK_REFRESH_TOKEN,
 } from "./testUtils.js";
 import { googleAdsVersion } from "../src/version.js";
 type google = typeof operationsProtos.google;
@@ -341,5 +345,25 @@ describe("getGoogleAdsError without a GoogleAdsFailure trailer", () => {
     });
     // @ts-expect-error Accessing protected method for test purposes
     expect(customer.getGoogleAdsError(err)).toBe(err);
+  });
+});
+
+describe("grpc_channel_options", () => {
+  it("passes channel options through to the service client", () => {
+    const customer = new Customer(
+      {
+        client_id: MOCK_CLIENT_ID,
+        client_secret: MOCK_CLIENT_SECRET,
+        developer_token: MOCK_DEVELOPER_TOKEN,
+        grpc_channel_options: { "grpc.keepalive_time_ms": 30000 },
+      },
+      { customer_id: MOCK_CID, refresh_token: MOCK_REFRESH_TOKEN }
+    );
+    // @ts-expect-error Accessing protected method for test purposes
+    const service = customer.loadService<{ _opts: Record<string, unknown> }>(
+      "CustomerServiceClient",
+      { skipCache: true }
+    );
+    expect(service._opts["grpc.keepalive_time_ms"]).toBe(30000);
   });
 });

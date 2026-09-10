@@ -168,6 +168,7 @@ export class Service {
     const client = new protoService({
       sslCreds: this.getCredentials(),
       universeDomain: "googleapis.com",
+      ...this.clientOptions.grpc_channel_options,
     });
 
     if (!options?.skipCache) {
