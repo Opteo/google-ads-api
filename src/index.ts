@@ -15,6 +15,7 @@ export {
 
 // Util functions
 export { fromMicros, toMicros } from "./utils.js";
+export { googleAdsVersion } from "./version.js";
 export { parse } from "./parser.js";
 export * as ResourceNames from "./protos/autogen/resourceNames.js";
 

@@ -1,4 +1,5 @@
 import { grpc } from "google-gax";
+import * as googleAdsNode from "google-ads-node";
 import { UserRefreshClient, OAuth2Client } from "google-auth-library";
 import { ClientOptions } from "./client.js";
 import {
@@ -22,6 +23,11 @@ import TTLCache from "@isaacs/ttlcache";
 
 // Make sure to update this version number when upgrading
 export const FAILURE_KEY = `google.ads.googleads.${googleAdsVersion}.errors.googleadsfailure-bin`;
+
+type ServiceConstructor = new (options: {
+  sslCreds: grpc.ChannelCredentials;
+  [option: string]: unknown;
+}) => { close: () => Promise<void> };
 
 export interface CallHeaders {
   "developer-token": string;
@@ -149,8 +155,11 @@ export class Service {
       }
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const { [service]: protoService } = require("google-ads-node");
+    const protoService = (
+      googleAdsNode as unknown as Partial<
+        Record<ServiceName, ServiceConstructor>
+      >
+    )[service];
     if (typeof protoService === "undefined") {
       throw new Error(`Service "${String(service)}" could not be found`);
     }
