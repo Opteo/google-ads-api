@@ -146,7 +146,7 @@ export class Service {
     service: ServiceName,
     options?: { skipCache?: boolean }
   ): T {
-    const serviceCacheKey = `${service}_${this.clientOptions.client_id}_${this.customerOptions.refresh_token}`;
+    const serviceCacheKey = `${service}_${this.clientOptions.client_id}_${this.customerOptions.refresh_token}_${JSON.stringify(this.clientOptions.grpc_channel_options ?? null)}`;
 
     if (!options?.skipCache) {
       const cachedService = serviceCache.get(serviceCacheKey);
@@ -166,9 +166,9 @@ export class Service {
 
     // Initialising services can take a few ms, so we cache when possible.
     const client = new protoService({
+      ...this.clientOptions.grpc_channel_options,
       sslCreds: this.getCredentials(),
       universeDomain: "googleapis.com",
-      ...this.clientOptions.grpc_channel_options,
     });
 
     if (!options?.skipCache) {

@@ -367,3 +367,65 @@ describe("grpc_channel_options", () => {
     expect(service._opts["grpc.keepalive_time_ms"]).toBe(30000);
   });
 });
+
+describe("service cache partitioning", () => {
+  const clientOptions = {
+    client_id: MOCK_CLIENT_ID,
+    client_secret: MOCK_CLIENT_SECRET,
+    developer_token: MOCK_DEVELOPER_TOKEN,
+  };
+  const customerOptions = {
+    customer_id: MOCK_CID,
+    refresh_token: MOCK_REFRESH_TOKEN,
+  };
+
+  it("does not share cached clients between different channel options", () => {
+    const first = new Customer(
+      {
+        ...clientOptions,
+        grpc_channel_options: { "grpc.keepalive_time_ms": 1000 },
+      },
+      customerOptions
+    );
+    const second = new Customer(
+      {
+        ...clientOptions,
+        grpc_channel_options: { "grpc.keepalive_time_ms": 2000 },
+      },
+      customerOptions
+    );
+    // @ts-expect-error Accessing protected method for test purposes
+    const a = first.loadService<{ _opts: Record<string, unknown> }>(
+      "CustomerServiceClient"
+    );
+    // @ts-expect-error Accessing protected method for test purposes
+    const b = second.loadService<{ _opts: Record<string, unknown> }>(
+      "CustomerServiceClient"
+    );
+    expect(b).not.toBe(a);
+    expect(a._opts["grpc.keepalive_time_ms"]).toBe(1000);
+    expect(b._opts["grpc.keepalive_time_ms"]).toBe(2000);
+  });
+
+  it("keeps sslCreds and universeDomain under library control", () => {
+    const customer = new Customer(
+      {
+        ...clientOptions,
+        grpc_channel_options: {
+          universeDomain: "example.com",
+          sslCreds: "nope",
+        },
+      },
+      customerOptions
+    );
+    // @ts-expect-error Accessing protected method for test purposes
+    const service = customer.loadService<{ _opts: Record<string, unknown> }>(
+      "CustomerServiceClient",
+      {
+        skipCache: true,
+      }
+    );
+    expect(service._opts.universeDomain).toBe("googleapis.com");
+    expect(service._opts.sslCreds).not.toBe("nope");
+  });
+});
