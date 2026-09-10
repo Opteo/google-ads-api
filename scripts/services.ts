@@ -249,12 +249,16 @@ function compileMutateMethods(
   const mutateMethods: string[] = [];
 
   const { requestType } = methodDef;
-  const req = (allServices as any)[requestType];
+  const definitions = allServices as unknown as Record<string, ProtoDefinition>;
+  const req = definitions[requestType];
 
-  const opType = req.fields.operation ?? req.fields.operations;
-  const op = (allServices as any)[opType.type];
+  const opType = req.fields?.operation ?? req.fields?.operations;
+  if (!opType) {
+    throw new Error(`${requestType} has no operation field`);
+  }
+  const op = definitions[opType.type];
 
-  const methods = Object.keys(op.fields).filter((o) =>
+  const methods = Object.keys(op.fields ?? {}).filter((o) =>
     ["create", "update", "remove"].includes(o)
   );
 
