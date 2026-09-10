@@ -2,15 +2,19 @@
   "name": "google-ads-api",
   "version": "25.1.0-beta.0",
   "description": "Google Ads API Client Library for Node.js",
-  "repository": "https://github.com/Opteo/google-ads-api",
-  "main": "build/src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Opteo/google-ads-api.git"
+  },
+  "main": "./build/cjs/index.js",
   "files": [
-    "build/src"
+    "build/cjs",
+    "build/esm"
   ],
   "scripts": {
     "test": "jest",
     "lint": "eslint . --ext .ts",
-    "build": "tsc",
+    "build": "tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json && printf '{\"type\":\"module\"}' > build/esm/package.json",
     "compile": "esbuild --bundle --platform=node ./scripts/index.ts --outfile=./build/scripts/index.js && node ./build/scripts/index.js",
     "prepare": "rm -rf build && npm run build",
     "node": "tsx"
@@ -64,5 +68,39 @@
   "type": "commonjs",
   "engines": {
     "node": ">=22"
+  },
+  "types": "./build/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./build/esm/index.d.ts",
+        "default": "./build/esm/index.js"
+      },
+      "require": {
+        "types": "./build/cjs/index.d.ts",
+        "default": "./build/cjs/index.js"
+      }
+    },
+    "./enums": {
+      "import": {
+        "types": "./build/esm/protos/autogen/enums.d.ts",
+        "default": "./build/esm/protos/autogen/enums.js"
+      },
+      "require": {
+        "types": "./build/cjs/protos/autogen/enums.d.ts",
+        "default": "./build/cjs/protos/autogen/enums.js"
+      }
+    },
+    "./fields": {
+      "import": {
+        "types": "./build/esm/protos/autogen/fields.d.ts",
+        "default": "./build/esm/protos/autogen/fields.js"
+      },
+      "require": {
+        "types": "./build/cjs/protos/autogen/fields.d.ts",
+        "default": "./build/cjs/protos/autogen/fields.js"
+      }
+    },
+    "./package.json": "./package.json"
   }
 }
