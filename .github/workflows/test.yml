@@ -40,5 +40,8 @@ jobs:
       # tests
       - run: yarn test
 
+      # packaging: ESM and CommonJS consumers through the export map
+      - run: yarn test:package
+
       # packaging: export map and type resolution
-      - run: npx --yes @arethetypeswrong/cli --profile node16 --pack .
+      - run: npx --yes @arethetypeswrong/cli@0.18.5 --profile node16 --pack .
