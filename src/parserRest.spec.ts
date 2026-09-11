@@ -1,5 +1,4 @@
-import { ReportOptions } from "./types.js";
-import { enums, services } from "./protos/index.js";
+import { enums } from "./protos/index.js";
 import { decamelizeKeys } from "./parserRest.js";
 
 describe("decamelizeKeys", () => {
