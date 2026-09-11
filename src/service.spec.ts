@@ -258,9 +258,7 @@ describe("Service", () => {
 
   describe("FAILURE_KEY", () => {
     it("matches the API version of the installed google-ads-node package", () => {
-      const installedVersions = Object.keys(
-        (protos.google.ads as any).googleads
-      );
+      const installedVersions = Object.keys(protos.google.ads.googleads);
       expect(installedVersions).toContain(googleAdsVersion);
       expect(FAILURE_KEY).toBe(
         `google.ads.googleads.${googleAdsVersion}.errors.googleadsfailure-bin`

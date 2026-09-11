@@ -448,7 +448,7 @@ describe("reportStream", () => {
 
     const stream = customer.reportStream(mockReportOptions);
 
-    const acc: any[] = [];
+    const acc: unknown[] = [];
     for await (const row of stream) {
       acc.push(row);
     }
@@ -484,7 +484,7 @@ describe("reportStream", () => {
 
     const stream = customer.reportStream(mockReportOptions);
 
-    const acc: any[] = [];
+    const acc: unknown[] = [];
     for await (const row of stream) {
       acc.push(row);
     }
@@ -500,7 +500,7 @@ describe("reportStream", () => {
 
     const stream = customer.reportStream(mockReportOptions);
 
-    const acc: any[] = [];
+    const acc: unknown[] = [];
     for await (const row of stream) {
       acc.push(row);
     }
@@ -522,7 +522,7 @@ describe("reportStream", () => {
 
     const stream = customer.reportStream(mockReportOptions);
 
-    const acc: any[] = [];
+    const acc: unknown[] = [];
     for await (const row of stream) {
       acc.push(row);
     }
@@ -554,7 +554,7 @@ describe("reportStream", () => {
 
     const stream = customer.reportStream(mockReportOptions);
 
-    const acc: any[] = [];
+    const acc: unknown[] = [];
     for await (const row of stream) {
       acc.push(row);
     }

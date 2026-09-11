@@ -22,7 +22,7 @@ export const mockReportOptions: ReportOptions = {
   limit: 1,
 };
 
-export const mockMutations: MutateOperation<any>[] = [
+export const mockMutations: MutateOperation<unknown>[] = [
   { resource: "abc", entity: "campaign", operation: "create" },
 ];
 
@@ -104,7 +104,7 @@ export const mockParsedValues = [
 ];
 
 // Returns a stream that emits the provided values
-export const mockStream = function (data: any = mockSearchRawResult) {
+export const mockStream = function (data: unknown = mockSearchRawResult) {
   const chunks = _.chunk(JSON.stringify(data), 10).map((c) => c.join("")); // random splits
   const stream = new Readable({ objectMode: true });
   chunks.forEach((value) => stream.push(new Buffer(value)));
@@ -159,7 +159,7 @@ export function mockSearchOnce({
   includeTotalResultsCount,
 }: {
   customer: Customer;
-  response: any[];
+  response: unknown[];
   nextPageToken: PageToken;
   includeTotalResultsCount?: boolean;
 }): jest.SpyInstance {

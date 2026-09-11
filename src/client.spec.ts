@@ -21,7 +21,10 @@ describe("listAccessibleCustomers", () => {
       .mockResolvedValue([{ resource_names: ["customers/123"] }]);
 
     const loadServiceSpy = jest
-      .spyOn(Service.prototype as any, "loadService")
+      .spyOn(
+        Service.prototype as unknown as { loadService: () => unknown },
+        "loadService"
+      )
       .mockReturnValue({ listAccessibleCustomers, close });
 
     const response = await client.listAccessibleCustomers("MOCK_REFRESH_TOKEN");
@@ -37,12 +40,17 @@ describe("listAccessibleCustomers", () => {
     const client = newClient();
     const close = jest.fn().mockResolvedValue(undefined);
 
-    jest.spyOn(Service.prototype as any, "loadService").mockReturnValue({
-      listAccessibleCustomers: jest
-        .fn()
-        .mockRejectedValue(new Error("rpc failed")),
-      close,
-    });
+    jest
+      .spyOn(
+        Service.prototype as unknown as { loadService: () => unknown },
+        "loadService"
+      )
+      .mockReturnValue({
+        listAccessibleCustomers: jest
+          .fn()
+          .mockRejectedValue(new Error("rpc failed")),
+        close,
+      });
     jest.spyOn(console, "log").mockImplementation(() => undefined);
 
     await expect(

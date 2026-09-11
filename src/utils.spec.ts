@@ -165,7 +165,9 @@ describe("recursiveFieldMaskSearch", () => {
   });
 
   it("throws on circular references instead of overflowing the stack", () => {
-    const input: Record<string, any> = { campaign: { name: "x" } };
+    const input: { campaign: Record<string, unknown> } = {
+      campaign: { name: "x" },
+    };
     input.campaign.self = input;
 
     expect(() => recursiveFieldMaskSearch(input)).toThrow("circular reference");
