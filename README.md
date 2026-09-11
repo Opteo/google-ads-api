@@ -721,3 +721,11 @@ try {
 8. Test with `yarn test`.
 9. Test by linking to a real project and making some real requests.
 10. Once confident, bump the major version & publish to NPM.
+
+# About Opteo
+
+This library is developed and maintained by [Opteo](https://opteo.com), the Advertising Efficiency Manager (AEM) for paid media teams working across Google Ads, Meta Ads, Microsoft Advertising, LinkedIn Ads and TikTok Ads.
+
+Opteo brings together live account data, business context, skills, and specialist marketing tools in one workspace. Connect your marketing accounts, analyse your data with professional-grade tools, build expert marketing agents, and implement changes that increase ROAS.
+
+Learn more about [Opteo](https://opteo.com).
