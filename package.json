@@ -1,6 +1,6 @@
 {
   "name": "google-ads-api",
-  "version": "25.1.0-beta.0",
+  "version": "25.1.0-beta.1",
   "description": "Google Ads API Client Library for Node.js",
   "repository": {
     "type": "git",
@@ -27,7 +27,7 @@
     "@isaacs/ttlcache": "^1.4.0",
     "axios": "^1.6.7",
     "circ-json": "^1.0.4",
-    "google-ads-node": "25.1.0-beta.0",
+    "google-ads-node": "25.1.0-beta.1",
     "google-auth-library": "^11.0.2",
     "google-gax": "^6.3.0",
     "long": "^4.0.0",
