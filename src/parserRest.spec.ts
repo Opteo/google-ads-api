@@ -1,12 +1,5 @@
-import // ParsingError,
-// parse,
-// getGAQLFields,
-// getReportOptionFields,
-// parseRows,
-"./parserRest";
-import { ReportOptions } from "./types";
-import { enums, services } from "./protos";
-import { decamelizeKeys } from "./parserRest";
+import { enums } from "./protos/index.js";
+import { decamelizeKeys } from "./parserRest.js";
 
 describe("decamelizeKeys", () => {
   it("works in the happy path", () => {

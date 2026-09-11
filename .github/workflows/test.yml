@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20.x]
+        node-version: [22.x, 24.x]
 
     steps:
       - uses: actions/checkout@v4
@@ -39,3 +39,9 @@ jobs:
 
       # tests
       - run: yarn test
+
+      # packaging: ESM and CommonJS consumers through the export map
+      - run: yarn test:package
+
+      # packaging: export map and type resolution
+      - run: npx --yes @arethetypeswrong/cli@0.18.5 --profile node16 --pack .

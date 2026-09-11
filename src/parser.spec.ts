@@ -4,9 +4,9 @@ import {
   getGAQLFields,
   getReportOptionFields,
   parseRows,
-} from "./parser";
-import { ReportOptions } from "./types";
-import { enums, services } from "./protos";
+} from "./parser.js";
+import { ReportOptions } from "./types.js";
+import { enums, services } from "./protos/index.js";
 
 describe("parse", () => {
   it("throws if no gaql query or report options are provided", () => {

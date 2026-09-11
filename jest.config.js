@@ -6,6 +6,7 @@ module.exports = {
   //collectCoverage: true,
   coveragePathIgnorePatterns: ["/node_modules/", "jest.config.js"],
   resetMocks: true,
+  moduleNameMapper: { "^(\\.{1,2}/.*)\\.js$": "$1" },
   testMatch: [
     // "build/.*?(?=.spec).*?.js",
     // "**/__tests__/**/*.[jt]s?(x)",

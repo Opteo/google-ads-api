@@ -1,5 +1,37 @@
 # Changelog
 
+### 25.1.0
+
+### Version Upgrade
+
+- Upgraded google-ads-api version to v25.1. Refer to Google Ads release notes [here](https://developers.google.com/google-ads/api/docs/release-notes) for changes.
+- Upgraded google-ads-node dependency to v25.1.0
+- Upgraded google-gax dependency to v6.3.0 and google-auth-library to v11
+- Service clients are pinned to the `googleapis.com` universe domain, so the new auth stack does not probe for application default credentials (about three seconds per new service client, plus a `MetadataLookupWarning` outside Google Cloud) when a service is first created
+
+### New Features
+
+- The package ships CommonJS and ES module builds with an `exports` map: `import { GoogleAdsApi } from "google-ads-api"` resolves to native ESM and `require("google-ads-api")` to CommonJS.
+- Loading both flavours in one process yields two module instances with separate service caches; proto message and error classes come from google-ads-node and stay shared, so `instanceof` checks keep working across them.
+- New subpath entries `google-ads-api/enums` and `google-ads-api/fields` expose the generated enums and field types without loading the gRPC service clients.
+- `googleAdsVersion` is exported from the package root.
+- New `grpc_channel_options` client option forwards gRPC channel settings such as keepalive to every service client; cached service clients are keyed by client id, refresh token and these options (#547).
+- New service: `MultiPartyAuthReviewService`
+- New resource names: `LiftMeasurementAgeRange`, `LiftMeasurementCampaign`, `LiftMeasurementConfig`, `LiftMeasurementDevice`, `LiftMeasurementFlight`, `LiftMeasurementGender`, `LiftMeasurementVideo`, `MultiPartyAuthReview`
+- New enums include `AdSubFormatType`, `BrandLiftMeasurementType`, `LiftMetricType`, `LoyaltyMembership`, `MultiPartyAuthReviewStatus`, `Sentiment`, `SyntheticContentSource` and `ThirdPartyConversionAttributionIntegrationPartner`
+
+### Breaking Changes
+
+- Node.js 22 or newer is required.
+- Deep imports of build files (for example `google-ads-api/build/src/protos/autogen/enums`) no longer resolve. Use the package root, `google-ads-api/enums` or `google-ads-api/fields` instead.
+- TypeScript projects on `moduleResolution: node` (node10) cannot type-resolve the `google-ads-api/enums` and `google-ads-api/fields` subpaths; use `node16`, `nodenext` or `bundler`.
+- Removed services and resources: `CampaignLifecycleGoalService`, `CustomerLifecycleGoalService`, `CampaignLifecycleGoal`, `CustomerLifecycleGoal` (use `Goal`). Removed enum: `CustomerAcquisitionOptimizationMode`.
+
+### Fixes
+
+- `getGoogleAdsError()` no longer throws a `TypeError` when an error carries no `GoogleAdsFailure` trailer (for example REST-style `google.rpc.ErrorInfo` errors such as `SERVICE_DISABLED`); the original error is returned instead (#548).
+- google-ads-api does not pin `jws`; a fresh install of this release resolves `jws` 4.0.1, which addresses the advisory reported in #529. Refresh your lockfile if it still holds 4.0.0.
+
 ### 24.1.0
 
 ### Version Upgrade

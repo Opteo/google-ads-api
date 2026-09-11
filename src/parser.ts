@@ -1,7 +1,7 @@
 import long from "long";
-import { ReportOptions } from "./types";
-import { services, fields } from "./protos";
-import { normaliseQuery } from "./utils";
+import { ReportOptions } from "./types.js";
+import { services, fields } from "./protos/index.js";
+import { normaliseQuery } from "./utils.js";
 
 export const ParsingError = {
   NO_REPORT_OPTIONS_OR_GAQL_QUERY:
