@@ -10,9 +10,13 @@ import {
   failTestIfExecuted,
   newCustomer,
   MOCK_CID,
+  MOCK_CLIENT_ID,
+  MOCK_CLIENT_SECRET,
   MOCK_LOGIN_CID,
   MOCK_DEVELOPER_TOKEN,
+  MOCK_REFRESH_TOKEN,
 } from "./testUtils";
+import { Customer } from "./customer";
 import { googleAdsVersion } from "../src/version";
 type google = typeof operationsProtos.google;
 const google = operationsProtos.google;
@@ -248,6 +252,17 @@ describe("Service", () => {
         "developer-token": MOCK_DEVELOPER_TOKEN,
         "login-customer-id": MOCK_LOGIN_CID,
       });
+    });
+
+    it("should omit the developer-token header when no developer token is configured", () => {
+      const customer = new Customer(
+        { client_id: MOCK_CLIENT_ID, client_secret: MOCK_CLIENT_SECRET },
+        { refresh_token: MOCK_REFRESH_TOKEN, customer_id: MOCK_CID }
+      );
+      // @ts-expect-error Accessing private property for test purposes
+      expect(customer.callHeaders).toEqual({});
+      // @ts-expect-error Accessing private property for test purposes
+      expect(Object.keys(customer.callHeaders)).not.toContain("developer-token");
     });
   });
 

@@ -24,7 +24,7 @@ import TTLCache from "@isaacs/ttlcache";
 export const FAILURE_KEY = `google.ads.googleads.${googleAdsVersion}.errors.googleadsfailure-bin`;
 
 export interface CallHeaders {
-  "developer-token": string;
+  "developer-token"?: string;
   "login-customer-id"?: string;
   "linked-customer-id"?: string;
 }
@@ -77,9 +77,14 @@ export class Service {
   }
 
   protected get callHeaders(): CallHeaders {
-    const headers: CallHeaders = {
-      "developer-token": this.clientOptions.developer_token,
-    };
+    const headers: CallHeaders = {};
+    // Access levels are attached to the Cloud project that owns the OAuth
+    // client, so the developer token is optional. An empty header is rejected
+    // by the API (DEVELOPER_TOKEN_PARAMETER_MISSING) while an absent one is
+    // accepted, so only send it when a value is configured.
+    if (this.clientOptions.developer_token) {
+      headers["developer-token"] = this.clientOptions.developer_token;
+    }
     if (this.customerOptions.login_customer_id) {
       headers["login-customer-id"] = this.customerOptions.login_customer_id;
     }
