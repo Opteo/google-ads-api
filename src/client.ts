@@ -7,7 +7,13 @@ import { Service } from "./service";
 export interface ClientOptions {
   client_id: string;
   client_secret: string;
-  developer_token: string;
+  /**
+   * Optional since the Google Ads API moved access levels from developer
+   * tokens to Google Cloud projects (September 2026). When omitted, no
+   * `developer-token` header is sent. The API ignores the value when it is
+   * present and will reject the header in a future major version.
+   */
+  developer_token?: string;
   disable_parsing?: boolean;
   max_reporting_rows?: number;
 }

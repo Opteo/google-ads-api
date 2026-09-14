@@ -66,9 +66,10 @@ import { GoogleAdsApi } from "google-ads-api";
 const client = new GoogleAdsApi({
   client_id: "<CLIENT-ID>",
   client_secret: "<CLIENT-SECRET>",
-  developer_token: "<DEVELOPER-TOKEN>",
 });
 ```
+
+`developer_token` is optional. Since September 2026 the Google Ads API attaches access levels to the Google Cloud project that owns the OAuth client rather than to a developer token, and ignores the token when it is sent. Existing configurations that still pass `developer_token` keep working; the header is only omitted when the option is absent.
 
 ---
 
