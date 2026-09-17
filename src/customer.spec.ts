@@ -1,10 +1,10 @@
 import { operationsProtos } from "google-gax";
 import { Readable } from "stream";
-import { Hooks } from "./hooks";
+import { Hooks } from "./hooks.js";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 
-import { enums, errors, services } from "./protos";
+import { enums, errors, services } from "./protos/index.js";
 import {
   failTestIfExecuted,
   mockBuildMutateRequestAndService,
@@ -21,8 +21,6 @@ import {
   mockPaginatedSearch,
   mockParse,
   mockParsedValues,
-  mockParseRest,
-  mockParseValue,
   mockQuery,
   mockQueryReturnValue,
   mockQueryReturnValueUnparsed,
@@ -32,14 +30,13 @@ import {
   mockSearchRawResult,
   mockSearchRawResultWithSummaryRow,
   mockStream,
-  mockStreamWithBadData,
   mockStreamWithSummaryRow,
   mockSummaryRow,
   mockTotalResultsCount,
   newCustomer,
-} from "./testUtils";
-import { MutateOptions, RequestOptions } from "./types";
-import { googleAdsVersion } from "../src/version";
+} from "./testUtils.js";
+import { MutateOptions, RequestOptions } from "./types.js";
+import { googleAdsVersion } from "../src/version.js";
 type google = typeof operationsProtos.google;
 const google = operationsProtos.google;
 
@@ -451,7 +448,7 @@ describe("reportStream", () => {
 
     const stream = customer.reportStream(mockReportOptions);
 
-    const acc: any[] = [];
+    const acc: unknown[] = [];
     for await (const row of stream) {
       acc.push(row);
     }
@@ -487,7 +484,7 @@ describe("reportStream", () => {
 
     const stream = customer.reportStream(mockReportOptions);
 
-    const acc: any[] = [];
+    const acc: unknown[] = [];
     for await (const row of stream) {
       acc.push(row);
     }
@@ -503,7 +500,7 @@ describe("reportStream", () => {
 
     const stream = customer.reportStream(mockReportOptions);
 
-    const acc: any[] = [];
+    const acc: unknown[] = [];
     for await (const row of stream) {
       acc.push(row);
     }
@@ -525,7 +522,7 @@ describe("reportStream", () => {
 
     const stream = customer.reportStream(mockReportOptions);
 
-    const acc: any[] = [];
+    const acc: unknown[] = [];
     for await (const row of stream) {
       acc.push(row);
     }
@@ -557,7 +554,7 @@ describe("reportStream", () => {
 
     const stream = customer.reportStream(mockReportOptions);
 
-    const acc: any[] = [];
+    const acc: unknown[] = [];
     for await (const row of stream) {
       acc.push(row);
     }

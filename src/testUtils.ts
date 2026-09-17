@@ -1,10 +1,10 @@
 import { Readable } from "stream";
-import { Customer } from "./customer";
-import { Hooks } from "./hooks";
-import * as parser from "./parser";
-import * as parserRest from "./parserRest";
-import { errors, GoogleAdsServiceClient, services } from "./protos";
-import { PageToken, ReportOptions, MutateOperation } from "./types";
+import { Customer } from "./customer.js";
+import { Hooks } from "./hooks.js";
+import * as parser from "./parser.js";
+import * as parserRest from "./parserRest.js";
+import { errors, GoogleAdsServiceClient, services } from "./protos/index.js";
+import { PageToken, ReportOptions, MutateOperation } from "./types.js";
 import _ from "lodash";
 
 export const MOCK_CLIENT_ID = "MOCK CLIENT ID";
@@ -22,7 +22,7 @@ export const mockReportOptions: ReportOptions = {
   limit: 1,
 };
 
-export const mockMutations: MutateOperation<any>[] = [
+export const mockMutations: MutateOperation<unknown>[] = [
   { resource: "abc", entity: "campaign", operation: "create" },
 ];
 
@@ -104,7 +104,7 @@ export const mockParsedValues = [
 ];
 
 // Returns a stream that emits the provided values
-export const mockStream = function (data: any = mockSearchRawResult) {
+export const mockStream = function (data: unknown = mockSearchRawResult) {
   const chunks = _.chunk(JSON.stringify(data), 10).map((c) => c.join("")); // random splits
   const stream = new Readable({ objectMode: true });
   chunks.forEach((value) => stream.push(new Buffer(value)));
@@ -159,7 +159,7 @@ export function mockSearchOnce({
   includeTotalResultsCount,
 }: {
   customer: Customer;
-  response: any[];
+  response: unknown[];
   nextPageToken: PageToken;
   includeTotalResultsCount?: boolean;
 }): jest.SpyInstance {

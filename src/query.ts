@@ -1,4 +1,4 @@
-import { enums, fields } from "./protos";
+import { enums, fields } from "./protos/index.js";
 import {
   Constraint,
   ConstraintKey,
@@ -12,7 +12,7 @@ import {
   RequestOptions,
   RequestOptionsWithTotalResults,
   SortOrder,
-} from "./types";
+} from "./types.js";
 
 enum QueryKeywords {
   SELECT = "SELECT",

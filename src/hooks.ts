@@ -1,11 +1,11 @@
-import { errors, services } from "./protos";
+import { errors, services } from "./protos/index.js";
 import {
   CustomerCredentials,
   MutateOperation,
   ReportOptions,
   RequestOptions,
   MutateOptions,
-} from "./types";
+} from "./types.js";
 
 export type BaseRequestHookArgs = {
   credentials: CustomerCredentials;

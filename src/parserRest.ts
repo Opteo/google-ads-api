@@ -1,11 +1,11 @@
 import { parse } from "circ-json";
 
-import { toSnakeCase } from "./utils";
+import { toSnakeCase } from "./utils.js";
 import {
   fieldDataTypes as fieldDataTypesString,
   fields,
-} from "./protos/autogen/fields";
-import { enums } from "./protos/autogen/enums";
+} from "./protos/autogen/fields.js";
+import { enums } from "./protos/autogen/enums.js";
 
 const fieldDataTypes = parse(fieldDataTypesString);
 

@@ -1,5 +1,5 @@
 import long from "long";
-import { protobuf } from "./protos";
+import { protobuf } from "./protos/index.js";
 
 /**
  * @param micros Money value in micros format

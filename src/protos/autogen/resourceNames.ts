@@ -1150,22 +1150,6 @@ export function campaignLabel(
   return `customers/${customerId}/campaignLabels/${campaignId}~${labelId}` as const;
 }
 
-/* CampaignLifecycleGoal */
-export type CampaignLifecycleGoalResourceName =
-  `customers/${StrNum}/campaignLifecycleGoals/${StrNum}`;
-/**
- * @param {string | number} customerId
- * @param {string | number} campaignId
- * @returns `CampaignLifecycleGoalResourceName`
- * @example const campaignLifecycleGoal: ResourceNames.CampaignLifecycleGoalResourceName = ResourceNames.campaignLifecycleGoal(10987417, 21974834)
- */
-export function campaignLifecycleGoal(
-  customerId: string | number,
-  campaignId: string | number
-): CampaignLifecycleGoalResourceName {
-  return `customers/${customerId}/campaignLifecycleGoals/${campaignId}` as const;
-}
-
 /* CampaignSearchTermInsight */
 export type CampaignSearchTermInsightResourceName =
   `customers/${StrNum}/campaignSearchTermInsights/${StrNum}~${StrNum}`;
@@ -1649,20 +1633,6 @@ export function customerLabel(
   labelId: string | number
 ): CustomerLabelResourceName {
   return `customers/${customerId}/customerLabels/${labelId}` as const;
-}
-
-/* CustomerLifecycleGoal */
-export type CustomerLifecycleGoalResourceName =
-  `customers/${StrNum}/customerLifecycleGoals`;
-/**
- * @param {string | number} customerId
- * @returns `CustomerLifecycleGoalResourceName`
- * @example const customerLifecycleGoal: ResourceNames.CustomerLifecycleGoalResourceName = ResourceNames.customerLifecycleGoal(10987417)
- */
-export function customerLifecycleGoal(
-  customerId: string | number
-): CustomerLifecycleGoalResourceName {
-  return `customers/${customerId}/customerLifecycleGoals` as const;
 }
 
 /* CustomerManagerLink */
@@ -2380,6 +2350,138 @@ export function lifeEvent(
   return `customers/${customerId}/lifeEvents/${lifeEventId}` as const;
 }
 
+/* LiftMeasurementAgeRange */
+export type LiftMeasurementAgeRangeResourceName =
+  `customers/${StrNum}/liftMeasurementAgeRanges/${StrNum}~${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} liftMeasurementConfigurationId
+ * @param {string | number} campaignId
+ * @param {string | number} criterionId
+ * @returns `LiftMeasurementAgeRangeResourceName`
+ * @example const liftMeasurementAgeRange: ResourceNames.LiftMeasurementAgeRangeResourceName = ResourceNames.liftMeasurementAgeRange(10987417, 21974834, 43949668, 87899336)
+ */
+export function liftMeasurementAgeRange(
+  customerId: string | number,
+  liftMeasurementConfigurationId: string | number,
+  campaignId: string | number,
+  criterionId: string | number
+): LiftMeasurementAgeRangeResourceName {
+  return `customers/${customerId}/liftMeasurementAgeRanges/${liftMeasurementConfigurationId}~${campaignId}~${criterionId}` as const;
+}
+
+/* LiftMeasurementCampaign */
+export type LiftMeasurementCampaignResourceName =
+  `customers/${StrNum}/liftMeasurementCampaigns/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} liftMeasurementConfigurationId
+ * @param {string | number} campaignId
+ * @returns `LiftMeasurementCampaignResourceName`
+ * @example const liftMeasurementCampaign: ResourceNames.LiftMeasurementCampaignResourceName = ResourceNames.liftMeasurementCampaign(10987417, 21974834, 43949668)
+ */
+export function liftMeasurementCampaign(
+  customerId: string | number,
+  liftMeasurementConfigurationId: string | number,
+  campaignId: string | number
+): LiftMeasurementCampaignResourceName {
+  return `customers/${customerId}/liftMeasurementCampaigns/${liftMeasurementConfigurationId}~${campaignId}` as const;
+}
+
+/* LiftMeasurementConfig */
+export type LiftMeasurementConfigResourceName =
+  `customers/${StrNum}/liftMeasurementConfigs/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} liftMeasurementConfigurationId
+ * @returns `LiftMeasurementConfigResourceName`
+ * @example const liftMeasurementConfig: ResourceNames.LiftMeasurementConfigResourceName = ResourceNames.liftMeasurementConfig(10987417, 21974834)
+ */
+export function liftMeasurementConfig(
+  customerId: string | number,
+  liftMeasurementConfigurationId: string | number
+): LiftMeasurementConfigResourceName {
+  return `customers/${customerId}/liftMeasurementConfigs/${liftMeasurementConfigurationId}` as const;
+}
+
+/* LiftMeasurementDevice */
+export type LiftMeasurementDeviceResourceName =
+  `customers/${StrNum}/liftMeasurementDevices/${StrNum}~${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} liftMeasurementConfigurationId
+ * @param {string | number} campaignId
+ * @param {string | number} criterionId
+ * @returns `LiftMeasurementDeviceResourceName`
+ * @example const liftMeasurementDevice: ResourceNames.LiftMeasurementDeviceResourceName = ResourceNames.liftMeasurementDevice(10987417, 21974834, 43949668, 87899336)
+ */
+export function liftMeasurementDevice(
+  customerId: string | number,
+  liftMeasurementConfigurationId: string | number,
+  campaignId: string | number,
+  criterionId: string | number
+): LiftMeasurementDeviceResourceName {
+  return `customers/${customerId}/liftMeasurementDevices/${liftMeasurementConfigurationId}~${campaignId}~${criterionId}` as const;
+}
+
+/* LiftMeasurementFlight */
+export type LiftMeasurementFlightResourceName =
+  `customers/${StrNum}/liftMeasurementFlights/${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} liftMeasurementConfigurationId
+ * @param {string | number} liftMeasurementFlightId
+ * @returns `LiftMeasurementFlightResourceName`
+ * @example const liftMeasurementFlight: ResourceNames.LiftMeasurementFlightResourceName = ResourceNames.liftMeasurementFlight(10987417, 21974834, 43949668)
+ */
+export function liftMeasurementFlight(
+  customerId: string | number,
+  liftMeasurementConfigurationId: string | number,
+  liftMeasurementFlightId: string | number
+): LiftMeasurementFlightResourceName {
+  return `customers/${customerId}/liftMeasurementFlights/${liftMeasurementConfigurationId}~${liftMeasurementFlightId}` as const;
+}
+
+/* LiftMeasurementGender */
+export type LiftMeasurementGenderResourceName =
+  `customers/${StrNum}/liftMeasurementGenders/${StrNum}~${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} liftMeasurementConfigurationId
+ * @param {string | number} campaignId
+ * @param {string | number} criterionId
+ * @returns `LiftMeasurementGenderResourceName`
+ * @example const liftMeasurementGender: ResourceNames.LiftMeasurementGenderResourceName = ResourceNames.liftMeasurementGender(10987417, 21974834, 43949668, 87899336)
+ */
+export function liftMeasurementGender(
+  customerId: string | number,
+  liftMeasurementConfigurationId: string | number,
+  campaignId: string | number,
+  criterionId: string | number
+): LiftMeasurementGenderResourceName {
+  return `customers/${customerId}/liftMeasurementGenders/${liftMeasurementConfigurationId}~${campaignId}~${criterionId}` as const;
+}
+
+/* LiftMeasurementVideo */
+export type LiftMeasurementVideoResourceName =
+  `customers/${StrNum}/liftMeasurementVideos/${StrNum}~${StrNum}~${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} liftMeasurementConfigurationId
+ * @param {string | number} campaignId
+ * @param {string | number} externalVideoId
+ * @returns `LiftMeasurementVideoResourceName`
+ * @example const liftMeasurementVideo: ResourceNames.LiftMeasurementVideoResourceName = ResourceNames.liftMeasurementVideo(10987417, 21974834, 43949668, 87899336)
+ */
+export function liftMeasurementVideo(
+  customerId: string | number,
+  liftMeasurementConfigurationId: string | number,
+  campaignId: string | number,
+  externalVideoId: string | number
+): LiftMeasurementVideoResourceName {
+  return `customers/${customerId}/liftMeasurementVideos/${liftMeasurementConfigurationId}~${campaignId}~${externalVideoId}` as const;
+}
+
 /* LocalServicesEmployee */
 export type LocalServicesEmployeeResourceName =
   `customers/${StrNum}/localServicesEmployees/${StrNum}`;
@@ -2557,6 +2659,22 @@ export function mobileDeviceConstant(
   criterionId: string | number
 ): MobileDeviceConstantResourceName {
   return `mobileDeviceConstants/${criterionId}` as const;
+}
+
+/* MultiPartyAuthReview */
+export type MultiPartyAuthReviewResourceName =
+  `customers/${StrNum}/multiPartyAuthReviews/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} customerInvitationId
+ * @returns `MultiPartyAuthReviewResourceName`
+ * @example const multiPartyAuthReview: ResourceNames.MultiPartyAuthReviewResourceName = ResourceNames.multiPartyAuthReview(10987417, 21974834)
+ */
+export function multiPartyAuthReview(
+  customerId: string | number,
+  customerInvitationId: string | number
+): MultiPartyAuthReviewResourceName {
+  return `customers/${customerId}/multiPartyAuthReviews/${customerInvitationId}` as const;
 }
 
 /* OfflineConversionUploadClientSummary */

@@ -4,16 +4,21 @@ import {
   protos,
 } from "google-ads-node";
 import { operationsProtos } from "google-gax";
-import { errors, services } from "./protos";
-import { disposeService, FAILURE_KEY, serviceCache } from "./service";
+import { UserRefreshClient } from "google-auth-library";
+import { errors, services } from "./protos/index.js";
+import { disposeService, FAILURE_KEY, serviceCache } from "./service.js";
+import { Customer } from "./customer.js";
 import {
   failTestIfExecuted,
   newCustomer,
   MOCK_CID,
+  MOCK_CLIENT_ID,
+  MOCK_CLIENT_SECRET,
   MOCK_LOGIN_CID,
   MOCK_DEVELOPER_TOKEN,
-} from "./testUtils";
-import { googleAdsVersion } from "../src/version";
+  MOCK_REFRESH_TOKEN,
+} from "./testUtils.js";
+import { googleAdsVersion } from "../src/version.js";
 type google = typeof operationsProtos.google;
 const google = operationsProtos.google;
 
@@ -253,9 +258,7 @@ describe("Service", () => {
 
   describe("FAILURE_KEY", () => {
     it("matches the API version of the installed google-ads-node package", () => {
-      const installedVersions = Object.keys(
-        (protos.google.ads as any).googleads
-      );
+      const installedVersions = Object.keys(protos.google.ads.googleads);
       expect(installedVersions).toContain(googleAdsVersion);
       expect(FAILURE_KEY).toBe(
         `google.ads.googleads.${googleAdsVersion}.errors.googleadsfailure-bin`
@@ -311,5 +314,139 @@ describe("Service", () => {
       const reloaded = customer.loadService("CustomerServiceClient");
       expect(reloaded).toBeInstanceOf(CustomerServiceClient);
     });
+  });
+});
+
+describe("universe domain", () => {
+  it("pins service clients to googleapis.com so no credential probe runs", () => {
+    const customer = newCustomer();
+    // @ts-expect-error Accessing protected method for test purposes
+    const service = customer.loadService<{ _opts: Record<string, unknown> }>(
+      "CustomerServiceClient",
+      { skipCache: true }
+    );
+    expect(service._opts.universeDomain).toBe("googleapis.com");
+  });
+});
+
+describe("getGoogleAdsError without a GoogleAdsFailure trailer", () => {
+  it("returns the original error when metadata has no internalRepr", () => {
+    const customer = newCustomer();
+    const err = Object.assign(new Error("SERVICE_DISABLED"), { metadata: {} });
+    // @ts-expect-error Accessing protected method for test purposes
+    expect(customer.getGoogleAdsError(err)).toBe(err);
+  });
+
+  it("returns the original error when the trailer key is absent", () => {
+    const customer = newCustomer();
+    const err = Object.assign(new Error("UNAVAILABLE"), {
+      metadata: { internalRepr: new Map() },
+    });
+    // @ts-expect-error Accessing protected method for test purposes
+    expect(customer.getGoogleAdsError(err)).toBe(err);
+  });
+});
+
+describe("grpc_channel_options", () => {
+  it("passes channel options through to the service client", () => {
+    const customer = new Customer(
+      {
+        client_id: MOCK_CLIENT_ID,
+        client_secret: MOCK_CLIENT_SECRET,
+        developer_token: MOCK_DEVELOPER_TOKEN,
+        grpc_channel_options: { "grpc.keepalive_time_ms": 30000 },
+      },
+      { customer_id: MOCK_CID, refresh_token: MOCK_REFRESH_TOKEN }
+    );
+    // @ts-expect-error Accessing protected method for test purposes
+    const service = customer.loadService<{ _opts: Record<string, unknown> }>(
+      "CustomerServiceClient",
+      { skipCache: true }
+    );
+    expect(service._opts["grpc.keepalive_time_ms"]).toBe(30000);
+  });
+});
+
+describe("service cache partitioning", () => {
+  const clientOptions = {
+    client_id: MOCK_CLIENT_ID,
+    client_secret: MOCK_CLIENT_SECRET,
+    developer_token: MOCK_DEVELOPER_TOKEN,
+  };
+  const customerOptions = {
+    customer_id: MOCK_CID,
+    refresh_token: MOCK_REFRESH_TOKEN,
+  };
+
+  it("does not share cached clients between different channel options", () => {
+    const first = new Customer(
+      {
+        ...clientOptions,
+        grpc_channel_options: { "grpc.keepalive_time_ms": 1000 },
+      },
+      customerOptions
+    );
+    const second = new Customer(
+      {
+        ...clientOptions,
+        grpc_channel_options: { "grpc.keepalive_time_ms": 2000 },
+      },
+      customerOptions
+    );
+    // @ts-expect-error Accessing protected method for test purposes
+    const a = first.loadService<{ _opts: Record<string, unknown> }>(
+      "CustomerServiceClient"
+    );
+    // @ts-expect-error Accessing protected method for test purposes
+    const b = second.loadService<{ _opts: Record<string, unknown> }>(
+      "CustomerServiceClient"
+    );
+    expect(b).not.toBe(a);
+    expect(a._opts["grpc.keepalive_time_ms"]).toBe(1000);
+    expect(b._opts["grpc.keepalive_time_ms"]).toBe(2000);
+  });
+
+  it("keeps sslCreds and universeDomain under library control", () => {
+    const customer = new Customer(
+      {
+        ...clientOptions,
+        grpc_channel_options: {
+          universeDomain: "example.com",
+          sslCreds: "nope",
+        },
+      },
+      customerOptions
+    );
+    // @ts-expect-error Accessing protected method for test purposes
+    const service = customer.loadService<{ _opts: Record<string, unknown> }>(
+      "CustomerServiceClient",
+      {
+        skipCache: true,
+      }
+    );
+    expect(service._opts.universeDomain).toBe("googleapis.com");
+    expect(service._opts.sslCreds).not.toBe("nope");
+  });
+});
+
+describe("gRPC call credentials", () => {
+  it("forwards the auth client's headers as call metadata", async () => {
+    jest
+      .spyOn(UserRefreshClient.prototype, "getRequestHeaders")
+      .mockResolvedValue(new Headers({ authorization: "Bearer test-token" }));
+    const customer = newCustomer();
+    // @ts-expect-error Accessing private method for test purposes
+    const credentials = customer.getCredentials();
+    const { callCredentials } = credentials as unknown as {
+      callCredentials: {
+        generateMetadata(options: {
+          service_url: string;
+        }): Promise<{ get(key: string): unknown[] }>;
+      };
+    };
+    const metadata = await callCredentials.generateMetadata({
+      service_url: "https://googleads.googleapis.com",
+    });
+    expect(metadata.get("authorization")).toEqual(["Bearer test-token"]);
   });
 });

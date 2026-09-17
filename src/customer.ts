@@ -1,23 +1,23 @@
 import { CancellableStream } from "google-gax";
 import axios from "axios";
-import { chain } from "stream-chain";
-import { parser, Parser } from "stream-json";
+import Chain from "stream-chain";
+import streamJson from "stream-json";
 
-import { streamArray } from "stream-json/streamers/StreamArray";
+import StreamArray from "stream-json/streamers/StreamArray.js";
 
-import { ClientOptions } from "./client";
+import { ClientOptions } from "./client.js";
 import {
   BaseMutationHookArgs,
   BaseRequestHookArgs,
   HookedCancellation,
   HookedResolution,
   Hooks,
-} from "./hooks";
+} from "./hooks.js";
 
-import { decamelizeKeys } from "./parserRest";
-import { services, errors } from "./protos";
-import ServiceFactory from "./protos/autogen/serviceFactory";
-import { buildQuery } from "./query";
+import { decamelizeKeys } from "./parserRest.js";
+import { services, errors } from "./protos/index.js";
+import ServiceFactory from "./protos/autogen/serviceFactory.js";
+import { buildQuery } from "./query.js";
 import {
   CustomerOptions,
   MutateOperation,
@@ -27,9 +27,9 @@ import {
   ReportOptionsWithTotalResults,
   RequestOptions,
   RequestOptionsWithTotalResults,
-} from "./types";
+} from "./types.js";
 
-import { googleAdsVersion } from "./version";
+import { googleAdsVersion } from "./version.js";
 
 const ROWS_PER_STREAMED_CHUNK = 10_000; // From experience, this is what can be expected from the API.
 
@@ -488,14 +488,14 @@ export class Customer extends ServiceFactory {
       const stream = response.data as any;
 
       // The options below help to make the stream less CPU intensive.
-      const parser = new Parser({
+      const parser = new streamJson.Parser({
         streamValues: false,
         streamKeys: false,
         packValues: true,
         packKeys: true,
       });
 
-      const pipeline = chain([stream, parser, streamArray()]);
+      const pipeline = Chain.chain([stream, parser, StreamArray.streamArray()]);
       let count = 0;
 
       try {
@@ -548,7 +548,11 @@ export class Customer extends ServiceFactory {
     // The error is a stream, so some effort is required to parse it.
     const stream = e.response.data as any;
 
-    const pipeline = chain([stream, parser(), streamArray()]);
+    const pipeline = Chain.chain([
+      stream,
+      streamJson.parser(),
+      StreamArray.streamArray(),
+    ]);
 
     const defaultErrorMessage = "Unknown GoogleAdsFailure";
 

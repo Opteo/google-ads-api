@@ -1,27 +1,33 @@
 import { grpc } from "google-gax";
+import * as googleAdsNode from "google-ads-node";
 import { UserRefreshClient, OAuth2Client } from "google-auth-library";
-import { ClientOptions } from "./client";
+import { ClientOptions } from "./client.js";
 import {
   AllServices,
   errors,
   GoogleAdsServiceClient,
   ServiceName,
   services,
-} from "./protos";
+} from "./protos/index.js";
 import {
   CustomerOptions,
   CustomerCredentials,
   RequestOptions,
   MutateOperation,
   MutateOptions,
-} from "./types";
-import { getFieldMask, toSnakeCase } from "./utils";
-import { googleAdsVersion } from "./version";
-import { Hooks } from "./hooks";
+} from "./types.js";
+import { getFieldMask, toSnakeCase } from "./utils.js";
+import { googleAdsVersion } from "./version.js";
+import { Hooks } from "./hooks.js";
 import TTLCache from "@isaacs/ttlcache";
 
 // Make sure to update this version number when upgrading
 export const FAILURE_KEY = `google.ads.googleads.${googleAdsVersion}.errors.googleadsfailure-bin`;
+
+type ServiceConstructor = new (options: {
+  sslCreds: grpc.ChannelCredentials;
+  [option: string]: unknown;
+}) => { close: () => Promise<void> };
 
 export interface CallHeaders {
   "developer-token": string;
@@ -92,14 +98,17 @@ export class Service {
   // Used only by gRPC calls
   private getCredentials(): grpc.ChannelCredentials {
     const sslCreds = grpc.credentials.createSsl();
-    const authClient = new UserRefreshClient(
-      this.clientOptions.client_id,
-      this.clientOptions.client_secret,
-      this.customerOptions.refresh_token
-    );
+    const authClient = new UserRefreshClient({
+      clientId: this.clientOptions.client_id,
+      clientSecret: this.clientOptions.client_secret,
+      refreshToken: this.customerOptions.refresh_token,
+    });
     const credentials = grpc.credentials.combineChannelCredentials(
       sslCreds,
-      grpc.credentials.createFromGoogleCredential(authClient)
+      grpc.credentials.createFromGoogleCredential({
+        getRequestHeaders: async (url?: string) =>
+          Object.fromEntries(await authClient.getRequestHeaders(url)),
+      })
     );
     return credentials;
   }
@@ -113,10 +122,10 @@ export class Service {
       return cachedToken;
     }
 
-    const oAuth2Client = new OAuth2Client(
-      this.clientOptions.client_id,
-      this.clientOptions.client_secret
-    );
+    const oAuth2Client = new OAuth2Client({
+      clientId: this.clientOptions.client_id,
+      clientSecret: this.clientOptions.client_secret,
+    });
 
     oAuth2Client.setCredentials({
       refresh_token: this.customerOptions.refresh_token,
@@ -137,7 +146,7 @@ export class Service {
     service: ServiceName,
     options?: { skipCache?: boolean }
   ): T {
-    const serviceCacheKey = `${service}_${this.clientOptions.client_id}_${this.customerOptions.refresh_token}`;
+    const serviceCacheKey = `${service}_${this.clientOptions.client_id}_${this.customerOptions.refresh_token}_${JSON.stringify(this.clientOptions.grpc_channel_options ?? null)}`;
 
     if (!options?.skipCache) {
       const cachedService = serviceCache.get(serviceCacheKey);
@@ -146,15 +155,20 @@ export class Service {
       }
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const { [service]: protoService } = require("google-ads-node");
+    const protoService = (
+      googleAdsNode as unknown as Partial<
+        Record<ServiceName, ServiceConstructor>
+      >
+    )[service];
     if (typeof protoService === "undefined") {
       throw new Error(`Service "${String(service)}" could not be found`);
     }
 
     // Initialising services can take a few ms, so we cache when possible.
     const client = new protoService({
+      ...this.clientOptions.grpc_channel_options,
       sslCreds: this.getCredentials(),
+      universeDomain: "googleapis.com",
     });
 
     if (!options?.skipCache) {
@@ -164,13 +178,15 @@ export class Service {
   }
 
   protected getGoogleAdsError(error: Error): errors.GoogleAdsFailure | Error {
-    // @ts-expect-error No type exists for GA query error
-    if (typeof error?.metadata?.internalRepr.get(FAILURE_KEY) === "undefined") {
+    const trailer = (
+      error as
+        | { metadata?: { internalRepr?: Map<string, Buffer[]> } }
+        | undefined
+    )?.metadata?.internalRepr?.get?.(FAILURE_KEY);
+    if (typeof trailer?.[0] === "undefined") {
       return error;
     }
-    // @ts-expect-error No type exists for GA query error
-    const [buffer] = error.metadata.internalRepr.get(FAILURE_KEY);
-    return this.decodeGoogleAdsFailureBuffer(buffer);
+    return this.decodeGoogleAdsFailureBuffer(trailer[0]);
   }
 
   private decodeGoogleAdsFailureBuffer(
