@@ -84,10 +84,8 @@ export class Service {
 
   protected get callHeaders(): CallHeaders {
     const headers: CallHeaders = {};
-    // Access levels are attached to the Cloud project that owns the OAuth
-    // client, so the developer token is optional. An empty header is rejected
-    // by the API (DEVELOPER_TOKEN_PARAMETER_MISSING) while an absent one is
-    // accepted, so only send it when a value is configured.
+    // Omitted rather than sent empty: the API rejects an empty developer-token
+    // header (DEVELOPER_TOKEN_PARAMETER_MISSING) but accepts a missing one.
     if (this.clientOptions.developer_token) {
       headers["developer-token"] = this.clientOptions.developer_token;
     }

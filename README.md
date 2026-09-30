@@ -71,10 +71,9 @@ const client = new GoogleAdsApi({
 });
 ```
 
-`developer_token` is optional. Since September 2026 the Google Ads API attaches access levels to the Google Cloud project that owns the OAuth client rather than to a developer token, and ignores the token when it is sent. Existing configurations that still pass `developer_token` keep working; the header is only omitted when the option is absent.
-
 Optional client settings:
 
+- `developer_token`: no longer needed. Google sunset developer tokens on 9 September 2026; API access levels now belong to the Google Cloud project that owns your OAuth client, and the API ignores the token. When it is unset or empty, no `developer-token` header is sent. Existing configurations that pass a token keep working until Google starts rejecting the header in a future major API version.
 - `grpc_channel_options`: [gRPC channel options](https://github.com/grpc/grpc-node/tree/master/packages/grpc-js#supported-channel-options) applied to every service client this instance creates, for example `{ "grpc.keepalive_time_ms": 30000, "grpc.keepalive_timeout_ms": 10000 }`. Cached service clients are keyed by client id, refresh token and these options, so instances with different options never share a client.
 - `max_reporting_rows`: throw once a report or query returns more rows than this.
 - `disable_parsing`: return raw API responses instead of parsed rows.
@@ -108,7 +107,6 @@ This is a special client method for listing the accessible customers for a given
 const client = new GoogleAdsApi({
   client_id: "<CLIENT-ID>",
   client_secret: "<CLIENT-SECRET>",
-  developer_token: "<DEVELOPER-TOKEN>",
 });
 
 const refreshToken = "<REFRESH-TOKEN>";

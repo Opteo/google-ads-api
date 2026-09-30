@@ -1,10 +1,14 @@
 # Changelog
 
-### Unreleased
+### 25.1.1
 
 ### New Features
 
-- `developer_token` is now optional in the client options. When it is not set, no `developer-token` header is sent. Google Ads API access levels are attached to the Google Cloud project that owns the OAuth client since September 2026; the API ignores the token value when present and will reject the header in a future major version. Note that an empty string is still refused by the API (`DEVELOPER_TOKEN_PARAMETER_MISSING`), so omit the option rather than blanking it.
+- `developer_token` is now optional (#553). Google sunset developer tokens on 9 September 2026: API access levels now belong to the Google Cloud project that owns your OAuth client, and the API ignores the token. When the option is unset or empty, no `developer-token` header is sent. Previously an unset token went out as the string `"undefined"` and an empty one was rejected with `DEVELOPER_TOKEN_PARAMETER_MISSING`. Configurations that pass a token are unchanged; Google will reject the header in a future major API version, so remove it when convenient.
+
+### Breaking Changes
+
+- `ClientOptions["developer_token"]` is now typed `string | undefined`. TypeScript code that reads the option back as a `string` needs a guard or a default.
 
 ### 25.1.0
 

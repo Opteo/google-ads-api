@@ -5,7 +5,6 @@ import { GoogleAdsApi, ResourceNames, enums, resources } from "../../src/index";
 const client = new GoogleAdsApi({
   client_id: "<CLIENT_ID>",
   client_secret: "<CLIENT_SECRET>",
-  developer_token: "<DEVELOPER_TOKEN>",
 });
 
 async function main() {

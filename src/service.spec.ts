@@ -15,6 +15,7 @@ import {
   MOCK_CLIENT_ID,
   MOCK_CLIENT_SECRET,
   MOCK_LOGIN_CID,
+  MOCK_LINKED_CID,
   MOCK_DEVELOPER_TOKEN,
   MOCK_REFRESH_TOKEN,
 } from "./testUtils.js";
@@ -255,16 +256,33 @@ describe("Service", () => {
       });
     });
 
-    it("should omit the developer-token header when no developer token is configured", () => {
-      const customer = new Customer(
-        { client_id: MOCK_CLIENT_ID, client_secret: MOCK_CLIENT_SECRET },
-        { refresh_token: MOCK_REFRESH_TOKEN, customer_id: MOCK_CID }
-      );
-      // @ts-expect-error Accessing private property for test purposes
-      expect(customer.callHeaders).toEqual({});
-      // @ts-expect-error Accessing private property for test purposes
-      expect(Object.keys(customer.callHeaders)).not.toContain("developer-token");
-    });
+    it.each([
+      ["unset", undefined],
+      ["empty", ""],
+    ])(
+      "should omit only the developer-token header when the token is %s",
+      (_, developer_token) => {
+        const customer = new Customer(
+          {
+            client_id: MOCK_CLIENT_ID,
+            client_secret: MOCK_CLIENT_SECRET,
+            developer_token,
+          },
+          {
+            refresh_token: MOCK_REFRESH_TOKEN,
+            customer_id: MOCK_CID,
+            login_customer_id: MOCK_LOGIN_CID,
+            linked_customer_id: MOCK_LINKED_CID,
+          }
+        );
+        // toStrictEqual, unlike toEqual, fails on a key holding undefined
+        // @ts-expect-error Accessing private property for test purposes
+        expect(customer.callHeaders).toStrictEqual({
+          "login-customer-id": MOCK_LOGIN_CID,
+          "linked-customer-id": MOCK_LINKED_CID,
+        });
+      }
+    );
   });
 
   describe("FAILURE_KEY", () => {
