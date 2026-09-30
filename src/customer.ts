@@ -1,9 +1,8 @@
 import { CancellableStream } from "google-gax";
 import axios from "axios";
-import Chain from "stream-chain";
-import streamJson from "stream-json";
-
-import StreamArray from "stream-json/streamers/StreamArray.js";
+import { chain } from "stream-chain";
+import { parser as jsonParser } from "stream-json";
+import { streamArray } from "stream-json/streamers/stream-array.js";
 
 import { ClientOptions } from "./client.js";
 import {
@@ -488,14 +487,14 @@ export class Customer extends ServiceFactory {
       const stream = response.data as any;
 
       // The options below help to make the stream less CPU intensive.
-      const parser = new streamJson.Parser({
+      const parser = jsonParser.asStream({
         streamValues: false,
         streamKeys: false,
         packValues: true,
         packKeys: true,
       });
 
-      const pipeline = Chain.chain([stream, parser, StreamArray.streamArray()]);
+      const pipeline = chain([stream, parser, streamArray.asStream()]);
       let count = 0;
 
       try {
@@ -548,10 +547,10 @@ export class Customer extends ServiceFactory {
     // The error is a stream, so some effort is required to parse it.
     const stream = e.response.data as any;
 
-    const pipeline = Chain.chain([
+    const pipeline = chain([
       stream,
-      streamJson.parser(),
-      StreamArray.streamArray(),
+      jsonParser.asStream(),
+      streamArray.asStream(),
     ]);
 
     const defaultErrorMessage = "Unknown GoogleAdsFailure";
