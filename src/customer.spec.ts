@@ -4,9 +4,15 @@ import { Hooks } from "./hooks.js";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 
+import { Customer } from "./customer.js";
 import { enums, errors, services } from "./protos/index.js";
 import {
   failTestIfExecuted,
+  MOCK_CID,
+  MOCK_CLIENT_ID,
+  MOCK_CLIENT_SECRET,
+  MOCK_DEVELOPER_TOKEN,
+  MOCK_REFRESH_TOKEN,
   mockBuildMutateRequestAndService,
   mockBuildSearchRequestAndService,
   mockBuildSearchStreamRequestAndService,
@@ -41,6 +47,43 @@ type google = typeof operationsProtos.google;
 const google = operationsProtos.google;
 
 const axiosMock = new MockAdapter(axios);
+
+describe("request headers", () => {
+  afterEach(() => {
+    jest.resetAllMocks();
+    axiosMock.reset();
+  });
+
+  it("sends the developer-token header when a token is configured", async () => {
+    const customer = newCustomer({});
+    axiosMock.onPost().reply(200, mockStream());
+    mockGetAccessToken(customer);
+
+    // @ts-expect-error private method
+    await customer.querier(mockGaqlQuery);
+
+    expect(axiosMock.history.post[0].headers).toHaveProperty(
+      "developer-token",
+      MOCK_DEVELOPER_TOKEN
+    );
+  });
+
+  it("sends no developer-token header when no token is configured", async () => {
+    const customer = new Customer(
+      { client_id: MOCK_CLIENT_ID, client_secret: MOCK_CLIENT_SECRET },
+      { refresh_token: MOCK_REFRESH_TOKEN, customer_id: MOCK_CID }
+    );
+    axiosMock.onPost().reply(200, mockStream());
+    mockGetAccessToken(customer);
+
+    // @ts-expect-error private method
+    await customer.querier(mockGaqlQuery);
+
+    expect(axiosMock.history.post[0].headers).not.toHaveProperty(
+      "developer-token"
+    );
+  });
+});
 
 describe("querier", () => {
   afterEach(() => {

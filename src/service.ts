@@ -30,7 +30,7 @@ type ServiceConstructor = new (options: {
 }) => { close: () => Promise<void> };
 
 export interface CallHeaders {
-  "developer-token": string;
+  "developer-token"?: string;
   "login-customer-id"?: string;
   "linked-customer-id"?: string;
 }
@@ -83,9 +83,12 @@ export class Service {
   }
 
   protected get callHeaders(): CallHeaders {
-    const headers: CallHeaders = {
-      "developer-token": this.clientOptions.developer_token,
-    };
+    const headers: CallHeaders = {};
+    // Omitted rather than sent empty: the API rejects an empty developer-token
+    // header (DEVELOPER_TOKEN_PARAMETER_MISSING) but accepts a missing one.
+    if (this.clientOptions.developer_token) {
+      headers["developer-token"] = this.clientOptions.developer_token;
+    }
     if (this.customerOptions.login_customer_id) {
       headers["login-customer-id"] = this.customerOptions.login_customer_id;
     }
