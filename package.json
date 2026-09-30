@@ -31,7 +31,8 @@
     "google-auth-library": "^11.3.3",
     "google-gax": "^6.16.0",
     "long": "^4.0.0",
-    "stream-json": "^1.8.0"
+    "stream-chain": "^4.2.6",
+    "stream-json": "^3.7.0"
   },
   "devDependencies": {
     "@types/jest": "^29.0.1",
@@ -39,7 +40,6 @@
     "@types/long": "^4.0.0",
     "@types/node": "^22.5.4",
     "@types/pluralize": "^0.0.29",
-    "@types/stream-json": "^1.7.7",
     "@typescript-eslint/eslint-plugin": "^4.8.2",
     "@typescript-eslint/parser": "^4.8.2",
     "axios-mock-adapter": "^1.22.0",
@@ -69,7 +69,7 @@
   "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72",
   "type": "commonjs",
   "engines": {
-    "node": ">=22"
+    "node": ">=22.12"
   },
   "types": "./build/cjs/index.d.ts",
   "exports": {

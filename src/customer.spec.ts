@@ -324,6 +324,89 @@ describe("querier", () => {
   });
 });
 
+describe("streamed error responses", () => {
+  afterEach(() => {
+    jest.resetAllMocks();
+    axiosMock.reset();
+  });
+
+  it("throws the GoogleAdsFailure parsed from the error response", async () => {
+    const customer = newCustomer({});
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(
+      400,
+      mockStream([
+        {
+          error: {
+            code: 400,
+            message: "Request contains an invalid argument.",
+            status: "INVALID_ARGUMENT",
+            details: [
+              {
+                "@type": `type.googleapis.com/google.ads.googleads.${googleAdsVersion}.errors.GoogleAdsFailure`,
+                errors: [
+                  {
+                    errorCode: {
+                      queryError: "PROHIBITED_RESOURCE_TYPE_IN_SELECT_CLAUSE",
+                    },
+                    message: "Cannot select campaign.bogus.",
+                  },
+                ],
+                requestId: "mock-request-id",
+              },
+            ],
+          },
+        },
+      ])
+    );
+
+    const error = await customer.query(mockGaqlQuery).catch((e: unknown) => e);
+
+    expect(error).toBeInstanceOf(errors.GoogleAdsFailure);
+    expect(error).toMatchObject({
+      request_id: "mock-request-id",
+      errors: [{ message: "Cannot select campaign.bogus." }],
+    });
+  });
+
+  it("throws the API message when the error response has no failure details", async () => {
+    const customer = newCustomer({});
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(
+      403,
+      mockStream([
+        {
+          error: {
+            code: 403,
+            message: "The caller does not have permission",
+            status: "PERMISSION_DENIED",
+          },
+        },
+      ])
+    );
+
+    const error = await customer.query(mockGaqlQuery).catch((e: unknown) => e);
+
+    expect(error).not.toBeInstanceOf(errors.GoogleAdsFailure);
+    expect(error).toMatchObject({
+      message: "The caller does not have permission",
+      cause: { status: "PERMISSION_DENIED" },
+    });
+  });
+
+  it("rejects with the parser error when the error response is not JSON", async () => {
+    const customer = newCustomer({});
+    mockGetAccessToken(customer);
+    axiosMock
+      .onPost()
+      .reply(502, Readable.from([Buffer.from("<html>502 Bad Gateway</html>")]));
+
+    await expect(customer.query(mockGaqlQuery)).rejects.toThrow(
+      "Parser cannot parse input: expected a value"
+    );
+  });
+});
+
 describe("paginatedSearch", () => {
   afterEach(() => {
     jest.resetAllMocks();
