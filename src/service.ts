@@ -363,4 +363,16 @@ export class Service {
     };
     return request as unknown as Req;
   }
+
+  protected buildSingleOperationRequest<Op, Req, Options>(
+    operation: Op,
+    options?: Options
+  ): Req {
+    const request = {
+      customer_id: this.customerOptions.customer_id,
+      operation,
+      ...options,
+    };
+    return request as unknown as Req;
+  }
 }

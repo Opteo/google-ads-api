@@ -37,20 +37,19 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAccountBudgetProposalResponse
        */
       create: async (
-        accountBudgetProposals: (
-          resources.IAccountBudgetProposal | resources.AccountBudgetProposal
-        )[],
+        accountBudgetProposal:
+          resources.IAccountBudgetProposal | resources.AccountBudgetProposal,
         options?: MutateOptions
       ): Promise<services.MutateAccountBudgetProposalResponse> => {
         const ops = this.buildOperations<
           services.AccountBudgetProposalOperation,
           resources.IAccountBudgetProposal
-        >("create", accountBudgetProposals);
-        const request = this.buildRequest<
+        >("create", [accountBudgetProposal]);
+        const request = this.buildSingleOperationRequest<
           services.AccountBudgetProposalOperation,
           services.IMutateAccountBudgetProposalRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], options);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AccountBudgetProposalService.mutateAccountBudgetProposal",
@@ -119,18 +118,18 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAccountBudgetProposalResponse
        */
       remove: async (
-        accountBudgetProposals: string[],
+        accountBudgetProposal: string,
         options?: MutateOptions
       ): Promise<services.MutateAccountBudgetProposalResponse> => {
         const ops = this.buildOperations<
           services.AccountBudgetProposalOperation,
           string
-        >("remove", accountBudgetProposals);
-        const request = this.buildRequest<
+        >("remove", [accountBudgetProposal]);
+        const request = this.buildSingleOperationRequest<
           services.AccountBudgetProposalOperation,
           services.IMutateAccountBudgetProposalRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], options);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AccountBudgetProposalService.mutateAccountBudgetProposal",
@@ -280,7 +279,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAccountLinkResponse
        */
       update: async (
-        accountLinks: (resources.IAccountLink | resources.AccountLink)[],
+        accountLink: resources.IAccountLink | resources.AccountLink,
         options?: MutateOptions
       ): Promise<services.MutateAccountLinkResponse> => {
         const ops = this.buildOperations<
@@ -288,15 +287,15 @@ export default class ServiceFactory extends Service {
           resources.IAccountLink
         >(
           "update",
-          accountLinks,
+          [accountLink],
           // @ts-expect-error Static class type here is fine
           resources.AccountLink
         );
-        const request = this.buildRequest<
+        const request = this.buildSingleOperationRequest<
           services.AccountLinkOperation,
           services.IMutateAccountLinkRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], options);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AccountLinkService.mutateAccountLink",
@@ -362,18 +361,18 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAccountLinkResponse
        */
       remove: async (
-        accountLinks: string[],
+        accountLink: string,
         options?: MutateOptions
       ): Promise<services.MutateAccountLinkResponse> => {
         const ops = this.buildOperations<services.AccountLinkOperation, string>(
           "remove",
-          accountLinks
+          [accountLink]
         );
-        const request = this.buildRequest<
+        const request = this.buildSingleOperationRequest<
           services.AccountLinkOperation,
           services.IMutateAccountLinkRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], options);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AccountLinkService.mutateAccountLink",
@@ -5675,18 +5674,18 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateBatchJobResponse
        */
       create: async (
-        batchJobs: (resources.IBatchJob | resources.BatchJob)[],
+        batchJob: resources.IBatchJob | resources.BatchJob,
         options?: MutateOptions
       ): Promise<services.MutateBatchJobResponse> => {
         const ops = this.buildOperations<
           services.BatchJobOperation,
           resources.IBatchJob
-        >("create", batchJobs);
-        const request = this.buildRequest<
+        >("create", [batchJob]);
+        const request = this.buildSingleOperationRequest<
           services.BatchJobOperation,
           services.IMutateBatchJobRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], options);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "BatchJobService.mutateBatchJob",
@@ -5752,18 +5751,18 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateBatchJobResponse
        */
       remove: async (
-        batchJobs: string[],
+        batchJob: string,
         options?: MutateOptions
       ): Promise<services.MutateBatchJobResponse> => {
         const ops = this.buildOperations<services.BatchJobOperation, string>(
           "remove",
-          batchJobs
+          [batchJob]
         );
-        const request = this.buildRequest<
+        const request = this.buildSingleOperationRequest<
           services.BatchJobOperation,
           services.IMutateBatchJobRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], options);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "BatchJobService.mutateBatchJob",
@@ -11182,21 +11181,20 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerBudgetNetworkSettingResponse
        */
       create: async (
-        customerBudgetNetworkSettings: (
+        customerBudgetNetworkSetting:
           | resources.ICustomerBudgetNetworkSetting
-          | resources.CustomerBudgetNetworkSetting
-        )[],
+          | resources.CustomerBudgetNetworkSetting,
         options?: MutateOptions
       ): Promise<services.MutateCustomerBudgetNetworkSettingResponse> => {
         const ops = this.buildOperations<
           services.CustomerBudgetNetworkSettingOperation,
           resources.ICustomerBudgetNetworkSetting
-        >("create", customerBudgetNetworkSettings);
-        const request = this.buildRequest<
+        >("create", [customerBudgetNetworkSetting]);
+        const request = this.buildSingleOperationRequest<
           services.CustomerBudgetNetworkSettingOperation,
           services.IMutateCustomerBudgetNetworkSettingRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], options);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
@@ -11266,10 +11264,9 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerBudgetNetworkSettingResponse
        */
       update: async (
-        customerBudgetNetworkSettings: (
+        customerBudgetNetworkSetting:
           | resources.ICustomerBudgetNetworkSetting
-          | resources.CustomerBudgetNetworkSetting
-        )[],
+          | resources.CustomerBudgetNetworkSetting,
         options?: MutateOptions
       ): Promise<services.MutateCustomerBudgetNetworkSettingResponse> => {
         const ops = this.buildOperations<
@@ -11277,15 +11274,15 @@ export default class ServiceFactory extends Service {
           resources.ICustomerBudgetNetworkSetting
         >(
           "update",
-          customerBudgetNetworkSettings,
+          [customerBudgetNetworkSetting],
           // @ts-expect-error Static class type here is fine
           resources.CustomerBudgetNetworkSetting
         );
-        const request = this.buildRequest<
+        const request = this.buildSingleOperationRequest<
           services.CustomerBudgetNetworkSettingOperation,
           services.IMutateCustomerBudgetNetworkSettingRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], options);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
@@ -11994,7 +11991,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerResponse
        */
       update: async (
-        customers: (resources.ICustomer | resources.Customer)[],
+        customer: resources.ICustomer | resources.Customer,
         options?: MutateOptions
       ): Promise<services.MutateCustomerResponse> => {
         const ops = this.buildOperations<
@@ -12002,15 +11999,15 @@ export default class ServiceFactory extends Service {
           resources.ICustomer
         >(
           "update",
-          customers,
+          [customer],
           // @ts-expect-error Static class type here is fine
           resources.Customer
         );
-        const request = this.buildRequest<
+        const request = this.buildSingleOperationRequest<
           services.CustomerOperation,
           services.IMutateCustomerRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], options);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerService.mutateCustomer",
@@ -16391,18 +16388,18 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateBillingSetupResponse
        */
       create: async (
-        billingSetups: (resources.IBillingSetup | resources.BillingSetup)[],
+        billingSetup: resources.IBillingSetup | resources.BillingSetup,
         options?: MutateOptions
       ): Promise<services.MutateBillingSetupResponse> => {
         const ops = this.buildOperations<
           services.BillingSetupOperation,
           resources.IBillingSetup
-        >("create", billingSetups);
-        const request = this.buildRequest<
+        >("create", [billingSetup]);
+        const request = this.buildSingleOperationRequest<
           services.BillingSetupOperation,
           services.IMutateBillingSetupRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], options);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "BillingSetupService.mutateBillingSetup",
@@ -16468,18 +16465,18 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateBillingSetupResponse
        */
       remove: async (
-        billingSetups: string[],
+        billingSetup: string,
         options?: MutateOptions
       ): Promise<services.MutateBillingSetupResponse> => {
         const ops = this.buildOperations<
           services.BillingSetupOperation,
           string
-        >("remove", billingSetups);
-        const request = this.buildRequest<
+        >("remove", [billingSetup]);
+        const request = this.buildSingleOperationRequest<
           services.BillingSetupOperation,
           services.IMutateBillingSetupRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], options);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "BillingSetupService.mutateBillingSetup",
@@ -17854,20 +17851,19 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerClientLinkResponse
        */
       create: async (
-        customerClientLinks: (
-          resources.ICustomerClientLink | resources.CustomerClientLink
-        )[],
+        customerClientLink:
+          resources.ICustomerClientLink | resources.CustomerClientLink,
         options?: MutateOptions
       ): Promise<services.MutateCustomerClientLinkResponse> => {
         const ops = this.buildOperations<
           services.CustomerClientLinkOperation,
           resources.ICustomerClientLink
-        >("create", customerClientLinks);
-        const request = this.buildRequest<
+        >("create", [customerClientLink]);
+        const request = this.buildSingleOperationRequest<
           services.CustomerClientLinkOperation,
           services.IMutateCustomerClientLinkRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], options);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerClientLinkService.mutateCustomerClientLink",
@@ -17933,9 +17929,8 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerClientLinkResponse
        */
       update: async (
-        customerClientLinks: (
-          resources.ICustomerClientLink | resources.CustomerClientLink
-        )[],
+        customerClientLink:
+          resources.ICustomerClientLink | resources.CustomerClientLink,
         options?: MutateOptions
       ): Promise<services.MutateCustomerClientLinkResponse> => {
         const ops = this.buildOperations<
@@ -17943,15 +17938,15 @@ export default class ServiceFactory extends Service {
           resources.ICustomerClientLink
         >(
           "update",
-          customerClientLinks,
+          [customerClientLink],
           // @ts-expect-error Static class type here is fine
           resources.CustomerClientLink
         );
-        const request = this.buildRequest<
+        const request = this.buildSingleOperationRequest<
           services.CustomerClientLinkOperation,
           services.IMutateCustomerClientLinkRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], options);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerClientLinkService.mutateCustomerClientLink",
@@ -18196,10 +18191,9 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerSkAdNetworkConversionValueSchemaResponse
        */
       update: async (
-        customerSkAdNetworkConversionValueSchemas: (
+        customerSkAdNetworkConversionValueSchema:
           | resources.ICustomerSkAdNetworkConversionValueSchema
-          | resources.CustomerSkAdNetworkConversionValueSchema
-        )[],
+          | resources.CustomerSkAdNetworkConversionValueSchema,
         options?: MutateOptions
       ): Promise<services.MutateCustomerSkAdNetworkConversionValueSchemaResponse> => {
         const ops = this.buildOperations<
@@ -18207,15 +18201,15 @@ export default class ServiceFactory extends Service {
           resources.ICustomerSkAdNetworkConversionValueSchema
         >(
           "update",
-          customerSkAdNetworkConversionValueSchemas,
+          [customerSkAdNetworkConversionValueSchema],
           // @ts-expect-error Static class type here is fine
           resources.CustomerSkAdNetworkConversionValueSchema
         );
-        const request = this.buildRequest<
+        const request = this.buildSingleOperationRequest<
           services.CustomerSkAdNetworkConversionValueSchemaOperation,
           services.IMutateCustomerSkAdNetworkConversionValueSchemaRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], options);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
@@ -18298,21 +18292,20 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerUserAccessInvitationResponse
        */
       create: async (
-        customerUserAccessInvitations: (
+        customerUserAccessInvitation:
           | resources.ICustomerUserAccessInvitation
-          | resources.CustomerUserAccessInvitation
-        )[],
+          | resources.CustomerUserAccessInvitation,
         options?: MutateOptions
       ): Promise<services.MutateCustomerUserAccessInvitationResponse> => {
         const ops = this.buildOperations<
           services.CustomerUserAccessInvitationOperation,
           resources.ICustomerUserAccessInvitation
-        >("create", customerUserAccessInvitations);
-        const request = this.buildRequest<
+        >("create", [customerUserAccessInvitation]);
+        const request = this.buildSingleOperationRequest<
           services.CustomerUserAccessInvitationOperation,
           services.IMutateCustomerUserAccessInvitationRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], options);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
@@ -18382,18 +18375,18 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerUserAccessInvitationResponse
        */
       remove: async (
-        customerUserAccessInvitations: string[],
+        customerUserAccessInvitation: string,
         options?: MutateOptions
       ): Promise<services.MutateCustomerUserAccessInvitationResponse> => {
         const ops = this.buildOperations<
           services.CustomerUserAccessInvitationOperation,
           string
-        >("remove", customerUserAccessInvitations);
-        const request = this.buildRequest<
+        >("remove", [customerUserAccessInvitation]);
+        const request = this.buildSingleOperationRequest<
           services.CustomerUserAccessInvitationOperation,
           services.IMutateCustomerUserAccessInvitationRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], options);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
@@ -18474,9 +18467,8 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerUserAccessResponse
        */
       update: async (
-        customerUserAccesses: (
-          resources.ICustomerUserAccess | resources.CustomerUserAccess
-        )[],
+        customerUserAccess:
+          resources.ICustomerUserAccess | resources.CustomerUserAccess,
         options?: MutateOptions
       ): Promise<services.MutateCustomerUserAccessResponse> => {
         const ops = this.buildOperations<
@@ -18484,15 +18476,15 @@ export default class ServiceFactory extends Service {
           resources.ICustomerUserAccess
         >(
           "update",
-          customerUserAccesses,
+          [customerUserAccess],
           // @ts-expect-error Static class type here is fine
           resources.CustomerUserAccess
         );
-        const request = this.buildRequest<
+        const request = this.buildSingleOperationRequest<
           services.CustomerUserAccessOperation,
           services.IMutateCustomerUserAccessRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], options);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerUserAccessService.mutateCustomerUserAccess",
@@ -18558,18 +18550,18 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerUserAccessResponse
        */
       remove: async (
-        customerUserAccesses: string[],
+        customerUserAccess: string,
         options?: MutateOptions
       ): Promise<services.MutateCustomerUserAccessResponse> => {
         const ops = this.buildOperations<
           services.CustomerUserAccessOperation,
           string
-        >("remove", customerUserAccesses);
-        const request = this.buildRequest<
+        >("remove", [customerUserAccess]);
+        const request = this.buildSingleOperationRequest<
           services.CustomerUserAccessOperation,
           services.IMutateCustomerUserAccessRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], options);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerUserAccessService.mutateCustomerUserAccess",

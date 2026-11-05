@@ -21,6 +21,7 @@
 - The package ships as ES modules only; the CommonJS build is gone. `import` works as before. CommonJS code can still `require("google-ads-api")` (and the `/enums` and `/fields` subpaths) through Node.js's built-in `require(esm)` support, which returns the same module instance as `import`.
 - Node.js 22.12 or newer is required.
 - Jest suites that load google-ads-api must transform the ES module-only `stream-json` and `stream-chain` packages, or run in Jest's ESM mode.
+- Mutate helpers for services whose requests take a single `operation` now take one resource (or one resource name for `remove`) instead of an array: `accountBudgetProposals`, `accountLinks`, `batchJobs`, `billingSetups`, `customerBudgetNetworkSettings`, `customerClientLinks`, `customers`, `customerSkAdNetworkConversionValueSchemas`, `customerUserAccesses` and `customerUserAccessInvitations`. For example `customer.customers.update([customer])` becomes `customer.customers.update(customer)`.
 - `ClientOptions["developer_token"]` is now typed `string | undefined`. TypeScript code that reads the option back as a `string` needs a guard or a default.
 - Removed fields: the hotel criteria on `ad_group_bid_modifier` (`hotel_advance_booking_window`, `hotel_check_in_date_range`, `hotel_check_in_day`, `hotel_date_selection_type`, `hotel_length_of_stay`) and `customer.conversion_tracking_setting.enhanced_conversions_for_leads_enabled`.
 
@@ -54,6 +55,7 @@
 ### Fixes
 
 - `getGoogleAdsError()` no longer throws a `TypeError` when an error carries no `GoogleAdsFailure` trailer (for example REST-style `google.rpc.ErrorInfo` errors such as `SERVICE_DISABLED`); the original error is returned instead (#548).
+- Mutate helpers for single-operation services send their operation. They previously sent it as `operations`, which these requests do not have, so serialisation dropped the mutation and the API received only `customer_id` (#289, #316, #501, #518).
 - Every gRPC call now gets its own metadata. Without a developer token, login customer id or linked customer id, google-gax handed calls on methods with no routing header one shared metadata object, so instrumentation that edits metadata in place (OpenTelemetry, dd-trace) carried trace headers and baggage from one call into the next.
 - The lockfile resolves patched `@grpc/grpc-js` (1.14.7), `follow-redirects`, `brace-expansion` and `fast-uri`.
 - google-ads-api does not pin `jws`; a fresh install of this release resolves `jws` 4.0.1, which addresses the advisory reported in #529. Refresh your lockfile if it still holds 4.0.0.

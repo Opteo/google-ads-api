@@ -264,7 +264,10 @@ function compileMutateMethods(
 
   const serviceMethod = toCamelCase(methodName);
   const resourceName = serviceName.replace("Service", "");
-  const argName = pluralize(toCamelCase(resourceName));
+  const singular = Boolean(req.fields?.operation);
+  const argName = singular
+    ? toCamelCase(resourceName)
+    : pluralize(toCamelCase(resourceName));
 
   const types = {
     resource: `resources.I${resourceName}`,
@@ -294,7 +297,8 @@ function compileMutateMethods(
           types.operation,
           types.response,
           serviceMethod,
-          options
+          options,
+          singular
         )
       );
     }
@@ -313,7 +317,8 @@ function compileMutateMethods(
         types.operation,
         types.response,
         serviceMethod,
-        options
+        options,
+        singular
       )
     );
   }
@@ -352,13 +357,15 @@ function buildMutateMethod(
   operationType: string,
   responseType: string,
   methodName: string,
-  mutationOptions: string[]
+  mutationOptions: string[],
+  singular: boolean
 ): string {
   const isUpdate = mutation === "update";
   const updateMaskMessageArg = isUpdate ? `, ${requestClass}` : "";
 
-  const policyViolationArgType =
-    argName !== "adGroupCriteria"
+  const policyViolationArgType = singular
+    ? `${resourceType} | ${requestClass}`
+    : argName !== "adGroupCriteria"
       ? `(${resourceType} | ${requestClass})[]`
       : `((${resourceType} & {exempt_policy_violation_keys?: services.AdGroupCriterionOperation['exempt_policy_violation_keys'] } ) | (${requestClass} & {exempt_policy_violation_keys?: services.AdGroupCriterionOperation['exempt_policy_violation_keys'] }))[]`;
   return `
@@ -369,7 +376,7 @@ function buildMutateMethod(
     ${mutation}: async (
       ${argName}: ${
         mutation === "remove"
-          ? `${resourceType}[]`
+          ? `${resourceType}${singular ? "" : "[]"}`
           : `${policyViolationArgType}`
       } ,
       options?: MutateOptions
@@ -379,15 +386,15 @@ function buildMutateMethod(
         ${resourceType}
       >(
         "${mutation}", 
-        ${argName}
+        ${singular ? `[${argName}]` : argName}
         ${isUpdate ? "// @ts-expect-error Static class type here is fine" : ""}
         ${updateMaskMessageArg}
       );
-      const request = this.buildRequest<
+      const request = this.${singular ? "buildSingleOperationRequest" : "buildRequest"}<
         ${operationType},
         ${requestType},
         MutateOptions
-      >(ops, options);
+      >(${singular ? "ops[0]" : "ops"}, options);
       ${buildMutateHookStart(serviceName, methodName)}
       try {
         // @ts-expect-error Response is an array type
