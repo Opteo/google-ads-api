@@ -4,7 +4,7 @@ import { googleAdsVersion } from "./version.js";
 describe("package root", () => {
   it("exports the Google Ads API version", () => {
     expect(api.googleAdsVersion).toBe(googleAdsVersion);
-    expect(api.googleAdsVersion).toBe("v25");
+    expect(api.googleAdsVersion).toBe("v26");
   });
 
   it("exports the client, enums and errors", () => {

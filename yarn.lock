@@ -1136,7 +1136,7 @@ agent-base@6:
   dependencies:
     debug "4"
 
-agent-base@^7.1.0, agent-base@^7.1.2:
+agent-base@^7.1.2:
   version "7.1.4"
   resolved "https://registry.yarnpkg.com/agent-base/-/agent-base-7.1.4.tgz#e3cd76d4c548ee895d3c3fd8dc1f6c5b9032e7a8"
   integrity sha512-MnA+YT8fwfJPgBx3m60MNqakm30XOkyIoH1y6huTQvC0PwZG7ki8NacLBcrPbNoo8vEZy7Jpuk7+jMO+CUovTQ==
@@ -1542,7 +1542,7 @@ data-uri-to-buffer@^4.0.0:
   resolved "https://registry.yarnpkg.com/data-uri-to-buffer/-/data-uri-to-buffer-4.0.1.tgz#d8feb2b2881e6a4f58c2e08acfd0e2834e26222e"
   integrity sha512-0R9ikRb668HB7QDxT1vkpuUBtqc53YyAwMwGeUFKRojY/NWKvdZ+9UYtRfGmhqNbRkTSVpMbmyhXipFFv2cb/A==
 
-debug@4, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.3.1, debug@^4.3.4:
+debug@4, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.3.1:
   version "4.4.3"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.4.3.tgz#c6ae432d9bd9662582fce08709b038c58e9e3d6a"
   integrity sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==
@@ -2067,22 +2067,22 @@ functional-red-black-tree@^1.0.1:
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha512-dsKNQNdj6xA3T+QlADDA7mOSlX0qiMINjn0cgr+eGHGsbSHzTabcIogz2+p/iqP1Xs6EP/sS2SbqH+brGTbq0g==
 
-gaxios@^7.1.3, gaxios@^7.1.4:
-  version "7.3.1"
-  resolved "https://registry.yarnpkg.com/gaxios/-/gaxios-7.3.1.tgz#b26223db05856dfa5e2393ea376abad00e479c62"
-  integrity sha512-kB3rzJV7d9juLZh8/56QTXCwQfxyhdOMdyYk1HdQKFtF8TJTDTZQJtixWIwXdE9Jji91mC41DUNpjleo4L4eAQ==
+gaxios@^8.3.1:
+  version "8.3.2"
+  resolved "https://registry.yarnpkg.com/gaxios/-/gaxios-8.3.2.tgz#1c133b7d9ff0d19c0782262cbc16db1eed388a54"
+  integrity sha512-7VsaTExxjbDv2ZK1YuC4jbgfN33NI/6/7zdYWUHB6mcg51v4tCBZe+xzjqPzOpVzI+C5k1Kk9OQ80WVrXAHOqw==
   dependencies:
     extend "^3.0.2"
     https-proxy-agent "^7.0.1"
     node-fetch "^3.3.2"
 
-gcp-metadata@^9.0.0:
-  version "9.0.3"
-  resolved "https://registry.yarnpkg.com/gcp-metadata/-/gcp-metadata-9.0.3.tgz#d8ed78f75b3c842d8cf5c2b8e73e28e2fd80f17f"
-  integrity sha512-2YYnIlHaKBGT2IPg3G2M57hia9Galz15zsEOvw9T3oRf0lSn6KN6VcHQLqby7x8ksYKnjXvp3rp2KJyLCN6zfQ==
+gcp-metadata@^9.2.1:
+  version "9.2.3"
+  resolved "https://registry.yarnpkg.com/gcp-metadata/-/gcp-metadata-9.2.3.tgz#4ff4ae03015b7fb34bf63fdfe3e792ec062d72a8"
+  integrity sha512-d2OI/dJJ3IIaeOz3c9jvr5j5G5beI5fQzbgilNiWhDKGwvJN9o10Qub70NkbF6PNJSUoNKZ77JKYGz0Fs4+9Lg==
   dependencies:
-    gaxios "^7.1.3"
-    google-logging-utils "^2.0.0"
+    gaxios "^8.3.1"
+    google-logging-utils "^2.1.0"
     json-bigint "^1.0.0"
 
 gensync@^1.0.0-beta.2:
@@ -2167,46 +2167,46 @@ globby@^11.0.3:
     merge2 "^1.4.1"
     slash "^3.0.0"
 
-google-ads-node@25.1.0:
-  version "25.1.0"
-  resolved "https://registry.yarnpkg.com/google-ads-node/-/google-ads-node-25.1.0.tgz#8fa9cecf5f96d754cafeaacde7406478477ff18e"
-  integrity sha512-ROVTtOcqY2Z05GkpGdGcjDdlFADCUYNHHKltBWIGL+KUX0CuNmgxOAUOGPbB41MIFZbLahMYfOQTsijoE0FwIg==
+google-ads-node@26.1.0-beta.0:
+  version "26.1.0-beta.0"
+  resolved "https://registry.yarnpkg.com/google-ads-node/-/google-ads-node-26.1.0-beta.0.tgz#562d4a6224a5ee018e95c42c4155e1c27baafe61"
+  integrity sha512-c/cEvUw4RtnoZnRtdyjdWu7qmmurRtcC+uX2oKV4FaWatQfRML06D4pEUgJd6qZUBuyrbgzLNDVb27Pv38BFuw==
   dependencies:
-    google-gax "^6.3.0"
+    google-gax "^6.16.0"
 
-google-auth-library@^11.0.0, google-auth-library@^11.0.2:
-  version "11.0.2"
-  resolved "https://registry.yarnpkg.com/google-auth-library/-/google-auth-library-11.0.2.tgz#7d08ae14bd81521d27ed27b3f4d0074d2af880a3"
-  integrity sha512-vzpgPutxrghPsnjrjpzLX2bdv8IOL719Rh0oEjGnQu8YCIbnbMuTTQ5zU9LcKvLdOPgCxBwppbvnhgW90Qna5Q==
+google-auth-library@^11.3.1, google-auth-library@^11.3.3:
+  version "11.3.3"
+  resolved "https://registry.yarnpkg.com/google-auth-library/-/google-auth-library-11.3.3.tgz#f2b48850d0a23ee52d41e46550a5cbd9f6948560"
+  integrity sha512-VxjQ5+zHeR4RcRi001qnT/6KRKy2CIjQ5I7/wFErvRqr0+setlRqjDOAzvjzWEzyvsWswZE6WMQJtS8OpeTqAQ==
   dependencies:
     base64-js "^1.3.0"
     ecdsa-sig-formatter "^1.0.11"
-    gaxios "^7.1.4"
-    gcp-metadata "^9.0.0"
-    google-logging-utils "^2.0.0"
+    gaxios "^8.3.1"
+    gcp-metadata "^9.2.1"
+    google-logging-utils "^2.1.0"
     jws "^4.0.0"
 
-google-gax@^6.3.0:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/google-gax/-/google-gax-6.3.0.tgz#3a9283a4eeba61c194d935bdefde5859fc03c5df"
-  integrity sha512-9/kD2yhNJJDAoxZMw+v/d53W6bibgHXr0uU2RRfkC2/r5uH1sBo1nzuaSUq1lKgipZ3O4HvksA7/rRBvkFHFkA==
+google-gax@^6.16.0:
+  version "6.16.0"
+  resolved "https://registry.yarnpkg.com/google-gax/-/google-gax-6.16.0.tgz#eb0c929cd9ee0cc0dacdabeb0827ab67a5ebf83c"
+  integrity sha512-qJz0RSuLgaPhiZDStTv04Q5MryjBNX6DJk7t3RlcOTHkLm3R3XxRhSjcSp1eDtU415IuBlV/bncyD5vnBFje1w==
   dependencies:
     "@grpc/grpc-js" "^1.12.6"
     "@grpc/proto-loader" "^0.8.0"
     "@opentelemetry/api" "^1.9.0"
     duplexify "^4.1.3"
-    google-auth-library "^11.0.0"
-    google-logging-utils "^2.0.0"
+    google-auth-library "^11.3.1"
+    google-logging-utils "^2.1.0"
     node-fetch "^3.3.2"
     object-hash "^3.0.0"
-    proto3-json-serializer "^4.0.0"
+    proto3-json-serializer "^4.1.0"
     protobufjs "^7.5.4"
-    retry-request "^9.0.0"
+    retry-request "^9.1.0"
 
-google-logging-utils@^2.0.0:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/google-logging-utils/-/google-logging-utils-2.0.1.tgz#d78b34f4250db9ee816f29fee3321939296bcb8a"
-  integrity sha512-HMhaQghlOTvbcb3c4T5jmmOMtG3JUF1iOQMezaJXL86CDS+Tm2vHd0IeLFRAx3+ewd+bo9E1HFHoy17X5aJa9A==
+google-logging-utils@^2.1.0:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/google-logging-utils/-/google-logging-utils-2.1.1.tgz#126b54160cf6199276eb72e6c25b016da62bb2b9"
+  integrity sha512-jYZOPMaRGS3Hldyudft6bdibW9ZWUKBkMdB2TeSETkV1c2T9TR4zxEWZETHv9xJ8KHr2hgkNLaSa8kcEcwlpeQ==
 
 gopd@^1.2.0:
   version "1.2.0"
@@ -2251,14 +2251,6 @@ html-escaper@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/html-escaper/-/html-escaper-2.0.2.tgz#dfd60027da36a36dfcbe236262c00a5822681453"
   integrity sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==
-
-http-proxy-agent@^7.0.0:
-  version "7.0.2"
-  resolved "https://registry.yarnpkg.com/http-proxy-agent/-/http-proxy-agent-7.0.2.tgz#9a8b1f246866c028509486585f62b8f2c18c270e"
-  integrity sha512-T1gkAiYYDWYx3V5Bmyu7HcfcvL7mUrTWiM6yOfa3PIphViJ/gFPbvidQ+veqSOHci/PxBcDabeUNCzpOODJZig==
-  dependencies:
-    agent-base "^7.1.0"
-    debug "^4.3.4"
 
 https-proxy-agent@^5.0.1:
   version "5.0.1"
@@ -3227,10 +3219,10 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-proto3-json-serializer@^4.0.0:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/proto3-json-serializer/-/proto3-json-serializer-4.0.2.tgz#c25ceb475454eeca562f3f66b3d8229d5af9a0c6"
-  integrity sha512-VUQlb/J2WjOG8BKhdLwJUz+MKxSMtBGYh+TaNmRtiYVhlIzXjzeAGIx7gtc3lXlA2iURzfF2+cXaQvC2ofwzpg==
+proto3-json-serializer@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/proto3-json-serializer/-/proto3-json-serializer-4.1.0.tgz#096c9876a8abdaee8823ee8e533e6efe9b233bf8"
+  integrity sha512-Z0Blk2BTZTPp9ZXOWnRG/P3bkEs53FtMv59sl4xU44xcDdYhKlVO/AqAHTYXAlW9HdislqQxjSornP3457wkag==
   dependencies:
     protobufjs "^7.5.4"
 
@@ -3332,13 +3324,12 @@ resolve@^1.20.0:
     path-parse "^1.0.7"
     supports-preserve-symlinks-flag "^1.0.0"
 
-retry-request@^9.0.0:
-  version "9.0.1"
-  resolved "https://registry.yarnpkg.com/retry-request/-/retry-request-9.0.1.tgz#3845320e83899248528ba39cf105026406ee4cac"
-  integrity sha512-4kGHEBl0ME6gR+8QB1sPMyg58jUxLUcCZNeqLDrfqzk0eWQN8XJFmeu7fmZCjlZCRW0S2u64Ik1HkO/0sWgCYQ==
+retry-request@^9.1.0:
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/retry-request/-/retry-request-9.1.0.tgz#b0c2c8e4432d9249e5f25150745ad63842ade8ac"
+  integrity sha512-FILyVbis+DTo3KRbtKceqpj1595wIF+XQFW/+AVOBdCQmxwNDgcNXXr2FNM0Ej2qD7zVXbJGfH7lo4jB0wwhKA==
   dependencies:
     extend "^3.0.2"
-    teeny-request "^11.0.0"
 
 reusify@^1.0.4:
   version "1.1.0"
@@ -3440,13 +3431,6 @@ stream-chain@^2.2.5:
   resolved "https://registry.yarnpkg.com/stream-chain/-/stream-chain-2.2.5.tgz#b30967e8f14ee033c5b9a19bbe8a2cba90ba0d09"
   integrity sha512-1TJmBx6aSWqZ4tx7aTpBDXK0/e2hhcNSTV8+CbFJtDjbb+I1mZ8lHit0Grw9GRT+6JbIrrDd8esncgBi8aBXGA==
 
-stream-events@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/stream-events/-/stream-events-1.0.5.tgz#bbc898ec4df33a4902d892333d47da9bf1c406d5"
-  integrity sha512-E1GUzBSgvct8Jsb3v2X15pjzN1tYebtbLaMg+eBOUOAxgbLoSbT2NS91ckc5lJD1KfLjId+jXJRgo0qnV5Nerg==
-  dependencies:
-    stubs "^3.0.0"
-
 stream-json@^1.8.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/stream-json/-/stream-json-1.9.1.tgz#e3fec03e984a503718946c170db7d74556c2a187"
@@ -3505,11 +3489,6 @@ strip-json-comments@^3.1.0, strip-json-comments@^3.1.1:
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-3.1.1.tgz#31f1281b3832630434831c310c01cccda8cbe006"
   integrity sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==
 
-stubs@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/stubs/-/stubs-3.0.0.tgz#e8d2ba1fa9c90570303c030b6900f7d5f89abe5b"
-  integrity sha512-PdHt7hHUJKxvTCgbKX9C1V/ftOcjJQgz8BZwNfV5c4B6dcGqlpelTbJ999jBGZ2jYiPAwcX5dP6oBwVlBlUbxw==
-
 supports-color@^5.3.0:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-5.5.0.tgz#e2e69a44ac8772f78a1ec0b35b689df6530efc8f"
@@ -3546,16 +3525,6 @@ table@^6.0.9:
     slice-ansi "^4.0.0"
     string-width "^4.2.3"
     strip-ansi "^6.0.1"
-
-teeny-request@^11.0.0:
-  version "11.0.1"
-  resolved "https://registry.yarnpkg.com/teeny-request/-/teeny-request-11.0.1.tgz#74a574ef5ce363a3b14e98bd7ae498dc593f8c81"
-  integrity sha512-bNr5j2YjSdajgCVsp+8JVjRf1uHIbpNISLeKp/7V1NnVMX3Gh6H/kECNGlm2Q3I68ACODQ0iv6aZ3Rvm8WgLGA==
-  dependencies:
-    http-proxy-agent "^7.0.0"
-    https-proxy-agent "^7.0.1"
-    node-fetch "^3.3.2"
-    stream-events "^1.0.5"
 
 test-exclude@^6.0.0:
   version "6.0.0"
