@@ -35,6 +35,23 @@ export interface CallHeaders {
   "linked-customer-id"?: string;
 }
 
+type GaxClient = {
+  _defaults: Record<
+    string,
+    { otherArgs: { metadataBuilder: (...args: unknown[]) => grpc.Metadata } }
+  >;
+};
+
+function cloneMetadataPerCall(client: GaxClient): void {
+  const shared = new Set(
+    Object.values(client._defaults).map(({ otherArgs }) => otherArgs)
+  );
+  for (const otherArgs of shared) {
+    const buildMetadata = otherArgs.metadataBuilder;
+    otherArgs.metadataBuilder = (...args) => buildMetadata(...args).clone();
+  }
+}
+
 // Close connections when services are removed from the cache
 export function disposeService(service: { close: () => Promise<void> }): void {
   Promise.resolve()
@@ -86,8 +103,9 @@ export class Service {
     const headers: CallHeaders = {};
     // Omitted rather than sent empty: the API rejects an empty developer-token
     // header (DEVELOPER_TOKEN_PARAMETER_MISSING) but accepts a missing one.
-    if (this.clientOptions.developer_token) {
-      headers["developer-token"] = this.clientOptions.developer_token;
+    const developerToken = this.clientOptions.developer_token?.trim();
+    if (developerToken) {
+      headers["developer-token"] = developerToken;
     }
     if (this.customerOptions.login_customer_id) {
       headers["login-customer-id"] = this.customerOptions.login_customer_id;
@@ -173,6 +191,7 @@ export class Service {
       sslCreds: this.getCredentials(),
       universeDomain: "googleapis.com",
     });
+    cloneMetadataPerCall(client as unknown as GaxClient);
 
     if (!options?.skipCache) {
       serviceCache.set(serviceCacheKey, client);

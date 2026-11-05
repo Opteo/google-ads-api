@@ -259,6 +259,7 @@ describe("Service", () => {
     it.each([
       ["unset", undefined],
       ["empty", ""],
+      ["whitespace", " \n\t"],
     ])(
       "should omit only the developer-token header when the token is %s",
       (_, developer_token) => {
@@ -477,5 +478,47 @@ describe("gRPC call credentials", () => {
       service_url: "https://googleads.googleapis.com",
     });
     expect(metadata.get("authorization")).toEqual(["Bearer test-token"]);
+  });
+});
+
+describe("per-call metadata", () => {
+  it("gives every call its own metadata when there are no call headers", async () => {
+    const customer = new Customer(
+      { client_id: MOCK_CLIENT_ID, client_secret: MOCK_CLIENT_SECRET },
+      { refresh_token: MOCK_REFRESH_TOKEN, customer_id: MOCK_CID }
+    );
+    // @ts-expect-error Accessing protected members for test purposes
+    const headers = customer.callHeaders;
+    expect(headers).toEqual({});
+
+    // @ts-expect-error Accessing protected method for test purposes
+    const service = customer.loadService<CustomerServiceClient>(
+      "CustomerServiceClient",
+      { skipCache: true }
+    );
+    const sent: { get: (key: string) => unknown[] }[] = [];
+    jest.spyOn(service["_gaxGrpc"], "createStub").mockResolvedValue({
+      listAccessibleCustomers: (
+        _request: unknown,
+        metadata: {
+          get: (key: string) => unknown[];
+          set: (key: string, value: string) => void;
+        },
+        _options: unknown,
+        callback: (error: null, response: Record<string, never>) => void
+      ) => {
+        sent.push(metadata);
+        metadata.set("traceparent", `call-${sent.length}`);
+        callback(null, {});
+        return { cancel: () => undefined };
+      },
+    } as never);
+
+    await service.listAccessibleCustomers({}, { otherArgs: { headers } });
+    await service.listAccessibleCustomers({}, { otherArgs: { headers } });
+
+    expect(sent).toHaveLength(2);
+    expect(sent[0]).not.toBe(sent[1]);
+    expect(sent[1].get("traceparent")).toEqual(["call-2"]);
   });
 });
