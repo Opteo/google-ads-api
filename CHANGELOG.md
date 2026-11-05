@@ -1,14 +1,28 @@
 # Changelog
 
-### 25.1.1
+### 26.1.0
+
+### Version Upgrade
+
+- Upgraded google-ads-api version to v26.1. Refer to Google Ads release notes [here](https://developers.google.com/google-ads/api/docs/release-notes) for changes.
+- Upgraded google-ads-node dependency to v26.1.0
+- Upgraded google-gax dependency to v6.16.0 and google-auth-library to v11.3.3
+- Upgraded stream-json to v3 (CVE-2026-71429, #554); stream-chain is now a declared dependency
 
 ### New Features
 
-- `developer_token` is now optional (#553). Google sunset developer tokens on 9 September 2026: API access levels now belong to the Google Cloud project that owns your OAuth client, and the API ignores the token. When the option is unset or empty, no `developer-token` header is sent. Previously an unset token went out as the string `"undefined"` and an empty one was rejected with `DEVELOPER_TOKEN_PARAMETER_MISSING`. Configurations that pass a token are unchanged; Google will reject the header in a future major API version, so remove it when convenient.
+- `developer_token` is now optional (#550, #553). Google sunset developer tokens on 9 September 2026: API access levels now belong to the Google Cloud project that owns your OAuth client, and the API ignores the token. When the option is unset, empty or whitespace, no `developer-token` header is sent. Previously an unset token went out as the string `"undefined"` and an empty one was rejected with `DEVELOPER_TOKEN_PARAMETER_MISSING`. Configurations that pass a token are unchanged; Google will reject the header in a future major API version, so remove it when convenient.
+- New services: `CustomerBudgetNetworkSettingService`, `LocalServicesEligibilityService`
+- New resource names: `CustomerBudgetNetworkSetting`, `SearchLiftKeywordBundle`
+- New enums include `BenchmarksCustomerPercentileTier`, `BudgetNetworkIneligibleReason`, `ChannelPriorityTier`, `DateSelectionType`, `NetworkChannelType`, `OfflinePromotionCodeType`, `ReachMetricState`, `SearchLiftKeywordBundleStatus` and `YouTubeVideoUploadGenerativeContentDisclosure`
 
 ### Breaking Changes
 
+- The package ships as ES modules only; the CommonJS build is gone. `import` works as before. CommonJS code can still `require("google-ads-api")` (and the `/enums` and `/fields` subpaths) through Node.js's built-in `require(esm)` support, which returns the same module instance as `import`.
+- Node.js 22.12 or newer is required.
+- Jest suites that load google-ads-api must transform the ES module-only `stream-json` and `stream-chain` packages, or run in Jest's ESM mode.
 - `ClientOptions["developer_token"]` is now typed `string | undefined`. TypeScript code that reads the option back as a `string` needs a guard or a default.
+- Removed fields: the hotel criteria on `ad_group_bid_modifier` (`hotel_advance_booking_window`, `hotel_check_in_date_range`, `hotel_check_in_day`, `hotel_date_selection_type`, `hotel_length_of_stay`) and `customer.conversion_tracking_setting.enhanced_conversions_for_leads_enabled`.
 
 ### 25.1.0
 
@@ -40,6 +54,8 @@
 ### Fixes
 
 - `getGoogleAdsError()` no longer throws a `TypeError` when an error carries no `GoogleAdsFailure` trailer (for example REST-style `google.rpc.ErrorInfo` errors such as `SERVICE_DISABLED`); the original error is returned instead (#548).
+- Every gRPC call now gets its own metadata. Without a developer token, login customer id or linked customer id, google-gax handed calls on methods with no routing header one shared metadata object, so instrumentation that edits metadata in place (OpenTelemetry, dd-trace) carried trace headers and baggage from one call into the next.
+- The lockfile resolves patched `@grpc/grpc-js` (1.14.7), `follow-redirects`, `brace-expansion` and `fast-uri`.
 - google-ads-api does not pin `jws`; a fresh install of this release resolves `jws` 4.0.1, which addresses the advisory reported in #529. Refresh your lockfile if it still holds 4.0.0.
 
 ### 24.1.0
