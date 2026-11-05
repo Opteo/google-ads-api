@@ -14,7 +14,7 @@ module.exports = {
   testEnvironment: "node",
   clearMocks: true,
   //collectCoverage: true,
-  coveragePathIgnorePatterns: ["/node_modules/", "jest.config.js"],
+  coveragePathIgnorePatterns: ["/node_modules/", "jest.config.cjs"],
   resetMocks: true,
   moduleNameMapper: { "^(\\.{1,2}/.*)\\.js$": "$1" },
   testMatch: [
