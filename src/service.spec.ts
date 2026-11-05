@@ -254,6 +254,17 @@ describe("Service", () => {
         "login-customer-id": MOCK_LOGIN_CID,
       });
     });
+
+    it("should omit the developer-token header when no developer token is configured", () => {
+      const customer = new Customer(
+        { client_id: MOCK_CLIENT_ID, client_secret: MOCK_CLIENT_SECRET },
+        { refresh_token: MOCK_REFRESH_TOKEN, customer_id: MOCK_CID }
+      );
+      // @ts-expect-error Accessing private property for test purposes
+      expect(customer.callHeaders).toEqual({});
+      // @ts-expect-error Accessing private property for test purposes
+      expect(Object.keys(customer.callHeaders)).not.toContain("developer-token");
+    });
   });
 
   describe("FAILURE_KEY", () => {
