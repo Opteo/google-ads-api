@@ -222,7 +222,7 @@ export class Customer extends ServiceFactory {
 
       return { response, nextPageToken, totalResultsCount, summaryRow };
     } catch (e: any) {
-      const failure = e.response?.data?.error?.details?.[0];
+      const failure = this.findGoogleAdsFailure(e.response?.data?.error);
       if (failure) {
         throw new errors.GoogleAdsFailure(this.decamelizeKeysIfNeeded(failure));
       }
@@ -270,6 +270,7 @@ export class Customer extends ServiceFactory {
     let summaryRow = initialSearch.summaryRow;
 
     response.push(...initialSearch.response);
+    this.throwIfOverRowCap(gaqlQuery, response.length);
     nextPageToken = initialSearch.nextPageToken;
 
     while (nextPageToken) {
@@ -278,6 +279,7 @@ export class Customer extends ServiceFactory {
         page_token: nextPageToken,
       });
       response.push(...nextSearch.response);
+      this.throwIfOverRowCap(gaqlQuery, response.length);
       nextPageToken = nextSearch.nextPageToken;
       if (nextSearch.summaryRow) {
         summaryRow = nextSearch.summaryRow;
@@ -357,6 +359,7 @@ export class Customer extends ServiceFactory {
         }
       }
 
+      this.throwIfOverRowCap(gaqlQuery, accumulator.length);
       return { response: accumulator };
     } catch (e: any) {
       await this.handleStreamError(e);
@@ -500,13 +503,7 @@ export class Customer extends ServiceFactory {
             [];
 
           count += results.length;
-          if (
-            this.clientOptions.max_reporting_rows &&
-            count > this.clientOptions.max_reporting_rows &&
-            !this.gaqlQueryStringIncludesLimit(gaqlQuery)
-          ) {
-            throw this.generateTooManyRowsError();
-          }
+          this.throwIfOverRowCap(gaqlQuery, count);
 
           for (const row of results) {
             const parsed = this.decamelizeKeysIfNeeded(row);
@@ -556,9 +553,10 @@ export class Customer extends ServiceFactory {
 
     // Only throw the first error.
     pipeline.once("data", (data) => {
-      if (data?.value?.error?.details?.[0]) {
+      const failure = this.findGoogleAdsFailure(data?.value?.error);
+      if (failure) {
         googleAdsFailure = new errors.GoogleAdsFailure(
-          this.decamelizeKeysIfNeeded(data.value.error.details[0])
+          this.decamelizeKeysIfNeeded(failure)
         );
       } else {
         googleAdsFailure = new Error(
@@ -699,6 +697,24 @@ export class Customer extends ServiceFactory {
 
   private gaqlQueryStringIncludesLimit(gaqlQuery: string) {
     return gaqlQuery.toLowerCase().includes("limit ");
+  }
+
+  private throwIfOverRowCap(gaqlQuery: string, rowCount: number) {
+    if (
+      this.clientOptions.max_reporting_rows &&
+      rowCount > this.clientOptions.max_reporting_rows &&
+      !this.gaqlQueryStringIncludesLimit(gaqlQuery)
+    ) {
+      throw this.generateTooManyRowsError();
+    }
+  }
+
+  private findGoogleAdsFailure(error?: {
+    details?: { "@type"?: string }[];
+  }): Record<string, unknown> | undefined {
+    return error?.details?.find((detail) =>
+      detail?.["@type"]?.endsWith(".errors.GoogleAdsFailure")
+    );
   }
 
   private generateTooManyRowsError() {

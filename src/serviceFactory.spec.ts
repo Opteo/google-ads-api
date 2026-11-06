@@ -1,6 +1,6 @@
 import protos from "google-ads-node/build/protos/protos.json";
 import pluralize from "pluralize";
-import { services } from "./protos/index.js";
+import { resources, services } from "./protos/index.js";
 import { Hooks } from "./hooks.js";
 import { newCustomer } from "./testUtils.js";
 import { toCamelCase } from "./utils.js";
@@ -319,5 +319,39 @@ describe("service getter names", () => {
     expect("localServicesLeads" in customer).toBe(true);
     expect("localServicesEligibilities" in customer).toBe(true);
     expect("localsLeadServices" in customer).toBe(false);
+  });
+});
+
+describe("update masks", () => {
+  async function sentMask(campaign: unknown): Promise<string[]> {
+    const customer = newCustomer();
+    const send = jest.fn().mockResolvedValue([{}]);
+    jest
+      // @ts-expect-error Accessing protected method for test purposes
+      .spyOn(customer, "loadService")
+      // @ts-expect-error Stubbed service exposes only the mutate method
+      .mockReturnValue({ mutateCampaigns: send });
+    await customer.campaigns.update([campaign as resources.ICampaign]);
+    return send.mock.calls[0][0].operations[0].update_mask.paths;
+  }
+
+  it("includes repeated fields set to an empty array, so they are cleared", async () => {
+    await expect(
+      sentMask({
+        resource_name: "customers/1/campaigns/2",
+        url_custom_parameters: [],
+      })
+    ).resolves.toEqual(["resource_name", "url_custom_parameters"]);
+  });
+
+  it("leaves unset repeated fields of message instances out of the mask", async () => {
+    await expect(
+      sentMask(
+        new resources.Campaign({
+          resource_name: "customers/1/campaigns/2",
+          name: "Renamed",
+        })
+      )
+    ).resolves.toEqual(["resource_name", "name"]);
   });
 });

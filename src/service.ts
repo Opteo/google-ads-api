@@ -343,10 +343,8 @@ export class Service {
       } else if (type === "update") {
         // @ts-expect-error Field required for updates
         op.update_mask = getFieldMask(
-          // @ts-expect-error Message types have a toObject method
-          message.toObject(e, {
-            defaults: false,
-          })
+          // @ts-expect-error Message types are constructors with a toObject method
+          e instanceof message ? message.toObject(e, { defaults: false }) : e
         );
       }
       return op;

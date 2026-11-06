@@ -53,6 +53,8 @@ A major release: Google Ads API v26.1, an ES module-only package, and fixes that
 
 - Helpers for services without mutate options (`batchJobs`, `billingSetups`, `customerUserAccesses`, `customerUserAccessInvitations`) type their `options` parameter as `Record<string, never>` instead of `never`.
 
+- **Update helpers build the update mask from the object you pass.** `customer.campaigns.update([{ resource_name, url_custom_parameters: [] }])` now clears `url_custom_parameters`; previously the empty list was dropped from the mask and the update changed nothing. As with `mutateResources`, every key of a plain object is in the mask, so a key that is not a field of the resource is now rejected by the API instead of being silently ignored. Message instances (`new resources.Campaign({...})`) are unchanged: their unset repeated fields stay out of the mask, so clear a list by passing a plain object.
+
 #### Queries and streams
 
 - **Stream methods take only the options searchStream accepts.** `SearchGoogleAdsStreamRequest` has no `page_token`, `page_size`, `validate_only` or `search_settings`, so `queryStream` now takes `StreamRequestOptions`, and `reportStream` and `reportStreamRaw` take `ReportStreamOptions` (report options plus `summary_row_setting`). `onStreamStart`'s `editOptions` takes `StreamRequestOptions`. Request a summary row in a stream with `summary_row_setting`:
@@ -74,6 +76,9 @@ A major release: Google Ads API v26.1, an ES module-only package, and fixes that
 
 - **`query` and `report` send `page_token` and `validate_only` to `search`.** They were sent to `searchStream`, which supports neither. A `validate_only` query now validates the query, and a `page_token` query starts from that page.
 - **REST results parse repeated enum and INT64 fields.** Each element of a repeated enum is now its enum number and each element of a repeated INT64 is a number, matching scalar fields and gRPC results. For example `campaign.excluded_parent_asset_field_types` returns `[13]` instead of `["SITELINK"]`, and `campaign.shopping_setting.advertising_partner_ids` returns `[123]` instead of `["123"]`. Compare against `enums` values instead of strings.
+
+- **`max_reporting_rows` applies to `query` and `report`.** Both counted rows only approximately (or, for paginated searches, not at all), so results above the cap were returned. They now throw the same `Exceeded the maximum number of rows set by "max_reporting_rows"` error as `queryStream` and `reportStream` once the decoded rows exceed the cap. A GAQL `LIMIT` still bypasses the cap.
+- **REST errors are `GoogleAdsFailure`s only when the API says so.** `query`, `report` and the stream methods look for the error detail whose `@type` is `GoogleAdsFailure`, wherever it sits in `details`. Other errors, such as `google.rpc.ErrorInfo` with `SERVICE_DISABLED`, were turned into an empty `GoogleAdsFailure` (`errors: []`, no message). They now surface as the original error: the axios error for `search`, or an `Error` with the API message and the error body as `cause` for streamed responses. Code that relied on `instanceof errors.GoogleAdsFailure` for these errors must handle a plain `Error`.
 
 #### Service methods
 
@@ -117,6 +122,7 @@ A major release: Google Ads API v26.1, an ES module-only package, and fixes that
 - Mutate helpers for single-operation services send their operation. They sent it as `operations`, which these requests do not have, so serialisation dropped the mutation and the API received only `customer_id` (#289, #316, #501, #518).
 - `mutateResources` keeps `exempt_policy_violation_keys` when `operation` is omitted. Omitting it means `create`, but the keys were only forwarded for an explicit `operation: "create"`.
 - A REST error without failure details (for example a plain `PERMISSION_DENIED`) is rethrown as the original error instead of becoming `TypeError: Cannot read properties of undefined (reading '0')`.
+- REST results keep numeric enum values. A field returned as a number (`status: 2`, or a value this version does not know such as `999`) became `undefined`; it is now kept as returned, as protobuf decoding does.
 - Every gRPC call gets its own metadata. Without a developer token, login customer id or linked customer id, google-gax handed calls on methods with no routing header one shared metadata object, so instrumentation that edits metadata in place (OpenTelemetry, dd-trace) carried trace headers and baggage from one call into the next.
 - The lockfile resolves patched `@grpc/grpc-js` (1.14.7), `follow-redirects`, `brace-expansion` and `fast-uri`.
 

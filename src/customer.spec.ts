@@ -1455,3 +1455,138 @@ describe("stream request options", () => {
     expect(typeChecks).toBeInstanceOf(Function);
   });
 });
+
+describe("max_reporting_rows on buffered queries", () => {
+  afterEach(() => {
+    jest.resetAllMocks();
+    axiosMock.reset();
+  });
+
+  const uncappedQuery = "SELECT campaign.id FROM campaign";
+  const rows = [
+    { campaign: { resourceName: "customers/1/campaigns/1", id: "1" } },
+    { campaign: { resourceName: "customers/1/campaigns/2", id: "2" } },
+  ];
+
+  function cappedCustomer(max_reporting_rows: number) {
+    const customer = new Customer(
+      {
+        client_id: MOCK_CLIENT_ID,
+        client_secret: MOCK_CLIENT_SECRET,
+        max_reporting_rows,
+      },
+      { customer_id: MOCK_CID, refresh_token: MOCK_REFRESH_TOKEN }
+    );
+    mockGetAccessToken(customer);
+    return customer;
+  }
+
+  it("rejects searchStream-backed queries that return more rows than the cap", async () => {
+    axiosMock.onPost().reply(200, mockStream([{ results: rows }]));
+
+    await expect(cappedCustomer(1).query(uncappedQuery)).rejects.toThrow(
+      'Exceeded the maximum number of rows set by "max_reporting_rows" (1).'
+    );
+  });
+
+  it("rejects paginated queries that return more rows than the cap", async () => {
+    axiosMock.onPost().reply(200, { results: rows });
+
+    await expect(
+      cappedCustomer(1).query(uncappedQuery, {
+        search_settings: { return_summary_row: true },
+      })
+    ).rejects.toThrow(
+      'Exceeded the maximum number of rows set by "max_reporting_rows" (1).'
+    );
+  });
+
+  it("lets a LIMIT clause bypass the cap", async () => {
+    axiosMock.onPost().reply(200, mockStream([{ results: rows }]));
+
+    await expect(
+      cappedCustomer(1).query(`${uncappedQuery} LIMIT 2`)
+    ).resolves.toHaveLength(2);
+  });
+
+  it("returns every row when the result fits the cap", async () => {
+    axiosMock.onPost().reply(200, mockStream([{ results: rows }]));
+
+    await expect(cappedCustomer(2).query(uncappedQuery)).resolves.toHaveLength(
+      2
+    );
+  });
+});
+
+describe("REST errors that are not GoogleAdsFailures", () => {
+  afterEach(() => {
+    jest.resetAllMocks();
+    axiosMock.reset();
+  });
+
+  const message =
+    "Google Ads API has not been used in project 1 before or it is disabled.";
+  const errorInfo = {
+    "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+    reason: "SERVICE_DISABLED",
+    domain: "googleapis.com",
+  };
+  const serviceDisabled = {
+    error: {
+      code: 403,
+      message,
+      status: "PERMISSION_DENIED",
+      details: [errorInfo],
+    },
+  };
+
+  it("rethrows the original search error", async () => {
+    const customer = newCustomer({});
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(403, serviceDisabled);
+
+    // @ts-expect-error private method
+    const error = await customer.search(mockGaqlQuery).catch((e) => e);
+
+    expect(error).not.toBeInstanceOf(errors.GoogleAdsFailure);
+    expect(error.response.data).toEqual(serviceDisabled);
+  });
+
+  it("keeps the API message for streamed errors", async () => {
+    const customer = newCustomer({});
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(403, mockStream([serviceDisabled]));
+
+    const error = await customer.query(mockGaqlQuery).catch((e) => e);
+
+    expect(error).not.toBeInstanceOf(errors.GoogleAdsFailure);
+    expect(error).toMatchObject({
+      message,
+      cause: { details: [errorInfo] },
+    });
+  });
+
+  it("finds a GoogleAdsFailure that is not the first detail", async () => {
+    const customer = newCustomer({});
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(400, {
+      error: {
+        ...serviceDisabled.error,
+        details: [
+          errorInfo,
+          {
+            "@type": `type.googleapis.com/google.ads.googleads.${googleAdsVersion}.errors.GoogleAdsFailure`,
+            errors: [{ message: "Cannot select campaign.bogus." }],
+            requestId: "mock-request-id",
+          },
+        ],
+      },
+    });
+
+    // @ts-expect-error private method
+    const error = await customer.search(mockGaqlQuery).catch((e) => e);
+
+    expect(error).toBeInstanceOf(errors.GoogleAdsFailure);
+    expect(error).toMatchObject({ request_id: "mock-request-id" });
+  });
+});

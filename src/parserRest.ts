@@ -109,14 +109,17 @@ const parseValue = (fullPath: string, value: any) => {
       };
     } else {
       // Normal enum handling
-      newValue = megaDataType[value];
+      newValue = typeof value === "number" ? value : megaDataType[value];
     }
   } else if (megaDataType === "INT64") {
     newValue = Number(value);
   } else if (megaDataType === "ENUM") {
     // Some enums aren't embedded in megaDataType, so we need this fallback.
-    // @ts-expect-error typescript doesn't like accessing items in a namespace with a string
-    newValue = enums[fields.enumFields[fullPath]][value]; // e.g. enums['CampaignStatus'][ENABLED] = "2"
+    newValue =
+      typeof value === "number"
+        ? value
+        : // @ts-expect-error typescript doesn't like accessing items in a namespace with a string
+          enums[fields.enumFields[fullPath]][value]; // e.g. enums['CampaignStatus'][ENABLED] = "2"
   }
 
   return newValue;

@@ -171,4 +171,13 @@ describe("decamelizeKeys", () => {
       },
     });
   });
+
+  it("keeps numeric enum values, including ones this version does not know", () => {
+    expect(decamelizeKeys({ campaign: { status: 2 } })).toEqual({
+      campaign: { status: enums.CampaignStatus.ENABLED },
+    });
+    expect(decamelizeKeys({ campaign: { status: 999 } })).toEqual({
+      campaign: { status: 999 },
+    });
+  });
 });
