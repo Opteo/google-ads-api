@@ -3,7 +3,8 @@
 import { ClientOptions } from "../../client.js";
 import { CustomerOptions } from "../../types.js";
 import { Service } from "../../service.js";
-import { resources, services, protobuf, longrunning } from "../index.js";
+import type { LROperation } from "google-gax";
+import { resources, services, protobuf } from "../index.js";
 import {
   BaseMutationHookArgs,
   BaseServiceHookArgs,
@@ -250,11 +251,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.createAccountLink(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -928,11 +926,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.removeAutomaticallyCreatedAssets(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -3354,11 +3349,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.generateText(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -3419,11 +3411,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.generateImages(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -5113,11 +5102,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.generateInsightsFinderReport(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -5181,11 +5167,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.listAudienceInsightsAttributes(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -5247,11 +5230,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.listInsightsEligibleDates(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -5314,11 +5294,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.generateAudienceCompositionInsights(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -5380,11 +5357,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.generateAudienceDefinition(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -5447,11 +5421,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.generateSuggestedTargetingInsights(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -5515,11 +5486,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.generateAudienceOverlapInsights(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -5583,11 +5551,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.generateTargetingSuggestionMetrics(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -5846,11 +5811,8 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Response is an array type
           const [response] =
             await service.removeCampaignAutomaticallyCreatedAsset(request, {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            });
+              otherArgs: { headers: this.callHeaders },
+            } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -6083,12 +6045,10 @@ export default class ServiceFactory extends Service {
         }
         try {
           // @ts-expect-error Response is an array type
-          const [response] = await service.listBatchJobResults(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+          const [, , response] = await service.listBatchJobResults(request, {
+            autoPaginate: false,
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -6121,7 +6081,9 @@ export default class ServiceFactory extends Service {
        */
       runBatchJob: async (
         request: services.RunBatchJobRequest
-      ): Promise<longrunning.Operation> => {
+      ): Promise<
+        LROperation<protobuf.IEmpty, resources.BatchJob.IBatchJobMetadata>
+      > => {
         const baseHookArguments: BaseServiceHookArgs = {
           credentials: this.credentials,
           method: "BatchJobService.RunBatchJob",
@@ -6149,11 +6111,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.runBatchJob(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -6214,11 +6173,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.addBatchJobOperations(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -8875,7 +8831,7 @@ export default class ServiceFactory extends Service {
        */
       promoteCampaignDraft: async (
         request: services.PromoteCampaignDraftRequest
-      ): Promise<longrunning.Operation> => {
+      ): Promise<LROperation<protobuf.IEmpty, protobuf.IEmpty>> => {
         const baseHookArguments: BaseServiceHookArgs = {
           credentials: this.credentials,
           method: "CampaignDraftService.PromoteCampaignDraft",
@@ -8903,11 +8859,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.promoteCampaignDraft(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -8967,14 +8920,12 @@ export default class ServiceFactory extends Service {
         }
         try {
           // @ts-expect-error Response is an array type
-          const [response] = await service.listCampaignDraftAsyncErrors(
+          const [, , response] = await service.listCampaignDraftAsyncErrors(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              autoPaginate: false,
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -9742,11 +9693,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.enablePMaxBrandGuidelines(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -12597,11 +12545,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.listAccessibleCustomers(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -12662,11 +12607,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.createCustomerClient(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -13435,11 +13377,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.endExperiment(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -13499,12 +13438,13 @@ export default class ServiceFactory extends Service {
         }
         try {
           // @ts-expect-error Response is an array type
-          const [response] = await service.listExperimentAsyncErrors(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+          const [, , response] = await service.listExperimentAsyncErrors(
+            request,
+            {
+              autoPaginate: false,
+              otherArgs: { headers: this.callHeaders },
+            } as never
+          );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -13565,11 +13505,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.graduateExperiment(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -13602,7 +13539,9 @@ export default class ServiceFactory extends Service {
        */
       scheduleExperiment: async (
         request: services.ScheduleExperimentRequest
-      ): Promise<longrunning.Operation> => {
+      ): Promise<
+        LROperation<protobuf.IEmpty, services.IScheduleExperimentMetadata>
+      > => {
         const baseHookArguments: BaseServiceHookArgs = {
           credentials: this.credentials,
           method: "ExperimentService.ScheduleExperiment",
@@ -13630,11 +13569,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.scheduleExperiment(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -13667,7 +13603,9 @@ export default class ServiceFactory extends Service {
        */
       promoteExperiment: async (
         request: services.PromoteExperimentRequest
-      ): Promise<longrunning.Operation> => {
+      ): Promise<
+        LROperation<protobuf.IEmpty, services.IPromoteExperimentMetadata>
+      > => {
         const baseHookArguments: BaseServiceHookArgs = {
           credentials: this.credentials,
           method: "ExperimentService.PromoteExperiment",
@@ -13695,11 +13633,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.promoteExperiment(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -16233,11 +16168,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.getSmartCampaignStatus(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -16389,11 +16321,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.generatePMaxDraftCampaign(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -16731,11 +16660,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.listBenchmarksAvailableDates(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -16797,11 +16723,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.listBenchmarksLocations(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -16862,11 +16785,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.listBenchmarksProducts(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -16927,11 +16847,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.listBenchmarksSources(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -16992,11 +16909,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.generateBenchmarksMetrics(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -17241,11 +17155,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.suggestBrands(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -17585,11 +17496,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.generateCreatorInsights(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -17650,11 +17558,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.generateTrendingInsights(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -17730,11 +17635,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.uploadConversionAdjustments(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -17807,11 +17709,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.uploadClickConversions(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -17872,11 +17771,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.uploadCallConversions(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -18849,11 +18745,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.moveManagerLink(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -19398,11 +19291,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.createDataLink(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -19463,11 +19353,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.removeDataLink(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -19528,11 +19415,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.updateDataLink(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -19604,11 +19488,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.suggestGeoTargetConstants(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -19858,11 +19739,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.startIdentityVerification(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -19923,11 +19801,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.getIdentityVerification(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -19999,11 +19874,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.fetchIncentive(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -20064,11 +19936,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.applyIncentive(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -20140,11 +20009,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.listInvoices(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -20215,12 +20081,10 @@ export default class ServiceFactory extends Service {
         }
         try {
           // @ts-expect-error Response is an array type
-          const [response] = await service.generateKeywordIdeas(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+          const [, , response] = await service.generateKeywordIdeas(request, {
+            autoPaginate: false,
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -20283,11 +20147,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.generateKeywordHistoricalMetrics(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -20349,11 +20210,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.generateAdGroupThemes(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -20416,11 +20274,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.generateKeywordForecastMetrics(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -20495,11 +20350,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.suggestKeywordThemeConstants(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -20533,7 +20385,7 @@ export default class ServiceFactory extends Service {
   /**
    * @link https://developers.google.com/google-ads/api/reference/rpc/v26/LocalServicesEligibilityService
    */
-  public get localsEligibilityServices() {
+  public get localServicesEligibilities() {
     const service = this.loadService<services.LocalServicesEligibilityService>(
       "LocalServicesEligibilityServiceClient"
     );
@@ -20575,11 +20427,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.checkLocalServicesEligibility(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -20613,7 +20462,7 @@ export default class ServiceFactory extends Service {
   /**
    * @link https://developers.google.com/google-ads/api/reference/rpc/v26/LocalServicesLeadService
    */
-  public get localsLeadServices() {
+  public get localServicesLeads() {
     const service = this.loadService<services.LocalServicesLeadService>(
       "LocalServicesLeadServiceClient"
     );
@@ -20652,11 +20501,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.appendLeadConversation(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -20717,11 +20563,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.provideLeadFeedback(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -20795,11 +20638,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.resolveMultiPartyAuthReview(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -20872,11 +20712,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.createOfflineUserDataJob(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -20939,11 +20776,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.addOfflineUserDataJobOperations(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -20977,7 +20811,9 @@ export default class ServiceFactory extends Service {
        */
       runOfflineUserDataJob: async (
         request: services.RunOfflineUserDataJobRequest
-      ): Promise<longrunning.Operation> => {
+      ): Promise<
+        LROperation<protobuf.IEmpty, resources.IOfflineUserDataJobMetadata>
+      > => {
         const baseHookArguments: BaseServiceHookArgs = {
           credentials: this.credentials,
           method: "OfflineUserDataJobService.RunOfflineUserDataJob",
@@ -21005,11 +20841,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.runOfflineUserDataJob(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -21081,11 +20914,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.listPaymentsAccounts(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -21159,11 +20989,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.createProductLinkInvitation(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -21227,11 +21054,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.updateProductLinkInvitation(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -21295,11 +21119,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.removeProductLinkInvitation(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -21372,11 +21193,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.createProductLink(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -21437,11 +21255,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.removeProductLink(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -21513,11 +21328,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.generateConversionRates(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -21578,11 +21390,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.listPlannableLocations(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -21643,11 +21452,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.listPlannableProducts(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -21708,11 +21514,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.generateReachForecast(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -21773,11 +21576,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.listPlannableUserLists(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -21838,11 +21638,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.listPlannableUserInterests(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -21914,11 +21711,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.applyRecommendation(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -21979,11 +21773,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.dismissRecommendation(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -22044,11 +21835,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.generateRecommendations(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -22120,11 +21908,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.quoteCampaigns(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -22185,11 +21970,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.bookCampaigns(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -22261,11 +22043,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.generateShareablePreviews(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -22340,11 +22119,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.suggestSmartCampaignBudgetOptions(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -22406,11 +22182,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.suggestSmartCampaignAd(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -22471,11 +22244,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.suggestKeywordThemes(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -22548,11 +22318,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.regenerateShareableLinkId(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -22624,11 +22391,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.suggestTravelAssets(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -22700,11 +22464,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.uploadUserData(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -22962,11 +22723,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.createYouTubeVideoUpload(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -23027,11 +22785,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.updateYouTubeVideoUpload(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -23092,11 +22847,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.removeYouTubeVideoUpload(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({

@@ -53,7 +53,8 @@ export async function compileServices(): Promise<void> {
 import { ClientOptions } from "../../client.js";
 import { CustomerOptions } from "../../types.js";
 import { Service } from "../../service.js";
-import { resources, services, protobuf, longrunning } from "../index.js";
+import type { LROperation } from "google-gax";
+import { resources, services, protobuf } from "../index.js";
 import {
   BaseMutationHookArgs,
   BaseServiceHookArgs,
@@ -115,7 +116,7 @@ export default class ServiceFactory extends Service {
       continue;
     }
 
-    const resourceName = name.replace("Service", "");
+    const resourceName = name.replace(/Service$/, "");
     const pluralServiceName = pluralize(toCamelCase(resourceName));
 
     const serviceInit = buildServiceInit(
@@ -148,17 +149,23 @@ function compileSpecialMethod(
 ): string {
   const serviceMethod = toCamelCase(methodName);
   const requestType = `services.${methodDef.requestType}`;
+  const definitions = allServices as unknown as Record<string, ProtoDefinition>;
+  const paged = Boolean(
+    definitions[methodDef.requestType]?.fields?.page_token &&
+    definitions[methodDef.responseType]?.fields?.next_page_token
+  );
 
-  // Some special methods use types such as google.longrunning.Operation
-  let responseType = methodDef.responseType.includes("google.")
-    ? methodDef.responseType.split("google.")[1]
-    : `services.${methodDef.responseType}`;
-
-  if (methodDef.responseType.includes(`.googleads.${googleAdsVersion}`)) {
-    [, responseType] = methodDef.responseType.split(
-      `.googleads.${googleAdsVersion}.`
-    );
-  }
+  const responseType = methodDef.responseType.includes("google.longrunning.")
+    ? `LROperation<${interfaceType(
+        methodDef.options["(google.longrunning.operation_info).response_type"]
+      )}, ${interfaceType(
+        methodDef.options["(google.longrunning.operation_info).metadata_type"]
+      )}>`
+    : methodDef.responseType.includes(`.googleads.${googleAdsVersion}.`)
+      ? methodDef.responseType.split(`.googleads.${googleAdsVersion}.`)[1]
+      : methodDef.responseType.startsWith("google.")
+        ? methodDef.responseType.replace("google.", "")
+        : `services.${methodDef.responseType}`;
 
   return `
     /**
@@ -168,12 +175,10 @@ function compileSpecialMethod(
       ${buildServiceHookStart(serviceName, methodName)}
       try {
         // @ts-expect-error Response is an array type
-        const [response] = await service.${serviceMethod}(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
+        const [${paged ? ", , " : ""}response] = await service.${serviceMethod}(request, {
+          ${paged ? "autoPaginate: false," : ""}
+          otherArgs: { headers: this.callHeaders },
+        } as never);
         ${buildServiceHookEnd()}
         return response;
       } catch (err) {
@@ -181,6 +186,15 @@ function compileSpecialMethod(
       }
     }
   `;
+}
+
+function interfaceType(protoType: string): string {
+  const path = protoType
+    .replace(`google.ads.googleads.${googleAdsVersion}.`, "")
+    .replace("google.", "")
+    .split(".");
+  path[path.length - 1] = `I${path[path.length - 1]}`;
+  return path.join(".");
 }
 
 function buildServiceHookStart(
@@ -263,7 +277,7 @@ function compileMutateMethods(
   );
 
   const serviceMethod = toCamelCase(methodName);
-  const resourceName = serviceName.replace("Service", "");
+  const resourceName = serviceName.replace(/Service$/, "");
   const singular = Boolean(req.fields?.operation);
   const argName = singular
     ? toCamelCase(resourceName)

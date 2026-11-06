@@ -8,7 +8,7 @@ import { googleAdsVersion } from "./version.js";
 
 type ProtoDefinition = {
   fields?: Record<string, { type: string; rule?: string }>;
-  methods?: Record<string, { requestType: string }>;
+  methods?: Record<string, { requestType: string; responseType: string }>;
   nested: Record<string, ProtoDefinition>;
 };
 
@@ -24,7 +24,7 @@ type RequestClass = {
 
 const mutateMethods = Object.entries(definitions).flatMap(
   ([serviceName, service]) => {
-    const resource = serviceName.replace("Service", "");
+    const resource = serviceName.replace(/Service$/, "");
     return Object.entries(service.methods ?? {}).flatMap(
       ([methodName, { requestType }]) => {
         const fields = definitions[requestType].fields;
@@ -169,5 +169,155 @@ describe("mutate helper hooks", () => {
       partial_failure: true,
     });
     expect(callerOptions).toEqual({ validate_only: true });
+  });
+});
+
+const specialMethods = Object.entries(definitions).flatMap(
+  ([serviceName, service]) => {
+    if (["GoogleAdsService", "GoogleAdsFieldService"].includes(serviceName)) {
+      return [];
+    }
+    const resource = serviceName.replace(/Service$/, "");
+    return Object.entries(service.methods ?? {}).flatMap(
+      ([methodName, { requestType, responseType }]) => {
+        if (methodName.startsWith("Mutate")) {
+          return [];
+        }
+        const request = definitions[requestType.split(".").pop() as string];
+        const response = definitions[responseType.split(".").pop() as string];
+        return {
+          getter: pluralize(toCamelCase(resource)),
+          rpc: toCamelCase(methodName),
+          paged: Boolean(
+            request?.fields?.page_token && response?.fields?.next_page_token
+          ),
+        };
+      }
+    );
+  }
+);
+
+describe("paginated service methods", () => {
+  const pagedMethods = specialMethods.filter(({ paged }) => paged);
+
+  it("finds the paginated methods", () => {
+    expect(pagedMethods.map(({ rpc }) => rpc).sort()).toEqual([
+      "generateKeywordIdeas",
+      "listBatchJobResults",
+      "listCampaignDraftAsyncErrors",
+      "listExperimentAsyncErrors",
+    ]);
+  });
+
+  it.each(pagedMethods)(
+    "$getter $rpc returns one page as the RPC response",
+    async ({ getter, rpc }) => {
+      const customer = newCustomer();
+      const rawResponse = { next_page_token: "next-page" };
+      const send = jest
+        .fn()
+        .mockResolvedValue([[], { page_token: "next-page" }, rawResponse]);
+      jest
+        // @ts-expect-error Accessing protected method for test purposes
+        .spyOn(customer, "loadService")
+        // @ts-expect-error Stubbed service exposes only the paged method
+        .mockReturnValue({ [rpc]: send });
+
+      const helpers = (customer as unknown as Record<string, unknown>)[
+        getter
+      ] as Record<string, (request: unknown) => Promise<unknown>>;
+
+      await expect(helpers[rpc]({})).resolves.toBe(rawResponse);
+      expect(send).toHaveBeenCalledWith(
+        {},
+        expect.objectContaining({ autoPaginate: false })
+      );
+    }
+  );
+
+  it("keeps total_size and next_page_token from generateKeywordIdeas", async () => {
+    const customer = newCustomer();
+    // @ts-expect-error Accessing protected method for test purposes
+    const client = customer.loadService("KeywordPlanIdeaServiceClient", {
+      skipCache: true,
+    }) as { _gaxGrpc: { createStub: () => Promise<unknown> } };
+    const generateKeywordIdeas = jest.fn(
+      (
+        _request: unknown,
+        _metadata: unknown,
+        _options: unknown,
+        callback: (error: null, response: Record<string, unknown>) => void
+      ) => {
+        callback(null, {
+          results: [{ text: "shoes" }],
+          next_page_token: "next-page",
+          total_size: 2,
+        });
+        return { cancel: () => undefined };
+      }
+    );
+    jest
+      .spyOn(client._gaxGrpc, "createStub")
+      .mockResolvedValue({ generateKeywordIdeas });
+    jest
+      // @ts-expect-error Accessing protected method for test purposes
+      .spyOn(customer, "loadService")
+      // @ts-expect-error The real client with a stubbed transport
+      .mockReturnValue(client);
+
+    const response = await customer.keywordPlanIdeas.generateKeywordIdeas(
+      new services.GenerateKeywordIdeasRequest({ customer_id: "1" })
+    );
+
+    expect(generateKeywordIdeas).toHaveBeenCalledTimes(1);
+    expect(response.total_size).toBe(2);
+    expect(response.next_page_token).toBe("next-page");
+    expect(response.results).toEqual([{ text: "shoes" }]);
+  });
+});
+
+describe("long-running service methods", () => {
+  it("returns a gax operation that can be awaited", async () => {
+    const customer = newCustomer();
+    // @ts-expect-error Accessing protected method for test purposes
+    const client = customer.loadService("BatchJobServiceClient", {
+      skipCache: true,
+    }) as { _gaxGrpc: { createStub: () => Promise<unknown> } };
+    jest.spyOn(client._gaxGrpc, "createStub").mockResolvedValue({
+      runBatchJob: (
+        _request: unknown,
+        _metadata: unknown,
+        _options: unknown,
+        callback: (error: null, response: Record<string, unknown>) => void
+      ) => {
+        callback(null, { name: "operations/1", done: false });
+        return { cancel: () => undefined };
+      },
+    });
+    jest
+      // @ts-expect-error Accessing protected method for test purposes
+      .spyOn(customer, "loadService")
+      // @ts-expect-error The real client with a stubbed transport
+      .mockReturnValue(client);
+
+    const operation = await customer.batchJobs.runBatchJob(
+      new services.RunBatchJobRequest({
+        resource_name: "customers/1/batchJobs/2",
+      })
+    );
+    const waitForCompletion: () => Promise<unknown> =
+      operation.promise.bind(operation);
+
+    expect(operation.name).toBe("operations/1");
+    expect(waitForCompletion).toBeInstanceOf(Function);
+  });
+});
+
+describe("service getter names", () => {
+  it("strips only the trailing Service from the service name", () => {
+    const customer = newCustomer();
+    expect("localServicesLeads" in customer).toBe(true);
+    expect("localServicesEligibilities" in customer).toBe(true);
+    expect("localsLeadServices" in customer).toBe(false);
   });
 });
