@@ -132,6 +132,14 @@ export type Constraint = string | ConstraintType1 | ConstraintType2;
 export type Constraints = Constraint[] | ConstraintType2;
 
 // Common request options used for the report/query methods
+export type StreamRequestOptions = Omit<
+  services.ISearchGoogleAdsStreamRequest,
+  "customer_id" | "query"
+>;
+
+export type ReportStreamOptions = Omit<ReportOptions, keyof RequestOptions> &
+  StreamRequestOptions;
+
 export type RequestOptions = Omit<
   services.ISearchGoogleAdsRequest,
   "customer_id" | "query" | "search_settings"

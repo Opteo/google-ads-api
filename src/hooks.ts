@@ -3,14 +3,16 @@ import {
   CustomerCredentials,
   MutateOperation,
   ReportOptions,
+  ReportStreamOptions,
   RequestOptions,
   MutateOptions,
+  StreamRequestOptions,
 } from "./types.js";
 
 export type BaseRequestHookArgs = {
   credentials: CustomerCredentials;
   query: string;
-  reportOptions?: ReportOptions;
+  reportOptions?: ReportOptions | ReportStreamOptions;
 };
 
 export type BaseMutationHookArgs = {
@@ -18,8 +20,8 @@ export type BaseMutationHookArgs = {
   method: `${keyof typeof services}.${string}`;
 } & (
   | // Mutation was executed with customer.mutateResources
-  { mutations: MutateOperation<any>[]; isServiceCall: false }
-  // Mutation was executed with a service e.g. customer.campaigns.create
+    { mutations: MutateOperation<any>[]; isServiceCall: false }
+    // Mutation was executed with a service e.g. customer.campaigns.create
   | { mutation: any; isServiceCall: true }
 );
 
@@ -55,7 +57,9 @@ export type OnQueryStart = RequestHook<StartHookArgs<RequestOptions, any>>;
 export type OnQueryError = RequestHook<ErrorHookArgs>;
 export type OnQueryEnd = RequestHook<EndHookArgs<services.IGoogleAdsRow[]>>;
 
-export type OnStreamStart = RequestHook<StartHookArgs<RequestOptions, void>>;
+export type OnStreamStart = RequestHook<
+  StartHookArgs<StreamRequestOptions, void>
+>;
 export type OnStreamError = RequestHook<ErrorHookArgs>;
 
 export type OnMutationStart = MutationHook<StartHookArgs<MutateOptions, any>>;

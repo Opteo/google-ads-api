@@ -16,7 +16,7 @@ import {
 import { decamelizeKeys } from "./parserRest.js";
 import { services, errors } from "./protos/index.js";
 import ServiceFactory from "./protos/autogen/serviceFactory.js";
-import { buildQuery } from "./query.js";
+import { buildQuery, buildStreamQuery } from "./query.js";
 import {
   CustomerOptions,
   MutateOperation,
@@ -24,8 +24,10 @@ import {
   PageToken,
   ReportOptions,
   ReportOptionsWithTotalResults,
+  ReportStreamOptions,
   RequestOptions,
   RequestOptionsWithTotalResults,
+  StreamRequestOptions,
 } from "./types.js";
 
 import { googleAdsVersion } from "./version.js";
@@ -63,7 +65,7 @@ export class Customer extends ServiceFactory {
   */
   public async *queryStream<T = services.IGoogleAdsRow>(
     gaqlQuery: string,
-    requestOptions: Readonly<RequestOptions> = {}
+    requestOptions: Readonly<StreamRequestOptions> = {}
   ): AsyncGenerator<T> {
     const stream = this.streamer<T>(gaqlQuery, requestOptions);
     for await (const row of stream) {
@@ -124,9 +126,9 @@ export class Customer extends ServiceFactory {
     for await (const row of stream) { ... }
   */
   public async *reportStream<T = services.IGoogleAdsRow>(
-    reportOptions: Readonly<ReportOptions>
+    reportOptions: Readonly<ReportStreamOptions>
   ): AsyncGenerator<T> {
-    const { gaqlQuery, requestOptions } = buildQuery(reportOptions);
+    const { gaqlQuery, requestOptions } = buildStreamQuery(reportOptions);
     const stream = this.streamer<T>(gaqlQuery, requestOptions, reportOptions);
     for await (const row of stream) {
       yield row;
@@ -143,9 +145,9 @@ export class Customer extends ServiceFactory {
     stream.on('end', () => { ... })
   */
   public async reportStreamRaw(
-    reportOptions: Readonly<ReportOptions>
+    reportOptions: Readonly<ReportStreamOptions>
   ): Promise<CancellableStream | void> {
-    const { gaqlQuery, requestOptions } = buildQuery(reportOptions);
+    const { gaqlQuery, requestOptions } = buildStreamQuery(reportOptions);
 
     const baseHookArguments: BaseRequestHookArgs = {
       credentials: this.credentials,
@@ -245,10 +247,8 @@ export class Customer extends ServiceFactory {
       requestOptions.search_settings === undefined
     ) {
       // If no pagination or summary options are set, we can use the non-paginated search method.
-      const { response } = await this.useStreamToImitateRegularSearch(
-        gaqlQuery,
-        requestOptions
-      );
+      const { response } =
+        await this.useStreamToImitateRegularSearch(gaqlQuery);
 
       return { response };
     }
@@ -295,10 +295,7 @@ export class Customer extends ServiceFactory {
   // When report() is called, we use searchStream if possible, otherwise we use paginatedSearch.
   // Note that just like `paginatedSearch`, this method accumulates results in memory. Use
   // `reportStream` for a more memory-efficient alternative (at the cost of more CPU usage).
-  private async useStreamToImitateRegularSearch(
-    gaqlQuery: string,
-    requestOptions: Readonly<RequestOptions>
-  ): Promise<{
+  private async useStreamToImitateRegularSearch(gaqlQuery: string): Promise<{
     response: services.IGoogleAdsRow[];
   }> {
     const accessToken = await this.getAccessToken();
@@ -309,10 +306,7 @@ export class Customer extends ServiceFactory {
         accessToken,
         {
           responseType: "stream",
-          data: {
-            query: gaqlQuery,
-            ...requestOptions,
-          },
+          data: { query: gaqlQuery },
         }
       );
 
@@ -438,8 +432,8 @@ export class Customer extends ServiceFactory {
 
   private async *streamer<T = services.IGoogleAdsRow[]>(
     gaqlQuery: string,
-    requestOptions: RequestOptions = {},
-    reportOptions?: Readonly<ReportOptions>
+    requestOptions: StreamRequestOptions = {},
+    reportOptions?: Readonly<ReportStreamOptions>
   ): AsyncGenerator<T> {
     const baseHookArguments: BaseRequestHookArgs = {
       credentials: this.credentials,

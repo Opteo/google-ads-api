@@ -41,7 +41,11 @@ import {
   mockTotalResultsCount,
   newCustomer,
 } from "./testUtils.js";
-import { MutateOptions, RequestOptions } from "./types.js";
+import {
+  MutateOptions,
+  RequestOptions,
+  StreamRequestOptions,
+} from "./types.js";
 import { googleAdsVersion } from "../src/version.js";
 type google = typeof operationsProtos.google;
 const google = operationsProtos.google;
@@ -764,7 +768,9 @@ describe("reportStream", () => {
   it("edits the requestOptions when editOptions() is called in onStreamStart", async () => {
     const hooks: Hooks = {
       onStreamStart({ editOptions }) {
-        editOptions({ validate_only: true, page_size: 4 });
+        editOptions({
+          summary_row_setting: enums.SummaryRowSetting.SUMMARY_ROW_ONLY,
+        });
       },
     };
     const customer = newCustomer(hooks);
@@ -775,10 +781,8 @@ describe("reportStream", () => {
       "prepareGoogleAdsServicePostRequestArgs"
     );
 
-    const requestOptions: RequestOptions = {
-      validate_only: false, // changed
-      page_token: "abcd",
-      page_size: 2, // changed
+    const requestOptions: StreamRequestOptions = {
+      summary_row_setting: enums.SummaryRowSetting.SUMMARY_ROW_WITH_RESULTS,
     };
 
     mockGetAccessToken(customer);
@@ -799,9 +803,7 @@ describe("reportStream", () => {
       {
         data: {
           query: expect.any(String),
-          validate_only: true,
-          page_token: "abcd",
-          page_size: 4,
+          summary_row_setting: enums.SummaryRowSetting.SUMMARY_ROW_ONLY,
         },
         responseType: "stream",
       }
@@ -975,16 +977,16 @@ describe("reportStreamRaw", () => {
   it("edits the requestOptions when editOptions() is called in onStreamStart", async () => {
     const hooks: Hooks = {
       onStreamStart({ editOptions }) {
-        editOptions({ validate_only: true, page_size: 4 });
+        editOptions({
+          summary_row_setting: enums.SummaryRowSetting.SUMMARY_ROW_ONLY,
+        });
       },
     };
     const customer = newCustomer(hooks);
     const { spyBuild, mockStreamData, mockStreamEnd } =
       mockBuildSearchStreamRequestAndService(customer);
-    const requestOptions: RequestOptions = {
-      validate_only: false, // changed
-      page_token: "abcd",
-      page_size: 2, // changed
+    const requestOptions: StreamRequestOptions = {
+      summary_row_setting: enums.SummaryRowSetting.SUMMARY_ROW_WITH_RESULTS,
     };
     await customer.reportStreamRaw({
       ...mockReportOptions,
@@ -994,9 +996,7 @@ describe("reportStreamRaw", () => {
     mockStreamEnd();
 
     expect(spyBuild).toHaveBeenCalledWith(mockGaqlQuery, {
-      validate_only: true,
-      page_token: "abcd",
-      page_size: 4,
+      summary_row_setting: enums.SummaryRowSetting.SUMMARY_ROW_ONLY,
     });
   });
 });
@@ -1350,4 +1350,62 @@ describe("mutateResources policy exemptions", () => {
       ).toEqual([{ policy_name: "trademark" }]);
     }
   );
+});
+
+describe("stream request options", () => {
+  afterEach(() => {
+    jest.resetAllMocks();
+    axiosMock.reset();
+  });
+
+  const summaryRowSetting = enums.SummaryRowSetting.SUMMARY_ROW_WITH_RESULTS;
+
+  it("sends summary_row_setting from queryStream to searchStream", async () => {
+    const customer = newCustomer({});
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(200, mockStream());
+
+    const stream = customer.queryStream(mockGaqlQuery, {
+      summary_row_setting: summaryRowSetting,
+    });
+    for await (const row of stream) row;
+
+    expect(axiosMock.history.post[0].url).toMatch(/googleAds:searchStream$/);
+    expect(JSON.parse(axiosMock.history.post[0].data)).toEqual({
+      query: mockGaqlQuery,
+      summary_row_setting: summaryRowSetting,
+    });
+  });
+
+  it("sends only summary_row_setting from reportStream to searchStream", async () => {
+    const customer = newCustomer({});
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(200, mockStream());
+
+    const stream = customer.reportStream({
+      ...mockReportOptions,
+      summary_row_setting: summaryRowSetting,
+    });
+    for await (const row of stream) row;
+
+    const body = JSON.parse(axiosMock.history.post[0].data);
+    expect(Object.keys(body).sort()).toEqual(["query", "summary_row_setting"]);
+    expect(body.summary_row_setting).toBe(summaryRowSetting);
+  });
+
+  it("rejects search-only options at compile time", () => {
+    const customer = newCustomer({});
+    const typeChecks = () => {
+      // @ts-expect-error searchStream has no page_token
+      customer.queryStream(mockGaqlQuery, { page_token: "next-page" });
+      // @ts-expect-error searchStream has no validate_only
+      customer.queryStream(mockGaqlQuery, { validate_only: true });
+      customer.reportStream({
+        ...mockReportOptions,
+        // @ts-expect-error searchStream has no search_settings
+        search_settings: { return_summary_row: true },
+      });
+    };
+    expect(typeChecks).toBeInstanceOf(Function);
+  });
 });

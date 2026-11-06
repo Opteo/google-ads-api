@@ -15,6 +15,7 @@ import {
   RequestOptions,
   MutateOperation,
   MutateOptions,
+  StreamRequestOptions,
 } from "./types.js";
 import { getFieldMask, toSnakeCase } from "./utils.js";
 import { googleAdsVersion } from "./version.js";
@@ -260,7 +261,7 @@ export class Service {
 
   protected buildSearchStreamRequestAndService(
     gaql: string,
-    options?: RequestOptions
+    options?: StreamRequestOptions
   ): {
     service: GoogleAdsServiceClient;
     request: services.SearchGoogleAdsStreamRequest;

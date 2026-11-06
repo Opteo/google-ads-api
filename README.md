@@ -456,15 +456,13 @@ const [summaryRow, ...response] = await customer.report({
 });
 ```
 
-If a summery row is requested in the `reportStream` method, it will be included as the **final** iterated row of the results.
+The streaming methods (`reportStream`, `reportStreamRaw` and `queryStream`) request a summary row with `summary_row_setting` instead, because the stream endpoint does not take `search_settings`. In `reportStream` the summary row is the **final** iterated row of the results.
 
 ```ts
 const stream = customer.reportStream({
   entity: "campaign",
   metrics: ["metrics.clicks", "metrics.all_conversions"],
-  search_settings: {
-    return_summary_row: true,
-  },
+  summary_row_setting: enums.SummaryRowSetting.SUMMARY_ROW_WITH_RESULTS,
 });
 
 const accumulator = [];
