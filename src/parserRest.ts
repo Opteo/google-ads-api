@@ -33,7 +33,11 @@ export const decamelizeKeys = (input: any) => {
 
       for (let i = 0; i < length; i += 1) {
         const item = value[i];
-        result[i] = isObject(item) ? transformObject(item, parentPath) : item;
+        result[i] = isObject(item)
+          ? transformObject(item, parentPath)
+          : parentPath === undefined
+            ? item
+            : parseValue(parentPath, item);
       }
 
       return result;
@@ -78,11 +82,11 @@ const cachedDecamelize = (key: string) => {
 const cachedValueParser = (
   key: string,
   parentPath: string | undefined,
-  value: any
-) => {
-  let newValue = value;
+  value: unknown
+) => parseValue(parentPath ? `${parentPath}.${key}` : key, value);
 
-  const fullPath = parentPath ? `${parentPath}.${key}` : key;
+const parseValue = (fullPath: string, value: any) => {
+  let newValue = value;
 
   const megaDataType = getTypeFromPath(fullPath);
 
