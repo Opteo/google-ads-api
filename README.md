@@ -73,7 +73,7 @@ const client = new GoogleAdsApi({
 
 Optional client settings:
 
-- `developer_token`: no longer needed. Google sunset developer tokens on 9 September 2026; API access levels now belong to the Google Cloud project that owns your OAuth client, and the API ignores the token. When it is unset or empty, no `developer-token` header is sent. Existing configurations that pass a token keep working until Google starts rejecting the header in a future major API version.
+- `developer_token`: no longer needed. Google sunset developer tokens on 9 September 2026; API access levels now belong to the Google Cloud project that owns your OAuth client, and the API ignores the token. When you leave it unset or empty, the client sends no `developer-token` header. Existing configurations that pass a token keep working until Google starts rejecting the header in a future major API version.
 - `grpc_channel_options`: [gRPC channel options](https://github.com/grpc/grpc-node/tree/master/packages/grpc-js#supported-channel-options) applied to every service client this instance creates, for example `{ "grpc.keepalive_time_ms": 30000, "grpc.keepalive_timeout_ms": 10000 }`. Cached service clients are keyed by client id, refresh token and these options, so instances with different options never share a client.
 - `max_reporting_rows`: throw once a report or query returns more rows than this.
 - `disable_parsing`: return raw API responses instead of parsed rows.
@@ -456,7 +456,7 @@ const [summaryRow, ...response] = await customer.report({
 });
 ```
 
-The streaming methods (`reportStream`, `reportStreamRaw` and `queryStream`) request a summary row with `summary_row_setting` instead, because the stream endpoint does not take `search_settings`. In `reportStream` the summary row is the **final** iterated row of the results.
+The streaming methods (`reportStream`, `reportStreamRaw` and `queryStream`) request a summary row with `summary_row_setting` instead, because the stream endpoint does not take `search_settings`. In `reportStream` the summary row comes as the **final** iterated row of the results.
 
 ```ts
 const stream = customer.reportStream({
@@ -578,7 +578,7 @@ These hooks have access to the `customerCredentials` argument, containing the `c
 
 These hooks also have access to the `method` argument, containing the mutation method as a string.
 
-These hooks also have access to the `mutateOptions` argument, containing the mutate options the request is sent with (`validate_only`, `partial_failure`, `response_content_type`), including any changes made with `editOptions`. It is the same for `mutateResources` and the service helpers such as `customer.campaigns.create`, so `mutateOptions.validate_only` tells a hook whether a mutation is a dry run.
+These hooks also have access to the `mutateOptions` argument, containing the mutate options the request goes out with (`validate_only`, `partial_failure`, `response_content_type`), including any changes made with `editOptions`. `mutateResources` and the service helpers such as `customer.campaigns.create` both provide it, so `mutateOptions.validate_only` tells a hook whether a mutation only validates.
 
 ### Service hooks:
 
