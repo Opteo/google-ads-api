@@ -1,12 +1,19 @@
 import { operationsProtos } from "google-gax";
 import { Readable } from "stream";
-import { Hooks } from "./hooks.js";
+import { inspect } from "util";
+import { Hooks, OnQueryEnd, OnStreamStart } from "./hooks.js";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 
+import { Customer } from "./customer.js";
 import { enums, errors, services } from "./protos/index.js";
 import {
   failTestIfExecuted,
+  MOCK_CID,
+  MOCK_CLIENT_ID,
+  MOCK_CLIENT_SECRET,
+  MOCK_DEVELOPER_TOKEN,
+  MOCK_REFRESH_TOKEN,
   mockBuildMutateRequestAndService,
   mockBuildSearchRequestAndService,
   mockBuildSearchStreamRequestAndService,
@@ -35,12 +42,53 @@ import {
   mockTotalResultsCount,
   newCustomer,
 } from "./testUtils.js";
-import { MutateOptions, RequestOptions } from "./types.js";
+import {
+  MutateOptions,
+  RequestOptions,
+  StreamRequestOptions,
+} from "./types.js";
 import { googleAdsVersion } from "../src/version.js";
 type google = typeof operationsProtos.google;
 const google = operationsProtos.google;
 
 const axiosMock = new MockAdapter(axios);
+
+describe("request headers", () => {
+  afterEach(() => {
+    jest.resetAllMocks();
+    axiosMock.reset();
+  });
+
+  it("sends the developer-token header when a token is configured", async () => {
+    const customer = newCustomer({});
+    axiosMock.onPost().reply(200, mockStream());
+    mockGetAccessToken(customer);
+
+    // @ts-expect-error private method
+    await customer.querier(mockGaqlQuery);
+
+    expect(axiosMock.history.post[0].headers).toHaveProperty(
+      "developer-token",
+      MOCK_DEVELOPER_TOKEN
+    );
+  });
+
+  it("sends no developer-token header when no token is configured", async () => {
+    const customer = new Customer(
+      { client_id: MOCK_CLIENT_ID, client_secret: MOCK_CLIENT_SECRET },
+      { refresh_token: MOCK_REFRESH_TOKEN, customer_id: MOCK_CID }
+    );
+    axiosMock.onPost().reply(200, mockStream());
+    mockGetAccessToken(customer);
+
+    // @ts-expect-error private method
+    await customer.querier(mockGaqlQuery);
+
+    expect(axiosMock.history.post[0].headers).not.toHaveProperty(
+      "developer-token"
+    );
+  });
+});
 
 describe("querier", () => {
   afterEach(() => {
@@ -324,6 +372,89 @@ describe("querier", () => {
   });
 });
 
+describe("streamed error responses", () => {
+  afterEach(() => {
+    jest.resetAllMocks();
+    axiosMock.reset();
+  });
+
+  it("throws the GoogleAdsFailure parsed from the error response", async () => {
+    const customer = newCustomer({});
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(
+      400,
+      mockStream([
+        {
+          error: {
+            code: 400,
+            message: "Request contains an invalid argument.",
+            status: "INVALID_ARGUMENT",
+            details: [
+              {
+                "@type": `type.googleapis.com/google.ads.googleads.${googleAdsVersion}.errors.GoogleAdsFailure`,
+                errors: [
+                  {
+                    errorCode: {
+                      queryError: "PROHIBITED_RESOURCE_TYPE_IN_SELECT_CLAUSE",
+                    },
+                    message: "Cannot select campaign.bogus.",
+                  },
+                ],
+                requestId: "mock-request-id",
+              },
+            ],
+          },
+        },
+      ])
+    );
+
+    const error = await customer.query(mockGaqlQuery).catch((e: unknown) => e);
+
+    expect(error).toBeInstanceOf(errors.GoogleAdsFailure);
+    expect(error).toMatchObject({
+      request_id: "mock-request-id",
+      errors: [{ message: "Cannot select campaign.bogus." }],
+    });
+  });
+
+  it("throws the API message when the error response has no failure details", async () => {
+    const customer = newCustomer({});
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(
+      403,
+      mockStream([
+        {
+          error: {
+            code: 403,
+            message: "The caller does not have permission",
+            status: "PERMISSION_DENIED",
+          },
+        },
+      ])
+    );
+
+    const error = await customer.query(mockGaqlQuery).catch((e: unknown) => e);
+
+    expect(error).not.toBeInstanceOf(errors.GoogleAdsFailure);
+    expect(error).toMatchObject({
+      message: "The caller does not have permission",
+      cause: { status: "PERMISSION_DENIED" },
+    });
+  });
+
+  it("rejects with the parser error when the error response is not JSON", async () => {
+    const customer = newCustomer({});
+    mockGetAccessToken(customer);
+    axiosMock
+      .onPost()
+      .reply(502, Readable.from([Buffer.from("<html>502 Bad Gateway</html>")]));
+
+    await expect(customer.query(mockGaqlQuery)).rejects.toThrow(
+      "Parser cannot parse input: expected a value"
+    );
+  });
+});
+
 describe("paginatedSearch", () => {
   afterEach(() => {
     jest.resetAllMocks();
@@ -432,6 +563,47 @@ describe("search", () => {
     const { totalResultsCount } = await customer.search(mockGaqlQuery);
     expect(totalResultsCount).toEqual(mockTotalResultsCount);
   });
+
+  it("throws the API error when the error response has no failure details", async () => {
+    const customer = newCustomer({});
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(403, {
+      error: {
+        code: 403,
+        message: "The caller does not have permission",
+        status: "PERMISSION_DENIED",
+      },
+    });
+
+    // @ts-expect-error private method
+    const error = await customer.search(mockGaqlQuery).catch((e) => e);
+
+    expect(error).not.toBeInstanceOf(TypeError);
+    expect(error).toMatchObject({
+      message: "The caller does not have permission",
+      cause: { code: 403, status: "PERMISSION_DENIED" },
+    });
+  });
+
+  it.each([
+    ["page_token", { page_token: "next-page" }],
+    ["validate_only", { validate_only: true }],
+  ])(
+    "sends queries with %s to search, which supports it",
+    async (_, requestOptions) => {
+      const customer = newCustomer({});
+      mockGetAccessToken(customer);
+      axiosMock.onPost().reply(200, { results: [] });
+
+      await customer.query(mockGaqlQuery, requestOptions);
+
+      expect(axiosMock.history.post).toHaveLength(1);
+      expect(axiosMock.history.post[0].url).toMatch(/googleAds:search$/);
+      expect(JSON.parse(axiosMock.history.post[0].data)).toMatchObject(
+        requestOptions
+      );
+    }
+  );
 });
 
 describe("reportStream", () => {
@@ -600,7 +772,9 @@ describe("reportStream", () => {
   it("edits the requestOptions when editOptions() is called in onStreamStart", async () => {
     const hooks: Hooks = {
       onStreamStart({ editOptions }) {
-        editOptions({ validate_only: true, page_size: 4 });
+        editOptions({
+          summary_row_setting: enums.SummaryRowSetting.SUMMARY_ROW_ONLY,
+        });
       },
     };
     const customer = newCustomer(hooks);
@@ -611,10 +785,8 @@ describe("reportStream", () => {
       "prepareGoogleAdsServicePostRequestArgs"
     );
 
-    const requestOptions: RequestOptions = {
-      validate_only: false, // changed
-      page_token: "abcd",
-      page_size: 2, // changed
+    const requestOptions: StreamRequestOptions = {
+      summary_row_setting: enums.SummaryRowSetting.SUMMARY_ROW_WITH_RESULTS,
     };
 
     mockGetAccessToken(customer);
@@ -635,9 +807,7 @@ describe("reportStream", () => {
       {
         data: {
           query: expect.any(String),
-          validate_only: true,
-          page_token: "abcd",
-          page_size: 4,
+          summary_row_setting: enums.SummaryRowSetting.SUMMARY_ROW_ONLY,
         },
         responseType: "stream",
       }
@@ -811,16 +981,16 @@ describe("reportStreamRaw", () => {
   it("edits the requestOptions when editOptions() is called in onStreamStart", async () => {
     const hooks: Hooks = {
       onStreamStart({ editOptions }) {
-        editOptions({ validate_only: true, page_size: 4 });
+        editOptions({
+          summary_row_setting: enums.SummaryRowSetting.SUMMARY_ROW_ONLY,
+        });
       },
     };
     const customer = newCustomer(hooks);
     const { spyBuild, mockStreamData, mockStreamEnd } =
       mockBuildSearchStreamRequestAndService(customer);
-    const requestOptions: RequestOptions = {
-      validate_only: false, // changed
-      page_token: "abcd",
-      page_size: 2, // changed
+    const requestOptions: StreamRequestOptions = {
+      summary_row_setting: enums.SummaryRowSetting.SUMMARY_ROW_WITH_RESULTS,
     };
     await customer.reportStreamRaw({
       ...mockReportOptions,
@@ -830,9 +1000,7 @@ describe("reportStreamRaw", () => {
     mockStreamEnd();
 
     expect(spyBuild).toHaveBeenCalledWith(mockGaqlQuery, {
-      validate_only: true,
-      page_token: "abcd",
-      page_size: 4,
+      summary_row_setting: enums.SummaryRowSetting.SUMMARY_ROW_ONLY,
     });
   });
 });
@@ -898,9 +1066,53 @@ describe("mutateResources", () => {
       method: "GoogleAdsService.mutate",
       isServiceCall: false,
       mutations: mockMutations,
+      mutateOptions: {},
       cancel: expect.any(Function),
       editOptions: expect.any(Function),
     });
+  });
+
+  it("gives every mutation hook the effective mutate options", async () => {
+    const seen: Record<string, unknown> = {};
+    const hooks: Hooks = {
+      onMutationStart({ mutateOptions, editOptions }) {
+        seen.start = { ...mutateOptions };
+        editOptions({ partial_failure: true });
+      },
+      onMutationEnd({ mutateOptions }) {
+        seen.end = { ...mutateOptions };
+      },
+    };
+    const customer = newCustomer(hooks);
+    const { spyBuild } = mockBuildMutateRequestAndService({ customer });
+    const callerOptions: MutateOptions = { validate_only: true };
+
+    await customer.mutateResources(mockMutations, callerOptions);
+
+    expect(seen.start).toEqual({ validate_only: true });
+    expect(seen.end).toEqual({ validate_only: true, partial_failure: true });
+    expect(spyBuild).toHaveBeenCalledWith(mockMutations, {
+      validate_only: true,
+      partial_failure: true,
+    });
+    expect(callerOptions).toEqual({ validate_only: true });
+  });
+
+  it("gives onMutationError the mutate options", async () => {
+    let seen: unknown;
+    const hooks: Hooks = {
+      onMutationError({ mutateOptions }) {
+        seen = mutateOptions;
+      },
+    };
+    const customer = newCustomer(hooks);
+    mockBuildMutateRequestAndService({ customer, shouldThrow: true });
+
+    await customer
+      .mutateResources(mockMutations, { validate_only: true })
+      .catch(() => undefined);
+
+    expect(seen).toEqual({ validate_only: true });
   });
 
   it("calls onMutationStart asynchronously", async () => {
@@ -1001,6 +1213,7 @@ describe("mutateResources", () => {
         method: "GoogleAdsService.mutate",
         isServiceCall: false,
         mutations: mockMutations,
+        mutateOptions: {},
         error: mockError,
       });
     }
@@ -1066,6 +1279,7 @@ describe("mutateResources", () => {
       method: "GoogleAdsService.mutate",
       isServiceCall: false,
       mutations: mockMutations,
+      mutateOptions: {},
       response: mockMutationReturnValue,
       resolve: expect.any(Function),
     });
@@ -1153,5 +1367,381 @@ describe("mutateResources", () => {
       response.partial_failure_error instanceof errors.GoogleAdsFailure
     ).toEqual(true);
     expect(response.partial_failure_error).toEqual(failureMessage);
+  });
+});
+
+describe("mutateResources policy exemptions", () => {
+  it.each([
+    ["omitted", undefined],
+    ["create", "create" as const],
+  ])(
+    "keeps exempt_policy_violation_keys when the operation is %s",
+    (_, operation) => {
+      const customer = newCustomer({});
+      // @ts-expect-error protected method
+      const { request } = customer.buildMutationRequestAndService([
+        {
+          entity: "ad_group_criterion",
+          operation,
+          resource: { ad_group: "customers/1/adGroups/2" },
+          exempt_policy_violation_keys: [{ policy_name: "trademark" }],
+        },
+      ]);
+
+      const decoded = services.MutateGoogleAdsRequest.toObject(
+        services.MutateGoogleAdsRequest.decode(
+          services.MutateGoogleAdsRequest.encode(request).finish()
+        )
+      );
+
+      expect(
+        decoded.mutate_operations[0].ad_group_criterion_operation
+          .exempt_policy_violation_keys
+      ).toEqual([{ policy_name: "trademark" }]);
+    }
+  );
+});
+
+describe("stream request options", () => {
+  afterEach(() => {
+    jest.resetAllMocks();
+    axiosMock.reset();
+  });
+
+  const summaryRowSetting = enums.SummaryRowSetting.SUMMARY_ROW_WITH_RESULTS;
+
+  it("sends summary_row_setting from queryStream to searchStream", async () => {
+    const customer = newCustomer({});
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(200, mockStream());
+
+    const stream = customer.queryStream(mockGaqlQuery, {
+      summary_row_setting: summaryRowSetting,
+    });
+    for await (const row of stream) row;
+
+    expect(axiosMock.history.post[0].url).toMatch(/googleAds:searchStream$/);
+    expect(JSON.parse(axiosMock.history.post[0].data)).toEqual({
+      query: mockGaqlQuery,
+      summary_row_setting: summaryRowSetting,
+    });
+  });
+
+  it("sends only summary_row_setting from reportStream to searchStream", async () => {
+    const customer = newCustomer({});
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(200, mockStream());
+
+    const stream = customer.reportStream({
+      ...mockReportOptions,
+      summary_row_setting: summaryRowSetting,
+    });
+    for await (const row of stream) row;
+
+    const body = JSON.parse(axiosMock.history.post[0].data);
+    expect(Object.keys(body).sort()).toEqual(["query", "summary_row_setting"]);
+    expect(body.summary_row_setting).toBe(summaryRowSetting);
+  });
+
+  it("rejects search-only options at compile time", () => {
+    const customer = newCustomer({});
+    const typeChecks = () => {
+      // @ts-expect-error searchStream has no page_token
+      customer.queryStream(mockGaqlQuery, { page_token: "next-page" });
+      // @ts-expect-error searchStream has no validate_only
+      customer.queryStream(mockGaqlQuery, { validate_only: true });
+      customer.reportStream({
+        ...mockReportOptions,
+        // @ts-expect-error searchStream has no search_settings
+        search_settings: { return_summary_row: true },
+      });
+    };
+    expect(typeChecks).toBeInstanceOf(Function);
+  });
+});
+
+describe("max_reporting_rows on buffered queries", () => {
+  afterEach(() => {
+    jest.resetAllMocks();
+    axiosMock.reset();
+  });
+
+  const uncappedQuery = "SELECT campaign.id FROM campaign";
+  const rows = [
+    { campaign: { resourceName: "customers/1/campaigns/1", id: "1" } },
+    { campaign: { resourceName: "customers/1/campaigns/2", id: "2" } },
+  ];
+
+  function cappedCustomer(max_reporting_rows: number) {
+    const customer = new Customer(
+      {
+        client_id: MOCK_CLIENT_ID,
+        client_secret: MOCK_CLIENT_SECRET,
+        max_reporting_rows,
+      },
+      { customer_id: MOCK_CID, refresh_token: MOCK_REFRESH_TOKEN }
+    );
+    mockGetAccessToken(customer);
+    return customer;
+  }
+
+  it("rejects searchStream-backed queries that return more rows than the cap", async () => {
+    axiosMock.onPost().reply(200, mockStream([{ results: rows }]));
+
+    await expect(cappedCustomer(1).query(uncappedQuery)).rejects.toThrow(
+      'Exceeded the maximum number of rows set by "max_reporting_rows" (1).'
+    );
+  });
+
+  it("rejects paginated queries that return more rows than the cap", async () => {
+    axiosMock.onPost().reply(200, { results: rows });
+
+    await expect(
+      cappedCustomer(1).query(uncappedQuery, {
+        search_settings: { return_summary_row: true },
+      })
+    ).rejects.toThrow(
+      'Exceeded the maximum number of rows set by "max_reporting_rows" (1).'
+    );
+  });
+
+  it("lets a LIMIT clause bypass the cap", async () => {
+    axiosMock.onPost().reply(200, mockStream([{ results: rows }]));
+
+    await expect(
+      cappedCustomer(1).query(`${uncappedQuery} LIMIT 2`)
+    ).resolves.toHaveLength(2);
+  });
+
+  it("returns every row when the result fits the cap", async () => {
+    axiosMock.onPost().reply(200, mockStream([{ results: rows }]));
+
+    await expect(cappedCustomer(2).query(uncappedQuery)).resolves.toHaveLength(
+      2
+    );
+  });
+});
+
+describe("REST errors that are not GoogleAdsFailures", () => {
+  afterEach(() => {
+    jest.resetAllMocks();
+    axiosMock.reset();
+  });
+
+  const message =
+    "Google Ads API has not been used in project 1 before or it is disabled.";
+  const errorInfo = {
+    "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+    reason: "SERVICE_DISABLED",
+    domain: "googleapis.com",
+  };
+  const serviceDisabled = {
+    error: {
+      code: 403,
+      message,
+      status: "PERMISSION_DENIED",
+      details: [errorInfo],
+    },
+  };
+
+  it("throws the API error for search", async () => {
+    const customer = newCustomer({});
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(403, serviceDisabled);
+
+    // @ts-expect-error private method
+    const error = await customer.search(mockGaqlQuery).catch((e) => e);
+
+    expect(error).not.toBeInstanceOf(errors.GoogleAdsFailure);
+    expect(error).toMatchObject({ message, cause: serviceDisabled.error });
+  });
+
+  it("keeps the API message for streamed errors", async () => {
+    const customer = newCustomer({});
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(403, mockStream([serviceDisabled]));
+
+    const error = await customer.query(mockGaqlQuery).catch((e) => e);
+
+    expect(error).not.toBeInstanceOf(errors.GoogleAdsFailure);
+    expect(error).toMatchObject({
+      message,
+      cause: { details: [errorInfo] },
+    });
+  });
+
+  it("finds a GoogleAdsFailure that is not the first detail", async () => {
+    const customer = newCustomer({});
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(400, {
+      error: {
+        ...serviceDisabled.error,
+        details: [
+          errorInfo,
+          {
+            "@type": `type.googleapis.com/google.ads.googleads.${googleAdsVersion}.errors.GoogleAdsFailure`,
+            errors: [{ message: "Cannot select campaign.bogus." }],
+            requestId: "mock-request-id",
+          },
+        ],
+      },
+    });
+
+    // @ts-expect-error private method
+    const error = await customer.search(mockGaqlQuery).catch((e) => e);
+
+    expect(error).toBeInstanceOf(errors.GoogleAdsFailure);
+    expect(error).toMatchObject({ request_id: "mock-request-id" });
+  });
+});
+
+describe("REST errors and credentials", () => {
+  afterEach(() => {
+    jest.resetAllMocks();
+    axiosMock.reset();
+  });
+
+  const serviceDisabled = {
+    error: {
+      code: 403,
+      message:
+        "Google Ads API has not been used in project 1 before or it is disabled.",
+      status: "PERMISSION_DENIED",
+      details: [
+        {
+          "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+          reason: "SERVICE_DISABLED",
+        },
+      ],
+    },
+  };
+
+  async function searchError(reply: (mock: MockAdapter) => void) {
+    const customer = newCustomer({});
+    mockGetAccessToken(customer);
+    reply(axiosMock);
+    // @ts-expect-error private method
+    return customer.search(mockGaqlQuery).catch((e: unknown) => e);
+  }
+
+  async function streamError(reply: (mock: MockAdapter) => void) {
+    const customer = newCustomer({});
+    mockGetAccessToken(customer);
+    reply(axiosMock);
+    return customer
+      .query("SELECT campaign.id FROM campaign")
+      .catch((e: unknown) => e);
+  }
+
+  it.each([
+    [
+      "search API error",
+      () => searchError((m) => m.onPost().reply(403, serviceDisabled)),
+    ],
+    [
+      "stream API error",
+      () =>
+        streamError((m) =>
+          m.onPost().reply(403, mockStream([serviceDisabled]))
+        ),
+    ],
+    [
+      "search network error",
+      () => searchError((m) => m.onPost().networkError()),
+    ],
+    [
+      "stream network error",
+      () => streamError((m) => m.onPost().networkError()),
+    ],
+  ])("keeps the access and developer tokens out of a %s", async (_, run) => {
+    const shown = inspect(await run(), { depth: 20 });
+
+    expect(shown).not.toContain("mockedAccessTokenHere");
+    expect(shown).not.toContain(MOCK_DEVELOPER_TOKEN);
+  });
+
+  it("gives search and stream the same error for the same API response", async () => {
+    const fromSearch = await searchError((m) =>
+      m.onPost().reply(403, serviceDisabled)
+    );
+    axiosMock.reset();
+    const fromStream = await streamError((m) =>
+      m.onPost().reply(403, mockStream([serviceDisabled]))
+    );
+
+    expect(fromSearch).toEqual(fromStream);
+    expect(fromSearch).toMatchObject({
+      message: serviceDisabled.error.message,
+      cause: serviceDisabled.error,
+    });
+  });
+
+  it("keeps the error code of a failed request", async () => {
+    const error = await searchError((m) => m.onPost().timeout());
+
+    expect(error).toMatchObject({ cause: { code: "ECONNABORTED" } });
+    expect(inspect(error, { depth: 20 })).not.toContain(
+      "mockedAccessTokenHere"
+    );
+  });
+});
+
+describe("query hooks and the caller's options", () => {
+  afterEach(() => {
+    jest.resetAllMocks();
+    axiosMock.reset();
+  });
+
+  it("leaves the options passed to query unchanged", async () => {
+    const customer = newCustomer({
+      onQueryStart({ editOptions }) {
+        editOptions({ validate_only: true });
+      },
+    });
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(200, { results: [] });
+    const callerOptions: RequestOptions = { page_token: "next-page" };
+
+    await customer.query(mockGaqlQuery, callerOptions);
+
+    expect(callerOptions).toEqual({ page_token: "next-page" });
+    expect(JSON.parse(axiosMock.history.post[0].data)).toMatchObject({
+      validate_only: true,
+    });
+  });
+
+  it("leaves the options passed to queryStream unchanged", async () => {
+    const customer = newCustomer({
+      onStreamStart({ editOptions }) {
+        editOptions({
+          summary_row_setting: enums.SummaryRowSetting.SUMMARY_ROW_ONLY,
+        });
+      },
+    });
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(200, mockStream());
+    const callerOptions: StreamRequestOptions = {};
+
+    for await (const row of customer.queryStream(mockGaqlQuery, callerOptions))
+      row;
+
+    expect(callerOptions).toEqual({});
+    expect(JSON.parse(axiosMock.history.post[0].data)).toMatchObject({
+      summary_row_setting: enums.SummaryRowSetting.SUMMARY_ROW_ONLY,
+    });
+  });
+});
+
+describe("hook argument types", () => {
+  it("types query hooks with search report options and stream hooks with stream report options", () => {
+    const onQueryEnd: OnQueryEnd = ({ reportOptions }) => {
+      void reportOptions?.page_size;
+      void reportOptions?.search_settings?.return_summary_row;
+    };
+    const onStreamStart: OnStreamStart = ({ reportOptions }) => {
+      void reportOptions?.summary_row_setting;
+    };
+
+    expect(newCustomer({ onQueryEnd, onStreamStart })).toBeInstanceOf(Customer);
   });
 });

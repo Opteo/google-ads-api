@@ -1,14 +1,14 @@
 import { CancellableStream } from "google-gax";
 import axios from "axios";
-import Chain from "stream-chain";
-import streamJson from "stream-json";
-
-import StreamArray from "stream-json/streamers/StreamArray.js";
+import { chain } from "stream-chain";
+import { parser as jsonParser } from "stream-json";
+import { streamArray } from "stream-json/streamers/stream-array.js";
 
 import { ClientOptions } from "./client.js";
 import {
   BaseMutationHookArgs,
   BaseRequestHookArgs,
+  BaseStreamHookArgs,
   HookedCancellation,
   HookedResolution,
   Hooks,
@@ -17,7 +17,7 @@ import {
 import { decamelizeKeys } from "./parserRest.js";
 import { services, errors } from "./protos/index.js";
 import ServiceFactory from "./protos/autogen/serviceFactory.js";
-import { buildQuery } from "./query.js";
+import { buildQuery, buildStreamQuery } from "./query.js";
 import {
   CustomerOptions,
   MutateOperation,
@@ -25,12 +25,15 @@ import {
   PageToken,
   ReportOptions,
   ReportOptionsWithTotalResults,
+  ReportStreamOptions,
   RequestOptions,
   RequestOptionsWithTotalResults,
+  StreamRequestOptions,
 } from "./types.js";
 
 import { googleAdsVersion } from "./version.js";
 
+const DEFAULT_REST_ERROR_MESSAGE = "Unknown GoogleAdsFailure";
 const ROWS_PER_STREAMED_CHUNK = 10_000; // From experience, this is what can be expected from the API.
 
 export class Customer extends ServiceFactory {
@@ -64,7 +67,7 @@ export class Customer extends ServiceFactory {
   */
   public async *queryStream<T = services.IGoogleAdsRow>(
     gaqlQuery: string,
-    requestOptions: Readonly<RequestOptions> = {}
+    requestOptions: Readonly<StreamRequestOptions> = {}
   ): AsyncGenerator<T> {
     const stream = this.streamer<T>(gaqlQuery, requestOptions);
     for await (const row of stream) {
@@ -125,9 +128,9 @@ export class Customer extends ServiceFactory {
     for await (const row of stream) { ... }
   */
   public async *reportStream<T = services.IGoogleAdsRow>(
-    reportOptions: Readonly<ReportOptions>
+    reportOptions: Readonly<ReportStreamOptions>
   ): AsyncGenerator<T> {
-    const { gaqlQuery, requestOptions } = buildQuery(reportOptions);
+    const { gaqlQuery, requestOptions } = buildStreamQuery(reportOptions);
     const stream = this.streamer<T>(gaqlQuery, requestOptions, reportOptions);
     for await (const row of stream) {
       yield row;
@@ -144,11 +147,11 @@ export class Customer extends ServiceFactory {
     stream.on('end', () => { ... })
   */
   public async reportStreamRaw(
-    reportOptions: Readonly<ReportOptions>
+    reportOptions: Readonly<ReportStreamOptions>
   ): Promise<CancellableStream | void> {
-    const { gaqlQuery, requestOptions } = buildQuery(reportOptions);
+    const { gaqlQuery, requestOptions } = buildStreamQuery(reportOptions);
 
-    const baseHookArguments: BaseRequestHookArgs = {
+    const baseHookArguments: BaseStreamHookArgs = {
       credentials: this.credentials,
       query: gaqlQuery,
       reportOptions,
@@ -221,12 +224,7 @@ export class Customer extends ServiceFactory {
 
       return { response, nextPageToken, totalResultsCount, summaryRow };
     } catch (e: any) {
-      if (e.response?.data.error.details[0]) {
-        throw new errors.GoogleAdsFailure(
-          this.decamelizeKeysIfNeeded(e.response.data.error.details[0])
-        );
-      }
-      throw e;
+      throw this.restError(e, e?.response?.data?.error);
     }
   }
 
@@ -242,13 +240,13 @@ export class Customer extends ServiceFactory {
     */
     if (
       requestOptions.page_size === undefined &&
-      requestOptions.search_settings === undefined // If search_settings is set, we can't use searchStream.
+      requestOptions.page_token === undefined &&
+      requestOptions.validate_only === undefined &&
+      requestOptions.search_settings === undefined
     ) {
       // If no pagination or summary options are set, we can use the non-paginated search method.
-      const { response } = await this.useStreamToImitateRegularSearch(
-        gaqlQuery,
-        requestOptions
-      );
+      const { response } =
+        await this.useStreamToImitateRegularSearch(gaqlQuery);
 
       return { response };
     }
@@ -270,6 +268,7 @@ export class Customer extends ServiceFactory {
     let summaryRow = initialSearch.summaryRow;
 
     response.push(...initialSearch.response);
+    this.throwIfOverRowCap(gaqlQuery, response.length);
     nextPageToken = initialSearch.nextPageToken;
 
     while (nextPageToken) {
@@ -278,6 +277,7 @@ export class Customer extends ServiceFactory {
         page_token: nextPageToken,
       });
       response.push(...nextSearch.response);
+      this.throwIfOverRowCap(gaqlQuery, response.length);
       nextPageToken = nextSearch.nextPageToken;
       if (nextSearch.summaryRow) {
         summaryRow = nextSearch.summaryRow;
@@ -295,10 +295,7 @@ export class Customer extends ServiceFactory {
   // When report() is called, we use searchStream if possible, otherwise we use paginatedSearch.
   // Note that just like `paginatedSearch`, this method accumulates results in memory. Use
   // `reportStream` for a more memory-efficient alternative (at the cost of more CPU usage).
-  private async useStreamToImitateRegularSearch(
-    gaqlQuery: string,
-    requestOptions: Readonly<RequestOptions>
-  ): Promise<{
+  private async useStreamToImitateRegularSearch(gaqlQuery: string): Promise<{
     response: services.IGoogleAdsRow[];
   }> {
     const accessToken = await this.getAccessToken();
@@ -309,10 +306,7 @@ export class Customer extends ServiceFactory {
         accessToken,
         {
           responseType: "stream",
-          data: {
-            query: gaqlQuery,
-            ...requestOptions,
-          },
+          data: { query: gaqlQuery },
         }
       );
 
@@ -363,6 +357,7 @@ export class Customer extends ServiceFactory {
         }
       }
 
+      this.throwIfOverRowCap(gaqlQuery, accumulator.length);
       return { response: accumulator };
     } catch (e: any) {
       await this.handleStreamError(e);
@@ -372,10 +367,11 @@ export class Customer extends ServiceFactory {
 
   private async querier<T = services.IGoogleAdsRow[]>(
     gaqlQuery: string,
-    requestOptions: RequestOptionsWithTotalResults = {},
+    callerOptions: RequestOptionsWithTotalResults = {},
     reportOptions?: Readonly<ReportOptions>,
     useHooks = true
   ): Promise<{ response: T; totalResultsCount?: number }> {
+    const requestOptions: RequestOptionsWithTotalResults = { ...callerOptions };
     const baseHookArguments: BaseRequestHookArgs = {
       credentials: this.credentials,
       query: gaqlQuery,
@@ -438,10 +434,11 @@ export class Customer extends ServiceFactory {
 
   private async *streamer<T = services.IGoogleAdsRow[]>(
     gaqlQuery: string,
-    requestOptions: RequestOptions = {},
-    reportOptions?: Readonly<ReportOptions>
+    callerOptions: StreamRequestOptions = {},
+    reportOptions?: Readonly<ReportStreamOptions>
   ): AsyncGenerator<T> {
-    const baseHookArguments: BaseRequestHookArgs = {
+    const requestOptions: StreamRequestOptions = { ...callerOptions };
+    const baseHookArguments: BaseStreamHookArgs = {
       credentials: this.credentials,
       query: gaqlQuery,
       reportOptions,
@@ -488,14 +485,14 @@ export class Customer extends ServiceFactory {
       const stream = response.data as any;
 
       // The options below help to make the stream less CPU intensive.
-      const parser = new streamJson.Parser({
+      const parser = jsonParser.asStream({
         streamValues: false,
         streamKeys: false,
         packValues: true,
         packKeys: true,
       });
 
-      const pipeline = Chain.chain([stream, parser, StreamArray.streamArray()]);
+      const pipeline = chain([stream, parser, streamArray.asStream()]);
       let count = 0;
 
       try {
@@ -506,13 +503,7 @@ export class Customer extends ServiceFactory {
             [];
 
           count += results.length;
-          if (
-            this.clientOptions.max_reporting_rows &&
-            count > this.clientOptions.max_reporting_rows &&
-            !this.gaqlQueryStringIncludesLimit(gaqlQuery)
-          ) {
-            throw this.generateTooManyRowsError();
-          }
+          this.throwIfOverRowCap(gaqlQuery, count);
 
           for (const row of results) {
             const parsed = this.decamelizeKeysIfNeeded(row);
@@ -543,35 +534,22 @@ export class Customer extends ServiceFactory {
 
   private async handleStreamError(e: any) {
     if (!e?.response?.data) {
-      throw e;
+      throw this.restError(e);
     }
     // The error is a stream, so some effort is required to parse it.
     const stream = e.response.data as any;
 
-    const pipeline = Chain.chain([
+    const pipeline = chain([
       stream,
-      streamJson.parser(),
-      StreamArray.streamArray(),
+      jsonParser.asStream(),
+      streamArray.asStream(),
     ]);
 
-    const defaultErrorMessage = "Unknown GoogleAdsFailure";
-
-    let googleAdsFailure: errors.GoogleAdsFailure | Error = new Error(
-      defaultErrorMessage
-    );
+    let googleAdsFailure: unknown = new Error(DEFAULT_REST_ERROR_MESSAGE);
 
     // Only throw the first error.
     pipeline.once("data", (data) => {
-      if (data?.value?.error?.details?.[0]) {
-        googleAdsFailure = new errors.GoogleAdsFailure(
-          this.decamelizeKeysIfNeeded(data.value.error.details[0])
-        );
-      } else {
-        googleAdsFailure = new Error(
-          data?.value?.error?.message ?? defaultErrorMessage,
-          { cause: data?.value?.error ?? data?.value }
-        );
-      }
+      googleAdsFailure = this.restError(e, data?.value?.error ?? data?.value);
     });
 
     // Must always reject.
@@ -589,12 +567,14 @@ export class Customer extends ServiceFactory {
    */
   public async mutateResources<T>(
     mutations: MutateOperation<T>[],
-    mutateOptions: MutateOptions = {}
+    callerOptions: MutateOptions = {}
   ): Promise<services.MutateGoogleAdsResponse> {
+    const mutateOptions: MutateOptions = { ...callerOptions };
     const baseHookArguments: BaseMutationHookArgs = {
       credentials: this.credentials,
       method: "GoogleAdsService.mutate",
       mutations,
+      mutateOptions,
       isServiceCall: false,
     };
 
@@ -703,6 +683,45 @@ export class Customer extends ServiceFactory {
 
   private gaqlQueryStringIncludesLimit(gaqlQuery: string) {
     return gaqlQuery.toLowerCase().includes("limit ");
+  }
+
+  private throwIfOverRowCap(gaqlQuery: string, rowCount: number) {
+    if (
+      this.clientOptions.max_reporting_rows &&
+      rowCount > this.clientOptions.max_reporting_rows &&
+      !this.gaqlQueryStringIncludesLimit(gaqlQuery)
+    ) {
+      throw this.generateTooManyRowsError();
+    }
+  }
+
+  private restError(
+    error: unknown,
+    apiError?: { message?: string; details?: { "@type"?: string }[] }
+  ): unknown {
+    if (!axios.isAxiosError(error)) {
+      return error;
+    }
+    const failure = this.findGoogleAdsFailure(apiError);
+    if (failure) {
+      return new errors.GoogleAdsFailure(this.decamelizeKeysIfNeeded(failure));
+    }
+    if (apiError) {
+      return new Error(apiError.message ?? DEFAULT_REST_ERROR_MESSAGE, {
+        cause: apiError,
+      });
+    }
+    return new Error(error.message, {
+      cause: { code: error.code, status: error.response?.status },
+    });
+  }
+
+  private findGoogleAdsFailure(error?: {
+    details?: { "@type"?: string }[];
+  }): Record<string, unknown> | undefined {
+    return error?.details?.find((detail) =>
+      detail?.["@type"]?.endsWith(".errors.GoogleAdsFailure")
+    );
   }
 
   private generateTooManyRowsError() {

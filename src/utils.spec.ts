@@ -104,6 +104,25 @@ describe("toSnakeCase", () => {
 });
 
 describe("recursiveFieldMaskSearch", () => {
+  it("leaves undefined values out and keeps null as an explicit clear", () => {
+    const input = {
+      name: "Renamed",
+      status: undefined,
+      trackingUrlTemplate: null,
+      networkSettings: {
+        targetSearchNetwork: undefined,
+        targetContentNetwork: true,
+      },
+      shoppingSetting: { merchantId: undefined },
+    };
+
+    expect(recursiveFieldMaskSearch(input)).toEqual([
+      "name",
+      "tracking_url_template",
+      "network_settings.target_content_network",
+    ]);
+  });
+
   it("returns the keys of a single layered object in snake case", () => {
     const input = { key: true, secondKey: false, thirdKey: true };
     const output = ["key", "second_key", "third_key"];

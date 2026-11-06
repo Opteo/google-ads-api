@@ -33,7 +33,11 @@ export const decamelizeKeys = (input: any) => {
 
       for (let i = 0; i < length; i += 1) {
         const item = value[i];
-        result[i] = isObject(item) ? transformObject(item, parentPath) : item;
+        result[i] = isObject(item)
+          ? transformObject(item, parentPath)
+          : parentPath === undefined
+            ? item
+            : parseValue(parentPath, item);
       }
 
       return result;
@@ -78,11 +82,11 @@ const cachedDecamelize = (key: string) => {
 const cachedValueParser = (
   key: string,
   parentPath: string | undefined,
-  value: any
-) => {
-  let newValue = value;
+  value: unknown
+) => parseValue(parentPath ? `${parentPath}.${key}` : key, value);
 
-  const fullPath = parentPath ? `${parentPath}.${key}` : key;
+const parseValue = (fullPath: string, value: any) => {
+  let newValue = value;
 
   const megaDataType = getTypeFromPath(fullPath);
 
@@ -105,14 +109,18 @@ const cachedValueParser = (
       };
     } else {
       // Normal enum handling
-      newValue = megaDataType[value];
+      newValue =
+        typeof value === "number" ? value : (megaDataType[value] ?? value);
     }
   } else if (megaDataType === "INT64") {
     newValue = Number(value);
   } else if (megaDataType === "ENUM") {
     // Some enums aren't embedded in megaDataType, so we need this fallback.
-    // @ts-expect-error typescript doesn't like accessing items in a namespace with a string
-    newValue = enums[fields.enumFields[fullPath]][value]; // e.g. enums['CampaignStatus'][ENABLED] = "2"
+    newValue =
+      typeof value === "number"
+        ? value
+        : // @ts-expect-error typescript doesn't like accessing items in a namespace with a string
+          (enums[fields.enumFields[fullPath]]?.[value] ?? value); // e.g. enums['CampaignStatus'][ENABLED] = "2"
   }
 
   return newValue;

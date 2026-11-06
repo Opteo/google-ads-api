@@ -150,4 +150,91 @@ describe("decamelizeKeys", () => {
       request_id: "v88qTFjnLHkKAm5HwYKbgg",
     });
   });
+
+  it("parses each element of repeated enum and INT64 fields", () => {
+    expect(
+      decamelizeKeys({
+        campaign: {
+          excludedParentAssetFieldTypes: ["SITELINK", "CALLOUT"],
+          shoppingSetting: { advertisingPartnerIds: ["123", "9007199254740"] },
+          finalUrlSuffix: "a=b",
+        },
+      })
+    ).toEqual({
+      campaign: {
+        excluded_parent_asset_field_types: [
+          enums.AssetFieldType.SITELINK,
+          enums.AssetFieldType.CALLOUT,
+        ],
+        shopping_setting: { advertising_partner_ids: [123, 9007199254740] },
+        final_url_suffix: "a=b",
+      },
+    });
+  });
+
+  it("keeps numeric enum values, including ones this version does not know", () => {
+    expect(decamelizeKeys({ campaign: { status: 2 } })).toEqual({
+      campaign: { status: enums.CampaignStatus.ENABLED },
+    });
+    expect(decamelizeKeys({ campaign: { status: 999 } })).toEqual({
+      campaign: { status: 999 },
+    });
+  });
+
+  it("parses Performance Max listing group dimensions", () => {
+    expect(
+      decamelizeKeys({
+        assetGroupListingGroupFilter: {
+          path: {
+            dimensions: [
+              { productChannel: { channel: "ONLINE" } },
+              { productCondition: { condition: "NEW" } },
+            ],
+          },
+        },
+      })
+    ).toEqual({
+      asset_group_listing_group_filter: {
+        path: {
+          dimensions: [
+            {
+              product_channel: {
+                channel: enums.ListingGroupFilterProductChannel.ONLINE,
+              },
+            },
+            {
+              product_condition: {
+                condition: enums.ListingGroupFilterProductCondition.NEW,
+              },
+            },
+          ],
+        },
+      },
+    });
+  });
+
+  it("keeps enum names this version does not know", () => {
+    expect(decamelizeKeys({ campaign: { status: "FUTURE_STATUS" } })).toEqual({
+      campaign: { status: "FUTURE_STATUS" },
+    });
+    expect(decamelizeKeys({ segments: { device: "FUTURE_DEVICE" } })).toEqual({
+      segments: { device: "FUTURE_DEVICE" },
+    });
+  });
+
+  it("keeps the raw value of an enum field whose enum it cannot resolve", () => {
+    jest.isolateModules(() => {
+      jest.doMock("./protos/autogen/fields", () => ({
+        fields: { enumFields: {} },
+        fieldDataTypes: JSON.stringify({ campaign: { status: "ENUM" } }),
+      }));
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const isolated = require("./parserRest");
+      expect(
+        isolated.decamelizeKeys({ campaign: { status: "ENABLED" } })
+      ).toEqual({
+        campaign: { status: "ENABLED" },
+      });
+    });
+  });
 });

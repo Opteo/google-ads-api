@@ -53,7 +53,8 @@ export async function compileServices(): Promise<void> {
 import { ClientOptions } from "../../client.js";
 import { CustomerOptions } from "../../types.js";
 import { Service } from "../../service.js";
-import { resources, services, protobuf, longrunning } from "../index.js";
+import type { LROperation } from "google-gax";
+import { resources, services, protobuf } from "../index.js";
 import {
   BaseMutationHookArgs,
   BaseServiceHookArgs,
@@ -101,7 +102,7 @@ export default class ServiceFactory extends Service {
         if (mutateOptions.hasOptions) {
           serviceTypes.push(mutateOptions.type);
         } else {
-          serviceTypes.push("type MutateOptions = never");
+          serviceTypes.push("type MutateOptions = Record<string, never>");
         }
         continue;
       }
@@ -115,7 +116,7 @@ export default class ServiceFactory extends Service {
       continue;
     }
 
-    const resourceName = name.replace("Service", "");
+    const resourceName = name.replace(/Service$/, "");
     const pluralServiceName = pluralize(toCamelCase(resourceName));
 
     const serviceInit = buildServiceInit(
@@ -148,17 +149,24 @@ function compileSpecialMethod(
 ): string {
   const serviceMethod = toCamelCase(methodName);
   const requestType = `services.${methodDef.requestType}`;
+  const definitions = allServices as unknown as Record<string, ProtoDefinition>;
+  const paged = Boolean(
+    definitions[methodDef.requestType]?.fields?.page_token &&
+    definitions[methodDef.requestType]?.fields?.page_size &&
+    definitions[methodDef.responseType]?.fields?.next_page_token
+  );
 
-  // Some special methods use types such as google.longrunning.Operation
-  let responseType = methodDef.responseType.includes("google.")
-    ? methodDef.responseType.split("google.")[1]
-    : `services.${methodDef.responseType}`;
-
-  if (methodDef.responseType.includes(`.googleads.${googleAdsVersion}`)) {
-    [, responseType] = methodDef.responseType.split(
-      `.googleads.${googleAdsVersion}.`
-    );
-  }
+  const responseType = methodDef.responseType.includes("google.longrunning.")
+    ? `LROperation<${interfaceType(
+        methodDef.options["(google.longrunning.operation_info).response_type"]
+      )}, ${interfaceType(
+        methodDef.options["(google.longrunning.operation_info).metadata_type"]
+      )}>`
+    : methodDef.responseType.includes(`.googleads.${googleAdsVersion}.`)
+      ? methodDef.responseType.split(`.googleads.${googleAdsVersion}.`)[1]
+      : methodDef.responseType.startsWith("google.")
+        ? methodDef.responseType.replace("google.", "")
+        : `services.${methodDef.responseType}`;
 
   return `
     /**
@@ -168,12 +176,10 @@ function compileSpecialMethod(
       ${buildServiceHookStart(serviceName, methodName)}
       try {
         // @ts-expect-error Response is an array type
-        const [response] = await service.${serviceMethod}(request, {
-          // @ts-expect-error This arg doesn't exist in the type definitions
-          otherArgs: {
-            headers: this.callHeaders,
-          },
-        });
+        const [${paged ? ", , " : ""}response] = await service.${serviceMethod}(request, {
+          ${paged ? "autoPaginate: false," : ""}
+          otherArgs: { headers: this.callHeaders },
+        } as never);
         ${buildServiceHookEnd()}
         return response;
       } catch (err) {
@@ -181,6 +187,15 @@ function compileSpecialMethod(
       }
     }
   `;
+}
+
+function interfaceType(protoType: string): string {
+  const path = protoType
+    .replace(`google.ads.googleads.${googleAdsVersion}.`, "")
+    .replace("google.", "")
+    .split(".");
+  path[path.length - 1] = `I${path[path.length - 1]}`;
+  return path.join(".");
 }
 
 function buildServiceHookStart(
@@ -263,8 +278,11 @@ function compileMutateMethods(
   );
 
   const serviceMethod = toCamelCase(methodName);
-  const resourceName = serviceName.replace("Service", "");
-  const argName = pluralize(toCamelCase(resourceName));
+  const resourceName = serviceName.replace(/Service$/, "");
+  const singular = Boolean(req.fields?.operation);
+  const argName = singular
+    ? toCamelCase(resourceName)
+    : pluralize(toCamelCase(resourceName));
 
   const types = {
     resource: `resources.I${resourceName}`,
@@ -274,7 +292,7 @@ function compileMutateMethods(
     response: `services.${methodDef.responseType}`,
   };
 
-  const options = Object.keys(req.fields).filter(
+  const options = Object.keys(req.fields ?? {}).filter(
     (k) => !["customer_id", "operations", "operation"].includes(k)
   );
 
@@ -294,7 +312,8 @@ function compileMutateMethods(
           types.operation,
           types.response,
           serviceMethod,
-          options
+          options,
+          singular
         )
       );
     }
@@ -313,7 +332,8 @@ function compileMutateMethods(
         types.operation,
         types.response,
         serviceMethod,
-        options
+        options,
+        singular
       )
     );
   }
@@ -352,13 +372,15 @@ function buildMutateMethod(
   operationType: string,
   responseType: string,
   methodName: string,
-  mutationOptions: string[]
+  mutationOptions: string[],
+  singular: boolean
 ): string {
   const isUpdate = mutation === "update";
   const updateMaskMessageArg = isUpdate ? `, ${requestClass}` : "";
 
-  const policyViolationArgType =
-    argName !== "adGroupCriteria"
+  const policyViolationArgType = singular
+    ? `${resourceType} | ${requestClass}`
+    : argName !== "adGroupCriteria"
       ? `(${resourceType} | ${requestClass})[]`
       : `((${resourceType} & {exempt_policy_violation_keys?: services.AdGroupCriterionOperation['exempt_policy_violation_keys'] } ) | (${requestClass} & {exempt_policy_violation_keys?: services.AdGroupCriterionOperation['exempt_policy_violation_keys'] }))[]`;
   return `
@@ -369,7 +391,7 @@ function buildMutateMethod(
     ${mutation}: async (
       ${argName}: ${
         mutation === "remove"
-          ? `${resourceType}[]`
+          ? `${resourceType}${singular ? "" : "[]"}`
           : `${policyViolationArgType}`
       } ,
       options?: MutateOptions
@@ -379,15 +401,16 @@ function buildMutateMethod(
         ${resourceType}
       >(
         "${mutation}", 
-        ${argName}
+        ${singular ? `[${argName}]` : argName}
         ${isUpdate ? "// @ts-expect-error Static class type here is fine" : ""}
         ${updateMaskMessageArg}
       );
-      const request = this.buildRequest<
+      const mutateOptions: MutateOptions = { ...options };
+      const request = this.${singular ? "buildSingleOperationRequest" : "buildRequest"}<
         ${operationType},
         ${requestType},
         MutateOptions
-      >(ops, options);
+      >(${singular ? "ops[0]" : "ops"}, mutateOptions);
       ${buildMutateHookStart(serviceName, methodName)}
       try {
         // @ts-expect-error Response is an array type
@@ -419,6 +442,7 @@ function buildMutateHookStart(serviceName: string, methodName: string): string {
     credentials: this.credentials,
     method: "${serviceName}.${methodName}",
     mutation: request,
+    mutateOptions,
     isServiceCall: true,
   };
   if (this.hooks.onMutationStart) {
@@ -433,6 +457,8 @@ function buildMutateHookStart(serviceName: string, methodName: string): string {
         Object.entries(options).forEach(([key, val]) => {
           // @ts-expect-error Index with key type is fine
           request[key] = val;
+          // @ts-expect-error Index with key type is fine
+          mutateOptions[key] = val;
         });
       },
     });

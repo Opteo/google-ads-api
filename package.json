@@ -1,24 +1,25 @@
 {
   "name": "google-ads-api",
-  "version": "25.1.0",
+  "version": "26.1.0-beta.0",
   "description": "Google Ads API Client Library for Node.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Opteo/google-ads-api.git"
   },
-  "main": "./build/cjs/index.js",
+  "main": "./build/index.js",
   "files": [
-    "build/cjs",
-    "build/esm"
+    "build",
+    "!build/scripts",
+    "!build/*.tsbuildinfo"
   ],
   "scripts": {
     "test": "jest",
     "lint": "eslint . --ext .ts",
-    "build": "tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json && printf '{\"type\":\"module\"}' > build/esm/package.json",
-    "compile": "esbuild --bundle --platform=node ./scripts/index.ts --outfile=./build/scripts/index.js && node ./build/scripts/index.js",
+    "build": "tsc -p tsconfig.build.json",
+    "compile": "esbuild --bundle --platform=node ./scripts/index.ts --outfile=./build/scripts/index.cjs && node ./build/scripts/index.cjs",
     "prepare": "rm -rf build && npm run build",
     "node": "tsx",
-    "test:package": "npm run build && node tests/package.mjs",
+    "test:package": "npm run build && node tests/package.mjs && node tests/package.cjs",
     "postcompile": "prettier --write src/protos/autogen"
   },
   "author": "Opteo",
@@ -27,11 +28,12 @@
     "@isaacs/ttlcache": "^1.4.0",
     "axios": "^1.6.7",
     "circ-json": "^1.0.4",
-    "google-ads-node": "25.1.0",
-    "google-auth-library": "^11.0.2",
-    "google-gax": "^6.3.0",
+    "google-ads-node": "26.1.0-beta.0",
+    "google-auth-library": "^11.3.3",
+    "google-gax": "^6.16.0",
     "long": "^4.0.0",
-    "stream-json": "^1.8.0"
+    "stream-chain": "^4.2.6",
+    "stream-json": "^3.7.0"
   },
   "devDependencies": {
     "@types/jest": "^29.0.1",
@@ -39,11 +41,10 @@
     "@types/long": "^4.0.0",
     "@types/node": "^22.5.4",
     "@types/pluralize": "^0.0.29",
-    "@types/stream-json": "^1.7.7",
     "@typescript-eslint/eslint-plugin": "^4.8.2",
     "@typescript-eslint/parser": "^4.8.2",
     "axios-mock-adapter": "^1.22.0",
-    "esbuild": "^0.20.1",
+    "esbuild": "^0.28.2",
     "eslint": "^7.14.0",
     "jest": "^29.7.0",
     "lodash": "^4.17.21",
@@ -67,41 +68,23 @@
     "gads"
   ],
   "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72",
-  "type": "commonjs",
+  "type": "module",
   "engines": {
-    "node": ">=22"
+    "node": ">=22.12"
   },
-  "types": "./build/cjs/index.d.ts",
+  "types": "./build/index.d.ts",
   "exports": {
     ".": {
-      "import": {
-        "types": "./build/esm/index.d.ts",
-        "default": "./build/esm/index.js"
-      },
-      "require": {
-        "types": "./build/cjs/index.d.ts",
-        "default": "./build/cjs/index.js"
-      }
+      "types": "./build/index.d.ts",
+      "default": "./build/index.js"
     },
     "./enums": {
-      "import": {
-        "types": "./build/esm/protos/autogen/enums.d.ts",
-        "default": "./build/esm/protos/autogen/enums.js"
-      },
-      "require": {
-        "types": "./build/cjs/protos/autogen/enums.d.ts",
-        "default": "./build/cjs/protos/autogen/enums.js"
-      }
+      "types": "./build/protos/autogen/enums.d.ts",
+      "default": "./build/protos/autogen/enums.js"
     },
     "./fields": {
-      "import": {
-        "types": "./build/esm/protos/autogen/fields.d.ts",
-        "default": "./build/esm/protos/autogen/fields.js"
-      },
-      "require": {
-        "types": "./build/cjs/protos/autogen/fields.d.ts",
-        "default": "./build/cjs/protos/autogen/fields.js"
-      }
+      "types": "./build/protos/autogen/fields.d.ts",
+      "default": "./build/protos/autogen/fields.js"
     },
     "./package.json": "./package.json"
   }

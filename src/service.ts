@@ -15,6 +15,7 @@ import {
   RequestOptions,
   MutateOperation,
   MutateOptions,
+  StreamRequestOptions,
 } from "./types.js";
 import { getFieldMask, toSnakeCase } from "./utils.js";
 import { googleAdsVersion } from "./version.js";
@@ -30,9 +31,28 @@ type ServiceConstructor = new (options: {
 }) => { close: () => Promise<void> };
 
 export interface CallHeaders {
-  "developer-token": string;
+  "developer-token"?: string;
   "login-customer-id"?: string;
   "linked-customer-id"?: string;
+}
+
+type GaxClient = {
+  _defaults?: Record<
+    string,
+    { otherArgs?: { metadataBuilder?: (...args: unknown[]) => grpc.Metadata } }
+  >;
+};
+
+export function cloneMetadataPerCall(client: GaxClient): void {
+  const shared = new Set(
+    Object.values(client._defaults ?? {}).map(({ otherArgs }) => otherArgs)
+  );
+  for (const otherArgs of shared) {
+    const buildMetadata = otherArgs?.metadataBuilder;
+    if (otherArgs && buildMetadata) {
+      otherArgs.metadataBuilder = (...args) => buildMetadata(...args).clone();
+    }
+  }
 }
 
 // Close connections when services are removed from the cache
@@ -51,9 +71,10 @@ export const serviceCache = new TTLCache({
 });
 
 // A global access token cache used by REST calls. Issued tokens expire after 1 hour, so we cache them for 50 minutes.
-const accessTokenCache = new TTLCache<string, string>({
+const oAuth2ClientCache = new TTLCache<string, OAuth2Client>({
   max: 100_000,
-  ttl: 50 * 60 * 1000, // 50 minutes
+  ttl: 60 * 60 * 1000,
+  updateAgeOnGet: true,
 });
 
 export class Service {
@@ -83,9 +104,13 @@ export class Service {
   }
 
   protected get callHeaders(): CallHeaders {
-    const headers: CallHeaders = {
-      "developer-token": this.clientOptions.developer_token,
-    };
+    const headers: CallHeaders = {};
+    // Omitted rather than sent empty: the API rejects an empty developer-token
+    // header (DEVELOPER_TOKEN_PARAMETER_MISSING) but accepts a missing one.
+    const developerToken = this.clientOptions.developer_token?.trim();
+    if (developerToken) {
+      headers["developer-token"] = developerToken;
+    }
     if (this.customerOptions.login_customer_id) {
       headers["login-customer-id"] = this.customerOptions.login_customer_id;
     }
@@ -115,29 +140,24 @@ export class Service {
 
   // Used only by REST calls
   public async getAccessToken(): Promise<string> {
-    const cachedToken = accessTokenCache.get(
-      this.customerOptions.refresh_token
-    );
-    if (cachedToken) {
-      return cachedToken;
+    const cacheKey = `${this.clientOptions.client_id}_${this.customerOptions.refresh_token}`;
+    let oAuth2Client = oAuth2ClientCache.get(cacheKey);
+    if (!oAuth2Client) {
+      oAuth2Client = new OAuth2Client({
+        clientId: this.clientOptions.client_id,
+        clientSecret: this.clientOptions.client_secret,
+      });
+      oAuth2Client.setCredentials({
+        refresh_token: this.customerOptions.refresh_token,
+      });
+      oAuth2ClientCache.set(cacheKey, oAuth2Client);
     }
-
-    const oAuth2Client = new OAuth2Client({
-      clientId: this.clientOptions.client_id,
-      clientSecret: this.clientOptions.client_secret,
-    });
-
-    oAuth2Client.setCredentials({
-      refresh_token: this.customerOptions.refresh_token,
-    });
 
     const { token } = await oAuth2Client.getAccessToken();
 
     if (typeof token !== "string") {
       throw new Error("Failed to retrieve access token");
     }
-
-    accessTokenCache.set(this.customerOptions.refresh_token, token);
 
     return token;
   }
@@ -170,6 +190,7 @@ export class Service {
       sslCreds: this.getCredentials(),
       universeDomain: "googleapis.com",
     });
+    cloneMetadataPerCall(client as unknown as GaxClient);
 
     if (!options?.skipCache) {
       serviceCache.set(serviceCacheKey, client);
@@ -180,8 +201,7 @@ export class Service {
   protected getGoogleAdsError(error: Error): errors.GoogleAdsFailure | Error {
     const trailer = (
       error as
-        | { metadata?: { internalRepr?: Map<string, Buffer[]> } }
-        | undefined
+        { metadata?: { internalRepr?: Map<string, Buffer[]> } } | undefined
     )?.metadata?.internalRepr?.get?.(FAILURE_KEY);
     if (typeof trailer?.[0] === "undefined") {
       return error;
@@ -238,7 +258,7 @@ export class Service {
 
   protected buildSearchStreamRequestAndService(
     gaql: string,
-    options?: RequestOptions
+    options?: StreamRequestOptions
   ): {
     service: GoogleAdsServiceClient;
     request: services.SearchGoogleAdsStreamRequest;
@@ -269,11 +289,12 @@ export class Service {
     const mutateOperations = mutations.map(
       (mutation): services.MutateOperation => {
         const opKey = toSnakeCase(`${mutation.entity}Operation`);
+        const operationType = mutation.operation ?? "create";
         const operation = {
-          [mutation.operation ?? "create"]: mutation.resource,
+          [operationType]: mutation.resource,
         };
         if (
-          mutation.operation === "create" &&
+          operationType === "create" &&
           //@ts-ignore
           mutation?.exempt_policy_violation_keys?.length
         ) {
@@ -319,10 +340,8 @@ export class Service {
       } else if (type === "update") {
         // @ts-expect-error Field required for updates
         op.update_mask = getFieldMask(
-          // @ts-expect-error Message types have a toObject method
-          message.toObject(e, {
-            defaults: false,
-          })
+          // @ts-expect-error Message types are constructors with a toObject method
+          e instanceof message ? message.toObject(e, { defaults: false }) : e
         );
       }
       return op;
@@ -337,6 +356,18 @@ export class Service {
     const request = {
       customer_id: this.customerOptions.customer_id,
       operations,
+      ...options,
+    };
+    return request as unknown as Req;
+  }
+
+  protected buildSingleOperationRequest<Op, Req, Options>(
+    operation: Op,
+    options?: Options
+  ): Req {
+    const request = {
+      customer_id: this.customerOptions.customer_id,
+      operation,
       ...options,
     };
     return request as unknown as Req;

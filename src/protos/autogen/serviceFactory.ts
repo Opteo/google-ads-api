@@ -3,7 +3,8 @@
 import { ClientOptions } from "../../client.js";
 import { CustomerOptions } from "../../types.js";
 import { Service } from "../../service.js";
-import { resources, services, protobuf, longrunning } from "../index.js";
+import type { LROperation } from "google-gax";
+import { resources, services, protobuf } from "../index.js";
 import {
   BaseMutationHookArgs,
   BaseServiceHookArgs,
@@ -22,7 +23,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AccountBudgetProposalService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AccountBudgetProposalService
    */
   public get accountBudgetProposals() {
     const service = this.loadService<services.AccountBudgetProposalService>(
@@ -37,24 +38,25 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAccountBudgetProposalResponse
        */
       create: async (
-        accountBudgetProposals: (
-          resources.IAccountBudgetProposal | resources.AccountBudgetProposal
-        )[],
+        accountBudgetProposal:
+          resources.IAccountBudgetProposal | resources.AccountBudgetProposal,
         options?: MutateOptions
       ): Promise<services.MutateAccountBudgetProposalResponse> => {
         const ops = this.buildOperations<
           services.AccountBudgetProposalOperation,
           resources.IAccountBudgetProposal
-        >("create", accountBudgetProposals);
-        const request = this.buildRequest<
+        >("create", [accountBudgetProposal]);
+        const mutateOptions: MutateOptions = { ...options };
+        const request = this.buildSingleOperationRequest<
           services.AccountBudgetProposalOperation,
           services.IMutateAccountBudgetProposalRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AccountBudgetProposalService.mutateAccountBudgetProposal",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -69,6 +71,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -119,22 +123,24 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAccountBudgetProposalResponse
        */
       remove: async (
-        accountBudgetProposals: string[],
+        accountBudgetProposal: string,
         options?: MutateOptions
       ): Promise<services.MutateAccountBudgetProposalResponse> => {
         const ops = this.buildOperations<
           services.AccountBudgetProposalOperation,
           string
-        >("remove", accountBudgetProposals);
-        const request = this.buildRequest<
+        >("remove", [accountBudgetProposal]);
+        const mutateOptions: MutateOptions = { ...options };
+        const request = this.buildSingleOperationRequest<
           services.AccountBudgetProposalOperation,
           services.IMutateAccountBudgetProposalRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AccountBudgetProposalService.mutateAccountBudgetProposal",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -149,6 +155,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -197,7 +205,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AccountLinkService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AccountLinkService
    */
   public get accountLinks() {
     const service = this.loadService<services.AccountLinkService>(
@@ -211,7 +219,7 @@ export default class ServiceFactory extends Service {
     >;
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AccountLinkService#createaccountlink
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AccountLinkService#createaccountlink
        */
       createAccountLink: async (
         request: services.CreateAccountLinkRequest
@@ -243,11 +251,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.createAccountLink(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -280,7 +285,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAccountLinkResponse
        */
       update: async (
-        accountLinks: (resources.IAccountLink | resources.AccountLink)[],
+        accountLink: resources.IAccountLink | resources.AccountLink,
         options?: MutateOptions
       ): Promise<services.MutateAccountLinkResponse> => {
         const ops = this.buildOperations<
@@ -288,19 +293,21 @@ export default class ServiceFactory extends Service {
           resources.IAccountLink
         >(
           "update",
-          accountLinks,
+          [accountLink],
           // @ts-expect-error Static class type here is fine
           resources.AccountLink
         );
-        const request = this.buildRequest<
+        const mutateOptions: MutateOptions = { ...options };
+        const request = this.buildSingleOperationRequest<
           services.AccountLinkOperation,
           services.IMutateAccountLinkRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AccountLinkService.mutateAccountLink",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -315,6 +322,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -362,22 +371,24 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateAccountLinkResponse
        */
       remove: async (
-        accountLinks: string[],
+        accountLink: string,
         options?: MutateOptions
       ): Promise<services.MutateAccountLinkResponse> => {
         const ops = this.buildOperations<services.AccountLinkOperation, string>(
           "remove",
-          accountLinks
+          [accountLink]
         );
-        const request = this.buildRequest<
+        const mutateOptions: MutateOptions = { ...options };
+        const request = this.buildSingleOperationRequest<
           services.AccountLinkOperation,
           services.IMutateAccountLinkRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AccountLinkService.mutateAccountLink",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -392,6 +403,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -437,7 +450,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AdGroupAdLabelService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AdGroupAdLabelService
    */
   public get adGroupAdLabels() {
     const service = this.loadService<services.AdGroupAdLabelService>(
@@ -464,15 +477,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupAdLabelOperation,
           resources.IAdGroupAdLabel
         >("create", adGroupAdLabels);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupAdLabelOperation,
           services.IMutateAdGroupAdLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupAdLabelService.mutateAdGroupAdLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -487,6 +502,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -541,15 +558,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupAdLabelOperation,
           string
         >("remove", adGroupAdLabels);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupAdLabelOperation,
           services.IMutateAdGroupAdLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupAdLabelService.mutateAdGroupAdLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -564,6 +583,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -609,7 +630,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AdGroupAdService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AdGroupAdService
    */
   public get adGroupAds() {
     const service = this.loadService<services.AdGroupAdService>(
@@ -634,15 +655,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupAdOperation,
           resources.IAdGroupAd
         >("create", adGroupAds);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupAdOperation,
           services.IMutateAdGroupAdsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupAdService.mutateAdGroupAds",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -657,6 +680,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -716,15 +741,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.AdGroupAd
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupAdOperation,
           services.IMutateAdGroupAdsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupAdService.mutateAdGroupAds",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -739,6 +766,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -793,15 +822,17 @@ export default class ServiceFactory extends Service {
           "remove",
           adGroupAds
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupAdOperation,
           services.IMutateAdGroupAdsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupAdService.mutateAdGroupAds",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -816,6 +847,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -859,7 +892,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AdGroupAdService#removeautomaticallycreatedassets
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AdGroupAdService#removeautomaticallycreatedassets
        */
       removeAutomaticallyCreatedAssets: async (
         request: services.RemoveAutomaticallyCreatedAssetsRequest
@@ -893,11 +926,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.removeAutomaticallyCreatedAssets(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -929,7 +959,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AdGroupAssetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AdGroupAssetService
    */
   public get adGroupAssets() {
     const service = this.loadService<services.AdGroupAssetService>(
@@ -954,15 +984,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupAssetOperation,
           resources.IAdGroupAsset
         >("create", adGroupAssets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupAssetOperation,
           services.IMutateAdGroupAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupAssetService.mutateAdGroupAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -977,6 +1009,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -1036,15 +1070,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.AdGroupAsset
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupAssetOperation,
           services.IMutateAdGroupAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupAssetService.mutateAdGroupAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -1059,6 +1095,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -1113,15 +1151,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupAssetOperation,
           string
         >("remove", adGroupAssets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupAssetOperation,
           services.IMutateAdGroupAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupAssetService.mutateAdGroupAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -1136,6 +1176,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -1181,7 +1223,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AdGroupAssetSetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AdGroupAssetSetService
    */
   public get adGroupAssetSets() {
     const service = this.loadService<services.AdGroupAssetSetService>(
@@ -1208,15 +1250,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupAssetSetOperation,
           resources.IAdGroupAssetSet
         >("create", adGroupAssetSets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupAssetSetOperation,
           services.IMutateAdGroupAssetSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupAssetSetService.mutateAdGroupAssetSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -1231,6 +1275,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -1285,15 +1331,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupAssetSetOperation,
           string
         >("remove", adGroupAssetSets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupAssetSetOperation,
           services.IMutateAdGroupAssetSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupAssetSetService.mutateAdGroupAssetSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -1308,6 +1356,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -1353,7 +1403,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AdGroupBidModifierService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AdGroupBidModifierService
    */
   public get adGroupBidModifiers() {
     const service = this.loadService<services.AdGroupBidModifierService>(
@@ -1380,15 +1430,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupBidModifierOperation,
           resources.IAdGroupBidModifier
         >("create", adGroupBidModifiers);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupBidModifierOperation,
           services.IMutateAdGroupBidModifiersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupBidModifierService.mutateAdGroupBidModifiers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -1403,6 +1455,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -1464,15 +1518,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.AdGroupBidModifier
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupBidModifierOperation,
           services.IMutateAdGroupBidModifiersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupBidModifierService.mutateAdGroupBidModifiers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -1487,6 +1543,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -1541,15 +1599,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupBidModifierOperation,
           string
         >("remove", adGroupBidModifiers);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupBidModifierOperation,
           services.IMutateAdGroupBidModifiersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupBidModifierService.mutateAdGroupBidModifiers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -1564,6 +1624,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -1609,7 +1671,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AdGroupCriterionCustomizerService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AdGroupCriterionCustomizerService
    */
   public get adGroupCriterionCustomizers() {
     const service =
@@ -1638,16 +1700,18 @@ export default class ServiceFactory extends Service {
           services.AdGroupCriterionCustomizerOperation,
           resources.IAdGroupCriterionCustomizer
         >("create", adGroupCriterionCustomizers);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupCriterionCustomizerOperation,
           services.IMutateAdGroupCriterionCustomizersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "AdGroupCriterionCustomizerService.mutateAdGroupCriterionCustomizers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -1662,6 +1726,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -1719,16 +1785,18 @@ export default class ServiceFactory extends Service {
           services.AdGroupCriterionCustomizerOperation,
           string
         >("remove", adGroupCriterionCustomizers);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupCriterionCustomizerOperation,
           services.IMutateAdGroupCriterionCustomizersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "AdGroupCriterionCustomizerService.mutateAdGroupCriterionCustomizers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -1743,6 +1811,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -1791,7 +1861,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AdGroupCriterionLabelService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AdGroupCriterionLabelService
    */
   public get adGroupCriterionLabels() {
     const service = this.loadService<services.AdGroupCriterionLabelService>(
@@ -1818,15 +1888,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupCriterionLabelOperation,
           resources.IAdGroupCriterionLabel
         >("create", adGroupCriterionLabels);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupCriterionLabelOperation,
           services.IMutateAdGroupCriterionLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupCriterionLabelService.mutateAdGroupCriterionLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -1841,6 +1913,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -1898,15 +1972,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupCriterionLabelOperation,
           string
         >("remove", adGroupCriterionLabels);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupCriterionLabelOperation,
           services.IMutateAdGroupCriterionLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupCriterionLabelService.mutateAdGroupCriterionLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -1921,6 +1997,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -1969,7 +2047,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AdGroupCriterionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AdGroupCriterionService
    */
   public get adGroupCriteria() {
     const service = this.loadService<services.AdGroupCriterionService>(
@@ -2001,15 +2079,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupCriterionOperation,
           resources.IAdGroupCriterion
         >("create", adGroupCriteria);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupCriterionOperation,
           services.IMutateAdGroupCriteriaRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupCriterionService.mutateAdGroupCriteria",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -2024,6 +2104,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -2090,15 +2172,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.AdGroupCriterion
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupCriterionOperation,
           services.IMutateAdGroupCriteriaRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupCriterionService.mutateAdGroupCriteria",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -2113,6 +2197,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -2167,15 +2253,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupCriterionOperation,
           string
         >("remove", adGroupCriteria);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupCriterionOperation,
           services.IMutateAdGroupCriteriaRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupCriterionService.mutateAdGroupCriteria",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -2190,6 +2278,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -2235,7 +2325,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AdGroupCustomizerService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AdGroupCustomizerService
    */
   public get adGroupCustomizers() {
     const service = this.loadService<services.AdGroupCustomizerService>(
@@ -2262,15 +2352,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupCustomizerOperation,
           resources.IAdGroupCustomizer
         >("create", adGroupCustomizers);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupCustomizerOperation,
           services.IMutateAdGroupCustomizersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupCustomizerService.mutateAdGroupCustomizers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -2285,6 +2377,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -2339,15 +2433,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupCustomizerOperation,
           string
         >("remove", adGroupCustomizers);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupCustomizerOperation,
           services.IMutateAdGroupCustomizersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupCustomizerService.mutateAdGroupCustomizers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -2362,6 +2458,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -2407,7 +2505,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AdGroupLabelService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AdGroupLabelService
    */
   public get adGroupLabels() {
     const service = this.loadService<services.AdGroupLabelService>(
@@ -2432,15 +2530,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupLabelOperation,
           resources.IAdGroupLabel
         >("create", adGroupLabels);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupLabelOperation,
           services.IMutateAdGroupLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupLabelService.mutateAdGroupLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -2455,6 +2555,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -2509,15 +2611,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupLabelOperation,
           string
         >("remove", adGroupLabels);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupLabelOperation,
           services.IMutateAdGroupLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupLabelService.mutateAdGroupLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -2532,6 +2636,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -2577,7 +2683,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AdGroupService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AdGroupService
    */
   public get adGroups() {
     const service = this.loadService<services.AdGroupService>(
@@ -2602,15 +2708,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupOperation,
           resources.IAdGroup
         >("create", adGroups);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupOperation,
           services.IMutateAdGroupsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupService.mutateAdGroups",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -2625,6 +2733,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -2684,15 +2794,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.AdGroup
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupOperation,
           services.IMutateAdGroupsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupService.mutateAdGroups",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -2707,6 +2819,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -2761,15 +2875,17 @@ export default class ServiceFactory extends Service {
           "remove",
           adGroups
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupOperation,
           services.IMutateAdGroupsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupService.mutateAdGroups",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -2784,6 +2900,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -2829,7 +2947,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AdParameterService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AdParameterService
    */
   public get adParameters() {
     const service = this.loadService<services.AdParameterService>(
@@ -2854,15 +2972,17 @@ export default class ServiceFactory extends Service {
           services.AdParameterOperation,
           resources.IAdParameter
         >("create", adParameters);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdParameterOperation,
           services.IMutateAdParametersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdParameterService.mutateAdParameters",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -2877,6 +2997,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -2936,15 +3058,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.AdParameter
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdParameterOperation,
           services.IMutateAdParametersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdParameterService.mutateAdParameters",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -2959,6 +3083,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -3013,15 +3139,17 @@ export default class ServiceFactory extends Service {
           "remove",
           adParameters
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdParameterOperation,
           services.IMutateAdParametersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdParameterService.mutateAdParameters",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -3036,6 +3164,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -3081,7 +3211,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AdService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AdService
    */
   public get ads() {
     const service = this.loadService<services.AdService>("AdServiceClient");
@@ -3106,15 +3236,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.Ad
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdOperation,
           services.IMutateAdsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdService.mutateAds",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -3129,6 +3261,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -3174,7 +3308,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AssetGenerationService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AssetGenerationService
    */
   public get assetGenerations() {
     const service = this.loadService<services.AssetGenerationService>(
@@ -3183,7 +3317,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AssetGenerationService#generatetext
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AssetGenerationService#generatetext
        */
       generateText: async (
         request: services.GenerateTextRequest
@@ -3215,11 +3349,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.generateText(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -3248,7 +3379,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AssetGenerationService#generateimages
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AssetGenerationService#generateimages
        */
       generateImages: async (
         request: services.GenerateImagesRequest
@@ -3280,11 +3411,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.generateImages(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -3315,7 +3443,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AssetGroupAssetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AssetGroupAssetService
    */
   public get assetGroupAssets() {
     const service = this.loadService<services.AssetGroupAssetService>(
@@ -3342,15 +3470,17 @@ export default class ServiceFactory extends Service {
           services.AssetGroupAssetOperation,
           resources.IAssetGroupAsset
         >("create", assetGroupAssets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetGroupAssetOperation,
           services.IMutateAssetGroupAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetGroupAssetService.mutateAssetGroupAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -3365,6 +3495,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -3426,15 +3558,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.AssetGroupAsset
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetGroupAssetOperation,
           services.IMutateAssetGroupAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetGroupAssetService.mutateAssetGroupAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -3449,6 +3583,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -3503,15 +3639,17 @@ export default class ServiceFactory extends Service {
           services.AssetGroupAssetOperation,
           string
         >("remove", assetGroupAssets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetGroupAssetOperation,
           services.IMutateAssetGroupAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetGroupAssetService.mutateAssetGroupAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -3526,6 +3664,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -3571,7 +3711,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AssetGroupListingGroupFilterService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AssetGroupListingGroupFilterService
    */
   public get assetGroupListingGroupFilters() {
     const service =
@@ -3600,16 +3740,18 @@ export default class ServiceFactory extends Service {
           services.AssetGroupListingGroupFilterOperation,
           resources.IAssetGroupListingGroupFilter
         >("create", assetGroupListingGroupFilters);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetGroupListingGroupFilterOperation,
           services.IMutateAssetGroupListingGroupFiltersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "AssetGroupListingGroupFilterService.mutateAssetGroupListingGroupFilters",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -3624,6 +3766,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -3689,16 +3833,18 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.AssetGroupListingGroupFilter
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetGroupListingGroupFilterOperation,
           services.IMutateAssetGroupListingGroupFiltersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "AssetGroupListingGroupFilterService.mutateAssetGroupListingGroupFilters",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -3713,6 +3859,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -3770,16 +3918,18 @@ export default class ServiceFactory extends Service {
           services.AssetGroupListingGroupFilterOperation,
           string
         >("remove", assetGroupListingGroupFilters);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetGroupListingGroupFilterOperation,
           services.IMutateAssetGroupListingGroupFiltersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "AssetGroupListingGroupFilterService.mutateAssetGroupListingGroupFilters",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -3794,6 +3944,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -3842,7 +3994,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AssetGroupService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AssetGroupService
    */
   public get assetGroups() {
     const service = this.loadService<services.AssetGroupService>(
@@ -3864,15 +4016,17 @@ export default class ServiceFactory extends Service {
           services.AssetGroupOperation,
           resources.IAssetGroup
         >("create", assetGroups);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetGroupOperation,
           services.IMutateAssetGroupsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetGroupService.mutateAssetGroups",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -3887,6 +4041,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -3946,15 +4102,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.AssetGroup
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetGroupOperation,
           services.IMutateAssetGroupsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetGroupService.mutateAssetGroups",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -3969,6 +4127,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -4023,15 +4183,17 @@ export default class ServiceFactory extends Service {
           "remove",
           assetGroups
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetGroupOperation,
           services.IMutateAssetGroupsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetGroupService.mutateAssetGroups",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -4046,6 +4208,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -4091,7 +4255,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AssetGroupSignalService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AssetGroupSignalService
    */
   public get assetGroupSignals() {
     const service = this.loadService<services.AssetGroupSignalService>(
@@ -4118,15 +4282,17 @@ export default class ServiceFactory extends Service {
           services.AssetGroupSignalOperation,
           resources.IAssetGroupSignal
         >("create", assetGroupSignals);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetGroupSignalOperation,
           services.IMutateAssetGroupSignalsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetGroupSignalService.mutateAssetGroupSignals",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -4141,6 +4307,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -4195,15 +4363,17 @@ export default class ServiceFactory extends Service {
           services.AssetGroupSignalOperation,
           string
         >("remove", assetGroupSignals);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetGroupSignalOperation,
           services.IMutateAssetGroupSignalsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetGroupSignalService.mutateAssetGroupSignals",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -4218,6 +4388,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -4263,7 +4435,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AssetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AssetService
    */
   public get assets() {
     const service =
@@ -4287,15 +4459,17 @@ export default class ServiceFactory extends Service {
           services.AssetOperation,
           resources.IAsset
         >("create", assets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetOperation,
           services.IMutateAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetService.mutateAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -4310,6 +4484,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -4369,15 +4545,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.Asset
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetOperation,
           services.IMutateAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetService.mutateAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -4392,6 +4570,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -4437,7 +4617,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AssetSetAssetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AssetSetAssetService
    */
   public get assetSetAssets() {
     const service = this.loadService<services.AssetSetAssetService>(
@@ -4462,15 +4642,17 @@ export default class ServiceFactory extends Service {
           services.AssetSetAssetOperation,
           resources.IAssetSetAsset
         >("create", assetSetAssets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetSetAssetOperation,
           services.IMutateAssetSetAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetSetAssetService.mutateAssetSetAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -4485,6 +4667,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -4539,15 +4723,17 @@ export default class ServiceFactory extends Service {
           services.AssetSetAssetOperation,
           string
         >("remove", assetSetAssets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetSetAssetOperation,
           services.IMutateAssetSetAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetSetAssetService.mutateAssetSetAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -4562,6 +4748,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -4607,7 +4795,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AssetSetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AssetSetService
    */
   public get assetSets() {
     const service = this.loadService<services.AssetSetService>(
@@ -4632,15 +4820,17 @@ export default class ServiceFactory extends Service {
           services.AssetSetOperation,
           resources.IAssetSet
         >("create", assetSets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetSetOperation,
           services.IMutateAssetSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetSetService.mutateAssetSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -4655,6 +4845,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -4714,15 +4906,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.AssetSet
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetSetOperation,
           services.IMutateAssetSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetSetService.mutateAssetSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -4737,6 +4931,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -4791,15 +4987,17 @@ export default class ServiceFactory extends Service {
           "remove",
           assetSets
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetSetOperation,
           services.IMutateAssetSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetSetService.mutateAssetSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -4814,6 +5012,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -4859,7 +5059,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AudienceInsightsService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AudienceInsightsService
    */
   public get audienceInsights() {
     const service = this.loadService<services.AudienceInsightsService>(
@@ -4868,7 +5068,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AudienceInsightsService#generateinsightsfinderreport
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AudienceInsightsService#generateinsightsfinderreport
        */
       generateInsightsFinderReport: async (
         request: services.GenerateInsightsFinderReportRequest
@@ -4902,11 +5102,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.generateInsightsFinderReport(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -4936,7 +5133,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AudienceInsightsService#listaudienceinsightsattributes
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AudienceInsightsService#listaudienceinsightsattributes
        */
       listAudienceInsightsAttributes: async (
         request: services.ListAudienceInsightsAttributesRequest
@@ -4970,11 +5167,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.listAudienceInsightsAttributes(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -5004,7 +5198,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AudienceInsightsService#listinsightseligibledates
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AudienceInsightsService#listinsightseligibledates
        */
       listInsightsEligibleDates: async (
         request: services.ListInsightsEligibleDatesRequest
@@ -5036,11 +5230,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.listInsightsEligibleDates(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -5069,7 +5260,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AudienceInsightsService#generateaudiencecompositioninsights
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AudienceInsightsService#generateaudiencecompositioninsights
        */
       generateAudienceCompositionInsights: async (
         request: services.GenerateAudienceCompositionInsightsRequest
@@ -5103,11 +5294,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.generateAudienceCompositionInsights(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -5137,7 +5325,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AudienceInsightsService#generateaudiencedefinition
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AudienceInsightsService#generateaudiencedefinition
        */
       generateAudienceDefinition: async (
         request: services.GenerateAudienceDefinitionRequest
@@ -5169,11 +5357,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.generateAudienceDefinition(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -5202,7 +5387,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AudienceInsightsService#generatesuggestedtargetinginsights
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AudienceInsightsService#generatesuggestedtargetinginsights
        */
       generateSuggestedTargetingInsights: async (
         request: services.GenerateSuggestedTargetingInsightsRequest
@@ -5236,11 +5421,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.generateSuggestedTargetingInsights(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -5270,7 +5452,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AudienceInsightsService#generateaudienceoverlapinsights
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AudienceInsightsService#generateaudienceoverlapinsights
        */
       generateAudienceOverlapInsights: async (
         request: services.GenerateAudienceOverlapInsightsRequest
@@ -5304,11 +5486,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.generateAudienceOverlapInsights(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -5338,7 +5517,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AudienceInsightsService#generatetargetingsuggestionmetrics
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AudienceInsightsService#generatetargetingsuggestionmetrics
        */
       generateTargetingSuggestionMetrics: async (
         request: services.GenerateTargetingSuggestionMetricsRequest
@@ -5372,11 +5551,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.generateTargetingSuggestionMetrics(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -5408,7 +5584,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AudienceService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AudienceService
    */
   public get audiences() {
     const service = this.loadService<services.AudienceService>(
@@ -5433,15 +5609,17 @@ export default class ServiceFactory extends Service {
           services.AudienceOperation,
           resources.IAudience
         >("create", audiences);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AudienceOperation,
           services.IMutateAudiencesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AudienceService.mutateAudiences",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -5456,6 +5634,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -5515,15 +5695,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.Audience
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AudienceOperation,
           services.IMutateAudiencesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AudienceService.mutateAudiences",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -5538,6 +5720,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -5583,7 +5767,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AutomaticallyCreatedAssetRemovalService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AutomaticallyCreatedAssetRemovalService
    */
   public get automaticallyCreatedAssetRemovals() {
     const service =
@@ -5593,7 +5777,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/AutomaticallyCreatedAssetRemovalService#removecampaignautomaticallycreatedasset
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/AutomaticallyCreatedAssetRemovalService#removecampaignautomaticallycreatedasset
        */
       removeCampaignAutomaticallyCreatedAsset: async (
         request: services.RemoveCampaignAutomaticallyCreatedAssetRequest
@@ -5627,11 +5811,8 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Response is an array type
           const [response] =
             await service.removeCampaignAutomaticallyCreatedAsset(request, {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            });
+              otherArgs: { headers: this.callHeaders },
+            } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -5662,35 +5843,37 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/BatchJobService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/BatchJobService
    */
   public get batchJobs() {
     const service = this.loadService<services.BatchJobService>(
       "BatchJobServiceClient"
     );
-    type MutateOptions = never;
+    type MutateOptions = Record<string, never>;
     return {
       /**
        * @description create resources of type resources.IBatchJob
        * @returns services.MutateBatchJobResponse
        */
       create: async (
-        batchJobs: (resources.IBatchJob | resources.BatchJob)[],
+        batchJob: resources.IBatchJob | resources.BatchJob,
         options?: MutateOptions
       ): Promise<services.MutateBatchJobResponse> => {
         const ops = this.buildOperations<
           services.BatchJobOperation,
           resources.IBatchJob
-        >("create", batchJobs);
-        const request = this.buildRequest<
+        >("create", [batchJob]);
+        const mutateOptions: MutateOptions = { ...options };
+        const request = this.buildSingleOperationRequest<
           services.BatchJobOperation,
           services.IMutateBatchJobRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "BatchJobService.mutateBatchJob",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -5705,6 +5888,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -5752,22 +5937,24 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateBatchJobResponse
        */
       remove: async (
-        batchJobs: string[],
+        batchJob: string,
         options?: MutateOptions
       ): Promise<services.MutateBatchJobResponse> => {
         const ops = this.buildOperations<services.BatchJobOperation, string>(
           "remove",
-          batchJobs
+          [batchJob]
         );
-        const request = this.buildRequest<
+        const mutateOptions: MutateOptions = { ...options };
+        const request = this.buildSingleOperationRequest<
           services.BatchJobOperation,
           services.IMutateBatchJobRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "BatchJobService.mutateBatchJob",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -5782,6 +5969,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -5825,7 +6014,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/BatchJobService#listbatchjobresults
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/BatchJobService#listbatchjobresults
        */
       listBatchJobResults: async (
         request: services.ListBatchJobResultsRequest
@@ -5856,12 +6045,10 @@ export default class ServiceFactory extends Service {
         }
         try {
           // @ts-expect-error Response is an array type
-          const [response] = await service.listBatchJobResults(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+          const [, , response] = await service.listBatchJobResults(request, {
+            autoPaginate: false,
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -5890,11 +6077,13 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/BatchJobService#runbatchjob
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/BatchJobService#runbatchjob
        */
       runBatchJob: async (
         request: services.RunBatchJobRequest
-      ): Promise<longrunning.Operation> => {
+      ): Promise<
+        LROperation<protobuf.IEmpty, resources.BatchJob.IBatchJobMetadata>
+      > => {
         const baseHookArguments: BaseServiceHookArgs = {
           credentials: this.credentials,
           method: "BatchJobService.RunBatchJob",
@@ -5922,11 +6111,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.runBatchJob(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -5955,7 +6141,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/BatchJobService#addbatchjoboperations
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/BatchJobService#addbatchjoboperations
        */
       addBatchJobOperations: async (
         request: services.AddBatchJobOperationsRequest
@@ -5987,11 +6173,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.addBatchJobOperations(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -6022,7 +6205,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/BiddingDataExclusionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/BiddingDataExclusionService
    */
   public get biddingDataExclusions() {
     const service = this.loadService<services.BiddingDataExclusionService>(
@@ -6049,15 +6232,17 @@ export default class ServiceFactory extends Service {
           services.BiddingDataExclusionOperation,
           resources.IBiddingDataExclusion
         >("create", biddingDataExclusions);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.BiddingDataExclusionOperation,
           services.IMutateBiddingDataExclusionsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "BiddingDataExclusionService.mutateBiddingDataExclusions",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -6072,6 +6257,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -6136,15 +6323,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.BiddingDataExclusion
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.BiddingDataExclusionOperation,
           services.IMutateBiddingDataExclusionsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "BiddingDataExclusionService.mutateBiddingDataExclusions",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -6159,6 +6348,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -6216,15 +6407,17 @@ export default class ServiceFactory extends Service {
           services.BiddingDataExclusionOperation,
           string
         >("remove", biddingDataExclusions);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.BiddingDataExclusionOperation,
           services.IMutateBiddingDataExclusionsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "BiddingDataExclusionService.mutateBiddingDataExclusions",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -6239,6 +6432,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -6287,7 +6482,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/BiddingSeasonalityAdjustmentService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/BiddingSeasonalityAdjustmentService
    */
   public get biddingSeasonalityAdjustments() {
     const service =
@@ -6316,16 +6511,18 @@ export default class ServiceFactory extends Service {
           services.BiddingSeasonalityAdjustmentOperation,
           resources.IBiddingSeasonalityAdjustment
         >("create", biddingSeasonalityAdjustments);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.BiddingSeasonalityAdjustmentOperation,
           services.IMutateBiddingSeasonalityAdjustmentsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "BiddingSeasonalityAdjustmentService.mutateBiddingSeasonalityAdjustments",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -6340,6 +6537,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -6405,16 +6604,18 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.BiddingSeasonalityAdjustment
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.BiddingSeasonalityAdjustmentOperation,
           services.IMutateBiddingSeasonalityAdjustmentsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "BiddingSeasonalityAdjustmentService.mutateBiddingSeasonalityAdjustments",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -6429,6 +6630,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -6486,16 +6689,18 @@ export default class ServiceFactory extends Service {
           services.BiddingSeasonalityAdjustmentOperation,
           string
         >("remove", biddingSeasonalityAdjustments);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.BiddingSeasonalityAdjustmentOperation,
           services.IMutateBiddingSeasonalityAdjustmentsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "BiddingSeasonalityAdjustmentService.mutateBiddingSeasonalityAdjustments",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -6510,6 +6715,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -6558,7 +6765,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/BiddingStrategyService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/BiddingStrategyService
    */
   public get biddingStrategies() {
     const service = this.loadService<services.BiddingStrategyService>(
@@ -6585,15 +6792,17 @@ export default class ServiceFactory extends Service {
           services.BiddingStrategyOperation,
           resources.IBiddingStrategy
         >("create", biddingStrategies);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.BiddingStrategyOperation,
           services.IMutateBiddingStrategiesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "BiddingStrategyService.mutateBiddingStrategies",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -6608,6 +6817,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -6669,15 +6880,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.BiddingStrategy
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.BiddingStrategyOperation,
           services.IMutateBiddingStrategiesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "BiddingStrategyService.mutateBiddingStrategies",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -6692,6 +6905,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -6746,15 +6961,17 @@ export default class ServiceFactory extends Service {
           services.BiddingStrategyOperation,
           string
         >("remove", biddingStrategies);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.BiddingStrategyOperation,
           services.IMutateBiddingStrategiesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "BiddingStrategyService.mutateBiddingStrategies",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -6769,6 +6986,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -6814,7 +7033,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CampaignAssetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CampaignAssetService
    */
   public get campaignAssets() {
     const service = this.loadService<services.CampaignAssetService>(
@@ -6839,15 +7058,17 @@ export default class ServiceFactory extends Service {
           services.CampaignAssetOperation,
           resources.ICampaignAsset
         >("create", campaignAssets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignAssetOperation,
           services.IMutateCampaignAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignAssetService.mutateCampaignAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -6862,6 +7083,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -6921,15 +7144,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CampaignAsset
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignAssetOperation,
           services.IMutateCampaignAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignAssetService.mutateCampaignAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -6944,6 +7169,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -6998,15 +7225,17 @@ export default class ServiceFactory extends Service {
           services.CampaignAssetOperation,
           string
         >("remove", campaignAssets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignAssetOperation,
           services.IMutateCampaignAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignAssetService.mutateCampaignAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -7021,6 +7250,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -7066,7 +7297,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CampaignAssetSetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CampaignAssetSetService
    */
   public get campaignAssetSets() {
     const service = this.loadService<services.CampaignAssetSetService>(
@@ -7093,15 +7324,17 @@ export default class ServiceFactory extends Service {
           services.CampaignAssetSetOperation,
           resources.ICampaignAssetSet
         >("create", campaignAssetSets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignAssetSetOperation,
           services.IMutateCampaignAssetSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignAssetSetService.mutateCampaignAssetSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -7116,6 +7349,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -7170,15 +7405,17 @@ export default class ServiceFactory extends Service {
           services.CampaignAssetSetOperation,
           string
         >("remove", campaignAssetSets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignAssetSetOperation,
           services.IMutateCampaignAssetSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignAssetSetService.mutateCampaignAssetSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -7193,6 +7430,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -7238,7 +7477,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CampaignBidModifierService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CampaignBidModifierService
    */
   public get campaignBidModifiers() {
     const service = this.loadService<services.CampaignBidModifierService>(
@@ -7265,15 +7504,17 @@ export default class ServiceFactory extends Service {
           services.CampaignBidModifierOperation,
           resources.ICampaignBidModifier
         >("create", campaignBidModifiers);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignBidModifierOperation,
           services.IMutateCampaignBidModifiersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignBidModifierService.mutateCampaignBidModifiers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -7288,6 +7529,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -7349,15 +7592,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CampaignBidModifier
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignBidModifierOperation,
           services.IMutateCampaignBidModifiersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignBidModifierService.mutateCampaignBidModifiers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -7372,6 +7617,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -7426,15 +7673,17 @@ export default class ServiceFactory extends Service {
           services.CampaignBidModifierOperation,
           string
         >("remove", campaignBidModifiers);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignBidModifierOperation,
           services.IMutateCampaignBidModifiersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignBidModifierService.mutateCampaignBidModifiers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -7449,6 +7698,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -7494,7 +7745,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CampaignBudgetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CampaignBudgetService
    */
   public get campaignBudgets() {
     const service = this.loadService<services.CampaignBudgetService>(
@@ -7521,15 +7772,17 @@ export default class ServiceFactory extends Service {
           services.CampaignBudgetOperation,
           resources.ICampaignBudget
         >("create", campaignBudgets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignBudgetOperation,
           services.IMutateCampaignBudgetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignBudgetService.mutateCampaignBudgets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -7544,6 +7797,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -7605,15 +7860,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CampaignBudget
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignBudgetOperation,
           services.IMutateCampaignBudgetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignBudgetService.mutateCampaignBudgets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -7628,6 +7885,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -7682,15 +7941,17 @@ export default class ServiceFactory extends Service {
           services.CampaignBudgetOperation,
           string
         >("remove", campaignBudgets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignBudgetOperation,
           services.IMutateCampaignBudgetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignBudgetService.mutateCampaignBudgets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -7705,6 +7966,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -7750,7 +8013,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CampaignConversionGoalService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CampaignConversionGoalService
    */
   public get campaignConversionGoals() {
     const service = this.loadService<services.CampaignConversionGoalService>(
@@ -7779,15 +8042,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CampaignConversionGoal
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignConversionGoalOperation,
           services.IMutateCampaignConversionGoalsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignConversionGoalService.mutateCampaignConversionGoals",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -7802,6 +8067,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -7850,7 +8117,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CampaignCriterionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CampaignCriterionService
    */
   public get campaignCriteria() {
     const service = this.loadService<services.CampaignCriterionService>(
@@ -7877,15 +8144,17 @@ export default class ServiceFactory extends Service {
           services.CampaignCriterionOperation,
           resources.ICampaignCriterion
         >("create", campaignCriteria);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignCriterionOperation,
           services.IMutateCampaignCriteriaRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignCriterionService.mutateCampaignCriteria",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -7900,6 +8169,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -7961,15 +8232,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CampaignCriterion
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignCriterionOperation,
           services.IMutateCampaignCriteriaRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignCriterionService.mutateCampaignCriteria",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -7984,6 +8257,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -8038,15 +8313,17 @@ export default class ServiceFactory extends Service {
           services.CampaignCriterionOperation,
           string
         >("remove", campaignCriteria);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignCriterionOperation,
           services.IMutateCampaignCriteriaRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignCriterionService.mutateCampaignCriteria",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -8061,6 +8338,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -8106,7 +8385,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CampaignCustomizerService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CampaignCustomizerService
    */
   public get campaignCustomizers() {
     const service = this.loadService<services.CampaignCustomizerService>(
@@ -8133,15 +8412,17 @@ export default class ServiceFactory extends Service {
           services.CampaignCustomizerOperation,
           resources.ICampaignCustomizer
         >("create", campaignCustomizers);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignCustomizerOperation,
           services.IMutateCampaignCustomizersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignCustomizerService.mutateCampaignCustomizers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -8156,6 +8437,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -8210,15 +8493,17 @@ export default class ServiceFactory extends Service {
           services.CampaignCustomizerOperation,
           string
         >("remove", campaignCustomizers);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignCustomizerOperation,
           services.IMutateCampaignCustomizersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignCustomizerService.mutateCampaignCustomizers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -8233,6 +8518,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -8278,7 +8565,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CampaignDraftService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CampaignDraftService
    */
   public get campaignDrafts() {
     const service = this.loadService<services.CampaignDraftService>(
@@ -8303,15 +8590,17 @@ export default class ServiceFactory extends Service {
           services.CampaignDraftOperation,
           resources.ICampaignDraft
         >("create", campaignDrafts);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignDraftOperation,
           services.IMutateCampaignDraftsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignDraftService.mutateCampaignDrafts",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -8326,6 +8615,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -8385,15 +8676,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CampaignDraft
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignDraftOperation,
           services.IMutateCampaignDraftsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignDraftService.mutateCampaignDrafts",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -8408,6 +8701,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -8462,15 +8757,17 @@ export default class ServiceFactory extends Service {
           services.CampaignDraftOperation,
           string
         >("remove", campaignDrafts);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignDraftOperation,
           services.IMutateCampaignDraftsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignDraftService.mutateCampaignDrafts",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -8485,6 +8782,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -8528,11 +8827,11 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CampaignDraftService#promotecampaigndraft
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CampaignDraftService#promotecampaigndraft
        */
       promoteCampaignDraft: async (
         request: services.PromoteCampaignDraftRequest
-      ): Promise<longrunning.Operation> => {
+      ): Promise<LROperation<protobuf.IEmpty, protobuf.IEmpty>> => {
         const baseHookArguments: BaseServiceHookArgs = {
           credentials: this.credentials,
           method: "CampaignDraftService.PromoteCampaignDraft",
@@ -8560,11 +8859,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.promoteCampaignDraft(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -8593,7 +8889,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CampaignDraftService#listcampaigndraftasyncerrors
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CampaignDraftService#listcampaigndraftasyncerrors
        */
       listCampaignDraftAsyncErrors: async (
         request: services.ListCampaignDraftAsyncErrorsRequest
@@ -8624,14 +8920,12 @@ export default class ServiceFactory extends Service {
         }
         try {
           // @ts-expect-error Response is an array type
-          const [response] = await service.listCampaignDraftAsyncErrors(
+          const [, , response] = await service.listCampaignDraftAsyncErrors(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              autoPaginate: false,
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -8663,7 +8957,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CampaignGroupService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CampaignGroupService
    */
   public get campaignGroups() {
     const service = this.loadService<services.CampaignGroupService>(
@@ -8688,15 +8982,17 @@ export default class ServiceFactory extends Service {
           services.CampaignGroupOperation,
           resources.ICampaignGroup
         >("create", campaignGroups);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignGroupOperation,
           services.IMutateCampaignGroupsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignGroupService.mutateCampaignGroups",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -8711,6 +9007,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -8770,15 +9068,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CampaignGroup
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignGroupOperation,
           services.IMutateCampaignGroupsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignGroupService.mutateCampaignGroups",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -8793,6 +9093,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -8847,15 +9149,17 @@ export default class ServiceFactory extends Service {
           services.CampaignGroupOperation,
           string
         >("remove", campaignGroups);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignGroupOperation,
           services.IMutateCampaignGroupsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignGroupService.mutateCampaignGroups",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -8870,6 +9174,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -8915,7 +9221,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CampaignLabelService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CampaignLabelService
    */
   public get campaignLabels() {
     const service = this.loadService<services.CampaignLabelService>(
@@ -8940,15 +9246,17 @@ export default class ServiceFactory extends Service {
           services.CampaignLabelOperation,
           resources.ICampaignLabel
         >("create", campaignLabels);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignLabelOperation,
           services.IMutateCampaignLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignLabelService.mutateCampaignLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -8963,6 +9271,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -9017,15 +9327,17 @@ export default class ServiceFactory extends Service {
           services.CampaignLabelOperation,
           string
         >("remove", campaignLabels);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignLabelOperation,
           services.IMutateCampaignLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignLabelService.mutateCampaignLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -9040,6 +9352,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -9085,7 +9399,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CampaignService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CampaignService
    */
   public get campaigns() {
     const service = this.loadService<services.CampaignService>(
@@ -9110,15 +9424,17 @@ export default class ServiceFactory extends Service {
           services.CampaignOperation,
           resources.ICampaign
         >("create", campaigns);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignOperation,
           services.IMutateCampaignsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignService.mutateCampaigns",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -9133,6 +9449,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -9192,15 +9510,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.Campaign
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignOperation,
           services.IMutateCampaignsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignService.mutateCampaigns",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -9215,6 +9535,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -9269,15 +9591,17 @@ export default class ServiceFactory extends Service {
           "remove",
           campaigns
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignOperation,
           services.IMutateCampaignsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignService.mutateCampaigns",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -9292,6 +9616,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -9335,7 +9661,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CampaignService#enablepmaxbrandguidelines
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CampaignService#enablepmaxbrandguidelines
        */
       enablePMaxBrandGuidelines: async (
         request: services.EnablePMaxBrandGuidelinesRequest
@@ -9367,11 +9693,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.enablePMaxBrandGuidelines(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -9402,7 +9725,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CampaignSharedSetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CampaignSharedSetService
    */
   public get campaignSharedSets() {
     const service = this.loadService<services.CampaignSharedSetService>(
@@ -9429,15 +9752,17 @@ export default class ServiceFactory extends Service {
           services.CampaignSharedSetOperation,
           resources.ICampaignSharedSet
         >("create", campaignSharedSets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignSharedSetOperation,
           services.IMutateCampaignSharedSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignSharedSetService.mutateCampaignSharedSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -9452,6 +9777,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -9506,15 +9833,17 @@ export default class ServiceFactory extends Service {
           services.CampaignSharedSetOperation,
           string
         >("remove", campaignSharedSets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignSharedSetOperation,
           services.IMutateCampaignSharedSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignSharedSetService.mutateCampaignSharedSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -9529,6 +9858,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -9574,7 +9905,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ConversionActionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ConversionActionService
    */
   public get conversionActions() {
     const service = this.loadService<services.ConversionActionService>(
@@ -9601,15 +9932,17 @@ export default class ServiceFactory extends Service {
           services.ConversionActionOperation,
           resources.IConversionAction
         >("create", conversionActions);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ConversionActionOperation,
           services.IMutateConversionActionsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ConversionActionService.mutateConversionActions",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -9624,6 +9957,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -9685,15 +10020,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.ConversionAction
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ConversionActionOperation,
           services.IMutateConversionActionsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ConversionActionService.mutateConversionActions",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -9708,6 +10045,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -9762,15 +10101,17 @@ export default class ServiceFactory extends Service {
           services.ConversionActionOperation,
           string
         >("remove", conversionActions);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ConversionActionOperation,
           services.IMutateConversionActionsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ConversionActionService.mutateConversionActions",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -9785,6 +10126,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -9830,7 +10173,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ConversionCustomVariableService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ConversionCustomVariableService
    */
   public get conversionCustomVariables() {
     const service = this.loadService<services.ConversionCustomVariableService>(
@@ -9858,16 +10201,18 @@ export default class ServiceFactory extends Service {
           services.ConversionCustomVariableOperation,
           resources.IConversionCustomVariable
         >("create", conversionCustomVariables);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ConversionCustomVariableOperation,
           services.IMutateConversionCustomVariablesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "ConversionCustomVariableService.mutateConversionCustomVariables",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -9882,6 +10227,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -9947,16 +10294,18 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.ConversionCustomVariable
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ConversionCustomVariableOperation,
           services.IMutateConversionCustomVariablesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "ConversionCustomVariableService.mutateConversionCustomVariables",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -9971,6 +10320,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -10019,7 +10370,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ConversionGoalCampaignConfigService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ConversionGoalCampaignConfigService
    */
   public get conversionGoalCampaignConfigs() {
     const service =
@@ -10053,16 +10404,18 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.ConversionGoalCampaignConfig
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ConversionGoalCampaignConfigOperation,
           services.IMutateConversionGoalCampaignConfigsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "ConversionGoalCampaignConfigService.mutateConversionGoalCampaignConfigs",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -10077,6 +10430,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -10125,7 +10480,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ConversionValueRuleService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ConversionValueRuleService
    */
   public get conversionValueRules() {
     const service = this.loadService<services.ConversionValueRuleService>(
@@ -10152,15 +10507,17 @@ export default class ServiceFactory extends Service {
           services.ConversionValueRuleOperation,
           resources.IConversionValueRule
         >("create", conversionValueRules);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ConversionValueRuleOperation,
           services.IMutateConversionValueRulesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ConversionValueRuleService.mutateConversionValueRules",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -10175,6 +10532,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -10236,15 +10595,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.ConversionValueRule
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ConversionValueRuleOperation,
           services.IMutateConversionValueRulesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ConversionValueRuleService.mutateConversionValueRules",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -10259,6 +10620,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -10313,15 +10676,17 @@ export default class ServiceFactory extends Service {
           services.ConversionValueRuleOperation,
           string
         >("remove", conversionValueRules);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ConversionValueRuleOperation,
           services.IMutateConversionValueRulesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ConversionValueRuleService.mutateConversionValueRules",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -10336,6 +10701,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -10381,7 +10748,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ConversionValueRuleSetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ConversionValueRuleSetService
    */
   public get conversionValueRuleSets() {
     const service = this.loadService<services.ConversionValueRuleSetService>(
@@ -10408,15 +10775,17 @@ export default class ServiceFactory extends Service {
           services.ConversionValueRuleSetOperation,
           resources.IConversionValueRuleSet
         >("create", conversionValueRuleSets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ConversionValueRuleSetOperation,
           services.IMutateConversionValueRuleSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ConversionValueRuleSetService.mutateConversionValueRuleSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -10431,6 +10800,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -10495,15 +10866,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.ConversionValueRuleSet
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ConversionValueRuleSetOperation,
           services.IMutateConversionValueRuleSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ConversionValueRuleSetService.mutateConversionValueRuleSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -10518,6 +10891,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -10575,15 +10950,17 @@ export default class ServiceFactory extends Service {
           services.ConversionValueRuleSetOperation,
           string
         >("remove", conversionValueRuleSets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ConversionValueRuleSetOperation,
           services.IMutateConversionValueRuleSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ConversionValueRuleSetService.mutateConversionValueRuleSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -10598,6 +10975,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -10646,7 +11025,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CustomConversionGoalService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CustomConversionGoalService
    */
   public get customConversionGoals() {
     const service = this.loadService<services.CustomConversionGoalService>(
@@ -10673,15 +11052,17 @@ export default class ServiceFactory extends Service {
           services.CustomConversionGoalOperation,
           resources.ICustomConversionGoal
         >("create", customConversionGoals);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomConversionGoalOperation,
           services.IMutateCustomConversionGoalsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomConversionGoalService.mutateCustomConversionGoals",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -10696,6 +11077,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -10760,15 +11143,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CustomConversionGoal
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomConversionGoalOperation,
           services.IMutateCustomConversionGoalsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomConversionGoalService.mutateCustomConversionGoals",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -10783,6 +11168,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -10840,15 +11227,17 @@ export default class ServiceFactory extends Service {
           services.CustomConversionGoalOperation,
           string
         >("remove", customConversionGoals);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomConversionGoalOperation,
           services.IMutateCustomConversionGoalsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomConversionGoalService.mutateCustomConversionGoals",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -10863,6 +11252,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -10911,7 +11302,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CustomerAssetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CustomerAssetService
    */
   public get customerAssets() {
     const service = this.loadService<services.CustomerAssetService>(
@@ -10936,15 +11327,17 @@ export default class ServiceFactory extends Service {
           services.CustomerAssetOperation,
           resources.ICustomerAsset
         >("create", customerAssets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerAssetOperation,
           services.IMutateCustomerAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerAssetService.mutateCustomerAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -10959,6 +11352,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -11018,15 +11413,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CustomerAsset
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerAssetOperation,
           services.IMutateCustomerAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerAssetService.mutateCustomerAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -11041,6 +11438,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -11095,15 +11494,17 @@ export default class ServiceFactory extends Service {
           services.CustomerAssetOperation,
           string
         >("remove", customerAssets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerAssetOperation,
           services.IMutateCustomerAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerAssetService.mutateCustomerAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -11118,6 +11519,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -11163,7 +11566,203 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CustomerConversionGoalService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CustomerBudgetNetworkSettingService
+   */
+  public get customerBudgetNetworkSettings() {
+    const service =
+      this.loadService<services.CustomerBudgetNetworkSettingService>(
+        "CustomerBudgetNetworkSettingServiceClient"
+      );
+    type MutateOptions = Partial<
+      Pick<
+        services.IMutateCustomerBudgetNetworkSettingRequest,
+        "validate_only" | "response_content_type"
+      >
+    >;
+    return {
+      /**
+       * @description create resources of type resources.ICustomerBudgetNetworkSetting
+       * @returns services.MutateCustomerBudgetNetworkSettingResponse
+       */
+      create: async (
+        customerBudgetNetworkSetting:
+          | resources.ICustomerBudgetNetworkSetting
+          | resources.CustomerBudgetNetworkSetting,
+        options?: MutateOptions
+      ): Promise<services.MutateCustomerBudgetNetworkSettingResponse> => {
+        const ops = this.buildOperations<
+          services.CustomerBudgetNetworkSettingOperation,
+          resources.ICustomerBudgetNetworkSetting
+        >("create", [customerBudgetNetworkSetting]);
+        const mutateOptions: MutateOptions = { ...options };
+        const request = this.buildSingleOperationRequest<
+          services.CustomerBudgetNetworkSettingOperation,
+          services.IMutateCustomerBudgetNetworkSettingRequest,
+          MutateOptions
+        >(ops[0], mutateOptions);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method:
+            "CustomerBudgetNetworkSettingService.mutateCustomerBudgetNetworkSetting",
+          mutation: request,
+          mutateOptions,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.mutateCustomerBudgetNetworkSetting(
+            request,
+            {
+              // @ts-expect-error This arg doesn't exist in the type definitions
+              otherArgs: {
+                headers: this.callHeaders,
+              },
+            }
+          );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
+          return response;
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err as Error);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
+
+      /**
+       * @description update resources of type resources.ICustomerBudgetNetworkSetting
+       * @returns services.MutateCustomerBudgetNetworkSettingResponse
+       */
+      update: async (
+        customerBudgetNetworkSetting:
+          | resources.ICustomerBudgetNetworkSetting
+          | resources.CustomerBudgetNetworkSetting,
+        options?: MutateOptions
+      ): Promise<services.MutateCustomerBudgetNetworkSettingResponse> => {
+        const ops = this.buildOperations<
+          services.CustomerBudgetNetworkSettingOperation,
+          resources.ICustomerBudgetNetworkSetting
+        >(
+          "update",
+          [customerBudgetNetworkSetting],
+          // @ts-expect-error Static class type here is fine
+          resources.CustomerBudgetNetworkSetting
+        );
+        const mutateOptions: MutateOptions = { ...options };
+        const request = this.buildSingleOperationRequest<
+          services.CustomerBudgetNetworkSettingOperation,
+          services.IMutateCustomerBudgetNetworkSettingRequest,
+          MutateOptions
+        >(ops[0], mutateOptions);
+        const baseHookArguments: BaseMutationHookArgs = {
+          credentials: this.credentials,
+          method:
+            "CustomerBudgetNetworkSettingService.mutateCustomerBudgetNetworkSetting",
+          mutation: request,
+          mutateOptions,
+          isServiceCall: true,
+        };
+        if (this.hooks.onMutationStart) {
+          const mutationCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onMutationStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              mutationCancellation.cancelled = true;
+              mutationCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
+              });
+            },
+          });
+          if (mutationCancellation.cancelled) {
+            return mutationCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.mutateCustomerBudgetNetworkSetting(
+            request,
+            {
+              // @ts-expect-error This arg doesn't exist in the type definitions
+              otherArgs: {
+                headers: this.callHeaders,
+              },
+            }
+          );
+          if (this.hooks.onMutationEnd) {
+            const mutationResolution: HookedResolution = { resolved: false };
+            await this.hooks.onMutationEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                mutationResolution.resolved = true;
+                mutationResolution.res = res;
+              },
+            });
+            if (mutationResolution.resolved) {
+              return mutationResolution.res;
+            }
+          }
+          return response;
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err as Error);
+          if (this.hooks.onMutationError) {
+            await this.hooks.onMutationError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
+    };
+  }
+
+  /**
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CustomerConversionGoalService
    */
   public get customerConversionGoals() {
     const service = this.loadService<services.CustomerConversionGoalService>(
@@ -11192,15 +11791,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CustomerConversionGoal
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerConversionGoalOperation,
           services.IMutateCustomerConversionGoalsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerConversionGoalService.mutateCustomerConversionGoals",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -11215,6 +11816,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -11263,7 +11866,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CustomerCustomizerService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CustomerCustomizerService
    */
   public get customerCustomizers() {
     const service = this.loadService<services.CustomerCustomizerService>(
@@ -11290,15 +11893,17 @@ export default class ServiceFactory extends Service {
           services.CustomerCustomizerOperation,
           resources.ICustomerCustomizer
         >("create", customerCustomizers);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerCustomizerOperation,
           services.IMutateCustomerCustomizersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerCustomizerService.mutateCustomerCustomizers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -11313,6 +11918,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -11367,15 +11974,17 @@ export default class ServiceFactory extends Service {
           services.CustomerCustomizerOperation,
           string
         >("remove", customerCustomizers);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerCustomizerOperation,
           services.IMutateCustomerCustomizersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerCustomizerService.mutateCustomerCustomizers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -11390,6 +11999,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -11435,7 +12046,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CustomerLabelService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CustomerLabelService
    */
   public get customerLabels() {
     const service = this.loadService<services.CustomerLabelService>(
@@ -11460,15 +12071,17 @@ export default class ServiceFactory extends Service {
           services.CustomerLabelOperation,
           resources.ICustomerLabel
         >("create", customerLabels);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerLabelOperation,
           services.IMutateCustomerLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerLabelService.mutateCustomerLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -11483,6 +12096,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -11537,15 +12152,17 @@ export default class ServiceFactory extends Service {
           services.CustomerLabelOperation,
           string
         >("remove", customerLabels);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerLabelOperation,
           services.IMutateCustomerLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerLabelService.mutateCustomerLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -11560,6 +12177,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -11605,7 +12224,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CustomerNegativeCriterionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CustomerNegativeCriterionService
    */
   public get customerNegativeCriteria() {
     const service = this.loadService<services.CustomerNegativeCriterionService>(
@@ -11633,16 +12252,18 @@ export default class ServiceFactory extends Service {
           services.CustomerNegativeCriterionOperation,
           resources.ICustomerNegativeCriterion
         >("create", customerNegativeCriteria);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerNegativeCriterionOperation,
           services.IMutateCustomerNegativeCriteriaRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "CustomerNegativeCriterionService.mutateCustomerNegativeCriteria",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -11657,6 +12278,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -11714,16 +12337,18 @@ export default class ServiceFactory extends Service {
           services.CustomerNegativeCriterionOperation,
           string
         >("remove", customerNegativeCriteria);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerNegativeCriterionOperation,
           services.IMutateCustomerNegativeCriteriaRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "CustomerNegativeCriterionService.mutateCustomerNegativeCriteria",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -11738,6 +12363,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -11786,7 +12413,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CustomerService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CustomerService
    */
   public get customers() {
     const service = this.loadService<services.CustomerService>(
@@ -11804,7 +12431,7 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerResponse
        */
       update: async (
-        customers: (resources.ICustomer | resources.Customer)[],
+        customer: resources.ICustomer | resources.Customer,
         options?: MutateOptions
       ): Promise<services.MutateCustomerResponse> => {
         const ops = this.buildOperations<
@@ -11812,19 +12439,21 @@ export default class ServiceFactory extends Service {
           resources.ICustomer
         >(
           "update",
-          customers,
+          [customer],
           // @ts-expect-error Static class type here is fine
           resources.Customer
         );
-        const request = this.buildRequest<
+        const mutateOptions: MutateOptions = { ...options };
+        const request = this.buildSingleOperationRequest<
           services.CustomerOperation,
           services.IMutateCustomerRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerService.mutateCustomer",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -11839,6 +12468,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -11882,7 +12513,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CustomerService#listaccessiblecustomers
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CustomerService#listaccessiblecustomers
        */
       listAccessibleCustomers: async (
         request: services.ListAccessibleCustomersRequest
@@ -11914,11 +12545,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.listAccessibleCustomers(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -11947,7 +12575,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CustomerService#createcustomerclient
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CustomerService#createcustomerclient
        */
       createCustomerClient: async (
         request: services.CreateCustomerClientRequest
@@ -11979,11 +12607,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.createCustomerClient(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -12014,7 +12639,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CustomizerAttributeService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CustomizerAttributeService
    */
   public get customizerAttributes() {
     const service = this.loadService<services.CustomizerAttributeService>(
@@ -12041,15 +12666,17 @@ export default class ServiceFactory extends Service {
           services.CustomizerAttributeOperation,
           resources.ICustomizerAttribute
         >("create", customizerAttributes);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomizerAttributeOperation,
           services.IMutateCustomizerAttributesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomizerAttributeService.mutateCustomizerAttributes",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -12064,6 +12691,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -12118,15 +12747,17 @@ export default class ServiceFactory extends Service {
           services.CustomizerAttributeOperation,
           string
         >("remove", customizerAttributes);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomizerAttributeOperation,
           services.IMutateCustomizerAttributesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomizerAttributeService.mutateCustomizerAttributes",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -12141,6 +12772,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -12186,7 +12819,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ExperimentArmService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ExperimentArmService
    */
   public get experimentArms() {
     const service = this.loadService<services.ExperimentArmService>(
@@ -12211,15 +12844,17 @@ export default class ServiceFactory extends Service {
           services.ExperimentArmOperation,
           resources.IExperimentArm
         >("create", experimentArms);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ExperimentArmOperation,
           services.IMutateExperimentArmsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ExperimentArmService.mutateExperimentArms",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -12234,6 +12869,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -12293,15 +12930,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.ExperimentArm
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ExperimentArmOperation,
           services.IMutateExperimentArmsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ExperimentArmService.mutateExperimentArms",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -12316,6 +12955,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -12370,15 +13011,17 @@ export default class ServiceFactory extends Service {
           services.ExperimentArmOperation,
           string
         >("remove", experimentArms);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ExperimentArmOperation,
           services.IMutateExperimentArmsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ExperimentArmService.mutateExperimentArms",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -12393,6 +13036,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -12438,7 +13083,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ExperimentService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ExperimentService
    */
   public get experiments() {
     const service = this.loadService<services.ExperimentService>(
@@ -12463,15 +13108,17 @@ export default class ServiceFactory extends Service {
           services.ExperimentOperation,
           resources.IExperiment
         >("create", experiments);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ExperimentOperation,
           services.IMutateExperimentsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ExperimentService.mutateExperiments",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -12486,6 +13133,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -12545,15 +13194,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.Experiment
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ExperimentOperation,
           services.IMutateExperimentsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ExperimentService.mutateExperiments",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -12568,6 +13219,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -12622,15 +13275,17 @@ export default class ServiceFactory extends Service {
           "remove",
           experiments
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ExperimentOperation,
           services.IMutateExperimentsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ExperimentService.mutateExperiments",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -12645,6 +13300,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -12688,7 +13345,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ExperimentService#endexperiment
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ExperimentService#endexperiment
        */
       endExperiment: async (
         request: services.EndExperimentRequest
@@ -12720,11 +13377,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.endExperiment(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -12753,7 +13407,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ExperimentService#listexperimentasyncerrors
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ExperimentService#listexperimentasyncerrors
        */
       listExperimentAsyncErrors: async (
         request: services.ListExperimentAsyncErrorsRequest
@@ -12784,12 +13438,13 @@ export default class ServiceFactory extends Service {
         }
         try {
           // @ts-expect-error Response is an array type
-          const [response] = await service.listExperimentAsyncErrors(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+          const [, , response] = await service.listExperimentAsyncErrors(
+            request,
+            {
+              autoPaginate: false,
+              otherArgs: { headers: this.callHeaders },
+            } as never
+          );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -12818,7 +13473,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ExperimentService#graduateexperiment
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ExperimentService#graduateexperiment
        */
       graduateExperiment: async (
         request: services.GraduateExperimentRequest
@@ -12850,11 +13505,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.graduateExperiment(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -12883,11 +13535,13 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ExperimentService#scheduleexperiment
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ExperimentService#scheduleexperiment
        */
       scheduleExperiment: async (
         request: services.ScheduleExperimentRequest
-      ): Promise<longrunning.Operation> => {
+      ): Promise<
+        LROperation<protobuf.IEmpty, services.IScheduleExperimentMetadata>
+      > => {
         const baseHookArguments: BaseServiceHookArgs = {
           credentials: this.credentials,
           method: "ExperimentService.ScheduleExperiment",
@@ -12915,11 +13569,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.scheduleExperiment(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -12948,11 +13599,13 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ExperimentService#promoteexperiment
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ExperimentService#promoteexperiment
        */
       promoteExperiment: async (
         request: services.PromoteExperimentRequest
-      ): Promise<longrunning.Operation> => {
+      ): Promise<
+        LROperation<protobuf.IEmpty, services.IPromoteExperimentMetadata>
+      > => {
         const baseHookArguments: BaseServiceHookArgs = {
           credentials: this.credentials,
           method: "ExperimentService.PromoteExperiment",
@@ -12980,11 +13633,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.promoteExperiment(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -13015,7 +13665,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/KeywordPlanAdGroupKeywordService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/KeywordPlanAdGroupKeywordService
    */
   public get keywordPlanAdGroupKeywords() {
     const service = this.loadService<services.KeywordPlanAdGroupKeywordService>(
@@ -13043,16 +13693,18 @@ export default class ServiceFactory extends Service {
           services.KeywordPlanAdGroupKeywordOperation,
           resources.IKeywordPlanAdGroupKeyword
         >("create", keywordPlanAdGroupKeywords);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanAdGroupKeywordOperation,
           services.IMutateKeywordPlanAdGroupKeywordsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "KeywordPlanAdGroupKeywordService.mutateKeywordPlanAdGroupKeywords",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -13067,6 +13719,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -13132,16 +13786,18 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.KeywordPlanAdGroupKeyword
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanAdGroupKeywordOperation,
           services.IMutateKeywordPlanAdGroupKeywordsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "KeywordPlanAdGroupKeywordService.mutateKeywordPlanAdGroupKeywords",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -13156,6 +13812,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -13213,16 +13871,18 @@ export default class ServiceFactory extends Service {
           services.KeywordPlanAdGroupKeywordOperation,
           string
         >("remove", keywordPlanAdGroupKeywords);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanAdGroupKeywordOperation,
           services.IMutateKeywordPlanAdGroupKeywordsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "KeywordPlanAdGroupKeywordService.mutateKeywordPlanAdGroupKeywords",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -13237,6 +13897,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -13285,7 +13947,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/KeywordPlanAdGroupService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/KeywordPlanAdGroupService
    */
   public get keywordPlanAdGroups() {
     const service = this.loadService<services.KeywordPlanAdGroupService>(
@@ -13312,15 +13974,17 @@ export default class ServiceFactory extends Service {
           services.KeywordPlanAdGroupOperation,
           resources.IKeywordPlanAdGroup
         >("create", keywordPlanAdGroups);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanAdGroupOperation,
           services.IMutateKeywordPlanAdGroupsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "KeywordPlanAdGroupService.mutateKeywordPlanAdGroups",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -13335,6 +13999,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -13396,15 +14062,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.KeywordPlanAdGroup
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanAdGroupOperation,
           services.IMutateKeywordPlanAdGroupsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "KeywordPlanAdGroupService.mutateKeywordPlanAdGroups",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -13419,6 +14087,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -13473,15 +14143,17 @@ export default class ServiceFactory extends Service {
           services.KeywordPlanAdGroupOperation,
           string
         >("remove", keywordPlanAdGroups);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanAdGroupOperation,
           services.IMutateKeywordPlanAdGroupsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "KeywordPlanAdGroupService.mutateKeywordPlanAdGroups",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -13496,6 +14168,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -13541,7 +14215,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/KeywordPlanCampaignKeywordService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/KeywordPlanCampaignKeywordService
    */
   public get keywordPlanCampaignKeywords() {
     const service =
@@ -13570,16 +14244,18 @@ export default class ServiceFactory extends Service {
           services.KeywordPlanCampaignKeywordOperation,
           resources.IKeywordPlanCampaignKeyword
         >("create", keywordPlanCampaignKeywords);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanCampaignKeywordOperation,
           services.IMutateKeywordPlanCampaignKeywordsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "KeywordPlanCampaignKeywordService.mutateKeywordPlanCampaignKeywords",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -13594,6 +14270,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -13659,16 +14337,18 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.KeywordPlanCampaignKeyword
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanCampaignKeywordOperation,
           services.IMutateKeywordPlanCampaignKeywordsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "KeywordPlanCampaignKeywordService.mutateKeywordPlanCampaignKeywords",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -13683,6 +14363,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -13740,16 +14422,18 @@ export default class ServiceFactory extends Service {
           services.KeywordPlanCampaignKeywordOperation,
           string
         >("remove", keywordPlanCampaignKeywords);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanCampaignKeywordOperation,
           services.IMutateKeywordPlanCampaignKeywordsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "KeywordPlanCampaignKeywordService.mutateKeywordPlanCampaignKeywords",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -13764,6 +14448,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -13812,7 +14498,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/KeywordPlanCampaignService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/KeywordPlanCampaignService
    */
   public get keywordPlanCampaigns() {
     const service = this.loadService<services.KeywordPlanCampaignService>(
@@ -13839,15 +14525,17 @@ export default class ServiceFactory extends Service {
           services.KeywordPlanCampaignOperation,
           resources.IKeywordPlanCampaign
         >("create", keywordPlanCampaigns);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanCampaignOperation,
           services.IMutateKeywordPlanCampaignsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "KeywordPlanCampaignService.mutateKeywordPlanCampaigns",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -13862,6 +14550,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -13923,15 +14613,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.KeywordPlanCampaign
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanCampaignOperation,
           services.IMutateKeywordPlanCampaignsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "KeywordPlanCampaignService.mutateKeywordPlanCampaigns",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -13946,6 +14638,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -14000,15 +14694,17 @@ export default class ServiceFactory extends Service {
           services.KeywordPlanCampaignOperation,
           string
         >("remove", keywordPlanCampaigns);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanCampaignOperation,
           services.IMutateKeywordPlanCampaignsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "KeywordPlanCampaignService.mutateKeywordPlanCampaigns",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -14023,6 +14719,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -14068,7 +14766,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/KeywordPlanService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/KeywordPlanService
    */
   public get keywordPlans() {
     const service = this.loadService<services.KeywordPlanService>(
@@ -14093,15 +14791,17 @@ export default class ServiceFactory extends Service {
           services.KeywordPlanOperation,
           resources.IKeywordPlan
         >("create", keywordPlans);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanOperation,
           services.IMutateKeywordPlansRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "KeywordPlanService.mutateKeywordPlans",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -14116,6 +14816,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -14175,15 +14877,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.KeywordPlan
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanOperation,
           services.IMutateKeywordPlansRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "KeywordPlanService.mutateKeywordPlans",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -14198,6 +14902,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -14252,15 +14958,17 @@ export default class ServiceFactory extends Service {
           "remove",
           keywordPlans
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanOperation,
           services.IMutateKeywordPlansRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "KeywordPlanService.mutateKeywordPlans",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -14275,6 +14983,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -14320,7 +15030,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/LabelService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/LabelService
    */
   public get labels() {
     const service =
@@ -14344,15 +15054,17 @@ export default class ServiceFactory extends Service {
           services.LabelOperation,
           resources.ILabel
         >("create", labels);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.LabelOperation,
           services.IMutateLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "LabelService.mutateLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -14367,6 +15079,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -14426,15 +15140,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.Label
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.LabelOperation,
           services.IMutateLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "LabelService.mutateLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -14449,6 +15165,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -14503,15 +15221,17 @@ export default class ServiceFactory extends Service {
           "remove",
           labels
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.LabelOperation,
           services.IMutateLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "LabelService.mutateLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -14526,6 +15246,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -14571,7 +15293,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/RecommendationSubscriptionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/RecommendationSubscriptionService
    */
   public get recommendationSubscriptions() {
     const service =
@@ -14600,16 +15322,18 @@ export default class ServiceFactory extends Service {
           services.RecommendationSubscriptionOperation,
           resources.IRecommendationSubscription
         >("create", recommendationSubscriptions);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.RecommendationSubscriptionOperation,
           services.IMutateRecommendationSubscriptionRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "RecommendationSubscriptionService.mutateRecommendationSubscription",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -14624,6 +15348,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -14689,16 +15415,18 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.RecommendationSubscription
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.RecommendationSubscriptionOperation,
           services.IMutateRecommendationSubscriptionRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "RecommendationSubscriptionService.mutateRecommendationSubscription",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -14713,6 +15441,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -14761,7 +15491,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/RemarketingActionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/RemarketingActionService
    */
   public get remarketingActions() {
     const service = this.loadService<services.RemarketingActionService>(
@@ -14788,15 +15518,17 @@ export default class ServiceFactory extends Service {
           services.RemarketingActionOperation,
           resources.IRemarketingAction
         >("create", remarketingActions);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.RemarketingActionOperation,
           services.IMutateRemarketingActionsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "RemarketingActionService.mutateRemarketingActions",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -14811,6 +15543,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -14872,15 +15606,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.RemarketingAction
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.RemarketingActionOperation,
           services.IMutateRemarketingActionsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "RemarketingActionService.mutateRemarketingActions",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -14895,6 +15631,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -14940,7 +15678,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/SharedCriterionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/SharedCriterionService
    */
   public get sharedCriteria() {
     const service = this.loadService<services.SharedCriterionService>(
@@ -14967,15 +15705,17 @@ export default class ServiceFactory extends Service {
           services.SharedCriterionOperation,
           resources.ISharedCriterion
         >("create", sharedCriteria);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.SharedCriterionOperation,
           services.IMutateSharedCriteriaRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "SharedCriterionService.mutateSharedCriteria",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -14990,6 +15730,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -15044,15 +15786,17 @@ export default class ServiceFactory extends Service {
           services.SharedCriterionOperation,
           string
         >("remove", sharedCriteria);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.SharedCriterionOperation,
           services.IMutateSharedCriteriaRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "SharedCriterionService.mutateSharedCriteria",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -15067,6 +15811,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -15112,7 +15858,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/SharedSetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/SharedSetService
    */
   public get sharedSets() {
     const service = this.loadService<services.SharedSetService>(
@@ -15137,15 +15883,17 @@ export default class ServiceFactory extends Service {
           services.SharedSetOperation,
           resources.ISharedSet
         >("create", sharedSets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.SharedSetOperation,
           services.IMutateSharedSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "SharedSetService.mutateSharedSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -15160,6 +15908,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -15219,15 +15969,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.SharedSet
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.SharedSetOperation,
           services.IMutateSharedSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "SharedSetService.mutateSharedSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -15242,6 +15994,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -15296,15 +16050,17 @@ export default class ServiceFactory extends Service {
           "remove",
           sharedSets
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.SharedSetOperation,
           services.IMutateSharedSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "SharedSetService.mutateSharedSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -15319,6 +16075,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -15364,7 +16122,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/SmartCampaignSettingService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/SmartCampaignSettingService
    */
   public get smartCampaignSettings() {
     const service = this.loadService<services.SmartCampaignSettingService>(
@@ -15378,7 +16136,7 @@ export default class ServiceFactory extends Service {
     >;
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/SmartCampaignSettingService#getsmartcampaignstatus
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/SmartCampaignSettingService#getsmartcampaignstatus
        */
       getSmartCampaignStatus: async (
         request: services.GetSmartCampaignStatusRequest
@@ -15410,11 +16168,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.getSmartCampaignStatus(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -15461,15 +16216,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.SmartCampaignSetting
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.SmartCampaignSettingOperation,
           services.IMutateSmartCampaignSettingsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "SmartCampaignSettingService.mutateSmartCampaignSettings",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -15484,6 +16241,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -15528,11 +16287,73 @@ export default class ServiceFactory extends Service {
           throw googleAdsError;
         }
       },
+
+      /**
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/SmartCampaignSettingService#generatepmaxdraftcampaign
+       */
+      generatePMaxDraftCampaign: async (
+        request: services.GeneratePMaxDraftCampaignRequest
+      ): Promise<services.GeneratePMaxDraftCampaignResponse> => {
+        const baseHookArguments: BaseServiceHookArgs = {
+          credentials: this.credentials,
+          method: "SmartCampaignSettingService.GeneratePMaxDraftCampaign",
+          requestOptions: request,
+        };
+        if (this.hooks.onServiceStart) {
+          const serviceCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onServiceStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              serviceCancellation.cancelled = true;
+              serviceCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (serviceCancellation.cancelled) {
+            return serviceCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.generatePMaxDraftCampaign(request, {
+            otherArgs: { headers: this.callHeaders },
+          } as never);
+          if (this.hooks.onServiceEnd) {
+            const serviceResolution: HookedResolution = { resolved: false };
+            await this.hooks.onServiceEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                serviceResolution.resolved = true;
+                serviceResolution.res = res;
+              },
+            });
+            if (serviceResolution.resolved) {
+              return serviceResolution.res;
+            }
+          }
+          return response;
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err as Error);
+          if (this.hooks.onServiceError) {
+            await this.hooks.onServiceError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
     };
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/UserListService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/UserListService
    */
   public get userLists() {
     const service = this.loadService<services.UserListService>(
@@ -15557,15 +16378,17 @@ export default class ServiceFactory extends Service {
           services.UserListOperation,
           resources.IUserList
         >("create", userLists);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.UserListOperation,
           services.IMutateUserListsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "UserListService.mutateUserLists",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -15580,6 +16403,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -15639,15 +16464,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.UserList
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.UserListOperation,
           services.IMutateUserListsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "UserListService.mutateUserLists",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -15662,6 +16489,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -15716,15 +16545,17 @@ export default class ServiceFactory extends Service {
           "remove",
           userLists
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.UserListOperation,
           services.IMutateUserListsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "UserListService.mutateUserLists",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -15739,6 +16570,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -15784,7 +16617,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/BenchmarksService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/BenchmarksService
    */
   public get benchmarks() {
     const service = this.loadService<services.BenchmarksService>(
@@ -15793,7 +16626,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/BenchmarksService#listbenchmarksavailabledates
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/BenchmarksService#listbenchmarksavailabledates
        */
       listBenchmarksAvailableDates: async (
         request: services.ListBenchmarksAvailableDatesRequest
@@ -15827,11 +16660,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.listBenchmarksAvailableDates(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -15861,7 +16691,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/BenchmarksService#listbenchmarkslocations
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/BenchmarksService#listbenchmarkslocations
        */
       listBenchmarksLocations: async (
         request: services.ListBenchmarksLocationsRequest
@@ -15893,11 +16723,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.listBenchmarksLocations(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -15926,7 +16753,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/BenchmarksService#listbenchmarksproducts
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/BenchmarksService#listbenchmarksproducts
        */
       listBenchmarksProducts: async (
         request: services.ListBenchmarksProductsRequest
@@ -15958,11 +16785,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.listBenchmarksProducts(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -15991,7 +16815,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/BenchmarksService#listbenchmarkssources
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/BenchmarksService#listbenchmarkssources
        */
       listBenchmarksSources: async (
         request: services.ListBenchmarksSourcesRequest
@@ -16023,11 +16847,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.listBenchmarksSources(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -16056,7 +16877,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/BenchmarksService#generatebenchmarksmetrics
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/BenchmarksService#generatebenchmarksmetrics
        */
       generateBenchmarksMetrics: async (
         request: services.GenerateBenchmarksMetricsRequest
@@ -16088,11 +16909,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.generateBenchmarksMetrics(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -16123,35 +16941,37 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/BillingSetupService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/BillingSetupService
    */
   public get billingSetups() {
     const service = this.loadService<services.BillingSetupService>(
       "BillingSetupServiceClient"
     );
-    type MutateOptions = never;
+    type MutateOptions = Record<string, never>;
     return {
       /**
        * @description create resources of type resources.IBillingSetup
        * @returns services.MutateBillingSetupResponse
        */
       create: async (
-        billingSetups: (resources.IBillingSetup | resources.BillingSetup)[],
+        billingSetup: resources.IBillingSetup | resources.BillingSetup,
         options?: MutateOptions
       ): Promise<services.MutateBillingSetupResponse> => {
         const ops = this.buildOperations<
           services.BillingSetupOperation,
           resources.IBillingSetup
-        >("create", billingSetups);
-        const request = this.buildRequest<
+        >("create", [billingSetup]);
+        const mutateOptions: MutateOptions = { ...options };
+        const request = this.buildSingleOperationRequest<
           services.BillingSetupOperation,
           services.IMutateBillingSetupRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "BillingSetupService.mutateBillingSetup",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -16166,6 +16986,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -16213,22 +17035,24 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateBillingSetupResponse
        */
       remove: async (
-        billingSetups: string[],
+        billingSetup: string,
         options?: MutateOptions
       ): Promise<services.MutateBillingSetupResponse> => {
         const ops = this.buildOperations<
           services.BillingSetupOperation,
           string
-        >("remove", billingSetups);
-        const request = this.buildRequest<
+        >("remove", [billingSetup]);
+        const mutateOptions: MutateOptions = { ...options };
+        const request = this.buildSingleOperationRequest<
           services.BillingSetupOperation,
           services.IMutateBillingSetupRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "BillingSetupService.mutateBillingSetup",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -16243,6 +17067,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -16288,7 +17114,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/BrandSuggestionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/BrandSuggestionService
    */
   public get brandSuggestions() {
     const service = this.loadService<services.BrandSuggestionService>(
@@ -16297,7 +17123,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/BrandSuggestionService#suggestbrands
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/BrandSuggestionService#suggestbrands
        */
       suggestBrands: async (
         request: services.SuggestBrandsRequest
@@ -16329,11 +17155,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.suggestBrands(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -16364,7 +17187,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CampaignGoalConfigService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CampaignGoalConfigService
    */
   public get campaignGoalConfigs() {
     const service = this.loadService<services.CampaignGoalConfigService>(
@@ -16391,15 +17214,17 @@ export default class ServiceFactory extends Service {
           services.CampaignGoalConfigOperation,
           resources.ICampaignGoalConfig
         >("create", campaignGoalConfigs);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignGoalConfigOperation,
           services.IMutateCampaignGoalConfigsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignGoalConfigService.mutateCampaignGoalConfigs",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -16414,6 +17239,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -16475,15 +17302,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CampaignGoalConfig
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignGoalConfigOperation,
           services.IMutateCampaignGoalConfigsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignGoalConfigService.mutateCampaignGoalConfigs",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -16498,6 +17327,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -16552,15 +17383,17 @@ export default class ServiceFactory extends Service {
           services.CampaignGoalConfigOperation,
           string
         >("remove", campaignGoalConfigs);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignGoalConfigOperation,
           services.IMutateCampaignGoalConfigsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignGoalConfigService.mutateCampaignGoalConfigs",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -16575,6 +17408,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -16620,7 +17455,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ContentCreatorInsightsService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ContentCreatorInsightsService
    */
   public get contentCreatorInsights() {
     const service = this.loadService<services.ContentCreatorInsightsService>(
@@ -16629,7 +17464,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ContentCreatorInsightsService#generatecreatorinsights
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ContentCreatorInsightsService#generatecreatorinsights
        */
       generateCreatorInsights: async (
         request: services.GenerateCreatorInsightsRequest
@@ -16661,11 +17496,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.generateCreatorInsights(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -16694,7 +17526,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ContentCreatorInsightsService#generatetrendinginsights
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ContentCreatorInsightsService#generatetrendinginsights
        */
       generateTrendingInsights: async (
         request: services.GenerateTrendingInsightsRequest
@@ -16726,11 +17558,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.generateTrendingInsights(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -16761,7 +17590,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ConversionAdjustmentUploadService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ConversionAdjustmentUploadService
    */
   public get conversionAdjustmentUploads() {
     const service =
@@ -16771,7 +17600,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ConversionAdjustmentUploadService#uploadconversionadjustments
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ConversionAdjustmentUploadService#uploadconversionadjustments
        */
       uploadConversionAdjustments: async (
         request: services.UploadConversionAdjustmentsRequest
@@ -16806,11 +17635,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.uploadConversionAdjustments(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -16842,7 +17668,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ConversionUploadService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ConversionUploadService
    */
   public get conversionUploads() {
     const service = this.loadService<services.ConversionUploadService>(
@@ -16851,7 +17677,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ConversionUploadService#uploadclickconversions
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ConversionUploadService#uploadclickconversions
        */
       uploadClickConversions: async (
         request: services.UploadClickConversionsRequest
@@ -16883,11 +17709,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.uploadClickConversions(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -16916,7 +17739,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ConversionUploadService#uploadcallconversions
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ConversionUploadService#uploadcallconversions
        */
       uploadCallConversions: async (
         request: services.UploadCallConversionsRequest
@@ -16948,11 +17771,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.uploadCallConversions(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -16983,7 +17803,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CustomAudienceService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CustomAudienceService
    */
   public get customAudiences() {
     const service = this.loadService<services.CustomAudienceService>(
@@ -17007,15 +17827,17 @@ export default class ServiceFactory extends Service {
           services.CustomAudienceOperation,
           resources.ICustomAudience
         >("create", customAudiences);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomAudienceOperation,
           services.IMutateCustomAudiencesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomAudienceService.mutateCustomAudiences",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -17030,6 +17852,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -17091,15 +17915,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CustomAudience
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomAudienceOperation,
           services.IMutateCustomAudiencesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomAudienceService.mutateCustomAudiences",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -17114,6 +17940,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -17168,15 +17996,17 @@ export default class ServiceFactory extends Service {
           services.CustomAudienceOperation,
           string
         >("remove", customAudiences);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomAudienceOperation,
           services.IMutateCustomAudiencesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomAudienceService.mutateCustomAudiences",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -17191,6 +18021,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -17236,7 +18068,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CustomInterestService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CustomInterestService
    */
   public get customInterests() {
     const service = this.loadService<services.CustomInterestService>(
@@ -17260,15 +18092,17 @@ export default class ServiceFactory extends Service {
           services.CustomInterestOperation,
           resources.ICustomInterest
         >("create", customInterests);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomInterestOperation,
           services.IMutateCustomInterestsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomInterestService.mutateCustomInterests",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -17283,6 +18117,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -17344,15 +18180,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CustomInterest
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomInterestOperation,
           services.IMutateCustomInterestsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomInterestService.mutateCustomInterests",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -17367,6 +18205,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -17412,7 +18252,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CustomerAssetSetService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CustomerAssetSetService
    */
   public get customerAssetSets() {
     const service = this.loadService<services.CustomerAssetSetService>(
@@ -17439,15 +18279,17 @@ export default class ServiceFactory extends Service {
           services.CustomerAssetSetOperation,
           resources.ICustomerAssetSet
         >("create", customerAssetSets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerAssetSetOperation,
           services.IMutateCustomerAssetSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerAssetSetService.mutateCustomerAssetSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -17462,6 +18304,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -17516,15 +18360,17 @@ export default class ServiceFactory extends Service {
           services.CustomerAssetSetOperation,
           string
         >("remove", customerAssetSets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerAssetSetOperation,
           services.IMutateCustomerAssetSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerAssetSetService.mutateCustomerAssetSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -17539,6 +18385,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -17584,7 +18432,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CustomerClientLinkService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CustomerClientLinkService
    */
   public get customerClientLinks() {
     const service = this.loadService<services.CustomerClientLinkService>(
@@ -17599,24 +18447,25 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerClientLinkResponse
        */
       create: async (
-        customerClientLinks: (
-          resources.ICustomerClientLink | resources.CustomerClientLink
-        )[],
+        customerClientLink:
+          resources.ICustomerClientLink | resources.CustomerClientLink,
         options?: MutateOptions
       ): Promise<services.MutateCustomerClientLinkResponse> => {
         const ops = this.buildOperations<
           services.CustomerClientLinkOperation,
           resources.ICustomerClientLink
-        >("create", customerClientLinks);
-        const request = this.buildRequest<
+        >("create", [customerClientLink]);
+        const mutateOptions: MutateOptions = { ...options };
+        const request = this.buildSingleOperationRequest<
           services.CustomerClientLinkOperation,
           services.IMutateCustomerClientLinkRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerClientLinkService.mutateCustomerClientLink",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -17631,6 +18480,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -17678,9 +18529,8 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerClientLinkResponse
        */
       update: async (
-        customerClientLinks: (
-          resources.ICustomerClientLink | resources.CustomerClientLink
-        )[],
+        customerClientLink:
+          resources.ICustomerClientLink | resources.CustomerClientLink,
         options?: MutateOptions
       ): Promise<services.MutateCustomerClientLinkResponse> => {
         const ops = this.buildOperations<
@@ -17688,19 +18538,21 @@ export default class ServiceFactory extends Service {
           resources.ICustomerClientLink
         >(
           "update",
-          customerClientLinks,
+          [customerClientLink],
           // @ts-expect-error Static class type here is fine
           resources.CustomerClientLink
         );
-        const request = this.buildRequest<
+        const mutateOptions: MutateOptions = { ...options };
+        const request = this.buildSingleOperationRequest<
           services.CustomerClientLinkOperation,
           services.IMutateCustomerClientLinkRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerClientLinkService.mutateCustomerClientLink",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -17715,6 +18567,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -17760,7 +18614,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CustomerManagerLinkService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CustomerManagerLinkService
    */
   public get customerManagerLinks() {
     const service = this.loadService<services.CustomerManagerLinkService>(
@@ -17789,15 +18643,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CustomerManagerLink
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerManagerLinkOperation,
           services.IMutateCustomerManagerLinkRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerManagerLinkService.mutateCustomerManagerLink",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -17812,6 +18668,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -17855,7 +18713,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CustomerManagerLinkService#movemanagerlink
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CustomerManagerLinkService#movemanagerlink
        */
       moveManagerLink: async (
         request: services.MoveManagerLinkRequest
@@ -17887,11 +18745,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.moveManagerLink(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -17922,7 +18777,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CustomerSkAdNetworkConversionValueSchemaService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CustomerSkAdNetworkConversionValueSchemaService
    */
   public get customerSkAdNetworkConversionValueSchemas() {
     const service =
@@ -17941,10 +18796,9 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerSkAdNetworkConversionValueSchemaResponse
        */
       update: async (
-        customerSkAdNetworkConversionValueSchemas: (
+        customerSkAdNetworkConversionValueSchema:
           | resources.ICustomerSkAdNetworkConversionValueSchema
-          | resources.CustomerSkAdNetworkConversionValueSchema
-        )[],
+          | resources.CustomerSkAdNetworkConversionValueSchema,
         options?: MutateOptions
       ): Promise<services.MutateCustomerSkAdNetworkConversionValueSchemaResponse> => {
         const ops = this.buildOperations<
@@ -17952,20 +18806,22 @@ export default class ServiceFactory extends Service {
           resources.ICustomerSkAdNetworkConversionValueSchema
         >(
           "update",
-          customerSkAdNetworkConversionValueSchemas,
+          [customerSkAdNetworkConversionValueSchema],
           // @ts-expect-error Static class type here is fine
           resources.CustomerSkAdNetworkConversionValueSchema
         );
-        const request = this.buildRequest<
+        const mutateOptions: MutateOptions = { ...options };
+        const request = this.buildSingleOperationRequest<
           services.CustomerSkAdNetworkConversionValueSchemaOperation,
           services.IMutateCustomerSkAdNetworkConversionValueSchemaRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "CustomerSkAdNetworkConversionValueSchemaService.mutateCustomerSkAdNetworkConversionValueSchema",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -17980,6 +18836,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -18029,40 +18887,41 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CustomerUserAccessInvitationService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CustomerUserAccessInvitationService
    */
   public get customerUserAccessInvitations() {
     const service =
       this.loadService<services.CustomerUserAccessInvitationService>(
         "CustomerUserAccessInvitationServiceClient"
       );
-    type MutateOptions = never;
+    type MutateOptions = Record<string, never>;
     return {
       /**
        * @description create resources of type resources.ICustomerUserAccessInvitation
        * @returns services.MutateCustomerUserAccessInvitationResponse
        */
       create: async (
-        customerUserAccessInvitations: (
+        customerUserAccessInvitation:
           | resources.ICustomerUserAccessInvitation
-          | resources.CustomerUserAccessInvitation
-        )[],
+          | resources.CustomerUserAccessInvitation,
         options?: MutateOptions
       ): Promise<services.MutateCustomerUserAccessInvitationResponse> => {
         const ops = this.buildOperations<
           services.CustomerUserAccessInvitationOperation,
           resources.ICustomerUserAccessInvitation
-        >("create", customerUserAccessInvitations);
-        const request = this.buildRequest<
+        >("create", [customerUserAccessInvitation]);
+        const mutateOptions: MutateOptions = { ...options };
+        const request = this.buildSingleOperationRequest<
           services.CustomerUserAccessInvitationOperation,
           services.IMutateCustomerUserAccessInvitationRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "CustomerUserAccessInvitationService.mutateCustomerUserAccessInvitation",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -18077,6 +18936,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -18127,23 +18988,25 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerUserAccessInvitationResponse
        */
       remove: async (
-        customerUserAccessInvitations: string[],
+        customerUserAccessInvitation: string,
         options?: MutateOptions
       ): Promise<services.MutateCustomerUserAccessInvitationResponse> => {
         const ops = this.buildOperations<
           services.CustomerUserAccessInvitationOperation,
           string
-        >("remove", customerUserAccessInvitations);
-        const request = this.buildRequest<
+        >("remove", [customerUserAccessInvitation]);
+        const mutateOptions: MutateOptions = { ...options };
+        const request = this.buildSingleOperationRequest<
           services.CustomerUserAccessInvitationOperation,
           services.IMutateCustomerUserAccessInvitationRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "CustomerUserAccessInvitationService.mutateCustomerUserAccessInvitation",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -18158,6 +19021,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -18206,22 +19071,21 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/CustomerUserAccessService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/CustomerUserAccessService
    */
   public get customerUserAccesses() {
     const service = this.loadService<services.CustomerUserAccessService>(
       "CustomerUserAccessServiceClient"
     );
-    type MutateOptions = never;
+    type MutateOptions = Record<string, never>;
     return {
       /**
        * @description update resources of type resources.ICustomerUserAccess
        * @returns services.MutateCustomerUserAccessResponse
        */
       update: async (
-        customerUserAccesses: (
-          resources.ICustomerUserAccess | resources.CustomerUserAccess
-        )[],
+        customerUserAccess:
+          resources.ICustomerUserAccess | resources.CustomerUserAccess,
         options?: MutateOptions
       ): Promise<services.MutateCustomerUserAccessResponse> => {
         const ops = this.buildOperations<
@@ -18229,19 +19093,21 @@ export default class ServiceFactory extends Service {
           resources.ICustomerUserAccess
         >(
           "update",
-          customerUserAccesses,
+          [customerUserAccess],
           // @ts-expect-error Static class type here is fine
           resources.CustomerUserAccess
         );
-        const request = this.buildRequest<
+        const mutateOptions: MutateOptions = { ...options };
+        const request = this.buildSingleOperationRequest<
           services.CustomerUserAccessOperation,
           services.IMutateCustomerUserAccessRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerUserAccessService.mutateCustomerUserAccess",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -18256,6 +19122,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -18303,22 +19171,24 @@ export default class ServiceFactory extends Service {
        * @returns services.MutateCustomerUserAccessResponse
        */
       remove: async (
-        customerUserAccesses: string[],
+        customerUserAccess: string,
         options?: MutateOptions
       ): Promise<services.MutateCustomerUserAccessResponse> => {
         const ops = this.buildOperations<
           services.CustomerUserAccessOperation,
           string
-        >("remove", customerUserAccesses);
-        const request = this.buildRequest<
+        >("remove", [customerUserAccess]);
+        const mutateOptions: MutateOptions = { ...options };
+        const request = this.buildSingleOperationRequest<
           services.CustomerUserAccessOperation,
           services.IMutateCustomerUserAccessRequest,
           MutateOptions
-        >(ops, options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerUserAccessService.mutateCustomerUserAccess",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -18333,6 +19203,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -18378,7 +19250,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/DataLinkService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/DataLinkService
    */
   public get dataLinks() {
     const service = this.loadService<services.DataLinkService>(
@@ -18387,7 +19259,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/DataLinkService#createdatalink
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/DataLinkService#createdatalink
        */
       createDataLink: async (
         request: services.CreateDataLinkRequest
@@ -18419,11 +19291,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.createDataLink(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -18452,7 +19321,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/DataLinkService#removedatalink
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/DataLinkService#removedatalink
        */
       removeDataLink: async (
         request: services.RemoveDataLinkRequest
@@ -18484,11 +19353,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.removeDataLink(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -18517,7 +19383,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/DataLinkService#updatedatalink
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/DataLinkService#updatedatalink
        */
       updateDataLink: async (
         request: services.UpdateDataLinkRequest
@@ -18549,11 +19415,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.updateDataLink(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -18584,7 +19447,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/GeoTargetConstantService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/GeoTargetConstantService
    */
   public get geoTargetConstants() {
     const service = this.loadService<services.GeoTargetConstantService>(
@@ -18593,7 +19456,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/GeoTargetConstantService#suggestgeotargetconstants
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/GeoTargetConstantService#suggestgeotargetconstants
        */
       suggestGeoTargetConstants: async (
         request: services.SuggestGeoTargetConstantsRequest
@@ -18625,11 +19488,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.suggestGeoTargetConstants(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -18660,7 +19520,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/GoalService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/GoalService
    */
   public get goals() {
     const service = this.loadService<services.GoalService>("GoalServiceClient");
@@ -18680,15 +19540,17 @@ export default class ServiceFactory extends Service {
           services.GoalOperation,
           resources.IGoal
         >("create", goals);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.GoalOperation,
           services.IMutateGoalsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "GoalService.mutateGoals",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -18703,6 +19565,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -18762,15 +19626,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.Goal
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.GoalOperation,
           services.IMutateGoalsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "GoalService.mutateGoals",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -18785,6 +19651,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -18830,7 +19698,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/IdentityVerificationService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/IdentityVerificationService
    */
   public get identityVerifications() {
     const service = this.loadService<services.IdentityVerificationService>(
@@ -18839,7 +19707,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/IdentityVerificationService#startidentityverification
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/IdentityVerificationService#startidentityverification
        */
       startIdentityVerification: async (
         request: services.StartIdentityVerificationRequest
@@ -18871,11 +19739,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.startIdentityVerification(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -18904,7 +19769,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/IdentityVerificationService#getidentityverification
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/IdentityVerificationService#getidentityverification
        */
       getIdentityVerification: async (
         request: services.GetIdentityVerificationRequest
@@ -18936,11 +19801,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.getIdentityVerification(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -18971,7 +19833,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/IncentiveService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/IncentiveService
    */
   public get incentives() {
     const service = this.loadService<services.IncentiveService>(
@@ -18980,7 +19842,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/IncentiveService#fetchincentive
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/IncentiveService#fetchincentive
        */
       fetchIncentive: async (
         request: services.FetchIncentiveRequest
@@ -19012,11 +19874,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.fetchIncentive(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -19045,7 +19904,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/IncentiveService#applyincentive
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/IncentiveService#applyincentive
        */
       applyIncentive: async (
         request: services.ApplyIncentiveRequest
@@ -19077,11 +19936,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.applyIncentive(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -19112,7 +19968,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/InvoiceService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/InvoiceService
    */
   public get invoices() {
     const service = this.loadService<services.InvoiceService>(
@@ -19121,7 +19977,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/InvoiceService#listinvoices
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/InvoiceService#listinvoices
        */
       listInvoices: async (
         request: services.ListInvoicesRequest
@@ -19153,11 +20009,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.listInvoices(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -19188,7 +20041,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/KeywordPlanIdeaService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/KeywordPlanIdeaService
    */
   public get keywordPlanIdeas() {
     const service = this.loadService<services.KeywordPlanIdeaService>(
@@ -19197,7 +20050,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/KeywordPlanIdeaService#generatekeywordideas
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/KeywordPlanIdeaService#generatekeywordideas
        */
       generateKeywordIdeas: async (
         request: services.GenerateKeywordIdeasRequest
@@ -19228,12 +20081,10 @@ export default class ServiceFactory extends Service {
         }
         try {
           // @ts-expect-error Response is an array type
-          const [response] = await service.generateKeywordIdeas(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+          const [, , response] = await service.generateKeywordIdeas(request, {
+            autoPaginate: false,
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -19262,7 +20113,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/KeywordPlanIdeaService#generatekeywordhistoricalmetrics
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/KeywordPlanIdeaService#generatekeywordhistoricalmetrics
        */
       generateKeywordHistoricalMetrics: async (
         request: services.GenerateKeywordHistoricalMetricsRequest
@@ -19296,11 +20147,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.generateKeywordHistoricalMetrics(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -19330,7 +20178,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/KeywordPlanIdeaService#generateadgroupthemes
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/KeywordPlanIdeaService#generateadgroupthemes
        */
       generateAdGroupThemes: async (
         request: services.GenerateAdGroupThemesRequest
@@ -19362,11 +20210,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.generateAdGroupThemes(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -19395,7 +20240,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/KeywordPlanIdeaService#generatekeywordforecastmetrics
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/KeywordPlanIdeaService#generatekeywordforecastmetrics
        */
       generateKeywordForecastMetrics: async (
         request: services.GenerateKeywordForecastMetricsRequest
@@ -19429,11 +20274,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.generateKeywordForecastMetrics(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -19465,7 +20307,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/KeywordThemeConstantService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/KeywordThemeConstantService
    */
   public get keywordThemeConstants() {
     const service = this.loadService<services.KeywordThemeConstantService>(
@@ -19474,7 +20316,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/KeywordThemeConstantService#suggestkeywordthemeconstants
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/KeywordThemeConstantService#suggestkeywordthemeconstants
        */
       suggestKeywordThemeConstants: async (
         request: services.SuggestKeywordThemeConstantsRequest
@@ -19508,11 +20350,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.suggestKeywordThemeConstants(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -19544,16 +20383,93 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/LocalServicesLeadService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/LocalServicesEligibilityService
    */
-  public get localsLeadServices() {
+  public get localServicesEligibilities() {
+    const service = this.loadService<services.LocalServicesEligibilityService>(
+      "LocalServicesEligibilityServiceClient"
+    );
+
+    return {
+      /**
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/LocalServicesEligibilityService#checklocalserviceseligibility
+       */
+      checkLocalServicesEligibility: async (
+        request: services.CheckLocalServicesEligibilityRequest
+      ): Promise<services.CheckLocalServicesEligibilityResponse> => {
+        const baseHookArguments: BaseServiceHookArgs = {
+          credentials: this.credentials,
+          method:
+            "LocalServicesEligibilityService.CheckLocalServicesEligibility",
+          requestOptions: request,
+        };
+        if (this.hooks.onServiceStart) {
+          const serviceCancellation: HookedCancellation = { cancelled: false };
+          await this.hooks.onServiceStart({
+            ...baseHookArguments,
+            cancel: (res) => {
+              serviceCancellation.cancelled = true;
+              serviceCancellation.res = res;
+            },
+            editOptions: (options) => {
+              Object.entries(options).forEach(([key, val]) => {
+                // @ts-expect-error Index with key type is fine
+                request[key] = val;
+              });
+            },
+          });
+          if (serviceCancellation.cancelled) {
+            return serviceCancellation.res;
+          }
+        }
+        try {
+          // @ts-expect-error Response is an array type
+          const [response] = await service.checkLocalServicesEligibility(
+            request,
+            {
+              otherArgs: { headers: this.callHeaders },
+            } as never
+          );
+          if (this.hooks.onServiceEnd) {
+            const serviceResolution: HookedResolution = { resolved: false };
+            await this.hooks.onServiceEnd({
+              ...baseHookArguments,
+              response,
+              resolve: (res) => {
+                serviceResolution.resolved = true;
+                serviceResolution.res = res;
+              },
+            });
+            if (serviceResolution.resolved) {
+              return serviceResolution.res;
+            }
+          }
+          return response;
+        } catch (err) {
+          const googleAdsError = this.getGoogleAdsError(err as Error);
+          if (this.hooks.onServiceError) {
+            await this.hooks.onServiceError({
+              ...baseHookArguments,
+              error: googleAdsError,
+            });
+          }
+          throw googleAdsError;
+        }
+      },
+    };
+  }
+
+  /**
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/LocalServicesLeadService
+   */
+  public get localServicesLeads() {
     const service = this.loadService<services.LocalServicesLeadService>(
       "LocalServicesLeadServiceClient"
     );
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/LocalServicesLeadService#appendleadconversation
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/LocalServicesLeadService#appendleadconversation
        */
       appendLeadConversation: async (
         request: services.AppendLeadConversationRequest
@@ -19585,11 +20501,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.appendLeadConversation(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -19618,7 +20531,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/LocalServicesLeadService#provideleadfeedback
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/LocalServicesLeadService#provideleadfeedback
        */
       provideLeadFeedback: async (
         request: services.ProvideLeadFeedbackRequest
@@ -19650,11 +20563,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.provideLeadFeedback(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -19685,7 +20595,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/MultiPartyAuthReviewService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/MultiPartyAuthReviewService
    */
   public get multiPartyAuthReviews() {
     const service = this.loadService<services.MultiPartyAuthReviewService>(
@@ -19694,7 +20604,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/MultiPartyAuthReviewService#resolvemultipartyauthreview
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/MultiPartyAuthReviewService#resolvemultipartyauthreview
        */
       resolveMultiPartyAuthReview: async (
         request: services.ResolveMultiPartyAuthReviewRequest
@@ -19728,11 +20638,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.resolveMultiPartyAuthReview(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -19764,7 +20671,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/OfflineUserDataJobService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/OfflineUserDataJobService
    */
   public get offlineUserDataJobs() {
     const service = this.loadService<services.OfflineUserDataJobService>(
@@ -19773,7 +20680,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/OfflineUserDataJobService#createofflineuserdatajob
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/OfflineUserDataJobService#createofflineuserdatajob
        */
       createOfflineUserDataJob: async (
         request: services.CreateOfflineUserDataJobRequest
@@ -19805,11 +20712,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.createOfflineUserDataJob(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -19838,7 +20742,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/OfflineUserDataJobService#addofflineuserdatajoboperations
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/OfflineUserDataJobService#addofflineuserdatajoboperations
        */
       addOfflineUserDataJobOperations: async (
         request: services.AddOfflineUserDataJobOperationsRequest
@@ -19872,11 +20776,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.addOfflineUserDataJobOperations(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -19906,11 +20807,13 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/OfflineUserDataJobService#runofflineuserdatajob
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/OfflineUserDataJobService#runofflineuserdatajob
        */
       runOfflineUserDataJob: async (
         request: services.RunOfflineUserDataJobRequest
-      ): Promise<longrunning.Operation> => {
+      ): Promise<
+        LROperation<protobuf.IEmpty, resources.IOfflineUserDataJobMetadata>
+      > => {
         const baseHookArguments: BaseServiceHookArgs = {
           credentials: this.credentials,
           method: "OfflineUserDataJobService.RunOfflineUserDataJob",
@@ -19938,11 +20841,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.runOfflineUserDataJob(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -19973,7 +20873,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/PaymentsAccountService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/PaymentsAccountService
    */
   public get paymentsAccounts() {
     const service = this.loadService<services.PaymentsAccountService>(
@@ -19982,7 +20882,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/PaymentsAccountService#listpaymentsaccounts
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/PaymentsAccountService#listpaymentsaccounts
        */
       listPaymentsAccounts: async (
         request: services.ListPaymentsAccountsRequest
@@ -20014,11 +20914,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.listPaymentsAccounts(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -20049,7 +20946,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ProductLinkInvitationService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ProductLinkInvitationService
    */
   public get productLinkInvitations() {
     const service = this.loadService<services.ProductLinkInvitationService>(
@@ -20058,7 +20955,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ProductLinkInvitationService#createproductlinkinvitation
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ProductLinkInvitationService#createproductlinkinvitation
        */
       createProductLinkInvitation: async (
         request: services.CreateProductLinkInvitationRequest
@@ -20092,11 +20989,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.createProductLinkInvitation(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -20126,7 +21020,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ProductLinkInvitationService#updateproductlinkinvitation
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ProductLinkInvitationService#updateproductlinkinvitation
        */
       updateProductLinkInvitation: async (
         request: services.UpdateProductLinkInvitationRequest
@@ -20160,11 +21054,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.updateProductLinkInvitation(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -20194,7 +21085,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ProductLinkInvitationService#removeproductlinkinvitation
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ProductLinkInvitationService#removeproductlinkinvitation
        */
       removeProductLinkInvitation: async (
         request: services.RemoveProductLinkInvitationRequest
@@ -20228,11 +21119,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.removeProductLinkInvitation(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -20264,7 +21152,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ProductLinkService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ProductLinkService
    */
   public get productLinks() {
     const service = this.loadService<services.ProductLinkService>(
@@ -20273,7 +21161,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ProductLinkService#createproductlink
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ProductLinkService#createproductlink
        */
       createProductLink: async (
         request: services.CreateProductLinkRequest
@@ -20305,11 +21193,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.createProductLink(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -20338,7 +21223,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ProductLinkService#removeproductlink
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ProductLinkService#removeproductlink
        */
       removeProductLink: async (
         request: services.RemoveProductLinkRequest
@@ -20370,11 +21255,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.removeProductLink(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -20405,7 +21287,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ReachPlanService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ReachPlanService
    */
   public get reachPlans() {
     const service = this.loadService<services.ReachPlanService>(
@@ -20414,7 +21296,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ReachPlanService#generateconversionrates
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ReachPlanService#generateconversionrates
        */
       generateConversionRates: async (
         request: services.GenerateConversionRatesRequest
@@ -20446,11 +21328,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.generateConversionRates(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -20479,7 +21358,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ReachPlanService#listplannablelocations
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ReachPlanService#listplannablelocations
        */
       listPlannableLocations: async (
         request: services.ListPlannableLocationsRequest
@@ -20511,11 +21390,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.listPlannableLocations(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -20544,7 +21420,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ReachPlanService#listplannableproducts
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ReachPlanService#listplannableproducts
        */
       listPlannableProducts: async (
         request: services.ListPlannableProductsRequest
@@ -20576,11 +21452,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.listPlannableProducts(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -20609,7 +21482,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ReachPlanService#generatereachforecast
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ReachPlanService#generatereachforecast
        */
       generateReachForecast: async (
         request: services.GenerateReachForecastRequest
@@ -20641,11 +21514,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.generateReachForecast(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -20674,7 +21544,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ReachPlanService#listplannableuserlists
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ReachPlanService#listplannableuserlists
        */
       listPlannableUserLists: async (
         request: services.ListPlannableUserListsRequest
@@ -20706,11 +21576,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.listPlannableUserLists(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -20739,7 +21606,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ReachPlanService#listplannableuserinterests
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ReachPlanService#listplannableuserinterests
        */
       listPlannableUserInterests: async (
         request: services.ListPlannableUserInterestsRequest
@@ -20771,11 +21638,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.listPlannableUserInterests(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -20806,7 +21670,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/RecommendationService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/RecommendationService
    */
   public get recommendations() {
     const service = this.loadService<services.RecommendationService>(
@@ -20815,7 +21679,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/RecommendationService#applyrecommendation
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/RecommendationService#applyrecommendation
        */
       applyRecommendation: async (
         request: services.ApplyRecommendationRequest
@@ -20847,11 +21711,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.applyRecommendation(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -20880,7 +21741,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/RecommendationService#dismissrecommendation
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/RecommendationService#dismissrecommendation
        */
       dismissRecommendation: async (
         request: services.DismissRecommendationRequest
@@ -20912,11 +21773,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.dismissRecommendation(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -20945,7 +21803,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/RecommendationService#generaterecommendations
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/RecommendationService#generaterecommendations
        */
       generateRecommendations: async (
         request: services.GenerateRecommendationsRequest
@@ -20977,11 +21835,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.generateRecommendations(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -21012,7 +21867,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ReservationService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ReservationService
    */
   public get reservations() {
     const service = this.loadService<services.ReservationService>(
@@ -21021,7 +21876,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ReservationService#quotecampaigns
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ReservationService#quotecampaigns
        */
       quoteCampaigns: async (
         request: services.QuoteCampaignsRequest
@@ -21053,11 +21908,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.quoteCampaigns(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -21086,7 +21938,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ReservationService#bookcampaigns
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ReservationService#bookcampaigns
        */
       bookCampaigns: async (
         request: services.BookCampaignsRequest
@@ -21118,11 +21970,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.bookCampaigns(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -21153,7 +22002,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ShareablePreviewService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ShareablePreviewService
    */
   public get shareablePreviews() {
     const service = this.loadService<services.ShareablePreviewService>(
@@ -21162,7 +22011,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ShareablePreviewService#generateshareablepreviews
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ShareablePreviewService#generateshareablepreviews
        */
       generateShareablePreviews: async (
         request: services.GenerateShareablePreviewsRequest
@@ -21194,11 +22043,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.generateShareablePreviews(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -21229,7 +22075,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/SmartCampaignSuggestService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/SmartCampaignSuggestService
    */
   public get smartCampaignSuggests() {
     const service = this.loadService<services.SmartCampaignSuggestService>(
@@ -21238,7 +22084,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/SmartCampaignSuggestService#suggestsmartcampaignbudgetoptions
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/SmartCampaignSuggestService#suggestsmartcampaignbudgetoptions
        */
       suggestSmartCampaignBudgetOptions: async (
         request: services.SuggestSmartCampaignBudgetOptionsRequest
@@ -21273,11 +22119,8 @@ export default class ServiceFactory extends Service {
           const [response] = await service.suggestSmartCampaignBudgetOptions(
             request,
             {
-              // @ts-expect-error This arg doesn't exist in the type definitions
-              otherArgs: {
-                headers: this.callHeaders,
-              },
-            }
+              otherArgs: { headers: this.callHeaders },
+            } as never
           );
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
@@ -21307,7 +22150,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/SmartCampaignSuggestService#suggestsmartcampaignad
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/SmartCampaignSuggestService#suggestsmartcampaignad
        */
       suggestSmartCampaignAd: async (
         request: services.SuggestSmartCampaignAdRequest
@@ -21339,11 +22182,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.suggestSmartCampaignAd(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -21372,7 +22212,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/SmartCampaignSuggestService#suggestkeywordthemes
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/SmartCampaignSuggestService#suggestkeywordthemes
        */
       suggestKeywordThemes: async (
         request: services.SuggestKeywordThemesRequest
@@ -21404,11 +22244,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.suggestKeywordThemes(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -21439,7 +22276,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ThirdPartyAppAnalyticsLinkService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ThirdPartyAppAnalyticsLinkService
    */
   public get thirdPartyAppAnalyticsLinks() {
     const service =
@@ -21449,7 +22286,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/ThirdPartyAppAnalyticsLinkService#regenerateshareablelinkid
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/ThirdPartyAppAnalyticsLinkService#regenerateshareablelinkid
        */
       regenerateShareableLinkId: async (
         request: services.RegenerateShareableLinkIdRequest
@@ -21481,11 +22318,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.regenerateShareableLinkId(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -21516,7 +22350,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/TravelAssetSuggestionService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/TravelAssetSuggestionService
    */
   public get travelAssetSuggestions() {
     const service = this.loadService<services.TravelAssetSuggestionService>(
@@ -21525,7 +22359,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/TravelAssetSuggestionService#suggesttravelassets
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/TravelAssetSuggestionService#suggesttravelassets
        */
       suggestTravelAssets: async (
         request: services.SuggestTravelAssetsRequest
@@ -21557,11 +22391,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.suggestTravelAssets(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -21592,7 +22423,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/UserDataService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/UserDataService
    */
   public get userData() {
     const service = this.loadService<services.UserDataService>(
@@ -21601,7 +22432,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/UserDataService#uploaduserdata
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/UserDataService#uploaduserdata
        */
       uploadUserData: async (
         request: services.UploadUserDataRequest
@@ -21633,11 +22464,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.uploadUserData(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -21668,7 +22496,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/UserListCustomerTypeService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/UserListCustomerTypeService
    */
   public get userListCustomerTypes() {
     const service = this.loadService<services.UserListCustomerTypeService>(
@@ -21695,15 +22523,17 @@ export default class ServiceFactory extends Service {
           services.UserListCustomerTypeOperation,
           resources.IUserListCustomerType
         >("create", userListCustomerTypes);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.UserListCustomerTypeOperation,
           services.IMutateUserListCustomerTypesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "UserListCustomerTypeService.mutateUserListCustomerTypes",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -21718,6 +22548,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -21775,15 +22607,17 @@ export default class ServiceFactory extends Service {
           services.UserListCustomerTypeOperation,
           string
         >("remove", userListCustomerTypes);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.UserListCustomerTypeOperation,
           services.IMutateUserListCustomerTypesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "UserListCustomerTypeService.mutateUserListCustomerTypes",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -21798,6 +22632,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -21846,7 +22682,7 @@ export default class ServiceFactory extends Service {
   }
 
   /**
-   * @link https://developers.google.com/google-ads/api/reference/rpc/v25/YouTubeVideoUploadService
+   * @link https://developers.google.com/google-ads/api/reference/rpc/v26/YouTubeVideoUploadService
    */
   public get youTubeVideoUploads() {
     const service = this.loadService<services.YouTubeVideoUploadService>(
@@ -21855,7 +22691,7 @@ export default class ServiceFactory extends Service {
 
     return {
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/YouTubeVideoUploadService#createyoutubevideoupload
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/YouTubeVideoUploadService#createyoutubevideoupload
        */
       createYouTubeVideoUpload: async (
         request: services.CreateYouTubeVideoUploadRequest
@@ -21887,11 +22723,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.createYouTubeVideoUpload(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -21920,7 +22753,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/YouTubeVideoUploadService#updateyoutubevideoupload
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/YouTubeVideoUploadService#updateyoutubevideoupload
        */
       updateYouTubeVideoUpload: async (
         request: services.UpdateYouTubeVideoUploadRequest
@@ -21952,11 +22785,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.updateYouTubeVideoUpload(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({
@@ -21985,7 +22815,7 @@ export default class ServiceFactory extends Service {
       },
 
       /**
-       * @link https://developers.google.com/google-ads/api/reference/rpc/v25/YouTubeVideoUploadService#removeyoutubevideoupload
+       * @link https://developers.google.com/google-ads/api/reference/rpc/v26/YouTubeVideoUploadService#removeyoutubevideoupload
        */
       removeYouTubeVideoUpload: async (
         request: services.RemoveYouTubeVideoUploadRequest
@@ -22017,11 +22847,8 @@ export default class ServiceFactory extends Service {
         try {
           // @ts-expect-error Response is an array type
           const [response] = await service.removeYouTubeVideoUpload(request, {
-            // @ts-expect-error This arg doesn't exist in the type definitions
-            otherArgs: {
-              headers: this.callHeaders,
-            },
-          });
+            otherArgs: { headers: this.callHeaders },
+          } as never);
           if (this.hooks.onServiceEnd) {
             const serviceResolution: HookedResolution = { resolved: false };
             await this.hooks.onServiceEnd({

@@ -1551,6 +1551,20 @@ export function customerAssetSet(
   return `customers/${customerId}/customerAssetSets/${assetSetId}` as const;
 }
 
+/* CustomerBudgetNetworkSetting */
+export type CustomerBudgetNetworkSettingResourceName =
+  `customers/${StrNum}/customerBudgetNetworkSettings`;
+/**
+ * @param {string | number} customerId
+ * @returns `CustomerBudgetNetworkSettingResourceName`
+ * @example const customerBudgetNetworkSetting: ResourceNames.CustomerBudgetNetworkSettingResourceName = ResourceNames.customerBudgetNetworkSetting(10987417)
+ */
+export function customerBudgetNetworkSetting(
+  customerId: string | number
+): CustomerBudgetNetworkSettingResourceName {
+  return `customers/${customerId}/customerBudgetNetworkSettings` as const;
+}
+
 /* CustomerClient */
 export type CustomerClientResourceName =
   `customers/${StrNum}/customerClients/${StrNum}`;
@@ -2952,6 +2966,22 @@ export function remarketingAction(
   remarketingActionId: string | number
 ): RemarketingActionResourceName {
   return `customers/${customerId}/remarketingActions/${remarketingActionId}` as const;
+}
+
+/* SearchLiftKeywordBundle */
+export type SearchLiftKeywordBundleResourceName =
+  `customers/${StrNum}/searchLiftKeywordBundles/${StrNum}`;
+/**
+ * @param {string | number} customerId
+ * @param {string | number} searchLiftKeywordBundleId
+ * @returns `SearchLiftKeywordBundleResourceName`
+ * @example const searchLiftKeywordBundle: ResourceNames.SearchLiftKeywordBundleResourceName = ResourceNames.searchLiftKeywordBundle(10987417, 21974834)
+ */
+export function searchLiftKeywordBundle(
+  customerId: string | number,
+  searchLiftKeywordBundleId: string | number
+): SearchLiftKeywordBundleResourceName {
+  return `customers/${customerId}/searchLiftKeywordBundles/${searchLiftKeywordBundleId}` as const;
 }
 
 /* SearchTermView */

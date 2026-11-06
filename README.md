@@ -36,7 +36,7 @@
 npm install google-ads-api
 ```
 
-Requires Node.js 22 or newer. Both `import { GoogleAdsApi } from "google-ads-api"` (ES modules) and `require("google-ads-api")` (CommonJS) are supported. `google-ads-api/enums` and `google-ads-api/fields` expose the generated enums and field types without loading the gRPC service clients.
+Requires Node.js 22.12 or newer. The package ships as ES modules only: `import { GoogleAdsApi } from "google-ads-api"`. CommonJS code can still call `require("google-ads-api")`, which Node.js loads through its built-in `require(esm)` support. TypeScript CommonJS projects need `module: "nodenext"` (TypeScript 5.8 or newer) or `module: "node20"` (TypeScript 5.9 or newer), and Jest needs ESM mode or a transform (see CHANGELOG.md). `google-ads-api/enums` and `google-ads-api/fields` expose the generated enums and field types without loading the gRPC service clients.
 
 # Usage
 
@@ -68,12 +68,12 @@ import { GoogleAdsApi } from "google-ads-api";
 const client = new GoogleAdsApi({
   client_id: "<CLIENT-ID>",
   client_secret: "<CLIENT-SECRET>",
-  developer_token: "<DEVELOPER-TOKEN>",
 });
 ```
 
 Optional client settings:
 
+- `developer_token`: no longer needed. Google sunset developer tokens on 9 September 2026; API access levels now belong to the Google Cloud project that owns your OAuth client, and the API ignores the token. When you leave it unset or empty, the client sends no `developer-token` header. Existing configurations that pass a token keep working until Google starts rejecting the header in a future major API version.
 - `grpc_channel_options`: [gRPC channel options](https://github.com/grpc/grpc-node/tree/master/packages/grpc-js#supported-channel-options) applied to every service client this instance creates, for example `{ "grpc.keepalive_time_ms": 30000, "grpc.keepalive_timeout_ms": 10000 }`. Cached service clients are keyed by client id, refresh token and these options, so instances with different options never share a client.
 - `max_reporting_rows`: throw once a report or query returns more rows than this.
 - `disable_parsing`: return raw API responses instead of parsed rows.
@@ -107,7 +107,6 @@ This is a special client method for listing the accessible customers for a given
 const client = new GoogleAdsApi({
   client_id: "<CLIENT-ID>",
   client_secret: "<CLIENT-SECRET>",
-  developer_token: "<DEVELOPER-TOKEN>",
 });
 
 const refreshToken = "<REFRESH-TOKEN>";
@@ -457,15 +456,13 @@ const [summaryRow, ...response] = await customer.report({
 });
 ```
 
-If a summery row is requested in the `reportStream` method, it will be included as the **final** iterated row of the results.
+The streaming methods (`reportStream`, `reportStreamRaw` and `queryStream`) request a summary row with `summary_row_setting` instead, because the stream endpoint does not take `search_settings`. In `reportStream` the summary row comes as the **final** iterated row of the results.
 
 ```ts
 const stream = customer.reportStream({
   entity: "campaign",
   metrics: ["metrics.clicks", "metrics.all_conversions"],
-  search_settings: {
-    return_summary_row: true,
-  },
+  summary_row_setting: enums.SummaryRowSetting.SUMMARY_ROW_WITH_RESULTS,
 });
 
 const accumulator = [];
@@ -580,6 +577,8 @@ These hooks also have access the the `reportOptions` argument. This will be unde
 These hooks have access to the `customerCredentials` argument, containing the `customer_id`, `login_customer_id` and `linked_customer_id`.
 
 These hooks also have access to the `method` argument, containing the mutation method as a string.
+
+These hooks also have access to the `mutateOptions` argument, containing the mutate options the request goes out with (`validate_only`, `partial_failure`, `response_content_type`), including any changes made with `editOptions`. `mutateResources` and the service helpers such as `customer.campaigns.create` both provide it, so `mutateOptions.validate_only` tells a hook whether a mutation only validates.
 
 ### Service hooks:
 
