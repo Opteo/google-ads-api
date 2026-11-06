@@ -32,6 +32,7 @@ import {
 
 import { googleAdsVersion } from "./version.js";
 
+const DEFAULT_REST_ERROR_MESSAGE = "Unknown GoogleAdsFailure";
 const ROWS_PER_STREAMED_CHUNK = 10_000; // From experience, this is what can be expected from the API.
 
 export class Customer extends ServiceFactory {
@@ -222,11 +223,7 @@ export class Customer extends ServiceFactory {
 
       return { response, nextPageToken, totalResultsCount, summaryRow };
     } catch (e: any) {
-      const failure = this.findGoogleAdsFailure(e.response?.data?.error);
-      if (failure) {
-        throw new errors.GoogleAdsFailure(this.decamelizeKeysIfNeeded(failure));
-      }
-      throw e;
+      throw this.restError(e, e?.response?.data?.error);
     }
   }
 
@@ -534,7 +531,7 @@ export class Customer extends ServiceFactory {
 
   private async handleStreamError(e: any) {
     if (!e?.response?.data) {
-      throw e;
+      throw this.restError(e);
     }
     // The error is a stream, so some effort is required to parse it.
     const stream = e.response.data as any;
@@ -545,25 +542,11 @@ export class Customer extends ServiceFactory {
       streamArray.asStream(),
     ]);
 
-    const defaultErrorMessage = "Unknown GoogleAdsFailure";
-
-    let googleAdsFailure: errors.GoogleAdsFailure | Error = new Error(
-      defaultErrorMessage
-    );
+    let googleAdsFailure: unknown = new Error(DEFAULT_REST_ERROR_MESSAGE);
 
     // Only throw the first error.
     pipeline.once("data", (data) => {
-      const failure = this.findGoogleAdsFailure(data?.value?.error);
-      if (failure) {
-        googleAdsFailure = new errors.GoogleAdsFailure(
-          this.decamelizeKeysIfNeeded(failure)
-        );
-      } else {
-        googleAdsFailure = new Error(
-          data?.value?.error?.message ?? defaultErrorMessage,
-          { cause: data?.value?.error ?? data?.value }
-        );
-      }
+      googleAdsFailure = this.restError(e, data?.value?.error ?? data?.value);
     });
 
     // Must always reject.
@@ -707,6 +690,27 @@ export class Customer extends ServiceFactory {
     ) {
       throw this.generateTooManyRowsError();
     }
+  }
+
+  private restError(
+    error: unknown,
+    apiError?: { message?: string; details?: { "@type"?: string }[] }
+  ): unknown {
+    if (!axios.isAxiosError(error)) {
+      return error;
+    }
+    const failure = this.findGoogleAdsFailure(apiError);
+    if (failure) {
+      return new errors.GoogleAdsFailure(this.decamelizeKeysIfNeeded(failure));
+    }
+    if (apiError) {
+      return new Error(apiError.message ?? DEFAULT_REST_ERROR_MESSAGE, {
+        cause: apiError,
+      });
+    }
+    return new Error(error.message, {
+      cause: { code: error.code, status: error.response?.status },
+    });
   }
 
   private findGoogleAdsFailure(error?: {

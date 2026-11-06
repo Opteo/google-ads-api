@@ -36,7 +36,7 @@
 npm install google-ads-api
 ```
 
-Requires Node.js 22.12 or newer. The package ships as ES modules only: `import { GoogleAdsApi } from "google-ads-api"`. CommonJS code can still call `require("google-ads-api")`, which Node.js loads through its built-in `require(esm)` support. `google-ads-api/enums` and `google-ads-api/fields` expose the generated enums and field types without loading the gRPC service clients.
+Requires Node.js 22.12 or newer. The package ships as ES modules only: `import { GoogleAdsApi } from "google-ads-api"`. CommonJS code can still call `require("google-ads-api")`, which Node.js loads through its built-in `require(esm)` support. TypeScript CommonJS projects need `module: "nodenext"` with TypeScript 5.8 or newer, and Jest needs ESM mode or a transform (see CHANGELOG.md). `google-ads-api/enums` and `google-ads-api/fields` expose the generated enums and field types without loading the gRPC service clients.
 
 # Usage
 

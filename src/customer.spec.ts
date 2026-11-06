@@ -1,5 +1,6 @@
 import { operationsProtos } from "google-gax";
 import { Readable } from "stream";
+import { inspect } from "util";
 import { Hooks } from "./hooks.js";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
@@ -563,7 +564,7 @@ describe("search", () => {
     expect(totalResultsCount).toEqual(mockTotalResultsCount);
   });
 
-  it("rethrows the original error when the error response has no failure details", async () => {
+  it("throws the API error when the error response has no failure details", async () => {
     const customer = newCustomer({});
     mockGetAccessToken(customer);
     axiosMock.onPost().reply(403, {
@@ -578,7 +579,10 @@ describe("search", () => {
     const error = await customer.search(mockGaqlQuery).catch((e) => e);
 
     expect(error).not.toBeInstanceOf(TypeError);
-    expect(error.response.status).toBe(403);
+    expect(error).toMatchObject({
+      message: "The caller does not have permission",
+      cause: { code: 403, status: "PERMISSION_DENIED" },
+    });
   });
 
   it.each([
@@ -1540,7 +1544,7 @@ describe("REST errors that are not GoogleAdsFailures", () => {
     },
   };
 
-  it("rethrows the original search error", async () => {
+  it("throws the API error for search", async () => {
     const customer = newCustomer({});
     mockGetAccessToken(customer);
     axiosMock.onPost().reply(403, serviceDisabled);
@@ -1549,7 +1553,7 @@ describe("REST errors that are not GoogleAdsFailures", () => {
     const error = await customer.search(mockGaqlQuery).catch((e) => e);
 
     expect(error).not.toBeInstanceOf(errors.GoogleAdsFailure);
-    expect(error.response.data).toEqual(serviceDisabled);
+    expect(error).toMatchObject({ message, cause: serviceDisabled.error });
   });
 
   it("keeps the API message for streamed errors", async () => {
@@ -1588,5 +1592,96 @@ describe("REST errors that are not GoogleAdsFailures", () => {
 
     expect(error).toBeInstanceOf(errors.GoogleAdsFailure);
     expect(error).toMatchObject({ request_id: "mock-request-id" });
+  });
+});
+
+describe("REST errors and credentials", () => {
+  afterEach(() => {
+    jest.resetAllMocks();
+    axiosMock.reset();
+  });
+
+  const serviceDisabled = {
+    error: {
+      code: 403,
+      message:
+        "Google Ads API has not been used in project 1 before or it is disabled.",
+      status: "PERMISSION_DENIED",
+      details: [
+        {
+          "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+          reason: "SERVICE_DISABLED",
+        },
+      ],
+    },
+  };
+
+  async function searchError(reply: (mock: MockAdapter) => void) {
+    const customer = newCustomer({});
+    mockGetAccessToken(customer);
+    reply(axiosMock);
+    // @ts-expect-error private method
+    return customer.search(mockGaqlQuery).catch((e: unknown) => e);
+  }
+
+  async function streamError(reply: (mock: MockAdapter) => void) {
+    const customer = newCustomer({});
+    mockGetAccessToken(customer);
+    reply(axiosMock);
+    return customer
+      .query("SELECT campaign.id FROM campaign")
+      .catch((e: unknown) => e);
+  }
+
+  it.each([
+    [
+      "search API error",
+      () => searchError((m) => m.onPost().reply(403, serviceDisabled)),
+    ],
+    [
+      "stream API error",
+      () =>
+        streamError((m) =>
+          m.onPost().reply(403, mockStream([serviceDisabled]))
+        ),
+    ],
+    [
+      "search network error",
+      () => searchError((m) => m.onPost().networkError()),
+    ],
+    [
+      "stream network error",
+      () => streamError((m) => m.onPost().networkError()),
+    ],
+  ])("keeps the access and developer tokens out of a %s", async (_, run) => {
+    const shown = inspect(await run(), { depth: 20 });
+
+    expect(shown).not.toContain("mockedAccessTokenHere");
+    expect(shown).not.toContain(MOCK_DEVELOPER_TOKEN);
+  });
+
+  it("gives search and stream the same error for the same API response", async () => {
+    const fromSearch = await searchError((m) =>
+      m.onPost().reply(403, serviceDisabled)
+    );
+    axiosMock.reset();
+    const fromStream = await streamError((m) =>
+      m.onPost().reply(403, mockStream([serviceDisabled]))
+    );
+
+    expect(fromSearch).toEqual(fromStream);
+    expect(fromSearch).toMatchObject({
+      message: serviceDisabled.error.message,
+      cause: serviceDisabled.error,
+    });
+  });
+
+  it("keeps the error code of a failed request", async () => {
+    const error = await searchError((m) => m.onPost().timeout());
+
+    expect(error).toMatchObject({ cause: { code: "ECONNABORTED" } });
+    expect(inspect(error, { depth: 20 })).not.toContain(
+      "mockedAccessTokenHere"
+    );
   });
 });
