@@ -180,4 +180,20 @@ describe("decamelizeKeys", () => {
       campaign: { status: 999 },
     });
   });
+
+  it("keeps the raw value of an enum field whose enum it cannot resolve", () => {
+    jest.isolateModules(() => {
+      jest.doMock("./protos/autogen/fields", () => ({
+        fields: { enumFields: {} },
+        fieldDataTypes: JSON.stringify({ campaign: { status: "ENUM" } }),
+      }));
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const isolated = require("./parserRest");
+      expect(
+        isolated.decamelizeKeys({ campaign: { status: "ENABLED" } })
+      ).toEqual({
+        campaign: { status: "ENABLED" },
+      });
+    });
+  });
 });

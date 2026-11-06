@@ -344,6 +344,18 @@ describe("update masks", () => {
     ).resolves.toEqual(["resource_name", "url_custom_parameters"]);
   });
 
+  it("leaves fields passed as undefined out of the mask", async () => {
+    await expect(
+      sentMask({
+        resource_name: "customers/1/campaigns/2",
+        name: "Renamed",
+        status: undefined,
+        tracking_url_template: undefined,
+        network_settings: { target_search_network: undefined },
+      })
+    ).resolves.toEqual(["resource_name", "name"]);
+  });
+
   it("leaves unset repeated fields of message instances out of the mask", async () => {
     await expect(
       sentMask(

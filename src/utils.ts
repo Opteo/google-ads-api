@@ -91,6 +91,9 @@ export function recursiveFieldMaskSearch(
     }
     const fieldKey = toSnakeCase(key);
     const value = data[key];
+    if (value === undefined) {
+      continue;
+    }
     if (
       typeof value === "object" &&
       !Array.isArray(value) &&

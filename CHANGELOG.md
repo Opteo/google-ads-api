@@ -17,14 +17,17 @@ A major release: Google Ads API v26.1, an ES module-only package, and fixes that
 
 - **ES modules only.** The package no longer ships a CommonJS build. `import { GoogleAdsApi } from "google-ads-api"` works as before. CommonJS code can still call `require("google-ads-api")`, `require("google-ads-api/enums")` and `require("google-ads-api/fields")`: Node.js loads the ES module through its built-in `require(esm)` support and returns the same module instance as `import`.
 - **Requires Node.js 22.12 or newer**, the first 22.x release where `require(esm)` works without a flag.
-- **Jest in CommonJS mode** must transform the ES module-only `stream-json` and `stream-chain` packages, or run in Jest's ESM mode:
+- **Jest in CommonJS mode cannot load the package as published.** Jest uses its own module loader instead of Node.js's `require(esm)`, so Jest 29 fails with `SyntaxError: Unexpected token 'export'` and Jest 30 with `Must use import to load ES Module`. Either run Jest in ESM mode (`NODE_OPTIONS=--experimental-vm-modules`), or transform google-ads-api and its ES module-only dependencies `stream-json` and `stream-chain`, for example with ts-jest:
 
   ```js
   transform: {
     "^.+\\.tsx?$": "ts-jest",
-    "/node_modules/(stream-json|stream-chain)/.+\\.js$": ["ts-jest", { tsconfig: { allowJs: true } }],
+    "/node_modules/(google-ads-api|stream-json|stream-chain)/.+\\.js$": [
+      "ts-jest",
+      { tsconfig: { allowJs: true, esModuleInterop: true } },
+    ],
   },
-  transformIgnorePatterns: ["/node_modules/(?!(stream-json|stream-chain)/)"],
+  transformIgnorePatterns: ["/node_modules/(?!(google-ads-api|stream-json|stream-chain)/)"],
   ```
 
 #### Mutations
@@ -53,7 +56,7 @@ A major release: Google Ads API v26.1, an ES module-only package, and fixes that
 
 - Helpers for services without mutate options (`batchJobs`, `billingSetups`, `customerUserAccesses`, `customerUserAccessInvitations`) type their `options` parameter as `Record<string, never>` instead of `never`.
 
-- **Update helpers build the update mask from the object you pass.** `customer.campaigns.update([{ resource_name, url_custom_parameters: [] }])` now clears `url_custom_parameters`; previously the mask dropped the empty list and the update changed nothing. As with `mutateResources`, every key of a plain object goes into the mask, so the API now rejects a key that names no field of the resource instead of silently ignoring it. Message instances (`new resources.Campaign({...})`) behave as before: their unset repeated fields stay out of the mask, so clear a list by passing a plain object.
+- **Update helpers build the update mask from the object you pass.** `customer.campaigns.update([{ resource_name, url_custom_parameters: [] }])` now clears `url_custom_parameters`; previously the mask dropped the empty list and the update changed nothing. As with `mutateResources`, every key of a plain object goes into the mask, so the API now rejects a key that names no field of the resource instead of silently ignoring it. Message instances (`new resources.Campaign({...})`) behave as before: their unset repeated fields stay out of the mask, so clear a list by passing a plain object. Keys set to `undefined` stay out of the mask, so an unset variable leaves its field alone; `null` puts the field in the mask and clears it. The 25.x update helpers ignored both, while `mutateResources` put both in the mask, so `mutateResources` now also leaves `undefined` keys alone.
 
 #### Queries and streams
 

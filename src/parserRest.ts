@@ -119,7 +119,7 @@ const parseValue = (fullPath: string, value: any) => {
       typeof value === "number"
         ? value
         : // @ts-expect-error typescript doesn't like accessing items in a namespace with a string
-          enums[fields.enumFields[fullPath]][value]; // e.g. enums['CampaignStatus'][ENABLED] = "2"
+          (enums[fields.enumFields[fullPath]]?.[value] ?? value); // e.g. enums['CampaignStatus'][ENABLED] = "2"
   }
 
   return newValue;
