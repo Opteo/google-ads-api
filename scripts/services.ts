@@ -291,7 +291,7 @@ function compileMutateMethods(
     response: `services.${methodDef.responseType}`,
   };
 
-  const options = Object.keys(req.fields).filter(
+  const options = Object.keys(req.fields ?? {}).filter(
     (k) => !["customer_id", "operations", "operation"].includes(k)
   );
 

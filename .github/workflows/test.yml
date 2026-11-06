@@ -37,6 +37,9 @@ jobs:
       # linting
       - run: yarn lint
 
+      # type-checking
+      - run: npx tsc -p tsconfig.json --noEmit
+
       # tests
       - run: yarn test
 
