@@ -12,7 +12,11 @@ import {
 export type BaseRequestHookArgs = {
   credentials: CustomerCredentials;
   query: string;
-  reportOptions?: ReportOptions | ReportStreamOptions;
+  reportOptions?: ReportOptions;
+};
+
+export type BaseStreamHookArgs = Omit<BaseRequestHookArgs, "reportOptions"> & {
+  reportOptions?: ReportStreamOptions;
 };
 
 export type BaseMutationHookArgs = {
@@ -51,6 +55,7 @@ type EndHookArgs<
 type HookArgs = StartHookArgs | ErrorHookArgs | EndHookArgs;
 
 type RequestHook<H extends HookArgs> = (a: BaseRequestHookArgs & H) => void;
+type StreamHook<H extends HookArgs> = (a: BaseStreamHookArgs & H) => void;
 type MutationHook<H extends HookArgs> = (a: BaseMutationHookArgs & H) => void;
 type ServiceHook<H extends HookArgs> = (a: BaseServiceHookArgs & H) => void;
 
@@ -58,10 +63,10 @@ export type OnQueryStart = RequestHook<StartHookArgs<RequestOptions, any>>;
 export type OnQueryError = RequestHook<ErrorHookArgs>;
 export type OnQueryEnd = RequestHook<EndHookArgs<services.IGoogleAdsRow[]>>;
 
-export type OnStreamStart = RequestHook<
+export type OnStreamStart = StreamHook<
   StartHookArgs<StreamRequestOptions, void>
 >;
-export type OnStreamError = RequestHook<ErrorHookArgs>;
+export type OnStreamError = StreamHook<ErrorHookArgs>;
 
 export type OnMutationStart = MutationHook<StartHookArgs<MutateOptions, any>>;
 export type OnMutationError = MutationHook<ErrorHookArgs>;

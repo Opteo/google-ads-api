@@ -1,7 +1,7 @@
 import { operationsProtos } from "google-gax";
 import { Readable } from "stream";
 import { inspect } from "util";
-import { Hooks } from "./hooks.js";
+import { Hooks, OnQueryEnd, OnStreamStart } from "./hooks.js";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 
@@ -1729,5 +1729,19 @@ describe("query hooks and the caller's options", () => {
     expect(JSON.parse(axiosMock.history.post[0].data)).toMatchObject({
       summary_row_setting: enums.SummaryRowSetting.SUMMARY_ROW_ONLY,
     });
+  });
+});
+
+describe("hook argument types", () => {
+  it("types query hooks with search report options and stream hooks with stream report options", () => {
+    const onQueryEnd: OnQueryEnd = ({ reportOptions }) => {
+      void reportOptions?.page_size;
+      void reportOptions?.search_settings?.return_summary_row;
+    };
+    const onStreamStart: OnStreamStart = ({ reportOptions }) => {
+      void reportOptions?.summary_row_setting;
+    };
+
+    expect(newCustomer({ onQueryEnd, onStreamStart })).toBeInstanceOf(Customer);
   });
 });

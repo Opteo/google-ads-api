@@ -61,7 +61,7 @@ A major release: Google Ads API v26.1, an ES module-only package, and fixes that
 
 #### Queries and streams
 
-- **Stream methods take only the options searchStream accepts.** `SearchGoogleAdsStreamRequest` has no `page_token`, `page_size`, `validate_only` or `search_settings`, so `queryStream` now takes `StreamRequestOptions`, and `reportStream` and `reportStreamRaw` take `ReportStreamOptions` (report options plus `summary_row_setting`). `onStreamStart`'s `editOptions` takes `StreamRequestOptions`. Request a summary row in a stream with `summary_row_setting`:
+- **Stream methods take only the options searchStream accepts.** `SearchGoogleAdsStreamRequest` has no `page_token`, `page_size`, `validate_only` or `search_settings`, so `queryStream` now takes `StreamRequestOptions`, and `reportStream` and `reportStreamRaw` take `ReportStreamOptions` (report options plus `summary_row_setting`). `onStreamStart`'s `editOptions` takes `StreamRequestOptions`, and `onStreamStart` and `onStreamError` receive `reportOptions` typed as `ReportStreamOptions`; the query hooks keep `ReportOptions`. Request a summary row in a stream with `summary_row_setting`:
 
   ```ts
   // 25.x: sent search_settings to searchStream, which does not take it

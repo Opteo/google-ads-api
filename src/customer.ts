@@ -8,6 +8,7 @@ import { ClientOptions } from "./client.js";
 import {
   BaseMutationHookArgs,
   BaseRequestHookArgs,
+  BaseStreamHookArgs,
   HookedCancellation,
   HookedResolution,
   Hooks,
@@ -150,7 +151,7 @@ export class Customer extends ServiceFactory {
   ): Promise<CancellableStream | void> {
     const { gaqlQuery, requestOptions } = buildStreamQuery(reportOptions);
 
-    const baseHookArguments: BaseRequestHookArgs = {
+    const baseHookArguments: BaseStreamHookArgs = {
       credentials: this.credentials,
       query: gaqlQuery,
       reportOptions,
@@ -437,7 +438,7 @@ export class Customer extends ServiceFactory {
     reportOptions?: Readonly<ReportStreamOptions>
   ): AsyncGenerator<T> {
     const requestOptions: StreamRequestOptions = { ...callerOptions };
-    const baseHookArguments: BaseRequestHookArgs = {
+    const baseHookArguments: BaseStreamHookArgs = {
       credentials: this.credentials,
       query: gaqlQuery,
       reportOptions,
