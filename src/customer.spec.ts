@@ -1685,3 +1685,49 @@ describe("REST errors and credentials", () => {
     );
   });
 });
+
+describe("query hooks and the caller's options", () => {
+  afterEach(() => {
+    jest.resetAllMocks();
+    axiosMock.reset();
+  });
+
+  it("leaves the options passed to query unchanged", async () => {
+    const customer = newCustomer({
+      onQueryStart({ editOptions }) {
+        editOptions({ validate_only: true });
+      },
+    });
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(200, { results: [] });
+    const callerOptions: RequestOptions = { page_token: "next-page" };
+
+    await customer.query(mockGaqlQuery, callerOptions);
+
+    expect(callerOptions).toEqual({ page_token: "next-page" });
+    expect(JSON.parse(axiosMock.history.post[0].data)).toMatchObject({
+      validate_only: true,
+    });
+  });
+
+  it("leaves the options passed to queryStream unchanged", async () => {
+    const customer = newCustomer({
+      onStreamStart({ editOptions }) {
+        editOptions({
+          summary_row_setting: enums.SummaryRowSetting.SUMMARY_ROW_ONLY,
+        });
+      },
+    });
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(200, mockStream());
+    const callerOptions: StreamRequestOptions = {};
+
+    for await (const row of customer.queryStream(mockGaqlQuery, callerOptions))
+      row;
+
+    expect(callerOptions).toEqual({});
+    expect(JSON.parse(axiosMock.history.post[0].data)).toMatchObject({
+      summary_row_setting: enums.SummaryRowSetting.SUMMARY_ROW_ONLY,
+    });
+  });
+});

@@ -213,6 +213,15 @@ describe("decamelizeKeys", () => {
     });
   });
 
+  it("keeps enum names this version does not know", () => {
+    expect(decamelizeKeys({ campaign: { status: "FUTURE_STATUS" } })).toEqual({
+      campaign: { status: "FUTURE_STATUS" },
+    });
+    expect(decamelizeKeys({ segments: { device: "FUTURE_DEVICE" } })).toEqual({
+      segments: { device: "FUTURE_DEVICE" },
+    });
+  });
+
   it("keeps the raw value of an enum field whose enum it cannot resolve", () => {
     jest.isolateModules(() => {
       jest.doMock("./protos/autogen/fields", () => ({

@@ -9,7 +9,8 @@
   "main": "./build/index.js",
   "files": [
     "build",
-    "!build/scripts"
+    "!build/scripts",
+    "!build/*.tsbuildinfo"
   ],
   "scripts": {
     "test": "jest",
@@ -18,7 +19,7 @@
     "compile": "esbuild --bundle --platform=node ./scripts/index.ts --outfile=./build/scripts/index.cjs && node ./build/scripts/index.cjs",
     "prepare": "rm -rf build && npm run build",
     "node": "tsx",
-    "test:package": "npm run build && node tests/package.mjs",
+    "test:package": "npm run build && node tests/package.mjs && node tests/package.cjs",
     "postcompile": "prettier --write src/protos/autogen"
   },
   "author": "Opteo",

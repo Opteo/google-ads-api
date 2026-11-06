@@ -109,7 +109,8 @@ const parseValue = (fullPath: string, value: any) => {
       };
     } else {
       // Normal enum handling
-      newValue = typeof value === "number" ? value : megaDataType[value];
+      newValue =
+        typeof value === "number" ? value : (megaDataType[value] ?? value);
     }
   } else if (megaDataType === "INT64") {
     newValue = Number(value);

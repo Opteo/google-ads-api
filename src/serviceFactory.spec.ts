@@ -1,6 +1,7 @@
 import protos from "google-ads-node/build/protos/protos.json";
 import pluralize from "pluralize";
 import { resources, services } from "./protos/index.js";
+import { Customer } from "./customer.js";
 import { Hooks } from "./hooks.js";
 import { newCustomer } from "./testUtils.js";
 import { toCamelCase } from "./utils.js";
@@ -186,10 +187,13 @@ const specialMethods = Object.entries(definitions).flatMap(
         const request = definitions[requestType.split(".").pop() as string];
         const response = definitions[responseType.split(".").pop() as string];
         return {
+          serviceName,
           getter: pluralize(toCamelCase(resource)),
           rpc: toCamelCase(methodName),
           paged: Boolean(
-            request?.fields?.page_token && response?.fields?.next_page_token
+            request?.fields?.page_token &&
+            request?.fields?.page_size &&
+            response?.fields?.next_page_token
           ),
         };
       }
@@ -200,13 +204,29 @@ const specialMethods = Object.entries(definitions).flatMap(
 describe("paginated service methods", () => {
   const pagedMethods = specialMethods.filter(({ paged }) => paged);
 
-  it("finds the paginated methods", () => {
-    expect(pagedMethods.map(({ rpc }) => rpc).sort()).toEqual([
+  it("finds the methods google-gax paginates", () => {
+    const gaxPaged = specialMethods
+      .filter(({ getter, rpc }) => {
+        const client = newCustomer()[getter as keyof Customer] as unknown;
+        return typeof client === "object" && client !== null && rpc in client;
+      })
+      .filter(({ serviceName, rpc }) => {
+        // @ts-expect-error Accessing protected method for test purposes
+        const service = newCustomer().loadService(`${serviceName}Client`, {
+          skipCache: true,
+        }) as { descriptors: { page: Record<string, unknown> } };
+        return rpc in service.descriptors.page;
+      })
+      .map(({ rpc }) => rpc)
+      .sort();
+
+    expect(gaxPaged).toEqual([
       "generateKeywordIdeas",
       "listBatchJobResults",
       "listCampaignDraftAsyncErrors",
       "listExperimentAsyncErrors",
     ]);
+    expect(pagedMethods.map(({ rpc }) => rpc).sort()).toEqual(gaxPaged);
   });
 
   it.each(pagedMethods)(

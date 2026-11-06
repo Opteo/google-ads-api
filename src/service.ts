@@ -37,19 +37,21 @@ export interface CallHeaders {
 }
 
 type GaxClient = {
-  _defaults: Record<
+  _defaults?: Record<
     string,
-    { otherArgs: { metadataBuilder: (...args: unknown[]) => grpc.Metadata } }
+    { otherArgs?: { metadataBuilder?: (...args: unknown[]) => grpc.Metadata } }
   >;
 };
 
-function cloneMetadataPerCall(client: GaxClient): void {
+export function cloneMetadataPerCall(client: GaxClient): void {
   const shared = new Set(
-    Object.values(client._defaults).map(({ otherArgs }) => otherArgs)
+    Object.values(client._defaults ?? {}).map(({ otherArgs }) => otherArgs)
   );
   for (const otherArgs of shared) {
-    const buildMetadata = otherArgs.metadataBuilder;
-    otherArgs.metadataBuilder = (...args) => buildMetadata(...args).clone();
+    const buildMetadata = otherArgs?.metadataBuilder;
+    if (otherArgs && buildMetadata) {
+      otherArgs.metadataBuilder = (...args) => buildMetadata(...args).clone();
+    }
   }
 }
 
@@ -203,8 +205,7 @@ export class Service {
   protected getGoogleAdsError(error: Error): errors.GoogleAdsFailure | Error {
     const trailer = (
       error as
-        | { metadata?: { internalRepr?: Map<string, Buffer[]> } }
-        | undefined
+        { metadata?: { internalRepr?: Map<string, Buffer[]> } } | undefined
     )?.metadata?.internalRepr?.get?.(FAILURE_KEY);
     if (typeof trailer?.[0] === "undefined") {
       return error;

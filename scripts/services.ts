@@ -152,6 +152,7 @@ function compileSpecialMethod(
   const definitions = allServices as unknown as Record<string, ProtoDefinition>;
   const paged = Boolean(
     definitions[methodDef.requestType]?.fields?.page_token &&
+    definitions[methodDef.requestType]?.fields?.page_size &&
     definitions[methodDef.responseType]?.fields?.next_page_token
   );
 

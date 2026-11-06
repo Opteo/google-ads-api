@@ -6,7 +6,12 @@ import {
 import { operationsProtos } from "google-gax";
 import { UserRefreshClient } from "google-auth-library";
 import { errors, services } from "./protos/index.js";
-import { disposeService, FAILURE_KEY, serviceCache } from "./service.js";
+import {
+  cloneMetadataPerCall,
+  disposeService,
+  FAILURE_KEY,
+  serviceCache,
+} from "./service.js";
 import { Customer } from "./customer.js";
 import {
   failTestIfExecuted,
@@ -520,5 +525,19 @@ describe("per-call metadata", () => {
     expect(sent).toHaveLength(2);
     expect(sent[0]).not.toBe(sent[1]);
     expect(sent[1].get("traceparent")).toEqual(["call-2"]);
+  });
+});
+
+describe("cloneMetadataPerCall", () => {
+  it("leaves clients without the expected gax internals alone", () => {
+    expect(() => cloneMetadataPerCall({} as never)).not.toThrow();
+    expect(() =>
+      cloneMetadataPerCall({ _defaults: { method: {} } } as never)
+    ).not.toThrow();
+    expect(() =>
+      cloneMetadataPerCall({
+        _defaults: { method: { otherArgs: {} } },
+      } as never)
+    ).not.toThrow();
   });
 });

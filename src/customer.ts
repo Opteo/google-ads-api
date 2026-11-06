@@ -366,10 +366,11 @@ export class Customer extends ServiceFactory {
 
   private async querier<T = services.IGoogleAdsRow[]>(
     gaqlQuery: string,
-    requestOptions: RequestOptionsWithTotalResults = {},
+    callerOptions: RequestOptionsWithTotalResults = {},
     reportOptions?: Readonly<ReportOptions>,
     useHooks = true
   ): Promise<{ response: T; totalResultsCount?: number }> {
+    const requestOptions: RequestOptionsWithTotalResults = { ...callerOptions };
     const baseHookArguments: BaseRequestHookArgs = {
       credentials: this.credentials,
       query: gaqlQuery,
@@ -432,9 +433,10 @@ export class Customer extends ServiceFactory {
 
   private async *streamer<T = services.IGoogleAdsRow[]>(
     gaqlQuery: string,
-    requestOptions: StreamRequestOptions = {},
+    callerOptions: StreamRequestOptions = {},
     reportOptions?: Readonly<ReportStreamOptions>
   ): AsyncGenerator<T> {
+    const requestOptions: StreamRequestOptions = { ...callerOptions };
     const baseHookArguments: BaseRequestHookArgs = {
       credentials: this.credentials,
       query: gaqlQuery,
