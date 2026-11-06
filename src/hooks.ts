@@ -18,6 +18,7 @@ export type BaseRequestHookArgs = {
 export type BaseMutationHookArgs = {
   credentials: CustomerCredentials;
   method: `${keyof typeof services}.${string}`;
+  mutateOptions: MutateOptions;
 } & (
   | // Mutation was executed with customer.mutateResources
     { mutations: MutateOperation<any>[]; isServiceCall: false }

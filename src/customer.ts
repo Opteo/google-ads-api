@@ -583,12 +583,14 @@ export class Customer extends ServiceFactory {
    */
   public async mutateResources<T>(
     mutations: MutateOperation<T>[],
-    mutateOptions: MutateOptions = {}
+    callerOptions: MutateOptions = {}
   ): Promise<services.MutateGoogleAdsResponse> {
+    const mutateOptions: MutateOptions = { ...callerOptions };
     const baseHookArguments: BaseMutationHookArgs = {
       credentials: this.credentials,
       method: "GoogleAdsService.mutate",
       mutations,
+      mutateOptions,
       isServiceCall: false,
     };
 

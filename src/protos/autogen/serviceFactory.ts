@@ -45,15 +45,17 @@ export default class ServiceFactory extends Service {
           services.AccountBudgetProposalOperation,
           resources.IAccountBudgetProposal
         >("create", [accountBudgetProposal]);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildSingleOperationRequest<
           services.AccountBudgetProposalOperation,
           services.IMutateAccountBudgetProposalRequest,
           MutateOptions
-        >(ops[0], options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AccountBudgetProposalService.mutateAccountBudgetProposal",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -68,6 +70,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -125,15 +129,17 @@ export default class ServiceFactory extends Service {
           services.AccountBudgetProposalOperation,
           string
         >("remove", [accountBudgetProposal]);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildSingleOperationRequest<
           services.AccountBudgetProposalOperation,
           services.IMutateAccountBudgetProposalRequest,
           MutateOptions
-        >(ops[0], options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AccountBudgetProposalService.mutateAccountBudgetProposal",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -148,6 +154,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -291,15 +299,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.AccountLink
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildSingleOperationRequest<
           services.AccountLinkOperation,
           services.IMutateAccountLinkRequest,
           MutateOptions
-        >(ops[0], options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AccountLinkService.mutateAccountLink",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -314,6 +324,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -368,15 +380,17 @@ export default class ServiceFactory extends Service {
           "remove",
           [accountLink]
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildSingleOperationRequest<
           services.AccountLinkOperation,
           services.IMutateAccountLinkRequest,
           MutateOptions
-        >(ops[0], options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AccountLinkService.mutateAccountLink",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -391,6 +405,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -463,15 +479,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupAdLabelOperation,
           resources.IAdGroupAdLabel
         >("create", adGroupAdLabels);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupAdLabelOperation,
           services.IMutateAdGroupAdLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupAdLabelService.mutateAdGroupAdLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -486,6 +504,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -540,15 +560,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupAdLabelOperation,
           string
         >("remove", adGroupAdLabels);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupAdLabelOperation,
           services.IMutateAdGroupAdLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupAdLabelService.mutateAdGroupAdLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -563,6 +585,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -633,15 +657,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupAdOperation,
           resources.IAdGroupAd
         >("create", adGroupAds);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupAdOperation,
           services.IMutateAdGroupAdsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupAdService.mutateAdGroupAds",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -656,6 +682,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -715,15 +743,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.AdGroupAd
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupAdOperation,
           services.IMutateAdGroupAdsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupAdService.mutateAdGroupAds",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -738,6 +768,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -792,15 +824,17 @@ export default class ServiceFactory extends Service {
           "remove",
           adGroupAds
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupAdOperation,
           services.IMutateAdGroupAdsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupAdService.mutateAdGroupAds",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -815,6 +849,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -953,15 +989,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupAssetOperation,
           resources.IAdGroupAsset
         >("create", adGroupAssets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupAssetOperation,
           services.IMutateAdGroupAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupAssetService.mutateAdGroupAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -976,6 +1014,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -1035,15 +1075,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.AdGroupAsset
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupAssetOperation,
           services.IMutateAdGroupAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupAssetService.mutateAdGroupAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -1058,6 +1100,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -1112,15 +1156,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupAssetOperation,
           string
         >("remove", adGroupAssets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupAssetOperation,
           services.IMutateAdGroupAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupAssetService.mutateAdGroupAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -1135,6 +1181,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -1207,15 +1255,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupAssetSetOperation,
           resources.IAdGroupAssetSet
         >("create", adGroupAssetSets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupAssetSetOperation,
           services.IMutateAdGroupAssetSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupAssetSetService.mutateAdGroupAssetSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -1230,6 +1280,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -1284,15 +1336,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupAssetSetOperation,
           string
         >("remove", adGroupAssetSets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupAssetSetOperation,
           services.IMutateAdGroupAssetSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupAssetSetService.mutateAdGroupAssetSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -1307,6 +1361,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -1379,15 +1435,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupBidModifierOperation,
           resources.IAdGroupBidModifier
         >("create", adGroupBidModifiers);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupBidModifierOperation,
           services.IMutateAdGroupBidModifiersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupBidModifierService.mutateAdGroupBidModifiers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -1402,6 +1460,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -1463,15 +1523,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.AdGroupBidModifier
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupBidModifierOperation,
           services.IMutateAdGroupBidModifiersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupBidModifierService.mutateAdGroupBidModifiers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -1486,6 +1548,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -1540,15 +1604,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupBidModifierOperation,
           string
         >("remove", adGroupBidModifiers);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupBidModifierOperation,
           services.IMutateAdGroupBidModifiersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupBidModifierService.mutateAdGroupBidModifiers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -1563,6 +1629,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -1637,16 +1705,18 @@ export default class ServiceFactory extends Service {
           services.AdGroupCriterionCustomizerOperation,
           resources.IAdGroupCriterionCustomizer
         >("create", adGroupCriterionCustomizers);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupCriterionCustomizerOperation,
           services.IMutateAdGroupCriterionCustomizersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "AdGroupCriterionCustomizerService.mutateAdGroupCriterionCustomizers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -1661,6 +1731,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -1718,16 +1790,18 @@ export default class ServiceFactory extends Service {
           services.AdGroupCriterionCustomizerOperation,
           string
         >("remove", adGroupCriterionCustomizers);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupCriterionCustomizerOperation,
           services.IMutateAdGroupCriterionCustomizersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "AdGroupCriterionCustomizerService.mutateAdGroupCriterionCustomizers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -1742,6 +1816,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -1817,15 +1893,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupCriterionLabelOperation,
           resources.IAdGroupCriterionLabel
         >("create", adGroupCriterionLabels);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupCriterionLabelOperation,
           services.IMutateAdGroupCriterionLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupCriterionLabelService.mutateAdGroupCriterionLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -1840,6 +1918,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -1897,15 +1977,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupCriterionLabelOperation,
           string
         >("remove", adGroupCriterionLabels);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupCriterionLabelOperation,
           services.IMutateAdGroupCriterionLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupCriterionLabelService.mutateAdGroupCriterionLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -1920,6 +2002,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -2000,15 +2084,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupCriterionOperation,
           resources.IAdGroupCriterion
         >("create", adGroupCriteria);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupCriterionOperation,
           services.IMutateAdGroupCriteriaRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupCriterionService.mutateAdGroupCriteria",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -2023,6 +2109,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -2089,15 +2177,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.AdGroupCriterion
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupCriterionOperation,
           services.IMutateAdGroupCriteriaRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupCriterionService.mutateAdGroupCriteria",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -2112,6 +2202,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -2166,15 +2258,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupCriterionOperation,
           string
         >("remove", adGroupCriteria);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupCriterionOperation,
           services.IMutateAdGroupCriteriaRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupCriterionService.mutateAdGroupCriteria",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -2189,6 +2283,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -2261,15 +2357,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupCustomizerOperation,
           resources.IAdGroupCustomizer
         >("create", adGroupCustomizers);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupCustomizerOperation,
           services.IMutateAdGroupCustomizersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupCustomizerService.mutateAdGroupCustomizers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -2284,6 +2382,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -2338,15 +2438,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupCustomizerOperation,
           string
         >("remove", adGroupCustomizers);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupCustomizerOperation,
           services.IMutateAdGroupCustomizersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupCustomizerService.mutateAdGroupCustomizers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -2361,6 +2463,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -2431,15 +2535,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupLabelOperation,
           resources.IAdGroupLabel
         >("create", adGroupLabels);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupLabelOperation,
           services.IMutateAdGroupLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupLabelService.mutateAdGroupLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -2454,6 +2560,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -2508,15 +2616,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupLabelOperation,
           string
         >("remove", adGroupLabels);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupLabelOperation,
           services.IMutateAdGroupLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupLabelService.mutateAdGroupLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -2531,6 +2641,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -2601,15 +2713,17 @@ export default class ServiceFactory extends Service {
           services.AdGroupOperation,
           resources.IAdGroup
         >("create", adGroups);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupOperation,
           services.IMutateAdGroupsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupService.mutateAdGroups",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -2624,6 +2738,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -2683,15 +2799,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.AdGroup
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupOperation,
           services.IMutateAdGroupsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupService.mutateAdGroups",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -2706,6 +2824,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -2760,15 +2880,17 @@ export default class ServiceFactory extends Service {
           "remove",
           adGroups
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdGroupOperation,
           services.IMutateAdGroupsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdGroupService.mutateAdGroups",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -2783,6 +2905,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -2853,15 +2977,17 @@ export default class ServiceFactory extends Service {
           services.AdParameterOperation,
           resources.IAdParameter
         >("create", adParameters);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdParameterOperation,
           services.IMutateAdParametersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdParameterService.mutateAdParameters",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -2876,6 +3002,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -2935,15 +3063,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.AdParameter
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdParameterOperation,
           services.IMutateAdParametersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdParameterService.mutateAdParameters",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -2958,6 +3088,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -3012,15 +3144,17 @@ export default class ServiceFactory extends Service {
           "remove",
           adParameters
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdParameterOperation,
           services.IMutateAdParametersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdParameterService.mutateAdParameters",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -3035,6 +3169,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -3105,15 +3241,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.Ad
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AdOperation,
           services.IMutateAdsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AdService.mutateAds",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -3128,6 +3266,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -3341,15 +3481,17 @@ export default class ServiceFactory extends Service {
           services.AssetGroupAssetOperation,
           resources.IAssetGroupAsset
         >("create", assetGroupAssets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetGroupAssetOperation,
           services.IMutateAssetGroupAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetGroupAssetService.mutateAssetGroupAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -3364,6 +3506,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -3425,15 +3569,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.AssetGroupAsset
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetGroupAssetOperation,
           services.IMutateAssetGroupAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetGroupAssetService.mutateAssetGroupAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -3448,6 +3594,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -3502,15 +3650,17 @@ export default class ServiceFactory extends Service {
           services.AssetGroupAssetOperation,
           string
         >("remove", assetGroupAssets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetGroupAssetOperation,
           services.IMutateAssetGroupAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetGroupAssetService.mutateAssetGroupAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -3525,6 +3675,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -3599,16 +3751,18 @@ export default class ServiceFactory extends Service {
           services.AssetGroupListingGroupFilterOperation,
           resources.IAssetGroupListingGroupFilter
         >("create", assetGroupListingGroupFilters);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetGroupListingGroupFilterOperation,
           services.IMutateAssetGroupListingGroupFiltersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "AssetGroupListingGroupFilterService.mutateAssetGroupListingGroupFilters",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -3623,6 +3777,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -3688,16 +3844,18 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.AssetGroupListingGroupFilter
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetGroupListingGroupFilterOperation,
           services.IMutateAssetGroupListingGroupFiltersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "AssetGroupListingGroupFilterService.mutateAssetGroupListingGroupFilters",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -3712,6 +3870,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -3769,16 +3929,18 @@ export default class ServiceFactory extends Service {
           services.AssetGroupListingGroupFilterOperation,
           string
         >("remove", assetGroupListingGroupFilters);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetGroupListingGroupFilterOperation,
           services.IMutateAssetGroupListingGroupFiltersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "AssetGroupListingGroupFilterService.mutateAssetGroupListingGroupFilters",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -3793,6 +3955,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -3863,15 +4027,17 @@ export default class ServiceFactory extends Service {
           services.AssetGroupOperation,
           resources.IAssetGroup
         >("create", assetGroups);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetGroupOperation,
           services.IMutateAssetGroupsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetGroupService.mutateAssetGroups",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -3886,6 +4052,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -3945,15 +4113,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.AssetGroup
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetGroupOperation,
           services.IMutateAssetGroupsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetGroupService.mutateAssetGroups",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -3968,6 +4138,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -4022,15 +4194,17 @@ export default class ServiceFactory extends Service {
           "remove",
           assetGroups
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetGroupOperation,
           services.IMutateAssetGroupsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetGroupService.mutateAssetGroups",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -4045,6 +4219,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -4117,15 +4293,17 @@ export default class ServiceFactory extends Service {
           services.AssetGroupSignalOperation,
           resources.IAssetGroupSignal
         >("create", assetGroupSignals);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetGroupSignalOperation,
           services.IMutateAssetGroupSignalsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetGroupSignalService.mutateAssetGroupSignals",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -4140,6 +4318,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -4194,15 +4374,17 @@ export default class ServiceFactory extends Service {
           services.AssetGroupSignalOperation,
           string
         >("remove", assetGroupSignals);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetGroupSignalOperation,
           services.IMutateAssetGroupSignalsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetGroupSignalService.mutateAssetGroupSignals",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -4217,6 +4399,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -4286,15 +4470,17 @@ export default class ServiceFactory extends Service {
           services.AssetOperation,
           resources.IAsset
         >("create", assets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetOperation,
           services.IMutateAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetService.mutateAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -4309,6 +4495,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -4368,15 +4556,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.Asset
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetOperation,
           services.IMutateAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetService.mutateAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -4391,6 +4581,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -4461,15 +4653,17 @@ export default class ServiceFactory extends Service {
           services.AssetSetAssetOperation,
           resources.IAssetSetAsset
         >("create", assetSetAssets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetSetAssetOperation,
           services.IMutateAssetSetAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetSetAssetService.mutateAssetSetAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -4484,6 +4678,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -4538,15 +4734,17 @@ export default class ServiceFactory extends Service {
           services.AssetSetAssetOperation,
           string
         >("remove", assetSetAssets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetSetAssetOperation,
           services.IMutateAssetSetAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetSetAssetService.mutateAssetSetAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -4561,6 +4759,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -4631,15 +4831,17 @@ export default class ServiceFactory extends Service {
           services.AssetSetOperation,
           resources.IAssetSet
         >("create", assetSets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetSetOperation,
           services.IMutateAssetSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetSetService.mutateAssetSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -4654,6 +4856,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -4713,15 +4917,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.AssetSet
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetSetOperation,
           services.IMutateAssetSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetSetService.mutateAssetSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -4736,6 +4942,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -4790,15 +4998,17 @@ export default class ServiceFactory extends Service {
           "remove",
           assetSets
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AssetSetOperation,
           services.IMutateAssetSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AssetSetService.mutateAssetSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -4813,6 +5023,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -5432,15 +5644,17 @@ export default class ServiceFactory extends Service {
           services.AudienceOperation,
           resources.IAudience
         >("create", audiences);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AudienceOperation,
           services.IMutateAudiencesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AudienceService.mutateAudiences",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -5455,6 +5669,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -5514,15 +5730,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.Audience
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.AudienceOperation,
           services.IMutateAudiencesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "AudienceService.mutateAudiences",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -5537,6 +5755,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -5667,7 +5887,7 @@ export default class ServiceFactory extends Service {
     const service = this.loadService<services.BatchJobService>(
       "BatchJobServiceClient"
     );
-    type MutateOptions = never;
+    type MutateOptions = Record<string, never>;
     return {
       /**
        * @description create resources of type resources.IBatchJob
@@ -5681,15 +5901,17 @@ export default class ServiceFactory extends Service {
           services.BatchJobOperation,
           resources.IBatchJob
         >("create", [batchJob]);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildSingleOperationRequest<
           services.BatchJobOperation,
           services.IMutateBatchJobRequest,
           MutateOptions
-        >(ops[0], options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "BatchJobService.mutateBatchJob",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -5704,6 +5926,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -5758,15 +5982,17 @@ export default class ServiceFactory extends Service {
           "remove",
           [batchJob]
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildSingleOperationRequest<
           services.BatchJobOperation,
           services.IMutateBatchJobRequest,
           MutateOptions
-        >(ops[0], options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "BatchJobService.mutateBatchJob",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -5781,6 +6007,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -6048,15 +6276,17 @@ export default class ServiceFactory extends Service {
           services.BiddingDataExclusionOperation,
           resources.IBiddingDataExclusion
         >("create", biddingDataExclusions);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.BiddingDataExclusionOperation,
           services.IMutateBiddingDataExclusionsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "BiddingDataExclusionService.mutateBiddingDataExclusions",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -6071,6 +6301,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -6135,15 +6367,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.BiddingDataExclusion
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.BiddingDataExclusionOperation,
           services.IMutateBiddingDataExclusionsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "BiddingDataExclusionService.mutateBiddingDataExclusions",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -6158,6 +6392,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -6215,15 +6451,17 @@ export default class ServiceFactory extends Service {
           services.BiddingDataExclusionOperation,
           string
         >("remove", biddingDataExclusions);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.BiddingDataExclusionOperation,
           services.IMutateBiddingDataExclusionsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "BiddingDataExclusionService.mutateBiddingDataExclusions",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -6238,6 +6476,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -6315,16 +6555,18 @@ export default class ServiceFactory extends Service {
           services.BiddingSeasonalityAdjustmentOperation,
           resources.IBiddingSeasonalityAdjustment
         >("create", biddingSeasonalityAdjustments);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.BiddingSeasonalityAdjustmentOperation,
           services.IMutateBiddingSeasonalityAdjustmentsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "BiddingSeasonalityAdjustmentService.mutateBiddingSeasonalityAdjustments",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -6339,6 +6581,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -6404,16 +6648,18 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.BiddingSeasonalityAdjustment
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.BiddingSeasonalityAdjustmentOperation,
           services.IMutateBiddingSeasonalityAdjustmentsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "BiddingSeasonalityAdjustmentService.mutateBiddingSeasonalityAdjustments",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -6428,6 +6674,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -6485,16 +6733,18 @@ export default class ServiceFactory extends Service {
           services.BiddingSeasonalityAdjustmentOperation,
           string
         >("remove", biddingSeasonalityAdjustments);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.BiddingSeasonalityAdjustmentOperation,
           services.IMutateBiddingSeasonalityAdjustmentsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "BiddingSeasonalityAdjustmentService.mutateBiddingSeasonalityAdjustments",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -6509,6 +6759,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -6584,15 +6836,17 @@ export default class ServiceFactory extends Service {
           services.BiddingStrategyOperation,
           resources.IBiddingStrategy
         >("create", biddingStrategies);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.BiddingStrategyOperation,
           services.IMutateBiddingStrategiesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "BiddingStrategyService.mutateBiddingStrategies",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -6607,6 +6861,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -6668,15 +6924,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.BiddingStrategy
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.BiddingStrategyOperation,
           services.IMutateBiddingStrategiesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "BiddingStrategyService.mutateBiddingStrategies",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -6691,6 +6949,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -6745,15 +7005,17 @@ export default class ServiceFactory extends Service {
           services.BiddingStrategyOperation,
           string
         >("remove", biddingStrategies);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.BiddingStrategyOperation,
           services.IMutateBiddingStrategiesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "BiddingStrategyService.mutateBiddingStrategies",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -6768,6 +7030,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -6838,15 +7102,17 @@ export default class ServiceFactory extends Service {
           services.CampaignAssetOperation,
           resources.ICampaignAsset
         >("create", campaignAssets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignAssetOperation,
           services.IMutateCampaignAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignAssetService.mutateCampaignAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -6861,6 +7127,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -6920,15 +7188,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CampaignAsset
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignAssetOperation,
           services.IMutateCampaignAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignAssetService.mutateCampaignAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -6943,6 +7213,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -6997,15 +7269,17 @@ export default class ServiceFactory extends Service {
           services.CampaignAssetOperation,
           string
         >("remove", campaignAssets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignAssetOperation,
           services.IMutateCampaignAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignAssetService.mutateCampaignAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -7020,6 +7294,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -7092,15 +7368,17 @@ export default class ServiceFactory extends Service {
           services.CampaignAssetSetOperation,
           resources.ICampaignAssetSet
         >("create", campaignAssetSets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignAssetSetOperation,
           services.IMutateCampaignAssetSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignAssetSetService.mutateCampaignAssetSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -7115,6 +7393,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -7169,15 +7449,17 @@ export default class ServiceFactory extends Service {
           services.CampaignAssetSetOperation,
           string
         >("remove", campaignAssetSets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignAssetSetOperation,
           services.IMutateCampaignAssetSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignAssetSetService.mutateCampaignAssetSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -7192,6 +7474,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -7264,15 +7548,17 @@ export default class ServiceFactory extends Service {
           services.CampaignBidModifierOperation,
           resources.ICampaignBidModifier
         >("create", campaignBidModifiers);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignBidModifierOperation,
           services.IMutateCampaignBidModifiersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignBidModifierService.mutateCampaignBidModifiers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -7287,6 +7573,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -7348,15 +7636,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CampaignBidModifier
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignBidModifierOperation,
           services.IMutateCampaignBidModifiersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignBidModifierService.mutateCampaignBidModifiers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -7371,6 +7661,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -7425,15 +7717,17 @@ export default class ServiceFactory extends Service {
           services.CampaignBidModifierOperation,
           string
         >("remove", campaignBidModifiers);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignBidModifierOperation,
           services.IMutateCampaignBidModifiersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignBidModifierService.mutateCampaignBidModifiers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -7448,6 +7742,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -7520,15 +7816,17 @@ export default class ServiceFactory extends Service {
           services.CampaignBudgetOperation,
           resources.ICampaignBudget
         >("create", campaignBudgets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignBudgetOperation,
           services.IMutateCampaignBudgetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignBudgetService.mutateCampaignBudgets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -7543,6 +7841,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -7604,15 +7904,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CampaignBudget
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignBudgetOperation,
           services.IMutateCampaignBudgetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignBudgetService.mutateCampaignBudgets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -7627,6 +7929,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -7681,15 +7985,17 @@ export default class ServiceFactory extends Service {
           services.CampaignBudgetOperation,
           string
         >("remove", campaignBudgets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignBudgetOperation,
           services.IMutateCampaignBudgetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignBudgetService.mutateCampaignBudgets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -7704,6 +8010,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -7778,15 +8086,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CampaignConversionGoal
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignConversionGoalOperation,
           services.IMutateCampaignConversionGoalsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignConversionGoalService.mutateCampaignConversionGoals",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -7801,6 +8111,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -7876,15 +8188,17 @@ export default class ServiceFactory extends Service {
           services.CampaignCriterionOperation,
           resources.ICampaignCriterion
         >("create", campaignCriteria);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignCriterionOperation,
           services.IMutateCampaignCriteriaRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignCriterionService.mutateCampaignCriteria",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -7899,6 +8213,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -7960,15 +8276,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CampaignCriterion
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignCriterionOperation,
           services.IMutateCampaignCriteriaRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignCriterionService.mutateCampaignCriteria",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -7983,6 +8301,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -8037,15 +8357,17 @@ export default class ServiceFactory extends Service {
           services.CampaignCriterionOperation,
           string
         >("remove", campaignCriteria);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignCriterionOperation,
           services.IMutateCampaignCriteriaRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignCriterionService.mutateCampaignCriteria",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -8060,6 +8382,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -8132,15 +8456,17 @@ export default class ServiceFactory extends Service {
           services.CampaignCustomizerOperation,
           resources.ICampaignCustomizer
         >("create", campaignCustomizers);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignCustomizerOperation,
           services.IMutateCampaignCustomizersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignCustomizerService.mutateCampaignCustomizers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -8155,6 +8481,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -8209,15 +8537,17 @@ export default class ServiceFactory extends Service {
           services.CampaignCustomizerOperation,
           string
         >("remove", campaignCustomizers);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignCustomizerOperation,
           services.IMutateCampaignCustomizersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignCustomizerService.mutateCampaignCustomizers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -8232,6 +8562,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -8302,15 +8634,17 @@ export default class ServiceFactory extends Service {
           services.CampaignDraftOperation,
           resources.ICampaignDraft
         >("create", campaignDrafts);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignDraftOperation,
           services.IMutateCampaignDraftsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignDraftService.mutateCampaignDrafts",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -8325,6 +8659,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -8384,15 +8720,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CampaignDraft
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignDraftOperation,
           services.IMutateCampaignDraftsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignDraftService.mutateCampaignDrafts",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -8407,6 +8745,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -8461,15 +8801,17 @@ export default class ServiceFactory extends Service {
           services.CampaignDraftOperation,
           string
         >("remove", campaignDrafts);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignDraftOperation,
           services.IMutateCampaignDraftsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignDraftService.mutateCampaignDrafts",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -8484,6 +8826,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -8687,15 +9031,17 @@ export default class ServiceFactory extends Service {
           services.CampaignGroupOperation,
           resources.ICampaignGroup
         >("create", campaignGroups);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignGroupOperation,
           services.IMutateCampaignGroupsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignGroupService.mutateCampaignGroups",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -8710,6 +9056,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -8769,15 +9117,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CampaignGroup
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignGroupOperation,
           services.IMutateCampaignGroupsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignGroupService.mutateCampaignGroups",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -8792,6 +9142,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -8846,15 +9198,17 @@ export default class ServiceFactory extends Service {
           services.CampaignGroupOperation,
           string
         >("remove", campaignGroups);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignGroupOperation,
           services.IMutateCampaignGroupsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignGroupService.mutateCampaignGroups",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -8869,6 +9223,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -8939,15 +9295,17 @@ export default class ServiceFactory extends Service {
           services.CampaignLabelOperation,
           resources.ICampaignLabel
         >("create", campaignLabels);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignLabelOperation,
           services.IMutateCampaignLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignLabelService.mutateCampaignLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -8962,6 +9320,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -9016,15 +9376,17 @@ export default class ServiceFactory extends Service {
           services.CampaignLabelOperation,
           string
         >("remove", campaignLabels);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignLabelOperation,
           services.IMutateCampaignLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignLabelService.mutateCampaignLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -9039,6 +9401,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -9109,15 +9473,17 @@ export default class ServiceFactory extends Service {
           services.CampaignOperation,
           resources.ICampaign
         >("create", campaigns);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignOperation,
           services.IMutateCampaignsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignService.mutateCampaigns",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -9132,6 +9498,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -9191,15 +9559,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.Campaign
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignOperation,
           services.IMutateCampaignsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignService.mutateCampaigns",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -9214,6 +9584,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -9268,15 +9640,17 @@ export default class ServiceFactory extends Service {
           "remove",
           campaigns
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignOperation,
           services.IMutateCampaignsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignService.mutateCampaigns",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -9291,6 +9665,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -9428,15 +9804,17 @@ export default class ServiceFactory extends Service {
           services.CampaignSharedSetOperation,
           resources.ICampaignSharedSet
         >("create", campaignSharedSets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignSharedSetOperation,
           services.IMutateCampaignSharedSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignSharedSetService.mutateCampaignSharedSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -9451,6 +9829,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -9505,15 +9885,17 @@ export default class ServiceFactory extends Service {
           services.CampaignSharedSetOperation,
           string
         >("remove", campaignSharedSets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignSharedSetOperation,
           services.IMutateCampaignSharedSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignSharedSetService.mutateCampaignSharedSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -9528,6 +9910,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -9600,15 +9984,17 @@ export default class ServiceFactory extends Service {
           services.ConversionActionOperation,
           resources.IConversionAction
         >("create", conversionActions);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ConversionActionOperation,
           services.IMutateConversionActionsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ConversionActionService.mutateConversionActions",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -9623,6 +10009,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -9684,15 +10072,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.ConversionAction
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ConversionActionOperation,
           services.IMutateConversionActionsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ConversionActionService.mutateConversionActions",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -9707,6 +10097,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -9761,15 +10153,17 @@ export default class ServiceFactory extends Service {
           services.ConversionActionOperation,
           string
         >("remove", conversionActions);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ConversionActionOperation,
           services.IMutateConversionActionsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ConversionActionService.mutateConversionActions",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -9784,6 +10178,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -9857,16 +10253,18 @@ export default class ServiceFactory extends Service {
           services.ConversionCustomVariableOperation,
           resources.IConversionCustomVariable
         >("create", conversionCustomVariables);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ConversionCustomVariableOperation,
           services.IMutateConversionCustomVariablesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "ConversionCustomVariableService.mutateConversionCustomVariables",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -9881,6 +10279,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -9946,16 +10346,18 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.ConversionCustomVariable
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ConversionCustomVariableOperation,
           services.IMutateConversionCustomVariablesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "ConversionCustomVariableService.mutateConversionCustomVariables",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -9970,6 +10372,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -10052,16 +10456,18 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.ConversionGoalCampaignConfig
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ConversionGoalCampaignConfigOperation,
           services.IMutateConversionGoalCampaignConfigsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "ConversionGoalCampaignConfigService.mutateConversionGoalCampaignConfigs",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -10076,6 +10482,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -10151,15 +10559,17 @@ export default class ServiceFactory extends Service {
           services.ConversionValueRuleOperation,
           resources.IConversionValueRule
         >("create", conversionValueRules);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ConversionValueRuleOperation,
           services.IMutateConversionValueRulesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ConversionValueRuleService.mutateConversionValueRules",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -10174,6 +10584,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -10235,15 +10647,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.ConversionValueRule
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ConversionValueRuleOperation,
           services.IMutateConversionValueRulesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ConversionValueRuleService.mutateConversionValueRules",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -10258,6 +10672,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -10312,15 +10728,17 @@ export default class ServiceFactory extends Service {
           services.ConversionValueRuleOperation,
           string
         >("remove", conversionValueRules);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ConversionValueRuleOperation,
           services.IMutateConversionValueRulesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ConversionValueRuleService.mutateConversionValueRules",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -10335,6 +10753,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -10407,15 +10827,17 @@ export default class ServiceFactory extends Service {
           services.ConversionValueRuleSetOperation,
           resources.IConversionValueRuleSet
         >("create", conversionValueRuleSets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ConversionValueRuleSetOperation,
           services.IMutateConversionValueRuleSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ConversionValueRuleSetService.mutateConversionValueRuleSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -10430,6 +10852,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -10494,15 +10918,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.ConversionValueRuleSet
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ConversionValueRuleSetOperation,
           services.IMutateConversionValueRuleSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ConversionValueRuleSetService.mutateConversionValueRuleSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -10517,6 +10943,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -10574,15 +11002,17 @@ export default class ServiceFactory extends Service {
           services.ConversionValueRuleSetOperation,
           string
         >("remove", conversionValueRuleSets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ConversionValueRuleSetOperation,
           services.IMutateConversionValueRuleSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ConversionValueRuleSetService.mutateConversionValueRuleSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -10597,6 +11027,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -10672,15 +11104,17 @@ export default class ServiceFactory extends Service {
           services.CustomConversionGoalOperation,
           resources.ICustomConversionGoal
         >("create", customConversionGoals);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomConversionGoalOperation,
           services.IMutateCustomConversionGoalsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomConversionGoalService.mutateCustomConversionGoals",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -10695,6 +11129,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -10759,15 +11195,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CustomConversionGoal
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomConversionGoalOperation,
           services.IMutateCustomConversionGoalsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomConversionGoalService.mutateCustomConversionGoals",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -10782,6 +11220,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -10839,15 +11279,17 @@ export default class ServiceFactory extends Service {
           services.CustomConversionGoalOperation,
           string
         >("remove", customConversionGoals);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomConversionGoalOperation,
           services.IMutateCustomConversionGoalsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomConversionGoalService.mutateCustomConversionGoals",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -10862,6 +11304,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -10935,15 +11379,17 @@ export default class ServiceFactory extends Service {
           services.CustomerAssetOperation,
           resources.ICustomerAsset
         >("create", customerAssets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerAssetOperation,
           services.IMutateCustomerAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerAssetService.mutateCustomerAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -10958,6 +11404,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -11017,15 +11465,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CustomerAsset
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerAssetOperation,
           services.IMutateCustomerAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerAssetService.mutateCustomerAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -11040,6 +11490,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -11094,15 +11546,17 @@ export default class ServiceFactory extends Service {
           services.CustomerAssetOperation,
           string
         >("remove", customerAssets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerAssetOperation,
           services.IMutateCustomerAssetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerAssetService.mutateCustomerAssets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -11117,6 +11571,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -11190,16 +11646,18 @@ export default class ServiceFactory extends Service {
           services.CustomerBudgetNetworkSettingOperation,
           resources.ICustomerBudgetNetworkSetting
         >("create", [customerBudgetNetworkSetting]);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildSingleOperationRequest<
           services.CustomerBudgetNetworkSettingOperation,
           services.IMutateCustomerBudgetNetworkSettingRequest,
           MutateOptions
-        >(ops[0], options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "CustomerBudgetNetworkSettingService.mutateCustomerBudgetNetworkSetting",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -11214,6 +11672,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -11278,16 +11738,18 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CustomerBudgetNetworkSetting
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildSingleOperationRequest<
           services.CustomerBudgetNetworkSettingOperation,
           services.IMutateCustomerBudgetNetworkSettingRequest,
           MutateOptions
-        >(ops[0], options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "CustomerBudgetNetworkSettingService.mutateCustomerBudgetNetworkSetting",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -11302,6 +11764,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -11379,15 +11843,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CustomerConversionGoal
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerConversionGoalOperation,
           services.IMutateCustomerConversionGoalsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerConversionGoalService.mutateCustomerConversionGoals",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -11402,6 +11868,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -11477,15 +11945,17 @@ export default class ServiceFactory extends Service {
           services.CustomerCustomizerOperation,
           resources.ICustomerCustomizer
         >("create", customerCustomizers);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerCustomizerOperation,
           services.IMutateCustomerCustomizersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerCustomizerService.mutateCustomerCustomizers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -11500,6 +11970,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -11554,15 +12026,17 @@ export default class ServiceFactory extends Service {
           services.CustomerCustomizerOperation,
           string
         >("remove", customerCustomizers);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerCustomizerOperation,
           services.IMutateCustomerCustomizersRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerCustomizerService.mutateCustomerCustomizers",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -11577,6 +12051,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -11647,15 +12123,17 @@ export default class ServiceFactory extends Service {
           services.CustomerLabelOperation,
           resources.ICustomerLabel
         >("create", customerLabels);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerLabelOperation,
           services.IMutateCustomerLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerLabelService.mutateCustomerLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -11670,6 +12148,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -11724,15 +12204,17 @@ export default class ServiceFactory extends Service {
           services.CustomerLabelOperation,
           string
         >("remove", customerLabels);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerLabelOperation,
           services.IMutateCustomerLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerLabelService.mutateCustomerLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -11747,6 +12229,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -11820,16 +12304,18 @@ export default class ServiceFactory extends Service {
           services.CustomerNegativeCriterionOperation,
           resources.ICustomerNegativeCriterion
         >("create", customerNegativeCriteria);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerNegativeCriterionOperation,
           services.IMutateCustomerNegativeCriteriaRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "CustomerNegativeCriterionService.mutateCustomerNegativeCriteria",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -11844,6 +12330,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -11901,16 +12389,18 @@ export default class ServiceFactory extends Service {
           services.CustomerNegativeCriterionOperation,
           string
         >("remove", customerNegativeCriteria);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerNegativeCriterionOperation,
           services.IMutateCustomerNegativeCriteriaRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "CustomerNegativeCriterionService.mutateCustomerNegativeCriteria",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -11925,6 +12415,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -12003,15 +12495,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.Customer
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildSingleOperationRequest<
           services.CustomerOperation,
           services.IMutateCustomerRequest,
           MutateOptions
-        >(ops[0], options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerService.mutateCustomer",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -12026,6 +12520,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -12228,15 +12724,17 @@ export default class ServiceFactory extends Service {
           services.CustomizerAttributeOperation,
           resources.ICustomizerAttribute
         >("create", customizerAttributes);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomizerAttributeOperation,
           services.IMutateCustomizerAttributesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomizerAttributeService.mutateCustomizerAttributes",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -12251,6 +12749,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -12305,15 +12805,17 @@ export default class ServiceFactory extends Service {
           services.CustomizerAttributeOperation,
           string
         >("remove", customizerAttributes);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomizerAttributeOperation,
           services.IMutateCustomizerAttributesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomizerAttributeService.mutateCustomizerAttributes",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -12328,6 +12830,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -12398,15 +12902,17 @@ export default class ServiceFactory extends Service {
           services.ExperimentArmOperation,
           resources.IExperimentArm
         >("create", experimentArms);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ExperimentArmOperation,
           services.IMutateExperimentArmsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ExperimentArmService.mutateExperimentArms",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -12421,6 +12927,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -12480,15 +12988,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.ExperimentArm
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ExperimentArmOperation,
           services.IMutateExperimentArmsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ExperimentArmService.mutateExperimentArms",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -12503,6 +13013,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -12557,15 +13069,17 @@ export default class ServiceFactory extends Service {
           services.ExperimentArmOperation,
           string
         >("remove", experimentArms);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ExperimentArmOperation,
           services.IMutateExperimentArmsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ExperimentArmService.mutateExperimentArms",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -12580,6 +13094,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -12650,15 +13166,17 @@ export default class ServiceFactory extends Service {
           services.ExperimentOperation,
           resources.IExperiment
         >("create", experiments);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ExperimentOperation,
           services.IMutateExperimentsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ExperimentService.mutateExperiments",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -12673,6 +13191,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -12732,15 +13252,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.Experiment
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ExperimentOperation,
           services.IMutateExperimentsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ExperimentService.mutateExperiments",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -12755,6 +13277,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -12809,15 +13333,17 @@ export default class ServiceFactory extends Service {
           "remove",
           experiments
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.ExperimentOperation,
           services.IMutateExperimentsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "ExperimentService.mutateExperiments",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -12832,6 +13358,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -13230,16 +13758,18 @@ export default class ServiceFactory extends Service {
           services.KeywordPlanAdGroupKeywordOperation,
           resources.IKeywordPlanAdGroupKeyword
         >("create", keywordPlanAdGroupKeywords);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanAdGroupKeywordOperation,
           services.IMutateKeywordPlanAdGroupKeywordsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "KeywordPlanAdGroupKeywordService.mutateKeywordPlanAdGroupKeywords",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -13254,6 +13784,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -13319,16 +13851,18 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.KeywordPlanAdGroupKeyword
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanAdGroupKeywordOperation,
           services.IMutateKeywordPlanAdGroupKeywordsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "KeywordPlanAdGroupKeywordService.mutateKeywordPlanAdGroupKeywords",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -13343,6 +13877,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -13400,16 +13936,18 @@ export default class ServiceFactory extends Service {
           services.KeywordPlanAdGroupKeywordOperation,
           string
         >("remove", keywordPlanAdGroupKeywords);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanAdGroupKeywordOperation,
           services.IMutateKeywordPlanAdGroupKeywordsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "KeywordPlanAdGroupKeywordService.mutateKeywordPlanAdGroupKeywords",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -13424,6 +13962,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -13499,15 +14039,17 @@ export default class ServiceFactory extends Service {
           services.KeywordPlanAdGroupOperation,
           resources.IKeywordPlanAdGroup
         >("create", keywordPlanAdGroups);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanAdGroupOperation,
           services.IMutateKeywordPlanAdGroupsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "KeywordPlanAdGroupService.mutateKeywordPlanAdGroups",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -13522,6 +14064,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -13583,15 +14127,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.KeywordPlanAdGroup
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanAdGroupOperation,
           services.IMutateKeywordPlanAdGroupsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "KeywordPlanAdGroupService.mutateKeywordPlanAdGroups",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -13606,6 +14152,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -13660,15 +14208,17 @@ export default class ServiceFactory extends Service {
           services.KeywordPlanAdGroupOperation,
           string
         >("remove", keywordPlanAdGroups);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanAdGroupOperation,
           services.IMutateKeywordPlanAdGroupsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "KeywordPlanAdGroupService.mutateKeywordPlanAdGroups",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -13683,6 +14233,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -13757,16 +14309,18 @@ export default class ServiceFactory extends Service {
           services.KeywordPlanCampaignKeywordOperation,
           resources.IKeywordPlanCampaignKeyword
         >("create", keywordPlanCampaignKeywords);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanCampaignKeywordOperation,
           services.IMutateKeywordPlanCampaignKeywordsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "KeywordPlanCampaignKeywordService.mutateKeywordPlanCampaignKeywords",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -13781,6 +14335,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -13846,16 +14402,18 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.KeywordPlanCampaignKeyword
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanCampaignKeywordOperation,
           services.IMutateKeywordPlanCampaignKeywordsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "KeywordPlanCampaignKeywordService.mutateKeywordPlanCampaignKeywords",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -13870,6 +14428,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -13927,16 +14487,18 @@ export default class ServiceFactory extends Service {
           services.KeywordPlanCampaignKeywordOperation,
           string
         >("remove", keywordPlanCampaignKeywords);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanCampaignKeywordOperation,
           services.IMutateKeywordPlanCampaignKeywordsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "KeywordPlanCampaignKeywordService.mutateKeywordPlanCampaignKeywords",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -13951,6 +14513,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -14026,15 +14590,17 @@ export default class ServiceFactory extends Service {
           services.KeywordPlanCampaignOperation,
           resources.IKeywordPlanCampaign
         >("create", keywordPlanCampaigns);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanCampaignOperation,
           services.IMutateKeywordPlanCampaignsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "KeywordPlanCampaignService.mutateKeywordPlanCampaigns",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -14049,6 +14615,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -14110,15 +14678,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.KeywordPlanCampaign
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanCampaignOperation,
           services.IMutateKeywordPlanCampaignsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "KeywordPlanCampaignService.mutateKeywordPlanCampaigns",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -14133,6 +14703,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -14187,15 +14759,17 @@ export default class ServiceFactory extends Service {
           services.KeywordPlanCampaignOperation,
           string
         >("remove", keywordPlanCampaigns);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanCampaignOperation,
           services.IMutateKeywordPlanCampaignsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "KeywordPlanCampaignService.mutateKeywordPlanCampaigns",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -14210,6 +14784,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -14280,15 +14856,17 @@ export default class ServiceFactory extends Service {
           services.KeywordPlanOperation,
           resources.IKeywordPlan
         >("create", keywordPlans);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanOperation,
           services.IMutateKeywordPlansRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "KeywordPlanService.mutateKeywordPlans",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -14303,6 +14881,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -14362,15 +14942,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.KeywordPlan
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanOperation,
           services.IMutateKeywordPlansRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "KeywordPlanService.mutateKeywordPlans",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -14385,6 +14967,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -14439,15 +15023,17 @@ export default class ServiceFactory extends Service {
           "remove",
           keywordPlans
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.KeywordPlanOperation,
           services.IMutateKeywordPlansRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "KeywordPlanService.mutateKeywordPlans",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -14462,6 +15048,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -14531,15 +15119,17 @@ export default class ServiceFactory extends Service {
           services.LabelOperation,
           resources.ILabel
         >("create", labels);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.LabelOperation,
           services.IMutateLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "LabelService.mutateLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -14554,6 +15144,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -14613,15 +15205,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.Label
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.LabelOperation,
           services.IMutateLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "LabelService.mutateLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -14636,6 +15230,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -14690,15 +15286,17 @@ export default class ServiceFactory extends Service {
           "remove",
           labels
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.LabelOperation,
           services.IMutateLabelsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "LabelService.mutateLabels",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -14713,6 +15311,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -14787,16 +15387,18 @@ export default class ServiceFactory extends Service {
           services.RecommendationSubscriptionOperation,
           resources.IRecommendationSubscription
         >("create", recommendationSubscriptions);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.RecommendationSubscriptionOperation,
           services.IMutateRecommendationSubscriptionRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "RecommendationSubscriptionService.mutateRecommendationSubscription",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -14811,6 +15413,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -14876,16 +15480,18 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.RecommendationSubscription
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.RecommendationSubscriptionOperation,
           services.IMutateRecommendationSubscriptionRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "RecommendationSubscriptionService.mutateRecommendationSubscription",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -14900,6 +15506,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -14975,15 +15583,17 @@ export default class ServiceFactory extends Service {
           services.RemarketingActionOperation,
           resources.IRemarketingAction
         >("create", remarketingActions);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.RemarketingActionOperation,
           services.IMutateRemarketingActionsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "RemarketingActionService.mutateRemarketingActions",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -14998,6 +15608,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -15059,15 +15671,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.RemarketingAction
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.RemarketingActionOperation,
           services.IMutateRemarketingActionsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "RemarketingActionService.mutateRemarketingActions",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -15082,6 +15696,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -15154,15 +15770,17 @@ export default class ServiceFactory extends Service {
           services.SharedCriterionOperation,
           resources.ISharedCriterion
         >("create", sharedCriteria);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.SharedCriterionOperation,
           services.IMutateSharedCriteriaRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "SharedCriterionService.mutateSharedCriteria",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -15177,6 +15795,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -15231,15 +15851,17 @@ export default class ServiceFactory extends Service {
           services.SharedCriterionOperation,
           string
         >("remove", sharedCriteria);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.SharedCriterionOperation,
           services.IMutateSharedCriteriaRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "SharedCriterionService.mutateSharedCriteria",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -15254,6 +15876,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -15324,15 +15948,17 @@ export default class ServiceFactory extends Service {
           services.SharedSetOperation,
           resources.ISharedSet
         >("create", sharedSets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.SharedSetOperation,
           services.IMutateSharedSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "SharedSetService.mutateSharedSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -15347,6 +15973,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -15406,15 +16034,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.SharedSet
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.SharedSetOperation,
           services.IMutateSharedSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "SharedSetService.mutateSharedSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -15429,6 +16059,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -15483,15 +16115,17 @@ export default class ServiceFactory extends Service {
           "remove",
           sharedSets
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.SharedSetOperation,
           services.IMutateSharedSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "SharedSetService.mutateSharedSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -15506,6 +16140,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -15648,15 +16284,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.SmartCampaignSetting
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.SmartCampaignSettingOperation,
           services.IMutateSmartCampaignSettingsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "SmartCampaignSettingService.mutateSmartCampaignSettings",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -15671,6 +16309,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -15809,15 +16449,17 @@ export default class ServiceFactory extends Service {
           services.UserListOperation,
           resources.IUserList
         >("create", userLists);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.UserListOperation,
           services.IMutateUserListsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "UserListService.mutateUserLists",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -15832,6 +16474,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -15891,15 +16535,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.UserList
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.UserListOperation,
           services.IMutateUserListsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "UserListService.mutateUserLists",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -15914,6 +16560,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -15968,15 +16616,17 @@ export default class ServiceFactory extends Service {
           "remove",
           userLists
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.UserListOperation,
           services.IMutateUserListsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "UserListService.mutateUserLists",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -15991,6 +16641,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -16381,7 +17033,7 @@ export default class ServiceFactory extends Service {
     const service = this.loadService<services.BillingSetupService>(
       "BillingSetupServiceClient"
     );
-    type MutateOptions = never;
+    type MutateOptions = Record<string, never>;
     return {
       /**
        * @description create resources of type resources.IBillingSetup
@@ -16395,15 +17047,17 @@ export default class ServiceFactory extends Service {
           services.BillingSetupOperation,
           resources.IBillingSetup
         >("create", [billingSetup]);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildSingleOperationRequest<
           services.BillingSetupOperation,
           services.IMutateBillingSetupRequest,
           MutateOptions
-        >(ops[0], options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "BillingSetupService.mutateBillingSetup",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -16418,6 +17072,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -16472,15 +17128,17 @@ export default class ServiceFactory extends Service {
           services.BillingSetupOperation,
           string
         >("remove", [billingSetup]);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildSingleOperationRequest<
           services.BillingSetupOperation,
           services.IMutateBillingSetupRequest,
           MutateOptions
-        >(ops[0], options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "BillingSetupService.mutateBillingSetup",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -16495,6 +17153,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -16643,15 +17303,17 @@ export default class ServiceFactory extends Service {
           services.CampaignGoalConfigOperation,
           resources.ICampaignGoalConfig
         >("create", campaignGoalConfigs);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignGoalConfigOperation,
           services.IMutateCampaignGoalConfigsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignGoalConfigService.mutateCampaignGoalConfigs",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -16666,6 +17328,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -16727,15 +17391,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CampaignGoalConfig
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignGoalConfigOperation,
           services.IMutateCampaignGoalConfigsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignGoalConfigService.mutateCampaignGoalConfigs",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -16750,6 +17416,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -16804,15 +17472,17 @@ export default class ServiceFactory extends Service {
           services.CampaignGoalConfigOperation,
           string
         >("remove", campaignGoalConfigs);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CampaignGoalConfigOperation,
           services.IMutateCampaignGoalConfigsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CampaignGoalConfigService.mutateCampaignGoalConfigs",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -16827,6 +17497,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -17259,15 +17931,17 @@ export default class ServiceFactory extends Service {
           services.CustomAudienceOperation,
           resources.ICustomAudience
         >("create", customAudiences);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomAudienceOperation,
           services.IMutateCustomAudiencesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomAudienceService.mutateCustomAudiences",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -17282,6 +17956,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -17343,15 +18019,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CustomAudience
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomAudienceOperation,
           services.IMutateCustomAudiencesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomAudienceService.mutateCustomAudiences",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -17366,6 +18044,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -17420,15 +18100,17 @@ export default class ServiceFactory extends Service {
           services.CustomAudienceOperation,
           string
         >("remove", customAudiences);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomAudienceOperation,
           services.IMutateCustomAudiencesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomAudienceService.mutateCustomAudiences",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -17443,6 +18125,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -17512,15 +18196,17 @@ export default class ServiceFactory extends Service {
           services.CustomInterestOperation,
           resources.ICustomInterest
         >("create", customInterests);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomInterestOperation,
           services.IMutateCustomInterestsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomInterestService.mutateCustomInterests",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -17535,6 +18221,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -17596,15 +18284,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CustomInterest
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomInterestOperation,
           services.IMutateCustomInterestsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomInterestService.mutateCustomInterests",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -17619,6 +18309,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -17691,15 +18383,17 @@ export default class ServiceFactory extends Service {
           services.CustomerAssetSetOperation,
           resources.ICustomerAssetSet
         >("create", customerAssetSets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerAssetSetOperation,
           services.IMutateCustomerAssetSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerAssetSetService.mutateCustomerAssetSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -17714,6 +18408,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -17768,15 +18464,17 @@ export default class ServiceFactory extends Service {
           services.CustomerAssetSetOperation,
           string
         >("remove", customerAssetSets);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerAssetSetOperation,
           services.IMutateCustomerAssetSetsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerAssetSetService.mutateCustomerAssetSets",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -17791,6 +18489,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -17859,15 +18559,17 @@ export default class ServiceFactory extends Service {
           services.CustomerClientLinkOperation,
           resources.ICustomerClientLink
         >("create", [customerClientLink]);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildSingleOperationRequest<
           services.CustomerClientLinkOperation,
           services.IMutateCustomerClientLinkRequest,
           MutateOptions
-        >(ops[0], options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerClientLinkService.mutateCustomerClientLink",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -17882,6 +18584,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -17942,15 +18646,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CustomerClientLink
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildSingleOperationRequest<
           services.CustomerClientLinkOperation,
           services.IMutateCustomerClientLinkRequest,
           MutateOptions
-        >(ops[0], options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerClientLinkService.mutateCustomerClientLink",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -17965,6 +18671,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -18039,15 +18747,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CustomerManagerLink
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.CustomerManagerLinkOperation,
           services.IMutateCustomerManagerLinkRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerManagerLinkService.mutateCustomerManagerLink",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -18062,6 +18772,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -18205,16 +18917,18 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CustomerSkAdNetworkConversionValueSchema
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildSingleOperationRequest<
           services.CustomerSkAdNetworkConversionValueSchemaOperation,
           services.IMutateCustomerSkAdNetworkConversionValueSchemaRequest,
           MutateOptions
-        >(ops[0], options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "CustomerSkAdNetworkConversionValueSchemaService.mutateCustomerSkAdNetworkConversionValueSchema",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -18229,6 +18943,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -18285,7 +19001,7 @@ export default class ServiceFactory extends Service {
       this.loadService<services.CustomerUserAccessInvitationService>(
         "CustomerUserAccessInvitationServiceClient"
       );
-    type MutateOptions = never;
+    type MutateOptions = Record<string, never>;
     return {
       /**
        * @description create resources of type resources.ICustomerUserAccessInvitation
@@ -18301,16 +19017,18 @@ export default class ServiceFactory extends Service {
           services.CustomerUserAccessInvitationOperation,
           resources.ICustomerUserAccessInvitation
         >("create", [customerUserAccessInvitation]);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildSingleOperationRequest<
           services.CustomerUserAccessInvitationOperation,
           services.IMutateCustomerUserAccessInvitationRequest,
           MutateOptions
-        >(ops[0], options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "CustomerUserAccessInvitationService.mutateCustomerUserAccessInvitation",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -18325,6 +19043,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -18382,16 +19102,18 @@ export default class ServiceFactory extends Service {
           services.CustomerUserAccessInvitationOperation,
           string
         >("remove", [customerUserAccessInvitation]);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildSingleOperationRequest<
           services.CustomerUserAccessInvitationOperation,
           services.IMutateCustomerUserAccessInvitationRequest,
           MutateOptions
-        >(ops[0], options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method:
             "CustomerUserAccessInvitationService.mutateCustomerUserAccessInvitation",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -18406,6 +19128,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -18460,7 +19184,7 @@ export default class ServiceFactory extends Service {
     const service = this.loadService<services.CustomerUserAccessService>(
       "CustomerUserAccessServiceClient"
     );
-    type MutateOptions = never;
+    type MutateOptions = Record<string, never>;
     return {
       /**
        * @description update resources of type resources.ICustomerUserAccess
@@ -18480,15 +19204,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.CustomerUserAccess
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildSingleOperationRequest<
           services.CustomerUserAccessOperation,
           services.IMutateCustomerUserAccessRequest,
           MutateOptions
-        >(ops[0], options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerUserAccessService.mutateCustomerUserAccess",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -18503,6 +19229,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -18557,15 +19285,17 @@ export default class ServiceFactory extends Service {
           services.CustomerUserAccessOperation,
           string
         >("remove", [customerUserAccess]);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildSingleOperationRequest<
           services.CustomerUserAccessOperation,
           services.IMutateCustomerUserAccessRequest,
           MutateOptions
-        >(ops[0], options);
+        >(ops[0], mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "CustomerUserAccessService.mutateCustomerUserAccess",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -18580,6 +19310,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -18927,15 +19659,17 @@ export default class ServiceFactory extends Service {
           services.GoalOperation,
           resources.IGoal
         >("create", goals);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.GoalOperation,
           services.IMutateGoalsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "GoalService.mutateGoals",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -18950,6 +19684,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -19009,15 +19745,17 @@ export default class ServiceFactory extends Service {
           // @ts-expect-error Static class type here is fine
           resources.Goal
         );
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.GoalOperation,
           services.IMutateGoalsRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "GoalService.mutateGoals",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -19032,6 +19770,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -22022,15 +22762,17 @@ export default class ServiceFactory extends Service {
           services.UserListCustomerTypeOperation,
           resources.IUserListCustomerType
         >("create", userListCustomerTypes);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.UserListCustomerTypeOperation,
           services.IMutateUserListCustomerTypesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "UserListCustomerTypeService.mutateUserListCustomerTypes",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -22045,6 +22787,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });
@@ -22102,15 +22846,17 @@ export default class ServiceFactory extends Service {
           services.UserListCustomerTypeOperation,
           string
         >("remove", userListCustomerTypes);
+        const mutateOptions: MutateOptions = { ...options };
         const request = this.buildRequest<
           services.UserListCustomerTypeOperation,
           services.IMutateUserListCustomerTypesRequest,
           MutateOptions
-        >(ops, options);
+        >(ops, mutateOptions);
         const baseHookArguments: BaseMutationHookArgs = {
           credentials: this.credentials,
           method: "UserListCustomerTypeService.mutateUserListCustomerTypes",
           mutation: request,
+          mutateOptions,
           isServiceCall: true,
         };
         if (this.hooks.onMutationStart) {
@@ -22125,6 +22871,8 @@ export default class ServiceFactory extends Service {
               Object.entries(options).forEach(([key, val]) => {
                 // @ts-expect-error Index with key type is fine
                 request[key] = val;
+                // @ts-expect-error Index with key type is fine
+                mutateOptions[key] = val;
               });
             },
           });

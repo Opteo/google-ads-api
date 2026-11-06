@@ -1,6 +1,7 @@
 import protos from "google-ads-node/build/protos/protos.json";
 import pluralize from "pluralize";
 import { services } from "./protos/index.js";
+import { Hooks } from "./hooks.js";
 import { newCustomer } from "./testUtils.js";
 import { toCamelCase } from "./utils.js";
 import { googleAdsVersion } from "./version.js";
@@ -132,5 +133,41 @@ describe("mutate helpers for repeated-operation requests", () => {
       { remove: "customers/1/campaigns/2" },
       { remove: "customers/1/campaigns/3" },
     ]);
+  });
+});
+
+describe("mutate helper hooks", () => {
+  it("gives every mutation hook the effective mutate options", async () => {
+    const seen: Record<string, unknown> = {};
+    const hooks: Hooks = {
+      onMutationStart({ mutateOptions, editOptions }) {
+        seen.start = { ...mutateOptions };
+        editOptions({ partial_failure: true });
+      },
+      onMutationEnd({ mutateOptions }) {
+        seen.end = { ...mutateOptions };
+      },
+    };
+    const customer = newCustomer(hooks);
+    const send = jest.fn().mockResolvedValue([{}]);
+    jest
+      // @ts-expect-error Accessing protected method for test purposes
+      .spyOn(customer, "loadService")
+      // @ts-expect-error Stubbed service exposes only the mutate method
+      .mockReturnValue({ mutateCampaignBudgets: send });
+    const callerOptions = { validate_only: true };
+
+    await customer.campaignBudgets.create(
+      [{ name: "probe", amount_micros: 1 }],
+      callerOptions
+    );
+
+    expect(seen.start).toEqual({ validate_only: true });
+    expect(seen.end).toEqual({ validate_only: true, partial_failure: true });
+    expect(send.mock.calls[0][0]).toMatchObject({
+      validate_only: true,
+      partial_failure: true,
+    });
+    expect(callerOptions).toEqual({ validate_only: true });
   });
 });

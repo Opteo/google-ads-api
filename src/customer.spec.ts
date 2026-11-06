@@ -1062,9 +1062,53 @@ describe("mutateResources", () => {
       method: "GoogleAdsService.mutate",
       isServiceCall: false,
       mutations: mockMutations,
+      mutateOptions: {},
       cancel: expect.any(Function),
       editOptions: expect.any(Function),
     });
+  });
+
+  it("gives every mutation hook the effective mutate options", async () => {
+    const seen: Record<string, unknown> = {};
+    const hooks: Hooks = {
+      onMutationStart({ mutateOptions, editOptions }) {
+        seen.start = { ...mutateOptions };
+        editOptions({ partial_failure: true });
+      },
+      onMutationEnd({ mutateOptions }) {
+        seen.end = { ...mutateOptions };
+      },
+    };
+    const customer = newCustomer(hooks);
+    const { spyBuild } = mockBuildMutateRequestAndService({ customer });
+    const callerOptions: MutateOptions = { validate_only: true };
+
+    await customer.mutateResources(mockMutations, callerOptions);
+
+    expect(seen.start).toEqual({ validate_only: true });
+    expect(seen.end).toEqual({ validate_only: true, partial_failure: true });
+    expect(spyBuild).toHaveBeenCalledWith(mockMutations, {
+      validate_only: true,
+      partial_failure: true,
+    });
+    expect(callerOptions).toEqual({ validate_only: true });
+  });
+
+  it("gives onMutationError the mutate options", async () => {
+    let seen: unknown;
+    const hooks: Hooks = {
+      onMutationError({ mutateOptions }) {
+        seen = mutateOptions;
+      },
+    };
+    const customer = newCustomer(hooks);
+    mockBuildMutateRequestAndService({ customer, shouldThrow: true });
+
+    await customer
+      .mutateResources(mockMutations, { validate_only: true })
+      .catch(() => undefined);
+
+    expect(seen).toEqual({ validate_only: true });
   });
 
   it("calls onMutationStart asynchronously", async () => {
@@ -1165,6 +1209,7 @@ describe("mutateResources", () => {
         method: "GoogleAdsService.mutate",
         isServiceCall: false,
         mutations: mockMutations,
+        mutateOptions: {},
         error: mockError,
       });
     }
@@ -1230,6 +1275,7 @@ describe("mutateResources", () => {
       method: "GoogleAdsService.mutate",
       isServiceCall: false,
       mutations: mockMutations,
+      mutateOptions: {},
       response: mockMutationReturnValue,
       resolve: expect.any(Function),
     });

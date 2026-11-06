@@ -101,7 +101,7 @@ export default class ServiceFactory extends Service {
         if (mutateOptions.hasOptions) {
           serviceTypes.push(mutateOptions.type);
         } else {
-          serviceTypes.push("type MutateOptions = never");
+          serviceTypes.push("type MutateOptions = Record<string, never>");
         }
         continue;
       }
@@ -390,11 +390,12 @@ function buildMutateMethod(
         ${isUpdate ? "// @ts-expect-error Static class type here is fine" : ""}
         ${updateMaskMessageArg}
       );
+      const mutateOptions: MutateOptions = { ...options };
       const request = this.${singular ? "buildSingleOperationRequest" : "buildRequest"}<
         ${operationType},
         ${requestType},
         MutateOptions
-      >(${singular ? "ops[0]" : "ops"}, options);
+      >(${singular ? "ops[0]" : "ops"}, mutateOptions);
       ${buildMutateHookStart(serviceName, methodName)}
       try {
         // @ts-expect-error Response is an array type
@@ -426,6 +427,7 @@ function buildMutateHookStart(serviceName: string, methodName: string): string {
     credentials: this.credentials,
     method: "${serviceName}.${methodName}",
     mutation: request,
+    mutateOptions,
     isServiceCall: true,
   };
   if (this.hooks.onMutationStart) {
@@ -440,6 +442,8 @@ function buildMutateHookStart(serviceName: string, methodName: string): string {
         Object.entries(options).forEach(([key, val]) => {
           // @ts-expect-error Index with key type is fine
           request[key] = val;
+          // @ts-expect-error Index with key type is fine
+          mutateOptions[key] = val;
         });
       },
     });
