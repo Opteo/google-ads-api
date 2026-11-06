@@ -291,11 +291,12 @@ export class Service {
     const mutateOperations = mutations.map(
       (mutation): services.MutateOperation => {
         const opKey = toSnakeCase(`${mutation.entity}Operation`);
+        const operationType = mutation.operation ?? "create";
         const operation = {
-          [mutation.operation ?? "create"]: mutation.resource,
+          [operationType]: mutation.resource,
         };
         if (
-          mutation.operation === "create" &&
+          operationType === "create" &&
           //@ts-ignore
           mutation?.exempt_policy_violation_keys?.length
         ) {

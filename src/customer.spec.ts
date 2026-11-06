@@ -558,6 +558,44 @@ describe("search", () => {
     const { totalResultsCount } = await customer.search(mockGaqlQuery);
     expect(totalResultsCount).toEqual(mockTotalResultsCount);
   });
+
+  it("rethrows the original error when the error response has no failure details", async () => {
+    const customer = newCustomer({});
+    mockGetAccessToken(customer);
+    axiosMock.onPost().reply(403, {
+      error: {
+        code: 403,
+        message: "The caller does not have permission",
+        status: "PERMISSION_DENIED",
+      },
+    });
+
+    // @ts-expect-error private method
+    const error = await customer.search(mockGaqlQuery).catch((e) => e);
+
+    expect(error).not.toBeInstanceOf(TypeError);
+    expect(error.response.status).toBe(403);
+  });
+
+  it.each([
+    ["page_token", { page_token: "next-page" }],
+    ["validate_only", { validate_only: true }],
+  ])(
+    "sends queries with %s to search, which supports it",
+    async (_, requestOptions) => {
+      const customer = newCustomer({});
+      mockGetAccessToken(customer);
+      axiosMock.onPost().reply(200, { results: [] });
+
+      await customer.query(mockGaqlQuery, requestOptions);
+
+      expect(axiosMock.history.post).toHaveLength(1);
+      expect(axiosMock.history.post[0].url).toMatch(/googleAds:search$/);
+      expect(JSON.parse(axiosMock.history.post[0].data)).toMatchObject(
+        requestOptions
+      );
+    }
+  );
 });
 
 describe("reportStream", () => {
@@ -1280,4 +1318,36 @@ describe("mutateResources", () => {
     ).toEqual(true);
     expect(response.partial_failure_error).toEqual(failureMessage);
   });
+});
+
+describe("mutateResources policy exemptions", () => {
+  it.each([
+    ["omitted", undefined],
+    ["create", "create" as const],
+  ])(
+    "keeps exempt_policy_violation_keys when the operation is %s",
+    (_, operation) => {
+      const customer = newCustomer({});
+      // @ts-expect-error protected method
+      const { request } = customer.buildMutationRequestAndService([
+        {
+          entity: "ad_group_criterion",
+          operation,
+          resource: { ad_group: "customers/1/adGroups/2" },
+          exempt_policy_violation_keys: [{ policy_name: "trademark" }],
+        },
+      ]);
+
+      const decoded = services.MutateGoogleAdsRequest.toObject(
+        services.MutateGoogleAdsRequest.decode(
+          services.MutateGoogleAdsRequest.encode(request).finish()
+        )
+      );
+
+      expect(
+        decoded.mutate_operations[0].ad_group_criterion_operation
+          .exempt_policy_violation_keys
+      ).toEqual([{ policy_name: "trademark" }]);
+    }
+  );
 });

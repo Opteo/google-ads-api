@@ -220,10 +220,9 @@ export class Customer extends ServiceFactory {
 
       return { response, nextPageToken, totalResultsCount, summaryRow };
     } catch (e: any) {
-      if (e.response?.data.error.details[0]) {
-        throw new errors.GoogleAdsFailure(
-          this.decamelizeKeysIfNeeded(e.response.data.error.details[0])
-        );
+      const failure = e.response?.data?.error?.details?.[0];
+      if (failure) {
+        throw new errors.GoogleAdsFailure(this.decamelizeKeysIfNeeded(failure));
       }
       throw e;
     }
@@ -241,7 +240,9 @@ export class Customer extends ServiceFactory {
     */
     if (
       requestOptions.page_size === undefined &&
-      requestOptions.search_settings === undefined // If search_settings is set, we can't use searchStream.
+      requestOptions.page_token === undefined &&
+      requestOptions.validate_only === undefined &&
+      requestOptions.search_settings === undefined
     ) {
       // If no pagination or summary options are set, we can use the non-paginated search method.
       const { response } = await this.useStreamToImitateRegularSearch(
