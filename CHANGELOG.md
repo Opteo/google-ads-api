@@ -131,6 +131,7 @@ A major release: Google Ads API v26.1, an ES module-only package, and fixes that
 - `mutateResources` keeps `exempt_policy_violation_keys` when the mutation omits `operation`. Omitting it means `create`, but the library only forwarded the keys for an explicit `operation: "create"`.
 - A REST error without failure details (for example a plain `PERMISSION_DENIED`) now surfaces as an `Error` with the API message instead of becoming `TypeError: Cannot read properties of undefined (reading '0')`.
 - REST results keep numeric enum values. A field that arrived as a number (`status: 2`, or a value this version does not know such as `999`) became `undefined`; the parser now keeps the number, as protobuf decoding does.
+- REST calls refresh the OAuth access token at its real expiry instead of after a fixed 50 minutes: the library now keeps one google-auth-library `OAuth2Client` per OAuth client and refresh token, which refreshes five minutes before the `expires_in` the token endpoint returns. Concurrent calls with the same refresh token share one refresh instead of each requesting a token.
 - Every gRPC call gets its own metadata. Without a developer token, login customer id or linked customer id, google-gax handed calls on methods with no routing header one shared metadata object, so instrumentation that edits metadata in place (OpenTelemetry, dd-trace) carried trace headers and baggage from one call into the next.
 - The lockfile resolves patched `@grpc/grpc-js` (1.14.7), `follow-redirects`, `brace-expansion` and `fast-uri`.
 

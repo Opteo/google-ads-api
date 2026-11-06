@@ -4,7 +4,7 @@ import {
   protos,
 } from "google-ads-node";
 import { operationsProtos } from "google-gax";
-import { UserRefreshClient } from "google-auth-library";
+import { OAuth2Client, UserRefreshClient } from "google-auth-library";
 import { errors, services } from "./protos/index.js";
 import {
   cloneMetadataPerCall,
@@ -539,5 +539,74 @@ describe("cloneMetadataPerCall", () => {
         _defaults: { method: { otherArgs: {} } },
       } as never)
     ).not.toThrow();
+  });
+});
+
+describe("REST access tokens", () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+    jest.useRealTimers();
+  });
+
+  function customerWithRefreshToken(refresh_token: string) {
+    return new Customer(
+      { client_id: MOCK_CLIENT_ID, client_secret: MOCK_CLIENT_SECRET },
+      { customer_id: MOCK_CID, refresh_token }
+    );
+  }
+
+  function stubTokenEndpoint(lifetimeMs: number) {
+    let issued = 0;
+    return jest
+      .spyOn(
+        OAuth2Client.prototype as unknown as {
+          refreshTokenNoCache: () => Promise<unknown>;
+        },
+        "refreshTokenNoCache"
+      )
+      .mockImplementation(async () => {
+        issued += 1;
+        return {
+          tokens: {
+            access_token: `token-${issued}`,
+            expiry_date: Date.now() + lifetimeMs,
+          },
+          res: null,
+        };
+      });
+  }
+
+  it("refreshes once for concurrent cold calls", async () => {
+    const refresh = stubTokenEndpoint(60 * 60 * 1000);
+    const customer = customerWithRefreshToken("concurrent-refresh-token");
+
+    const tokens = await Promise.all(
+      Array.from({ length: 5 }, () => customer.getAccessToken())
+    );
+
+    expect(refresh).toHaveBeenCalledTimes(1);
+    expect(new Set(tokens)).toEqual(new Set(["token-1"]));
+  });
+
+  it("refreshes when the token approaches its real expiry", async () => {
+    jest.useFakeTimers({ now: Date.parse("2026-11-06T09:00:00Z") });
+    const refresh = stubTokenEndpoint(10 * 60 * 1000);
+    const customer = customerWithRefreshToken("short-lived-refresh-token");
+
+    await expect(customer.getAccessToken()).resolves.toBe("token-1");
+    jest.setSystemTime(Date.parse("2026-11-06T09:06:00Z"));
+    await expect(customer.getAccessToken()).resolves.toBe("token-2");
+
+    expect(refresh).toHaveBeenCalledTimes(2);
+  });
+
+  it("retries after a failed refresh", async () => {
+    const refresh = stubTokenEndpoint(60 * 60 * 1000);
+    refresh.mockRejectedValueOnce(new Error("invalid_grant"));
+    const customer = customerWithRefreshToken("retried-refresh-token");
+
+    await expect(customer.getAccessToken()).rejects.toThrow("invalid_grant");
+    await expect(customer.getAccessToken()).resolves.toBe("token-1");
+    expect(refresh).toHaveBeenCalledTimes(2);
   });
 });

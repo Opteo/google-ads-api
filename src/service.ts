@@ -71,9 +71,10 @@ export const serviceCache = new TTLCache({
 });
 
 // A global access token cache used by REST calls. Issued tokens expire after 1 hour, so we cache them for 50 minutes.
-const accessTokenCache = new TTLCache<string, string>({
+const oAuth2ClientCache = new TTLCache<string, OAuth2Client>({
   max: 100_000,
-  ttl: 50 * 60 * 1000, // 50 minutes
+  ttl: 60 * 60 * 1000,
+  updateAgeOnGet: true,
 });
 
 export class Service {
@@ -139,29 +140,24 @@ export class Service {
 
   // Used only by REST calls
   public async getAccessToken(): Promise<string> {
-    const cachedToken = accessTokenCache.get(
-      this.customerOptions.refresh_token
-    );
-    if (cachedToken) {
-      return cachedToken;
+    const cacheKey = `${this.clientOptions.client_id}_${this.customerOptions.refresh_token}`;
+    let oAuth2Client = oAuth2ClientCache.get(cacheKey);
+    if (!oAuth2Client) {
+      oAuth2Client = new OAuth2Client({
+        clientId: this.clientOptions.client_id,
+        clientSecret: this.clientOptions.client_secret,
+      });
+      oAuth2Client.setCredentials({
+        refresh_token: this.customerOptions.refresh_token,
+      });
+      oAuth2ClientCache.set(cacheKey, oAuth2Client);
     }
-
-    const oAuth2Client = new OAuth2Client({
-      clientId: this.clientOptions.client_id,
-      clientSecret: this.clientOptions.client_secret,
-    });
-
-    oAuth2Client.setCredentials({
-      refresh_token: this.customerOptions.refresh_token,
-    });
 
     const { token } = await oAuth2Client.getAccessToken();
 
     if (typeof token !== "string") {
       throw new Error("Failed to retrieve access token");
     }
-
-    accessTokenCache.set(this.customerOptions.refresh_token, token);
 
     return token;
   }
