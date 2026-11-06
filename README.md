@@ -578,6 +578,8 @@ These hooks have access to the `customerCredentials` argument, containing the `c
 
 These hooks also have access to the `method` argument, containing the mutation method as a string.
 
+These hooks also have access to the `mutateOptions` argument, containing the mutate options the request is sent with (`validate_only`, `partial_failure`, `response_content_type`), including any changes made with `editOptions`. It is the same for `mutateResources` and the service helpers such as `customer.campaigns.create`, so `mutateOptions.validate_only` tells a hook whether a mutation is a dry run.
+
 ### Service hooks:
 
 - `onServiceStart`

@@ -2,6 +2,8 @@
 
 ### 26.1.0
 
+A major release: Google Ads API v26.1, an ES module-only package, and fixes that change the shape of several methods. Every breaking change below says what to change in your code.
+
 ### Version Upgrade
 
 - Upgraded google-ads-api version to v26.1. Refer to Google Ads release notes [here](https://developers.google.com/google-ads/api/docs/release-notes) for changes.
@@ -9,21 +11,114 @@
 - Upgraded google-gax dependency to v6.16.0 and google-auth-library to v11.3.3
 - Upgraded stream-json to v3 (CVE-2026-71429, #554); stream-chain is now a declared dependency
 
+### Breaking Changes
+
+#### Packaging
+
+- **ES modules only.** The CommonJS build is gone. `import { GoogleAdsApi } from "google-ads-api"` works as before. CommonJS code can still call `require("google-ads-api")`, `require("google-ads-api/enums")` and `require("google-ads-api/fields")`: Node.js loads the ES module through its built-in `require(esm)` support and returns the same module instance as `import`.
+- **Node.js 22.12 or newer** is required, the first 22.x release where `require(esm)` works without a flag.
+- **Jest in CommonJS mode** must transform the ES module-only `stream-json` and `stream-chain` packages, or run in Jest's ESM mode:
+
+  ```js
+  transform: {
+    "^.+\\.tsx?$": "ts-jest",
+    "/node_modules/(stream-json|stream-chain)/.+\\.js$": ["ts-jest", { tsconfig: { allowJs: true } }],
+  },
+  transformIgnorePatterns: ["/node_modules/(?!(stream-json|stream-chain)/)"],
+  ```
+
+#### Mutations
+
+- **Single-operation services take one resource.** The API accepts exactly one operation per request for `accountBudgetProposals`, `accountLinks`, `batchJobs`, `billingSetups`, `customerBudgetNetworkSettings`, `customerClientLinks`, `customers`, `customerSkAdNetworkConversionValueSchemas`, `customerUserAccesses` and `customerUserAccessInvitations`. Their `create`, `update` and `remove` helpers now take one resource (or one resource name for `remove`) instead of an array. These helpers never worked with an array (see Fixes), so call them once per resource:
+
+  ```ts
+  // 25.x
+  await customer.customers.update([{ resource_name, tracking_url_template }]);
+  // 26.x
+  await customer.customers.update({ resource_name, tracking_url_template });
+  ```
+
+- **Mutation hooks receive `mutateOptions`.** `onMutationStart`, `onMutationEnd` and `onMutationError` get the effective mutate options (`validate_only`, `partial_failure`, `response_content_type`) on every path, including changes made with `editOptions`. For `mutateResources` the hooks previously received only the operations array, so a hook could not tell a `validate_only` dry run from a real mutation. Read the options from `mutateOptions` instead of `mutation` or `mutations`:
+
+  ```ts
+  // 25.x: always undefined for mutateResources
+  const dryRun = options.isServiceCall
+    ? options.mutation.validate_only
+    : options.mutations.validate_only;
+  // 26.x
+  const dryRun = options.mutateOptions.validate_only;
+  ```
+
+  `mutateOptions` is a required property of `BaseMutationHookArgs`, so code that builds hook arguments itself (for example in tests) must include it. `mutateResources` no longer writes `editOptions` changes into the options object the caller passed in.
+
+- Helpers for services without mutate options (`batchJobs`, `billingSetups`, `customerUserAccesses`, `customerUserAccessInvitations`) type their `options` parameter as `Record<string, never>` instead of `never`.
+
+#### Queries and streams
+
+- **Stream methods take only the options searchStream accepts.** `SearchGoogleAdsStreamRequest` has no `page_token`, `page_size`, `validate_only` or `search_settings`, so `queryStream` now takes `StreamRequestOptions`, and `reportStream` and `reportStreamRaw` take `ReportStreamOptions` (report options plus `summary_row_setting`). `onStreamStart`'s `editOptions` takes `StreamRequestOptions`. Request a summary row in a stream with `summary_row_setting`:
+
+  ```ts
+  // 25.x: search_settings was sent to searchStream, which does not take it
+  customer.reportStream({
+    entity: "campaign",
+    metrics,
+    search_settings: { return_summary_row: true },
+  });
+  // 26.x
+  customer.reportStream({
+    entity: "campaign",
+    metrics,
+    summary_row_setting: enums.SummaryRowSetting.SUMMARY_ROW_WITH_RESULTS,
+  });
+  ```
+
+- **`query` and `report` send `page_token` and `validate_only` to `search`.** They were sent to `searchStream`, which supports neither. A `validate_only` query now validates the query, and a `page_token` query starts from that page.
+- **REST results parse repeated enum and INT64 fields.** Each element of a repeated enum is now its enum number and each element of a repeated INT64 is a number, matching scalar fields and gRPC results. For example `campaign.excluded_parent_asset_field_types` returns `[13]` instead of `["SITELINK"]`, and `campaign.shopping_setting.advertising_partner_ids` returns `[123]` instead of `["123"]`. Compare against `enums` values instead of strings.
+
+#### Service methods
+
+- **Paginated methods return one page as the RPC response.** `keywordPlanIdeas.generateKeywordIdeas`, `batchJobs.listBatchJobResults`, `campaignDrafts.listCampaignDraftAsyncErrors` and `experiments.listExperimentAsyncErrors` returned an array of every result across all pages, while their types promised the response message. They now return the response message for one page, with `results` (or `errors`), `next_page_token` and fields such as `total_size` and `aggregate_metric_results` that the array dropped. Pass `page_token` to fetch the next page:
+
+  ```ts
+  // 25.x: an array, despite the declared response type
+  const ideas = await customer.keywordPlanIdeas.generateKeywordIdeas(request);
+  // 26.x
+  const ideas = [];
+  let page_token: string | undefined;
+  do {
+    const response = await customer.keywordPlanIdeas.generateKeywordIdeas({
+      ...request,
+      page_token,
+    });
+    ideas.push(...response.results);
+    page_token = response.next_page_token || undefined;
+  } while (page_token);
+  ```
+
+- **Long-running methods are typed as gax operations.** `batchJobs.runBatchJob`, `campaignDrafts.promoteCampaignDraft`, `experiments.scheduleExperiment`, `experiments.promoteExperiment` and `offlineUserDataJobs.runOfflineUserDataJob` return google-gax's `LROperation<Result, Metadata>`, which is what they always returned at runtime. `await operation.promise()` now type-checks; `longrunning.Operation` members such as `toJSON()` never existed on the returned object.
+- **LocalServices getters are renamed:** `customer.localsLeadServices` is now `customer.localServicesLeads`, and the new `LocalServicesEligibilityService` is `customer.localServicesEligibilities`. The generator removed the first `Service` from the name instead of the trailing one.
+
+#### Types and API
+
+- `ClientOptions["developer_token"]` is now typed `string | undefined`. TypeScript code that reads the option back as a `string` needs a guard or a default.
+- Removed fields: the hotel criteria on `ad_group_bid_modifier` (`hotel_advance_booking_window`, `hotel_check_in_date_range`, `hotel_check_in_day`, `hotel_date_selection_type`, `hotel_length_of_stay`) and `customer.conversion_tracking_setting.enhanced_conversions_for_leads_enabled`.
+
 ### New Features
 
 - `developer_token` is now optional (#550, #553). Google sunset developer tokens on 9 September 2026: API access levels now belong to the Google Cloud project that owns your OAuth client, and the API ignores the token. When the option is unset, empty or whitespace, no `developer-token` header is sent. Previously an unset token went out as the string `"undefined"` and an empty one was rejected with `DEVELOPER_TOKEN_PARAMETER_MISSING`. Configurations that pass a token are unchanged; Google will reject the header in a future major API version, so remove it when convenient.
+- Mutation hooks receive `mutateOptions` (see Breaking Changes).
+- New exported types: `StreamRequestOptions` and `ReportStreamOptions`.
 - New services: `CustomerBudgetNetworkSettingService`, `LocalServicesEligibilityService`
 - New resource names: `CustomerBudgetNetworkSetting`, `SearchLiftKeywordBundle`
 - New enums include `BenchmarksCustomerPercentileTier`, `BudgetNetworkIneligibleReason`, `ChannelPriorityTier`, `DateSelectionType`, `NetworkChannelType`, `OfflinePromotionCodeType`, `ReachMetricState`, `SearchLiftKeywordBundleStatus` and `YouTubeVideoUploadGenerativeContentDisclosure`
 
-### Breaking Changes
+### Fixes
 
-- The package ships as ES modules only; the CommonJS build is gone. `import` works as before. CommonJS code can still `require("google-ads-api")` (and the `/enums` and `/fields` subpaths) through Node.js's built-in `require(esm)` support, which returns the same module instance as `import`.
-- Node.js 22.12 or newer is required.
-- Jest suites that load google-ads-api must transform the ES module-only `stream-json` and `stream-chain` packages, or run in Jest's ESM mode.
-- Mutate helpers for services whose requests take a single `operation` now take one resource (or one resource name for `remove`) instead of an array: `accountBudgetProposals`, `accountLinks`, `batchJobs`, `billingSetups`, `customerBudgetNetworkSettings`, `customerClientLinks`, `customers`, `customerSkAdNetworkConversionValueSchemas`, `customerUserAccesses` and `customerUserAccessInvitations`. For example `customer.customers.update([customer])` becomes `customer.customers.update(customer)`.
-- `ClientOptions["developer_token"]` is now typed `string | undefined`. TypeScript code that reads the option back as a `string` needs a guard or a default.
-- Removed fields: the hotel criteria on `ad_group_bid_modifier` (`hotel_advance_booking_window`, `hotel_check_in_date_range`, `hotel_check_in_day`, `hotel_date_selection_type`, `hotel_length_of_stay`) and `customer.conversion_tracking_setting.enhanced_conversions_for_leads_enabled`.
+- Mutate helpers for single-operation services send their operation. They sent it as `operations`, which these requests do not have, so serialisation dropped the mutation and the API received only `customer_id` (#289, #316, #501, #518).
+- `mutateResources` keeps `exempt_policy_violation_keys` when `operation` is omitted. Omitting it means `create`, but the keys were only forwarded for an explicit `operation: "create"`.
+- A REST error without failure details (for example a plain `PERMISSION_DENIED`) is rethrown as the original error instead of becoming `TypeError: Cannot read properties of undefined (reading '0')`.
+- Every gRPC call gets its own metadata. Without a developer token, login customer id or linked customer id, google-gax handed calls on methods with no routing header one shared metadata object, so instrumentation that edits metadata in place (OpenTelemetry, dd-trace) carried trace headers and baggage from one call into the next.
+- The lockfile resolves patched `@grpc/grpc-js` (1.14.7), `follow-redirects`, `brace-expansion` and `fast-uri`.
 
 ### 25.1.0
 
@@ -55,9 +150,6 @@
 ### Fixes
 
 - `getGoogleAdsError()` no longer throws a `TypeError` when an error carries no `GoogleAdsFailure` trailer (for example REST-style `google.rpc.ErrorInfo` errors such as `SERVICE_DISABLED`); the original error is returned instead (#548).
-- Mutate helpers for single-operation services send their operation. They previously sent it as `operations`, which these requests do not have, so serialisation dropped the mutation and the API received only `customer_id` (#289, #316, #501, #518).
-- Every gRPC call now gets its own metadata. Without a developer token, login customer id or linked customer id, google-gax handed calls on methods with no routing header one shared metadata object, so instrumentation that edits metadata in place (OpenTelemetry, dd-trace) carried trace headers and baggage from one call into the next.
-- The lockfile resolves patched `@grpc/grpc-js` (1.14.7), `follow-redirects`, `brace-expansion` and `fast-uri`.
 - google-ads-api does not pin `jws`; a fresh install of this release resolves `jws` 4.0.1, which addresses the advisory reported in #529. Refresh your lockfile if it still holds 4.0.0.
 
 ### 24.1.0
