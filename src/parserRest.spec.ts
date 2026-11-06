@@ -181,6 +181,38 @@ describe("decamelizeKeys", () => {
     });
   });
 
+  it("parses Performance Max listing group dimensions", () => {
+    expect(
+      decamelizeKeys({
+        assetGroupListingGroupFilter: {
+          path: {
+            dimensions: [
+              { productChannel: { channel: "ONLINE" } },
+              { productCondition: { condition: "NEW" } },
+            ],
+          },
+        },
+      })
+    ).toEqual({
+      asset_group_listing_group_filter: {
+        path: {
+          dimensions: [
+            {
+              product_channel: {
+                channel: enums.ListingGroupFilterProductChannel.ONLINE,
+              },
+            },
+            {
+              product_condition: {
+                condition: enums.ListingGroupFilterProductCondition.NEW,
+              },
+            },
+          ],
+        },
+      },
+    });
+  });
+
   it("keeps the raw value of an enum field whose enum it cannot resolve", () => {
     jest.isolateModules(() => {
       jest.doMock("./protos/autogen/fields", () => ({
