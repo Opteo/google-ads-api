@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
+import * as esm from "google-ads-api";
 import { GoogleAdsApi, enums, googleAdsVersion } from "google-ads-api";
 import { enums as enumsSubpath } from "google-ads-api/enums";
+import * as fieldsModule from "google-ads-api/fields";
 import { fields } from "google-ads-api/fields";
 
 assert.equal(typeof GoogleAdsApi, "function");
@@ -11,13 +13,10 @@ assert.equal(typeof enums.AdvertisingChannelType.SEARCH, "number");
 assert.equal(typeof fields, "object");
 
 const require = createRequire(import.meta.url);
-const cjs = require("google-ads-api");
-assert.equal(typeof cjs.GoogleAdsApi, "function");
-assert.equal(cjs.googleAdsVersion, googleAdsVersion);
-assert.equal(require("google-ads-api/enums").enums, cjs.enums);
-assert.equal(typeof require("google-ads-api/fields").fields, "object");
+assert.equal(require("google-ads-api"), esm);
+assert.equal(require("google-ads-api/enums").enums, enums);
+assert.equal(require("google-ads-api/fields"), fieldsModule);
 assert.equal(require("google-ads-api/package.json").name, "google-ads-api");
-assert.throws(
-  () => require("google-ads-api/build/cjs/version"),
-  { code: "ERR_PACKAGE_PATH_NOT_EXPORTED" }
-);
+assert.throws(() => require("google-ads-api/build/version.js"), {
+  code: "ERR_PACKAGE_PATH_NOT_EXPORTED",
+});

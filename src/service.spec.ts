@@ -4,9 +4,14 @@ import {
   protos,
 } from "google-ads-node";
 import { operationsProtos } from "google-gax";
-import { UserRefreshClient } from "google-auth-library";
+import { OAuth2Client, UserRefreshClient } from "google-auth-library";
 import { errors, services } from "./protos/index.js";
-import { disposeService, FAILURE_KEY, serviceCache } from "./service.js";
+import {
+  cloneMetadataPerCall,
+  disposeService,
+  FAILURE_KEY,
+  serviceCache,
+} from "./service.js";
 import { Customer } from "./customer.js";
 import {
   failTestIfExecuted,
@@ -15,6 +20,7 @@ import {
   MOCK_CLIENT_ID,
   MOCK_CLIENT_SECRET,
   MOCK_LOGIN_CID,
+  MOCK_LINKED_CID,
   MOCK_DEVELOPER_TOKEN,
   MOCK_REFRESH_TOKEN,
 } from "./testUtils.js";
@@ -254,6 +260,35 @@ describe("Service", () => {
         "login-customer-id": MOCK_LOGIN_CID,
       });
     });
+
+    it.each([
+      ["unset", undefined],
+      ["empty", ""],
+      ["whitespace", " \n\t"],
+    ])(
+      "should omit only the developer-token header when the token is %s",
+      (_, developer_token) => {
+        const customer = new Customer(
+          {
+            client_id: MOCK_CLIENT_ID,
+            client_secret: MOCK_CLIENT_SECRET,
+            developer_token,
+          },
+          {
+            refresh_token: MOCK_REFRESH_TOKEN,
+            customer_id: MOCK_CID,
+            login_customer_id: MOCK_LOGIN_CID,
+            linked_customer_id: MOCK_LINKED_CID,
+          }
+        );
+        // toStrictEqual, unlike toEqual, fails on a key holding undefined
+        // @ts-expect-error Accessing private property for test purposes
+        expect(customer.callHeaders).toStrictEqual({
+          "login-customer-id": MOCK_LOGIN_CID,
+          "linked-customer-id": MOCK_LINKED_CID,
+        });
+      }
+    );
   });
 
   describe("FAILURE_KEY", () => {
@@ -448,5 +483,130 @@ describe("gRPC call credentials", () => {
       service_url: "https://googleads.googleapis.com",
     });
     expect(metadata.get("authorization")).toEqual(["Bearer test-token"]);
+  });
+});
+
+describe("per-call metadata", () => {
+  it("gives every call its own metadata when there are no call headers", async () => {
+    const customer = new Customer(
+      { client_id: MOCK_CLIENT_ID, client_secret: MOCK_CLIENT_SECRET },
+      { refresh_token: MOCK_REFRESH_TOKEN, customer_id: MOCK_CID }
+    );
+    // @ts-expect-error Accessing protected members for test purposes
+    const headers = customer.callHeaders;
+    expect(headers).toEqual({});
+
+    // @ts-expect-error Accessing protected method for test purposes
+    const service = customer.loadService<CustomerServiceClient>(
+      "CustomerServiceClient",
+      { skipCache: true }
+    );
+    const sent: { get: (key: string) => unknown[] }[] = [];
+    jest.spyOn(service["_gaxGrpc"], "createStub").mockResolvedValue({
+      listAccessibleCustomers: (
+        _request: unknown,
+        metadata: {
+          get: (key: string) => unknown[];
+          set: (key: string, value: string) => void;
+        },
+        _options: unknown,
+        callback: (error: null, response: Record<string, never>) => void
+      ) => {
+        sent.push(metadata);
+        metadata.set("traceparent", `call-${sent.length}`);
+        callback(null, {});
+        return { cancel: () => undefined };
+      },
+    } as never);
+
+    await service.listAccessibleCustomers({}, { otherArgs: { headers } });
+    await service.listAccessibleCustomers({}, { otherArgs: { headers } });
+
+    expect(sent).toHaveLength(2);
+    expect(sent[0]).not.toBe(sent[1]);
+    expect(sent[1].get("traceparent")).toEqual(["call-2"]);
+  });
+});
+
+describe("cloneMetadataPerCall", () => {
+  it("leaves clients without the expected gax internals alone", () => {
+    expect(() => cloneMetadataPerCall({} as never)).not.toThrow();
+    expect(() =>
+      cloneMetadataPerCall({ _defaults: { method: {} } } as never)
+    ).not.toThrow();
+    expect(() =>
+      cloneMetadataPerCall({
+        _defaults: { method: { otherArgs: {} } },
+      } as never)
+    ).not.toThrow();
+  });
+});
+
+describe("REST access tokens", () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+    jest.useRealTimers();
+  });
+
+  function customerWithRefreshToken(refresh_token: string) {
+    return new Customer(
+      { client_id: MOCK_CLIENT_ID, client_secret: MOCK_CLIENT_SECRET },
+      { customer_id: MOCK_CID, refresh_token }
+    );
+  }
+
+  function stubTokenEndpoint(lifetimeMs: number) {
+    let issued = 0;
+    return jest
+      .spyOn(
+        OAuth2Client.prototype as unknown as {
+          refreshTokenNoCache: () => Promise<unknown>;
+        },
+        "refreshTokenNoCache"
+      )
+      .mockImplementation(async () => {
+        issued += 1;
+        return {
+          tokens: {
+            access_token: `token-${issued}`,
+            expiry_date: Date.now() + lifetimeMs,
+          },
+          res: null,
+        };
+      });
+  }
+
+  it("refreshes once for concurrent cold calls", async () => {
+    const refresh = stubTokenEndpoint(60 * 60 * 1000);
+    const customer = customerWithRefreshToken("concurrent-refresh-token");
+
+    const tokens = await Promise.all(
+      Array.from({ length: 5 }, () => customer.getAccessToken())
+    );
+
+    expect(refresh).toHaveBeenCalledTimes(1);
+    expect(new Set(tokens)).toEqual(new Set(["token-1"]));
+  });
+
+  it("refreshes when the token approaches its real expiry", async () => {
+    jest.useFakeTimers({ now: Date.parse("2026-11-06T09:00:00Z") });
+    const refresh = stubTokenEndpoint(10 * 60 * 1000);
+    const customer = customerWithRefreshToken("short-lived-refresh-token");
+
+    await expect(customer.getAccessToken()).resolves.toBe("token-1");
+    jest.setSystemTime(Date.parse("2026-11-06T09:06:00Z"));
+    await expect(customer.getAccessToken()).resolves.toBe("token-2");
+
+    expect(refresh).toHaveBeenCalledTimes(2);
+  });
+
+  it("retries after a failed refresh", async () => {
+    const refresh = stubTokenEndpoint(60 * 60 * 1000);
+    refresh.mockRejectedValueOnce(new Error("invalid_grant"));
+    const customer = customerWithRefreshToken("retried-refresh-token");
+
+    await expect(customer.getAccessToken()).rejects.toThrow("invalid_grant");
+    await expect(customer.getAccessToken()).resolves.toBe("token-1");
+    expect(refresh).toHaveBeenCalledTimes(2);
   });
 });

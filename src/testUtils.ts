@@ -13,6 +13,7 @@ export const MOCK_DEVELOPER_TOKEN = "MOCK DEVELOPER TOKEN";
 export const MOCK_REFRESH_TOKEN = "MOCK REFRESH TOKEN";
 export const MOCK_CID = "MOCK CID";
 export const MOCK_LOGIN_CID = "MOCK LOGIN CID";
+export const MOCK_LINKED_CID = "MOCK LINKED CID";
 
 export const mockGaqlQuery = `SELECT campaign.resource_name FROM campaign LIMIT 1`;
 

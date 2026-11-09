@@ -9,8 +9,10 @@ import {
   dateConstants,
   Order,
   ReportOptions,
+  ReportStreamOptions,
   RequestOptions,
   RequestOptionsWithTotalResults,
+  StreamRequestOptions,
   SortOrder,
 } from "./types.js";
 
@@ -419,6 +421,16 @@ export function buildRequestOptions(
     reportOptions;
 
   return { page_size, page_token, validate_only, search_settings };
+}
+
+export function buildStreamQuery(
+  reportOptions: Readonly<ReportStreamOptions>
+): { gaqlQuery: Query; requestOptions: StreamRequestOptions } {
+  const { gaqlQuery } = buildQuery(reportOptions);
+  return {
+    gaqlQuery,
+    requestOptions: { summary_row_setting: reportOptions.summary_row_setting },
+  };
 }
 
 export function buildQuery(reportOptions: Readonly<ReportOptions>): {

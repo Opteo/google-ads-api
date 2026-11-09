@@ -23,6 +23,8 @@ export * as ResourceNames from "./protos/autogen/resourceNames.js";
 export {
   CustomerOptions,
   ReportOptions,
+  ReportStreamOptions,
+  StreamRequestOptions,
   MutateOperation,
   Constraint,
   Constraints,
